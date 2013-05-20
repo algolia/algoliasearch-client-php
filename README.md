@@ -46,3 +46,80 @@ $index = $client->initIndex("MyIndexName");
 $res = $index->search("query string");
 $res = $index->search("query string", array("attributes" => "population,name", "hitsPerPage" => 50)));
 </code></pre>
+
+The search answer will be of the form:
+<pre><code>
+{
+    "hasError": false,
+    "errorMsg": null,
+    "answer":
+            { "hits":[
+                        { "name": "Betty Jane Mccamey",
+                          "company": "Vita Foods Inc.",
+                          "email": "betty@mccamey.com",
+                          "objectID": "6891Y2usk0",
+                          "_highlightResult": {"name": {"value": "Betty <em>Jan</em>e Mccamey", "matchLevel": "full"}, 
+                                               "company": {"value": "Vita Foods Inc.", "matchLevel": "none"},
+                                               "email": {"value": "betty@mccamey.com", "matchLevel": "none"} }
+                        },
+                        { "name": "Gayla Geimer Dan", 
+                          "company": "Ortman Mccain Co", 
+                          "email": "gayla@geimer.com", 
+                          "objectID": "ap78784310" 
+                          "_highlightResult": {"name": {"value": "Gayla Geimer <em>Dan</em>", "matchLevel": "full" },
+                                               "company": {"value": "Ortman Mccain Co", "matchLevel": "none" },
+                                               "email": {"highlighted": "gayla@geimer.com", "matchLevel": "none" } }
+                        }],
+                "page":0,
+                "nbHits":2,
+                "nbPages":1,
+                "hitsPerPage:":20,
+                "processingTimeMS":1,
+                "query":"jan"
+            }
+}
+</code></pre>
+
+Add a new object in Index
+-------------
+
+Each entry in an index has a unique identifier called `objectID`. You have two way to add en entry in the index:
+
+ 1. Using automatic `objectID` assignement, you will be able to retrieve it in the answer.
+ 2. Passing your `objectID`
+
+Example with automatic `objectID` assignement:
+<pre><code>
+$res = $index->addObject(array("name" => "San Francisco", 
+                               "population" => 805235));
+if (!$res->hasError()) {
+    $content = $res->getContent();
+    echo "objectID=" . $content['objectID'] . "\n";
+}
+</code></pre>
+
+Example with manual `objectID` assignement:
+<pre><code>
+$res = $index->addObject(array("name" => "San Francisco", 
+                               "population" => 805235), "myID");
+if (!$res->hasError()) {
+    $content = $res->getContent();
+    echo "objectID=" . $content['objectID'] . "\n";
+}
+</code></pre>
+
+Update an existing object in Index
+-------------
+
+You have two options to update an existing object:
+
+ 1. Replace all attributes of an existing object.
+ 2. Replace only some attributes of an existing object.
+
+Example of code to update only the population attribute of an existing object:
+<pre><code>
+$index->saveObject(array("name" => "Los Angeles", 
+                         "population" => 3792621,
+                         "objectID" => "myID"));
+</code></pre>
+

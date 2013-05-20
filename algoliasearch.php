@@ -196,7 +196,7 @@ class Index {
         if ($objectID === null) {
             return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName, array(), $content);
         } else {
-            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID));
+            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID), array(), $content);
         }
     }
 
@@ -235,7 +235,7 @@ class Index {
      *  object must contains an objectID attribute
      */
     public function partialUpdateObject($partialObject) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"] . "/partial", array(), $partialObject));
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"] . "/partial"), array(), $partialObject);
     }
 
     /*
@@ -247,7 +247,7 @@ class Index {
      *  content: the server answer that updateAt and taskID
      */
     public function saveObject($object) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"], array(), $object));
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"]), array(), $object);
     }
 
     /*
@@ -279,13 +279,13 @@ class Index {
      *
      * @param query the full text query
      * @param args (optional) if set, contains an associative array with query parameters:
-     *  - attributes: a string that contains attribute names to retrieve separated by ","
-     *     (if not set all attributes are retrieve)
-     *  - attributesToHighlight: a string that contains attribute names to highlight separated by ","
-     *     (if not set all textual attributes are highlighted)
-     *  - minWordSizeForApprox1: the minimum number of characters to accept one typo.
-     *     Defaults to 3.
-     *  - minWordSizeForApprox2: the minimum number of characters to accept two typos.
+     *  - attributes: a string that contains attribute names to retrieve separated by a comma. 
+     *    By default all attributes are retrieved.
+     *  - attributesToHighlight: a string that contains attribute names to highlight separated by a comma. 
+     *    By default all attributes are highlighted.
+     *  - minWordSizeForApprox1: the minimum number of characters in a query word to accept one typo in this word. 
+     *    Defaults to 3.
+     *  - minWordSizeForApprox2: the minimum number of characters in a query word to accept two typos in this word.
      *     Defaults to 7.
      *  - getRankingInfo: if set to 1, the result hits will contain ranking information in 
      *     _rankingInfo attribute
@@ -403,6 +403,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     if ($params != null && count($params) > 0)
         $url .= "?" . http_build_query($params);
     curl_setopt($curlHandle, CURLOPT_URL, $url);
+    var_dump($url);
     if ($method === 'GET') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
@@ -432,7 +433,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     if ($http_status === 404) {
         return new Answer(true, "Resource does not exist", null);            
     }
-    $answer = json_decode($response);
+    $answer = json_decode($response, true);
     $error = true;
     $errorMsg = null;
 

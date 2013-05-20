@@ -80,13 +80,16 @@ The search answer will be of the form:
 }
 </code></pre>
 
-Add a new object in Index
+Add a new object in the Index
 -------------
 
 Each entry in an index has a unique identifier called `objectID`. You have two way to add en entry in the index:
 
  1. Using automatic `objectID` assignement, you will be able to retrieve it in the answer.
  2. Passing your `objectID`
+
+You have no need to create an index, it will be automatically create the first time you add an object.
+Objects are schema less, you have no configuration to start indexing. You can look at settings section to have more details on advanced settings.
 
 Example with automatic `objectID` assignement:
 <pre><code>
@@ -108,7 +111,7 @@ if (!$res->hasError()) {
 }
 </code></pre>
 
-Update an existing object in Index
+Update an existing object in the Index
 -------------
 
 You have two options to update an existing object:
@@ -123,3 +126,56 @@ $index->saveObject(array("name" => "Los Angeles",
                          "objectID" => "myID"));
 </code></pre>
 
+Get an object
+-------------
+
+You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
+<pre><code>
+$index->getObject("myID");
+$index->getObject("myID", "attribute1,attribute2");
+</code></pre>
+
+Delete an object
+-------------
+
+You can delete an object using its `objectID`:
+<pre><code>
+$index->deleteObject("myID");
+</code></pre>
+
+Index Settings
+-------------
+
+You can retrieve all settings using the `getSettings` functions. The result will contains the following attributes:
+
+ * **minWordSizeForApprox1**: (integer) the minimum number of characters to accept one typo (default = 3).
+ * **minWordSizeForApprox2**: (integer) the minimum number of characters to accept two typos (default = 7).
+ * **hitsPerPage**: (integer) the number of hits per page (default = 10).
+ * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve for objects.
+ * **attributesToHighlight**: (array of strings) default list of attributes to highlight
+ * **attributesToIndex**: (array of strings) the list of fields you want to index.<br/>By default all textual attributes of your objects are indexed, but you should update it to get optimal results.<br/>
+ This parameter has two important uses:
+  *  *Limit the attributes to index*.<br/> 
+For example if you store a binary image in base64, you want to store it in the index but you don't want to use the base64 string for search.
+  * *Control part of the ranking* (see the **ranking** parameter for full explanation).<br/>
+Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list.
+ * **ranking**: (array of strings) controls the way results are sorted.<br/>
+We have four available criteria: 
+  * **typo**: (sort according to number of typos),
+  * **geo**: (sort according to decreassing distance when performing a geo-location based search),
+  * **position**: (sort according to the matching attribute), 
+  * **custom**: which is user defined.<br/>
+The standard order is ["typo", "geo", position", "custom"]
+ * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>
+The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.<br/>
+For example `"customRanking" => ["desc(population)", "asc(name)"]`
+
+You can easily retrieve settings and update them:
+<pre><code>
+$res = $index->getSettings();
+if (!$res->hasError()) {
+    $settings = $res->getContent();
+    $settings["customRanking"] = array("desc(population)", "asc(name)");
+    $index->setSettings($settings);
+}
+</code></pre>

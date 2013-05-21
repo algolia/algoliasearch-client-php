@@ -12,6 +12,7 @@ To setup your project, follow these steps:
  3. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
 
 <pre><code>
+```php
   require 'algoliasearch.php';
   $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
 </code></pre>
@@ -42,6 +43,7 @@ You can optionally use the following arguments :
  * **tags**: filter the query by a set of tags (contains a list of tags separated by a comma).<br/>At indexing, tags should be added in _tags attribute of objects (for example `{"_tags":["tag1","tag2"]}` )
 
 <pre><code>
+```php
 $index = $client->initIndex("MyIndexName");
 $res = $index->search("query string");
 $res = $index->search("query string", array("attributes" => "population,name", "hitsPerPage" => 50)));
@@ -49,6 +51,7 @@ $res = $index->search("query string", array("attributes" => "population,name", "
 
 The search answer will be of the form:
 <pre><code>
+```javascript
 {
     "hasError": false,
     "errorMsg": null,
@@ -93,6 +96,7 @@ Objects are schema less, you have no configuration to start indexing. You can lo
 
 Example with automatic `objectID` assignement:
 <pre><code>
+```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235));
 if (!$res->hasError()) {
@@ -103,6 +107,7 @@ if (!$res->hasError()) {
 
 Example with manual `objectID` assignement:
 <pre><code>
+```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235), "myID");
 if (!$res->hasError()) {
@@ -121,6 +126,7 @@ You have two options to update an existing object:
 
 Example to replace content of an existing object:
 <pre><code>
+```php
 $index->saveObject(array("name" => "Los Angeles", 
                          "population" => 3792621,
                          "objectID" => "myID"));
@@ -128,6 +134,7 @@ $index->saveObject(array("name" => "Los Angeles",
 
 Example of code to update only the population attribute of an existing object:
 <pre><code>
+```php
 $index->partialUpdateObject(array("population" => 3792621,
                                   "objectID" => "myID"));
 </code></pre>
@@ -137,6 +144,7 @@ Get an object
 
 You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
 <pre><code>
+```php
 // Retrieves all attributes
 $index->getObject("myID");
 // Retrieves name and population attributes
@@ -150,6 +158,7 @@ Delete an object
 
 You can delete an object using its `objectID`:
 <pre><code>
+```php
 $index->deleteObject("myID");
 </code></pre>
 
@@ -182,6 +191,7 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
 
 You can easily retrieve settings and update them:
 <pre><code>
+```php
 $res = $index->getSettings();
 if (!$res->hasError()) {
     $settings = $res->getContent();

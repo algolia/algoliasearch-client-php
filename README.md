@@ -11,12 +11,10 @@ To setup your project, follow these steps:
  2. Add the `require` call to your project
  3. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
 
-<pre><code>
 ```php
   require 'algoliasearch.php';
   $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
 ``
-</code></pre>
 
 General Principle
 -------------
@@ -43,16 +41,13 @@ You can optionally use the following arguments :
  * **insideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat, p2Lng).<br/>For example `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`).<br/>At indexing, you should specify geoloc of an object with _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
  * **tags**: filter the query by a set of tags (contains a list of tags separated by a comma).<br/>At indexing, tags should be added in _tags attribute of objects (for example `{"_tags":["tag1","tag2"]}` )
 
-<pre><code>
 ```php
 $index = $client->initIndex("MyIndexName");
 $res = $index->search("query string");
 $res = $index->search("query string", array("attributes" => "population,name", "hitsPerPage" => 50)));
 ```
-</code></pre>
 
 The search answer will be of the form:
-<pre><code>
 ```javascript
 {
     "hasError": false,
@@ -84,7 +79,6 @@ The search answer will be of the form:
             }
 }
 ```
-</code></pre>
 
 Add a new object in the Index
 -------------

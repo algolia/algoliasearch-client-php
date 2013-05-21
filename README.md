@@ -14,7 +14,7 @@ To setup your project, follow these steps:
 ```php
   require 'algoliasearch.php';
   $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
-``
+```
 
 General Principle
 -------------
@@ -48,6 +48,7 @@ $res = $index->search("query string", array("attributes" => "population,name", "
 ```
 
 The search answer will be of the form:
+
 ```javascript
 {
     "hasError": false,
@@ -92,7 +93,7 @@ You have no need to create an index, it will be automatically create the first t
 Objects are schema less, you have no configuration to start indexing. You can look at settings section to have more details on advanced settings.
 
 Example with automatic `objectID` assignement:
-<pre><code>
+
 ```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235));
@@ -101,10 +102,9 @@ if (!$res->hasError()) {
     echo "objectID=" . $content['objectID'] . "\n";
 }
 ```
-</code></pre>
 
 Example with manual `objectID` assignement:
-<pre><code>
+
 ```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235), "myID");
@@ -113,7 +113,6 @@ if (!$res->hasError()) {
     echo "objectID=" . $content['objectID'] . "\n";
 }
 ```
-</code></pre>
 
 Update an existing object in the Index
 -------------
@@ -124,27 +123,25 @@ You have two options to update an existing object:
  2. Replace only some attributes of an existing object.
 
 Example to replace content of an existing object:
-<pre><code>
+
 ```php
 $index->saveObject(array("name" => "Los Angeles", 
                          "population" => 3792621,
                          "objectID" => "myID"));
 ```
-</code></pre>
 
 Example of code to update only the population attribute of an existing object:
-<pre><code>
+
 ```php
 $index->partialUpdateObject(array("population" => 3792621,
                                   "objectID" => "myID"));
 ```
-</code></pre>
 
 Get an object
 -------------
 
 You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
-<pre><code>
+
 ```php
 // Retrieves all attributes
 $index->getObject("myID");
@@ -153,17 +150,15 @@ $index->getObject("myID", "name,population");
 // Retrieves only name attribute
 $index->getObject("myID", "name");
 ```
-</code></pre>
 
 Delete an object
 -------------
 
 You can delete an object using its `objectID`:
-<pre><code>
+
 ```php
 $index->deleteObject("myID");
 ```
-</code></pre>
 
 Index Settings
 -------------
@@ -193,7 +188,7 @@ The syntax of this condition is an array of strings containing attributes prefix
 For example `"customRanking" => ["desc(population)", "asc(name)"]`
 
 You can easily retrieve settings and update them:
-<pre><code>
+
 ```php
 $res = $index->getSettings();
 if (!$res->hasError()) {
@@ -202,4 +197,3 @@ if (!$res->hasError()) {
     $index->setSettings($settings);
 }
 ```
-</code></pre>

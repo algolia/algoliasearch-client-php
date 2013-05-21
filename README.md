@@ -13,7 +13,8 @@ To setup your project, follow these steps:
 
 ```php
   require 'algoliasearch.php';
-  $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
+  $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', 
+                                      array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
 ```
 
 General Principle

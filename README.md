@@ -13,7 +13,7 @@ To setup your project, follow these steps:
 
 <pre><code>
   require 'algoliasearch.php';
-  $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("host1", "host2", "host3"));
+  $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
 </code></pre>
 
 General Principle
@@ -119,11 +119,17 @@ You have two options to update an existing object:
  1. Replace all attributes of an existing object.
  2. Replace only some attributes of an existing object.
 
-Example of code to update only the population attribute of an existing object:
+Example to replace content of an existing object:
 <pre><code>
 $index->saveObject(array("name" => "Los Angeles", 
                          "population" => 3792621,
                          "objectID" => "myID"));
+</code></pre>
+
+Example of code to update only the population attribute of an existing object:
+<pre><code>
+$index->partialUpdateObject(array("population" => 3792621,
+                                  "objectID" => "myID"));
 </code></pre>
 
 Get an object
@@ -131,8 +137,12 @@ Get an object
 
 You can easily retrieve an object using its `objectID` and optionnaly a list of attributes you want to retrieve (using comma as separator):
 <pre><code>
+// Retrieves all attributes
 $index->getObject("myID");
-$index->getObject("myID", "attribute1,attribute2");
+// Retrieves name and population attributes
+$index->getObject("myID", "name,population");
+// Retrieves only name attribute
+$index->getObject("myID", "name");
 </code></pre>
 
 Delete an object

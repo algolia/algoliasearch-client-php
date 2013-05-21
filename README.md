@@ -15,6 +15,7 @@ To setup your project, follow these steps:
 ```php
   require 'algoliasearch.php';
   $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', array("api-u1-1.algolia.io", "api-u1-2.algolia.io", "api-u1-3.algolia.io"));
+``
 </code></pre>
 
 General Principle
@@ -47,6 +48,7 @@ You can optionally use the following arguments :
 $index = $client->initIndex("MyIndexName");
 $res = $index->search("query string");
 $res = $index->search("query string", array("attributes" => "population,name", "hitsPerPage" => 50)));
+```
 </code></pre>
 
 The search answer will be of the form:
@@ -81,6 +83,7 @@ The search answer will be of the form:
                 "query":"jan"
             }
 }
+```
 </code></pre>
 
 Add a new object in the Index
@@ -103,6 +106,7 @@ if (!$res->hasError()) {
     $content = $res->getContent();
     echo "objectID=" . $content['objectID'] . "\n";
 }
+```
 </code></pre>
 
 Example with manual `objectID` assignement:
@@ -114,6 +118,7 @@ if (!$res->hasError()) {
     $content = $res->getContent();
     echo "objectID=" . $content['objectID'] . "\n";
 }
+```
 </code></pre>
 
 Update an existing object in the Index
@@ -130,6 +135,7 @@ Example to replace content of an existing object:
 $index->saveObject(array("name" => "Los Angeles", 
                          "population" => 3792621,
                          "objectID" => "myID"));
+```
 </code></pre>
 
 Example of code to update only the population attribute of an existing object:
@@ -137,6 +143,7 @@ Example of code to update only the population attribute of an existing object:
 ```php
 $index->partialUpdateObject(array("population" => 3792621,
                                   "objectID" => "myID"));
+```
 </code></pre>
 
 Get an object
@@ -151,6 +158,7 @@ $index->getObject("myID");
 $index->getObject("myID", "name,population");
 // Retrieves only name attribute
 $index->getObject("myID", "name");
+```
 </code></pre>
 
 Delete an object
@@ -160,6 +168,7 @@ You can delete an object using its `objectID`:
 <pre><code>
 ```php
 $index->deleteObject("myID");
+```
 </code></pre>
 
 Index Settings
@@ -198,4 +207,5 @@ if (!$res->hasError()) {
     $settings["customRanking"] = array("desc(population)", "asc(name)");
     $index->setSettings($settings);
 }
+```
 </code></pre>

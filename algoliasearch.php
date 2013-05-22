@@ -61,8 +61,9 @@ class Answer
 }
 
 /** 
- * Entry point in the PHP API, you should instanciate an AlgoliaSearchClient to start using 
- * Algolia Search API
+ * Entry point in the PHP API.
+ * You should instanciate a Client object with your ApplicationID, ApiKey and Hosts 
+ * to start using Algolia Search API
  */
 class Client {
     /*
@@ -110,7 +111,11 @@ class Client {
 
     /*
      * List all existing indexes
-     * return an AlgoliaAnswer object whith answer in the form array("deletedAt" => "2013-01-18T15:33:13.556Z")
+     * return an Answer object with answer in the form 
+     * array("items" => array(
+     *                        array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
+     *                        array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
+     *                        ))
      */
     public function listIndexes() {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/");
@@ -120,19 +125,15 @@ class Client {
      * Delete an index
      *
      * @param indexName the name of index to delete
-     * return an AlgoliaAnswer object with answer in the form 
-     * array("items" => array(
-     *                        array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
-     *                        array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
-     *                        ))
+     * return an Answer object whith answer in the form array("deletedAt" => "2013-01-18T15:33:13.556Z")
      */
     public function deleteIndex($indexName) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $indexName);
     }
   
     /*
-     * Get the index object initialized
-     *
+     * Get the index object initialized (no server call needed for initialization)
+    
      * @param indexName the name of index
      * @param callback the result callback with one argument (the Index instance)
      */
@@ -165,7 +166,7 @@ class Client {
     }
 
     /*
-     * Add an existing user key
+     * Create a new user key
      *
      * @param acls the list of ACL for this key. Defined by an array of strings that 
      * can contains the following values:

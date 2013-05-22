@@ -17,15 +17,6 @@ To setup your project, follow these steps:
                                       array("user-1.algolia.io", "user-2.algolia.io", "user-3.algolia.io"));
 ```
 
-General Principle
--------------
-
-All API calls will return an object <em>Answer</em> that will expose three methods
-
- 1. hasError() that returns true if an error occured
- 2. errorMsg() that describes the error
- 3. getContent() that return the deserialized json object of API when there is no error
-
 Search 
 -------------
 To perform a search, you have just to initialize the index and perform a call to search.<br/>
@@ -98,10 +89,7 @@ Example with automatic `objectID` assignement:
 ```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235));
-if (!$res->hasError()) {
-    $content = $res->getContent();
-    echo "objectID=" . $content['objectID'] . "\n";
-}
+echo "objectID=" . $res['objectID'] . "\n";
 ```
 
 Example with manual `objectID` assignement:
@@ -109,10 +97,7 @@ Example with manual `objectID` assignement:
 ```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235), "myID");
-if (!$res->hasError()) {
-    $content = $res->getContent();
-    echo "objectID=" . $content['objectID'] . "\n";
-}
+echo "objectID=" . $res['objectID'] . "\n";
 ```
 
 Update an existing object in the Index
@@ -191,10 +176,7 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
 You can easily retrieve settings and update them:
 
 ```php
-$res = $index->getSettings();
-if (!$res->hasError()) {
-    $settings = $res->getContent();
-    $settings["customRanking"] = array("desc(population)", "asc(name)");
-    $index->setSettings($settings);
-}
+$settings = $index->getSettings();
+$settings["customRanking"] = array("desc(population)", "asc(name)");
+$index->setSettings($settings);
 ```

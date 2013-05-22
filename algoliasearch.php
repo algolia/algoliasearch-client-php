@@ -23,43 +23,6 @@
  */
 namespace AlgoliaSearch;
 
-/*
- * Object returned by all API method
- */
-class Answer
-{
-    public function __construct($hasError, $errorMsg, $answerObject) {
-        $this->hasError = $hasError;
-        $this->errorMsg = $errorMsg;
-        $this->answer = $answerObject;
-    }
-
-    /*
-     * Returns true if the API call failed
-     */
-    public function hasError() {
-        return $this->hasError;
-    }
-    
-    /*
-     * Returns error message when hasError() == true
-     */
-    public function getErrorMessage() {
-        return $this->errorMsg;
-    }
-
-    /*
-     * Returns answer content when hasError() == false
-     */
-    public function getContent() {
-        return $this->answer;
-    }
-
-    private $hasError;
-    private $errorMsg;
-    private $answer;
-}
-
 /** 
  * Entry point in the PHP API.
  * You should instanciate a Client object with your ApplicationID, ApiKey and Hosts 
@@ -111,7 +74,7 @@ class Client {
 
     /*
      * List all existing indexes
-     * return an Answer object with answer in the form 
+     * return an object in the form:
      * array("items" => array(
      *                        array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
      *                        array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
@@ -125,7 +88,7 @@ class Client {
      * Delete an index
      *
      * @param indexName the name of index to delete
-     * return an Answer object whith answer in the form array("deletedAt" => "2013-01-18T15:33:13.556Z")
+     * return an object whith in the form array("deletedAt" => "2013-01-18T15:33:13.556Z")
      */
     public function deleteIndex($indexName) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $indexName);
@@ -135,7 +98,6 @@ class Client {
      * Get the index object initialized (no server call needed for initialization)
     
      * @param indexName the name of index
-     * @param callback the result callback with one argument (the Index instance)
      */
     public function initIndex($indexName) {
         return new Index($this->curlHandle, $this->hostsArray, $indexName);
@@ -265,9 +227,6 @@ class Index {
      * Override the content of object
      * 
      * @param object contains the javascript object to save, the object must contains an objectID attribute
-     * @param callback (optional) the result callback with two arguments:
-     *  success: boolean set to true if the request was successfull
-     *  content: the server answer that updateAt and taskID
      */
     public function saveObject($object) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"]), array(), $object);
@@ -402,11 +361,12 @@ class Index {
 
 function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params = array(), $data = array()) {
     foreach ($hostsArray as &$host) {
-        $res = AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
-        if ($res !== null)
-            return $res;
+        try {
+            return AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
+        } catch (Exception $e) {
+        }
     }
-    return new Answer(true, "Hosts unreachable", null);
+    throw new Exception('Hosts unreachable');
 }
 
 function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data) {
@@ -439,13 +399,12 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         return null;
     }
     if ($http_status === 403) {
-        return new Answer(true, "Invalid Application-ID or API-Key", null);            
+        throw new Exception("Invalid Application-ID or API-Key");
     }
     if ($http_status === 404) {
-        return new Answer(true, "Resource does not exist", null);            
+        throw new Exception("Resource does not exist");
     }
     $answer = json_decode($response, true);
-    $error = true;
     $errorMsg = null;
 
     switch (json_last_error()) {
@@ -466,15 +425,16 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             break;
         case JSON_ERROR_NONE:
         default:
-            $error = false;
             break;
     }
+    if ($errorMsg !== null)
+        throw new Exception($errorMsg);
+
     // Check is there is an error which is not a 403/404/503
-    if ($error === false && intval(floor($http_status / 100)) !== 2) {
-        $error = true;
-        $error = $answer["message"];
+    if (intval(floor($http_status / 100)) !== 2) {
+        throw new Exception($answer["message"]);
     }
-    return new Answer($error, $errorMsg, $answer);
+    return $answer;
 }
 
 ?>

@@ -413,7 +413,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     if ($params != null && count($params) > 0)
         $url .= "?" . http_build_query($params);
     curl_setopt($curlHandle, CURLOPT_URL, $url);
-    var_dump($url);
+
     if ($method === 'GET') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curlHandle, CURLOPT_HTTPGET, true);

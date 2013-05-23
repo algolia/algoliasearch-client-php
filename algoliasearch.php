@@ -23,6 +23,9 @@
  */
 namespace AlgoliaSearch;
 
+
+class AlgoliaException extends \Exception { }
+
 /** 
  * Entry point in the PHP API.
  * You should instanciate a Client object with your ApplicationID, ApiKey and Hosts 
@@ -362,11 +365,15 @@ class Index {
 function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params = array(), $data = array()) {
     foreach ($hostsArray as &$host) {
         try {
-            return AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
+            $res = AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
+            if ($res !== null)
+                return $res;
+        } catch (AlgoliaException $e) {
+            throw e; 
         } catch (Exception $e) {
         }
     }
-    throw new Exception('Hosts unreachable');
+    throw new AlgoliaException('Hosts unreachable');
 }
 
 function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data) {
@@ -374,7 +381,6 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     if ($params != null && count($params) > 0)
         $url .= "?" . http_build_query($params);
     curl_setopt($curlHandle, CURLOPT_URL, $url);
-
     if ($method === 'GET') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
@@ -395,14 +401,14 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
 
     if ($http_status === 0 || $http_status === 503) {
-        // Could not reach host or service anavailable, try with another one if we have it
+        // Could not reach host or service unavailable, try with another one if we have it
         return null;
     }
     if ($http_status === 403) {
-        throw new Exception("Invalid Application-ID or API-Key");
+        throw new AlgoliaException("Invalid Application-ID or API-Key");
     }
     if ($http_status === 404) {
-        throw new Exception("Resource does not exist");
+        throw new AlgoliaException("Resource does not exist");
     }
     $answer = json_decode($response, true);
     $errorMsg = null;
@@ -428,11 +434,11 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             break;
     }
     if ($errorMsg !== null)
-        throw new Exception($errorMsg);
+        throw new AlgoliaException($errorMsg);
 
     // Check is there is an error which is not a 403/404/503
     if (intval(floor($http_status / 100)) !== 2) {
-        throw new Exception($answer["message"]);
+        throw new AlgoliaException($answer["message"]);
     }
     return $answer;
 }

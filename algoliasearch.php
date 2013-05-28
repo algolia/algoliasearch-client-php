@@ -196,7 +196,7 @@ class Index {
     public function addObjects($objects) {
         $requests = array();
         for ($i = 0; $i < count($objects); ++$i) {
-            array_push($requests, array("action" => "addObject", "body" => $object[$i]));
+            array_push($requests, array("action" => "addObject", "body" => $objects[$i]));
         }
         $request = array("requests" => $requests);
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
@@ -243,7 +243,7 @@ class Index {
     public function saveObjects($objects) {
         $requests = array();
         for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $object[$i];
+            $obj = $objects[$i];
             array_push($requests, array("action" => "updateObject", "objetID" => $obj["objectID"], "body" => $obj));
         }
         $request = array("requests" => $requests);

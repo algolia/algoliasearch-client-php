@@ -17,6 +17,35 @@ To setup your project, follow these steps:
                                       array("user-1.algolia.io", "user-2.algolia.io", "user-3.algolia.io"));
 ```
 
+
+Quick Start
+-------------
+This quick start is a 30 seconds tutorial where you can discover how to index and search objects.
+
+Without any prior-configuration, you can index the 1000 world's biggest cities in the ```cities``` index with the following code:
+```php
+$index = $client->initIndex("cities");
+$batch = json_decode(file_get_contents("1000-cities.json"), true);
+$index->addObjects($batch["objects"]);
+```
+The [1000-cities.json](https://github.com/algolia/algoliasearch-client-php/blob/master/1000-cities.json) file contains city names extracted from [Geonames](http://www.geonames.org) and formated in our [batch format](http://docs.algoliav1.apiary.io/#post-%2F1%2Findexes%2F%7BindexName%7D%2Fbatch). The ```body```attribute contains the user-object that can be any valid JSON.
+
+You can then start to search for a city name (even with typos):
+```sh
+var_dump($index->search('san fran'));
+var_dump($index->search('loz anqel'));
+```
+
+Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following command with the [settings-cities.json](https://github.com/algolia/algoliasearch-client-php/blob/master/settings-cities.json) file:
+```sh
+$index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
+```
+
+And then search for all cities that start with an "s":
+```sh
+var_dump($index->search('s'));
+```
+
 Search 
 -------------
 To perform a search, you just need to initialize the index and perform a call to the search function.<br/>

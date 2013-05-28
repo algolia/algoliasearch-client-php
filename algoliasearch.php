@@ -144,7 +144,7 @@ class Client {
      *   - editSettings : allows to change index settings (https only)
      */
     public function addUserKey($acls) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), array("acl" => $acls);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), array("acl" => $acls));
     }
 
     private $applicationID;

@@ -2,6 +2,7 @@ Algolia Search API Client for PHP
 ==================
 
 This PHP client let you easily use the Algolia Search API from your backend.
+The service is currently in Beta, you can request an invite on our [website](http://www.algolia.com/pricing/).
 
 Setup
 -------------

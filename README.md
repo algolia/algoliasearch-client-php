@@ -36,7 +36,7 @@ var_dump($index->search('san fran'));
 var_dump($index->search('loz anqel'));
 ```
 
-Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following command with the [settings-cities.json](https://github.com/algolia/algoliasearch-client-php/blob/master/settings-cities.json) file:
+Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following code:
 ```sh
 $index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
 ```

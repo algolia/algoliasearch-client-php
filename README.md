@@ -32,18 +32,18 @@ $index->addObjects($batch["objects"]);
 The [1000-cities.json](https://github.com/algolia/algoliasearch-client-php/blob/master/1000-cities.json) file contains city names extracted from [Geonames](http://www.geonames.org) and formated in our [batch format](http://docs.algoliav1.apiary.io/#post-%2F1%2Findexes%2F%7BindexName%7D%2Fbatch). The ```body```attribute contains the user-object that can be any valid JSON.
 
 You can then start to search for a city name (even with typos):
-```sh
+```php
 var_dump($index->search('san fran'));
 var_dump($index->search('loz anqel'));
 ```
 
 Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following code:
-```sh
+```php
 $index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
 ```
 
 And then search for all cities that start with an "s":
-```sh
+```php
 var_dump($index->search('s'));
 ```
 

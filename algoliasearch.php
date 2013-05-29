@@ -33,7 +33,7 @@ class AlgoliaException extends \Exception { }
  */
 class Client {
     /*
-     * Algolia Search library initialization
+     * Algolia Search initialization
      * @param applicationID the application ID you have in your admin interface
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
@@ -72,7 +72,7 @@ class Client {
                     ));
         //Return the output instead of printing it
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
+	curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
     }
 
     /*
@@ -191,12 +191,17 @@ class Index {
     /*
      * Add several objects
      * 
-     * @param objects contains an array of objects to add
+     * @param objects contains an array of objects to add. If the object contains an objectID
      */
-    public function addObjects($objects) {
+    public function addObjects($objects, $objectIDKey = "objectID") {
         $requests = array();
         for ($i = 0; $i < count($objects); ++$i) {
-            array_push($requests, array("action" => "addObject", "body" => $objects[$i]));
+	    $obj = $objects[$i];
+	    if (array_key_exists($objectIDKey, $obj)) {
+	        array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
+	    } else {
+	        array_push($requests, array("action" => "addObject", "body" => $obj));
+	    }
         }
         $request = array("requests" => $requests);
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
@@ -240,11 +245,11 @@ class Index {
      * 
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
-    public function saveObjects($objects) {
+    public function saveObjects($objects, $objectIDKey = "objectID") {
         $requests = array();
         for ($i = 0; $i < count($objects); ++$i) {
             $obj = $objects[$i];
-            array_push($requests, array("action" => "updateObject", "objetID" => $obj["objectID"], "body" => $obj));
+            array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
         }
         $request = array("requests" => $requests);
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
@@ -369,7 +374,7 @@ function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params 
             if ($res !== null)
                 return $res;
         } catch (AlgoliaException $e) {
-            throw e; 
+            throw $e; 
         } catch (Exception $e) {
         }
     }
@@ -381,6 +386,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     if ($params != null && count($params) > 0)
         $url .= "?" . http_build_query($params);
     curl_setopt($curlHandle, CURLOPT_URL, $url);
+    curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
     if ($method === 'GET') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curlHandle, CURLOPT_HTTPGET, true);

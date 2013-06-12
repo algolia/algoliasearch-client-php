@@ -272,7 +272,7 @@ class Index {
      *  - attributes: a string that contains attribute names to retrieve separated by a comma. 
      *    By default all attributes are retrieved.
      *  - attributesToHighlight: a string that contains attribute names to highlight separated by a comma. 
-     *    By default all attributes are highlighted.
+     *    By default indexed attributes are highlighted.
      *  - minWordSizeForApprox1: the minimum number of characters in a query word to accept one typo in this word. 
      *    Defaults to 3.
      *  - minWordSizeForApprox2: the minimum number of characters in a query word to accept two typos in this word.

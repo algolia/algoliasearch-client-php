@@ -28,7 +28,7 @@ class AlgoliaException extends \Exception { }
 
 /** 
  * Entry point in the PHP API.
- * You should instanciate a Client object with your ApplicationID, ApiKey and Hosts 
+ * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts 
  * to start using Algolia Search API
  */
 class Client {
@@ -72,7 +72,7 @@ class Client {
                     ));
         //Return the output instead of printing it
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
+	    curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
     }
 
     /*
@@ -91,7 +91,7 @@ class Client {
      * Delete an index
      *
      * @param indexName the name of index to delete
-     * return an object whith in the form array("deletedAt" => "2013-01-18T15:33:13.556Z")
+     * return an object containing a "deletedAt" attribute
      */
     public function deleteIndex($indexName) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $indexName);
@@ -224,7 +224,7 @@ class Index {
     /*
      * Update partially an object (only update attributes passed in argument)
      * 
-     * @param partialObject contains the javascript attributes to override, the 
+     * @param partialObject contains the object attributes to override, the 
      *  object must contains an objectID attribute
      */
     public function partialUpdateObject($partialObject) {
@@ -234,7 +234,7 @@ class Index {
     /*
      * Override the content of object
      * 
-     * @param object contains the javascript object to save, the object must contains an objectID attribute
+     * @param object contains the object to save, the object must contains an objectID attribute
      */
     public function saveObject($object) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"]), array(), $object);
@@ -289,8 +289,8 @@ class Index {
      *    a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat, p2Lng.
      *    For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
      *    At indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
-     *  - tags let you filter the query by a set of tags (contains a list of tags separated by ','). 
-     *    At indexing, tags should be added in _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
+     *  - tags filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
+     *    At indexing, tags should be added in the _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
      */
     public function search($query, $args = null) {
         if ($args === null) {

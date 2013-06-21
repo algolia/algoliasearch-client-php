@@ -273,6 +273,10 @@ class Index {
      *    By default all attributes are retrieved.
      *  - attributesToHighlight: a string that contains attribute names to highlight separated by a comma. 
      *    By default indexed attributes are highlighted.
+     *  - attributesToSnippet: a string that contains the names of attributes to snippet alongside the number 
+     *    of words to return (syntax is 'attributeName:nbWords'). 
+     *    Attributes are separated by a comma (Example: "attributesToSnippet=name:10,content:10").
+     *    By default no snippet is computed.
      *  - minWordSizeForApprox1: the minimum number of characters in a query word to accept one typo in this word. 
      *    Defaults to 3.
      *  - minWordSizeForApprox2: the minimum number of characters in a query word to accept two typos in this word.
@@ -289,6 +293,10 @@ class Index {
      *    a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat, p2Lng.
      *    For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
      *    At indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+     *  - queryType: select how the query words are interpreted:
+     *     - prefixAll: all query words are interpreted as prefixes (default behavior).
+     *     - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+     *     - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
      *  - tags filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
      *    At indexing, tags should be added in the _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
      */
@@ -335,7 +343,9 @@ class Index {
      *  - minWordSizeForApprox2: (integer) the minimum number of characters to accept two typos (default = 7)
      *  - hitsPerPage: (integer) the number of hits per page (default = 10)
      *  - attributesToRetrieve: (array of strings) default list of attributes to retrieve for objects
-     *  - attributesToHighlight: (array of strings) default list of attributes to highlight
+     *  - attributesToHighlight: (array of strings) default list of attributes to highlight.
+     *  - attributesToSnippet: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords').
+     *    By default no snippet is computed.
      *  - attributesToIndex: (array of strings) the list of fields you want to index. 
      *    By default all textual attributes of your objects are indexed, but you should update it to get optimal 
      *    results. This parameter has two important uses:
@@ -352,6 +362,10 @@ class Index {
      *       - position (sort according to the matching attribute), 
      *       - custom which is user defined
      *     (the standard order is ["typo", "geo", position", "custom"])
+     *  - queryType: select how the query words are interpreted:
+     *       - prefixAll: all query words are interpreted as prefixes (default behavior).
+     *       - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+     *       - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
      *  - customRanking: (array of strings) lets you specify part of the ranking. 
      *    The syntax of this condition is an array of strings containing attributes prefixed 
      *    by asc (ascending order) or desc (descending order) operator.

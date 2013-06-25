@@ -13,9 +13,9 @@ To setup your project, follow these steps:
  3. Initialize the client with your ApplicationID, API-Key and list of hostnames (you can find all of them on your Algolia account)
 
 ```php
-  require 'algoliasearch.php';
-  $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', 
-                                      array("user-1.algolia.io", "user-2.algolia.io", "user-3.algolia.io"));
+require 'algoliasearch.php';
+$client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', 
+  array("YourHostname-1.algolia.io", "YourHostname-2.algolia.io", "YourHostname-3.algolia.io"));
 ```
 
 

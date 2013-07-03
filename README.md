@@ -15,7 +15,7 @@ Table of Content
 
 1. [Search](#search)
 1. [Add a new object](#add-a-new-object-in-the-index)
-1. [Update an object](#update-an-existing-obect-in-the-index)
+1. [Update an object](#update-an-existing-object-in-the-index)
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
 1. [Index settings](#index-settings)
@@ -65,7 +65,7 @@ And then search for all cities that start with an "s":
 var_dump($index->search('s'));
 ```
 
-Search 
+Search
 -------------
 > **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go threw your servers, and (ii) it will offload your servers of unnecessary tasks.
 

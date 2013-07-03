@@ -94,7 +94,7 @@ class Client {
      * return an object containing a "deletedAt" attribute
      */
     public function deleteIndex($indexName) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $indexName);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . urlencode($indexName));
     }
   
     /*
@@ -136,15 +136,15 @@ class Client {
      * @param acls the list of ACL for this key. Defined by an array of strings that 
      * can contains the following values:
      *   - search: allow to search (https and http)
-     *   - addObject: allows to add a new object in the index (https only)
-     *   - updateObject : allows to change content of an existing object (https only)
+     *   - addObject: allows to add/update an object in the index (https only)
      *   - deleteObject : allows to delete an existing object (https only)
      *   - deleteIndex : allows to delete index content (https only)
      *   - settings : allows to get index settings (https only)
      *   - editSettings : allows to change index settings (https only)
+     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
      */
-    public function addUserKey($acls) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), array("acl" => $acls));
+    public function addUserKey($acls, $validity = 0) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), array("acl" => $acls, "validity" => $validity));
     }
 
     private $applicationID;
@@ -374,6 +374,46 @@ class Index {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/settings", array(), $settings);
     }
 
+    /*
+     * List all existing user keys associated to this index with their associated ACLs
+     *
+     */
+    public function listUserKeys() {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/keys");
+    }
+
+    /*
+     * Get ACL of a user key associated to this index
+     *
+     */
+    public function getUserKeyACL($key) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
+    }
+
+    /*
+     * Delete an existing user key associated to this index
+     *
+     */
+    public function deleteUserKey($key) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
+    }
+
+    /*
+     * Create a new user key associated to this index
+     *
+     * @param acls the list of ACL for this key. Defined by an array of strings that 
+     * can contains the following values:
+     *   - search: allow to search (https and http)
+     *   - addObject: allows to add/update an object in the index (https only)
+     *   - deleteObject : allows to delete an existing object (https only)
+     *   - deleteIndex : allows to delete index content (https only)
+     *   - settings : allows to get index settings (https only)
+     *   - editSettings : allows to change index settings (https only)
+     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
+     */
+    public function addUserKey($acls, $validity = 0) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(), array("acl" => $acls, "validity" => $validity));
+    }
 
     private $indexName;
     private $urlIndexName;

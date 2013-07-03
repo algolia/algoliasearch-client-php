@@ -4,6 +4,24 @@ Algolia Search API Client for PHP
 This PHP client let you easily use the Algolia Search API from your backend.
 The service is currently in Beta, you can request an invite on our [website](http://www.algolia.com/pricing/).
 
+Table of Content
+-------------
+**Get started**
+
+1. [Setup](#setup) 
+1. [Quick Start](#quick-start)
+
+**Commands reference**
+
+1. [Search](#search)
+1. [Add a new object](#add-a-new-object-in-the-index)
+1. [Update an object](#update-an-existing-obect-in-the-index)
+1. [Get an object](#get-an-object)
+1. [Delete an object](#delete-an-object)
+1. [Index settings](#index-settings)
+1. [Delete an index](#delete-an-index)
+1. [Security / User API Keys](#security--user-api-keys)
+
 Setup
 -------------
 To setup your project, follow these steps:
@@ -55,7 +73,7 @@ To perform a search, you just need to initialize the index and perform a call to
 You can use the following optional arguments:
 
  * **attributes**: a string that contains the names of attributes to retrieve separated by a comma.<br/>By default all attributes are retrieved.
- * **attributesToHighlight**: a string that contains the names of attributes to highlight separated by a comma.<br/>By default indexed attributes are highlighted.
+ * **attributesToHighlight**: a string that contains the names of attributes to highlight separated by a comma.<br/>By default indexed attributes are highlighted. Numerical attributes cannot be highlighted. A **matchLevel** is returned for each highlighted attribute and can contain: "full" if all the query terms were found in the attribute, "partial" if only some of the query terms were found, or "none" if none of the query terms were found.
  * **attributesToSnippet**: a string that contains the names of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords'). Attributes are separated by a comma (Example: "attributesToSnippet=name:10,content:10").<br/>By default no snippet is computed.
  * **minWordSizeForApprox1**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
  * **minWordSizeForApprox2**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
@@ -188,22 +206,24 @@ You can retrieve all settings using the `getSettings` function. The result will 
  * **minWordSizeForApprox2**: (integer) the minimum number of characters to accept two typos (default = 7).
  * **hitsPerPage**: (integer) the number of hits per page (default = 10).
  * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects.
- * **attributesToHighlight**: (array of strings) default list of attributes to highlight
+ * **attributesToHighlight**: (array of strings) default list of attributes to highlight.
  * **attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords')<br/>By default no snippet is computed.
  * **attributesToIndex**: (array of strings) the list of fields you want to index.<br/>By default all textual attributes of your objects are indexed, but you should update it to get optimal results.<br/>This parameter has two important uses:
- * *Limit the attributes to index*.<br/>For example if you store a binary image in base64, you want to store it and be able to retrieve it but you don't want to search in the base64 string.
- * *Control part of the ranking*.<br/>Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. 
- * **ranking**: (array of strings) controls the way results are sorted.<br/>We have four available criteria: 
+  * *Limits the attributes to index*.<br/>For example if you store a binary image in base64, you want to store it and be able to retrieve it but you don't want to search in the base64 string.
+  * *Controls part of the ranking*.<br/>Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. 
+ * **ranking**: (array of strings) controls the way hits are sorted.<br/>We have five available criteria:
   * **typo**: sort according to number of typos,
-  * **geo**: sort according to decreassing distance when performing a geo-location based search,
-  * **position**: sort according to the proximity of query words in the object, 
-  * **custom**: sort according to a user defined formula set in **customRanking** attribute.<br/>The standard order is ["typo", "geo", position", "custom"]
+  * **geo**: sort according to decreasing distance when performing a geo-location based search,
+  * **proximity**: sort according to the proximity of query words in hits, 
+  * **attribute**: sort according to the order of attributes defined by **attributesToIndex**,
+  * **custom**: sort according to a user defined formula set in **customRanking** attribute.
+  <br/>The default order is `["typo", "geo", "proximity", "attribute", "custom"]`. We strongly recommend to keep this configuration.
+ * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
+ For example `"customRanking" => ["desc(population)", "asc(name)"]`
  * **queryType**: select how the query words are interpreted:
   * **prefixAll**: all query words are interpreted as prefixes (default behavior).
   * **prefixLast**: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
- * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
- For example `"customRanking" => ["desc(population)", "asc(name)"]`
 
 You can easily retrieve settings or update them:
 
@@ -215,3 +235,70 @@ var_dump($settings);
 ```php
 $index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
 ```
+
+Delete an index
+-------------
+You can delete an index using its name:
+
+```php
+$client->deleteIndex("cities");
+```
+
+Security / User API Keys
+-------------
+
+The admin API key provides full control of all your indexes. 
+You can also generate user API keys to control security. 
+These API keys can be restricted to a set of operations or/and restricted to a given index.
+
+To list existing keys, you can use `listUserKeys` method:
+```php
+// Lists global API Keys
+$client->listUserKeys();
+// Lists API Keys that can access only to this index
+$index->listUserKeys();
+```
+
+Each key is defined by a set of rights that specify the authorized actions. The different rights are:
+ * **search**: allows to search,
+ * **addObject**: allows to add/update an object in the index,
+ * **deleteObject**: allows to delete an existing object,
+ * **deleteIndex**: allows to delete index content,
+ * **settings**: allows to get index settings,
+ * **editSettings**: allows to change index settings.
+
+Example of API Key creation:
+```php
+// Creates a new global API key that can only perform search actions
+$res = $client->addUserKey(array("search"));
+echo "key=" . $res['key'] . "\n";
+// Creates a new API key that can only perform search action on this index
+$res = $index->addUserKey(array("search"));
+echo "key=" . $res['key'] . "\n";
+```
+You can also create a temporary API key that will be valid only for a specific period of time (in seconds):
+```php
+// Creates a new global API key that is valid for 300 seconds
+$res = $client->addUserKey(array("search"), 300);
+echo "key=" . $res['key'] . "\n";
+// Creates a new index specific API key valid for 300 seconds
+$res = $index->addUserKey(array("search"), 300);
+echo "key=" . $res['key'] . "\n";
+```
+
+Get the rights of a given key:
+```php
+// Gets the rights of a global key
+$res = $client->getUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+// Gets the rights of an index specific key
+$res = $index->getUserKeyACL("71671c38001bf3ac857bc82052485107");
+```
+
+Delete an existing key:
+```php
+// Deletes a global key
+$res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+// Deletes an index specific key
+$res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
+```
+

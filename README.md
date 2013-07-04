@@ -255,8 +255,6 @@ You can delete an index using its name:
 $client->deleteIndex("cities");
 ```
 
-`
-
 Wait indexing
 -------------
 

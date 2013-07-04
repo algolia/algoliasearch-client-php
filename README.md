@@ -258,14 +258,16 @@ $client->deleteIndex("cities");
 Wait indexing
 -------------
 
-All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. You can easily wait indexing using the `waitTask` method on the `taskID` returned by a write operation.
+All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. Even if it's extremely fast, you can easily ensure indexing is complete using the `waitTask` method on the `taskID` returned by a write operation.
 
-For example to wait for indexing of a new object:
+For example, to wait for indexing of a new object:
 ```php
 $res = $index->addObject(array("name" => "San Francisco", 
                                "population" => 805235));
 $index->waitTask($res['taskID']);
 ```
+
+If you want to ensure multiple objects have been indexed, you can only check the biggest taskID.
 
 Batch writes
 -------------
@@ -275,7 +277,7 @@ We expose two methods to perform batch:
  * `addObjects`: add an array of object using automatic `objectID` assignement
  * `saveObjects`: add or update an array of object that contains an `objectID` attribute
 
-Example using automatic `objectID` assignement
+Example using automatic `objectID` assignement:
 ```php
 $res = $index->addObjects(array(array("name" => "San Francisco", 
                                       "population" => 805235),

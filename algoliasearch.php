@@ -318,10 +318,7 @@ class Index {
     public function waitTask($taskID, $timeBeforeRetry = 100) {
         while (true) {
             $res = AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/task/" . $taskID);
-            if ($res->hasError())
-                return $res;
-            $content = $res->getContent();
-            if ($content["status"] === "published")
+            if ($res["status"] === "published")
                 return $res;
             usleep($timeBeforeRetry * 1000);
         }

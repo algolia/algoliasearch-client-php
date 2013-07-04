@@ -19,7 +19,10 @@ Table of Content
 1. [Get an object](#get-an-object)
 1. [Delete an object](#delete-an-object)
 1. [Index settings](#index-settings)
+1. [List indexes](#list-indexes)
 1. [Delete an index](#delete-an-index)
+1. [Wait indexing](#wait-indexing)
+1. [Batch writes](#batch-writes)
 1. [Security / User API Keys](#security--user-api-keys)
 
 Setup
@@ -236,12 +239,60 @@ var_dump($settings);
 $index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
 ```
 
+List indexes
+-------------
+You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
+
+```php
+var_dump($client->listIndexes());
+```
+
 Delete an index
 -------------
 You can delete an index using its name:
 
 ```php
 $client->deleteIndex("cities");
+```
+
+`
+
+Wait indexing
+-------------
+
+All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. You can easily wait indexing using the `waitTask` method on the `taskID` returned by a write operation.
+
+For example to wait for indexing of a new object:
+```php
+$res = $index->addObject(array("name" => "San Francisco", 
+                               "population" => 805235));
+$index->waitTask($res['taskID']);
+```
+
+Batch writes
+-------------
+
+You may want to perform multiple operations with one API call to reduce latency.
+We expose two methods to perform batch:
+ * `addObjects`: add an array of object using automatic `objectID` assignement
+ * `saveObjects`: add or update an array of object that contains an `objectID` attribute
+
+Example using automatic `objectID` assignement
+```php
+$res = $index->addObjects(array(array("name" => "San Francisco", 
+                                      "population" => 805235),
+                                array("name" => "Los Angeles",
+                                      "population" => 3792621)));
+```
+
+Example with user defined `objectID` (add or update):
+```php
+$res = $index->saveObjects(array(array("name" => "San Francisco", 
+                                       "population" => 805235,
+                                       "objectID" => "SFO"),
+                                 array("name" => "Los Angeles",
+                                       "population" => 3792621,
+                                       "objectID" => "LA")));
 ```
 
 Security / User API Keys

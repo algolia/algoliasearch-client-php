@@ -160,9 +160,6 @@ class Client {
 class Index {
     /*
      * Index initialization (You should not call this initialized yourself)
-     * @param applicationID the application ID you have in your admin interface
-     * @param apiKey a valid API key for the service
-     * @param hostsArray the list of hosts that you have received for the service
      */
     public function __construct($curlHandle, $hostsArray, $indexName) {
         $this->curlHandle = $curlHandle;

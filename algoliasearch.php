@@ -147,10 +147,10 @@ class Client {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), array("acl" => $acls, "validity" => $validity));
     }
 
-    private $applicationID;
-    private $apiKey;
-    private $hostsArray;
-    private $curlHandle;
+    protected $applicationID;
+    protected $apiKey;
+    protected $hostsArray;
+    protected $curlHandle;
 }
 
 /*

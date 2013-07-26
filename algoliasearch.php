@@ -353,9 +353,11 @@ class Index {
      *     We have four available criteria: 
      *       - typo (sort according to number of typos), 
      *       - geo: (sort according to decreassing distance when performing a geo-location based search),
-     *       - position (sort according to the matching attribute), 
+     *       - proximity: sort according to the proximity of query words in hits, 
+     *       - attribute: sort according to the order of attributes defined by **attributesToIndex**,
+     *       - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
      *       - custom which is user defined
-     *     (the standard order is ["typo", "geo", position", "custom"])
+     *     (the standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"])
      *  - queryType: select how the query words are interpreted:
      *       - prefixAll: all query words are interpreted as prefixes (default behavior).
      *       - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.

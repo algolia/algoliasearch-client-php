@@ -35,8 +35,7 @@ To setup your project, follow these steps:
 
 ```php
 require 'algoliasearch.php';
-$client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey', 
-  array("YourHostname-1.algolia.io", "YourHostname-2.algolia.io", "YourHostname-3.algolia.io"));
+$client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
 
 

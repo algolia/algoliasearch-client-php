@@ -38,10 +38,14 @@ class Client {
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
      */
-    public function __construct($applicationID, $apiKey, $hostsArray) {
+    public function __construct($applicationID, $apiKey, $hostsArray = null) {
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
-        $this->hostsArray = $hostsArray;
+        if ($hostsArray == null) {
+            $this->hostsArray = array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io");
+        } else {
+            $this->hostsArray = $hostsArray;
+        }
 
         if(!function_exists('curl_init')){
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');

@@ -43,28 +43,39 @@ Quick Start
 -------------
 This quick start is a 30 seconds tutorial where you can discover how to index and search objects.
 
-Without any prior-configuration, you can index the 1000 world's biggest cities in the ```cities``` index with the following code:
+Without any prior-configuration, you can index [500 contacts](https://github.com/algolia/algoliasearch-client-ruby/blob/master/contacts.json) in the ```contacts``` index with the following code:
 ```php
-$index = $client->initIndex("cities");
-$batch = json_decode(file_get_contents("1000-cities.json"), true);
-$index->addObjects($batch["objects"]);
-```
-The [1000-cities.json](https://github.com/algolia/algoliasearch-client-php/blob/master/1000-cities.json) file contains city names extracted from [Geonames](http://www.geonames.org).
-
-You can then start to search for a city name (even with typos):
-```php
-var_dump($index->search('san fran'));
-var_dump($index->search('loz anqel'));
+$index = $client->initIndex("contacts");
+$batch = json_decode(file_get_contents("contacts.json"), true);
+$index->addObjects($batch);
 ```
 
-Settings can be customized to tune the index behavior. For example you can add a custom sort by population to the already good out-of-the-box relevance to raise bigger cities above smaller ones. To update the settings, use the following code:
+You can then start to search for a contact firstname, lastname, company, ... (even with typos):
 ```php
-$index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
+// search by firstname
+var_dump($index->search('jimmie'));
+// search a firstname with typo
+var_dump($index->search('jimie'));
+// search for a company
+var_dump($index->search('california paint'));
+// search for a firstname & company
+var_dump($index->search('jimmie paint'));
 ```
 
-And then search for all cities that start with an "s":
+Settings can be customized to tune the search behavior. For example you can add a custom sort by number of followers to the already good out-of-the-box relevance:
 ```php
-var_dump($index->search('s'));
+$index->setSettings(array("customRanking" => array("desc(followers)")));
+```
+You can also configure the list of attributes you want to index by order of importance (first = most important):
+```php
+$index->setSettings(array("attributesToIndex" => array("lastname", "firstname", "company",
+                                                       "email", "city", "address")));
+```
+
+Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
+```ruby
+var_dump($index->search('or'));
+var_dump($index->search('jim'));
 ```
 
 Search
@@ -91,38 +102,66 @@ You can use the following optional arguments:
  * **tags**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the _tags attribute of objects (for example `{"_tags":["tag1","tag2"]}` )
 
 ```php
-$index = $client->initIndex("MyIndexName");
+$index = $client->initIndex("contacts");
 $res = $index->search("query string");
-$res = $index->search("query string", array("attributes" => "population,name", "hitsPerPage" => 50)));
+$res = $index->search("query string", array("attributes" => "fistname,lastname", "hitsPerPage" => 50)));
 ```
 
 The server response will look like:
 
 ```javascript
 {
-    "hits":[
-            { "name": "Betty Jane Mccamey",
-              "company": "Vita Foods Inc.",
-              "email": "betty@mccamey.com",
-              "objectID": "6891Y2usk0",
-              "_highlightResult": {"name": {"value": "Betty <em>Jan</em>e Mccamey", "matchLevel": "full"}, 
-                                   "company": {"value": "Vita Foods Inc.", "matchLevel": "none"},
-                                   "email": {"value": "betty@mccamey.com", "matchLevel": "none"} }
-            },
-            { "name": "Gayla Geimer Dan", 
-              "company": "Ortman Mccain Co", 
-              "email": "gayla@geimer.com", 
-              "objectID": "ap78784310" 
-              "_highlightResult": {"name": {"value": "Gayla Geimer <em>Dan</em>", "matchLevel": "full" },
-                                   "company": {"value": "Ortman Mccain Co", "matchLevel": "none" },
-                                   "email": {"highlighted": "gayla@geimer.com", "matchLevel": "none" } }
-            }],
-    "page":0,
-    "nbHits":2,
-    "nbPages":1,
-    "hitsPerPage:":20,
-    "processingTimeMS":1,
-    "query":"jan"
+  "hits": [
+    {
+      "firstname": "Jimmie",
+      "lastname": "Barninger",
+      "company": "California Paint & Wlpaper Str",
+      "address": "Box #-4038",
+      "city": "Modesto",
+      "county": "Stanislaus",
+      "state": "CA",
+      "zip": "95352",
+      "phone": "209-525-7568",
+      "fax": "209-525-4389",
+      "email": "jimmie@barninger.com",
+      "web": "http://www.jimmiebarninger.com",
+      "followers": 3947,
+      "objectID": "433",
+      "_highlightResult": {
+        "firstname": {
+          "value": "<em>Jimmie</em>",
+          "matchLevel": "partial"
+        },
+        "lastname": {
+          "value": "Barninger",
+          "matchLevel": "none"
+        },
+        "company": {
+          "value": "California <em>Paint</em> & Wlpaper Str",
+          "matchLevel": "partial"
+        },
+        "address": {
+          "value": "Box #-4038",
+          "matchLevel": "none"
+        },
+        "city": {
+          "value": "Modesto",
+          "matchLevel": "none"
+        },
+        "email": {
+          "value": "<em>jimmie</em>@barninger.com",
+          "matchLevel": "partial"
+        }
+      }
+    }
+  ],
+  "page": 0,
+  "nbHits": 1,
+  "nbPages": 1,
+  "hitsPerPage": 20,
+  "processingTimeMS": 1,
+  "query": "jimmie paint",
+  "params": "query=jimmie+paint&"
 }
 ```
 
@@ -140,16 +179,16 @@ Objects are schema less, you don't need any configuration to start indexing. The
 Example with automatic `objectID` assignement:
 
 ```php
-$res = $index->addObject(array("name" => "San Francisco", 
-                               "population" => 805235));
+$res = $index->addObject(array("firstname" => "Jimmie", 
+                               "lastname" => "Barninger"));
 echo "objectID=" . $res['objectID'] . "\n";
 ```
 
 Example with manual `objectID` assignement:
 
 ```php
-$res = $index->addObject(array("name" => "San Francisco", 
-                               "population" => 805235), "myID");
+$res = $index->addObject(array("firstname" => "Jimmie", 
+                               "lastname" => "Barninger"), "myID");
 echo "objectID=" . $res['objectID'] . "\n";
 ```
 
@@ -164,15 +203,16 @@ You have two options to update an existing object:
 Example to replace all the content of an existing object:
 
 ```php
-$index->saveObject(array("name" => "Los Angeles", 
-                         "population" => 3792621,
+$index->saveObject(array("firstname" => "Jimmie", 
+                         "lastname" => "Barninger",
+                         "city" => "New York",
                          "objectID" => "myID"));
 ```
 
-Example to update only the population attribute of an existing object:
+Example to update only the city attribute of an existing object:
 
 ```php
-$index->partialUpdateObject(array("population" => 3792621,
+$index->partialUpdateObject(array("city" => "San Francisco",
                                   "objectID" => "myID"));
 ```
 
@@ -184,10 +224,10 @@ You can easily retrieve an object using its `objectID` and optionnaly a list of 
 ```php
 // Retrieves all attributes
 $index->getObject("myID");
-// Retrieves name and population attributes
-$index->getObject("myID", "name,population");
-// Retrieves only the name attribute
-$index->getObject("myID", "name");
+// Retrieves firstname and lastname attributes
+$index->getObject("myID", "firstname,lastname");
+// Retrieves only the firstname attribute
+$index->getObject("myID", "firstname");
 ```
 
 Delete an object
@@ -236,7 +276,7 @@ var_dump($settings);
 ```
 
 ```php
-$index->setSettings(array("customRanking" => array("desc(population)", "asc(name)"));
+$index->setSettings(array("customRanking" => array("desc(followers)")));
 ```
 
 List indexes
@@ -252,7 +292,7 @@ Delete an index
 You can delete an index using its name:
 
 ```php
-$client->deleteIndex("cities");
+$client->deleteIndex("contacts");
 ```
 
 Wait indexing
@@ -262,8 +302,8 @@ All write operations return a `taskID` when the job is securely stored on our in
 
 For example, to wait for indexing of a new object:
 ```php
-$res = $index->addObject(array("name" => "San Francisco", 
-                               "population" => 805235));
+$res = $index->addObject(array("firstname" => "Jimmie", 
+                               "lastname" => "Barninger"));
 $index->waitTask($res['taskID']);
 ```
 
@@ -279,20 +319,20 @@ We expose two methods to perform batch:
 
 Example using automatic `objectID` assignement:
 ```php
-$res = $index->addObjects(array(array("name" => "San Francisco", 
-                                      "population" => 805235),
-                                array("name" => "Los Angeles",
-                                      "population" => 3792621)));
+$res = $index->addObjects(array(array("firstname" => "Jimmie", 
+                                      "lastname" => "Barninger"),
+                                array("firstname" => "Warren", 
+                                      "lastname" => "myID1")));
 ```
 
 Example with user defined `objectID` (add or update):
 ```php
-$res = $index->saveObjects(array(array("name" => "San Francisco", 
-                                       "population" => 805235,
+$res = $index->saveObjects(array(array("firstname" => "Jimmie", 
+                                       "lastname" => "Barninger",
                                        "objectID" => "SFO"),
-                                 array("name" => "Los Angeles",
-                                       "population" => 3792621,
-                                       "objectID" => "LA")));
+                                 array("firstname" => "Warren", 
+                                       "lastname" => "Speach",
+                                       "objectID" => "myID2")));
 ```
 
 Security / User API Keys

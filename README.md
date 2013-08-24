@@ -29,7 +29,7 @@ Setup
 -------------
 To setup your project, follow these steps:
 
- 1. Download and add the [algoliasearch.php][https://raw.github.com/algolia/algoliasearch-client-php/master/algoliasearch.php] file to your project
+ 1. Download and add the [algoliasearch.php](https://raw.github.com/algolia/algoliasearch-client-php/master/algoliasearch.php) file to your project
  2. Add the `require` call to your project
  3. Initialize the client with your ApplicationID and API-Key (you can find all of them on your Algolia account).
 

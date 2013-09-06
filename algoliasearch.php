@@ -441,6 +441,8 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         $url .= "?" . http_build_query($params);
     curl_setopt($curlHandle, CURLOPT_URL, $url);
     curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
+    curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
+
     if ($method === 'GET') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
@@ -471,7 +473,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         throw new AlgoliaException("Resource does not exist");
     }
     $answer = json_decode($response, true);
-    $errorMsg = null;
+    $errorMsg = $answer['message'];
 
     switch (json_last_error()) {
         case JSON_ERROR_DEPTH:

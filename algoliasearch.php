@@ -262,6 +262,9 @@ class Index {
      * @param objectID the unique identifier of object to delete
      */
     public function deleteObject($objectID) {
+        if ($objectID == null || mb_strlen($objectID) == 0) {
+            throw new \Exception('objectID is mandatory');            
+        }
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID));
     }
 

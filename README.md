@@ -397,7 +397,6 @@ $res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
 $res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
 ```
 
-
 Copy or rename an index
 -------------
 

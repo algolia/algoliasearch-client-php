@@ -101,6 +101,35 @@ class Client {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . urlencode($indexName));
     }
   
+    /**
+     * Move an existing index.
+     * @param srcIndexName the name of index to copy.
+     * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
+     */
+    public function moveIndex($srcIndexName, $dstIndexName) {
+        $request = array("operation" => "move", "destination" => $dstIndexName);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+    }
+    
+    /**
+     * Copy an existing index.
+     * @param srcIndexName the name of index to copy.
+     * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
+     */
+    public function copyIndex($srcIndexName, $dstIndexName) {
+        $request = array("operation" => "copy", "destination" => $dstIndexName);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+    }
+    
+    /**
+     * Return last logs entries.
+     * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
+     * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
+     */
+    public function getLogs($offset = 0, $length = 10) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/logs?offset=" . $offset . "&length=" . $length);
+    }
+    
     /*
      * Get the index object initialized (no server call needed for initialization)
     
@@ -275,6 +304,10 @@ class Index {
      * @param args (optional) if set, contains an associative array with query parameters:
      *  - attributes: a string that contains attribute names to retrieve separated by a comma. 
      *    By default all attributes are retrieved.
+     *  - numerics: specify the list of numeric filters you want to apply separated by a comma. 
+     *    The syntax of one filter is `attributeName` followed by `operand` followed by `value`. 
+     *    Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
+     *    You can have multiple conditions on one attribute like for example `numerics=price>100,price<1000`.
      *  - attributesToHighlight: a string that contains attribute names to highlight separated by a comma. 
      *    By default indexed attributes are highlighted.
      *  - attributesToSnippet: a string that contains the names of attributes to snippet alongside the number 
@@ -348,7 +381,7 @@ class Index {
      *  - attributesToSnippet: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords').
      *    By default no snippet is computed.
      *  - attributesToIndex: (array of strings) the list of fields you want to index. 
-     *    By default all textual attributes of your objects are indexed, but you should update it to get optimal 
+     *    By default all textual and numerical attributes of your objects are indexed, but you should update it to get optimal 
      *    results. This parameter has two important uses:
      *       - Limit the attributes to index. 
      *         For example if you store a binary image in base64, you want to store it in the index but you 

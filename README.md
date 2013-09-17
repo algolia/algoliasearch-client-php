@@ -433,7 +433,7 @@ You can retrieve log of your last 1000 API calls and you can navigate into them 
  * ***offset***: Specify the first entry to retrieve (0-based, 0 is the most recent log entry). Default to 0.
  * ***length***: Specify the maximum number of entries to retrieve starting at offset. Default to 10. Maximum allowed value: 1000.
 
-```objc
+```php
 // Get last 10 log entries
 $res = $client->getLogs();
 // Get last 100 log entries

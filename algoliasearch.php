@@ -509,7 +509,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         throw new AlgoliaException("Resource does not exist");
     }
     $answer = json_decode($response, true);
-    $errorMsg = $answer['message'];
+    $errorMsg = isset($answer['message']) ? $answer['message'] : null;
 
     switch (json_last_error()) {
         case JSON_ERROR_DEPTH:

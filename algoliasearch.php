@@ -314,9 +314,9 @@ class Index {
      *    of words to return (syntax is 'attributeName:nbWords'). 
      *    Attributes are separated by a comma (Example: "attributesToSnippet=name:10,content:10").
      *    By default no snippet is computed.
-     *  - minWordSizeForApprox1: the minimum number of characters in a query word to accept one typo in this word. 
+     *  - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in this word. 
      *    Defaults to 3.
-     *  - minWordSizeForApprox2: the minimum number of characters in a query word to accept two typos in this word.
+     *  - minWordSizefor2Typos: the minimum number of characters in a query word to accept two typos in this word.
      *     Defaults to 7.
      *  - getRankingInfo: if set to 1, the result hits will contain ranking information in 
      *     _rankingInfo attribute
@@ -331,8 +331,8 @@ class Index {
      *    For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
      *    At indexing, geoloc of an object should be set with _geoloc attribute containing lat and lng attributes (for example {"_geoloc":{"lat":48.853409, "lng":2.348800}})
      *  - queryType: select how the query words are interpreted:
-     *     - prefixAll: all query words are interpreted as prefixes (default behavior).
-     *     - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+     *     - prefixAll: all query words are interpreted as prefixes,
+     *     - prefixLast: only the last word is interpreted as a prefix (default behavior),
      *     - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
      *  - tags filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
      *    At indexing, tags should be added in the _tags attribute of objects (for example {"_tags":["tag1","tag2"]} )
@@ -373,8 +373,8 @@ class Index {
      * Set settings for this index
      * 
      * @param settigns the settings object that can contains :
-     *  - minWordSizeForApprox1 (integer) the minimum number of characters to accept one typo (default = 3)
-     *  - minWordSizeForApprox2: (integer) the minimum number of characters to accept two typos (default = 7)
+     *  - minWordSizefor1Typo (integer) the minimum number of characters to accept one typo (default = 3)
+     *  - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7)
      *  - hitsPerPage: (integer) the number of hits per page (default = 10)
      *  - attributesToRetrieve: (array of strings) default list of attributes to retrieve for objects
      *  - attributesToHighlight: (array of strings) default list of attributes to highlight.
@@ -389,6 +389,9 @@ class Index {
      *       - Control part of the ranking (see the ranking parameter for full explanation). 
      *         Matches in attributes at the beginning of the list will be considered more important than matches 
      *         in attributes further down the list.
+     *         In one attribute, matching text at the beginning of the attribute will be considered more important than text after, 
+     *         you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, 
+     *         for example `attributesToIndex:["title", "unordered(text)"]`.
      *  - ranking: (array of strings) controls the way results are sorted. 
      *     We have four available criteria: 
      *       - typo (sort according to number of typos), 
@@ -399,8 +402,8 @@ class Index {
      *       - custom which is user defined
      *     (the standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"])
      *  - queryType: select how the query words are interpreted:
-     *       - prefixAll: all query words are interpreted as prefixes (default behavior).
-     *       - prefixLast: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+     *       - prefixAll: all query words are interpreted as prefixes,
+     *       - prefixLast: only the last word is interpreted as a prefix (default behavior),
      *       - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
      *  - customRanking: (array of strings) lets you specify part of the ranking. 
      *    The syntax of this condition is an array of strings containing attributes prefixed 

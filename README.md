@@ -90,16 +90,16 @@ You can use the following optional arguments:
  * **attributes**: a string that contains the names of attributes to retrieve separated by a comma.<br/>By default all attributes are retrieved.
  * **attributesToHighlight**: a string that contains the names of attributes to highlight separated by a comma.<br/>By default indexed attributes are highlighted. Numerical attributes cannot be highlighted. A **matchLevel** is returned for each highlighted attribute and can contain: "full" if all the query terms were found in the attribute, "partial" if only some of the query terms were found, or "none" if none of the query terms were found.
  * **attributesToSnippet**: a string that contains the names of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords'). Attributes are separated by a comma (Example: "attributesToSnippet=name:10,content:10").<br/>By default no snippet is computed.
- * **minWordSizeForApprox1**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **minWordSizeForApprox2**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
+ * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
  * **getRankingInfo**: if set to 1, the result hits will contain ranking information in _rankingInfo attribute.
  * **page**: *(pagination parameter)* page to retrieve (zero base).<br/>Defaults to 0.
  * **hitsPerPage**: *(pagination parameter)* number of hits per page.<br/>Defaults to 10.
  * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
  * **insideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
  * **queryType**: select how the query words are interpreted:
-  * **prefixAll**: all query words are interpreted as prefixes (default behavior).
-  * **prefixLast**: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+  * **prefixAll**: all query words are interpreted as prefixes,
+  * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
  * **numerics**: specify the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
  You can have multiple conditions on one attribute like for example `numerics=price>100,price<1000`.
@@ -248,15 +248,15 @@ Index Settings
 
 You can retrieve all settings using the `getSettings` function. The result will contains the following attributes:
 
- * **minWordSizeForApprox1**: (integer) the minimum number of characters to accept one typo (default = 3).
- * **minWordSizeForApprox2**: (integer) the minimum number of characters to accept two typos (default = 7).
+ * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 3).
+ * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 7).
  * **hitsPerPage**: (integer) the number of hits per page (default = 10).
  * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects.
  * **attributesToHighlight**: (array of strings) default list of attributes to highlight.
  * **attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is 'attributeName:nbWords')<br/>By default no snippet is computed.
  * **attributesToIndex**: (array of strings) the list of fields you want to index.<br/>By default all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.<br/>This parameter has two important uses:
   * *Limits the attributes to index*.<br/>For example if you store a binary image in base64, you want to store it and be able to retrieve it but you don't want to search in the base64 string.
-  * *Controls part of the ranking*.<br/>Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. 
+  * *Controls part of the ranking*.<br/>Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example `attributesToIndex:["title", "unordered(text)"]`.
  * **ranking**: (array of strings) controls the way hits are sorted.<br/>We have six available criteria:
   * **typo**: sort according to number of typos,
   * **geo**: sort according to decreasing distance when performing a geo-location based search,
@@ -268,8 +268,8 @@ You can retrieve all settings using the `getSettings` function. The result will 
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
  For example `"customRanking" => ["desc(population)", "asc(name)"]`
  * **queryType**: select how the query words are interpreted:
-  * **prefixAll**: all query words are interpreted as prefixes (default behavior).
-  * **prefixLast**: only the last word is interpreted as a prefix. This option is recommended if you have a lot of content to speedup the processing.
+  * **prefixAll**: all query words are interpreted as prefixes,
+  * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
 
 You can easily retrieve settings or update them:

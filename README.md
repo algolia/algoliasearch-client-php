@@ -108,7 +108,7 @@ You can use the following optional arguments:
 ```php
 $index = $client->initIndex("contacts");
 $res = $index->search("query string");
-$res = $index->search("query string", array("attributes" => "fistname,lastname", "hitsPerPage" => 50)));
+$res = $index->search("query string", array("attributes" => "fistname,lastname", "hitsPerPage" => 50));
 ```
 
 The server response will look like:

@@ -413,15 +413,20 @@ Copy or rename an index
 You can easily copy or rename an existing index using the `copy` and `move` commands.
 **Note**: Move and copy commands overwrite destination index.
 
+```php
+// Rename MyIndex in MyIndexNewName
+$res = $client->moveIndex("MyIndex", "MyIndexNewName");
+// Copy MyIndex in MyIndexCopy
+$res = $client->copyIndex("MyIndex", "MyIndexCopy");
+```
+
 The move command is particularly useful is you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you just have to:
  1. Import your database in a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
  1. Rename `MyNewIndex` in `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
 
 ```php
-// Rename MyNewIndex in MyIndex
+// Rename MyNewIndex in MyIndex (and overwrite it)
 $res = $client->moveIndex("MyNewIndex", "MyIndex");
-// Copy MyNewIndex in MyIndex
-$res = $client->copyIndex("MyNewIndex", "MyIndex");
 ```
 
 Logs

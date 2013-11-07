@@ -386,7 +386,6 @@ class Index {
 
     /*
      * This function deletes the index content. Settings and index specific API keys are kept untouched.
-     * 
      */
     public function clearIndex() {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/clear");

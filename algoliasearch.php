@@ -511,8 +511,17 @@ function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params 
 
 function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data) {
     $url = "https://" . $host . $path;
-    if ($params != null && count($params) > 0)
-        $url .= "?" . http_build_query($params);
+
+    if ($params != null && count($params) > 0) {
+        $params2 = array();
+        foreach ($params as $key => $val) {
+            if (is_array($val)) {
+                $params2[$key] = json_encode($val);
+            }
+        }
+        $url .= "?" . http_build_query($params2);
+	echo "$url\n";
+    }
     curl_setopt($curlHandle, CURLOPT_URL, $url);
     curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);

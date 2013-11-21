@@ -323,9 +323,10 @@ Batch writes
 -------------
 
 You may want to perform multiple operations with one API call to reduce latency.
-We expose two methods to perform batch:
- * `addObjects`: add an array of object using automatic `objectID` assignement
- * `saveObjects`: add or update an array of object that contains an `objectID` attribute
+We expose three methods to perform batch:
+ * `addObjects`: add an array of objects using automatic `objectID` assignement
+ * `saveObjects`: add or update an array of objects that contain an `objectID` attribute
+ * `partialUpdateObjects`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
 ```php
@@ -343,6 +344,14 @@ $res = $index->saveObjects(array(array("firstname" => "Jimmie",
                                  array("firstname" => "Warren", 
                                        "lastname" => "Speach",
                                        "objectID" => "myID2")));
+```
+
+Example that update only the `firstname` attribute:
+```php
+$res = $index->partialUpdateObjects(array(array("firstname" => "Jimmie", 
+                                                "objectID" => "SFO"),
+                                          array("firstname" => "Warren", 
+                                                "objectID" => "myID2")));
 ```
 
 Security / User API Keys

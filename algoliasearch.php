@@ -265,6 +265,21 @@ class Index {
     }
 
     /*
+     * Partially Override the content of several objects
+     * 
+     * @param objects contains an array of objects to update (each object must contains a objectID attribute)
+     */
+    public function partialUpdateObjects($objects, $objectIDKey = "objectID") {
+        $requests = array();
+        for ($i = 0; $i < count($objects); ++$i) {
+            $obj = $objects[$i];
+            array_push($requests, array("action" => "partialUpdateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
+        }
+        $request = array("requests" => $requests);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
+    }
+
+    /*
      * Override the content of object
      * 
      * @param object contains the object to save, the object must contains an objectID attribute

@@ -535,7 +535,6 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             }
         }
         $url .= "?" . http_build_query($params2);
-	echo "$url\n";
     }
     curl_setopt($curlHandle, CURLOPT_URL, $url);
     curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);

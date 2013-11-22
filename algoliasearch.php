@@ -532,10 +532,13 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         foreach ($params as $key => $val) {
             if (is_array($val)) {
                 $params2[$key] = json_encode($val);
+            } else {
+                $params2[$key] = $val;
             }
         }
         $url .= "?" . http_build_query($params2);
     }
+
     curl_setopt($curlHandle, CURLOPT_URL, $url);
     curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);

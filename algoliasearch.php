@@ -74,9 +74,11 @@ class Client {
                     'X-Algolia-API-Key: ' . $this->apiKey,
                     'Content-type: application/json'
                     ));
+        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP");
         //Return the output instead of printing it
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
-	    curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
+        curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
+        curl_setopt($this->curlHandle, CURLOPT_ENCODING, '');
     }
 
     /*
@@ -229,12 +231,12 @@ class Index {
     public function addObjects($objects, $objectIDKey = "objectID") {
         $requests = array();
         for ($i = 0; $i < count($objects); ++$i) {
-	    $obj = $objects[$i];
-	    if (array_key_exists($objectIDKey, $obj)) {
-	        array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
-	    } else {
-	        array_push($requests, array("action" => "addObject", "body" => $obj));
-	    }
+            $obj = $objects[$i];
+            if (array_key_exists($objectIDKey, $obj)) {
+                array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
+            } else {
+                array_push($requests, array("action" => "addObject", "body" => $obj));
+            }
         }
         $request = array("requests" => $requests);
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);

@@ -260,8 +260,8 @@ You can retrieve all settings using the `getSettings` function. The result will 
   * **proximity**: sort according to the proximity of query words in hits,
   * **attribute**: sort according to the order of attributes defined by attributesToIndex,
   * **exact**: 
-   * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
-   * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
+    * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
+    * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
   * **custom**: sort according to a user defined formula set in **customRanking** attribute.<br/>The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
 For example `"customRanking" => ["desc(population)", "asc(name)"]`  

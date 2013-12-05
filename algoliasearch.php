@@ -384,6 +384,18 @@ class Index {
     }
 
     /*
+     * Browse all index content
+     *
+     * @param page Pagination parameter used to select the page to retrieve.
+     *             Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
+     * @param hitsPerPage: Pagination parameter used to select the number of hits per page. Defaults to 1000.
+     */
+    public function browse($page = 0, $hitsPerPage = 1000) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/browse", 
+                                    array("page" => $page, "hitsPerPage" => $hitsPerPage));
+    }
+
+    /*
      * Wait the publication of a task on the server. 
      * All server task are asynchronous and you can check with this method that the task is published.
      *

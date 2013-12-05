@@ -451,9 +451,9 @@ This method retrieve 1000 objects by API call and support pagination.
 
 ```php
 // Get first page
-$res = $client->browse(0);
+$res = $index->browse(0);
 // Get second page
-$res = $client->browse(1);
+$res = $index->browse(1);
 ```
 
 Logs

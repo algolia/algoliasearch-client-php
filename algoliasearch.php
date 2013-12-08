@@ -79,6 +79,9 @@ class Client {
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
         curl_setopt($this->curlHandle, CURLOPT_ENCODING, '');
+        curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($this->curlHandle, CURLOPT_CAINFO, './resources/ca-bundle.crt');
     }
 
     /*
@@ -525,6 +528,7 @@ class Index {
 }
 
 function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params = array(), $data = array()) {
+    $exception = null;
     foreach ($hostsArray as &$host) {
         try {
             $res = AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
@@ -533,9 +537,13 @@ function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params 
         } catch (AlgoliaException $e) {
             throw $e; 
         } catch (Exception $e) {
+            $exception = $e;
         }
     }
-    throw new AlgoliaException('Hosts unreachable');
+    if ($exception == null)
+        throw new AlgoliaException('Hosts unreachable');
+    else
+        throw $exception;
 }
 
 function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data) {
@@ -574,6 +582,9 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
     }
     $response = curl_exec($curlHandle);
+    if ($response === false) {
+        throw new \Exception(curl_error($curlHandle));
+    }
     $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
 
     if ($http_status === 0 || $http_status === 503) {

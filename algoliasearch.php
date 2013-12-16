@@ -81,7 +81,7 @@ class Client {
         curl_setopt($this->curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($this->curlHandle, CURLOPT_CAINFO, __DIR__ . './resources/ca-bundle.crt');
+        curl_setopt($this->curlHandle, CURLOPT_CAINFO, __DIR__ . '/resources/ca-bundle.crt');
     }
 
     /*

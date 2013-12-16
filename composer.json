@@ -1,0 +1,8 @@
+{
+  "name": "algolia/algoliasearch-client-php",
+  "description": "Algolia search client for PHP",
+  "license": "MIT",
+  "autoload": {
+    "classmap": ["algoliasearch.php"]
+  }
+}

@@ -85,6 +85,34 @@ class Client {
     }
 
     /*
+     * Allow to use IP rate limit when you have a proxy between end-user and Algolia.
+     * This option will set the X-Forwarded-For HTTP header with the client IP and the X-Forwarded-API-Key with the API Key having rate limits.
+     * @param adminAPIKey the admin API Key you can find in your dashboard
+     * @param endUserIP the end user IP (you can use both IPV4 or IPV6 syntax)
+     * @param rateLimitAPIKey the API key on which you have a rate limit
+     */
+    public function enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
+         curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array(
+                    'X-Algolia-Application-Id: ' . $this->applicationID,
+                    'X-Algolia-API-Key: ' . $adminAPIKey,
+                    'X-Forwarded-For: ' . $endUserIP,
+                    'X-Forwarded-API-Key: ' . $rateLimitAPIKey,
+                    'Content-type: application/json'
+                    ));
+    }
+
+    /*
+     * Disable IP rate limit enabled with enableRateLimitForward() function
+     */
+    public function disableRateLimitForward() {
+        curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array(
+                    'X-Algolia-Application-Id: ' . $this->applicationID,
+                    'X-Algolia-API-Key: ' . $this->apiKey,
+                    'Content-type: application/json'
+                    ));
+    }
+
+    /*
      * List all existing indexes
      * return an object in the form:
      * array("items" => array(
@@ -377,6 +405,11 @@ class Index {
      *    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
      * - optionalWords: a string that contains the list of words that should be considered as optional when found in the query. 
      *   The list of words is comma separated.
+     * - distinct: If set to 1, enable the distinct feature (disabled by default) if the attributeForDistinct index setting is set. 
+     *   This feature is similar to the SQL "distinct" keyword: when enabled in a query with the distinct=1 parameter, 
+     *   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. 
+     *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best 
+     *   one is kept and others are removed.
      */
     public function search($query, $args = null) {
         if ($args === null) {
@@ -453,13 +486,20 @@ class Index {
      *       this behavior if you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex: ["title", "unordered(text)"].
      * - attributesForFaceting: (array of strings) The list of fields you want to use for faceting. 
      *   All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
+     * - attributeForDistinct: (string) The attribute name used for the Distinct feature. This feature is similar to the SQL "distinct" keyword: when enabled 
+     *   in query with the distinct=1 parameter, all hits containing a duplicate value for this attribute are removed from results. 
+     *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best one is kept and others are removed.
      * - ranking: (array of strings) controls the way results are sorted.
      *   We have six available criteria: 
      *    - typo: sort according to number of typos,
      *    - geo: sort according to decreassing distance when performing a geo-location based search,
      *    - proximity: sort according to the proximity of query words in hits,
      *    - attribute: sort according to the order of attributes defined by attributesToIndex,
-     *    - exact: sort according to the number of words that are matched identical to query word (and not as a prefix),
+     *    - exact: 
+     *        - if the user query contains one word: sort objects having an attribute that is exactly the query word before others. 
+     *          For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV 
+     *          show starting by the v letter before it.
+     *        - if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
      *    - custom: sort according to a user defined formula set in **customRanking** attribute.
      *   The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
      * - customRanking: (array of strings) lets you specify part of the ranking.
@@ -591,13 +631,14 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         // Could not reach host or service unavailable, try with another one if we have it
         return null;
     }
+    $answer = json_decode($response, true);
+
     if ($http_status === 403) {
-        throw new AlgoliaException("Invalid Application-ID or API-Key");
+        throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Invalid Application-ID or API-Key");
     }
     if ($http_status === 404) {
-        throw new AlgoliaException("Resource does not exist");
+        throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Resource does not exist");
     }
-    $answer = json_decode($response, true);
     $errorMsg = isset($answer['message']) ? $answer['message'] : null;
 
     switch (json_last_error()) {

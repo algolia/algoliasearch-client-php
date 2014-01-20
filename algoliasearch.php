@@ -202,7 +202,7 @@ class Client {
      * @param acls the list of ACL for this key. Defined by an array of strings that 
      * can contains the following values:
      *   - search: allow to search (https and http)
-     *   - addObject: allows to add/update an object in the index (https only)
+     *   - §Object: allows to add/update an object in the index (https only)
      *   - deleteObject : allows to delete an existing object (https only)
      *   - deleteIndex : allows to delete index content (https only)
      *   - settings : allows to get index settings (https only)
@@ -260,17 +260,8 @@ class Index {
      * @param objects contains an array of objects to add. If the object contains an objectID
      */
     public function addObjects($objects, $objectIDKey = "objectID") {
-        $requests = array();
-        for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $objects[$i];
-            if (array_key_exists($objectIDKey, $obj)) {
-                array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
-            } else {
-                array_push($requests, array("action" => "addObject", "body" => $obj));
-            }
-        }
-        $request = array("requests" => $requests);
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
+        $requests = $this->buildBatch("addObject", $objects, true, $objectIDKey);
+        return $this->batch($requests);
     }
 
     /*
@@ -303,13 +294,8 @@ class Index {
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
     public function partialUpdateObjects($objects, $objectIDKey = "objectID") {
-        $requests = array();
-        for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $objects[$i];
-            array_push($requests, array("action" => "partialUpdateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
-        }
-        $request = array("requests" => $requests);
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
+        $requests = $this->buildBatch("partialUpdateObject", $objects, true, $objectIDKey);
+        return $this->batch($requests);
     }
 
     /*
@@ -327,13 +313,8 @@ class Index {
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
     public function saveObjects($objects, $objectIDKey = "objectID") {
-        $requests = array();
-        for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $objects[$i];
-            array_push($requests, array("action" => "updateObject", "objectID" => $obj[$objectIDKey], "body" => $obj));
-        }
-        $request = array("requests" => $requests);
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $request);
+        $requests = $this->buildBatch("updateObject", $objects, true, $objectIDKey);
+        return $this->batch($requests);
     }
 
     /*
@@ -559,6 +540,34 @@ class Index {
     public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(), 
             array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery));
+    }
+
+    /**
+     * Send a batch request
+     * @param  $requests an associative array defining the batch request body
+     */
+    public function batch($requests) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $requests);
+    }
+
+    /**
+     * Build a batch request
+     * @param  $action the batch action
+     * @param  $objects the array of objects
+     * @param  $withObjectID set an 'objectID' attribute
+     * @param  $objectIDKey the objectIDKey
+     */
+    private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID") {
+        $requests = array();
+        for ($i = 0; $i < count($objects); ++$i) {
+            $obj = $objects[$i];
+            $req = array("action" => $action, "body" => $obj);
+            if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
+                $req["objectID"] = (string) $obj[$objectIDKey];
+            }
+            array_push($requests, $req);
+        }
+        return array("requests" => $requests);
     }
 
     private $indexName;

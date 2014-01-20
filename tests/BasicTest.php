@@ -1,5 +1,7 @@
 <?php
 
+@include __DIR__ . '/../vendor/autoload.php';
+
 function safe_name($name) {
     if (getenv("TRAVIS") != "true") {
         return $name;

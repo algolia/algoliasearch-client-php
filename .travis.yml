@@ -1,0 +1,12 @@
+language: php
+php:
+  - 5.5
+  - 5.4
+branches:
+  only:
+  - master
+script: phpunit tests
+env:
+  global:
+  - secure: dhXbbd+jGv8/1L7+nEpaAwD4hsJi6IEyKriblPi/UUUHXvrWOUhSDJPmjulUBqKMYXrkY5TQVK5cpncHdVmVAY3fZMBiPORRSEAqzQO9KSwK9uCDuhm4c6GWa9At+LAMjC1rF5kcBFS1KnhbMD/Pfh+M73ZYS4caBC7eui7eriw=
+  - secure: yXnpGUQCjb/d22zhl9p7Ljsurj7MHSSbrQf7J/WEEBPQKRGDHKHiouW921iJd75r5UJmkPLZhuZhg8osMP6Ny82b9en80Nbzml5pLWCCsT5Lxi8D4jd47b/wdQQ9DDONqxaIpr4xlSrNNKFd/PTS+vzBTBCrRuEBayQVAqlsl0E=

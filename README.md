@@ -355,17 +355,18 @@ Batch writes
 -------------
 
 You may want to perform multiple operations with one API call to reduce latency.
-We expose three methods to perform batch:
+We expose four methods to perform batch operations:
  * `addObjects`: add an array of objects using automatic `objectID` assignement
  * `saveObjects`: add or update an array of objects that contain an `objectID` attribute
  * `partialUpdateObjects`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
+ * `batch`: the underlying method used to send a batch request
 
 Example using automatic `objectID` assignement:
 ```php
 $res = $index->addObjects(array(array("firstname" => "Jimmie", 
                                       "lastname" => "Barninger"),
                                 array("firstname" => "Warren", 
-                                      "lastname" => "myID1")));
+                                      "lastname" => "Speach")));
 ```
 
 Example with user defined `objectID` (add or update):
@@ -384,6 +385,22 @@ $res = $index->partialUpdateObjects(array(array("firstname" => "Jimmie",
                                                 "objectID" => "SFO"),
                                           array("firstname" => "Warren", 
                                                 "objectID" => "myID2")));
+```
+
+Custom batch:
+```php
+$res = $index->batch(array(
+  "requests" => array(
+      array("action" => "addObject",
+            "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
+      array("action" => "addObject",
+            "body" => array("Warren" => "Jimmie", "lastname" => "Speach")),
+      array("action" => "updateObject",
+            "objectID" => "myID3",
+            "body" => array("firstname" => "Rob")),
+    )
+  )
+);
 ```
 
 Security / User API Keys

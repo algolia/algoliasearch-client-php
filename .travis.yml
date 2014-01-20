@@ -5,6 +5,8 @@ php:
 branches:
   only:
   - master
+before_script:
+  - composer install
 script: phpunit tests
 env:
   global:

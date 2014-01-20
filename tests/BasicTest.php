@@ -7,7 +7,8 @@ function safe_name($name) {
     if (getenv("TRAVIS") != "true") {
         return $name;
     }
-    $id = end(explode(".", getenv("TRAVIS_JOB_NUMBER")));
+    $s = explode(".", getenv("TRAVIS_JOB_NUMBER"));
+    $id = end($s);
     return $name . "_travis-" . $id;
 }
 

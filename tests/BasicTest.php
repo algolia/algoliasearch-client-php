@@ -45,6 +45,14 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, $results['nbHits']);
     }
 
+    public function testSaveObject()
+    {
+        $res = $this->index->saveObject(array("firstname" => "Robin", "objectID" => 1));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('rob');
+        $this->assertEquals(1, $results['nbHits']);
+    }
+
     public function testSaveObjects()
     {
         $res = $this->index->saveObjects(array(
@@ -55,6 +63,28 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $results = $this->index->search('rob');
         $this->assertEquals(2, $results['nbHits']);
     }
+
+    public function testPartialUpdateObject()
+    {
+        $res = $this->index->partialUpdateObject(array("lastname" => "Oneil", "objectID" => 1));
+        $this->index->waitTask($res['taskID']);
+
+        $results = $this->index->search('Oneil');
+        $this->assertEquals(1, $results['nbHits']);
+        $this->assertEquals('Oneil', $results['hits'][0]['lastname']);
+    }
+
+    public function testPartialUpdateObjects()
+    {
+        $res = $this->index->partialUpdateObjects(array(
+            array("lastname" => "Oneil", "objectID" => 1)));
+        $this->index->waitTask($res['taskID']);
+
+        $results = $this->index->search('Oneil');
+        $this->assertEquals(1, $results['nbHits']);
+        $this->assertEquals('Oneil', $results['hits'][0]['lastname']);
+    }
+
 
     private $client;
     private $index;

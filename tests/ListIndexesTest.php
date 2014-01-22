@@ -17,7 +17,6 @@ class ListIndexesTest extends PHPUnit_Framework_TestCase
         }
         try {
             $task = $this->client->deleteIndex(safe_name('ListTest2'));
-            $this->index->waitTask($task['taskID']);    
         } catch (AlgoliaSearch\AlgoliaException $e) {
             // ListTest2 does not exist
         }

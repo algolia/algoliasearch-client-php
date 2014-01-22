@@ -10,7 +10,7 @@ class BatchTest extends PHPUnit_Framework_TestCase
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $this->index = $this->client->initIndex(safe_name('BatchTest'));
         try {
-            $this->index->clearIndex();
+            $this->client->deleteIndex(safe_name('BatchTest'));
         } catch (AlgoliaSearch\AlgoliaException $e) {
             // not fatal
         }

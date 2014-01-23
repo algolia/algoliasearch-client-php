@@ -15,7 +15,7 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
 
 This PHP client let you easily use the Algolia Search API from your backend.
 
-[![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.png?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![PHP version](https://badge.fury.io/ph/algolia%2Falgoliasearch-client-php.png)](http://badge.fury.io/ph/algolia%2Falgoliasearch-client-php)
+[![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.png?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![PHP version](https://badge.fury.io/ph/algolia%2Falgoliasearch-client-php.png)](http://badge.fury.io/ph/algolia%2Falgoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.png)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 Table of Content
 -------------

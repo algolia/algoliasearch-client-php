@@ -7,7 +7,9 @@ branches:
   - master
 before_script:
   - composer install
-script: phpunit tests
+script: phpunit --coverage-clover coverage.cov tests
+after_script:
+  - php vendor/bin/coveralls
 env:
   global:
   - secure: dhXbbd+jGv8/1L7+nEpaAwD4hsJi6IEyKriblPi/UUUHXvrWOUhSDJPmjulUBqKMYXrkY5TQVK5cpncHdVmVAY3fZMBiPORRSEAqzQO9KSwK9uCDuhm4c6GWa9At+LAMjC1rF5kcBFS1KnhbMD/Pfh+M73ZYS4caBC7eui7eriw=

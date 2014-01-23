@@ -26,7 +26,7 @@ class BatchTest extends PHPUnit_Framework_TestCase
                 )
             )
         );
-        $this->index->waitTask($res['taskID']);
+        $this->index->waitTask($res['taskID'], 0.1);
 
         $results = $this->index->search('');
         $this->assertEquals(3, $results['nbHits']);

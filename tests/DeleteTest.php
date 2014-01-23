@@ -17,17 +17,23 @@ class DeleteTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     *  @expectedException Exception
+     */
     public function testDeleteObject()
     {
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
-        $results = $this->index->search('');
+        $results = $this->index->search('', array('attributesToRetrieve' => array("firstname")));
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
         $del = $this->index->deleteObject($results['hits'][0]['objectID']);
         $this->index->waitTask($del['taskID']);
         $results = $this->index->search('');
-        $this->assertEquals(0, $results['nbHits']);        
+        $this->assertEquals(0, $results['nbHits']);
+
+        $this->setExpectedException('Exception');
+        $this->index->deleteObject(null);
     }
 
     private $client;

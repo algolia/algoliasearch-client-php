@@ -52,12 +52,19 @@ Setup
 -------------
 To setup your project, follow these steps:
 
- 1. Download and add the [algoliasearch.php](https://github.com/algolia/algoliasearch-client-php/archive/master.zip) file to your project
- 2. Add the `require` call to your project
+
+ 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `resources` directory to your project).
+ 2. Add `algolia/algoliasearch-client-php` to your `composer.json` file:
+```json
+  "require": {
+      "algolia/algoliasearch-client-php": "1.1.*"
+  }
+```
  3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```php
-require 'algoliasearch.php';
+require 'vendor/autoload.php'; // if you don't use Composer: require 'path/to/algoliasearch.php';
+
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
 
@@ -137,6 +144,7 @@ You can use the following optional arguments:
  * **insideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
 #### Parameters to control results content
+
  * **attributesToRetrieve**: a string that contains the list of object attributes you want to retrieve (let you minimize the answer size).<br/> Attributes are separated with a comma (for example `"name,address"`), you can also use a string array encoding (for example `["name","address"]` ). By default, all attributes are retrieved. You can also use `*` to retrieve all values when an **attributesToRetrieve** setting is specified for your index.
  * **attributesToHighlight**: a string that contains the list of attributes you want to highlight according to the query. Attributes are separated by a comma. You can also use a string array encoding (for example `["name","address"]`). If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted. You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted. A matchLevel is returned for each highlighted attribute and can contain:
   * **full**: if all the query terms were found in the attribute,
@@ -144,6 +152,7 @@ You can use the following optional arguments:
   * **none**: if none of the query terms were found.
  * **attributesToSnippet**: a string that contains the list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`). Attributes are separated by a comma (Example: `attributesToSnippet=name:10,content:10`). <br/>You can also use a string array encoding (Example: `attributesToSnippet: ["name:10","content:10"]`). By default no snippet is computed.
  * **getRankingInfo**: if set to 1, the result hits will contain ranking information in **_rankingInfo** attribute.
+ 
 
 #### Numeric search parameters
  * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 

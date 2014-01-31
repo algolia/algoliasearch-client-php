@@ -562,8 +562,7 @@ class Index {
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID") {
         $requests = array();
-        for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $objects[$i];
+        foreach ($objects as $obj) {
             $req = array("action" => $action, "body" => $obj);
             if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
                 $req["objectID"] = (string) $obj[$objectIDKey];

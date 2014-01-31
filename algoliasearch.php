@@ -288,7 +288,7 @@ class Index {
      *  object must contains an objectID attribute
      */
     public function partialUpdateObject($partialObject) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"] . "/partial"), array(), $partialObject);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial", array(), $partialObject);
     }
 
     /*

@@ -26,6 +26,17 @@ class URLEncodeTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
         $obj = $this->index->getObject("a/go/?a");
         $this->assertEquals('Robin', $obj['firstname']);
+        $res = $this->index->saveObject(array("firstname" => "Roger", "objectID" => "a/go/?a"));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('');
+        $this->assertEquals(1, $results['nbHits']);
+        $this->assertEquals('Roger', $results['hits'][0]['firstname']);
+        $res = $this->index->partialUpdateObject(array("firstname" => "Rodrigo", "objectID" => "a/go/?a"));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('');
+        $this->assertEquals(1, $results['nbHits']);
+        $this->assertEquals('Rodrigo', $results['hits'][0]['firstname']);
+
     }
     private $client;
     private $index;

@@ -8,9 +8,19 @@ class FunctionTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
-        $this->index = $this->client->initIndex(safe_name('FunctionTest'));
+        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
+    }
+
+    public function tearDown()
+    {
+        try {
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));
+        } catch (AlgoliaSearch\AlgoliaException $e) {
+            // not fatal
+        }
+
     }
 
     public function testConstructAPIKey()
@@ -29,23 +39,24 @@ class FunctionTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException('Exception');
         $host = array("toto");
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
-        $this->index = $this->client->initIndex(safe_name('FunctionTest'));
-        $res = $this->index->addObject(array("firstname" => "Robin"));
-        $this->index->waitTask($res['taskID']);
+        $this->badClient = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
+        $this->badIndex = $this->badClient->initIndex(safe_name('àlgol?à-php'));
+        $res = $this->badIndex->addObject(array("firstname" => "Robin"));
+        $this->badIndex->waitTask($res['taskID']);
     }
 
     public function testBadAPPIP()
     {
         $this->setExpectedException('Exception');
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), "toto");
-        $this->index = $this->client->listIndexes();
+        $this->badClient = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), "toto");
+        $this->index = $this->badClient->listIndexes();
     }
 
 
     public function testFunction()
     {
-        $this->client->disableRateLimitForward();  
+        $this->client->disableRateLimitForward(); 
+        $this->client->listIndexes(); 
     }
 
     private $client;

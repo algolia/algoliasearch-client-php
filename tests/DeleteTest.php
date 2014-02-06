@@ -9,7 +9,7 @@ class DeleteTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('DeleteTest'));
+        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaSearch\AlgoliaException $e) {
@@ -17,12 +17,22 @@ class DeleteTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function tearDown()
+    {
+        try {
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));          
+        } catch (AlgoliaSearch\AlgoliaException $e) {
+            // not fatal
+        }
+
+    }
+
     /**
      *  @expectedException Exception
      */
     public function testDeleteObject()
     {
-        $res = $this->index->addObject(array("firstname" => "Robin"));
+        $res = $this->index->addObject(array("firstname" => "Robin", "objectID" => "à/go/?à"));
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('', array('attributesToRetrieve' => array("firstname")));
         $this->assertEquals(1, $results['nbHits']);

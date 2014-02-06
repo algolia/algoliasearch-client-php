@@ -8,12 +8,22 @@ class BatchTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('BatchTest'));
+        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         try {
-            $this->client->deleteIndex(safe_name('BatchTest'));
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));
         } catch (AlgoliaSearch\AlgoliaException $e) {
             // not fatal
         }
+    }
+
+    public function tearDown()
+    {
+        try {
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));           
+        } catch (AlgoliaSearch\AlgoliaException $e) {
+            // not fatal
+        }
+
     }
 
     public function testBatchCustomObjects()
@@ -22,7 +32,7 @@ class BatchTest extends PHPUnit_Framework_TestCase
             "requests" => array(
                 array("action" => "addObject", "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
                 array("action" => "addObject", "body" => array("firstname" => "Oneil", "lastname" => "Barney")),
-                array("action" => "updateObject", "objectID" => "3", "body" => array("firstname" => "Rob")),
+                array("action" => "updateObject", "objectID" => "à/go/?à", "body" => array("firstname" => "Rob")),
                 )
             )
         );

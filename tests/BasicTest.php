@@ -17,12 +17,22 @@ class BasicTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('friends_php2'));
+        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaSearch\AlgoliaException $e) {
             // not fatal
         }
+    }
+
+    public function tearDown()
+    {
+        try {
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));            
+        } catch (AlgoliaSearch\AlgoliaException $e) {
+            // not fatal
+        }
+
     }
 
     public function testAddObject()
@@ -47,7 +57,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
 
     public function testSaveObject()
     {
-        $res = $this->index->saveObject(array("firstname" => "Robin", "objectID" => 1));
+        $res = $this->index->saveObject(array("firstname" => "Robin", "objectID" => "à/go/?à"));
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('rob');
         $this->assertEquals(1, $results['nbHits']);
@@ -56,8 +66,8 @@ class BasicTest extends PHPUnit_Framework_TestCase
     public function testSaveObjects()
     {
         $res = $this->index->saveObjects(array(
-            array("firstname" => "Robin", "objectID" => 1),
-            array("firstname" => "Robert", "objectID" => 2)
+            array("firstname" => "Robin", "objectID" => "à/go/?à"),
+            array("firstname" => "Robert", "objectID" => "à/go/?à2")
         ));
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('rob');
@@ -66,7 +76,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
 
     public function testPartialUpdateObject()
     {
-        $res = $this->index->partialUpdateObject(array("lastname" => "Oneil", "objectID" => 1));
+        $res = $this->index->partialUpdateObject(array("lastname" => "Oneil", "objectID" => "à/go/?à"));
         $this->index->waitTask($res['taskID']);
 
         $results = $this->index->search('Oneil');
@@ -77,7 +87,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
     public function testPartialUpdateObjects()
     {
         $res = $this->index->partialUpdateObjects(array(
-            array("lastname" => "Oneil", "objectID" => 1)));
+            array("lastname" => "Oneil", "objectID" => "à/go/?à")));
         $this->index->waitTask($res['taskID']);
 
         $results = $this->index->search('Oneil');

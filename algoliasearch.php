@@ -662,7 +662,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             $errorMsg = 'JSON parsing error: unexpected control character found';
             break;
         case JSON_ERROR_SYNTAX:
-            $errorMsg = 'JSON parsing error: syntax error, malformed JSON response=' . $response;
+            $errorMsg = 'JSON parsing error: syntax error, malformed JSON';
             break;
         case JSON_ERROR_STATE_MISMATCH:
             $errorMsg = 'JSON parsing error: underflow or the modes mismatch';

@@ -284,7 +284,7 @@ class Index {
      *  object must contains an objectID attribute
      */
     public function partialUpdateObject($partialObject) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"] . "/partial"), array(), $partialObject);
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial", array(), $partialObject);
     }
 
     /*
@@ -624,10 +624,12 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
     } elseif ($method === 'DELETE') {
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        curl_setopt($curlHandle, CURLOPT_POST, false);
     } elseif ($method === 'PUT') {
         $body = ($data) ? json_encode($data) : '';
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
+        curl_setopt($curlHandle, CURLOPT_POST, false);
     }
     $response = curl_exec($curlHandle);
     if ($response === false) {
@@ -657,7 +659,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             $errorMsg = 'JSON parsing error: unexpected control character found';
             break;
         case JSON_ERROR_SYNTAX:
-            $errorMsg = 'JSON parsing error: syntax error, malformed JSON';
+            $errorMsg = 'JSON parsing error: syntax error, malformed JSON response=' . $response;
             break;
         case JSON_ERROR_STATE_MISMATCH:
             $errorMsg = 'JSON parsing error: underflow or the modes mismatch';

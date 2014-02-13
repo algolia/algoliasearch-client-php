@@ -632,7 +632,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         $body = ($data) ? json_encode($data) : '';
         curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-        curl_setopt($curlHandle, CURLOPT_POST, false);
+        curl_setopt($curlHandle, CURLOPT_POST, true);
     }
     $response = curl_exec($curlHandle);
     if ($response === false) {

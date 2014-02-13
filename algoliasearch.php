@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.1.5
+ * VERSION 1.1.6
  * 
  */
 namespace AlgoliaSearch;
@@ -77,7 +77,7 @@ class Client {
                     'X-Algolia-API-Key: ' . $this->apiKey,
                     'Content-type: application/json'
                     ));
-        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.5");
+        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.6");
         //Return the output instead of printing it
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);

@@ -16,6 +16,8 @@ class LogTest extends PHPUnit_Framework_TestCase
         $res = $this->client->getLogs();
         
         $this->assertGreaterThan(0, count($res['logs']));
+
+        
     }
 
     private $client;

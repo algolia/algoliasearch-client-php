@@ -20,6 +20,10 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
+ *
+ *
+ * VERSION 1.1.5
+ * 
  */
 namespace AlgoliaSearch;
 
@@ -73,7 +77,7 @@ class Client {
                     'X-Algolia-API-Key: ' . $this->apiKey,
                     'Content-type: application/json'
                     ));
-        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP");
+        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.5");
         //Return the output instead of printing it
         curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
@@ -558,8 +562,7 @@ class Index {
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID") {
         $requests = array();
-        for ($i = 0; $i < count($objects); ++$i) {
-            $obj = $objects[$i];
+        foreach ($objects as $obj) {
             $req = array("action" => $action, "body" => $obj);
             if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
                 $req["objectID"] = (string) $obj[$objectIDKey];

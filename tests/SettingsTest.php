@@ -9,12 +9,22 @@ class SettingsTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
-        $this->index = $this->client->initIndex(safe_name('SettingsTest'));
+        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaSearch\AlgoliaException $e) {
             // not fatal
         }
+    }
+
+    public function tearDown()
+    {
+        try {
+            $this->client->deleteIndex(safe_name('àlgol?à-php'));
+        } catch (AlgoliaSearch\AlgoliaException $e) {
+            // not fatal
+        }
+
     }
 
     public function testSettingsIndex()

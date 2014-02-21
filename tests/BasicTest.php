@@ -95,6 +95,19 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Oneil', $results['hits'][0]['lastname']);
     }
 
+    public function testDeleteObjects()
+    {
+        $res = $this->index->addObjects(array(
+            array("firstname" => "Robin", "objectID" => "à/go/?à"),
+            array("firstname" => "Robert", "objectID" => "à/go/?à2")
+        ));
+        $this->index->waitTask($res['taskID']);
+        $res = $this->index->deleteObjects(array("à/go/?à", "à/go/?à2"));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('rob');
+        $this->assertEquals(0, $results['nbHits']);
+    }
+
 
     private $client;
     private $index;

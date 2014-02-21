@@ -333,6 +333,20 @@ class Index {
     }
 
     /*
+     * Delete several objects
+     * 
+     * @param objects contains an array of objectIDs to delete. If the object contains an objectID
+     */
+    public function deleteObjects($objects) {
+        $objectIDs = array();
+        foreach ($objects as $key => $id) {
+            $objectIDs[$key] = array('objectID' => $id);
+        }
+        $requests = $this->buildBatch("deleteObject", $objectIDs, true);
+        return $this->batch($requests);
+    }
+
+    /*
      * Search inside the index
      *
      * @param query the full text query

@@ -27,6 +27,16 @@ class DeleteIndexTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function includeValue($tab, $attrName, $value)
+    {
+        foreach ($tab as $key => $elt) {
+            if ($elt[$attrName] == $value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function testDeleteIndex()
     {
         $this->index2 = $this->client->initIndex(safe_name('ListTest2'));
@@ -34,13 +44,13 @@ class DeleteIndexTest extends PHPUnit_Framework_TestCase
         $this->index2->waitTask($task['taskID']);
 
         $res = $this->client->listIndexes();
-
+        $this->assertTrue($this->includeValue($res['items'], 'name', safe_name('ListTest2')));
         $task = $this->client->deleteIndex(safe_name('ListTest2'));
         $this->index2->waitTask($task['taskID']);  
 
         $resAfter = $this->client->listIndexes();
 
-        $this->assertEquals(count($res['items']) - 1, count($resAfter['items']));
+        $this->assertFalse($this->includeValue($resAfter['items'], 'name', safe_name('ListTest2')));
     }
 
     private $client;

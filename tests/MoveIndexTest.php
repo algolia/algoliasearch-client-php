@@ -37,6 +37,16 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function includeValue($tab, $attrName, $value)
+    {
+        foreach ($tab as $key => $elt) {
+            if ($elt[$attrName] == $value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function testMoveIndex()
     {
         $task = $this->index->addObject(array("firstname" => "Robin"));
@@ -48,7 +58,9 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
         $this->index = $this->client->initIndex(safe_name('àlgol?à2-php'));
 
         $res = $this->index->search('');
-
+        $list = $this->client->listIndexes();
+        $this->assertTrue($this->includeValue($list['items'], 'name', safe_name('àlgol?à2-php')));
+        $this->assertFalse($this->includeValue($list['items'], 'name', safe_name('àlgol?à-php')));
         $this->assertEquals(1, $res['nbHits']);
         $this->assertEquals("Robin", $res['hits'][0]['firstname']);
     }

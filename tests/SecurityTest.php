@@ -3,7 +3,6 @@
 include __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../algoliasearch.php';
 
-
 class SecurityTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -50,6 +49,19 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $task = $this->client->deleteUserKey($newKey['key']);
         $resEnd = $this->client->listUserKeys();
         $this->assertEquals(count($res['keys']), count($resEnd['keys']));
+    }
+
+    public function testSecuredApiKeys()
+    {
+        $this->assertEquals('143fec7bef6f16f6aa127a4949948a966816fa154e67a811e516c2549dbe2a8b', hash('sha256', 'my_api_key(public,user1)'));
+        $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)');
+        $this->assertEquals($key, hash('sha256', 'my_api_key(public,user1)'));
+        $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)', 42);
+        $this->assertEquals($key, hash('sha256', 'my_api_key(public,user1)42'));
+        $key = $this->client->generateSecuredApiKey('my_api_key', array('public'));
+        $this->assertEquals($key, hash('sha256', 'my_api_keypublic'));
+        $key = $this->client->generateSecuredApiKey('my_api_key', array('public', array('premium','vip')));
+        $this->assertEquals($key, hash('sha256', 'my_api_keypublic,(premium,vip)'));
     }
 
     private $client;

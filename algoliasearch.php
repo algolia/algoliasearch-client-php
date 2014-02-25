@@ -214,9 +214,52 @@ class Client {
      * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited) 
      */
-    public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), 
-             array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery));
+    public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
+        $params = array(
+            "acl" => $acls,
+            "validity" => $validity,
+            "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
+            "maxHitsPerQuery" => $maxHitsPerQuery
+        );
+        if ($indexes != null) {
+            if (is_array($indexes)) {
+                $tmp = array();
+                foreach ($indexes as $index) {
+                    array_push($tmp, $index);
+                }
+                $indexes = join(',', $tmp);
+            }
+            $params['indexes'] = $indexes;
+        }
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), $params);
+    }
+
+    /*
+     * Generate a secured and public API Key from a list of tagFilters and an
+     * optional user token identifying the current user
+     *
+     * @param privateApiKey your private API Key
+     * @param tagFilters the list of tags applied to the query (used as security)
+     * @param userToken an optional token identifying the current user
+     *
+     */
+    public function generateSecuredApiKey($privateApiKey, $tagFilters, $userToken = null) {
+        if (is_array($tagFilters)) {
+            $tmp = array();
+            foreach ($tagFilters as $tag) {
+                if (is_array($tag)) {
+                    $tmp2 = array();
+                    foreach ($tag as $tag2) {
+                        array_push($tmp2, $tag2);
+                    }
+                    array_push($tmp, '(' . join(',', $tmp2) . ')');
+                } else {
+                    array_push($tmp, $tag);
+                }
+            }
+            $tagFilters = join(',', $tmp);
+        }
+        return hash('sha256', $privateApiKey . $tagFilters . $userToken);
     }
 
     protected $applicationID;

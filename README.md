@@ -197,6 +197,8 @@ $index->partialUpdateObject(array("city" => "San Francisco",
                                   "objectID" => "myID"));
 ```
 
+
+
 Search
 -------------
  **Opening note:** If you are building a web application, you may be more interested in using our [javascript client](https://github.com/algolia/algoliasearch-client-js) to send queries. It brings two benefits: (i) your users get a better response time by avoiding to go through your servers, and (ii) it will offload your servers of unnecessary tasks.
@@ -249,7 +251,7 @@ You can use the following optional arguments:
 #### Faceting parameters
  * **facetFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding (for example `[["category:Book","category:Movie"],"author:John%20Doe"]`).
  * **facets**: List of object attributes that you want to use for faceting. <br/>Attributes are separated with a comma (for example `"category,author"` ). You can also use a JSON string array encoding (for example `["category","author"]` ). Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter. You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
- * **maxValuesPerFacets**: Limit the number of facet values returned for each facet. For example: `maxValuePerFacets=10` will retrieve max 10 values per facet.
+ * **maxValuesPerFacet**: Limit the number of facet values returned for each facet. For example: `maxValuesPerFacet=10` will retrieve max 10 values per facet.
 
 #### Distinct parameter
  * **distinct**: If set to 1, enable the distinct feature (disabled by default) if the `attributeForDistinct` index setting is set. This feature is similar to the SQL "distinct" keyword: when enabled in a query with the `distinct=1` parameter, all hits containing a duplicate value for the attributeForDistinct attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed.
@@ -294,6 +296,10 @@ The server response will look like:
   "params": "query=jimmie+paint&attributesToRetrieve=firstname,lastname&hitsPerPage=50"
 }
 ```
+
+
+
+
 
 Get an object
 -------------
@@ -415,6 +421,7 @@ You may want to perform multiple operations with one API call to reduce latency.
 We expose three methods to perform batch:
  * `addObjects`: add an array of object using automatic `objectID` assignement
  * `saveObjects`: add or update an array of object that contains an `objectID` attribute
+ * `deleteObjects`: delete an array of objectIDs
  * `partialUpdateObjects`: partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated, other will remain unchanged)
 
 Example using automatic `objectID` assignement:
@@ -433,6 +440,11 @@ $res = $index->saveObjects(array(array("firstname" => "Jimmie",
                                  array("firstname" => "Warren", 
                                        "lastname" => "Speach",
                                        "objectID" => "myID2")));
+```
+
+Example that delete a set of records:
+```php
+$res = $index->deleteObjects(array("myID1", "myID2"));
 ```
 
 Example that update only the `firstname` attribute:
@@ -503,6 +515,7 @@ You can also create an API Key with advanced restrictions:
   Note: If you are sending the query through your servers, you must use the `enableRateLimitForward("TheAdminAPIKey", "EndUserIP", "APIKeyWithRateLimit")` function to enable rate-limit.
 
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
+ * Specify the list of targeted indexes. Defaults to all indexes if empty of blank.
 
  ```php
 // Creates a new global API key that is valid for 300 seconds
@@ -527,6 +540,49 @@ Delete an existing key:
 $res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
 // Deletes an index specific key
 $res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
+```
+
+You may have a single index containing per-user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate secured API key from your backend:
+
+```php
+// generate a public API key for user 42. Here, records are tagged with:
+//  - 'public' if they are visible by all users
+//  - 'user_XXXX' if they are visible by user XXXX
+$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', '(public,user_42)');
+```
+
+This public API key must then be used in your JavaScript code as follow:
+
+```javascript
+<script type="text/javascript">
+  var algolia = new AlgoliaSearch('YourApplicationID', '<%= public_api_key %>');
+  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
+    // [...]
+  });
+</script>
+```
+
+You can mix rate limits and secured API keys setting an extra `user_token` attribute both at API key generation-time and query-time. When set, a uniq user will be identified by her `IP + user_token` instead of only her `IP`. It allows you to restrict a single user to perform maximum `N` API calls per hour, even if she share her `IP` with another user.
+
+```php
+// generate a public API key for user 42. Here, records are tagged with:
+//  - 'public' if they are visible by all users
+//  - 'user_XXXX' if they are visible by user XXXX
+$public_key = $client->generateSecuredApiKey('YourRateLimitedApiKey', '(public,user_42)', 'user_42');
+```
+
+This public API key must then be used in your JavaScript code as follow:
+
+```javascript
+<script type="text/javascript">
+  var algolia = new AlgoliaSearch('YourApplicationID', '<%= public_api_key %>');
+  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+  algolia.setUserToken('user_42')              // must be same than the one used at generation-time
+  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
+    // [...]
+  });
+</script>
 ```
 
 Copy or rename an index

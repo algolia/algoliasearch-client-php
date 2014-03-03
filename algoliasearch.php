@@ -198,6 +198,14 @@ class Client {
     public function deleteUserKey($key) {
         return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/keys/" . $key);
     }
+    
+    /*
+     * Search multiple indexes
+     *
+     */
+    public function searchMulti($args = array()) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/*/queries",array(), $args);
+    }
 
     /*
      * Create a new user key

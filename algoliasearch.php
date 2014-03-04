@@ -284,6 +284,37 @@ class Index {
     }
 
     /*
+     * Perform batch operation on several objects
+     *
+     * @param objects contains an array of objects to update (each object must contains an objectID attribute)
+     * @param objectIDKey  the key in each object that contains the objectID
+     * @param objectActionKey  the key in each object that contains the action to perform (addObject, updateObject, deleteObject or partialUpdateObject)
+     */
+    public function batchObjects($objects, $objectIDKey = "objectID", $objectActionKey = "objectAction") {
+        $requests = array();
+
+        foreach ($objects as $obj) {
+            // If no or invalid action, assume updateObject
+            if (! isset($obj[$objectActionKey]) || ! in_array($obj[$objectActionKey], array('addObject', 'updateObject', 'deleteObject', 'partialUpdateObject'))) {
+                $obj[$objectActionKey] = 'updateObject';
+            }
+
+            $action = $obj[$objectActionKey];
+            unset($obj[$objectActionKey]); // The action key is not included in the object
+
+            $req = array("action" => $action, "body" => $obj);
+
+            if (array_key_exists($objectIDKey, $obj)) {
+                $req["objectID"] = (string) $obj[$objectIDKey];
+            }
+
+            $requests[] = $req;
+        }
+
+        return $this->batch(array("requests" => $requests));
+    }
+
+    /*
      * Add an object in this index
      * 
      * @param content contains the object to add inside the index. 

@@ -461,6 +461,62 @@ class Index {
     }
 
     /*
+     *  Multi search
+     *  This method allows to send multiple searches on a single call
+     *
+     * @param queries is an array that contains each query. Each query is an array containing the key "query" and at the same level optional keys documented as args in self::query()
+     *
+     * @return array with the same keys and in the same order than original query
+     */
+    public function multiSearch(Array $queries) {
+        // If this is not a real multi, send to Algolia as a regular query
+        if (count($queries) === 1) {
+            foreach ($queries as $key => $args) { // to preserve key
+                $query = '';
+                if (isset($args['query'])) {
+                    $query = $args['query'];
+                    unset($args['query']);
+                }
+                return array($key => $this->search($query, $args));
+            }
+        }
+
+        $searches = array();
+
+        foreach ($queries as $query) {
+            $params = array();
+            foreach ($query as $key => $val) {
+                if (is_array($val)) {
+                    $params[$key] = json_encode($val);
+                } else {
+                    $params[$key] = $val;
+                }
+            }
+
+            $searches[] = array(
+                'indexName' => $this->urlIndexName, // This implementation is on a single index, but it's possible to do a multi search on several indexes
+                'params' => http_build_query($params)
+            );
+        }
+
+        $result = AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/*/queries", array(), array('requests' => $searches));
+
+        if (isset($result['results'])) {
+            $result = $result['results'];
+
+            if (isset($result) && is_array($result) && count($result) === count($queries)) {
+                foreach ($queries as $key => $value) {
+                    $queries[$key] = array_shift($result);
+                }
+
+                $result = $queries;
+            }
+        }
+
+        return $result;
+    }
+
+    /*
      * Browse all index content
      *
      * @param page Pagination parameter used to select the page to retrieve.

@@ -116,6 +116,28 @@ class Client {
     }
 
     /*
+     * This method allows to query multiple indexes with one API call
+     *
+     */
+    public function multipleQueries($queries, $indexNameKey = "indexName") {
+        if ($queries == null) {
+            throw new \Exception('No query provided');
+        }
+        $requests = array();
+        foreach ($queries as $query) {            
+            if (array_key_exists($indexNameKey, $query)) {
+                $indexes = $query[$indexNameKey];
+                unset($query[$indexNameKey]);    
+            } else {
+                throw new \Exception('indexName is mandatory');
+            }
+            $req = array("indexName" => $indexes, "params" => http_build_query($query));
+            array_push($requests, $req);
+        }
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
+    }
+
+    /*
      * List all existing indexes
      * return an object in the form:
      * array("items" => array(

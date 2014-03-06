@@ -108,6 +108,15 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $results['nbHits']);
     }
 
+    public function testMultipleQueries()
+    {
+        $res = $this->index->addObject(array("firstname" => "Robin"));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->client->multipleQueries(array(array('indexName' => safe_name('àlgol?à-php'), 'query' => '')));
+        $this->assertEquals(1, $results['results'][0]['nbHits']);
+        $this->assertEquals('Robin', $results['results'][0]['hits'][0]['firstname']);
+    }
+
 
     private $client;
     private $index;

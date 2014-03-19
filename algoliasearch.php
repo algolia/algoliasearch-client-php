@@ -184,8 +184,8 @@ class Client {
      * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
      * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
      */
-    public function getLogs($offset = 0, $length = 10) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/logs?offset=" . $offset . "&length=" . $length);
+    public function getLogs($offset = 0, $length = 10, $onlyErrors = false) {
+        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
     }
 
     /*

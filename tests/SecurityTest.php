@@ -28,6 +28,8 @@ class SecurityTest extends PHPUnit_Framework_TestCase
 
     public function testSecurityIndex()
     {
+        $res = $this->index->addObject(array("firstname" => "Robin"));
+        $this->index->waitTask($res['taskID']);
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(['search']);
         $this->assertTrue($newKey['key'] != "");

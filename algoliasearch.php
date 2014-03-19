@@ -281,7 +281,7 @@ class Client {
             }
             $tagFilters = join(',', $tmp);
         }
-        return hash('sha256', $privateApiKey . $tagFilters . $userToken);
+        return hash_hmac('sha256', $tagFilters . $userToken, $privateApiKey);
     }
 
     protected $applicationID;

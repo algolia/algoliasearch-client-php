@@ -55,13 +55,13 @@ class SecurityTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('143fec7bef6f16f6aa127a4949948a966816fa154e67a811e516c2549dbe2a8b', hash('sha256', 'my_api_key(public,user1)'));
         $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)');
-        $this->assertEquals($key, hash('sha256', 'my_api_key(public,user1)'));
+        $this->assertEquals($key, hash_hmac('sha256', '(public,user1)', 'my_api_key'));
         $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)', 42);
-        $this->assertEquals($key, hash('sha256', 'my_api_key(public,user1)42'));
+        $this->assertEquals($key, hash_hmac('sha256', '(public,user1)42', 'my_api_key'));
         $key = $this->client->generateSecuredApiKey('my_api_key', array('public'));
-        $this->assertEquals($key, hash('sha256', 'my_api_keypublic'));
+        $this->assertEquals($key, hash_hmac('sha256', 'public', 'my_api_key'));
         $key = $this->client->generateSecuredApiKey('my_api_key', array('public', array('premium','vip')));
-        $this->assertEquals($key, hash('sha256', 'my_api_keypublic,(premium,vip)'));
+        $this->assertEquals($key, hash_hmac('sha256', 'public,(premium,vip)', 'my_api_key'));
     }
 
     private $client;

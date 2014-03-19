@@ -55,7 +55,7 @@ class SecurityTest extends PHPUnit_Framework_TestCase
 
     public function testSecuredApiKeys()
     {
-        $this->assertEquals('143fec7bef6f16f6aa127a4949948a966816fa154e67a811e516c2549dbe2a8b', hash('sha256', 'my_api_key(public,user1)'));
+        $this->assertEquals('1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417', hash_hmac('sha256', '(public,user1)', 'my_api_key'));
         $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)');
         $this->assertEquals($key, hash_hmac('sha256', '(public,user1)', 'my_api_key'));
         $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)', 42);

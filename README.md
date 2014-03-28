@@ -219,6 +219,9 @@ You can use the following optional arguments:
  * **optionalWords**: a string that contains the list of words that should be considered as optional when found in the query. The list of words is comma separated.
  * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
  * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **advancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
+    * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
+    * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
 
 #### Pagination parameters
 
@@ -542,6 +545,8 @@ $res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
 $res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
 ```
 
+
+
 You may have a single index containing per-user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=(public,user_42)` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate secured API key from your backend:
 
 ```php
@@ -584,6 +589,8 @@ This public API key must then be used in your JavaScript code as follow:
   });
 </script>
 ```
+
+
 
 Copy or rename an index
 -------------

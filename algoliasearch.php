@@ -756,13 +756,18 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
     }
     $answer = json_decode($response, true);
 
-    if ($http_status === 403) {
+    if ($http_status == 400) {
+        throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Bad request");
+    }
+    elseif ($http_status === 403) {
         throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Invalid Application-ID or API-Key");
     }
-    if ($http_status === 404) {
+    elseif ($http_status === 404) {
         throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Resource does not exist");
     }
-    $errorMsg = isset($answer['message']) ? $answer['message'] : null;
+    elseif ($http_status != 200 && $http_status != 201) {
+        throw new Exception($http_status . ": " . $response);
+    }
 
     switch (json_last_error()) {
         case JSON_ERROR_DEPTH:
@@ -782,14 +787,11 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             break;
         case JSON_ERROR_NONE:
         default:
+            $errorMsg = null;
             break;
     }
     if ($errorMsg !== null)
         throw new AlgoliaException($errorMsg);
 
-    // Check is there is an error which is not a 403/404/503
-    if (intval(floor($http_status / 100)) !== 2) {
-        throw new AlgoliaException($answer["message"]);
-    }
     return $answer;
 }

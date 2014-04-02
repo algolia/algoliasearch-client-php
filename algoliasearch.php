@@ -697,7 +697,7 @@ function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params 
                 return $res;
         } catch (AlgoliaException $e) {
             throw $e;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $exception = $e;
         }
     }

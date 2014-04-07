@@ -53,9 +53,8 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
         $this->index->waitTask($task['taskID']);
 
         $task = $this->client->moveIndex(safe_name('àlgol?à-php'), safe_name('àlgol?à2-php'));
-        $this->index->waitTask($task['taskID']);
-
         $this->index = $this->client->initIndex(safe_name('àlgol?à2-php'));
+        $this->index->waitTask($task['taskID']);
 
         $res = $this->index->search('');
         $list = $this->client->listIndexes();

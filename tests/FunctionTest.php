@@ -23,6 +23,19 @@ class FunctionTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testKeepAlive()
+    {
+        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $init = $this->microtime_float();
+        $this->client->listIndexes();
+        $end_init = $this->microtime_float();
+        for ($i = 1; $i <= 10; $i++) {
+            $this->client->listIndexes();
+        }
+        $end = $this->microtime_float();
+        $this->assertGreaterThan(($end - $end_init) / 2, $end_init - $init);
+    }
+
     public function testConstructAPIKey()
     {
         $this->setExpectedException('Exception');
@@ -57,6 +70,12 @@ class FunctionTest extends PHPUnit_Framework_TestCase
     {
         $this->client->disableRateLimitForward(); 
         $this->client->listIndexes(); 
+    }
+
+    public function microtime_float()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
     }
 
     private $client;

@@ -29,34 +29,12 @@ namespace AlgoliaSearch;
 
 class AlgoliaException extends \Exception { }
 
-/**
- * Entry point in the PHP API.
- * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
- * to start using Algolia Search API
- */
-class Client {
-    /*
-     * Algolia Search initialization
-     * @param applicationID the application ID you have in your admin interface
-     * @param apiKey a valid API key for the service
-     * @param hostsArray the list of hosts that you have received for the service
-     */
-    public function __construct($applicationID, $apiKey, $hostsArray = null) {
+class ClientContext {
+    function __construct($applicationID, $apiKey, $hostsArray) {
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
-        if ($hostsArray == null) {
-            $this->hostsArray = array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io");
-        } else {
-            $this->hostsArray = $hostsArray;
-        }
+        $this->hostsArray = $hostsArray;
 
-        if(!function_exists('curl_init')){
-            throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
-        }
-
-        if(!function_exists('json_decode')){
-            throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
-        }
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new \Exception('AlgoliaSearch requires an applicationID.');
         }
@@ -70,21 +48,81 @@ class Client {
             shuffle($this->hostsArray);
         }
 
-        // initialize curl library
-        $this->curlHandle = curl_init();
-        curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array(
-                    'X-Algolia-Application-Id: ' . $this->applicationID,
-                    'X-Algolia-API-Key: ' . $this->apiKey,
-                    'Content-type: application/json'
-                    ));
-        curl_setopt($this->curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.8");
-        //Return the output instead of printing it
-        curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($this->curlHandle, CURLOPT_FAILONERROR, true);
-        curl_setopt($this->curlHandle, CURLOPT_ENCODING, '');
-        curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($this->curlHandle, CURLOPT_CAINFO, __DIR__ . '/resources/ca-bundle.crt');
+        $this->curlMHandle = NULL;
+        $this->adminAPIKey = NULL;
+        $this->endUserIP = NULL;
+        $this->rateLimitAPIKey = NULL;
+    }
+
+    function __destruct() {
+        if ($this->curlMHandle != null) {
+            curl_multi_close($this->curlMHandle);
+        }
+    }
+
+    public function getMHandle($curlHandle) {
+        if ($this->curlMHandle == null) {
+            $this->curlMHandle = curl_multi_init();
+        }
+        curl_multi_add_handle($this->curlMHandle, $curlHandle);
+
+        return $this->curlMHandle;
+    }
+
+    public function releaseMHandle($curlHandle) {
+        curl_multi_remove_handle($this->curlMHandle, $curlHandle);
+    }
+    
+    public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
+        $this->adminAPIKey = $adminAPIKey;
+        $this->endUserIP = $endUserIP;
+        $this->rateLimitAPIKey = $rateLimitAPIKey;
+    }
+
+    public function disableRateLimit() {
+        $this->adminAPIKey = NULL;
+        $this->endUserIP = NULL;
+        $this->rateLimitAPIKey = NULL;
+
+    }
+
+    public $applicationID;
+    public $apiKey;
+    public $hostsArray;
+    public $curlMHandle;
+    public $adminAPIKey;
+}
+
+/**
+ * Entry point in the PHP API.
+ * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
+ * to start using Algolia Search API
+ */
+class Client {
+    /*
+     * Algolia Search initialization
+     * @param applicationID the application ID you have in your admin interface
+     * @param apiKey a valid API key for the service
+     * @param hostsArray the list of hosts that you have received for the service
+     */
+    function __construct($applicationID, $apiKey, $hostsArray = null) {
+        if ($hostsArray == null) {
+            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io"));
+        } else {
+            $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
+        }
+        if(!function_exists('curl_init')){
+            throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
+        }
+        if(!function_exists('json_decode')){
+            throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
+        }
+    }
+
+    /*
+     * Release curl handle
+     */
+    function __destruct() {
     }
 
     /*
@@ -95,24 +133,14 @@ class Client {
      * @param rateLimitAPIKey the API key on which you have a rate limit
      */
     public function enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
-         curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array(
-                    'X-Algolia-Application-Id: ' . $this->applicationID,
-                    'X-Algolia-API-Key: ' . $adminAPIKey,
-                    'X-Forwarded-For: ' . $endUserIP,
-                    'X-Forwarded-API-Key: ' . $rateLimitAPIKey,
-                    'Content-type: application/json'
-                    ));
+        $this->context->setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey);
     }
 
     /*
      * Disable IP rate limit enabled with enableRateLimitForward() function
      */
     public function disableRateLimitForward() {
-        curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, array(
-                    'X-Algolia-Application-Id: ' . $this->applicationID,
-                    'X-Algolia-API-Key: ' . $this->apiKey,
-                    'Content-type: application/json'
-                    ));
+        $this->context->disableRateLimit();
     }
 
     /*
@@ -134,7 +162,7 @@ class Client {
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
     }
 
     /*
@@ -146,7 +174,7 @@ class Client {
      *                        ))
      */
     public function listIndexes() {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/");
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/");
     }
 
     /*
@@ -156,7 +184,7 @@ class Client {
      * return an object containing a "deletedAt" attribute
      */
     public function deleteIndex($indexName) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . urlencode($indexName));
+        return AlgoliaUtils_request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
     }
 
     /**
@@ -166,7 +194,7 @@ class Client {
      */
     public function moveIndex($srcIndexName, $dstIndexName) {
         $request = array("operation" => "move", "destination" => $dstIndexName);
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -176,7 +204,7 @@ class Client {
      */
     public function copyIndex($srcIndexName, $dstIndexName) {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -185,7 +213,7 @@ class Client {
      * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
      */
     public function getLogs($offset = 0, $length = 10, $onlyErrors = false) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
+        return AlgoliaUtils_request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
     }
 
     /*
@@ -194,7 +222,7 @@ class Client {
      * @param indexName the name of index
      */
     public function initIndex($indexName) {
-        return new Index($this->curlHandle, $this->hostsArray, $indexName);
+        return new Index($this->context, $indexName);
     }
 
     /*
@@ -202,7 +230,7 @@ class Client {
      *
      */
     public function listUserKeys() {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/keys");
+        return AlgoliaUtils_request($this->context, "GET", "/1/keys");
     }
 
     /*
@@ -210,7 +238,7 @@ class Client {
      *
      */
     public function getUserKeyACL($key) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/keys/" . $key);
+        return AlgoliaUtils_request($this->context, "GET", "/1/keys/" . $key);
     }
 
     /*
@@ -218,7 +246,7 @@ class Client {
      *
      */
     public function deleteUserKey($key) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/keys/" . $key);
+        return AlgoliaUtils_request($this->context, "DELETE", "/1/keys/" . $key);
     }
 
     /*
@@ -253,7 +281,7 @@ class Client {
             }
             $params['indexes'] = $indexes;
         }
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/keys", array(), $params);
+        return AlgoliaUtils_request($this->context, "POST", "/1/keys", array(), $params);
     }
 
     /*
@@ -284,10 +312,7 @@ class Client {
         return hash_hmac('sha256', $tagFilters . $userToken, $privateApiKey);
     }
 
-    protected $applicationID;
-    protected $apiKey;
-    protected $hostsArray;
-    protected $curlHandle;
+    protected $context;
 }
 
 /*
@@ -298,9 +323,8 @@ class Index {
     /*
      * Index initialization (You should not call this initialized yourself)
      */
-    public function __construct($curlHandle, $hostsArray, $indexName) {
-        $this->curlHandle = $curlHandle;
-        $this->hostsArray = $hostsArray;
+    public function __construct($context, $indexName) {
+        $this->context = $context;
         $this->indexName = $indexName;
         $this->urlIndexName = urlencode($indexName);
     }
@@ -347,9 +371,9 @@ class Index {
     public function addObject($content, $objectID = null) {
 
         if ($objectID === null) {
-            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName, array(), $content);
+            return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName, array(), $content);
         } else {
-            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID), array(), $content);
+            return AlgoliaUtils_request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID), array(), $content);
         }
     }
 
@@ -372,9 +396,9 @@ class Index {
     public function getObject($objectID, $attributesToRetrieve = null) {
         $id = urlencode($objectID);
         if ($attributesToRetrieve === null)
-            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/" . $id);
+            return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/" . $id);
         else
-            return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/" . $id, array("attributes" => $attributesToRetrieve));
+            return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/" . $id, array("attributes" => $attributesToRetrieve));
     }
 
     /*
@@ -384,7 +408,7 @@ class Index {
      *  object must contains an objectID attribute
      */
     public function partialUpdateObject($partialObject) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial", array(), $partialObject);
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial", array(), $partialObject);
     }
 
     /*
@@ -403,7 +427,7 @@ class Index {
      * @param object contains the object to save, the object must contains an objectID attribute
      */
     public function saveObject($object) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"]), array(), $object);
+        return AlgoliaUtils_request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($object["objectID"]), array(), $object);
     }
 
     /*
@@ -425,7 +449,7 @@ class Index {
         if ($objectID == null || mb_strlen($objectID) == 0) {
             throw new \Exception('objectID is mandatory');
         }
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID));
+        return AlgoliaUtils_request($this->context, "DELETE", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($objectID));
     }
 
     /*
@@ -510,7 +534,7 @@ class Index {
             $args = array();
         }
         $args["query"] = $query;
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName, $args);
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName, $args);
     }
 
     /*
@@ -521,7 +545,7 @@ class Index {
      * @param hitsPerPage: Pagination parameter used to select the number of hits per page. Defaults to 1000.
      */
     public function browse($page = 0, $hitsPerPage = 1000) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/browse",
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/browse",
                                     array("page" => $page, "hitsPerPage" => $hitsPerPage));
     }
 
@@ -534,7 +558,7 @@ class Index {
      */
     public function waitTask($taskID, $timeBeforeRetry = 100) {
         while (true) {
-            $res = AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/task/" . $taskID);
+            $res = AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/task/" . $taskID);
             if ($res["status"] === "published")
                 return $res;
             usleep($timeBeforeRetry * 1000);
@@ -546,14 +570,14 @@ class Index {
      *
      */
     public function getSettings() {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/settings");
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/settings");
     }
 
     /*
      * This function deletes the index content. Settings and index specific API keys are kept untouched.
      */
     public function clearIndex() {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/clear");
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/clear");
     }
 
     /*
@@ -608,7 +632,7 @@ class Index {
      * - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
      */
     public function setSettings($settings) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "PUT", "/1/indexes/" . $this->urlIndexName . "/settings", array(), $settings);
+        return AlgoliaUtils_request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/settings", array(), $settings);
     }
 
     /*
@@ -616,7 +640,7 @@ class Index {
      *
      */
     public function listUserKeys() {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/keys");
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/keys");
     }
 
     /*
@@ -624,7 +648,7 @@ class Index {
      *
      */
     public function getUserKeyACL($key) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "GET", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
+        return AlgoliaUtils_request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
     }
 
     /*
@@ -632,7 +656,7 @@ class Index {
      *
      */
     public function deleteUserKey($key) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "DELETE", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
+        return AlgoliaUtils_request($this->context, "DELETE", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key);
     }
 
     /*
@@ -651,7 +675,7 @@ class Index {
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      */
     public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(),
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(),
             array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery));
     }
 
@@ -660,7 +684,7 @@ class Index {
      * @param  $requests an associative array defining the batch request body
      */
     public function batch($requests) {
-        return AlgoliaUtils_request($this->curlHandle, $this->hostsArray, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $requests);
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/batch", array(), $requests);
     }
 
     /**
@@ -688,11 +712,11 @@ class Index {
     private $curlHandle;
 }
 
-function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params = array(), $data = array()) {
+function AlgoliaUtils_request($context, $method, $path, $params = array(), $data = array()) {
     $exception = null;
-    foreach ($hostsArray as &$host) {
+    foreach ($context->hostsArray as &$host) {
         try {
-            $res = AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data);
+            $res = AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $data);
             if ($res !== null)
                 return $res;
         } catch (AlgoliaException $e) {
@@ -707,9 +731,9 @@ function AlgoliaUtils_request($curlHandle, $hostsArray, $method, $path, $params 
         throw $exception;
 }
 
-function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $data) {
+function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $data) {
     $url = "https://" . $host . $path;
-
+//echo $url;
     if ($params != null && count($params) > 0) {
         $params2 = array();
         foreach ($params as $key => $val) {
@@ -720,8 +744,36 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             }
         }
         $url .= "?" . http_build_query($params2);
+        
     }
-
+//echo $url;
+    // initialize curl library
+    $curlHandle = curl_init();
+    //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
+    if ($context->adminAPIKey == null) {
+        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+                    'X-Algolia-Application-Id: ' . $context->applicationID,
+                    'X-Algolia-API-Key: ' . $context->apiKey,
+                    'Content-type: application/json'
+                    ));
+    } else {
+         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+                'X-Algolia-Application-Id: ' . $context->applicationID,
+                'X-Algolia-API-Key: ' . $context->adminAPIKey,
+                'X-Forwarded-For: ' . $context->endUserIP,
+                'X-Forwarded-API-Key: ' . $context->rateLimitAPIKey,
+                'Content-type: application/json'
+                ));
+    }
+    curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.8");
+    //Return the output instead of printing it
+    curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
+    curl_setopt($curlHandle, CURLOPT_ENCODING, '');
+    curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+    curl_setopt($curlHandle, CURLOPT_CAINFO, __DIR__ . '/resources/ca-bundle.crt');
+    
     curl_setopt($curlHandle, CURLOPT_URL, $url);
     curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
@@ -744,7 +796,30 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
         curl_setopt($curlHandle, CURLOPT_POST, true);
     }
-    $response = curl_exec($curlHandle);
+    $mhandle = $context->getMHandle($curlHandle);
+
+    $response = NULL;
+    // Do all the processing.
+    $active = NULL;
+
+    $mrc = curl_multi_exec($mhandle, $active);
+    while ($mrc == CURLM_CALL_MULTI_PERFORM) {
+        usleep(100);
+        $mrc = curl_multi_exec($mhandle, $active);
+    }
+    while ($active && $mrc == CURLM_OK) {
+        $select = curl_multi_select($mhandle);
+        if ($select != -1 || $select != 0) {
+            do {
+                $mrc = curl_multi_exec($mhandle, $active);
+            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        } elseif ($select == 0) { //Nothing to do stop
+            break;
+        }
+        usleep(100);
+    }
+
+
     if ($response === false) {
         throw new \Exception(curl_error($curlHandle));
     }
@@ -754,7 +829,10 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
         // Could not reach host or service unavailable, try with another one if we have it
         return null;
     }
+    $response = curl_multi_getcontent($curlHandle);
     $answer = json_decode($response, true);
+    $context->releaseMHandle($curlHandle);
+    curl_close($curlHandle);
 
     if ($http_status == 400) {
         throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Bad request");
@@ -790,7 +868,7 @@ function AlgoliaUtils_requestHost($curlHandle, $method, $host, $path, $params, $
             $errorMsg = null;
             break;
     }
-    if ($errorMsg !== null)
+    if ($errorMsg !== null) 
         throw new AlgoliaException($errorMsg);
 
     return $answer;

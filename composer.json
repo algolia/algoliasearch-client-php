@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "4.0.*"
     },
     "autoload": {
         "classmap": ["algoliasearch.php"]

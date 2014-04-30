@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.1.8
+ * VERSION 1.1.9
  *
  */
 namespace AlgoliaSearch;
@@ -765,7 +765,7 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
                 'Content-type: application/json'
                 ));
     }
-    curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.8");
+    curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.9");
     //Return the output instead of printing it
     curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);

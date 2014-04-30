@@ -12,6 +12,18 @@ function safe_name($name) {
     return $name . "_travis-" . $id;
 }
 
+function containsValue($array, $attr, $value)
+{
+  foreach ($array as $elt)
+  {
+    if ($elt[$attr] == $value)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 class BasicTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

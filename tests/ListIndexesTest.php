@@ -37,18 +37,6 @@ class ListIndexesTest extends PHPUnit_Framework_TestCase
 
     }
 
-    public function containsValue($array, $attr, $value)
-    {
-      foreach ($array as $elt)
-      {
-        if ($elt[$attr] == $value)
-        {
-          return true;
-        }
-      }
-      return false;
-    }
-
     public function testListIndexes()
     {
         $this->index2 = $this->client->initIndex(safe_name('ListTest2'));
@@ -56,8 +44,7 @@ class ListIndexesTest extends PHPUnit_Framework_TestCase
         $this->index2->waitTask($task['taskID']);
         $resAfter = $this->client->listIndexes();
 
-        $this->assertTrue($this->containsValue($resAfter["items"], "name", safe_name('ListTest2')));
-        
+        $this->assertTrue(containsValue($resAfter["items"], "name", safe_name('ListTest2')));
     }
 
     private $client;

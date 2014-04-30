@@ -34,23 +34,25 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $newKey = $this->index->addUserKey(['search']);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->index->listUserKeys();
-        $this->assertEquals(count($res['keys']) + 1, count($resAfter['keys']));
+        $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
+        $this->assertFalse(containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->index->deleteUserKey($newKey['key']);
         $resEnd = $this->index->listUserKeys();
-        $this->assertEquals(count($res['keys']), count($resEnd['keys']));
+        $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
 
         $res = $this->client->listUserKeys();
         $newKey = $this->client->addUserKey(['search']);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->client->listUserKeys();
-        $this->assertEquals(count($res['keys']) + 1, count($resAfter['keys']));
+        $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
+        $this->assertFalse(containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->client->deleteUserKey($newKey['key']);
         $resEnd = $this->client->listUserKeys();
-        $this->assertEquals(count($res['keys']), count($resEnd['keys']));
+        $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
     }
 
     public function testSecuredApiKeys()

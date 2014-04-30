@@ -72,7 +72,7 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
 
         $this->expectOutputString('');
         $task = $this->client->copyIndex(safe_name('àlgol?à2-php'), safe_name('àlgol?à-php'));
-        //$this->client->waitTask($task['taskID']);
+        $this->index->waitTask($task['taskID']);
 
         $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
         $this->index2 = $this->client->initIndex(safe_name('àlgol?à2-php'));

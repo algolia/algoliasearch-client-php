@@ -33,7 +33,7 @@ class FunctionTest extends PHPUnit_Framework_TestCase
             $this->client->listIndexes();
         }
         $end = $this->microtime_float();
-        $this->assertGreaterThan(($end - $end_init) / 2, $end_init - $init);
+        $this->assertGreaterThan(($end - $end_init) / 3, $end_init - $init);
     }
 
     public function testConstructAPIKey()

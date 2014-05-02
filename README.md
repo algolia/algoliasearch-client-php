@@ -222,6 +222,9 @@ You can use the following optional arguments:
  * **advancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
     * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
     * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol. For example `search -engine` will retrieve records containing `search` but not `engine`.
+ * **analytics**: If set to false, this query will not be taken into account in analytics feature. Default to true.
+ * **synonyms**: If set to false, this query will not use synonyms defined in configuration. Default to true.
+ * **replaceSynonymsInHighlight**: If set to false, words matched via synonyms expansion will not be replaced by the matched synonym in highlight result. Default to true.
 
 #### Pagination parameters
 
@@ -360,6 +363,12 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
  * **slaves**: The list of indexes on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indexes with the same operations.
+
+#### Query expansion
+ * **synonyms**: (array of array of words considered as equals). For example, you may want to retrieve your **ipad** record when your users are searching for **tablet**, even if the **tablet** word is not part of the record: so you need to configure **tablet** as a synonym of **ipad**. For example `"synomyms": [ [ "ipad", "tablet" ], [ "iphone", "igadget", "istuff" ], ... ]`.
+ * **placeholders**: (hash of array of words). This is an advanced use case to define a token substitutable by a list of words without having the original token searchable. It is defined by a hash associating placeholders to lists of substitutable words. For example `"placeholders": { "<streetnumber>": ["1", "2", "3", ..., "9999"]}` placeholder to be able to match all street numbers (we use the `< >` tag syntax to define placeholders in an attribute). For example:
+  * Push a record with the placeholder: `{ "name" : "Apple Store", "address" : "&lt;streetnumber&gt; Opera street, Paris" }`
+  * Configure the placeholder in your index settings: `"placeholders": { "<streetnumber>" : ["1", "2", "3", "4", "5", ... ], ... }`.
 
 #### Default query parameters (can be overwrite by query)
  * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 3).
@@ -622,7 +631,7 @@ $res = $client->moveIndex("MyNewIndex", "MyIndex");
 Backup / Retrieve all index content
 -------------
 
-You can retrieve all index content for backup purpose of for analytics using the browse method. 
+You can retrieve all index content for backup purpose or for analytics using the browse method. 
 This method retrieve 1000 objects by API call and support pagination.
 
 ```php

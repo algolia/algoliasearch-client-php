@@ -2,27 +2,7 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../algoliasearch.php';
-
-function safe_name($name) {
-    if (getenv("TRAVIS") != "true") {
-        return $name;
-    }
-    $s = explode(".", getenv("TRAVIS_JOB_NUMBER"));
-    $id = end($s);
-    return $name . "_travis-" . $id;
-}
-
-function containsValue($array, $attr, $value)
-{
-  foreach ($array as $elt)
-  {
-    if ($elt[$attr] == $value)
-    {
-      return true;
-    }
-  }
-  return false;
-}
+require_once __DIR__ . '/helper.php';
 
 class BasicTest extends PHPUnit_Framework_TestCase
 {

@@ -2,6 +2,7 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../algoliasearch.php';
+require_once __DIR__ . '/helper.php';
 
 class MoveIndexTest extends PHPUnit_Framework_TestCase
 {

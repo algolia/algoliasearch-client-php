@@ -348,7 +348,7 @@ You can retrieve all settings using the `getSettings` function. The result will 
   * *Control part of the ranking*.<br/>(see the ranking parameter for full explanation) Matches in attributes at the beginning of the list will be considered more important than matches in attributes further down the list. In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable this behavior if you add your attribute inside `unordered(AttributeName)`, for example `attributesToIndex: ["title", "unordered(text)"]`.
  * **attributesForFaceting**: (array of strings) The list of fields you want to use for faceting. All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
  * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword: when enabled in query with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
- * **ranking**: (array of strings) controls the way results are sorted.<br/>We have six available criteria: 
+ * **ranking**: (array of strings) controls the way results are sorted.<br/>We have eight available criteria: 
   * **typo**: sort according to number of typos,
   * **geo**: sort according to decreassing distance when performing a geo-location based search,
   * **proximity**: sort according to the proximity of query words in hits,
@@ -356,7 +356,9 @@ You can retrieve all settings using the `getSettings` function. The result will 
   * **exact**: 
     * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
     * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
-  * **custom**: sort according to a user defined formula set in **customRanking** attribute.<br/>The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
+  * **custom**: sort according to a user defined formula set in **customRanking** attribute.
+  * **asc(attributeName)**: sort according to a numeric attribute by ascending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean).
+  * **desc(attributeName)**: sort according to a numeric attribute by descending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean). <br/>The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
 For example `"customRanking" => ["desc(population)", "asc(name)"]`  
  * **queryType**: Select how the query words are interpreted, it can be one of the following value:

@@ -30,6 +30,7 @@ class SettingsTest extends PHPUnit_Framework_TestCase
     public function testSettingsIndex()
     {
         $res = $this->index->setSettings(array("attributesToRetrieve" => array("firstname"), "hitsPerPage" => 50));
+        $this->index->waitTask($res['taskID']);
         $settings = $this->index->getSettings();
         $this->assertEquals(count($settings['attributesToRetrieve']), 1);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');

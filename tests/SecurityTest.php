@@ -33,6 +33,7 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $this->index->waitTask($res['taskID']);
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(['search']);
+        sleep(1);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->index->listUserKeys();
         $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
@@ -40,11 +41,13 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->index->deleteUserKey($newKey['key']);
+        sleep(1);
         $resEnd = $this->index->listUserKeys();
         $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
 
         $res = $this->client->listUserKeys();
         $newKey = $this->client->addUserKey(['search']);
+        sleep(1);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->client->listUserKeys();
         $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
@@ -52,6 +55,7 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->client->deleteUserKey($newKey['key']);
+        sleep(1);
         $resEnd = $this->client->listUserKeys();
         $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
     }

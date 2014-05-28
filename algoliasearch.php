@@ -159,6 +159,11 @@ class Client {
             } else {
                 throw new \Exception('indexName is mandatory');
             }
+            foreach ($query as $key => $value) {
+              if (gettype($value) == "array") {
+                $query[$key] = json_encode($value);
+              }
+            }
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
@@ -222,7 +227,7 @@ class Client {
      * @param indexName the name of index
      */
     public function initIndex($indexName) {
-        return new Index($this->context, $indexName);
+        return new Index($this->context, $this, $indexName);
     }
 
     /*
@@ -323,8 +328,9 @@ class Index {
     /*
      * Index initialization (You should not call this initialized yourself)
      */
-    public function __construct($context, $indexName) {
+    public function __construct($context, $client, $indexName) {
         $this->context = $context;
+        $this->client = $client;
         $this->indexName = $indexName;
         $this->urlIndexName = urlencode($indexName);
     }
@@ -538,6 +544,90 @@ class Index {
     }
 
     /*
+     * Perform a search with disjunctive facets generating as many queries as number of disjunctive facets
+     *
+     * @param query the query
+     * @param disjunctive_facets the array of disjunctive facets
+     * @param params a hash representing the regular query parameters
+     * @param refinements a hash ("string" -> ["array", "of", "refined", "values"]) representing the current refinements
+     * ex: { "my_facet1" => ["my_value1", ["my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
+     */
+    public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array()) {
+      if (gettype($disjunctive_facets) != "string" && gettype($disjunctive_facets) != "array") {
+        throw new AlgoliaException("Argument \"disjunctive_facets\" must be a String or an Array");
+      }
+      if (gettype($refinements) != "array") {
+        throw new AlgoliaException("Argument \"refinements\" must be a Hash of Arrays");
+      }
+
+      if (gettype($disjunctive_facets) == "string") {
+        $disjunctive_facets = split(",", $disjunctive_facets);
+      }
+
+      $disjunctive_refinements = array();
+      foreach ($refinements as $key => $value) {
+        if (in_array($key, $disjunctive_facets)) {
+          $disjunctive_refinements[$key] = $value;
+        }
+      }
+      $queries = array();
+      $filters = array();
+
+      foreach ($refinements as $key => $value) {
+        $r = array_map(function ($val) use ($key) { return $key . ":" . $val;}, $value);
+
+        if (in_array($key, $disjunctive_refinements)) {
+          $filter = array_merge($filters, $r);
+        } else {
+          array_push($filters, $r);
+        }
+      }
+      $params["indexName"] = $this->indexName;
+      $params["query"] = $query;
+      $params["facetFilters"] = $filters;
+      array_push($queries, $params);
+      foreach ($disjunctive_facets as $disjunctive_facet) {
+        $filters = array();
+        foreach ($refinements as $key => $value) {
+          if ($key != $disjunctive_facet) {
+            $r = array_map(function($val) use($key) { return $key . ":" . $val;}, $value);
+
+            if (in_array($key, $disjunctive_refinements)) {
+              $filter = array_merge($filters, $r);
+            } else {
+              array_push($filters, $r);
+            }
+          }
+        }
+        $params["indexName"] = $this->indexName;
+        $params["query"] = $query;
+        $params["facetFilters"] = $filters;
+        $params["page"] = 0;
+        $params["hitsPerPage"] = 1;
+        $params["facets"] = $disjunctive_facet;
+        array_push($queries, $params);
+      }
+      $answers = $this->client->multipleQueries($queries);
+
+      $aggregated_answer = $answers['results'][0];
+      $aggregated_answer['disjunctiveFacets'] = array();
+      for ($i = 1; $i < count($answers['results']); $i++) {
+        foreach ($answers['results'][$i]['facets'] as $key => $facet) {
+          $aggregated_answer['disjunctiveFacets'][$key] = $facet;
+          if (!in_array($key, $disjunctive_refinements)) {
+            continue;
+          }
+          foreach ($disjunctive_refinements[$key] as $r) {
+            if (is_null($aggregated_answer['disjunctiveFacets'][$key][$r])) {
+              $aggregated_answer['disjunctiveFacets'][$key][$r] = 0;
+            }
+          }
+        }
+      }
+      return $aggregated_answer;
+    }
+
+    /*
      * Browse all index content
      *
      * @param page Pagination parameter used to select the page to retrieve.
@@ -707,6 +797,7 @@ class Index {
     }
 
     private $indexName;
+    private $client;
     private $urlIndexName;
     private $hostsArray;
     private $curlHandle;

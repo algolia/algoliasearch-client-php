@@ -936,7 +936,7 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
         throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Resource does not exist");
     }
     elseif ($http_status != 200 && $http_status != 201) {
-        throw new Exception($http_status . ": " . $response);
+        throw new \Exception($http_status . ": " . $response);
     }
 
     switch (json_last_error()) {

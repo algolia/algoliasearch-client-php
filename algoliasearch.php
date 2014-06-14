@@ -892,25 +892,12 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
 
     $response = NULL;
     // Do all the processing.
-    $active = NULL;
-
-    $mrc = curl_multi_exec($mhandle, $active);
-    while ($mrc == CURLM_CALL_MULTI_PERFORM) {
+    $running = null;
+    do {
+        curl_multi_exec($mhandle, $running);
+        curl_multi_select($mhandle);
         usleep(100);
-        $mrc = curl_multi_exec($mhandle, $active);
-    }
-    while ($active && $mrc == CURLM_OK) {
-        $select = curl_multi_select($mhandle);
-        if ($select != -1 || $select != 0) {
-            do {
-                $mrc = curl_multi_exec($mhandle, $active);
-            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-        } elseif ($select == 0) { //Nothing to do stop
-            break;
-        }
-        usleep(100);
-    }
-
+    } while ($running > 0);
 
     if ($response === false) {
         throw new \Exception(curl_error($curlHandle));

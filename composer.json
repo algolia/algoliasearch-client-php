@@ -9,15 +9,22 @@
         {
             "name": "Algolia Team",
             "email": "contact@algolia.com"
+        },
+        {
+            "name": "Jonathan H. Wage",
+            "email": "jonwage@gmail.com"
         }
     ],
     "require": {
+        "kriswallsmith/buzz": "dev-master"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
         "phpunit/phpunit": "4.0.*"
     },
     "autoload": {
-        "classmap": ["algoliasearch.php"]
+        "psr-0": {
+            "AlgoliaSearch": "src/"
+        }
     }
 }

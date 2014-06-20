@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4514887c9144883eebbcf8a5a23f549b",
+    "hash": "2875f13ea6b59387c4b287f869849e7d",
     "packages": [
         {
             "name": "kriswallsmith/buzz",
-            "version": "dev-master",
+            "version": "v0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "a0f207ac4939978b604be9bec5d5b19baecd8165"
+                "reference": "759432d66387e3433d3b06cb6f773b97225b9b17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/a0f207ac4939978b604be9bec5d5b19baecd8165",
-                "reference": "a0f207ac4939978b604be9bec5d5b19baecd8165",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/759432d66387e3433d3b06cb6f773b97225b9b17",
+                "reference": "759432d66387e3433d3b06cb6f773b97225b9b17",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "curl",
                 "http client"
             ],
-            "time": "2014-03-24 21:56:09"
+            "time": "2013-05-19 03:41:15"
         }
     ],
     "packages-dev": [
@@ -1155,7 +1155,6 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kriswallsmith/buzz": 20,
         "satooshi/php-coveralls": 20
     },
     "platform": [

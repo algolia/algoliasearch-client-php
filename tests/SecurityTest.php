@@ -32,7 +32,7 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
         $res = $this->index->listUserKeys();
-        $newKey = $this->index->addUserKey(['search']);
+        $newKey = $this->index->addUserKey(array('search'));
         sleep(1);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->index->listUserKeys();
@@ -46,7 +46,7 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
 
         $res = $this->client->listUserKeys();
-        $newKey = $this->client->addUserKey(['search']);
+        $newKey = $this->client->addUserKey(array('search'));
         sleep(1);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->client->listUserKeys();

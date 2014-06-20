@@ -13,6 +13,10 @@
         {
             "name": "Jonathan H. Wage",
             "email": "jonwage@gmail.com"
+        },
+        {
+            "name": "Ryan T. Catlin",
+            "email": "ryan.catlin@gmail.com"
         }
     ],
     "require": {
@@ -24,7 +28,8 @@
     },
     "autoload": {
         "psr-0": {
-            "AlgoliaSearch": "src/"
+            "AlgoliaSearch": "src/",
+            "AlgoliaSearch\\Tests": "tests/"
         }
     }
 }

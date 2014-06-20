@@ -9,7 +9,9 @@ branches:
   - master
 before_script:
   - composer install --prefer-source
-script: phpunit --coverage-clover coverage.cov tests
+script:
+  - mkdir -p build/logs
+  - phpunit -c phpunit.xml.dist
 after_script:
   - php vendor/bin/coveralls
 env:

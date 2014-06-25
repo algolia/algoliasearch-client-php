@@ -13,14 +13,14 @@ class ListIndexesTest extends AlgoliaTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
             // not fatal
         }
         try {
-            $task = $this->client->deleteIndex(safe_name('àlgol?à2-php'));
+            $task = $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
         } catch (AlgoliaException $e) {
             // ListTest2 does not exist
         }
@@ -29,12 +29,12 @@ class ListIndexesTest extends AlgoliaTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à2-php'));
+            $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -43,11 +43,11 @@ class ListIndexesTest extends AlgoliaTestCase
 
     public function testListIndexes()
     {
-        $this->index2 = $this->client->initIndex(safe_name('ListTest2'));
+        $this->index2 = $this->client->initIndex($this->safe_name('ListTest2'));
         $task = $this->index2->addObject(array("firstname" => "Robin"));
         $this->index2->waitTask($task['taskID']);
         $resAfter = $this->client->listIndexes();
 
-        $this->assertTrue(containsValue($resAfter["items"], "name", safe_name('ListTest2')));
+        $this->assertTrue(containsValue($resAfter["items"], "name", $this->safe_name('ListTest2')));
     }
 }

@@ -13,7 +13,7 @@ class FunctionTest extends AlgoliaTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
     }
@@ -21,7 +21,7 @@ class FunctionTest extends AlgoliaTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -60,7 +60,7 @@ class FunctionTest extends AlgoliaTestCase
         $this->setExpectedException('Exception');
         $host = array("toto");
         $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
-        $this->badIndex = $this->badClient->initIndex(safe_name('àlgol?à-php'));
+        $this->badIndex = $this->badClient->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->badIndex->addObject(array("firstname" => "Robin"));
         $this->badIndex->waitTask($res['taskID']);
     }

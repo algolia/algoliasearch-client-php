@@ -13,9 +13,9 @@ class BatchTest extends AlgoliaTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -24,7 +24,7 @@ class BatchTest extends AlgoliaTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
         } catch (AlgoliaException $e) {
             // not fatal
         }

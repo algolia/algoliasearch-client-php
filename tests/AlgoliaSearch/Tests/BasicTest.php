@@ -13,7 +13,7 @@ class BasicTest extends AlgoliaTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
@@ -24,7 +24,7 @@ class BasicTest extends AlgoliaTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));            
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));            
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -108,7 +108,7 @@ class BasicTest extends AlgoliaTestCase
     {
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
-        $results = $this->client->multipleQueries(array(array('indexName' => safe_name('àlgol?à-php'), 'query' => '')));
+        $results = $this->client->multipleQueries(array(array('indexName' => $this->safe_name('àlgol?à-php'), 'query' => '')));
         $this->assertEquals(1, $results['results'][0]['nbHits']);
         $this->assertEquals('Robin', $results['results'][0]['hits'][0]['firstname']);
     }

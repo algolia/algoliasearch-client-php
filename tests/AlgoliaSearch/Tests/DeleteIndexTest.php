@@ -13,7 +13,7 @@ class DeleteIndexTest extends AlgoliaTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
@@ -24,7 +24,7 @@ class DeleteIndexTest extends AlgoliaTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -43,17 +43,17 @@ class DeleteIndexTest extends AlgoliaTestCase
 
     public function testDeleteIndex()
     {
-        $this->index2 = $this->client->initIndex(safe_name('ListTest2'));
+        $this->index2 = $this->client->initIndex($this->safe_name('ListTest2'));
         $task = $this->index2->addObject(array("firstname" => "Robin"));
         $this->index2->waitTask($task['taskID']);
 
         $res = $this->client->listIndexes();
-        $this->assertTrue($this->includeValue($res['items'], 'name', safe_name('ListTest2')));
+        $this->assertTrue($this->includeValue($res['items'], 'name', $this->safe_name('ListTest2')));
         $task = $this->client->deleteIndex(safe_name('ListTest2'));
         $this->index2->waitTask($task['taskID']);  
 
         $resAfter = $this->client->listIndexes();
 
-        $this->assertFalse($this->includeValue($resAfter['items'], 'name', safe_name('ListTest2')));
+        $this->assertFalse($this->includeValue($resAfter['items'], 'name', $this->safe_name('ListTest2')));
     }
 }

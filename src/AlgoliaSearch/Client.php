@@ -79,7 +79,7 @@ class Client
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
-        return $this->doRequest($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
+        return $this->request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
     }
 
     /**
@@ -92,7 +92,7 @@ class Client
      */
     public function listIndexes()
     {
-        return $this->doRequest($this->context, "GET", "/1/indexes/");
+        return $this->request($this->context, "GET", "/1/indexes/");
     }
 
     /**
@@ -103,7 +103,7 @@ class Client
      */
     public function deleteIndex($indexName)
     {
-        return $this->doRequest($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
+        return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
     }
 
     /**
@@ -115,7 +115,7 @@ class Client
     public function moveIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "move", "destination" => $dstIndexName);
-        return $this->doRequest($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -127,7 +127,7 @@ class Client
     public function copyIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
-        return $this->doRequest($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -138,7 +138,7 @@ class Client
      */
     public function getLogs($offset = 0, $length = 10, $onlyErrors = false)
     {
-        return $this->doRequest($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
+        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
     }
 
     /**
@@ -157,7 +157,7 @@ class Client
      */
     public function listUserKeys()
     {
-        return $this->doRequest($this->context, "GET", "/1/keys");
+        return $this->request($this->context, "GET", "/1/keys");
     }
 
     /**
@@ -166,7 +166,7 @@ class Client
      */
     public function getUserKeyACL($key)
     {
-        return $this->doRequest($this->context, "GET", "/1/keys/" . $key);
+        return $this->request($this->context, "GET", "/1/keys/" . $key);
     }
 
     /**
@@ -175,7 +175,7 @@ class Client
      */
     public function deleteUserKey($key)
     {
-        return $this->doRequest($this->context, "DELETE", "/1/keys/" . $key);
+        return $this->request($this->context, "DELETE", "/1/keys/" . $key);
     }
 
     /**
@@ -266,9 +266,9 @@ class Client
         }
     }
 
-    private function doRequest($context, $method, $host, $path, $params, $data)
+    private function doRequest($context, $method, $host, $path, $params = array(), $data = array())
     {
-        $url = "http://" . $host;
+        $url = "https://" . $host;
 
         if ($params != null && count($params) > 0) {
             $params2 = array();
@@ -304,11 +304,11 @@ class Client
         $client->setVerifyPeer(true);
         $client->setIgnoreErrors(false);
         $client->setOption(CURLOPT_RETURNTRANSFER, true);
-        $client->setOption(CURLOPT_FAILONERROR, true);
+        $client->setOption(CURLOPT_FAILONERROR, false);
         $client->setOption(CURLOPT_ENCODING, '');
         $client->setOption(CURLOPT_SSL_VERIFYPEER, true);
         $client->setOption(CURLOPT_SSL_VERIFYHOST, 2);
-        $client->setOption(CURLOPT_CAINFO, __DIR__ . '/resources/ca-bundle.crt');
+        $client->setOption(CURLOPT_CAINFO, __DIR__ . '/../../resources/ca-bundle.crt');
         $client->setOption(CURLOPT_CONNECTTIMEOUT, 30);
         $client->setOption(CURLOPT_NOSIGNAL, 1);
 

@@ -49,7 +49,7 @@ class DeleteIndexTest extends AlgoliaTestCase
 
         $res = $this->client->listIndexes();
         $this->assertTrue($this->includeValue($res['items'], 'name', $this->safe_name('ListTest2')));
-        $task = $this->client->deleteIndex(safe_name('ListTest2'));
+        $task = $this->client->deleteIndex($this->safe_name('ListTest2'));
         $this->index2->waitTask($task['taskID']);  
 
         $resAfter = $this->client->listIndexes();

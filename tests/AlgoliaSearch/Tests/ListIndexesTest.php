@@ -48,6 +48,6 @@ class ListIndexesTest extends AlgoliaTestCase
         $this->index2->waitTask($task['taskID']);
         $resAfter = $this->client->listIndexes();
 
-        $this->assertTrue(containsValue($resAfter["items"], "name", $this->safe_name('ListTest2')));
+        $this->assertTrue($this->containsValue($resAfter["items"], "name", $this->safe_name('ListTest2')));
     }
 }

@@ -2,7 +2,6 @@
 
 namespace AlgoliaSearch;
 
-use Buzz\Exception\ClientException;
 /**
  * Entry point in the PHP API.
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts

@@ -8,7 +8,7 @@ class ClientContext
     public $apiKey;
     public $hostsArray;
     public $adminAPIKey;
-    public $curlMHandle;
+    // public $curlMHandle;
 
     public function __construct($applicationID, $apiKey, $hostsArray)
     {

@@ -15,6 +15,21 @@ class Client
     protected $context;
 
     /**
+     * @var \GuzzleHttp\Client
+     */
+    protected $httpClient;
+
+    /**
+     * @var \GuzzleHttp\Adaptor\MultiAdapter
+     */
+    protected $multiAdapter;
+
+    /**
+     * @var \GuzzleHttp\Message\MessageFactory
+     */
+    protected $messageFactory;
+
+    /**
      * Algolia Search initialization
      *
      * @param applicationID the application ID you have in your admin interface
@@ -23,6 +38,7 @@ class Client
      */
     public function __construct($applicationID, $apiKey, $hostsArray = null)
     {
+
         if ($hostsArray == null) {
             $this->context = new ClientContext($applicationID, $apiKey, array(
                 $applicationID . "-1.algolia.io",
@@ -32,6 +48,18 @@ class Client
         } else {
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }
+
+        $this->messageFactory = new \GuzzleHttp\Message\MessageFactory();
+        $this->multiAdapter = new \GuzzleHttp\Adapter\Curl\MultiAdapter($this->messageFactory);
+        $this->httpClient = new \GuzzleHttp\Client(
+            array(
+                'message_factory' => $this->messageFactory,
+                'adapter' => $this->multiAdapter,
+                'defaults' => array(
+                    'verify' => __DIR__ . '/../../resources/ca-bundle.crt'
+                )
+            )
+        );
     }
 
     /**
@@ -79,7 +107,7 @@ class Client
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
-        return $this->doRequest($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
+        return $this->request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
     }
 
     /**
@@ -92,7 +120,7 @@ class Client
      */
     public function listIndexes()
     {
-        return $this->doRequest($this->context, "GET", "/1/indexes/");
+        return $this->request($this->context, "GET", "/1/indexes/");
     }
 
     /**
@@ -103,7 +131,7 @@ class Client
      */
     public function deleteIndex($indexName)
     {
-        return $this->doRequest($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
+        return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
     }
 
     /**
@@ -115,7 +143,7 @@ class Client
     public function moveIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "move", "destination" => $dstIndexName);
-        return $this->doRequest($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -127,7 +155,7 @@ class Client
     public function copyIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
-        return $this->doRequest($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
     }
 
     /**
@@ -138,7 +166,7 @@ class Client
      */
     public function getLogs($offset = 0, $length = 10, $onlyErrors = false)
     {
-        return $this->doRequest($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
+        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
     }
 
     /**
@@ -157,7 +185,7 @@ class Client
      */
     public function listUserKeys()
     {
-        return $this->doRequest($this->context, "GET", "/1/keys");
+        return $this->request($this->context, "GET", "/1/keys");
     }
 
     /**
@@ -166,7 +194,7 @@ class Client
      */
     public function getUserKeyACL($key)
     {
-        return $this->doRequest($this->context, "GET", "/1/keys/" . $key);
+        return $this->request($this->context, "GET", "/1/keys/" . $key);
     }
 
     /**
@@ -175,7 +203,7 @@ class Client
      */
     public function deleteUserKey($key)
     {
-        return $this->doRequest($this->context, "DELETE", "/1/keys/" . $key);
+        return $this->request($this->context, "DELETE", "/1/keys/" . $key);
     }
 
     /**
@@ -268,55 +296,45 @@ class Client
 
     private function doRequest($context, $method, $host, $path, $params, $data)
     {
-        $url = "http://" . $host;
+        $request = $this->httpClient->createRequest(
+            $method,
+            "https://" . $host . $path,
+            array(
+                'query' => $params,
+                'json' => $data,
+                'config' => array(
+                    'curl' => array(
+                        CURLOPT_SSL_VERIFYPEER => true,
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_FAILONERROR => false,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_SSL_VERIFYPEER => true,
+                        CURLOPT_SSL_VERIFYHOST => 2,
+                        CURLOPT_CAINFO => __DIR__ . '/resources/ca-bundle.crt',
+                        CURLOPT_CONNECTTIMEOUT => 30,
+                        CURLOPT_NOSIGNAL => 1
+                    )
+                )
+            )
+        );
 
-        if ($params != null && count($params) > 0) {
-            $params2 = array();
-            foreach ($params as $key => $val) {
-                if (is_array($val)) {
-                    $params2[$key] = json_encode($val);
-                } else {
-                    $params2[$key] = $val;
-                }
-            }
-            $path .= "?" . http_build_query($params2);
-        }
-
-        $request = new \Buzz\Message\Request($method, $path, $url);
-
-        $request->addHeader('Content-type: application/json');
-        $request->addHeader('User-Agent: Algolia for PHP 1.1.9');
-        $request->addHeader('X-Algolia-Application-Id: ' . $context->applicationID);
+        $request->setHeader('Content-type', 'application/json');
+        $request->setHeader('User-Agent', 'Algolia for PHP 1.1.9');
+        $request->setHeader('X-Algolia-Application-Id', $context->applicationID);
 
         if ($context->adminAPIKey === null) {
-            $request->addHeader('X-Algolia-API-Key: ' . $context->apiKey);
+            $request->setHeader('X-Algolia-API-Key', $context->apiKey);
         } else {
-            $request->addHeader('X-Algolia-API-Key: ' . $context->adminAPIKey);
-            $request->addHeader('X-Forwarded-For: ' . $context->endUserIP);
-            $request->addHeader('X-Forwarded-API-Key: ' . $context->rateLimitAPIKey);
+            $request->setHeader('X-Algolia-API-Key', $context->adminAPIKey);
+            $request->setHeader('X-Forwarded-For', $context->endUserIP);
+            $request->setHeader('X-Forwarded-API-Key', $context->rateLimitAPIKey);
         }
 
-        $request->setContent(json_encode($data));
-
-        $response = new \Buzz\Message\Response();
-
-        $client = new \Buzz\Client\Curl();
-        $client->setVerifyPeer(true);
-        $client->setIgnoreErrors(false);
-        $client->setOption(CURLOPT_RETURNTRANSFER, true);
-        $client->setOption(CURLOPT_FAILONERROR, true);
-        $client->setOption(CURLOPT_ENCODING, '');
-        $client->setOption(CURLOPT_SSL_VERIFYPEER, true);
-        $client->setOption(CURLOPT_SSL_VERIFYHOST, 2);
-        $client->setOption(CURLOPT_CAINFO, __DIR__ . '/resources/ca-bundle.crt');
-        $client->setOption(CURLOPT_CONNECTTIMEOUT, 30);
-        $client->setOption(CURLOPT_NOSIGNAL, 1);
-
-        $client->send($request, $response);
+        $response = $this->httpClient->send($request);
 
         $http_status = $response->getStatusCode();
 
-        $response = $response->getContent();
+        $response = $response->getBody();
 
         if ($http_status === 0 || $http_status === 503) {
             // Could not reach host or service unavailable, try with another one if we have it

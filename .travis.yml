@@ -1,13 +1,17 @@
 language: php
 php:
-  - 5.5
+  - 5.3
   - 5.4
+  - 5.5
+  - 5.6
+#  - hhvm
 branches:
   only:
   - master
 before_script:
-  - composer install
-script: phpunit --coverage-clover coverage.cov tests
+  - composer install --prefer-source
+script:
+  - phpunit -c phpunit.xml.dist
 after_script:
   - php vendor/bin/coveralls
 env:

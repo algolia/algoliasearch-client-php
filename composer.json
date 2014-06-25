@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "~4.0"
+        "guzzlehttp/guzzle": "3.7.3"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",

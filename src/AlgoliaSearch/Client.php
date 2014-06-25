@@ -15,19 +15,9 @@ class Client
     protected $context;
 
     /**
-     * @var \GuzzleHttp\Client
+     * @var \Guzzle\Http\Client
      */
     protected $httpClient;
-
-    /**
-     * @var \GuzzleHttp\Adaptor\MultiAdapter
-     */
-    protected $multiAdapter;
-
-    /**
-     * @var \GuzzleHttp\Message\MessageFactory
-     */
-    protected $messageFactory;
 
     /**
      * Algolia Search initialization
@@ -49,14 +39,10 @@ class Client
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }
 
-        $this->messageFactory = new \GuzzleHttp\Message\MessageFactory();
-        $this->multiAdapter = new \GuzzleHttp\Adapter\Curl\MultiAdapter($this->messageFactory);
-        $this->httpClient = new \GuzzleHttp\Client(
-            array(
-                'message_factory' => $this->messageFactory,
-                'adapter' => $this->multiAdapter,
-                'defaults' => array(
-                    'verify' => __DIR__ . '/../../resources/ca-bundle.crt'
+        $this->httpClient = new \Guzzle\Http\Client(
+            new \Guzzle\Common\Collection(
+                array(
+                    'ssl.certificate_authority' => __DIR__ . '/../../resources/ca-bundle.crt'
                 )
             )
         );
@@ -296,39 +282,53 @@ class Client
 
     private function doRequest($context, $method, $host, $path, $params, $data)
     {
+        // Create headers array
+        $headers = array(
+            'Content-type' => 'application/json',
+            'User-Agent' => 'Algolia for PHP 1.1.9',
+            'X-Algolia-Application-Id' => $context->applicationID,
+        );
+        if ($context->adminAPIKey === null) {
+            $headers['X-Algolia-API-Key'] = $context->apiKey;
+        } else {
+            $headers['X-Algolia-API-Key'] = $context->adminAPIKey;
+            $headers['X-Forwarded-For'] = $context->endUserIP;
+            $headers['X-Forwarded-API-Key'] = $context->rateLimitAPIKey;
+        }
+
+        // Create url query string
+        $query = "";
+        if ($params != null && count($params) > 0) {
+            $params2 = array();
+            foreach ($params as $key => $val) {
+                if (is_array($val)) {
+                    $params2[$key] = json_encode($val);
+                } else {
+                    $params2[$key] = $val;
+                }
+            }
+            $query .= "?" . http_build_query($params2);
+        }
+
+        // Create Guzzle Request
         $request = $this->httpClient->createRequest(
             $method,
-            "https://" . $host . $path,
+            "https://" . $host . $path . $query,
+            $headers,
+            json_encode($data),
             array(
-                'query' => $params,
-                'json' => $data,
-                'config' => array(
-                    'curl' => array(
-                        CURLOPT_SSL_VERIFYPEER => true,
-                        CURLOPT_RETURNTRANSFER => true,
-                        CURLOPT_FAILONERROR => false,
-                        CURLOPT_ENCODING => '',
-                        CURLOPT_SSL_VERIFYPEER => true,
-                        CURLOPT_SSL_VERIFYHOST => 2,
-                        CURLOPT_CAINFO => __DIR__ . '/resources/ca-bundle.crt',
-                        CURLOPT_CONNECTTIMEOUT => 30,
-                        CURLOPT_NOSIGNAL => 1
-                    )
+                'curl.options' => array(
+                    CURLOPT_SSL_VERIFYPEER => true,
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_FAILONERROR => false,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_SSL_VERIFYPEER => true,
+                    CURLOPT_SSL_VERIFYHOST => 2,
+                    CURLOPT_CONNECTTIMEOUT => 30,
+                    CURLOPT_NOSIGNAL => 1
                 )
             )
         );
-
-        $request->setHeader('Content-type', 'application/json');
-        $request->setHeader('User-Agent', 'Algolia for PHP 1.1.9');
-        $request->setHeader('X-Algolia-Application-Id', $context->applicationID);
-
-        if ($context->adminAPIKey === null) {
-            $request->setHeader('X-Algolia-API-Key', $context->apiKey);
-        } else {
-            $request->setHeader('X-Algolia-API-Key', $context->adminAPIKey);
-            $request->setHeader('X-Forwarded-For', $context->endUserIP);
-            $request->setHeader('X-Forwarded-API-Key', $context->rateLimitAPIKey);
-        }
 
         $response = $this->httpClient->send($request);
 

@@ -38,7 +38,6 @@ class ListIndexesTest extends AlgoliaTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testListIndexes()

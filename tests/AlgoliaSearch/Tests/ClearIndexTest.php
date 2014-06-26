@@ -28,7 +28,6 @@ class ClearIndexTest extends AlgoliaTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testClearIndex()

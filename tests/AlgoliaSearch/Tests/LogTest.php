@@ -20,7 +20,5 @@ class LogTest extends AlgoliaTestCase
         $res = $this->client->getLogs();
         
         $this->assertGreaterThan(0, count($res['logs']));
-
-        
     }
 }

@@ -380,6 +380,7 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   * **word**: the word to correct
   * **correction**: the corrected word
   * **nbTypos** the number of typos (1 or 2) that will be considered for the ranking algorithm (1 typo is better than 2 typos)
+
   For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1}, { "word": "feet", "correction": "foot", "nbTypos": 1}].`
 
 #### Default query parameters (can be overwrite by query)

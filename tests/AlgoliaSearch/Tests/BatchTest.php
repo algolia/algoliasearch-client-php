@@ -1,27 +1,31 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../algoliasearch.php';
-require_once __DIR__ . '/helper.php';
+namespace AlgoliaSearch\Tests;
 
-class BatchTest extends PHPUnit_Framework_TestCase
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+
+class BatchTest extends AlgoliaTestCase
 {
-    public function setUp()
+    private $client;
+    private $index;
+    
+    protected function setUp()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+        } catch (AlgoliaException $e) {
             // not fatal
         }
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));           
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
+        } catch (AlgoliaException $e) {
             // not fatal
         }
 
@@ -42,8 +46,4 @@ class BatchTest extends PHPUnit_Framework_TestCase
         $results = $this->index->search('');
         $this->assertEquals(3, $results['nbHits']);
     }
-
-
-    private $client;
-    private $index;
 }

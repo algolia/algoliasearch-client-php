@@ -1,24 +1,28 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../algoliasearch.php';
-require_once __DIR__ . '/helper.php';
+namespace AlgoliaSearch\Tests;
 
-class FunctionTest extends PHPUnit_Framework_TestCase
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+
+class FunctionTest extends AlgoliaTestCase
 {
-    public function setUp()
+    private $client;
+    private $index;
+
+    protected function setUp()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+        } catch (AlgoliaException $e) {
             // not fatal
         }
 
@@ -26,7 +30,7 @@ class FunctionTest extends PHPUnit_Framework_TestCase
 
     public function testKeepAlive()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
         $init = $this->microtime_float();
         $this->client->listIndexes();
         $end_init = $this->microtime_float();
@@ -42,21 +46,21 @@ class FunctionTest extends PHPUnit_Framework_TestCase
     public function testConstructAPIKey()
     {
         $this->setExpectedException('Exception');
-        new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), null);
+        new Client(getenv('ALGOLIA_APPLICATION_ID'), null);
     }
 
     public function testConstructAPPID()
     {
         $this->setExpectedException('Exception');
-        new \AlgoliaSearch\Client(null, getenv('ALGOLIA_API_KEY'));
+        new Client(null, getenv('ALGOLIA_API_KEY'));
     }
 
     public function testConstructHost()
     {
         $this->setExpectedException('Exception');
         $host = array("toto");
-        $this->badClient = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
-        $this->badIndex = $this->badClient->initIndex(safe_name('àlgol?à-php'));
+        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
+        $this->badIndex = $this->badClient->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->badIndex->addObject(array("firstname" => "Robin"));
         $this->badIndex->waitTask($res['taskID']);
     }
@@ -64,7 +68,7 @@ class FunctionTest extends PHPUnit_Framework_TestCase
     public function testBadAPPIP()
     {
         $this->setExpectedException('Exception');
-        $this->badClient = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), "toto");
+        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), "toto");
         $this->index = $this->badClient->listIndexes();
     }
 
@@ -80,7 +84,4 @@ class FunctionTest extends PHPUnit_Framework_TestCase
         list($usec, $sec) = explode(" ", microtime());
         return ((float)$usec + (float)$sec);
     }
-
-    private $client;
-    private $index;
 }

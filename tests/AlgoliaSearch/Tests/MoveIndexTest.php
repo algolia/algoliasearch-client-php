@@ -1,38 +1,42 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../algoliasearch.php';
-require_once __DIR__ . '/helper.php';
+namespace AlgoliaSearch\Tests;
 
-class MoveIndexTest extends PHPUnit_Framework_TestCase
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+
+class MoveIndexTest extends AlgoliaTestCase
 {
-    public function setUp()
+    private $client;
+    private $index;
+
+    protected function setUp()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+        } catch (AlgoliaException $e) {
             // not fatal
         }
         try {
-            $task = $this->client->deleteIndex(safe_name('àlgol?à2-php'));
+            $task = $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
             //$this->client->waitTask($task['taskID']);
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+        } catch (AlgoliaException $e) {
             // CopyIndex does not exist
         }
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+        } catch (AlgoliaException $e) {
             // not fatal
         }
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à2-php'));
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
+        } catch (AlgoliaException $e) {
             // not fatal
         }
 
@@ -53,30 +57,30 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
         $task = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($task['taskID']);
 
-        $task = $this->client->moveIndex(safe_name('àlgol?à-php'), safe_name('àlgol?à2-php'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à2-php'));
+        $task = $this->client->moveIndex($this->safe_name('àlgol?à-php'), $this->safe_name('àlgol?à2-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à2-php'));
         $this->index->waitTask($task['taskID']);
 
         $res = $this->index->search('');
         $list = $this->client->listIndexes();
-        $this->assertTrue($this->includeValue($list['items'], 'name', safe_name('àlgol?à2-php')));
-        $this->assertFalse($this->includeValue($list['items'], 'name', safe_name('àlgol?à-php')));
+        $this->assertTrue($this->includeValue($list['items'], 'name', $this->safe_name('àlgol?à2-php')));
+        $this->assertFalse($this->includeValue($list['items'], 'name', $this->safe_name('àlgol?à-php')));
         $this->assertEquals(1, $res['nbHits']);
         $this->assertEquals("Robin", $res['hits'][0]['firstname']);
     }
 
     public function testCopyIndex()
     {
-        $this->index2 = $this->client->initIndex(safe_name('àlgol?à2-php'));
+        $this->index2 = $this->client->initIndex($this->safe_name('àlgol?à2-php'));
         $task = $this->index2->addObject(array("firstname" => "Robin"));
         $this->index2->waitTask($task['taskID']);
 
         $this->expectOutputString('');
-        $task = $this->client->copyIndex(safe_name('àlgol?à2-php'), safe_name('àlgol?à-php'));
+        $task = $this->client->copyIndex($this->safe_name('àlgol?à2-php'), $this->safe_name('àlgol?à-php'));
         $this->index->waitTask($task['taskID']);
 
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
-        $this->index2 = $this->client->initIndex(safe_name('àlgol?à2-php'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
+        $this->index2 = $this->client->initIndex($this->safe_name('àlgol?à2-php'));
 
         $res = $this->index->search('');
         $this->assertEquals(1, $res['nbHits']);
@@ -88,7 +92,4 @@ class MoveIndexTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $res['nbHits']);
         $this->assertEquals("Robin", $res['hits'][0]['firstname']);
     }
-
-    private $client;
-    private $index;
 }

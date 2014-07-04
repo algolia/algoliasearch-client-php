@@ -9,15 +9,27 @@
         {
             "name": "Algolia Team",
             "email": "contact@algolia.com"
+        },
+        {
+            "name": "Jonathan H. Wage",
+            "email": "jonwage@gmail.com"
+        },
+        {
+            "name": "Ryan T. Catlin",
+            "email": "ryan.catlin@gmail.com"
         }
     ],
     "require": {
+        "guzzlehttp/guzzle": "3.7.3"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
         "phpunit/phpunit": "4.0.*"
     },
     "autoload": {
-        "classmap": ["algoliasearch.php"]
+        "psr-0": {
+            "AlgoliaSearch": "src/",
+            "AlgoliaSearch\\Tests": "tests/"
+        }
     }
 }

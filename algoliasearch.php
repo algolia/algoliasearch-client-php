@@ -490,6 +490,27 @@ class Index {
     }
 
     /*
+     * Delete all objects matching a query
+     *
+     * @param query the query string
+     * @param params the optional query parameters
+     */
+    public function deleteByQuery($query, $args = array()) {
+      $params["attributeToRetrieve"] = array('objectID');
+      $params["hitsPerPage"] = 1000;
+      $results = $this->search($query, $args);
+      while ($results['nbHits'] != 0) {
+        $objectIDs = array();
+        foreach ($results['hits'] as $elt) {
+          array_push($objectIDs, $elt['objectID']);
+        }
+        $res = $this->deleteObjects($objectIDs);
+        $this->waitTask($res['taskID']);
+        $results = $this->search($query, $args)['nbHits'];
+      }
+    }
+
+    /*
      * Search inside the index
      *
      * @param query the full text query

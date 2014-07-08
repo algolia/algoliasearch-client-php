@@ -34,6 +34,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
+        $this->client->deleteIndex(safe_name('àlgol?à-php'));
     }
 
     public function testAddObjects()
@@ -98,6 +99,19 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('rob');
         $this->assertEquals(0, $results['nbHits']);
+    }
+
+    public function testDeleteObjectByQuery()
+    {
+        $res = $this->index->addObjects(array(
+            array("firstname" => "Robin", "objectID" => "à/go/?à"),
+            array("firstname" => "Robert", "objectID" => "à/go/?à2"),
+            array("firstname" => "Robert", "objectID" => "à/go/?à3")
+        ));
+        $this->index->waitTask($res['taskID']);
+        $this->index->deleteByQuery("Robert");
+        $results = $this->index->search('');
+        $this->assertEquals(1, $results['nbHits']);
     }
 
     public function testMultipleQueries()

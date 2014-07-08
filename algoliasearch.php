@@ -408,6 +408,23 @@ class Index {
     }
 
     /*
+     * Get several objects from this index
+     *
+     * @param objectIDs the array of unique identifier of objects to retrieve
+     */
+    public function getObjects($objectIDs) {
+        if ($objectIDs == null) {
+            throw new \Exception('No list of objectID provided');
+        }
+        $requests = array();
+        foreach ($objectIDs as $object) {            
+            $req = array("indexName" => $this->indexName, "objectID" => $object);
+            array_push($requests, $req);
+        }
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/*/objects", array(), array("requests" => $requests));
+   }
+
+    /*
      * Update partially an object (only update attributes passed in argument)
      *
      * @param partialObject contains the object attributes to override, the

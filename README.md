@@ -329,6 +329,12 @@ $index->getObject("myID", "firstname,lastname");
 $index->getObject("myID", "firstname");
 ```
 
+You can also retrieve a set of objects:
+
+```php
+$index->getObjects(array("myID1", "myID2"));
+```
+
 Delete an object
 -------------
 

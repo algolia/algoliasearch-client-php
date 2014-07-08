@@ -506,7 +506,7 @@ class Index {
         }
         $res = $this->deleteObjects($objectIDs);
         $this->waitTask($res['taskID']);
-        $results = $this->search($query, $args)['nbHits'];
+        $results = $this->search($query, $args);
       }
     }
 

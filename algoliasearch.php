@@ -841,7 +841,6 @@ function AlgoliaUtils_request($context, $method, $path, $params = array(), $data
 
 function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $data) {
     $url = "https://" . $host . $path;
-//echo $url;
     if ($params != null && count($params) > 0) {
         $params2 = array();
         foreach ($params as $key => $val) {
@@ -854,7 +853,6 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
         $url .= "?" . http_build_query($params2);
         
     }
-//echo $url;
     // initialize curl library
     $curlHandle = curl_init();
     //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
@@ -907,7 +905,6 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
     }
     $mhandle = $context->getMHandle($curlHandle);
 
-    $response = NULL;
     // Do all the processing.
     $running = null;
     do {
@@ -915,17 +912,17 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
         curl_multi_select($mhandle);
         usleep(100);
     } while ($running > 0);
-
-    if ($response === false) {
-        throw new \Exception(curl_error($curlHandle));
-    }
     $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-
+    $response = curl_multi_getcontent($curlHandle);
+    $error = curl_error($curlHandle);
+    if (!empty($error)) {
+        throw new \Exception($error);
+    }
     if ($http_status === 0 || $http_status === 503) {
         // Could not reach host or service unavailable, try with another one if we have it
         return null;
     }
-    $response = curl_multi_getcontent($curlHandle);
+
     $answer = json_decode($response, true);
     $context->releaseMHandle($curlHandle);
     curl_close($curlHandle);

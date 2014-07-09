@@ -642,6 +642,9 @@ class Index {
         $params["facetFilters"] = $filters;
         $params["page"] = 0;
         $params["hitsPerPage"] = 1;
+        $params["attributesToRetrieve"] = array();
+        $params["attributesToHighlight"] = array();
+        $params["attributesToSnippet"] = array();
         $params["facets"] = $disjunctive_facet;
         array_push($queries, $params);
       }

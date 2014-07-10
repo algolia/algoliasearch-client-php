@@ -430,8 +430,8 @@ class Index {
      * @param partialObject contains the object attributes to override, the
      *  object must contains an objectID attribute
      */
-    public function partialUpdateObject($partialObject) {
-        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial", array(), $partialObject);
+    public function partialUpdateObject($partialObject, $createIfNotExists = true) {
+        return AlgoliaUtils_request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/" . urlencode($partialObject["objectID"]) . "/partial" . ($createIfNotExists ? "" : "?createIfNotExists=false"), array(), $partialObject);
     }
 
     /*
@@ -439,8 +439,12 @@ class Index {
      *
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
-    public function partialUpdateObjects($objects, $objectIDKey = "objectID") {
-        $requests = $this->buildBatch("partialUpdateObject", $objects, true, $objectIDKey);
+    public function partialUpdateObjects($objects, $objectIDKey = "objectID", $createIfNotExists = true) {
+        if ($createIfNotExists) {
+           $requests = $this->buildBatch("partialUpdateObject", $objects, true, $objectIDKey);
+        } else {
+            $requests = $this->buildBatch("partialUpdateObjectNoCreate", $objects, true, $objectIDKey);
+	}
         return $this->batch($requests);
     }
 

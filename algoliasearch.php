@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.1.9
+ * VERSION 1.2.2
  *
  */
 namespace AlgoliaSearch;
@@ -899,7 +899,7 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
                 'Content-type: application/json'
                 ));
     }
-    curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.1.9");
+    curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.2.2");
     //Return the output instead of printing it
     curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
@@ -981,7 +981,7 @@ function AlgoliaUtils_requestHost($context, $method, $host, $path, $params, $dat
         case JSON_ERROR_STATE_MISMATCH:
             $errorMsg = 'JSON parsing error: underflow or the modes mismatch';
             break;
-        case (defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1): // PHP 5.3 less than 5.3.3 (Ubuntu 10.04 LTS)
+        case (defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1): // PHP 5.3 less than 1.2.2 (Ubuntu 10.04 LTS)
             $errorMsg = 'JSON parsing error: malformed UTF-8 characters, possibly incorrectly encoded';
             break;
         case JSON_ERROR_NONE:

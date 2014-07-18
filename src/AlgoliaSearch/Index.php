@@ -133,7 +133,7 @@ class Index {
            $requests = $this->buildBatch("partialUpdateObject", $objects, true, $objectIDKey);
         } else {
             $requests = $this->buildBatch("partialUpdateObjectNoCreate", $objects, true, $objectIDKey);
-    }
+        }
         return $this->batch($requests);
     }
 

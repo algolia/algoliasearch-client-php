@@ -1,27 +1,31 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../algoliasearch.php';
-require_once __DIR__ . '/helper.php';
+namespace AlgoliaSearch\Tests;
 
-class SecurityTest extends PHPUnit_Framework_TestCase
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+
+class SecurityTest extends AlgoliaSearchTestCase
 {
-    public function setUp()
+    private $client;
+    private $index;
+
+    protected function setUp()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+        } catch (AlgoliaException $e) {
             // not fatal
         }
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+        } catch (AlgoliaException $e) {
             // not fatal
         }
 
@@ -36,28 +40,28 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         sleep(2);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->index->listUserKeys();
-        $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
-        $this->assertFalse(containsValue($res["keys"], "value", $newKey['key']));
+        $this->assertTrue($this->containsValue($resAfter["keys"], "value", $newKey['key']));
+        $this->assertFalse($this->containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->index->deleteUserKey($newKey['key']);
         sleep(2);
         $resEnd = $this->index->listUserKeys();
-        $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
+        $this->assertFalse($this->containsValue($resEnd["keys"], "value", $newKey['key']));
 
         $res = $this->client->listUserKeys();
         $newKey = $this->client->addUserKey(array('search'));
         sleep(2);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->client->listUserKeys();
-        $this->assertTrue(containsValue($resAfter["keys"], "value", $newKey['key']));
-        $this->assertFalse(containsValue($res["keys"], "value", $newKey['key']));
+        $this->assertTrue($this->containsValue($resAfter["keys"], "value", $newKey['key']));
+        $this->assertFalse($this->containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $task = $this->client->deleteUserKey($newKey['key']);
         sleep(2);
         $resEnd = $this->client->listUserKeys();
-        $this->assertFalse(containsValue($resEnd["keys"], "value", $newKey['key']));
+        $this->assertFalse($this->containsValue($resEnd["keys"], "value", $newKey['key']));
     }
 
     public function testSecuredApiKeys()
@@ -72,7 +76,4 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $key = $this->client->generateSecuredApiKey('my_api_key', array('public', array('premium','vip')));
         $this->assertEquals($key, hash_hmac('sha256', 'public,(premium,vip)', 'my_api_key'));
     }
-
-    private $client;
-    private $index;
 }

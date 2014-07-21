@@ -81,6 +81,13 @@ class Client {
     }
 
     /*
+     * Call isAlive
+     */
+     public function isAlive() {
+        $this->request($this->context, "GET", "/1/isalive");
+     }
+
+    /*
      * This method allows to query multiple indexes with one API call
      *
      */
@@ -274,7 +281,11 @@ class Client {
     }
 
     public function doRequest($context, $method, $host, $path, $params, $data) {
-        $url = "https://" . $host . $path;
+        if (strpos($host, "http") == 0) {
+            $url = $host . $path;
+        } else {
+            $url = "https://" . $host . $path;
+        }
         if ($params != null && count($params) > 0) {
             $params2 = array();
             foreach ($params as $key => $val) {

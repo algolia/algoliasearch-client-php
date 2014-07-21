@@ -9,7 +9,7 @@ branches:
   only:
   - master
 before_script:
-  - composer install --prefer-source
+  - composer install
 script:
   - phpunit -c phpunit.xml.dist
 after_script:

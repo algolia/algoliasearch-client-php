@@ -281,7 +281,7 @@ class Client {
     }
 
     public function doRequest($context, $method, $host, $path, $params, $data) {
-        if (strpos($host, "http") == 0) {
+        if (strpos($host, "http") === 0) {
             $url = $host . $path;
         } else {
             $url = "https://" . $host . $path;

@@ -12,7 +12,7 @@ before_install:
 before_script:
 - composer install
 script:
-- phpunit -c phpunit.xml.dist
+- phpunit --debug -c phpunit.xml.dist
 after_script:
 - php vendor/bin/coveralls
 env:

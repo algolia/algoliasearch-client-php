@@ -1,27 +1,31 @@
 <?php
 
-include __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../algoliasearch.php';
-require_once __DIR__ . '/helper.php';
+namespace AlgoliaSearch\Tests;
 
-class BasicTest extends PHPUnit_Framework_TestCase
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+
+class BasicTest extends AlgoliaSearchTestCase
 {
-    public function setUp()
+    private $client;
+    private $index;
+
+    protected function setUp()
     {
-        $this->client = new \AlgoliaSearch\Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex(safe_name('àlgol?à-php'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+        } catch (AlgoliaException $e) {
             // not fatal
         }
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         try {
-            $this->client->deleteIndex(safe_name('àlgol?à-php'));            
-        } catch (AlgoliaSearch\AlgoliaException $e) {
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));            
+        } catch (AlgoliaException $e) {
             // not fatal
         }
 
@@ -34,7 +38,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
-        $this->client->deleteIndex(safe_name('àlgol?à-php'));
+        $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
     }
 
     public function testAddObjects()
@@ -118,7 +122,7 @@ class BasicTest extends PHPUnit_Framework_TestCase
     {
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
-        $results = $this->client->multipleQueries(array(array('indexName' => safe_name('àlgol?à-php'), 'query' => '')));
+        $results = $this->client->multipleQueries(array(array('indexName' => $this->safe_name('àlgol?à-php'), 'query' => '')));
         $this->assertEquals(1, $results['results'][0]['nbHits']);
         $this->assertEquals('Robin', $results['results'][0]['hits'][0]['firstname']);
     }
@@ -161,9 +165,4 @@ class BasicTest extends PHPUnit_Framework_TestCase
       $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
       $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['****']);
     }
-
-
-
-    private $client;
-    private $index;
 }

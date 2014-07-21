@@ -1,20 +1,19 @@
 language: php
 php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-#  - hhvm
+- 5.3
+- 5.4
+- 5.5
+- 5.6
 branches:
   only:
   - master
 before_script:
-  - composer install
+- composer install
 script:
-  - phpunit -c phpunit.xml.dist
+- phpunit -c phpunit.xml.dist
 after_script:
-  - php vendor/bin/coveralls
+- php vendor/bin/coveralls
 env:
   global:
-  - secure: dhXbbd+jGv8/1L7+nEpaAwD4hsJi6IEyKriblPi/UUUHXvrWOUhSDJPmjulUBqKMYXrkY5TQVK5cpncHdVmVAY3fZMBiPORRSEAqzQO9KSwK9uCDuhm4c6GWa9At+LAMjC1rF5kcBFS1KnhbMD/Pfh+M73ZYS4caBC7eui7eriw=
-  - secure: yXnpGUQCjb/d22zhl9p7Ljsurj7MHSSbrQf7J/WEEBPQKRGDHKHiouW921iJd75r5UJmkPLZhuZhg8osMP6Ny82b9en80Nbzml5pLWCCsT5Lxi8D4jd47b/wdQQ9DDONqxaIpr4xlSrNNKFd/PTS+vzBTBCrRuEBayQVAqlsl0E=
+  - secure: DoPWJWWbEHWXxX/gGf49vE9oszcIbDy/i35AihPvzbpICN6GuWuYVYhUR74X9ApeSkl03LyVccHUMUVQEnTC6KxN2bNqjjjy7SyM11XMZ6r29iaCaHp+M5DmCIrPNdvEIKTewce7QUEpzOhGCQDS9nJ/Jvs8zVythLs6Y6XrMnk=
+  - secure: IiTCsLcfQVrMs0EMj5FgVu8eLi+GXbJBI9P40B2UtL9MWmzKXzmNbCAroM1nWydQUNU2iCLOnB3nNn90Du6A103iPp7RJ1aevkbDycCqrcRh6THVCfJne56Y4BcWt/qF5mHIYQceiuDKq2TqbENBRK4cLJIVqNlEl0rl/4HrP4k=

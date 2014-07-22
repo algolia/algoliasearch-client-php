@@ -365,6 +365,8 @@ class Client {
         }
         if ($http_status === 0 || $http_status === 503) {
             // Could not reach host or service unavailable, try with another one if we have it
+            $context->releaseMHandle($curlHandle);
+            curl_close($curlHandle);
             return null;
         }
 

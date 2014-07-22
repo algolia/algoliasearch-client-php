@@ -72,7 +72,7 @@ To setup your project, follow these steps:
  3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```php
-require 'vendor/autoload.php'; // if you don't use Composer: require 'path/to/AlgoliaSearch/Client.php';
+// if you don't use Composer: require_once 'path/to/algoliasearch.php';
 
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```

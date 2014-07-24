@@ -1,5 +1,1 @@
-vendor/*
-!vendor/composer/*
-!vendor/autoload.php
-vendor/composer/include_paths.php
-vendor/composer/installed.json
+vendor

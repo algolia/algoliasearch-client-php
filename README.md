@@ -62,7 +62,7 @@ To setup your project, follow these steps:
 
 
 
- 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `vendor`, `src` and `resources` directory to your project).
+ 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
  2. Add `algolia/algoliasearch-client-php` to your `composer.json` file:
 ```json
   "require": {

@@ -66,7 +66,7 @@ To setup your project, follow these steps:
  2. Add `algolia/algoliasearch-client-php` to your `composer.json` file:
 ```json
   "require": {
-      "algolia/algoliasearch-client-php": "1.2.*"
+      "algolia/algoliasearch-client-php": "1.3.*"
   }
 ```
  3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).

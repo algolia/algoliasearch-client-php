@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.2.2
+ * VERSION 1.3.0
  *
  */
 

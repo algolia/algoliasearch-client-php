@@ -8,7 +8,7 @@ branches:
   only:
   - master
 before_install:
- - composer self-update
+- composer self-update
 before_script:
 - composer install
 script:
@@ -17,5 +17,5 @@ after_script:
 - php vendor/bin/coveralls
 env:
   global:
-  - secure: DoPWJWWbEHWXxX/gGf49vE9oszcIbDy/i35AihPvzbpICN6GuWuYVYhUR74X9ApeSkl03LyVccHUMUVQEnTC6KxN2bNqjjjy7SyM11XMZ6r29iaCaHp+M5DmCIrPNdvEIKTewce7QUEpzOhGCQDS9nJ/Jvs8zVythLs6Y6XrMnk=
-  - secure: IiTCsLcfQVrMs0EMj5FgVu8eLi+GXbJBI9P40B2UtL9MWmzKXzmNbCAroM1nWydQUNU2iCLOnB3nNn90Du6A103iPp7RJ1aevkbDycCqrcRh6THVCfJne56Y4BcWt/qF5mHIYQceiuDKq2TqbENBRK4cLJIVqNlEl0rl/4HrP4k=
+  - secure: NIp6EaQ5PuW82Vz4VRQEKWQyvBiyyr328VGy6ssfYVcHscTxmWj/c6ItQva1YhRG+rkkqaxk5/12dV3DrXlseXXuXsTlSUUhccUpmQZwQksQaKd/WCCJGO5E6N0TWc7xZTKTarL6Ez9K8pbhJHfCLMKNAij0U+RGohUWGp6vjQI=
+  - secure: vrh60ZzJQdIjhFdX/PxYyk7w7b7rBq/xX365Ixyav/h7tJ8IfpkNiDlXNZkF0/6GnzWNPm66lQiBs+BXpwR5DzMK11c+5M7Yz9MP/XSCFzUOd52aj/wmAVsbFj3LSpcJL7BBOOWIVM5kAr6+KU/0ggwGzrUJ0Msv4oOfcDEjObs=

@@ -41,7 +41,7 @@ Table of Content
 1. [Delete an object](#delete-an-object)
 1. [Delete by query](#delete-by-query)
 1. [Index settings](#index-settings)
-1. [List indexes](#list-indexes)
+1. [List indices](#list-indices)
 1. [Delete an index](#delete-an-index)
 1. [Clear an index](#clear-an-index)
 1. [Wait indexing](#wait-indexing)
@@ -76,6 +76,10 @@ To setup your project, follow these steps:
 
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
+
+
+
+
 
 
 
@@ -408,7 +412,7 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
- * **slaves**: The list of indexes on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indexes with the same operations.
+ * **slaves**: The list of indices on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indices with the same operations.
 
 #### Query expansion
  * **synonyms**: (array of array of words considered as equals). For example, you may want to retrieve your **black ipad** record when your users are searching for **dark ipad**, even if the **dark** word is not part of the record: so you need to configure **black** as a synonym of **dark**. For example `"synomyms": [ [ "black", "dark" ], [ "small", "little", "mini" ], ... ]`.
@@ -445,9 +449,9 @@ var_dump($settings);
 $index->setSettings(array("customRanking" => array("desc(followers)")));
 ```
 
-List indexes
+List indices
 -------------
-You can list all your indexes with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
+You can list all your indices with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
 
 ```php
 var_dump($client->listIndexes());
@@ -546,7 +550,7 @@ $res = $index->batch(array(
 Security / User API Keys
 -------------
 
-The admin API key provides full control of all your indexes. 
+The admin API key provides full control of all your indices. 
 You can also generate user API keys to control security. 
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
@@ -585,7 +589,7 @@ You can also create an API Key with advanced restrictions:
   Note: If you are sending the query through your servers, you must use the `enableRateLimitForward("TheAdminAPIKey", "EndUserIP", "APIKeyWithRateLimit")` function to enable rate-limit.
 
  * Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited). This parameter can be used to protect you from attempts at retrieving your entire content by massively querying the index.
- * Specify the list of targeted indexes. Defaults to all indexes if empty of blank.
+ * Specify the list of targeted indices, you can target all indices starting by a prefix or finishing by a suffix with the '*' character (for example "dev_*" matches all indices starting by "dev_" and "*_dev" matches all indices finishing by "_dev"). Defaults to all indices if empty of blank.
 
  ```php
 // Creates a new global API key that is valid for 300 seconds

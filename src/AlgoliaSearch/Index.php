@@ -36,7 +36,6 @@ class Index {
     private $indexName;
     private $client;
     private $urlIndexName;
-    private $hostsArray;
     private $curlHandle;
 
     /*

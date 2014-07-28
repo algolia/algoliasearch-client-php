@@ -171,6 +171,9 @@ class Client {
      * @param indexName the name of index
      */
     public function initIndex($indexName) {
+        if (empty($indexName)) {
+            throw new AlgoliaException('Invalid index name: empty string');
+	}
         return new Index($this->context, $this, $indexName);
     }
 

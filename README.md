@@ -3,8 +3,6 @@ Algolia Search API Client for PHP
 
 
 
-
-
 [Algolia Search](http://www.algolia.com) is a search API that provides hosted full-text, numerical and faceted search.
 Algolia’s Search API makes it easy to deliver a great search experience in your apps & websites providing:
 
@@ -19,18 +17,18 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
 
 This PHP client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 
-
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.png?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![PHP version](https://badge.fury.io/ph/algolia%2Falgoliasearch-client-php.png)](http://badge.fury.io/ph/algolia%2Falgoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.png)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 
 
 Table of Content
--------------
+================
 **Get started**
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
-1. [Online documentation](#online-documentation)
+1. [Online documentation](#documentation)
+1. [Tutorials](#tutorials)
 
 **Commands reference**
 
@@ -127,25 +125,33 @@ var_dump($index->search('jim'));
 
 
 
-Online Documentation
-----------------
+Documentation
+================
 
-Check our [online documentation](http://www.algolia.com/doc):
- * [Initial Import](http://www.algolia.com/doc#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc#RankingRelevance)
- * [Settings](http://www.algolia.com/doc#Settings)
- * [Search](http://www.algolia.com/doc#Search)
- * [Incremental Updates](http://www.algolia.com/doc#IncrementalUpdates)
- * [Reindexing](http://www.algolia.com/doc#Reindexing)
- * [Numeric-Search](http://www.algolia.com/doc#Numeric-Search)
- * [Category-Search](http://www.algolia.com/doc#Category-Search)
- * [Faceting](http://www.algolia.com/doc#Faceting)
- * [Geo-Search](http://www.algolia.com/doc#Geo-Search)
- * [Security](http://www.algolia.com/doc#Security)
- * [Indexing Several Types](http://www.algolia.com/doc#IndexingSeveralTypes)
+Check our [online documentation](http://www.algolia.com/doc/guides/php):
+ * [Initial Import](http://www.algolia.com/doc/guides/php#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/php#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/guides/php#Indexing)
+ * [Search](http://www.algolia.com/doc/guides/php#Search)
+ * [Sorting](http://www.algolia.com/doc/guides/php#Sorting)
+ * [Filtering](http://www.algolia.com/doc/guides/php#Filtering)
+ * [Faceting](http://www.algolia.com/doc/guides/php#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/guides/php#Geo-Search)
+ * [Security](http://www.algolia.com/doc/guides/php#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
+Tutorials
+================
 
+Check our [tutorials](http://www.algolia.com/doc/tutorials):
+ * [Searchbar with auto-completion](http://www.algolia.com/doc/tutorials/auto-complete)
+ * [Searchbar with multi-categories auto-completion](http://www.algolia.com/doc/tutorials/multi-auto-complete)
+ * [Instant-search](http://www.algolia.com/doc/tutorials/instant-search)
+
+
+
+Commands reference
+==================
 
 
 

@@ -155,17 +155,18 @@ var_dump($index->search('jim'));
 Documentation
 ================
 
-Check our [online documentation](http://www.algolia.com/doc/php):
- * [Initial Import](http://www.algolia.com/doc/php#InitialImport)
- * [Ranking &amp; Relevance](http://www.algolia.com/doc/php#RankingRelevance)
- * [Indexing](http://www.algolia.com/doc/php#Indexing)
- * [Search](http://www.algolia.com/doc/php#Search)
- * [Sorting](http://www.algolia.com/doc/php#Sorting)
- * [Filtering](http://www.algolia.com/doc/php#Filtering)
- * [Faceting](http://www.algolia.com/doc/php#Faceting)
- * [Geo-Search](http://www.algolia.com/doc/php#Geo-Search)
- * [Security](http://www.algolia.com/doc/php#Security)
+Check our [online documentation](http://www.algolia.com/doc/guides/php):
+ * [Initial Import](http://www.algolia.com/doc/guides/php#InitialImport)
+ * [Ranking &amp; Relevance](http://www.algolia.com/doc/guides/php#RankingRelevance)
+ * [Indexing](http://www.algolia.com/doc/guides/php#Indexing)
+ * [Search](http://www.algolia.com/doc/guides/php#Search)
+ * [Sorting](http://www.algolia.com/doc/guides/php#Sorting)
+ * [Filtering](http://www.algolia.com/doc/guides/php#Filtering)
+ * [Faceting](http://www.algolia.com/doc/guides/php#Faceting)
+ * [Geo-Search](http://www.algolia.com/doc/guides/php#Geo-Search)
+ * [Security](http://www.algolia.com/doc/guides/php#Security)
  * [REST API](http://www.algolia.com/doc/rest)
+
 
 Tutorials
 ================

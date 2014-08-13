@@ -259,6 +259,10 @@ You can use the following optional arguments:
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
+ * **removeWordsIfNoResult**: This option to select a strategy to avoid having an empty result page. There is three different option:
+  * **LastWords**: when a query does not return any result, the final word will be removed until there is results,
+  * **FirstWords**: when a query does not return any result, the first word will be removed until there is results,
+  * **None**: No specific processing is done when a query does not return any result (default behavior).
  * **typoTolerance**: if set to false, disable the typo-tolerance. Defaults to true.
  * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
  * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
@@ -298,7 +302,7 @@ You can use the following optional arguments:
  
 
 #### Numeric search parameters
- * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
+ * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`.
 
 You can easily perform range queries via the `:` operator (equivalent to combining a `>=` and `<=` operand), for example `numericFilters=price:10 to 1000`.
 
@@ -307,7 +311,7 @@ You can also mix OR and AND operators. The OR operator is defined with a parenth
 You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
 #### Category search parameters
- * **tagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
+ * **tagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`).
 
 #### Faceting parameters
  * **facetFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding (for example `[["category:Book","category:Movie"],"author:John%20Doe"]`).
@@ -436,20 +440,20 @@ You can retrieve all settings using the `getSettings` function. The result will 
 You can decide to have the same priority for two attributes by passing them in the same string using comma as separator. For example `title` and `alternative_title` have the same priority in this example, which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`
  * **attributesForFaceting**: (array of strings) The list of fields you want to use for faceting. All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
  * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword: when enabled in query with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
- * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria: 
+ * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria:
   * **typo**: sort according to number of typos,
   * **geo**: sort according to decreassing distance when performing a geo-location based search,
   * **words**: sort according to the number of query words matched by decreasing order. This parameter is useful when you use `optionalWords` query parameter to have results with the most matched words first.
   * **proximity**: sort according to the proximity of query words in hits,
   * **attribute**: sort according to the order of attributes defined by attributesToIndex,
-  * **exact**: 
+  * **exact**:
     * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
     * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
   * **custom**: sort according to a user defined formula set in **customRanking** attribute.
   * **asc(attributeName)**: sort according to a numeric attribute by ascending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean).
   * **desc(attributeName)**: sort according to a numeric attribute by descending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean). <br/>The standard order is ["typo", "geo", "words", "proximity", "attribute", "exact", "custom"]
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-For example `"customRanking" => ["desc(population)", "asc(name)"]`  
+For example `"customRanking" => ["desc(population)", "asc(name)"]`
  * **queryType**: Select how the query words are interpreted, it can be one of the following value:
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
@@ -518,7 +522,7 @@ $index->clearIndex();
 Wait indexing
 -------------
 
-All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. Even if it's extremely fast, you can easily ensure indexing is complete using the `waitTask` method on the `taskID` returned by a write operation. 
+All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. Even if it's extremely fast, you can easily ensure indexing is complete using the `waitTask` method on the `taskID` returned by a write operation.
 
 For example, to wait for indexing of a new object:
 ```php
@@ -592,8 +596,8 @@ $res = $index->batch(array(
 Security / User API Keys
 -------------
 
-The admin API key provides full control of all your indices. 
-You can also generate user API keys to control security. 
+The admin API key provides full control of all your indices.
+You can also generate user API keys to control security.
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
 To list existing keys, you can use `listUserKeys` method:
@@ -730,7 +734,7 @@ $res = $client->moveIndex("MyNewIndex", "MyIndex");
 Backup / Retrieve all index content
 -------------
 
-You can retrieve all index content for backup purpose or for analytics using the browse method. 
+You can retrieve all index content for backup purpose or for analytics using the browse method.
 This method retrieve 1000 objects by API call and support pagination.
 
 ```php
@@ -743,7 +747,7 @@ $res = $index->browse(1);
 Logs
 -------------
 
-You can retrieve the last logs via this API. Each log entry contains: 
+You can retrieve the last logs via this API. Each log entry contains:
  * Timestamp in ISO-8601 format
  * Client IP
  * Request Headers (API-Key is obfuscated)

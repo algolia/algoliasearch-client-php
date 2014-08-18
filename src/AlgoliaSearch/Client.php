@@ -215,6 +215,7 @@ class Client {
      * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
      * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param indexes Specify the list of indices to target (null means all)
      */
     public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
         $params = array(
@@ -224,13 +225,6 @@ class Client {
             "maxHitsPerQuery" => $maxHitsPerQuery
         );
         if ($indexes != null) {
-            if (is_array($indexes)) {
-                $tmp = array();
-                foreach ($indexes as $index) {
-                    array_push($tmp, $index);
-                }
-                $indexes = join(',', $tmp);
-            }
             $params['indexes'] = $indexes;
         }
         return $this->request($this->context, "POST", "/1/keys", array(), $params);

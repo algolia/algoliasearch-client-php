@@ -64,6 +64,25 @@ class SecurityTest extends AlgoliaSearchTestCase
         $this->assertFalse($this->containsValue($resEnd["keys"], "value", $newKey['key']));
     }
 
+    public function testSecurityMultipleIndices()
+    {
+        $a = $this->client->initIndex($this->safe_name('a-12'));
+        $res = $a->setSettings(array('hitsPerPage' => 10));
+        $a->waitTask($res['taskID']);
+        $b = $this->client->initIndex($this->safe_name('b-13'));
+        $res = $b->setSettings(array('hitsPerPage' => 10));
+        $b->waitTask($res['taskID']);
+
+        $newKey = $this->client->addUserKey(array('search', 'addObject', 'deleteObject'), 0, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
+        sleep(2);
+        $this->assertTrue($newKey['key'] != "");
+        $res = $this->client->listUserKeys();
+        $this->assertTrue($this->containsValue($res["keys"], "value", $newKey['key']));
+
+        $this->client->deleteIndex($this->safe_name('a-12'));
+        $this->client->deleteIndex($this->safe_name('b-13'));
+    }
+
     public function testSecuredApiKeys()
     {
         $this->assertEquals('1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417', hash_hmac('sha256', '(public,user1)', 'my_api_key'));

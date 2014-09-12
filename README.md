@@ -646,6 +646,15 @@ $res = $index->addUserKey(array("search"), 300, 100, 20);
 echo "key=" . $res['key'] . "\n";
 ```
 
+Update the rights of an existing key:
+ ```php
+// Update an existing global API key that is valid for 300 seconds
+$res = $client->updateUserKey("myAPIKey", array("search"), 300);
+echo "key=" . $res['key'] . "\n";
+// Update an existing index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+$res = $index->updateUserKey("myAPIKey", array("search"), 300, 100, 20);
+echo "key=" . $res['key'] . "\n";
+```
 Get the rights of a given key:
 ```php
 // Gets the rights of a global key

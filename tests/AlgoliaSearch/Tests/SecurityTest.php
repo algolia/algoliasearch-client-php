@@ -44,6 +44,10 @@ class SecurityTest extends AlgoliaSearchTestCase
         $this->assertFalse($this->containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
+        $this->index->updateUserKey($newKey['key'], array('addObject'));
+        sleep(2);
+        $key = $this->index->getUserKeyACL($newKey['key']);
+        $this->assertEquals($key['acl'][0], 'addObject');
         $task = $this->index->deleteUserKey($newKey['key']);
         sleep(2);
         $resEnd = $this->index->listUserKeys();
@@ -58,6 +62,10 @@ class SecurityTest extends AlgoliaSearchTestCase
         $this->assertFalse($this->containsValue($res["keys"], "value", $newKey['key']));
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
+        $this->client->updateUserKey($newKey['key'], array('addObject'));
+        sleep(2);
+        $key = $this->client->getUserKeyACL($newKey['key']);
+        $this->assertEquals($key['acl'][0], 'addObject');
         $task = $this->client->deleteUserKey($newKey['key']);
         sleep(2);
         $resEnd = $this->client->listUserKeys();

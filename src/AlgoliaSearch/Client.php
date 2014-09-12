@@ -231,6 +231,35 @@ class Client {
     }
 
     /*
+     * Update a user key
+     *
+     * @param acls the list of ACL for this key. Defined by an array of strings that
+     * can contains the following values:
+     *   - search: allow to search (https and http)
+     *   - addObject: allows to add/update an object in the index (https only)
+     *   - deleteObject : allows to delete an existing object (https only)
+     *   - deleteIndex : allows to delete index content (https only)
+     *   - settings : allows to get index settings (https only)
+     *   - editSettings : allows to change index settings (https only)
+     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
+     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
+     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param indexes Specify the list of indices to target (null means all)
+     */
+    public function updateUserKey($key, $acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
+        $params = array(
+            "acl" => $acls,
+            "validity" => $validity,
+            "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
+            "maxHitsPerQuery" => $maxHitsPerQuery
+        );
+        if ($indexes != null) {
+            $params['indexes'] = $indexes;
+        }
+        return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params);
+    }
+
+    /*
      * Generate a secured and public API Key from a list of tagFilters and an
      * optional user token identifying the current user
      *

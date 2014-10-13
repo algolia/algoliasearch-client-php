@@ -25,6 +25,24 @@
  */
 namespace AlgoliaSearch;
 
-class AlgoliaException extends \Exception
-{
+class Version {
+
+  static $value;
+
+  public static function getValue() {
+    if (!isset(self::$value)) {
+      $composerJson = file_get_contents(dirname(__FILE__) . "/../../composer.json");
+      if ($composerJson != false) {
+        $composer = json_decode($composerJson);
+        if ($composer != null) {
+          self::$value = $composer->version;
+          return self::$value;
+        }
+      }
+      self::$value = "N/A";
+    } else {
+      return self::$value;
+    }
+  }
+
 }

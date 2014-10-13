@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.3.4
- *
  */
 
+require_once 'src/AlgoliaSearch/Version.php';
 require_once 'src/AlgoliaSearch/AlgoliaException.php';
 require_once 'src/AlgoliaSearch/ClientContext.php';
 require_once 'src/AlgoliaSearch/Client.php';

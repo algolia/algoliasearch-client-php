@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.2.2
- *
  */
 namespace AlgoliaSearch;
 
@@ -342,7 +340,7 @@ class Client {
                     'Content-type: application/json'
                     ));
         }
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.2.2");
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::getValue());
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);

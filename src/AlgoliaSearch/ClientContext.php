@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.2.2
- *
  */
 namespace AlgoliaSearch;
 

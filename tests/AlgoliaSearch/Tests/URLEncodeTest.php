@@ -35,7 +35,7 @@ class URLEncodeTest extends AlgoliaSearchTestCase
     {
         $res = $this->index->addObject(array("firstname" => "Robin"), "a/go/?a");
         $this->index->waitTask($res['taskID']);
-        $results = $this->index->search('');
+        $results = $this->index->search('', array("numericFilters" => "followers=9891"));
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
         $obj = $this->index->getObject("a/go/?a");

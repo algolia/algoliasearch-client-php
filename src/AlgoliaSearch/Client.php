@@ -86,6 +86,13 @@ class Client {
      }
 
     /*
+     * Allow to set custom headers
+     */
+     public function setExtraHeader($key, $value) {
+        $this->context->setExtraHeader($key, $value);
+     }
+
+    /*
      * This method allows to query multiple indexes with one API call
      *
      */
@@ -326,19 +333,19 @@ class Client {
         $curlHandle = curl_init();
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                         'X-Algolia-Application-Id: ' . $context->applicationID,
                         'X-Algolia-API-Key: ' . $context->apiKey,
                         'Content-type: application/json'
-                        ));
+                        ), $context->headers));
         } else {
-             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                     'X-Algolia-Application-Id: ' . $context->applicationID,
                     'X-Algolia-API-Key: ' . $context->adminAPIKey,
                     'X-Forwarded-For: ' . $context->endUserIP,
                     'X-Forwarded-API-Key: ' . $context->rateLimitAPIKey,
                     'Content-type: application/json'
-                    ));
+                    ), $context->headers));
         }
         curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::getValue());
         //Return the output instead of printing it

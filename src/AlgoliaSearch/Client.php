@@ -384,10 +384,16 @@ class Client {
         // Do all the processing.
         $running = null;
         do {
-            curl_multi_exec($mhandle, $running);
-            curl_multi_select($mhandle);
+            $mrc = curl_multi_exec($mhandle, $running);
+        } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        while ($running && $mrc == CURLM_OK) {
+          if (curl_multi_select($mhandle, 0.1) == -1) {
             usleep(100);
-        } while ($running > 0);
+          }
+          do {
+            $mrc = curl_multi_exec($mhandle, $running);
+          } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        }
         $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);

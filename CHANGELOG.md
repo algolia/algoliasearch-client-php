@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.4.1
+- Fixed the retry on hosts
+
 ### 1.4.0
 - Fixed performance issue with curl_multi_select
 - Read the API client version from composer.json if possible

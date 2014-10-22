@@ -293,7 +293,7 @@ class Client {
     }
 
     public function request($context, $method, $path, $params = array(), $data = array()) {
-        $exception = null;
+        $exceptions = array();
         foreach ($context->hostsArray as &$host) {
             try {
                 $res = $this->doRequest($context, $method, $host, $path, $params, $data);
@@ -302,13 +302,10 @@ class Client {
             } catch (AlgoliaException $e) {
                 throw $e;
             } catch (\Exception $e) {
-                $exception = $e;
+                $exceptions[$host] = $e->getMessage();
             }
         }
-        if ($exception == null)
-            throw new AlgoliaException('Hosts unreachable');
-        else
-            throw $exception;
+        throw new AlgoliaException('Hosts unreachable: ' . join(",", $exceptions));
     }
 
     public function doRequest($context, $method, $host, $path, $params, $data) {

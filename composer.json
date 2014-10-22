@@ -1,6 +1,6 @@
 {
     "name": "algolia/algoliasearch-client-php",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Algolia Search API Client for PHP",
     "type": "library",
     "homepage": "https://github.com/algolia/algoliasearch-client-php",

@@ -17,7 +17,7 @@ Algolia’s Search API makes it easy to deliver a great search experience in you
 
 This PHP client let you easily use the Algolia Search API from your backend. It wraps [Algolia's REST API](http://www.algolia.com/doc/rest_api).
 
-[![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.png?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![PHP version](https://badge.fury.io/ph/algolia%2Falgoliasearch-client-php.png)](http://badge.fury.io/ph/algolia%2Falgoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.png)](https://coveralls.io/r/algolia/algoliasearch-client-php)
+[![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.png?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.png)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 
 
@@ -167,6 +167,7 @@ Check our [online documentation](http://www.algolia.com/doc/guides/php):
  * [Security](http://www.algolia.com/doc/guides/php#Security)
  * [REST API](http://www.algolia.com/doc/rest)
 
+
 Tutorials
 ================
 
@@ -258,10 +259,15 @@ You can use the following optional arguments:
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
+ * **removeWordsIfNoResult**: This option to select a strategy to avoid having an empty result page. There is three different option:
+  * **LastWords**: when a query does not return any result, the last word will be added as optional (the process is repeated with n-1 word, n-2 word, ... until there is results),
+  * **FirstWords**: when a query does not return any result, the first word will be added as optional (the process is repeated with second word, third word, ... until there is results),
+  * **None**: No specific processing is done when a query does not return any result (default behavior).
  * **typoTolerance**: if set to false, disable the typo-tolerance. Defaults to true.
- * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 3.
- * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 7.
+ * **minWordSizefor1Typo**: the minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
+ * **minWordSizefor2Typos**: the minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
  * **allowTyposOnNumericTokens**: if set to false, disable typo-tolerance on numeric tokens (numbers). Default to true.
+ * **ignorePlural**: If set to true, plural won't be considered as a typo (for example car/cars will be considered as equals). Default to false.
  * **restrictSearchableAttributes** List of attributes you want to use for textual search (must be a subset of the `attributesToIndex` index setting). Attributes are separated with a comma (for example `"name,address"`), you can also use a JSON string array encoding (for example encodeURIComponent("[\"name\",\"address\"]")). By default, all attributes specified in `attributesToIndex` settings are used to search.
  * **advancedSyntax**: Enable the advanced query syntax. Defaults to 0 (false).
     * **Phrase query**: a phrase query defines a particular sequence of terms. A phrase query is build by Algolia's query parser for words surrounded by `"`. For example, `"search engine"` will retrieve records having `search` next to `engine` only. Typo-tolerance is _disabled_ on phrase queries.
@@ -280,7 +286,7 @@ You can use the following optional arguments:
 
  * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
- * **aroundLatLng**: search for entries around a given latitude/longitude (specified as two floats separated by a comma).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
+ * **aroundLatLngViaIP**: search for entries around a given latitude/longitude (automatically computed from user IP address).<br/>For example `aroundLatLng=47.316669,5.016670`).<br/>You can specify the maximum distance in meters with the **aroundRadius** parameter (in meters) and the precision for ranking with **aroundPrecision** (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).<br/>At indexing, you should specify geoloc of an object with the `_geoloc` attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
 
 
  * **insideBoundingBox**: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).<br/>For example `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`).<br/>At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form `{"_geoloc":{"lat":48.853409, "lng":2.348800}}`)
@@ -297,7 +303,7 @@ You can use the following optional arguments:
  
 
 #### Numeric search parameters
- * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. 
+ * **numericFilters**: a string that contains the list of numeric filters you want to apply separated by a comma. The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`.
 
 You can easily perform range queries via the `:` operator (equivalent to combining a `>=` and `<=` operand), for example `numericFilters=price:10 to 1000`.
 
@@ -306,7 +312,7 @@ You can also mix OR and AND operators. The OR operator is defined with a parenth
 You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
 #### Category search parameters
- * **tagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`). 
+ * **tagFilters**: filter the query by a set of tags. You can AND tags by separating them by commas. To OR tags, you must add parentheses. For example, `tags=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*. You can also use a string array encoding, for example `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.<br/>At indexing, tags should be added in the **_tags** attribute of objects (for example `{"_tags":["tag1","tag2"]}`).
 
 #### Faceting parameters
  * **facetFilters**: filter the query by a list of facets. Facets are separated by commas and each facet is encoded as `attributeName:value`. To OR facets, you must add parentheses. For example: `facetFilters=(category:Book,category:Movie),author:John%20Doe`. You can also use a string array encoding (for example `[["category:Book","category:Movie"],"author:John%20Doe"]`).
@@ -435,25 +441,27 @@ You can retrieve all settings using the `getSettings` function. The result will 
 You can decide to have the same priority for two attributes by passing them in the same string using comma as separator. For example `title` and `alternative_title` have the same priority in this example, which is different than text priority: `attributesToIndex:["title,alternative_title", "text"]`
  * **attributesForFaceting**: (array of strings) The list of fields you want to use for faceting. All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
  * **attributeForDistinct**: The attribute name used for the `Distinct` feature. This feature is similar to the SQL "distinct" keyword: when enabled in query with the `distinct=1` parameter, all hits containing a duplicate value for this attribute are removed from results. For example, if the chosen attribute is `show_name` and several hits have the same value for `show_name`, then only the best one is kept and others are removed. **Note**: This feature is disabled if the query string is empty and there isn't any `tagFilters`, nor any `facetFilters`, nor any `numericFilters` parameters.
- * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria: 
+ * **ranking**: (array of strings) controls the way results are sorted.<br/>We have nine available criteria:
   * **typo**: sort according to number of typos,
   * **geo**: sort according to decreassing distance when performing a geo-location based search,
   * **words**: sort according to the number of query words matched by decreasing order. This parameter is useful when you use `optionalWords` query parameter to have results with the most matched words first.
   * **proximity**: sort according to the proximity of query words in hits,
   * **attribute**: sort according to the order of attributes defined by attributesToIndex,
-  * **exact**: 
+  * **exact**:
     * if the user query contains one word: sort objects having an attribute that is exactly the query word before others. For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV show starting by the v letter before it.
     * if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
   * **custom**: sort according to a user defined formula set in **customRanking** attribute.
   * **asc(attributeName)**: sort according to a numeric attribute by ascending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean).
   * **desc(attributeName)**: sort according to a numeric attribute by descending order. **attributeName** can be the name of any numeric attribute of your records (integer, a double or boolean). <br/>The standard order is ["typo", "geo", "words", "proximity", "attribute", "exact", "custom"]
  * **customRanking**: (array of strings) lets you specify part of the ranking.<br/>The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-For example `"customRanking" => ["desc(population)", "asc(name)"]`  
+For example `"customRanking" => ["desc(population)", "asc(name)"]`
  * **queryType**: Select how the query words are interpreted, it can be one of the following value:
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
  * **slaves**: The list of indices on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indices with the same operations.
+ * **unretrievableAttributes**: The list of attributes that cannot be retrieved at query time. This feature allow to have an attribute that is used for indexing and/or ranking but cannot be retrieved. Default to null.
+ * **allowCompressionOfIntegerArray**: Allows compression of big integer arrays. We recommended to store the list of user ID or rights as an integer array and enable this setting. When enabled the integer array are reordered to reach a better compression ratio. Default to false.
 
 #### Query expansion
  * **synonyms**: (array of array of words considered as equals). For example, you may want to retrieve your **black ipad** record when your users are searching for **dark ipad**, even if the **dark** word is not part of the record: so you need to configure **black** as a synonym of **dark**. For example `"synomyms": [ [ "black", "dark" ], [ "small", "little", "mini" ], ... ]`.
@@ -469,8 +477,8 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   For example `"altCorrections": [ { "word" : "foot", "correction": "feet", "nbTypos": 1}, { "word": "feet", "correction": "foot", "nbTypos": 1}].`
 
 #### Default query parameters (can be overwrite by query)
- * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 3).
- * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 7).
+ * **minWordSizefor1Typo**: (integer) the minimum number of characters to accept one typo (default = 4).
+ * **minWordSizefor2Typos**: (integer) the minimum number of characters to accept two typos (default = 8).
  * **hitsPerPage**: (integer) the number of hits per page (default = 10).
  * **attributesToRetrieve**: (array of strings) default list of attributes to retrieve in objects. If set to null, all attributes are retrieved.
  * **attributesToHighlight**: (array of strings) default list of attributes to highlight. If set to null, all indexed attributes are highlighted.
@@ -517,7 +525,7 @@ $index->clearIndex();
 Wait indexing
 -------------
 
-All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. Even if it's extremely fast, you can easily ensure indexing is complete using the `waitTask` method on the `taskID` returned by a write operation. 
+All write operations return a `taskID` when the job is securely stored on our infrastructure but not when the job is published in your index. Even if it's extremely fast, you can easily ensure indexing is complete using the `waitTask` method on the `taskID` returned by a write operation.
 
 For example, to wait for indexing of a new object:
 ```php
@@ -591,8 +599,8 @@ $res = $index->batch(array(
 Security / User API Keys
 -------------
 
-The admin API key provides full control of all your indices. 
-You can also generate user API keys to control security. 
+The admin API key provides full control of all your indices.
+You can also generate user API keys to control security.
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
 To list existing keys, you can use `listUserKeys` method:
@@ -641,6 +649,15 @@ $res = $index->addUserKey(array("search"), 300, 100, 20);
 echo "key=" . $res['key'] . "\n";
 ```
 
+Update the rights of an existing key:
+ ```php
+// Update an existing global API key that is valid for 300 seconds
+$res = $client->updateUserKey("myAPIKey", array("search"), 300);
+echo "key=" . $res['key'] . "\n";
+// Update an existing index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+$res = $index->updateUserKey("myAPIKey", array("search"), 300, 100, 20);
+echo "key=" . $res['key'] . "\n";
+```
 Get the rights of a given key:
 ```php
 // Gets the rights of a global key
@@ -729,7 +746,7 @@ $res = $client->moveIndex("MyNewIndex", "MyIndex");
 Backup / Retrieve all index content
 -------------
 
-You can retrieve all index content for backup purpose or for analytics using the browse method. 
+You can retrieve all index content for backup purpose or for analytics using the browse method.
 This method retrieve 1000 objects by API call and support pagination.
 
 ```php
@@ -742,7 +759,7 @@ $res = $index->browse(1);
 Logs
 -------------
 
-You can retrieve the last logs via this API. Each log entry contains: 
+You can retrieve the last logs via this API. Each log entry contains:
  * Timestamp in ISO-8601 format
  * Client IP
  * Request Headers (API-Key is obfuscated)

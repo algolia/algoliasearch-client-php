@@ -30,6 +30,9 @@ class FunctionTest extends AlgoliaSearchTestCase
 
     public function testKeepAlive()
     {
+        if (getenv('TRAVIS_PHP_VERSION') == 'hhvm') {
+            $this->markTestSkipped('Irrevelant on travis');
+        }
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
         $init = $this->microtime_float();
         $this->client->listIndexes();

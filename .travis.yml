@@ -4,6 +4,7 @@ php:
 - 5.4
 - 5.5
 - 5.6
+- hhvm
 branches:
   only:
   - master
@@ -14,7 +15,7 @@ before_script:
 script:
 - phpunit --debug -c phpunit.xml.dist
 after_script:
-- php vendor/bin/coveralls
+- sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls; fi;'
 env:
   global:
   - secure: NIp6EaQ5PuW82Vz4VRQEKWQyvBiyyr328VGy6ssfYVcHscTxmWj/c6ItQva1YhRG+rkkqaxk5/12dV3DrXlseXXuXsTlSUUhccUpmQZwQksQaKd/WCCJGO5E6N0TWc7xZTKTarL6Ez9K8pbhJHfCLMKNAij0U+RGohUWGp6vjQI=

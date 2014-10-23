@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.2.2
- *
  */
 namespace AlgoliaSearch;
 
@@ -85,6 +83,13 @@ class Client {
      */
      public function isAlive() {
         $this->request($this->context, "GET", "/1/isalive");
+     }
+
+    /*
+     * Allow to set custom headers
+     */
+     public function setExtraHeader($key, $value) {
+        $this->context->setExtraHeader($key, $value);
      }
 
     /*
@@ -215,6 +220,7 @@ class Client {
      * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
      * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param indexes Specify the list of indices to target (null means all)
      */
     public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
         $params = array(
@@ -224,16 +230,38 @@ class Client {
             "maxHitsPerQuery" => $maxHitsPerQuery
         );
         if ($indexes != null) {
-            if (is_array($indexes)) {
-                $tmp = array();
-                foreach ($indexes as $index) {
-                    array_push($tmp, $index);
-                }
-                $indexes = join(',', $tmp);
-            }
             $params['indexes'] = $indexes;
         }
         return $this->request($this->context, "POST", "/1/keys", array(), $params);
+    }
+
+    /*
+     * Update a user key
+     *
+     * @param acls the list of ACL for this key. Defined by an array of strings that
+     * can contains the following values:
+     *   - search: allow to search (https and http)
+     *   - addObject: allows to add/update an object in the index (https only)
+     *   - deleteObject : allows to delete an existing object (https only)
+     *   - deleteIndex : allows to delete index content (https only)
+     *   - settings : allows to get index settings (https only)
+     *   - editSettings : allows to change index settings (https only)
+     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
+     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
+     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param indexes Specify the list of indices to target (null means all)
+     */
+    public function updateUserKey($key, $acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
+        $params = array(
+            "acl" => $acls,
+            "validity" => $validity,
+            "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
+            "maxHitsPerQuery" => $maxHitsPerQuery
+        );
+        if ($indexes != null) {
+            $params['indexes'] = $indexes;
+        }
+        return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params);
     }
 
     /*
@@ -265,7 +293,7 @@ class Client {
     }
 
     public function request($context, $method, $path, $params = array(), $data = array()) {
-        $exception = null;
+        $exceptions = array();
         foreach ($context->hostsArray as &$host) {
             try {
                 $res = $this->doRequest($context, $method, $host, $path, $params, $data);
@@ -274,13 +302,10 @@ class Client {
             } catch (AlgoliaException $e) {
                 throw $e;
             } catch (\Exception $e) {
-                $exception = $e;
+                $exceptions[$host] = $e->getMessage();
             }
         }
-        if ($exception == null)
-            throw new AlgoliaException('Hosts unreachable');
-        else
-            throw $exception;
+        throw new AlgoliaException('Hosts unreachable: ' . join(",", $exceptions));
     }
 
     public function doRequest($context, $method, $host, $path, $params, $data) {
@@ -305,21 +330,21 @@ class Client {
         $curlHandle = curl_init();
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                         'X-Algolia-Application-Id: ' . $context->applicationID,
                         'X-Algolia-API-Key: ' . $context->apiKey,
                         'Content-type: application/json'
-                        ));
+                        ), $context->headers));
         } else {
-             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array(
+             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                     'X-Algolia-Application-Id: ' . $context->applicationID,
                     'X-Algolia-API-Key: ' . $context->adminAPIKey,
                     'X-Forwarded-For: ' . $context->endUserIP,
                     'X-Forwarded-API-Key: ' . $context->rateLimitAPIKey,
                     'Content-type: application/json'
-                    ));
+                    ), $context->headers));
         }
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP 1.2.2");
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::getValue());
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
@@ -356,10 +381,16 @@ class Client {
         // Do all the processing.
         $running = null;
         do {
-            curl_multi_exec($mhandle, $running);
-            curl_multi_select($mhandle);
+            $mrc = curl_multi_exec($mhandle, $running);
+        } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        while ($running && $mrc == CURLM_OK) {
+          if (curl_multi_select($mhandle, 0.1) == -1) {
             usleep(100);
-        } while ($running > 0);
+          }
+          do {
+            $mrc = curl_multi_exec($mhandle, $running);
+          } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        }
         $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);

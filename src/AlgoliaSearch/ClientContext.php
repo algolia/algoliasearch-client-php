@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  *
  *
- * VERSION 1.2.2
- *
  */
 namespace AlgoliaSearch;
 
@@ -59,6 +57,7 @@ class ClientContext {
         $this->adminAPIKey = NULL;
         $this->endUserIP = NULL;
         $this->rateLimitAPIKey = NULL;
+        $this->headers = array();
     }
 
     function __destruct() {
@@ -91,5 +90,9 @@ class ClientContext {
         $this->endUserIP = NULL;
         $this->rateLimitAPIKey = NULL;
 
+    }
+
+    public function setExtraHeader($key, $value) {
+        $this->headers[$key] = $value;
     }
 }

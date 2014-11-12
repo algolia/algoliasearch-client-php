@@ -33,6 +33,7 @@ namespace AlgoliaSearch;
 class Client {
 
     protected $context;
+    protected $cainfoPath;
 
     /*
      * Algolia Search initialization
@@ -40,7 +41,7 @@ class Client {
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
      */
-    function __construct($applicationID, $apiKey, $hostsArray = null) {
+    function __construct($applicationID, $apiKey, $hostsArray = null, $options = array()) {
         if ($hostsArray == null) {
             $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io"));
         } else {
@@ -51,6 +52,14 @@ class Client {
         }
         if(!function_exists('json_decode')){
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
+        }
+        $this->cainfoPath = __DIR__ . '/../../resources/ca-bundle.crt';
+        foreach ($options as $option => $value) {
+            if ($option == "cainfo") {
+                $this->cainfoPath = $value;
+            } else {
+                throw new \Exception('Unknown option: ' . $option);
+            }
         }
     }
 
@@ -351,7 +360,7 @@ class Client {
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_CAINFO, __DIR__ . '/../../resources/ca-bundle.crt');
+        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
         
         curl_setopt($curlHandle, CURLOPT_URL, $url);
         curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);

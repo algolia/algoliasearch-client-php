@@ -43,7 +43,7 @@ class Client {
      */
     function __construct($applicationID, $apiKey, $hostsArray = null, $options = array()) {
         if ($hostsArray == null) {
-            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io"));
+            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.net", $applicationID . "-2.algolia.net", $applicationID . "-3.algolia.net"));
         } else {
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }

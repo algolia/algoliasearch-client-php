@@ -43,7 +43,7 @@ class Client {
      */
     function __construct($applicationID, $apiKey, $hostsArray = null, $options = array()) {
         if ($hostsArray == null) {
-            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.io", $applicationID . "-2.algolia.io", $applicationID . "-3.algolia.io"));
+            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.net", $applicationID . "-2.algolia.net", $applicationID . "-3.algolia.net"));
         } else {
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }
@@ -175,8 +175,15 @@ class Client {
      * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
      * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
      */
-    public function getLogs($offset = 0, $length = 10, $onlyErrors = false) {
-        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&onlyErrors=" . $onlyErrors);
+    public function getLogs($offset = 0, $length = 10, $type = "all") {
+        if (gettype($type) == "boolean") { //Old prototype onlyError
+            if ($type) {
+                $type = "error";
+            } else {
+                $type = "all";
+            }
+        }
+        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&type=" . $type);
     }
 
     /*

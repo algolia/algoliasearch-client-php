@@ -37,7 +37,7 @@ class SecurityTest extends AlgoliaSearchTestCase
         $this->index->waitTask($res['taskID']);
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(array('search'));
-        sleep(2);
+        sleep(5);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->index->listUserKeys();
         $this->assertTrue($this->containsValue($resAfter["keys"], "value", $newKey['key']));
@@ -45,17 +45,17 @@ class SecurityTest extends AlgoliaSearchTestCase
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $this->index->updateUserKey($newKey['key'], array('addObject'));
-        sleep(2);
+        sleep(5);
         $key = $this->index->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'addObject');
         $task = $this->index->deleteUserKey($newKey['key']);
-        sleep(2);
+        sleep(5);
         $resEnd = $this->index->listUserKeys();
         $this->assertFalse($this->containsValue($resEnd["keys"], "value", $newKey['key']));
 
         $res = $this->client->listUserKeys();
         $newKey = $this->client->addUserKey(array('search'));
-        sleep(2);
+        sleep(5);
         $this->assertTrue($newKey['key'] != "");
         $resAfter = $this->client->listUserKeys();
         $this->assertTrue($this->containsValue($resAfter["keys"], "value", $newKey['key']));
@@ -63,11 +63,11 @@ class SecurityTest extends AlgoliaSearchTestCase
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'search');
         $this->client->updateUserKey($newKey['key'], array('addObject'));
-        sleep(2);
+        sleep(5);
         $key = $this->client->getUserKeyACL($newKey['key']);
         $this->assertEquals($key['acl'][0], 'addObject');
         $task = $this->client->deleteUserKey($newKey['key']);
-        sleep(2);
+        sleep(5);
         $resEnd = $this->client->listUserKeys();
         $this->assertFalse($this->containsValue($resEnd["keys"], "value", $newKey['key']));
     }
@@ -82,7 +82,7 @@ class SecurityTest extends AlgoliaSearchTestCase
         $b->waitTask($res['taskID']);
 
         $newKey = $this->client->addUserKey(array('search', 'addObject', 'deleteObject'), 0, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
-        sleep(2);
+        sleep(5);
         $this->assertTrue($newKey['key'] != "");
         $res = $this->client->listUserKeys();
         $this->assertTrue($this->containsValue($res["keys"], "value", $newKey['key']));

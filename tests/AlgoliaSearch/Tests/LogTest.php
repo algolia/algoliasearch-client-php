@@ -17,7 +17,7 @@ class LogTest extends AlgoliaSearchTestCase
 
     public function testLogIndex()
     {
-        $res = $this->client->getLogs();
+        $res = $this->client->getLogs(0, 20, true);
         
         $this->assertGreaterThan(0, count($res['logs']));
 

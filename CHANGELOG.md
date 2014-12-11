@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.5.0
+ - Nove to .net instead of .io
+ - Ability to pass a custom certificate path
+
 ### 1.4.1
 - Fixed the retry on hosts
 

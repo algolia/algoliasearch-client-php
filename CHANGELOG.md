@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.5.1
+ - Changed default connect timeout from 30s to 1s and add an option to override it
+
 ### 1.5.0
  - Nove to .net instead of .io
  - Ability to pass a custom certificate path

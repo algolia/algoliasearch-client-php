@@ -34,8 +34,10 @@ class ClientContext {
     public $hostsArray;
     public $curlMHandle;
     public $adminAPIKey;
+    public $connectTimeout;
 
     function __construct($applicationID, $apiKey, $hostsArray) {
+        $this->connectTimeout = 1; // connect timeout of 1s by default
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
         $this->hostsArray = $hostsArray;

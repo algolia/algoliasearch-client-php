@@ -70,6 +70,13 @@ class Client {
     }
 
     /*
+     * Change the default connect timeout of 1s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     */
+    public function setConnectTimeout($timeoutInSecond) {
+      $this->context->connectTimeout = $timeoutInSecond;
+    }
+
+    /*
      * Allow to use IP rate limit when you have a proxy between end-user and Algolia.
      * This option will set the X-Forwarded-For HTTP header with the client IP and the X-Forwarded-API-Key with the API Key having rate limits.
      * @param adminAPIKey the admin API Key you can find in your dashboard
@@ -370,7 +377,7 @@ class Client {
         curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
         
         curl_setopt($curlHandle, CURLOPT_URL, $url);
-        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);
         curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1); # The problem is that on (Li|U)nix, when libcurl uses the standard name resolver, a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 

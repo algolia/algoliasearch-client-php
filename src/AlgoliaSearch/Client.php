@@ -377,7 +377,12 @@ class Client {
         curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
         
         curl_setopt($curlHandle, CURLOPT_URL, $url);
-        curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);
+        if (version_compare(phpversion(), '5.2.3', '>=') && $this->context->connectTimeout < 1) {
+            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $this->context->connectTimeout * 1000);
+        } else {
+            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);
+        }
+
         curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1); # The problem is that on (Li|U)nix, when libcurl uses the standard name resolver, a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 

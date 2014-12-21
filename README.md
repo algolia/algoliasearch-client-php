@@ -502,6 +502,7 @@ For example `"customRanking" => ["desc(population)", "asc(name)"]`
   * **prefixAll**: all query words are interpreted as prefixes,
   * **prefixLast**: only the last word is interpreted as a prefix (default behavior),
   * **prefixNone**: no query word is interpreted as a prefix. This option is not recommended.
+ * **separatorsToIndex**: Specify the separators (punctuation characters) to index. By default, separators are not indexed. Use `+#` to be able to search Google+ or C#.
  * **slaves**: The list of indices on which you want to replicate all write operations. In order to get response times in milliseconds, we pre-compute part of the ranking during indexing. If you want to use different ranking configurations depending of the use-case, you need to create one index per ranking configuration. This option enables you to perform write operations only on this index, and to automatically update slave indices with the same operations.
  * **unretrievableAttributes**: The list of attributes that cannot be retrieved at query time. This feature allow to have an attribute that is used for indexing and/or ranking but cannot be retrieved. Default to null.
  * **allowCompressionOfIntegerArray**: Allows compression of big integer arrays. We recommended to store the list of user ID or rights as an integer array and enable this setting. When enabled the integer array are reordered to reach a better compression ratio. Default to false.

@@ -73,7 +73,8 @@ class Client {
      * Change the default connect timeout of 1s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
      */
     public function setConnectTimeout($timeoutInSecond) {
-      if ((version_compare(phpversion(), '5.2.3', '<') || version_compare(curl_version()['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
+      $version = curl_version();
+      if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
         throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
       }
       $this->context->connectTimeout = $timeoutInSecond;
@@ -380,7 +381,8 @@ class Client {
         curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
         
         curl_setopt($curlHandle, CURLOPT_URL, $url);
-        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare(curl_version()['version'], '7.16.2', '>=') && $this->context->connectTimeout < 1) {
+        $version = curl_version();
+        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $this->context->connectTimeout < 1) {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $this->context->connectTimeout * 1000);
         } else {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);

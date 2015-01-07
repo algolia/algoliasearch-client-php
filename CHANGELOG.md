@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.5.2
+ - Changed default connect timeout from 1s to 5s (was too agressive and timeout was triggered on some machines)
+
 ### 1.5.1
  - Changed default connect timeout from 30s to 1s and add an option to override it
 

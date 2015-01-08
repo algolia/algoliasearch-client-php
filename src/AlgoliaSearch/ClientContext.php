@@ -38,6 +38,7 @@ class ClientContext {
 
     function __construct($applicationID, $apiKey, $hostsArray) {
         $this->connectTimeout = 5; // connect timeout of 5s by default
+        $this->timeout = 30; // global timeout of 30s by default
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
         $this->hostsArray = $hostsArray;

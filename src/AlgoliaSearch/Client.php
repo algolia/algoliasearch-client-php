@@ -70,14 +70,17 @@ class Client {
     }
 
     /*
-     * Change the default connect timeout of 1s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     * Change the default connect timeout of 5s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     * @param connectTimeout the connection timeout
+     * @param timeout the global timeout for the query
      */
-    public function setConnectTimeout($timeoutInSecond) {
+    public function setConnectTimeout($connectTimeout, $timeout = 30) {
       $version = curl_version();
       if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
         throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
       }
-      $this->context->connectTimeout = $timeoutInSecond;
+      $this->context->connectTimeout = $connectTimeout;
+      $this->context->timeout = $timeout;
     }
 
     /*
@@ -384,8 +387,10 @@ class Client {
         $version = curl_version();
         if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $this->context->connectTimeout < 1) {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $this->context->connectTimeout * 1000);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $this->context->timeout * 1000);
         } else {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $this->context->timeout);
         }
 
         curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1); # The problem is that on (Li|U)nix, when libcurl uses the standard name resolver, a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.

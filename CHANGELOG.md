@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.5.3
+ - Added global timeout for a query
+ - Fixed missing namespace escaping
+
 ### 1.5.2
  - Changed default connect timeout from 1s to 5s (was too agressive and timeout was triggered on some machines)
 

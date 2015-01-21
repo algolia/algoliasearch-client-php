@@ -34,7 +34,6 @@ class Index {
     private $indexName;
     private $client;
     private $urlIndexName;
-    private $curlHandle;
 
     /*
      * Index initialization (You should not call this initialized yourself)
@@ -559,6 +558,7 @@ class Index {
      * @param  $objects the array of objects
      * @param  $withObjectID set an 'objectID' attribute
      * @param  $objectIDKey the objectIDKey
+     * @return array
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID") {
         $requests = array();

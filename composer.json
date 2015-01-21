@@ -1,6 +1,5 @@
 {
     "name": "algolia/algoliasearch-client-php",
-    "version": "1.5.3",
     "description": "Algolia Search API Client for PHP",
     "type": "library",
     "homepage": "https://github.com/algolia/algoliasearch-client-php",
@@ -20,6 +19,7 @@
         }
     ],
     "require": {
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",

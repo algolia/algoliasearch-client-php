@@ -374,7 +374,7 @@ class Client {
                     'Content-type: application/json'
                     ), $context->headers));
         }
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::getValue());
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::VALUE);
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);

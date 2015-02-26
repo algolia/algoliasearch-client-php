@@ -26,26 +26,5 @@
 namespace AlgoliaSearch;
 
 class Version {
-
-  static $value;
-
-  public static function getValue() {
-    if (!isset(self::$value)) {
-      $vpath = dirname(__FILE__) . "/../../composer.json";
-      if (file_exists($vpath)) {
-        $composerJson = file_get_contents($vpath);
-        if ($composerJson != false) {
-          $composer = json_decode($composerJson);
-          if ($composer != null) {
-            self::$value = $composer->version;
-            return self::$value;
-          }
-        }
-      }
-      self::$value = "N/A";
-    } else {
-      return self::$value;
-    }
-  }
-
+  const VALUE = "1.5.4";
 }

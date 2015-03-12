@@ -355,11 +355,12 @@ class Index {
         $params["query"] = $query;
         $params["facetFilters"] = $filters;
         $params["page"] = 0;
-        $params["hitsPerPage"] = 1;
+        $params["hitsPerPage"] = 0;
         $params["attributesToRetrieve"] = array();
         $params["attributesToHighlight"] = array();
         $params["attributesToSnippet"] = array();
         $params["facets"] = $disjunctive_facet;
+        $params["analytics"] = false;
         array_push($queries, $params);
       }
       $answers = $this->client->multipleQueries($queries);

@@ -79,6 +79,17 @@ To setup your project, follow these steps:
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
 
+### Framework Integrations
+
+If you're a Symfony or Laravel user; you're probably looking for the following integrations:
+
+ - **Laravel** (community) - [vinkla/algolia](https://github.com/vinkla/algolia)
+ - **Symfony** (official) - [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
+ - **Symfony** (community) - [GoldenLine/AlgoliaBundle](https://github.com/GoldenLine/AlgoliaBundle)
+
+
+
+
 
 
 

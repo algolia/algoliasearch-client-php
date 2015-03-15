@@ -846,7 +846,9 @@ $res = $client->getLogs();
 $res = $client->getLogs(0, 100);
 ```
 
+## Framework Integrations
+ - **Laravel** - https://github.com/vinkla/algolia
+ - **Symfony** - https://github.com/GoldenLine/AlgoliaBundle
 
-
-
+If you have integrated Algolia into a popular PHP framework let us know!
 

@@ -36,7 +36,7 @@ Table of Contents
 
 **Commands Reference**
 
-1. [Add a new object](#add-a-new-object-in-the-index)
+1. [Add a new object](#add-a-new-object-to-the-index)
 1. [Update an object](#update-an-existing-object-in-the-index)
 1. [Search](#search)
 1. [Get an object](#get-an-object)
@@ -50,7 +50,7 @@ Table of Contents
 1. [Batch writes](#batch-writes)
 1. [Security / User API Keys](#security--user-api-keys)
 1. [Copy or rename an index](#copy-or-rename-an-index)
-1. [Backup / Retrieve all index content](#backup--retrieve-all-index-content)
+1. [Backup / Retrieve of all index content](#backup--retrieve-of-all-index-content)
 1. [Logs](#logs)
 
 

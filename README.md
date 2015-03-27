@@ -3,21 +3,8 @@
 
 
 [Algolia Search](http://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
-Algolia's Search API makes it easy to deliver a great search experience in your websites and mobile applications by providing:
 
- * REST and JSON based API
- * Search against infinite attributes from a single search box
- * Instant search as you type experience
- * Relevance and popularity ranking
- * Global language support
- * Typo tolerance in any language
- * Smart highlighting
- * Facet as you type
- * Geo awareness
- * 99.99% SLA
- * First class data security
-
-Our PHP client lets you easily use the [Algolia Search API](http://www.algolia.com) from your backend. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
+Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest_api) from your backend. It wraps the [Algolia Search REST API](http://www.algolia.com/doc/rest_api).
 
 
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.png)](https://coveralls.io/r/algolia/algoliasearch-client-php)
@@ -140,25 +127,35 @@ var_dump($index->search('jim'));
 
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
-  * It will offload unnecessary tasks from your servers.
+  * It will offload unnecessary tasks from your servers
 
 ```html
-<script type="text/javascript" src="//path/to/algoliasearch.min.js"></script>
-<script type="text/javascript">
-  var client = new AlgoliaSearch("YourApplicationID", "YourSearchOnlyAPIKey");
-  var index = client.initIndex('YourIndexName');
+<script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script>
+var client = algoliasearch('ApplicationID', 'Search-Only-API-Key');
+var index = client.initIndex('indexName');
 
-  function searchCallback(success, content) {
-    if (success) {
-      console.log(content);
-    }
+// perform query "jim"
+index.search('jim', searchCallback);
+
+// the last optional argument can be used to add search parameters
+index.search(
+  'jim', {
+    hitsPerPage: 5,
+    facets: '*',
+    maxValuesPerFacet: 10
+  },
+  searchCallback
+);
+
+function searchCallback(err, content) {
+  if (err) {
+    console.error(err);
+    return;
   }
 
-  // perform query "jim"
-  index.search("jim", searchCallback);
-
-  // the last optional argument can be used to add search parameters
-  index.search("jim", searchCallback, { hitsPerPage: 5, facets: '*', maxValuesPerFacet: 10 });
+  console.log(content);
+}
 </script>
 ```
 
@@ -399,7 +396,7 @@ $res = $index->search("query string", array("attributesToRetrieve" => "fistname,
 
 The server response will look like:
 
-```javascript
+```json
 {
   "hits": [
     {
@@ -467,9 +464,11 @@ $index->getObject("myID", "firstname");
 
 You can also retrieve a set of objects:
 
+
 ```php
 $index->getObjects(array("myID1", "myID2"));
 ```
+
 
 
 
@@ -756,15 +755,23 @@ You may have a single index containing per user data. In that case, all records 
 $public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', '(public,user_42)');
 ```
 
-This public API key must then be used in your JavaScript code as follow:
+This public API key can then be used in your JavaScript code as follow:
 
 ```javascript
 <script type="text/javascript">
-  var algolia = new AlgoliaSearch('YourApplicationID', '<%= public_api_key %>');
-  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
-  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
-    // [...]
-  });
+var client = algoliasearch('YourApplicationID', '<%= public_api_key %>');
+client.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
+
+var index = client.initIndex('indexName')
+
+index.search('something', function(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(content);
+});
 </script>
 ```
 
@@ -777,16 +784,28 @@ You can mix rate limits and secured API keys by setting an extra `user_token` at
 $public_key = $client->generateSecuredApiKey('YourRateLimitedApiKey', '(public,user_42)', 'user_42');
 ```
 
-This public API key must then be used in your JavaScript code as follow:
+This public API key can then be used in your JavaScript code as follow:
 
 ```javascript
 <script type="text/javascript">
-  var algolia = new AlgoliaSearch('YourApplicationID', '<%= public_api_key %>');
-  algolia.setSecurityTags('(public,user_42)'); // must be same than those used at generation-time
-  algolia.setUserToken('user_42')              // must be same than the one used at generation-time
-  algolia.initIndex('YourIndex').search($('#q').val(), function(success, content) {
-    // [...]
-  });
+var client = algoliasearch('YourApplicationID', '<%= public_api_key %>');
+
+// must be same than those used at generation-time
+client.setSecurityTags('(public,user_42)');
+
+// must be same than the one used at generation-time
+client.setUserToken('user_42');
+
+var index = client.initIndex('indexName')
+
+index.search('another query', function(err, content) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+
+  console.log(content);
+});
 </script>
 ```
 

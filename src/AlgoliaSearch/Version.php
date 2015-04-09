@@ -26,5 +26,5 @@
 namespace AlgoliaSearch;
 
 class Version {
-  const VALUE = "1.5.4";
+  const VALUE = "1.5.5";
 }

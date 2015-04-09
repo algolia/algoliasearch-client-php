@@ -1,5 +1,13 @@
 ## Change Log
 
+### 1.5.5
+ - Better retry strategy using two different provider (Improve high-availability of the solution, retry is done on algolianet.com)
+ - Read operations are performed to APPID-dsn.algolia.net domain first to leverage Distributed Search Network (select the closest location)
+ - Improved timeout strategy: increasse timeout after 2 trials & have a different read timeout for search operations
+
+### 1.5.4
+ - Added allOptional support for removeWordsIfNoResult
+
 ### 1.5.3
  - Added global timeout for a query
  - Fixed missing namespace escaping

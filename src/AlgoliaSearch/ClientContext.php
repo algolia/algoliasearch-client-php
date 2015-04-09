@@ -31,29 +31,29 @@ class ClientContext {
 
     public $applicationID;
     public $apiKey;
-    public $hostsArray;
+    public $readHostsArray;
+    public $writeHostsArray;
     public $curlMHandle;
     public $adminAPIKey;
     public $connectTimeout;
 
     function __construct($applicationID, $apiKey, $hostsArray) {
-        $this->connectTimeout = 5; // connect timeout of 5s by default
-        $this->timeout = 30; // global timeout of 30s by default
+        $this->connectTimeout = 2; // connect timeout of 2s by default
+        $this->readTimeout = 30; // global timeout of 30s by default
+        $this->searchTimeout = 5; // search timeout of 5s by default
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
-        $this->hostsArray = $hostsArray;
-
+        $this->readHostsArray = $hostsArray;
+        $this->writeHostsArray = $hostsArray;
+        if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
+            $this->readHostsArray = array($applicationID . "-dsn.algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
+            $this->writeHostsArray = array($applicationID . ".algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
+        }
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
         }
         if ($this->apiKey == null || mb_strlen($this->apiKey) == 0) {
             throw new Exception('AlgoliaSearch requires an apiKey.');
-        }
-        if ($this->hostsArray == null || count($this->hostsArray) == 0) {
-            throw new Exception('AlgoliaSearch requires a list of hostnames.');
-        } else {
-            // randomize elements of hostsArray (act as a kind of load-balancer)
-            shuffle($this->hostsArray);
         }
 
         $this->curlMHandle = NULL;

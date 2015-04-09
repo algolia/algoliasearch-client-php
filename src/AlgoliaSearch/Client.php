@@ -43,7 +43,7 @@ class Client {
      */
     function __construct($applicationID, $apiKey, $hostsArray = null, $options = array()) {
         if ($hostsArray == null) {
-            $this->context = new ClientContext($applicationID, $apiKey, array($applicationID . "-1.algolia.net", $applicationID . "-2.algolia.net", $applicationID . "-3.algolia.net"));
+            $this->context = new ClientContext($applicationID, $apiKey, null);
         } else {
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }
@@ -70,17 +70,19 @@ class Client {
     }
 
     /*
-     * Change the default connect timeout of 5s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     * Change the default connect timeout of 2s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
      * @param connectTimeout the connection timeout
-     * @param timeout the global timeout for the query
+     * @param timeout the read timeout for the query
+     * @param searchTimeout the read timeout used for search queries only
      */
-    public function setConnectTimeout($connectTimeout, $timeout = 30) {
+    public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5) {
       $version = curl_version();
       if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
         throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
       }
       $this->context->connectTimeout = $connectTimeout;
-      $this->context->timeout = $timeout;
+      $this->context->readTimeout = $timeout;
+      $this->context->searchTimeout = $searchTimeout;
     }
 
     /*
@@ -105,7 +107,7 @@ class Client {
      * Call isAlive
      */
      public function isAlive() {
-        $this->request($this->context, "GET", "/1/isalive");
+        $this->request($this->context, "GET", "/1/isalive", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
      }
 
     /*
@@ -139,7 +141,7 @@ class Client {
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
-        return $this->request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests));
+        return $this->request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
     /*
@@ -151,7 +153,7 @@ class Client {
      *                        ))
      */
     public function listIndexes() {
-        return $this->request($this->context, "GET", "/1/indexes/");
+        return $this->request($this->context, "GET", "/1/indexes/", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -161,7 +163,7 @@ class Client {
      * return an object containing a "deletedAt" attribute
      */
     public function deleteIndex($indexName) {
-        return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName));
+        return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -171,7 +173,7 @@ class Client {
      */
     public function moveIndex($srcIndexName, $dstIndexName) {
         $request = array("operation" => "move", "destination" => $dstIndexName);
-        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -181,7 +183,7 @@ class Client {
      */
     public function copyIndex($srcIndexName, $dstIndexName) {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
-        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request);
+        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -197,7 +199,7 @@ class Client {
                 $type = "all";
             }
         }
-        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&type=" . $type);
+        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&type=" . $type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -217,7 +219,7 @@ class Client {
      *
      */
     public function listUserKeys() {
-        return $this->request($this->context, "GET", "/1/keys");
+        return $this->request($this->context, "GET", "/1/keys", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -225,7 +227,7 @@ class Client {
      *
      */
     public function getUserKeyACL($key) {
-        return $this->request($this->context, "GET", "/1/keys/" . $key);
+        return $this->request($this->context, "GET", "/1/keys/" . $key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -233,7 +235,7 @@ class Client {
      *
      */
     public function deleteUserKey($key) {
-        return $this->request($this->context, "DELETE", "/1/keys/" . $key);
+        return $this->request($this->context, "DELETE", "/1/keys/" . $key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -262,7 +264,7 @@ class Client {
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
-        return $this->request($this->context, "POST", "/1/keys", array(), $params);
+        return $this->request($this->context, "POST", "/1/keys", array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -291,7 +293,7 @@ class Client {
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
-        return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params);
+        return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -322,11 +324,17 @@ class Client {
         return hash_hmac('sha256', $tagFilters . $userToken, $privateApiKey);
     }
 
-    public function request($context, $method, $path, $params = array(), $data = array()) {
+    public function request($context, $method, $path, $params = array(), $data = array(), $hostsArray, $connectTimeout, $readTimeout) {
         $exceptions = array();
-        foreach ($context->hostsArray as &$host) {
+        $cnt = 0;
+        foreach ($hostsArray as &$host) {
+            $cnt += 1;
+            if ($cnt == 3) {
+                $connectTimeout += 2;
+                $readTimeout += 10;
+            }
             try {
-                $res = $this->doRequest($context, $method, $host, $path, $params, $data);
+                $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout);
                 if ($res !== null)
                     return $res;
             } catch (AlgoliaException $e) {
@@ -338,7 +346,7 @@ class Client {
         throw new AlgoliaException('Hosts unreachable: ' . join(",", $exceptions));
     }
 
-    public function doRequest($context, $method, $host, $path, $params, $data) {
+    public function doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout) {
         if (strpos($host, "http") === 0) {
             $url = $host . $path;
         } else {
@@ -385,12 +393,12 @@ class Client {
         
         curl_setopt($curlHandle, CURLOPT_URL, $url);
         $version = curl_version();
-        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $this->context->connectTimeout < 1) {
-            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $this->context->connectTimeout * 1000);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $this->context->timeout * 1000);
+        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {
+            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $connectTimeout * 1000);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $readTimeout * 1000);
         } else {
-            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $this->context->connectTimeout);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $this->context->timeout);
+            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $readTimeout);
         }
 
         curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1); # The problem is that on (Li|U)nix, when libcurl uses the standard name resolver, a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
@@ -446,16 +454,10 @@ class Client {
         $context->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        if ($http_status == 400) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Bad request");
+        if (intval($http_status / 100) == 4) {
+            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status + " error");
         }
-        elseif ($http_status === 403) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Invalid Application-ID or API-Key");
-        }
-        elseif ($http_status === 404) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : "Resource does not exist");
-        }
-        elseif ($http_status != 200 && $http_status != 201) {
+        elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status . ": " . $response);
         }
 

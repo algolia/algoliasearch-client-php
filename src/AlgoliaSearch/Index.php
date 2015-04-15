@@ -521,8 +521,12 @@ class Index {
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      */
     public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        return $this->client->request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(),
-            array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery),
+        $params = array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery);
+        return $this->addAPIKey($params);
+    }
+
+    public function addAPIKey($params) {
+        return $this->client->request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -542,8 +546,12 @@ class Index {
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      */
     public function updateUserKey($key, $acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        return $this->client->request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key , array(),
-            array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery),
+        $params = array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery);
+        return $this->updateAPIKey($key, $params);
+    }
+
+    public function updateAPIKey($key, $params) {
+        return $this->client->request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key , array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 

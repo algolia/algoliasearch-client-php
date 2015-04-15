@@ -121,7 +121,7 @@ class Client {
      * This method allows to query multiple indexes with one API call
      *
      */
-    public function multipleQueries($queries, $indexNameKey = "indexName") {
+    public function multipleQueries($queries, $indexNameKey = "indexName", $strategy = "none") {
         if ($queries == null) {
             throw new \Exception('No query provided');
         }
@@ -141,7 +141,7 @@ class Client {
             $req = array("indexName" => $indexes, "params" => http_build_query($query));
             array_push($requests, $req);
         }
-        return $this->request($this->context, "POST", "/1/indexes/*/queries", array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
+        return $this->request($this->context, "POST", "/1/indexes/*/queries?strategy=" . $strategy, array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
     /*
@@ -264,6 +264,10 @@ class Client {
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
+        return $this->addAPIKey($params);
+    }
+
+    public function addAPIKey($params) {
         return $this->request($this->context, "POST", "/1/keys", array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -293,6 +297,10 @@ class Client {
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
+        return $this->updateAPIKey($key, $params);
+    }
+
+    public function updateAPIKey($key, $params) {
         return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 

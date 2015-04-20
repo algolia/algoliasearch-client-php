@@ -508,7 +508,18 @@ class Index {
     /*
      * Create a new user key associated to this index
      *
-     * @param acls the list of ACL for this key. Defined by an array of strings that
+     * @param obj can be two different parameters:
+     * The list of parameters for this key. Defined by a NSDictionary that
+     * can contains the following values:
+     *   - acl: array of string
+     *   - indices: array of string
+     *   - validity: int
+     *   - referers: array of string
+     *   - description: string
+     *   - maxHitsPerQuery: integer
+     *   - queryParameters: string
+     *   - maxQueriesPerIPPerHour: integer
+     * Or the list of ACL for this key. Defined by an array of NSString that
      * can contains the following values:
      *   - search: allow to search (https and http)
      *   - addObject: allows to add/update an object in the index (https only)
@@ -520,12 +531,20 @@ class Index {
      * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      */
-    public function addUserKey($acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        $params = array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery);
-        return $this->addAPIKey($params);
-    }
-
-    public function addAPIKey($params) {
+    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
+        if ($obj !== array_values($obj)) { // is dict of value
+            $params = $obj;
+            $params["validity"] = $validity;
+            $params["maxQueriesPerIPPerHour"] = $maxQueriesPerIPPerHour;
+            $params["maxHitsPerQuery"] = $maxHitsPerQuery;
+        } else {
+            $params = array(
+                "acl" => $obj,
+                "validity" => $validity,
+                "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
+                "maxHitsPerQuery" => $maxHitsPerQuery
+            );
+        }
         return $this->client->request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/keys", array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -533,7 +552,18 @@ class Index {
     /*
      * Update a user key associated to this index
      *
-     * @param acls the list of ACL for this key. Defined by an array of strings that
+     * @param obj can be two different parameters:
+     * The list of parameters for this key. Defined by a NSDictionary that
+     * can contains the following values:
+     *   - acl: array of string
+     *   - indices: array of string
+     *   - validity: int
+     *   - referers: array of string
+     *   - description: string
+     *   - maxHitsPerQuery: integer
+     *   - queryParameters: string
+     *   - maxQueriesPerIPPerHour: integer
+     * Or the list of ACL for this key. Defined by an array of NSString that
      * can contains the following values:
      *   - search: allow to search (https and http)
      *   - addObject: allows to add/update an object in the index (https only)
@@ -545,12 +575,20 @@ class Index {
      * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      */
-    public function updateUserKey($key, $acls, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
-        $params = array("acl" => $acls, "validity" => $validity, "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour, "maxHitsPerQuery" => $maxHitsPerQuery);
-        return $this->updateAPIKey($key, $params);
-    }
-
-    public function updateAPIKey($key, $params) {
+    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0) {
+        if ($obj !== array_values($obj)) { // is dict of value
+            $params = $obj;
+            $params["validity"] = $validity;
+            $params["maxQueriesPerIPPerHour"] = $maxQueriesPerIPPerHour;
+            $params["maxHitsPerQuery"] = $maxHitsPerQuery;
+        } else {
+            $params = array(
+                "acl" => $obj,
+                "validity" => $validity,
+                "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
+                "maxHitsPerQuery" => $maxHitsPerQuery
+            );
+        }
         return $this->client->request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key , array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }

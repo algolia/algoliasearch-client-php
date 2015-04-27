@@ -333,6 +333,15 @@ class Client {
         return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
+    /**
+     * Send a batch request targeting multiple indices
+     * @param  $requests an associative array defining the batch request body
+     */
+    public function batch($requests) {
+        return $this->request($this->context, "POST", "/1/indexes/*/batch", array(), array("requests" => $requests),
+                                      $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+    }
+
     /*
      * Generate a secured and public API Key from a list of tagFilters and an
      * optional user token identifying the current user

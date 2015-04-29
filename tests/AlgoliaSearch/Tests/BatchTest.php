@@ -51,9 +51,9 @@ class BatchTest extends AlgoliaSearchTestCase
     public function testBatchCustomObjectsMultipleIndexes()
     {
         $res = $this->client->batch(array(
-                array("action" => "addObject", "indexName" => 'àlgol?à-php', "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
-                array("action" => "addObject", "indexName" => 'àlgol?à-php', "body" => array("firstname" => "Oneil", "lastname" => "Barney")),
-                array("action" => "updateObject", "indexName" => 'àlgol?à-php', "objectID" => "à/go/?à", "body" => array("firstname" => "Rob")),
+                array("action" => "addObject", "indexName" => $this->index->indexName, "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
+                array("action" => "addObject", "indexName" => $this->index->indexName, "body" => array("firstname" => "Oneil", "lastname" => "Barney")),
+                array("action" => "updateObject", "indexName" => $this->index->indexName, "objectID" => "à/go/?à", "body" => array("firstname" => "Rob")),
             )
         );
         $this->index->waitTask($res['taskID']['àlgol?à-php'], 0.1);

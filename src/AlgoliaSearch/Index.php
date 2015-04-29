@@ -31,7 +31,7 @@ namespace AlgoliaSearch;
  */
 class Index {
 
-    private $indexName;
+    public $indexName;
     private $client;
     private $urlIndexName;
 

@@ -56,7 +56,7 @@ class BatchTest extends AlgoliaSearchTestCase
                 array("action" => "updateObject", "indexName" => $this->index->indexName, "objectID" => "à/go/?à", "body" => array("firstname" => "Rob")),
             )
         );
-        $this->index->waitTask($res['taskID']['àlgol?à-php'], 0.1);
+        $this->index->waitTask($res['taskID'][$this->index->indexName], 0.1);
 
         $results = $this->index->search('');
         $this->assertEquals(3, $results['nbHits']);

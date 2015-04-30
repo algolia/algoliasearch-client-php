@@ -1,5 +1,11 @@
 ## Change Log
 
+### 1.5.6
+ - Add new methods to add/update api key
+ - Add batch method to target multiple indices
+ - Add strategy parameter for the multipleQueries
+ - Add new method to generate secured api key from query parameters
+
 ### 1.5.5
  - Better retry strategy using two different provider (Improve high-availability of the solution, retry is done on algolianet.com)
  - Read operations are performed to APPID-dsn.algolia.net domain first to leverage Distributed Search Network (select the closest location)

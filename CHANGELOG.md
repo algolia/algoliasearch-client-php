@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.5.7
+ - Replace GET search method by POST search method to avoid the url limit
+
 ### 1.5.6
  - Add new methods to add/update api key
  - Add batch method to target multiple indices

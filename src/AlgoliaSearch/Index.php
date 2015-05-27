@@ -291,6 +291,11 @@ class Index {
         if ($args === null) {
             $args = array();
         }
+        foreach ($args as $key => $value) {
+          if (gettype($value) == "array") {
+            $args[$key] = json_encode($value);
+          }
+        }
         $args["query"] = $query;
         return $this->client->request($this->context, "POST", "/1/indexes/" . $this->urlIndexName . "/query", array(), array("params" => http_build_query($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }

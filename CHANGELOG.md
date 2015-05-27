@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.5.8
+ - Fix bug introduced in the previous release with the nested array arguments in the search
+
 ### 1.5.7
  - Replace GET search method by POST search method to avoid the url limit
 

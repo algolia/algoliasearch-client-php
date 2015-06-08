@@ -25,14 +25,25 @@
  */
 namespace AlgoliaSearch;
 
+/**
+ * Class Version
+ *
+ * @package AlgoliaSearch
+ */
 class Version
 {
-    const VALUE                   = "1.5.8";
+    const VALUE = "1.5.8";
 
-    public static $custom_value   = "";
+    /**
+     * @var string
+     */
+    public static $custom_value = "";
 
+    /**
+     * @return string
+     */
     public static function get()
     {
-        return self::VALUE.static::$custom_value;
+        return self::VALUE . static::$custom_value;
     }
 }

@@ -25,6 +25,11 @@
  */
 namespace AlgoliaSearch;
 
+/**
+ * Class AlgoliaException
+ *
+ * @package AlgoliaSearch
+ */
 class AlgoliaException extends \Exception
 {
 }

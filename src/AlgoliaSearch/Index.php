@@ -629,12 +629,12 @@ class Index {
 
     private function _browse($query, $params = null)
     {
-        return new IndexBrowzer($this->client, $this->context, $this->urlIndexName, $query, $params);
+        return new IndexBrowser($this->client, $this->context, $this->urlIndexName, $query, $params);
     }
 
     public function browseFrom($query, $params = null, $cursor)
     {
-        return new IndexBrowzer($this->client, $this->context, $this->urlIndexName, $query, $params, $cursor);
+        return new IndexBrowser($this->client, $this->context, $this->urlIndexName, $query, $params, $cursor);
     }
 
     public function __call($name, $arguments)

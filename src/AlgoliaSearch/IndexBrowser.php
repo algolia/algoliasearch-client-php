@@ -25,7 +25,7 @@
  */
 namespace AlgoliaSearch;
 
-class IndexBrowzer implements \Iterator
+class IndexBrowser implements \Iterator
 {
     private $client;
     private $urlIndexName;

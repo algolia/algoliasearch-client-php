@@ -390,7 +390,7 @@ class Index {
      *             Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
      * @param hitsPerPage: Pagination parameter used to select the number of hits per page. Defaults to 1000.
      */
-    public function browse($page = 0, $hitsPerPage = 1000) {
+    public function _bc_browse($page = 0, $hitsPerPage = 1000) {
         return $this->client->request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/browse",
                                     array("page" => $page, "hitsPerPage" => $hitsPerPage), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -621,4 +621,28 @@ class Index {
         }
         return array("requests" => $requests);
     }
+
+    private function _browse($query, $params = null)
+    {
+        return new IndexBrowzer($this->client, $this->context, $this->urlIndexName, $query, $params);
+    }
+
+    public function browseFrom($query, $params = null, $cursor)
+    {
+        return new IndexBrowzer($this->client, $this->context, $this->urlIndexName, $query, $params, $cursor);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if ($name === 'browse') {
+            if ((count($arguments) >= 1 && is_string($arguments[0]))) {
+                return call_user_func_array(array($this, '_browse'), $arguments);
+            }
+            else {
+                return call_user_func_array(array($this, '_bc_browse'), $arguments);
+            }
+        }
+    }
 }
+
+

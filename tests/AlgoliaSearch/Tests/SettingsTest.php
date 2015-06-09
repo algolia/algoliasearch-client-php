@@ -39,4 +39,16 @@ class SettingsTest extends AlgoliaSearchTestCase
         $this->assertEquals(count($settings['attributesToRetrieve']), 1);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
     }
+
+    public function testSearchFacet()
+    {
+        $res = $this->index->addObjects(array(
+            array("firstname" => "Robin"),
+            array("firstname" => "Robert")
+        ));
+        $res = $this->index->setSettings(array('attributesForFaceting' => array('firstname')));
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('rob', array('facetFilters' => array('firstname:Robert')));
+        $this->assertEquals(1, $results['nbHits']);
+    }
 }

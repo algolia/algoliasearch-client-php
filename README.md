@@ -71,11 +71,8 @@ $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 
 If you're a Symfony or Laravel user; you're probably looking for the following integrations:
 
- - **Laravel** (community) - [vinkla/algolia](https://github.com/vinkla/algolia)
- - **Symfony** (official) - [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
- - **Symfony** (community) - [GoldenLine/AlgoliaBundle](https://github.com/GoldenLine/AlgoliaBundle)
-
-
+ - **Laravel**: [algolia/algoliasearch-laravel](https://github.com/algolia/algoliasearch-laravel)
+ - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
 
 Quick Start

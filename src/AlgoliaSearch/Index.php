@@ -629,18 +629,31 @@ class Index {
 
     private function _browse($query, $params = null)
     {
-        return new IndexBrowser($this->client, $this->context, $this->urlIndexName, $query, $params);
+        return new IndexBrowser($this, $query, $params);
     }
 
-    public function browseFrom($query, $params = null, $cursor)
+    public function browseFrom($query, $params = null, $cursor = null)
     {
-        return new IndexBrowser($this->client, $this->context, $this->urlIndexName, $query, $params, $cursor);
+        if ($params === null) {
+            $params = array();
+        }
+        foreach ($params as $key => $value) {
+          if (gettype($value) == "array") {
+            $params[$key] = json_encode($value);
+          }
+        }
+        if ($query != null)
+            $params["query"] = $query;
+        if ($cursor != null)
+            $params["cursor"] = $cursor;
+        return $this->client->request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/browse",
+                            $params, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     public function __call($name, $arguments)
     {
         if ($name === 'browse') {
-            if ((count($arguments) >= 1 && is_string($arguments[0]))) {
+            if (count($arguments) >= 1 && is_string($arguments[0])) {
                 return call_user_func_array(array($this, '_browse'), $arguments);
             }
             else {

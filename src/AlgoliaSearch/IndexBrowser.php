@@ -37,11 +37,9 @@ class IndexBrowser implements \Iterator
     private $answer;
 
 
-    public function __construct(Client $client, $context, $urlIndexName, $query, $params = null, $cursor = null)
+    public function __construct(Index $index, $query, $params = null, $cursor = null)
     {
-        $this->client       = $client;
-        $this->context      = $context;
-        $this->urlIndexName = $urlIndexName;
+        $this->index       = $index;
         $this->query        = $query;
         $this->params       = $params;
 
@@ -95,12 +93,16 @@ class IndexBrowser implements \Iterator
         $this->pos = 0;
     }
 
+    public function cursor()
+    {
+        return $this->answer['cursor'];
+    }
+
     private function doQuery($cursor = null)
     {
         if ($cursor !== null)
             $this->params['cursor'] = $cursor;
 
-        $this->answer = $this->client->request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/browse",
-                            $this->params, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        $this->answer = $this->index->browseFrom($this->query, $this->params, $cursor);
     }
 }

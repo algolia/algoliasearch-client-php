@@ -409,11 +409,21 @@ class Index {
      */
     public function waitTask($taskID, $timeBeforeRetry = 100) {
         while (true) {
-            $res = $this->client->request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/task/" . $taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            $res = $this->getTaskStatus($taskID);
             if ($res["status"] === "published")
                 return $res;
             usleep($timeBeforeRetry * 1000);
         }
+    }
+
+    /*
+     * get the status of a task on the server.
+     * All server task are asynchronous and you can check with this method that the task is published or not.
+     *
+     * @param taskID the id of the task returned by server
+     */
+    public function getTaskStatus($taskID) {
+        return $this->client->request($this->context, "GET", "/1/indexes/" . $this->urlIndexName . "/task/" . $taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*

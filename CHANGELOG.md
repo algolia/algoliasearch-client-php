@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.6.0
+ - Add new browse methods that supports filtering
+ - Add getTaskStatus to retrieve the status of a task without waiting
+
 ### 1.5.8
  - Fix bug introduced in the previous release with the nested array arguments in the search
 

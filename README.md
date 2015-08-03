@@ -55,6 +55,8 @@ You can install the package via Composer:
 ```bash
 composer require You can install the package via composer:
 ```
+If you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
+
 Next you'll have to initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```php
@@ -64,6 +66,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 ```
+
+
 
 ### Framework Integrations
 

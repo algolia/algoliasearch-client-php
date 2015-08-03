@@ -51,17 +51,11 @@ Setup
 -------------
 To setup your project, follow these steps:
 
-
-
-
- 1. Use [Composer](https://getcomposer.org/doc/00-intro.md) to manage your `algoliasearch` dependency (if you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
- 2. Add `algolia/algoliasearch-client-php` to your `composer.json` file:
-```json
-  "require": {
-      "algolia/algoliasearch-client-php": "1.5.*"
-  }
+You can install the package via Composer:
+```bash
+composer require You can install the package via composer:
 ```
- 3. Initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
+Next you'll have to initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
 
 ```php
 // composer autoload

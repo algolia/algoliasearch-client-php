@@ -53,7 +53,7 @@ To setup your project, follow these steps:
 
 You can install the package via Composer:
 ```bash
-composer require You can install the package via composer:
+composer require algolia/algoliasearch-client-php
 ```
 If you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
 

@@ -215,14 +215,14 @@ class Index {
      */
     public function deleteByQuery($query, $args = array(), $waitLastCall = true) {
         $args['attributesToRetrieve'] = 'objectID';
-        if (!empty($args['hitsPerPage'])) {
-            $args['hitsPerPage'] = 1000;
-        }
+        $args['hitsPerPage'] = 1000;
+        $args['distinct'] = false;
+
         $results = $this->search($query, $args);
         while ($results['nbHits'] != 0) {
-            $objectIDs = [];
+            $objectIDs = array();
             foreach ($results['hits'] as $elt) {
-                $objectIDs[] = $elt['objectID'];
+                array_push($objectIDs, $elt['objectID']);
             }
             $res = $this->deleteObjects($objectIDs);
             if ($results['nbHits'] < $args['hitsPerPage'] && false === $waitLastCall) {

@@ -127,7 +127,7 @@ class Index {
             throw new \Exception('No list of objectID provided');
         }
         $requests = array();
-        foreach ($objectIDs as $object) {            
+        foreach ($objectIDs as $object) {
             $req = array("indexName" => $this->indexName, "objectID" => $object);
             array_push($requests, $req);
         }
@@ -207,21 +207,30 @@ class Index {
      * Delete all objects matching a query
      *
      * @param query the query string
-     * @param params the optional query parameters
+     * @param args the optional query parameters
+     * @param waitLastCall
+     * /!\ Be safe with "waitLastCall"
+     *      In really rare cases you can have the number of hits smaller than the hitsPerPage
+     *      param if you trigger the timeout of the search, in that case you won't remove all the records
      */
-    public function deleteByQuery($query, $args = array()) {
-      $params["attributeToRetrieve"] = array('objectID');
-      $params["hitsPerPage"] = 1000;
-      $results = $this->search($query, $args);
-      while ($results['nbHits'] != 0) {
-        $objectIDs = array();
-        foreach ($results['hits'] as $elt) {
-          array_push($objectIDs, $elt['objectID']);
+    public function deleteByQuery($query, $args = array(), $waitLastCall = true) {
+        $args['attributesToRetrieve'] = 'objectID';
+        if (!empty($args['hitsPerPage'])) {
+            $args['hitsPerPage'] = 1000;
         }
-        $res = $this->deleteObjects($objectIDs);
-        $this->waitTask($res['taskID']);
         $results = $this->search($query, $args);
-      }
+        while ($results['nbHits'] != 0) {
+            $objectIDs = [];
+            foreach ($results['hits'] as $elt) {
+                $objectIDs[] = $elt['objectID'];
+            }
+            $res = $this->deleteObjects($objectIDs);
+            if ($results['nbHits'] < $args['hitsPerPage'] && false === $waitLastCall) {
+                break;
+            }
+            $this->waitTask($res['taskID']);
+            $results = $this->search($query, $args);
+        }
     }
 
     /*

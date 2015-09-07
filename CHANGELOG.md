@@ -1,5 +1,10 @@
 ## Change Log
 
+### 1.6.1
+ - fix deleteByQuery (was not using 1000 hits for deletes)
+ - force distinct false in deleteByQuery
+ - add waitLastCall option in deleteByQuery
+
 ### 1.6.0
  - Add new browse methods that supports filtering
  - Add getTaskStatus to retrieve the status of a task without waiting

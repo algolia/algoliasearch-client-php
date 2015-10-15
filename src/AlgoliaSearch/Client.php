@@ -133,12 +133,8 @@ class Client {
             } else {
                 throw new \Exception('indexName is mandatory');
             }
-            foreach ($query as $key => $value) {
-              if (gettype($value) == "array") {
-                $query[$key] = json_encode($value);
-              }
-            }
-            $req = array("indexName" => $indexes, "params" => http_build_query($query));
+            $req = array("indexName" => $indexes, "params" => $this->buildQuery($query));
+
             array_push($requests, $req);
         }
         return $this->request($this->context, "POST", "/1/indexes/*/queries?strategy=" . $strategy, array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
@@ -343,31 +339,76 @@ class Client {
     }
 
     /*
-     * Generate a secured and public API Key from a list of tagFilters and an
+     * Generate a secured and public API Key from a list of query parameters and an
      * optional user token identifying the current user
      *
      * @param privateApiKey your private API Key
-     * @param tagFilters the list of tags applied to the query (used as security)
+     * @param query the list of query parameters applied to the query (used as security)
      * @param userToken an optional token identifying the current user
      *
      */
-    public function generateSecuredApiKey($privateApiKey, $tagFilters, $userToken = null) {
-        if (is_array($tagFilters)) {
-            $tmp = array();
-            foreach ($tagFilters as $tag) {
-                if (is_array($tag)) {
-                    $tmp2 = array();
-                    foreach ($tag as $tag2) {
-                        array_push($tmp2, $tag2);
-                    }
-                    array_push($tmp, '(' . join(',', $tmp2) . ')');
-                } else {
-                    array_push($tmp, $tag);
-                }
+    public function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
+    {
+        $urlEncodedQuery = '';
+        if (is_array($query))
+        {
+            $queryParameters = array();
+            if (array_keys($query) !== array_keys(array_keys($query))) // array of query parameters
+            {
+                $queryParameters = $query;
             }
-            $tagFilters = join(',', $tmp);
+            else // array of tags
+            {
+                $tmp = array();
+                foreach ($query as $tag) {
+                    if (is_array($tag)) {
+                        $tmp2 = array();
+                        foreach ($tag as $tag2) {
+                            array_push($tmp2, $tag2);
+                        }
+                        array_push($tmp, '(' . join(',', $tmp2) . ')');
+                    } else {
+                        array_push($tmp, $tag);
+                    }
+                }
+                $tagFilters = join(',', $tmp);
+                $queryParameters['tagFilters'] = $tagFilters;
+            }
+            if ($userToken != null && strlen($userToken))
+            {
+                $queryParameters['userToken'] = $userToken;
+            }
+            $urlEncodedQuery = $this->buildQuery($queryParameters);
         }
-        return hash_hmac('sha256', $tagFilters . $userToken, $privateApiKey);
+        else if (strpos($query, '=') === FALSE) // String of tags
+        {
+            $queryParameters = array('tagFilters' => $query);
+            if ($userToken != null && strlen($userToken))
+            {
+                $queryParameters['userToken'] = $userToken;
+            }
+            $urlEncodedQuery = $this->buildQuery($queryParameters);
+        }
+        else // url encoded query
+        {
+            $urlEncodedQuery = $query;
+            if ($userToken != null && strlen($userToken))
+            {
+                $urlEncodedQuery = $urlEncodedQuery . "&userToken=" . urlencode($userToken);
+            }
+        }
+        $content = hash_hmac('sha256', $urlEncodedQuery, $privateApiKey) . $urlEncodedQuery;
+        return base64_encode($content);
+    }
+
+    public function buildQuery($args)
+    {
+        foreach ($args as $key => $value) {
+            if (gettype($value) == "array") {
+                $args[$key] = json_encode($value);
+            }
+        }
+        return http_build_query($args);
     }
 
     public function request($context, $method, $path, $params = array(), $data = array(), $hostsArray, $connectTimeout, $readTimeout) {

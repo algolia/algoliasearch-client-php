@@ -91,16 +91,11 @@ class SecurityTest extends AlgoliaSearchTestCase
         $this->client->deleteIndex($this->safe_name('b-13'));
     }
 
-    public function testSecuredApiKeys()
+    public function testNewSecuredApiKeys()
     {
-        $this->assertEquals('1fd74b206c64fb49fdcd7a5f3004356cd3bdc9d9aba8733656443e64daafc417', hash_hmac('sha256', '(public,user1)', 'my_api_key'));
-        $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)');
-        $this->assertEquals($key, hash_hmac('sha256', '(public,user1)', 'my_api_key'));
-        $key = $this->client->generateSecuredApiKey('my_api_key', '(public,user1)', 42);
-        $this->assertEquals($key, hash_hmac('sha256', '(public,user1)42', 'my_api_key'));
-        $key = $this->client->generateSecuredApiKey('my_api_key', array('public'));
-        $this->assertEquals($key, hash_hmac('sha256', 'public', 'my_api_key'));
-        $key = $this->client->generateSecuredApiKey('my_api_key', array('public', array('premium','vip')));
-        $this->assertEquals($key, hash_hmac('sha256', 'public,(premium,vip)', 'my_api_key'));
+        $this->assertEquals("MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=", $this->client->generateSecuredApiKey("182634d8894831d5dbce3b3185c50881", "(public,user1)"));
+        $this->assertEquals("MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=", $this->client->generateSecuredApiKey("182634d8894831d5dbce3b3185c50881", array('tagFilters' => "(public,user1)")));
+        $this->assertEquals("OGYwN2NlNTdlOGM2ZmM4MjA5NGM0ZmYwNTk3MDBkNzMzZjQ0MDI3MWZjNTNjM2Y3YTAzMWM4NTBkMzRiNTM5YnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjkmdXNlclRva2VuPTQy", $this->client->generateSecuredApiKey("182634d8894831d5dbce3b3185c50881", array('tagFilters' => "(public,user1)", 'userToken'=> '42')));
+        $this->assertEquals("OGYwN2NlNTdlOGM2ZmM4MjA5NGM0ZmYwNTk3MDBkNzMzZjQ0MDI3MWZjNTNjM2Y3YTAzMWM4NTBkMzRiNTM5YnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjkmdXNlclRva2VuPTQy", $this->client->generateSecuredApiKey("182634d8894831d5dbce3b3185c50881", array('tagFilters' => "(public,user1)"), '42'));
     }
 }

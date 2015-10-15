@@ -362,11 +362,7 @@ class Client {
                 $tmp = array();
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
-                        $tmp2 = array();
-                        foreach ($tag as $tag2) {
-                            array_push($tmp2, $tag2);
-                        }
-                        array_push($tmp, '(' . join(',', $tmp2) . ')');
+                        array_push($tmp, '(' . join(',', $tag) . ')');
                     } else {
                         array_push($tmp, $tag);
                     }
@@ -374,7 +370,7 @@ class Client {
                 $tagFilters = join(',', $tmp);
                 $queryParameters['tagFilters'] = $tagFilters;
             }
-            if ($userToken != null && strlen($userToken))
+            if ($userToken != null && strlen($userToken) > 0)
             {
                 $queryParameters['userToken'] = $userToken;
             }
@@ -383,7 +379,7 @@ class Client {
         else if (strpos($query, '=') === FALSE) // String of tags
         {
             $queryParameters = array('tagFilters' => $query);
-            if ($userToken != null && strlen($userToken))
+            if ($userToken != null && strlen($userToken) > 0)
             {
                 $queryParameters['userToken'] = $userToken;
             }
@@ -392,7 +388,7 @@ class Client {
         else // url encoded query
         {
             $urlEncodedQuery = $query;
-            if ($userToken != null && strlen($userToken))
+            if ($userToken != null && strlen($userToken) > 0)
             {
                 $urlEncodedQuery = $urlEncodedQuery . "&userToken=" . urlencode($userToken);
             }

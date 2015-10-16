@@ -27,7 +27,7 @@ namespace AlgoliaSearch;
 
 class Version
 {
-    const VALUE                   = "1.6.1";
+    const VALUE                   = "1.7.0";
 
     public static $custom_value   = "";
 

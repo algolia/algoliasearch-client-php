@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.7.0
+ - Add new secured api key
+
 ### 1.6.1
  - fix deleteByQuery (was not using 1000 hits for deletes)
  - force distinct false in deleteByQuery

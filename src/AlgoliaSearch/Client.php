@@ -34,6 +34,7 @@ class Client {
 
     protected $context;
     protected $cainfoPath;
+    protected $curlOptions = [];
 
     /*
      * Algolia Search initialization
@@ -57,6 +58,8 @@ class Client {
         foreach ($options as $option => $value) {
             if ($option == "cainfo") {
                 $this->cainfoPath = $value;
+            } elseif ($option == "curl-options" and is_array($value)) {
+                $this->curlOptions = $value;
             } else {
                 throw new \Exception('Unknown option: ' . $option);
             }
@@ -449,6 +452,12 @@ class Client {
         }
         // initialize curl library
         $curlHandle = curl_init();
+        
+        // set curl options
+        foreach ($this->curlOptions as $curlOption => $value) {
+            curl_setopt($curlHandle, $curlOption, $value);
+        }
+
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(

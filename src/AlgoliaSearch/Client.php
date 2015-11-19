@@ -627,7 +627,16 @@ class Client {
         }
 
         $curlAllConstants = get_defined_constants(true);
-        $curlAllConstants = $curlAllConstants['curl'];
+
+        if (isset($curlAllConstants['curl'])) {
+            $curlAllConstants = $curlAllConstants['curl'];
+        }
+        elseif (isset($curlAllConstants['Core'])) { // hhvm
+            $curlAllConstants = $curlAllConstants['Core'];
+        }
+        else {
+            return $this->curlConstants;
+        }
 
         $curlConstants = array();
         foreach ($curlAllConstants as $constantName => $constantValue) {

@@ -32,6 +32,8 @@ namespace AlgoliaSearch;
  */
 class Client {
 
+    const CAINFO = 'cainfo';
+
     protected $context;
     protected $cainfoPath;
 
@@ -55,10 +57,13 @@ class Client {
         }
         $this->cainfoPath = __DIR__ . '/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {
-            if ($option == "cainfo") {
-                $this->cainfoPath = $value;
-            } else {
-                throw new \Exception('Unknown option: ' . $option);
+            switch ($option) {
+                case static::CAINFO:
+                    $this->cainfoPath = $value;
+                    break;
+                default:
+                    throw new \Exception('Unknown option: ' . $option);
+                    break;
             }
         }
     }
@@ -206,7 +211,7 @@ class Client {
     public function initIndex($indexName) {
         if (empty($indexName)) {
             throw new AlgoliaException('Invalid index name: empty string');
-	}
+        }
         return new Index($this->context, $this, $indexName);
     }
 

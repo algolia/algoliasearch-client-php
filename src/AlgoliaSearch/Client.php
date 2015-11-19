@@ -626,7 +626,8 @@ class Client {
             return $this->curlConstants;
         }
 
-        $curlAllConstants = get_defined_constants(true)['curl'];
+        $curlAllConstants = get_defined_constants(true);
+        $curlAllConstants = $curlAllConstants['curl'];
 
         $curlConstants = [];
         foreach ($curlAllConstants as $constantName => $constantValue) {

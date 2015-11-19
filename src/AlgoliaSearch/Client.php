@@ -629,7 +629,7 @@ class Client {
         $curlAllConstants = get_defined_constants(true);
         $curlAllConstants = $curlAllConstants['curl'];
 
-        $curlConstants = [];
+        $curlConstants = array();
         foreach ($curlAllConstants as $constantName => $constantValue) {
             if (strpos($constantName, 'CURLOPT') === 0) {
                 $curlConstants[$constantName] = $constantValue;

@@ -38,6 +38,7 @@ class Client {
     protected $context;
     protected $cainfoPath;
     protected $curlConstants;
+    protected $curlOptions = array();
 
     /*
      * Algolia Search initialization
@@ -60,10 +61,10 @@ class Client {
         $this->cainfoPath = __DIR__ . '/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {
             switch ($option) {
-                case static::CAINFO:
+                case self::CAINFO:
                     $this->cainfoPath = $value;
                     break;
-                case static::CURLOPT:
+                case self::CURLOPT:
                     $this->curlOptions = $this->checkCurlOptions($value);
                     break;
                 default:
@@ -463,7 +464,7 @@ class Client {
         // set curl options
         try {
             foreach ($this->curlOptions as $curlOption => $optionValue) {
-                curl_setopt($curlHandle, $curlOption, $optionValue);
+                curl_setopt($curlHandle, constant($curlOption), $optionValue);
             }
         } catch (\Exception $e) {
             $this->invalidOptions($this->curlOptions, $e->getMessage());
@@ -607,7 +608,7 @@ class Client {
             );
         }
 
-        $checkedCurlOptions = array_intersect(array_keys($curlOptions), array_values($this->getCurlConstants()));
+        $checkedCurlOptions = array_intersect(array_keys($curlOptions), array_keys($this->getCurlConstants()));
 
         if (count($checkedCurlOptions) !== count($curlOptions)) {
             $this->invalidOptions($curlOptions);

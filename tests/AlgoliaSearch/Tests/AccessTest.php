@@ -17,4 +17,9 @@ class AccessTest extends AlgoliaSearchTestCase
       $client->isAlive();
     }
 
+    public function testAccessWithOptions() {
+        $client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), array("https://" . getenv('ALGOLIA_APPLICATION_ID') . "-1.algolia.io"),
+                                array('curloptions' => array('CURLOPT_FAILONERROR' => 0)));
+        $client->isAlive();
+    }
 }

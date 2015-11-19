@@ -33,9 +33,11 @@ namespace AlgoliaSearch;
 class Client {
 
     const CAINFO = 'cainfo';
+    const CURLOPT = 'curloptions';
 
     protected $context;
     protected $cainfoPath;
+    protected $curlConstants;
 
     /*
      * Algolia Search initialization
@@ -60,6 +62,9 @@ class Client {
             switch ($option) {
                 case static::CAINFO:
                     $this->cainfoPath = $value;
+                    break;
+                case static::CURLOPT:
+                    $this->curlOptions = $this->checkCurlOptions($value);
                     break;
                 default:
                     throw new \Exception('Unknown option: ' . $option);
@@ -454,6 +459,16 @@ class Client {
         }
         // initialize curl library
         $curlHandle = curl_init();
+
+        // set curl options
+        try {
+            foreach ($this->curlOptions as $curlOption => $optionValue) {
+                curl_setopt($curlHandle, $curlOption, $optionValue);
+            }
+        } catch (\Exception $e) {
+            $this->invalidOptions($this->curlOptions, $e->getMessage());
+        }
+
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
@@ -575,6 +590,70 @@ class Client {
 
         return $answer;
     }
+
+    /*
+     * Checks if curl option passed are valid curl options
+     *
+     * @param curlOptions must be array but no type required while first test throw clear Exception
+     */
+    protected function checkCurlOptions($curlOptions)
+    {
+        if (!is_array($curlOptions)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'AlgoliaSearch requires %s option to be array of valid curl options.',
+                    static::CURLOPT
+                )
+            );
+        }
+
+        $checkedCurlOptions = array_intersect(array_keys($curlOptions), array_values($this->getCurlConstants()));
+
+        if (count($checkedCurlOptions) !== count($curlOptions)) {
+            $this->invalidOptions($curlOptions);
+        }
+
+        return $curlOptions;
+    }
+
+    /*
+     * Get all php curl available options
+     */
+    protected function getCurlConstants()
+    {
+        if (!is_null($this->curlConstants)) {
+            return $this->curlConstants;
+        }
+
+        $curlAllConstants = get_defined_constants(true)['curl'];
+
+        $curlConstants = [];
+        foreach ($curlAllConstants as $constantName => $constantValue) {
+            if (strpos($constantName, 'CURLOPT') === 0) {
+                $curlConstants[$constantName] = $constantValue;
+            }
+        }
+
+        $this->curlConstants = $curlConstants;
+
+        return $this->curlConstants;
+    }
+
+    /*
+     * throw clear Exception when bad curl option is set
+     *
+     * @param curlOptions array
+     * @param errorMsg add specific message for disambiguation
+     */
+    protected function invalidOptions(array $curlOptions = array(), $errorMsg = '')
+    {
+        throw new \OutOfBoundsException(
+            sprintf(
+                'AlgoliaSearch %s options keys are invalid. %s given. error message : %s',
+                static::CURLOPT,
+                json_encode($curlOptions),
+                $errorMsg
+            )
+        );
+    }
 }
-
-

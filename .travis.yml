@@ -1,25 +1,34 @@
 language: php
+
 php:
-- 5.3
-- 5.4
-- 5.5
-- 5.6
-- 7.0
-- hhvm
+  - 5.3.3
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
 sudo: false
+
 cache:
   directories:
     - $HOME/.composer/cache
+
 branches:
   only:
-  - master
+    - master
+
 install:
-  - composer install
+    - composer install
+
 script:
   - phpunit --debug -c phpunit.xml.dist
+
 after_script:
   - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls; fi;'
+
 env:
   global:
-  - secure: NIp6EaQ5PuW82Vz4VRQEKWQyvBiyyr328VGy6ssfYVcHscTxmWj/c6ItQva1YhRG+rkkqaxk5/12dV3DrXlseXXuXsTlSUUhccUpmQZwQksQaKd/WCCJGO5E6N0TWc7xZTKTarL6Ez9K8pbhJHfCLMKNAij0U+RGohUWGp6vjQI=
-  - secure: vrh60ZzJQdIjhFdX/PxYyk7w7b7rBq/xX365Ixyav/h7tJ8IfpkNiDlXNZkF0/6GnzWNPm66lQiBs+BXpwR5DzMK11c+5M7Yz9MP/XSCFzUOd52aj/wmAVsbFj3LSpcJL7BBOOWIVM5kAr6+KU/0ggwGzrUJ0Msv4oOfcDEjObs=
+    - secure: NIp6EaQ5PuW82Vz4VRQEKWQyvBiyyr328VGy6ssfYVcHscTxmWj/c6ItQva1YhRG+rkkqaxk5/12dV3DrXlseXXuXsTlSUUhccUpmQZwQksQaKd/WCCJGO5E6N0TWc7xZTKTarL6Ez9K8pbhJHfCLMKNAij0U+RGohUWGp6vjQI=
+    - secure: vrh60ZzJQdIjhFdX/PxYyk7w7b7rBq/xX365Ixyav/h7tJ8IfpkNiDlXNZkF0/6GnzWNPm66lQiBs+BXpwR5DzMK11c+5M7Yz9MP/XSCFzUOd52aj/wmAVsbFj3LSpcJL7BBOOWIVM5kAr6+KU/0ggwGzrUJ0Msv4oOfcDEjObs=

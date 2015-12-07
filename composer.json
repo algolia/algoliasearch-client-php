@@ -19,11 +19,12 @@
         }
     ],
     "require": {
+        "php": ">=5.3.3",
         "ext-mbstring": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "4.0.*"
+        "satooshi/php-coveralls": "0.6.*",
+        "phpunit/phpunit": "^4.8 || ^5.0"
     },
     "autoload": {
         "psr-0": {

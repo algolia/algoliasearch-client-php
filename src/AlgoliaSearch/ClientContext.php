@@ -35,6 +35,8 @@ class ClientContext {
     public $writeHostsArray;
     public $curlMHandle;
     public $adminAPIKey;
+    public $endUserIP;
+    public $algoliaUserToken;
     public $connectTimeout;
 
     function __construct($applicationID, $apiKey, $hostsArray) {
@@ -59,6 +61,7 @@ class ClientContext {
         $this->curlMHandle = NULL;
         $this->adminAPIKey = NULL;
         $this->endUserIP = NULL;
+        $this->algoliaUserToken = NULL;
         $this->rateLimitAPIKey = NULL;
         $this->headers = array();
     }
@@ -81,7 +84,15 @@ class ClientContext {
     public function releaseMHandle($curlHandle) {
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
-    
+
+    public function setForwardedFor($ip) {
+        $this->endUserIP = $ip;
+    }
+
+    public function setAlgoliaUserToken($token) {
+        $this->algoliaUserToken = $token;
+    }
+
     public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
         $this->adminAPIKey = $adminAPIKey;
         $this->endUserIP = $endUserIP;

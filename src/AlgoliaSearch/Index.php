@@ -322,7 +322,7 @@ class Index {
       }
 
       if (gettype($disjunctive_facets) == "string") {
-        $disjunctive_facets = split(",", $disjunctive_facets);
+        $disjunctive_facets = explode(",", $disjunctive_facets);
       }
 
       $disjunctive_refinements = array();

@@ -324,7 +324,6 @@ You can use the following optional arguments:
   * **none**: No specific processing is done when a query does not return any results (default behavior).
  * **minWordSizefor1Typo**: The minimum number of characters in a query word to accept one typo in this word.<br/>Defaults to 4.
  * **minWordSizefor2Typos**: The minimum number of characters in a query word to accept two typos in this word.<br/>Defaults to 8.
- * **allowTyposOnNumericTokens**: If set to false, it disables typo tolerance on numeric tokens (numbers). Defaults to false.
  * **typoTolerance**: This option allows you to control the number of typos in the result set:
   * **true**: The typo tolerance is enabled and all matching hits are retrieved (default behavior).
   * **false**: The typo tolerance is disabled. For example, if one result matches without typos, then all results with typos will be hidden.
@@ -906,11 +905,24 @@ $res = $client->moveIndex("MyNewIndex", "MyIndex");
 Backup / Retrieve of all index content
 -------------
 
-You can retrieve all index content for backup purposes or for SEO using the browse method.
-This method can retrieve up to 1,000 objects per call and supports full text search and filters but the distinct feature is not available
-Unlike the search method, the sort by typo, proximity, geo distance and matched words is not applied, the hits are only sorted by numeric attributes specified in the ranking and the custom ranking.
+The `search` method cannot return more than 1,000 results. If you need to
+retrieve all the content of your index (for backup, SEO purposes or for running
+a script on it), you should use the `browse` method instead. This method lets
+you retrieve objects beyond the 1,000 limit.
 
-You can browse the index:
+This method is optimized for speed. To make it fast, distinct, typo-tolerance,
+word proximity, geo distance and number of matched words are disabled. Results
+are still returned ranked by attributes and custom ranking.
+
+
+It will return a `cursor` alongside your data, that you can then use to retrieve
+the next chunk of your records.
+
+You can specify custom parameters (like `page` or `hitsPerPage`) on your first
+`browse` call, and these parameters will then be included in the `cursor`. Note
+that it is not possible to access records beyond the 1,000th on the first call.
+
+Example:
 
 ```php
 // Iterate with a filter over the index

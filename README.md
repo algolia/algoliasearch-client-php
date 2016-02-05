@@ -468,7 +468,9 @@ $queries = array(
   array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 10)
 );
 
-var_dump(results["results"]):
+$results = $client->multipleQueries($queries);
+
+var_dump($results["results"]):
 ```
 
 The resulting JSON answer contains a ```results``` array storing the underlying queries answers. The answers order is the same than the requests order.

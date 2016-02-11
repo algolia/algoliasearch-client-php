@@ -107,6 +107,28 @@ class Client {
         $this->context->setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey);
     }
 
+    /**
+     * The aggregation of the queries to retrieve the latest query uses the IP or the user token to work efficiently.
+     * If the queries are made from your backend server, the IP will be the same for all of the queries.
+     * We're supporting the following HTTP header to forward the IP of your end-user to the engine, you just need to set it for each query.
+     *
+     * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
+     * @param string $ip
+     */
+    public function setForwardedFor($ip) {
+        $this->context->setForwardedFor($ip);
+    }
+
+    /**
+     * It's possible to use the following token to track users that have the same IP or to track users that use different devices
+     *
+     * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
+     * @param string $token
+     */
+    public function setAlgoliaUserToken($token) {
+        $this->context->setAlgoliaUserToken($token);
+    }
+
     /*
      * Disable IP rate limit enabled with enableRateLimitForward() function
      */
@@ -482,6 +504,7 @@ class Client {
                     'X-Algolia-Application-Id: ' . $context->applicationID,
                     'X-Algolia-API-Key: ' . $context->adminAPIKey,
                     'X-Forwarded-For: ' . $context->endUserIP,
+                    'X-Algolia-UserToken: ' . $context->algoliaUserToken,
                     'X-Forwarded-API-Key: ' . $context->rateLimitAPIKey,
                     'Content-type: application/json'
                     ), $context->headers));

@@ -392,16 +392,22 @@ class Client {
             }
             else // array of tags
             {
-                $tmp = array();
-                foreach ($query as $tag) {
-                    if (is_array($tag)) {
-                        array_push($tmp, '(' . join(',', $tag) . ')');
-                    } else {
-                        array_push($tmp, $tag);
+                $format = function($value) use (&$format){
+                    if(is_array($value)){
+                        $result = array();
+                        foreach($value as $_value){
+                            if(is_array($_value)){
+                                $_value = $format($_value);
+                            }
+                            $result[] = $_value;
+                        }
+                        return '(' . implode(',', $result) . ')';
                     }
-                }
-                $tagFilters = join(',', $tmp);
-                $queryParameters['tagFilters'] = $tagFilters;
+                    else{
+                        return $value;
+                    }
+                };
+                $queryParameters['tagFilters'] = $format($query);
             }
             if ($userToken != null && strlen($userToken) > 0)
             {

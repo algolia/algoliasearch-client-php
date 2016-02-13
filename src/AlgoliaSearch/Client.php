@@ -182,6 +182,7 @@ class Client
 
             array_push($requests, $req);
         }
+
         return $this->request($this->context, "POST", "/1/indexes/*/queries?strategy=".$strategy, array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
@@ -218,6 +219,7 @@ class Client
     public function moveIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "move", "destination" => $dstIndexName);
+
         return $this->request($this->context, "POST", "/1/indexes/".urlencode($srcIndexName)."/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -230,6 +232,7 @@ class Client
     public function copyIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
+
         return $this->request($this->context, "POST", "/1/indexes/".urlencode($srcIndexName)."/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -248,6 +251,7 @@ class Client
                 $type = "all";
             }
         }
+
         return $this->request($this->context, "GET", "/1/logs?offset=".$offset."&length=".$length."&type=".$type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -261,6 +265,7 @@ class Client
         if (empty($indexName)) {
             throw new AlgoliaException('Invalid index name: empty string');
         }
+
         return new Index($this->context, $this, $indexName);
     }
 
@@ -337,6 +342,7 @@ class Client
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
+
         return $this->request($this->context, "POST", "/1/keys", array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -385,6 +391,7 @@ class Client
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
+
         return $this->request($this->context, "PUT", "/1/keys/".$key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -454,6 +461,7 @@ class Client
             }
         }
         $content = hash_hmac('sha256', $urlEncodedQuery, $privateApiKey).$urlEncodedQuery;
+
         return base64_encode($content);
     }
 
@@ -464,6 +472,7 @@ class Client
                 $args[$key] = json_encode($value);
             }
         }
+
         return http_build_query($args);
     }
 
@@ -605,6 +614,7 @@ class Client
             // Could not reach host or service unavailable, try with another one if we have it
             $context->releaseMHandle($curlHandle);
             curl_close($curlHandle);
+
             return;
         }
 

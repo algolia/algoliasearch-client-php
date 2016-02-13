@@ -103,6 +103,7 @@ class Index
     public function addObjects($objects, $objectIDKey = "objectID")
     {
         $requests = $this->buildBatch("addObject", $objects, true, $objectIDKey);
+
         return $this->batch($requests);
     }
 
@@ -137,6 +138,7 @@ class Index
             $req = array("indexName" => $this->indexName, "objectID" => $object);
             array_push($requests, $req);
         }
+
         return $this->client->request($this->context, "POST", "/1/indexes/*/objects", array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -163,6 +165,7 @@ class Index
         } else {
             $requests = $this->buildBatch("partialUpdateObjectNoCreate", $objects, true, $objectIDKey);
         }
+
         return $this->batch($requests);
     }
 
@@ -184,6 +187,7 @@ class Index
     public function saveObjects($objects, $objectIDKey = "objectID")
     {
         $requests = $this->buildBatch("updateObject", $objects, true, $objectIDKey);
+
         return $this->batch($requests);
     }
 
@@ -197,6 +201,7 @@ class Index
         if ($objectID == null || mb_strlen($objectID) == 0) {
             throw new \Exception('objectID is mandatory');
         }
+
         return $this->client->request($this->context, "DELETE", "/1/indexes/".$this->urlIndexName."/".urlencode($objectID), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -212,6 +217,7 @@ class Index
             $objectIDs[$key] = array('objectID' => $id);
         }
         $requests = $this->buildBatch("deleteObject", $objectIDs, true);
+
         return $this->batch($requests);
     }
 
@@ -315,6 +321,7 @@ class Index
             $args = array();
         }
         $args["query"] = $query;
+
         return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/query", array(), array("params" => $this->client->buildQuery($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
@@ -404,6 +411,7 @@ class Index
                 }
             }
         }
+
         return $aggregated_answer;
     }
 
@@ -590,6 +598,7 @@ class Index
                 "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
+
         return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/keys", array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -635,6 +644,7 @@ class Index
                 "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
+
         return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/keys/".$key, array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -670,6 +680,7 @@ class Index
             }
             array_push($requests, $req);
         }
+
         return array("requests" => $requests);
     }
 
@@ -694,6 +705,7 @@ class Index
         if ($cursor != null) {
             $params["cursor"] = $cursor;
         }
+
         return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/browse",
                             $params, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }

@@ -46,7 +46,7 @@ class Index
         $this->urlIndexName = urlencode($indexName);
     }
 
-    /*
+    /**
      * Perform batch operation on several objects
      *
      * @param objects contains an array of objects to update (each object must contains an objectID attribute)
@@ -64,7 +64,9 @@ class Index
             }
 
             $action = $obj[$objectActionKey];
-            unset($obj[$objectActionKey]); // The action key is not included in the object
+
+            // The action key is not included in the object
+            unset($obj[$objectActionKey]);
 
             $req = array('action' => $action, 'body' => $obj);
 
@@ -78,7 +80,7 @@ class Index
         return $this->batch(array('requests' => $requests));
     }
 
-    /*
+    /**
      * Add an object in this index
      *
      * @param content contains the object to add inside the index.
@@ -95,7 +97,7 @@ class Index
         }
     }
 
-    /*
+    /**
      * Add several objects
      *
      * @param objects contains an array of objects to add. If the object contains an objectID
@@ -107,7 +109,7 @@ class Index
         return $this->batch($requests);
     }
 
-    /*
+    /**
      * Get an object from this index
      *
      * @param objectID the unique identifier of the object to retrieve
@@ -123,7 +125,7 @@ class Index
         }
     }
 
-    /*
+    /**
      * Get several objects from this index
      *
      * @param objectIDs the array of unique identifier of objects to retrieve
@@ -133,6 +135,7 @@ class Index
         if ($objectIDs == null) {
             throw new \Exception('No list of objectID provided');
         }
+
         $requests = array();
         foreach ($objectIDs as $object) {
             $req = array('indexName' => $this->indexName, 'objectID' => $object);
@@ -142,7 +145,7 @@ class Index
         return $this->client->request($this->context, 'POST', '/1/indexes/*/objects', array(), array('requests' => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Update partially an object (only update attributes passed in argument)
      *
      * @param partialObject contains the object attributes to override, the
@@ -153,7 +156,7 @@ class Index
         return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.($createIfNotExists ? '' : '?createIfNotExists=false'), array(), $partialObject, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Partially Override the content of several objects
      *
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
@@ -169,7 +172,7 @@ class Index
         return $this->batch($requests);
     }
 
-    /*
+    /**
      * Override the content of object
      *
      * @param object contains the object to save, the object must contains an objectID attribute
@@ -179,7 +182,7 @@ class Index
         return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']), array(), $object, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Override the content of several objects
      *
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
@@ -191,7 +194,7 @@ class Index
         return $this->batch($requests);
     }
 
-    /*
+    /**
      * Delete an object from the index
      *
      * @param objectID the unique identifier of object to delete
@@ -205,7 +208,7 @@ class Index
         return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Delete several objects
      *
      * @param objects contains an array of objectIDs to delete. If the object contains an objectID
@@ -221,7 +224,7 @@ class Index
         return $this->batch($requests);
     }
 
-    /*
+    /**
      * Delete all objects matching a query
      *
      * @param query the query string
@@ -252,7 +255,7 @@ class Index
         }
     }
 
-    /*
+    /**
      * Search inside the index
      *
      * @param query the full text query
@@ -325,7 +328,7 @@ class Index
         return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/query', array(), array('params' => $this->client->buildQuery($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
-    /*
+    /**
      * Perform a search with disjunctive facets generating as many queries as number of disjunctive facets
      *
      * @param query the query
@@ -415,7 +418,7 @@ class Index
         return $aggregated_answer;
     }
 
-    /*
+    /**
      * Browse all index content
      *
      * @param page Pagination parameter used to select the page to retrieve.
@@ -428,7 +431,7 @@ class Index
                                     array('page' => $page, 'hitsPerPage' => $hitsPerPage), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Wait the publication of a task on the server.
      * All server task are asynchronous and you can check with this method that the task is published.
      *
@@ -446,7 +449,7 @@ class Index
         }
     }
 
-    /*
+    /**
      * get the status of a task on the server.
      * All server task are asynchronous and you can check with this method that the task is published or not.
      *
@@ -457,16 +460,15 @@ class Index
         return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/task/'.$taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Get settings of this index
-     *
      */
     public function getSettings()
     {
         return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/settings', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * This function deletes the index content. Settings and index specific API keys are kept untouched.
      */
     public function clearIndex()
@@ -474,7 +476,7 @@ class Index
         return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/clear', null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Set settings for this index
      *
      * @param settigns the settings object that can contains :
@@ -530,7 +532,7 @@ class Index
         return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/settings', array(), $settings, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * List all existing user keys associated to this index with their associated ACLs
      *
      */
@@ -539,7 +541,7 @@ class Index
         return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Get ACL of a user key associated to this index
      *
      */
@@ -548,7 +550,7 @@ class Index
         return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Delete an existing user key associated to this index
      *
      */
@@ -557,7 +559,7 @@ class Index
         return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Create a new user key associated to this index
      *
      * @param obj can be two different parameters:
@@ -585,7 +587,8 @@ class Index
      */
     public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
-        if ($obj !== array_values($obj)) { // is dict of value
+        // is dict of value
+        if ($obj !== array_values($obj)) {
             $params = $obj;
             $params['validity'] = $validity;
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
@@ -603,7 +606,7 @@ class Index
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Update a user key associated to this index
      *
      * @param obj can be two different parameters:
@@ -631,7 +634,8 @@ class Index
      */
     public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
-        if ($obj !== array_values($obj)) { // is dict of value
+        // is dict of value
+        if ($obj !== array_values($obj)) {
             $params = $obj;
             $params['validity'] = $validity;
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;

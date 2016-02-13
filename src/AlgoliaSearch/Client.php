@@ -40,8 +40,9 @@ class Client
     protected $curlConstants;
     protected $curlOptions = array();
 
-    /*
+    /**
      * Algolia Search initialization
+     *
      * @param applicationID the application ID you have in your admin interface
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
@@ -75,15 +76,16 @@ class Client
         }
     }
 
-    /*
+    /**
      * Release curl handle
      */
     public function __destruct()
     {
     }
 
-    /*
+    /**
      * Change the default connect timeout of 2s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     *
      * @param connectTimeout the connection timeout
      * @param timeout the read timeout for the query
      * @param searchTimeout the read timeout used for search queries only
@@ -99,9 +101,10 @@ class Client
         $this->context->searchTimeout = $searchTimeout;
     }
 
-    /*
+    /**
      * Allow to use IP rate limit when you have a proxy between end-user and Algolia.
      * This option will set the X-Forwarded-For HTTP header with the client IP and the X-Forwarded-API-Key with the API Key having rate limits.
+     *
      * @param adminAPIKey the admin API Key you can find in your dashboard
      * @param endUserIP the end user IP (you can use both IPV4 or IPV6 syntax)
      * @param rateLimitAPIKey the API key on which you have a rate limit
@@ -137,7 +140,7 @@ class Client
         $this->context->setAlgoliaUserToken($token);
     }
 
-    /*
+    /**
      * Disable IP rate limit enabled with enableRateLimitForward() function
      */
     public function disableRateLimitForward()
@@ -145,23 +148,23 @@ class Client
         $this->context->disableRateLimit();
     }
 
-    /*
+    /**
      * Call isAlive
      */
-     public function isAlive()
-     {
-         $this->request($this->context, 'GET', '/1/isalive', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
-     }
+    public function isAlive()
+    {
+        $this->request($this->context, 'GET', '/1/isalive', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+    }
 
-    /*
+    /**
      * Allow to set custom headers
      */
-     public function setExtraHeader($key, $value)
-     {
-         $this->context->setExtraHeader($key, $value);
-     }
+    public function setExtraHeader($key, $value)
+    {
+        $this->context->setExtraHeader($key, $value);
+    }
 
-    /*
+    /**
      * This method allows to query multiple indexes with one API call
      *
      */
@@ -186,20 +189,22 @@ class Client
         return $this->request($this->context, 'POST', '/1/indexes/*/queries?strategy='.$strategy, array(), array('requests' => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
-    /*
+    /**
      * List all existing indexes
      * return an object in the form:
-     * array("items" => array(
-     *                        array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
-     *                        array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
-     *                        ))
+     * array(
+     *     "items" => array(
+     *         array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
+     *         array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
+     *     )
+     * )
      */
     public function listIndexes()
     {
         return $this->request($this->context, 'GET', '/1/indexes/', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Delete an index
      *
      * @param indexName the name of index to delete
@@ -255,7 +260,7 @@ class Client
         return $this->request($this->context, 'GET', '/1/logs?offset='.$offset.'&length='.$length.'&type='.$type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Get the index object initialized (no server call needed for initialization)
 
      * @param indexName the name of index
@@ -269,7 +274,7 @@ class Client
         return new Index($this->context, $this, $indexName);
     }
 
-    /*
+    /**
      * List all existing user keys with their associated ACLs
      *
      */
@@ -278,25 +283,27 @@ class Client
         return $this->request($this->context, 'GET', '/1/keys', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Get ACL of a user key
      *
+     * @param string $key
      */
     public function getUserKeyACL($key)
     {
         return $this->request($this->context, 'GET', '/1/keys/'.$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Delete an existing user key
      *
+     * @param string $key
      */
     public function deleteUserKey($key)
     {
         return $this->request($this->context, 'DELETE', '/1/keys/'.$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Create a new user key
      *
      * @param obj can be two different parameters:
@@ -346,7 +353,7 @@ class Client
         return $this->request($this->context, 'POST', '/1/keys', array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Update a user key
      *
      * @param obj can be two different parameters:
@@ -406,7 +413,7 @@ class Client
                                       $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
-    /*
+    /**
      * Generate a secured and public API Key from a list of query parameters and an
      * optional user token identifying the current user
      *
@@ -507,6 +514,7 @@ class Client
         } else {
             $url = 'https://'.$host.$path;
         }
+
         if ($params != null && count($params) > 0) {
             $params2 = array();
             foreach ($params as $key => $val) {
@@ -518,6 +526,7 @@ class Client
             }
             $url .= '?'.http_build_query($params2);
         }
+
         // initialize curl library
         $curlHandle = curl_init();
 
@@ -547,6 +556,7 @@ class Client
                     'Content-type: application/json',
                     ), $context->headers));
         }
+
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Algolia for PHP '.Version::get());
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
@@ -566,7 +576,9 @@ class Client
             curl_setopt($curlHandle, CURLOPT_TIMEOUT, $readTimeout);
         }
 
-        curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1); # The problem is that on (Li|U)nix, when libcurl uses the standard name resolver, a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
+        // The problem is that on (Li|U)nix, when libcurl uses the standard name resolver,
+        // a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
+        curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 
         if ($method === 'GET') {
@@ -596,6 +608,7 @@ class Client
         do {
             $mrc = curl_multi_exec($mhandle, $running);
         } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+
         while ($running && $mrc == CURLM_OK) {
             if (curl_multi_select($mhandle, 0.1) == -1) {
                 usleep(100);
@@ -604,12 +617,15 @@ class Client
                 $mrc = curl_multi_exec($mhandle, $running);
             } while ($mrc == CURLM_CALL_MULTI_PERFORM);
         }
+
         $http_status = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
+
         if (!empty($error)) {
             throw new \Exception($error);
         }
+
         if ($http_status === 0 || $http_status === 503) {
             // Could not reach host or service unavailable, try with another one if we have it
             $context->releaseMHandle($curlHandle);
@@ -641,7 +657,8 @@ class Client
             case JSON_ERROR_STATE_MISMATCH:
                 $errorMsg = 'JSON parsing error: underflow or the modes mismatch';
                 break;
-            case defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1: // PHP 5.3 less than 1.2.2 (Ubuntu 10.04 LTS)
+            // PHP 5.3 less than 1.2.2 (Ubuntu 10.04 LTS)
+            case defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1:
                 $errorMsg = 'JSON parsing error: malformed UTF-8 characters, possibly incorrectly encoded';
                 break;
             case JSON_ERROR_NONE:
@@ -656,7 +673,7 @@ class Client
         return $answer;
     }
 
-    /*
+    /**
      * Checks if curl option passed are valid curl options
      *
      * @param curlOptions must be array but no type required while first test throw clear Exception
@@ -681,7 +698,7 @@ class Client
         return $curlOptions;
     }
 
-    /*
+    /**
      * Get all php curl available options
      */
     protected function getCurlConstants()
@@ -712,7 +729,7 @@ class Client
         return $this->curlConstants;
     }
 
-    /*
+    /**
      * throw clear Exception when bad curl option is set
      *
      * @param curlOptions array

@@ -326,7 +326,7 @@ class Client
                 "acl" => $obj,
                 "validity" => $validity,
                 "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery
+                "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
         
@@ -375,7 +375,7 @@ class Client
                 "acl" => $obj,
                 "validity" => $validity,
                 "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery
+                "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
         if ($indexes != null) {
@@ -521,7 +521,7 @@ class Client
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                         'X-Algolia-Application-Id: '.$context->applicationID,
                         'X-Algolia-API-Key: '.$context->apiKey,
-                        'Content-type: application/json'
+                        'Content-type: application/json',
                         ), $context->headers));
         } else {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
@@ -530,7 +530,7 @@ class Client
                     'X-Forwarded-For: '.$context->endUserIP,
                     'X-Algolia-UserToken: '.$context->algoliaUserToken,
                     'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
-                    'Content-type: application/json'
+                    'Content-type: application/json',
                     ), $context->headers));
         }
         curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP ".Version::get());

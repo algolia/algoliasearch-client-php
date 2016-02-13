@@ -588,7 +588,7 @@ class Index
                 "acl" => $obj,
                 "validity" => $validity,
                 "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery
+                "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
         return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/keys", array(), $params,
@@ -633,7 +633,7 @@ class Index
                 "acl" => $obj,
                 "validity" => $validity,
                 "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery
+                "maxHitsPerQuery" => $maxHitsPerQuery,
             );
         }
         return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/keys/".$key, array(), $params,

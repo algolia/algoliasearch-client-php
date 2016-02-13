@@ -40,7 +40,7 @@ class ClientContext
     public $algoliaUserToken;
     public $connectTimeout;
 
-    function __construct($applicationID, $apiKey, $hostsArray)
+    public function __construct($applicationID, $apiKey, $hostsArray)
     {
         $this->connectTimeout = 2; // connect timeout of 2s by default
         $this->readTimeout = 30; // global timeout of 30s by default
@@ -68,7 +68,7 @@ class ClientContext
         $this->headers = array();
     }
 
-    function __destruct()
+    public function __destruct()
     {
         if ($this->curlMHandle != null) {
             curl_multi_close($this->curlMHandle);

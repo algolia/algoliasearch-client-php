@@ -47,7 +47,7 @@ class Client
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
      */
-    function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
+    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
     {
         if ($hostsArray == null) {
             $this->context = new ClientContext($applicationID, $apiKey, null);
@@ -79,7 +79,7 @@ class Client
     /*
      * Release curl handle
      */
-    function __destruct()
+    public function __destruct()
     {
     }
 

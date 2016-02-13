@@ -32,7 +32,6 @@ namespace AlgoliaSearch;
  */
 class Client
 {
-
     const CAINFO = 'cainfo';
     const CURLOPT = 'curloptions';
 

@@ -29,7 +29,6 @@ use Exception;
 
 class ClientContext
 {
-
     public $applicationID;
     public $apiKey;
     public $readHostsArray;

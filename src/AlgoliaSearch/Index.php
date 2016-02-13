@@ -53,7 +53,7 @@ class Index
      * @param objectIDKey  the key in each object that contains the objectID
      * @param objectActionKey  the key in each object that contains the action to perform (addObject, updateObject, deleteObject or partialUpdateObject)
      */
-    public function batchObjects($objects, $objectIDKey = "objectID", $objectActionKey = "objectAction")
+    public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')
     {
         $requests = array();
 
@@ -66,16 +66,16 @@ class Index
             $action = $obj[$objectActionKey];
             unset($obj[$objectActionKey]); // The action key is not included in the object
 
-            $req = array("action" => $action, "body" => $obj);
+            $req = array('action' => $action, 'body' => $obj);
 
             if (array_key_exists($objectIDKey, $obj)) {
-                $req["objectID"] = (string) $obj[$objectIDKey];
+                $req['objectID'] = (string) $obj[$objectIDKey];
             }
 
             $requests[] = $req;
         }
 
-        return $this->batch(array("requests" => $requests));
+        return $this->batch(array('requests' => $requests));
     }
 
     /*
@@ -89,9 +89,9 @@ class Index
     public function addObject($content, $objectID = null)
     {
         if ($objectID === null) {
-            return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName, array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName, array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
         } else {
-            return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/".urlencode($objectID), array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID), array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
         }
     }
 
@@ -100,9 +100,9 @@ class Index
      *
      * @param objects contains an array of objects to add. If the object contains an objectID
      */
-    public function addObjects($objects, $objectIDKey = "objectID")
+    public function addObjects($objects, $objectIDKey = 'objectID')
     {
-        $requests = $this->buildBatch("addObject", $objects, true, $objectIDKey);
+        $requests = $this->buildBatch('addObject', $objects, true, $objectIDKey);
 
         return $this->batch($requests);
     }
@@ -117,9 +117,9 @@ class Index
     {
         $id = urlencode($objectID);
         if ($attributesToRetrieve === null) {
-            return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/".$id, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/'.$id, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
         } else {
-            return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/".$id, array("attributes" => $attributesToRetrieve), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/'.$id, array('attributes' => $attributesToRetrieve), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
         }
     }
 
@@ -135,11 +135,11 @@ class Index
         }
         $requests = array();
         foreach ($objectIDs as $object) {
-            $req = array("indexName" => $this->indexName, "objectID" => $object);
+            $req = array('indexName' => $this->indexName, 'objectID' => $object);
             array_push($requests, $req);
         }
 
-        return $this->client->request($this->context, "POST", "/1/indexes/*/objects", array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'POST', '/1/indexes/*/objects', array(), array('requests' => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -150,7 +150,7 @@ class Index
      */
     public function partialUpdateObject($partialObject, $createIfNotExists = true)
     {
-        return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/".urlencode($partialObject["objectID"])."/partial".($createIfNotExists ? "" : "?createIfNotExists=false"), array(), $partialObject, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.($createIfNotExists ? '' : '?createIfNotExists=false'), array(), $partialObject, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -158,12 +158,12 @@ class Index
      *
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
-    public function partialUpdateObjects($objects, $objectIDKey = "objectID", $createIfNotExists = true)
+    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true)
     {
         if ($createIfNotExists) {
-            $requests = $this->buildBatch("partialUpdateObject", $objects, true, $objectIDKey);
+            $requests = $this->buildBatch('partialUpdateObject', $objects, true, $objectIDKey);
         } else {
-            $requests = $this->buildBatch("partialUpdateObjectNoCreate", $objects, true, $objectIDKey);
+            $requests = $this->buildBatch('partialUpdateObjectNoCreate', $objects, true, $objectIDKey);
         }
 
         return $this->batch($requests);
@@ -176,7 +176,7 @@ class Index
      */
     public function saveObject($object)
     {
-        return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/".urlencode($object["objectID"]), array(), $object, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']), array(), $object, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -184,9 +184,9 @@ class Index
      *
      * @param objects contains an array of objects to update (each object must contains a objectID attribute)
      */
-    public function saveObjects($objects, $objectIDKey = "objectID")
+    public function saveObjects($objects, $objectIDKey = 'objectID')
     {
-        $requests = $this->buildBatch("updateObject", $objects, true, $objectIDKey);
+        $requests = $this->buildBatch('updateObject', $objects, true, $objectIDKey);
 
         return $this->batch($requests);
     }
@@ -202,7 +202,7 @@ class Index
             throw new \Exception('objectID is mandatory');
         }
 
-        return $this->client->request($this->context, "DELETE", "/1/indexes/".$this->urlIndexName."/".urlencode($objectID), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -216,7 +216,7 @@ class Index
         foreach ($objects as $key => $id) {
             $objectIDs[$key] = array('objectID' => $id);
         }
-        $requests = $this->buildBatch("deleteObject", $objectIDs, true);
+        $requests = $this->buildBatch('deleteObject', $objectIDs, true);
 
         return $this->batch($requests);
     }
@@ -320,9 +320,9 @@ class Index
         if ($args === null) {
             $args = array();
         }
-        $args["query"] = $query;
+        $args['query'] = $query;
 
-        return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/query", array(), array("params" => $this->client->buildQuery($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
+        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/query', array(), array('params' => $this->client->buildQuery($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
     /*
@@ -336,15 +336,15 @@ class Index
      */
     public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())
     {
-        if (gettype($disjunctive_facets) != "string" && gettype($disjunctive_facets) != "array") {
-            throw new AlgoliaException("Argument \"disjunctive_facets\" must be a String or an Array");
+        if (gettype($disjunctive_facets) != 'string' && gettype($disjunctive_facets) != 'array') {
+            throw new AlgoliaException('Argument "disjunctive_facets" must be a String or an Array');
         }
-        if (gettype($refinements) != "array") {
-            throw new AlgoliaException("Argument \"refinements\" must be a Hash of Arrays");
+        if (gettype($refinements) != 'array') {
+            throw new AlgoliaException('Argument "refinements" must be a Hash of Arrays');
         }
 
-        if (gettype($disjunctive_facets) == "string") {
-            $disjunctive_facets = explode(",", $disjunctive_facets);
+        if (gettype($disjunctive_facets) == 'string') {
+            $disjunctive_facets = explode(',', $disjunctive_facets);
         }
 
         $disjunctive_refinements = array();
@@ -357,7 +357,7 @@ class Index
         $filters = array();
 
         foreach ($refinements as $key => $value) {
-            $r = array_map(function ($val) use ($key) { return $key.":".$val;}, $value);
+            $r = array_map(function ($val) use ($key) { return $key.':'.$val;}, $value);
 
             if (in_array($key, $disjunctive_refinements)) {
                 $filter = array_merge($filters, $r);
@@ -365,15 +365,15 @@ class Index
                 array_push($filters, $r);
             }
         }
-        $params["indexName"] = $this->indexName;
-        $params["query"] = $query;
-        $params["facetFilters"] = $filters;
+        $params['indexName'] = $this->indexName;
+        $params['query'] = $query;
+        $params['facetFilters'] = $filters;
         array_push($queries, $params);
         foreach ($disjunctive_facets as $disjunctive_facet) {
             $filters = array();
             foreach ($refinements as $key => $value) {
                 if ($key != $disjunctive_facet) {
-                    $r = array_map(function ($val) use ($key) { return $key.":".$val;}, $value);
+                    $r = array_map(function ($val) use ($key) { return $key.':'.$val;}, $value);
 
                     if (in_array($key, $disjunctive_refinements)) {
                         $filter = array_merge($filters, $r);
@@ -382,16 +382,16 @@ class Index
                     }
                 }
             }
-            $params["indexName"] = $this->indexName;
-            $params["query"] = $query;
-            $params["facetFilters"] = $filters;
-            $params["page"] = 0;
-            $params["hitsPerPage"] = 0;
-            $params["attributesToRetrieve"] = array();
-            $params["attributesToHighlight"] = array();
-            $params["attributesToSnippet"] = array();
-            $params["facets"] = $disjunctive_facet;
-            $params["analytics"] = false;
+            $params['indexName'] = $this->indexName;
+            $params['query'] = $query;
+            $params['facetFilters'] = $filters;
+            $params['page'] = 0;
+            $params['hitsPerPage'] = 0;
+            $params['attributesToRetrieve'] = array();
+            $params['attributesToHighlight'] = array();
+            $params['attributesToSnippet'] = array();
+            $params['facets'] = $disjunctive_facet;
+            $params['analytics'] = false;
             array_push($queries, $params);
         }
         $answers = $this->client->multipleQueries($queries);
@@ -424,8 +424,8 @@ class Index
      */
     public function _bc_browse($page = 0, $hitsPerPage = 1000)
     {
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/browse",
-                                    array("page" => $page, "hitsPerPage" => $hitsPerPage), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/browse',
+                                    array('page' => $page, 'hitsPerPage' => $hitsPerPage), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -439,7 +439,7 @@ class Index
     {
         while (true) {
             $res = $this->getTaskStatus($taskID);
-            if ($res["status"] === "published") {
+            if ($res['status'] === 'published') {
                 return $res;
             }
             usleep($timeBeforeRetry * 1000);
@@ -454,7 +454,7 @@ class Index
      */
     public function getTaskStatus($taskID)
     {
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/task/".$taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/task/'.$taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -463,7 +463,7 @@ class Index
      */
     public function getSettings()
     {
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/settings", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/settings', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -471,7 +471,7 @@ class Index
      */
     public function clearIndex()
     {
-        return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/clear", null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/clear', null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -527,7 +527,7 @@ class Index
      */
     public function setSettings($settings)
     {
-        return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/settings", array(), $settings, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/settings', array(), $settings, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -536,7 +536,7 @@ class Index
      */
     public function listUserKeys()
     {
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/keys", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -545,7 +545,7 @@ class Index
      */
     public function getUserKeyACL($key)
     {
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/keys/".$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -554,7 +554,7 @@ class Index
      */
     public function deleteUserKey($key)
     {
-        return $this->client->request($this->context, "DELETE", "/1/indexes/".$this->urlIndexName."/keys/".$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -587,19 +587,19 @@ class Index
     {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
-            $params["validity"] = $validity;
-            $params["maxQueriesPerIPPerHour"] = $maxQueriesPerIPPerHour;
-            $params["maxHitsPerQuery"] = $maxHitsPerQuery;
+            $params['validity'] = $validity;
+            $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
+            $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
             $params = array(
-                "acl" => $obj,
-                "validity" => $validity,
-                "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery,
+                'acl' => $obj,
+                'validity' => $validity,
+                'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
+                'maxHitsPerQuery' => $maxHitsPerQuery,
             );
         }
 
-        return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/keys", array(), $params,
+        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/keys', array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -633,19 +633,19 @@ class Index
     {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
-            $params["validity"] = $validity;
-            $params["maxQueriesPerIPPerHour"] = $maxQueriesPerIPPerHour;
-            $params["maxHitsPerQuery"] = $maxHitsPerQuery;
+            $params['validity'] = $validity;
+            $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
+            $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
             $params = array(
-                "acl" => $obj,
-                "validity" => $validity,
-                "maxQueriesPerIPPerHour" => $maxQueriesPerIPPerHour,
-                "maxHitsPerQuery" => $maxHitsPerQuery,
+                'acl' => $obj,
+                'validity' => $validity,
+                'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
+                'maxHitsPerQuery' => $maxHitsPerQuery,
             );
         }
 
-        return $this->client->request($this->context, "PUT", "/1/indexes/".$this->urlIndexName."/keys/".$key, array(), $params,
+        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -656,7 +656,7 @@ class Index
      */
     public function batch($requests)
     {
-        return $this->client->request($this->context, "POST", "/1/indexes/".$this->urlIndexName."/batch", array(), $requests,
+        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/batch', array(), $requests,
                                       $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -670,18 +670,18 @@ class Index
      *
      * @return array
      */
-    private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID")
+    private function buildBatch($action, $objects, $withObjectID, $objectIDKey = 'objectID')
     {
         $requests = array();
         foreach ($objects as $obj) {
-            $req = array("action" => $action, "body" => $obj);
+            $req = array('action' => $action, 'body' => $obj);
             if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
-                $req["objectID"] = (string) $obj[$objectIDKey];
+                $req['objectID'] = (string) $obj[$objectIDKey];
             }
             array_push($requests, $req);
         }
 
-        return array("requests" => $requests);
+        return array('requests' => $requests);
     }
 
     private function _browse($query, $params = null)
@@ -695,18 +695,18 @@ class Index
             $params = array();
         }
         foreach ($params as $key => $value) {
-            if (gettype($value) == "array") {
+            if (gettype($value) == 'array') {
                 $params[$key] = json_encode($value);
             }
         }
         if ($query != null) {
-            $params["query"] = $query;
+            $params['query'] = $query;
         }
         if ($cursor != null) {
-            $params["cursor"] = $cursor;
+            $params['cursor'] = $cursor;
         }
 
-        return $this->client->request($this->context, "GET", "/1/indexes/".$this->urlIndexName."/browse",
+        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/browse',
                             $params, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 

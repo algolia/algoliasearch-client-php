@@ -28,7 +28,7 @@ namespace AlgoliaSearch;
 /**
  * Entry point in the PHP API.
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
- * to start using Algolia Search API
+ * to start using Algolia Search API.
  */
 class Client
 {
@@ -126,7 +126,7 @@ class Client
     }
 
     /**
-     * It's possible to use the following token to track users that have the same IP or to track users that use different devices
+     * It's possible to use the following token to track users that have the same IP or to track users that use different devices.
      *
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
      *
@@ -389,7 +389,7 @@ class Client
     }
 
     /**
-     * Send a batch request targeting multiple indices
+     * Send a batch request targeting multiple indices.
      *
      * @param  $requests an associative array defining the batch request body
      */

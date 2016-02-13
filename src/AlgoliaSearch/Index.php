@@ -640,7 +640,7 @@ class Index
     }
 
     /**
-     * Send a batch request
+     * Send a batch request.
      *
      * @param  $requests an associative array defining the batch request body
      */
@@ -651,7 +651,7 @@ class Index
     }
 
     /**
-     * Build a batch request
+     * Build a batch request.
      *
      * @param  $action the batch action
      * @param  $objects the array of objects

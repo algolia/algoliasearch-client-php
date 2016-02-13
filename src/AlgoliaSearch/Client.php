@@ -390,8 +390,14 @@ class Client
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      * @param indexes Specify the list of indices to target (null means all)
      */
-    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
-    {
+    public function updateUserKey(
+        $key,
+        $obj,
+        $validity = 0,
+        $maxQueriesPerIPPerHour = 0,
+        $maxHitsPerQuery = 0,
+        $indexes = null
+    ) {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
             $params['validity'] = $validity;
@@ -490,8 +496,16 @@ class Client
         return http_build_query($args);
     }
 
-    public function request($context, $method, $path, $params = array(), $data = array(), $hostsArray, $connectTimeout, $readTimeout)
-    {
+    public function request(
+        $context,
+        $method,
+        $path,
+        $params,
+        $data,
+        $hostsArray,
+        $connectTimeout,
+        $readTimeout
+    ) {
         $exceptions = array();
         $cnt = 0;
         foreach ($hostsArray as &$host) {
@@ -514,8 +528,16 @@ class Client
         throw new AlgoliaException('Hosts unreachable: '.join(',', $exceptions));
     }
 
-    public function doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout)
-    {
+    public function doRequest(
+        $context,
+        $method,
+        $host,
+        $path,
+        $params,
+        $data,
+        $connectTimeout,
+        $readTimeout
+    ) {
         if (strpos($host, 'http') === 0) {
             $url = $host.$path;
         } else {

@@ -431,7 +431,7 @@ class Client
             }
             $urlEncodedQuery = $this->buildQuery($queryParameters);
         } else {
-            if (strpos($query, '=') === FALSE) {
+            if (strpos($query, '=') === false) {
                 // String of tags
 
             $queryParameters = array('tagFilters' => $query);

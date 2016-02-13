@@ -60,11 +60,11 @@ class ClientContext
             throw new Exception('AlgoliaSearch requires an apiKey.');
         }
 
-        $this->curlMHandle = NULL;
-        $this->adminAPIKey = NULL;
-        $this->endUserIP = NULL;
-        $this->algoliaUserToken = NULL;
-        $this->rateLimitAPIKey = NULL;
+        $this->curlMHandle = null;
+        $this->adminAPIKey = null;
+        $this->endUserIP = null;
+        $this->algoliaUserToken = null;
+        $this->rateLimitAPIKey = null;
         $this->headers = array();
     }
 
@@ -109,9 +109,9 @@ class ClientContext
 
     public function disableRateLimit()
     {
-        $this->adminAPIKey = NULL;
-        $this->endUserIP = NULL;
-        $this->rateLimitAPIKey = NULL;
+        $this->adminAPIKey = null;
+        $this->endUserIP = null;
+        $this->rateLimitAPIKey = null;
     }
 
     public function setExtraHeader($key, $value)

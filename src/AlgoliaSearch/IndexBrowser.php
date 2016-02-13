@@ -38,11 +38,11 @@ class IndexBrowser implements \Iterator
 
     public function __construct(Index $index, $query, $params = null, $cursor = null)
     {
-        $this->index       = $index;
-        $this->query        = $query;
-        $this->params       = $params;
+        $this->index = $index;
+        $this->query = $query;
+        $this->params = $params;
 
-        $this->position     = 0;
+        $this->position = 0;
 
         $this->doQuery($cursor);
     }

@@ -27,7 +27,8 @@ namespace AlgoliaSearch;
 
 use Exception;
 
-class ClientContext {
+class ClientContext
+{
 
     public $applicationID;
     public $apiKey;
@@ -39,7 +40,8 @@ class ClientContext {
     public $algoliaUserToken;
     public $connectTimeout;
 
-    function __construct($applicationID, $apiKey, $hostsArray) {
+    function __construct($applicationID, $apiKey, $hostsArray)
+    {
         $this->connectTimeout = 2; // connect timeout of 2s by default
         $this->readTimeout = 30; // global timeout of 30s by default
         $this->searchTimeout = 5; // search timeout of 5s by default
@@ -66,13 +68,15 @@ class ClientContext {
         $this->headers = array();
     }
 
-    function __destruct() {
+    function __destruct()
+    {
         if ($this->curlMHandle != null) {
             curl_multi_close($this->curlMHandle);
         }
     }
 
-    public function getMHandle($curlHandle) {
+    public function getMHandle($curlHandle)
+    {
         if ($this->curlMHandle == null) {
             $this->curlMHandle = curl_multi_init();
         }
@@ -81,32 +85,37 @@ class ClientContext {
         return $this->curlMHandle;
     }
 
-    public function releaseMHandle($curlHandle) {
+    public function releaseMHandle($curlHandle)
+    {
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
 
-    public function setForwardedFor($ip) {
+    public function setForwardedFor($ip)
+    {
         $this->endUserIP = $ip;
     }
 
-    public function setAlgoliaUserToken($token) {
+    public function setAlgoliaUserToken($token)
+    {
         $this->algoliaUserToken = $token;
     }
 
-    public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
+    public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey)
+    {
         $this->adminAPIKey = $adminAPIKey;
         $this->endUserIP = $endUserIP;
         $this->rateLimitAPIKey = $rateLimitAPIKey;
     }
 
-    public function disableRateLimit() {
+    public function disableRateLimit()
+    {
         $this->adminAPIKey = NULL;
         $this->endUserIP = NULL;
         $this->rateLimitAPIKey = NULL;
-
     }
 
-    public function setExtraHeader($key, $value) {
+    public function setExtraHeader($key, $value)
+    {
         $this->headers[$key] = $value;
     }
 }

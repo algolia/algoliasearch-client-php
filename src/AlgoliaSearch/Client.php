@@ -30,7 +30,8 @@ namespace AlgoliaSearch;
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
  * to start using Algolia Search API
  */
-class Client {
+class Client
+{
 
     const CAINFO = 'cainfo';
     const CURLOPT = 'curloptions';
@@ -46,16 +47,17 @@ class Client {
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
      */
-    function __construct($applicationID, $apiKey, $hostsArray = null, $options = array()) {
+    function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
+    {
         if ($hostsArray == null) {
             $this->context = new ClientContext($applicationID, $apiKey, null);
         } else {
             $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
         }
-        if(!function_exists('curl_init')){
+        if (!function_exists('curl_init')) {
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
         }
-        if(!function_exists('json_decode')){
+        if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
         $this->cainfoPath = __DIR__ . '/../../resources/ca-bundle.crt';
@@ -77,7 +79,8 @@ class Client {
     /*
      * Release curl handle
      */
-    function __destruct() {
+    function __destruct()
+    {
     }
 
     /*
@@ -86,14 +89,15 @@ class Client {
      * @param timeout the read timeout for the query
      * @param searchTimeout the read timeout used for search queries only
      */
-    public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5) {
-      $version = curl_version();
-      if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
-        throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
-      }
-      $this->context->connectTimeout = $connectTimeout;
-      $this->context->readTimeout = $timeout;
-      $this->context->searchTimeout = $searchTimeout;
+    public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)
+    {
+        $version = curl_version();
+        if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
+            throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
+        }
+        $this->context->connectTimeout = $connectTimeout;
+        $this->context->readTimeout = $timeout;
+        $this->context->searchTimeout = $searchTimeout;
     }
 
     /*
@@ -103,7 +107,8 @@ class Client {
      * @param endUserIP the end user IP (you can use both IPV4 or IPV6 syntax)
      * @param rateLimitAPIKey the API key on which you have a rate limit
      */
-    public function enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
+    public function enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey)
+    {
         $this->context->setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey);
     }
 
@@ -115,7 +120,8 @@ class Client {
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
      * @param string $ip
      */
-    public function setForwardedFor($ip) {
+    public function setForwardedFor($ip)
+    {
         $this->context->setForwardedFor($ip);
     }
 
@@ -125,44 +131,49 @@ class Client {
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
      * @param string $token
      */
-    public function setAlgoliaUserToken($token) {
+    public function setAlgoliaUserToken($token)
+    {
         $this->context->setAlgoliaUserToken($token);
     }
 
     /*
      * Disable IP rate limit enabled with enableRateLimitForward() function
      */
-    public function disableRateLimitForward() {
+    public function disableRateLimitForward()
+    {
         $this->context->disableRateLimit();
     }
 
     /*
      * Call isAlive
      */
-     public function isAlive() {
-        $this->request($this->context, "GET", "/1/isalive", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+     public function isAlive()
+     {
+         $this->request($this->context, "GET", "/1/isalive", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
      }
 
     /*
      * Allow to set custom headers
      */
-     public function setExtraHeader($key, $value) {
-        $this->context->setExtraHeader($key, $value);
+     public function setExtraHeader($key, $value)
+     {
+         $this->context->setExtraHeader($key, $value);
      }
 
     /*
      * This method allows to query multiple indexes with one API call
      *
      */
-    public function multipleQueries($queries, $indexNameKey = "indexName", $strategy = "none") {
+    public function multipleQueries($queries, $indexNameKey = "indexName", $strategy = "none")
+    {
         if ($queries == null) {
             throw new \Exception('No query provided');
         }
         $requests = array();
-        foreach ($queries as $query) {            
+        foreach ($queries as $query) {
             if (array_key_exists($indexNameKey, $query)) {
                 $indexes = $query[$indexNameKey];
-                unset($query[$indexNameKey]);    
+                unset($query[$indexNameKey]);
             } else {
                 throw new \Exception('indexName is mandatory');
             }
@@ -181,7 +192,8 @@ class Client {
      *                        array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
      *                        ))
      */
-    public function listIndexes() {
+    public function listIndexes()
+    {
         return $this->request($this->context, "GET", "/1/indexes/", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -191,7 +203,8 @@ class Client {
      * @param indexName the name of index to delete
      * return an object containing a "deletedAt" attribute
      */
-    public function deleteIndex($indexName) {
+    public function deleteIndex($indexName)
+    {
         return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -200,7 +213,8 @@ class Client {
      * @param srcIndexName the name of index to copy.
      * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
      */
-    public function moveIndex($srcIndexName, $dstIndexName) {
+    public function moveIndex($srcIndexName, $dstIndexName)
+    {
         $request = array("operation" => "move", "destination" => $dstIndexName);
         return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -210,7 +224,8 @@ class Client {
      * @param srcIndexName the name of index to copy.
      * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
      */
-    public function copyIndex($srcIndexName, $dstIndexName) {
+    public function copyIndex($srcIndexName, $dstIndexName)
+    {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
         return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -220,7 +235,8 @@ class Client {
      * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
      * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
      */
-    public function getLogs($offset = 0, $length = 10, $type = "all") {
+    public function getLogs($offset = 0, $length = 10, $type = "all")
+    {
         if (gettype($type) == "boolean") { //Old prototype onlyError
             if ($type) {
                 $type = "error";
@@ -236,7 +252,8 @@ class Client {
 
      * @param indexName the name of index
      */
-    public function initIndex($indexName) {
+    public function initIndex($indexName)
+    {
         if (empty($indexName)) {
             throw new AlgoliaException('Invalid index name: empty string');
         }
@@ -247,7 +264,8 @@ class Client {
      * List all existing user keys with their associated ACLs
      *
      */
-    public function listUserKeys() {
+    public function listUserKeys()
+    {
         return $this->request($this->context, "GET", "/1/keys", null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -255,7 +273,8 @@ class Client {
      * Get ACL of a user key
      *
      */
-    public function getUserKeyACL($key) {
+    public function getUserKeyACL($key)
+    {
         return $this->request($this->context, "GET", "/1/keys/" . $key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -263,7 +282,8 @@ class Client {
      * Delete an existing user key
      *
      */
-    public function deleteUserKey($key) {
+    public function deleteUserKey($key)
+    {
         return $this->request($this->context, "DELETE", "/1/keys/" . $key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
@@ -294,7 +314,8 @@ class Client {
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      * @param indexes Specify the list of indices to target (null means all)
      */
-    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
+    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
             $params["validity"] = $validity;
@@ -342,7 +363,8 @@ class Client {
      * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
      * @param indexes Specify the list of indices to target (null means all)
      */
-    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null) {
+    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
             $params["validity"] = $validity;
@@ -366,7 +388,8 @@ class Client {
      * Send a batch request targeting multiple indices
      * @param  $requests an associative array defining the batch request body
      */
-    public function batch($requests) {
+    public function batch($requests)
+    {
         return $this->request($this->context, "POST", "/1/indexes/*/batch", array(), array("requests" => $requests),
                                       $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
@@ -383,15 +406,15 @@ class Client {
     public function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
     {
         $urlEncodedQuery = '';
-        if (is_array($query))
-        {
+        if (is_array($query)) {
             $queryParameters = array();
-            if (array_keys($query) !== array_keys(array_keys($query))) // array of query parameters
-            {
+            if (array_keys($query) !== array_keys(array_keys($query))) {
+                // array of query parameters
+
                 $queryParameters = $query;
-            }
-            else // array of tags
-            {
+            } else {
+                // array of tags
+
                 $tmp = array();
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
@@ -403,27 +426,26 @@ class Client {
                 $tagFilters = join(',', $tmp);
                 $queryParameters['tagFilters'] = $tagFilters;
             }
-            if ($userToken != null && strlen($userToken) > 0)
-            {
+            if ($userToken != null && strlen($userToken) > 0) {
                 $queryParameters['userToken'] = $userToken;
             }
             $urlEncodedQuery = $this->buildQuery($queryParameters);
-        }
-        else if (strpos($query, '=') === FALSE) // String of tags
-        {
+        } else {
+            if (strpos($query, '=') === FALSE) {
+                // String of tags
+
             $queryParameters = array('tagFilters' => $query);
-            if ($userToken != null && strlen($userToken) > 0)
-            {
-                $queryParameters['userToken'] = $userToken;
-            }
-            $urlEncodedQuery = $this->buildQuery($queryParameters);
-        }
-        else // url encoded query
-        {
+                if ($userToken != null && strlen($userToken) > 0) {
+                    $queryParameters['userToken'] = $userToken;
+                }
+                $urlEncodedQuery = $this->buildQuery($queryParameters);
+            } else {
+                // url encoded query
+
             $urlEncodedQuery = $query;
-            if ($userToken != null && strlen($userToken) > 0)
-            {
-                $urlEncodedQuery = $urlEncodedQuery . "&userToken=" . urlencode($userToken);
+                if ($userToken != null && strlen($userToken) > 0) {
+                    $urlEncodedQuery = $urlEncodedQuery . "&userToken=" . urlencode($userToken);
+                }
             }
         }
         $content = hash_hmac('sha256', $urlEncodedQuery, $privateApiKey) . $urlEncodedQuery;
@@ -440,7 +462,8 @@ class Client {
         return http_build_query($args);
     }
 
-    public function request($context, $method, $path, $params = array(), $data = array(), $hostsArray, $connectTimeout, $readTimeout) {
+    public function request($context, $method, $path, $params = array(), $data = array(), $hostsArray, $connectTimeout, $readTimeout)
+    {
         $exceptions = array();
         $cnt = 0;
         foreach ($hostsArray as &$host) {
@@ -451,8 +474,9 @@ class Client {
             }
             try {
                 $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout);
-                if ($res !== null)
+                if ($res !== null) {
                     return $res;
+                }
             } catch (AlgoliaException $e) {
                 throw $e;
             } catch (\Exception $e) {
@@ -462,7 +486,8 @@ class Client {
         throw new AlgoliaException('Hosts unreachable: ' . join(",", $exceptions));
     }
 
-    public function doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout) {
+    public function doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout)
+    {
         if (strpos($host, "http") === 0) {
             $url = $host . $path;
         } else {
@@ -478,7 +503,6 @@ class Client {
                 }
             }
             $url .= "?" . http_build_query($params2);
-            
         }
         // initialize curl library
         $curlHandle = curl_init();
@@ -500,7 +524,7 @@ class Client {
                         'Content-type: application/json'
                         ), $context->headers));
         } else {
-             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                     'X-Algolia-Application-Id: ' . $context->applicationID,
                     'X-Algolia-API-Key: ' . $context->adminAPIKey,
                     'X-Forwarded-For: ' . $context->endUserIP,
@@ -535,19 +559,21 @@ class Client {
             curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
             curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
             curl_setopt($curlHandle, CURLOPT_POST, false);
-        } else if ($method === 'POST') {
-            $body = ($data) ? json_encode($data) : '';
-            curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($curlHandle, CURLOPT_POST, true);
-            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-        } elseif ($method === 'DELETE') {
-            curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($curlHandle, CURLOPT_POST, false);
-        } elseif ($method === 'PUT') {
-            $body = ($data) ? json_encode($data) : '';
-            curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
-            curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-            curl_setopt($curlHandle, CURLOPT_POST, true);
+        } else {
+            if ($method === 'POST') {
+                $body = ($data) ? json_encode($data) : '';
+                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
+                curl_setopt($curlHandle, CURLOPT_POST, true);
+                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
+            } elseif ($method === 'DELETE') {
+                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
+                curl_setopt($curlHandle, CURLOPT_POST, false);
+            } elseif ($method === 'PUT') {
+                $body = ($data) ? json_encode($data) : '';
+                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
+                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($curlHandle, CURLOPT_POST, true);
+            }
         }
         $mhandle = $context->getMHandle($curlHandle);
 
@@ -557,12 +583,12 @@ class Client {
             $mrc = curl_multi_exec($mhandle, $running);
         } while ($mrc == CURLM_CALL_MULTI_PERFORM);
         while ($running && $mrc == CURLM_OK) {
-          if (curl_multi_select($mhandle, 0.1) == -1) {
-            usleep(100);
-          }
-          do {
-            $mrc = curl_multi_exec($mhandle, $running);
-          } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+            if (curl_multi_select($mhandle, 0.1) == -1) {
+                usleep(100);
+            }
+            do {
+                $mrc = curl_multi_exec($mhandle, $running);
+            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
         }
         $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
@@ -583,8 +609,7 @@ class Client {
 
         if (intval($http_status / 100) == 4) {
             throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status + " error");
-        }
-        elseif (intval($http_status / 100) != 2) {
+        } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status . ": " . $response);
         }
 
@@ -609,8 +634,9 @@ class Client {
                 $errorMsg = null;
                 break;
         }
-        if ($errorMsg !== null) 
+        if ($errorMsg !== null) {
             throw new AlgoliaException($errorMsg);
+        }
 
         return $answer;
     }
@@ -653,11 +679,9 @@ class Client {
 
         if (isset($curlAllConstants['curl'])) {
             $curlAllConstants = $curlAllConstants['curl'];
-        }
-        elseif (isset($curlAllConstants['Core'])) { // hhvm
+        } elseif (isset($curlAllConstants['Core'])) { // hhvm
             $curlAllConstants = $curlAllConstants['Core'];
-        }
-        else {
+        } else {
             return $this->curlConstants;
         }
 

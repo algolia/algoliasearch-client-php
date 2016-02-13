@@ -65,8 +65,7 @@ class IndexBrowser implements \Iterator
 
     public function valid()
     {
-        do
-        {
+        do {
             if ($this->position < count($this->answer['hits'])) {
                 $this->hit = $this->answer['hits'][$this->position];
                 $this->position++;
@@ -82,9 +81,7 @@ class IndexBrowser implements \Iterator
             }
 
             return false;
-        }
-        while (true);
-
+        } while (true);
     }
 
     public function rewind()
@@ -100,8 +97,9 @@ class IndexBrowser implements \Iterator
 
     private function doQuery($cursor = null)
     {
-        if ($cursor !== null)
+        if ($cursor !== null) {
             $this->params['cursor'] = $cursor;
+        }
 
         $this->answer = $this->index->browseFrom($this->query, $this->params, $cursor);
     }

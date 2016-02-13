@@ -91,9 +91,27 @@ class Index
     public function addObject($content, $objectID = null)
     {
         if ($objectID === null) {
-            return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName, array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request(
+                $this->context,
+                'POST',
+                '/1/indexes/'.$this->urlIndexName,
+                array(),
+                $content,
+                $this->context->writeHostsArray,
+                $this->context->connectTimeout,
+                $this->context->readTimeout
+            );
         } else {
-            return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID), array(), $content, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request(
+                $this->context,
+                'PUT',
+                '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID),
+                array(),
+                $content,
+                $this->context->writeHostsArray,
+                $this->context->connectTimeout,
+                $this->context->readTimeout
+            );
         }
     }
 
@@ -119,9 +137,27 @@ class Index
     {
         $id = urlencode($objectID);
         if ($attributesToRetrieve === null) {
-            return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/'.$id, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request(
+                $this->context,
+                'GET',
+                '/1/indexes/'.$this->urlIndexName.'/'.$id,
+                null,
+                null,
+                $this->context->readHostsArray,
+                $this->context->connectTimeout,
+                $this->context->readTimeout
+            );
         } else {
-            return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/'.$id, array('attributes' => $attributesToRetrieve), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+            return $this->client->request(
+                $this->context,
+                'GET',
+                '/1/indexes/'.$this->urlIndexName.'/'.$id,
+                array('attributes' => $attributesToRetrieve),
+                null,
+                $this->context->readHostsArray,
+                $this->context->connectTimeout,
+                $this->context->readTimeout
+            );
         }
     }
 
@@ -142,7 +178,16 @@ class Index
             array_push($requests, $req);
         }
 
-        return $this->client->request($this->context, 'POST', '/1/indexes/*/objects', array(), array('requests' => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/objects',
+            array(),
+            array('requests' => $requests),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -153,7 +198,18 @@ class Index
      */
     public function partialUpdateObject($partialObject, $createIfNotExists = true)
     {
-        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.($createIfNotExists ? '' : '?createIfNotExists=false'), array(), $partialObject, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        $queryString = $createIfNotExists ? '' : '?createIfNotExists=false';
+
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.$queryString,
+            array(),
+            $partialObject,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -179,7 +235,16 @@ class Index
      */
     public function saveObject($object)
     {
-        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']), array(), $object, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']),
+            array(),
+            $object,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -205,7 +270,16 @@ class Index
             throw new \Exception('objectID is mandatory');
         }
 
-        return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'DELETE',
+            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -325,7 +399,16 @@ class Index
         }
         $args['query'] = $query;
 
-        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/query', array(), array('params' => $this->client->buildQuery($args)), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/query',
+            array(),
+            array('params' => $this->client->buildQuery($args)),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->searchTimeout
+        );
     }
 
     /**
@@ -428,8 +511,16 @@ class Index
      */
     public function _bc_browse($page = 0, $hitsPerPage = 1000)
     {
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/browse',
-                                    array('page' => $page, 'hitsPerPage' => $hitsPerPage), null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/browse',
+            array('page' => $page, 'hitsPerPage' => $hitsPerPage),
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -458,7 +549,16 @@ class Index
      */
     public function getTaskStatus($taskID)
     {
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/task/'.$taskID, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/task/'.$taskID,
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -466,7 +566,16 @@ class Index
      */
     public function getSettings()
     {
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/settings', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/settings',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -474,7 +583,16 @@ class Index
      */
     public function clearIndex()
     {
-        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/clear', null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/clear',
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -530,7 +648,16 @@ class Index
      */
     public function setSettings($settings)
     {
-        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/settings', array(), $settings, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/settings',
+            array(),
+            $settings,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -539,7 +666,16 @@ class Index
      */
     public function listUserKeys()
     {
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/keys',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -548,7 +684,16 @@ class Index
      */
     public function getUserKeyACL($key)
     {
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/keys/'.$key,
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -557,7 +702,16 @@ class Index
      */
     public function deleteUserKey($key)
     {
-        return $this->client->request($this->context, 'DELETE', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'DELETE',
+            '/1/indexes/'.$this->urlIndexName.'/keys/'.$key,
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -603,8 +757,16 @@ class Index
             );
         }
 
-        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/keys', array(), $params,
-            $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/keys',
+            array(),
+            $params,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -650,8 +812,16 @@ class Index
             );
         }
 
-        return $this->client->request($this->context, 'PUT', '/1/indexes/'.$this->urlIndexName.'/keys/'.$key, array(), $params,
-            $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/keys/'.$key,
+            array(),
+            $params,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -661,8 +831,16 @@ class Index
      */
     public function batch($requests)
     {
-        return $this->client->request($this->context, 'POST', '/1/indexes/'.$this->urlIndexName.'/batch', array(), $requests,
-                                      $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/batch',
+            array(),
+            $requests,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**

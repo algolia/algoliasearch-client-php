@@ -164,7 +164,16 @@ class Client
      */
     public function isAlive()
     {
-        $this->request($this->context, 'GET', '/1/isalive', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        $this->request(
+            $this->context,
+            'GET',
+            '/1/isalive',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -196,7 +205,16 @@ class Client
             array_push($requests, $req);
         }
 
-        return $this->request($this->context, 'POST', '/1/indexes/*/queries?strategy='.$strategy, array(), array('requests' => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/queries?strategy='.$strategy,
+            array(),
+            array('requests' => $requests),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->searchTimeout
+        );
     }
 
     /**
@@ -211,7 +229,16 @@ class Client
      */
     public function listIndexes()
     {
-        return $this->request($this->context, 'GET', '/1/indexes/', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/indexes/',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -222,7 +249,16 @@ class Client
      */
     public function deleteIndex($indexName)
     {
-        return $this->request($this->context, 'DELETE', '/1/indexes/'.urlencode($indexName), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'DELETE',
+            '/1/indexes/'.urlencode($indexName),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -235,7 +271,16 @@ class Client
     {
         $request = array('operation' => 'move', 'destination' => $dstIndexName);
 
-        return $this->request($this->context, 'POST', '/1/indexes/'.urlencode($srcIndexName).'/operation', array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.urlencode($srcIndexName).'/operation',
+            array(),
+            $request,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -248,7 +293,16 @@ class Client
     {
         $request = array('operation' => 'copy', 'destination' => $dstIndexName);
 
-        return $this->request($this->context, 'POST', '/1/indexes/'.urlencode($srcIndexName).'/operation', array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.urlencode($srcIndexName).'/operation',
+            array(),
+            $request,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -267,7 +321,16 @@ class Client
             }
         }
 
-        return $this->request($this->context, 'GET', '/1/logs?offset='.$offset.'&length='.$length.'&type='.$type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/logs?offset='.$offset.'&length='.$length.'&type='.$type,
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -286,11 +349,19 @@ class Client
 
     /**
      * List all existing user keys with their associated ACLs
-     *
      */
     public function listUserKeys()
     {
-        return $this->request($this->context, 'GET', '/1/keys', null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/keys',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -300,7 +371,16 @@ class Client
      */
     public function getUserKeyACL($key)
     {
-        return $this->request($this->context, 'GET', '/1/keys/'.$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/keys/'.$key,
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -310,7 +390,16 @@ class Client
      */
     public function deleteUserKey($key)
     {
-        return $this->request($this->context, 'DELETE', '/1/keys/'.$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'DELETE',
+            '/1/keys/'.$key,
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -360,7 +449,16 @@ class Client
             $params['indexes'] = $indexes;
         }
 
-        return $this->request($this->context, 'POST', '/1/keys', array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/keys',
+            array(),
+            $params,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -415,7 +513,16 @@ class Client
             $params['indexes'] = $indexes;
         }
 
-        return $this->request($this->context, 'PUT', '/1/keys/'.$key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'PUT',
+            '/1/keys/'.$key,
+            array(),
+            $params,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
@@ -425,8 +532,16 @@ class Client
      */
     public function batch($requests)
     {
-        return $this->request($this->context, 'POST', '/1/indexes/*/batch', array(), array('requests' => $requests),
-                                      $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/batch',
+            array(),
+            array('requests' => $requests),
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**

@@ -451,7 +451,12 @@ class Index
         $filters = array();
 
         foreach ($refinements as $key => $value) {
-            $r = array_map(function ($val) use ($key) { return $key.':'.$val;}, $value);
+            $r = array_map(
+                function ($val) use ($key) {
+                    return $key.':'.$val;
+                },
+                $value
+            );
 
             if (in_array($key, $disjunctive_refinements)) {
                 $filter = array_merge($filters, $r);
@@ -467,7 +472,12 @@ class Index
             $filters = array();
             foreach ($refinements as $key => $value) {
                 if ($key != $disjunctive_facet) {
-                    $r = array_map(function ($val) use ($key) { return $key.':'.$val;}, $value);
+                    $r = array_map(
+                        function ($val) use ($key) {
+                            return $key.':'.$val;
+                        },
+                        $value
+                    );
 
                     if (in_array($key, $disjunctive_refinements)) {
                         $filter = array_merge($filters, $r);

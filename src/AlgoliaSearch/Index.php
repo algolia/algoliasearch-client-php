@@ -641,6 +641,7 @@ class Index
 
     /**
      * Send a batch request
+     *
      * @param  $requests an associative array defining the batch request body
      */
     public function batch($requests)
@@ -651,10 +652,12 @@ class Index
 
     /**
      * Build a batch request
+     *
      * @param  $action the batch action
      * @param  $objects the array of objects
      * @param  $withObjectID set an 'objectID' attribute
      * @param  $objectIDKey the objectIDKey
+     *
      * @return array
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = "objectID")

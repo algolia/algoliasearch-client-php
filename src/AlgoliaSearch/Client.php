@@ -117,6 +117,7 @@ class Client
      * We're supporting the following HTTP header to forward the IP of your end-user to the engine, you just need to set it for each query.
      *
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
+     *
      * @param string $ip
      */
     public function setForwardedFor($ip)
@@ -128,6 +129,7 @@ class Client
      * It's possible to use the following token to track users that have the same IP or to track users that use different devices
      *
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
+     *
      * @param string $token
      */
     public function setAlgoliaUserToken($token)
@@ -209,6 +211,7 @@ class Client
 
     /**
      * Move an existing index.
+     *
      * @param srcIndexName the name of index to copy.
      * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
      */
@@ -220,6 +223,7 @@ class Client
 
     /**
      * Copy an existing index.
+     *
      * @param srcIndexName the name of index to copy.
      * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
      */
@@ -231,6 +235,7 @@ class Client
 
     /**
      * Return last logs entries.
+     *
      * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
      * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
      */
@@ -385,6 +390,7 @@ class Client
 
     /**
      * Send a batch request targeting multiple indices
+     *
      * @param  $requests an associative array defining the batch request body
      */
     public function batch($requests)

@@ -59,7 +59,7 @@ class Index
 
         foreach ($objects as $obj) {
             // If no or invalid action, assume updateObject
-            if (! isset($obj[$objectActionKey]) || ! in_array($obj[$objectActionKey], array('addObject', 'updateObject', 'deleteObject', 'partialUpdateObject', 'partialUpdateObjectNoCreate'))) {
+            if (!isset($obj[$objectActionKey]) || !in_array($obj[$objectActionKey], array('addObject', 'updateObject', 'deleteObject', 'partialUpdateObject', 'partialUpdateObjectNoCreate'))) {
                 throw new \Exception('invalid or no action detected');
             }
 

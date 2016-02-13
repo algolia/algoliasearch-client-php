@@ -636,7 +636,7 @@ class Index
                 "maxHitsPerQuery" => $maxHitsPerQuery
             );
         }
-        return $this->client->request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key , array(), $params,
+        return $this->client->request($this->context, "PUT", "/1/indexes/" . $this->urlIndexName . "/keys/" . $key, array(), $params,
             $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 

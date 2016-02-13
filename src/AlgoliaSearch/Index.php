@@ -342,6 +342,7 @@ class Index
         if (gettype($disjunctive_facets) != 'string' && gettype($disjunctive_facets) != 'array') {
             throw new AlgoliaException('Argument "disjunctive_facets" must be a String or an Array');
         }
+
         if (gettype($refinements) != 'array') {
             throw new AlgoliaException('Argument "refinements" must be a Hash of Arrays');
         }

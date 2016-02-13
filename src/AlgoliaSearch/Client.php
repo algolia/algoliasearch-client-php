@@ -84,7 +84,8 @@ class Client
     }
 
     /**
-     * Change the default connect timeout of 2s to a custom value (only useful if your server has a very slow connectivity to Algolia backend)
+     * Change the default connect timeout of 2s to a custom value
+     * (only useful if your server has a very slow connectivity to Algolia backend)
      *
      * @param connectTimeout the connection timeout
      * @param timeout the read timeout for the query
@@ -103,7 +104,8 @@ class Client
 
     /**
      * Allow to use IP rate limit when you have a proxy between end-user and Algolia.
-     * This option will set the X-Forwarded-For HTTP header with the client IP and the X-Forwarded-API-Key with the API Key having rate limits.
+     * This option will set the X-Forwarded-For HTTP header with the client IP
+     * and the X-Forwarded-API-Key with the API Key having rate limits.
      *
      * @param adminAPIKey the admin API Key you can find in your dashboard
      * @param endUserIP the end user IP (you can use both IPV4 or IPV6 syntax)
@@ -115,9 +117,12 @@ class Client
     }
 
     /**
-     * The aggregation of the queries to retrieve the latest query uses the IP or the user token to work efficiently.
-     * If the queries are made from your backend server, the IP will be the same for all of the queries.
-     * We're supporting the following HTTP header to forward the IP of your end-user to the engine, you just need to set it for each query.
+     * The aggregation of the queries to retrieve the latest query
+     * uses the IP or the user token to work efficiently.
+     * If the queries are made from your backend server,
+     * the IP will be the same for all of the queries.
+     * We're supporting the following HTTP header to forward the IP of your end-user
+     * to the engine, you just need to set it for each query.
      *
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
      *
@@ -129,7 +134,8 @@ class Client
     }
 
     /**
-     * It's possible to use the following token to track users that have the same IP or to track users that use different devices.
+     * It's possible to use the following token to track users that have the same IP
+     * or to track users that use different devices.
      *
      * @see https://www.algolia.com/doc/faq/analytics/will-the-analytics-still-work-if-i-perform-the-search-through-my-backend
      *
@@ -166,7 +172,6 @@ class Client
 
     /**
      * This method allows to query multiple indexes with one API call
-     *
      */
     public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')
     {
@@ -429,11 +434,9 @@ class Client
             $queryParameters = array();
             if (array_keys($query) !== array_keys(array_keys($query))) {
                 // array of query parameters
-
                 $queryParameters = $query;
             } else {
                 // array of tags
-
                 $tmp = array();
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
@@ -452,16 +455,15 @@ class Client
         } else {
             if (strpos($query, '=') === false) {
                 // String of tags
+                $queryParameters = array('tagFilters' => $query);
 
-            $queryParameters = array('tagFilters' => $query);
                 if ($userToken != null && strlen($userToken) > 0) {
                     $queryParameters['userToken'] = $userToken;
                 }
                 $urlEncodedQuery = $this->buildQuery($queryParameters);
             } else {
                 // url encoded query
-
-            $urlEncodedQuery = $query;
+                $urlEncodedQuery = $query;
                 if ($userToken != null && strlen($userToken) > 0) {
                     $urlEncodedQuery = $urlEncodedQuery.'&userToken='.urlencode($userToken);
                 }

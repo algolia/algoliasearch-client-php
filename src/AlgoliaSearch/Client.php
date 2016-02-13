@@ -94,8 +94,13 @@ class Client
     public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)
     {
         $version = curl_version();
-        if ((version_compare(phpversion(), '5.2.3', '<') || version_compare($version['version'], '7.16.2', '<')) && $this->context->connectTimeout < 1) {
-            throw new AlgoliaException("The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2");
+        $isPhpOld = version_compare(phpversion(), '5.2.3', '<');
+        $isCurlOld = version_compare($version['version'], '7.16.2', '<');
+
+        if (($isPhpOld || $isCurlOld) && $this->context->connectTimeout < 1) {
+            throw new AlgoliaException(
+                "The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2"
+            );
         }
         $this->context->connectTimeout = $connectTimeout;
         $this->context->readTimeout = $timeout;

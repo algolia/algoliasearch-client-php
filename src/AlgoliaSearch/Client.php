@@ -641,7 +641,7 @@ class Client
             case JSON_ERROR_STATE_MISMATCH:
                 $errorMsg = 'JSON parsing error: underflow or the modes mismatch';
                 break;
-            case (defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1): // PHP 5.3 less than 1.2.2 (Ubuntu 10.04 LTS)
+            case defined('JSON_ERROR_UTF8') ? JSON_ERROR_UTF8 : -1: // PHP 5.3 less than 1.2.2 (Ubuntu 10.04 LTS)
                 $errorMsg = 'JSON parsing error: malformed UTF-8 characters, possibly incorrectly encoded';
                 break;
             case JSON_ERROR_NONE:

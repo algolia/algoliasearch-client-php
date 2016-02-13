@@ -604,7 +604,7 @@ class Client
                 $mrc = curl_multi_exec($mhandle, $running);
             } while ($mrc == CURLM_CALL_MULTI_PERFORM);
         }
-        $http_status = (int)curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
+        $http_status = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
         if (!empty($error)) {

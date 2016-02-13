@@ -338,7 +338,7 @@ class Client
                 'maxHitsPerQuery' => $maxHitsPerQuery,
             );
         }
-        
+
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
@@ -555,7 +555,7 @@ class Client
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
-        
+
         curl_setopt($curlHandle, CURLOPT_URL, $url);
         $version = curl_version();
         if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {

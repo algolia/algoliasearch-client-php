@@ -60,7 +60,7 @@ class Client
         if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
-        $this->cainfoPath = __DIR__ . '/../../resources/ca-bundle.crt';
+        $this->cainfoPath = __DIR__.'/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {
             switch ($option) {
                 case self::CAINFO:
@@ -70,7 +70,7 @@ class Client
                     $this->curlOptions = $this->checkCurlOptions($value);
                     break;
                 default:
-                    throw new \Exception('Unknown option: ' . $option);
+                    throw new \Exception('Unknown option: '.$option);
                     break;
             }
         }
@@ -181,7 +181,7 @@ class Client
 
             array_push($requests, $req);
         }
-        return $this->request($this->context, "POST", "/1/indexes/*/queries?strategy=" . $strategy, array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
+        return $this->request($this->context, "POST", "/1/indexes/*/queries?strategy=".$strategy, array(), array("requests" => $requests), $this->context->readHostsArray, $this->context->connectTimeout, $this->context->searchTimeout);
     }
 
     /*
@@ -205,7 +205,7 @@ class Client
      */
     public function deleteIndex($indexName)
     {
-        return $this->request($this->context, "DELETE", "/1/indexes/" . urlencode($indexName), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "DELETE", "/1/indexes/".urlencode($indexName), null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -216,7 +216,7 @@ class Client
     public function moveIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "move", "destination" => $dstIndexName);
-        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "POST", "/1/indexes/".urlencode($srcIndexName)."/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -227,7 +227,7 @@ class Client
     public function copyIndex($srcIndexName, $dstIndexName)
     {
         $request = array("operation" => "copy", "destination" => $dstIndexName);
-        return $this->request($this->context, "POST", "/1/indexes/" . urlencode($srcIndexName) . "/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "POST", "/1/indexes/".urlencode($srcIndexName)."/operation", array(), $request, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -244,7 +244,7 @@ class Client
                 $type = "all";
             }
         }
-        return $this->request($this->context, "GET", "/1/logs?offset=" . $offset . "&length=" . $length . "&type=" . $type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "GET", "/1/logs?offset=".$offset."&length=".$length."&type=".$type, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -275,7 +275,7 @@ class Client
      */
     public function getUserKeyACL($key)
     {
-        return $this->request($this->context, "GET", "/1/keys/" . $key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "GET", "/1/keys/".$key, null, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -284,7 +284,7 @@ class Client
      */
     public function deleteUserKey($key)
     {
-        return $this->request($this->context, "DELETE", "/1/keys/" . $key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "DELETE", "/1/keys/".$key, null, null, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /*
@@ -381,7 +381,7 @@ class Client
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }
-        return $this->request($this->context, "PUT", "/1/keys/" . $key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->request($this->context, "PUT", "/1/keys/".$key, array(), $params, $this->context->writeHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
     }
 
     /**
@@ -418,7 +418,7 @@ class Client
                 $tmp = array();
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
-                        array_push($tmp, '(' . join(',', $tag) . ')');
+                        array_push($tmp, '('.join(',', $tag).')');
                     } else {
                         array_push($tmp, $tag);
                     }
@@ -444,11 +444,11 @@ class Client
 
             $urlEncodedQuery = $query;
                 if ($userToken != null && strlen($userToken) > 0) {
-                    $urlEncodedQuery = $urlEncodedQuery . "&userToken=" . urlencode($userToken);
+                    $urlEncodedQuery = $urlEncodedQuery."&userToken=".urlencode($userToken);
                 }
             }
         }
-        $content = hash_hmac('sha256', $urlEncodedQuery, $privateApiKey) . $urlEncodedQuery;
+        $content = hash_hmac('sha256', $urlEncodedQuery, $privateApiKey).$urlEncodedQuery;
         return base64_encode($content);
     }
 
@@ -483,15 +483,15 @@ class Client
                 $exceptions[$host] = $e->getMessage();
             }
         }
-        throw new AlgoliaException('Hosts unreachable: ' . join(",", $exceptions));
+        throw new AlgoliaException('Hosts unreachable: '.join(",", $exceptions));
     }
 
     public function doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout)
     {
         if (strpos($host, "http") === 0) {
-            $url = $host . $path;
+            $url = $host.$path;
         } else {
-            $url = "https://" . $host . $path;
+            $url = "https://".$host.$path;
         }
         if ($params != null && count($params) > 0) {
             $params2 = array();
@@ -502,7 +502,7 @@ class Client
                     $params2[$key] = $val;
                 }
             }
-            $url .= "?" . http_build_query($params2);
+            $url .= "?".http_build_query($params2);
         }
         // initialize curl library
         $curlHandle = curl_init();
@@ -519,21 +519,21 @@ class Client
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
-                        'X-Algolia-Application-Id: ' . $context->applicationID,
-                        'X-Algolia-API-Key: ' . $context->apiKey,
+                        'X-Algolia-Application-Id: '.$context->applicationID,
+                        'X-Algolia-API-Key: '.$context->apiKey,
                         'Content-type: application/json'
                         ), $context->headers));
         } else {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
-                    'X-Algolia-Application-Id: ' . $context->applicationID,
-                    'X-Algolia-API-Key: ' . $context->adminAPIKey,
-                    'X-Forwarded-For: ' . $context->endUserIP,
-                    'X-Algolia-UserToken: ' . $context->algoliaUserToken,
-                    'X-Forwarded-API-Key: ' . $context->rateLimitAPIKey,
+                    'X-Algolia-Application-Id: '.$context->applicationID,
+                    'X-Algolia-API-Key: '.$context->adminAPIKey,
+                    'X-Forwarded-For: '.$context->endUserIP,
+                    'X-Algolia-UserToken: '.$context->algoliaUserToken,
+                    'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
                     'Content-type: application/json'
                     ), $context->headers));
         }
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP " . Version::get());
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, "Algolia for PHP ".Version::get());
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
@@ -610,7 +610,7 @@ class Client
         if (intval($http_status / 100) == 4) {
             throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status + " error");
         } elseif (intval($http_status / 100) != 2) {
-            throw new \Exception($http_status . ": " . $response);
+            throw new \Exception($http_status.": ".$response);
         }
 
         switch (json_last_error()) {

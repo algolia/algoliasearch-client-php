@@ -50,8 +50,8 @@ class ClientContext
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
         if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
-            $this->readHostsArray = array($applicationID . "-dsn.algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
-            $this->writeHostsArray = array($applicationID . ".algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
+            $this->readHostsArray = array($applicationID."-dsn.algolia.net", $applicationID."-1.algolianet.com", $applicationID."-2.algolianet.com", $applicationID."-3.algolianet.com");
+            $this->writeHostsArray = array($applicationID.".algolia.net", $applicationID."-1.algolianet.com", $applicationID."-2.algolianet.com", $applicationID."-3.algolianet.com");
         }
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');

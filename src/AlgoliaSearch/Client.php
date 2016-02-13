@@ -600,7 +600,7 @@ class Client
             // Could not reach host or service unavailable, try with another one if we have it
             $context->releaseMHandle($curlHandle);
             curl_close($curlHandle);
-            return null;
+            return;
         }
 
         $answer = json_decode($response, true);

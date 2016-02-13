@@ -36,7 +36,6 @@ class IndexBrowser implements \Iterator
     private $params;
     private $answer;
 
-
     public function __construct(Index $index, $query, $params = null, $cursor = null)
     {
         $this->index       = $index;

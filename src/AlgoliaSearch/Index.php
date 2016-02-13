@@ -526,7 +526,7 @@ class Index
      *             Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
      * @param hitsPerPage: Pagination parameter used to select the number of hits per page. Defaults to 1000.
      */
-    public function _bc_browse($page = 0, $hitsPerPage = 1000)
+    private function doBcBrowse($page = 0, $hitsPerPage = 1000)
     {
         return $this->client->request(
             $this->context,
@@ -884,7 +884,7 @@ class Index
         return array('requests' => $requests);
     }
 
-    private function _browse($query, $params = null)
+    private function doBrowse($query, $params = null)
     {
         return new IndexBrowser($this, $query, $params);
     }
@@ -906,17 +906,25 @@ class Index
             $params['cursor'] = $cursor;
         }
 
-        return $this->client->request($this->context, 'GET', '/1/indexes/'.$this->urlIndexName.'/browse',
-                            $params, null, $this->context->readHostsArray, $this->context->connectTimeout, $this->context->readTimeout);
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/browse',
+            $params,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     public function __call($name, $arguments)
     {
         if ($name === 'browse') {
             if (count($arguments) >= 1 && is_string($arguments[0])) {
-                return call_user_func_array(array($this, '_browse'), $arguments);
+                return call_user_func_array(array($this, 'doBrowse'), $arguments);
             } else {
-                return call_user_func_array(array($this, '_bc_browse'), $arguments);
+                return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
             }
         }
     }

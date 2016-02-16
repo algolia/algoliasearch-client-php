@@ -380,7 +380,7 @@ class Client {
      * @param userToken an optional token identifying the current user
      *
      */
-    public function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
+    public static function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
     {
         $urlEncodedQuery = '';
         if (is_array($query))
@@ -407,7 +407,7 @@ class Client {
             {
                 $queryParameters['userToken'] = $userToken;
             }
-            $urlEncodedQuery = $this->buildQuery($queryParameters);
+            $urlEncodedQuery = buildQuery($queryParameters);
         }
         else if (strpos($query, '=') === FALSE) // String of tags
         {
@@ -416,7 +416,7 @@ class Client {
             {
                 $queryParameters['userToken'] = $userToken;
             }
-            $urlEncodedQuery = $this->buildQuery($queryParameters);
+            $urlEncodedQuery = buildQuery($queryParameters);
         }
         else // url encoded query
         {
@@ -430,7 +430,7 @@ class Client {
         return base64_encode($content);
     }
 
-    public function buildQuery($args)
+    public static function buildQuery($args)
     {
         foreach ($args as $key => $value) {
             if (gettype($value) == "array") {

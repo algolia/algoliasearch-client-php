@@ -1,0 +1,6 @@
+preset: PSR2
+linting: true
+finder:
+  path:
+      - "src/AlgoliaSearch"
+      - "tests/AlgoliaSearch"

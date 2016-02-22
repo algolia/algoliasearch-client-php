@@ -18,17 +18,16 @@ class DeleteIndexTest extends AlgoliaSearchTestCase
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
             // not fatal
-        }  
+        }
     }
 
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function includeValue($tab, $attrName, $value)
@@ -50,7 +49,7 @@ class DeleteIndexTest extends AlgoliaSearchTestCase
         $res = $this->client->listIndexes();
         $this->assertTrue($this->includeValue($res['items'], 'name', $this->safe_name('ListTest2')));
         $task = $this->client->deleteIndex($this->safe_name('ListTest2'));
-        $this->index2->waitTask($task['taskID']);  
+        $this->index2->waitTask($task['taskID']);
 
         $resAfter = $this->client->listIndexes();
 

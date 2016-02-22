@@ -12,7 +12,7 @@ class LogTest extends AlgoliaSearchTestCase
     
     protected function setUp()
     {
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
     }
 
     public function testLogIndex()
@@ -20,7 +20,5 @@ class LogTest extends AlgoliaSearchTestCase
         $res = $this->client->getLogs(0, 20, true);
         
         $this->assertGreaterThan(0, count($res['logs']));
-
-        
     }
 }

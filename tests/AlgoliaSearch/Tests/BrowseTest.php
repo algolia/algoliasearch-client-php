@@ -28,30 +28,32 @@ class BrowseTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testBrowseIndex()
     {
         $objects = array();
 
-        for ($i = 0; $i < 1500; $i++)
+        for ($i = 0; $i < 1500; $i++) {
             $objects[] = array('objectID' => $i, 'i' => $i);
+        }
 
         $task = $this->index->addObjects($objects);
         $this->index->waitTask($task['taskID']);
 
         $i = 0;
 
-        foreach ($this->index->browse('') as $key => $value)
+        foreach ($this->index->browse('') as $key => $value) {
             $i++;
+        }
 
         $this->assertEquals(1500, $i);
 
         $i = 0;
 
-        foreach ($this->index->browse('', array("numericFilters" => "i<42")) as $key => $value)
+        foreach ($this->index->browse('', array("numericFilters" => "i<42")) as $key => $value) {
             $i++;
+        }
 
         $this->assertEquals(42, $i);
     }

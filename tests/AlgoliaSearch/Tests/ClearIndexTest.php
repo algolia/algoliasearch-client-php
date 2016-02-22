@@ -18,17 +18,16 @@ class ClearIndexTest extends AlgoliaSearchTestCase
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
             // not fatal
-        }  
+        }
     }
 
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testClearIndex()
@@ -37,7 +36,7 @@ class ClearIndexTest extends AlgoliaSearchTestCase
         $this->index->waitTask($task['taskID']);
 
         $task = $this->index->clearIndex();
-        $this->index->waitTask($task['taskID']);  
+        $this->index->waitTask($task['taskID']);
 
         $res = $this->index->search('');
 

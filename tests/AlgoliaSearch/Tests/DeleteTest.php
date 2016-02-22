@@ -24,11 +24,10 @@ class DeleteTest extends AlgoliaSearchTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));          
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     /**

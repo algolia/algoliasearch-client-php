@@ -28,7 +28,6 @@ class GetTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testGetObject()

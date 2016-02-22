@@ -27,8 +27,8 @@ namespace AlgoliaSearch;
 
 use Exception;
 
-class ClientContext {
-
+class ClientContext
+{
     public $applicationID;
     public $apiKey;
     public $readHostsArray;
@@ -39,40 +39,62 @@ class ClientContext {
     public $algoliaUserToken;
     public $connectTimeout;
 
-    function __construct($applicationID, $apiKey, $hostsArray) {
-        $this->connectTimeout = 2; // connect timeout of 2s by default
-        $this->readTimeout = 30; // global timeout of 30s by default
-        $this->searchTimeout = 5; // search timeout of 5s by default
+    public function __construct($applicationID, $apiKey, $hostsArray)
+    {
+        // connect timeout of 2s by default
+        $this->connectTimeout = 2;
+
+        // global timeout of 30s by default
+        $this->readTimeout = 30;
+
+        // search timeout of 5s by default
+        $this->searchTimeout = 5;
+
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
+
         if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
-            $this->readHostsArray = array($applicationID . "-dsn.algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
-            $this->writeHostsArray = array($applicationID . ".algolia.net", $applicationID . "-1.algolianet.com", $applicationID . "-2.algolianet.com", $applicationID . "-3.algolianet.com");
+            $this->readHostsArray = array(
+                $applicationID.'-dsn.algolia.net',
+                $applicationID.'-1.algolianet.com',
+                $applicationID.'-2.algolianet.com',
+                $applicationID.'-3.algolianet.com',
+            );
+            $this->writeHostsArray = array(
+                $applicationID.'.algolia.net',
+                $applicationID.'-1.algolianet.com',
+                $applicationID.'-2.algolianet.com',
+                $applicationID.'-3.algolianet.com'
+            );
         }
+
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
         }
+
         if ($this->apiKey == null || mb_strlen($this->apiKey) == 0) {
             throw new Exception('AlgoliaSearch requires an apiKey.');
         }
 
-        $this->curlMHandle = NULL;
-        $this->adminAPIKey = NULL;
-        $this->endUserIP = NULL;
-        $this->algoliaUserToken = NULL;
-        $this->rateLimitAPIKey = NULL;
+        $this->curlMHandle = null;
+        $this->adminAPIKey = null;
+        $this->endUserIP = null;
+        $this->algoliaUserToken = null;
+        $this->rateLimitAPIKey = null;
         $this->headers = array();
     }
 
-    function __destruct() {
+    public function __destruct()
+    {
         if ($this->curlMHandle != null) {
             curl_multi_close($this->curlMHandle);
         }
     }
 
-    public function getMHandle($curlHandle) {
+    public function getMHandle($curlHandle)
+    {
         if ($this->curlMHandle == null) {
             $this->curlMHandle = curl_multi_init();
         }
@@ -81,32 +103,37 @@ class ClientContext {
         return $this->curlMHandle;
     }
 
-    public function releaseMHandle($curlHandle) {
+    public function releaseMHandle($curlHandle)
+    {
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
 
-    public function setForwardedFor($ip) {
+    public function setForwardedFor($ip)
+    {
         $this->endUserIP = $ip;
     }
 
-    public function setAlgoliaUserToken($token) {
+    public function setAlgoliaUserToken($token)
+    {
         $this->algoliaUserToken = $token;
     }
 
-    public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey) {
+    public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey)
+    {
         $this->adminAPIKey = $adminAPIKey;
         $this->endUserIP = $endUserIP;
         $this->rateLimitAPIKey = $rateLimitAPIKey;
     }
 
-    public function disableRateLimit() {
-        $this->adminAPIKey = NULL;
-        $this->endUserIP = NULL;
-        $this->rateLimitAPIKey = NULL;
-
+    public function disableRateLimit()
+    {
+        $this->adminAPIKey = null;
+        $this->endUserIP = null;
+        $this->rateLimitAPIKey = null;
     }
 
-    public function setExtraHeader($key, $value) {
+    public function setExtraHeader($key, $value)
+    {
         $this->headers[$key] = $value;
     }
 }

@@ -24,11 +24,10 @@ class BrowseIndexTest extends AlgoliaSearchTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testBrowseIndex()
@@ -41,6 +40,5 @@ class BrowseIndexTest extends AlgoliaSearchTestCase
         $res = $this->index->browse(0);
         $this->assertEquals(1, $res['nbHits']);
         $this->assertEquals("Robin", $res['hits'][0]['firstname']);
-        
     }
 }

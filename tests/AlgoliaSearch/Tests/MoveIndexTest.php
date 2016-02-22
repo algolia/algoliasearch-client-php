@@ -38,7 +38,6 @@ class MoveIndexTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function includeValue($tab, $attrName, $value)

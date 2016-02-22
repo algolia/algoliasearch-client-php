@@ -12,7 +12,7 @@ class FunctionTest extends AlgoliaSearchTestCase
 
     protected function setUp()
     {
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->index->addObject(array("firstname" => "Robin"));
         $this->index->waitTask($res['taskID']);
@@ -25,7 +25,6 @@ class FunctionTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testKeepAlive()
@@ -33,7 +32,7 @@ class FunctionTest extends AlgoliaSearchTestCase
         if (getenv('TRAVIS_PHP_VERSION') == 'hhvm') {
             $this->markTestSkipped('Irrevelant on travis');
         }
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $init = $this->microtime_float();
         $this->client->listIndexes();
         $end_init = $this->microtime_float();
@@ -41,8 +40,8 @@ class FunctionTest extends AlgoliaSearchTestCase
             $this->client->listIndexes();
         }
         $end = $this->microtime_float();
-	$timeInit = ($end_init - $init);
-	$timeAfter = ($end - $end_init) / 10;
+        $timeInit = ($end_init - $init);
+        $timeAfter = ($end - $end_init) / 10;
         $this->assertGreaterThan(2.0, $timeInit / $timeAfter);
     }
 
@@ -78,8 +77,8 @@ class FunctionTest extends AlgoliaSearchTestCase
 
     public function testFunction()
     {
-        $this->client->disableRateLimitForward(); 
-        $this->client->listIndexes(); 
+        $this->client->disableRateLimitForward();
+        $this->client->listIndexes();
     }
 
     public function microtime_float()

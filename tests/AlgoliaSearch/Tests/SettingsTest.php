@@ -12,7 +12,7 @@ class SettingsTest extends AlgoliaSearchTestCase
 
     protected function setUp()
     {
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));  
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();
@@ -28,7 +28,6 @@ class SettingsTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testSettingsIndex()

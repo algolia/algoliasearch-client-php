@@ -29,7 +29,6 @@ class BasicTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testAddObject()
@@ -130,40 +129,41 @@ class BasicTest extends AlgoliaSearchTestCase
 
     public function testDisjunctiveFaceting()
     {
-      $this->index->setSettings(array("attributesForFacetting" => array('city', 'stars', 'facilities')));
-      $task = $this->index->addObjects(array(
-        array( "name" => "Hotel A", "stars" => "*", "facilities" => array("wifi", "batch", "spa"), "city" => "Paris"),
-        array( "name" => "Hotel B", "stars" => "*", "facilities" => array("wifi"), "city" => "Paris"),
-        array( "name" => "Hotel C", "stars" => "**", "facilities" => array("batch"), "city" => "San Francisco"),
-        array( "name" => "Hotel D", "stars" => "****", "facilities" => array("spa"), "city" => "Paris"),
-        array( "name" => "Hotel E", "stars" => "****", "facilities" => array("spa"), "city" => "New York")));
-      $this->index->waitTask($task['taskID']);
+        $this->index->setSettings(array("attributesForFacetting" => array('city', 'stars', 'facilities')));
+        $task = $this->index->addObjects(array(
+            array( "name" => "Hotel A", "stars" => "*", "facilities" => array("wifi", "batch", "spa"), "city" => "Paris"),
+            array( "name" => "Hotel B", "stars" => "*", "facilities" => array("wifi"), "city" => "Paris"),
+            array( "name" => "Hotel C", "stars" => "**", "facilities" => array("batch"), "city" => "San Francisco"),
+            array( "name" => "Hotel D", "stars" => "****", "facilities" => array("spa"), "city" => "Paris"),
+            array( "name" => "Hotel E", "stars" => "****", "facilities" => array("spa"), "city" => "New York"))
+        );
+        $this->index->waitTask($task['taskID']);
 
-      $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"));
-      $this->assertEquals(5, $answer['nbHits']);
-      $this->assertEquals(1, count($answer['facets']));
-      $this->assertEquals(2, count($answer['disjunctiveFacets']));
+        $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"));
+        $this->assertEquals(5, $answer['nbHits']);
+        $this->assertEquals(1, count($answer['facets']));
+        $this->assertEquals(2, count($answer['disjunctiveFacets']));
 
-      $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*")));
-      $this->assertEquals(2, $answer['nbHits']);
-      $this->assertEquals(1, count($answer['facets']));
-      $this->assertEquals(2, count($answer['disjunctiveFacets']));
-      $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
-      $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['**']);
-      $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['****']);
+        $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*")));
+        $this->assertEquals(2, $answer['nbHits']);
+        $this->assertEquals(1, count($answer['facets']));
+        $this->assertEquals(2, count($answer['disjunctiveFacets']));
+        $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
+        $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['**']);
+        $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['****']);
 
-      $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*"), "city" => array("Paris")));
-      $this->assertEquals(2, $answer['nbHits']);
-      $this->assertEquals(1, count($answer['facets']));
-      $this->assertEquals(2, count($answer['disjunctiveFacets']));
-      $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
-      $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['****']);
+        $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*"), "city" => array("Paris")));
+        $this->assertEquals(2, $answer['nbHits']);
+        $this->assertEquals(1, count($answer['facets']));
+        $this->assertEquals(2, count($answer['disjunctiveFacets']));
+        $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
+        $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['****']);
 
-      $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*", "****"), "city" => array("Paris")));
-      $this->assertEquals(3, $answer['nbHits']);
-      $this->assertEquals(1, count($answer['facets']));
-      $this->assertEquals(2, count($answer['disjunctiveFacets']));
-      $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
-      $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['****']);
+        $answer = $this->index->searchDisjunctiveFaceting("h", array("stars", "facilities"), array("facets" => "city"), array("stars" => array("*", "****"), "city" => array("Paris")));
+        $this->assertEquals(3, $answer['nbHits']);
+        $this->assertEquals(1, count($answer['facets']));
+        $this->assertEquals(2, count($answer['disjunctiveFacets']));
+        $this->assertEquals(2, $answer['disjunctiveFacets']['stars']['*']);
+        $this->assertEquals(1, $answer['disjunctiveFacets']['stars']['****']);
     }
 }

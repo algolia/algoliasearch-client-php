@@ -4,7 +4,8 @@ namespace AlgoliaSearch\Tests;
 
 class AlgoliaSearchTestCase extends \PHPUnit_Framework_TestCase
 {
-    public function safe_name($name) {
+    public function safe_name($name)
+    {
         if (getenv("TRAVIS") != "true") {
             return $name;
         }
@@ -15,13 +16,11 @@ class AlgoliaSearchTestCase extends \PHPUnit_Framework_TestCase
 
     public function containsValue($array, $attr, $value)
     {
-      foreach ($array as $elt)
-      {
-        if ($elt[$attr] == $value)
-        {
-          return true;
+        foreach ($array as $elt) {
+            if ($elt[$attr] == $value) {
+                return true;
+            }
         }
-      }
-      return false;
+        return false;
     }
 }

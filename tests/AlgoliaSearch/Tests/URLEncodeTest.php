@@ -28,7 +28,6 @@ class URLEncodeTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testURLEncode()
@@ -50,6 +49,5 @@ class URLEncodeTest extends AlgoliaSearchTestCase
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Rodrigo', $results['hits'][0]['firstname']);
-
     }
 }

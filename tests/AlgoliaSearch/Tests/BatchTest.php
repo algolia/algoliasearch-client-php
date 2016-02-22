@@ -25,11 +25,10 @@ class BatchTest extends AlgoliaSearchTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));           
+            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
     }
 
     public function testBatchCustomObjects()
@@ -61,5 +60,4 @@ class BatchTest extends AlgoliaSearchTestCase
         $results = $this->index->search('');
         $this->assertEquals(3, $results['nbHits']);
     }
-
 }

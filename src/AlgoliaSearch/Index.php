@@ -735,7 +735,7 @@ class Index
      * Create a new user key associated to this index
      *
      * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a NSDictionary that
+     * The list of parameters for this key. Defined by a array that
      * can contains the following values:
      *   - acl: array of string
      *   - indices: array of string
@@ -790,7 +790,7 @@ class Index
      * Update a user key associated to this index
      *
      * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a NSDictionary that
+     * The list of parameters for this key. Defined by a array that
      * can contains the following values:
      *   - acl: array of string
      *   - indices: array of string

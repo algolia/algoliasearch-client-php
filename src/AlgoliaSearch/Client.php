@@ -34,11 +34,13 @@ class Client
 {
     const CAINFO = 'cainfo';
     const CURLOPT = 'curloptions';
+    const PLACES_ENABLED = 'placesEnabled';
 
     protected $context;
     protected $cainfoPath;
     protected $curlConstants;
     protected $curlOptions = array();
+    protected $placesEnabled = false;
 
     /**
      * Algolia Search initialization
@@ -46,20 +48,17 @@ class Client
      * @param applicationID the application ID you have in your admin interface
      * @param apiKey a valid API key for the service
      * @param hostsArray the list of hosts that you have received for the service
+     * @param options
      */
     public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
     {
-        if ($hostsArray == null) {
-            $this->context = new ClientContext($applicationID, $apiKey, null);
-        } else {
-            $this->context = new ClientContext($applicationID, $apiKey, $hostsArray);
-        }
         if (!function_exists('curl_init')) {
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
         }
         if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
+
         $this->cainfoPath = __DIR__.'/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {
             switch ($option) {
@@ -69,11 +68,16 @@ class Client
                 case self::CURLOPT:
                     $this->curlOptions = $this->checkCurlOptions($value);
                     break;
+                case self::PLACES_ENABLED:
+                    $this->placesEnabled = (bool) $value;
+                    break;
                 default:
                     throw new \Exception('Unknown option: '.$option);
                     break;
             }
         }
+
+        $this->context = new ClientContext($applicationID, $apiKey, $hostsArray, $this->placesEnabled);
     }
 
     /**
@@ -406,7 +410,7 @@ class Client
      * Create a new user key
      *
      * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a NSDictionary that
+     * The list of parameters for this key. Defined by a array that
      * can contains the following values:
      *   - acl: array of string
      *   - indices: array of string
@@ -465,7 +469,7 @@ class Client
      * Update a user key
      *
      * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a NSDictionary that
+     * The list of parameters for this key. Defined by a array that
      * can contains the following values:
      *   - acl: array of string
      *   - indices: array of string
@@ -611,6 +615,18 @@ class Client
         return http_build_query($args);
     }
 
+    /**
+     * @param $context
+     * @param $method
+     * @param $path
+     * @param $params
+     * @param $data
+     * @param $hostsArray
+     * @param $connectTimeout
+     * @param $readTimeout
+     * @return mixed
+     * @throws AlgoliaException
+     */
     public function request(
         $context,
         $method,
@@ -889,5 +905,17 @@ class Client
                 $errorMsg
             )
         );
+    }
+
+    private function getPlacesIndex()
+    {
+        return new PlacesIndex($this->context, $this);
+    }
+
+    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array())
+    {
+        $options['placesEnabled'] = true;
+        $client = new static($appId, $apiKey, $hostsArray, $options);
+        return $client->getPlacesIndex();
     }
 }

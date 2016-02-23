@@ -39,7 +39,7 @@ class ClientContext
     public $algoliaUserToken;
     public $connectTimeout;
 
-    public function __construct($applicationID, $apiKey, $hostsArray)
+    public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
     {
         // connect timeout of 2s by default
         $this->connectTimeout = 2;
@@ -56,18 +56,8 @@ class ClientContext
         $this->writeHostsArray = $hostsArray;
 
         if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
-            $this->readHostsArray = array(
-                $applicationID.'-dsn.algolia.net',
-                $applicationID.'-1.algolianet.com',
-                $applicationID.'-2.algolianet.com',
-                $applicationID.'-3.algolianet.com',
-            );
-            $this->writeHostsArray = array(
-                $applicationID.'.algolia.net',
-                $applicationID.'-1.algolianet.com',
-                $applicationID.'-2.algolianet.com',
-                $applicationID.'-3.algolianet.com'
-            );
+            $this->readHostsArray = $this->getDefaultReadHosts($placesEnabled);
+            $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
 
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
@@ -84,6 +74,35 @@ class ClientContext
         $this->algoliaUserToken = null;
         $this->rateLimitAPIKey = null;
         $this->headers = array();
+    }
+
+    private function getDefaultReadHosts($placesEnabled)
+    {
+        if ($placesEnabled) {
+            return [
+                'places-dsn.algolia.net',
+                'places-1.algolianet.com',
+                'places-2.algolianet.com',
+                'places-3.algolianet.com',
+            ];
+        }
+
+        return [
+            $this->applicationID.'-dsn.algolia.net',
+            $this->applicationID.'-1.algolianet.com',
+            $this->applicationID.'-2.algolianet.com',
+            $this->applicationID.'-3.algolianet.com',
+        ];
+    }
+
+    private function getDefaultWriteHosts()
+    {
+        return [
+            $this->applicationID.'.algolia.net',
+            $this->applicationID.'-1.algolianet.com',
+            $this->applicationID.'-2.algolianet.com',
+            $this->applicationID.'-3.algolianet.com'
+        ];
     }
 
     public function __destruct()

@@ -2,6 +2,11 @@
 
 ### 1.7.0
  - Add new secured api key
+ - Drop php 5.3 support
+ - Project is now following PSR-2 Coding style
+ - Add 7.0 support
+ - New `snippetEllipsisText` search parameter exposed
+ - Adding in multipleQueries request
 
 ### 1.6.1
  - fix deleteByQuery (was not using 1000 hits for deletes)

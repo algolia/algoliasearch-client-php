@@ -33,6 +33,12 @@ class PlacesIndex
         $this->client = $client;
     }
 
+    /**
+     * @param $query
+     * @param array|null $args
+     * @return mixed
+     * @throws AlgoliaException
+     */
     public function search($query, $args = null)
     {
         if ($args === null) {

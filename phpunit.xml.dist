@@ -9,6 +9,9 @@
         <blacklist>
             <file>systemlib.phpreflection_hni</file>
         </blacklist>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
     </filter>
     <logging>
         <log type="coverage-clover" target="coverage.cov"/>

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -23,22 +24,68 @@
  *
  *
  */
+
 namespace AlgoliaSearch;
 
 use Exception;
 
 class ClientContext
 {
+    /**
+     * @var string
+     */
     public $applicationID;
+
+    /**
+     * @var string
+     */
     public $apiKey;
+
+    /**
+     * @var array
+     */
     public $readHostsArray;
+
+    /**
+     * @var array
+     */
     public $writeHostsArray;
+
+    /**
+     * @var resource
+     */
     public $curlMHandle;
+
+    /**
+     * @var string
+     */
     public $adminAPIKey;
+
+    /**
+     * @var string
+     */
     public $endUserIP;
+
+    /**
+     * @var string
+     */
     public $algoliaUserToken;
+
+    /**
+     * @var int
+     */
     public $connectTimeout;
 
+    /**
+     * ClientContext constructor.
+     *
+     * @param string $applicationID
+     * @param string $apiKey
+     * @param array  $hostsArray
+     * @param bool   $placesEnabled
+     *
+     * @throws Exception
+     */
     public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
     {
         // connect timeout of 2s by default
@@ -73,9 +120,14 @@ class ClientContext
         $this->endUserIP = null;
         $this->algoliaUserToken = null;
         $this->rateLimitAPIKey = null;
-        $this->headers = array();
+        $this->headers = [];
     }
 
+    /**
+     * @param bool $placesEnabled
+     *
+     * @return array
+     */
     private function getDefaultReadHosts($placesEnabled)
     {
         if ($placesEnabled) {
@@ -95,16 +147,22 @@ class ClientContext
         ];
     }
 
+    /**
+     * @return array
+     */
     private function getDefaultWriteHosts()
     {
         return [
             $this->applicationID.'.algolia.net',
             $this->applicationID.'-1.algolianet.com',
             $this->applicationID.'-2.algolianet.com',
-            $this->applicationID.'-3.algolianet.com'
+            $this->applicationID.'-3.algolianet.com',
         ];
     }
 
+    /**
+     * Closes eventually opened curl handles.
+     */
     public function __destruct()
     {
         if ($this->curlMHandle != null) {
@@ -112,6 +170,11 @@ class ClientContext
         }
     }
 
+    /**
+     * @param $curlHandle
+     *
+     * @return resource
+     */
     public function getMHandle($curlHandle)
     {
         if ($this->curlMHandle == null) {
@@ -122,21 +185,35 @@ class ClientContext
         return $this->curlMHandle;
     }
 
+    /**
+     * @param $curlHandle
+     */
     public function releaseMHandle($curlHandle)
     {
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
 
+    /**
+     * @param string $ip
+     */
     public function setForwardedFor($ip)
     {
         $this->endUserIP = $ip;
     }
 
+    /**
+     * @param string $token
+     */
     public function setAlgoliaUserToken($token)
     {
         $this->algoliaUserToken = $token;
     }
 
+    /**
+     * @param string $adminAPIKey
+     * @param string $endUserIP
+     * @param string $rateLimitAPIKey
+     */
     public function setRateLimit($adminAPIKey, $endUserIP, $rateLimitAPIKey)
     {
         $this->adminAPIKey = $adminAPIKey;
@@ -144,6 +221,9 @@ class ClientContext
         $this->rateLimitAPIKey = $rateLimitAPIKey;
     }
 
+    /**
+     * Disables the rate limit.
+     */
     public function disableRateLimit()
     {
         $this->adminAPIKey = null;
@@ -151,6 +231,10 @@ class ClientContext
         $this->rateLimitAPIKey = null;
     }
 
+    /**
+     * @param string $key
+     * @param string $value
+     */
     public function setExtraHeader($key, $value)
     {
         $this->headers[$key] = $value;

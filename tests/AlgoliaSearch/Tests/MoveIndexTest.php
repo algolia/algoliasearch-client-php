@@ -1,4 +1,5 @@
 <?php
+
 namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
@@ -19,7 +20,7 @@ class MoveIndexTest extends AlgoliaSearchTestCase
             // not fatal
         }
         try {
-            $task = $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
+            $this->client->deleteIndex($this->safe_name('àlgol?à2-php'));
             //$this->client->waitTask($task['taskID']);
         } catch (AlgoliaException $e) {
             // CopyIndex does not exist
@@ -47,12 +48,13 @@ class MoveIndexTest extends AlgoliaSearchTestCase
                 return true;
             }
         }
+
         return false;
     }
 
     public function testMoveIndex()
     {
-        $task = $this->index->addObject(array("firstname" => "Robin"));
+        $task = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($task['taskID']);
 
         $task = $this->client->moveIndex($this->safe_name('àlgol?à-php'), $this->safe_name('àlgol?à2-php'));
@@ -64,13 +66,13 @@ class MoveIndexTest extends AlgoliaSearchTestCase
         $this->assertTrue($this->includeValue($list['items'], 'name', $this->safe_name('àlgol?à2-php')));
         $this->assertFalse($this->includeValue($list['items'], 'name', $this->safe_name('àlgol?à-php')));
         $this->assertEquals(1, $res['nbHits']);
-        $this->assertEquals("Robin", $res['hits'][0]['firstname']);
+        $this->assertEquals('Robin', $res['hits'][0]['firstname']);
     }
 
     public function testCopyIndex()
     {
         $this->index2 = $this->client->initIndex($this->safe_name('àlgol?à2-php'));
-        $task = $this->index2->addObject(array("firstname" => "Robin"));
+        $task = $this->index2->addObject(['firstname' => 'Robin']);
         $this->index2->waitTask($task['taskID']);
 
         $this->expectOutputString('');
@@ -88,6 +90,6 @@ class MoveIndexTest extends AlgoliaSearchTestCase
         $res = $this->index2->search('');
 
         $this->assertEquals(1, $res['nbHits']);
-        $this->assertEquals("Robin", $res['hits'][0]['firstname']);
+        $this->assertEquals('Robin', $res['hits'][0]['firstname']);
     }
 }

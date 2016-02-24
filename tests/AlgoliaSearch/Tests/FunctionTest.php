@@ -14,7 +14,7 @@ class FunctionTest extends AlgoliaSearchTestCase
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
-        $res = $this->index->addObject(array("firstname" => "Robin"));
+        $res = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($res['taskID']);
     }
 
@@ -60,20 +60,19 @@ class FunctionTest extends AlgoliaSearchTestCase
     public function testConstructHost()
     {
         $this->setExpectedException('Exception');
-        $host = array("toto");
+        $host = ['toto'];
         $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
         $this->badIndex = $this->badClient->initIndex($this->safe_name('àlgol?à-php'));
-        $res = $this->badIndex->addObject(array("firstname" => "Robin"));
+        $res = $this->badIndex->addObject(['firstname' => 'Robin']);
         $this->badIndex->waitTask($res['taskID']);
     }
 
     public function testBadAPPIP()
     {
         $this->setExpectedException('Exception');
-        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), "toto");
+        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), 'toto');
         $this->index = $this->badClient->listIndexes();
     }
-
 
     public function testFunction()
     {
@@ -83,7 +82,8 @@ class FunctionTest extends AlgoliaSearchTestCase
 
     public function microtime_float()
     {
-        list($usec, $sec) = explode(" ", microtime());
-        return ((float)$usec + (float)$sec);
+        list($usec, $sec) = explode(' ', microtime());
+
+        return ((float) $usec + (float) $sec);
     }
 }

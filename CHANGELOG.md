@@ -1,6 +1,6 @@
 ## Change Log
 
-### 1.7.0
+### 1.7.0 / 1.7.1
  - Add new secured api key
  - Drop php 5.3 support
  - Project is now following PSR-2 Coding style

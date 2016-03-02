@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -23,6 +24,7 @@
  *
  *
  */
+
 namespace AlgoliaSearch;
 
 /**
@@ -36,21 +38,42 @@ class Client
     const CURLOPT = 'curloptions';
     const PLACES_ENABLED = 'placesEnabled';
 
+    /**
+     * @var ClientContext
+     */
     protected $context;
-    protected $cainfoPath;
+
+    /**
+     * @var string
+     */
+    protected $caInfoPath;
+
+    /**
+     * @var array
+     */
     protected $curlConstants;
-    protected $curlOptions = array();
+
+    /**
+     * @var array
+     */
+    protected $curlOptions = [];
+
+    /**
+     * @var bool
+     */
     protected $placesEnabled = false;
 
     /**
-     * Algolia Search initialization
+     * Algolia Search initialization.
      *
-     * @param applicationID the application ID you have in your admin interface
-     * @param apiKey a valid API key for the service
-     * @param hostsArray the list of hosts that you have received for the service
-     * @param options
+     * @param string     $applicationID the application ID you have in your admin interface
+     * @param string     $apiKey        a valid API key for the service
+     * @param array|null $hostsArray    the list of hosts that you have received for the service
+     * @param array      $options
+     *
+     * @throws \Exception
      */
-    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
+    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = [])
     {
         if (!function_exists('curl_init')) {
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
@@ -59,11 +82,11 @@ class Client
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
 
-        $this->cainfoPath = __DIR__.'/../../resources/ca-bundle.crt';
+        $this->caInfoPath = __DIR__.'/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {
             switch ($option) {
                 case self::CAINFO:
-                    $this->cainfoPath = $value;
+                    $this->caInfoPath = $value;
                     break;
                 case self::CURLOPT:
                     $this->curlOptions = $this->checkCurlOptions($value);
@@ -73,7 +96,6 @@ class Client
                     break;
                 default:
                     throw new \Exception('Unknown option: '.$option);
-                    break;
             }
         }
 
@@ -81,7 +103,7 @@ class Client
     }
 
     /**
-     * Release curl handle
+     * Release curl handle.
      */
     public function __destruct()
     {
@@ -89,11 +111,13 @@ class Client
 
     /**
      * Change the default connect timeout of 2s to a custom value
-     * (only useful if your server has a very slow connectivity to Algolia backend)
+     * (only useful if your server has a very slow connectivity to Algolia backend).
      *
-     * @param connectTimeout the connection timeout
-     * @param timeout the read timeout for the query
-     * @param searchTimeout the read timeout used for search queries only
+     * @param int $connectTimeout the connection timeout
+     * @param int $timeout        the read timeout for the query
+     * @param int $searchTimeout  the read timeout used for search queries only
+     *
+     * @throws AlgoliaException
      */
     public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)
     {
@@ -116,9 +140,9 @@ class Client
      * This option will set the X-Forwarded-For HTTP header with the client IP
      * and the X-Forwarded-API-Key with the API Key having rate limits.
      *
-     * @param adminAPIKey the admin API Key you can find in your dashboard
-     * @param endUserIP the end user IP (you can use both IPV4 or IPV6 syntax)
-     * @param rateLimitAPIKey the API key on which you have a rate limit
+     * @param string $adminAPIKey     the admin API Key you can find in your dashboard
+     * @param string $endUserIP       the end user IP (you can use both IPV4 or IPV6 syntax)
+     * @param string $rateLimitAPIKey the API key on which you have a rate limit
      */
     public function enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey)
     {
@@ -156,7 +180,7 @@ class Client
     }
 
     /**
-     * Disable IP rate limit enabled with enableRateLimitForward() function
+     * Disable IP rate limit enabled with enableRateLimitForward() function.
      */
     public function disableRateLimitForward()
     {
@@ -164,7 +188,7 @@ class Client
     }
 
     /**
-     * Call isAlive
+     * Call isAlive.
      */
     public function isAlive()
     {
@@ -181,7 +205,10 @@ class Client
     }
 
     /**
-     * Allow to set custom headers
+     * Allow to set custom headers.
+     *
+     * @param string $key
+     * @param string $value
      */
     public function setExtraHeader($key, $value)
     {
@@ -189,14 +216,23 @@ class Client
     }
 
     /**
-     * This method allows to query multiple indexes with one API call
+     * This method allows to query multiple indexes with one API call.
+     *
+     * @param array  $queries
+     * @param string $indexNameKey
+     * @param string $strategy
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
      */
     public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')
     {
         if ($queries == null) {
             throw new \Exception('No query provided');
         }
-        $requests = array();
+        $requests = [];
         foreach ($queries as $query) {
             if (array_key_exists($indexNameKey, $query)) {
                 $indexes = $query[$indexNameKey];
@@ -204,7 +240,7 @@ class Client
             } else {
                 throw new \Exception('indexName is mandatory');
             }
-            $req = array('indexName' => $indexes, 'params' => $this->buildQuery($query));
+            $req = ['indexName' => $indexes, 'params' => $this->buildQuery($query)];
 
             array_push($requests, $req);
         }
@@ -213,8 +249,8 @@ class Client
             $this->context,
             'POST',
             '/1/indexes/*/queries?strategy='.$strategy,
-            array(),
-            array('requests' => $requests),
+            [],
+            ['requests' => $requests],
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout
@@ -229,7 +265,11 @@ class Client
      *         array("name" => "contacts", "createdAt" => "2013-01-18T15:33:13.556Z"),
      *         array("name" => "notes", "createdAt" => "2013-01-18T15:33:13.556Z")
      *     )
-     * )
+     * ).
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function listIndexes()
     {
@@ -246,10 +286,11 @@ class Client
     }
 
     /**
-     * Delete an index
+     * Delete an index.
      *
-     * @param indexName the name of index to delete
-     * return an object containing a "deletedAt" attribute
+     * @param string $indexName the name of index to delete
+     *
+     * @return mixed an object containing a "deletedAt" attribute
      */
     public function deleteIndex($indexName)
     {
@@ -268,18 +309,21 @@ class Client
     /**
      * Move an existing index.
      *
-     * @param srcIndexName the name of index to copy.
-     * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
+     * @param string $srcIndexName the name of index to copy.
+     * @param string $dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overwritten
+     *                             if it already exist).
+     *
+     * @return mixed
      */
     public function moveIndex($srcIndexName, $dstIndexName)
     {
-        $request = array('operation' => 'move', 'destination' => $dstIndexName);
+        $request = ['operation' => 'move', 'destination' => $dstIndexName];
 
         return $this->request(
             $this->context,
             'POST',
             '/1/indexes/'.urlencode($srcIndexName).'/operation',
-            array(),
+            [],
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -290,18 +334,21 @@ class Client
     /**
      * Copy an existing index.
      *
-     * @param srcIndexName the name of index to copy.
-     * @param dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overriten if it already exist).
+     * @param string $srcIndexName the name of index to copy.
+     * @param string $dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overwritten
+     *                             if it already exist).
+     *
+     * @return mixed
      */
     public function copyIndex($srcIndexName, $dstIndexName)
     {
-        $request = array('operation' => 'copy', 'destination' => $dstIndexName);
+        $request = ['operation' => 'copy', 'destination' => $dstIndexName];
 
         return $this->request(
             $this->context,
             'POST',
             '/1/indexes/'.urlencode($srcIndexName).'/operation',
-            array(),
+            [],
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -312,8 +359,13 @@ class Client
     /**
      * Return last logs entries.
      *
-     * @param offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
-     * @param length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
+     * @param int   $offset Specify the first entry to retrieve (0-based, 0 is the most recent log entry).
+     * @param int   $length Specify the maximum number of entries to retrieve starting at offset. Maximum allowed value: 1000.
+     * @param mixed $type
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function getLogs($offset = 0, $length = 10, $type = 'all')
     {
@@ -338,9 +390,13 @@ class Client
     }
 
     /**
-     * Get the index object initialized (no server call needed for initialization)
-
-     * @param indexName the name of index
+     * Get the index object initialized (no server call needed for initialization).
+     *
+     * @param string $indexName the name of index
+     *
+     * @return Index
+     *
+     * @throws AlgoliaException
      */
     public function initIndex($indexName)
     {
@@ -352,7 +408,11 @@ class Client
     }
 
     /**
-     * List all existing user keys with their associated ACLs
+     * List all existing user keys with their associated ACLs.
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function listUserKeys()
     {
@@ -369,9 +429,11 @@ class Client
     }
 
     /**
-     * Get ACL of a user key
+     * Get ACL of a user key.
      *
      * @param string $key
+     *
+     * @return mixed
      */
     public function getUserKeyACL($key)
     {
@@ -388,9 +450,11 @@ class Client
     }
 
     /**
-     * Delete an existing user key
+     * Delete an existing user key.
      *
      * @param string $key
+     *
+     * @return mixed
      */
     public function deleteUserKey($key)
     {
@@ -407,31 +471,38 @@ class Client
     }
 
     /**
-     * Create a new user key
+     * Create a new user key.
      *
-     * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a array that
-     * can contains the following values:
-     *   - acl: array of string
-     *   - indices: array of string
-     *   - validity: int
-     *   - referers: array of string
-     *   - description: string
-     *   - maxHitsPerQuery: integer
-     *   - queryParameters: string
-     *   - maxQueriesPerIPPerHour: integer
-     * Or the list of ACL for this key. Defined by an array of NSString that
-     * can contains the following values:
-     *   - search: allow to search (https and http)
-     *   - addObject: allows to add/update an object in the index (https only)
-     *   - deleteObject : allows to delete an existing object (https only)
-     *   - deleteIndex : allows to delete index content (https only)
-     *   - settings : allows to get index settings (https only)
-     *   - editSettings : allows to change index settings (https only)
-     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
-     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
-     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
-     * @param indexes Specify the list of indices to target (null means all)
+     * @param            $obj                    can be two different parameters:
+     *                                           The list of parameters for this key. Defined by an array that
+     *                                           can contain the following values:
+     *                                           - acl: array of string
+     *                                           - indices: array of string
+     *                                           - validity: int
+     *                                           - referrers: array of string
+     *                                           - description: string
+     *                                           - maxHitsPerQuery: integer
+     *                                           - queryParameters: string
+     *                                           - maxQueriesPerIPPerHour: integer
+     *                                           Or the list of ACL for this key. Defined by an array of NSString that
+     *                                           can contains the following values:
+     *                                           - search: allow to search (https and http)
+     *                                           - addObject: allows to add/update an object in the index (https only)
+     *                                           - deleteObject : allows to delete an existing object (https only)
+     *                                           - deleteIndex : allows to delete index content (https only)
+     *                                           - settings : allows to get index settings (https only)
+     *                                           - editSettings : allows to change index settings (https only)
+     * @param int        $validity               the number of seconds after which the key will be automatically removed (0 means
+     *                                           no time limit for this key)
+     * @param int        $maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.
+     *                                           Defaults to 0 (no rate limit).
+     * @param int        $maxHitsPerQuery        Specify the maximum number of hits this API key can retrieve in one call.
+     *                                           Defaults to 0 (unlimited)
+     * @param array|null $indexes                Specify the list of indices to target (null means all)
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
     {
@@ -441,12 +512,12 @@ class Client
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
-                'acl' => $obj,
-                'validity' => $validity,
+            $params = [
+                'acl'                    => $obj,
+                'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
-                'maxHitsPerQuery' => $maxHitsPerQuery,
-            );
+                'maxHitsPerQuery'        => $maxHitsPerQuery,
+            ];
         }
 
         if ($indexes != null) {
@@ -457,7 +528,7 @@ class Client
             $this->context,
             'POST',
             '/1/keys',
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -466,31 +537,39 @@ class Client
     }
 
     /**
-     * Update a user key
+     * Update a user key.
      *
-     * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a array that
-     * can contains the following values:
-     *   - acl: array of string
-     *   - indices: array of string
-     *   - validity: int
-     *   - referers: array of string
-     *   - description: string
-     *   - maxHitsPerQuery: integer
-     *   - queryParameters: string
-     *   - maxQueriesPerIPPerHour: integer
-     * Or the list of ACL for this key. Defined by an array of NSString that
-     * can contains the following values:
-     *   - search: allow to search (https and http)
-     *   - addObject: allows to add/update an object in the index (https only)
-     *   - deleteObject : allows to delete an existing object (https only)
-     *   - deleteIndex : allows to delete index content (https only)
-     *   - settings : allows to get index settings (https only)
-     *   - editSettings : allows to change index settings (https only)
-     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
-     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
-     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
-     * @param indexes Specify the list of indices to target (null means all)
+     * @param string     $key
+     * @param mixed      $obj                    can be two different parameters:
+     *                                           The list of parameters for this key. Defined by a array that
+     *                                           can contains the following values:
+     *                                           - acl: array of string
+     *                                           - indices: array of string
+     *                                           - validity: int
+     *                                           - referrers: array of string
+     *                                           - description: string
+     *                                           - maxHitsPerQuery: integer
+     *                                           - queryParameters: string
+     *                                           - maxQueriesPerIPPerHour: integer
+     *                                           Or the list of ACL for this key. Defined by an array of NSString that
+     *                                           can contains the following values:
+     *                                           - search: allow to search (https and http)
+     *                                           - addObject: allows to add/update an object in the index (https only)
+     *                                           - deleteObject : allows to delete an existing object (https only)
+     *                                           - deleteIndex : allows to delete index content (https only)
+     *                                           - settings : allows to get index settings (https only)
+     *                                           - editSettings : allows to change index settings (https only)
+     * @param int        $validity               the number of seconds after which the key will be automatically removed (0 means
+     *                                           no time limit for this key)
+     * @param int        $maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.
+     *                                           Defaults to 0 (no rate limit).
+     * @param int        $maxHitsPerQuery        Specify the maximum number of hits this API key can retrieve in one call. Defaults
+     *                                           to 0 (unlimited)
+     * @param array|null $indexes                Specify the list of indices to target (null means all)
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function updateUserKey(
         $key,
@@ -506,12 +585,12 @@ class Client
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
-                'acl' => $obj,
-                'validity' => $validity,
+            $params = [
+                'acl'                    => $obj,
+                'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
-                'maxHitsPerQuery' => $maxHitsPerQuery,
-            );
+                'maxHitsPerQuery'        => $maxHitsPerQuery,
+            ];
         }
         if ($indexes != null) {
             $params['indexes'] = $indexes;
@@ -521,7 +600,7 @@ class Client
             $this->context,
             'PUT',
             '/1/keys/'.$key,
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -532,7 +611,9 @@ class Client
     /**
      * Send a batch request targeting multiple indices.
      *
-     * @param  $requests an associative array defining the batch request body
+     * @param array $requests an associative array defining the batch request body
+     *
+     * @return mixed
      */
     public function batch($requests)
     {
@@ -540,8 +621,8 @@ class Client
             $this->context,
             'POST',
             '/1/indexes/*/batch',
-            array(),
-            array('requests' => $requests),
+            [],
+            ['requests' => $requests],
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout
@@ -550,47 +631,48 @@ class Client
 
     /**
      * Generate a secured and public API Key from a list of query parameters and an
-     * optional user token identifying the current user
+     * optional user token identifying the current user.
      *
-     * @param privateApiKey your private API Key
-     * @param query the list of query parameters applied to the query (used as security)
-     * @param userToken an optional token identifying the current user
+     * @param string      $privateApiKey your private API Key
+     * @param mixed       $query         the list of query parameters applied to the query (used as security)
+     * @param string|null $userToken     an optional token identifying the current user
      *
+     * @return string
      */
     public static function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
     {
         $urlEncodedQuery = '';
         if (is_array($query)) {
-            $queryParameters = array();
+            $queryParameters = [];
             if (array_keys($query) !== array_keys(array_keys($query))) {
                 // array of query parameters
                 $queryParameters = $query;
             } else {
                 // array of tags
-                $tmp = array();
+                $tmp = [];
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
-                        array_push($tmp, '('.join(',', $tag).')');
+                        array_push($tmp, '('.implode(',', $tag).')');
                     } else {
                         array_push($tmp, $tag);
                     }
                 }
-                $tagFilters = join(',', $tmp);
+                $tagFilters = implode(',', $tmp);
                 $queryParameters['tagFilters'] = $tagFilters;
             }
             if ($userToken != null && strlen($userToken) > 0) {
                 $queryParameters['userToken'] = $userToken;
             }
-            $urlEncodedQuery = Client::buildQuery($queryParameters);
+            $urlEncodedQuery = static::buildQuery($queryParameters);
         } else {
             if (strpos($query, '=') === false) {
                 // String of tags
-                $queryParameters = array('tagFilters' => $query);
+                $queryParameters = ['tagFilters' => $query];
 
                 if ($userToken != null && strlen($userToken) > 0) {
                     $queryParameters['userToken'] = $userToken;
                 }
-                $urlEncodedQuery = Client::buildQuery($queryParameters);
+                $urlEncodedQuery = static::buildQuery($queryParameters);
             } else {
                 // url encoded query
                 $urlEncodedQuery = $query;
@@ -604,6 +686,11 @@ class Client
         return base64_encode($content);
     }
 
+    /**
+     * @param array $args
+     *
+     * @return string
+     */
     public static function buildQuery($args)
     {
         foreach ($args as $key => $value) {
@@ -616,15 +703,17 @@ class Client
     }
 
     /**
-     * @param $context
-     * @param $method
-     * @param $path
-     * @param $params
-     * @param $data
-     * @param $hostsArray
-     * @param $connectTimeout
-     * @param $readTimeout
+     * @param ClientContext $context
+     * @param string        $method
+     * @param string        $path
+     * @param array         $params
+     * @param array         $data
+     * @param array         $hostsArray
+     * @param int           $connectTimeout
+     * @param int           $readTimeout
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function request(
@@ -637,7 +726,7 @@ class Client
         $connectTimeout,
         $readTimeout
     ) {
-        $exceptions = array();
+        $exceptions = [];
         $cnt = 0;
         foreach ($hostsArray as &$host) {
             $cnt += 1;
@@ -656,9 +745,24 @@ class Client
                 $exceptions[$host] = $e->getMessage();
             }
         }
-        throw new AlgoliaException('Hosts unreachable: '.join(',', $exceptions));
+        throw new AlgoliaException('Hosts unreachable: '.implode(',', $exceptions));
     }
 
+    /**
+     * @param ClientContext $context
+     * @param string        $method
+     * @param string        $host
+     * @param string        $path
+     * @param array         $params
+     * @param array         $data
+     * @param int           $connectTimeout
+     * @param int           $readTimeout
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
+     */
     public function doRequest(
         $context,
         $method,
@@ -676,7 +780,7 @@ class Client
         }
 
         if ($params != null && count($params) > 0) {
-            $params2 = array();
+            $params2 = [];
             foreach ($params as $key => $val) {
                 if (is_array($val)) {
                     $params2[$key] = json_encode($val);
@@ -701,20 +805,20 @@ class Client
 
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         if ($context->adminAPIKey == null) {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
                         'X-Algolia-Application-Id: '.$context->applicationID,
                         'X-Algolia-API-Key: '.$context->apiKey,
                         'Content-type: application/json',
-                        ), $context->headers));
+                        ], $context->headers));
         } else {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
                     'X-Algolia-Application-Id: '.$context->applicationID,
                     'X-Algolia-API-Key: '.$context->adminAPIKey,
                     'X-Forwarded-For: '.$context->endUserIP,
                     'X-Algolia-UserToken: '.$context->algoliaUserToken,
                     'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
                     'Content-type: application/json',
-                    ), $context->headers));
+                    ], $context->headers));
         }
 
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Algolia for PHP '.Version::get());
@@ -724,7 +828,7 @@ class Client
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->cainfoPath);
+        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
 
         curl_setopt($curlHandle, CURLOPT_URL, $url);
         $version = curl_version();
@@ -834,9 +938,11 @@ class Client
     }
 
     /**
-     * Checks if curl option passed are valid curl options
+     * Checks if curl option passed are valid curl options.
      *
-     * @param curlOptions must be array but no type required while first test throw clear Exception
+     * @param array $curlOptions must be array but no type required while first test throw clear Exception
+     *
+     * @return array
      */
     protected function checkCurlOptions($curlOptions)
     {
@@ -859,7 +965,9 @@ class Client
     }
 
     /**
-     * Get all php curl available options
+     * Get all php curl available options.
+     *
+     * @return array
      */
     protected function getCurlConstants()
     {
@@ -877,7 +985,7 @@ class Client
             return $this->curlConstants;
         }
 
-        $curlConstants = array();
+        $curlConstants = [];
         foreach ($curlAllConstants as $constantName => $constantValue) {
             if (strpos($constantName, 'CURLOPT') === 0) {
                 $curlConstants[$constantName] = $constantValue;
@@ -890,12 +998,12 @@ class Client
     }
 
     /**
-     * throw clear Exception when bad curl option is set
+     * throw clear Exception when bad curl option is set.
      *
-     * @param curlOptions array
-     * @param errorMsg add specific message for disambiguation
+     * @param array  $curlOptions
+     * @param string $errorMsg    add specific message for disambiguation
      */
-    protected function invalidOptions(array $curlOptions = array(), $errorMsg = '')
+    protected function invalidOptions(array $curlOptions = [], $errorMsg = '')
     {
         throw new \OutOfBoundsException(
             sprintf(
@@ -907,15 +1015,27 @@ class Client
         );
     }
 
+    /**
+     * @return PlacesIndex
+     */
     private function getPlacesIndex()
     {
         return new PlacesIndex($this->context, $this);
     }
 
-    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array())
+    /**
+     * @param string $appId
+     * @param string $apiKey
+     * @param array  $hostsArray
+     * @param array  $options
+     *
+     * @return mixed
+     */
+    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = [])
     {
         $options['placesEnabled'] = true;
         $client = new static($appId, $apiKey, $hostsArray, $options);
+
         return $client->getPlacesIndex();
     }
 }

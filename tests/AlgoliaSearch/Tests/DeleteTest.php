@@ -35,9 +35,9 @@ class DeleteTest extends AlgoliaSearchTestCase
      */
     public function testDeleteObject()
     {
-        $res = $this->index->addObject(array("firstname" => "Robin", "objectID" => "à/go/?à"));
+        $res = $this->index->addObject(['firstname' => 'Robin', 'objectID' => 'à/go/?à']);
         $this->index->waitTask($res['taskID']);
-        $results = $this->index->search('', array('attributesToRetrieve' => array("firstname")));
+        $results = $this->index->search('', ['attributesToRetrieve' => ['firstname']]);
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
         $del = $this->index->deleteObject($results['hits'][0]['objectID']);

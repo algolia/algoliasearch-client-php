@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -23,6 +24,7 @@
  *
  *
  */
+
 namespace AlgoliaSearch;
 
 /*
@@ -31,14 +33,36 @@ namespace AlgoliaSearch;
  */
 class Index
 {
-    public $indexName;
+    /**
+     * @var ClientContext
+     */
+    private $context;
+
+    /**
+     * @var Client
+     */
     private $client;
+
+    /**
+     * @var string
+     */
+    public $indexName;
+
+    /**
+     * @var string
+     */
     private $urlIndexName;
 
-    /*
-     * Index initialization (You should not call this initialized yourself)
+    /**
+     * Index initialization (You should not instantiate this yourself).
+     *
+     * @param ClientContext $context
+     * @param Client        $client
+     * @param string        $indexName
+     *
+     * @internal
      */
-    public function __construct($context, $client, $indexName)
+    public function __construct(ClientContext $context, Client $client, $indexName)
     {
         $this->context = $context;
         $this->client = $client;
@@ -47,22 +71,28 @@ class Index
     }
 
     /**
-     * Perform batch operation on several objects
+     * Perform batch operation on several objects.
      *
-     * @param objects contains an array of objects to update (each object must contains an objectID attribute)
-     * @param objectIDKey  the key in each object that contains the objectID
-     * @param objectActionKey  the key in each object that contains the action to perform (addObject, updateObject, deleteObject or partialUpdateObject)
+     * @param array  $objects         contains an array of objects to update (each object must contains an objectID
+     *                                attribute)
+     * @param string $objectIDKey     the key in each object that contains the objectID
+     * @param string $objectActionKey the key in each object that contains the action to perform (addObject, updateObject,
+     *                                deleteObject or partialUpdateObject)
+     *
+     * @return mixed
+     *
+     * @throws \Exception
      */
     public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')
     {
-        $requests = array();
-        $allowedActions = array(
+        $requests = [];
+        $allowedActions = [
             'addObject',
             'updateObject',
             'deleteObject',
             'partialUpdateObject',
-            'partialUpdateObjectNoCreate'
-        );
+            'partialUpdateObjectNoCreate',
+        ];
 
         foreach ($objects as $obj) {
             // If no or invalid action, assume updateObject
@@ -75,7 +105,7 @@ class Index
             // The action key is not included in the object
             unset($obj[$objectActionKey]);
 
-            $req = array('action' => $action, 'body' => $obj);
+            $req = ['action' => $action, 'body' => $obj];
 
             if (array_key_exists($objectIDKey, $obj)) {
                 $req['objectID'] = (string) $obj[$objectIDKey];
@@ -84,16 +114,18 @@ class Index
             $requests[] = $req;
         }
 
-        return $this->batch(array('requests' => $requests));
+        return $this->batch(['requests' => $requests]);
     }
 
     /**
-     * Add an object in this index
+     * Add an object in this index.
      *
-     * @param content contains the object to add inside the index.
-     *  The object is represented by an associative array
-     * @param objectID (optional) an objectID you want to attribute to this object
-     * (if the attribute already exist the old object will be overwrite)
+     * @param array       $content  contains the object to add inside the index.
+     *                              The object is represented by an associative array
+     * @param string|null $objectID (optional) an objectID you want to attribute to this object
+     *                              (if the attribute already exist the old object will be overwrite)
+     *
+     * @return mixed
      */
     public function addObject($content, $objectID = null)
     {
@@ -102,30 +134,33 @@ class Index
                 $this->context,
                 'POST',
                 '/1/indexes/'.$this->urlIndexName,
-                array(),
-                $content,
-                $this->context->writeHostsArray,
-                $this->context->connectTimeout,
-                $this->context->readTimeout
-            );
-        } else {
-            return $this->client->request(
-                $this->context,
-                'PUT',
-                '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID),
-                array(),
+                [],
                 $content,
                 $this->context->writeHostsArray,
                 $this->context->connectTimeout,
                 $this->context->readTimeout
             );
         }
+
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID),
+            [],
+            $content,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
     }
 
     /**
-     * Add several objects
+     * Add several objects.
      *
-     * @param objects contains an array of objects to add. If the object contains an objectID
+     * @param array  $objects     contains an array of objects to add. If the object contains an objectID
+     * @param string $objectIDKey
+     *
+     * @return mixed
      */
     public function addObjects($objects, $objectIDKey = 'objectID')
     {
@@ -135,10 +170,13 @@ class Index
     }
 
     /**
-     * Get an object from this index
+     * Get an object from this index.
      *
-     * @param objectID the unique identifier of the object to retrieve
-     * @param attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string separated by ","
+     * @param $objectID             the unique identifier of the object to retrieve
+     * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
+     *                              separated by ","
+     *
+     * @return mixed
      */
     public function getObject($objectID, $attributesToRetrieve = null)
     {
@@ -154,43 +192,14 @@ class Index
                 $this->context->connectTimeout,
                 $this->context->readTimeout
             );
-        } else {
-            return $this->client->request(
-                $this->context,
-                'GET',
-                '/1/indexes/'.$this->urlIndexName.'/'.$id,
-                array('attributes' => $attributesToRetrieve),
-                null,
-                $this->context->readHostsArray,
-                $this->context->connectTimeout,
-                $this->context->readTimeout
-            );
-        }
-    }
-
-    /**
-     * Get several objects from this index
-     *
-     * @param objectIDs the array of unique identifier of objects to retrieve
-     */
-    public function getObjects($objectIDs)
-    {
-        if ($objectIDs == null) {
-            throw new \Exception('No list of objectID provided');
-        }
-
-        $requests = array();
-        foreach ($objectIDs as $object) {
-            $req = array('indexName' => $this->indexName, 'objectID' => $object);
-            array_push($requests, $req);
         }
 
         return $this->client->request(
             $this->context,
-            'POST',
-            '/1/indexes/*/objects',
-            array(),
-            array('requests' => $requests),
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/'.$id,
+            ['attributes' => $attributesToRetrieve],
+            null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout
@@ -198,10 +207,48 @@ class Index
     }
 
     /**
-     * Update partially an object (only update attributes passed in argument)
+     * Get several objects from this index.
      *
-     * @param partialObject contains the object attributes to override, the
-     *  object must contains an objectID attribute
+     * @param array $objectIDs the array of unique identifier of objects to retrieve
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function getObjects($objectIDs)
+    {
+        if ($objectIDs == null) {
+            throw new \Exception('No list of objectID provided');
+        }
+
+        $requests = [];
+        foreach ($objectIDs as $object) {
+            $req = ['indexName' => $this->indexName, 'objectID' => $object];
+            array_push($requests, $req);
+        }
+
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/objects',
+            [],
+            ['requests' => $requests],
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * Update partially an object (only update attributes passed in argument).
+     *
+     * @param array $partialObject     contains the object attributes to override, the
+     *                                 object must contains an objectID attribute
+     * @param bool  $createIfNotExists
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function partialUpdateObject($partialObject, $createIfNotExists = true)
     {
@@ -211,7 +258,7 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.$queryString,
-            array(),
+            [],
             $partialObject,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -220,9 +267,13 @@ class Index
     }
 
     /**
-     * Partially Override the content of several objects
+     * Partially Override the content of several objects.
      *
-     * @param objects contains an array of objects to update (each object must contains a objectID attribute)
+     * @param array  $objects           contains an array of objects to update (each object must contains a objectID attribute)
+     * @param string $objectIDKey
+     * @param bool   $createIfNotExists
+     *
+     * @return mixed
      */
     public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true)
     {
@@ -236,9 +287,11 @@ class Index
     }
 
     /**
-     * Override the content of object
+     * Override the content of object.
      *
-     * @param object contains the object to save, the object must contains an objectID attribute
+     * @param array $object contains the object to save, the object must contains an objectID attribute
+     *
+     * @return mixed
      */
     public function saveObject($object)
     {
@@ -246,7 +299,7 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']),
-            array(),
+            [],
             $object,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -255,9 +308,12 @@ class Index
     }
 
     /**
-     * Override the content of several objects
+     * Override the content of several objects.
      *
-     * @param objects contains an array of objects to update (each object must contains a objectID attribute)
+     * @param array  $objects     contains an array of objects to update (each object must contains a objectID attribute)
+     * @param string $objectIDKey
+     *
+     * @return mixed
      */
     public function saveObjects($objects, $objectIDKey = 'objectID')
     {
@@ -267,9 +323,14 @@ class Index
     }
 
     /**
-     * Delete an object from the index
+     * Delete an object from the index.
      *
-     * @param objectID the unique identifier of object to delete
+     * @param $objectID the unique identifier of object to delete
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
      */
     public function deleteObject($objectID)
     {
@@ -290,15 +351,17 @@ class Index
     }
 
     /**
-     * Delete several objects
+     * Delete several objects.
      *
-     * @param objects contains an array of objectIDs to delete. If the object contains an objectID
+     * @param array $objects contains an array of objectIDs to delete. If the object contains an objectID
+     *
+     * @return mixed
      */
     public function deleteObjects($objects)
     {
-        $objectIDs = array();
+        $objectIDs = [];
         foreach ($objects as $key => $id) {
-            $objectIDs[$key] = array('objectID' => $id);
+            $objectIDs[$key] = ['objectID' => $id];
         }
         $requests = $this->buildBatch('deleteObject', $objectIDs, true);
 
@@ -306,16 +369,16 @@ class Index
     }
 
     /**
-     * Delete all objects matching a query
+     * Delete all objects matching a query.
      *
-     * @param query the query string
-     * @param args the optional query parameters
-     * @param waitLastCall
-     * /!\ Be safe with "waitLastCall"
-     *      In really rare cases you can have the number of hits smaller than the hitsPerPage
-     *      param if you trigger the timeout of the search, in that case you won't remove all the records
+     * @param string $query        the query string
+     * @param array  $args         the optional query parameters
+     * @param bool   $waitLastCall
+     *                             /!\ Be safe with "waitLastCall"
+     *                             In really rare cases you can have the number of hits smaller than the hitsPerPage
+     *                             param if you trigger the timeout of the search, in that case you won't remove all the records
      */
-    public function deleteByQuery($query, $args = array(), $waitLastCall = true)
+    public function deleteByQuery($query, $args = [], $waitLastCall = true)
     {
         $args['attributesToRetrieve'] = 'objectID';
         $args['hitsPerPage'] = 1000;
@@ -323,7 +386,7 @@ class Index
 
         $results = $this->search($query, $args);
         while ($results['nbHits'] != 0) {
-            $objectIDs = array();
+            $objectIDs = [];
             foreach ($results['hits'] as $elt) {
                 array_push($objectIDs, $elt['objectID']);
             }
@@ -337,72 +400,92 @@ class Index
     }
 
     /**
-     * Search inside the index
+     * Search inside the index.
      *
-     * @param query the full text query
-     * @param args (optional) if set, contains an associative array with query parameters:
-     * - page: (integer) Pagination parameter used to select the page to retrieve.
-     *                   Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
-     * - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page. Defaults to 20.
-     * - attributesToRetrieve: a string that contains the list of object attributes you want to retrieve (let you minimize the answer size).
-     *   Attributes are separated with a comma (for example "name,address").
-     *   You can also use a string array encoding (for example ["name","address"]).
-     *   By default, all attributes are retrieved. You can also use '*' to retrieve all values when an attributesToRetrieve setting is specified for your index.
-     * - attributesToHighlight: a string that contains the list of attributes you want to highlight according to the query.
-     *   Attributes are separated by a comma. You can also use a string array encoding (for example ["name","address"]).
-     *   If an attribute has no match for the query, the raw value is returned. By default all indexed text attributes are highlighted.
-     *   You can use `*` if you want to highlight all textual attributes. Numerical attributes are not highlighted.
-     *   A matchLevel is returned for each highlighted attribute and can contain:
-     *      - full: if all the query terms were found in the attribute,
-     *      - partial: if only some of the query terms were found,
-     *      - none: if none of the query terms were found.
-     * - attributesToSnippet: a string that contains the list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`).
-     *    Attributes are separated by a comma (Example: attributesToSnippet=name:10,content:10).
-     *    You can also use a string array encoding (Example: attributesToSnippet: ["name:10","content:10"]). By default no snippet is computed.
-     * - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in this word. Defaults to 3.
-     * - minWordSizefor2Typos: the minimum number of characters in a query word to accept two typos in this word. Defaults to 7.
-     * - getRankingInfo: if set to 1, the result hits will contain ranking information in _rankingInfo attribute.
-     * - aroundLatLng: search for entries around a given latitude/longitude (specified as two floats separated by a comma).
-     *   For example aroundLatLng=47.316669,5.016670).
-     *   You can specify the maximum distance in meters with the aroundRadius parameter (in meters) and the precision for ranking with aroundPrecision
-     *   (for example if you set aroundPrecision=100, two objects that are distant of less than 100m will be considered as identical for "geo" ranking parameter).
-     *   At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
-     * - insideBoundingBox: search entries inside a given area defined by the two extreme points of a rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
-     *   For example insideBoundingBox=47.3165,4.9665,47.3424,5.0201).
-     *   At indexing, you should specify geoloc of an object with the _geoloc attribute (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
-     * - numericFilters: a string that contains the list of numeric filters you want to apply separated by a comma.
-     *   The syntax of one filter is `attributeName` followed by `operand` followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`.
-     *   You can have multiple conditions on one attribute like for example numericFilters=price>100,price<1000.
-     *   You can also use a string array encoding (for example numericFilters: ["price>100","price<1000"]).
-     * - tagFilters: filter the query by a set of tags. You can AND tags by separating them by commas.
-     *   To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2 OR tag3).
-     *   You can also use a string array encoding, for example tagFilters: ["tag1",["tag2","tag3"]] means tag1 AND (tag2 OR tag3).
-     *   At indexing, tags should be added in the _tags** attribute of objects (for example {"_tags":["tag1","tag2"]}).
-     * - facetFilters: filter the query by a list of facets.
-     *   Facets are separated by commas and each facet is encoded as `attributeName:value`.
-     *   For example: `facetFilters=category:Book,author:John%20Doe`.
-     *   You can also use a string array encoding (for example `["category:Book","author:John%20Doe"]`).
-     * - facets: List of object attributes that you want to use for faceting.
-     *   Attributes are separated with a comma (for example `"category,author"` ).
-     *   You can also use a JSON string array encoding (for example ["category","author"]).
-     *   Only attributes that have been added in **attributesForFaceting** index setting can be used in this parameter.
-     *   You can also use `*` to perform faceting on all attributes specified in **attributesForFaceting**.
-     * - queryType: select how the query words are interpreted, it can be one of the following value:
-     *    - prefixAll: all query words are interpreted as prefixes,
-     *    - prefixLast: only the last word is interpreted as a prefix (default behavior),
-     *    - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
-     * - optionalWords: a string that contains the list of words that should be considered as optional when found in the query.
-     *   The list of words is comma separated.
-     * - distinct: If set to 1, enable the distinct feature (disabled by default) if the attributeForDistinct index setting is set.
-     *   This feature is similar to the SQL "distinct" keyword: when enabled in a query with the distinct=1 parameter,
-     *   all hits containing a duplicate value for the attributeForDistinct attribute are removed from results.
-     *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best
-     *   one is kept and others are removed.
+     * @param string $query the full text query
+     * @param mixed  $args  (optional) if set, contains an associative array with query parameters:
+     *                      - page: (integer) Pagination parameter used to select the page to retrieve.
+     *                      Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
+     *                      - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page.
+     *                      Defaults to 20.
+     *                      - attributesToRetrieve: a string that contains the list of object attributes you want to
+     *                      retrieve (let you minimize the answer size). Attributes are separated with a comma (for
+     *                      example "name,address"). You can also use a string array encoding (for example
+     *                      ["name","address"]). By default, all attributes are retrieved. You can also use '*' to
+     *                      retrieve all values when an attributesToRetrieve setting is specified for your index.
+     *                      - attributesToHighlight: a string that contains the list of attributes you want to highlight
+     *                      according to the query. Attributes are separated by a comma. You can also use a string array
+     *                      encoding (for example ["name","address"]). If an attribute has no match for the query, the raw
+     *                      value is returned. By default all indexed text attributes are highlighted. You can use `*` if
+     *                      you want to highlight all textual attributes. Numerical attributes are not highlighted. A
+     *                      matchLevel is returned for each highlighted attribute and can contain:
+     *                      - full: if all the query terms were found in the attribute,
+     *                      - partial: if only some of the query terms were found,
+     *                      - none: if none of the query terms were found.
+     *                      - attributesToSnippet: a string that contains the list of attributes to snippet alongside the
+     *                      number of words to return (syntax is `attributeName:nbWords`). Attributes are separated by a
+     *                      comma (Example: attributesToSnippet=name:10,content:10). You can also use a string array
+     *                      encoding (Example: attributesToSnippet: ["name:10","content:10"]). By default no snippet is
+     *                      computed.
+     *                      - minWordSizefor1Typo: the minimum number of characters in a query word to accept one typo in
+     *                      this word. Defaults to 3.
+     *                      - minWordSizefor2Typos: the minimum number of characters in a query word to accept two typos
+     *                      in this word. Defaults to 7.
+     *                      - getRankingInfo: if set to 1, the result hits will contain ranking information in
+     *                      _rankingInfo attribute.
+     *                      - aroundLatLng: search for entries around a given latitude/longitude (specified as two floats
+     *                      separated by a comma). For example aroundLatLng=47.316669,5.016670). You can specify the
+     *                      maximum distance in meters with the aroundRadius parameter (in meters) and the precision for
+     *                      ranking with aroundPrecision
+     *                      (for example if you set aroundPrecision=100, two objects that are distant of less than 100m
+     *                      will be considered as identical for "geo" ranking parameter). At indexing, you should specify
+     *                      geoloc of an object with the _geoloc attribute (in the form {"_geoloc":{"lat":48.853409,
+     *                      "lng":2.348800}})
+     *                      - insideBoundingBox: search entries inside a given area defined by the two extreme points of a
+     *                      rectangle (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng). For example
+     *                      insideBoundingBox=47.3165,4.9665,47.3424,5.0201). At indexing, you should specify geoloc of an
+     *                      object with the _geoloc attribute (in the form {"_geoloc":{"lat":48.853409, "lng":2.348800}})
+     *                      - numericFilters: a string that contains the list of numeric filters you want to apply
+     *                      separated by a comma. The syntax of one filter is `attributeName` followed by `operand`
+     *                      followed by `value`. Supported operands are `<`, `<=`, `=`, `>` and `>=`. You can have
+     *                      multiple conditions on one attribute like for example numericFilters=price>100,price<1000. You
+     *                      can also use a string array encoding (for example numericFilters: ["price>100","price<1000"]).
+     *                      - tagFilters: filter the query by a set of tags. You can AND tags by separating them by
+     *                      commas.
+     *                      To OR tags, you must add parentheses. For example, tags=tag1,(tag2,tag3) means tag1 AND (tag2
+     *                      OR tag3). You can also use a string array encoding, for example tagFilters:
+     *                      ["tag1",["tag2","tag3"]] means tag1 AND (tag2 OR tag3). At indexing, tags should be added in
+     *                      the _tags** attribute of objects (for example {"_tags":["tag1","tag2"]}).
+     *                      - facetFilters: filter the query by a list of facets.
+     *                      Facets are separated by commas and each facet is encoded as `attributeName:value`.
+     *                      For example: `facetFilters=category:Book,author:John%20Doe`.
+     *                      You can also use a string array encoding (for example
+     *                      `["category:Book","author:John%20Doe"]`).
+     *                      - facets: List of object attributes that you want to use for faceting.
+     *                      Attributes are separated with a comma (for example `"category,author"` ).
+     *                      You can also use a JSON string array encoding (for example ["category","author"]).
+     *                      Only attributes that have been added in **attributesForFaceting** index setting can be used in
+     *                      this parameter. You can also use `*` to perform faceting on all attributes specified in
+     *                      **attributesForFaceting**.
+     *                      - queryType: select how the query words are interpreted, it can be one of the following value:
+     *                      - prefixAll: all query words are interpreted as prefixes,
+     *                      - prefixLast: only the last word is interpreted as a prefix (default behavior),
+     *                      - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
+     *                      - optionalWords: a string that contains the list of words that should be considered as
+     *                      optional when found in the query. The list of words is comma separated.
+     *                      - distinct: If set to 1, enable the distinct feature (disabled by default) if the
+     *                      attributeForDistinct index setting is set. This feature is similar to the SQL "distinct"
+     *                      keyword: when enabled in a query with the distinct=1 parameter, all hits containing a
+     *                      duplicate value for the attributeForDistinct attribute are removed from results. For example,
+     *                      if the chosen attribute is show_name and several hits have the same value for show_name, then
+     *                      only the best one is kept and others are removed.
+     *
+     * @return mixed
      */
     public function search($query, $args = null)
     {
         if ($args === null) {
-            $args = array();
+            $args = [];
         }
         $args['query'] = $query;
 
@@ -410,8 +493,8 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/query',
-            array(),
-            array('params' => $this->client->buildQuery($args)),
+            [],
+            ['params' => $this->client->buildQuery($args)],
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout
@@ -419,15 +502,20 @@ class Index
     }
 
     /**
-     * Perform a search with disjunctive facets generating as many queries as number of disjunctive facets
+     * Perform a search with disjunctive facets generating as many queries as number of disjunctive facets.
      *
-     * @param query the query
-     * @param disjunctive_facets the array of disjunctive facets
-     * @param params a hash representing the regular query parameters
-     * @param refinements a hash ("string" -> ["array", "of", "refined", "values"]) representing the current refinements
-     * ex: { "my_facet1" => ["my_value1", ["my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
+     * @param string $query              the query
+     * @param array  $disjunctive_facets the array of disjunctive facets
+     * @param array  $params             a hash representing the regular query parameters
+     * @param array  $refinements        a hash ("string" -> ["array", "of", "refined", "values"]) representing the current refinements
+     *                                   ex: { "my_facet1" => ["my_value1", ["my_value2"], "my_disjunctive_facet1" => ["my_value1", "my_value2"] }
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
      */
-    public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())
+    public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = [], $refinements = [])
     {
         if (gettype($disjunctive_facets) != 'string' && gettype($disjunctive_facets) != 'array') {
             throw new AlgoliaException('Argument "disjunctive_facets" must be a String or an Array');
@@ -441,14 +529,14 @@ class Index
             $disjunctive_facets = explode(',', $disjunctive_facets);
         }
 
-        $disjunctive_refinements = array();
+        $disjunctive_refinements = [];
         foreach ($refinements as $key => $value) {
             if (in_array($key, $disjunctive_facets)) {
                 $disjunctive_refinements[$key] = $value;
             }
         }
-        $queries = array();
-        $filters = array();
+        $queries = [];
+        $filters = [];
 
         foreach ($refinements as $key => $value) {
             $r = array_map(
@@ -469,7 +557,7 @@ class Index
         $params['facetFilters'] = $filters;
         array_push($queries, $params);
         foreach ($disjunctive_facets as $disjunctive_facet) {
-            $filters = array();
+            $filters = [];
             foreach ($refinements as $key => $value) {
                 if ($key != $disjunctive_facet) {
                     $r = array_map(
@@ -491,9 +579,9 @@ class Index
             $params['facetFilters'] = $filters;
             $params['page'] = 0;
             $params['hitsPerPage'] = 0;
-            $params['attributesToRetrieve'] = array();
-            $params['attributesToHighlight'] = array();
-            $params['attributesToSnippet'] = array();
+            $params['attributesToRetrieve'] = [];
+            $params['attributesToHighlight'] = [];
+            $params['attributesToSnippet'] = [];
             $params['facets'] = $disjunctive_facet;
             $params['analytics'] = false;
             array_push($queries, $params);
@@ -501,7 +589,7 @@ class Index
         $answers = $this->client->multipleQueries($queries);
 
         $aggregated_answer = $answers['results'][0];
-        $aggregated_answer['disjunctiveFacets'] = array();
+        $aggregated_answer['disjunctiveFacets'] = [];
         for ($i = 1; $i < count($answers['results']); $i++) {
             foreach ($answers['results'][$i]['facets'] as $key => $facet) {
                 $aggregated_answer['disjunctiveFacets'][$key] = $facet;
@@ -520,11 +608,15 @@ class Index
     }
 
     /**
-     * Browse all index content
+     * Browse all index content.
      *
-     * @param page Pagination parameter used to select the page to retrieve.
-     *             Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
-     * @param hitsPerPage: Pagination parameter used to select the number of hits per page. Defaults to 1000.
+     * @param int $page        Pagination parameter used to select the page to retrieve.
+     *                         Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
+     * @param int $hitsPerPage : Pagination parameter used to select the number of hits per page. Defaults to 1000.
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     private function doBcBrowse($page = 0, $hitsPerPage = 1000)
     {
@@ -532,7 +624,7 @@ class Index
             $this->context,
             'GET',
             '/1/indexes/'.$this->urlIndexName.'/browse',
-            array('page' => $page, 'hitsPerPage' => $hitsPerPage),
+            ['page' => $page, 'hitsPerPage' => $hitsPerPage],
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
@@ -544,8 +636,10 @@ class Index
      * Wait the publication of a task on the server.
      * All server task are asynchronous and you can check with this method that the task is published.
      *
-     * @param taskID the id of the task returned by server
-     * @param timeBeforeRetry the time in milliseconds before retry (default = 100ms)
+     * @param string $taskID          the id of the task returned by server
+     * @param int    $timeBeforeRetry the time in milliseconds before retry (default = 100ms)
+     *
+     * @return mixed
      */
     public function waitTask($taskID, $timeBeforeRetry = 100)
     {
@@ -562,7 +656,9 @@ class Index
      * get the status of a task on the server.
      * All server task are asynchronous and you can check with this method that the task is published or not.
      *
-     * @param taskID the id of the task returned by server
+     * @param string $taskID the id of the task returned by server
+     *
+     * @return mixed
      */
     public function getTaskStatus($taskID)
     {
@@ -579,7 +675,11 @@ class Index
     }
 
     /**
-     * Get settings of this index
+     * Get settings of this index.
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function getSettings()
     {
@@ -597,6 +697,10 @@ class Index
 
     /**
      * This function deletes the index content. Settings and index specific API keys are kept untouched.
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function clearIndex()
     {
@@ -613,55 +717,70 @@ class Index
     }
 
     /**
-     * Set settings for this index
+     * Set settings for this index.
      *
-     * @param settigns the settings object that can contains :
-     * - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default = 3).
-     * - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default = 7).
-     * - hitsPerPage: (integer) the number of hits per page (default = 10).
-     * - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects.
-     *   If set to null, all attributes are retrieved.
-     * - attributesToHighlight: (array of strings) default list of attributes to highlight.
-     *   If set to null, all indexed attributes are highlighted.
-     * - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the number of words to return (syntax is attributeName:nbWords).
-     *   By default no snippet is computed. If set to null, no snippet is computed.
-     * - attributesToIndex: (array of strings) the list of fields you want to index.
-     *   If set to null, all textual and numerical attributes of your objects are indexed, but you should update it to get optimal results.
-     *   This parameter has two important uses:
-     *     - Limit the attributes to index: For example if you store a binary image in base64, you want to store it and be able to
-     *       retrieve it but you don't want to search in the base64 string.
-     *     - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in attributes at the beginning of
-     *       the list will be considered more important than matches in attributes further down the list.
-     *       In one attribute, matching text at the beginning of the attribute will be considered more important than text after, you can disable
-     *       this behavior if you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex: ["title", "unordered(text)"].
-     * - attributesForFaceting: (array of strings) The list of fields you want to use for faceting.
-     *   All strings in the attribute selected for faceting are extracted and added as a facet. If set to null, no attribute is used for faceting.
-     * - attributeForDistinct: (string) The attribute name used for the Distinct feature. This feature is similar to the SQL "distinct" keyword: when enabled
-     *   in query with the distinct=1 parameter, all hits containing a duplicate value for this attribute are removed from results.
-     *   For example, if the chosen attribute is show_name and several hits have the same value for show_name, then only the best one is kept and others are removed.
-     * - ranking: (array of strings) controls the way results are sorted.
-     *   We have six available criteria:
-     *    - typo: sort according to number of typos,
-     *    - geo: sort according to decreassing distance when performing a geo-location based search,
-     *    - proximity: sort according to the proximity of query words in hits,
-     *    - attribute: sort according to the order of attributes defined by attributesToIndex,
-     *    - exact:
-     *        - if the user query contains one word: sort objects having an attribute that is exactly the query word before others.
-     *          For example if you search for the "V" TV show, you want to find it with the "V" query and avoid to have all popular TV
-     *          show starting by the v letter before it.
-     *        - if the user query contains multiple words: sort according to the number of words that matched exactly (and not as a prefix).
-     *    - custom: sort according to a user defined formula set in **customRanking** attribute.
-     *   The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
-     * - customRanking: (array of strings) lets you specify part of the ranking.
-     *   The syntax of this condition is an array of strings containing attributes prefixed by asc (ascending order) or desc (descending order) operator.
-     *   For example `"customRanking" => ["desc(population)", "asc(name)"]`
-     * - queryType: Select how the query words are interpreted, it can be one of the following value:
-     *   - prefixAll: all query words are interpreted as prefixes,
-     *   - prefixLast: only the last word is interpreted as a prefix (default behavior),
-     *   - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
-     * - highlightPreTag: (string) Specify the string that is inserted before the highlighted parts in the query result (default to "<em>").
-     * - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in the query result (default to "</em>").
-     * - optionalWords: (array of strings) Specify a list of words that should be considered as optional when found in the query.
+     * @param mixed $settings the settings object that can contains :
+     *                        - minWordSizefor1Typo: (integer) the minimum number of characters to accept one typo (default =
+     *                        3).
+     *                        - minWordSizefor2Typos: (integer) the minimum number of characters to accept two typos (default
+     *                        = 7).
+     *                        - hitsPerPage: (integer) the number of hits per page (default = 10).
+     *                        - attributesToRetrieve: (array of strings) default list of attributes to retrieve in objects.
+     *                        If set to null, all attributes are retrieved.
+     *                        - attributesToHighlight: (array of strings) default list of attributes to highlight.
+     *                        If set to null, all indexed attributes are highlighted.
+     *                        - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the
+     *                        number of words to return (syntax is attributeName:nbWords). By default no snippet is computed.
+     *                        If set to null, no snippet is computed.
+     *                        - attributesToIndex: (array of strings) the list of fields you want to index.
+     *                        If set to null, all textual and numerical attributes of your objects are indexed, but you
+     *                        should update it to get optimal results. This parameter has two important uses:
+     *                        - Limit the attributes to index: For example if you store a binary image in base64, you want to
+     *                        store it and be able to retrieve it but you don't want to search in the base64 string.
+     *                        - Control part of the ranking*: (see the ranking parameter for full explanation) Matches in
+     *                        attributes at the beginning of the list will be considered more important than matches in
+     *                        attributes further down the list. In one attribute, matching text at the beginning of the
+     *                        attribute will be considered more important than text after, you can disable this behavior if
+     *                        you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex:
+     *                        ["title", "unordered(text)"].
+     *                        - attributesForFaceting: (array of strings) The list of fields you want to use for faceting.
+     *                        All strings in the attribute selected for faceting are extracted and added as a facet. If set
+     *                        to null, no attribute is used for faceting.
+     *                        - attributeForDistinct: (string) The attribute name used for the Distinct feature. This feature
+     *                        is similar to the SQL "distinct" keyword: when enabled in query with the distinct=1 parameter,
+     *                        all hits containing a duplicate value for this attribute are removed from results. For example,
+     *                        if the chosen attribute is show_name and several hits have the same value for show_name, then
+     *                        only the best one is kept and others are removed.
+     *                        - ranking: (array of strings) controls the way results are sorted.
+     *                        We have six available criteria:
+     *                        - typo: sort according to number of typos,
+     *                        - geo: sort according to decreassing distance when performing a geo-location based search,
+     *                        - proximity: sort according to the proximity of query words in hits,
+     *                        - attribute: sort according to the order of attributes defined by attributesToIndex,
+     *                        - exact:
+     *                        - if the user query contains one word: sort objects having an attribute that is exactly the
+     *                        query word before others. For example if you search for the "V" TV show, you want to find it
+     *                        with the "V" query and avoid to have all popular TV show starting by the v letter before it.
+     *                        - if the user query contains multiple words: sort according to the number of words that matched
+     *                        exactly (and not as a prefix).
+     *                        - custom: sort according to a user defined formula set in **customRanking** attribute.
+     *                        The standard order is ["typo", "geo", "proximity", "attribute", "exact", "custom"]
+     *                        - customRanking: (array of strings) lets you specify part of the ranking.
+     *                        The syntax of this condition is an array of strings containing attributes prefixed by asc
+     *                        (ascending order) or desc (descending order) operator. For example `"customRanking" =>
+     *                        ["desc(population)", "asc(name)"]`
+     *                        - queryType: Select how the query words are interpreted, it can be one of the following value:
+     *                        - prefixAll: all query words are interpreted as prefixes,
+     *                        - prefixLast: only the last word is interpreted as a prefix (default behavior),
+     *                        - prefixNone: no query word is interpreted as a prefix. This option is not recommended.
+     *                        - highlightPreTag: (string) Specify the string that is inserted before the highlighted parts in
+     *                        the query result (default to "<em>").
+     *                        - highlightPostTag: (string) Specify the string that is inserted after the highlighted parts in
+     *                        the query result (default to "</em>").
+     *                        - optionalWords: (array of strings) Specify a list of words that should be considered as
+     *                        optional when found in the query.
+     *
+     * @return mixed
      */
     public function setSettings($settings)
     {
@@ -669,7 +788,7 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/settings',
-            array(),
+            [],
             $settings,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -678,8 +797,11 @@ class Index
     }
 
     /**
-     * List all existing user keys associated to this index with their associated ACLs
+     * List all existing user keys associated to this index with their associated ACLs.
      *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function listUserKeys()
     {
@@ -696,8 +818,13 @@ class Index
     }
 
     /**
-     * Get ACL of a user key associated to this index
+     * Get ACL of a user key associated to this index.
      *
+     * @param string $key
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function getUserKeyACL($key)
     {
@@ -714,8 +841,13 @@ class Index
     }
 
     /**
-     * Delete an existing user key associated to this index
+     * Delete an existing user key associated to this index.
      *
+     * @param string $key
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function deleteUserKey($key)
     {
@@ -732,30 +864,37 @@ class Index
     }
 
     /**
-     * Create a new user key associated to this index
+     * Create a new user key associated to this index.
      *
-     * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a array that
-     * can contains the following values:
-     *   - acl: array of string
-     *   - indices: array of string
-     *   - validity: int
-     *   - referers: array of string
-     *   - description: string
-     *   - maxHitsPerQuery: integer
-     *   - queryParameters: string
-     *   - maxQueriesPerIPPerHour: integer
-     * Or the list of ACL for this key. Defined by an array of NSString that
-     * can contains the following values:
-     *   - search: allow to search (https and http)
-     *   - addObject: allows to add/update an object in the index (https only)
-     *   - deleteObject : allows to delete an existing object (https only)
-     *   - deleteIndex : allows to delete index content (https only)
-     *   - settings : allows to get index settings (https only)
-     *   - editSettings : allows to change index settings (https only)
-     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
-     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
-     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param array $obj                    can be two different parameters:
+     *                                      The list of parameters for this key. Defined by a array that
+     *                                      can contains the following values:
+     *                                      - acl: array of string
+     *                                      - indices: array of string
+     *                                      - validity: int
+     *                                      - referers: array of string
+     *                                      - description: string
+     *                                      - maxHitsPerQuery: integer
+     *                                      - queryParameters: string
+     *                                      - maxQueriesPerIPPerHour: integer
+     *                                      Or the list of ACL for this key. Defined by an array of NSString that
+     *                                      can contains the following values:
+     *                                      - search: allow to search (https and http)
+     *                                      - addObject: allows to add/update an object in the index (https only)
+     *                                      - deleteObject : allows to delete an existing object (https only)
+     *                                      - deleteIndex : allows to delete index content (https only)
+     *                                      - settings : allows to get index settings (https only)
+     *                                      - editSettings : allows to change index settings (https only)
+     * @param int   $validity               the number of seconds after which the key will be automatically removed (0 means
+     *                                      no time limit for this key)
+     * @param int   $maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.
+     *                                      Defaults to 0 (no rate limit).
+     * @param int   $maxHitsPerQuery        Specify the maximum number of hits this API key can retrieve in one call.
+     *                                      Defaults to 0 (unlimited)
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
@@ -766,19 +905,19 @@ class Index
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
-                'acl' => $obj,
-                'validity' => $validity,
+            $params = [
+                'acl'                    => $obj,
+                'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
-                'maxHitsPerQuery' => $maxHitsPerQuery,
-            );
+                'maxHitsPerQuery'        => $maxHitsPerQuery,
+            ];
         }
 
         return $this->client->request(
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/keys',
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -787,30 +926,38 @@ class Index
     }
 
     /**
-     * Update a user key associated to this index
+     * Update a user key associated to this index.
      *
-     * @param obj can be two different parameters:
-     * The list of parameters for this key. Defined by a array that
-     * can contains the following values:
-     *   - acl: array of string
-     *   - indices: array of string
-     *   - validity: int
-     *   - referers: array of string
-     *   - description: string
-     *   - maxHitsPerQuery: integer
-     *   - queryParameters: string
-     *   - maxQueriesPerIPPerHour: integer
-     * Or the list of ACL for this key. Defined by an array of NSString that
-     * can contains the following values:
-     *   - search: allow to search (https and http)
-     *   - addObject: allows to add/update an object in the index (https only)
-     *   - deleteObject : allows to delete an existing object (https only)
-     *   - deleteIndex : allows to delete index content (https only)
-     *   - settings : allows to get index settings (https only)
-     *   - editSettings : allows to change index settings (https only)
-     * @param validity the number of seconds after which the key will be automatically removed (0 means no time limit for this key)
-     * @param maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.  Defaults to 0 (no rate limit).
-     * @param maxHitsPerQuery Specify the maximum number of hits this API key can retrieve in one call. Defaults to 0 (unlimited)
+     * @param string $key
+     * @param array  $obj                    can be two different parameters:
+     *                                       The list of parameters for this key. Defined by a array that
+     *                                       can contains the following values:
+     *                                       - acl: array of string
+     *                                       - indices: array of string
+     *                                       - validity: int
+     *                                       - referers: array of string
+     *                                       - description: string
+     *                                       - maxHitsPerQuery: integer
+     *                                       - queryParameters: string
+     *                                       - maxQueriesPerIPPerHour: integer
+     *                                       Or the list of ACL for this key. Defined by an array of NSString that
+     *                                       can contains the following values:
+     *                                       - search: allow to search (https and http)
+     *                                       - addObject: allows to add/update an object in the index (https only)
+     *                                       - deleteObject : allows to delete an existing object (https only)
+     *                                       - deleteIndex : allows to delete index content (https only)
+     *                                       - settings : allows to get index settings (https only)
+     *                                       - editSettings : allows to change index settings (https only)
+     * @param int    $validity               the number of seconds after which the key will be automatically removed (0 means
+     *                                       no time limit for this key)
+     * @param int    $maxQueriesPerIPPerHour Specify the maximum number of API calls allowed from an IP address per hour.
+     *                                       Defaults to 0 (no rate limit).
+     * @param int    $maxHitsPerQuery        Specify the maximum number of hits this API key can retrieve in one call.
+     *                                       Defaults to 0 (unlimited)
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
      */
     public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
@@ -821,19 +968,19 @@ class Index
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
-                'acl' => $obj,
-                'validity' => $validity,
+            $params = [
+                'acl'                    => $obj,
+                'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
-                'maxHitsPerQuery' => $maxHitsPerQuery,
-            );
+                'maxHitsPerQuery'        => $maxHitsPerQuery,
+            ];
         }
 
         return $this->client->request(
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/keys/'.$key,
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -844,7 +991,9 @@ class Index
     /**
      * Send a batch request.
      *
-     * @param  $requests an associative array defining the batch request body
+     * @param array $requests an associative array defining the batch request body
+     *
+     * @return mixed
      */
     public function batch($requests)
     {
@@ -852,7 +1001,7 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/batch',
-            array(),
+            [],
             $requests,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -863,36 +1012,49 @@ class Index
     /**
      * Build a batch request.
      *
-     * @param  $action the batch action
-     * @param  $objects the array of objects
-     * @param  $withObjectID set an 'objectID' attribute
-     * @param  $objectIDKey the objectIDKey
+     * @param string $action       the batch action
+     * @param array  $objects      the array of objects
+     * @param string $withObjectID set an 'objectID' attribute
+     * @param string $objectIDKey  the objectIDKey
      *
      * @return array
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = 'objectID')
     {
-        $requests = array();
+        $requests = [];
         foreach ($objects as $obj) {
-            $req = array('action' => $action, 'body' => $obj);
+            $req = ['action' => $action, 'body' => $obj];
             if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
                 $req['objectID'] = (string) $obj[$objectIDKey];
             }
             array_push($requests, $req);
         }
 
-        return array('requests' => $requests);
+        return ['requests' => $requests];
     }
 
+    /**
+     * @param string     $query
+     * @param array|null $params
+     *
+     * @return IndexBrowser
+     */
     private function doBrowse($query, $params = null)
     {
         return new IndexBrowser($this, $query, $params);
     }
 
+    /**
+     * @param string     $query
+     * @param array|null $params
+     * @param $cursor
+     *
+     * @return mixed
+     */
     public function browseFrom($query, $params = null, $cursor = null)
     {
         if ($params === null) {
-            $params = array();
+            $params = [];
         }
         foreach ($params as $key => $value) {
             if (gettype($value) == 'array') {
@@ -918,14 +1080,22 @@ class Index
         );
     }
 
+    /**
+     * @param string $name
+     * @param array  $arguments
+     *
+     * @return mixed
+     */
     public function __call($name, $arguments)
     {
-        if ($name === 'browse') {
-            if (count($arguments) >= 1 && is_string($arguments[0])) {
-                return call_user_func_array(array($this, 'doBrowse'), $arguments);
-            } else {
-                return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
-            }
+        if ($name !== 'browse') {
+            return;
         }
+
+        if (count($arguments) >= 1 && is_string($arguments[0])) {
+            return call_user_func_array([$this, 'doBrowse'], $arguments);
+        }
+
+        return call_user_func_array([$this, 'doBcBrowse'], $arguments);
     }
 }

@@ -32,7 +32,7 @@ class ClearIndexTest extends AlgoliaSearchTestCase
 
     public function testClearIndex()
     {
-        $task = $this->index->addObject(array("firstname" => "Robin"));
+        $task = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($task['taskID']);
 
         $task = $this->index->clearIndex();

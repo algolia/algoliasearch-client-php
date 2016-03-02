@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -23,10 +24,15 @@
  *
  *
  */
+
 namespace AlgoliaSearch;
 
 class PlacesIndex
 {
+    /**
+     * @param ClientContext $context
+     * @param Client        $client
+     */
     public function __construct($context, Client $client)
     {
         $this->context = $context;
@@ -34,15 +40,17 @@ class PlacesIndex
     }
 
     /**
-     * @param $query
+     * @param string     $query
      * @param array|null $args
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function search($query, $args = null)
     {
         if ($args === null) {
-            $args = array();
+            $args = [];
         }
         $args['query'] = $query;
 
@@ -50,8 +58,8 @@ class PlacesIndex
             $this->context,
             'POST',
             '/1/places/query',
-            array(),
-            array('params' => $this->client->buildQuery($args)),
+            [],
+            ['params' => $this->client->buildQuery($args)],
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout

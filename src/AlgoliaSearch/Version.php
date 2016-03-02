@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -23,6 +24,7 @@
  *
  *
  */
+
 namespace AlgoliaSearch;
 
 class Version

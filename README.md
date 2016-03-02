@@ -24,6 +24,7 @@ Table of Contents
 1. [Quick Start](#quick-start)
 1. [Online documentation](#documentation)
 1. [Tutorials](#tutorials)
+1. [Contributing](#contributing)
 
 
 **Commands Reference**
@@ -967,6 +968,27 @@ $res = $client->getLogs();
 $res = $client->getLogs(0, 100);
 ```
 
+Contributing
+-------------
 
+Feel free to contribute by any means.
+
+**Please note that for now pull requests tests will always fail as we do not provide Travis with the required API keys.**
+
+You will need to make 2 environment variables available for the tests to work:
+
+```bash
+# Your application ID.
+export ALGOLIA_APPLICATION_ID=XXXXXXXXXX
+
+# Your admin API key.
+export ALGOLIA_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+Please take care of running [php-cs-fixer](http://cs.sensiolabs.org/) to ensure the code styles stay consistent.
+
+```bash
+$ php-cs-fixer fix
+```
 
 

@@ -32,13 +32,13 @@ class BrowseIndexTest extends AlgoliaSearchTestCase
 
     public function testBrowseIndex()
     {
-        $task = $this->index->addObject(array("firstname" => "Robin"));
+        $task = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($task['taskID']);
         $res = $this->index->search('');
         $this->assertEquals(1, $res['nbHits']);
 
         $res = $this->index->browse(0);
         $this->assertEquals(1, $res['nbHits']);
-        $this->assertEquals("Robin", $res['hits'][0]['firstname']);
+        $this->assertEquals('Robin', $res['hits'][0]['firstname']);
     }
 }

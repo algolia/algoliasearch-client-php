@@ -1029,7 +1029,7 @@ class Client
      * @param array  $hostsArray
      * @param array  $options
      *
-     * @return mixed
+     * @return PlacesIndex
      */
     public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = [])
     {

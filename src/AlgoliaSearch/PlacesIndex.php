@@ -29,6 +29,9 @@ namespace AlgoliaSearch;
 
 class PlacesIndex
 {
+    private $context;
+    private $client;
+
     /**
      * @param ClientContext $context
      * @param Client        $client
@@ -64,5 +67,15 @@ class PlacesIndex
             $this->context->connectTimeout,
             $this->context->searchTimeout
         );
+    }
+
+    public function setExtraHeader($key, $value)
+    {
+        $this->context->setExtraHeader($key, $value);
+    }
+
+    public function getContext()
+    {
+        return $this->context;
     }
 }

@@ -473,7 +473,7 @@ class Client
     /**
      * Create a new user key.
      *
-     * @param            $obj                    can be two different parameters:
+     * @param array      $obj                    can be two different parameters:
      *                                           The list of parameters for this key. Defined by an array that
      *                                           can contain the following values:
      *                                           - acl: array of string
@@ -484,7 +484,7 @@ class Client
      *                                           - maxHitsPerQuery: integer
      *                                           - queryParameters: string
      *                                           - maxQueriesPerIPPerHour: integer
-     *                                           Or the list of ACL for this key. Defined by an array of NSString that
+     *                                           Or the list of ACL for this key. Defined by an array of string that
      *                                           can contains the following values:
      *                                           - search: allow to search (https and http)
      *                                           - addObject: allows to add/update an object in the index (https only)
@@ -540,7 +540,7 @@ class Client
      * Update a user key.
      *
      * @param string     $key
-     * @param mixed      $obj                    can be two different parameters:
+     * @param array      $obj                    can be two different parameters:
      *                                           The list of parameters for this key. Defined by a array that
      *                                           can contains the following values:
      *                                           - acl: array of string
@@ -551,7 +551,7 @@ class Client
      *                                           - maxHitsPerQuery: integer
      *                                           - queryParameters: string
      *                                           - maxQueriesPerIPPerHour: integer
-     *                                           Or the list of ACL for this key. Defined by an array of NSString that
+     *                                           Or the list of ACL for this key. Defined by an array of string that
      *                                           can contains the following values:
      *                                           - search: allow to search (https and http)
      *                                           - addObject: allows to add/update an object in the index (https only)

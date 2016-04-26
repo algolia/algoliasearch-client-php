@@ -29,14 +29,21 @@ namespace AlgoliaSearch;
 
 class PlacesIndex
 {
+    /**
+     * @var ClientContext
+     */
     private $context;
+
+    /**
+     * @var Client
+     */
     private $client;
 
     /**
      * @param ClientContext $context
      * @param Client        $client
      */
-    public function __construct($context, Client $client)
+    public function __construct(ClientContext $context, Client $client)
     {
         $this->context = $context;
         $this->client = $client;
@@ -69,11 +76,18 @@ class PlacesIndex
         );
     }
 
+    /**
+     * @param string $key
+     * @param string $value
+     */
     public function setExtraHeader($key, $value)
     {
         $this->context->setExtraHeader($key, $value);
     }
 
+    /**
+     * @return ClientContext
+     */
     public function getContext()
     {
         return $this->context;

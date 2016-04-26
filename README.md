@@ -7,7 +7,6 @@
 
 
 
-
 <!--NO_HTML-->
 
 [Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
@@ -15,7 +14,6 @@
 <!--/NO_HTML-->
 
 Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest) from your backend. It wraps the [Algolia Search REST API](https://www.algolia.com/doc/rest).
-
 
 
 
@@ -32,7 +30,6 @@ Table of Contents
 
 1. [Setup](#setup)
 1. [Quick Start](#quick-start)
-
 1. [Guides & Tutorials](#guides-tutorials)
 
 
@@ -51,9 +48,9 @@ Table of Contents
 1. [Clear an index](#clear-an-index)
 1. [Wait indexing](#wait-indexing)
 1. [Batch writes](#batch-writes)
-1. [Security / User API Keys](#security--user-api-keys)
-1. [Copy or rename an index](#copy-or-rename-an-index)
-1. [Backup / Retrieve all index content](#backup--retrieve-of-all-index-content)
+1. [Copy / Move an index](#copy--move-an-index)
+1. [Backup / Export an index](#backup--export-an-index)
+1. [API Keys](#api-keys)
 1. [Logs](#logs)
 
 
@@ -919,7 +916,7 @@ You can use the following optional arguments:
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>String used as an ellipsis indicator when a snippet is truncated (defaults to empty).</p>
+        <p>String used as an ellipsis indicator when a snippet is truncated. Defaults to an empty string for all accounts created before 10/2/2016, and to <code>…</code> (UTF-8 U+2026) for accounts created after that date.</p>
 
       </td>
     </tr>
@@ -1937,14 +1934,75 @@ The attribute **action** can have these values:
 - partialUpdateObjectNoCreate
 - deleteObject
 
-Security / User API Keys
+Copy / Move an index
 ==================
 
-The ADMIN API key provides full control of all your indices.
+You can easily copy or rename an existing index using the `copy` and `move` commands.
+**Note**: Move and copy commands overwrite the destination index.
+
+```php
+// Rename MyIndex in MyIndexNewName
+$res = $client->moveIndex("MyIndex", "MyIndexNewName");
+// Copy MyIndex in MyIndexCopy
+$res = $client->copyIndex("MyIndex", "MyIndexCopy");
+```
+
+The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
+ 1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
+ 1. Rename `MyNewIndex` to `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
+
+```php
+// Rename MyNewIndex in MyIndex (and overwrite it)
+$res = $client->moveIndex("MyNewIndex", "MyIndex");
+```
+
+Backup / Export an index
+==================
+
+The `search` method cannot return more than 1,000 results. If you need to
+retrieve all the content of your index (for backup, SEO purposes or for running
+a script on it), you should use the `browse` method instead. This method lets
+you retrieve objects beyond the 1,000 limit.
+
+This method is optimized for speed. To make it fast, distinct, typo-tolerance,
+word proximity, geo distance and number of matched words are disabled. Results
+are still returned ranked by attributes and custom ranking.
+
+
+It will return a `cursor` alongside your data, that you can then use to retrieve
+the next chunk of your records.
+
+You can specify custom parameters (like `page` or `hitsPerPage`) on your first
+`browse` call, and these parameters will then be included in the `cursor`. Note
+that it is not possible to access records beyond the 1,000th on the first call.
+
+Example:
+
+```php
+// Iterate with a filter over the index
+foreach ($this->index->browse('', array("numericFilters" => "i<42")) as $hit) {
+  print_r($hit);
+}
+
+$next_cursor = $this->index->browseFrom('', array("numericFilters" => "i<42"))["cursor"];
+```
+
+
+
+
+
+API Keys
+==================
+
+The **admin** API key provides full control of all your indices. *The admin API key should always be kept secure; do NOT use it from outside your back-end.*
+
 You can also generate user API keys to control security.
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
-To list existing keys, you can use `listUserKeys` method:
+## List API keys
+
+To list existing keys, you can use:
+
 ```php
 // Lists global API Keys
 $client->listUserKeys();
@@ -1963,7 +2021,10 @@ Each key is defined by a set of permissions that specify the authorized actions.
  * **analytics**: Allowed to retrieve analytics through the analytics API.
  * **listIndexes**: Allowed to list all accessible indexes.
 
-Example of API Key creation:
+## Create API keys
+
+To create API keys:
+
 ```php
 // Creates a new global API key that can only perform search actions
 $res = $client->addUserKey(array("search"));
@@ -2109,7 +2170,9 @@ $res = $client->addUserKey(params);
 echo "key=" . $res['key'] . "\n";
 ```
 
-Update the permissions of an existing key:
+## Update API keys
+
+To update the permissions of an existing key:
  ```php
 // Update an existing global API key that is valid for 300 seconds
 $res = $client->updateUserKey("myAPIKey", array("search"), 300);
@@ -2118,7 +2181,7 @@ echo "key=" . $res['key'] . "\n";
 $res = $index->updateUserKey("myAPIKey", array("search"), 300, 100, 20);
 echo "key=" . $res['key'] . "\n";
 ```
-Get the permissions of a given key:
+To get the permissions of a given key:
 ```php
 // Gets the rights of a global key
 $res = $client->getUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
@@ -2126,7 +2189,9 @@ $res = $client->getUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
 $res = $index->getUserKeyACL("71671c38001bf3ac857bc82052485107");
 ```
 
-Delete an existing key:
+## Delete API keys
+
+To delete an existing key:
 ```php
 // Deletes a global key
 $res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
@@ -2136,7 +2201,9 @@ $res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
 
 
 
-You may have a single index containing per user data. In that case, all records should be tagged with their associated user_id in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
+## Secured API keys (frontend)
+
+You may have a single index containing **per user** data. In that case, all records should be tagged with their associated `user_id` in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
 ```php
 // generate a public API key for user 42. Here, records are tagged with:
@@ -2166,7 +2233,7 @@ You can mix rate limits and secured API keys by setting a `userToken` query para
 ```php
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-$public_key = $client->generateSecuredApiKey('YourRateLimitedApiKey', array('tagFilters' => 'user_42', 'userToken' => 'user_42'));
+$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', array('tagFilters' => 'user_42', 'userToken' => 'user_42'));
 ```
 
 This public API key can then be used in your JavaScript code as follow:
@@ -2184,61 +2251,6 @@ index.search('another query', function(err, content) {
 
   console.log(content);
 });
-```
-
-
-Copy or rename an index
-==================
-
-You can easily copy or rename an existing index using the `copy` and `move` commands.
-**Note**: Move and copy commands overwrite the destination index.
-
-```php
-// Rename MyIndex in MyIndexNewName
-$res = $client->moveIndex("MyIndex", "MyIndexNewName");
-// Copy MyIndex in MyIndexCopy
-$res = $client->copyIndex("MyIndex", "MyIndexCopy");
-```
-
-The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
- 1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
- 1. Rename `MyNewIndex` to `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
-
-```php
-// Rename MyNewIndex in MyIndex (and overwrite it)
-$res = $client->moveIndex("MyNewIndex", "MyIndex");
-```
-
-
-Backup / Retrieve of all index content
-==================
-
-The `search` method cannot return more than 1,000 results. If you need to
-retrieve all the content of your index (for backup, SEO purposes or for running
-a script on it), you should use the `browse` method instead. This method lets
-you retrieve objects beyond the 1,000 limit.
-
-This method is optimized for speed. To make it fast, distinct, typo-tolerance,
-word proximity, geo distance and number of matched words are disabled. Results
-are still returned ranked by attributes and custom ranking.
-
-
-It will return a `cursor` alongside your data, that you can then use to retrieve
-the next chunk of your records.
-
-You can specify custom parameters (like `page` or `hitsPerPage`) on your first
-`browse` call, and these parameters will then be included in the `cursor`. Note
-that it is not possible to access records beyond the 1,000th on the first call.
-
-Example:
-
-```php
-// Iterate with a filter over the index
-foreach ($this->index->browse('', array("numericFilters" => "i<42")) as $hit) {
-  print_r($hit);
-}
-
-$next_cursor = $this->index->browseFrom('', array("numericFilters" => "i<42"))["cursor"];
 ```
 
 

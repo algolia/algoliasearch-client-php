@@ -479,7 +479,7 @@ class Client
      *                                           - acl: array of string
      *                                           - indices: array of string
      *                                           - validity: int
-     *                                           - referrers: array of string
+     *                                           - referers: array of string
      *                                           - description: string
      *                                           - maxHitsPerQuery: integer
      *                                           - queryParameters: string
@@ -546,7 +546,7 @@ class Client
      *                                           - acl: array of string
      *                                           - indices: array of string
      *                                           - validity: int
-     *                                           - referrers: array of string
+     *                                           - referers: array of string
      *                                           - description: string
      *                                           - maxHitsPerQuery: integer
      *                                           - queryParameters: string

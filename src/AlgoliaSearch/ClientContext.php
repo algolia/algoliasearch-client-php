@@ -239,4 +239,18 @@ class ClientContext
     {
         $this->headers[$key] = $value;
     }
+
+    /**
+     * get extra headers as array (as expected by curl CURLOPT_HTTPHEADER)
+     *
+     * @return array
+     */
+    public function getExtraHeadersAsArray()
+    {
+        $headers = [];
+        foreach ($this->headers as $key => $value) {
+            $headers[] = $key.': '.$value;
+        }
+        return $headers;
+    }
 }

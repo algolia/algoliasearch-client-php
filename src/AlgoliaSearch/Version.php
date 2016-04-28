@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (c) 2013 Algolia
  * http://www.algolia.com/
@@ -24,8 +25,16 @@
  *
  */
 
-require_once 'src/AlgoliaSearch/Version.php';
-require_once 'src/AlgoliaSearch/AlgoliaException.php';
-require_once 'src/AlgoliaSearch/ClientContext.php';
-require_once 'src/AlgoliaSearch/Client.php';
-require_once 'src/AlgoliaSearch/Index.php';
+namespace AlgoliaSearch;
+
+class Version
+{
+    const VALUE = '1.8.0';
+
+    public static $custom_value = '';
+
+    public static function get()
+    {
+        return self::VALUE.static::$custom_value;
+    }
+}

@@ -1,6 +1,5 @@
 {
     "name": "algolia/algoliasearch-client-php",
-    "version": "1.1.7",
     "description": "Algolia Search API Client for PHP",
     "type": "library",
     "homepage": "https://github.com/algolia/algoliasearch-client-php",
@@ -9,15 +8,28 @@
         {
             "name": "Algolia Team",
             "email": "contact@algolia.com"
+        },
+        {
+            "name": "Jonathan H. Wage",
+            "email": "jonwage@gmail.com"
+        },
+        {
+            "name": "Ryan T. Catlin",
+            "email": "ryan.catlin@gmail.com"
         }
     ],
     "require": {
+        "php": ">=5.4",
+        "ext-mbstring": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "3.7.*"
+        "satooshi/php-coveralls": "0.6.*",
+        "phpunit/phpunit": "^4.8 || ^5.0"
     },
     "autoload": {
-        "classmap": ["algoliasearch.php"]
+        "psr-0": {
+            "AlgoliaSearch": "src/",
+            "AlgoliaSearch\\Tests": "tests/"
+        }
     }
 }

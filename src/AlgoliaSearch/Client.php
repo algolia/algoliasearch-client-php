@@ -806,7 +806,7 @@ class Client
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
         $curlHeaders = [];
         foreach ($context->headers as $key => $value) {
-            array_push($curlHeaders, $key . ": " . $value);
+            $curlHeaders[] = $key . ": " . $value;
         }
         if ($context->adminAPIKey == null) {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([

@@ -1,5 +1,11 @@
 ## Change Log
 
+### 1.8.2
+ - Fix custom headers
+
+### 1.8.1
+ - Add `setExtraHeader` on places index
+
 ### 1.8.0
  - Add new secured api key
  - Drop php 5.3 support

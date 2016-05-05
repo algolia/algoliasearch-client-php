@@ -804,12 +804,16 @@ class Client
         }
 
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
+        $curlHeaders = [];
+        foreach ($context->headers as $key => $value) {
+            array_push($curlHeaders, $key . ": " . $value);
+        }
         if ($context->adminAPIKey == null) {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
                         'X-Algolia-Application-Id: '.$context->applicationID,
                         'X-Algolia-API-Key: '.$context->apiKey,
                         'Content-type: application/json',
-                        ], $context->headers));
+                        ], $curlHeaders));
         } else {
             curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
                     'X-Algolia-Application-Id: '.$context->applicationID,
@@ -818,7 +822,7 @@ class Client
                     'X-Algolia-UserToken: '.$context->algoliaUserToken,
                     'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
                     'Content-type: application/json',
-                    ], $context->headers));
+                    ], $curlHeaders));
         }
 
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Algolia for PHP '.Version::get());

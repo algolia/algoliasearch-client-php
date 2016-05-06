@@ -11,7 +11,8 @@ return Symfony\CS\Config\Config::create()
     ->fixers([
         'align_double_arrow',
         'short_array_syntax',
-        '-multiline_array_trailing_comma'
+        '-multiline_array_trailing_comma',
+        '-pre_increment',
     ])
     ->finder($finder)
 ;

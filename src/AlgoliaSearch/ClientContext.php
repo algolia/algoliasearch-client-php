@@ -131,20 +131,26 @@ class ClientContext
     private function getDefaultReadHosts($placesEnabled)
     {
         if ($placesEnabled) {
-            return [
-                'places-dsn.algolia.net',
+            $hosts = [
                 'places-1.algolianet.com',
                 'places-2.algolianet.com',
                 'places-3.algolianet.com',
             ];
+            shuffle($hosts);
+            array_unshift($hosts, 'places-dsn.algolia.net');
+
+            return $hosts;
         }
 
-        return [
-            $this->applicationID.'-dsn.algolia.net',
+        $hosts = [
             $this->applicationID.'-1.algolianet.com',
             $this->applicationID.'-2.algolianet.com',
             $this->applicationID.'-3.algolianet.com',
         ];
+        shuffle($hosts);
+        array_unshift($hosts, $this->applicationID.'-dsn.algolia.net');
+
+        return $hosts;
     }
 
     /**
@@ -152,12 +158,15 @@ class ClientContext
      */
     private function getDefaultWriteHosts()
     {
-        return [
-            $this->applicationID.'.algolia.net',
+        $hosts = [
             $this->applicationID.'-1.algolianet.com',
             $this->applicationID.'-2.algolianet.com',
             $this->applicationID.'-3.algolianet.com',
         ];
+        shuffle($hosts);
+        array_unshift($hosts, $this->applicationID.'.algolia.net');
+
+        return $hosts;
     }
 
     /**

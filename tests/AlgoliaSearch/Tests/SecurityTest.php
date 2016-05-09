@@ -69,40 +69,57 @@ class SecurityTest extends AlgoliaSearchTestCase
 	    }
 
         $key = $this->index->getUserKeyACL($newKey['key']);
-
         $this->assertEquals($key['acl'][0], 'search');
+	    
         $this->index->updateUserKey($newKey['key'], ['addObject']);
-        sleep(5);
-        $key = $this->index->getUserKeyACL($newKey['key']);
-        $this->assertEquals($key['acl'][0], 'addObject');
-        $this->index->deleteUserKey($newKey['key']);
-        sleep(5);
-        $resEnd = $this->index->listUserKeys();
-        $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
 
-        $res = $this->client->listUserKeys();
-        $newKey = $this->client->addUserKey(['search']);
-        sleep(5);
-        $this->assertTrue($newKey['key'] != '');
-        $resAfter = $this->client->listUserKeys();
-        $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
-        $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
-        $key = $this->client->getUserKeyACL($newKey['key']);
-        $this->assertEquals($key['acl'][0], 'search');
-        $this->client->updateUserKey($newKey['key'], ['addObject']);
-        sleep(5);
-        $key = $this->client->getUserKeyACL($newKey['key']);
-        $this->assertEquals($key['acl'][0], 'addObject');
-        $this->client->deleteUserKey($newKey['key']);
-        sleep(5);
-        $resEnd = $this->client->listUserKeys();
-        $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
+	    $asserted = FALSE;
+	    $timeouted = time() + $timeout;
+	    while(time() < $timeouted)
+	    {
+		    $key = $this->index->getUserKeyACL($newKey['key']);
+
+		    if($key['acl'][0] === 'addObject' || time() >= $timeouted)
+		    {
+			    $asserted = TRUE;
+			    $this->assertEquals($key['acl'][0], 'addObject');
+			    break;
+		    }
+
+		    usleep(500);
+	    }
+
+	    if($asserted === FALSE)
+	    {
+		    $this->assertEquals($key['acl'][0], 'addObject');
+	    }
+	    
+        $this->index->deleteUserKey($newKey['key']);
+
+	    $asserted = FALSE;
+	    $timeouted = time() + $timeout;
+	    while(time() < $timeouted)
+	    {
+		    $resEnd = $this->index->listUserKeys();
+
+		    if($this->containsValue($resEnd['keys'], 'value', $newKey['key']) === FALSE || time() >= $timeouted)
+		    {
+			    $asserted = TRUE;
+			    $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
+			    break;
+		    }
+
+		    usleep(500);
+	    }
+
+	    if($asserted === FALSE)
+	    {
+		    $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
+	    }
     }
 
     public function testSecurityMultipleIndices()
     {
-	    return;
-
         $a = $this->client->initIndex($this->safe_name('a-12'));
         $res = $a->setSettings(['hitsPerPage' => 10]);
         $a->waitTask($res['taskID']);
@@ -122,8 +139,6 @@ class SecurityTest extends AlgoliaSearchTestCase
 
     public function testNewSecuredApiKeys()
     {
-	    return;
-
         $this->assertEquals('MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', '(public,user1)'));
         $this->assertEquals('MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', ['tagFilters' => '(public,user1)']));
         $this->assertEquals('OGYwN2NlNTdlOGM2ZmM4MjA5NGM0ZmYwNTk3MDBkNzMzZjQ0MDI3MWZjNTNjM2Y3YTAzMWM4NTBkMzRiNTM5YnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjkmdXNlclRva2VuPTQy', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', ['tagFilters' => '(public,user1)', 'userToken' => '42']));

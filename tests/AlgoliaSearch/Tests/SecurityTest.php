@@ -8,10 +8,10 @@ use AlgoliaSearch\Index;
 
 class SecurityTest extends AlgoliaSearchTestCase
 {
-	/** @var Client */
+    /** @var Client */
     private $client;
 
-	/** @var Index */
+    /** @var Index */
     private $index;
 
     protected function setUp()
@@ -36,7 +36,7 @@ class SecurityTest extends AlgoliaSearchTestCase
 
     public function testSecurityIndex()
     {
-	    $timeout = 200;
+        $timeout = 200;
 
         $res = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($res['taskID']);
@@ -44,112 +44,93 @@ class SecurityTest extends AlgoliaSearchTestCase
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(['search']);
 
-	    $this->assertTrue($newKey['key'] != '');
-	    $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
+        $this->assertTrue($newKey['key'] != '');
+        $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
 
-	    $asserted = FALSE;
-	    $timeouted = time() + $timeout;
-	    while(time() < $timeouted)
-	    {
-		    usleep(1000);
+        $asserted = false;
+        $timeouted = time() + $timeout;
+        while (time() < $timeouted) {
+            usleep(1000);
 
-		    $resAfter = $this->index->listUserKeys();
+            $resAfter = $this->index->listUserKeys();
 
-	        if($this->containsValue($resAfter['keys'], 'value', $newKey['key']) || time() >= $timeouted)
-	        {
-		        $asserted = TRUE;
-		        $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
-		        break;
-	        }
+            if ($this->containsValue($resAfter['keys'], 'value', $newKey['key']) || time() >= $timeouted) {
+                $asserted = true;
+                $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
+                break;
+            }
+        }
 
-	    }
+        if ($asserted === false) {
+            $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
+        }
 
-	    if($asserted === FALSE)
-	    {
-		    $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
-	    }
+        $timeouted = time() + $timeout;
+        while (time() < $timeouted) {
+            usleep(1000);
 
-	    $timeouted = time() + $timeout;
-	    while(time() < $timeouted)
-	    {
-		    usleep(1000);
-
-		    try
-		    {
-			    $key = $this->index->getUserKeyACL($newKey['key']);
-			    break;
-		    }
-		    catch(AlgoliaException $e)
-		    {
-			    if(time() >= $timeouted)
-			    {
-				    throw $e;
-			    }
-		    }
-	    }
+            try {
+                $key = $this->index->getUserKeyACL($newKey['key']);
+                break;
+            } catch (AlgoliaException $e) {
+                if (time() >= $timeouted) {
+                    throw $e;
+                }
+            }
+        }
 
         $this->assertEquals($key['acl'][0], 'search');
-	    
+        
         $this->index->updateUserKey($newKey['key'], ['addObject']);
 
-	    $asserted = FALSE;
-	    $timeouted = time() + $timeout;
-	    while(time() < $timeouted)
-	    {
-		    usleep(1000);
+        $asserted = false;
+        $timeouted = time() + $timeout;
+        while (time() < $timeouted) {
+            usleep(1000);
 
-		    try
-		    {
-			    $key = $this->index->getUserKeyACL($newKey['key']);
+            try {
+                $key = $this->index->getUserKeyACL($newKey['key']);
 
-			    if($key['acl'][0] === 'addObject' || time() >= $timeouted)
-			    {
-				    $asserted = TRUE;
-				    $this->assertEquals($key['acl'][0], 'addObject');
-				    break;
-			    }
-		    }
-		    catch(AlgoliaException $e)
-		    {
-			    if(time() >= $timeouted)
-			    {
-				    throw $e;
-			    }
-		    }
-	    }
+                if ($key['acl'][0] === 'addObject' || time() >= $timeouted) {
+                    $asserted = true;
+                    $this->assertEquals($key['acl'][0], 'addObject');
+                    break;
+                }
+            } catch (AlgoliaException $e) {
+                if (time() >= $timeouted) {
+                    throw $e;
+                }
+            }
+        }
 
-	    if($asserted === FALSE)
-	    {
-		    $this->assertEquals($key['acl'][0], 'addObject');
-	    }
+        if ($asserted === false) {
+            $this->assertEquals($key['acl'][0], 'addObject');
+        }
 
         $this->index->deleteUserKey($newKey['key']);
 
-	    $asserted = FALSE;
-	    $timeouted = time() + $timeout;
-	    while(time() < $timeouted)
-	    {
-		    usleep(1000);
+        $asserted = false;
+        $timeouted = time() + $timeout;
+        while (time() < $timeouted) {
+            usleep(1000);
 
-		    $resEnd = $this->index->listUserKeys();
+            $resEnd = $this->index->listUserKeys();
 
-		    if($this->containsValue($resEnd['keys'], 'value', $newKey['key']) === FALSE || time() >= $timeouted)
-		    {
-			    $asserted = TRUE;
-			    $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
-			    break;
-		    }
-	    }
+            if ($this->containsValue($resEnd['keys'], 'value', $newKey['key']) === false || time() >= $timeouted) {
+                $asserted = true;
+                $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
+                break;
+            }
+        }
 
-	    if($asserted === FALSE)
-	    {
-		    $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
-	    }
+        if ($asserted === false) {
+            $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
+        }
     }
 
     public function testSecurityMultipleIndices()
     {
-	    $timeout = 200;
+        $timeout = 200;
 
         $a = $this->client->initIndex($this->safe_name('a-12'));
         $res = $a->setSettings(['hitsPerPage' => 10]);
@@ -159,29 +140,25 @@ class SecurityTest extends AlgoliaSearchTestCase
         $b->waitTask($res['taskID']);
 
         $newKey = $this->client->addUserKey(['search', 'addObject', 'deleteObject'], 0, 0, 0, [$this->safe_name('a-12'), $this->safe_name('b-13')]);
-	    $this->assertTrue($newKey['key'] != '');
+        $this->assertTrue($newKey['key'] != '');
 
-	    $asserted = FALSE;
-	    $timeouted = time() + $timeout;
-	    while(time() < $timeouted)
-	    {
-		    usleep(1000);
+        $asserted = false;
+        $timeouted = time() + $timeout;
+        while (time() < $timeouted) {
+            usleep(1000);
 
-		    $res = $this->client->listUserKeys();
+            $res = $this->client->listUserKeys();
 
-		    if($this->containsValue($res['keys'], 'value', $newKey['key']) || time() >= $timeouted)
-		    {
-			    $asserted = TRUE;
-			    $this->assertTrue($this->containsValue($res['keys'], 'value', $newKey['key']));
-			    break;
-		    }
+            if ($this->containsValue($res['keys'], 'value', $newKey['key']) || time() >= $timeouted) {
+                $asserted = true;
+                $this->assertTrue($this->containsValue($res['keys'], 'value', $newKey['key']));
+                break;
+            }
+        }
 
-	    }
-
-	    if($asserted === FALSE)
-	    {
-		    $this->assertTrue($this->containsValue($res['keys'], 'value', $newKey['key']));
-	    }
+        if ($asserted === false) {
+            $this->assertTrue($this->containsValue($res['keys'], 'value', $newKey['key']));
+        }
 
         $this->client->deleteIndex($this->safe_name('a-12'));
         $this->client->deleteIndex($this->safe_name('b-13'));

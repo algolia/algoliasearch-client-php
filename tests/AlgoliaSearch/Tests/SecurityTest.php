@@ -36,16 +36,40 @@ class SecurityTest extends AlgoliaSearchTestCase
 
     public function testSecurityIndex()
     {
+	    $timeout = 50;
+
         $res = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($res['taskID']);
+
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(['search']);
-        sleep(5);
-        $this->assertTrue($newKey['key'] != '');
-        $resAfter = $this->index->listUserKeys();
-        $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
-        $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
+
+	    $this->assertTrue($newKey['key'] != '');
+	    $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
+
+	    $asserted = FALSE;
+	    $timeouted = time() + $timeout;
+	    while(time() < $timeouted)
+	    {
+		    $resAfter = $this->index->listUserKeys();
+
+	        if($this->containsValue($resAfter['keys'], 'value', $newKey['key']) || time() >= $timeouted)
+	        {
+		        $asserted = TRUE;
+		        $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
+		        break;
+	        }
+
+		    usleep(500);
+	    }
+
+	    if($asserted === FALSE)
+	    {
+		    $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
+	    }
+
         $key = $this->index->getUserKeyACL($newKey['key']);
+
         $this->assertEquals($key['acl'][0], 'search');
         $this->index->updateUserKey($newKey['key'], ['addObject']);
         sleep(5);
@@ -99,7 +123,7 @@ class SecurityTest extends AlgoliaSearchTestCase
     public function testNewSecuredApiKeys()
     {
 	    return;
-	    
+
         $this->assertEquals('MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', '(public,user1)'));
         $this->assertEquals('MDZkNWNjNDY4M2MzMDA0NmUyNmNkZjY5OTMzYjVlNmVlMTk1NTEwMGNmNTVjZmJhMmIwOTIzYjdjMTk2NTFiMnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjk=', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', ['tagFilters' => '(public,user1)']));
         $this->assertEquals('OGYwN2NlNTdlOGM2ZmM4MjA5NGM0ZmYwNTk3MDBkNzMzZjQ0MDI3MWZjNTNjM2Y3YTAzMWM4NTBkMzRiNTM5YnRhZ0ZpbHRlcnM9JTI4cHVibGljJTJDdXNlcjElMjkmdXNlclRva2VuPTQy', $this->client->generateSecuredApiKey('182634d8894831d5dbce3b3185c50881', ['tagFilters' => '(public,user1)', 'userToken' => '42']));

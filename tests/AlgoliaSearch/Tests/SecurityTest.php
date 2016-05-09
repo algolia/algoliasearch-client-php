@@ -53,6 +53,8 @@ class SecurityTest extends AlgoliaSearchTestCase
 	    {
 		    $resAfter = $this->index->listUserKeys();
 
+		    usleep(500);
+
 	        if($this->containsValue($resAfter['keys'], 'value', $newKey['key']) || time() >= $timeouted)
 	        {
 		        $asserted = TRUE;
@@ -60,7 +62,6 @@ class SecurityTest extends AlgoliaSearchTestCase
 		        break;
 	        }
 
-		    usleep(500);
 	    }
 
 	    if($asserted === FALSE)
@@ -68,7 +69,24 @@ class SecurityTest extends AlgoliaSearchTestCase
 		    $this->assertTrue($this->containsValue($resAfter['keys'], 'value', $newKey['key']));
 	    }
 
-        $key = $this->index->getUserKeyACL($newKey['key']);
+	    $timeouted = time() + $timeout;
+	    while(time() < $timeouted)
+	    {
+		    try
+		    {
+			    $key = $this->index->getUserKeyACL($newKey['key']);
+			    break;
+		    }
+		    catch(AlgoliaException $e)
+		    {
+			    usleep(500);
+			    if(time() >= $timeouted)
+			    {
+				    throw $e;
+			    }
+		    }
+	    }
+
         $this->assertEquals($key['acl'][0], 'search');
 	    
         $this->index->updateUserKey($newKey['key'], ['addObject']);
@@ -79,21 +97,20 @@ class SecurityTest extends AlgoliaSearchTestCase
 	    {
 		    $key = $this->index->getUserKeyACL($newKey['key']);
 
+		    usleep(500);
 		    if($key['acl'][0] === 'addObject' || time() >= $timeouted)
 		    {
 			    $asserted = TRUE;
 			    $this->assertEquals($key['acl'][0], 'addObject');
 			    break;
 		    }
-
-		    usleep(500);
 	    }
 
 	    if($asserted === FALSE)
 	    {
 		    $this->assertEquals($key['acl'][0], 'addObject');
 	    }
-	    
+
         $this->index->deleteUserKey($newKey['key']);
 
 	    $asserted = FALSE;
@@ -102,14 +119,13 @@ class SecurityTest extends AlgoliaSearchTestCase
 	    {
 		    $resEnd = $this->index->listUserKeys();
 
+		    usleep(500);
 		    if($this->containsValue($resEnd['keys'], 'value', $newKey['key']) === FALSE || time() >= $timeouted)
 		    {
 			    $asserted = TRUE;
 			    $this->assertFalse($this->containsValue($resEnd['keys'], 'value', $newKey['key']));
 			    break;
 		    }
-
-		    usleep(500);
 	    }
 
 	    if($asserted === FALSE)

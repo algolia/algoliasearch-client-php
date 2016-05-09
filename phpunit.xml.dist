@@ -2,7 +2,7 @@
 <phpunit colors="true" bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="PHPUnit">
-          <directory>tests/</directory>
+          <file>tests/AlgoliaSearch/Tests/SecurityTest.php</file>
         </testsuite>
     </testsuites>
     <filter>

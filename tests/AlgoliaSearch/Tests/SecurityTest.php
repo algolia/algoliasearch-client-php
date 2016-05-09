@@ -4,10 +4,14 @@ namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
+use AlgoliaSearch\Index;
 
 class SecurityTest extends AlgoliaSearchTestCase
 {
+	/** @var Client */
     private $client;
+
+	/** @var Index */
     private $index;
 
     protected function setUp()

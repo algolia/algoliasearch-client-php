@@ -1,5 +1,11 @@
 ## Change Log
 
+### 1.9.0
+ - Made the SecurityTests more reliable
+ - Added support for Synonyms API endpoints
+ - Randomized the order of fallback hosts per ClientContext instance
+ - Fixed some minor typos in the README.md and converted the arrays to short array syntax
+
 ### 1.8.2
  - Fix custom headers
 

@@ -100,8 +100,8 @@ In 30 seconds, this quick start tutorial will show you how to index and search o
 
 Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index using the following code:
 ```php
-$index = $client->initIndex("contacts");
-$batch = json_decode(file_get_contents("contacts.json"), true);
+$index = $client->initIndex('contacts');
+$batch = json_decode(file_get_contents('contacts.json'), true);
 $index->addObjects($batch);
 ```
 
@@ -109,23 +109,36 @@ You can now search for contacts using firstname, lastname, company, etc. (even w
 ```php
 // search by firstname
 var_dump($index->search('jimmie'));
+
 // search a firstname with typo
 var_dump($index->search('jimie'));
+
 // search for a company
 var_dump($index->search('california paint'));
+
 // search for a firstname & company
 var_dump($index->search('jimmie paint'));
 ```
 
 Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
 ```php
-$index->setSettings(array("customRanking" => array("desc(followers)")));
+$index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
 
 You can also configure the list of attributes you want to index by order of importance (first = most important):
 ```php
-$index->setSettings(array("attributesToIndex" => array("lastname", "firstname", "company",
-                                                       "email", "city", "address")));
+$index->setSettings(
+    [
+        'attributesToIndex' => [
+            'lastname',
+            'firstname',
+            'company',
+            'email',
+            'city',
+            'address'
+        ]
+    ]
+);
 ```
 
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
@@ -214,17 +227,24 @@ Objects are schema less so you don't need any configuration to start indexing. I
 Example with automatic `objectID` assignment:
 
 ```php
-$res = $index->addObject(array("firstname" => "Jimmie", 
-                               "lastname" => "Barninger"));
-echo "objectID=" . $res['objectID'] . "\n";
+$res = $index->addObject([
+	'firstname' => 'Jimmie',
+	'lastname' => 'Barninger'
+]);
+echo 'objectID=' . $res['objectID'] . "\n";
 ```
 
 Example with manual `objectID` assignment:
 
 ```php
-$res = $index->addObject(array("firstname" => "Jimmie", 
-                               "lastname" => "Barninger"), "myID");
-echo "objectID=" . $res['objectID'] . "\n";
+$res = $index->addObject(
+    [
+        'firstname' => 'Jimmie',
+        'lastname'  => 'Barninger'
+    ],
+    'myID'
+);
+echo 'objectID=' . $res['objectID'] . "\n";
 ```
 
 Update an existing object in the Index
@@ -239,10 +259,14 @@ You have three options when updating an existing object:
 Example on how to replace all attributes of an existing object:
 
 ```php
-$index->saveObject(array("firstname" => "Jimmie", 
-                         "lastname" => "Barninger",
-                         "city" => "New York",
-                         "objectID" => "myID"));
+$index->saveObject(
+    [
+        'firstname' => 'Jimmie',
+        'lastname'  => 'Barninger',
+        'city'      => 'New York',
+        'objectID'  => 'myID'
+    ]
+);
 ```
 
 You have many ways to update an object's attributes:
@@ -257,36 +281,56 @@ You have many ways to update an object's attributes:
 Example to update only the city attribute of an existing object:
 
 ```php
-$index->partialUpdateObject(array("city" => "San Francisco",
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        'city'     => 'San Francisco',
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Example to add a tag:
 
 ```php
-$index->partialUpdateObject(array("_tags" => array("value":"MyTag", "_operation":"Add"),
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        '_tags'    => ['value' => 'MyTag', '_operation' => 'Add'],
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Example to remove a tag:
 
 ```php
-$index->partialUpdateObject(array("_tags" => array("value":"MyTag", "_operation":"Remove"),
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        '_tags'    => ['value' => 'MyTag', '_operation' => 'Remove'],
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Example to add a tag if it doesn't exist:
 
 ```php
-$index->partialUpdateObject(array("_tags" => array("value":"MyTag", "_operation":"AddUnique"),
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        '_tags'    => ['value' => 'MyTag', '_operation' => 'AddUnique'],
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Example to increment a numeric value:
 
 ```php
-$index->partialUpdateObject(array("price" => array("value":42 "_operation":"Increment"),
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        'price'    => ['value' => 42, '_operation' => 'Increment'],
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Note: Here we are incrementing the value by `42`. To increment just by one, put
@@ -295,8 +339,12 @@ Note: Here we are incrementing the value by `42`. To increment just by one, put
 Example to decrement a numeric value:
 
 ```php
-$index->partialUpdateObject(array("price" => array("value":42, "_operation":"Decrement"),
-                                  "objectID" => "myID"));
+$index->partialUpdateObject(
+    [
+        'price'    => ['value' => 42, '_operation' => 'Decrement'],
+        'objectID' => 'myID'
+    ]
+);
 ```
 
 Note: Here we are decrementing the value by `42`. To decrement just by one, put
@@ -316,9 +364,9 @@ To perform a search, you only need to initialize the index and perform a call to
 The search query allows only to retrieve 1000 hits, if you need to retrieve more than 1000 hits for seo, you can use [Backup / Retrieve all index content](#backup--retrieve-of-all-index-content)
 
 ```php
-$index = $client->initIndex("contacts");
-$res = $index->search("query string");
-$res = $index->search("query string", array("attributesToRetrieve" => "fistname,lastname", "hitsPerPage" => 50));
+$index = $client->initIndex('contacts');
+$res = $index->search('query string');
+$res = $index->search('query string', ['attributesToRetrieve' => 'fistname,lastname', 'hitsPerPage' => 50]);
 ```
 
 The server response will look like:
@@ -808,6 +856,8 @@ You can use the following optional arguments:
 
 <p>Attributes are separated with a comma (for example <code>&quot;name,address&quot;</code>). You can also use a string array encoding (for example <code>[&quot;name&quot;,&quot;address&quot;]</code> ). By default, all attributes are retrieved. You can also use <code>*</code> to retrieve all values when an <strong>attributesToRetrieve</strong> setting is specified for your index.</p>
 
+<p><code>objectID</code> is always retrieved even when not specified.</p>
+
       </td>
     </tr>
     
@@ -1117,15 +1167,15 @@ You can send multiple queries with a single API call using a batch of queries:
 // perform 3 queries in a single API call:
 //  - 1st query targets index `categories`
 //  - 2nd and 3rd queries target index `products`
-$queries = array(
-  array('indexName' => "categories", 'query' => myQueryString, 'hitsPerPage' => 3),
-  array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 3, 'facetFilters' => "promotion"),
-  array('indexName' => "products", 'query' => myQueryString, 'hitsPerPage' => 10)
-);
+$queries = [
+    ['indexName' => 'categories', 'query' => $myQueryString, 'hitsPerPage' => 3],
+    ['indexName' => 'products', 'query' => $myQueryString, 'hitsPerPage' => 3, 'facetFilters' => 'promotion'],
+    ['indexName' => 'products', 'query' => $myQueryString, 'hitsPerPage' => 10]
+];
 
 $results = $client->multipleQueries($queries);
 
-var_dump(results["results"]):
+var_dump(results['results']):
 ```
 
 The resulting JSON answer contains a ```results``` array storing the underlying queries answers. The answers order is the same than the requests order.
@@ -1143,17 +1193,19 @@ You can easily retrieve an object using its `objectID` and optionally specify a 
 
 ```php
 // Retrieves all attributes
-$index->getObject("myID");
+$index->getObject('myID');
+
 // Retrieves firstname and lastname attributes
-$index->getObject("myID", "firstname,lastname");
+$index->getObject('myID', 'firstname,lastname');
+
 // Retrieves only the firstname attribute
-$index->getObject("myID", "firstname");
+$index->getObject('myID', 'firstname');
 ```
 
 You can also retrieve a set of objects:
 
 ```php
-$index->getObjects(array("myID1", "myID2"));
+$index->getObjects(['myID1', 'myID2']);
 ```
 
 Delete an object
@@ -1162,7 +1214,7 @@ Delete an object
 You can delete an object using its `objectID`:
 
 ```php
-$index->deleteObject("myID");
+$index->deleteObject('myID');
 ```
 
 
@@ -1172,8 +1224,8 @@ Delete by query
 You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
 
 ```php
-$params = array();
-$index->deleteByQuery("John", $params);
+$params = [];
+$index->deleteByQuery('John', $params);
 ```
 
 
@@ -1188,7 +1240,7 @@ var_dump($settings);
 ```
 
 ```php
-$index->setSettings(array("customRanking" => array("desc(followers)")));
+$index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
 
 
@@ -1820,7 +1872,7 @@ Delete an index
 You can delete an index using its name:
 
 ```php
-$client->deleteIndex("contacts");
+$client->deleteIndex('contacts');
 ```
 
 
@@ -1850,8 +1902,12 @@ You can wait for a task to complete using the `waitTask` method on the `taskID` 
 
 For example, to wait for indexing of a new object:
 ```php
-$res = $index->addObject(array("firstname" => "Jimmie", 
-                               "lastname" => "Barninger"));
+$res = $index->addObject(
+    [
+        'firstname' => 'Jimmie',
+        'lastname'  => 'Barninger'
+    ]
+);
 $index->waitTask($res['taskID']);
 ```
 
@@ -1870,49 +1926,80 @@ We expose four methods to perform batch operations:
 
 Example using automatic `objectID` assignment:
 ```php
-$res = $index->addObjects(array(array("firstname" => "Jimmie", 
-                                      "lastname" => "Barninger"),
-                                array("firstname" => "Warren", 
-                                      "lastname" => "myID1")));
+$res = $index->addObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'lastname'  => 'Barninger'
+        ],
+        [
+            'firstname' => 'Warren',
+            'lastname'  => 'myID1'
+        ]
+    ]
+);
 ```
 
 Example with user defined `objectID` (add or update):
 ```php
-$res = $index->saveObjects(array(array("firstname" => "Jimmie", 
-                                       "lastname" => "Barninger",
-                                       "objectID" => "SFO"),
-                                 array("firstname" => "Warren", 
-                                       "lastname" => "Speach",
-                                       "objectID" => "myID2")));
+$res = $index->saveObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'lastname'  => 'Barninger',
+            'objectID'  => 'SFO'
+        ],
+        [
+            'firstname' => 'Warren',
+            'lastname'  => 'Speach',
+            'objectID'  => 'myID2'
+        ]
+    ]
+);
 ```
 
 Example that deletes a set of records:
 ```php
-$res = $index->deleteObjects(array("myID1", "myID2"));
+$res = $index->deleteObjects(["myID1", "myID2"]);
 ```
 
 Example that updates only the `firstname` attribute:
 ```php
-$res = $index->partialUpdateObjects(array(array("firstname" => "Jimmie", 
-                                                "objectID" => "SFO"),
-                                          array("firstname" => "Warren", 
-                                                "objectID" => "myID2")));
+$res = $index->partialUpdateObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'objectID'  => 'SFO'
+        ],
+        [
+            'firstname' => 'Warren',
+            'objectID'  => 'myID2'
+        ]
+    ]
+);
 ```
 
 
 Custom batch:
 ```php
-$res = $index->batch(array(
-  "requests" => array(
-      array("action" => "addObject",
-            "body" => array("firstname" => "Jimmie", "lastname" => "Barninger")),
-      array("action" => "addObject",
-            "body" => array("Warren" => "Jimmie", "lastname" => "Speach")),
-      array("action" => "updateObject",
-            "objectID" => "myID3",
-            "body" => array("firstname" => "Rob")),
-    )
-  )
+$res = $index->batch(
+    [
+        'requests' => [
+            [
+                'action' => 'addObject',
+                'body'   => ['firstname' => 'Jimmie', 'lastname' => 'Barninger']
+            ],
+            [
+                'action' => 'addObject',
+                'body'   => ['Warren' => 'Jimmie', 'lastname' => 'Speach']
+            ],
+            [
+                'action'   => 'updateObject',
+                'objectID' => 'myID3',
+                'body'     => ['firstname' => 'Rob']
+            ],
+        ]
+    ]
 );
 ```
 
@@ -1920,11 +2007,26 @@ $res = $index->batch(array(
 If you have one index per user, you may want to perform a batch operations across severals indexes.
 We expose a method to perform this type of batch:
 ```php
-$res = $index->batch(array(
-	array("action": "addObject", "indexName": "index1", "array("firstname" => "Jimmie", 
-                                      "lastname" => "Barninger")),
-	array("action": "addObject", "indexName": "index1", array("firstname" => "Warren", 
-                                      "lastname" => "myID1"))));
+$res = $index->batch(
+    [
+        [
+            'action'    => 'addObject',
+            'indexName' => 'index1',
+            [
+                'firstname' => 'Jimmie',
+                'lastname'  => 'Barninger'
+            ]
+        ],
+        [
+            'action'    => 'addObject',
+            'indexName' => 'index1',
+            [
+                'firstname' => 'Warren',
+                'lastname'  => 'myID1'
+            ]
+        ]
+    ]
+);
 ```
 
 The attribute **action** can have these values:
@@ -1942,9 +2044,9 @@ You can easily copy or rename an existing index using the `copy` and `move` comm
 
 ```php
 // Rename MyIndex in MyIndexNewName
-$res = $client->moveIndex("MyIndex", "MyIndexNewName");
+$res = $client->moveIndex('MyIndex', 'MyIndexNewName');
 // Copy MyIndex in MyIndexCopy
-$res = $client->copyIndex("MyIndex", "MyIndexCopy");
+$res = $client->copyIndex('MyIndex', 'MyIndexCopy');
 ```
 
 The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
@@ -1953,7 +2055,7 @@ The move command is particularly useful if you want to update a big index atomic
 
 ```php
 // Rename MyNewIndex in MyIndex (and overwrite it)
-$res = $client->moveIndex("MyNewIndex", "MyIndex");
+$res = $client->moveIndex('MyNewIndex', 'MyIndex');
 ```
 
 Backup / Export an index
@@ -1980,11 +2082,11 @@ Example:
 
 ```php
 // Iterate with a filter over the index
-foreach ($this->index->browse('', array("numericFilters" => "i<42")) as $hit) {
-  print_r($hit);
+foreach ($this->index->browse('', ['numericFilters' => 'i<42']) as $hit) {
+    print_r($hit);
 }
 
-$next_cursor = $this->index->browseFrom('', array("numericFilters" => "i<42"))["cursor"];
+$next_cursor = $this->index->browseFrom('', ['numericFilters' => 'i<42'])['cursor'];
 ```
 
 
@@ -2006,6 +2108,7 @@ To list existing keys, you can use:
 ```php
 // Lists global API Keys
 $client->listUserKeys();
+
 // Lists API Keys that can access only to this index
 $index->listUserKeys();
 ```
@@ -2027,11 +2130,12 @@ To create API keys:
 
 ```php
 // Creates a new global API key that can only perform search actions
-$res = $client->addUserKey(array("search"));
-echo "key=" . $res['key'] . "\n";
+$res = $client->addUserKey(['search']);
+echo 'key=' . $res['key'] . "\n";
+
 // Creates a new API key that can only perform search action on this index
-$res = $index->addUserKey(array("search"));
-echo "key=" . $res['key'] . "\n";
+$res = $index->addUserKey(['search']);
+echo 'key=' . $res['key'] . "\n";
 ```
 
 You can also create an API Key with advanced settings:
@@ -2157,17 +2261,18 @@ You can also create an API Key with advanced settings:
  ```php
 // Creates a new index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
 
-$params = array('validity' => 300,
-	'maxQueriesPerIPPerHour' => 100,
-	'maxHitsPerQuery' => 20,
-	'indexes'=> array('dev_*'),
-	'referers' => array('algolia.com/*'),
-	'queryParameters' => 'typoTolerance=strict&ignorePlurals=false',
-	'description' => 'Limited search only API key for algolia.com'
-);
+$params = [
+    'validity'               => 300,
+    'maxQueriesPerIPPerHour' => 100,
+    'maxHitsPerQuery'        => 20,
+    'indexes'                => ['dev_*'],
+    'referers'               => ['algolia.com/*'],
+    'queryParameters'        => 'typoTolerance=strict&ignorePlurals=false',
+    'description'            => 'Limited search only API key for algolia.com'
+];
 
 $res = $client->addUserKey(params);
-echo "key=" . $res['key'] . "\n";
+echo 'key=' . $res['key'] . "\n";
 ```
 
 ## Update API keys
@@ -2175,18 +2280,20 @@ echo "key=" . $res['key'] . "\n";
 To update the permissions of an existing key:
  ```php
 // Update an existing global API key that is valid for 300 seconds
-$res = $client->updateUserKey("myAPIKey", array("search"), 300);
-echo "key=" . $res['key'] . "\n";
+$res = $client->updateUserKey('myAPIKey', ['search'], 300);
+echo 'key=' . $res['key'] . "\n";
+
 // Update an existing index specific API key valid for 300 seconds, with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-$res = $index->updateUserKey("myAPIKey", array("search"), 300, 100, 20);
-echo "key=" . $res['key'] . "\n";
+$res = $index->updateUserKey('myAPIKey', ['search'], 300, 100, 20);
+echo 'key=' . $res['key'] . "\n";
 ```
 To get the permissions of a given key:
 ```php
 // Gets the rights of a global key
-$res = $client->getUserKeyACL("f420238212c54dcfad07ea0aa6d5c45f");
+$res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
+
 // Gets the rights of an index specific key
-$res = $index->getUserKeyACL("71671c38001bf3ac857bc82052485107");
+$res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
 
 ## Delete API keys
@@ -2194,9 +2301,10 @@ $res = $index->getUserKeyACL("71671c38001bf3ac857bc82052485107");
 To delete an existing key:
 ```php
 // Deletes a global key
-$res = $client->deleteUserKey("f420238212c54dcfad07ea0aa6d5c45f");
+$res = $client->deleteUserKey('f420238212c54dcfad07ea0aa6d5c45f');
+
 // Deletes an index specific key
-$res = $index->deleteUserKey("71671c38001bf3ac857bc82052485107");
+$res = $index->deleteUserKey('71671c38001bf3ac857bc82052485107');
 ```
 
 
@@ -2208,7 +2316,7 @@ You may have a single index containing **per user** data. In that case, all reco
 ```php
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', array('tagFilters' => 'user_42'));
+$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', ['tagFilters' => 'user_42']);
 ```
 
 This public API key can then be used in your JavaScript code as follow:
@@ -2233,7 +2341,10 @@ You can mix rate limits and secured API keys by setting a `userToken` query para
 ```php
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', array('tagFilters' => 'user_42', 'userToken' => 'user_42'));
+$public_key = $client->generateSecuredApiKey(
+    'YourSearchOnlyApiKey',
+    ['tagFilters' => 'user_42', 'userToken' => 'user_42']
+);
 ```
 
 This public API key can then be used in your JavaScript code as follow:
@@ -2348,6 +2459,7 @@ You can retrieve the logs of your last 1,000 API calls and browse them using the
 ```php
 // Get last 10 log entries
 $res = $client->getLogs();
+
 // Get last 100 log entries
 $res = $client->getLogs(0, 100);
 ```

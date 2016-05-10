@@ -686,7 +686,7 @@ class Index
         return $this->client->request(
             $this->context,
             'GET',
-            '/1/indexes/'.$this->urlIndexName.'/settings',
+            '/1/indexes/'.$this->urlIndexName.'/settings?getVersion=2',
             null,
             null,
             $this->context->readHostsArray,
@@ -1075,6 +1075,156 @@ class Index
             $params,
             null,
             $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $query
+     * @param $synonymType
+     * @param null $page
+     * @param null $hitsPerPage
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function searchSynonyms($query, array $synonymType = [], $page = null, $hitsPerPage = null)
+    {
+        $params = [];
+
+        if ($query !== null) {
+            $params['query'] = $query;
+        }
+
+        if (count($synonymType) > 0) {
+            $types = [];
+
+            foreach ($synonymType as $type) {
+                if (is_integer($type)) {
+                    $types[] = SynonymType::getSynonymsTypeString($type);
+                } else {
+                    $types[] = $type;
+                }
+            }
+            $params['type'] = implode(',', $types);
+        }
+
+        if ($page !== null) {
+            $params['page'] = $page;
+        }
+
+        if ($hitsPerPage !== null) {
+            $params['hitsPerPage'] = $hitsPerPage;
+        }
+
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/search',
+            null,
+            $params,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function getSynonym($objectID)
+    {
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID),
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     * @param $forwardToSlaves
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function deleteSynonym($objectID, $forwardToSlaves = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'DELETE',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param bool $forwardToSlaves
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function clearSynonyms($forwardToSlaves = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/clear?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objects
+     * @param bool $forwardToSlaves
+     * @param bool $replaceExistingSynonyms
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function batchSynonyms($objects, $forwardToSlaves = false, $replaceExistingSynonyms = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/batch?replaceExistingSynonyms='.($replaceExistingSynonyms ? 'true' : 'false')
+                .'&forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            null,
+            $objects,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     * @param $content
+     * @param bool $forwardToSlaves
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function saveSynonym($objectID, $content, $forwardToSlaves = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            $content,
+            null,
+            $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout
         );

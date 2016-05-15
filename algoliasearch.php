@@ -24,8 +24,11 @@
  *
  */
 
-require_once 'src/AlgoliaSearch/Version.php';
 require_once 'src/AlgoliaSearch/AlgoliaException.php';
-require_once 'src/AlgoliaSearch/ClientContext.php';
 require_once 'src/AlgoliaSearch/Client.php';
+require_once 'src/AlgoliaSearch/ClientContext.php';
 require_once 'src/AlgoliaSearch/Index.php';
+require_once 'src/AlgoliaSearch/IndexBrowser.php';
+require_once 'src/AlgoliaSearch/PlacesIndex.php';
+require_once 'src/AlgoliaSearch/SynonymType.php';
+require_once 'src/AlgoliaSearch/Version.php';

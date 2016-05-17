@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.9.1
+ - Fix `Index::saveObject` method signature
+ - Made the AccessTests more reliable
+
 ### 1.9.0
  - Made the SecurityTests more reliable
  - Added support for Synonyms API endpoints

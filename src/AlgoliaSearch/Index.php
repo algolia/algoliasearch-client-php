@@ -290,15 +290,17 @@ class Index
      * Override the content of object.
      *
      * @param array $object contains the object to save, the object must contains an objectID attribute
+     *                              or attribute specified in $objectIDKey considered as objectID
+     * @param string $objectIDKey
      *
      * @return mixed
      */
-    public function saveObject($object)
+    public function saveObject($object, $objectIDKey = 'objectID')
     {
         return $this->client->request(
             $this->context,
             'PUT',
-            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object['objectID']),
+            '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object[$objectIDKey]),
             [],
             $object,
             $this->context->writeHostsArray,

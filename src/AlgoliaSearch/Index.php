@@ -1087,7 +1087,9 @@ class Index
      * @param $synonymType
      * @param null $page
      * @param null $hitsPerPage
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function searchSynonyms($query, array $synonymType = [], $page = null, $hitsPerPage = null)
@@ -1133,7 +1135,9 @@ class Index
 
     /**
      * @param $objectID
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function getSynonym($objectID)
@@ -1153,7 +1157,9 @@ class Index
     /**
      * @param $objectID
      * @param $forwardToSlaves
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function deleteSynonym($objectID, $forwardToSlaves = false)
@@ -1172,7 +1178,9 @@ class Index
 
     /**
      * @param bool $forwardToSlaves
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function clearSynonyms($forwardToSlaves = false)
@@ -1193,7 +1201,9 @@ class Index
      * @param $objects
      * @param bool $forwardToSlaves
      * @param bool $replaceExistingSynonyms
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function batchSynonyms($objects, $forwardToSlaves = false, $replaceExistingSynonyms = false)
@@ -1215,7 +1225,9 @@ class Index
      * @param $objectID
      * @param $content
      * @param bool $forwardToSlaves
+     *
      * @return mixed
+     *
      * @throws AlgoliaException
      */
     public function saveSynonym($objectID, $content, $forwardToSlaves = false)

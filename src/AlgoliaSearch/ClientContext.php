@@ -107,11 +107,11 @@ class ClientContext
             $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
 
-        if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
+        if ($this->applicationID == null || empty($this->applicationID)) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
         }
 
-        if ($this->apiKey == null || mb_strlen($this->apiKey) == 0) {
+        if ($this->apiKey == null || empty($this->apiKey)) {
             throw new Exception('AlgoliaSearch requires an apiKey.');
         }
 

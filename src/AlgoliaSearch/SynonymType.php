@@ -4,11 +4,11 @@ namespace AlgoliaSearch;
 
 class SynonymType
 {
-    const SYNONYM                   = 0;
-    const SYNONYM_ONEWAY            = 1;
-    const PLACEHOLDER               = 2;
-    const ALTCORRECTION_1           = 3;
-    const ALTCORRECTION_2           = 4;
+    const SYNONYM = 0;
+    const SYNONYM_ONEWAY = 1;
+    const PLACEHOLDER = 2;
+    const ALTCORRECTION_1 = 3;
+    const ALTCORRECTION_2 = 4;
 
     public static function getSynonymsTypeString($synonymType)
     {
@@ -32,6 +32,6 @@ class SynonymType
             return 'altCorrection2';
         }
 
-        return null;
+        return;
     }
 }

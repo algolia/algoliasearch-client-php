@@ -369,7 +369,7 @@ class Client
      */
     public function getLogs($offset = 0, $length = 10, $type = 'all')
     {
-        if (gettype($type) == 'boolean') { //Old prototype onlyError
+        if (is_bool($type)) { //Old prototype onlyError
             if ($type) {
                 $type = 'error';
             } else {
@@ -641,7 +641,6 @@ class Client
      */
     public static function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
     {
-        $urlEncodedQuery = '';
         if (is_array($query)) {
             $queryParameters = [];
             if (array_keys($query) !== array_keys(array_keys($query))) {
@@ -694,7 +693,7 @@ class Client
     public static function buildQuery($args)
     {
         foreach ($args as $key => $value) {
-            if (gettype($value) == 'array') {
+            if (is_array($value)) {
                 $args[$key] = json_encode($value);
             }
         }
@@ -948,17 +947,8 @@ class Client
      *
      * @return array
      */
-    protected function checkCurlOptions($curlOptions)
+    protected function checkCurlOptions(array $curlOptions)
     {
-        if (!is_array($curlOptions)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'AlgoliaSearch requires %s option to be array of valid curl options.',
-                    static::CURLOPT
-                )
-            );
-        }
-
         $checkedCurlOptions = array_intersect(array_keys($curlOptions), array_keys($this->getCurlConstants()));
 
         if (count($checkedCurlOptions) !== count($curlOptions)) {

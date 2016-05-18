@@ -60,7 +60,7 @@ class PlacesIndex
     public function search($query, $args = null)
     {
         if ($args === null) {
-            $args = [];
+            $args = array();
         }
         $args['query'] = $query;
 
@@ -68,8 +68,8 @@ class PlacesIndex
             $this->context,
             'POST',
             '/1/places/query',
-            [],
-            ['params' => $this->client->buildQuery($args)],
+            array(),
+            array('params' => $this->client->buildQuery($args)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout

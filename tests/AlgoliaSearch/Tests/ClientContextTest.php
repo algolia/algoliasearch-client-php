@@ -28,12 +28,12 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
 
         // As hosts are in a random order, we sort everything to be sure the correct hosts are present.
         sort($hosts, SORT_STRING);
-        $expectedHosts = [
+        $expectedHosts = array(
             'whatever-1.algolianet.com',
             'whatever-2.algolianet.com',
             'whatever-3.algolianet.com',
             'whatever-dsn.algolia.net',
-        ];
+        );
         $this->assertEquals($expectedHosts, $hosts);
     }
 
@@ -59,12 +59,12 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
 
         // As hosts are in a random order, we sort everything to be sure the correct hosts are present.
         sort($hosts, SORT_STRING);
-        $expectedHosts = [
+        $expectedHosts = array(
             'places-1.algolianet.com',
             'places-2.algolianet.com',
             'places-3.algolianet.com',
             'places-dsn.algolia.net',
-        ];
+        );
         $this->assertEquals($expectedHosts, $hosts);
     }
 
@@ -90,12 +90,12 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
 
         // As hosts are in a random order, we sort everything to be sure the correct hosts are present.
         sort($hosts, SORT_STRING);
-        $expectedHosts = [
+        $expectedHosts = array(
             'whatever-1.algolianet.com',
             'whatever-2.algolianet.com',
             'whatever-3.algolianet.com',
             'whatever.algolia.net',
-        ];
+        );
         $this->assertEquals($expectedHosts, $hosts);
     }
 }

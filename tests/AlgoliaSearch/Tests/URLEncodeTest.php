@@ -32,19 +32,19 @@ class URLEncodeTest extends AlgoliaSearchTestCase
 
     public function testURLEncode()
     {
-        $res = $this->index->addObject(['firstname' => 'Robin'], 'a/go/?a');
+        $res = $this->index->addObject(array('firstname' => 'Robin'), 'a/go/?a');
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
         $obj = $this->index->getObject('a/go/?a');
         $this->assertEquals('Robin', $obj['firstname']);
-        $res = $this->index->saveObject(['firstname' => 'Roger', 'objectID' => 'a/go/?a']);
+        $res = $this->index->saveObject(array('firstname' => 'Roger', 'objectID' => 'a/go/?a'));
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
         $this->assertEquals('Roger', $results['hits'][0]['firstname']);
-        $res = $this->index->partialUpdateObject(['firstname' => 'Rodrigo', 'objectID' => 'a/go/?a']);
+        $res = $this->index->partialUpdateObject(array('firstname' => 'Rodrigo', 'objectID' => 'a/go/?a'));
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);

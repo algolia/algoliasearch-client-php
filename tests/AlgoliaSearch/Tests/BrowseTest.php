@@ -32,10 +32,10 @@ class BrowseTest extends AlgoliaSearchTestCase
 
     public function testBrowseIndex()
     {
-        $objects = [];
+        $objects = array();
 
         for ($i = 0; $i < 1500; $i++) {
-            $objects[] = ['objectID' => $i, 'i' => $i];
+            $objects[] = array('objectID' => $i, 'i' => $i);
         }
 
         $task = $this->index->addObjects($objects);
@@ -51,7 +51,7 @@ class BrowseTest extends AlgoliaSearchTestCase
 
         $i = 0;
 
-        foreach ($this->index->browse('', ['numericFilters' => 'i<42']) as $key => $value) {
+        foreach ($this->index->browse('', array('numericFilters' => 'i<42')) as $key => $value) {
             $i++;
         }
 

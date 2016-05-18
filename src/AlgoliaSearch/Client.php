@@ -846,7 +846,7 @@ class Client
 
         // The problem is that on (Li|U)nix, when libcurl uses the standard name resolver,
         // a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
-        curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1);
+        // curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 
         if ($method === 'GET') {

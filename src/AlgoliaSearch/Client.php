@@ -56,7 +56,7 @@ class Client
     /**
      * @var array
      */
-    protected $curlOptions = [];
+    protected $curlOptions = array();
 
     /**
      * @var bool
@@ -73,7 +73,7 @@ class Client
      *
      * @throws \Exception
      */
-    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = [])
+    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
     {
         if (!function_exists('curl_init')) {
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
@@ -232,7 +232,7 @@ class Client
         if ($queries == null) {
             throw new \Exception('No query provided');
         }
-        $requests = [];
+        $requests = array();
         foreach ($queries as $query) {
             if (array_key_exists($indexNameKey, $query)) {
                 $indexes = $query[$indexNameKey];
@@ -240,7 +240,7 @@ class Client
             } else {
                 throw new \Exception('indexName is mandatory');
             }
-            $req = ['indexName' => $indexes, 'params' => $this->buildQuery($query)];
+            $req = array('indexName' => $indexes, 'params' => $this->buildQuery($query));
 
             array_push($requests, $req);
         }
@@ -249,8 +249,8 @@ class Client
             $this->context,
             'POST',
             '/1/indexes/*/queries?strategy='.$strategy,
-            [],
-            ['requests' => $requests],
+            array(),
+            array('requests' => $requests),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout
@@ -317,13 +317,13 @@ class Client
      */
     public function moveIndex($srcIndexName, $dstIndexName)
     {
-        $request = ['operation' => 'move', 'destination' => $dstIndexName];
+        $request = array('operation' => 'move', 'destination' => $dstIndexName);
 
         return $this->request(
             $this->context,
             'POST',
             '/1/indexes/'.urlencode($srcIndexName).'/operation',
-            [],
+            array(),
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -342,13 +342,13 @@ class Client
      */
     public function copyIndex($srcIndexName, $dstIndexName)
     {
-        $request = ['operation' => 'copy', 'destination' => $dstIndexName];
+        $request = array('operation' => 'copy', 'destination' => $dstIndexName);
 
         return $this->request(
             $this->context,
             'POST',
             '/1/indexes/'.urlencode($srcIndexName).'/operation',
-            [],
+            array(),
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -512,12 +512,12 @@ class Client
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = [
+            $params = array(
                 'acl'                    => $obj,
                 'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
                 'maxHitsPerQuery'        => $maxHitsPerQuery,
-            ];
+            );
         }
 
         if ($indexes != null) {
@@ -528,7 +528,7 @@ class Client
             $this->context,
             'POST',
             '/1/keys',
-            [],
+            array(),
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -585,12 +585,12 @@ class Client
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = [
+            $params = array(
                 'acl'                    => $obj,
                 'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
                 'maxHitsPerQuery'        => $maxHitsPerQuery,
-            ];
+            );
         }
         if ($indexes != null) {
             $params['indexes'] = $indexes;
@@ -600,7 +600,7 @@ class Client
             $this->context,
             'PUT',
             '/1/keys/'.$key,
-            [],
+            array(),
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -621,8 +621,8 @@ class Client
             $this->context,
             'POST',
             '/1/indexes/*/batch',
-            [],
-            ['requests' => $requests],
+            array(),
+            array('requests' => $requests),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout
@@ -643,13 +643,13 @@ class Client
     {
         $urlEncodedQuery = '';
         if (is_array($query)) {
-            $queryParameters = [];
+            $queryParameters = array();
             if (array_keys($query) !== array_keys(array_keys($query))) {
                 // array of query parameters
                 $queryParameters = $query;
             } else {
                 // array of tags
-                $tmp = [];
+                $tmp = array();
                 foreach ($query as $tag) {
                     if (is_array($tag)) {
                         array_push($tmp, '('.implode(',', $tag).')');
@@ -667,7 +667,7 @@ class Client
         } else {
             if (strpos($query, '=') === false) {
                 // String of tags
-                $queryParameters = ['tagFilters' => $query];
+                $queryParameters = array('tagFilters' => $query);
 
                 if ($userToken != null && strlen($userToken) > 0) {
                     $queryParameters['userToken'] = $userToken;
@@ -726,7 +726,7 @@ class Client
         $connectTimeout,
         $readTimeout
     ) {
-        $exceptions = [];
+        $exceptions = array();
         $cnt = 0;
         foreach ($hostsArray as &$host) {
             $cnt += 1;
@@ -780,7 +780,7 @@ class Client
         }
 
         if ($params != null && count($params) > 0) {
-            $params2 = [];
+            $params2 = array();
             foreach ($params as $key => $val) {
                 if (is_array($val)) {
                     $params2[$key] = json_encode($val);
@@ -804,25 +804,25 @@ class Client
         }
 
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
-        $curlHeaders = [];
+        $curlHeaders = array();
         foreach ($context->headers as $key => $value) {
             $curlHeaders[] = $key.': '.$value;
         }
         if ($context->adminAPIKey == null) {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                         'X-Algolia-Application-Id: '.$context->applicationID,
                         'X-Algolia-API-Key: '.$context->apiKey,
                         'Content-type: application/json',
-                        ], $curlHeaders));
+                        ), $curlHeaders));
         } else {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge([
+            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
                     'X-Algolia-Application-Id: '.$context->applicationID,
                     'X-Algolia-API-Key: '.$context->adminAPIKey,
                     'X-Forwarded-For: '.$context->endUserIP,
                     'X-Algolia-UserToken: '.$context->algoliaUserToken,
                     'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
                     'Content-type: application/json',
-                    ], $curlHeaders));
+                    ), $curlHeaders));
         }
 
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Algolia for PHP '.Version::get());
@@ -989,7 +989,7 @@ class Client
             return $this->curlConstants;
         }
 
-        $curlConstants = [];
+        $curlConstants = array();
         foreach ($curlAllConstants as $constantName => $constantValue) {
             if (strpos($constantName, 'CURLOPT') === 0) {
                 $curlConstants[$constantName] = $constantValue;
@@ -1007,7 +1007,7 @@ class Client
      * @param array  $curlOptions
      * @param string $errorMsg    add specific message for disambiguation
      */
-    protected function invalidOptions(array $curlOptions = [], $errorMsg = '')
+    protected function invalidOptions(array $curlOptions = array(), $errorMsg = '')
     {
         throw new \OutOfBoundsException(
             sprintf(
@@ -1035,7 +1035,7 @@ class Client
      *
      * @return PlacesIndex
      */
-    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = [])
+    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array())
     {
         $options['placesEnabled'] = true;
         $client = new static($appId, $apiKey, $hostsArray, $options);

@@ -43,7 +43,7 @@ class ListIndexesTest extends AlgoliaSearchTestCase
     public function testListIndexes()
     {
         $this->index2 = $this->client->initIndex($this->safe_name('ListTest2'));
-        $task = $this->index2->addObject(['firstname' => 'Robin']);
+        $task = $this->index2->addObject(array('firstname' => 'Robin'));
         $this->index2->waitTask($task['taskID']);
         $resAfter = $this->client->listIndexes();
 

@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.9.2
+ - Restored PHP 5.3 support
+
 ### 1.9.1
  - Fix `Index::saveObject` method signature
  - Made the AccessTests more reliable

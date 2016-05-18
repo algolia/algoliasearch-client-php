@@ -173,9 +173,9 @@ class SecurityTest extends AlgoliaSearchTestCase
         $client->listIndexes();
         $processingTime = time() - $start;
 
-        // Timeout of 5s, so the processing should be between 5 and 10
-        // Assuming .biz will always fail to resolve.
-        $this->assertGreaterThanOrEqual(5, $processingTime);
-        $this->assertLessThanOrEqual(10, $processingTime);
+        // Timeout of 2s, so the processing should be between 2 and 4
+        // Assuming .biz will always fail to resolve. Let's put 5 for the processing around the HTTP transport.
+        $this->assertGreaterThanOrEqual(2, $processingTime);
+        $this->assertLessThanOrEqual(5, $processingTime);
     }
 }

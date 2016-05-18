@@ -834,6 +834,8 @@ class Client
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
 
+        curl_setopt($curlHandle, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+
         curl_setopt($curlHandle, CURLOPT_URL, $url);
         $version = curl_version();
         if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {
@@ -894,11 +896,8 @@ class Client
             throw new \Exception($error);
         }
 
-        $ok = $http_status === 200 || $http_status === 201;
-        $retry = !$ok && floor($http_status / 100) !== 4 && floor($http_status / 100) !== 1;
 
-
-        if ($retry) {
+        if ($http_status === 0 || $http_status === 503) {
             // Could not reach host or service unavailable, try with another one if we have it
             $context->releaseMHandle($curlHandle);
             curl_close($curlHandle);

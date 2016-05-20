@@ -160,6 +160,7 @@ class SecurityTest extends AlgoliaSearchTestCase
     
     public function testDnsFallback()
     {
+        echo phpinfo();
         $client = new Client(
             getenv('ALGOLIA_APPLICATION_ID'),
             getenv('ALGOLIA_API_KEY'),

@@ -70,16 +70,22 @@ class Client
      * @param string     $apiKey        a valid API key for the service
      * @param array|null $hostsArray    the list of hosts that you have received for the service
      * @param array      $options
+     * @param bool       $checkAsynchDNS
      *
      * @throws \Exception
      */
-    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
+    public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array(), $checkAsynchDNS = true)
     {
         if (!function_exists('curl_init')) {
             throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
         }
+
         if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
+        }
+
+        if ($checkAsynchDNS === true && $this->isAsynchDNSAvailable() === false) {
+            trigger_error('cURL AsynchDSN feature is disabled. Please compile your libcurl with ARES enabled to avoid potential issues with DNS resolution.', E_USER_NOTICE);
         }
 
         $this->caInfoPath = __DIR__.'/../../resources/ca-bundle.crt';
@@ -1041,5 +1047,30 @@ class Client
         $client = new static($appId, $apiKey, $hostsArray, $options);
 
         return $client->getPlacesIndex();
+    }
+
+    private function isAsynchDNSAvailable()
+    {
+        // Do not run this test on Travis-CI as there is AsynchDNS disabled
+        if (getenv('TRAVIS') == true) {
+            return true;
+        }
+
+        for ($i = 0; $i < 5000; $i++) {
+            ob_start();
+            phpinfo();
+            $phpInfoString = ob_get_clean();
+
+            $pattern = '@.*<td class="e">AsynchDNS </td><td class="v">(.*) </td>.*@';
+            if (php_sapi_name() === 'cli') {
+                $pattern = '@.*AsynchDNS => (.*).*@';
+            }
+
+            if (preg_match($pattern, $phpInfoString, $regs)) {
+                return $regs[1] === 'Yes';
+            }
+        }
+
+        return false;
     }
 }

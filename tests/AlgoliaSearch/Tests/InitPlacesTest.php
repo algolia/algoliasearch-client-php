@@ -8,13 +8,13 @@ class InitPlacesTest extends AlgoliaSearchTestCase
 {
     public function testInitPlaces()
     {
-        $placesIndex = Client::initPlaces(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $placesIndex = Client::initPlaces(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
         $this->assertInstanceOf('\AlgoliaSearch\PlacesIndex', $placesIndex);
     }
 
     public function testExtraHeader()
     {
-        $placesIndex = Client::initPlaces(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $placesIndex = Client::initPlaces(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
         $placesIndex->setExtraHeader('X-Forwarded-For', 'test');
 
         $this->assertArrayHasKey('X-Forwarded-For', $placesIndex->getContext()->headers);

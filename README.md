@@ -7,6 +7,7 @@
 
 
 
+
 <!--NO_HTML-->
 
 [Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
@@ -18,6 +19,7 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 
 
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.svg)](https://coveralls.io/r/algolia/algoliasearch-client-php)
+
 
 
 
@@ -2082,7 +2084,7 @@ Example:
 
 ```php
 // Iterate with a filter over the index
-foreach ($this->index->browse('', ['numericFilters' => 'i<42']) as $hit) {
+foreach ($this->index->browse('', ['filters' => 'i<42']) as $hit) {
     print_r($hit);
 }
 
@@ -2316,7 +2318,7 @@ You may have a single index containing **per user** data. In that case, all reco
 ```php
 // generate a public API key for user 42. Here, records are tagged with:
 //  - 'user_XXXX' if they are visible by user XXXX
-$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', ['tagFilters' => 'user_42']);
+$public_key = $client->generateSecuredApiKey('YourSearchOnlyApiKey', ['filters' => 'user_42']);
 ```
 
 This public API key can then be used in your JavaScript code as follow:
@@ -2343,7 +2345,7 @@ You can mix rate limits and secured API keys by setting a `userToken` query para
 //  - 'user_XXXX' if they are visible by user XXXX
 $public_key = $client->generateSecuredApiKey(
     'YourSearchOnlyApiKey',
-    ['tagFilters' => 'user_42', 'userToken' => 'user_42']
+    ['filters' => 'user_42', 'userToken' => 'user_42']
 );
 ```
 

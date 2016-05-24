@@ -85,7 +85,7 @@ class Client
         }
 
         if ($checkAsynchDNS === true && $this->isAsynchDNSAvailable() === false) {
-            trigger_error('cURL AsynchDSN feature is disabled. Please compile your libcurl with ARES enabled to avoid potential issues with DNS resolution.', E_USER_NOTICE);
+            trigger_error('cURL AsynchDSN feature is disabled. Please compile your libcurl with ARES enabled to avoid potential issues with DNS resolution.', E_USER_WARNING);
         }
 
         $this->caInfoPath = __DIR__.'/../../resources/ca-bundle.crt';
@@ -1038,37 +1038,31 @@ class Client
      * @param string $apiKey
      * @param array  $hostsArray
      * @param array  $options
+     * @param bool   $checkAsynchDNS
      *
      * @return PlacesIndex
      */
-    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array())
+    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array(), $checkAsynchDNS = true)
     {
         $options['placesEnabled'] = true;
-        $client = new static($appId, $apiKey, $hostsArray, $options);
+        $client = new static($appId, $apiKey, $hostsArray, $options, $checkAsynchDNS);
 
         return $client->getPlacesIndex();
     }
 
     private function isAsynchDNSAvailable()
     {
-        // Do not run this test on Travis-CI as there is AsynchDNS disabled
-        if (getenv('TRAVIS') == true) {
-            return true;
+        ob_start();
+        phpinfo();
+        $phpInfoString = ob_get_clean();
+
+        $pattern = '@.*<td class="e">AsynchDNS </td><td class="v">(.*) </td>.*@';
+        if (php_sapi_name() === 'cli') {
+            $pattern = '@.*AsynchDNS => (.*).*@';
         }
 
-        for ($i = 0; $i < 5000; $i++) {
-            ob_start();
-            phpinfo();
-            $phpInfoString = ob_get_clean();
-
-            $pattern = '@.*<td class="e">AsynchDNS </td><td class="v">(.*) </td>.*@';
-            if (php_sapi_name() === 'cli') {
-                $pattern = '@.*AsynchDNS => (.*).*@';
-            }
-
-            if (preg_match($pattern, $phpInfoString, $regs)) {
-                return $regs[1] === 'Yes';
-            }
+        if (preg_match($pattern, $phpInfoString, $regs)) {
+            return $regs[1] === 'Yes';
         }
 
         return false;

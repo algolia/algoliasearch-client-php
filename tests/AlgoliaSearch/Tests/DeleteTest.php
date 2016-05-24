@@ -12,7 +12,7 @@ class DeleteTest extends AlgoliaSearchTestCase
 
     protected function setUp()
     {
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         try {
             $this->index->clearIndex();

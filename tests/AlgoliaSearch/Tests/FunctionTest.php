@@ -12,7 +12,7 @@ class FunctionTest extends AlgoliaSearchTestCase
 
     protected function setUp()
     {
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->index->addObject(array('firstname' => 'Robin'));
         $this->index->waitTask($res['taskID']);
@@ -32,7 +32,8 @@ class FunctionTest extends AlgoliaSearchTestCase
         if (getenv('TRAVIS_PHP_VERSION') == 'hhvm') {
             $this->markTestSkipped('Irrevelant on travis');
         }
-        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
         $init = $this->microtime_float();
         $this->client->listIndexes();
         $end_init = $this->microtime_float();
@@ -48,20 +49,20 @@ class FunctionTest extends AlgoliaSearchTestCase
     public function testConstructAPIKey()
     {
         $this->setExpectedException('Exception');
-        new Client(getenv('ALGOLIA_APPLICATION_ID'), null);
+        new Client(getenv('ALGOLIA_APPLICATION_ID'), null, null, array(), !getenv('TRAVIS'));
     }
 
     public function testConstructAPPID()
     {
         $this->setExpectedException('Exception');
-        new Client(null, getenv('ALGOLIA_API_KEY'));
+        new Client(null, getenv('ALGOLIA_API_KEY'), null, array(), !getenv('TRAVIS'));
     }
 
     public function testConstructHost()
     {
         $this->setExpectedException('Exception');
         $host = array('toto');
-        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
+        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host, array(), !getenv('TRAVIS'));
         $this->badIndex = $this->badClient->initIndex($this->safe_name('àlgol?à-php'));
         $res = $this->badIndex->addObject(array('firstname' => 'Robin'));
         $this->badIndex->waitTask($res['taskID']);
@@ -70,7 +71,7 @@ class FunctionTest extends AlgoliaSearchTestCase
     public function testBadAPPIP()
     {
         $this->setExpectedException('Exception');
-        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), 'toto');
+        $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), 'toto', null, array(), !getenv('TRAVIS'));
         $this->index = $this->badClient->listIndexes();
     }
 

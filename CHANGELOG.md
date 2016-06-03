@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.9.3
+ - Made `Index::deleteByQuery` return the number of delete operations triggered
+
 ### 1.9.2
  - Restored PHP 5.3 support
 

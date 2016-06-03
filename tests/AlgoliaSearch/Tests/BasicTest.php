@@ -113,7 +113,10 @@ class BasicTest extends AlgoliaSearchTestCase
             array('firstname' => 'Robert', 'objectID' => 'à/go/?à3')
         ));
         $this->index->waitTask($res['taskID']);
-        $this->index->deleteByQuery('Robert');
+        $deletedCount = $this->index->deleteByQuery('Robert');
+
+        $this->assertEquals(2, $deletedCount);
+
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
     }

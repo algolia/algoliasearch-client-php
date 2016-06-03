@@ -378,7 +378,10 @@ class Index
      * @param bool   $waitLastCall
      *                             /!\ Be safe with "waitLastCall"
      *                             In really rare cases you can have the number of hits smaller than the hitsPerPage
-     *                             param if you trigger the timeout of the search, in that case you won't remove all the records
+     *                             param if you trigger the timeout of the search, in that case you won't remove all
+     *                             the records
+     *
+     * @return int                 the number of delete operations
      */
     public function deleteByQuery($query, $args = array(), $waitLastCall = true)
     {
@@ -386,6 +389,7 @@ class Index
         $args['hitsPerPage'] = 1000;
         $args['distinct'] = false;
 
+        $deletedCount = 0;
         $results = $this->search($query, $args);
         while ($results['nbHits'] != 0) {
             $objectIDs = array();
@@ -393,12 +397,15 @@ class Index
                 array_push($objectIDs, $elt['objectID']);
             }
             $res = $this->deleteObjects($objectIDs);
+            $deletedCount += count($objectIDs);
             if ($results['nbHits'] < $args['hitsPerPage'] && false === $waitLastCall) {
                 break;
             }
             $this->waitTask($res['taskID']);
             $results = $this->search($query, $args);
         }
+
+        return $deletedCount;
     }
 
     /**

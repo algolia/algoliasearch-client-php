@@ -218,7 +218,7 @@ Check our [online guides](https://www.algolia.com/doc):
 Add a new object to the Index
 ==================
 
-Each entry in an index has a unique identifier called `objectID`. There are two ways to add en entry to the index:
+Each entry in an index has a unique identifier called `objectID`. There are two ways to add an entry to the index:
 
  1. Using automatic `objectID` assignment. You will be able to access it in the answer.
  2. Supplying your own `objectID`.

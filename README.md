@@ -1221,11 +1221,11 @@ You can delete an object using its `objectID`:
 $index->deleteObject('myID');
 ```
 
-
 Delete by query
 ==================
 
 You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
+
 
 ```php
 $params = [];

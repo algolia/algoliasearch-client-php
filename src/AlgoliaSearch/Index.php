@@ -637,31 +637,6 @@ class Index
     }
 
     /**
-     * Browse all index content.
-     *
-     * @param int $page        Pagination parameter used to select the page to retrieve.
-     *                         Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
-     * @param int $hitsPerPage : Pagination parameter used to select the number of hits per page. Defaults to 1000.
-     *
-     * @return mixed
-     *
-     * @throws AlgoliaException
-     */
-    private function doBcBrowse($page = 0, $hitsPerPage = 1000)
-    {
-        return $this->client->request(
-            $this->context,
-            'GET',
-            '/1/indexes/'.$this->urlIndexName.'/browse',
-            array('page' => $page, 'hitsPerPage' => $hitsPerPage),
-            null,
-            $this->context->readHostsArray,
-            $this->context->connectTimeout,
-            $this->context->readTimeout
-        );
-    }
-
-    /**
      * Wait the publication of a task on the server.
      * All server task are asynchronous and you can check with this method that the task is published.
      *
@@ -1068,7 +1043,7 @@ class Index
      *
      * @return IndexBrowser
      */
-    private function doBrowse($query, $params = null)
+    public function browse($query, $params = null)
     {
         return new IndexBrowser($this, $query, $params);
     }
@@ -1085,14 +1060,17 @@ class Index
         if ($params === null) {
             $params = array();
         }
+
         foreach ($params as $key => $value) {
             if (gettype($value) == 'array') {
                 $params[$key] = json_encode($value);
             }
         }
+
         if ($query != null) {
             $params['query'] = $query;
         }
+
         if ($cursor != null) {
             $params['cursor'] = $cursor;
         }
@@ -1269,24 +1247,5 @@ class Index
             $this->context->connectTimeout,
             $this->context->readTimeout
         );
-    }
-
-    /**
-     * @param string $name
-     * @param array  $arguments
-     *
-     * @return mixed
-     */
-    public function __call($name, $arguments)
-    {
-        if ($name !== 'browse') {
-            return;
-        }
-
-        if (count($arguments) >= 1 && is_string($arguments[0])) {
-            return call_user_func_array(array($this, 'doBrowse'), $arguments);
-        }
-
-        return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
     }
 }

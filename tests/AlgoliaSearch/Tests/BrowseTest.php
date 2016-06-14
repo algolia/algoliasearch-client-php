@@ -4,16 +4,21 @@ namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
+use AlgoliaSearch\Index;
 
 class BrowseTest extends AlgoliaSearchTestCase
 {
+    /** @var Client */
     private $client;
+
+    /** @var Index */
     private $index;
 
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
+
         try {
             $this->index->clearIndex();
         } catch (AlgoliaException $e) {
@@ -56,5 +61,21 @@ class BrowseTest extends AlgoliaSearchTestCase
         }
 
         $this->assertEquals(42, $i);
+    }
+
+    public function testBrowseIndexWithSingleRecord()
+    {
+        $task = $this->index->addObject(array('firstname' => 'Robin'));
+        $this->index->waitTask($task['taskID']);
+
+        $res = $this->index->search('');
+        $this->assertEquals(1, $res['nbHits']);
+
+        $data = $this->index->browse('');
+
+        $data->valid();
+
+        $record = $data->current();
+        $this->assertEquals('Robin', $record['firstname']);
     }
 }

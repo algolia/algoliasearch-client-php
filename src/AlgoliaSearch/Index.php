@@ -85,14 +85,14 @@ class Index
      */
     public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')
     {
-        $requests = array();
-        $allowedActions = array(
+        $requests = [];
+        $allowedActions = [
             'addObject',
             'updateObject',
             'deleteObject',
             'partialUpdateObject',
             'partialUpdateObjectNoCreate',
-        );
+        ];
 
         foreach ($objects as $obj) {
             // If no or invalid action, assume updateObject
@@ -105,7 +105,7 @@ class Index
             // The action key is not included in the object
             unset($obj[$objectActionKey]);
 
-            $req = array('action' => $action, 'body' => $obj);
+            $req = ['action' => $action, 'body' => $obj];
 
             if (array_key_exists($objectIDKey, $obj)) {
                 $req['objectID'] = (string) $obj[$objectIDKey];
@@ -114,7 +114,7 @@ class Index
             $requests[] = $req;
         }
 
-        return $this->batch(array('requests' => $requests));
+        return $this->batch(['requests' => $requests]);
     }
 
     /**
@@ -134,7 +134,7 @@ class Index
                 $this->context,
                 'POST',
                 '/1/indexes/'.$this->urlIndexName,
-                array(),
+                [],
                 $content,
                 $this->context->writeHostsArray,
                 $this->context->connectTimeout,
@@ -146,7 +146,7 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/'.urlencode($objectID),
-            array(),
+            [],
             $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -198,7 +198,7 @@ class Index
             $this->context,
             'GET',
             '/1/indexes/'.$this->urlIndexName.'/'.$id,
-            array('attributes' => $attributesToRetrieve),
+            ['attributes' => $attributesToRetrieve],
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
@@ -221,9 +221,9 @@ class Index
             throw new \Exception('No list of objectID provided');
         }
 
-        $requests = array();
+        $requests = [];
         foreach ($objectIDs as $object) {
-            $req = array('indexName' => $this->indexName, 'objectID' => $object);
+            $req = ['indexName' => $this->indexName, 'objectID' => $object];
             array_push($requests, $req);
         }
 
@@ -231,8 +231,8 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/*/objects',
-            array(),
-            array('requests' => $requests),
+            [],
+            ['requests' => $requests],
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout
@@ -258,7 +258,7 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/'.urlencode($partialObject['objectID']).'/partial'.$queryString,
-            array(),
+            [],
             $partialObject,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -301,7 +301,7 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/'.urlencode($object[$objectIDKey]),
-            array(),
+            [],
             $object,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -361,9 +361,9 @@ class Index
      */
     public function deleteObjects($objects)
     {
-        $objectIDs = array();
+        $objectIDs = [];
         foreach ($objects as $key => $id) {
-            $objectIDs[$key] = array('objectID' => $id);
+            $objectIDs[$key] = ['objectID' => $id];
         }
         $requests = $this->buildBatch('deleteObject', $objectIDs, true);
 
@@ -383,7 +383,7 @@ class Index
      *
      * @return int                 the number of delete operations
      */
-    public function deleteByQuery($query, $args = array(), $waitLastCall = true)
+    public function deleteByQuery($query, $args = [], $waitLastCall = true)
     {
         $args['attributesToRetrieve'] = 'objectID';
         $args['hitsPerPage'] = 1000;
@@ -392,7 +392,7 @@ class Index
         $deletedCount = 0;
         $results = $this->search($query, $args);
         while ($results['nbHits'] != 0) {
-            $objectIDs = array();
+            $objectIDs = [];
             foreach ($results['hits'] as $elt) {
                 array_push($objectIDs, $elt['objectID']);
             }
@@ -494,7 +494,7 @@ class Index
     public function search($query, $args = null)
     {
         if ($args === null) {
-            $args = array();
+            $args = [];
         }
         $args['query'] = $query;
 
@@ -502,8 +502,8 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/query',
-            array(),
-            array('params' => $this->client->buildQuery($args)),
+            [],
+            ['params' => $this->client->buildQuery($args)],
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout
@@ -524,7 +524,7 @@ class Index
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())
+    public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = [], $refinements = [])
     {
         if (gettype($disjunctive_facets) != 'string' && gettype($disjunctive_facets) != 'array') {
             throw new AlgoliaException('Argument "disjunctive_facets" must be a String or an Array');
@@ -538,14 +538,14 @@ class Index
             $disjunctive_facets = explode(',', $disjunctive_facets);
         }
 
-        $disjunctive_refinements = array();
+        $disjunctive_refinements = [];
         foreach ($refinements as $key => $value) {
             if (in_array($key, $disjunctive_facets)) {
                 $disjunctive_refinements[$key] = $value;
             }
         }
-        $queries = array();
-        $filters = array();
+        $queries = [];
+        $filters = [];
 
         foreach ($refinements as $key => $value) {
             $r = array_map(
@@ -566,7 +566,7 @@ class Index
         $params['facetFilters'] = $filters;
         array_push($queries, $params);
         foreach ($disjunctive_facets as $disjunctive_facet) {
-            $filters = array();
+            $filters = [];
             foreach ($refinements as $key => $value) {
                 if ($key != $disjunctive_facet) {
                     $r = array_map(
@@ -588,9 +588,9 @@ class Index
             $params['facetFilters'] = $filters;
             $params['page'] = 0;
             $params['hitsPerPage'] = 0;
-            $params['attributesToRetrieve'] = array();
-            $params['attributesToHighlight'] = array();
-            $params['attributesToSnippet'] = array();
+            $params['attributesToRetrieve'] = [];
+            $params['attributesToHighlight'] = [];
+            $params['attributesToSnippet'] = [];
             $params['facets'] = $disjunctive_facet;
             $params['analytics'] = false;
             array_push($queries, $params);
@@ -598,7 +598,7 @@ class Index
         $answers = $this->client->multipleQueries($queries);
 
         $aggregated_answer = $answers['results'][0];
-        $aggregated_answer['disjunctiveFacets'] = array();
+        $aggregated_answer['disjunctiveFacets'] = [];
         for ($i = 1; $i < count($answers['results']); $i++) {
             foreach ($answers['results'][$i]['facets'] as $key => $facet) {
                 $aggregated_answer['disjunctiveFacets'][$key] = $facet;
@@ -633,7 +633,7 @@ class Index
             $this->context,
             'GET',
             '/1/indexes/'.$this->urlIndexName.'/browse',
-            array('page' => $page, 'hitsPerPage' => $hitsPerPage),
+            ['page' => $page, 'hitsPerPage' => $hitsPerPage],
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
@@ -797,7 +797,7 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/settings',
-            array(),
+            [],
             $settings,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -914,19 +914,19 @@ class Index
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
+            $params = [
                 'acl'                    => $obj,
                 'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
                 'maxHitsPerQuery'        => $maxHitsPerQuery,
-            );
+            ];
         }
 
         return $this->client->request(
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/keys',
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -977,19 +977,19 @@ class Index
             $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
             $params['maxHitsPerQuery'] = $maxHitsPerQuery;
         } else {
-            $params = array(
+            $params = [
                 'acl'                    => $obj,
                 'validity'               => $validity,
                 'maxQueriesPerIPPerHour' => $maxQueriesPerIPPerHour,
                 'maxHitsPerQuery'        => $maxHitsPerQuery,
-            );
+            ];
         }
 
         return $this->client->request(
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/keys/'.$key,
-            array(),
+            [],
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -1010,7 +1010,7 @@ class Index
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/batch',
-            array(),
+            [],
             $requests,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
@@ -1030,16 +1030,16 @@ class Index
      */
     private function buildBatch($action, $objects, $withObjectID, $objectIDKey = 'objectID')
     {
-        $requests = array();
+        $requests = [];
         foreach ($objects as $obj) {
-            $req = array('action' => $action, 'body' => $obj);
+            $req = ['action' => $action, 'body' => $obj];
             if ($withObjectID && array_key_exists($objectIDKey, $obj)) {
                 $req['objectID'] = (string) $obj[$objectIDKey];
             }
             array_push($requests, $req);
         }
 
-        return array('requests' => $requests);
+        return ['requests' => $requests];
     }
 
     /**
@@ -1063,7 +1063,7 @@ class Index
     public function browseFrom($query, $params = null, $cursor = null)
     {
         if ($params === null) {
-            $params = array();
+            $params = [];
         }
         foreach ($params as $key => $value) {
             if (gettype($value) == 'array') {
@@ -1099,16 +1099,16 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null)
+    public function searchSynonyms($query, array $synonymType = [], $page = null, $hitsPerPage = null)
     {
-        $params = array();
+        $params = [];
 
         if ($query !== null) {
             $params['query'] = $query;
         }
 
         if (count($synonymType) > 0) {
-            $types = array();
+            $types = [];
 
             foreach ($synonymType as $type) {
                 if (is_integer($type)) {
@@ -1264,9 +1264,9 @@ class Index
         }
 
         if (count($arguments) >= 1 && is_string($arguments[0])) {
-            return call_user_func_array(array($this, 'doBrowse'), $arguments);
+            return call_user_func_array([$this, 'doBrowse'], $arguments);
         }
 
-        return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
+        return call_user_func_array([$this, 'doBcBrowse'], $arguments);
     }
 }

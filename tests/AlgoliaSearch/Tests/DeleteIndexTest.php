@@ -44,7 +44,7 @@ class DeleteIndexTest extends AlgoliaSearchTestCase
     public function testDeleteIndex()
     {
         $this->index2 = $this->client->initIndex($this->safe_name('ListTest2'));
-        $task = $this->index2->addObject(array('firstname' => 'Robin'));
+        $task = $this->index2->addObject(['firstname' => 'Robin']);
         $this->index2->waitTask($task['taskID']);
 
         $res = $this->client->listIndexes();

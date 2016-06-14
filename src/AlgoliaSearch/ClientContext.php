@@ -120,7 +120,7 @@ class ClientContext
         $this->endUserIP = null;
         $this->algoliaUserToken = null;
         $this->rateLimitAPIKey = null;
-        $this->headers = array();
+        $this->headers = [];
     }
 
     /**
@@ -131,22 +131,22 @@ class ClientContext
     private function getDefaultReadHosts($placesEnabled)
     {
         if ($placesEnabled) {
-            $hosts = array(
+            $hosts = [
                 'places-1.algolianet.com',
                 'places-2.algolianet.com',
                 'places-3.algolianet.com',
-            );
+            ];
             shuffle($hosts);
             array_unshift($hosts, 'places-dsn.algolia.net');
 
             return $hosts;
         }
 
-        $hosts = array(
+        $hosts = [
             $this->applicationID.'-1.algolianet.com',
             $this->applicationID.'-2.algolianet.com',
             $this->applicationID.'-3.algolianet.com',
-        );
+        ];
         shuffle($hosts);
         array_unshift($hosts, $this->applicationID.'-dsn.algolia.net');
 
@@ -158,11 +158,11 @@ class ClientContext
      */
     private function getDefaultWriteHosts()
     {
-        $hosts = array(
+        $hosts = [
             $this->applicationID.'-1.algolianet.com',
             $this->applicationID.'-2.algolianet.com',
             $this->applicationID.'-3.algolianet.com',
-        );
+        ];
         shuffle($hosts);
         array_unshift($hosts, $this->applicationID.'.algolia.net');
 

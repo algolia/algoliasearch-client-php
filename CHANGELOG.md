@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.9.4
+ - All JSON operations are now validated by new `Json` class
+
 ### 1.9.3
  - Made `Index::deleteByQuery` return the number of delete operations triggered
 

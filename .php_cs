@@ -10,7 +10,7 @@ return Symfony\CS\Config\Config::create()
     ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
     ->fixers([
         'align_double_arrow',
-        'long_array_syntax',
+        'short_array_syntax',
         '-multiline_array_trailing_comma',
         '-pre_increment',
     ])

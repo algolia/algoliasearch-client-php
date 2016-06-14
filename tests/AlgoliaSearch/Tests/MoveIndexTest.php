@@ -54,7 +54,7 @@ class MoveIndexTest extends AlgoliaSearchTestCase
 
     public function testMoveIndex()
     {
-        $task = $this->index->addObject(array('firstname' => 'Robin'));
+        $task = $this->index->addObject(['firstname' => 'Robin']);
         $this->index->waitTask($task['taskID']);
 
         $task = $this->client->moveIndex($this->safe_name('àlgol?à-php'), $this->safe_name('àlgol?à2-php'));
@@ -72,7 +72,7 @@ class MoveIndexTest extends AlgoliaSearchTestCase
     public function testCopyIndex()
     {
         $this->index2 = $this->client->initIndex($this->safe_name('àlgol?à2-php'));
-        $task = $this->index2->addObject(array('firstname' => 'Robin'));
+        $task = $this->index2->addObject(['firstname' => 'Robin']);
         $this->index2->waitTask($task['taskID']);
 
         $this->expectOutputString('');

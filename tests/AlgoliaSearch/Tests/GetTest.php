@@ -32,7 +32,7 @@ class GetTest extends AlgoliaSearchTestCase
 
     public function testGetObject()
     {
-        $res = $this->index->addObject(array('firstname' => 'Robin'), 'à/go/?à');
+        $res = $this->index->addObject(['firstname' => 'Robin'], 'à/go/?à');
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
@@ -43,10 +43,10 @@ class GetTest extends AlgoliaSearchTestCase
 
     public function testGetObjects()
     {
-        $res = $this->index->addObjects(array(
-            array('firstname' => 'Robin'),
-            array('firstname' => 'Robert')
-        ));
+        $res = $this->index->addObjects([
+            ['firstname' => 'Robin'],
+            ['firstname' => 'Robert']
+        ]);
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('rob');
         $this->assertEquals(2, $results['nbHits']);
@@ -58,10 +58,10 @@ class GetTest extends AlgoliaSearchTestCase
 
     public function testGetSaveObjects()
     {
-        $res = $this->index->saveObjects(array(
-            array('firstname' => 'Oneil', 'objectID' => 'à/go/?à'),
-            array('firstname' => 'Robert', 'objectID' => 'à/go/?à2')
-        ));
+        $res = $this->index->saveObjects([
+            ['firstname' => 'Oneil', 'objectID' => 'à/go/?à'],
+            ['firstname' => 'Robert', 'objectID' => 'à/go/?à2']
+        ]);
         $this->index->waitTask($res['taskID']);
         $results = $this->index->search('rob');
         $this->assertEquals(1, $results['nbHits']);

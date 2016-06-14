@@ -36,22 +36,22 @@ class SynonymsTest extends AlgoliaSearchTestCase
 
     public function testSynonyms()
     {
-        $res = $this->index->addObject(array('name' => '589 Howard St., San Francisco'));
+        $res = $this->index->addObject(['name' => '589 Howard St., San Francisco']);
         $this->index->waitTask($res['taskID'], 0.1);
 
-        $res = $this->index->batchSynonyms(array(
-            array(
+        $res = $this->index->batchSynonyms([
+            [
                 'objectID' => 'city',
                 'type'     => 'synonym',
-                'synonyms' => array('San Francisco', 'SF'),
-            ),
-            array(
+                'synonyms' => ['San Francisco', 'SF'],
+            ],
+            [
                 'objectID'    => 'street',
                 'type'        => 'altCorrection1',
                 'word'        => 'Street',
-                'corrections' => array('St')
-            )
-        ));
+                'corrections' => ['St']
+            ]
+        ]);
 
         $this->index->waitTask($res['taskID'], 0.1);
 
@@ -63,12 +63,12 @@ class SynonymsTest extends AlgoliaSearchTestCase
 
         $res = $this->index->deleteSynonym('street');
         $this->index->waitTask($res['taskID'], 0.1);
-        $res = $this->index->searchSynonyms('', array(SynonymType::SYNONYM), 0, 5);
+        $res = $this->index->searchSynonyms('', [SynonymType::SYNONYM], 0, 5);
         $this->assertEquals(1, $res['nbHits']);
 
         $res = $this->index->clearSynonyms();
         $this->index->waitTask($res['taskID'], 0.1);
-        $res = $this->index->searchSynonyms('', array(), 0, 5);
+        $res = $this->index->searchSynonyms('', [], 0, 5);
         $this->assertEquals(0, $res['nbHits']);
     }
 }

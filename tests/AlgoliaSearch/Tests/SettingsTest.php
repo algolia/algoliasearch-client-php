@@ -32,7 +32,7 @@ class SettingsTest extends AlgoliaSearchTestCase
 
     public function testSettingsIndex()
     {
-        $res = $this->index->setSettings(array('attributesToRetrieve' => array('firstname'), 'hitsPerPage' => 50));
+        $res = $this->index->setSettings(['attributesToRetrieve' => ['firstname'], 'hitsPerPage' => 50]);
         $this->index->waitTask($res['taskID']);
         $settings = $this->index->getSettings();
         $this->assertEquals(count($settings['attributesToRetrieve']), 1);
@@ -41,13 +41,13 @@ class SettingsTest extends AlgoliaSearchTestCase
 
     public function testSearchFacet()
     {
-        $this->index->addObjects(array(
-            array('firstname' => 'Robin'),
-            array('firstname' => 'Robert')
-        ));
-        $res = $this->index->setSettings(array('attributesForFaceting' => array('firstname')));
+        $this->index->addObjects([
+            ['firstname' => 'Robin'],
+            ['firstname' => 'Robert']
+        ]);
+        $res = $this->index->setSettings(['attributesForFaceting' => ['firstname']]);
         $this->index->waitTask($res['taskID']);
-        $results = $this->index->search('rob', array('facetFilters' => array('firstname:Robert')));
+        $results = $this->index->search('rob', ['facetFilters' => ['firstname:Robert']]);
         $this->assertEquals(1, $results['nbHits']);
     }
 }

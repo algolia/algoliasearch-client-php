@@ -32,3 +32,4 @@ require_once 'src/AlgoliaSearch/IndexBrowser.php';
 require_once 'src/AlgoliaSearch/PlacesIndex.php';
 require_once 'src/AlgoliaSearch/SynonymType.php';
 require_once 'src/AlgoliaSearch/Version.php';
+require_once 'src/AlgoliaSearch/Json.php';

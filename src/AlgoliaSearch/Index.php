@@ -1067,7 +1067,7 @@ class Index
         }
         foreach ($params as $key => $value) {
             if (gettype($value) == 'array') {
-                $params[$key] = json_encode($value);
+                $params[$key] = Json::encode($value);
             }
         }
         if ($query != null) {

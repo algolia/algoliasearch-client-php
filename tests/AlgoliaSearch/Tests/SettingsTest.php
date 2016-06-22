@@ -24,7 +24,12 @@ class SettingsTest extends AlgoliaSearchTestCase
     protected function tearDown()
     {
         try {
-            $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+            $res = $this->client->deleteIndex($this->safe_name('àlgol?à-php'));
+            $this->index->waitTask($res['taskID']);
+
+            $res = $this->client->deleteIndex($this->safe_name('àlgol?à-php-slave'));
+            $index = $this->client->initIndex($this->safe_name('àlgol?à-php-slave'));
+            $index->waitTask($res['taskID']);
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -35,6 +40,25 @@ class SettingsTest extends AlgoliaSearchTestCase
         $res = $this->index->setSettings(array('attributesToRetrieve' => array('firstname'), 'hitsPerPage' => 50));
         $this->index->waitTask($res['taskID']);
         $settings = $this->index->getSettings();
+        $this->assertEquals(count($settings['attributesToRetrieve']), 1);
+        $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
+    }
+
+    public function testSettingsIndexWithForwardToSlaves()
+    {
+        $res = $this->index->setSettings(array('slaves' => array($this->safe_name('àlgol?à-php-slave'))));
+        $this->index->waitTask($res['taskID']);
+
+        $res = $this->index->addObject(array("test" => "test"));
+        $this->index->waitTask($res['taskID']);
+
+        $res = $this->index->setSettings(array('attributesToRetrieve' => array('firstname'), 'hitsPerPage' => 50), true);
+        $this->index->waitTask($res['taskID']);
+
+        $slaveIndex = $this->client->initIndex($this->safe_name('àlgol?à-php-slave'));
+        $settings = $slaveIndex->getSettings();
+
+
         $this->assertEquals(count($settings['attributesToRetrieve']), 1);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
     }

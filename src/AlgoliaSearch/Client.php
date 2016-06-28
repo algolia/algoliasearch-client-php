@@ -809,17 +809,17 @@ class Client
         if ($context->adminAPIKey == null) {
             $defaultHeaders = array(
                 'X-Algolia-Application-Id' => $context->applicationID,
-                'X-Algolia-API-Key' => $context->apiKey,
-                'Content-type' => 'application/json',
+                'X-Algolia-API-Key'        => $context->apiKey,
+                'Content-type'             => 'application/json',
             );
         } else {
             $defaultHeaders = array(
                 'X-Algolia-Application-Id' => $context->applicationID,
-                'X-Algolia-API-Key' => $context->adminAPIKey,
-                'X-Forwarded-For' => $context->endUserIP,
-                'X-Algolia-UserToken' => $context->algoliaUserToken,
-                'X-Forwarded-API-Key' => $context->rateLimitAPIKey,
-                'Content-type' => 'application/json',
+                'X-Algolia-API-Key'        => $context->adminAPIKey,
+                'X-Forwarded-For'          => $context->endUserIP,
+                'X-Algolia-UserToken'      => $context->algoliaUserToken,
+                'X-Forwarded-API-Key'      => $context->rateLimitAPIKey,
+                'Content-type'             => 'application/json',
             );
         }
 

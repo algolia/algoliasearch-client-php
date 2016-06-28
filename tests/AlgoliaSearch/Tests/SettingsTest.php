@@ -58,7 +58,6 @@ class SettingsTest extends AlgoliaSearchTestCase
         $slaveIndex = $this->client->initIndex($this->safe_name('àlgol?à-php-slave'));
         $settings = $slaveIndex->getSettings();
 
-
         $this->assertEquals(count($settings['attributesToRetrieve']), 1);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
     }

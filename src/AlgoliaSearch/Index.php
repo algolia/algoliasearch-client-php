@@ -381,7 +381,7 @@ class Index
      *                             param if you trigger the timeout of the search, in that case you won't remove all
      *                             the records
      *
-     * @return int                 the number of delete operations
+     * @return int the number of delete operations
      */
     public function deleteByQuery($query, $args = array(), $waitLastCall = true)
     {
@@ -789,7 +789,7 @@ class Index
      *                        - optionalWords: (array of strings) Specify a list of words that should be considered as
      *                        optional when found in the query.
      *
-     * @param bool $forwardToSlaves
+     * @param  bool             $forwardToSlaves
      * @return mixed
      * @throws AlgoliaException
      */
@@ -798,7 +798,7 @@ class Index
         $url = '/1/indexes/'.$this->urlIndexName.'/settings';
 
         if ($forwardToSlaves) {
-            $url = $url . '?forwardToSlaves=true';
+            $url = $url.'?forwardToSlaves=true';
         }
 
         return $this->client->request(

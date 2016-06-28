@@ -804,26 +804,33 @@ class Client
         }
 
         //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
+
+        $defaultHeaders = null;
+        if ($context->adminAPIKey == null) {
+            $defaultHeaders = array(
+                'X-Algolia-Application-Id' => $context->applicationID,
+                'X-Algolia-API-Key'        => $context->apiKey,
+                'Content-type'             => 'application/json',
+            );
+        } else {
+            $defaultHeaders = array(
+                'X-Algolia-Application-Id' => $context->applicationID,
+                'X-Algolia-API-Key'        => $context->adminAPIKey,
+                'X-Forwarded-For'          => $context->endUserIP,
+                'X-Algolia-UserToken'      => $context->algoliaUserToken,
+                'X-Forwarded-API-Key'      => $context->rateLimitAPIKey,
+                'Content-type'             => 'application/json',
+            );
+        }
+
+        $headers = array_merge($defaultHeaders, $context->headers);
+
         $curlHeaders = array();
-        foreach ($context->headers as $key => $value) {
+        foreach ($headers as $key => $value) {
             $curlHeaders[] = $key.': '.$value;
         }
-        if ($context->adminAPIKey == null) {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
-                        'X-Algolia-Application-Id: '.$context->applicationID,
-                        'X-Algolia-API-Key: '.$context->apiKey,
-                        'Content-type: application/json',
-                        ), $curlHeaders));
-        } else {
-            curl_setopt($curlHandle, CURLOPT_HTTPHEADER, array_merge(array(
-                    'X-Algolia-Application-Id: '.$context->applicationID,
-                    'X-Algolia-API-Key: '.$context->adminAPIKey,
-                    'X-Forwarded-For: '.$context->endUserIP,
-                    'X-Algolia-UserToken: '.$context->algoliaUserToken,
-                    'X-Forwarded-API-Key: '.$context->rateLimitAPIKey,
-                    'Content-type: application/json',
-                    ), $curlHeaders));
-        }
+
+        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $curlHeaders);
 
         curl_setopt($curlHandle, CURLOPT_USERAGENT, 'Algolia for PHP '.Version::get());
         //Return the output instead of printing it

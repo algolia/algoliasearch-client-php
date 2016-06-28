@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.10.0
+ - Add forwardToSlaves option in setSettings
+
 ### 1.9.4
  - All JSON operations are now validated by new `Json` class
 

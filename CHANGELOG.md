@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.10.1
+ - Fix `Index::saveSynonym`
+
 ### 1.10.0
  - Add forwardToSlaves option in setSettings
 

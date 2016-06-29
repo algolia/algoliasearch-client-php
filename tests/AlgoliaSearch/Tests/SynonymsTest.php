@@ -66,6 +66,14 @@ class SynonymsTest extends AlgoliaSearchTestCase
         $res = $this->index->searchSynonyms('', array(SynonymType::SYNONYM), 0, 5);
         $this->assertEquals(1, $res['nbHits']);
 
+        $res = $this->index->saveSynonym('city', array(
+            'type'     => 'synonym',
+            'synonyms' => array('San Francisco', 'SF', 'silicon valley')
+        ));
+        $this->index->waitTask($res['taskID'], 0.1);
+        $res = $this->index->search('silicon valley');
+        $this->assertEquals(1, $res['nbHits']);
+
         $res = $this->index->clearSynonyms();
         $this->index->waitTask($res['taskID'], 0.1);
         $res = $this->index->searchSynonyms('', array(), 0, 5);

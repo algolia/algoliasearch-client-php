@@ -1251,8 +1251,8 @@ class Index
             $this->context,
             'PUT',
             '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
-            $content,
             null,
+            $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout

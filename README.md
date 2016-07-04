@@ -612,7 +612,65 @@ You can use the following optional arguments:
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>Remove the stop words from query before executing it. Defaults to false. Contains a list of stop words from 41 languages (Arabic, Armenian, Basque, Bengali, Brazilian, Bulgarian, Catalan, Chinese, Czech, Danish, Dutch, English, Finnish, French, Galician, German, Greek, Hindi, Hungarian, Indonesian, Irish, Italian, Japanese, Korean, Kurdish, Latvian, Lithuanian, Marathi, Norwegian, Persian, Polish, Portugese, Romanian, Russian, Slovak, Spanish, Swedish, Thai, Turkish, Ukranian, Urdu). In most use-cases, we don&#39;t recommend enabling this option.</p>
+        <p>Remove stop words from the query <strong>before</strong> executing it. Defaults to <code>false</code>. Use a boolean to enable/disable all 41 supported languages and a comma separated list of iso codes of the languages you want to use consider to enable the stopwords removal on a subset of them (select the one you have in your records). In most use-cases, you shouldn&#39;t need to enable this option.</p>
+
+<p>List of 41 supported languages with their associated iso code: Arabic=ar, Armenian=hy, Basque=eu, Bengali=bn, Brazilian=pt-br, Bulgarian=bg, Catalan=ca, Chinese=zh, Czech=cs, Danish=da, Dutch=nl, English=en, Finnish=fi, French=fr, Galician=gl, German=de, Greek=el, Hindi=hi, Hungarian=hu, Indonesian=id, Irish=ga, Italian=it, Japanese=ja, Korean=ko, Kurdish=ku, Latvian=lv, Lithuanian=lt, Marathi=mr, Norwegian=no, Persian (Farsi)=fa, Polish=pl, Portugese=pt, Romanian=ro, Russian=ru, Slovak=sk, Spanish=es, Swedish=sv, Thai=th, Turkish=tr, Ukranian=uk, Urdu=ur</p>
+
+<p>Stop words removal is applied on query words that are not interpreted as a prefix. The behavior depends of the queryType parameter:</p>
+
+<ul>
+<li><p><code>queryType=prefixLast</code> means the last query word is a prefix and it won’t be considered for stop words removal</p></li>
+<li><p><code>queryType=prefixNone</code> means no query word are prefix, stop words removal will be applied on all query words</p></li>
+<li><p><code>queryType=prefixAll</code> means all query terms are prefix, stop words won’t be removed</p></li>
+</ul>
+
+<p>This parameter is useful when you have a query in natural language like “what is a record?”. In this case, before executing the query, we will remove “what”, “is” and “a” in order to just search for “record”. This removal will remove false positive because of stop words, especially when combined with optional words. For most use cases, it is better to not use this feature as people search by keywords on search engines.</p>
+
+      </td>
+    </tr>
+    
+
+  
+    <tr>
+      <td valign='top'>
+        <div class='client-readme-param-container'>
+          <div class='client-readme-param-container-inner'>
+            <div class='client-readme-param-name'><code>exactOnSingleWordQuery</code></div>
+            <div class="client-readme-param-meta"><div><em>Default: <strong>attribute</strong></em></div></div>
+          </div>
+        </div>
+      </td>
+      <td class='client-readme-param-content'>
+        <p>This parameter control how the <code>exact</code> ranking criterion is computed when the query contains one word. There is three different values:</p>
+
+<ul>
+<li><p><code>none</code>: no exact on single word query</p></li>
+<li><p><code>word</code>: exact set to 1 if the query word is found in the record. The query word needs to have at least 3 chars and not be part of our stop words dictionary</p></li>
+<li><p><code>attribute</code> (default): exact set to 1 if there is an attribute containing a string equals to the query</p></li>
+</ul>
+
+      </td>
+    </tr>
+    
+
+  
+    <tr>
+      <td valign='top'>
+        <div class='client-readme-param-container'>
+          <div class='client-readme-param-container-inner'>
+            <div class='client-readme-param-name'><code>alternativesAsExact</code></div>
+            <div class="client-readme-param-meta"><div><em>Default: <strong>["ignorePlurals", "singleWordSynonym"]</strong></em></div></div>
+          </div>
+        </div>
+      </td>
+      <td class='client-readme-param-content'>
+        <p>Specify the list of approximation that should be considered as an exact match in the ranking formula:</p>
+
+<ul>
+<li><p><code>ignorePlurals</code>: alternative words added by the ignorePlurals feature</p></li>
+<li><p><code>singleWordSynonym</code>: single-word synonym (For example &quot;NY&quot; = &quot;NYC&quot;)</p></li>
+<li><p><code>multiWordsSynonym</code>: multiple-words synonym (For example &quot;NY&quot; = &quot;New York&quot;)</p></li>
+</ul>
 
       </td>
     </tr>
@@ -875,7 +933,7 @@ You can use the following optional arguments:
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>A string that contains the list of attributes you want to highlight according to the query. Attributes are separated by commas. You can also use a string array encoding (for example <code>[&quot;name&quot;,&quot;address&quot;]</code>). If an attribute has no match for the query, the raw value is returned. By default, all indexed attributes are highlighted. You can use <code>*</code> if you want to highlight all attributes. A matchLevel is returned for each highlighted attribute and can contain:</p>
+        <p>A string that contains the list of attributes you want to highlight according to the query. Attributes are separated by commas. You can also use a string array encoding (for example <code>[&quot;name&quot;,&quot;address&quot;]</code>). If an attribute has no match for the query, the raw value is returned. By default, all indexed attributes are highlighted (as long as they are strings). You can use <code>*</code> if you want to highlight all attributes. A matchLevel is returned for each highlighted attribute and can contain:</p>
 
 <ul>
 <li><strong>full</strong>: If all the query terms were found in the attribute.</li>
@@ -1247,6 +1305,13 @@ var_dump($settings);
 $index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
 
+## Slave settings
+
+You can forward all settings updates to the slaves of an index by using the `forwardToSlaves` option:
+
+```php
+$index->setSettings(['customRanking' => ['desc(followers)']], true);
+```
 
 ## Indexing parameters
 
@@ -1876,12 +1941,68 @@ To get a full description of how the Ranking works, you can have a look at our <
         <div class='client-readme-param-container'>
           <div class='client-readme-param-container-inner'>
             <div class='client-readme-param-name'><code>removeStopWords</code></div>
-            <div class="client-readme-param-meta"><div><em>Type: <strong>boolean</strong></em></div><div><em>Default: <strong>false</strong></em></div></div>
+            <div class="client-readme-param-meta"><div><em>Type: <strong>boolean or string array</strong></em></div><div><em>Default: <strong>false</strong></em></div></div>
           </div>
         </div>
       </td>
       <td class='client-readme-param-content'>
-        <p>Remove stop words from query before executing it. Defaults to false. Contains stop words for 41 languages (Arabic, Armenian, Basque, Bengali, Brazilian, Bulgarian, Catalan, Chinese, Czech, Danish, Dutch, English, Finnish, French, Galician, German, Greek, Hindi, Hungarian, Indonesian, Irish, Italian, Japanese, Korean, Kurdish, Latvian, Lithuanian, Marathi, Norwegian, Persian, Polish, Portugese, Romanian, Russian, Slovak, Spanish, Swedish, Thai, Turkish, Ukranian, Urdu)</p>
+        <p>Remove stop words from the query <strong>before</strong> executing it. Defaults to <code>false</code>. Use a boolean to enable/disable all 41 supported languages and an array of string listing the iso codes of the languages you want to use consider to enable the stop words removal on a subset of them (select the one you have in your records).</p>
+
+<p>List of 41 supported languages with their associated iso code: Arabic=ar, Armenian=hy, Basque=eu, Bengali=bn, Brazilian=pt-br, Bulgarian=bg, Catalan=ca, Chinese=zh, Czech=cs, Danish=da, Dutch=nl, English=en, Finnish=fi, French=fr, Galician=gl, German=de, Greek=el, Hindi=hi, Hungarian=hu, Indonesian=id, Irish=ga, Italian=it, Japanese=ja, Korean=ko, Kurdish=ku, Latvian=lv, Lithuanian=lt, Marathi=mr, Norwegian=no, Persian (Farsi)=fa, Polish=pl, Portugese=pt, Romanian=ro, Russian=ru, Slovak=sk, Spanish=es, Swedish=sv, Thai=th, Turkish=tr, Ukranian=uk, Urdu=ur.</p>
+
+<p>Stop words removal is applied on query words that are not interpreted as a prefix. The behavior depends of the queryType setting:</p>
+
+<ul>
+<li><p><code>queryType=prefixLast</code> means the last query word is a prefix and it won’t be considered for stop words removal</p></li>
+<li><p><code>queryType=prefixNone</code> means no query word are prefix, stop words removal will be applied on all query words</p></li>
+<li><p><code>queryType=prefixAll</code> means all query terms are prefix, stop words won’t be removed</p></li>
+</ul>
+
+<p>This index setting is useful when you have queries in natural language like “what is a record?”. In this case, before executing the query, we will remove “what”, “is” and “a” in order to just search for “record”. This removal will remove false positive because of stop words. For most use cases, it is better to not use this feature as people search by keywords on search engines.</p>
+
+      </td>
+    </tr>
+    
+  
+    <tr>
+      <td valign='top'>
+        <div class='client-readme-param-container'>
+          <div class='client-readme-param-container-inner'>
+            <div class='client-readme-param-name'><code>exactOnSingleWordQuery</code></div>
+            <div class="client-readme-param-meta"><div><em>Type: <strong>string</strong></em></div><div><em>Default: <strong>attribute</strong></em></div></div>
+          </div>
+        </div>
+      </td>
+      <td class='client-readme-param-content'>
+        <p>This parameter controls how the <code>exact</code> ranking criterion is computed when the query contains one word. There is three different values:</p>
+
+<ul>
+<li><p><code>none</code>: no <code>exact</code> on single word query</p></li>
+<li><p><code>word</code>: <code>exact</code> set to 1 if the query word is found in the record. The query word needs to have at least 3 chars and not be part of our stop words dictionary</p></li>
+<li><p><code>attribute</code> (default): exact set to 1 if there is an attribute containing a string equals to the query</p></li>
+</ul>
+
+      </td>
+    </tr>
+    
+  
+    <tr>
+      <td valign='top'>
+        <div class='client-readme-param-container'>
+          <div class='client-readme-param-container-inner'>
+            <div class='client-readme-param-name'><code>alternativesAsExact</code></div>
+            <div class="client-readme-param-meta"><div><em>Type: <strong>string array</strong></em></div><div><em>Default: <strong>["ignorePlurals", "singleWordSynonym"]</strong></em></div></div>
+          </div>
+        </div>
+      </td>
+      <td class='client-readme-param-content'>
+        <p>Specify the list of approximation that should be considered as an exact match in the ranking formula:</p>
+
+<ul>
+<li><p><code>ignorePlurals</code>: alternative words added by the ignorePlurals feature</p></li>
+<li><p><code>singleWordSynonym</code>: single-word synonym (For example &quot;NY&quot; = &quot;NYC&quot;)</p></li>
+<li><p><code>multiWordsSynonym</code>: multiple-words synonym (For example &quot;NY&quot; = &quot;New York&quot;)</p></li>
+</ul>
 
       </td>
     </tr>

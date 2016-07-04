@@ -1305,6 +1305,13 @@ var_dump($settings);
 $index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
 
+## Slave settings
+
+You can forward all settings updates to the slaves of an index by using the `forwardToSlaves` option:
+
+```php
+$index->setSettings(['customRanking' => ['desc(followers)']], true);
+```
 
 ## Indexing parameters
 

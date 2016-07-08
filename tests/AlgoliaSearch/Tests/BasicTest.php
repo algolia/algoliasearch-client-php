@@ -4,10 +4,14 @@ namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
+use AlgoliaSearch\Index;
 
 class BasicTest extends AlgoliaSearchTestCase
 {
+    /** @var  Client */
     private $client;
+
+    /** @var Index */
     private $index;
 
     protected function setUp()
@@ -123,11 +127,44 @@ class BasicTest extends AlgoliaSearchTestCase
 
     public function testMultipleQueries()
     {
-        $res = $this->index->addObject(array('firstname' => 'Robin'));
+        $res = $this->index->addObjects(array(
+            array('firstname' => 'John'),
+            array('firstname' => 'Robin'),
+            array('firstname' => 'William'),
+        ));
+
         $this->index->waitTask($res['taskID']);
-        $results = $this->client->multipleQueries(array(array('indexName' => $this->safe_name('àlgol?à-php'), 'query' => '')));
-        $this->assertEquals(1, $results['results'][0]['nbHits']);
-        $this->assertEquals('Robin', $results['results'][0]['hits'][0]['firstname']);
+
+        $results = $this->client->multipleQueries(array(
+            array(
+                'indexName' => $this->safe_name('àlgol?à-php'),
+                'query' => '',
+            ),
+        ));
+
+        $this->assertEquals(3, $results['results'][0]['nbHits']);
+        $this->assertEquals(3, count($results['results'][0]['hits']));
+
+        $results = $this->client->multipleQueries(array(
+            array(
+                'indexName' => $this->safe_name('àlgol?à-php'),
+                'query' => '',
+                'hitsPerPage' => 1,
+            ),
+            array(
+                'indexName' => $this->safe_name('àlgol?à-php'),
+                'query' => '',
+                'hitsPerPage' => 1,
+            ),
+            array(
+                'indexName' => $this->safe_name('àlgol?à-php'),
+                'query' => '',
+                'hitsPerPage' => 1,
+            ),
+        ), 'indexName', 'stopIfEnoughMatches');
+
+        $this->assertEquals(1, count($results['results'][0]['hits']));
+        $this->assertEquals(1, count($results['results'][0]['hits']) + count($results['results'][1]['hits']) + count($results['results'][2]['hits']));
     }
 
     public function testDisjunctiveFaceting()

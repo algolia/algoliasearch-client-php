@@ -2,17 +2,19 @@
 
 # Algolia Search API Client for PHP
 
-<!--/NO_HTML-->
 
 
 
 
 
-<!--NO_HTML-->
+
+
+
+
 
 [Algolia Search](https://www.algolia.com) is a hosted full-text, numerical, and faceted search engine capable of delivering realtime results from the first keystroke.
 
-<!--/NO_HTML-->
+
 
 Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.com/doc/rest) from your backend. It wraps the [Algolia Search REST API](https://www.algolia.com/doc/rest).
 
@@ -24,7 +26,6 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 
 
 
-<!--NO_HTML-->
 
 Table of Contents
 -----------------
@@ -85,9 +86,6 @@ Advanced
 1. [Get Logs](#get-logs---getlogs)
 
 
-<!--/NO_HTML-->
-
-<!--NO_HTML-->
 
 Guides & Tutorials
 ================
@@ -106,13 +104,14 @@ Check our [online guides](https://www.algolia.com/doc):
  * [REST API](https://www.algolia.com/doc/rest)
 
 
+
+
+
+
+
+
+
 <!--/NO_HTML-->
-
-
-
-
-
-
 
 
 
@@ -558,7 +557,7 @@ $index->deleteByQuery('John', $params);
 
 
 
-### Wait for an indexing operation - `waitTask`
+### Wait for operations - `waitTask`
 
 All write operations in Algolia are asynchronous by design.
 

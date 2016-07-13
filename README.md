@@ -65,6 +65,7 @@ Manage Indices
 1. [Move an index](#move-index---moveindex)
 
 Api Keys
+
 1. [Generate API keys](#generate-key---generatesecuredapikey)
 
 Advanced
@@ -1817,6 +1818,8 @@ $next_cursor = $this->index->browseFrom('', ['numericFilters' => 'i<42'])['curso
 ```
 
 
+
+
 ### List api keys - `listApiKeys`
 
 To list existing keys, you can use:
@@ -2034,8 +2037,6 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 // Gets the rights of an index specific key
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
-
-
 
 ### Multiple queries - `multipleQueries`
 

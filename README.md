@@ -2168,7 +2168,7 @@ $res = $client->addUserKey(params);
 echo 'key=' . $res['key'] . "\n";
 ```
 
-### Update user key - `update_user_key`
+### Update user key - `updateUserKey`
 
 To update the permissions of an existing key:
  ```php

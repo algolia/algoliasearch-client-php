@@ -36,7 +36,8 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 
 Getting started
 
-1. [Install and init](#install-and-init---initindex)
+1. [Install](#install)
+1. [Init index](#init-index---initindex)
 
 Search
 
@@ -125,27 +126,18 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ## Getting Started
 
-### Install and init - `initIndex`
+### Install
 
 
 
 
-1. Install the package via [Composer](https://getcomposer.org/doc/00-intro.md):
+Install the package via [Composer](https://getcomposer.org/doc/00-intro.md):
+
 ```bash
 composer require algolia/algoliasearch-client-php
 ```
+
 If you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
-
-2. Next you'll have to initialize the client with your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit).
-
-
-```php
-// composer autoload
-require __DIR__ . '/vendor/autoload.php';
-// if you are not using composer: require_once 'path/to/algoliasearch.php';
-
-$client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
-```
 
 #### Framework Integrations
 
@@ -154,6 +146,19 @@ If you're a Symfony or Laravel user, you're probably looking for the following i
  - **Laravel**: [algolia/algoliasearch-laravel](https://github.com/algolia/algoliasearch-laravel)
  - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
+
+### Init index - `initIndex`
+
+To initialize the client you need your ApplicationID and API-Key. You can find all of them on [your Algolia account](http://www.algolia.com/users/edit)
+
+```php
+// composer autoload
+require __DIR__ . '/vendor/autoload.php';
+// if you are not using composer: require_once 'path/to/algoliasearch.php';
+
+$client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
+$index = $client->initIndex('index_name');
+```
 
 
 

@@ -914,11 +914,9 @@ you can have a look at our [Ranking guide](https://www.algolia.com/doc/relevance
 
 #### slaves
 
-#### ranking
-
 - scope: `settings`
 - type: `array of strings`
-- default: `['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom']`
+- default: `[]`
 
 
 The list of indices on which you want to replicate all write operations.

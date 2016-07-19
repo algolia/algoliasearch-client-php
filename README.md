@@ -125,7 +125,7 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ## Getting Started
 
-### Install and init- `initIndex`
+### Install and init - `initIndex`
 
 
 
@@ -256,7 +256,7 @@ function searchCallback(err, content) {
 
 ## Search
 
-### Search in an index- `search`
+### Search in an index - `search`
 
 
 **Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
@@ -373,7 +373,7 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 
 <!--/PARAMETERS_LINK-->
 
-### Find by IDs- `getObjects`
+### Find by IDs - `getObjects`
 
 You can easily retrieve an object using its `objectID` and optionally specify a comma separated list of attributes you want:
 
@@ -399,7 +399,7 @@ $index->getObjects(['myID1', 'myID2']);
 
 ## Indexing
 
-### Add objects- `addObjects`
+### Add objects - `addObjects`
 
 Each entry in an index has a unique identifier called `objectID`. There are two ways to add an entry to the index:
 
@@ -433,7 +433,7 @@ echo 'objectID=' . $res['objectID'] . "\n";
 ```
 
 
-### Update objects- `saveObjects`
+### Update objects - `saveObjects`
 
 You have three options when updating an existing object:
 
@@ -454,7 +454,7 @@ $index->saveObject(
 );
 ```
 
-### Partial update- `partialUpdateObjects`
+### Partial update - `partialUpdateObjects`
 
 You have many ways to update an object's attributes:
 
@@ -538,7 +538,7 @@ Note: Here we are decrementing the value by `42`. To decrement just by one, put
 `value:1`.
 
 
-### Delete objects- `deleteObjects`
+### Delete objects - `deleteObjects`
 
 You can delete an object using its `objectID`:
 
@@ -546,7 +546,7 @@ You can delete an object using its `objectID`:
 $index->deleteObject('myID');
 ```
 
-### Delete by query- `deleteByQuery`
+### Delete by query - `deleteByQuery`
 
 You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
 
@@ -558,7 +558,7 @@ $params = [];
 $index->deleteByQuery('John', $params);
 ```
 
-### Wait for operations- `waitTask`
+### Wait for operations - `waitTask`
 
 All write operations in Algolia are asynchronous by design.
 
@@ -586,7 +586,7 @@ the biggest `taskID`.
 
 ## Settings
 
-### Get settings- `getSettings`
+### Get settings - `getSettings`
 
 You can retrieve settings:
 
@@ -595,7 +595,7 @@ $settings = $index->getSettings();
 var_dump($settings);
 ```
 
-### Set settings- `setSettings`
+### Set settings - `setSettings`
 
 ```php
 $index->setSettings(array("customRanking" => array("desc(followers)")));
@@ -1613,7 +1613,7 @@ To create an index, you need to perform any indexing operation like:
 - set settings
 - add object
 
-### List indices- `listIndexes`
+### List indices - `listIndexes`
 
 You can list all your indices along with their associated information (number of entries, disk size, etc.) with the `listIndexes` method:
 
@@ -1624,7 +1624,7 @@ var_dump($client->listIndexes());
 
 
 
-### Delete index- `deleteIndex`
+### Delete index - `deleteIndex`
 
 You can delete an index using its name:
 
@@ -1633,7 +1633,7 @@ $client->deleteIndex('contacts');
 ```
 
 
-### Clear index- `clearIndex`
+### Clear index - `clearIndex`
 You can delete the index contents without removing settings and index specific API keys by using the clearIndex command:
 
 ```php
@@ -1641,7 +1641,7 @@ $index->clearIndex();
 ```
 
 
-### Copy index- `copyIndex`
+### Copy index - `copyIndex`
 
 You can easily copy or rename an existing index using the `copy` and `move` commands.
 **Note**: Move and copy commands overwrite the destination index.
@@ -1654,7 +1654,7 @@ $res = $client->copyIndex('MyIndex', 'MyIndexCopy');
 ```
 
 
-### Move index- `moveIndex` 
+### Move index - `moveIndex` 
 
 The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
  1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
@@ -1677,7 +1677,7 @@ The **admin** API key provides full control of all your indices. *The admin API 
 You can also generate user API keys to control security.
 These API keys can be restricted to a set of operations or/and restricted to a given index.
 
-### Generate key- `generateSecuredApiKey`
+### Generate key - `generateSecuredApiKey`
 
 You may have a single index containing **per user** data. In that case, all records should be tagged with their associated `user_id` in order to add a `tagFilters=user_42` filter at query time to retrieve only what a user has access to. If you're using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js), it will result in a security breach since the user is able to modify the `tagFilters` you've set by modifying the code from the browser. To keep using the JavaScript client (recommended for optimal latency) and target secured records, you can generate a secured API key from your backend:
 
@@ -1738,7 +1738,7 @@ index.search('another query', function(err, content) {
 
 ## Synonyms
 
-### Save synonym- `saveSynonym`
+### Save synonym - `saveSynonym`
 
 This method saves a single synonym record into the index.
 
@@ -1753,7 +1753,7 @@ $index->saveSynonym("a-unique-identifier", array(
 ), true);
 ```
 
-### Batch synonyms- `batchSynonyms`
+### Batch synonyms - `batchSynonyms`
 
 Use the batch method to create a large number of synonyms at once,
 forward them to slave indices if desired,
@@ -1788,7 +1788,7 @@ false is the default value).
 Otherwise, the entire synonym list will be replaced only partially with the records
 in the batch update.
 
-### Delete Synonyms- `delete_synonyms`
+### Delete Synonyms - `delete_synonyms`
 
 Use the normal index delete method to delete synonyms,
 specifying the objectID of the synonym record you want to delete.
@@ -1799,7 +1799,7 @@ Forward the deletion to slave indices by setting the forwardToSlaves parameter t
 $index->deleteSynonym("a-unique-identifier", true);
 ```
 
-### Clear all synonyms- `clearSynonyms`
+### Clear all synonyms - `clearSynonyms`
 
 This is a convenience method to delete all synonyms at once.
 It should not be used on a production index to then push a new list of synonyms:
@@ -1814,7 +1814,7 @@ use the batch method with the replaceExistingSynonyms parameter set to true.
 $index->clearSynonyms(true);
 ```
 
-### Get synonym- `getSynonym`
+### Get synonym - `getSynonym`
 
 Search for synonym records by their objectID or by the text they contain.
 Both methods are covered here.
@@ -1823,7 +1823,7 @@ Both methods are covered here.
 $synonym = $index->getSynonym("a-unique-identifier");
 ```
 
-### Search synonyms- `searchSynonyms`
+### Search synonyms - `searchSynonyms`
 
 Search for synonym records similar to how you’d search normally.
 
@@ -1842,14 +1842,14 @@ $results = $index->searchSynonyms("street", array("synonym", "oneWaySynonym"), 1
 
 ## Advanced
 
-### Custom batch- `batch`
+### Custom batch - `batch`
 
 You may want to perform multiple operations with one API call to reduce latency.
 We expose four methods to perform batch operations:
- * Add objects- `addObjects`: Add an array of objects using automatic `objectID` assignment.
- * Update objects- `saveObjects`: Add or update an array of objects that contains an `objectID` attribute.
- * Delete objects- `deleteObjects`: Delete an array of objectIDs.
- * Partial update- `partialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
+ * Add objects - `addObjects`: Add an array of objects using automatic `objectID` assignment.
+ * Update objects - `saveObjects`: Add or update an array of objects that contains an `objectID` attribute.
+ * Delete objects - `deleteObjects`: Delete an array of objectIDs.
+ * Partial update - `partialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
 
 Example using automatic `objectID` assignment:
 ```php
@@ -1963,7 +1963,7 @@ The attribute **action** can have these values:
 - partialUpdateObjectNoCreate
 - deleteObject
 
-### Backup / Export an index- `browse`
+### Backup / Export an index - `browse`
 
 The `search` method cannot return more than 1,000 results. If you need to
 retrieve all the content of your index (for backup, SEO purposes or for running
@@ -1996,7 +1996,7 @@ $next_cursor = $this->index->browseFrom('', ['numericFilters' => 'i<42'])['curso
 
 
 
-### List api keys- `listApiKeys`
+### List api keys - `listApiKeys`
 
 To list existing keys, you can use:
 
@@ -2019,7 +2019,7 @@ Each key is defined by a set of permissions that specify the authorized actions.
  * **analytics**: Allowed to retrieve analytics through the analytics API.
  * **listIndexes**: Allowed to list all accessible indexes.
 
-### Add user key- `addUserKey`
+### Add user key - `addUserKey`
 
 To create API keys:
 
@@ -2170,7 +2170,7 @@ $res = $client->addUserKey(params);
 echo 'key=' . $res['key'] . "\n";
 ```
 
-### Update user key- `updateUserKey`
+### Update user key - `updateUserKey`
 
 To update the permissions of an existing key:
  ```php
@@ -2191,7 +2191,7 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
 
-### Delete user key- `deleteUserKey`
+### Delete user key - `deleteUserKey`
 To delete an existing key:
 ```php
 // Deletes a global key
@@ -2201,7 +2201,7 @@ $res = $client->deleteUserKey('f420238212c54dcfad07ea0aa6d5c45f');
 $res = $index->deleteUserKey('71671c38001bf3ac857bc82052485107');
 ```
 
-### Get key permissions- `getUserKeyACL`
+### Get key permissions - `getUserKeyACL`
 
 
 
@@ -2214,7 +2214,7 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
 
-### Multiple queries- `multipleQueries`
+### Multiple queries - `multipleQueries`
 
 You can send multiple queries with a single API call using a batch of queries:
 
@@ -2241,7 +2241,7 @@ You can specify a `strategy` parameter to optimize your multiple queries:
 
 
 
-### Get Logs- `getLogs`
+### Get Logs - `getLogs`
 
 You can retrieve the latest logs via this API. Each log entry contains:
  * Timestamp in ISO-8601 format

@@ -276,7 +276,7 @@ The search query allows only to retrieve 1000 hits, if you need to retrieve more
 ```php
 $index = $client->initIndex('contacts');
 $res = $index->search('query string');
-$res = $index->search('query string', ['attributesToRetrieve' => 'firstname,lastname', 'hitsPerPage' => 50]);
+$res = $index->search('query string', ['attributesToRetrieve' => 'fistname,lastname', 'hitsPerPage' => 50]);
 ```
 
 The server response will look like:

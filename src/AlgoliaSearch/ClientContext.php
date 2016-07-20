@@ -182,7 +182,7 @@ class ClientContext
      */
     public function __destruct()
     {
-        if ($this->curlMHandle != null) {
+        if (is_resource($this->curlMHandle)) {
             curl_multi_close($this->curlMHandle);
         }
     }
@@ -194,7 +194,7 @@ class ClientContext
      */
     public function getMHandle($curlHandle)
     {
-        if ($this->curlMHandle == null) {
+        if (!is_resource($this->curlMHandle)) {
             $this->curlMHandle = curl_multi_init();
         }
         curl_multi_add_handle($this->curlMHandle, $curlHandle);

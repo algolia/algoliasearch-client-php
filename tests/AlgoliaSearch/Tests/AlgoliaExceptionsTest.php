@@ -86,6 +86,6 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     {
         $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaRefinementsInvalidException');
 
-        $this->index->searchDisjunctiveFaceting('whatever', 'bis', [], false);
+        $this->index->searchDisjunctiveFaceting('whatever', 'bis', array(), false);
     }
 }

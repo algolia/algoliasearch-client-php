@@ -1036,15 +1036,24 @@ class Client
      */
     protected function throwAlgoliaException($answer, $http_status, $data)
     {
-        switch (true) {
-            case strpos($answer['message'], 'Record is too big') >= 0:
-                return new AlgoliaRecordTooBigException($data);
-                break;
-            case preg_match('/Index (?P<index>\w+) does not exist/', $answer['message'], $matches):
-                return new AlgoliaIndexNotFoundException($matches['index']);
-                break;
-            default:
-                return new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status . ' error');
+        $message = isset($answer['message']) ? $answer['message'] : $http_status . ' error';
+
+        if (false !== strpos($answer['message'], 'Record is too big')) {
+            $exception = new AlgoliaRecordTooBigException($message);
+            $exception->setRecord($data);
+
+            return $exception;
         }
+
+        if (preg_match('/Index ((?P<index>.+) )?does not exist/', $answer['message'], $matches) > 0) {
+            $exception = new AlgoliaIndexNotFoundException($message);
+            if (isset($matches['index'])) {
+                $exception->setIndexName($matches['index']);
+            }
+
+            return $exception;
+        }
+
+        return new AlgoliaException($message);
     }
 }

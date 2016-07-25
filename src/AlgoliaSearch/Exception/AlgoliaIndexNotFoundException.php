@@ -6,19 +6,27 @@ use AlgoliaSearch\AlgoliaException;
 
 class AlgoliaIndexNotFoundException extends AlgoliaException
 {
-    const MESSAGE = 'Index not found: %s.';
+    /**
+     * @var string
+     */
+    private $indexName;
 
     /**
-     * IndexNotFoundException constructor.
-     *
-     * @param string $indexName
-     * @param string $message
-     * @param int $code
-     * @param \Exception|null $previous
+     * @return string
      */
-    public function __construct($indexName, $message = null, $code = 0, \Exception $previous = null)
+    public function getIndexName()
     {
-        $message = $message ? $message : sprintf(self::MESSAGE, $indexName);
-        parent::__construct($message, $code, $previous);
+        return $this->indexName;
+    }
+
+    /**
+     * @param string $indexName
+     *
+     * @return AlgoliaIndexNotFoundException
+     */
+    public function setIndexName($indexName)
+    {
+        $this->indexName = $indexName;
+        return $this;
     }
 }

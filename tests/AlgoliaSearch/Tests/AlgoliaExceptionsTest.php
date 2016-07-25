@@ -38,7 +38,7 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
         $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaRecordTooBigException');
 
         $contacts = file_get_contents(__DIR__.'/../../../contacts.json');
-        $object = ['contacts' => $contacts];
+        $object = array('contacts' => $contacts);
 
         try {
             $this->index->addObject($object);

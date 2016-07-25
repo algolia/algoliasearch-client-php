@@ -27,6 +27,9 @@
 
 namespace AlgoliaSearch;
 
+use AlgoliaSearch\Exception\AlgoliaRecordTooBigException;
+use AlgoliaSearch\Exception\AlgoliaIndexNotFoundException;
+
 /**
  * Entry point in the PHP API.
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
@@ -914,7 +917,7 @@ class Client
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status + ' error');
+            throw $this->throwCorrectException($answer, $http_status, $data);
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response);
         }
@@ -1022,5 +1025,26 @@ class Client
         $client = new static($appId, $apiKey, $hostsArray, $options);
 
         return $client->getPlacesIndex();
+    }
+
+    /**
+     * @param $answer
+     * @param $http_status
+     * @param $data
+     *
+     * @return AlgoliaException|AlgoliaRecordTooBigException|AlgoliaIndexNotFoundException
+     */
+    protected function throwCorrectException($answer, $http_status, $data)
+    {
+        switch (true) {
+            case strpos($answer['message'], 'Record is too big') >= 0:
+                return new AlgoliaRecordTooBigException($data);
+                break;
+            case preg_match('/Index (?P<index>\w+) does not exist/', $answer['message'], $matches):
+                return new AlgoliaIndexNotFoundException($matches['index']);
+                break;
+            default:
+                return new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status . ' error');
+        }
     }
 }

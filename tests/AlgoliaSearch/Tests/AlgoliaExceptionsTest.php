@@ -74,4 +74,18 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
             throw $e;
         }
     }
+
+    public function testDisjunctiveFacetsInvalidException()
+    {
+        $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaDisjunctiveFacetsInvalidException');
+
+        $this->index->searchDisjunctiveFaceting('whatever', 1);
+    }
+
+    public function testRefinementsInvalidException()
+    {
+        $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaRefinementsInvalidException');
+
+        $this->index->searchDisjunctiveFaceting('whatever', 'bis', [], false);
+    }
 }

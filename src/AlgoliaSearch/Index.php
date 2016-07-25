@@ -27,6 +27,9 @@
 
 namespace AlgoliaSearch;
 
+use AlgoliaSearch\Exception\AlgoliaDisjunctiveFacetsInvalidException;
+use AlgoliaSearch\Exception\AlgoliaRefinementsInvalidException;
+
 /*
  * Contains all the functions related to one index
  * You should use Client.initIndex(indexName) to retrieve this object
@@ -527,11 +530,11 @@ class Index
     public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())
     {
         if (gettype($disjunctive_facets) != 'string' && gettype($disjunctive_facets) != 'array') {
-            throw new AlgoliaException('Argument "disjunctive_facets" must be a String or an Array');
+            throw new AlgoliaDisjunctiveFacetsInvalidException('Argument "disjunctive_facets" must be a String or an Array');
         }
 
         if (gettype($refinements) != 'array') {
-            throw new AlgoliaException('Argument "refinements" must be a Hash of Arrays');
+            throw new AlgoliaRefinementsInvalidException('Argument "refinements" must be a Hash of Arrays');
         }
 
         if (gettype($disjunctive_facets) == 'string') {

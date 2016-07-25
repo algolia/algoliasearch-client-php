@@ -917,7 +917,7 @@ class Client
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw $this->throwCorrectException($answer, $http_status, $data);
+            throw $this->throwAlgoliaException($answer, $http_status, $data);
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response);
         }
@@ -1034,7 +1034,7 @@ class Client
      *
      * @return AlgoliaException|AlgoliaRecordTooBigException|AlgoliaIndexNotFoundException
      */
-    protected function throwCorrectException($answer, $http_status, $data)
+    protected function throwAlgoliaException($answer, $http_status, $data)
     {
         switch (true) {
             case strpos($answer['message'], 'Record is too big') >= 0:

@@ -1049,14 +1049,14 @@ class Client
             return $exception;
         }
 
-        if (false !== strpos($answer['message'], 'Record is too big')) {
+        if (false !== strpos($message, 'Record is too big')) {
             $exception = new AlgoliaRecordTooBigException($message);
             $exception->setRecord($data);
 
             return $exception;
         }
 
-        if (preg_match('/Index ((?P<index>.+) )?does not exist/', $answer['message'], $matches) > 0) {
+        if (preg_match('/Index ((?P<index>.+) )?does not exist/', $message, $matches) > 0) {
             $exception = new AlgoliaIndexNotFoundException($message);
             if (isset($matches['index'])) {
                 $exception->setIndexName($matches['index']);

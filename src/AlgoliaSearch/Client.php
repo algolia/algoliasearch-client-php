@@ -27,6 +27,7 @@
 
 namespace AlgoliaSearch;
 
+use AlgoliaSearch\Exception\AlgoliaBatchException;
 use AlgoliaSearch\Exception\AlgoliaRecordTooBigException;
 use AlgoliaSearch\Exception\AlgoliaIndexNotFoundException;
 
@@ -917,7 +918,7 @@ class Client
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw $this->throwAlgoliaException($answer, $http_status, $data);
+            throw $this->throwAlgoliaException($answer, $http_status, $path, $data);
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response);
         }
@@ -1028,15 +1029,25 @@ class Client
     }
 
     /**
-     * @param $answer
-     * @param $http_status
-     * @param $data
+     * @param array $answer
+     * @param integer $http_status
+     * @param string $path
+     * @param array $data
      *
-     * @return AlgoliaException|AlgoliaRecordTooBigException|AlgoliaIndexNotFoundException
+     * @return AlgoliaException
      */
-    protected function throwAlgoliaException($answer, $http_status, $data)
+    protected function throwAlgoliaException($answer, $http_status, $path, $data)
     {
         $message = isset($answer['message']) ? $answer['message'] : $http_status . ' error';
+
+        if (substr($path, -6) === '/batch') {
+            $exception = new AlgoliaBatchException($message);
+            foreach ($data['requests'] as $request) {
+                $exception->addRecord($request['body']);
+            }
+
+            return $exception;
+        }
 
         if (false !== strpos($answer['message'], 'Record is too big')) {
             $exception = new AlgoliaRecordTooBigException($message);

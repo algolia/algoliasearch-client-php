@@ -4,6 +4,7 @@ namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
+use AlgoliaSearch\Exception\AlgoliaBatchException;
 use AlgoliaSearch\Exception\AlgoliaIndexNotFoundException;
 use AlgoliaSearch\Exception\AlgoliaRecordTooBigException;
 use AlgoliaSearch\Index;
@@ -16,12 +17,16 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     /** @var Index */
     private $index;
 
+    /** @var string */
+    private $data;
+
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array('cainfo' => (__DIR__.'/../../../resources/ca-bundle.crt')));
         $this->client->setConnectTimeout(1);
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $this->tearDown();
+        $this->data = file_get_contents(__DIR__.'/../../../contacts.json');
     }
 
     protected function tearDown()
@@ -37,13 +42,31 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     {
         $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaRecordTooBigException');
 
-        $contacts = file_get_contents(__DIR__.'/../../../contacts.json');
-        $object = array('contacts' => $contacts);
+        $object = array('contacts' => $this->data);
 
         try {
             $this->index->addObject($object);
         } catch (AlgoliaRecordTooBigException $e) {
-            $this->assertEquals($object, $e->getRecord());
+            $this->assertEquals($e->getRecord(), $object);
+
+            throw $e;
+        }
+    }
+
+    public function testBatchException()
+    {
+        $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaBatchException');
+
+        $objectBad = array('contacts' => $this->data);
+        $objectBad2 = array('contacts' => $this->data);
+        $objectGood = array('contacts' => null);
+
+        $objects = array($objectGood, $objectBad, $objectBad2);
+
+        try {
+            $this->index->addObjects($objects);
+        } catch (AlgoliaBatchException $e) {
+            $this->assertEquals($e->getRecords(), $objects);
 
             throw $e;
         }

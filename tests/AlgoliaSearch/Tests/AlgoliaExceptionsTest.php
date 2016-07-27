@@ -17,16 +17,12 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     /** @var Index */
     private $index;
 
-    /** @var string */
-    private $data;
-
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array('cainfo' => (__DIR__.'/../../../resources/ca-bundle.crt')));
         $this->client->setConnectTimeout(1);
         $this->index = $this->client->initIndex($this->safe_name('àlgol?à-php'));
         $this->tearDown();
-        $this->data = file_get_contents(__DIR__.'/../../../contacts.json');
     }
 
     protected function tearDown()
@@ -42,7 +38,8 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     {
         $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaRecordTooBigException');
 
-        $object = array('contacts' => $this->data);
+        $data = file_get_contents(__DIR__.'/../../../contacts.json');
+        $object = array('contacts' => $data);
 
         try {
             $this->index->addObject($object);
@@ -57,8 +54,9 @@ class AlgoliaExceptionsTest extends AlgoliaSearchTestCase
     {
         $this->setExpectedException('AlgoliaSearch\Exception\AlgoliaBatchException');
 
-        $objectBad = array('contacts' => $this->data);
-        $objectBad2 = array('contacts' => $this->data);
+        $data = file_get_contents(__DIR__.'/../../../contacts.json');
+        $objectBad = array('contacts' => $data);
+        $objectBad2 = array('contacts' => $data);
         $objectGood = array('contacts' => null);
 
         $objects = array($objectGood, $objectBad, $objectBad2);

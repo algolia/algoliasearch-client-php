@@ -33,8 +33,32 @@ class Version
 
     public static $custom_value = '';
 
+    private static $prefixUserAgentSegments = '';
+    private static $suffixUserAgentSegments = '';
+
+    // Method untouched to keep backward compatibility
     public static function get()
     {
-        return self::VALUE.static::$custom_value;
+        return self::VALUE . static::$custom_value;
+    }
+
+    public static function getUserAgent()
+    {
+        $userAgent = self::$prefixUserAgentSegments . 'Algolia for PHP ('.self::VALUE.')' . static::$suffixUserAgentSegments;
+
+        // Keep backward compatibility
+        $userAgent .= static::$custom_value;
+
+        return $userAgent;
+    }
+
+    public static function addPrefixUserAgentSegment($segment, $version)
+    {
+        self::$prefixUserAgentSegments = $segment.' ('.$version.'); '.self::$prefixUserAgentSegments;
+    }
+
+    public static function addSuffixUserAgentSegment($segment, $version)
+    {
+        self::$suffixUserAgentSegments .= '; '.$segment.' ('.$version.')';
     }
 }

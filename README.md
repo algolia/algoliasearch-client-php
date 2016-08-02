@@ -1803,14 +1803,17 @@ In some cases, you may want to totally reindex all your data. In order to keep y
 running while re-importing your data we recommend the usage of a temporary index plus an atomical
 move using the moveIndex method.
 
-**Note**: The moveIndex method will overwrite the destination index, and delete the temporary index.
-
 ```php
 // Rename MyNewIndex in MyIndex (and overwrite it)
 $res = $client->moveIndex('MyNewIndex', 'MyIndex');
 ```
 
+**Note**:
+
+The moveIndex method will overwrite the destination index, and delete the temporary index.
+
 **Warning**
+
 The moveIndex operation will override all settings of the destination,
 There is one exception for the [slaves](#slaves) parameter which is not impacted.
 

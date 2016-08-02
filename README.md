@@ -2427,7 +2427,7 @@ You can specify a `strategy` parameter to optimize your multiple queries:
 
 The resulting JSON contains the following fields:
 
-- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in .
+- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in [Search in an index](#search-in-an-index---search).
 
     Each result also includes the following additional fields:
 

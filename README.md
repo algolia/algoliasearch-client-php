@@ -1788,12 +1788,10 @@ $index->clearIndex();
 
 ### Copy index - `copyIndex`
 
-You can easily copy or rename an existing index using the `copy` and `move` commands.
-**Note**: Move and copy commands overwrite the destination index.
+You can copy an existing index using the `copy` command.
+**Note**: The copy command will overwrite the destination index.
 
 ```php
-// Rename MyIndex in MyIndexNewName
-$res = $client->moveIndex('MyIndex', 'MyIndexNewName');
 // Copy MyIndex in MyIndexCopy
 $res = $client->copyIndex('MyIndex', 'MyIndexCopy');
 ```
@@ -1801,14 +1799,33 @@ $res = $client->copyIndex('MyIndex', 'MyIndexCopy');
 
 ### Move index - `moveIndex`
 
-The move command is particularly useful if you want to update a big index atomically from one version to another. For example, if you recreate your index `MyIndex` each night from a database by batch, you only need to:
- 1. Import your database into a new index using [batches](#batch-writes). Let's call this new index `MyNewIndex`.
- 1. Rename `MyNewIndex` to `MyIndex` using the move command. This will automatically override the old index and new queries will be served on the new one.
+In some cases, you may want to totally reindex all your data. In order to keep your existing service
+running while re-importing your data we recommend the usage of a temporary index plus an atomical
+move using the moveIndex method.
+
+**Note**: The moveIndex method will overwrite the destination index, and delete the temporary index.
 
 ```php
 // Rename MyNewIndex in MyIndex (and overwrite it)
 $res = $client->moveIndex('MyNewIndex', 'MyIndex');
 ```
+
+**Warning**
+The moveIndex operation will override all settings of the destination,
+There is one exception for the [slaves](#slaves) parameter which is not impacted.
+
+For example, if you want to fully update your index `MyIndex` every night, we recommend the following process:
+ 1. Get settings and synonyms from the old index using [Get settings](#get-settings---getsettings)
+  and Get synonym - `getSynonym`.
+ 1. Apply settings and synonyms to the temporary index `MyTmpIndex`, (this will create the `MyTmpIndex` index)
+  using [Set settings](#set-settings---setsettings) and Batch synonyms - `batchSynonyms`
+  (make sure to remove the [slaves](#slaves) parameter from the settings if it exists).
+ 1. Import your records into a new index using [Add objects](#add-objects---addobjects).
+ 1. Atomically replace the index `MyIndex` with the content and settings of the index `MyTmpIndex`
+ using the moveIndex method.
+ This will automatically override the old index without any downtime on the search.
+ 1. You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
+ and the slave-indices that were initially attached to `MyIndex` will be in sync with the new data.
 
 
 
@@ -2427,7 +2444,7 @@ You can specify a `strategy` parameter to optimize your multiple queries:
 
 The resulting JSON contains the following fields:
 
-- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in .
+- `results` (array): The results for each request, in the order they were submitted. The contents are the same as in [Search in an index](#search-in-an-index---search).
 
     Each result also includes the following additional fields:
 

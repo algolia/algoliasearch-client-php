@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.10.2
+ - Fix of passing `$strategy` parameter to API in `Client::multipleQueries`
+ - Follow new User-Agent header convention 
+ 
 ### 1.10.1
  - Fix `Index::saveSynonym`
 

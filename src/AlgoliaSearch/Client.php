@@ -248,9 +248,9 @@ class Client
         return $this->request(
             $this->context,
             'POST',
-            '/1/indexes/*/queries?strategy='.$strategy,
+            '/1/indexes/*/queries',
             array(),
-            array('requests' => $requests),
+            array('requests' => $requests, 'strategy' => $strategy),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout

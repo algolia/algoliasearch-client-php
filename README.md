@@ -2184,6 +2184,10 @@ $res = $index->batch(
                 'objectID' => 'myID3',
                 'body'     => ['firstname' => 'Rob']
             ],
+            [
+                'action'   => 'deleteObject',
+                'objectID' => 'myID3'
+            ]
         ]
     ]
 );

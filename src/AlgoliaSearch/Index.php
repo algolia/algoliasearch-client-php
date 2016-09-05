@@ -327,7 +327,7 @@ class Index
     /**
      * Delete an object from the index.
      *
-     * @param $objectID the unique identifier of object to delete
+     * @param int|string $objectID the unique identifier of object to delete
      *
      * @return mixed
      *

@@ -48,7 +48,7 @@ Indexing
 
 1. [Add objects](#add-objects---addobjects)
 1. [Update objects](#update-objects---saveobjects)
-1. [Partial update](#partial-update---partialupdateobjects)
+1. [Partial update objects](#partial-update-objects---partialupdateobjects)
 1. [Delete objects](#delete-objects---deleteobjects)
 
 Settings
@@ -581,23 +581,49 @@ $index->getObjects(['myID1', 'myID2']);
 
 Each entry in an index has a unique identifier called `objectID`. There are two ways to add an entry to the index:
 
- 1. Using automatic `objectID` assignment. You will be able to access it in the answer.
- 2. Supplying your own `objectID`.
+ 1. Supplying your own `objectID`.
+ 2. Using automatic `objectID` assignment. You will be able to access it in the answer.
 
 You don't need to explicitly create an index, it will be automatically created the first time you add an object.
 Objects are schema less so you don't need any configuration to start indexing. If you wish to configure things, the settings section provides details about advanced settings.
 
-Example with automatic `objectID` assignment:
+Example with automatic `objectID` assignments:
 
 ```php
-$res = $index->addObject([
-	'firstname' => 'Jimmie',
-	'lastname' => 'Barninger'
-]);
-echo 'objectID=' . $res['objectID'] . "\n";
+$res = $index->addObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'lastname'  => 'Barninger'
+        ],
+        [
+            'firstname' => 'Warren',
+            'lastname'  => 'myID1'
+        ]
+    ]
+);
 ```
 
-Example with manual `objectID` assignment:
+Example with manual `objectID` assignments:
+
+```php
+$res = $index->addObjects(
+    [
+        [
+            'objectID' => '1',
+            'firstname' => 'Jimmie',
+            'lastname'  => 'Barninger'
+        ],
+        [
+            'objectID' => '2',
+            'firstname' => 'Warren',
+            'lastname'  => 'myID1'
+        ]
+    ]
+);
+```
+
+To add a single object, use the `[Add object](#add-object---addobject)` method:
 
 ```php
 $res = $index->addObject(
@@ -610,7 +636,6 @@ $res = $index->addObject(
 echo 'objectID=' . $res['objectID'] . "\n";
 ```
 
-
 ### Update objects - `saveObjects`
 
 You have three options when updating an existing object:
@@ -619,7 +644,26 @@ You have three options when updating an existing object:
  2. Replace only some attributes.
  3. Apply an operation to some attributes.
 
-Example on how to replace all attributes of an existing object:
+Example on how to replace all attributes existing objects:
+
+```php
+$res = $index->saveObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'lastname'  => 'Barninger',
+            'objectID'  => 'SFO'
+        ],
+        [
+            'firstname' => 'Warren',
+            'lastname'  => 'Speach',
+            'objectID'  => 'myID2'
+        ]
+    ]
+);
+```
+
+To update a single object, you can use the `[Update object](#update-object---saveobject) method:
 
 ```php
 $index->saveObject(
@@ -632,7 +676,8 @@ $index->saveObject(
 );
 ```
 
-### Partial update - `partialUpdateObjects`
+
+### Partial update objects - `partialUpdateObjects`
 
 You have many ways to update an object's attributes:
 
@@ -715,10 +760,33 @@ $index->partialUpdateObject(
 Note: Here we are decrementing the value by `42`. To decrement just by one, put
 `value:1`.
 
+To partial update multiple objects using one API call, you can use the `[Partial update objects](#partial-update-objects---partialupdateobjects)` method:
+
+```php
+$res = $index->partialUpdateObjects(
+    [
+        [
+            'firstname' => 'Jimmie',
+            'objectID'  => 'SFO'
+        ],
+        [
+            'firstname' => 'Warren',
+            'objectID'  => 'myID2'
+        ]
+    ]
+);
+```
+
 
 ### Delete objects - `deleteObjects`
 
-You can delete an object using its `objectID`:
+You can delete objects using their `objectID`:
+
+```php
+$res = $index->deleteObjects(["myID1", "myID2"]);
+```
+
+To delete a single object, you can use the `[Delete object](#delete-object---deleteobject)` method:
 
 ```php
 $index->deleteObject('myID');
@@ -2298,71 +2366,6 @@ $results = $index->searchSynonyms("street", array("synonym", "oneWaySynonym"), 1
 ### Custom batch - `batch`
 
 You may want to perform multiple operations with one API call to reduce latency.
-We expose four methods to perform batch operations:
-
-* Add objects - `addObjects`: Add an array of objects using automatic `objectID` assignment.
-* Update objects - `saveObjects`: Add or update an array of objects that contains an `objectID` attribute.
-* Delete objects - `deleteObjects`: Delete an array of objectIDs.
-* Partial update - `partialUpdateObjects`: Partially update an array of objects that contain an `objectID` attribute (only specified attributes will be updated).
-
-Example using automatic `objectID` assignment:
-
-```php
-$res = $index->addObjects(
-    [
-        [
-            'firstname' => 'Jimmie',
-            'lastname'  => 'Barninger'
-        ],
-        [
-            'firstname' => 'Warren',
-            'lastname'  => 'myID1'
-        ]
-    ]
-);
-```
-
-Example with user defined `objectID` (add or update):
-
-```php
-$res = $index->saveObjects(
-    [
-        [
-            'firstname' => 'Jimmie',
-            'lastname'  => 'Barninger',
-            'objectID'  => 'SFO'
-        ],
-        [
-            'firstname' => 'Warren',
-            'lastname'  => 'Speach',
-            'objectID'  => 'myID2'
-        ]
-    ]
-);
-```
-
-Example that deletes a set of records:
-
-```php
-$res = $index->deleteObjects(["myID1", "myID2"]);
-```
-
-Example that updates only the `firstname` attribute:
-
-```php
-$res = $index->partialUpdateObjects(
-    [
-        [
-            'firstname' => 'Jimmie',
-            'objectID'  => 'SFO'
-        ],
-        [
-            'firstname' => 'Warren',
-            'objectID'  => 'myID2'
-        ]
-    ]
-);
-```
 
 
 Custom batch:

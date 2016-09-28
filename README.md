@@ -2253,6 +2253,15 @@ $public_key = $client->generateSecuredApiKey(
 );
 ```
 
+#### Network restriction
+
+For more protection against API key leaking and reuse you can restrict the key to be valid only from specific IPv4 networks
+
+```php
+# generate a public API key that is restricted to '192.168.1.0/24':
+$public_key = \AlgoliaSearch\Client::generateSecuredApiKey('SearchApiKey', ['restrictSources' => '192.168.1.0/24']);
+```
+
 
 
 

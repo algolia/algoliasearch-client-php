@@ -741,7 +741,7 @@ class Index
      *                        - attributesToSnippet**: (array of strings) default list of attributes to snippet alongside the
      *                        number of words to return (syntax is attributeName:nbWords). By default no snippet is computed.
      *                        If set to null, no snippet is computed.
-     *                        - attributesToIndex: (array of strings) the list of fields you want to index.
+     *                        - searchableAttributes (formerly named attributesToIndex): (array of strings) the list of fields you want to index.
      *                        If set to null, all textual and numerical attributes of your objects are indexed, but you
      *                        should update it to get optimal results. This parameter has two important uses:
      *                        - Limit the attributes to index: For example if you store a binary image in base64, you want to
@@ -750,7 +750,7 @@ class Index
      *                        attributes at the beginning of the list will be considered more important than matches in
      *                        attributes further down the list. In one attribute, matching text at the beginning of the
      *                        attribute will be considered more important than text after, you can disable this behavior if
-     *                        you add your attribute inside `unordered(AttributeName)`, for example attributesToIndex:
+     *                        you add your attribute inside `unordered(AttributeName)`, for example searchableAttributes:
      *                        ["title", "unordered(text)"].
      *                        - attributesForFaceting: (array of strings) The list of fields you want to use for faceting.
      *                        All strings in the attribute selected for faceting are extracted and added as a facet. If set
@@ -765,7 +765,7 @@ class Index
      *                        - typo: sort according to number of typos,
      *                        - geo: sort according to decreassing distance when performing a geo-location based search,
      *                        - proximity: sort according to the proximity of query words in hits,
-     *                        - attribute: sort according to the order of attributes defined by attributesToIndex,
+     *                        - attribute: sort according to the order of attributes defined by searchableAttributes,
      *                        - exact:
      *                        - if the user query contains one word: sort objects having an attribute that is exactly the
      *                        query word before others. For example if you search for the "V" TV show, you want to find it
@@ -789,16 +789,16 @@ class Index
      *                        - optionalWords: (array of strings) Specify a list of words that should be considered as
      *                        optional when found in the query.
      *
-     * @param  bool             $forwardToSlaves
+     * @param  bool             $forwardToReplicas
      * @return mixed
      * @throws AlgoliaException
      */
-    public function setSettings($settings, $forwardToSlaves = false)
+    public function setSettings($settings, $forwardToReplicas = false)
     {
         $url = '/1/indexes/'.$this->urlIndexName.'/settings';
 
-        if ($forwardToSlaves) {
-            $url = $url.'?forwardToSlaves=true';
+        if ($forwardToReplicas) {
+            $url = $url.'?forwardToReplicas=true';
         }
 
         return $this->client->request(
@@ -1171,18 +1171,18 @@ class Index
 
     /**
      * @param $objectID
-     * @param $forwardToSlaves
+     * @param $forwardToReplicas
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function deleteSynonym($objectID, $forwardToSlaves = false)
+    public function deleteSynonym($objectID, $forwardToReplicas = false)
     {
         return $this->client->request(
             $this->context,
             'DELETE',
-            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
             null,
             null,
             $this->context->writeHostsArray,
@@ -1192,18 +1192,18 @@ class Index
     }
 
     /**
-     * @param bool $forwardToSlaves
+     * @param bool $forwardToReplicas
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function clearSynonyms($forwardToSlaves = false)
+    public function clearSynonyms($forwardToReplicas = false)
     {
         return $this->client->request(
             $this->context,
             'POST',
-            '/1/indexes/'.$this->urlIndexName.'/synonyms/clear?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/clear?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
             null,
             null,
             $this->context->writeHostsArray,
@@ -1214,20 +1214,20 @@ class Index
 
     /**
      * @param $objects
-     * @param bool $forwardToSlaves
+     * @param bool $forwardToReplicas
      * @param bool $replaceExistingSynonyms
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function batchSynonyms($objects, $forwardToSlaves = false, $replaceExistingSynonyms = false)
+    public function batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false)
     {
         return $this->client->request(
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/synonyms/batch?replaceExistingSynonyms='.($replaceExistingSynonyms ? 'true' : 'false')
-                .'&forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+                .'&forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
             null,
             $objects,
             $this->context->writeHostsArray,
@@ -1239,18 +1239,18 @@ class Index
     /**
      * @param $objectID
      * @param $content
-     * @param bool $forwardToSlaves
+     * @param bool $forwardToReplicas
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function saveSynonym($objectID, $content, $forwardToSlaves = false)
+    public function saveSynonym($objectID, $content, $forwardToReplicas = false)
     {
         return $this->client->request(
             $this->context,
             'PUT',
-            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToSlaves='.($forwardToSlaves ? 'true' : 'false'),
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID).'?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
             null,
             $content,
             $this->context->writeHostsArray,

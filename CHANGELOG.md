@@ -1,5 +1,10 @@
 ## Change Log
 
+### 1.10.3
+ - Renamed `slaves` to `replicas` (#159)
+ - Renamed `attributesToIndex` to `searchableAttributes` (#159)
+ - Fixed `$objectID` parameter type in DOC block (#150)
+
 ### 1.10.2
  - Fix of passing `$strategy` parameter to API in `Client::multipleQueries`
  - Follow new User-Agent header convention 

@@ -511,6 +511,30 @@ class Index
     }
 
     /**
+     * Perform a search inside facets.
+     *
+     * @param $facetName
+     * @param $facetQuery
+     * @param array $query
+     * @return mixed
+     */
+    public function searchFacet($facetName, $facetQuery, $query = array())
+    {
+        $query['facetQuery'] = $facetQuery;
+
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/facets/'.$facetName.'/query',
+            array(),
+            array('params' => $this->client->buildQuery($query)),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->searchTimeout
+        );
+    }
+
+    /**
      * Perform a search with disjunctive facets generating as many queries as number of disjunctive facets.
      *
      * @param string $query              the query

@@ -1,5 +1,10 @@
 preset: PSR2
+
 linting: true
+
+enabled:
+  - long_array_syntax
+
 finder:
   path:
       - "src/AlgoliaSearch"

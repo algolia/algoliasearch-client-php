@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.11.0
+- Add searchFacet feature
+
 ### 1.10.3
  - Renamed `slaves` to `replicas` (#159)
  - Renamed `attributesToIndex` to `searchableAttributes` (#159)

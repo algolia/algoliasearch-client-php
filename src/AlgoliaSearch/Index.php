@@ -172,8 +172,8 @@ class Index
     /**
      * Get an object from this index.
      *
-     * @param $objectID             the unique identifier of the object to retrieve
-     * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
+     * @param string|null $objectID the unique identifier of the object to retrieve
+     * @param string|null $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
      *                              separated by ","
      *
      * @return mixed
@@ -580,7 +580,7 @@ class Index
             );
 
             if (in_array($key, $disjunctive_refinements)) {
-                $filter = array_merge($filters, $r);
+                $filters = array_merge($filters, $r);
             } else {
                 array_push($filters, $r);
             }
@@ -601,7 +601,7 @@ class Index
                     );
 
                     if (in_array($key, $disjunctive_refinements)) {
-                        $filter = array_merge($filters, $r);
+                        $filters = array_merge($filters, $r);
                     } else {
                         array_push($filters, $r);
                     }
@@ -787,7 +787,7 @@ class Index
      *                        - ranking: (array of strings) controls the way results are sorted.
      *                        We have six available criteria:
      *                        - typo: sort according to number of typos,
-     *                        - geo: sort according to decreassing distance when performing a geo-location based search,
+     *                        - geo: sort according to decreasing distance when performing a geo-location based search,
      *                        - proximity: sort according to the proximity of query words in hits,
      *                        - attribute: sort according to the order of attributes defined by searchableAttributes,
      *                        - exact:

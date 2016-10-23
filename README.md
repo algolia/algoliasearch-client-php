@@ -2130,7 +2130,7 @@ allow the person who has it to query/change/delete data*
 The *Admin API Key* and *Search-Only API Key* both have really large scope and sometimes you want to give a key to
 someone that have restricted permissions, can it be an index, a rate limit, a validity limit, ...
 
-To address those use-cases we have two differents type of keys:
+To address those use-cases we have two different type of keys:
 
 - **Secured API Keys**
 
@@ -2406,7 +2406,7 @@ $res = $index->batch(
 ```
 
 
-If you have one index per user, you may want to perform a batch operations across severals indexes.
+If you have one index per user, you may want to perform a batch operations across several indexes.
 We expose a method to perform this type of batch:
 
 ```php

@@ -664,7 +664,7 @@ $res = $index->saveObjects(
 );
 ```
 
-To update a single object, you can use the `[Update object](#update-object---saveobject) method:
+To update a single object, you can use the `saveObject` method:
 
 ```php
 $index->saveObject(

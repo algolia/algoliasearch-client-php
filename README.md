@@ -508,6 +508,7 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 - [synonyms](#synonyms) `search`
 - [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `search`, `settings`
 - [minProximity](#minproximity) `search`, `settings`
+- [responseFields](#responsefields) `search`, `settings`
 
 <!--/PARAMETERS_LINK-->
 
@@ -1044,6 +1045,7 @@ They are three scopes:
 - [placeholders](#placeholders) `settings`
 - [altCorrections](#altcorrections) `settings`
 - [minProximity](#minproximity) `search`, `settings`
+- [responseFields](#responsefields) `search`, `settings`
 
 ### Search
 
@@ -2021,6 +2023,25 @@ Configure the precision of the `proximity` ranking criterion. By default, the mi
 Considering the query *“javascript framework”*, if you set `minProximity=2`, the records *“JavaScript framework”* and *“JavaScript charting framework”* will get the same proximity score, even if the second contains a word between the two matching words.
 
 **Note:** the maximum `minProximity` that can be set is 7. Any higher value will disable the `proximity` criterion from the ranking formula.
+
+#### responseFields
+
+- scope: `search`, `settings`
+- type: `array of strings`
+- default: `*`
+
+
+Choose which fields the response will contain. Applies to search and browse queries.
+
+By default, all fields are returned. If this parameter is specified, only the fields explicitly listed will be returned, unless `*` is used, in which case all fields are returned. Specifying an empty list or unknown field names is an error.
+
+This parameter is mainly intended to limit the response size. For example, for complex queries, echoing of request parameters in the response's `params` field can be undesirable.
+
+Some fields cannot be filtered out:
+
+- warning `message`
+- `cursor` in browse queries
+- fields triggered explicitly via [getRankingInfo](#getrankinginfo)
 
 
 ## Manage Indices

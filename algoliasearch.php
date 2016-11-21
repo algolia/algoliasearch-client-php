@@ -25,6 +25,11 @@
  */
 
 require_once 'src/AlgoliaSearch/AlgoliaException.php';
+require_once 'src/AlgoliaSearch/Exception/AlgoliaBatchException.php';
+require_once 'src/AlgoliaSearch/Exception/AlgoliaDisjunctiveFacetsInvalidException.php';
+require_once 'src/AlgoliaSearch/Exception/AlgoliaIndexNotFoundException.php';
+require_once 'src/AlgoliaSearch/Exception/AlgoliaRecordTooBigException.php';
+require_once 'src/AlgoliaSearch/Exception/AlgoliaRefinementsInvalidException.php';
 require_once 'src/AlgoliaSearch/Client.php';
 require_once 'src/AlgoliaSearch/ClientContext.php';
 require_once 'src/AlgoliaSearch/Index.php';

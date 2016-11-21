@@ -27,6 +27,10 @@
 
 namespace AlgoliaSearch;
 
+use AlgoliaSearch\Exception\AlgoliaBatchException;
+use AlgoliaSearch\Exception\AlgoliaRecordTooBigException;
+use AlgoliaSearch\Exception\AlgoliaIndexNotFoundException;
+
 /**
  * Entry point in the PHP API.
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
@@ -914,7 +918,7 @@ class Client
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status + ' error');
+            throw $this->throwAlgoliaException($answer, $http_status, $path, $data);
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response);
         }
@@ -1022,5 +1026,45 @@ class Client
         $client = new static($appId, $apiKey, $hostsArray, $options);
 
         return $client->getPlacesIndex();
+    }
+
+    /**
+     * @param array $answer
+     * @param integer $http_status
+     * @param string $path
+     * @param array $data
+     *
+     * @return AlgoliaException
+     */
+    protected function throwAlgoliaException($answer, $http_status, $path, $data)
+    {
+        $message = isset($answer['message']) ? $answer['message'] : $http_status . ' error';
+
+        if (substr($path, -6) === '/batch') {
+            $exception = new AlgoliaBatchException($message);
+            foreach ($data['requests'] as $request) {
+                $exception->addRecord($request['body']);
+            }
+
+            return $exception;
+        }
+
+        if (false !== strpos($message, 'Record is too big')) {
+            $exception = new AlgoliaRecordTooBigException($message);
+            $exception->setRecord($data);
+
+            return $exception;
+        }
+
+        if (preg_match('/Index ((?P<index>.+) )?does not exist/', $message, $matches) > 0) {
+            $exception = new AlgoliaIndexNotFoundException($message);
+            if (isset($matches['index'])) {
+                $exception->setIndexName($matches['index']);
+            }
+
+            return $exception;
+        }
+
+        return new AlgoliaException($message);
     }
 }

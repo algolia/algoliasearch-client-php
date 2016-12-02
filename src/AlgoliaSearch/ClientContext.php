@@ -88,8 +88,8 @@ class ClientContext
      */
     public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
     {
-        // connect timeout of 2s by default
-        $this->connectTimeout = 2;
+        // connect timeout of 1s by default
+        $this->connectTimeout = 1;
 
         // global timeout of 30s by default
         $this->readTimeout = 30;
@@ -102,10 +102,8 @@ class ClientContext
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
 
-        if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
-            $this->readHostsArray = $this->getDefaultReadHosts($placesEnabled);
-            $this->writeHostsArray = $this->getDefaultWriteHosts();
-        }
+        $this->readHostsArray = new ReadHostsHandler($this->readHostsArray, $this->applicationID, $placesEnabled);
+        $this->writeHostsArray = new WriteHostsHandler($this->writeHostsArray, $this->applicationID, $placesEnabled);
 
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
@@ -121,52 +119,6 @@ class ClientContext
         $this->algoliaUserToken = null;
         $this->rateLimitAPIKey = null;
         $this->headers = array();
-    }
-
-    /**
-     * @param bool $placesEnabled
-     *
-     * @return array
-     */
-    private function getDefaultReadHosts($placesEnabled)
-    {
-        if ($placesEnabled) {
-            $hosts = array(
-                'places-1.algolianet.com',
-                'places-2.algolianet.com',
-                'places-3.algolianet.com',
-            );
-            shuffle($hosts);
-            array_unshift($hosts, 'places-dsn.algolia.net');
-
-            return $hosts;
-        }
-
-        $hosts = array(
-            $this->applicationID.'-1.algolianet.com',
-            $this->applicationID.'-2.algolianet.com',
-            $this->applicationID.'-3.algolianet.com',
-        );
-        shuffle($hosts);
-        array_unshift($hosts, $this->applicationID.'-dsn.algolia.net');
-
-        return $hosts;
-    }
-
-    /**
-     * @return array
-     */
-    private function getDefaultWriteHosts()
-    {
-        $hosts = array(
-            $this->applicationID.'-1.algolianet.com',
-            $this->applicationID.'-2.algolianet.com',
-            $this->applicationID.'-3.algolianet.com',
-        );
-        shuffle($hosts);
-        array_unshift($hosts, $this->applicationID.'.algolia.net');
-
-        return $hosts;
     }
 
     /**

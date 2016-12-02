@@ -704,17 +704,17 @@ class Client
 
     /**
      * @param ClientContext $context
-     * @param string        $method
-     * @param string        $path
-     * @param array         $params
-     * @param array         $data
-     * @param array         $hostsArray
-     * @param int           $connectTimeout
-     * @param int           $readTimeout
-     *
+     * @param string $method
+     * @param string $path
+     * @param array $params
+     * @param array $data
+     * @param HostsHandler|array $hostsArray
+     * @param $connectTimeout
+     * @param int $readTimeout
      * @return mixed
-     *
      * @throws AlgoliaException
+     * @internal param $connectTimeouts
+     * @internal param int $connectTimeout
      */
     public function request(
         $context,
@@ -722,13 +722,14 @@ class Client
         $path,
         $params,
         $data,
-        $hostsArray,
+        HostsHandler $hostsArray,
         $connectTimeout,
         $readTimeout
     ) {
         $exceptions = array();
         $cnt = 0;
-        foreach ($hostsArray as &$host) {
+        $isFirstHost = ($hostsArray->key() == 0);
+        foreach ($hostsArray as $host) {
             $cnt += 1;
             if ($cnt == 3) {
                 $connectTimeout += 2;
@@ -742,6 +743,9 @@ class Client
             } catch (AlgoliaException $e) {
                 throw $e;
             } catch (\Exception $e) {
+                if (false === $isFirstHost) {
+                    $hostsArray->reset();
+                }
                 $exceptions[$host] = $e->getMessage();
             }
         }

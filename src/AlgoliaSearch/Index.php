@@ -172,7 +172,7 @@ class Index
     /**
      * Get an object from this index.
      *
-     * @param $objectID             the unique identifier of the object to retrieve
+     * @param $objectID             string - the unique identifier of the object to retrieve
      * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
      *                              separated by ","
      *

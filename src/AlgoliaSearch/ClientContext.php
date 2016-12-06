@@ -102,8 +102,10 @@ class ClientContext
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
 
-        $this->readHostsArray = new ReadHostsHandler($this->readHostsArray, $this->applicationID, $placesEnabled);
-        $this->writeHostsArray = new WriteHostsHandler($this->writeHostsArray, $this->applicationID, $placesEnabled);
+        if ($this->readHostsArray == null || count($this->readHostsArray) == 0) {
+            $this->readHostsArray = $this->getDefaultReadHosts($applicationID, $placesEnabled);
+            $this->writeHostsArray = $this->getDefaultWriteHosts($applicationID);
+        }
 
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
@@ -120,6 +122,41 @@ class ClientContext
         $this->rateLimitAPIKey = null;
         $this->headers = array();
     }
+
+    /**
+     * @param bool $placesEnabled
+     *
+     * @return array
+     */
+    protected function getDefaultReadHosts($applicationID, $placesEnabled = false)
+    {
+        if ($placesEnabled) {
+            return array(
+                'places-dsn.algolia.net',
+                'places-1.algolianet.com',
+                'places-2.algolianet.com',
+                'places-3.algolianet.com',
+            );
+        }
+
+        return array(
+            $applicationID.'-dsn.algolia.net',
+            $applicationID.'-1.algolianet.com',
+            $applicationID.'-2.algolianet.com',
+            $applicationID.'-3.algolianet.com',
+        );
+    }
+
+    protected function getDefaultWriteHosts($applicationID)
+    {
+        return array(
+            $applicationID.'.algolia.net',
+            $applicationID.'-1.algolianet.com',
+            $applicationID.'-2.algolianet.com',
+            $applicationID.'-3.algolianet.com',
+        );
+    }
+
 
     /**
      * Closes eventually opened curl handles.

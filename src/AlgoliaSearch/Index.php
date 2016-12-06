@@ -138,7 +138,8 @@ class Index
                 $content,
                 $this->context->writeHostsArray,
                 $this->context->connectTimeout,
-                $this->context->readTimeout
+                $this->context->readTimeout,
+                Client::WRITE
             );
         }
 
@@ -150,7 +151,8 @@ class Index
             $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -190,7 +192,8 @@ class Index
                 null,
                 $this->context->readHostsArray,
                 $this->context->connectTimeout,
-                $this->context->readTimeout
+                $this->context->readTimeout,
+                Client::READ
             );
         }
 
@@ -202,7 +205,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -235,7 +239,8 @@ class Index
             array('requests' => $requests),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -262,7 +267,8 @@ class Index
             $partialObject,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -305,7 +311,8 @@ class Index
             $object,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -348,7 +355,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -506,7 +514,8 @@ class Index
             array('params' => $this->client->buildQuery($args)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            Client::READ
         );
     }
 
@@ -530,7 +539,8 @@ class Index
             array('params' => $this->client->buildQuery($query)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            Client::READ
         );
     }
 
@@ -661,7 +671,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -703,7 +714,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -724,7 +736,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -745,7 +758,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -833,7 +847,8 @@ class Index
             $settings,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -854,7 +869,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -877,7 +893,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -900,7 +917,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -962,7 +980,8 @@ class Index
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1025,7 +1044,8 @@ class Index
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1046,7 +1066,8 @@ class Index
             $requests,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1117,7 +1138,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -1168,7 +1190,8 @@ class Index
             $params,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -1189,7 +1212,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -1211,7 +1235,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1232,7 +1257,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1256,7 +1282,8 @@ class Index
             $objects,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -1279,7 +1306,8 @@ class Index
             $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 

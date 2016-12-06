@@ -7,18 +7,12 @@ abstract class HostsHandler implements \Iterator, \ArrayAccess
     private $originalHostArray;
     private $hostsArray;
 
-    abstract protected function getDefaultHosts($applicationID, $placesEnabled = false);
     abstract protected function getPosition();
     abstract protected function setPosition($position);
 
-    public function __construct($hostsArray, $applicationID, $placesEnabled)
+    public function __construct($hostsArray)
     {
         $this->hostsArray = $hostsArray;
-
-        if ($this->hostsArray == null || count($this->hostsArray) == 0) {
-            $this->hostsArray = $this->getDefaultHosts($applicationID, $placesEnabled);
-        }
-
         $this->originalHostArray = $this->hostsArray;
 
         if ($this->getPosition() === null) {

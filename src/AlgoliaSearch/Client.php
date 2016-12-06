@@ -37,6 +37,8 @@ class Client
     const CAINFO = 'cainfo';
     const CURLOPT = 'curloptions';
     const PLACES_ENABLED = 'placesEnabled';
+    const READ = 'read';
+    const WRITE = 'write';
 
     /**
      * @var ClientContext
@@ -200,7 +202,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -253,7 +256,8 @@ class Client
             array('requests' => $requests, 'strategy' => $strategy),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            Client::READ
         );
     }
 
@@ -281,7 +285,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -302,7 +307,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -327,7 +333,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -352,7 +359,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -385,7 +393,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -424,7 +433,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -445,7 +455,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::READ
         );
     }
 
@@ -466,7 +477,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -532,7 +544,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -604,7 +617,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -625,7 +639,8 @@ class Client
             array('requests' => $requests),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            Client::WRITE
         );
     }
 
@@ -711,6 +726,7 @@ class Client
      * @param HostsHandler|array $hostsArray
      * @param $connectTimeout
      * @param int $readTimeout
+     * @param string $type
      * @return mixed
      * @throws AlgoliaException
      * @internal param $connectTimeouts
@@ -722,14 +738,21 @@ class Client
         $path,
         $params,
         $data,
-        HostsHandler $hostsArray,
+        $hostsArray,
         $connectTimeout,
-        $readTimeout
+        $readTimeout,
+        $type = Client::WRITE
     ) {
         $exceptions = array();
         $cnt = 0;
-        $isFirstHost = ($hostsArray->key() == 0);
-        foreach ($hostsArray as $host) {
+
+        if ($type == Client::READ) {
+            $hostsHandler = new ReadHostsHandler($hostsArray);
+        } else {
+            $hostsHandler = new WriteHostsHandler($hostsArray);
+        }
+        $isFirstHost = ($hostsHandler->key() == 0);
+        foreach ($hostsHandler as $host) {
             $cnt += 1;
             if ($cnt == 3) {
                 $connectTimeout += 2;
@@ -744,7 +767,7 @@ class Client
                 throw $e;
             } catch (\Exception $e) {
                 if (false === $isFirstHost) {
-                    $hostsArray->reset();
+                    $hostsHandler->reset();
                 }
                 $exceptions[$host] = $e->getMessage();
             }

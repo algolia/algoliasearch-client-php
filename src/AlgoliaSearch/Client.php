@@ -110,7 +110,7 @@ class Client
     }
 
     /**
-     * Change the default connect timeout of 2s to a custom value
+     * Change the default connect timeout of 1s to a custom value
      * (only useful if your server has a very slow connectivity to Algolia backend).
      *
      * @param int $connectTimeout the connection timeout
@@ -743,6 +743,9 @@ class Client
                 throw $e;
             } catch (\Exception $e) {
                 $exceptions[$host] = $e->getMessage();
+                if ($context instanceof ClientContext) {
+                    $context->rotateHosts($host);
+                }
             }
         }
         throw new AlgoliaException('Hosts unreachable: '.implode(',', $exceptions));

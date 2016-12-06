@@ -32,4 +32,26 @@ class AccessTest extends AlgoliaSearchTestCase
 
         $client->isAlive();
     }
+
+    public function testStatefullRetryStrategy()
+    {
+        if (version_compare(phpversion(), '5.4', '<')) {
+            $this->markTestSkipped("No way to test statefull retry strategy in Travis for PHP 5.3.");
+        }
+
+        $client = new Client(
+            getenv('ALGOLIA_APPLICATION_ID'),
+            getenv('ALGOLIA_API_KEY'),
+            array(
+                getenv('ALGOLIA_APPLICATION_ID') . '.algolia.biz', // Unresolvable.
+                getenv('ALGOLIA_APPLICATION_ID') . '.algolia.net',
+            )
+        );
+        $start = microtime(true);
+        for ($i = 0; $i < 10; $i++) {
+            $client->isAlive();
+        }
+        $processingTime = microtime(true) - $start;
+        $this->assertLessThan(5, $processingTime);
+    }
 }

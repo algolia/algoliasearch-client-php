@@ -88,8 +88,8 @@ class ClientContext
      */
     public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
     {
-        // connect timeout of 2s by default
-        $this->connectTimeout = 2;
+        // connect timeout of 1s by default
+        $this->connectTimeout = 1;
 
         // global timeout of 30s by default
         $this->readTimeout = 30;
@@ -247,5 +247,28 @@ class ClientContext
     public function setExtraHeader($key, $value)
     {
         $this->headers[$key] = $value;
+    }
+
+    /**
+     * The Client will call this when an attempt to reach a given host times out.
+     * If the host is first either in the readHosts or the the writeHosts, we
+     * rotate the array to ensure the next API call will be directly made with a working
+     * host. This mainly ensures we don't add the equivalent of the connection timeout value to each
+     * request to the API.
+     *
+     * @param string $host The host that was unavailable.
+     */
+    public function rotateHosts($host)
+    {
+        if (array_search($host, $this->readHostsArray, true) === 0) {
+            $this->readHostsArray[] = array_shift($this->readHostsArray);
+        }
+        
+        // We don't use elseif on purpose as we could have the same host in
+        // the readHosts and writeHosts. This ensures that if it fails for one
+        // we also ensure that it will work for the other.
+        if (array_search($host, $this->writeHostsArray, true) === 0) {
+            $this->writeHostsArray[] = array_shift($this->writeHostsArray);
+        }
     }
 }

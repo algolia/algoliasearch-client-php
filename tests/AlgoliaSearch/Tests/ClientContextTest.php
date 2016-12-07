@@ -98,4 +98,38 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedHosts, $hosts);
     }
+
+    public function testHostsCanBeRotated()
+    {
+        $context = new ClientContext('whatever', 'whatever', null);
+        $initialReadHosts = array('host1.com', 'shared-host.com', 'host3.com');
+        $initialWriteHosts = array('write-host1.com', 'shared-host.com', 'write-host3.com');
+        $context->readHostsArray = $initialReadHosts;
+        $context->writeHostsArray = $initialWriteHosts;
+
+        // Rotate read host.
+        $context->rotateHosts('host1.com');
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals($initialWriteHosts, $context->writeHostsArray);
+
+        // This should change nothing given the current host is shared-host.com.
+        $context->rotateHosts('host3.com');
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals($initialWriteHosts, $context->writeHostsArray);
+
+        // Rotate read write.
+        $context->rotateHosts('write-host1.com');
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals(array('shared-host.com', 'write-host3.com', 'write-host1.com'), $context->writeHostsArray);
+
+        // This should change nothing given the current host is shared-host.com.
+        $context->rotateHosts('write-host3.com');
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals(array('shared-host.com', 'write-host3.com', 'write-host1.com'), $context->writeHostsArray);
+
+        // Should rotate both read and write hosts.
+        $context->rotateHosts('shared-host.com');
+        $this->assertEquals(array('host3.com', 'host1.com', 'shared-host.com'), $context->readHostsArray);
+        $this->assertEquals(array('write-host3.com', 'write-host1.com', 'shared-host.com'), $context->writeHostsArray);
+    }
 }

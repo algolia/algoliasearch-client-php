@@ -744,7 +744,8 @@ class Client
             } catch (\Exception $e) {
                 $exceptions[$host] = $e->getMessage();
                 if ($context instanceof ClientContext) {
-                    $context->rotateHosts($host);
+                    $context->addFailingHost($host); // Needs to be before the rotation otherwise it will not be rotated
+                    $context->rotateHosts();
                 }
             }
         }
@@ -1025,5 +1026,10 @@ class Client
         $client = new static($appId, $apiKey, $hostsArray, $options);
 
         return $client->getPlacesIndex();
+    }
+
+    public function getContext()
+    {
+        return $this->context;
     }
 }

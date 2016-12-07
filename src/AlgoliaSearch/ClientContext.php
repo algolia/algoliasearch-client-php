@@ -77,6 +77,11 @@ class ClientContext
     public $connectTimeout;
 
     /**
+     * @var array
+     */
+    private static $failingHosts = array();
+
+    /**
      * ClientContext constructor.
      *
      * @param string $applicationID
@@ -99,6 +104,7 @@ class ClientContext
 
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
+
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
 
@@ -106,6 +112,8 @@ class ClientContext
             $this->readHostsArray = $this->getDefaultReadHosts($placesEnabled);
             $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
+
+        $this->rotateHosts();
 
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
@@ -250,24 +258,33 @@ class ClientContext
     }
 
     /**
-     * The Client will call this when an attempt to reach a given host times out.
-     * If the host is first either in the readHosts or the the writeHosts, we
+     * @param $host
+     */
+    public static function addFailingHost($host)
+    {
+        if (! in_array($host, self::$failingHosts)) {
+            self::$failingHosts[] = $host;
+        }
+    }
+
+    /**
+     * This method is called to pass on failing hosts.
+     * If the host is first either in the failingHosts array, we
      * rotate the array to ensure the next API call will be directly made with a working
      * host. This mainly ensures we don't add the equivalent of the connection timeout value to each
      * request to the API.
-     *
-     * @param string $host The host that was unavailable.
      */
-    public function rotateHosts($host)
+    public function rotateHosts()
     {
-        if (array_search($host, $this->readHostsArray, true) === 0) {
+        $i = 0;
+        while ($i <= count($this->readHostsArray) && in_array($this->readHostsArray[0], self::$failingHosts)) {
+            $i++;
             $this->readHostsArray[] = array_shift($this->readHostsArray);
         }
-        
-        // We don't use elseif on purpose as we could have the same host in
-        // the readHosts and writeHosts. This ensures that if it fails for one
-        // we also ensure that it will work for the other.
-        if (array_search($host, $this->writeHostsArray, true) === 0) {
+
+        $i = 0;
+        while ($i <= count($this->writeHostsArray) && in_array($this->writeHostsArray[0], self::$failingHosts)) {
+            $i++;
             $this->writeHostsArray[] = array_shift($this->writeHostsArray);
         }
     }

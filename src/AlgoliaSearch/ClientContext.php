@@ -77,6 +77,11 @@ class ClientContext
     public $connectTimeout;
 
     /**
+     * @var array
+     */
+    private static $failingHosts = array();
+
+    /**
      * ClientContext constructor.
      *
      * @param string $applicationID
@@ -88,8 +93,8 @@ class ClientContext
      */
     public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
     {
-        // connect timeout of 2s by default
-        $this->connectTimeout = 2;
+        // connect timeout of 1s by default
+        $this->connectTimeout = 1;
 
         // global timeout of 30s by default
         $this->readTimeout = 30;
@@ -99,6 +104,7 @@ class ClientContext
 
         $this->applicationID = $applicationID;
         $this->apiKey = $apiKey;
+
         $this->readHostsArray = $hostsArray;
         $this->writeHostsArray = $hostsArray;
 
@@ -106,6 +112,8 @@ class ClientContext
             $this->readHostsArray = $this->getDefaultReadHosts($placesEnabled);
             $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
+
+        $this->rotateHosts();
 
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
@@ -247,5 +255,37 @@ class ClientContext
     public function setExtraHeader($key, $value)
     {
         $this->headers[$key] = $value;
+    }
+
+    /**
+     * @param $host
+     */
+    public static function addFailingHost($host)
+    {
+        if (! in_array($host, self::$failingHosts)) {
+            self::$failingHosts[] = $host;
+        }
+    }
+
+    /**
+     * This method is called to pass on failing hosts.
+     * If the host is first either in the failingHosts array, we
+     * rotate the array to ensure the next API call will be directly made with a working
+     * host. This mainly ensures we don't add the equivalent of the connection timeout value to each
+     * request to the API.
+     */
+    public function rotateHosts()
+    {
+        $i = 0;
+        while ($i <= count($this->readHostsArray) && in_array($this->readHostsArray[0], self::$failingHosts)) {
+            $i++;
+            $this->readHostsArray[] = array_shift($this->readHostsArray);
+        }
+
+        $i = 0;
+        while ($i <= count($this->writeHostsArray) && in_array($this->writeHostsArray[0], self::$failingHosts)) {
+            $i++;
+            $this->writeHostsArray[] = array_shift($this->writeHostsArray);
+        }
     }
 }

@@ -98,4 +98,42 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expectedHosts, $hosts);
     }
+
+    public function testHostsCanBeRotated()
+    {
+        $context = new ClientContext('whatever', 'whatever', null);
+        $initialReadHosts = array('host1.com', 'shared-host.com', 'host3.com');
+        $initialWriteHosts = array('write-host1.com', 'shared-host.com', 'write-host3.com');
+        $context->readHostsArray = $initialReadHosts;
+        $context->writeHostsArray = $initialWriteHosts;
+
+        // Rotate read host.
+        $context->addFailingHost('host1.com');
+        $context->rotateHosts();
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals($initialWriteHosts, $context->writeHostsArray);
+
+        // This should change nothing given test.com is not in the host array
+        $context->addFailingHost('test.com');
+        $context->rotateHosts();
+        $this->assertEquals(array('shared-host.com', 'host3.com', 'host1.com'), $context->readHostsArray);
+        $this->assertEquals($initialWriteHosts, $context->writeHostsArray);
+
+        $context->addFailingHost('shared-host.com');
+        $context->rotateHosts();
+        $this->assertEquals(array('host3.com', 'host1.com', 'shared-host.com'), $context->readHostsArray);
+        $this->assertEquals(array('write-host1.com', 'shared-host.com', 'write-host3.com'), $context->writeHostsArray);
+
+        $context->addFailingHost('write-host1.com');
+        $context->rotateHosts();
+        $this->assertEquals(array('host3.com', 'host1.com', 'shared-host.com'), $context->readHostsArray);
+        $this->assertEquals(array('write-host3.com', 'write-host1.com', 'shared-host.com'), $context->writeHostsArray);
+
+        $context2 = new ClientContext('whatever', 'whatever', null);
+        $context2->readHostsArray = $initialReadHosts;
+        $context2->writeHostsArray = $initialWriteHosts;
+        $context2->rotateHosts();
+        $this->assertEquals(array('host3.com', 'host1.com', 'shared-host.com'), $context2->readHostsArray);
+        $this->assertEquals(array('write-host3.com', 'write-host1.com', 'shared-host.com'), $context2->writeHostsArray);
+    }
 }

@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.12.0
+- Improved retry strategy (#187)
+
 ### 1.11.0
 - Add searchFacet feature
 

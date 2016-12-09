@@ -25,7 +25,6 @@ class VersionTest extends AlgoliaSearchTestCase
         $userAgent = Version::getUserAgent();
         $this->assertRegExp('/^Another prefix \(5\.6\.7\); Prefix integration \(0\.0\.8\); Algolia for PHP \(\d+\.\d+\.\d+\); Suffix platform \(1\.2\.3\); Different suffix \(7\.8\.9\)$/', $userAgent);
 
-
         // Should be "X.Y.Z"
         $version = Version::get();
         $this->assertRegExp('/^\d+\.\d+\.\d+$/', $version);

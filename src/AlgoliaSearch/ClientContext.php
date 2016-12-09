@@ -262,7 +262,7 @@ class ClientContext
      */
     public static function addFailingHost($host)
     {
-        if (! in_array($host, self::$failingHosts)) {
+        if (!in_array($host, self::$failingHosts)) {
             self::$failingHosts[] = $host;
         }
     }

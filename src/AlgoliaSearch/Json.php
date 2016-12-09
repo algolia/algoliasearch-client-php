@@ -3,11 +3,7 @@
 namespace AlgoliaSearch;
 
 /**
- * Class Json
- * @package AlgoliaSearch
- *
- * Helper class to simplify work with JSON
- *
+ * Class Json.
  */
 class Json
 {

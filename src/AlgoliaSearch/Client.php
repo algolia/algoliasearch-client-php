@@ -918,7 +918,7 @@ class Client
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status . ' error');
+            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status.' error');
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response);
         }

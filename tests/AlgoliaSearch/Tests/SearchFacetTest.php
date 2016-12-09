@@ -40,38 +40,38 @@ class SearchFacetTest extends AlgoliaSearchTestCase
         $objects = array(
             array(
                 'objectID' => '1',
-                'name' => 'Snoopy',
-                'kind' => array('dog', 'animal'),
-                'born' => 1950,
-                'series' => 'Peanuts'
+                'name'     => 'Snoopy',
+                'kind'     => array('dog', 'animal'),
+                'born'     => 1950,
+                'series'   => 'Peanuts'
             ),
             array(
                 'objectID' => '2',
-                'name' => 'Woodstock',
-                'kind' => array('bird', 'animal'),
-                'born' => 1960,
-                'series' => 'Peanuts'
+                'name'     => 'Woodstock',
+                'kind'     => array('bird', 'animal'),
+                'born'     => 1960,
+                'series'   => 'Peanuts'
             ),
             array(
                 'objectID' => '3',
-                'name' => 'Charlie Brown',
-                'kind' => array('human'),
-                'born' => 1950,
-                'series' => 'Peanuts'
+                'name'     => 'Charlie Brown',
+                'kind'     => array('human'),
+                'born'     => 1950,
+                'series'   => 'Peanuts'
             ),
             array(
                 'objectID' => '4',
-                'name' => 'Hobbes',
-                'kind' => array('tiger', 'animal', 'teddy'),
-                'born' => 1985,
-                'series' => 'Calvin & Hobbes'
+                'name'     => 'Hobbes',
+                'kind'     => array('tiger', 'animal', 'teddy'),
+                'born'     => 1985,
+                'series'   => 'Calvin & Hobbes'
             ),
             array(
                 'objectID' => '5',
-                'name' => 'Calvin',
-                'kind' => array('human'),
-                'born' => 1985,
-                'series' => 'Calvin & Hobbes'
+                'name'     => 'Calvin',
+                'kind'     => array('human'),
+                'born'     => 1985,
+                'series'   => 'Calvin & Hobbes'
             )
         );
 
@@ -88,7 +88,7 @@ class SearchFacetTest extends AlgoliaSearchTestCase
 
         # Using an addition query to restrict search.
         $query = array(
-            'facetFilters' => 'kind:animal',
+            'facetFilters'   => 'kind:animal',
             'numericFilters' => 'born >= 1955'
         );
         $facetHits = $this->index->searchFacet('series', 'Peanutz', $query);

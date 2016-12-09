@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.12.1
+- Fix UA version number
+
 ### 1.12.0
 - Improved retry strategy (#187)
 

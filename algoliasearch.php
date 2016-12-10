@@ -33,3 +33,6 @@ require_once 'src/AlgoliaSearch/PlacesIndex.php';
 require_once 'src/AlgoliaSearch/SynonymType.php';
 require_once 'src/AlgoliaSearch/Version.php';
 require_once 'src/AlgoliaSearch/Json.php';
+require_once 'src/AlgoliaSearch/FailingHostsCache.php';
+require_once 'src/AlgoliaSearch/FileFailingHostsCache.php';
+require_once 'src/AlgoliaSearch/InMemoryFailingHostsCache.php';

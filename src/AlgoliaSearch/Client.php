@@ -37,6 +37,7 @@ class Client
     const CAINFO = 'cainfo';
     const CURLOPT = 'curloptions';
     const PLACES_ENABLED = 'placesEnabled';
+    const FAILING_HOSTS_CACHE = 'failingHostsCache';
 
     /**
      * @var ClientContext
@@ -94,12 +95,18 @@ class Client
                 case self::PLACES_ENABLED:
                     $this->placesEnabled = (bool) $value;
                     break;
+                case self::FAILING_HOSTS_CACHE:
+                    if (! $value instanceof FailingHostsCache) {
+                        throw new \InvalidArgumentException('failingHostsCache must be an instance of \AlgoliaSearch\FailingHostsCache.');
+                    }
+                    break;
                 default:
                     throw new \Exception('Unknown option: '.$option);
             }
         }
 
-        $this->context = new ClientContext($applicationID, $apiKey, $hostsArray, $this->placesEnabled);
+        $failingHostsCache = isset($options[self::FAILING_HOSTS_CACHE]) ? $options[self::FAILING_HOSTS_CACHE] : null;
+        $this->context = new ClientContext($applicationID, $apiKey, $hostsArray, $this->placesEnabled, $failingHostsCache);
     }
 
     /**

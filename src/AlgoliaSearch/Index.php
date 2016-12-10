@@ -788,7 +788,7 @@ class Index
      *                                 - ranking: (array of strings) controls the way results are sorted.
      *                                 We have six available criteria:
      *                                 - typo: sort according to number of typos,
-     *                                 - geo: sort according to decreassing distance when performing a geo-location based search,
+     *                                 - geo: sort according to decreasing distance when performing a geo-location based search,
      *                                 - proximity: sort according to the proximity of query words in hits,
      *                                 - attribute: sort according to the order of attributes defined by searchableAttributes,
      *                                 - exact:

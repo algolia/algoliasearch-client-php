@@ -12,81 +12,81 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 
 **Getting Started**
 
-1. [Install](install)
-1. [Init index - `initIndex`](init-index)
-1. [Quick Start](quick-start)
+1. [Install](#install)
+1. [Init index - `initIndex`](#init-index)
+1. [Quick Start](#quick-start)
 
 **Search**
 
-1. [Search in an index - `search`](search-in-an-index)
-1. [Search Response Format](search-response-format)
-1. [Search Parameters](search-parameters)
-1. [Search in indices - `multipleQueries`](search-in-indices)
-1. [Get Objects - `getObjects`](get-objects)
+1. [Search in an index - `search`](#search-in-an-index)
+1. [Search Response Format](#search-response-format)
+1. [Search Parameters](#search-parameters)
+1. [Search in indices - `multipleQueries`](#search-in-indices)
+1. [Get Objects - `getObjects`](#get-objects)
 
 **Indexing**
 
-1. [Add Objects - `addObjects`](add-objects)
-1. [Update objects - `saveObjects`](update-objects)
-1. [Partial update objects - `partialUpdateObjects`](partial-update-objects)
-1. [Delete objects - `deleteObjects`](delete-objects)
-1. [Delete by query - `deleteByQuery`](delete-by-query)
-1. [Wait for operations - `waitTask`](wait-for-operations)
+1. [Add Objects - `addObjects`](#add-objects)
+1. [Update objects - `saveObjects`](#update-objects)
+1. [Partial update objects - `partialUpdateObjects`](#partial-update-objects)
+1. [Delete objects - `deleteObjects`](#delete-objects)
+1. [Delete by query - `deleteByQuery`](#delete-by-query)
+1. [Wait for operations - `waitTask`](#wait-for-operations)
 
 **Settings**
 
-1. [Get settings - `getSettings`](get-settings)
-1. [Set settings - `setSettings`](set-settings)
-1. [Index settings parameters](index-settings-parameters)
+1. [Get settings - `getSettings`](#get-settings)
+1. [Set settings - `setSettings`](#set-settings)
+1. [Index settings parameters](#index-settings-parameters)
 
 **Parameters**
 
-1. [Overview](overview)
-1. [Search](search)
-1. [Attributes](attributes)
-1. [Ranking](ranking)
-1. [Filtering / Faceting](filtering--faceting)
-1. [Highlighting / Snippeting](highlighting--snippeting)
-1. [Pagination](pagination)
-1. [Typos](typos)
-1. [Geo-Search](geo-search)
-1. [Query Strategy](query-strategy)
-1. [Advanced](advanced)
+1. [Overview](#overview)
+1. [Search](#search)
+1. [Attributes](#attributes)
+1. [Ranking](#ranking)
+1. [Filtering / Faceting](#filtering--faceting)
+1. [Highlighting / Snippeting](#highlighting--snippeting)
+1. [Pagination](#pagination)
+1. [Typos](#typos)
+1. [Geo-Search](#geo-search)
+1. [Query Strategy](#query-strategy)
+1. [Advanced](#advanced)
 
 **Manage Indices**
 
-1. [Create an index](create-an-index)
-1. [List indices - `listIndexes`](list-indices)
-1. [Delete index - `deleteIndex`](delete-index)
-1. [Clear index - `clearIndex`](clear-index)
-1. [Copy index - `copyIndex`](copy-index)
-1. [Move index - `moveIndex`](move-index)
+1. [Create an index](#create-an-index)
+1. [List indices - `listIndexes`](#list-indices)
+1. [Delete index - `deleteIndex`](#delete-index)
+1. [Clear index - `clearIndex`](#clear-index)
+1. [Copy index - `copyIndex`](#copy-index)
+1. [Move index - `moveIndex`](#move-index)
 
 **Api keys**
 
-1. [Overview](overview)
-1. [Generate key - `generateSecuredApiKey`](generate-key)
+1. [Overview](#overview)
+1. [Generate key - `generateSecuredApiKey`](#generate-key)
 
 **Synonyms**
 
-1. [Save synonym - `saveSynonym`](save-synonym)
-1. [Batch synonyms - `batchSynonyms`](batch-synonyms)
-1. [Editing Synonyms](editing-synonyms)
-1. [Delete synonym - `deleteSynonym`](delete-synonym)
-1. [Clear all synonyms - `clearSynonyms`](clear-all-synonyms)
-1. [Get synonym - `getSynonym`](get-synonym)
-1. [Search synonyms - `searchSynonyms`](search-synonyms)
+1. [Save synonym - `saveSynonym`](#save-synonym)
+1. [Batch synonyms - `batchSynonyms`](#batch-synonyms)
+1. [Editing Synonyms](#editing-synonyms)
+1. [Delete synonym - `deleteSynonym`](#delete-synonym)
+1. [Clear all synonyms - `clearSynonyms`](#clear-all-synonyms)
+1. [Get synonym - `getSynonym`](#get-synonym)
+1. [Search synonyms - `searchSynonyms`](#search-synonyms)
 
 **Advanced**
 
-1. [Custom batch - `batch`](custom-batch)
-1. [Backup / Export an index - `browse`](backup--export-an-index)
-1. [List api keys - `listApiKeys`](list-api-keys)
-1. [Add user key - `addUserKey`](add-user-key)
-1. [Update user key - `updateUserKey`](update-user-key)
-1. [Delete user key - `deleteUserKey`](delete-user-key)
-1. [Get key permissions - `getUserKeyACL`](get-key-permissions)
-1. [Get logs - `getLogs`](get-logs)
+1. [Custom batch - `batch`](#custom-batch)
+1. [Backup / Export an index - `browse`](#backup--export-an-index)
+1. [List api keys - `listApiKeys`](#list-api-keys)
+1. [Add user key - `addUserKey`](#add-user-key)
+1. [Update user key - `updateUserKey`](#update-user-key)
+1. [Delete user key - `deleteUserKey`](#delete-user-key)
+1. [Get key permissions - `getUserKeyACL`](#get-key-permissions)
+1. [Get logs - `getLogs`](#get-logs)
 
 
 # Guides & Tutorials

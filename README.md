@@ -13,30 +13,30 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 **Getting Started**
 
 1. [Install](#install)
-1. [Init index - `initIndex`](#init-index)
+1. [Init index - `initIndex`](#init-index---initindex)
 1. [Quick Start](#quick-start)
 
 **Search**
 
-1. [Search in an index - `search`](#search-in-an-index)
+1. [Search in an index - `search`](#search-in-an-index---search)
 1. [Search Response Format](#search-response-format)
 1. [Search Parameters](#search-parameters)
-1. [Search in indices - `multipleQueries`](#search-in-indices)
-1. [Get Objects - `getObjects`](#get-objects)
+1. [Search in indices - `multipleQueries`](#search-in-indices---multiplequeries)
+1. [Get Objects - `getObjects`](#get-objects---getobjects)
 
 **Indexing**
 
-1. [Add Objects - `addObjects`](#add-objects)
-1. [Update objects - `saveObjects`](#update-objects)
-1. [Partial update objects - `partialUpdateObjects`](#partial-update-objects)
-1. [Delete objects - `deleteObjects`](#delete-objects)
-1. [Delete by query - `deleteByQuery`](#delete-by-query)
-1. [Wait for operations - `waitTask`](#wait-for-operations)
+1. [Add Objects - `addObjects`](#add-objects---addobjects)
+1. [Update objects - `saveObjects`](#update-objects---saveobjects)
+1. [Partial update objects - `partialUpdateObjects`](#partial-update-objects---partialupdateobjects)
+1. [Delete objects - `deleteObjects`](#delete-objects---deleteobjects)
+1. [Delete by query - `deleteByQuery`](#delete-by-query---deletebyquery)
+1. [Wait for operations - `waitTask`](#wait-for-operations---waittask)
 
 **Settings**
 
-1. [Get settings - `getSettings`](#get-settings)
-1. [Set settings - `setSettings`](#set-settings)
+1. [Get settings - `getSettings`](#get-settings---getsettings)
+1. [Set settings - `setSettings`](#set-settings---setsettings)
 1. [Index settings parameters](#index-settings-parameters)
 
 **Parameters**
@@ -56,37 +56,37 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 **Manage Indices**
 
 1. [Create an index](#create-an-index)
-1. [List indices - `listIndexes`](#list-indices)
-1. [Delete index - `deleteIndex`](#delete-index)
-1. [Clear index - `clearIndex`](#clear-index)
-1. [Copy index - `copyIndex`](#copy-index)
-1. [Move index - `moveIndex`](#move-index)
+1. [List indices - `listIndexes`](#list-indices---listindexes)
+1. [Delete index - `deleteIndex`](#delete-index---deleteindex)
+1. [Clear index - `clearIndex`](#clear-index---clearindex)
+1. [Copy index - `copyIndex`](#copy-index---copyindex)
+1. [Move index - `moveIndex`](#move-index---moveindex)
 
 **Api keys**
 
 1. [Overview](#overview)
-1. [Generate key - `generateSecuredApiKey`](#generate-key)
+1. [Generate key - `generateSecuredApiKey`](#generate-key---generatesecuredapikey)
 
 **Synonyms**
 
-1. [Save synonym - `saveSynonym`](#save-synonym)
-1. [Batch synonyms - `batchSynonyms`](#batch-synonyms)
+1. [Save synonym - `saveSynonym`](#save-synonym---savesynonym)
+1. [Batch synonyms - `batchSynonyms`](#batch-synonyms---batchsynonyms)
 1. [Editing Synonyms](#editing-synonyms)
-1. [Delete synonym - `deleteSynonym`](#delete-synonym)
-1. [Clear all synonyms - `clearSynonyms`](#clear-all-synonyms)
-1. [Get synonym - `getSynonym`](#get-synonym)
-1. [Search synonyms - `searchSynonyms`](#search-synonyms)
+1. [Delete synonym - `deleteSynonym`](#delete-synonym---deletesynonym)
+1. [Clear all synonyms - `clearSynonyms`](#clear-all-synonyms---clearsynonyms)
+1. [Get synonym - `getSynonym`](#get-synonym---getsynonym)
+1. [Search synonyms - `searchSynonyms`](#search-synonyms---searchsynonyms)
 
 **Advanced**
 
-1. [Custom batch - `batch`](#custom-batch)
-1. [Backup / Export an index - `browse`](#backup--export-an-index)
-1. [List api keys - `listApiKeys`](#list-api-keys)
-1. [Add user key - `addUserKey`](#add-user-key)
-1. [Update user key - `updateUserKey`](#update-user-key)
-1. [Delete user key - `deleteUserKey`](#delete-user-key)
-1. [Get key permissions - `getUserKeyACL`](#get-key-permissions)
-1. [Get logs - `getLogs`](#get-logs)
+1. [Custom batch - `batch`](#custom-batch---batch)
+1. [Backup / Export an index - `browse`](#backup--export-an-index---browse)
+1. [List api keys - `listApiKeys`](#list-api-keys---listapikeys)
+1. [Add user key - `addUserKey`](#add-user-key---adduserkey)
+1. [Update user key - `updateUserKey`](#update-user-key---updateuserkey)
+1. [Delete user key - `deleteUserKey`](#delete-user-key---deleteuserkey)
+1. [Get key permissions - `getUserKeyACL`](#get-key-permissions---getuserkeyacl)
+1. [Get logs - `getLogs`](#get-logs---getlogs)
 
 
 # Guides & Tutorials
@@ -597,7 +597,7 @@ $res = $index->addObjects(
 );
 ```
 
-To add a single object, use the `[Add Objects](/doc/api-client/php/indexing#add-objects)` method:
+To add a single object, use the [Add Objects](/doc/api-client/php/indexing#add-objects) method:
 
 ```php
 <?php
@@ -2746,6 +2746,8 @@ Add a validity period. The key will be valid for a specific period of time (in s
 ##### maxQueriesPerIPPerHour
 
 Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the source of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
+
+  Note: If you are sending the query through your servers, you must use the `enableRateLimitForward("TheAdminAPIKey", "EndUserIP", "APIKeyWithRateLimit")` function to enable rate-limit.
 
 ##### maxHitsPerQuery
 

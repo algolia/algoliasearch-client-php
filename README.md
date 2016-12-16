@@ -111,9 +111,6 @@ Check our [online guides](https://www.algolia.com/doc):
 
 
 
-
-<section>
-
 ## Install
 
 Install the package via [Composer](https://getcomposer.org/doc/00-intro.md):
@@ -124,21 +121,12 @@ composer require algolia/algoliasearch-client-php
 
 If you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
 
-
-
-
 ### Framework Integrations
 
 If you're a Symfony or Laravel user, you're probably looking for the following integrations
 
  - **Laravel**: [algolia/algoliasearch-laravel](https://github.com/algolia/algoliasearch-laravel)
  - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
-
-
-</section>
-
-<section>
-
 
 ## Init index - `initIndex` 
 
@@ -154,14 +142,6 @@ $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 $index = $client->initIndex('index_name');
 ```
 
-
-
-</section>
-
-
-
-<section>
-
 ## Quick Start
 
 In 30 seconds, this quick start tutorial will show you how to index and search objects.
@@ -174,7 +154,6 @@ $index = $client->initIndex('contacts');
 $batch = json_decode(file_get_contents('contacts.json'), true);
 $index->addObjects($batch);
 ```
-
 
 You can now search for contacts using firstname, lastname, company, etc. (even with typos):
 
@@ -193,14 +172,12 @@ var_dump($index->search('california paint'));
 var_dump($index->search('jimmie paint'));
 ```
 
-
 Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
 
 ```php
 <?php
 $index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
-
 
 You can also configure the list of attributes you want to index by order of importance (first = most important):
 
@@ -220,7 +197,6 @@ $index->setSettings(
 );
 ```
 
-
 Since the engine is designed to suggest results as you type, you'll generally search by prefix. In this case the order of attributes is very important to decide which hit is the best:
 
 ```php
@@ -229,9 +205,7 @@ var_dump($index->search('or'));
 var_dump($index->search('jim'));
 ```
 
-
-**Note:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries.
-
+**Note:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-javascript) to perform queries.
 
 It brings two benefits:
   * Your users get a better response time by not going through your servers
@@ -267,23 +241,16 @@ function searchCallback(err, content) {
 </script>
 ```
 
-</section>
-
 
 # Search
 
 
 
-<section>
-
-
 ## Search in an index - `search` 
 
-
-**Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-js) to perform queries. It brings two benefits:
+**Notes:** If you are building a web application, you may be more interested in using our [JavaScript client](https://github.com/algolia/algoliasearch-client-javascript) to perform queries. It brings two benefits:
   * Your users get a better response time by not going through your servers
   * It will offload unnecessary tasks from your servers.
-
 
 To perform a search, you only need to initialize the index and perform a call to the search function.
 
@@ -295,14 +262,6 @@ $index = $client->initIndex('contacts');
 $res = $index->search('query string');
 $res = $index->search('query string', ['attributesToRetrieve' => 'firstname,lastname', 'hitsPerPage' => 50]);
 ```
-
-
-
-</section>
-
-
-
-<section>
 
 ## Search Response Format
 
@@ -447,15 +406,10 @@ When [facets](#facets) is non-empty, the following additional fields are returne
 
 - `exhaustiveFacetsCount` (boolean): Whether the counts are exhaustive (`true`) or approximate (`false`). *Note: When using [distinct](#distinct), the facet counts cannot be exhaustive.*
 
-</section>
-
-<section>
-
 ## Search Parameters
 
 Here is the list of parameters you can use with the search method (`search` [scope](#scope)):
 Parameters that can also be used in a setSettings also have the `indexing` [scope](#scope)
-
 
 **Search**
 
@@ -518,6 +472,7 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 
 **Advanced**
 
+- [analyticsTags](#analyticstags) `search`
 - [synonyms](#synonyms) `search`
 - [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 - [minProximity](#minproximity) `settings`, `search`
@@ -525,14 +480,9 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 - [distinct](#distinct) `settings`, `search`
 - [getRankingInfo](#getrankinginfo) `search`
 - [numericFilters (deprecated)](#numericfilters-deprecated) `search`
+- [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [facetFilters (deprecated)](#facetfilters-deprecated) `search`
 - [analytics](#analytics) `search`
-- [analyticsTags](#analyticstags) `search`
-
-</section>
-
-<section>
-
 
 ## Search in indices - `multipleQueries` 
 
@@ -554,7 +504,6 @@ $results = $client->multipleQueries($queries);
 var_dump(results['results']):
 ```
 
-
 You can specify a `strategy` parameter to optimize your multiple queries:
 
 - `none`: Execute the sequence of queries until the end.
@@ -572,14 +521,6 @@ The resulting JSON contains the following fields:
 
     - `processed` (boolean, optional): *Note: Only returned when `strategy` is `stopIfEnoughmatches`.* Whether the query was processed.
 
-
-</section>
-
-
-
-<section>
-
-
 ## Get Objects - `getObjects` 
 
 You can easily retrieve an object using its `objectID` and optionally specify a comma separated list of attributes you want:
@@ -596,7 +537,6 @@ $index->getObject('myID', 'firstname,lastname');
 $index->getObject('myID', 'firstname');
 ```
 
-
 You can also retrieve a set of objects:
 
 ```php
@@ -605,18 +545,8 @@ $index->getObjects(['myID1', 'myID2']);
 ```
 
 
-
-</section>
-
-
-
-
-
 # Indexing
 
-
-
-<section>
 
 
 ## Add Objects - `addObjects` 
@@ -647,7 +577,6 @@ $res = $index->addObjects(
 );
 ```
 
-
 Example with manual `objectID` assignments:
 
 ```php
@@ -668,7 +597,6 @@ $res = $index->addObjects(
 );
 ```
 
-
 To add a single object, use the `[Add Objects](/doc/api-client/php/indexing#add-objects)` method:
 
 ```php
@@ -682,14 +610,6 @@ $res = $index->addObject(
 );
 echo 'objectID=' . $res['objectID'] . "\n";
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Update objects - `saveObjects` 
 
@@ -719,7 +639,6 @@ $res = $index->saveObjects(
 );
 ```
 
-
 To update a single object, you can use the following method:
 
 ```php
@@ -733,14 +652,6 @@ $index->saveObject(
     ]
 );
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Partial update objects - `partialUpdateObjects` 
 
@@ -765,7 +676,6 @@ $index->partialUpdateObject(
 );
 ```
 
-
 Example to add a tag:
 
 ```php
@@ -777,7 +687,6 @@ $index->partialUpdateObject(
     ]
 );
 ```
-
 
 Example to remove a tag:
 
@@ -791,7 +700,6 @@ $index->partialUpdateObject(
 );
 ```
 
-
 Example to add a tag if it doesn't exist:
 
 ```php
@@ -804,7 +712,6 @@ $index->partialUpdateObject(
 );
 ```
 
-
 Example to increment a numeric value:
 
 ```php
@@ -816,7 +723,6 @@ $index->partialUpdateObject(
     ]
 );
 ```
-
 
 Note: Here we are incrementing the value by `42`. To increment just by one, put
 `value:1`.
@@ -832,7 +738,6 @@ $index->partialUpdateObject(
     ]
 );
 ```
-
 
 Note: Here we are decrementing the value by `42`. To decrement just by one, put
 `value:1`.
@@ -855,14 +760,6 @@ $res = $index->partialUpdateObjects(
 );
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Delete objects - `deleteObjects` 
 
 You can delete objects using their `objectID`:
@@ -872,7 +769,6 @@ You can delete objects using their `objectID`:
 $res = $index->deleteObjects(["myID1", "myID2"]);
 ```
 
-
 To delete a single object, you can use the `[Delete objects](/doc/api-client/php/indexing#delete-objects)` method:
 
 ```php
@@ -880,18 +776,9 @@ To delete a single object, you can use the `[Delete objects](/doc/api-client/php
 $index->deleteObject('myID');
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Delete by query - `deleteByQuery` 
 
 You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
-
 
 Take your precautions when using this method. Calling it with an empty query will result in cleaning the index of all its records.
 
@@ -900,14 +787,6 @@ Take your precautions when using this method. Calling it with an empty query wil
 $params = [];
 $index->deleteByQuery('John', $params);
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Wait for operations - `waitTask` 
 
@@ -934,20 +813,12 @@ $res = $index->addObject(
 $index->waitTask($res['taskID']);
 ```
 
-
 If you want to ensure multiple objects have been indexed, you only need to check
 the biggest `taskID`.
 
 
-</section>
-
-
-
 # Settings
 
-
-
-<section>
 
 
 ## Get settings - `getSettings` 
@@ -960,21 +831,12 @@ $settings = $index->getSettings();
 var_dump($settings);
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Set settings - `setSettings` 
 
 ```php
 <?php
 $index->setSettings(array("customRanking" => array("desc(followers)")));
 ```
-
 
 **Warning**
 
@@ -989,23 +851,11 @@ You can forward all settings updates to the replicas of an index by using the `f
 $index->setSettings(['customRanking' => ['desc(followers)']], true);
 ```
 
-
-
-
-
-</section>
-
-
-
-<section>
-
 ## Index settings parameters
 
 Here is the list of parameters you can use with the set settings method (`settings` [scope](#scope)).
 
-
 Parameters that can be overridden at search time also have the `search` [scope](#scope).
-
 
 **Attributes**
 
@@ -1074,8 +924,6 @@ Parameters that can be overridden at search time also have the `search` [scope](
 
 
 
-<section>
-
 ## Overview
 
 ### Scope
@@ -1089,9 +937,7 @@ They are three scopes:
 - `search`: The setting can only be used in the `search` method
 - `settings` `search`: The setting can be used in the `setSettings` method and be override in the`search` method
 
-
 ### Parameters List
-
 
 **Search**
 
@@ -1169,6 +1015,7 @@ They are three scopes:
 **Advanced**
 
 - [attributeForDistinct](#attributefordistinct) `settings`
+- [analyticsTags](#analyticstags) `search`
 - [synonyms](#synonyms) `search`
 - [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 - [placeholders](#placeholders) `settings`
@@ -1180,55 +1027,30 @@ They are three scopes:
 - [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
 - [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
 - [numericFilters (deprecated)](#numericfilters-deprecated) `search`
+- [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [facetFilters (deprecated)](#facetfilters-deprecated) `search`
 - [analytics](#analytics) `search`
-- [analyticsTags](#analyticstags) `search`
-
-</section>
-
-
-<section>
 
 ## Search
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### query
-
 
 - scope: `search`
 - type: `string`
 - default: ""
 
-
 The instant search query string, used to set the string you want to search in your index.
 If no query parameter is set, the textual search will match with all the objects.
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Attributes
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### searchableAttributes
-
 
 - scope: `settings`
 - type: `array of strings`
@@ -1252,65 +1074,41 @@ This parameter has two important uses:
 
 To get a full description of how the ranking works, you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### attributesForFaceting
-
 
 - scope: `settings`
 - type: `array of strings`
-
-
 
 The list of attributes you want to use for faceting.
 All strings within these attributes will be extracted and added as facets.
 If set to `null`, no attribute is used for faceting.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### unretrievableAttributes
-
 
 - scope: `settings`
 - type: `array of strings`
-
-
 
 The list of attributes that cannot be retrieved at query time.
 This feature allows you to have attributes that are used for indexing
 and/or ranking but cannot be retrieved.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### attributesToRetrieve
-
 
 - scope: `settings` `search`
 - type: `array of strings`
 - default: *
-
 
 A string that contains the list of attributes you want to retrieve in order to minimize the size of the JSON answer.
 
@@ -1321,53 +1119,32 @@ You can also use `*` to retrieve all values when an **attributesToRetrieve** set
 
 **Note:** `objectID` is always retrieved, even when not specified.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### restrictSearchableAttributes
-
 
 - scope: `search`
 - type: `array of strings`
 - default: searchableAttributes
-
 
 List of attributes you want to use for textual search (must be a subset of the `searchableAttributes` index setting).
 Attributes are separated with a comma such as `"name,address"`.
 You can also use JSON string array encoding such as `encodeURIComponent("[\"name\",\"address\"]")`.
 By default, all attributes specified in the `searchableAttributes` settings are used to search.
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Ranking
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### ranking
-
 
 - scope: `settings`
 - type: `array of strings`
 - default: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom']
-
-
 
 Controls the way results are sorted.
 
@@ -1387,24 +1164,15 @@ We have nine available criterion:
 
 To get a full description of how the Ranking works, you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### customRanking
-
 
 - scope: `settings`
 - type: `array of strings`
 - default: []
-
-
 
 Lets you specify part of the ranking.
 
@@ -1416,23 +1184,16 @@ For example, `"customRanking" => ["desc(population)", "asc(name)"]`.
 To get a full description of how the Custom Ranking works,
 you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### replicas
-
 
 - scope: `settings`
 - type: `array of strings`
 - default: []
 - formerly known as: `slaves`
-
 
 The list of indices on which you want to replicate all write operations.
 
@@ -1444,31 +1205,17 @@ you need to create one index per ranking configuration.
 This option enables you to perform write operations only on this index and automatically
 update replica indices with the same operations.
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Filtering / Faceting
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### filters
-
 
 - scope: `search`
 - type: `string`
 - default: ""
-
-
 
 Filter the query with numeric, facet or/and tag filters.
 
@@ -1483,23 +1230,15 @@ the filter applies to `_tags`.
 
 For example: `public OR user_42` will translate to `_tags:public OR _tags:user_42`.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### facets
-
 
 - scope: `search`
 - type: `string`
 - default: ""
-
-
 
 You can use [facets](#facets) to retrieve only a part of your attributes declared in
 **[attributesForFaceting](#attributesforfaceting)** attributes.
@@ -1529,23 +1268,15 @@ You can also use `*` to perform faceting on all attributes specified in `attribu
 If the number of results is important, the count can be approximate,
 the attribute `exhaustiveFacetsCount` in the response is true when the count is exact.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### maxValuesPerFacet
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 100
-
-
 
 Limit the number of facet values returned for each facet.
 
@@ -1554,31 +1285,16 @@ For example, `maxValuesPerFacet=10` will retrieve a maximum of 10 values per fac
 **Warnings**
 - The engine has a hard limit on the `maxValuesPerFacet` of `1000`. Any value above that will be interpreted by the engine as being `1000`.
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Highlighting / Snippeting
 
-
-
-
-
-
 <div class='api-client-parameter'>
-
 
 ### attributesToHighlight
 
-
 - scope: `settings` `search`
 - type: `array of string`
-
-
-
 
 Default list of attributes to highlight.
 If set to null, all indexed attributes are highlighted.
@@ -1596,226 +1312,131 @@ A matchLevel is returned for each highlighted attribute and can contain:
 * `partial`: If only some of the query terms were found.
 * `none`: If none of the query terms were found.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### attributesToSnippet
-
 
 - scope: `settings` `search`
 - type: `array of strings`
 
-
-
-
 Default list of attributes to snippet alongside the number of words to return (syntax is `attributeName:nbWords`).
 If set to null, no snippet is computed.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### highlightPreTag
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: <em>
 
-
-
 Specify the string that is inserted before the highlighted parts in the query result (defaults to `<em>`).
-
-
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### highlightPostTag
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: </em>
 
-
-
 Specify the string that is inserted after the highlighted parts in the query result (defaults to `</em>`).
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### snippetEllipsisText
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: ...
 
-
-
 String used as an ellipsis indicator when a snippet is truncated.
 
 Defaults to an empty string for all accounts created before 10/2/2016, and to `…` (U+2026) for accounts created after that date.
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### restrictHighlightAndSnippetArrays
-
 
 - scope: `settings` `search`
 - type: `boolean`
 - default: false
 
-
-
 If set to true, restrict arrays in highlights and snippets to items that matched the query at least partially else return all array items in highlights and snippets.
-
 
 </div>
 
-</section>
-
-<section>
-
 ## Pagination
-
-
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### page
-
 
 - scope: `search`
 - type: `integer`
 - default: 0
 
-
-
 Pagination parameter used to select the page to retrieve.
 
 **Warning:** Page is zero based. Thus, to retrieve the 10th page, you need to set `page=9`.
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### hitsPerPage
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 20
 
-
-
 Pagination parameter used to select the number of hits per page.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
-
 
 ### offset
 
-
 - scope: `search`
 - type: `integer`
-
-
-
 
 Offset of the first hit to return (zero-based).
 
 **Warning:** In most cases, `page`/`hitsPerPage` is the recommended method for pagination; `offset`/`length` is reserved for advanced use.
 
-
-
 </div>
 
-
-
-
 <div class='api-client-parameter'>
-
 
 ### length
 
-
 - scope: `search`
 - type: `integer`
-
-
-
 
 Offset of the first hit to return (zero-based).
 
 **Warning:** In most cases, `page`/`hitsPerPage` is the recommended method for pagination; `offset`/`length` is reserved for advanced use.
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### paginationLimitedTo
-
 
 - scope: `settings`
 - type: `integer`
 - default: 1000
-
-
 
 Allows to control the maximum number of hits accessible via pagination. By default, this parameter is limited to 1000 to guarantee good performance.
 
@@ -1823,72 +1444,41 @@ Allows to control the maximum number of hits accessible via pagination. By defau
 Increasing this limit will have a direct impact on the performance of search.
 A big value will also make it very easy for anyone to download all your dataset.
 
-
-
 </div>
-
-</section>
-
-<section>
 
 ## Typos
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### minWordSizefor1Typo
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 4
 
-
-
 The minimum number of characters needed to accept one typo.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### minWordSizefor2Typos
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 8
 
-
-
 The minimum number of characters needed to accept two typos.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### typoTolerance
-
 
 - scope: `settings` `search`
 - type: `boolean`
 - default: true
-
-
 
 This option allows you to control the number of typos allowed in the result set:
 
@@ -1897,42 +1487,27 @@ This option allows you to control the number of typos allowed in the result set:
 * `min`: Only keep results with the minimum number of typos. For example, if one result matches without typos, then all results with typos will be hidden.
 * `strict`: Hits matching with 2 typos are not retrieved if there are some matching without typos.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### allowTyposOnNumericTokens
-
 
 - scope: `settings` `search`
 - type: `boolean`
 - default: true
 
-
-
 If set to false, disables typo tolerance on numeric tokens (numbers).
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### ignorePlurals
-
 
 - scope: `settings` `search`
 - type: `boolean` `array of strings`
 - default: true
-
 
 Consider singular and plurals forms a match without typo. For example, car and
 cars, or foot and feet will be considered equivalent. This parameter can be:
@@ -1954,23 +1529,15 @@ Pashto=`ps`, Portuguese=`pt`, Quechua=`qu`, Romanian=`ro`, Russian=`ru`,
 Slovak=`sk`, Albanian=`sq`, Swedish=`sv`, Swahili=`sw`, Tamil=`ta`,
 Telugu=`te`, Tagalog=`tl`, Tswana=`tn`, Turkish=`tr`, Tatar=`tt`,
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### disableTypoToleranceOnAttributes
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: ""
-
-
 
 List of attributes on which you want to disable typo tolerance
 (must be a subset of the `searchableAttributes` index setting).
@@ -1978,23 +1545,15 @@ List of attributes on which you want to disable typo tolerance
 Attributes are separated with a comma such as `"name,address"`.
 You can also use JSON string array encoding such as `encodeURIComponent("[\"name\",\"address\"]")`.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### separatorsToIndex
-
 
 - scope: `settings`
 - type: `string`
 - default: ""
-
-
 
 Specify the separators (punctuation characters) to index.
 
@@ -2002,12 +1561,7 @@ By default, separators are not indexed.
 
 **Example:** Use `+#` to be able to search for "Google+" or "C#".
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Geo-Search
 
@@ -2039,23 +1593,13 @@ Geo search requires that you provide at least one geo location in each record at
 }
 ```
 
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### aroundLatLng
-
 
 - scope: `search`
 - type: `string`
 - default: ""
-
-
-
-
 
 Search for entries around a given location (specified as two floats separated by a comma).
 
@@ -2067,27 +1611,15 @@ For example, `aroundLatLng=47.316669,5.016670`.
 - If you set aroundPrecision=100, the distances will be considered by ranges of 100m.
 - For example all distances 0 and 100m will be considered as identical for the "geo" ranking parameter.
 
-
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### aroundLatLngViaIP
-
 
 - scope: `search`
 - type: `boolean`
 - default: false
-
-
-
-
 
 Search for entries around a given latitude/longitude automatically computed from user IP address.
 
@@ -2101,25 +1633,14 @@ For example:
 two objects that are in the range 0-99m
 will be considered as identical in the ranking for the "geo" ranking parameter (same for 100-199, 200-299, ... ranges).
 
-
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### aroundRadius
-
 
 - scope: `search`
 - type: `integer` `string`
-
-
-
 
 Control the radius associated with a geo search. Defined in meters.
 
@@ -2130,23 +1651,14 @@ You can also specify a minimum value for the automatic radius by using the `mini
 You can specify `aroundRadius=all` if you want to compute the geo distance without filtering in a geo area;
 this option will be faster than specifying a big integer value.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### aroundPrecision
-
 
 - scope: `search`
 - type: `integer`
-
-
-
 
 Control the precision of a geo search.
 Defined in meters.
@@ -2154,45 +1666,27 @@ Defined in meters.
 For example, if you set `aroundPrecision=100`, two objects that are in the range 0-99m will be considered as
 identical in the ranking for the `geo` ranking parameter (same for 100-199, 200-299, … ranges).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### minimumAroundRadius
-
 
 - scope: `search`
 - type: `integer`
-
-
-
 
 Define the minimum radius used for a geo search when `aroundRadius` is not set.
 The radius is computed automatically using the density of the area.
 You can retrieve the computed radius in the `automaticRadius` attribute of the answer.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### insideBoundingBox
-
 
 - scope: `search`
 - type: `string`
-
-
-
 
 Search entries inside a given area defined by the two extreme points of a rectangle
 (defined by 4 floats: p1Lat,p1Lng,p2Lat,p2Lng).
@@ -2201,27 +1695,18 @@ For example:
 
 - `insideBoundingBox=47.3165,4.9665,47.3424,5.0201`
 
-
 You can use several bounding boxes (OR) by passing more than 4 values.
 For example: instead of having 4 values you can pass 8 to search inside the UNION of two bounding boxes.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### insidePolygon
-
 
 - scope: `search`
 - type: `string`
 - default: ""
-
-
 
 Search entries inside a given area defined by a set of points
   (defined by a minimum of 6 floats: p1Lat,p1Lng,p2Lat,p2Lng,p3Lat,p3Long).
@@ -2231,31 +1716,17 @@ Search entries inside a given area defined by a set of points
   - `InsidePolygon=47.3165,4.9665,47.3424,5.0201,47.32,4.98`
   
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Query Strategy
 
-
-
-
-
-
 <div class='api-client-parameter'>
 
-
 ### queryType
-
 
 - scope: `settings`
 - type: `string`
 - default: prefixLast
-
-
 
 Selects how the query words are interpreted. It can be one of the following values:
 * `prefixAll`:
@@ -2265,23 +1736,15 @@ Only the last word is interpreted as a prefix (default behavior).
 * `prefixNone`:
 No query word is interpreted as a prefix. This option is not recommended.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### removeWordsIfNoResults
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: none
-
-
 
 This option is used to select a strategy in order to avoid having an empty result page.
 There are four different options:
@@ -2298,23 +1761,15 @@ This is equivalent to transforming the AND operand between query terms to an OR 
 - `none`:
 No specific processing is done when a query does not return any results (default behavior).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### advancedSyntax
-
 
 - scope: `settings` `search`
 - type: `boolean`
 - default: false
-
-
 
 Enables the advanced query syntax.
 
@@ -2325,43 +1780,27 @@ This syntax allow to do two things:
 * **Prohibit operator**: The prohibit operator excludes records that contain the term after the `-` symbol.
 For example, `search -engine` will retrieve records containing `search` but not `engine`.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### optionalWords
-
 
 - scope: `settings` `search`
 - type: `array of strings`
 - default: []
 
-
-
 A string that contains the comma separated list of words that should be considered as optional when found in the query.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### removeStopWords
-
 
 - scope: `settings` `search`
 - type: `boolean` `array of strings`
 - default: false
-
-
 
 Remove stop words from the query **before** executing it. It can be:
 
@@ -2383,25 +1822,15 @@ In this case, before executing the query, we will remove “what”, “is” an
 This removal will remove false positive because of stop words, especially when combined with optional words.
 For most use cases, it is better to not use this feature as people search by keywords on search engines.
 
-
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### disablePrefixOnAttributes
-
 
 - scope: `seetings`
 - type: `array of strings`
 - default: []
-
-
 
 List of attributes on which you want to disable prefix matching
 (must be a subset of the `searchableAttributes` index setting).
@@ -2409,44 +1838,28 @@ List of attributes on which you want to disable prefix matching
 This setting is useful on attributes that contain string that should not be matched as a prefix
 (for example a product SKU).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### disableExactOnAttributes
-
 
 - scope: `settings`
 - type: `search`
 - default: []
 
-
-
 List of attributes on which you want to disable the computation of `exact` criteria
 (must be a subset of the `searchableAttributes` index setting).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### exactOnSingleWordQuery
-
 
 - scope: `settings` `search`
 - type: `string`
 - default: attribute
-
-
 
 This parameter control how the `exact` ranking criterion is computed when the query contains one word. There are three different values:
 
@@ -2454,23 +1867,15 @@ This parameter control how the `exact` ranking criterion is computed when the qu
 * `word`: exact set to 1 if the query word is found in the record. The query word needs to have at least 3 chars and not be part of our stop words dictionary
 * `attribute` (default): exact set to 1 if there is an attribute containing a string equals to the query
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### alternativesAsExact
-
 
 - scope: `setting` `search`
 - type: `string`
 - default: ['ignorePlurals', 'singleWordSynonym']
-
-
 
 Specify the list of approximation that should be considered as an exact match in the ranking formula:
 
@@ -2478,31 +1883,16 @@ Specify the list of approximation that should be considered as an exact match in
 * `singleWordSynonym`: single-word synonym (For example "NY" = "NYC")
 * `multiWordsSynonym`: multiple-words synonym (For example "NY" = "New York")
 
-
 </div>
-
-</section>
-
-<section>
 
 ## Advanced
 
-
-
-
-
-
 <div class='api-client-parameter'>
-
 
 ### attributeForDistinct
 
-
 - scope: `settings`
 - type: `string`
-
-
-
 
 The name of the attribute used for the `Distinct` feature.
 
@@ -2516,63 +1906,50 @@ then only the first one is kept and the others are removed from the results.
 To get a full understanding of how `Distinct` works,
 you can have a look at our [guide on distinct](https://www.algolia.com/doc/search/distinct).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
+### analyticsTags
+
+- scope: `search`
+- type: `array of strings`
+
+If set, tag your query with the specified identifiers. Tags can then be used in the Analytics to analyze a subset of searches only.
+
+</div>
+
+<div class='api-client-parameter'>
 
 ### synonyms
-
 
 - scope: `search`
 - type: `boolean`
 - default: true
 
-
-
 If set to `false`, the search will not use the synonyms defined for the targeted index.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### replaceSynonymsInHighlight
-
 
 - scope: `settings` `search`
 - type: `boolean`
 - default: true
 
-
-
 If set to `false`, words matched via synonym expansion will not be replaced by the matched synonym in the highlighted result.
-
 
 </div>
 
-
-
-
 <div class='api-client-parameter'>
 
-
 ### placeholders
-
 
 - scope: `settings`
 - type: `hash of array of words`
 - default: ""
-
-
 
 This is an advanced use-case to define a token substitutable by a list of words
 without having the original token searchable.
@@ -2590,23 +1967,15 @@ For example:
 * Configure the placeholder in your index settings:
 `"placeholders": { "<streetnumber>" : ["1", "2", "3", "4", "5", ... ], ... }`.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### altCorrections
-
 
 - scope: `settings`
 - type: `array of objects`
 - default: []
-
-
 
 Specify alternative corrections that you want to consider.
 
@@ -2625,23 +1994,15 @@ For example:
 ]
 ```
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### minProximity
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 1
-
-
 
 Configure the precision of the `proximity` ranking criterion.
 By default, the minimum (and best) proximity value distance between 2 matching words is 1.
@@ -2652,24 +2013,15 @@ will get the same proximity score, even if the second contains a word between th
 
 **Note:** the maximum `minProximity` that can be set is 7. Any higher value will disable the `proximity` criterion from the ranking formula.
 
-
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### responseFields
-
 
 - scope: `settings` `search`
 - type: `array of strings`
 - default: ["*"]
-
-
 
 Choose which fields the response will contain. Applies to search and browse queries.
 
@@ -2683,23 +2035,15 @@ Some fields cannot be filtered out:
 - `cursor` in browse queries
 - fields triggered explicitly via [getRankingInfo](#getrankinginfo)
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### distinct
-
 
 - scope: `settings` `search`
 - type: `integer`
 - default: 0
-
-
 
 If set to 1,
 enables the distinct feature, disabled by default, if the `attributeForDistinct` index setting is set.
@@ -2714,44 +2058,28 @@ then only the best one is kept and the others are removed.
 To get a full understanding of how `Distinct` works,
 you can have a look at our [guide on distinct](https://www.algolia.com/doc/search/distinct).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### getRankingInfo
-
 
 - scope: `search`
 - type: `boolean`
 - default: false
 
-
-
 If set to 1,
 the result hits will contain ranking information in the **_rankingInfo** attribute.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### numericAttributesForFiltering
-
 
 - scope: `settings`
 - type: `array of strings`
 - default: []
-
-
 
 All numerical attributes are automatically indexed as numerical filters
 (allowing filtering operations like `<` and `<=`).
@@ -2762,23 +2090,15 @@ If you only need to filter on a numeric value with the `=` operator,
 you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
 The other operators will be disabled.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### allowCompressionOfIntegerArray
-
 
 - scope: `settings`
 - type: `boolean`
 - default: false
-
-
 
 Allows compression of big integer arrays.
 
@@ -2786,23 +2106,15 @@ In data-intensive use-cases,
 we recommended enabling this feature and then storing the list of user IDs or rights as an integer array.
 When enabled, the integer array is reordered to reach a better compression ratio.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### numericFilters (deprecated)
-
 
 - scope: `search`
 - type: `array of strings`
 - default: []
-
-
 
 *This parameter is deprecated. Please use [filters](#filters) instead.*
 
@@ -2823,23 +2135,46 @@ translates to `encodeURIComponent("code=1,(price:0 to 100,price:1000 to 2000)")`
 
 You can also use a string array encoding (for example `numericFilters: ["price>100","price<1000"]`).
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
-### facetFilters (deprecated)
-
+### tagFilters (deprecated)
 
 - scope: `search`
 - type: `string`
 - default: ""
 
+**This parameter is deprecated. You should use [filters](#filters) instead.**
 
+Filter the query by a set of tags.
+
+You can AND tags by separating them with commas.
+To OR tags, you must add parentheses.
+
+For example, `tagFilters=tag1,(tag2,tag3)` means *tag1 AND (tag2 OR tag3)*.
+
+You can also use a string array encoding.
+
+For example, `tagFilters: ["tag1",["tag2","tag3"]]` means *tag1 AND (tag2 OR tag3)*.
+
+Negations are supported via the `-` operator, prefixing the value.
+
+For example: `tagFilters=tag1,-tag2`.
+
+At indexing, tags should be added in the **_tags** attribute of objects.
+
+For example `{"_tags":["tag1","tag2"]}`.
+
+</div>
+
+<div class='api-client-parameter'>
+
+### facetFilters (deprecated)
+
+- scope: `search`
+- type: `string`
+- default: ""
 
 *This parameter is deprecated. Please use [filters](#filters) instead.*
 
@@ -2852,67 +2187,30 @@ You can also use a string array encoding.
 
 For example, `[["category:Book","category:Movie"],"author:John%20Doe"]`.
 
-
 </div>
-
-
-
 
 <div class='api-client-parameter'>
 
-
 ### analytics
-
 
 - scope: `search`
 - type: `boolean`
 - default: true
 
-
-
 If set to false, this query will not be taken into account in the analytics feature.
 
-
 </div>
 
-
-
-
-<div class='api-client-parameter'>
-
-
-### analyticsTags
-
-
-- scope: `search`
-- type: `array of strings`
-
-
-
-
-If set, tag your query with the specified identifiers. Tags can then be used in the Analytics to analyze a subset of searches only.
-
-
-</div>
-
-</section>
 
 # Manage Indices
 
 
-
-<section>
 
 ## Create an index
 
 To create an index, you need to perform any indexing operation like:
 - set settings
 - add object
-
-</section>
-
-<section>
-
 
 ## List indices - `listIndexes` 
 
@@ -2923,16 +2221,6 @@ You can list all your indices along with their associated information (number of
 var_dump($client->listIndexes());
 ```
 
-
-
-</section>
-
-
-
-
-<section>
-
-
 ## Delete index - `deleteIndex` 
 
 You can delete an index using its name:
@@ -2942,14 +2230,6 @@ You can delete an index using its name:
 $client->deleteIndex('contacts');
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Clear index - `clearIndex` 
 
 You can delete the index contents without removing settings and index specific API keys by using the `clearIndex` command:
@@ -2958,14 +2238,6 @@ You can delete the index contents without removing settings and index specific A
 <?php
 $index->clearIndex();
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Copy index - `copyIndex` 
 
@@ -2979,14 +2251,6 @@ You can copy an existing index using the `copy` command.
 $res = $client->copyIndex('MyIndex', 'MyIndexCopy');
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Move index - `moveIndex` 
 
 In some cases, you may want to totally reindex all your data. In order to keep your existing service
@@ -2998,7 +2262,6 @@ move using the `moveIndex` method.
 // Rename MyNewIndex in MyIndex (and overwrite it)
 $res = $client->moveIndex('MyNewIndex', 'MyIndex');
 ```
-
 
 **Note**:
 
@@ -3024,17 +2287,9 @@ For example, if you want to fully update your index `MyIndex` every night, we re
  and the replica-indices that were initially attached to `MyIndex` will be in sync with the new data.
 
 
-</section>
-
-
-
-
 # Api keys
 
 
-
-
-<section>
 
 ## Overview
 
@@ -3075,13 +2330,7 @@ We have several methods to manage them:
 - [List api keys](/doc/api-client/php/advanced#list-api-keys)
 - [Get key permissions](/doc/api-client/php/advanced#get-key-permissions)
 
-</section>
-
-<section>
-
-
 ## Generate key - `generateSecuredApiKey` 
-
 
 When you need to restrict the scope of the *Search Key*, we recommend to use *Secured API Key*.
 You can generate a *Secured API Key* from the *Search Only API Key* or any search *User API Key*
@@ -3122,7 +2371,6 @@ in the query parameters.
 $public_key = \AlgoliaSearch\Client::generateSecuredApiKey('SearchApiKey', ['filters' => '_tags:user_42']);
 ```
 
-
 **Warning**:
 
 If you set filters in the key `groups:admin`, and `groups:press OR groups:visitors` in the query parameters,
@@ -3136,7 +2384,8 @@ In that case, you can tag all records with their associated `user_id` in order t
 generating the *Secured API Key* to retrieve only what a user is tagged in.
 
 **Warning**
-If you're generating *Secured API Keys* using the [JavaScript client](http://github.com/algolia/algoliasearch-client-js) in your frontend,
+
+If you're generating *Secured API Keys* using the [JavaScript client](http://github.com/algolia/algoliasearch-client-javascript) in your frontend,
 it will result in a security breach since the user is able to modify the filters you've set
 by modifying the code from the browser.
 
@@ -3151,7 +2400,6 @@ $validUntil = Time.now.to_i + 3600
 $public_key = \AlgoliaSearch\Client::generateSecuredApiKey('SearchApiKey', ['validUntil' => $validUntil]);
 ```
 
-
 #### Index Restriction
 
 You can restrict the key to a list of index names allowed for the secured API key
@@ -3161,7 +2409,6 @@ You can restrict the key to a list of index names allowed for the secured API ke
 # generate a public API key that is restricted to 'index1' and 'index2':
 $public_key = \AlgoliaSearch\Client::generateSecuredApiKey('SearchApiKey', ['restrictIndices' => 'index1,index2']);
 ```
-
 
 #### Rate Limiting
 
@@ -3191,7 +2438,6 @@ $public_key = $client->generateSecuredApiKey(
 );
 ```
 
-
 #### Network restriction
 
 For more protection against API key leaking and reuse you can restrict the key to be valid only from specific IPv4 networks
@@ -3203,16 +2449,8 @@ $public_key = \AlgoliaSearch\Client::generateSecuredApiKey('SearchApiKey', ['res
 ```
 
 
-
-</section>
-
-
 # Synonyms
 
-
-
-
-<section>
 
 
 ## Save synonym - `saveSynonym` 
@@ -3230,14 +2468,6 @@ $index->saveSynonym("a-unique-identifier", array(
   "synonyms" => array("car", "vehicle", "auto")
 ), true);
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Batch synonyms - `batchSynonyms` 
 
@@ -3264,14 +2494,6 @@ $index->batchSynonyms(array(array(
 )), true, true);
 ```
 
-
-
-</section>
-
-
-
-<section>
-
 ## Editing Synonyms
 
 Updating the value of a specific synonym record is the same as creating one.
@@ -3282,11 +2504,6 @@ make sure you set replaceExistingSynonyms to false (or leave it out,
 false is the default value).
 Otherwise, the entire synonym list will be replaced only partially with the records
 in the batch update.
-
-</section>
-
-<section>
-
 
 ## Delete synonym - `deleteSynonym` 
 
@@ -3299,14 +2516,6 @@ Forward the deletion to replica indices by setting the forwardToReplicas paramet
 // Delete and forward to replicas
 $index->deleteSynonym("a-unique-identifier", true);
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Clear all synonyms - `clearSynonyms` 
 
@@ -3324,14 +2533,6 @@ use the batch method with the replaceExistingSynonyms parameter set to true.
 $index->clearSynonyms(true);
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Get synonym - `getSynonym` 
 
 Search for synonym records by their objectID or by the text they contain.
@@ -3341,14 +2542,6 @@ Both methods are covered here.
 <?php
 $synonym = $index->getSynonym("a-unique-identifier");
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Search synonyms - `searchSynonyms` 
 
@@ -3367,21 +2560,13 @@ $results = $index->searchSynonyms("street", array("synonym", "oneWaySynonym"), 1
 ```
 
 
-
-</section>
-
-
 # Advanced
 
-
-
-<section>
 
 
 ## Custom batch - `batch` 
 
 You may want to perform multiple operations with one API call to reduce latency.
-
 
 Custom batch:
 
@@ -3412,8 +2597,6 @@ $res = $index->batch(
 );
 ```
 
-
-
 If you have one index per user, you may want to perform a batch operations across several indices.
 We expose a method to perform this type of batch:
 
@@ -3441,7 +2624,6 @@ $res = $index->batch(
 );
 ```
 
-
 The attribute **action** can have these values:
 
 - addObject
@@ -3449,13 +2631,6 @@ The attribute **action** can have these values:
 - partialUpdateObject
 - partialUpdateObjectNoCreate
 - deleteObject
-
-
-</section>
-
-
-<section>
-
 
 ## Backup / Export an index - `browse` 
 
@@ -3467,8 +2642,6 @@ you retrieve objects beyond the 1,000 limit.
 This method is optimized for speed. To make it fast, distinct, typo-tolerance,
 word proximity, geo distance and number of matched words are disabled. Results
 are still returned ranked by attributes and custom ranking.
-
-
 
 #### Response Format
 
@@ -3510,7 +2683,6 @@ The following fields are provided for convenience purposes, and **only when the 
 
 - `nbPages` (integer): Number of pages corresponding to the number of hits. Basically, `ceil(nbHits / hitsPerPage)`.
 
-
 #### Example
 
 ```php
@@ -3525,18 +2697,6 @@ $result = $this->index->browseFrom('', ['filters' => 'i<42']);
 var_dump($result['cursor']);
 ```
 
-
-
-
-
-</section>
-
-
-
-
-<section>
-
-
 ## List api keys - `listApiKeys` 
 
 To list existing keys, you can use:
@@ -3550,7 +2710,6 @@ $client->listUserKeys();
 $index->listUserKeys();
 ```
 
-
 Each key is defined by a set of permissions that specify the authorized actions. The different permissions are:
 
 * **search**: Allowed to search.
@@ -3562,13 +2721,6 @@ Each key is defined by a set of permissions that specify the authorized actions.
 * **editSettings**: Allowed to change index settings.
 * **analytics**: Allowed to retrieve analytics through the analytics API.
 * **listIndexes**: Allowed to list all accessible indexes.
-
-
-</section>
-
-
-<section>
-
 
 ## Add user key - `addUserKey` 
 
@@ -3585,7 +2737,6 @@ $res = $index->addUserKey(['search']);
 echo 'key=' . $res['key'] . "\n";
 ```
 
-
 You can also create an API Key with advanced settings:
 
 ##### validity
@@ -3595,8 +2746,6 @@ Add a validity period. The key will be valid for a specific period of time (in s
 ##### maxQueriesPerIPPerHour
 
 Specify the maximum number of API calls allowed from an IP address per hour. Each time an API call is performed with this key, a check is performed. If the IP at the source of the call did more than this number of calls in the last hour, a 403 code is returned. Defaults to 0 (no rate limit). This parameter can be used to protect you from attempts at retrieving your entire index contents by massively querying the index.
-
-
 
 ##### maxHitsPerQuery
 
@@ -3636,14 +2785,6 @@ $res = $client->addUserKey(params);
 echo 'key=' . $res['key'] . "\n";
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Update user key - `updateUserKey` 
 
 To update the permissions of an existing key:
@@ -3659,7 +2800,6 @@ $res = $index->updateUserKey('myAPIKey', ['search'], 300, 100, 20);
 echo 'key=' . $res['key'] . "\n";
 ```
 
-
 To get the permissions of a given key:
 
 ```php
@@ -3670,14 +2810,6 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 // Gets the rights of an index specific key
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Delete user key - `deleteUserKey` 
 
@@ -3692,14 +2824,6 @@ $res = $client->deleteUserKey('f420238212c54dcfad07ea0aa6d5c45f');
 $res = $index->deleteUserKey('71671c38001bf3ac857bc82052485107');
 ```
 
-
-
-</section>
-
-
-<section>
-
-
 ## Get key permissions - `getUserKeyACL` 
 
 To get the permissions of a given key:
@@ -3712,14 +2836,6 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 // Gets the rights of an index specific key
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
-
-
-
-</section>
-
-
-<section>
-
 
 ## Get logs - `getLogs` 
 
@@ -3766,15 +2882,6 @@ $res = $client->getLogs();
 $res = $client->getLogs(0, 100);
 ```
 
-
-
-</section>
-
-
-
-
-<section>
-
 ### REST API
 
 We've developed API clients for the most common programming languages and platforms.
@@ -3787,4 +2894,4 @@ Everything that can be done using the REST API can be done using those clients.
 The REST API lets your interact directly with Algolia platforms from anything that can send an HTTP request
 [Go to the REST API doc](https://algolia.com/doc/rest)
 
-</section>
+

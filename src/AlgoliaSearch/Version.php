@@ -39,12 +39,12 @@ class Version
     // Method untouched to keep backward compatibility
     public static function get()
     {
-        return self::VALUE . static::$custom_value;
+        return self::VALUE.static::$custom_value;
     }
 
     public static function getUserAgent()
     {
-        $userAgent = self::$prefixUserAgentSegments . 'Algolia for PHP ('.self::VALUE.')' . static::$suffixUserAgentSegments;
+        $userAgent = self::$prefixUserAgentSegments.'Algolia for PHP ('.self::VALUE.')'.static::$suffixUserAgentSegments;
 
         // Keep backward compatibility
         $userAgent .= static::$custom_value;

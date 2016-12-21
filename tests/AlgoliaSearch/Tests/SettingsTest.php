@@ -49,7 +49,7 @@ class SettingsTest extends AlgoliaSearchTestCase
         $res = $this->index->setSettings(array('replicas' => array($this->safe_name('àlgol?à-php-replica'))));
         $this->index->waitTask($res['taskID']);
 
-        $res = $this->index->addObject(array("test" => "test"));
+        $res = $this->index->addObject(array('test' => 'test'));
         $this->index->waitTask($res['taskID']);
 
         $res = $this->index->setSettings(array('attributesToRetrieve' => array('firstname'), 'hitsPerPage' => 50), true);

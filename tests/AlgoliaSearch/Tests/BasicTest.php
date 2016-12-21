@@ -138,7 +138,7 @@ class BasicTest extends AlgoliaSearchTestCase
         $results = $this->client->multipleQueries(array(
             array(
                 'indexName' => $this->safe_name('àlgol?à-php'),
-                'query' => '',
+                'query'     => '',
             ),
         ));
 
@@ -147,18 +147,18 @@ class BasicTest extends AlgoliaSearchTestCase
 
         $results = $this->client->multipleQueries(array(
             array(
-                'indexName' => $this->safe_name('àlgol?à-php'),
-                'query' => '',
+                'indexName'   => $this->safe_name('àlgol?à-php'),
+                'query'       => '',
                 'hitsPerPage' => 1,
             ),
             array(
-                'indexName' => $this->safe_name('àlgol?à-php'),
-                'query' => '',
+                'indexName'   => $this->safe_name('àlgol?à-php'),
+                'query'       => '',
                 'hitsPerPage' => 1,
             ),
             array(
-                'indexName' => $this->safe_name('àlgol?à-php'),
-                'query' => '',
+                'indexName'   => $this->safe_name('àlgol?à-php'),
+                'query'       => '',
                 'hitsPerPage' => 1,
             ),
         ), 'indexName', 'stopIfEnoughMatches');

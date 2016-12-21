@@ -23,6 +23,7 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 1. [Search Parameters](#search-parameters)
 1. [Search in indices - `multipleQueries`](#search-in-indices---multiplequeries)
 1. [Get Objects - `getObjects`](#get-objects---getobjects)
+1. [Search for facet values - `searchForFacetValues`](#search-for-facet-values---searchforfacetvalues)
 
 **Indexing**
 
@@ -542,6 +543,93 @@ You can also retrieve a set of objects:
 ```php
 <?php
 $index->getObjects(['myID1', 'myID2']);
+```
+
+## Search for facet values - `searchForFacetValues` 
+
+When a facet can take many different values, it can be useful to search within them. The typical use case is to build
+an autocomplete menu for facet refinements, but of course other use cases may apply as well.
+
+The facet search is different from a regular search in the sense that it retrieves *facet values*, not *objects*.
+In other words, a value will only be returned once, even if it matches many different objects. How many objects it
+matches is indicated by a count.
+
+The results are sorted by decreasing count. Maximum 10 results are returned. No pagination is possible.
+
+The facet search can optionally be restricted by a regular search query. In that case, it will return only facet values
+that both:
+
+1. match the facet query; and
+2. are contained in objects matching the regular search query.
+
+**Warning:** *For a facet to be searchable, it must have been declared with the `searchable()` modifier in the [attributesForFaceting](#attributesforfaceting) index setting.*
+
+#### Example
+
+Let's imagine we have objects similar to this one:
+
+```json
+{
+    "name": "iPhone 7 Plus",
+    "brand": "Apple",
+    "category": [
+        "Mobile phones",
+        "Electronics"
+    ]
+}
+```
+
+Then:
+
+```php
+<?php
+# Search the values of the "category" facet matching "phone".
+$index->searchForFacetValues("category", "phone");
+```
+
+... could return:
+
+```json
+{
+    "facetHits": [
+        {
+            "value": "Mobile phones",
+            "highlighted": "Mobile <em>phone</em>s",
+            "count": 507
+        },
+        {
+            "value": "Phone cases",
+            "highlighted": "<em>Phone</em> cases",
+            "count": 63
+        }
+    ]
+}
+```
+
+Let's filter with an additional, regular search query:
+
+```php
+<?php
+$query = [
+    'filters': 'brand:Apple'
+];
+# Search the "category" facet for values matching "phone" in records
+# having "Apple" in their "brand" facet.
+$index->searchForFacetValues("category", "phone", $query);
+```
+
+... could return:
+
+```json
+{
+    "facetHits": [
+        {
+            "value": "Mobile phones",
+            "highlighted": "Mobile <em>phone</em>s",
+            "count": 41
+        }
+    ]
+}
 ```
 
 
@@ -1081,6 +1169,10 @@ To get a full description of how the ranking works, you can have a look at our [
 The list of attributes you want to use for faceting.
 All strings within these attributes will be extracted and added as facets.
 If set to `null`, no attribute is used for faceting.
+
+If you only need to filter on a given facet, you can specify filterOnly(attributeName). It reduces the size of the index and the build time.
+
+If you want to search inside values of a given facet (using the [Search for facet values](#search-for-facet-values) method) you need to specify searchable(attributeName).
 
 </div>
 
@@ -1726,7 +1818,7 @@ For example, `search -engine` will retrieve records containing `search` but not 
 ### optionalWords
 
 - scope: `settings` `search`
-- type: `array of strings`
+- type: `string`
 - default: []
 
 A string that contains the comma separated list of words that should be considered as optional when found in the query.

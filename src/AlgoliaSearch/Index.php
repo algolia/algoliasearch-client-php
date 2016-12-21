@@ -519,7 +519,7 @@ class Index
      *
      * @return mixed
      */
-    public function searchFacet($facetName, $facetQuery, $query = array())
+    public function searchForFacetValues($facetName, $facetQuery, $query = array())
     {
         $query['facetQuery'] = $facetQuery;
 
@@ -1286,6 +1286,18 @@ class Index
     }
 
     /**
+     * @deprecated Please use searchForFacetValues instead
+     * @param $facetName
+     * @param $facetQuery
+     * @param array $query
+     * @return mixed
+     */
+    public function searchFacet($facetName, $facetQuery, $query = array())
+    {
+        return $this->searchForFacetValues($facetName, $facetQuery, $query);
+    }
+
+    /**
      * @param string $name
      * @param array  $arguments
      *
@@ -1293,14 +1305,14 @@ class Index
      */
     public function __call($name, $arguments)
     {
-        if ($name !== 'browse') {
-            return;
+        if ($name === 'browse') {
+            if (count($arguments) >= 1 && is_string($arguments[0])) {
+                return call_user_func_array(array($this, 'doBrowse'), $arguments);
+            }
+
+            return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
         }
 
-        if (count($arguments) >= 1 && is_string($arguments[0])) {
-            return call_user_func_array(array($this, 'doBrowse'), $arguments);
-        }
-
-        return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
+        return;
     }
 }

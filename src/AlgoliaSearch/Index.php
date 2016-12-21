@@ -1284,6 +1284,18 @@ class Index
     }
 
     /**
+     * @deprecated Please use searchForFacetValues instead
+     * @param $facetName
+     * @param $facetQuery
+     * @param array $query
+     * @return mixed
+     */
+    public function searchFacet($facetName, $facetQuery, $query = array())
+    {
+        return $this->searchForFacetValues($facetName, $facetQuery, $query);
+    }
+
+    /**
      * @param string $name
      * @param array  $arguments
      *
@@ -1297,11 +1309,6 @@ class Index
             }
 
             return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
-        }
-
-        if ($name === 'searchFacet') {
-            // BC
-            return call_user_func_array(array($this, 'searchForFacetValues'), $arguments);
         }
 
         return;

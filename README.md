@@ -87,7 +87,7 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 1. [Update user key - `updateUserKey`](#update-user-key---updateuserkey)
 1. [Delete user key - `deleteUserKey`](#delete-user-key---deleteuserkey)
 1. [Get key permissions - `getUserKeyACL`](#get-key-permissions---getuserkeyacl)
-1. [Get logs - `getLogs`](#get-logs---getlogs)
+1. [Get last logs - `getLogs`](#get-last-logs---getlogs)
 
 
 # Guides & Tutorials
@@ -2809,7 +2809,7 @@ $res = $client->getUserKeyACL('f420238212c54dcfad07ea0aa6d5c45f');
 $res = $index->getUserKeyACL('71671c38001bf3ac857bc82052485107');
 ```
 
-## Get logs - `getLogs` 
+## Get last logs - `getLogs` 
 
 You can retrieve the latest logs via this API. Each log entry contains:
 

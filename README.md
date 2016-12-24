@@ -1818,10 +1818,11 @@ For example, `search -engine` will retrieve records containing `search` but not 
 ### optionalWords
 
 - scope: `settings` `search`
-- type: `string`
+- type: `array of strings` `string`
 - default: []
 
-A string that contains the comma separated list of words that should be considered as optional when found in the query.
+The list of words that should be considered as optional when found in the query.
+This can either be specified using an array of strings or a regular space (or comma) separated list string.
 
 </div>
 

@@ -88,6 +88,7 @@ Our PHP client lets you easily use the [Algolia Search API](https://www.algolia.
 1. [Delete user key - `deleteUserKey`](#delete-user-key---deleteuserkey)
 1. [Get key permissions - `getUserKeyACL`](#get-key-permissions---getuserkeyacl)
 1. [Get last logs - `getLogs`](#get-last-logs---getlogs)
+1. [REST API](#rest-api)
 
 
 # Guides & Tutorials
@@ -2733,7 +2734,7 @@ $res = $client->getLogs();
 $res = $client->getLogs(0, 100);
 ```
 
-### REST API
+## REST API
 
 We've developed API clients for the most common programming languages and platforms.
 These clients are advanced wrappers on top of our REST API itself and have been made

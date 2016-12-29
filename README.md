@@ -1126,7 +1126,6 @@ They are three scopes:
 - [altCorrections](#altcorrections) `settings`
 - [minProximity](#minproximity) `settings`, `search`
 - [responseFields](#responsefields) `settings`, `search`
-- [synonyms](#synonyms) `indexing`
 - [distinct](#distinct) `settings`, `search`
 - [getRankingInfo](#getrankinginfo) `search`
 - [numericAttributesForFiltering](#numericattributesforfiltering) `settings`

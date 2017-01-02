@@ -476,9 +476,6 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 
 **Advanced**
 
-- [analyticsTags](#analyticstags) `search`
-- [synonyms](#synonyms) `search`
-- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 - [minProximity](#minproximity) `settings`, `search`
 - [responseFields](#responsefields) `settings`, `search`
 - [distinct](#distinct) `settings`, `search`
@@ -486,6 +483,9 @@ Parameters that can also be used in a setSettings also have the `indexing` [scop
 - [numericFilters](#numericfilters) `search`
 - [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [analytics](#analytics) `search`
+- [analyticsTags](#analyticstags) `search`
+- [synonyms](#synonyms) `search`
+- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 
 ## Search in indices - `multipleQueries` 
 
@@ -1004,17 +1004,17 @@ Parameters that can be overridden at search time also have the `search` [scope](
 
 - [numericAttributesToIndex](#numericattributestoindex) `settings`
 - [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
+- [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
 
 **Advanced**
 
 - [attributeForDistinct](#attributefordistinct) `settings`
-- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 - [placeholders](#placeholders) `settings`
 - [altCorrections](#altcorrections) `settings`
 - [minProximity](#minproximity) `settings`, `search`
 - [responseFields](#responsefields) `settings`, `search`
 - [distinct](#distinct) `settings`, `search`
-- [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
+- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 
 
 # Parameters
@@ -1115,23 +1115,23 @@ They are three scopes:
 
 - [numericAttributesToIndex](#numericattributestoindex) `settings`
 - [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
+- [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
 
 **Advanced**
 
 - [attributeForDistinct](#attributefordistinct) `settings`
-- [analyticsTags](#analyticstags) `search`
-- [synonyms](#synonyms) `search`
-- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 - [placeholders](#placeholders) `settings`
 - [altCorrections](#altcorrections) `settings`
 - [minProximity](#minproximity) `settings`, `search`
 - [responseFields](#responsefields) `settings`, `search`
 - [distinct](#distinct) `settings`, `search`
 - [getRankingInfo](#getrankinginfo) `search`
-- [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
 - [numericFilters](#numericfilters) `search`
 - [tagFilters (deprecated)](#tagfilters-deprecated) `search`
 - [analytics](#analytics) `search`
+- [analyticsTags](#analyticstags) `search`
+- [synonyms](#synonyms) `search`
+- [replaceSynonymsInHighlight](#replacesynonymsinhighlight) `settings`, `search`
 
 ## Search
 
@@ -1150,7 +1150,7 @@ If no query parameter is set, the textual search will match with all the objects
 
 - scope: `settings`
 - type: `array of strings`
-- default: *
+- default: * (all string attributes)
 - formerly known as: `attributesToIndex`
 
 The list of attributes you want index (i.e. to make searchable).
@@ -1907,6 +1907,21 @@ In data-intensive use-cases,
 we recommended enabling this feature and then storing the list of user IDs or rights as an integer array.
 When enabled, the integer array is reordered to reach a better compression ratio.
 
+#### numericAttributesForFiltering
+
+- scope: `settings`
+- type: `array of strings`
+- default: []
+
+All numerical attributes are automatically indexed as numerical filters
+(allowing filtering operations like `<` and `<=`).
+If you don't need filtering on some of your numerical attributes,
+you can specify this list to speed up the indexing.
+
+If you only need to filter on a numeric value with the `=` operator,
+you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
+The other operators will be disabled.
+
 ## Advanced
 
 #### attributeForDistinct
@@ -1925,29 +1940,6 @@ then only the first one is kept and the others are removed from the results.
 
 To get a full understanding of how `Distinct` works,
 you can have a look at our [guide on distinct](https://www.algolia.com/doc/search/distinct).
-
-#### analyticsTags
-
-- scope: `search`
-- type: `array of strings`
-
-If set, tag your query with the specified identifiers. Tags can then be used in the Analytics to analyze a subset of searches only.
-
-#### synonyms
-
-- scope: `search`
-- type: `boolean`
-- default: true
-
-If set to `false`, the search will not use the synonyms defined for the targeted index.
-
-#### replaceSynonymsInHighlight
-
-- scope: `settings` `search`
-- type: `boolean`
-- default: true
-
-If set to `false`, words matched via synonyms expansion will not be replaced by the matched synonym in the highlighted result.
 
 #### placeholders
 
@@ -2084,21 +2076,6 @@ you can have a look at our [guide on distinct](https://www.algolia.com/doc/searc
 If set to true,
 the result hits will contain ranking information in the **_rankingInfo** attribute.
 
-#### numericAttributesForFiltering
-
-- scope: `settings`
-- type: `array of strings`
-- default: []
-
-All numerical attributes are automatically indexed as numerical filters
-(allowing filtering operations like `<` and `<=`).
-If you don't need filtering on some of your numerical attributes,
-you can specify this list to speed up the indexing.
-
-If you only need to filter on a numeric value with the `=` operator,
-you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
-The other operators will be disabled.
-
 #### numericFilters
 
 - scope: `search`
@@ -2150,6 +2127,29 @@ For example `{"_tags":["tag1","tag2"]}`.
 - default: true
 
 If set to false, this query will not be taken into account in the analytics.
+
+#### analyticsTags
+
+- scope: `search`
+- type: `array of strings`
+
+If set, tag your query with the specified identifiers. Tags can then be used in the Analytics to analyze a subset of searches only.
+
+#### synonyms
+
+- scope: `search`
+- type: `boolean`
+- default: true
+
+If set to `false`, the search will not use the synonyms defined for the targeted index.
+
+#### replaceSynonymsInHighlight
+
+- scope: `settings` `search`
+- type: `boolean`
+- default: true
+
+If set to `false`, words matched via synonyms expansion will not be replaced by the matched synonym in the highlighted result.
 
 
 # Manage Indices
@@ -2230,11 +2230,15 @@ For example, if you want to fully update your index `MyIndex` every night, we re
   using [Set settings](#set-settings) and [Batch synonyms](#batch-synonyms)
   (make sure to remove the [replicas](#replicas) parameter from the settings if it exists).
  1. Import your records into a new index using [Add Objects](#add-objects).
+ 1. Wait for all the records pushed to the new index to be indexed using the [Wait for operations](#wait-for-operations) method.
  1. Atomically replace the index `MyIndex` with the content and settings of the index `MyTmpIndex`
  using the [Move index](#move-index) method.
  This will automatically override the old index without any downtime on the search.
- 1. You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
+
+ You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
  and the replica-indices that were initially attached to `MyIndex` will be in sync with the new data.
+
+**Note:** By design, all indexing operations ("Add Objects", "Set Settings", ...) are asynchronous, so you need to make sure that all of them are executed using the [Wait for operations](#wait-for-operations) method before calling [Move index](#move-index).
 
 
 # Api keys

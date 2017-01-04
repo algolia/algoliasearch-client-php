@@ -1318,7 +1318,7 @@ Like for the other filter for performance reason, it's not possible to have FILT
 
 It's not possible to mix different category of filter inside a OR like num=3 OR tag1 OR facet:value
 
-It's not possible to negate an group, it's only possible to negate a filters:  NOT(FILTER1 OR (FILTER2) is not allowed.
+It's not possible to negate an group, it's only possible to negate a filters:  NOT(FILTER1 OR FILTER2) is not allowed.
 
 #### facets
 

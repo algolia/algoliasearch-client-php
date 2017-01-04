@@ -1002,9 +1002,8 @@ Parameters that can be overridden at search time also have the `search` [scope](
 
 **performance**
 
-- [numericAttributesToIndex](#numericattributestoindex) `settings`
-- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
 - [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
+- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
 
 **Advanced**
 
@@ -1113,9 +1112,8 @@ They are three scopes:
 
 **performance**
 
-- [numericAttributesToIndex](#numericattributestoindex) `settings`
-- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
 - [numericAttributesForFiltering](#numericattributesforfiltering) `settings`
+- [allowCompressionOfIntegerArray](#allowcompressionofintegerarray) `settings`
 
 **Advanced**
 
@@ -1174,7 +1172,7 @@ This parameter has two important uses:
     will consider all positions inside the `text` attribute as equal, but positions inside the `title` attribute will still matter.
 
     You can decide to have the same priority for several attributes by passing them in the same string using comma as separator.
-    For example: \n`title` and `alternative_title` have the same priority in this example: `attributesToIndex:["title,alternative_title", "text"]`
+    For example: \n`title` and `alternative_title` have the same priority in this example: `searchableAttributes:["title,alternative_title", "text"]`
 
 To get a full description of how the ranking works, you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 
@@ -1883,16 +1881,20 @@ Specify the list of approximation that should be considered as an exact match in
 
 ## performance
 
-#### numericAttributesToIndex
+#### numericAttributesForFiltering
 
 - scope: `settings`
 - type: `array of strings`
 - default: []
+- formerly known as: `numericAttributesToIndex`
 
-All numerical attributes are automatically indexed as numerical filters.
-If you don't need filtering on some of your numerical attributes, please consider sending them as strings to speed up the indexing.
+All numerical attributes are automatically indexed as numerical filters
+(allowing filtering operations like `<` and `<=`).
+If you don't need filtering on some of your numerical attributes,
+you can specify this list to speed up the indexing.
 
-If you only need to filter on a numeric value with the operator `=` or `!=`, you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
+If you only need to filter on a numeric value with the operator `=` or `!=`,
+you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
 The other operators will be disabled.
 
 #### allowCompressionOfIntegerArray
@@ -1906,21 +1908,6 @@ Allows compression of big integer arrays.
 In data-intensive use-cases,
 we recommended enabling this feature and then storing the list of user IDs or rights as an integer array.
 When enabled, the integer array is reordered to reach a better compression ratio.
-
-#### numericAttributesForFiltering
-
-- scope: `settings`
-- type: `array of strings`
-- default: []
-
-All numerical attributes are automatically indexed as numerical filters
-(allowing filtering operations like `<` and `<=`).
-If you don't need filtering on some of your numerical attributes,
-you can specify this list to speed up the indexing.
-
-If you only need to filter on a numeric value with the `=` operator,
-you can speed up the indexing by specifying the attribute with `equalOnly(AttributeName)`.
-The other operators will be disabled.
 
 ## Advanced
 
@@ -2230,15 +2217,11 @@ For example, if you want to fully update your index `MyIndex` every night, we re
   using [Set settings](#set-settings) and [Batch synonyms](#batch-synonyms)
   (make sure to remove the [replicas](#replicas) parameter from the settings if it exists).
  1. Import your records into a new index using [Add Objects](#add-objects).
- 1. Wait for all the records pushed to the new index to be indexed using the [Wait for operations](#wait-for-operations) method.
  1. Atomically replace the index `MyIndex` with the content and settings of the index `MyTmpIndex`
  using the [Move index](#move-index) method.
  This will automatically override the old index without any downtime on the search.
-
- You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
+ 1. You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
  and the replica-indices that were initially attached to `MyIndex` will be in sync with the new data.
-
-**Note:** By design, all indexing operations ("Add Objects", "Set Settings", ...) are asynchronous, so you need to make sure that all of them are executed using the [Wait for operations](#wait-for-operations) method before calling [Move index](#move-index).
 
 
 # Api keys

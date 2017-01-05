@@ -131,6 +131,9 @@ class FileFailingHostsCache implements FailingHostsCache
         return $failingHosts;
     }
 
+    /**
+     * Invalidate the opcode cache to make sure that on the next include the contents are up-to-date.
+     */
     private function invalidateOpcache()
     {
         if (function_exists('opcache_invalidate')) {
@@ -138,9 +141,12 @@ class FileFailingHostsCache implements FailingHostsCache
         }
     }
 
+    /**
+     * Removes the file storing the failing hosts.
+     */
     public function flushFailingHostsCache()
     {
-        $this->invalidateOpcache();
+        $this->invalidateOpcache(); // Needs to be before the unlink statement for being taken into account.
         @unlink($this->failingHostsCacheFile);
     }
 }

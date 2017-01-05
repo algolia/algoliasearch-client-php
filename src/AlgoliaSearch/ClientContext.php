@@ -127,16 +127,7 @@ class ClientContext
         $this->rateLimitAPIKey = null;
         $this->headers = array();
 
-        if (null === $failingHostsCache) {
-            try {
-                $failingHostsCache = new FileFailingHostsCache();
-            } catch (\RuntimeException $exception) {
-                // Filesystem is not writable, fallback to in memory caching strategy.
-                $failingHostsCache = new InMemoryFailingHostsCache();
-            }
-        }
-
-        $this->failingHostsCache = $failingHostsCache;
+        $this->failingHostsCache = null === $failingHostsCache ? new InMemoryFailingHostsCache() : $failingHostsCache ;
         $this->rotateHosts();
     }
 

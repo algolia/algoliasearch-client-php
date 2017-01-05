@@ -156,18 +156,8 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($cache, $context->getFailingHostsCache());
     }
 
-    public function testShouldUseFileFailingHostCacheByDefault()
+    public function testShouldUseInMemoryHostCacheByDefault()
     {
-        $context = new ClientContext('whatever', 'whatever', null);
-        $this->assertInstanceOf('\AlgoliaSearch\FileFailingHostsCache', $context->getFailingHostsCache());
-    }
-
-    public function testShouldUseInMemoryCacheIfFilesystemIsNotWritable()
-    {
-        global $make_is_writable_fail;
-
-        $make_is_writable_fail = true;
-
         $context = new ClientContext('whatever', 'whatever', null);
         $this->assertInstanceOf('\AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
     }

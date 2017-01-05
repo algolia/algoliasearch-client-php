@@ -17,7 +17,7 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
     /**
      * @expectedException \RuntimeException
      */
-    public function testShouldThrowAnExceptionIsCacheDirectoryIsNotWritable()
+    public function testShouldThrowAnExceptionIfCacheDirectoryIsNotWritable()
     {
         global $make_is_writable_fail;
 

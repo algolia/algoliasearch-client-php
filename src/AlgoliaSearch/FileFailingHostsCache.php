@@ -23,7 +23,7 @@ class FileFailingHostsCache implements FailingHostsCache
     {
         $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string)$file;
 
-        $this->assertCacheFileIsValid($file);
+        $this->assertCacheFileIsValid($this->failingHostsCacheFile);
 
         if (null === $ttl) {
             $ttl = 60 * 5; // 5 minutes

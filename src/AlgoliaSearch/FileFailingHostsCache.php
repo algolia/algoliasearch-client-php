@@ -4,7 +4,6 @@ namespace AlgoliaSearch;
 
 class FileFailingHostsCache implements FailingHostsCache
 {
-
     /**
      * @var string
      */
@@ -24,10 +23,7 @@ class FileFailingHostsCache implements FailingHostsCache
     {
         $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string)$file;
 
-        $directory = dirname($this->failingHostsCacheFile);
-        if (! is_writable($directory)) {
-            throw new \RuntimeException(sprintf('Cache file directory "%s" is not writable.', $directory));
-        }
+        $this->assertCacheFileIsValid($file);
 
         if (null === $ttl) {
             $ttl = 60 * 5; // 5 minutes
@@ -37,13 +33,36 @@ class FileFailingHostsCache implements FailingHostsCache
     }
 
     /**
+     * @param $file
+     */
+    private function assertCacheFileIsValid($file)
+    {
+        $fileDirectory = dirname($file);
+        if (! is_writable($fileDirectory)) {
+            throw new \RuntimeException(sprintf('Cache file directory "%s" is not writable.', $fileDirectory));
+        }
+
+        if (! file_exists($file)) {
+            // The dir being writable, the file will be created when needed.
+            return;
+        }
+
+        if (! is_readable($file)) {
+            throw new \RuntimeException(sprintf('Cache file "%s" is not readable.', $file));
+        }
+
+        if (! is_writable($file)) {
+            throw new \RuntimeException(sprintf('Cache file "%s" is not writable.', $file));
+        }
+    }
+
+    /**
      * @return string
      */
     private function getDefaultCacheFile()
     {
         return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'algolia-failing-hosts';
     }
-
 
     /**
      * @param string $host

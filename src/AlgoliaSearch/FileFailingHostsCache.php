@@ -22,11 +22,7 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function __construct($ttl = null, $file = null)
     {
-        if (null === $file) {
-            $this->failingHostsCacheFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'algolia-failing-hosts';
-        } else {
-            $this->failingHostsCacheFile = (string)$file;
-        }
+        $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string)$file;
 
         $directory = dirname($this->failingHostsCacheFile);
         if (! is_writable($directory)) {
@@ -38,6 +34,14 @@ class FileFailingHostsCache implements FailingHostsCache
         }
 
         $this->ttl = (int) $ttl;
+    }
+
+    /**
+     * @return string
+     */
+    private function getDefaultCacheFile()
+    {
+        return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'algolia-failing-hosts';
     }
 
 

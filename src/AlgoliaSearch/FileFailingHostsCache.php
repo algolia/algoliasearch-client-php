@@ -46,7 +46,16 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function addFailingHost($host)
     {
-        @include $this->failingHostsCacheFile;
+        if (defined('HHVM_VERSION')) {
+            // workaround for https://github.com/facebook/hhvm/issues/1447
+            $content = @file_get_contents($this->failingHostsCacheFile);
+            if ($content !== false) {
+                eval(str_replace('<?php', '', file_get_contents($this->failingHostsCacheFile)));
+            }
+        } else {
+            @include $this->failingHostsCacheFile;
+        }
+
         if (isset($ttl) && isset($failingHosts)) {
             // Update failing hosts cache.
             // Here we don't take care of invalidating. We do that on retrieval.
@@ -74,7 +83,15 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function getFailingHosts()
     {
-        @include $this->failingHostsCacheFile;
+        if (defined('HHVM_VERSION')) {
+            // workaround for https://github.com/facebook/hhvm/issues/1447
+            $content = @file_get_contents($this->failingHostsCacheFile);
+            if ($content !== false) {
+                eval(str_replace('<?php', '', file_get_contents($this->failingHostsCacheFile)));
+            }
+        } else {
+            @include $this->failingHostsCacheFile;
+        }
 
         if (!isset($ttl) || !isset($failingHosts)) {
             return array();

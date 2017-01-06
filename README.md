@@ -1306,7 +1306,7 @@ The list of keywords is:
 - **OR**: create a OR between two filters.
 - **AND**: create a AND between two filters.
 - **TO**: used to specify a range for a numeric filter.
-- **NOT**: used to negate a filter. The syntax with the '-' isn't allowed.
+- **NOT**: used to negate a filter.
 
 If no attribute name is specified,
 the filter applies to `_tags`.

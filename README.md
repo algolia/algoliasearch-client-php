@@ -381,9 +381,9 @@ When [getRankingInfo](#getrankinginfo) is set to `true`, the following additiona
 
 - `parsedQuery` (string): The query string that will be searched, after normalization. Normalization includes removing stop words (if [removeStopWords](#removestopwords) is enabled), and transforming portions of the query string into phrase queries (see [advancedSyntax](#advancedsyntax)).
 
-- `timeoutCounts` (boolean): Whether a timeout was hit when computing the facet counts. When `true`, the counts will be interpolated (i.e. approximate). See also `exhaustiveFacetsCount`.
+- `timeoutCounts` (boolean) - DEPRECATED: Please use `exhaustiveFacetsCount` in remplacement.
 
-- `timeoutHits` (boolean): Whether a timeout was hit when retrieving the hits. When true, some results may be missing.
+- `timeoutHits` (boolean) - DEPRECATED: Please use `exhaustiveFacetsCount` in remplacement.
 
 ... and ranking information is also added to each of the hits (see above).
 
@@ -407,7 +407,7 @@ When [facets](#facets) is non-empty, the following additional fields are returne
 
         - `sum` (integer | float): The sum of all values in the result set.
 
-- `exhaustiveFacetsCount` (boolean): Whether the counts are exhaustive (`true`) or approximate (`false`). *Note: When using [distinct](#distinct), the facet counts cannot be exhaustive.*
+- `exhaustiveFacetsCount` (boolean): Whether the counts are exhaustive (`true`) or approximate (`false`). *Note: In some conditions when [distinct](#distinct) is greater than 1 and an empty query without refinement is sent, the facet counts may not always be exhaustive.*
 
 ## Search Parameters
 
@@ -2030,8 +2030,8 @@ Here is the list of fields cannot be filtered out:
 - `warning`
 - `cursor`
 - `serverUsed`
-- `timeoutCounts`
-- `timeoutHits`
+- `timeoutCounts` (deprecated, please use `exhaustiveFacetsCount` instead)
+- `timeoutHits` (deprecated, please use `exhaustiveFacetsCount` instead)
 - `parsedQuery`
 - fields triggered explicitly via [getRankingInfo](#getrankinginfo)
 

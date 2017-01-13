@@ -997,6 +997,7 @@ Parameters that can be overridden at search time also have the `search` [scope](
 - [advancedSyntax](#advancedsyntax) `settings`, `search`
 - [optionalWords](#optionalwords) `settings`, `search`
 - [removeStopWords](#removestopwords) `settings`, `search`
+- [disablePrefixOnAttributes](#disableprefixonattributes) `settings`
 - [disableExactOnAttributes](#disableexactonattributes) `settings`
 - [exactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
 
@@ -1105,7 +1106,7 @@ They are three scopes:
 - [advancedSyntax](#advancedsyntax) `settings`, `search`
 - [optionalWords](#optionalwords) `settings`, `search`
 - [removeStopWords](#removestopwords) `settings`, `search`
-- [disablePrefixOnAttributes](#disableprefixonattributes) `seetings`
+- [disablePrefixOnAttributes](#disableprefixonattributes) `settings`
 - [disableExactOnAttributes](#disableexactonattributes) `settings`
 - [exactOnSingleWordQuery](#exactonsinglewordquery) `settings`, `search`
 - [alternativesAsExact](#alternativesasexact) `setting`, `search`
@@ -1836,7 +1837,7 @@ For most use cases, it is better to not use this feature as people search by key
 
 #### disablePrefixOnAttributes
 
-- scope: `seetings`
+- scope: `settings`
 - type: `array of strings`
 - default: []
 

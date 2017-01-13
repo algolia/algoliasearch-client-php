@@ -1224,7 +1224,7 @@ List of attributes you want to use for textual search.
 
 It must be a subset of the `searchableAttributes` index setting.
 
-SearchableAttributes must not be empty/null to be able to use this parameter.
+`searchableAttributes` must not be empty/null to be able to use this parameter.
 
 ## Ranking
 

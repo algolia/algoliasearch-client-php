@@ -1021,6 +1021,8 @@ Parameters that can be overridden at search time also have the `search` [scope](
 
 
 
+<section id="api-client-parameters-overview">
+
 ## Overview
 
 ### Scope

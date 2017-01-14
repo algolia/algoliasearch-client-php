@@ -1177,7 +1177,8 @@ This parameter has two important uses:
     will consider all positions inside the `text` attribute as equal, but positions inside the `title` attribute will still matter.
 
     You can decide to have the same priority for several attributes by passing them in the same string using comma as separator.
-    For example: \n`title` and `alternative_title` have the same priority in this example: `searchableAttributes:["title,alternative_title", "text"]`
+    For example:
+    `title` and `alternative_title` have the same priority in this example: `searchableAttributes:["title,alternative_title", "text"]`
 
 **Note:** To get a full description of how the ranking works, you can have a look at our [Ranking guide](https://www.algolia.com/doc/guides/relevance/ranking).
 

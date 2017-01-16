@@ -1333,7 +1333,7 @@ The following **individual filters** are supported:
     Example: `inStock > 0`.
 
     - **Range**: `${attributeName}:${lowerBound} TO ${upperBound}` matches all objects where the specified numeric
-    attribute is within the range [`${lowerBound}`, `${upperBound}`] (inclusive on both ends).
+    attribute is within the range [`${lowerBound}`, `${upperBound}`] \(inclusive on both ends).
     Example: `publication_date: 1441745506 TO 1441755506`.
 
 - **Facet filter**: `${facetName}:${facetValue}` matches all objects containing exactly the specified value in the specified facet attribute. *Facet matching is case sensitive*. Example: `category:Book`.
@@ -1919,6 +1919,14 @@ This advanced syntax brings two additional features:
 
 List of words that should be considered as optional when found in the query.
 
+This parameter can be useful when you want to do an **OR** between all words of the query.
+To do that you can set optionalWords equals to the search query.
+
+```python
+query = 'the query'
+params = {'optionalWords': query}
+```
+
 **Note:** You don't need to put commas between words.
 Each string will automatically be tokenized into words, all of which will be considered as optional.
 
@@ -2128,7 +2136,7 @@ Each string represents a filter on a numeric attribute. Two forms are supported:
 Example: `inStock > 0`.
 
 - **Range**: `${attributeName}:${lowerBound} TO ${upperBound}` matches all objects where the specified numeric
-attribute is within the range [`${lowerBound}`, `${upperBound}`] (inclusive on both ends).
+attribute is within the range [`${lowerBound}`, `${upperBound}`] \(inclusive on both ends).
 Example: `price: 0 TO 1000`.
 
 If you specify multiple filters, they are interpreted as a conjunction (AND). If you want to use a disjunction (OR),

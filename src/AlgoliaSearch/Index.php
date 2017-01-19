@@ -412,7 +412,7 @@ class Index
      * Search inside the index.
      *
      * @param string $query the full text query
-     * @param mixed  $args  (optional) if set, contains an associative array with query parameters:
+     * @param mixed $args (optional) if set, contains an associative array with query parameters:
      *                      - page: (integer) Pagination parameter used to select the page to retrieve.
      *                      Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
      *                      - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page.
@@ -488,8 +488,8 @@ class Index
      *                      duplicate value for the attributeForDistinct attribute are removed from results. For example,
      *                      if the chosen attribute is show_name and several hits have the same value for show_name, then
      *                      only the best one is kept and others are removed.
-     *
      * @return mixed
+     * @throws AlgoliaException
      */
     public function search($query, $args = null)
     {
@@ -497,6 +497,10 @@ class Index
             $args = array();
         }
         $args['query'] = $query;
+
+        if (isset($args['disjunctiveFacets'])) {
+            return $this->searchWithDisjunctiveFaceting($query, $args);
+        }
 
         return $this->client->request(
             $this->context,
@@ -508,6 +512,138 @@ class Index
             $this->context->connectTimeout,
             $this->context->searchTimeout
         );
+    }
+
+    /**
+     * @param $query
+     * @param $args
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    private function searchWithDisjunctiveFaceting($query, $args)
+    {
+        if (! is_array($args['disjunctiveFacets']) || count($args['disjunctiveFacets']) <= 0) {
+            throw new \InvalidArgumentException('disjunctiveFacets needs to be an non empty array');
+        }
+
+        if (isset($args['filters'])) {
+            throw new \InvalidArgumentException('You can not use disjunctive faceting and the filters parameter');
+        }
+
+        /**
+         * Prepare queries
+         */
+        // Get the list of disjunctive queries to do: 1 per disjunctive facet
+        $disjunctiveQueries = $this->getDisjunctiveQueries($args);
+
+        // Format disjunctive queries for multipleQueries call
+        foreach ($disjunctiveQueries as &$disjunctiveQuery) {
+            $disjunctiveQuery['indexName'] = $this->indexName;
+            $disjunctiveQuery['query'] = $query;
+            unset($disjunctiveQuery['disjunctiveFacets']);
+        }
+
+        // Merge facets and disjunctiveFacets for the hits query
+        $facets = isset($args['facets']) ? $args['facets'] : array();
+        $facets = array_merge($facets, $args['disjunctiveFacets']);
+        unset($args['disjunctiveFacets']);
+
+        // format the hits query for multipleQueries call
+        $args['query'] = $query;
+        $args['indexName'] = $this->indexName;
+        $args['facets'] = $facets;
+
+        // Put the hit query first
+        array_unshift($disjunctiveQueries, $args);
+
+        /**
+         * Do all queries in one call
+         */
+        $results = $this->client->multipleQueries(array_values($disjunctiveQueries));
+        $results = $results['results'];
+
+        /**
+         * Merge facets from disjunctive queries with facets from the hits query
+         */
+
+        // The first query is the hits query that the one we'll return to the user
+        $queryResults = array_shift($results);
+
+        // To be able to add facets from disjunctive query we create 'facets' key in case we only have disjunctive facets
+        if (false === isset($queryResults['facets'])) {
+            $queryResults['facets'] = array();
+        }
+
+        foreach ($results as $disjunctiveResults) {
+            if (isset($disjunctiveResults['facets'])) {
+                foreach ($disjunctiveResults['facets'] as $facetName => $facetValues) {
+                    $queryResults['facets'][$facetName] = $facetValues;
+                }
+            }
+        }
+
+        return $queryResults;
+    }
+
+    /**
+     * @param $queryParams
+     * @return array
+     */
+    private function getDisjunctiveQueries($queryParams)
+    {
+        $queriesParams = array();
+
+        foreach ($queryParams['disjunctiveFacets'] as $facetName) {
+            $params = $queryParams;
+            $params['facets'] = array($facetName);
+            $facetFilters = isset($params['facetFilters']) ? $params['facetFilters']: array();
+            $numericFilters = isset($params['numericFilters']) ? $params['numericFilters']: array();
+
+            $additionalParams = array(
+                'hitsPerPage' => 1,
+                'page' => 0,
+                'attributesToRetrieve' => array(),
+                'attributesToHighlight' => array(),
+                'attributesToSnippet' => array()
+            );
+
+            $additionalParams['facetFilters'] = $this->getAlgoliaFiltersArrayWithoutCurrentRefinement($facetFilters, $facetName . ':');
+            $additionalParams['numericFilters'] = $this->getAlgoliaFiltersArrayWithoutCurrentRefinement($numericFilters, $facetName);
+
+            $queriesParams[$facetName] = array_merge($params, $additionalParams);
+        }
+
+        return $queriesParams;
+    }
+
+    /**
+     * @param $filters
+     * @param $needle
+     * @return array
+     */
+    private function getAlgoliaFiltersArrayWithoutCurrentRefinement($filters, $needle)
+    {
+        // iterate on each filters which can be string or array and filter out every refinement matching the needle
+        for ($i = 0; $i < count($filters); $i++) {
+            if (is_array($filters[$i])) {
+                foreach ($filters[$i] as $filter) {
+                    if (mb_substr($filter, 0, mb_strlen($needle)) === $needle) {
+                        unset($filters[$i]);
+                        $filters = array_values($filters);
+                        $i--;
+                        break;
+                    }
+                }
+            } else {
+                if (mb_substr($filters[$i], 0, mb_strlen($needle)) === $needle) {
+                    unset($filters[$i]);
+                    $filters = array_values($filters);
+                    $i--;
+                }
+            }
+        }
+
+        return $filters;
     }
 
     /**
@@ -548,6 +684,7 @@ class Index
      *
      * @throws AlgoliaException
      * @throws \Exception
+     * @deprecated you should use $index->search($query, ['disjunctiveFacets' => $disjunctive_facets]]); instead
      */
     public function searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())
     {

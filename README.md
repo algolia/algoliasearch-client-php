@@ -118,13 +118,22 @@ Check our [online guides](https://www.algolia.com/doc):
 
 ## Install
 
+### With composer (Recommended)
+
 Install the package via [Composer](https://getcomposer.org/doc/00-intro.md):
 
 ```bash
 composer require algolia/algoliasearch-client-php
 ```
 
-If you don't use Composer, you can copy the `algoliasearch.php` file and the `src` and `resources` directories to your project).
+### Without composer
+
+If you don't use Composer, you can download the [package](https://github.com/algolia/algoliasearch-client-php/archive/master.zip) and include it in your code.
+
+```php
+<?php
+require_once('algoliasearch-client-php-master/algoliasearch.php');
+```
 
 ### Framework Integrations
 
@@ -352,6 +361,14 @@ The server response will look like:
         - `words` (integer): Number of matched words, including prefixes and typos.
 
         - `filters` (integer): *This field is reserved for advanced usage.* It will be zero in most cases.
+
+        - `matchedGeoLocation` (object): Geo location that matched the query. *Note: Only returned for a geo search.*
+
+            - `lat` (float): Latitude of the matched location.
+
+            - `lng` (float): Longitude of the matched location.
+
+            - `distance` (integer): Distance between the matched location and the search location (in meters). **Caution:** Contrary to `geoDistance`, this value is *not* divided by the geo precision.
 
     - `_distinctSeqID` (integer): *Note: Only returned when [distinct](#distinct) is non-zero.* When two consecutive results have the same value for the attribute used for "distinct", this field is used to distinguish between them.
 
@@ -2408,27 +2425,23 @@ move using the `moveIndex` method.
 $res = $client->moveIndex('MyNewIndex', 'MyIndex');
 ```
 
-**Note**:
+**Note:** The moveIndex method overrides the destination index, and deletes the temporary one.
+  In other words, there is no need to call the `clearIndex` or `deleteIndex` methods to clean the temporary index.
+It also overrides all the settings of the destination index (except the [replicas](#replicas) parameter that need to not be part of the temporary index settings).
 
-The moveIndex method will overwrite the destination index, and delete the temporary index.
-
-**Warning**
-
-The moveIndex operation will override all settings of the destination,
-There is one exception for the [replicas](#replicas) parameter which is not impacted.
-
-For example, if you want to fully update your index `MyIndex` every night, we recommend the following process:
+**Recommended steps**
+If you want to fully update your index `MyIndex` every night, we recommend the following process:
 
  1. Get settings and synonyms from the old index using [Get settings](#get-settings)
   and [Get synonym](#get-synonym).
  1. Apply settings and synonyms to the temporary index `MyTmpIndex`, (this will create the `MyTmpIndex` index)
-  using [Set settings](#set-settings) and [Batch synonyms](#batch-synonyms)
-  (make sure to remove the [replicas](#replicas) parameter from the settings if it exists).
- 1. Import your records into a new index using [Add Objects](#add-objects).
+  using [Set settings](#set-settings) and [Batch synonyms](#batch-synonyms) ([!] Make sure to remove the [replicas](#replicas) parameter from the settings if it exists.
+ 1. Import your records into a new index using [Add Objects](#add-objects)).
  1. Atomically replace the index `MyIndex` with the content and settings of the index `MyTmpIndex`
  using the [Move index](#move-index) method.
  This will automatically override the old index without any downtime on the search.
- 1. You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
+ 
+ You'll end up with only one index called `MyIndex`, that contains the records and settings pushed to `MyTmpIndex`
  and the replica-indices that were initially attached to `MyIndex` will be in sync with the new data.
 
 

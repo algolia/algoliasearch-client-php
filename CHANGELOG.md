@@ -1,5 +1,8 @@
 ## Change Log
 
+### 1.14.0
+- Better disjunctive faceting (included in the search method)
+
 ### 1.13.0
 - rename searchFacet to searchForFacetValues
 - better checks for curl handles

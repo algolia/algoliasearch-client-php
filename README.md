@@ -890,7 +890,7 @@ $index->setSettings(['customRanking' => ['desc(followers)']], true);
 
 ## Index settings parameters
 
-You can see the full list of search parameters here:
+You can see the full list of settings parameters here:
 [https://www.algolia.com/doc/api-client/php/parameters/](https://www.algolia.com/doc/api-client/php/parameters/)
 
 

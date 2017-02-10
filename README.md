@@ -6,6 +6,8 @@ The **Algolia Search API Client for PHP** lets you easily use the [Algolia Searc
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.svg)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 
+
+
 **Note:** An easier-to-read version of this documentation is available on
 [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
@@ -85,7 +87,7 @@ The **Algolia Search API Client for PHP** lets you easily use the [Algolia Searc
 
 1. [Custom batch - `batch`](#custom-batch---batch)
 1. [Backup / Export an index - `browse`](#backup--export-an-index---browse)
-1. [List api keys - `listApiKeys`](#list-api-keys---listapikeys)
+1. [List user keys - `listUserKeys`](#list-user-keys---listuserkeys)
 1. [Add user key - `addUserKey`](#add-user-key---adduserkey)
 1. [Update user key - `updateUserKey`](#update-user-key---updateuserkey)
 1. [Delete user key - `deleteUserKey`](#delete-user-key---deleteuserkey)
@@ -813,13 +815,13 @@ $index->deleteObject('myID');
 
 ## Delete by query - `deleteByQuery` 
 
-You can delete all objects matching a single query with the following code. Internally, the API client performs the query, deletes all matching hits, and waits until the deletions have been applied.
+The "delete by query" helper deletes all objects matching a query. Internally, the API client will browse the index (as in [Backup / Export an index](#backup--export-an-index)), delete all matching hits, and wait until all deletion tasks have been applied.
 
-Take your precautions when using this method. Calling it with an empty query will result in cleaning the index of all its records.
+**Warning:** Be careful when using this method. Calling it with an empty query will result in cleaning the index of all its records.
 
 ```php
 <?php
-$params = [];
+$params = [ /* any browse-compatible query parameters */ ];
 $index->deleteByQuery('John', $params);
 ```
 
@@ -1015,7 +1017,7 @@ We have several methods to manage them:
 - [Add user key](#add-user-key)
 - [Update user key](#update-user-key)
 - [Delete user key](#delete-user-key)
-- [List api keys](#list-api-keys)
+- [List user keys](#list-user-keys)
 - [Get key permissions](#get-key-permissions)
 
 ## Generate key - `generateSecuredApiKey` 
@@ -1379,7 +1381,7 @@ $result = $this->index->browseFrom('', ['filters' => 'i<42']);
 var_dump($result['cursor']);
 ```
 
-## List api keys - `listApiKeys` 
+## List user keys - `listUserKeys` 
 
 To list existing keys, you can use:
 

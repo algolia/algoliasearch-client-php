@@ -8,6 +8,7 @@ The **Algolia Search API Client for PHP** lets you easily use the [Algolia Searc
 
 
 
+
 **Note:** An easier-to-read version of this documentation is available on
 [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
@@ -19,6 +20,7 @@ The **Algolia Search API Client for PHP** lets you easily use the [Algolia Searc
 1. [Install](#install)
 1. [Init index - `initIndex`](#init-index---initindex)
 1. [Quick Start](#quick-start)
+1. [Getting Help](#getting-help)
 
 **Search**
 
@@ -256,6 +258,11 @@ function searchCallback(err, content) {
 }
 </script>
 ```
+
+## Getting Help
+
+- **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).
+- **Found a bug?** You can open a [GitHub issue](https://github.com/algolia/algoliasearch-client-php/issues).
 
 
 # Search

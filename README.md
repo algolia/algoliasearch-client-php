@@ -263,6 +263,8 @@ function searchCallback(err, content) {
 
 - **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).
 - **Found a bug?** You can open a [GitHub issue](https://github.com/algolia/algoliasearch-client-php/issues).
+- **Test the API** Check out the Algolia API on [RapidAPI](https://rapidapi.com/package/Algolia/functions?utm_source=AlgoliaGitHub&utm_medium=button).
+
 
 
 # Search

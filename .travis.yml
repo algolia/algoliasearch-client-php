@@ -15,6 +15,9 @@ matrix:
     - php: 7.0
       dist: trusty
       sudo: required
+    - php: 7.1
+      dist: trusty
+      sudo: required
     - php: hhvm
       dist: trusty
       sudo: required

@@ -12,7 +12,7 @@ The **Algolia Search API Client for PHP** lets you easily use the [Algolia Searc
 
 ## API Documentation
 
-You can find the full reference on the [Algolia's website](https://www.algolia.com/doc/api-client/php/).
+You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
 
 ## Table of Contents

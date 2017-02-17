@@ -172,9 +172,8 @@ class Index
     /**
      * Get an object from this index.
      *
-     * @param $objectID             the unique identifier of the object to retrieve
-     * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
-     *                              separated by ","
+     * @param string    $objectID             the unique identifier of the object to retrieve
+     * @param string[]  $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve
      *
      * @return mixed
      */
@@ -194,6 +193,10 @@ class Index
             );
         }
 
+        if (is_array($attributesToRetrieve)) {
+            $attributesToRetrieve = implode(',', $attributesToRetrieve);
+        }
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -209,9 +212,8 @@ class Index
     /**
      * Get several objects from this index.
      *
-     * @param array $objectIDs the array of unique identifier of objects to retrieve
-     * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
-     *                              separated by ","
+     * @param array    $objectIDs            the array of unique identifier of objects to retrieve
+     * @param string[] $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve
      *
      * @return mixed
      *
@@ -228,6 +230,10 @@ class Index
             $req = array('indexName' => $this->indexName, 'objectID' => $object);
 
             if ($attributesToRetrieve) {
+                if (is_array($attributesToRetrieve)) {
+                    $attributesToRetrieve = implode(',', $attributesToRetrieve);
+                }
+
                 $req['attributesToRetrieve'] = $attributesToRetrieve;
             }
 

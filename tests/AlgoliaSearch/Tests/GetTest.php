@@ -56,6 +56,34 @@ class GetTest extends AlgoliaSearchTestCase
         $this->assertEquals($results['hits'][1]['firstname'], $obj2['firstname']);
     }
 
+    public function testGetObjectsWithAttributesToRetrieve()
+    {
+        $res = $this->index->addObjects(array(
+            array('firstname' => 'Robin', 'lastname' => 'Lee'),
+            array('firstname' => 'Robert', 'lastname' => 'Watson')
+        ));
+
+        $this->index->waitTask($res['taskID']);
+        $results = $this->index->search('rob');
+        $this->assertEquals(2, $results['nbHits']);
+
+        $objects1 = $this->index->getObjects(array($results['hits'][0]['objectID'], $results['hits'][1]['objectID']));
+        $objects2 = $this->index->getObjects(array($results['hits'][0]['objectID'], $results['hits'][1]['objectID']), 'lastname');
+
+        $this->assertEquals(2, count($objects1['results']));
+        $this->assertEquals(2, count($objects2['results']));
+
+        $firstResult = reset($objects1['results']);
+        $this->assertTrue(isset($firstResult['objectID']));
+        $this->assertTrue(isset($firstResult['firstname']));
+        $this->assertTrue(isset($firstResult['lastname']));
+
+        $secondResult = reset($objects2['results']);
+        $this->assertTrue(isset($secondResult['objectID']));
+        $this->assertFalse(isset($secondResult['firstname']));
+        $this->assertTrue(isset($secondResult['lastname']));
+    }
+
     public function testGetSaveObjects()
     {
         $res = $this->index->saveObjects(array(

@@ -210,12 +210,14 @@ class Index
      * Get several objects from this index.
      *
      * @param array $objectIDs the array of unique identifier of objects to retrieve
+     * @param $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve as a string
+     *                              separated by ","
      *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function getObjects($objectIDs)
+    public function getObjects($objectIDs, $attributesToRetrieve = null)
     {
         if ($objectIDs == null) {
             throw new \Exception('No list of objectID provided');
@@ -224,6 +226,11 @@ class Index
         $requests = array();
         foreach ($objectIDs as $object) {
             $req = array('indexName' => $this->indexName, 'objectID' => $object);
+
+            if ($attributesToRetrieve) {
+                $req['attributesToRetrieve'] = $attributesToRetrieve;
+            }
+
             array_push($requests, $req);
         }
 

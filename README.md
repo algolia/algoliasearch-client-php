@@ -57,7 +57,6 @@ composer require algolia/algoliasearch-client-php
 If you don't use Composer, you can download the [package](https://github.com/algolia/algoliasearch-client-php/archive/master.zip) and include it in your code.
 
 ```php
-<?php
 require_once('algoliasearch-client-php-master/algoliasearch.php');
 ```
 
@@ -78,7 +77,6 @@ You first need to initialize the client. For that you need your **Application ID
 You can find both of them on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```php
-<?php
 // composer autoload
 require __DIR__ . '/vendor/autoload.php';
 // if you are not using composer: require_once 'path/to/algoliasearch.php';
@@ -91,7 +89,6 @@ $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index using the following code:
 
 ```php
-<?php
 $index = $client->initIndex('contacts');
 $batch = json_decode(file_get_contents('contacts.json'), true);
 $index->addObjects($batch);
@@ -102,7 +99,6 @@ $index->addObjects($batch);
 You can now search for contacts using firstname, lastname, company, etc. (even with typos):
 
 ```php
-<?php
 // search by firstname
 var_dump($index->search('jimmie'));
 
@@ -121,7 +117,6 @@ var_dump($index->search('jimmie paint'));
 Settings can be customized to tune the search behavior. For example, you can add a custom sort by number of followers to the already great built-in relevance:
 
 ```php
-<?php
 $index->setSettings(['customRanking' => ['desc(followers)']]);
 ```
 
@@ -131,7 +126,6 @@ You can also configure the list of attributes you want to index by order of impo
 In this case the order of attributes is very important to decide which hit is the best:
 
 ```php
-<?php
 $index->setSettings(
     [
         'searchableAttributes' => [

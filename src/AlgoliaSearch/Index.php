@@ -990,13 +990,13 @@ class Index
     }
 
     /**
-     * List all existing user keys associated to this index with their associated ACLs.
+     * List all existing api keys associated to this index with their associated ACLs.
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function listUserKeys()
+    public function listApiKeys()
     {
         return $this->client->request(
             $this->context,
@@ -1011,7 +1011,26 @@ class Index
     }
 
     /**
-     * Get ACL of a user key associated to this index.
+     * @deprecated use listApiKeys instead
+     * @return mixed
+     */
+    public function listUserKeys()
+    {
+        return $this->listApiKeys();
+    }
+
+    /**
+     * @deprecated use getApiKey in
+     * @param $key
+     * @return mixed
+     */
+    public function getUserKeyACL($key)
+    {
+        return $this->getApiKey($key);
+    }
+
+    /**
+     * Get ACL of a api key associated to this index.
      *
      * @param string $key
      *
@@ -1019,7 +1038,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getUserKeyACL($key)
+    public function getApiKey($key)
     {
         return $this->client->request(
             $this->context,
@@ -1033,8 +1052,9 @@ class Index
         );
     }
 
+
     /**
-     * Delete an existing user key associated to this index.
+     * Delete an existing api key associated to this index.
      *
      * @param string $key
      *
@@ -1042,7 +1062,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function deleteUserKey($key)
+    public function deleteApiKey($key)
     {
         return $this->client->request(
             $this->context,
@@ -1057,7 +1077,17 @@ class Index
     }
 
     /**
-     * Create a new user key associated to this index.
+     * @param $key
+     * @return mixed
+     * @deprecated use deleteApiKey instead
+     */
+    public function deleteUserKey($key)
+    {
+        return $this->deleteApiKey($key);
+    }
+
+    /**
+     * Create a new api key associated to this index.
      *
      * @param array $obj                    can be two different parameters:
      *                                      The list of parameters for this key. Defined by a array that
@@ -1089,7 +1119,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
         // is dict of value
         if ($obj !== array_values($obj)) {
@@ -1119,7 +1149,21 @@ class Index
     }
 
     /**
-     * Update a user key associated to this index.
+     * @param $obj
+     * @param int $validity
+     * @param int $maxQueriesPerIPPerHour
+     * @param int $maxHitsPerQuery
+     * @return mixed
+     * @deprecated use addApiKey instead
+     */
+    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    {
+        return $this->addApiKey($obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery);
+    }
+
+
+    /**
+     * Update an api key associated to this index.
      *
      * @param string $key
      * @param array  $obj                    can be two different parameters:
@@ -1152,7 +1196,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
         // is dict of value
         if ($obj !== array_values($obj)) {
@@ -1179,6 +1223,20 @@ class Index
             $this->context->connectTimeout,
             $this->context->readTimeout
         );
+    }
+
+    /**
+     * @param $key
+     * @param $obj
+     * @param int $validity
+     * @param int $maxQueriesPerIPPerHour
+     * @param int $maxHitsPerQuery
+     * @return mixed
+     * @deprecated use updateApiKey instead
+     */
+    public function updateUserKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    {
+        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery);
     }
 
     /**

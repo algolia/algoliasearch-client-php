@@ -990,7 +990,7 @@ class Index
     }
 
     /**
-     * List all existing api keys associated to this index with their associated ACLs.
+     * List all existing API keys associated to this index with their associated ACLs.
      *
      * @return mixed
      *
@@ -1030,7 +1030,7 @@ class Index
     }
 
     /**
-     * Get ACL of a api key associated to this index.
+     * Get ACL of a API key associated to this index.
      *
      * @param string $key
      *
@@ -1054,7 +1054,7 @@ class Index
 
 
     /**
-     * Delete an existing api key associated to this index.
+     * Delete an existing API key associated to this index.
      *
      * @param string $key
      *
@@ -1087,7 +1087,7 @@ class Index
     }
 
     /**
-     * Create a new api key associated to this index.
+     * Create a new API key associated to this index.
      *
      * @param array $obj                    can be two different parameters:
      *                                      The list of parameters for this key. Defined by a array that
@@ -1163,7 +1163,7 @@ class Index
 
 
     /**
-     * Update an api key associated to this index.
+     * Update an API key associated to this index.
      *
      * @param string $key
      * @param array  $obj                    can be two different parameters:

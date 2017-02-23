@@ -408,7 +408,7 @@ class Client
     }
 
     /**
-     * List all existing api keys with their associated ACLs.
+     * List all existing API keys with their associated ACLs.
      *
      * @return mixed
      *
@@ -438,7 +438,7 @@ class Client
     }
 
     /**
-     * Get ACL of a api key.
+     * Get ACL of a API key.
      *
      * @param string $key
      *
@@ -469,7 +469,7 @@ class Client
     }
 
     /**
-     * Delete an existing api key.
+     * Delete an existing API key.
      *
      * @param string $key
      *
@@ -500,7 +500,7 @@ class Client
     }
 
     /**
-     * Create a new api key.
+     * Create a new API key.
      *
      * @param array      $obj                    can be two different parameters:
      *                                           The list of parameters for this key. Defined by an array that
@@ -580,7 +580,7 @@ class Client
     }
 
     /**
-     * Update a api key.
+     * Update an API key.
      *
      * @param string     $key
      * @param array      $obj                    can be two different parameters:

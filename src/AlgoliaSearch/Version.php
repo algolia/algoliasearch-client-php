@@ -29,7 +29,7 @@ namespace AlgoliaSearch;
 
 class Version
 {
-    const VALUE = '1.14.0';
+    const VALUE = '1.15.0';
 
     public static $custom_value = '';
 
@@ -54,11 +54,25 @@ class Version
 
     public static function addPrefixUserAgentSegment($segment, $version)
     {
-        self::$prefixUserAgentSegments = $segment.' ('.$version.'); '.self::$prefixUserAgentSegments;
+        $prefix = $segment.' ('.$version.'); ';
+
+        if (false === mb_strpos(self::getUserAgent(), $prefix)) {
+            self::$prefixUserAgentSegments = $prefix . self::$prefixUserAgentSegments;
+        }
     }
 
     public static function addSuffixUserAgentSegment($segment, $version)
     {
-        self::$suffixUserAgentSegments .= '; '.$segment.' ('.$version.')';
+        $suffix = '; '.$segment.' ('.$version.')';
+
+        if (false === mb_strpos(self::getUserAgent(), $suffix)) {
+            self::$suffixUserAgentSegments .= $suffix;
+        }
+    }
+
+    public static function clearUserAgentSuffixesAndPrefixes()
+    {
+        self::$suffixUserAgentSegments = '';
+        self::$prefixUserAgentSegments = '';
     }
 }

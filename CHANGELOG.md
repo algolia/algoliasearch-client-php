@@ -1,5 +1,10 @@
 ## Change Log
 
+### 1.15.0
+
+- Make sure we don't have duplicated user agent
+- Allow more than one user agent prefix
+
 ### 1.14.0
 - Better disjunctive faceting (included in the search method)
 

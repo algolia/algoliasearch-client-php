@@ -4,6 +4,7 @@
 
 - Make sure we don't have duplicated user agent
 - Allow more than one user agent prefix
+- Allow to specify attributesToRetrieve in getObjects method
 
 ### 1.14.0
 - Better disjunctive faceting (included in the search method)

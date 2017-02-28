@@ -408,13 +408,13 @@ class Client
     }
 
     /**
-     * List all existing user keys with their associated ACLs.
+     * List all existing API keys with their associated ACLs.
      *
      * @return mixed
      *
      * @throws AlgoliaException
      */
-    public function listUserKeys()
+    public function listApiKeys()
     {
         return $this->request(
             $this->context,
@@ -429,13 +429,22 @@ class Client
     }
 
     /**
-     * Get ACL of a user key.
+     * @return mixed
+     * @deprecated use listApiKeys instead
+     */
+    public function listUserKeys()
+    {
+        return $this->listApiKeys();
+    }
+
+    /**
+     * Get ACL of a API key.
      *
      * @param string $key
      *
      * @return mixed
      */
-    public function getUserKeyACL($key)
+    public function getApiKey($key)
     {
         return $this->request(
             $this->context,
@@ -450,13 +459,23 @@ class Client
     }
 
     /**
-     * Delete an existing user key.
+     * @param $key
+     * @return mixed
+     * @deprecated use getApiKey instead
+     */
+    public function getUserKeyACL($key)
+    {
+        return $this->getApiKey($key);
+    }
+
+    /**
+     * Delete an existing API key.
      *
      * @param string $key
      *
      * @return mixed
      */
-    public function deleteUserKey($key)
+    public function deleteApiKey($key)
     {
         return $this->request(
             $this->context,
@@ -471,7 +490,17 @@ class Client
     }
 
     /**
-     * Create a new user key.
+     * @param $key
+     * @return mixed
+     * @deprecated use deleteApiKey instead
+     */
+    public function deleteUserKey($key)
+    {
+        return $this->deleteApiKey($key);
+    }
+
+    /**
+     * Create a new API key.
      *
      * @param array      $obj                    can be two different parameters:
      *                                           The list of parameters for this key. Defined by an array that
@@ -504,7 +533,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
     {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
@@ -537,7 +566,21 @@ class Client
     }
 
     /**
-     * Update a user key.
+     * @param $obj
+     * @param int $validity
+     * @param int $maxQueriesPerIPPerHour
+     * @param int $maxHitsPerQuery
+     * @param null $indexes
+     * @return mixed
+     * @deprecated use addApiKey instead
+     */
+    public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    {
+        return $this->addApiKey($obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes);
+    }
+
+    /**
+     * Update an API key.
      *
      * @param string     $key
      * @param array      $obj                    can be two different parameters:
@@ -571,7 +614,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function updateUserKey(
+    public function updateApiKey(
         $key,
         $obj,
         $validity = 0,
@@ -606,6 +649,27 @@ class Client
             $this->context->connectTimeout,
             $this->context->readTimeout
         );
+    }
+
+    /**
+     * @param $key
+     * @param $obj
+     * @param int $validity
+     * @param int $maxQueriesPerIPPerHour
+     * @param int $maxHitsPerQuery
+     * @param null $indexes
+     * @return mixed
+     * @deprecated use updateApiKey instead
+     */
+    public function updateUserKey(
+        $key,
+        $obj,
+        $validity = 0,
+        $maxQueriesPerIPPerHour = 0,
+        $maxHitsPerQuery = 0,
+        $indexes = null
+    ) {
+        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes);
     }
 
     /**

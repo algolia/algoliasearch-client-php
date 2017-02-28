@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.16.0
+
+- rename userKey to apiKey in the different keys related methods
+
 ### 1.15.0
 
 - Make sure we don't have duplicated user agent

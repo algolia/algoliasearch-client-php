@@ -131,6 +131,10 @@ class FileFailingHostsCache implements FailingHostsCache
     private function loadFailingHostsCacheFromDisk()
     {
         $json = @file_get_contents($this->failingHostsCacheFile);
+        if (false === $json) {
+            return array();
+        }
+
         $data = json_decode($json, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {

@@ -33,16 +33,16 @@ class FunctionTest extends AlgoliaSearchTestCase
             $this->markTestSkipped('Irrevelant on travis');
         }
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $init = $this->microtime_float();
+        $init = microtime(true);
         $this->client->listIndexes();
-        $end_init = $this->microtime_float();
+        $end_init = microtime(true);
         for ($i = 1; $i <= 10; $i++) {
             $this->client->listIndexes();
         }
-        $end = $this->microtime_float();
+        $end = microtime(true);
         $timeInit = ($end_init - $init);
         $timeAfter = ($end - $end_init) / 10;
-        $this->assertGreaterThan(2.0, $timeInit / $timeAfter);
+        $this->assertGreaterThan(1, $timeInit / $timeAfter);
     }
 
     public function testConstructAPIKey()
@@ -78,12 +78,5 @@ class FunctionTest extends AlgoliaSearchTestCase
     {
         $this->client->disableRateLimitForward();
         $this->client->listIndexes();
-    }
-
-    public function microtime_float()
-    {
-        list($usec, $sec) = explode(' ', microtime());
-
-        return (float) $usec + (float) $sec;
     }
 }

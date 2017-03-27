@@ -127,7 +127,16 @@ class ClientContext
         $this->rateLimitAPIKey = null;
         $this->headers = array();
 
-        $this->failingHostsCache = null === $failingHostsCache ? new InMemoryFailingHostsCache() : $failingHostsCache ;
+        if (null === $failingHostsCache) {
+            try {
+                $this->failingHostsCache = new FileFailingHostsCache();
+            } catch (\RuntimeException $exception) {
+                $this->failingHostsCache = new InMemoryFailingHostsCache();
+            }
+        } else {
+            $this->failingHostsCache = $failingHostsCache;
+        }
+
         $this->rotateHosts();
     }
 

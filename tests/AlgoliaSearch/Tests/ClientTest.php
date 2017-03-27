@@ -3,6 +3,7 @@
 namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\Client;
+use AlgoliaSearch\FileFailingHostsCache;
 use AlgoliaSearch\InMemoryFailingHostsCache;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
@@ -20,6 +21,14 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testShouldForwardFailingHostsCacheToClientContext()
     {
         $cache = new InMemoryFailingHostsCache();
+
+        $client = new Client('whatever', 'whatever', null, array(
+            Client::FAILING_HOSTS_CACHE => $cache,
+        ));
+
+        $this->assertSame($cache, $client->getContext()->getFailingHostsCache());
+
+        $cache = new FileFailingHostsCache();
 
         $client = new Client('whatever', 'whatever', null, array(
             Client::FAILING_HOSTS_CACHE => $cache,

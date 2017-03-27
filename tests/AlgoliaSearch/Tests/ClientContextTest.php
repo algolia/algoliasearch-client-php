@@ -148,17 +148,26 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('write-host3.com', 'write-host1.com', 'shared-host.com'), $context2->writeHostsArray);
     }
 
-    public function testCanBeInstantiatedWithFailingHostsCache()
+    public function testCanBeInstantiatedWithInMemoryHostCache()
     {
-        $cache = new InMemoryFailingHostsCache();
-        $context = new ClientContext('whatever', 'whatever', null, false, $cache);
-        
-        $this->assertSame($cache, $context->getFailingHostsCache());
+        $strategy = new InMemoryFailingHostsCache();
+        $context = new ClientContext('whatever', 'whatever', array(), false, $strategy);
+
+        $this->assertSame($strategy, $context->getFailingHostsCache());
     }
 
-    public function testShouldUseInMemoryHostCacheByDefault()
+    public function testShouldUseFileBasedHostCacheByDefault()
     {
-        $context = new ClientContext('whatever', 'whatever', null);
-        $this->assertInstanceOf('\AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
+        $context = new ClientContext('whatever', 'whatever', array());
+
+        $this->assertInstanceOf('AlgoliaSearch\FileFailingHostsCache', $context->getFailingHostsCache());
+    }
+
+    public function testShouldFallbackToInMemoryHostCacheIfFileSystemCanNotBeLeveraged()
+    {
+        global $make_is_writable_fail;
+        $make_is_writable_fail = true;
+        $context = new ClientContext('whatever', 'whatever', array());
+        $this->assertInstanceOf('AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
     }
 }

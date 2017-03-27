@@ -5,6 +5,16 @@ namespace AlgoliaSearch;
 class FileFailingHostsCache implements FailingHostsCache
 {
     /**
+     * Time To Live key used in the JSON representation.
+     */
+    const TTL = 'ttl';
+
+    /**
+     * Failing hosts key used in the JSON representation.
+     */
+    const FAILING_HOSTS = 'failing_hosts';
+
+    /**
      * @var string
      */
     private $failingHostsCacheFile;
@@ -21,7 +31,7 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function __construct($ttl = null, $file = null)
     {
-        $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string)$file;
+        $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string) $file;
 
         $this->assertCacheFileIsValid($this->failingHostsCacheFile);
 
@@ -33,11 +43,20 @@ class FileFailingHostsCache implements FailingHostsCache
     }
 
     /**
+     * @return int
+     */
+    public function getTtl()
+    {
+        return $this->ttl;
+    }
+
+    /**
      * @param $file
      */
     private function assertCacheFileIsValid($file)
     {
         $fileDirectory = dirname($file);
+
         if (! is_writable($fileDirectory)) {
             throw new \RuntimeException(sprintf('Cache file directory "%s" is not writable.', $fileDirectory));
         }
@@ -69,32 +88,19 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function addFailingHost($host)
     {
-        if (defined('HHVM_VERSION')) {
-            // workaround for https://github.com/facebook/hhvm/issues/1447
-            $content = @file_get_contents($this->failingHostsCacheFile);
-            if ($content !== false) {
-                eval(str_replace('<?php', '', file_get_contents($this->failingHostsCacheFile)));
-            }
-        } else {
-            @include $this->failingHostsCacheFile;
-        }
+        $cache = $this->loadFailingHostsCacheFromDisk();
 
-        if (isset($ttl) && isset($failingHosts)) {
+        if (isset($cache[self::TTL]) && isset($cache[self::FAILING_HOSTS])) {
             // Update failing hosts cache.
             // Here we don't take care of invalidating. We do that on retrieval.
-            if (!in_array($host, $failingHosts)) {
-                $failingHosts[] = $host;
-                file_put_contents(
-                    $this->failingHostsCacheFile,
-                    '<?php $ttl = ' . $ttl . '; $failingHosts = ' . var_export($failingHosts, true) . ';'
-                );
-                $this->invalidateOpcache();
+            if (!in_array($host, $cache[self::FAILING_HOSTS])) {
+                $cache[self::FAILING_HOSTS][] = $host;
+                $this->writeFailingHostsCacheFile($cache);
             }
         } else {
-            file_put_contents(
-                $this->failingHostsCacheFile,
-                '<?php $ttl = ' . time() . '; $failingHosts = ' . var_export(array($host), true) . ';'
-            );
+            $cache[self::TTL] = time();
+            $cache[self::FAILING_HOSTS] = array($host);
+            $this->writeFailingHostsCacheFile($cache);
         }
     }
 
@@ -106,39 +112,9 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function getFailingHosts()
     {
-        if (defined('HHVM_VERSION')) {
-            // workaround for https://github.com/facebook/hhvm/issues/1447
-            $content = @file_get_contents($this->failingHostsCacheFile);
-            if ($content !== false) {
-                eval(str_replace('<?php', '', file_get_contents($this->failingHostsCacheFile)));
-            }
-        } else {
-            @include $this->failingHostsCacheFile;
-        }
+        $cache = $this->loadFailingHostsCacheFromDisk();
 
-        if (!isset($ttl) || !isset($failingHosts)) {
-            return array();
-        }
-
-        $elapsed = time() - $ttl; // Number of seconds elapsed.
-
-        if ($elapsed > $this->ttl) {
-            $this->flushFailingHostsCache();
-
-            return array();
-        }
-
-        return $failingHosts;
-    }
-
-    /**
-     * Invalidate the opcode cache to make sure that on the next include the contents are up-to-date.
-     */
-    private function invalidateOpcache()
-    {
-        if (function_exists('opcache_invalidate')) {
-            opcache_invalidate($this->failingHostsCacheFile, true);
-        }
+        return isset($cache[self::FAILING_HOSTS]) ? $cache[self::FAILING_HOSTS] : array();
     }
 
     /**
@@ -146,7 +122,58 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function flushFailingHostsCache()
     {
-        $this->invalidateOpcache(); // Needs to be before the unlink statement for being taken into account.
         @unlink($this->failingHostsCacheFile);
+    }
+
+    /**
+     * @return array
+     */
+    private function loadFailingHostsCacheFromDisk()
+    {
+        $json = @file_get_contents($this->failingHostsCacheFile);
+        $data = json_decode($json, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return array();
+        }
+
+        // Some basic checks.
+        if (
+            !isset($data[self::TTL])
+            || !isset($data[self::FAILING_HOSTS])
+            || !is_int($data[self::TTL])
+            || !is_array($data[self::FAILING_HOSTS])
+        ) {
+            return array();
+        }
+
+        // Validate the hosts array.
+        foreach ($data[self::FAILING_HOSTS] as $host) {
+            if (!is_string($host)) {
+                return array();
+            }
+        }
+
+        $elapsed = time() - $data[self::TTL]; // Number of seconds elapsed.
+
+        if ($elapsed > $this->ttl) {
+            $this->flushFailingHostsCache();
+
+            return array();
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param array $data
+     */
+    private function writeFailingHostsCacheFile(array $data)
+    {
+        $json = json_encode($data);
+        if ($json === false) {
+            return;
+        }
+        @file_put_contents($this->failingHostsCacheFile, $json);
     }
 }

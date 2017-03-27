@@ -14,8 +14,8 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         @rmdir($dir);
         mkdir($dir, 0555);
 
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage('Cache file directory "' . $dir . '" is not writable.');
+        $this->setExpectedException('\RuntimeException', 'Cache file directory "' . $dir . '" is not writable.');
+
         new FileFailingHostsCache(5, $cacheFile);
     }
 
@@ -29,8 +29,8 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         touch($cacheFile);
         chmod($cacheFile, 0222); // not readable.
 
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not readable.');
+        $this->setExpectedException('\RuntimeException', 'Cache file "' . $cacheFile . '" is not readable.');
+
         new FileFailingHostsCache(5, $cacheFile);
     }
 
@@ -44,8 +44,8 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         touch($cacheFile);
         chmod($cacheFile, 0555); // not writable.
 
-        $this->expectException('\RuntimeException');
-        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not writable.');
+        $this->setExpectedException('\RuntimeException', 'Cache file "' . $cacheFile . '" is not writable.');
+
         new FileFailingHostsCache(5, $cacheFile);
     }
 

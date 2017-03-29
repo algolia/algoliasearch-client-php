@@ -5,9 +5,9 @@ namespace AlgoliaSearch;
 class FileFailingHostsCache implements FailingHostsCache
 {
     /**
-     * Time To Live key used in the JSON representation.
+     * Timestamp key used in the JSON representation.
      */
-    const TTL = 'ttl';
+    const TIMESTAMP = 'timestamp';
 
     /**
      * Failing hosts key used in the JSON representation.
@@ -94,7 +94,7 @@ class FileFailingHostsCache implements FailingHostsCache
     {
         $cache = $this->loadFailingHostsCacheFromDisk();
 
-        if (isset($cache[self::TTL]) && isset($cache[self::FAILING_HOSTS])) {
+        if (isset($cache[self::TIMESTAMP]) && isset($cache[self::FAILING_HOSTS])) {
             // Update failing hosts cache.
             // Here we don't take care of invalidating. We do that on retrieval.
             if (!in_array($host, $cache[self::FAILING_HOSTS])) {
@@ -102,7 +102,7 @@ class FileFailingHostsCache implements FailingHostsCache
                 $this->writeFailingHostsCacheFile($cache);
             }
         } else {
-            $cache[self::TTL] = time();
+            $cache[self::TIMESTAMP] = time();
             $cache[self::FAILING_HOSTS] = array($host);
             $this->writeFailingHostsCacheFile($cache);
         }
@@ -153,9 +153,9 @@ class FileFailingHostsCache implements FailingHostsCache
 
         // Some basic checks.
         if (
-            !isset($data[self::TTL])
+            !isset($data[self::TIMESTAMP])
             || !isset($data[self::FAILING_HOSTS])
-            || !is_int($data[self::TTL])
+            || !is_int($data[self::TIMESTAMP])
             || !is_array($data[self::FAILING_HOSTS])
         ) {
             return array();
@@ -168,7 +168,7 @@ class FileFailingHostsCache implements FailingHostsCache
             }
         }
 
-        $elapsed = time() - $data[self::TTL]; // Number of seconds elapsed.
+        $elapsed = time() - $data[self::TIMESTAMP]; // Number of seconds elapsed.
 
         if ($elapsed > $this->ttl) {
             $this->flushFailingHostsCache();

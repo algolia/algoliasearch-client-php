@@ -126,7 +126,9 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function flushFailingHostsCache()
     {
-        @unlink($this->failingHostsCacheFile);
+        if (file_exists($this->failingHostsCacheFile)) {
+            unlink($this->failingHostsCacheFile);
+        }
     }
 
     /**
@@ -134,7 +136,11 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     private function loadFailingHostsCacheFromDisk()
     {
-        $json = @file_get_contents($this->failingHostsCacheFile);
+        if (! file_exists($this->failingHostsCacheFile)) {
+            return array();
+        }
+
+        $json = file_get_contents($this->failingHostsCacheFile);
         if ($json === false) {
             return array();
         }
@@ -182,6 +188,6 @@ class FileFailingHostsCache implements FailingHostsCache
         if ($json === false) {
             return;
         }
-        @file_put_contents($this->failingHostsCacheFile, $json);
+        file_put_contents($this->failingHostsCacheFile, $json);
     }
 }

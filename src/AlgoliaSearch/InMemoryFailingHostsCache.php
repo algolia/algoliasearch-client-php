@@ -25,7 +25,7 @@ class InMemoryFailingHostsCache implements FailingHostsCache
      */
     public function __construct($ttl = null)
     {
-        if (null === $ttl) {
+        if ($ttl === null) {
             $ttl = 60 * 5; // 5 minutes
         }
         
@@ -42,7 +42,7 @@ class InMemoryFailingHostsCache implements FailingHostsCache
             // Keep a local cache of failed hosts in case the file based strategy doesn't work out.
             self::$failingHosts[] = $host;
 
-            if (null === self::$timestamp) {
+            if (self::$timestamp === null) {
                 self::$timestamp = time();
             }
         }
@@ -56,7 +56,7 @@ class InMemoryFailingHostsCache implements FailingHostsCache
      */
     public function getFailingHosts()
     {
-        if (null === self::$timestamp) {
+        if (self::$timestamp === null) {
             return self::$failingHosts;
         }
 

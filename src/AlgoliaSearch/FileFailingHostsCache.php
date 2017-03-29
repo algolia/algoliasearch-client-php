@@ -31,11 +31,15 @@ class FileFailingHostsCache implements FailingHostsCache
      */
     public function __construct($ttl = null, $file = null)
     {
-        $this->failingHostsCacheFile = null === $file ? $this->getDefaultCacheFile() : (string) $file;
+        if ($file === null) {
+            $this->failingHostsCacheFile = $this->getDefaultCacheFile();
+        } else {
+            $this->failingHostsCacheFile = (string) $file;
+        }
 
         $this->assertCacheFileIsValid($this->failingHostsCacheFile);
 
-        if (null === $ttl) {
+        if ($ttl === null) {
             $ttl = 60 * 5; // 5 minutes
         }
 
@@ -131,7 +135,7 @@ class FileFailingHostsCache implements FailingHostsCache
     private function loadFailingHostsCacheFromDisk()
     {
         $json = @file_get_contents($this->failingHostsCacheFile);
-        if (false === $json) {
+        if ($json === false) {
             return array();
         }
 

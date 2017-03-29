@@ -185,9 +185,8 @@ class FileFailingHostsCache implements FailingHostsCache
     private function writeFailingHostsCacheFile(array $data)
     {
         $json = json_encode($data);
-        if ($json === false) {
-            return;
+        if ($json !== false) {
+            file_put_contents($this->failingHostsCacheFile, $json);
         }
-        file_put_contents($this->failingHostsCacheFile, $json);
     }
 }

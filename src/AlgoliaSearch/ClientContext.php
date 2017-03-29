@@ -127,7 +127,7 @@ class ClientContext
         $this->rateLimitAPIKey = null;
         $this->headers = array();
 
-        if (null === $failingHostsCache) {
+        if ($failingHostsCache === null) {
             try {
                 $this->failingHostsCache = new FileFailingHostsCache();
             } catch (\RuntimeException $exception) {

@@ -5,6 +5,7 @@ namespace AlgoliaSearch\Tests;
 require_once 'global_functions_stubs.php';
 
 use AlgoliaSearch\ClientContext;
+use AlgoliaSearch\FileFailingHostsCache;
 use AlgoliaSearch\InMemoryFailingHostsCache;
 
 class ClientContextTest extends \PHPUnit_Framework_TestCase
@@ -148,7 +149,7 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array('write-host3.com', 'write-host1.com', 'shared-host.com'), $context2->writeHostsArray);
     }
 
-    public function testCanBeInstantiatedWithInMemoryHostCache()
+    public function testCanBeInstantiatedWithInMemoryHostCacheStrategy()
     {
         $strategy = new InMemoryFailingHostsCache();
         $context = new ClientContext('whatever', 'whatever', array(), false, $strategy);
@@ -156,18 +157,27 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($strategy, $context->getFailingHostsCache());
     }
 
-    public function testShouldUseFileBasedHostCacheByDefault()
+    public function testCanBeInstantiatedWithFileBasedHostCacheStrategy()
     {
-        $context = new ClientContext('whatever', 'whatever', array());
+        $strategy = new FileFailingHostsCache();
+        $context = new ClientContext('whatever', 'whatever', array(), false, $strategy);
 
-        $this->assertInstanceOf('AlgoliaSearch\FileFailingHostsCache', $context->getFailingHostsCache());
+        $this->assertSame($strategy, $context->getFailingHostsCache());
     }
 
-    public function testShouldFallbackToInMemoryHostCacheIfFileSystemCanNotBeLeveraged()
+    public function testShouldUseInMemoryHostCacheStrategyByDefault()
     {
-        global $make_is_writable_fail;
-        $make_is_writable_fail = true;
         $context = new ClientContext('whatever', 'whatever', array());
+
         $this->assertInstanceOf('AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
     }
+
+// Keep for later use.
+//    public function testShouldFallbackToInMemoryHostCacheIfFileSystemCanNotBeLeveraged()
+//    {
+//        global $make_is_writable_fail;
+//        $make_is_writable_fail = true;
+//        $context = new ClientContext('whatever', 'whatever', array());
+//        $this->assertInstanceOf('AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
+//    }
 }

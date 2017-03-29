@@ -128,11 +128,7 @@ class ClientContext
         $this->headers = array();
 
         if ($failingHostsCache === null) {
-            try {
-                $this->failingHostsCache = new FileFailingHostsCache();
-            } catch (\RuntimeException $exception) {
-                $this->failingHostsCache = new InMemoryFailingHostsCache();
-            }
+            $this->failingHostsCache = new InMemoryFailingHostsCache();
         } else {
             $this->failingHostsCache = $failingHostsCache;
         }

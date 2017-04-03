@@ -34,7 +34,7 @@ install:
     - composer install
 
 script:
-  - phpunit --debug -c phpunit.xml.dist
+  - vendor/bin/phpunit --debug -c phpunit.xml.dist
 
 env:
   global:

@@ -77,21 +77,20 @@ class ClientContext
     public $connectTimeout;
 
     /**
-     * @var array
+     * @var FailingHostsCache
      */
-    private static $failingHosts = array();
+    private $failingHostsCache;
 
     /**
-     * ClientContext constructor.
-     *
-     * @param string $applicationID
-     * @param string $apiKey
-     * @param array  $hostsArray
-     * @param bool   $placesEnabled
+     * @param string            $applicationID
+     * @param string            $apiKey
+     * @param array             $hostsArray
+     * @param bool              $placesEnabled
+     * @param FailingHostsCache $failingHostsCache
      *
      * @throws Exception
      */
-    public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false)
+    public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false, FailingHostsCache $failingHostsCache = null)
     {
         // connect timeout of 1s by default
         $this->connectTimeout = 1;
@@ -113,8 +112,6 @@ class ClientContext
             $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
 
-        $this->rotateHosts();
-
         if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
         }
@@ -129,6 +126,14 @@ class ClientContext
         $this->algoliaUserToken = null;
         $this->rateLimitAPIKey = null;
         $this->headers = array();
+
+        if ($failingHostsCache === null) {
+            $this->failingHostsCache = new InMemoryFailingHostsCache();
+        } else {
+            $this->failingHostsCache = $failingHostsCache;
+        }
+
+        $this->rotateHosts();
     }
 
     /**
@@ -258,15 +263,20 @@ class ClientContext
     }
 
     /**
-     * @param $host
+     * @param string $host
      */
-    public static function addFailingHost($host)
+    public function addFailingHost($host)
     {
-        if (!in_array($host, self::$failingHosts)) {
-            self::$failingHosts[] = $host;
-        }
+        $this->failingHostsCache->addFailingHost($host);
     }
 
+    /**
+     * @return FailingHostsCache
+     */
+    public function getFailingHostsCache()
+    {
+        return $this->failingHostsCache;
+    }
     /**
      * This method is called to pass on failing hosts.
      * If the host is first either in the failingHosts array, we
@@ -276,14 +286,15 @@ class ClientContext
      */
     public function rotateHosts()
     {
+        $failingHosts = $this->failingHostsCache->getFailingHosts();
         $i = 0;
-        while ($i <= count($this->readHostsArray) && in_array($this->readHostsArray[0], self::$failingHosts)) {
+        while ($i <= count($this->readHostsArray) && in_array($this->readHostsArray[0], $failingHosts)) {
             $i++;
             $this->readHostsArray[] = array_shift($this->readHostsArray);
         }
 
         $i = 0;
-        while ($i <= count($this->writeHostsArray) && in_array($this->writeHostsArray[0], self::$failingHosts)) {
+        while ($i <= count($this->writeHostsArray) && in_array($this->writeHostsArray[0], $failingHosts)) {
             $i++;
             $this->writeHostsArray[] = array_shift($this->writeHostsArray);
         }

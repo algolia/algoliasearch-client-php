@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.17.0
+
+- add a strategy to keep state between PHP requests
+
 ### 1.16.0
 
 - rename userKey to apiKey in the different keys related methods

@@ -30,19 +30,24 @@ class FunctionTest extends AlgoliaSearchTestCase
     public function testKeepAlive()
     {
         if (getenv('TRAVIS_PHP_VERSION') == 'hhvm') {
-            $this->markTestSkipped('Irrevelant on travis');
+            $this->markTestSkipped('On Travis, HHVM does not handle connection timeouts correctly.');
         }
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $init = $this->microtime_float();
+
+        $start = microtime(true);
         $this->client->listIndexes();
-        $end_init = $this->microtime_float();
+        $timeAfterFirstQuery = microtime(true);
         for ($i = 1; $i <= 10; $i++) {
             $this->client->listIndexes();
         }
-        $end = $this->microtime_float();
-        $timeInit = ($end_init - $init);
-        $timeAfter = ($end - $end_init) / 10;
-        $this->assertGreaterThan(2.0, $timeInit / $timeAfter);
+        $afterTenMoreQueries = microtime(true);
+        $timeOfFirstQuery = ($timeAfterFirstQuery - $start);
+        $avgTimeOfTheTenQueries = ($afterTenMoreQueries - $timeAfterFirstQuery) / 10;
+
+        // Makes sure that we re-use the connection by leveraging Keep-Alive.
+        // The first query should take more time to be processed given it opens the connection and handles the handshake.
+        // Subsequent queries should re-use the cURL resource and the underlying opened connection.
+        $this->assertTrue($timeOfFirstQuery > $avgTimeOfTheTenQueries);
     }
 
     public function testConstructAPIKey()
@@ -78,12 +83,5 @@ class FunctionTest extends AlgoliaSearchTestCase
     {
         $this->client->disableRateLimitForward();
         $this->client->listIndexes();
-    }
-
-    public function microtime_float()
-    {
-        list($usec, $sec) = explode(' ', microtime());
-
-        return (float) $usec + (float) $sec;
     }
 }

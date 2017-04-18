@@ -160,4 +160,26 @@ class SecurityTest extends AlgoliaSearchTestCase
 
         return;
     }
+    
+    public function testDnsFallback()
+    {
+        echo phpinfo();
+        $client = new Client(
+            getenv('ALGOLIA_APPLICATION_ID'),
+            getenv('ALGOLIA_API_KEY'),
+            array(
+                getenv('ALGOLIA_APPLICATION_ID') . '.algolia.biz',
+                getenv('ALGOLIA_APPLICATION_ID') . '.algolia.net'
+            )
+        );
+
+        $start = time();
+        $client->listIndexes();
+        $processingTime = time() - $start;
+
+        // Timeout of 2s, so the processing should be between 2 and 4
+        // Assuming .biz will always fail to resolve. Let's put 5 for the processing around the HTTP transport.
+        $this->assertGreaterThanOrEqual(2, $processingTime);
+        $this->assertLessThanOrEqual(5, $processingTime);
+    }
 }

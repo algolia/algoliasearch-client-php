@@ -712,7 +712,6 @@ class Client
      */
     public static function generateSecuredApiKey($privateApiKey, $query, $userToken = null)
     {
-        $urlEncodedQuery = '';
         if (is_array($query)) {
             $queryParameters = array();
             if (array_keys($query) !== array_keys(array_keys($query))) {

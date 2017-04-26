@@ -1521,6 +1521,6 @@ class Index
             return call_user_func_array(array($this, 'doBcBrowse'), $arguments);
         }
 
-        return;
+        throw new \BadMethodCallException(sprintf('No method named %s was found.', $name));
     }
 }

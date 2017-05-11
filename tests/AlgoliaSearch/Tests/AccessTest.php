@@ -82,8 +82,8 @@ class AccessTest extends AlgoliaSearchTestCase
 
     public function testStatefullRetryStrategyForSeveralInstance()
     {
-        if (version_compare(phpversion(), '5.4', '<')) {
-            $this->markTestSkipped('No way to test statefull retry strategy in Travis for PHP 5.3.');
+        if (getenv('TRAVIS') == 'true') {
+            $this->markTestSkipped('No way to test stateful retry strategy in Travis.');
         }
 
         $start = microtime(true);

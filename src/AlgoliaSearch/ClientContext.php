@@ -82,15 +82,15 @@ class ClientContext
     private $failingHostsCache;
 
     /**
-     * @param string            $applicationID
-     * @param string            $apiKey
-     * @param array             $hostsArray
-     * @param bool              $placesEnabled
-     * @param FailingHostsCache $failingHostsCache
+     * @param string|null            $applicationID
+     * @param string|null            $apiKey
+     * @param array|null             $hostsArray
+     * @param bool                   $placesEnabled
+     * @param FailingHostsCache|null $failingHostsCache
      *
      * @throws Exception
      */
-    public function __construct($applicationID, $apiKey, $hostsArray, $placesEnabled = false, FailingHostsCache $failingHostsCache = null)
+    public function __construct($applicationID = null, $apiKey = null, $hostsArray = null, $placesEnabled = false, FailingHostsCache $failingHostsCache = null)
     {
         // connect timeout of 1s by default
         $this->connectTimeout = 1;
@@ -112,11 +112,11 @@ class ClientContext
             $this->writeHostsArray = $this->getDefaultWriteHosts();
         }
 
-        if ($this->applicationID == null || mb_strlen($this->applicationID) == 0) {
+        if (($this->applicationID == null || mb_strlen($this->applicationID) == 0) && $placesEnabled === false) {
             throw new Exception('AlgoliaSearch requires an applicationID.');
         }
 
-        if ($this->apiKey == null || mb_strlen($this->apiKey) == 0) {
+        if (($this->apiKey == null || mb_strlen($this->apiKey) == 0) && $placesEnabled === false) {
             throw new Exception('AlgoliaSearch requires an apiKey.');
         }
 

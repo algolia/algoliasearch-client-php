@@ -172,6 +172,12 @@ class ClientContextTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('AlgoliaSearch\InMemoryFailingHostsCache', $context->getFailingHostsCache());
     }
 
+    public function testShouldAllowEmptyCredentialsIfInPlacesContext()
+    {
+        $placesEnabled = true;
+        new ClientContext(null, null, null, $placesEnabled);
+    }
+
 // Keep for later use.
 //    public function testShouldFallbackToInMemoryHostCacheIfFileSystemCanNotBeLeveraged()
 //    {

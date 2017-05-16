@@ -20,4 +20,20 @@ class InitPlacesTest extends AlgoliaSearchTestCase
         $this->assertArrayHasKey('X-Forwarded-For', $placesIndex->getContext()->headers);
         $this->assertEquals('test', $placesIndex->getContext()->headers['X-Forwarded-For']);
     }
+
+    public function testShouldAllowToBeCalledWithoutCredentials()
+    {
+        Client::initPlaces();
+    }
+
+    /**
+     * @depends testShouldAllowToBeCalledWithoutCredentials
+     */
+    public function testCanSearchWithoutCredentials()
+    {
+        $index = Client::initPlaces();
+        $results = $index->search('');
+        $this->assertArrayHasKey('nbHits', $results);
+        $this->assertGreaterThan(0, $results['nbHits']);
+    }
 }

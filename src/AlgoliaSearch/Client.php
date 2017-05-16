@@ -1084,14 +1084,14 @@ class Client
     }
 
     /**
-     * @param string $appId
-     * @param string $apiKey
-     * @param array  $hostsArray
-     * @param array  $options
+     * @param string|null $appId
+     * @param string|null $apiKey
+     * @param array|null  $hostsArray
+     * @param array       $options
      *
      * @return PlacesIndex
      */
-    public static function initPlaces($appId, $apiKey, $hostsArray = null, $options = array())
+    public static function initPlaces($appId = null, $apiKey = null, $hostsArray = null, $options = array())
     {
         $options['placesEnabled'] = true;
         $client = new static($appId, $apiKey, $hostsArray, $options);

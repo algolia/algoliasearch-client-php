@@ -3,6 +3,7 @@
 namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\Client;
+use AlgoliaSearch\ClientContext;
 use AlgoliaSearch\FileFailingHostsCache;
 use AlgoliaSearch\InMemoryFailingHostsCache;
 
@@ -41,5 +42,37 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client('whatever', 'whatever');
         $this->assertInstanceOf('\AlgoliaSearch\FailingHostsCache', $client->getContext()->getFailingHostsCache());
+    }
+
+    /**
+     * @expectedException \AlgoliaSearch\AlgoliaConnectionException
+     */
+    public function testEnsuresFailingHostsExceptionCode()
+    {
+        $client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $context = new ClientContext('whatever', 'whatever', null);
+
+        $client->request($context, 'whatever', 'whatever', null, null, array(), 0, 0);
+    }
+
+    /**
+     * @expectedException \AlgoliaSearch\AlgoliaException
+     * @expectedExceptionCode 403
+     */
+    public function testClientError403WithBadClient()
+    {
+        $client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $context = new ClientContext('whatever', 'whatever', null);
+
+        $client->request(
+            $context,
+            'GET',
+            '/1/indexes/',
+            null,
+            null,
+            array(getenv('ALGOLIA_APPLICATION_ID') . '-dsn.algolia.net'),
+            1,
+            30
+        );
     }
 }

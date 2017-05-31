@@ -403,19 +403,39 @@ class Index
         $args['distinct'] = false;
 
         $deletedCount = 0;
-        $results = $this->search($query, $args);
-        while ($results['nbHits'] != 0) {
-            $objectIDs = array();
-            foreach ($results['hits'] as $elt) {
-                array_push($objectIDs, $elt['objectID']);
+        $objectIDs = array();
+
+        $res = null;
+        while (true) {
+            $cursor = null;
+            $break = false;
+            do {
+                $iterator = $this->browseFrom($query, $args, $cursor);
+
+                if (count($iterator['hits']) == 0) {
+                    $break = true;
+                    break;
+                }
+
+                foreach ($iterator['hits'] as $hit) {
+                    $objectIDs[] = $hit['objectID'];
+                    $deletedCount++;
+                }
+
+                $cursor = isset($iterator['cursor']) && $iterator['cursor'] ? $iterator['cursor'] : null;
+            } while ($cursor !== null);
+
+            foreach (array_chunk($objectIDs, 1000) as $chunk) {
+                $res = $this->deleteObjects($chunk);
             }
-            $res = $this->deleteObjects($objectIDs);
-            $deletedCount += count($objectIDs);
-            if ($results['nbHits'] < $args['hitsPerPage'] && false === $waitLastCall) {
+
+            if ($waitLastCall && $res !== null) {
+                $this->waitTask($res['taskID']);
+            }
+
+            if ($break) {
                 break;
             }
-            $this->waitTask($res['taskID']);
-            $results = $this->search($query, $args);
         }
 
         return $deletedCount;

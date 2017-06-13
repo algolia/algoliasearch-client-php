@@ -86,7 +86,7 @@ $client = new \AlgoliaSearch\Client('YourApplicationID', 'YourAPIKey');
 
 ### Push data
 
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-csharp/blob/master/contacts.json) in the ```contacts``` index using the following code:
+Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/algoliasearch-client-php/blob/master/contacts.json) in the ```contacts``` index using the following code:
 
 ```php
 $index = $client->initIndex('contacts');

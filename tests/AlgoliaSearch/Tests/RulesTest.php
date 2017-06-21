@@ -32,18 +32,7 @@ class RulesTest extends AlgoliaSearchTestCase
 
     public function testSaveAndGetRule()
     {
-        $rule = array(
-            'objectID' => 'my-rule',
-            'if' => array(
-                'pattern'   => 'some text',
-                'anchoring' => 'is'
-            ),
-            'then' => array(
-                'params' => array(
-                    'query' => 'other text'
-                )
-            )
-        );
+        $rule = $this->getRuleStub();
 
         $response = $this->index->saveRule('my-rule', $rule);
         $this->index->waitTask($response['taskID']);
@@ -52,13 +41,68 @@ class RulesTest extends AlgoliaSearchTestCase
     }
 
     /**
+     * @depends testSaveAndGetRule
      * @expectedException AlgoliaSearch\AlgoliaException
      * @expectedExceptionMessage ObjectID does not exist
      */
     public function testDeleteRule()
     {
-        $rule = array(
-            'objectID' => 'my-rule',
+        $rule = $this->getRuleStub();
+
+        $response = $this->index->saveRule('my-rule', $rule);
+        $this->index->waitTask($response['taskID']);
+
+        $response = $this->index->deleteRule('my-rule');
+        $this->index->waitTask($response['taskID']);
+
+        $this->index->getRule('my-rule');
+    }
+
+    /**
+     * @depends testSaveAndGetRule
+     */
+    public function testSearchRules()
+    {
+        $rule = $this->getRuleStub();
+        $rule2 = $this->getRuleStub('my-second-rule');
+
+        $response = $this->index->saveRule('my-rule', $rule);
+        $this->index->waitTask($response['taskID']);
+
+        $response = $this->index->saveRule('my-second-rule', $rule2);
+        $this->index->waitTask($response['taskID']);
+
+        $rules = $this->index->searchRules();
+        $this->assertEquals(2, $rules['nbHits']);
+    }
+
+    /**
+     * @depends testSaveAndGetRule
+     * @depends testSearchRules
+     */
+    public function testBatchAndClearRules()
+    {
+        $rule = $this->getRuleStub();
+        $rule2 = $this->getRuleStub('my-second-rule');
+
+        $response = $this->index->batchRules(array($rule, $rule2));
+        $this->index->waitTask($response['taskID']);
+
+        $this->assertEquals($rule, $this->index->getRule('my-rule'));
+        $this->assertEquals($rule2, $this->index->getRule('my-second-rule'));
+
+        $response = $this->index->clearRules();
+        $this->index->waitTask($response['taskID']);
+
+
+        $rules = $this->index->searchRules();
+        $this->assertEquals(0, $rules['nbHits']);
+    }
+
+    private function getRuleStub($objectID = 'my-rule')
+    {
+        return $rule = array(
+            'objectID' => $objectID,
             'if' => array(
                 'pattern'   => 'some text',
                 'anchoring' => 'is'
@@ -69,13 +113,5 @@ class RulesTest extends AlgoliaSearchTestCase
                 )
             )
         );
-
-        $response = $this->index->saveRule('my-rule', $rule);
-        $this->index->waitTask($response['taskID']);
-
-        $response = $this->index->deleteRule('my-rule');
-        $this->index->waitTask($response['taskID']);
-
-        $this->index->getRule('my-rule');
     }
 }

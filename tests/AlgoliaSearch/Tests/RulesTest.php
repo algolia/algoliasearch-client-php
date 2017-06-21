@@ -30,7 +30,8 @@ class RulesTest extends AlgoliaSearchTestCase
         }
     }
 
-    public function testSaveAndGetRule() {
+    public function testSaveAndGetRule()
+    {
         $rule = array(
             'objectID' => 'my-rule',
             'if' => array(
@@ -48,5 +49,33 @@ class RulesTest extends AlgoliaSearchTestCase
         $this->index->waitTask($response['taskID']);
 
         $this->assertEquals($rule, $this->index->getRule('my-rule'));
+    }
+
+    /**
+     * @expectedException AlgoliaSearch\AlgoliaException
+     * @expectedExceptionMessage ObjectID does not exist
+     */
+    public function testDeleteRule()
+    {
+        $rule = array(
+            'objectID' => 'my-rule',
+            'if' => array(
+                'pattern'   => 'some text',
+                'anchoring' => 'is'
+            ),
+            'then' => array(
+                'params' => array(
+                    'query' => 'other text'
+                )
+            )
+        );
+
+        $response = $this->index->saveRule('my-rule', $rule);
+        $this->index->waitTask($response['taskID']);
+
+        $response = $this->index->deleteRule('my-rule');
+        $this->index->waitTask($response['taskID']);
+
+        $this->index->getRule('my-rule');
     }
 }

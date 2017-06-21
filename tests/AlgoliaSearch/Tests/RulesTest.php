@@ -42,7 +42,7 @@ class RulesTest extends AlgoliaSearchTestCase
 
     /**
      * @depends testSaveAndGetRule
-     * @expectedException AlgoliaSearch\AlgoliaException
+     * @expectedException \AlgoliaSearch\AlgoliaException
      * @expectedExceptionMessage ObjectID does not exist
      */
     public function testDeleteRule()
@@ -120,7 +120,7 @@ class RulesTest extends AlgoliaSearchTestCase
 
         unset($rules['hits'][0]['_highlightResult']);
         unset($rules['hits'][1]['_highlightResult']);
-        
+
         $this->assertEquals(array($rule4, $rule3), $rules['hits']);
     }
 

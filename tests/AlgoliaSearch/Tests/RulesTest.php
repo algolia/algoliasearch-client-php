@@ -99,6 +99,33 @@ class RulesTest extends AlgoliaSearchTestCase
         $this->assertEquals(0, $rules['nbHits']);
     }
 
+    /**
+     * @depends testBatchAndClearRules
+     */
+    public function testBatchClearExisting()
+    {
+        $rule = $this->getRuleStub();
+        $rule2 = $this->getRuleStub('my-second-rule');
+        $rule3 = $this->getRuleStub('my-second-rule-3');
+        $rule4 = $this->getRuleStub('my-second-rule-4');
+
+        $response = $this->index->batchRules(array($rule, $rule2));
+        $this->index->waitTask($response['taskID']);
+
+        $response = $this->index->batchRules(array($rule3, $rule4), false, true);
+        $this->index->waitTask($response['taskID']);
+
+        $rules = $this->index->searchRules();
+        $this->assertEquals(2, $rules['nbHits']);
+
+        unset($rules['hits'][0]['_highlightResult']);
+        unset($rules['hits'][1]['_highlightResult']);
+        
+        $this->assertEquals(array($rule4, $rule3), $rules['hits']);
+    }
+
+
+
     private function getRuleStub($objectID = 'my-rule')
     {
         return $rule = array(

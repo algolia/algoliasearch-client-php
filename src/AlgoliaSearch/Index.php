@@ -1625,6 +1625,10 @@ class Index
      */
     public function saveRule($objectID, $content, $forwardToReplicas = false)
     {
+        if (!isset($content['objectID'])) {
+            $content['objectID'] = $objectID;
+        }
+
         return $this->client->request(
             $this->context,
             'PUT',

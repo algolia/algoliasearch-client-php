@@ -130,11 +130,11 @@ class RulesTest extends AlgoliaSearchTestCase
     {
         return $rule = array(
             'objectID' => $objectID,
-            'if' => array(
+            'condition' => array(
                 'pattern'   => 'some text',
                 'anchoring' => 'is'
             ),
-            'then' => array(
+            'consequence' => array(
                 'params' => array(
                     'query' => 'other text'
                 )

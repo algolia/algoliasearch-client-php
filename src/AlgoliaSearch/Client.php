@@ -228,13 +228,14 @@ class Client
      * @param array  $queries
      * @param string $indexNameKey
      * @param string $strategy
+     * @param array $requestHeaders
      *
      * @return mixed
      *
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')
+    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none', $requestHeaders = array())
     {
         if ($queries == null) {
             throw new \Exception('No query provided');
@@ -260,7 +261,8 @@ class Client
             array('requests' => $requests, 'strategy' => $strategy),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            $requestHeaders
         );
     }
 
@@ -683,10 +685,11 @@ class Client
      * Send a batch request targeting multiple indices.
      *
      * @param array $requests an associative array defining the batch request body
+     * @param array $requestHeaders
      *
      * @return mixed
      */
-    public function batch($requests)
+    public function batch($requests, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -696,7 +699,8 @@ class Client
             array('requests' => $requests),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -782,6 +786,7 @@ class Client
      * @param array         $hostsArray
      * @param int           $connectTimeout
      * @param int           $readTimeout
+     * @param array         $requestHeaders
      *
      * @return mixed
      *
@@ -795,7 +800,8 @@ class Client
         $data,
         $hostsArray,
         $connectTimeout,
-        $readTimeout
+        $readTimeout,
+        $requestHeaders = array()
     ) {
         $exceptions = array();
         $cnt = 0;
@@ -806,7 +812,7 @@ class Client
                 $readTimeout += 10;
             }
             try {
-                $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout);
+                $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout, $requestHeaders);
                 if ($res !== null) {
                     return $res;
                 }
@@ -832,6 +838,7 @@ class Client
      * @param array         $data
      * @param int           $connectTimeout
      * @param int           $readTimeout
+     * @param array         $requestHeaders
      *
      * @return mixed
      *
@@ -846,7 +853,8 @@ class Client
         $params,
         $data,
         $connectTimeout,
-        $readTimeout
+        $readTimeout,
+        $requestHeaders = array()
     ) {
         if (strpos($host, 'http') === 0) {
             $url = $host.$path;
@@ -898,7 +906,7 @@ class Client
             );
         }
 
-        $headers = array_merge($defaultHeaders, $context->headers);
+        $headers = array_merge($defaultHeaders, $context->headers, $requestHeaders);
 
         $curlHeaders = array();
         foreach ($headers as $key => $value) {

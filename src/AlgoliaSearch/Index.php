@@ -174,10 +174,11 @@ class Index
      *
      * @param string    $objectID             the unique identifier of the object to retrieve
      * @param string[]  $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve
+     * @param array     $requestHeaders
      *
      * @return mixed
      */
-    public function getObject($objectID, $attributesToRetrieve = null)
+    public function getObject($objectID, $attributesToRetrieve = null, $requestHeaders = array())
     {
         $id = urlencode($objectID);
         if ($attributesToRetrieve === null) {
@@ -189,7 +190,8 @@ class Index
                 null,
                 $this->context->readHostsArray,
                 $this->context->connectTimeout,
-                $this->context->readTimeout
+                $this->context->readTimeout,
+                $requestHeaders
             );
         }
 
@@ -205,7 +207,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -214,12 +217,13 @@ class Index
      *
      * @param array    $objectIDs            the array of unique identifier of objects to retrieve
      * @param string[] $attributesToRetrieve (optional) if set, contains the list of attributes to retrieve
+     * @param array    $requestHeaders
      *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function getObjects($objectIDs, $attributesToRetrieve = null)
+    public function getObjects($objectIDs, $attributesToRetrieve = null, $requestHeaders = array())
     {
         if ($objectIDs == null) {
             throw new \Exception('No list of objectID provided');
@@ -248,7 +252,8 @@ class Index
             array('requests' => $requests),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -501,10 +506,12 @@ class Index
      *                      duplicate value for the attributeForDistinct attribute are removed from results. For example,
      *                      if the chosen attribute is show_name and several hits have the same value for show_name, then
      *                      only the best one is kept and others are removed.
+     * @param array $requestHeaders
+     *
      * @return mixed
      * @throws AlgoliaException
      */
-    public function search($query, $args = null)
+    public function search($query, $args = null, $requestHeaders = array())
     {
         if ($args === null) {
             $args = array();
@@ -523,7 +530,8 @@ class Index
             array('params' => $this->client->buildQuery($args)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            $requestHeaders
         );
     }
 
@@ -533,7 +541,7 @@ class Index
      * @return mixed
      * @throws AlgoliaException
      */
-    private function searchWithDisjunctiveFaceting($query, $args)
+    private function searchWithDisjunctiveFaceting($query, $args, $requestHeaders = array())
     {
         if (! is_array($args['disjunctiveFacets']) || count($args['disjunctiveFacets']) <= 0) {
             throw new \InvalidArgumentException('disjunctiveFacets needs to be an non empty array');
@@ -572,7 +580,12 @@ class Index
         /**
          * Do all queries in one call
          */
-        $results = $this->client->multipleQueries(array_values($disjunctiveQueries));
+        $results = $this->client->multipleQueries(
+            array_values($disjunctiveQueries),
+            'indexName',
+            'none',
+            $requestHeaders
+        );
         $results = $results['results'];
 
         /**
@@ -665,10 +678,11 @@ class Index
      * @param $facetName
      * @param $facetQuery
      * @param array $query
+     * @param array $requestHeaders
      *
      * @return mixed
      */
-    public function searchForFacetValues($facetName, $facetQuery, $query = array())
+    public function searchForFacetValues($facetName, $facetQuery, $query = array(), $requestHeaders)
     {
         $query['facetQuery'] = $facetQuery;
 
@@ -680,7 +694,8 @@ class Index
             array('params' => $this->client->buildQuery($query)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            $requestHeaders
         );
     }
 
@@ -1243,10 +1258,11 @@ class Index
      * Send a batch request.
      *
      * @param array $requests an associative array defining the batch request body
+     * @param array $requestHeaders pass custom header only for this request
      *
      * @return mixed
      */
-    public function batch($requests)
+    public function batch($requests, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1256,7 +1272,8 @@ class Index
             $requests,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1299,10 +1316,11 @@ class Index
      * @param string     $query
      * @param array|null $params
      * @param $cursor
+     * @param array      $requestHeaders
      *
      * @return mixed
      */
-    public function browseFrom($query, $params = null, $cursor = null)
+    public function browseFrom($query, $params = null, $cursor = null, $requestHeaders = array())
     {
         if ($params === null) {
             $params = array();
@@ -1327,7 +1345,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 

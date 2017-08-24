@@ -1506,6 +1506,142 @@ class Index
     }
 
     /**
+     * @param $params
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function searchRules(array $params = array())
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/rules/search',
+            null,
+            $params,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function getRule($objectID)
+    {
+        return $this->client->request(
+            $this->context,
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/rules/'.urlencode($objectID),
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     * @param $forwardToReplicas
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function deleteRule($objectID, $forwardToReplicas = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'DELETE',
+            '/1/indexes/'.$this->urlIndexName.'/rules/'.urlencode($objectID).'?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param bool $forwardToReplicas
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function clearRules($forwardToReplicas = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/rules/clear?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $rules
+     * @param bool $forwardToReplicas
+     * @param bool $clearExistingRules
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function batchRules($rules, $forwardToReplicas = false, $clearExistingRules = false)
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/rules/batch?clearExistingRules='.($clearExistingRules ? 'true' : 'false')
+            .'&forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
+            null,
+            $rules,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
+     * @param $objectID
+     * @param $content
+     * @param bool $forwardToReplicas
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+    public function saveRule($objectID, $content, $forwardToReplicas = false)
+    {
+        if (!isset($content['objectID'])) {
+            $content['objectID'] = $objectID;
+        }
+
+        return $this->client->request(
+            $this->context,
+            'PUT',
+            '/1/indexes/'.$this->urlIndexName.'/rules/'.urlencode($objectID).'?forwardToReplicas='.($forwardToReplicas ? 'true' : 'false'),
+            null,
+            $content,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
+    /**
      * @param string $name
      * @param array  $arguments
      *

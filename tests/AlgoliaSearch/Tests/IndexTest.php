@@ -40,7 +40,8 @@ class IndexTest extends AlgoliaSearchTestCase
         $index->unknown();
     }
 
-    public function testShouldBeAbleToDeleteByNumericalFilter() {
+    public function testShouldBeAbleToDeleteByNumericalFilter()
+    {
         $res = $this->index->addObjects(array(
             array('custom_id' => 2),
             array('custom_id' => 2),

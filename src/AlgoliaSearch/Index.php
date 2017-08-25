@@ -398,6 +398,7 @@ class Index
     }
 
     /**
+     * @deprecated use `deleteBy()` instead.
      * Delete all objects matching a query.
      *
      * @param string $query        the query string

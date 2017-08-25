@@ -1,5 +1,12 @@
 ## Change Log
 
+### 1.19.0
+
+- feat(query-rules): add query rules support 
+- feat(delete-by): add `delete by` support
+- feat: add a dedicated `AlgoliaConnectionException`
+
+
 ### 1.18.0
 
 - make API credentials optional for Client::initPlaces()

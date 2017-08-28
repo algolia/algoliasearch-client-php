@@ -383,7 +383,22 @@ class Index
         return $this->batch($requests);
     }
 
+    public function deleteBy(array $args)
+    {
+        return $this->client->request(
+            $this->context,
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/deleteByQuery',
+            null,
+            array('params' => $this->client->buildQuery($args)),
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout
+        );
+    }
+
     /**
+     * @deprecated use `deleteBy()` instead.
      * Delete all objects matching a query.
      *
      * @param string $query        the query string

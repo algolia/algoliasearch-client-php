@@ -77,6 +77,27 @@ class PlacesIndex
     }
 
     /**
+     * @param mixed $objectID
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     */
+     public function getObject($objectID)
+     {
+         return $this->client->request(
+             $this->context,
+             'GET',
+             '/1/places/' . urlencode($objectID),
+             null,
+             null,
+             $this->context->readHostsArray,
+             $this->context->connectTimeout,
+             $this->context->searchTimeout
+         );
+     }
+
+    /**
      * @param string $key
      * @param string $value
      */

@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.20.0
+
+- feat(places): add `getObject` support
+
 ### 1.19.0
 
 - feat(query-rules): add query rules support 

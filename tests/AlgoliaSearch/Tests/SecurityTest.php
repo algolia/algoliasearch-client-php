@@ -60,7 +60,7 @@ class SecurityTest extends AlgoliaSearchTestCase
 
         $key = $this->poolingTask(function ($timeouted) use ($newKey, $self) {
             try {
-                $key = $self->index->getUserKeyACL($newKey['key']);
+                $key = $self->index->getApiKey($newKey['key']);
 
                 return $key;
             } catch (AlgoliaException $e) {
@@ -78,7 +78,7 @@ class SecurityTest extends AlgoliaSearchTestCase
 
         $this->poolingTask(function ($timeouted) use ($newKey, $self) {
             try {
-                $key = $self->index->getUserKeyACL($newKey['key']);
+                $key = $self->index->getApiKey($newKey['key']);
 
                 if ($key['acl'][0] === 'addObject' || time() >= $timeouted) {
                     $self->assertEquals($key['acl'][0], 'addObject');

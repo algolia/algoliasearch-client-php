@@ -28,7 +28,11 @@
     },
     "autoload": {
         "psr-0": {
-            "AlgoliaSearch": "src/",
+            "AlgoliaSearch": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
             "AlgoliaSearch\\Tests": "tests/"
         }
     }

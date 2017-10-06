@@ -1,5 +1,11 @@
 ## Change Log
 
+### 1.21.0
+
+- feat: exclude disjunctive queries from analytics
+- fix: autoload Tests namespace only in dev
+- fix: remove usage of deprecated API key methods
+
 ### 1.20.0
 
 - feat(places): add `getObject` support

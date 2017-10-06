@@ -632,7 +632,8 @@ class Index
                 'page' => 0,
                 'attributesToRetrieve' => array(),
                 'attributesToHighlight' => array(),
-                'attributesToSnippet' => array()
+                'attributesToSnippet' => array(),
+                'analytics' => false
             );
 
             $additionalParams['facetFilters'] = $this->getAlgoliaFiltersArrayWithoutCurrentRefinement($facetFilters, $facetName . ':');

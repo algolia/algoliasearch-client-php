@@ -1,0 +1,82 @@
+<?php
+
+namespace AlgoliaSearch\Tests;
+
+use AlgoliaSearch\AlgoliaException;
+use AlgoliaSearch\Client;
+use AlgoliaSearch\Index;
+use AlgoliaSearch\SynonymType;
+
+class SynonymsExportTest extends AlgoliaSearchTestCase
+{
+    /** @var Client */
+    private $client;
+
+    /** @var Index */
+    private $index;
+
+    protected function setUp()
+    {
+        $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
+        $this->index = $this->client->initIndex($this->safe_name('test-synonym-export-php'));
+
+        try {
+            $this->index->clearIndex();
+        } catch (AlgoliaException $e) {
+            // not fatal
+        }
+
+        $res = $this->index->addObject(array('name' => '589 Howard St., San Francisco'));
+        $this->index->waitTask($res['taskID'], 0.1);
+
+        $res = $this->index->batchSynonyms(array(
+            array(
+                'objectID' => 'city',
+                'type'     => 'synonym',
+                'synonyms' => array('San Francisco', 'SF'),
+            ),
+            array(
+                'objectID'    => 'street',
+                'type'        => 'altCorrection1',
+                'word'        => 'Street',
+                'corrections' => array('St')
+            ),
+            array(
+                'objectID'    => 'avenue',
+                'type'        => 'altCorrection1',
+                'word'        => 'Avenue',
+                'corrections' => array('Av', 'Ave')
+            ),
+        ));
+
+        $this->index->waitTask($res['taskID'], 0.1);
+    }
+
+    protected function tearDown()
+    {
+        try {
+            $this->client->deleteIndex($this->indexName);
+        } catch (AlgoliaException $e) {
+            // not fatal
+        }
+    }
+
+    public function testSynonymsExport()
+    {
+        $i = 0;
+        $exported = array();
+
+        $browser = $this->index->exportSynonyms(array(), 2);
+
+        foreach ($browser as $k => $synonym) {
+            // Check if the key is correct, not related to pagination
+            $this->assertEquals($i, $k, 'The synonymsExporter returned incorrect keys.');
+            $i++;
+
+            $exported[] = $synonym;
+        }
+
+        $this->assertFalse(isset($synonym['_highlightResult']), 'Synonyms were not formatted properly.');
+        $this->assertEquals(3, count($exported), 'Some synonyms were not exported.');
+    }
+}

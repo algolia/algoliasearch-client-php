@@ -14,19 +14,19 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
     /** @var Index */
     private $index;
 
+    private $indexName = 'test-synonym-export-php';
+
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex($this->safe_name('test-synonym-export-php'));
+        $this->index = $this->client->initIndex($this->indexName);
+        $this->index->addObject(array('note' => 'Create index in Algolia'));
 
         try {
-            $this->index->clearIndex();
+            $this->index->clearSynonyms();
         } catch (AlgoliaException $e) {
             // not fatal
         }
-
-        $res = $this->index->addObject(array('name' => '589 Howard St., San Francisco'));
-        $this->index->waitTask($res['taskID'], 0.1);
 
         $res = $this->index->batchSynonyms(array(
             array(
@@ -65,7 +65,7 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $i = 0;
         $exported = array();
 
-        $browser = $this->index->exportSynonyms(2);
+        $browser = $this->index->initSynonymBrowser(2);
 
         foreach ($browser as $k => $synonym) {
             // Check if the key is correct, not related to pagination

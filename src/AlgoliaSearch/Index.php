@@ -1509,7 +1509,7 @@ class Index
         );
     }
 
-    public function exportSynonyms($batchSize = 500)
+    public function initSynonymBrowser($batchSize = 1000)
     {
         return new SynonymBrowser($this, $batchSize);
     }

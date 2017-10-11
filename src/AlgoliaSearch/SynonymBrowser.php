@@ -26,11 +26,6 @@ class SynonymBrowser implements \Iterator
     private $position;
 
     /**
-     * @var array Formatted current element
-     */
-    private $hit;
-
-    /**
      * @var array Response from the last Algolia API call,
      * this contains the results for the current page.
      */
@@ -41,15 +36,13 @@ class SynonymBrowser implements \Iterator
      * @param Index $index
      * @param int $hitsPerPage
      */
-    public function __construct($index, $hitsPerPage = 500)
+    public function __construct(Index $index, $hitsPerPage = 1000)
     {
         $this->index = $index;
         $this->hitsPerPage = $hitsPerPage;
 
         $this->page = 0;
         $this->position = 0;
-
-        $this->doQuery($page);
     }
 
     /**
@@ -58,7 +51,7 @@ class SynonymBrowser implements \Iterator
      */
     public function current()
     {
-        return $this->hit;
+        return $this->formatHit($this->response['hits'][$this->position]);
     }
 
     /**
@@ -68,6 +61,13 @@ class SynonymBrowser implements \Iterator
     public function next()
     {
         $this->position++;
+
+        // If the end of the batch is reached but there are
+        // more results in Algolia, we get the next page
+        if (! isset($this->response['hits'][$this->position])
+            && count($this->response['hits']) >= $this->hitsPerPage) {
+            $this->doQuery($this->page + 1);
+        }
     }
 
     /**
@@ -92,22 +92,7 @@ class SynonymBrowser implements \Iterator
      */
     public function valid()
     {
-        if (isset($this->response['hits'][$this->position])) {
-            $this->hit = $this->formatHit($this->response['hits'][$this->position]);
-
-            return true;
-        }
-
-        // No more results and it was the last page
-        if (count($this->response['hits']) < $this->hitsPerPage) {
-            return false;
-        }
-
-        // No more results but still results in Algolia
-        // We call Algolia and loop back to this function
-        $this->doQuery($this->page + 1);
-
-        return $this->valid();
+        return isset($this->response['hits'][$this->position]);
     }
 
     /**
@@ -118,7 +103,8 @@ class SynonymBrowser implements \Iterator
     {
         $this->page = 0;
         $this->position = 0;
-        $this->hit = null;
+
+        $this->doQuery($this->page);
     }
 
     /**

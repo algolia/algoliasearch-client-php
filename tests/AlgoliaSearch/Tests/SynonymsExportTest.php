@@ -23,7 +23,7 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $this->index->addObject(array('note' => 'Create index in Algolia'));
 
         try {
-            $this->index->clearSynonyms();
+            $this->clearSynonyms();
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -66,16 +66,29 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $exported = array();
 
         $browser = $this->index->initSynonymBrowser(2);
+        $lastObjectID = '';
 
         foreach ($browser as $k => $synonym) {
             // Check if the key is correct, not related to pagination
             $this->assertEquals($i, $k, 'The synonymsExporter returned incorrect keys.');
-            $i++;
+            $this->assertArrayHasKey('objectID', $synonym, 'objectID is missing in exported synonym');
+            $this->assertNotEquals($lastObjectID, $synonym['objectID']);
 
+            $i++;
+            $lastObjectID = $synonym['objectID'];
             $exported[] = $synonym;
         }
 
         $this->assertFalse(isset($synonym['_highlightResult']), 'Synonyms were not formatted properly.');
         $this->assertEquals(3, count($exported), 'Some synonyms were not exported.');
+
+        $this->clearSynonyms();
+        $this->index->batchSynonyms($exported);
+    }
+
+    private function clearSynonyms()
+    {
+        $res = $this->index->clearSynonyms();
+        $this->index->waitTask($res['taskID'], 0.1);
     }
 }

@@ -11,11 +11,6 @@ class SynonymBrowser implements \Iterator
     private $index;
 
     /**
-     * @var array Used to filter the type of synonyms you want to export
-     */
-    private $synonymType;
-
-    /**
      * @var int Zero-based page number
      */
     private $page;
@@ -44,17 +39,14 @@ class SynonymBrowser implements \Iterator
     /**
      * SynonymBrowser constructor.
      * @param Index $index
-     * @param array $synonymType
-     * @param int $page
      * @param int $hitsPerPage
      */
-    public function __construct($index, array $synonymType = array(), $page = 0, $hitsPerPage = 500)
+    public function __construct($index, $hitsPerPage = 500)
     {
         $this->index = $index;
-        $this->synonymType = $synonymType;
-        $this->page = $page;
         $this->hitsPerPage = $hitsPerPage;
 
+        $this->page = 0;
         $this->position = 0;
 
         $this->doQuery($page);
@@ -62,7 +54,7 @@ class SynonymBrowser implements \Iterator
 
     /**
      * Return the current element
-     * @return mixed Can return any type.
+     * @return array
      */
     public function current()
     {
@@ -139,7 +131,7 @@ class SynonymBrowser implements \Iterator
         $this->page = $page;
         $this->position = 0;
 
-        $this->response = $this->index->searchSynonyms('', $this->synonymType, $page, $this->hitsPerPage);
+        $this->response = $this->index->searchSynonyms('', array(), $page, $this->hitsPerPage);
     }
 
     /**

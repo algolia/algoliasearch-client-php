@@ -5,7 +5,6 @@ namespace AlgoliaSearch\Tests;
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
 use AlgoliaSearch\Index;
-use AlgoliaSearch\SynonymType;
 
 class SynonymsExportTest extends AlgoliaSearchTestCase
 {
@@ -66,7 +65,7 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $i = 0;
         $exported = array();
 
-        $browser = $this->index->exportSynonyms(array(), 2);
+        $browser = $this->index->exportSynonyms(2);
 
         foreach ($browser as $k => $synonym) {
             // Check if the key is correct, not related to pagination

@@ -70,7 +70,8 @@ class SynonymBrowser implements \Iterator
         // more results in Algolia, we get the next page
         if (! isset($this->response['hits'][$this->position])
             && count($this->response['hits']) >= $this->hitsPerPage) {
-            $this->doQuery($this->page + 1);
+            $this->page++;
+            $this->fetchCurrentPageResults();
         }
     }
 
@@ -108,7 +109,7 @@ class SynonymBrowser implements \Iterator
         $this->page = 0;
         $this->position = 0;
 
-        $this->doQuery($this->page);
+        $this->fetchCurrentPageResults();
     }
 
     /**
@@ -116,12 +117,10 @@ class SynonymBrowser implements \Iterator
      *
      * @param $page Page number to call
      */
-    private function doQuery($page)
+    private function fetchCurrentPageResults()
     {
-        $this->page = $page;
         $this->position = 0;
-
-        $this->response = $this->index->searchSynonyms('', array(), $page, $this->hitsPerPage);
+        $this->response = $this->index->searchSynonyms('', array(), $this->page, $this->hitsPerPage);
     }
 
     /**

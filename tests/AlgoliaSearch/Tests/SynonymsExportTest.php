@@ -5,6 +5,7 @@ namespace AlgoliaSearch\Tests;
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
 use AlgoliaSearch\Index;
+use AlgoliaSearch\SynonymBrowser;
 
 class SynonymsExportTest extends AlgoliaSearchTestCase
 {
@@ -36,6 +37,14 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testShouldRejectInvalidHitsPerPage()
+    {
+        new SynonymBrowser($this->index, 0);
     }
 
     public function testSynonymsExport()

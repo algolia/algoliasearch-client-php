@@ -33,8 +33,12 @@ class SynonymBrowser implements \Iterator
      */
     public function __construct(Index $index, $hitsPerPage = 1000)
     {
+        if ($hitsPerPage <= 0) {
+            throw new \InvalidArgumentException('Hits per page should be bigger than zero.');
+        }
+
         $this->index = $index;
-        $this->hitsPerPage = $hitsPerPage;
+        $this->hitsPerPage = (int) $hitsPerPage;
     }
 
     /**

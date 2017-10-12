@@ -11,19 +11,14 @@ class SynonymBrowser implements \Iterator
     private $index;
 
     /**
-     * @var int Zero-based page number
-     */
-    private $page = 0;
-
-    /**
      * @var int Number of results to return from each call to Algolia
      */
     private $hitsPerPage;
 
     /**
-     * @var int Position in the current paginated result batch
+     * @var int
      */
-    private $position = 0;
+    private $key = 0;
 
     /**
      * @var array Response from the last Algolia API call,
@@ -49,8 +44,9 @@ class SynonymBrowser implements \Iterator
     public function current()
     {
         $this->ensureResponseExists();
+        $hit = $this->response['hits'][$this->getHitIndexForCurrentPage()];
 
-        return $this->formatHit($this->response['hits'][$this->position]);
+        return $this->formatHit($hit);
     }
 
     /**
@@ -59,30 +55,21 @@ class SynonymBrowser implements \Iterator
      */
     public function next()
     {
-        $this->ensureResponseExists();
-
-        $this->position++;
-
-        if ($this->valid()) {
-            return;
-        }
-
-        // If the end of the batch is reached but there are
-        // more results in Algolia, we get the next page.
-        if (count($this->response['hits']) >= $this->hitsPerPage) {
-            $this->page++;
-            $this->position = 0;
-            $this->fetchCurrentPageResults();
+        $previousPage = $this->getCurrentPage();
+        $this->key++;
+        if($this->getCurrentPage() !== $previousPage) {
+            // Discard the response if the page has changed.
+            $this->response = null;
         }
     }
 
     /**
      * Return the key of the current element
-     * @return mixed scalar on success, or null on failure.
+     * @return int
      */
     public function key()
     {
-        return $this->page * $this->hitsPerPage + $this->position;
+        return $this->key;
     }
 
     /**
@@ -97,7 +84,7 @@ class SynonymBrowser implements \Iterator
     {
         $this->ensureResponseExists();
 
-        return isset($this->response['hits'][$this->position]);
+        return isset($this->response['hits'][$this->getHitIndexForCurrentPage()]);
     }
 
     /**
@@ -106,21 +93,8 @@ class SynonymBrowser implements \Iterator
      */
     public function rewind()
     {
-        $this->page = 0;
-        $this->position = 0;
+        $this->key = 0;
         $this->response = null;
-
-        $this->fetchCurrentPageResults();
-    }
-
-    /**
-     * Call Algolia' API to get new result batch
-     *
-     * @param $page Page number to call
-     */
-    private function fetchCurrentPageResults()
-    {
-        $this->response = $this->index->searchSynonyms('', array(), $this->page, $this->hitsPerPage);
     }
 
     /**
@@ -145,5 +119,35 @@ class SynonymBrowser implements \Iterator
         if ($this->response === null) {
             $this->fetchCurrentPageResults();
         }
+    }
+
+    /**
+     * Call Algolia' API to get new result batch
+     */
+    private function fetchCurrentPageResults()
+    {
+        $this->response = $this->index->searchSynonyms('', array(), $this->getCurrentPage(), $this->hitsPerPage);
+    }
+
+    /**
+     * getCurrentPage returns the current zero based page according to
+     * the current key and hits per page.
+     *
+     * @return int
+     */
+    private function getCurrentPage()
+    {
+        return (int) floor($this->key / ($this->hitsPerPage));
+    }
+
+    /**
+     * getHitIndexForCurrentPage retrieves the index
+     * of the hit in the current page.
+     *
+     * @return int
+     */
+    private function getHitIndexForCurrentPage()
+    {
+        return $this->key - ($this->getCurrentPage() * $this->hitsPerPage);
     }
 }

@@ -24,7 +24,8 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $this->index->addObject(array('note' => 'Create index in Algolia'));
 
         try {
-            $this->clearSynonyms();
+            $res = $this->index->clearSynonyms();
+            $this->index->waitTask($res['taskID'], 0.1);
         } catch (AlgoliaException $e) {
             // not fatal
         }
@@ -47,53 +48,6 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         new SynonymBrowser($this->index, 0);
     }
 
-    public function testSynonymsExport()
-    {
-        $res = $this->index->batchSynonyms(array(
-            array(
-                'objectID' => 'city',
-                'type'     => 'synonym',
-                'synonyms' => array('San Francisco', 'SF'),
-            ),
-            array(
-                'objectID'    => 'street',
-                'type'        => 'altCorrection1',
-                'word'        => 'Street',
-                'corrections' => array('St')
-            ),
-            array(
-                'objectID'    => 'avenue',
-                'type'        => 'altCorrection1',
-                'word'        => 'Avenue',
-                'corrections' => array('Av', 'Ave')
-            ),
-        ));
-
-        $this->index->waitTask($res['taskID'], 0.1);
-        $i = 0;
-        $exported = array();
-
-        $browser = $this->index->initSynonymBrowser(2);
-        $lastObjectID = '';
-
-        foreach ($browser as $k => $synonym) {
-            // Check if the key is correct, not related to pagination
-            $this->assertEquals($i, $k, 'The synonymsExporter returned incorrect keys.');
-            $this->assertArrayHasKey('objectID', $synonym, 'objectID is missing in exported synonym');
-            $this->assertNotEquals($lastObjectID, $synonym['objectID']);
-
-            $i++;
-            $lastObjectID = $synonym['objectID'];
-            $exported[] = $synonym;
-        }
-
-        $this->assertFalse(isset($synonym['_highlightResult']), 'Synonyms were not formatted properly.');
-        $this->assertEquals(3, count($exported), 'Some synonyms were not exported.');
-
-        $this->clearSynonyms();
-        $this->index->batchSynonyms($exported);
-    }
-
     public function testCanGetCurrentSynonymOfNewBrowser()
     {
         $res = $this->index->saveSynonym('city',
@@ -113,9 +67,68 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         ), $synonym);
     }
 
-    private function clearSynonyms()
+    public function testSynonymsExport()
     {
-        $res = $this->index->clearSynonyms();
+        $res = $this->index->batchSynonyms($this->getFakeSynonyms());
         $this->index->waitTask($res['taskID'], 0.1);
+
+        $exported = array();
+
+        $browser = $this->index->initSynonymBrowser(2);
+
+        $i = 0;
+        foreach ($browser as $key => $synonym) {
+            $this->assertArrayNotHasKey('_highlightResult', $synonym);
+            $this->assertEquals($i++, $key);
+
+            $exported[] = $synonym;
+        }
+
+        $this->assertCount(3, $exported);
     }
+
+    public function testFoundSynonymsCanBeBatched()
+    {
+        $res = $this->index->batchSynonyms($this->getFakeSynonyms());
+        $this->index->waitTask($res['taskID'], 0.1);
+
+
+        $browser = $this->index->initSynonymBrowser();
+
+        $synonyms = array();
+        foreach ($browser as $key => $synonym) {
+            $synonyms[] = $synonym;
+        }
+
+        $res = $this->index->clearSynonyms();
+        $this->index->waitTask($res['taskID']);
+
+        $this->index->batchSynonyms($synonyms);
+    }
+
+    /**
+     * @return array
+     */
+    private function getFakeSynonyms() {
+        return array(
+            array(
+                'objectID' => 'city',
+                'type'     => 'synonym',
+                'synonyms' => array('San Francisco', 'SF'),
+            ),
+            array(
+                'objectID'    => 'street',
+                'type'        => 'altCorrection1',
+                'word'        => 'Street',
+                'corrections' => array('St')
+            ),
+            array(
+                'objectID'    => 'avenue',
+                'type'        => 'altCorrection1',
+                'word'        => 'Avenue',
+                'corrections' => array('Av', 'Ave')
+            ),
+        );
+    }
+
 }

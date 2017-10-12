@@ -13,7 +13,7 @@ class SynonymBrowser implements \Iterator
     /**
      * @var int Zero-based page number
      */
-    private $page;
+    private $page = 0;
 
     /**
      * @var int Number of results to return from each call to Algolia
@@ -23,7 +23,7 @@ class SynonymBrowser implements \Iterator
     /**
      * @var int Position in the current paginated result batch
      */
-    private $position;
+    private $position = 0;
 
     /**
      * @var array Response from the last Algolia API call,
@@ -40,9 +40,6 @@ class SynonymBrowser implements \Iterator
     {
         $this->index = $index;
         $this->hitsPerPage = $hitsPerPage;
-
-        $this->page = 0;
-        $this->position = 0;
     }
 
     /**
@@ -51,9 +48,7 @@ class SynonymBrowser implements \Iterator
      */
     public function current()
     {
-        if ($this->response === null) {
-            $this->rewind();
-        }
+        $this->ensureResponseExists();
 
         return $this->formatHit($this->response['hits'][$this->position]);
     }
@@ -64,6 +59,8 @@ class SynonymBrowser implements \Iterator
      */
     public function next()
     {
+        $this->ensureResponseExists();
+
         $this->position++;
 
         if ($this->valid()) {
@@ -74,6 +71,7 @@ class SynonymBrowser implements \Iterator
         // more results in Algolia, we get the next page.
         if (count($this->response['hits']) >= $this->hitsPerPage) {
             $this->page++;
+            $this->position = 0;
             $this->fetchCurrentPageResults();
         }
     }
@@ -84,10 +82,7 @@ class SynonymBrowser implements \Iterator
      */
     public function key()
     {
-        $key = $this->page * $this->hitsPerPage + $this->position;
-
-        return $key;
-
+        return $this->page * $this->hitsPerPage + $this->position;
     }
 
     /**
@@ -100,6 +95,8 @@ class SynonymBrowser implements \Iterator
      */
     public function valid()
     {
+        $this->ensureResponseExists();
+
         return isset($this->response['hits'][$this->position]);
     }
 
@@ -111,6 +108,7 @@ class SynonymBrowser implements \Iterator
     {
         $this->page = 0;
         $this->position = 0;
+        $this->response = null;
 
         $this->fetchCurrentPageResults();
     }
@@ -122,7 +120,6 @@ class SynonymBrowser implements \Iterator
      */
     private function fetchCurrentPageResults()
     {
-        $this->position = 0;
         $this->response = $this->index->searchSynonyms('', array(), $this->page, $this->hitsPerPage);
     }
 
@@ -138,5 +135,15 @@ class SynonymBrowser implements \Iterator
         unset($hit['_highlightResult']);
 
         return $hit;
+    }
+
+    /**
+     * ensureResponseExists is always called prior
+     * to trying to access the response property.
+     */
+    private function ensureResponseExists() {
+        if ($this->response === null) {
+            $this->fetchCurrentPageResults();
+        }
     }
 }

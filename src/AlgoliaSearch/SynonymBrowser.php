@@ -126,7 +126,7 @@ class SynonymBrowser implements \Iterator
 
     /**
      * The export method is using search internally, this method
-     * is used to clean the resuls, like remove the highlight
+     * is used to clean the results, like remove the highlight
      *
      * @param array $hit
      * @return array formatted synonym array

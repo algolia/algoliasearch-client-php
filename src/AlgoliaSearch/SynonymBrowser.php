@@ -66,10 +66,13 @@ class SynonymBrowser implements \Iterator
     {
         $this->position++;
 
+        if ($this->valid()) {
+            return;
+        }
+
         // If the end of the batch is reached but there are
-        // more results in Algolia, we get the next page
-        if (! isset($this->response['hits'][$this->position])
-            && count($this->response['hits']) >= $this->hitsPerPage) {
+        // more results in Algolia, we get the next page.
+        if (count($this->response['hits']) >= $this->hitsPerPage) {
             $this->page++;
             $this->fetchCurrentPageResults();
         }

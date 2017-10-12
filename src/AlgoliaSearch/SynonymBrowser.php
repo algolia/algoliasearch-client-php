@@ -51,6 +51,10 @@ class SynonymBrowser implements \Iterator
      */
     public function current()
     {
+        if ($this->response === null) {
+            $this->rewind();
+        }
+
         return $this->formatHit($this->response['hits'][$this->position]);
     }
 

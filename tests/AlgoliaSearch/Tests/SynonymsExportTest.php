@@ -27,7 +27,19 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         } catch (AlgoliaException $e) {
             // not fatal
         }
+    }
 
+    protected function tearDown()
+    {
+        try {
+            $this->client->deleteIndex($this->indexName);
+        } catch (AlgoliaException $e) {
+            // not fatal
+        }
+    }
+
+    public function testSynonymsExport()
+    {
         $res = $this->index->batchSynonyms(array(
             array(
                 'objectID' => 'city',
@@ -49,19 +61,6 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         ));
 
         $this->index->waitTask($res['taskID'], 0.1);
-    }
-
-    protected function tearDown()
-    {
-        try {
-            $this->client->deleteIndex($this->indexName);
-        } catch (AlgoliaException $e) {
-            // not fatal
-        }
-    }
-
-    public function testSynonymsExport()
-    {
         $i = 0;
         $exported = array();
 
@@ -84,6 +83,25 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
 
         $this->clearSynonyms();
         $this->index->batchSynonyms($exported);
+    }
+
+    public function testCanGetCurrentSynonymOfNewBrowser()
+    {
+        $res = $this->index->saveSynonym('city',
+            array(
+                'type'     => 'synonym',
+                'synonyms' => array('San Francisco', 'SF'),
+            )
+        );
+        $this->index->waitTask($res['taskID'], 0.1);
+
+
+        $synonym = $this->index->initSynonymBrowser()->current();
+        $this->assertEquals(array(
+            'objectID' => 'city',
+            'type'     => 'synonym',
+            'synonyms' => array('San Francisco', 'SF'),
+        ), $synonym);
     }
 
     private function clearSynonyms()

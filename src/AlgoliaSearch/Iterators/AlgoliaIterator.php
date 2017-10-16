@@ -1,33 +1,36 @@
 <?php
 
-namespace AlgoliaSearch;
+namespace AlgoliaSearch\Iterators;
 
 
-class SynonymBrowser implements \Iterator
+use AlgoliaSearch\Index;
+
+abstract class AlgoliaIterator implements \Iterator
 {
     /**
      * @var Index
      */
-    private $index;
+    protected $index;
 
     /**
      * @var int Number of results to return from each call to Algolia
      */
-    private $hitsPerPage;
+    protected $hitsPerPage;
 
     /**
      * @var int
      */
-    private $key = 0;
+    protected $key = 0;
 
     /**
      * @var array Response from the last Algolia API call,
      * this contains the results for the current page.
      */
-    private $response;
+    protected $response;
 
     /**
-     * SynonymBrowser constructor.
+     * Iterator constructor.
+     *
      * @param Index $index
      * @param int $hitsPerPage
      */
@@ -102,35 +105,13 @@ class SynonymBrowser implements \Iterator
     }
 
     /**
-     * The export method is using search internally, this method
-     * is used to clean the results, like remove the highlight
-     *
-     * @param array $hit
-     * @return array formatted synonym array
-     */
-    private function formatHit(array $hit)
-    {
-        unset($hit['_highlightResult']);
-
-        return $hit;
-    }
-
-    /**
      * ensureResponseExists is always called prior
      * to trying to access the response property.
      */
-    private function ensureResponseExists() {
+    protected function ensureResponseExists() {
         if ($this->response === null) {
             $this->fetchCurrentPageResults();
         }
-    }
-
-    /**
-     * Call Algolia' API to get new result batch
-     */
-    private function fetchCurrentPageResults()
-    {
-        $this->response = $this->index->searchSynonyms('', array(), $this->getCurrentPage(), $this->hitsPerPage);
     }
 
     /**
@@ -139,7 +120,7 @@ class SynonymBrowser implements \Iterator
      *
      * @return int
      */
-    private function getCurrentPage()
+    protected function getCurrentPage()
     {
         return (int) floor($this->key / ($this->hitsPerPage));
     }
@@ -150,8 +131,22 @@ class SynonymBrowser implements \Iterator
      *
      * @return int
      */
-    private function getHitIndexForCurrentPage()
+    protected function getHitIndexForCurrentPage()
     {
         return $this->key - ($this->getCurrentPage() * $this->hitsPerPage);
     }
+
+    /**
+     * Call Algolia' API to get new result batch
+     */
+    abstract protected function fetchCurrentPageResults();
+
+    /**
+     * The export method might be is using search internally, this method
+     * is used to clean the results, like remove the highlight
+     *
+     * @param array $hit
+     * @return array formatted synonym array
+     */
+    abstract protected function formatHit(array $hit);
 }

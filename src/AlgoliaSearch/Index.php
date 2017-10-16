@@ -27,6 +27,9 @@
 
 namespace AlgoliaSearch;
 
+
+use AlgoliaSearch\Iterators\SynonymIterator;
+
 /*
  * Contains all the functions related to one index
  * You should use Client.initIndex(indexName) to retrieve this object

@@ -5,7 +5,7 @@ namespace AlgoliaSearch\Tests;
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
 use AlgoliaSearch\Index;
-use AlgoliaSearch\SynonymIterator;
+use AlgoliaSearch\Iterators\SynonymIterator;
 
 class SynonymsExportTest extends AlgoliaSearchTestCase
 {

@@ -1509,6 +1509,11 @@ class Index
         );
     }
 
+    public function initSynonymBrowser($batchSize = 1000)
+    {
+        return new SynonymBrowser($this, $batchSize);
+    }
+
     /**
      * @deprecated Please use searchForFacetValues instead
      * @param $facetName

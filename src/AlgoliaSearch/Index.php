@@ -28,6 +28,7 @@
 namespace AlgoliaSearch;
 
 
+use AlgoliaSearch\Iterators\RuleIterator;
 use AlgoliaSearch\Iterators\SynonymIterator;
 
 /*
@@ -1512,6 +1513,11 @@ class Index
         );
     }
 
+    /**
+     * @param int $batchSize
+     *
+     * @return SynonymIterator
+     */
     public function initSynonymIterator($batchSize = 1000)
     {
         return new SynonymIterator($this, $batchSize);
@@ -1663,6 +1669,16 @@ class Index
             $this->context->connectTimeout,
             $this->context->readTimeout
         );
+    }
+
+    /**
+     * @param int $batchSize
+     *
+     * @return RuleIterator
+     */
+    public function initRuleIterator($batchSize = 500)
+    {
+        return new RuleIterator($this, $batchSize);
     }
 
     /**

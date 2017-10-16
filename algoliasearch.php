@@ -37,3 +37,6 @@ require_once 'src/AlgoliaSearch/Json.php';
 require_once 'src/AlgoliaSearch/FailingHostsCache.php';
 require_once 'src/AlgoliaSearch/FileFailingHostsCache.php';
 require_once 'src/AlgoliaSearch/InMemoryFailingHostsCache.php';
+require_once 'src/AlgoliaSearch/Iterators/AlgoliaIterator.php';
+require_once 'src/AlgoliaSearch/Iterators/RuleIterator.php';
+require_once 'src/AlgoliaSearch/Iterators/SynonymIterator.php';

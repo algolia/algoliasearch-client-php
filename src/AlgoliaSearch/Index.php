@@ -1509,9 +1509,9 @@ class Index
         );
     }
 
-    public function initSynonymBrowser($batchSize = 1000)
+    public function initSynonymIterator($batchSize = 1000)
     {
-        return new SynonymBrowser($this, $batchSize);
+        return new SynonymIterator($this, $batchSize);
     }
 
     /**

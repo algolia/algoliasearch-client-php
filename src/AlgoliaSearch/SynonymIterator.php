@@ -3,7 +3,7 @@
 namespace AlgoliaSearch;
 
 
-class SynonymBrowser implements \Iterator
+class SynonymIterator implements \Iterator
 {
     /**
      * @var Index

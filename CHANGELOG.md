@@ -1,5 +1,10 @@
 ## Change Log
 
+### 1.22.0
+
+- feat: Introduce SynonymIterator to easily export all synonyms
+- feat: Introduce RuleIterator to easily export all query rules
+
 ### 1.21.0
 
 - feat: exclude disjunctive queries from analytics
@@ -12,7 +17,7 @@
 
 ### 1.19.0
 
-- feat(query-rules): add query rules support 
+- feat(query-rules): add query rules support
 - feat(delete-by): add `delete by` support
 - feat: add a dedicated `AlgoliaConnectionException`
 

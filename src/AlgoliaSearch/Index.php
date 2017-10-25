@@ -83,7 +83,7 @@ class Index
      *
      * @throws \Exception
      */
-    public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')
+    public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction', $requestHeaders = array())
     {
         $requests = array();
         $allowedActions = array(
@@ -114,7 +114,7 @@ class Index
             $requests[] = $req;
         }
 
-        return $this->batch(array('requests' => $requests));
+        return $this->batch(array('requests' => $requests), $requestHeaders);
     }
 
     /**
@@ -127,7 +127,7 @@ class Index
      *
      * @return mixed
      */
-    public function addObject($content, $objectID = null)
+    public function addObject($content, $objectID = null, $requestHeaders = array())
     {
         if ($objectID === null) {
             return $this->client->request(
@@ -138,7 +138,8 @@ class Index
                 $content,
                 $this->context->writeHostsArray,
                 $this->context->connectTimeout,
-                $this->context->readTimeout
+                $this->context->readTimeout,
+                $requestHeaders
             );
         }
 
@@ -150,7 +151,8 @@ class Index
             $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -162,11 +164,11 @@ class Index
      *
      * @return mixed
      */
-    public function addObjects($objects, $objectIDKey = 'objectID')
+    public function addObjects($objects, $objectIDKey = 'objectID', $requestHeaders = array())
     {
         $requests = $this->buildBatch('addObject', $objects, true, $objectIDKey);
 
-        return $this->batch($requests);
+        return $this->batch($requests, $requestHeaders);
     }
 
     /**
@@ -268,7 +270,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function partialUpdateObject($partialObject, $createIfNotExists = true)
+    public function partialUpdateObject($partialObject, $createIfNotExists = true, $requestHeaders = array())
     {
         $queryString = $createIfNotExists ? '' : '?createIfNotExists=false';
 
@@ -280,7 +282,8 @@ class Index
             $partialObject,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -293,7 +296,7 @@ class Index
      *
      * @return mixed
      */
-    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true)
+    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true, $requestHeaders = array())
     {
         if ($createIfNotExists) {
             $requests = $this->buildBatch('partialUpdateObject', $objects, true, $objectIDKey);
@@ -301,7 +304,7 @@ class Index
             $requests = $this->buildBatch('partialUpdateObjectNoCreate', $objects, true, $objectIDKey);
         }
 
-        return $this->batch($requests);
+        return $this->batch($requests, $requestHeaders);
     }
 
     /**
@@ -313,7 +316,7 @@ class Index
      *
      * @return mixed
      */
-    public function saveObject($object, $objectIDKey = 'objectID')
+    public function saveObject($object, $objectIDKey = 'objectID', $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -323,7 +326,8 @@ class Index
             $object,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -335,11 +339,11 @@ class Index
      *
      * @return mixed
      */
-    public function saveObjects($objects, $objectIDKey = 'objectID')
+    public function saveObjects($objects, $objectIDKey = 'objectID', $requestHeaders = array())
     {
         $requests = $this->buildBatch('updateObject', $objects, true, $objectIDKey);
 
-        return $this->batch($requests);
+        return $this->batch($requests, $requestHeaders);
     }
 
     /**
@@ -352,7 +356,7 @@ class Index
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function deleteObject($objectID)
+    public function deleteObject($objectID, $requestHeaders = array())
     {
         if ($objectID == null || mb_strlen($objectID) == 0) {
             throw new \Exception('objectID is mandatory');
@@ -366,7 +370,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -377,7 +382,7 @@ class Index
      *
      * @return mixed
      */
-    public function deleteObjects($objects)
+    public function deleteObjects($objects, $requestHeaders = array())
     {
         $objectIDs = array();
         foreach ($objects as $key => $id) {
@@ -385,7 +390,7 @@ class Index
         }
         $requests = $this->buildBatch('deleteObject', $objectIDs, true);
 
-        return $this->batch($requests);
+        return $this->batch($requests, $requestHeaders);
     }
 
     /**
@@ -401,26 +406,26 @@ class Index
      *
      * @return int the number of delete operations
      */
-    public function deleteByQuery($query, $args = array(), $waitLastCall = true)
+    public function deleteByQuery($query, $args = array(), $waitLastCall = true, $requestHeaders = array())
     {
         $args['attributesToRetrieve'] = 'objectID';
         $args['hitsPerPage'] = 1000;
         $args['distinct'] = false;
 
         $deletedCount = 0;
-        $results = $this->search($query, $args);
+        $results = $this->search($query, $args, $requestHeaders);
         while ($results['nbHits'] != 0) {
             $objectIDs = array();
             foreach ($results['hits'] as $elt) {
                 array_push($objectIDs, $elt['objectID']);
             }
-            $res = $this->deleteObjects($objectIDs);
+            $res = $this->deleteObjects($objectIDs, $requestHeaders);
             $deletedCount += count($objectIDs);
             if ($results['nbHits'] < $args['hitsPerPage'] && false === $waitLastCall) {
                 break;
             }
-            $this->waitTask($res['taskID']);
-            $results = $this->search($query, $args);
+            $this->waitTask($res['taskID'], 100, $requestHeaders);
+            $results = $this->search($query, $args, $requestHeaders);
         }
 
         return $deletedCount;
@@ -840,10 +845,10 @@ class Index
      *
      * @return mixed
      */
-    public function waitTask($taskID, $timeBeforeRetry = 100)
+    public function waitTask($taskID, $timeBeforeRetry = 100, $requestHeaders = array())
     {
         while (true) {
-            $res = $this->getTaskStatus($taskID);
+            $res = $this->getTaskStatus($taskID, $requestHeaders);
             if ($res['status'] === 'published') {
                 return $res;
             }
@@ -859,7 +864,7 @@ class Index
      *
      * @return mixed
      */
-    public function getTaskStatus($taskID)
+    public function getTaskStatus($taskID, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -869,7 +874,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -880,7 +886,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getSettings()
+    public function getSettings($requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -890,7 +896,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -901,7 +908,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function clearIndex()
+    public function clearIndex($requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -911,7 +918,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -984,7 +992,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function setSettings($settings, $forwardToReplicas = false)
+    public function setSettings($settings, $forwardToReplicas = false, $requestHeaders = array())
     {
         $url = '/1/indexes/'.$this->urlIndexName.'/settings';
 
@@ -1000,7 +1008,8 @@ class Index
             $settings,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1011,7 +1020,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function listApiKeys()
+    public function listApiKeys($requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1021,7 +1030,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1053,7 +1063,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getApiKey($key)
+    public function getApiKey($key, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1063,7 +1073,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1077,7 +1088,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function deleteApiKey($key)
+    public function deleteApiKey($key, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1087,7 +1098,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1134,7 +1146,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $requestHeaders = array())
     {
         // is dict of value
         if ($obj !== array_values($obj)) {
@@ -1159,7 +1171,8 @@ class Index
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1211,7 +1224,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
+    public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $requestHeaders = array())
     {
         // is dict of value
         if ($obj !== array_values($obj)) {
@@ -1236,7 +1249,8 @@ class Index
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1360,7 +1374,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null)
+    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null, $requestHeaders = array())
     {
         $params = array();
 
@@ -1397,7 +1411,8 @@ class Index
             $params,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1408,7 +1423,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getSynonym($objectID)
+    public function getSynonym($objectID, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1418,7 +1433,8 @@ class Index
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1430,7 +1446,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function deleteSynonym($objectID, $forwardToReplicas = false)
+    public function deleteSynonym($objectID, $forwardToReplicas = false, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1440,7 +1456,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1451,7 +1468,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function clearSynonyms($forwardToReplicas = false)
+    public function clearSynonyms($forwardToReplicas = false, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1461,7 +1478,8 @@ class Index
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1474,7 +1492,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false)
+    public function batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1485,7 +1503,8 @@ class Index
             $objects,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -1498,7 +1517,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function saveSynonym($objectID, $content, $forwardToReplicas = false)
+    public function saveSynonym($objectID, $content, $forwardToReplicas = false, $requestHeaders = array())
     {
         return $this->client->request(
             $this->context,
@@ -1508,7 +1527,8 @@ class Index
             $content,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 

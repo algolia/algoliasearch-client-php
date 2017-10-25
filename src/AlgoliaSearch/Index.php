@@ -682,7 +682,7 @@ class Index
      *
      * @return mixed
      */
-    public function searchForFacetValues($facetName, $facetQuery, $query = array(), $requestHeaders)
+    public function searchForFacetValues($facetName, $facetQuery, $query = array(), $requestHeaders = array())
     {
         $query['facetQuery'] = $facetQuery;
 

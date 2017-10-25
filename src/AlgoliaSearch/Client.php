@@ -228,13 +228,14 @@ class Client
      * @param array  $queries
      * @param string $indexNameKey
      * @param string $strategy
+     * @param array $requestHeaders
      *
      * @return mixed
      *
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')
+    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none', $requestHeaders = array())
     {
         if ($queries == null) {
             throw new \Exception('No query provided');
@@ -260,7 +261,8 @@ class Client
             array('requests' => $requests, 'strategy' => $strategy),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->searchTimeout
+            $this->context->searchTimeout,
+            $requestHeaders
         );
     }
 
@@ -278,7 +280,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listIndexes()
+    public function listIndexes($requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -288,7 +290,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -299,7 +302,7 @@ class Client
      *
      * @return mixed an object containing a "deletedAt" attribute
      */
-    public function deleteIndex($indexName)
+    public function deleteIndex($indexName, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -309,7 +312,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -322,7 +326,7 @@ class Client
      *
      * @return mixed
      */
-    public function moveIndex($srcIndexName, $dstIndexName)
+    public function moveIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
     {
         $request = array('operation' => 'move', 'destination' => $dstIndexName);
 
@@ -334,7 +338,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -347,7 +352,7 @@ class Client
      *
      * @return mixed
      */
-    public function copyIndex($srcIndexName, $dstIndexName)
+    public function copyIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
     {
         $request = array('operation' => 'copy', 'destination' => $dstIndexName);
 
@@ -359,7 +364,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -374,7 +380,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function getLogs($offset = 0, $length = 10, $type = 'all')
+    public function getLogs($offset = 0, $length = 10, $type = 'all', $requestHeaders = array())
     {
         if (gettype($type) == 'boolean') { //Old prototype onlyError
             if ($type) {
@@ -392,7 +398,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -421,7 +428,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listApiKeys()
+    public function listApiKeys($requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -431,7 +438,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -451,7 +459,7 @@ class Client
      *
      * @return mixed
      */
-    public function getApiKey($key)
+    public function getApiKey($key, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -461,7 +469,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -482,7 +491,7 @@ class Client
      *
      * @return mixed
      */
-    public function deleteApiKey($key)
+    public function deleteApiKey($key, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -492,7 +501,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -540,7 +550,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null, $requestHeaders = array())
     {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
@@ -568,7 +578,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -627,7 +638,8 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null
+        $indexes = null,
+        $requestHeaders = array()
     ) {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
@@ -654,7 +666,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -674,19 +687,21 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null
+        $indexes = null,
+        $requestHeaders = array()
     ) {
-        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes);
+        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes, $requestHeaders);
     }
 
     /**
      * Send a batch request targeting multiple indices.
      *
      * @param array $requests an associative array defining the batch request body
+     * @param array $requestHeaders
      *
      * @return mixed
      */
-    public function batch($requests)
+    public function batch($requests, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -696,7 +711,8 @@ class Client
             array('requests' => $requests),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -781,6 +797,7 @@ class Client
      * @param array         $hostsArray
      * @param int           $connectTimeout
      * @param int           $readTimeout
+     * @param array         $requestHeaders
      *
      * @return mixed
      *
@@ -794,7 +811,8 @@ class Client
         $data,
         $hostsArray,
         $connectTimeout,
-        $readTimeout
+        $readTimeout,
+        $requestHeaders = array()
     ) {
         $exceptions = array();
         $cnt = 0;
@@ -805,7 +823,7 @@ class Client
                 $readTimeout += 10;
             }
             try {
-                $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout);
+                $res = $this->doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout, $requestHeaders);
                 if ($res !== null) {
                     return $res;
                 }
@@ -831,6 +849,7 @@ class Client
      * @param array         $data
      * @param int           $connectTimeout
      * @param int           $readTimeout
+     * @param array         $requestHeaders
      *
      * @return mixed
      *
@@ -845,7 +864,8 @@ class Client
         $params,
         $data,
         $connectTimeout,
-        $readTimeout
+        $readTimeout,
+        $requestHeaders = array()
     ) {
         if (strpos($host, 'http') === 0) {
             $url = $host.$path;
@@ -897,7 +917,7 @@ class Client
             );
         }
 
-        $headers = array_merge($defaultHeaders, $context->headers);
+        $headers = array_merge($defaultHeaders, $context->headers, $requestHeaders);
 
         $curlHeaders = array();
         foreach ($headers as $key => $value) {

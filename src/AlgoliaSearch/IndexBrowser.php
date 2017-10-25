@@ -71,8 +71,9 @@ class IndexBrowser implements \Iterator
      * @param string     $query
      * @param array|null $params
      * @param int|null   $cursor
+     * @param array      $requestHeaders
      */
-    public function __construct(Index $index, $query, $params = null, $cursor = null)
+    public function __construct(Index $index, $query, $params = null, $cursor = null, $requestHeaders = array())
     {
         $this->index = $index;
         $this->query = $query;
@@ -80,7 +81,7 @@ class IndexBrowser implements \Iterator
 
         $this->position = 0;
 
-        $this->doQuery($cursor);
+        $this->doQuery($cursor, $requestHeaders);
     }
 
     /**
@@ -148,13 +149,14 @@ class IndexBrowser implements \Iterator
 
     /**
      * @param int $cursor
+     * @param array $requestHeaders
      */
-    private function doQuery($cursor = null)
+    private function doQuery($cursor = null, $requestHeaders = array())
     {
         if ($cursor !== null) {
             $this->params['cursor'] = $cursor;
         }
 
-        $this->answer = $this->index->browseFrom($this->query, $this->params, $cursor);
+        $this->answer = $this->index->browseFrom($this->query, $this->params, $cursor, $requestHeaders);
     }
 }

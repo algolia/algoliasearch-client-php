@@ -280,7 +280,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listIndexes()
+    public function listIndexes($requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -290,7 +290,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -301,7 +302,7 @@ class Client
      *
      * @return mixed an object containing a "deletedAt" attribute
      */
-    public function deleteIndex($indexName)
+    public function deleteIndex($indexName, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -311,7 +312,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -324,7 +326,7 @@ class Client
      *
      * @return mixed
      */
-    public function moveIndex($srcIndexName, $dstIndexName)
+    public function moveIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
     {
         $request = array('operation' => 'move', 'destination' => $dstIndexName);
 
@@ -336,7 +338,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -349,7 +352,7 @@ class Client
      *
      * @return mixed
      */
-    public function copyIndex($srcIndexName, $dstIndexName)
+    public function copyIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
     {
         $request = array('operation' => 'copy', 'destination' => $dstIndexName);
 
@@ -361,7 +364,8 @@ class Client
             $request,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -376,7 +380,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function getLogs($offset = 0, $length = 10, $type = 'all')
+    public function getLogs($offset = 0, $length = 10, $type = 'all', $requestHeaders = array())
     {
         if (gettype($type) == 'boolean') { //Old prototype onlyError
             if ($type) {
@@ -394,7 +398,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -423,7 +428,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listApiKeys()
+    public function listApiKeys($requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -433,7 +438,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -453,7 +459,7 @@ class Client
      *
      * @return mixed
      */
-    public function getApiKey($key)
+    public function getApiKey($key, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -463,7 +469,8 @@ class Client
             null,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -484,7 +491,7 @@ class Client
      *
      * @return mixed
      */
-    public function deleteApiKey($key)
+    public function deleteApiKey($key, $requestHeaders = array())
     {
         return $this->request(
             $this->context,
@@ -494,7 +501,8 @@ class Client
             null,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -542,7 +550,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null, $requestHeaders = array())
     {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
@@ -570,7 +578,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -629,7 +638,8 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null
+        $indexes = null,
+        $requestHeaders = array()
     ) {
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
@@ -656,7 +666,8 @@ class Client
             $params,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 
@@ -676,9 +687,10 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null
+        $indexes = null,
+        $requestHeaders = array()
     ) {
-        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes);
+        return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes, $requestHeaders);
     }
 
     /**

@@ -434,7 +434,7 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function RemoveUserID($userID, $requestHeaders = array())
+    public function removeUserID($userID, $requestHeaders = array())
     {
         $requestHeaders["X-Algolia-User-ID"] = $userID;
 

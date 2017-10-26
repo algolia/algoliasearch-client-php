@@ -39,7 +39,8 @@ class MultiClusterManagementTest extends AlgoliaSearchTestCase
     }
 
     public function testAssignUserID() {
-        $cluster = $this->client->listClusters()['clusters'][0]['clusterName'];
+        $clusters = $this->client->listClusters();
+        $cluster = $clusters['clusters'][0]['clusterName'];
         $answer = $this->client->assignUserID($this->userID, $cluster);
 
         $this->assertTrue($answer['createdAt'] !== null);
@@ -58,7 +59,8 @@ class MultiClusterManagementTest extends AlgoliaSearchTestCase
     }
 
     public function testGetTopUserID() {
-        $cluster = $this->client->listClusters()['clusters'][0]['clusterName'];
+        $clusters = $this->client->listClusters();
+        $cluster = $clusters['clusters'][0]['clusterName'];
         $answer = $this->client->getTopUserID();
 
         $this->assertTrue($answer['topUsers'] !== null);
@@ -79,7 +81,8 @@ class MultiClusterManagementTest extends AlgoliaSearchTestCase
     }
 
     public function testSearchUserIDs() {
-        $cluster = $this->client->listClusters()['clusters'][0]['clusterName'];
+        $clusters = $this->client->listClusters();
+        $cluster = $clusters['clusters'][0]['clusterName'];
         $answer = $this->client->searchUserIDs($this->userID, $cluster, 0, 1000);
 
         $this->assertTrue($answer['hits'] !== null);

@@ -404,6 +404,215 @@ class Client
     }
 
     /**
+     * Add a userID to the mapping
+     * @return an object containing a "updatedAt" attribute
+     *
+     * @throws AlgoliaException
+     */
+    public function assignUserID($userID, $clusterName, $requestHeaders = array())
+    {
+        $requestHeaders["X-Algolia-User-ID"] = $userID;
+
+        $request = array('cluster' => $clusterName);
+
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/clusters/mapping',
+            null,
+            $request,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * Remove a userID from the mapping
+     * @return an object containing a "deletedAt" attribute
+     *
+     * @throws AlgoliaException
+     */
+    public function removeUserID($userID, $requestHeaders = array())
+    {
+        $requestHeaders["X-Algolia-User-ID"] = $userID;
+
+        return $this->request(
+            $this->context,
+            'DELETE',
+            '/1/clusters/mapping',
+            null,
+            null,
+            $this->context->writeHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * List available cluster in the mapping
+     * return an object in the form:
+     * array(
+     *     "clusters" => array(
+     *         array("clusterName" => "name", "nbRecords" => 0, "nbUserIDs" => 0, "dataSize" => 0)
+     *     )
+     * ).
+     *
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function listClusters($requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/clusters',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * Get one userID in the mapping
+     * return an object in the form:
+     * array(
+     *     "userID" => "userName",
+     *     "clusterName" => "name",
+     *     "nbRecords" => 0,
+     *     "dataSize" => 0
+     * ).
+     *
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function getUserID($userID, $requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/clusters/mapping/'.urlencode($userID),
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * List userIDs in the mapping
+     * return an object in the form:
+     * array(
+     *     "userIDs" => array(
+     *         array("userID" => "userName", "clusterName" => "name", "nbRecords" => 0, "dataSize" => 0)
+     *     ),
+     *     "page" => 0,
+     *     "hitsPerPage" => 20
+     * ).
+     *
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function listUserIDs($page = 0, $hitsPerPage = 20, $requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/clusters/mapping?page='.$page.'&hitsPerPage='.$hitsPerPage,
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * Get top userID in the mapping
+     * return an object in the form:
+     * array(
+     *     "topUsers" => array(
+     *         "clusterName" => array(
+     *             array("userID" => "userName", "nbRecords" => 0, "dataSize" => 0)
+     *         )
+     *     )
+     * ).
+     *
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function getTopUserID($requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            '/1/clusters/mapping/top',
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
+     * Search userIDs in the mapping
+     * return an object in the form:
+     * array(
+     *     "hits" => array(
+     *         array("userID" => "userName", "clusterName" => "name", "nbRecords" => 0, "dataSize" => 0)
+     *     ),
+     *     "nbHits" => 0
+     *     "page" => 0,
+     *     "hitsPerPage" => 20
+     * ).
+     *
+     * @return mixed
+     * @throws AlgoliaException
+     */
+    public function searchUserIDs($query, $clusterName = null, $page = null, $hitsPerPage = null, $requestHeaders = array())
+    {
+        $params = array();
+
+        if ($query !== null) {
+            $params['query'] = $query;
+        }
+
+        if ($clusterName !== null) {
+            $params['cluster'] = $clusterName;
+        }
+
+        if ($page !== null) {
+            $params['page'] = $page;
+        }
+
+        if ($hitsPerPage !== null) {
+            $params['hitsPerPage'] = $hitsPerPage;
+        }
+
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/clusters/mapping/search',
+            null,
+            $params,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
+    /**
      * Get the index object initialized (no server call needed for initialization).
      *
      * @param string $indexName the name of index

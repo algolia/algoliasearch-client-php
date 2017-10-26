@@ -473,7 +473,7 @@ class Client
             '/1/clusters',
             null,
             null,
-            $this->context->writeHostsArray,
+            $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
             $requestHeaders
@@ -501,7 +501,7 @@ class Client
             '/1/clusters/mapping/'.urlencode($userID),
             null,
             null,
-            $this->context->writeHostsArray,
+            $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
             $requestHeaders
@@ -530,7 +530,7 @@ class Client
             '/1/clusters/mapping?page='.$page.'&hitsPerPage='.$hitsPerPage,
             null,
             null,
-            $this->context->writeHostsArray,
+            $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
             $requestHeaders
@@ -559,7 +559,7 @@ class Client
             '/1/clusters/mapping/top',
             null,
             null,
-            $this->context->writeHostsArray,
+            $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
             $requestHeaders
@@ -607,7 +607,7 @@ class Client
             '/1/clusters/mapping/search',
             null,
             $params,
-            $this->context->writeHostsArray,
+            $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
             $requestHeaders

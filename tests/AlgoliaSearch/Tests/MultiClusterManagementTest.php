@@ -94,7 +94,7 @@ class MultiClusterManagementTest extends AlgoliaSearchTestCase
     }
 
     public function testRemoveUserID() {
-        $answer = $this->client->removeUserID($this->userID, $cluster);
+        $answer = $this->client->removeUserID($this->userID);
 
         $this->assertTrue($answer['deletedAt'] !== null);
     }

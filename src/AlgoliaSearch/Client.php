@@ -438,8 +438,6 @@ class Client
     {
         $requestHeaders["X-Algolia-User-ID"] = $userID;
 
-        $request = array('cluster' => $clusterName);
-
         return $this->request(
             $this->context,
             'DELETE',

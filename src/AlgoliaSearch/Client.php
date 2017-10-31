@@ -237,7 +237,7 @@ class Client
      */
     public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none', $requestHeaders = array())
     {
-        if ($queries == null) {
+        if ($queries === null) {
             throw new \Exception('No query provided');
         }
         $requests = array();
@@ -263,6 +263,50 @@ class Client
             $this->context->connectTimeout,
             $this->context->searchTimeout,
             $requestHeaders
+        );
+    }
+
+    /**
+     * This method allows to get multiple objects from indexes with one API call.
+     *
+     * @param array  $queries
+     * @param string $indexNameKey
+     * @param string $objectIdKey
+     *
+     * @return mixed
+     *
+     * @throws AlgoliaException
+     * @throws \Exception
+     */
+    public function multipleObjects($queries, $indexNameKey = 'indexName', $objectIdKey = 'objectID')
+    {
+        if ($queries === null) {
+            throw new \Exception('No query provided');
+        }
+
+        $requests = array();
+        foreach ($queries as $query) {
+            if (array_key_exists($indexNameKey, $query) && array_key_exists($objectIdKey, $query)) {
+                $indexes = $query[$indexNameKey];
+                $objectID = $query[$objectIdKey];
+                unset($query[$indexNameKey]);
+            } else {
+                throw new \Exception('indexName is mandatory');
+            }
+            $req = array('indexName' => $indexes, 'objectID' => $objectID);
+
+            array_push($requests, $req);
+        }
+
+        return $this->request(
+            $this->context,
+            'POST',
+            '/1/indexes/*/objects',
+            array(),
+            array('requests' => $requests),
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->searchTimeout
         );
     }
 

@@ -1107,7 +1107,7 @@ class Client
 
         $options[GuzzleRequestOptions::HEADERS] = $headers;
         $options[GuzzleRequestOptions::HTTP_ERRORS] = false;
-        $options[GuzzleRequestOptions::VERIFY] = $this->caInfoPath;
+        $options[GuzzleRequestOptions::VERIFY] = self::isGoogleAppEngine() ? false : $this->caInfoPath;
         $options[GuzzleRequestOptions::TIMEOUT] = $options[GuzzleRequestOptions::CONNECT_TIMEOUT] = $connectTimeout;
         $options[GuzzleRequestOptions::READ_TIMEOUT] = $readTimeout;
 
@@ -1218,5 +1218,16 @@ class Client
     public function getContext()
     {
         return $this->context;
+    }
+
+    /**
+     * Recommended way to check if script is running in Google App Engine:
+     * https://github.com/google/google-api-php-client/blob/master/src/Google/Client.php#L799
+     *
+     * @return bool Returns true if running in Google App Engine
+     */
+    private static function isGoogleAppEngine()
+    {
+        return (isset($_SERVER['SERVER_SOFTWARE']) && strpos($_SERVER['SERVER_SOFTWARE'], 'Google App Engine') !== false);
     }
 }

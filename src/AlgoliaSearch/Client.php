@@ -27,6 +27,9 @@
 
 namespace AlgoliaSearch;
 
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\RequestOptions as GuzzleRequestOptions;
+
 /**
  * Entry point in the PHP API.
  * You should instantiate a Client object with your ApplicationID, ApiKey and Hosts
@@ -35,7 +38,7 @@ namespace AlgoliaSearch;
 class Client
 {
     const CAINFO = 'cainfo';
-    const CURLOPT = 'curloptions';
+    const GUZZLE_OPTIONS = 'guzzle';
     const PLACES_ENABLED = 'placesEnabled';
     const FAILING_HOSTS_CACHE = 'failingHostsCache';
 
@@ -50,14 +53,9 @@ class Client
     protected $caInfoPath;
 
     /**
-     * @var array
+     * @var GuzzleClient
      */
-    protected $curlConstants;
-
-    /**
-     * @var array
-     */
-    protected $curlOptions = array();
+    protected $guzzleClient;
 
     /**
      * @var bool
@@ -76,21 +74,19 @@ class Client
      */
     public function __construct($applicationID, $apiKey, $hostsArray = null, $options = array())
     {
-        if (!function_exists('curl_init')) {
-            throw new \Exception('AlgoliaSearch requires the CURL PHP extension.');
-        }
         if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
 
         $this->caInfoPath = __DIR__.'/../../resources/ca-bundle.crt';
+        $guzzleRequestOptions = [];
         foreach ($options as $option => $value) {
             switch ($option) {
                 case self::CAINFO:
                     $this->caInfoPath = $value;
                     break;
-                case self::CURLOPT:
-                    $this->curlOptions = $this->checkCurlOptions($value);
+                case self::GUZZLE_OPTIONS:
+                    $guzzleRequestOptions = $this->checkGuzzleRequestOptions($value);
                     break;
                 case self::PLACES_ENABLED:
                     $this->placesEnabled = (bool) $value;
@@ -107,13 +103,7 @@ class Client
 
         $failingHostsCache = isset($options[self::FAILING_HOSTS_CACHE]) ? $options[self::FAILING_HOSTS_CACHE] : null;
         $this->context = new ClientContext($applicationID, $apiKey, $hostsArray, $this->placesEnabled, $failingHostsCache);
-    }
-
-    /**
-     * Release curl handle.
-     */
-    public function __destruct()
-    {
+        $this->guzzleClient = new GuzzleClient($guzzleRequestOptions);
     }
 
     /**
@@ -128,13 +118,11 @@ class Client
      */
     public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)
     {
-        $version = curl_version();
         $isPhpOld = version_compare(phpversion(), '5.2.3', '<');
-        $isCurlOld = version_compare($version['version'], '7.16.2', '<');
 
-        if (($isPhpOld || $isCurlOld) && $this->context->connectTimeout < 1) {
+        if ($isPhpOld && $this->context->connectTimeout < 1) {
             throw new AlgoliaException(
-                "The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2"
+                "The timeout can't be a float with a PHP version less than 5.2.3"
             );
         }
         $this->context->connectTimeout = $connectTimeout;
@@ -1094,19 +1082,7 @@ class Client
             $url .= '?'.http_build_query($params2);
         }
 
-        // initialize curl library
-        $curlHandle = curl_init();
-
-        // set curl options
-        try {
-            foreach ($this->curlOptions as $curlOption => $optionValue) {
-                curl_setopt($curlHandle, constant($curlOption), $optionValue);
-            }
-        } catch (\Exception $e) {
-            $this->invalidOptions($this->curlOptions, $e->getMessage());
-        }
-
-        //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
+        $options = [];
 
         $defaultHeaders = null;
         if ($context->adminAPIKey == null) {
@@ -1127,94 +1103,29 @@ class Client
         }
 
         $headers = array_merge($defaultHeaders, $context->headers, $requestHeaders);
+        $headers['User-Agent'] = Version::getUserAgent();
 
-        $curlHeaders = array();
-        foreach ($headers as $key => $value) {
-            $curlHeaders[] = $key.': '.$value;
+        $options[GuzzleRequestOptions::HEADERS] = $headers;
+        $options[GuzzleRequestOptions::HTTP_ERRORS] = false;
+        $options[GuzzleRequestOptions::VERIFY] = $this->caInfoPath;
+        $options[GuzzleRequestOptions::TIMEOUT] = $options[GuzzleRequestOptions::CONNECT_TIMEOUT] = $connectTimeout;
+        $options[GuzzleRequestOptions::READ_TIMEOUT] = $readTimeout;
+
+        if (in_array($method, ['POST', 'PUT'])) {
+            $body = ($data) ? Json::encode($data) : '';
+            $options[GuzzleRequestOptions::BODY] = $body;
         }
 
-        curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $curlHeaders);
+        $guzzleResponse = $this->guzzleClient->request($method, $url, $options);
 
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, Version::getUserAgent());
-        //Return the output instead of printing it
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
-        curl_setopt($curlHandle, CURLOPT_ENCODING, '');
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
-
-        curl_setopt($curlHandle, CURLOPT_URL, $url);
-        $version = curl_version();
-        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {
-            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $connectTimeout * 1000);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $readTimeout * 1000);
-        } else {
-            curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $readTimeout);
-        }
-
-        // The problem is that on (Li|U)nix, when libcurl uses the standard name resolver,
-        // a SIGALRM is raised during name resolution which libcurl thinks is the timeout alarm.
-        curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1);
-        curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
-
-        if ($method === 'GET') {
-            curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
-            curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
-            curl_setopt($curlHandle, CURLOPT_POST, false);
-        } else {
-            if ($method === 'POST') {
-                $body = ($data) ? Json::encode($data) : '';
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
-                curl_setopt($curlHandle, CURLOPT_POST, true);
-                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-            } elseif ($method === 'DELETE') {
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
-                curl_setopt($curlHandle, CURLOPT_POST, false);
-            } elseif ($method === 'PUT') {
-                $body = ($data) ? Json::encode($data) : '';
-                curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
-                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-                curl_setopt($curlHandle, CURLOPT_POST, true);
-            }
-        }
-        $mhandle = $context->getMHandle($curlHandle);
-
-        // Do all the processing.
-        $running = null;
-        do {
-            $mrc = curl_multi_exec($mhandle, $running);
-        } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-
-        while ($running && $mrc == CURLM_OK) {
-            if (curl_multi_select($mhandle, 0.1) == -1) {
-                usleep(100);
-            }
-            do {
-                $mrc = curl_multi_exec($mhandle, $running);
-            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-        }
-
-        $http_status = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-        $response = curl_multi_getcontent($curlHandle);
-        $error = curl_error($curlHandle);
-
-        if (!empty($error)) {
-            throw new \Exception($error);
-        }
+        $http_status = $guzzleResponse->getStatusCode();
+        $response = (string)$guzzleResponse->getBody();
 
         if ($http_status === 0 || $http_status === 503) {
-            // Could not reach host or service unavailable, try with another one if we have it
-            $context->releaseMHandle($curlHandle);
-            curl_close($curlHandle);
-
             return;
         }
 
         $answer = Json::decode($response, true);
-        $context->releaseMHandle($curlHandle);
-        curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
             throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);
@@ -1226,78 +1137,55 @@ class Client
     }
 
     /**
-     * Checks if curl option passed are valid curl options.
+     * Checks if Guzzle request options passed are valid Guzzle request options.
      *
-     * @param array $curlOptions must be array but no type required while first test throw clear Exception
+     * @param array $options must be array but no type required while first test throw clear Exception
      *
      * @return array
      */
-    protected function checkCurlOptions($curlOptions)
+    protected function checkGuzzleRequestOptions($options)
     {
-        if (!is_array($curlOptions)) {
+        if (!is_array($options)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    'AlgoliaSearch requires %s option to be array of valid curl options.',
-                    static::CURLOPT
+                    'AlgoliaSearch requires %s option to be array of valid Guzzle request options.',
+                    static::GUZZLE_OPTIONS
                 )
             );
         }
 
-        $checkedCurlOptions = array_intersect(array_keys($curlOptions), array_keys($this->getCurlConstants()));
+        $checkedOptions = array_intersect(array_keys($options), array_values($this->getGuzzleRequestOptions()));
 
-        if (count($checkedCurlOptions) !== count($curlOptions)) {
-            $this->invalidOptions($curlOptions);
+        if (count($checkedOptions) !== count($options)) {
+            $this->invalidOptions($options);
         }
 
-        return $curlOptions;
+        return $options;
     }
 
     /**
-     * Get all php curl available options.
+     * Get all available Guzzle request options.
      *
      * @return array
      */
-    protected function getCurlConstants()
+    protected function getGuzzleRequestOptions()
     {
-        if (!is_null($this->curlConstants)) {
-            return $this->curlConstants;
-        }
-
-        $curlAllConstants = get_defined_constants(true);
-
-        if (isset($curlAllConstants['curl'])) {
-            $curlAllConstants = $curlAllConstants['curl'];
-        } elseif (isset($curlAllConstants['Core'])) { // hhvm
-            $curlAllConstants = $curlAllConstants['Core'];
-        } else {
-            return $this->curlConstants;
-        }
-
-        $curlConstants = array();
-        foreach ($curlAllConstants as $constantName => $constantValue) {
-            if (strpos($constantName, 'CURLOPT') === 0) {
-                $curlConstants[$constantName] = $constantValue;
-            }
-        }
-
-        $this->curlConstants = $curlConstants;
-
-        return $this->curlConstants;
+        return (new \ReflectionClass(GuzzleRequestOptions::class))->getConstants();
     }
 
     /**
-     * throw clear Exception when bad curl option is set.
+     * throw clear Exception when bad Guzzle request option is set.
      *
-     * @param array  $curlOptions
+     * @param array $options
      * @param string $errorMsg    add specific message for disambiguation
      */
-    protected function invalidOptions(array $curlOptions = array(), $errorMsg = '')
+    protected function invalidOptions(array $options = array(), $errorMsg = '')
     {
         throw new \OutOfBoundsException(
             sprintf(
                 'AlgoliaSearch %s options keys are invalid. %s given. error message : %s',
-                static::CURLOPT,
-                Json::encode($curlOptions),
+                static::GUZZLE_OPTIONS,
+                Json::encode($options),
                 $errorMsg
             )
         );

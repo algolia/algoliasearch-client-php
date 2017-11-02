@@ -52,11 +52,6 @@ class ClientContext
     public $writeHostsArray;
 
     /**
-     * @var resource
-     */
-    public $curlMHandle;
-
-    /**
      * @var string
      */
     public $adminAPIKey;
@@ -120,7 +115,6 @@ class ClientContext
             throw new Exception('AlgoliaSearch requires an apiKey.');
         }
 
-        $this->curlMHandle = null;
         $this->adminAPIKey = null;
         $this->endUserIP = null;
         $this->algoliaUserToken = null;
@@ -180,39 +174,6 @@ class ClientContext
         array_unshift($hosts, $this->applicationID.'.algolia.net');
 
         return $hosts;
-    }
-
-    /**
-     * Closes eventually opened curl handles.
-     */
-    public function __destruct()
-    {
-        if (is_resource($this->curlMHandle)) {
-            curl_multi_close($this->curlMHandle);
-        }
-    }
-
-    /**
-     * @param $curlHandle
-     *
-     * @return resource
-     */
-    public function getMHandle($curlHandle)
-    {
-        if (!is_resource($this->curlMHandle)) {
-            $this->curlMHandle = curl_multi_init();
-        }
-        curl_multi_add_handle($this->curlMHandle, $curlHandle);
-
-        return $this->curlMHandle;
-    }
-
-    /**
-     * @param $curlHandle
-     */
-    public function releaseMHandle($curlHandle)
-    {
-        curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
 
     /**

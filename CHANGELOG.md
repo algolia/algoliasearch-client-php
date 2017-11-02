@@ -1,5 +1,9 @@
 ## Change Log
 
+### 2.0.0
+
+- feat: Replace curl with Guzzle (guzzlephp.org)
+
 ### 1.23.0
 
 - feat: add a `requestHeaders` parameter to every method to allow passing custom HTTP headers on a per request basis

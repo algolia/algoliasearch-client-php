@@ -16,11 +16,16 @@
         {
             "name": "Ryan T. Catlin",
             "email": "ryan.catlin@gmail.com"
+        },
+        {
+            "name": "Geoffrey Arnold",
+            "email": "geoffrey@geoffreyarnold.com"
         }
     ],
     "require": {
         "php": ">=5.3",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "satooshi/php-coveralls": "0.6.*",

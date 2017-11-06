@@ -235,8 +235,10 @@ class Client
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none', $requestHeaders = array())
+    public function multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         if ($queries == null) {
             throw new \Exception('No query provided');
         }
@@ -280,8 +282,10 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listIndexes($requestHeaders = array())
+    public function listIndexes()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -302,8 +306,10 @@ class Client
      *
      * @return mixed an object containing a "deletedAt" attribute
      */
-    public function deleteIndex($indexName, $requestHeaders = array())
+    public function deleteIndex($indexName)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->request(
             $this->context,
             'DELETE',
@@ -326,8 +332,10 @@ class Client
      *
      * @return mixed
      */
-    public function moveIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
+    public function moveIndex($srcIndexName, $dstIndexName)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $request = array('operation' => 'move', 'destination' => $dstIndexName);
 
         return $this->request(
@@ -352,8 +360,10 @@ class Client
      *
      * @return mixed
      */
-    public function copyIndex($srcIndexName, $dstIndexName, $requestHeaders = array())
+    public function copyIndex($srcIndexName, $dstIndexName)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $request = array('operation' => 'copy', 'destination' => $dstIndexName);
 
         return $this->request(
@@ -380,8 +390,10 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function getLogs($offset = 0, $length = 10, $type = 'all', $requestHeaders = array())
+    public function getLogs($offset = 0, $length = 10, $type = 'all')
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         if (gettype($type) == 'boolean') { //Old prototype onlyError
             if ($type) {
                 $type = 'error';
@@ -409,8 +421,9 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function assignUserID($userID, $clusterName, $requestHeaders = array())
+    public function assignUserID($userID, $clusterName)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
         $requestHeaders["X-Algolia-User-ID"] = $userID;
 
         $request = array('cluster' => $clusterName);
@@ -434,8 +447,9 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function removeUserID($userID, $requestHeaders = array())
+    public function removeUserID($userID)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
         $requestHeaders["X-Algolia-User-ID"] = $userID;
 
         return $this->request(
@@ -463,8 +477,10 @@ class Client
      * @return mixed
      * @throws AlgoliaException
      */
-    public function listClusters($requestHeaders = array())
+    public function listClusters()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -491,8 +507,10 @@ class Client
      * @return mixed
      * @throws AlgoliaException
      */
-    public function getUserID($userID, $requestHeaders = array())
+    public function getUserID($userID)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -520,8 +538,10 @@ class Client
      * @return mixed
      * @throws AlgoliaException
      */
-    public function listUserIDs($page = 0, $hitsPerPage = 20, $requestHeaders = array())
+    public function listUserIDs($page = 0, $hitsPerPage = 20)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -549,8 +569,10 @@ class Client
      * @return mixed
      * @throws AlgoliaException
      */
-    public function getTopUserID($requestHeaders = array())
+    public function getTopUserID()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -579,8 +601,10 @@ class Client
      * @return mixed
      * @throws AlgoliaException
      */
-    public function searchUserIDs($query, $clusterName = null, $page = null, $hitsPerPage = null, $requestHeaders = array())
+    public function searchUserIDs($query, $clusterName = null, $page = null, $hitsPerPage = null)
     {
+        $requestHeaders = func_num_args() === 5 && is_array(func_get_arg(4)) ? func_get_arg(4) : array();
+
         $params = array();
 
         if ($query !== null) {
@@ -637,8 +661,10 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function listApiKeys($requestHeaders = array())
+    public function listApiKeys()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -668,8 +694,10 @@ class Client
      *
      * @return mixed
      */
-    public function getApiKey($key, $requestHeaders = array())
+    public function getApiKey($key)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->request(
             $this->context,
             'GET',
@@ -700,8 +728,10 @@ class Client
      *
      * @return mixed
      */
-    public function deleteApiKey($key, $requestHeaders = array())
+    public function deleteApiKey($key)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->request(
             $this->context,
             'DELETE',
@@ -759,8 +789,10 @@ class Client
      *
      * @throws AlgoliaException
      */
-    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null, $requestHeaders = array())
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)
     {
+        $requestHeaders = func_num_args() === 6 && is_array(func_get_arg(5)) ? func_get_arg(5) : array();
+
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
             $params['validity'] = $validity;
@@ -847,9 +879,10 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null,
-        $requestHeaders = array()
+        $indexes = null
     ) {
+        $requestHeaders = func_num_args() === 7 && is_array(func_get_arg(6)) ? func_get_arg(6) : array();
+
         if ($obj !== array_values($obj)) { // is dict of value
             $params = $obj;
             $params['validity'] = $validity;
@@ -896,9 +929,10 @@ class Client
         $validity = 0,
         $maxQueriesPerIPPerHour = 0,
         $maxHitsPerQuery = 0,
-        $indexes = null,
-        $requestHeaders = array()
+        $indexes = null
     ) {
+        $requestHeaders = func_num_args() === 7 && is_array(func_get_arg(6)) ? func_get_arg(6) : array();
+
         return $this->updateApiKey($key, $obj, $validity, $maxQueriesPerIPPerHour, $maxHitsPerQuery, $indexes, $requestHeaders);
     }
 
@@ -910,8 +944,10 @@ class Client
      *
      * @return mixed
      */
-    public function batch($requests, $requestHeaders = array())
+    public function batch($requests)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->request(
             $this->context,
             'POST',
@@ -1020,9 +1056,10 @@ class Client
         $data,
         $hostsArray,
         $connectTimeout,
-        $readTimeout,
-        $requestHeaders = array()
+        $readTimeout
     ) {
+        $requestHeaders = func_num_args() === 9 && is_array(func_get_arg(8)) ? func_get_arg(8) : array();
+
         $exceptions = array();
         $cnt = 0;
         foreach ($hostsArray as &$host) {
@@ -1073,9 +1110,10 @@ class Client
         $params,
         $data,
         $connectTimeout,
-        $readTimeout,
-        $requestHeaders = array()
+        $readTimeout
     ) {
+        $requestHeaders = func_num_args() === 9 && is_array(func_get_arg(8)) ? func_get_arg(8) : array();
+
         if (strpos($host, 'http') === 0) {
             $url = $host.$path;
         } else {

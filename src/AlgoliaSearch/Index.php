@@ -87,8 +87,10 @@ class Index
      *
      * @throws \Exception
      */
-    public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction', $requestHeaders = array())
+    public function batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         $requests = array();
         $allowedActions = array(
             'addObject',
@@ -131,8 +133,10 @@ class Index
      *
      * @return mixed
      */
-    public function addObject($content, $objectID = null, $requestHeaders = array())
+    public function addObject($content, $objectID = null)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         if ($objectID === null) {
             return $this->client->request(
                 $this->context,
@@ -168,8 +172,10 @@ class Index
      *
      * @return mixed
      */
-    public function addObjects($objects, $objectIDKey = 'objectID', $requestHeaders = array())
+    public function addObjects($objects, $objectIDKey = 'objectID')
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $requests = $this->buildBatch('addObject', $objects, true, $objectIDKey);
 
         return $this->batch($requests, $requestHeaders);
@@ -184,8 +190,10 @@ class Index
      *
      * @return mixed
      */
-    public function getObject($objectID, $attributesToRetrieve = null, $requestHeaders = array())
+    public function getObject($objectID, $attributesToRetrieve = null)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $id = urlencode($objectID);
         if ($attributesToRetrieve === null) {
             return $this->client->request(
@@ -229,8 +237,10 @@ class Index
      *
      * @throws \Exception
      */
-    public function getObjects($objectIDs, $attributesToRetrieve = null, $requestHeaders = array())
+    public function getObjects($objectIDs, $attributesToRetrieve = null)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         if ($objectIDs == null) {
             throw new \Exception('No list of objectID provided');
         }
@@ -274,8 +284,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function partialUpdateObject($partialObject, $createIfNotExists = true, $requestHeaders = array())
+    public function partialUpdateObject($partialObject, $createIfNotExists = true)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $queryString = $createIfNotExists ? '' : '?createIfNotExists=false';
 
         return $this->client->request(
@@ -300,8 +312,9 @@ class Index
      *
      * @return mixed
      */
-    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true, $requestHeaders = array())
+    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true)
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
         if ($createIfNotExists) {
             $requests = $this->buildBatch('partialUpdateObject', $objects, true, $objectIDKey);
         } else {
@@ -320,8 +333,10 @@ class Index
      *
      * @return mixed
      */
-    public function saveObject($object, $objectIDKey = 'objectID', $requestHeaders = array())
+    public function saveObject($object, $objectIDKey = 'objectID')
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         return $this->client->request(
             $this->context,
             'PUT',
@@ -343,8 +358,10 @@ class Index
      *
      * @return mixed
      */
-    public function saveObjects($objects, $objectIDKey = 'objectID', $requestHeaders = array())
+    public function saveObjects($objects, $objectIDKey = 'objectID')
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $requests = $this->buildBatch('updateObject', $objects, true, $objectIDKey);
 
         return $this->batch($requests, $requestHeaders);
@@ -360,8 +377,10 @@ class Index
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function deleteObject($objectID, $requestHeaders = array())
+    public function deleteObject($objectID)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         if ($objectID == null || mb_strlen($objectID) == 0) {
             throw new \Exception('objectID is mandatory');
         }
@@ -386,8 +405,10 @@ class Index
      *
      * @return mixed
      */
-    public function deleteObjects($objects, $requestHeaders = array())
+    public function deleteObjects($objects)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         $objectIDs = array();
         foreach ($objects as $key => $id) {
             $objectIDs[$key] = array('objectID' => $id);
@@ -425,8 +446,10 @@ class Index
      *
      * @return int the number of delete operations
      */
-    public function deleteByQuery($query, $args = array(), $waitLastCall = true, $requestHeaders = array())
+    public function deleteByQuery($query, $args = array(), $waitLastCall = true)
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         $args['attributesToRetrieve'] = 'objectID';
         $args['hitsPerPage'] = 1000;
         $args['distinct'] = false;
@@ -535,8 +558,10 @@ class Index
      * @return mixed
      * @throws AlgoliaException
      */
-    public function search($query, $args = null, $requestHeaders = array())
+    public function search($query, $args = null)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         if ($args === null) {
             $args = array();
         }
@@ -565,8 +590,10 @@ class Index
      * @return mixed
      * @throws AlgoliaException
      */
-    private function searchWithDisjunctiveFaceting($query, $args, $requestHeaders = array())
+    private function searchWithDisjunctiveFaceting($query, $args)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         if (! is_array($args['disjunctiveFacets']) || count($args['disjunctiveFacets']) <= 0) {
             throw new \InvalidArgumentException('disjunctiveFacets needs to be an non empty array');
         }
@@ -707,8 +734,10 @@ class Index
      *
      * @return mixed
      */
-    public function searchForFacetValues($facetName, $facetQuery, $query = array(), $requestHeaders = array())
+    public function searchForFacetValues($facetName, $facetQuery, $query = array())
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         $query['facetQuery'] = $facetQuery;
 
         return $this->client->request(
@@ -865,8 +894,10 @@ class Index
      *
      * @return mixed
      */
-    public function waitTask($taskID, $timeBeforeRetry = 100, $requestHeaders = array())
+    public function waitTask($taskID, $timeBeforeRetry = 100)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         while (true) {
             $res = $this->getTaskStatus($taskID, $requestHeaders);
             if ($res['status'] === 'published') {
@@ -884,8 +915,10 @@ class Index
      *
      * @return mixed
      */
-    public function getTaskStatus($taskID, $requestHeaders = array())
+    public function getTaskStatus($taskID)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -906,8 +939,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getSettings($requestHeaders = array())
+    public function getSettings()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -928,8 +963,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function clearIndex($requestHeaders = array())
+    public function clearIndex()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->client->request(
             $this->context,
             'POST',
@@ -1012,8 +1049,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function setSettings($settings, $forwardToReplicas = false, $requestHeaders = array())
+    public function setSettings($settings, $forwardToReplicas = false)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         $url = '/1/indexes/'.$this->urlIndexName.'/settings';
 
         if ($forwardToReplicas) {
@@ -1040,8 +1079,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function listApiKeys($requestHeaders = array())
+    public function listApiKeys()
     {
+        $requestHeaders = func_num_args() === 1 && is_array(func_get_arg(0)) ? func_get_arg(0) : array();
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -1083,8 +1124,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getApiKey($key, $requestHeaders = array())
+    public function getApiKey($key)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -1108,8 +1151,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function deleteApiKey($key, $requestHeaders = array())
+    public function deleteApiKey($key)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'DELETE',
@@ -1166,8 +1211,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $requestHeaders = array())
+    public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
+        $requestHeaders = func_num_args() === 5 && is_array(func_get_arg(4)) ? func_get_arg(4) : array();
+
         // is dict of value
         if ($obj !== array_values($obj)) {
             $params = $obj;
@@ -1244,8 +1291,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $requestHeaders = array())
+    public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
+        $requestHeaders = func_num_args() === 6 && is_array(func_get_arg(5)) ? func_get_arg(5) : array();
+
         // is dict of value
         if ($obj !== array_values($obj)) {
             $params = $obj;
@@ -1296,8 +1345,10 @@ class Index
      *
      * @return mixed
      */
-    public function batch($requests, $requestHeaders = array())
+    public function batch($requests)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'POST',
@@ -1354,8 +1405,10 @@ class Index
      *
      * @return mixed
      */
-    public function browseFrom($query, $params = null, $cursor = null, $requestHeaders = array())
+    public function browseFrom($query, $params = null, $cursor = null)
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         if ($params === null) {
             $params = array();
         }
@@ -1394,8 +1447,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null, $requestHeaders = array())
+    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null)
     {
+        $requestHeaders = func_num_args() === 5 && is_array(func_get_arg(4)) ? func_get_arg(4) : array();
+
         $params = array();
 
         if ($query !== null) {
@@ -1443,8 +1498,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function getSynonym($objectID, $requestHeaders = array())
+    public function getSynonym($objectID)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'GET',
@@ -1466,8 +1523,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function deleteSynonym($objectID, $forwardToReplicas = false, $requestHeaders = array())
+    public function deleteSynonym($objectID, $forwardToReplicas = false)
     {
+        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
         return $this->client->request(
             $this->context,
             'DELETE',
@@ -1488,8 +1547,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function clearSynonyms($forwardToReplicas = false, $requestHeaders = array())
+    public function clearSynonyms($forwardToReplicas = false)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'POST',
@@ -1512,8 +1573,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false, $requestHeaders = array())
+    public function batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false)
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         return $this->client->request(
             $this->context,
             'POST',
@@ -1537,8 +1600,10 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function saveSynonym($objectID, $content, $forwardToReplicas = false, $requestHeaders = array())
+    public function saveSynonym($objectID, $content, $forwardToReplicas = false)
     {
+        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+
         return $this->client->request(
             $this->context,
             'PUT',

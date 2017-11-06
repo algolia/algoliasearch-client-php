@@ -1,10 +1,9 @@
 ## Change Log
 
-### 1.23.0
-
-- feat: add a `requestHeaders` parameter to every method to allow passing custom HTTP headers on a per request basis
+### 1.23.0		
+		
+- feat: add a `requestHeaders` parameter to every method to allow passing custom HTTP headers on a per request basis		
 - feat: add multi cluster management endpoints
-
 
 ### 1.22.0
 

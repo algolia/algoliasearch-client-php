@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.23.1
+
+- fix: remove all requestHeaders params from method signatures as it breaks backward compatibility. Features added in 1.23.0 still work the same.
+
 ### 1.23.0
 
 - feat: add a `requestHeaders` parameter to every method to allow passing custom HTTP headers on a per request basis

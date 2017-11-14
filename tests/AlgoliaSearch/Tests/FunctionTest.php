@@ -50,21 +50,27 @@ class FunctionTest extends AlgoliaSearchTestCase
         $this->assertTrue($timeOfFirstQuery > $avgTimeOfTheTenQueries);
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testConstructAPIKey()
     {
-        $this->setExpectedException('Exception');
         new Client(getenv('ALGOLIA_APPLICATION_ID'), null);
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testConstructAPPID()
     {
-        $this->setExpectedException('Exception');
         new Client(null, getenv('ALGOLIA_API_KEY'));
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testConstructHost()
     {
-        $this->setExpectedException('Exception');
         $host = array('toto');
         $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), $host);
         $this->badIndex = $this->badClient->initIndex($this->safe_name('àlgol?à-php'));
@@ -72,9 +78,11 @@ class FunctionTest extends AlgoliaSearchTestCase
         $this->badIndex->waitTask($res['taskID']);
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function testBadAPPIP()
     {
-        $this->setExpectedException('Exception');
         $this->badClient = new Client(getenv('ALGOLIA_APPLICATION_ID'), 'toto');
         $this->index = $this->badClient->listIndexes();
     }

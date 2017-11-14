@@ -7,8 +7,9 @@ require_once 'global_functions_stubs.php';
 use AlgoliaSearch\ClientContext;
 use AlgoliaSearch\FileFailingHostsCache;
 use AlgoliaSearch\InMemoryFailingHostsCache;
+use PHPUnit\Framework\TestCase;
 
-class ClientContextTest extends \PHPUnit_Framework_TestCase
+class ClientContextTest extends TestCase
 {
     protected function tearDown()
     {

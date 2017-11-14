@@ -3,8 +3,9 @@
 namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\FailingHostsCache;
+use PHPUnit\Framework\TestCase;
 
-abstract class FailingHostsCacheTestCase extends \PHPUnit_Framework_TestCase
+abstract class FailingHostsCacheTestCase extends TestCase
 {
     public function testShouldDeduplicateFailingHosts()
     {
@@ -35,16 +36,16 @@ abstract class FailingHostsCacheTestCase extends \PHPUnit_Framework_TestCase
     public function testShouldShareFailingHostsBetweenInstances()
     {
         $cache = $this->getNewCleanCacheInstance();
-        
+
         $cache->addFailingHost('host1.com');
 
         $cache2 = $this->getNewCacheInstance();
         $cache2->addFailingHost('host2.com');
-        
+
         // The 2 instances should have the same state.
         $this->assertEquals(array('host1.com', 'host2.com'), $cache->getFailingHosts());
         $this->assertEquals(array('host1.com', 'host2.com'), $cache2->getFailingHosts());
-        
+
         // Clean the state.
         $cache2->flushFailingHostsCache();
 

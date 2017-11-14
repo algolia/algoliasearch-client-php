@@ -2,7 +2,9 @@
 
 namespace AlgoliaSearch\Tests;
 
-class AlgoliaSearchTestCase extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AlgoliaSearchTestCase extends TestCase
 {
     public function safe_name($name)
     {

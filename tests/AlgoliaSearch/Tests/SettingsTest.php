@@ -40,7 +40,7 @@ class SettingsTest extends AlgoliaSearchTestCase
         $res = $this->index->setSettings(array('attributesToRetrieve' => array('firstname'), 'hitsPerPage' => 50));
         $this->index->waitTask($res['taskID']);
         $settings = $this->index->getSettings();
-        $this->assertEquals(count($settings['attributesToRetrieve']), 1);
+        $this->assertCount(1, $settings['attributesToRetrieve']);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
     }
 
@@ -58,7 +58,7 @@ class SettingsTest extends AlgoliaSearchTestCase
         $replicaIndex = $this->client->initIndex($this->safe_name('àlgol?à-php-replica'));
         $settings = $replicaIndex->getSettings();
 
-        $this->assertEquals(count($settings['attributesToRetrieve']), 1);
+        $this->assertCount(1, $settings['attributesToRetrieve']);
         $this->assertEquals($settings['attributesToRetrieve'][0], 'firstname');
     }
 

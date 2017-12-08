@@ -82,7 +82,7 @@ class SearchFacetTest extends AlgoliaSearchTestCase
         # Straightforward search.
         $facetHits = $this->index->searchFacet('series', 'Hobb');
         $facetHits = $facetHits['facetHits'];
-        $this->assertEquals(count($facetHits), 1);
+        $this->assertCount(1, $facetHits);
         $this->assertEquals($facetHits[0]['value'], 'Calvin & Hobbes');
         $this->assertEquals($facetHits[0]['count'], 2);
 
@@ -148,7 +148,7 @@ class SearchFacetTest extends AlgoliaSearchTestCase
         # Straightforward search.
         $facetHits = $this->index->searchForFacetValues('series', 'Hobb');
         $facetHits = $facetHits['facetHits'];
-        $this->assertEquals(count($facetHits), 1);
+        $this->assertCount(1, $facetHits);
         $this->assertEquals($facetHits[0]['value'], 'Calvin & Hobbes');
         $this->assertEquals($facetHits[0]['count'], 2);
 

@@ -24,6 +24,7 @@ class InitPlacesTest extends AlgoliaSearchTestCase
     public function testShouldAllowToBeCalledWithoutCredentials()
     {
         Client::initPlaces();
+        $this->assertTrue(true);
     }
 
     /**

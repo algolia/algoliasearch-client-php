@@ -3,14 +3,16 @@
 namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\Client;
+use AlgoliaSearch\PlacesIndex;
 
 class PlacesIndexTest extends AlgoliaSearchTestCase
 {
     public function testGetObject()
     {
+        /** @var PlacesIndex $placesIndex */
         $placesIndex = Client::initPlaces();
-        $response = $placesIndex->getObject('171457082_7444');
+        $response = $placesIndex->search('Paris', array('hitsPerPage' => 12));
 
-        $this->assertEquals('171457082_7444', $response['objectID']);
+        $this->assertEquals(12, count($response['hits']));
     }
 }

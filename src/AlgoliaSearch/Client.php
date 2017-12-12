@@ -364,7 +364,33 @@ class Client
     {
         $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
 
-        $request = array('operation' => 'copy', 'destination' => $dstIndexName);
+        return $this->scopedCopyIndex($srcIndexName, $dstIndexName, array(), $requestHeaders);
+    }
+
+    /**
+     * Copy an existing index and define what to copy along with records:
+     *  - settings
+     *  - synonyms
+     *  - query rules
+     *
+     * By default, everything is copied.
+     *
+     * @param string $srcIndexName the name of index to copy.
+     * @param string $dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overwritten if it already exist).
+     * @param array $scope Resource to copy along with records: 'settings', 'rules', 'synonyms'
+     * @param array $requestHeaders
+     * @return mixed
+     */
+    public function scopedCopyIndex($srcIndexName, $dstIndexName, array $scope = array(), array $requestHeaders = array())
+    {
+        $request = array(
+            'operation' => 'copy',
+            'destination' => $dstIndexName,
+        );
+
+        if (! empty($scope)) {
+            $request['scope'] = $scope;
+        }
 
         return $this->request(
             $this->context,

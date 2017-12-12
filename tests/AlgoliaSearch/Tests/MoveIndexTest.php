@@ -4,10 +4,14 @@ namespace AlgoliaSearch\Tests;
 
 use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
+use AlgoliaSearch\Index;
 
 class MoveIndexTest extends AlgoliaSearchTestCase
 {
+    /** @var Client */
     private $client;
+
+    /** @var Index */
     private $index;
 
     protected function setUp()
@@ -91,5 +95,77 @@ class MoveIndexTest extends AlgoliaSearchTestCase
 
         $this->assertEquals(1, $res['nbHits']);
         $this->assertEquals('Robin', $res['hits'][0]['firstname']);
+    }
+
+    public function testScopedCopyIndex()
+    {
+        // Create source index with records, settings, synonyms and rules
+        $srcIndexName = $this->safe_name('àlgol?à-scoped-copy-index-php');
+        $this->client->deleteIndex($srcIndexName);
+        $srcIndex = $this->client->initIndex($srcIndexName);
+        $task = $srcIndex->addObjects(array(
+            array('firstname' => 'Robin'),
+            array('firstname' => 'Julien'),
+        ));
+        $taskSettings = $srcIndex->setSettings(array(
+            'searchableAttributes' => array('firstname')
+        ));
+        $taskRules = $srcIndex->saveRule('my-rule', array(
+            'condition' => array(
+                'pattern'   => 'some text',
+                'anchoring' => 'is'
+            ),
+            'consequence' => array(
+                'params' => array(
+                    'query' => 'other text'
+                )
+            )
+        ));
+        $taskSynonym = $srcIndex->saveSynonym('my-synonym', array(
+            'type'     => 'synonym',
+            'synonyms' => array('San Francisco', 'SF'),
+        ));
+
+        $srcIndex->waitTask($task['taskID']);
+        $srcIndex->waitTask($taskSettings['taskID']);
+        $srcIndex->waitTask($taskRules['taskID']);
+        $srcIndex->waitTask($taskSynonym['taskID']);
+
+        // If no scope is passed, all resources are copied
+        $task = $this->client->scopedCopyIndex($srcIndexName, $this->safe_name($srcIndexName.'_no_scope'));
+        $destIndex = $this->client->initIndex($this->safe_name($srcIndexName.'_no_scope'));
+        $destIndex->waitTask($task['taskID']);
+
+        $res = $destIndex->search('');
+        $this->assertEquals(2, $res['nbHits']);
+        $settings = $destIndex->getSettings();
+        $this->assertArraySubset(array('searchableAttributes' => array('firstname')), $settings);
+        $rules = $destIndex->searchRules();
+        $this->assertEquals(1, $rules['nbHits']);
+        $synonym = $destIndex->searchSynonyms('');
+        $this->assertEquals(1, $synonym['nbHits']);
+
+        // If any scope is passed, only these resources are copied
+        $task = $this->client->scopedCopyIndex(
+            $srcIndexName,
+            $this->safe_name($srcIndexName.'_rules'),
+            array('settings', 'rules')
+        );
+        $destIndex = $this->client->initIndex($this->safe_name($srcIndexName.'_rules'));
+        $destIndex->waitTask($task['taskID']);
+
+        $res = $destIndex->search('');
+        $this->assertEquals(0, $res['nbHits']);
+        $settings = $destIndex->getSettings();
+        $this->assertArraySubset(array('searchableAttributes' => array('firstname')), $settings);
+        $rules = $destIndex->searchRules();
+        $this->assertEquals(1, $rules['nbHits']);
+        $synonym = $destIndex->searchSynonyms('');
+        $this->assertEquals(0, $synonym['nbHits']);
+
+        // Clean up
+        $this->client->deleteIndex($srcIndexName);
+        $this->client->deleteIndex($this->safe_name($srcIndexName.'_no_scope'));
+        $this->client->deleteIndex($this->safe_name($srcIndexName.'_rules'));
     }
 }

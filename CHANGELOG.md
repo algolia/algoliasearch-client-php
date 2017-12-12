@@ -1,5 +1,9 @@
 ## Change Log
 
+### 1.24.0
+
+- feat: Introduce ScopedCopyIndex method, to copy settings, synonyms or query rules between indices
+
 ### 1.23.1
 
 - fix: remove all requestHeaders params from method signatures as it breaks backward compatibility. Features added in 1.23.0 still work the same.

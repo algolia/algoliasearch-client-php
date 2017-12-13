@@ -47,27 +47,27 @@ class GetTest extends AlgoliaSearchTestCase
         $this->assertEquals('Robin', $results['hits'][0]['firstname']);
 
         $obj = $this->index->getObject('à/go/?à');
-        $this->assertTrue(isset($obj['firstname']));
-        $this->assertTrue(isset($obj['lastname']));
+        $this->assertArrayHasKey('firstname', $obj);
+        $this->assertArrayHasKey('lastname', $obj);
         $this->assertEquals('Robin', $obj['firstname']);
 
         $obj = $this->index->getObject('à/go/?à', 'firstname');
-        $this->assertTrue(isset($obj['firstname']));
-        $this->assertFalse(isset($obj['lastname']));
+        $this->assertArrayHasKey('firstname', $obj);
+        $this->assertArrayNotHasKey('lastname', $obj);
 
         $obj = $this->index->getObject('à/go/?à', array('firstname'));
-        $this->assertTrue(isset($obj['firstname']));
-        $this->assertFalse(isset($obj['lastname']));
+        $this->assertArrayHasKey('firstname', $obj);
+        $this->assertArrayNotHasKey('lastname', $obj);
 
         $obj = $this->index->getObject('à/go/?à', '');
-        $this->assertTrue(isset($obj['objectID']));
-        $this->assertFalse(isset($obj['firstname']));
-        $this->assertFalse(isset($obj['lastname']));
+        $this->assertArrayHasKey('objectID', $obj);
+        $this->assertArrayNotHasKey('firstname', $obj);
+        $this->assertArrayNotHasKey('lastname', $obj);
 
         $obj = $this->index->getObject('à/go/?à', array());
-        $this->assertTrue(isset($obj['objectID']));
-        $this->assertFalse(isset($obj['firstname']));
-        $this->assertFalse(isset($obj['lastname']));
+        $this->assertArrayHasKey('objectID', $obj);
+        $this->assertArrayNotHasKey('firstname', $obj);
+        $this->assertArrayNotHasKey('lastname', $obj);
     }
 
     public function testGetObjects()
@@ -102,36 +102,36 @@ class GetTest extends AlgoliaSearchTestCase
         $objects4 = $this->index->getObjects(array($results['hits'][0]['objectID'], $results['hits'][1]['objectID']), '');
         $objects5 = $this->index->getObjects(array($results['hits'][0]['objectID'], $results['hits'][1]['objectID']), array());
 
-        $this->assertEquals(2, count($objects1['results']));
-        $this->assertEquals(2, count($objects2['results']));
-        $this->assertEquals(2, count($objects3['results']));
-        $this->assertEquals(2, count($objects4['results']));
-        $this->assertEquals(2, count($objects5['results']));
+        $this->assertCount(2, $objects1['results']);
+        $this->assertCount(2, $objects2['results']);
+        $this->assertCount(2, $objects3['results']);
+        $this->assertCount(2, $objects4['results']);
+        $this->assertCount(2, $objects5['results']);
 
         $firstResult = reset($objects1['results']);
-        $this->assertTrue(isset($firstResult['objectID']));
-        $this->assertTrue(isset($firstResult['firstname']));
-        $this->assertTrue(isset($firstResult['lastname']));
+        $this->assertArrayHasKey('objectID', $firstResult);
+        $this->assertArrayHasKey('firstname', $firstResult);
+        $this->assertArrayHasKey('lastname', $firstResult);
 
         $secondResult = reset($objects2['results']);
-        $this->assertTrue(isset($secondResult['objectID']));
-        $this->assertFalse(isset($secondResult['firstname']));
-        $this->assertTrue(isset($secondResult['lastname']));
+        $this->assertArrayHasKey('objectID', $secondResult);
+        $this->assertArrayNotHasKey('firstname', $secondResult);
+        $this->assertArrayHasKey('lastname', $secondResult);
 
         $thirdResult = reset($objects3['results']);
-        $this->assertTrue(isset($thirdResult['objectID']));
-        $this->assertFalse(isset($thirdResult['firstname']));
-        $this->assertTrue(isset($thirdResult['lastname']));
+        $this->assertArrayHasKey('objectID', $thirdResult);
+        $this->assertArrayNotHasKey('firstname', $thirdResult);
+        $this->assertArrayHasKey('lastname', $thirdResult);
 
         $fourthResult = reset($objects4['results']);
-        $this->assertTrue(isset($fourthResult['objectID']));
-        $this->assertTrue(isset($fourthResult['firstname']));
-        $this->assertTrue(isset($fourthResult['lastname']));
+        $this->assertArrayHasKey('objectID', $fourthResult);
+        $this->assertArrayHasKey('firstname', $fourthResult);
+        $this->assertArrayHasKey('lastname', $fourthResult);
 
         $fifthResult = reset($objects5['results']);
-        $this->assertTrue(isset($fifthResult['objectID']));
-        $this->assertTrue(isset($fifthResult['firstname']));
-        $this->assertTrue(isset($fifthResult['lastname']));
+        $this->assertArrayHasKey('objectID', $fifthResult);
+        $this->assertArrayHasKey('firstname', $fifthResult);
+        $this->assertArrayHasKey('lastname', $fifthResult);
     }
 
     public function testGetSaveObjects()

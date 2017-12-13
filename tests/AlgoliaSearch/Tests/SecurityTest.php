@@ -42,7 +42,7 @@ class SecurityTest extends AlgoliaSearchTestCase
         $res = $this->index->listUserKeys();
         $newKey = $this->index->addUserKey(array('search'));
 
-        $this->assertTrue($newKey['key'] != '');
+        $this->assertNotEquals('', $newKey['key']);
         $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
 
         $self = $this;
@@ -119,7 +119,7 @@ class SecurityTest extends AlgoliaSearchTestCase
         $b->waitTask($res['taskID']);
 
         $newKey = $this->client->addUserKey(array('search', 'addObject', 'deleteObject'), 0, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
-        $this->assertTrue($newKey['key'] != '');
+        $this->assertNotEquals('', $newKey['key']);
 
         $self = $this;
         $this->poolingTask(function ($timeouted) use ($newKey, $self) {

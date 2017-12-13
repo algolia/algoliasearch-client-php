@@ -47,7 +47,7 @@ class FunctionTest extends AlgoliaSearchTestCase
         // Makes sure that we re-use the connection by leveraging Keep-Alive.
         // The first query should take more time to be processed given it opens the connection and handles the handshake.
         // Subsequent queries should re-use the cURL resource and the underlying opened connection.
-        $this->assertTrue($timeOfFirstQuery > $avgTimeOfTheTenQueries);
+        $this->assertGreaterThan($avgTimeOfTheTenQueries, $timeOfFirstQuery);
     }
 
     /**

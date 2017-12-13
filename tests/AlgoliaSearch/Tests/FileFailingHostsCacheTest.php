@@ -8,6 +8,7 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
 {
     /**
      * @expectedException RuntimeException
+     * @expectExceptionMessage is not writable
      */
     public function testShouldThrowAnExceptionIfCacheDirectoryIsNotWritable()
     {
@@ -17,13 +18,12 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         @rmdir($dir);
         mkdir($dir, 0555);
 
-        $this->expectExceptionMessage('Cache file directory "' . $dir . '" is not writable.');
-
         new FileFailingHostsCache(5, $cacheFile);
     }
 
     /**
      * @expectedException RuntimeException
+     * @expectExceptionMessage is not readable
      */
     public function testShouldThrowAnExceptionIfCacheFileExistsButIsNotReadable()
     {
@@ -35,13 +35,12 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         touch($cacheFile);
         chmod($cacheFile, 0222); // not readable.
 
-        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not readable.');
-
         new FileFailingHostsCache(5, $cacheFile);
     }
 
     /**
      * @expectedException RuntimeException
+     * @expectExceptionMessage is not writable
      */
     public function testShouldThrowAnExceptionIfCacheFileExistsButIsNotWritable()
     {
@@ -52,8 +51,6 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         mkdir($dir, 0777);
         touch($cacheFile);
         chmod($cacheFile, 0555); // not writable.
-
-        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not writable.');
 
         new FileFailingHostsCache(5, $cacheFile);
     }
@@ -70,7 +67,7 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
 
         $cache = new FileFailingHostsCache(5, $cacheFile);
         $hosts = $cache->getFailingHosts();
-        $this->assertEquals(array(), $hosts);
+        $this->assertEmpty($hosts);
     }
 
     public function testThatDefaultTtlIs5Minutes()

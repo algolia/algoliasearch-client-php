@@ -6,8 +6,9 @@ use AlgoliaSearch\Client;
 use AlgoliaSearch\ClientContext;
 use AlgoliaSearch\FileFailingHostsCache;
 use AlgoliaSearch\InMemoryFailingHostsCache;
+use PHPUnit\Framework\TestCase;
 
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     /**
      * @expectedException \InvalidArgumentException

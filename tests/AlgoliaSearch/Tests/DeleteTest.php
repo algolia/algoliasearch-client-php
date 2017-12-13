@@ -45,7 +45,6 @@ class DeleteTest extends AlgoliaSearchTestCase
         $results = $this->index->search('');
         $this->assertEquals(0, $results['nbHits']);
 
-        $this->setExpectedException('Exception');
         $this->index->deleteObject(null);
     }
 }

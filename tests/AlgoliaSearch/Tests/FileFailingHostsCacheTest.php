@@ -6,6 +6,9 @@ use AlgoliaSearch\FileFailingHostsCache;
 
 class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
 {
+    /**
+     * @expectedException RuntimeException
+     */
     public function testShouldThrowAnExceptionIfCacheDirectoryIsNotWritable()
     {
         $dir = __DIR__ . DIRECTORY_SEPARATOR . 'cache_dir';
@@ -14,11 +17,14 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         @rmdir($dir);
         mkdir($dir, 0555);
 
-        $this->setExpectedException('\RuntimeException', 'Cache file directory "' . $dir . '" is not writable.');
+        $this->expectExceptionMessage('Cache file directory "' . $dir . '" is not writable.');
 
         new FileFailingHostsCache(5, $cacheFile);
     }
 
+    /**
+     * @expectedException RuntimeException
+     */
     public function testShouldThrowAnExceptionIfCacheFileExistsButIsNotReadable()
     {
         $dir = __DIR__ . DIRECTORY_SEPARATOR . 'cache_dir';
@@ -29,11 +35,14 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         touch($cacheFile);
         chmod($cacheFile, 0222); // not readable.
 
-        $this->setExpectedException('\RuntimeException', 'Cache file "' . $cacheFile . '" is not readable.');
+        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not readable.');
 
         new FileFailingHostsCache(5, $cacheFile);
     }
 
+    /**
+     * @expectedException RuntimeException
+     */
     public function testShouldThrowAnExceptionIfCacheFileExistsButIsNotWritable()
     {
         $dir = __DIR__ . DIRECTORY_SEPARATOR . 'cache_dir';
@@ -44,7 +53,7 @@ class FileFailingHostsCacheTest extends FailingHostsCacheTestCase
         touch($cacheFile);
         chmod($cacheFile, 0555); // not writable.
 
-        $this->setExpectedException('\RuntimeException', 'Cache file "' . $cacheFile . '" is not writable.');
+        $this->expectExceptionMessage('Cache file "' . $cacheFile . '" is not writable.');
 
         new FileFailingHostsCache(5, $cacheFile);
     }

@@ -20,18 +20,20 @@ class JsonTest extends AlgoliaSearchTestCase
         $this->assertEquals($array, $decodedArray);
     }
 
+    /**
+     * @expectedException AlgoliaSearch\AlgoliaException
+     */
     public function testMalformedJson()
     {
-        $this->setExpectedException('AlgoliaSearch\AlgoliaException');
-
         $malformedJson = '{"foo":"bar"';
         Json::decode($malformedJson);
     }
 
+    /**
+     * @expectedException AlgoliaSearch\AlgoliaException
+     */
     public function testMalformedString()
     {
-        $this->setExpectedException('AlgoliaSearch\AlgoliaException');
-
         $utf8String = 'ř';
         $malformedString = substr($utf8String, 0, 1);
 

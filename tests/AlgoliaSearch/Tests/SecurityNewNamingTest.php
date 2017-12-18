@@ -6,7 +6,7 @@ use AlgoliaSearch\AlgoliaException;
 use AlgoliaSearch\Client;
 use AlgoliaSearch\Index;
 
-class SecurityTestNewNaming extends AlgoliaSearchTestCase
+class SecurityNewNamingTest extends AlgoliaSearchTestCase
 {
     /** @var Client */
     public $client;
@@ -60,7 +60,7 @@ class SecurityTestNewNaming extends AlgoliaSearchTestCase
 
         $key = $this->poolingTask(function ($timeouted) use ($newKey, $self) {
             try {
-                $key = $self->index->getApiKeyACL($newKey['key']);
+                $key = $self->index->getApiKey($newKey['key']);
 
                 return $key;
             } catch (AlgoliaException $e) {
@@ -78,7 +78,7 @@ class SecurityTestNewNaming extends AlgoliaSearchTestCase
 
         $this->poolingTask(function ($timeouted) use ($newKey, $self) {
             try {
-                $key = $self->index->getApiKeyACL($newKey['key']);
+                $key = $self->index->getApiKey($newKey['key']);
 
                 if ($key['acl'][0] === 'addObject' || time() >= $timeouted) {
                     $self->assertEquals($key['acl'][0], 'addObject');

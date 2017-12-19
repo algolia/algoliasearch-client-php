@@ -34,6 +34,61 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
         }
     }
 
+    public function testNewApiKey()
+    {
+        $createdKeys = array();
+
+        $createdKeys[] = $res = $this->client->addApiKey(array('search'), 1000, 12, 2);
+        $simpleKey = $this->getKey($res['key']);
+
+        $createdKeys[] = $res = $this->client->addApiKey(array(
+            'acl' => array('search'),
+            'validity' => 1000,
+            'maxQueriesPerIPPerHour' => 12,
+            'maxHitsPerQuery' => 2,
+        ));
+        $objKey = $this->getKey($res['key']);
+
+        $this->assertGreaterThan(500, $simpleKey['validity']);
+        $this->assertGreaterThan(500, $objKey['validity']);
+
+        $subArray = array(
+            'acl' => array('search'),
+            'maxQueriesPerIPPerHour' => 12,
+            'maxHitsPerQuery' => 2,
+        );
+        $this->assertArraySubset($subArray, $simpleKey);
+        $this->assertArraySubset($subArray, $objKey);
+
+        $createdKeys[] = $res = $this->client->addApiKey(array(
+            'acl' => array('search'),
+            'validity' => 300,
+            'maxQueriesPerIPPerHour' => 200,
+            'maxHitsPerQuery' => 321,
+        ), 1000, 12, 2);
+        $priorityKey = $this->getKey($res['key']);
+
+        $this->assertGreaterThan(301, $priorityKey[ 'validity']);
+        $this->assertArraySubset($subArray, $priorityKey);
+
+        $createdKeys[] = $res = $this->client->addApiKey(array(
+            'acl' => array('search'),
+            'maxHitsPerQuery' => 23,
+        ));
+        $mixKey = $this->getKey($res['key']);
+
+        // Validity will be set to 0 but maxQueriesPerIPPerHour won' exist
+        $this->assertArraySubset(array(
+            'acl' => array('search'),
+            'validity' => 0,
+            'maxHitsPerQuery' => 23,
+        ), $mixKey);
+
+        foreach ($createdKeys as $key) {
+            $this->client->deleteApiKey($key['key']);
+        }
+    }
+
     public function testSecurityIndex()
     {
         $res = $this->index->addObject(array('firstname' => 'Robin'));
@@ -159,5 +214,21 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
         }
 
         return;
+    }
+
+    private function getKey($key)
+    {
+        $loop = 0;
+        do {
+            $loop++;
+            sleep(1);
+            $list = $this->client->listApiKeys();
+
+            foreach ($list['keys'] as $item) {
+                if ($item['value'] == $key) {
+                    return $item;
+                }
+            }
+        } while ($loop < 10);
     }
 }

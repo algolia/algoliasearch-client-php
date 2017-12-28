@@ -1,5 +1,27 @@
 ## Change Log
 
+### 1.25.0
+
+- feat: Let you define all API keys capabilities in one array
+
+Example:
+```php
+$client->addApiKey([
+    'acl' => [
+        'search',
+        'listIndexes',
+    ],
+    'validity' => $validity,
+    'maxQueriesPerIPPerHour' => 1000,
+    'maxHitsPerQuery' => 50,
+    'indexes' => ['prefix_*'],
+]);
+```
+instead of
+```php
+$client->addApiKey(['search', 'listIndexes'], $validity, 1000, 50, ['prefix_*']);
+```
+
 ### 1.24.0
 
 - feat: Introduce ScopedCopyIndex method, to copy settings, synonyms or query rules between indices

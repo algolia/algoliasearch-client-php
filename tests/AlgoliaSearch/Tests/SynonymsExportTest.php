@@ -15,7 +15,14 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
     /** @var Index */
     private $index;
 
-    private $indexName = 'test-synonym-export-php';
+    private $indexName;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->indexName = $this->safe_name('test-synonym-export-php');
+    }
 
     protected function setUp()
     {

@@ -32,7 +32,12 @@ branches:
     - master
 
 install:
-    - composer install
+  - composer install
+
+before_script:
+  - wget http://api-key-dealer.herokuapp.com/clients/algolia-keys && chmod +x algolia-keys
 
 script:
-  - vendor/bin/phpunit --debug -c phpunit.xml.dist
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then eval $(./algolia-keys export) && php vendor/bin/phpunit --testsuite community; fi
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then php vendor/bin/phpunit --testsuite all; fi
+

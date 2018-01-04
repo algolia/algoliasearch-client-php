@@ -38,6 +38,4 @@ before_script:
   - wget http://api-key-dealer.herokuapp.com/clients/algolia-keys && chmod +x algolia-keys
 
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then eval $(./algolia-keys export) && php vendor/bin/phpunit --testsuite community; fi
-  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then php vendor/bin/phpunit --testsuite all; fi
-
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [[ ! "$TRAVIS_PULL_REQUEST_SLUG" =~ ^algolia\/ ]]; then eval $(./algolia-keys export) && php vendor/bin/phpunit --testsuite community; else php vendor/bin/phpunit --testsuite all; fi

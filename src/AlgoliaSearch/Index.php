@@ -1634,6 +1634,16 @@ class Index
     }
 
     /**
+     * @deprecated Please use initSynonymIterator instead
+     * @param int $batchSize
+     * @return SynonymIterator
+     */
+    public function initSynonymBrowser($batchSize = 1000)
+    {
+        return $this->initSynonymIterator($batchSize);
+    }
+
+    /**
      * @deprecated Please use searchForFacetValues instead
      * @param $facetName
      * @param $facetQuery

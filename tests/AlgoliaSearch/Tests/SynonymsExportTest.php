@@ -65,6 +65,14 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
             'type'     => 'synonym',
             'synonyms' => array('San Francisco', 'SF'),
         ), $synonym);
+
+        // Test for backward compatibility
+        $synonym = $this->index->initSynonymBrowser()->current();
+        $this->assertEquals(array(
+            'objectID' => 'city',
+            'type'     => 'synonym',
+            'synonyms' => array('San Francisco', 'SF'),
+        ), $synonym);
     }
 
     public function testSynonymsExport()

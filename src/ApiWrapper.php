@@ -23,6 +23,11 @@ class ApiWrapper
      */
     private $messageFactory;
 
+    /**
+     * @var ResponseHandler
+     */
+    private $responseHandler;
+
     private $validHeaders = [
         'X-Algolia-Application-Id',
         'X-Algolia-API-Key',
@@ -39,6 +44,9 @@ class ApiWrapper
 
         $this->httpClient = $httpClient;
         $this->messageFactory = $messageFactory;
+
+        // TODO: Inject properly
+        $this->responseHandler = new ResponseHandler();
     }
 
     public function get($endpoint, $requestOptions = [], $urlParams = [])
@@ -63,20 +71,6 @@ class ApiWrapper
         } finally {
             return $this->formatResponse($response);
         }
-    }
-
-    protected function formatResponse(ResponseInterface $response)
-    {
-        if (is_null($response)) {
-            throw new \Exception('unreachable hosts');
-        }
-
-        // TODO: handle all status codes
-        if ($response->getStatusCode() != 200) {
-            throw new \Exception((string) $response->getBody());
-        }
-
-        return \GuzzleHttp\json_decode($response->getBody(), true);
     }
 
     protected function splitRequestOptions($requestOptions)

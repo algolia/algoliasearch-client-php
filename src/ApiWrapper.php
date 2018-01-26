@@ -62,17 +62,18 @@ class ApiWrapper
         $this->responseHandler = new ResponseHandler();
     }
 
-    public function get($endpoint, $requestOptions = [], $urlParams = [])
+    public function get($path, $requestOptions = [])
     {
-        return $this->request('GET', $endpoint, $requestOptions, $urlParams);
+        [$headers, $params] = $this->splitRequestOptions($requestOptions);
+
+        return $this->request('GET', $path, $headers, [], $params);
     }
 
-    private function request($method, $endpoint, $requestOptions = [], $urlParams = [])
+    private function request($method, $path, array $headers = [], array $body = [], array $query = [])
     {
-        [$headers, $body] = $this->splitRequestOptions($requestOptions);
-
         $uri = $this->uriFactory
-            ->createUri($endpoint.'?'.build_query($urlParams))
+            ->createUri($path)
+            ->withQuery(build_query($query))
             ->withScheme('https');
 
         foreach ($this->clusterHosts->all() as $host) {
@@ -81,7 +82,7 @@ class ApiWrapper
                     $method,
                     $uri->withHost($host),
                     $headers,
-                    $body
+                    \GuzzleHttp\json_encode($body)
                 );
 
                 $response = $this->httpClient->sendRequest($request);
@@ -91,7 +92,7 @@ class ApiWrapper
                 $this->clusterHosts->failed($host);
             } catch (\Exception $e) {
                 // TODO: panic
-                dump($e);die;
+                var_dump($e->getMessage());die;
             }
         }
     }
@@ -113,7 +114,7 @@ class ApiWrapper
             }
         }
 
-        return [$headers, \GuzzleHttp\json_encode($body)]; // TODO: build my own json_encode
+        return [$headers, $body];
     }
 
     private function isValidHeader($optionName)

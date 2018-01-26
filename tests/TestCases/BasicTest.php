@@ -20,5 +20,8 @@ class BasicTest extends TestCase
 
         $response = $client->listIndices();
         $this->assertTrue(is_array($response));
+
+        $response2 = $client->listIndices();
+        $this->assertTrue(is_array($response2));
     }
 }

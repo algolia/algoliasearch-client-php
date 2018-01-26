@@ -2,16 +2,22 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Http\Client\Exception;
+use function GuzzleHttp\Psr7\build_query;
+use Http\Client\Exception\NetworkException;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
-use Psr\Http\Message\ResponseInterface;
+use Http\Message\UriFactory;
 
 class ApiWrapper
 {
     private $applicationId;
 
     private $apiKey;
+
+    /**
+     * @var ClusterHosts
+     */
+    private $clusterHosts;
 
     /**
      * @var HttpClient
@@ -28,6 +34,11 @@ class ApiWrapper
      */
     private $responseHandler;
 
+    /**
+     * @var UriFactory
+     */
+    private $uriFactory;
+
     private $validHeaders = [
         'X-Algolia-Application-Id',
         'X-Algolia-API-Key',
@@ -37,13 +48,15 @@ class ApiWrapper
         'Content-type',
     ];
 
-    public function __construct($applicationId, $apiKey, HttpClient $httpClient, MessageFactory $messageFactory)
+    public function __construct($applicationId, $apiKey, ClusterHosts $clusterHosts, HttpClient $httpClient, MessageFactory $messageFactory, UriFactory $uriFactory)
     {
         $this->applicationId = $applicationId;
         $this->apiKey = $apiKey;
+        $this->clusterHosts = $clusterHosts;
 
         $this->httpClient = $httpClient;
         $this->messageFactory = $messageFactory;
+        $this->uriFactory = $uriFactory;
 
         // TODO: Inject properly
         $this->responseHandler = new ResponseHandler();
@@ -54,27 +67,38 @@ class ApiWrapper
         return $this->request('GET', $endpoint, $requestOptions, $urlParams);
     }
 
-    protected function request($method, $endpoint, $requestOptions = [], $urlParams = [])
+    private function request($method, $endpoint, $requestOptions = [], $urlParams = [])
     {
         [$headers, $body] = $this->splitRequestOptions($requestOptions);
 
-        try {
-            // TODO: Use an super cool custom UriBuilder
-            $uri = $this->gimmeUri($endpoint, $urlParams);
+        $uri = $this->uriFactory
+            ->createUri($endpoint.'?'.build_query($urlParams))
+            ->withScheme('https');
 
-            $request = $this->messageFactory->createRequest($method, $uri, $headers, $body);
-            $response = $this->httpClient->sendRequest($request);
-        } catch (\Exception $e) {
-            dump($e);die;
-        } catch (Exception $e) {
-            dump($e);die;
-        } finally {
-            return $this->formatResponse($response);
+        foreach ($this->clusterHosts->all() as $host) {
+            try {
+                $request = $this->messageFactory->createRequest(
+                    $method,
+                    $uri->withHost($host),
+                    $headers,
+                    $body
+                );
+
+                $response = $this->httpClient->sendRequest($request);
+
+                return $this->responseHandler->handle($response);
+            } catch (NetworkException $e) {
+                $this->clusterHosts->failed($host);
+            } catch (\Exception $e) {
+                // TODO: panic
+                dump($e);die;
+            }
         }
     }
 
-    protected function splitRequestOptions($requestOptions)
+    private function splitRequestOptions($requestOptions)
     {
+        // TODO: Set other default headers
         $headers = [
             'X-Algolia-Application-Id' => $this->applicationId,
             'X-Algolia-API-Key' => $this->apiKey,
@@ -89,26 +113,11 @@ class ApiWrapper
             }
         }
 
-        // TODO: Set default headers
-
         return [$headers, \GuzzleHttp\json_encode($body)]; // TODO: build my own json_encode
     }
 
     private function isValidHeader($optionName)
     {
         return in_array($optionName, $this->validHeaders);
-    }
-
-    private function gimmeUri($endpoint, $urlParams)
-    {
-        $host = 'https://'.$this->applicationId.'-dsn.algolia.net';
-
-        foreach ($urlParams as $key => $value) {
-            if (gettype($value) == 'array') {
-                $urlParams[$key] = json_encode($value);
-            }
-        }
-
-        return $host.$endpoint.'?'.http_build_query($urlParams);
     }
 }

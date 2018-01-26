@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Exception\UnreachableException;
 use function GuzzleHttp\Psr7\build_query;
 use Http\Client\Exception\NetworkException;
 use Http\Client\HttpClient;
@@ -95,6 +96,8 @@ class ApiWrapper
                 var_dump($e->getMessage());die;
             }
         }
+
+        throw new UnreachableException();
     }
 
     private function splitRequestOptions($requestOptions)

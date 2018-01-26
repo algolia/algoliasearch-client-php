@@ -2,18 +2,19 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use GuzzleHttp\Exception\BadResponseException;
 use Psr\Http\Message\ResponseInterface;
 
 class ResponseHandler
 {
     public function handle(ResponseInterface $response)
     {
-        if (is_null($response)) {
-            throw new \Exception('unreachable hosts');
-        }
+        $code = $response->getStatusCode();
 
-        // TODO: handle all status codes
-        if ($response->getStatusCode() != 200) {
+        // TODO: handle all status codes with helpful error message and links
+        if ($code > 499) {
+            throw new \Exception((string) $response->getBody());
+        } elseif ($code > 399) {
             throw new \Exception((string) $response->getBody());
         }
 

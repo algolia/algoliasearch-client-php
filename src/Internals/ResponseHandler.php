@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch;
+namespace Algolia\AlgoliaSearch\Internals;
 
 use GuzzleHttp\Exception\BadResponseException;
 use Psr\Http\Message\ResponseInterface;

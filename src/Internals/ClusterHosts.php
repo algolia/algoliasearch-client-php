@@ -1,8 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch;
-
-use Psr\Http\Message\UriInterface;
+namespace Algolia\AlgoliaSearch\Internals;
 
 class ClusterHosts
 {
@@ -23,7 +21,7 @@ class ClusterHosts
 
         shuffle($hosts);
         array_unshift($hosts, $applicationId.'-dsn.algolia.net');
-        array_unshift($hosts, 'no-possible-dsn.algolia.net');
+        array_unshift($hosts, 'no-connect.algolia.net');
 
         return new static($hosts);
     }

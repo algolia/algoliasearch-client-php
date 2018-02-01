@@ -18,15 +18,9 @@ abstract class TestCase extends PHPUitTestCase
 
     protected function getClient()
     {
-        $wrapper = new ApiWrapper(
+        return Client::create(
             getenv('ALGOLIA_APP_ID'),
-            getenv('ALGOLIA_API_KEY'),
-            ClusterHosts::createFromAppId(getenv('ALGOLIA_APP_ID')),
-            new \Http\Adapter\Guzzle6\Client(),
-            new GuzzleMessageFactory(),
-            new GuzzleUriFactory()
+            getenv('ALGOLIA_API_KEY')
         );
-
-        return new Client($wrapper);
     }
 }

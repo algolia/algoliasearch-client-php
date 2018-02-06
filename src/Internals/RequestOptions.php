@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
+use function GuzzleHttp\Psr7\build_query;
+
 class RequestOptions
 {
     private $options;
@@ -21,14 +23,24 @@ class RequestOptions
         return $this->options['query'];
     }
 
+    public function getBuiltQuery() : string
+    {
+        return build_query($this->options['query']);
+    }
+
     public function getBody() : array
     {
         return $this->options['body'];
     }
 
-    public function getTimeout()
+    public function getReadTimeout()
     {
-        return $this->options['timeout'];
+        return $this->options['readTimeout'];
+    }
+
+    public function getWriteTimeout()
+    {
+        return $this->options['writeTimeout'];
     }
 
     public function getConnectTimeout()

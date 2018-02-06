@@ -48,7 +48,8 @@ class RequestOptionsFactory
             ],
             'query' => [],
             'body' => [],
-            'timeout' => 5,
+            'readTimeout' => 5,
+            'writeTimeout' => 5,
             'connectTimeout' => 2,
         ];
 
@@ -67,7 +68,7 @@ class RequestOptionsFactory
             return 'headers';
         } elseif (in_array($optionName, $this->validQueryParameters)) {
             return 'query';
-        } elseif (in_array($optionName, ['timeout', 'connectTimeout'])) {
+        } elseif (in_array($optionName, ['connectTimeout', 'readTimeout', 'writeTimeout'])) {
             return $optionName;
         } else {
             return 'body';

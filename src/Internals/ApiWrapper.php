@@ -2,13 +2,10 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
-use Algolia\AlgoliaSearch\Contracts\HttpClientInterface;
+use Algolia\AlgoliaSearch\Exception\BadRequestException;
+use Algolia\AlgoliaSearch\Exception\RetriableException;
 use Algolia\AlgoliaSearch\Exception\UnreachableException;
-use function GuzzleHttp\Psr7\build_query;
-use Http\Client\Exception\NetworkException;
-use Http\Client\Exception\TransferException;
-use Http\Message\MessageFactory;
-use Http\Message\UriFactory;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 
 class ApiWrapper
 {
@@ -23,97 +20,92 @@ class ApiWrapper
     private $requestOptionsFactory;
 
     /**
-     * @var GuzzleHttpClient
+     * @var HttpClientInterface
      */
     private $http;
-
-    /**
-     * @var MessageFactory
-     */
-    private $messageFactory;
-
-    /**
-     * @var UriFactory
-     */
-    private $uriFactory;
-
-    /**
-     * @var ResponseHandler
-     */
-    private $responseHandler;
 
     public function __construct(
         ClusterHosts $clusterHosts,
         RequestOptionsFactory $requestOptionsFactory,
-        HttpClientInterface $http,
-        MessageFactory $messageFactory,
-        UriFactory $uriFactory
+        HttpClientInterface $http
     ) {
         $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $requestOptionsFactory;
-
         $this->http = $http;
-        $this->messageFactory = $messageFactory;
-        $this->uriFactory = $uriFactory;
-
-        // TODO: Inject properly
-        $this->responseHandler = new ResponseHandler();
     }
 
-    public function get($path, $requestOptions = [])
+    public function read($method, $path, array $requestOptions = [])
     {
-        $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+        if ('GET' == strtoupper($method)) {
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+        } else {
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
+        }
 
         return $this->request(
-            'GET',
+            $method,
             $path,
-            $requestOptions->getHeaders(),
-            $requestOptions->getQuery(),
-            []
+            $requestOptions,
+            $this->clusterHosts->read(),
+            $requestOptions->getReadTimeout()
         );
     }
 
-    public function post($path, $requestOptions = [])
+    public function write($method, $path, array $requestOptions = [])
     {
+        if (isset($requestOptions['timeout'])) {
+            $requestOptions['writeTimeout'] = $requestOptions['timeout'];
+        }
+
         $requestOptions = $this->requestOptionsFactory->create($requestOptions);
 
         return $this->request(
-            'POST',
+            $method,
             $path,
-            $requestOptions->getHeaders(),
-            $requestOptions->getQuery(),
-            $requestOptions->getBody()
+            $requestOptions,
+            $this->clusterHosts->write(),
+            $requestOptions->getWriteTimeout()
+
         );
     }
 
-    private function request($method, $path, array $headers = [], array $query = [], array $body = [])
+    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout)
     {
-        $uri = $this->uriFactory
+        $uri = $this->http
             ->createUri($path)
-            ->withQuery(build_query($query))
+            ->withQuery($requestOptions->getBuiltQuery())
             ->withScheme('https');
 
-        foreach ($this->clusterHosts->all() as $host) {
+        $retry = 1;
+        foreach ($hosts as $host) {
             try {
-                $request = $this->messageFactory->createRequest(
+                $request = $this->http->createRequest(
                     $method,
                     $uri->withHost($host),
-                    $headers,
-                    \GuzzleHttp\json_encode($body)
+                    $requestOptions->getHeaders(),
+                    $requestOptions->getBody()
                 );
 
-                $response = $this->http->send($request, 10, 10);
+                $responseBody = $this->http->sendRequest(
+                    $request,
+                    $timeout * $retry,
+                    $requestOptions->getConnectTimeout()  * $retry
+                );
 
-                return $this->responseHandler->handle($response);
-            } catch (NetworkException $e) {
+                return $responseBody;
+            } catch (RetriableException $e) {
                 $this->clusterHosts->failed($host);
-            } catch (TransferException $e) {
-                $this->clusterHosts->failed($host);
+            } catch (BadRequestException $e) {
+                // TODO: something
+                dump('Bad request: '.$e->getMessage());
+                die;
             } catch (\Exception $e) {
                 // TODO: panic
-                var_dump($e->getMessage());
+                dump($e);
                 die;
             }
+
+            $retry++;
         }
 
         throw new UnreachableException();

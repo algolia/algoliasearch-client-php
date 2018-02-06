@@ -20,8 +20,11 @@ class BasicTest extends TestCase
 
         $response = $client->listIndices();
         $this->assertTrue(is_array($response));
+    }
 
-        $response2 = $client->listIndices();
-        $this->assertTrue(is_array($response2));
+    public function testIndexCanIndexThings()
+    {
+        $index = $this->getClient()->index('really_cool_test');
+        $index->addObjects([['name' => 'fleur'], ['name' => 'orange'], ['name' => 'chien']]);
     }
 }

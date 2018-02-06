@@ -2,8 +2,9 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Http\Guzzle6Adapter;
+use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Contracts\ClientInterface;
+use Algolia\AlgoliaSearch\Http\Lol;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\Internals\RequestOptionsFactory;
@@ -36,9 +37,7 @@ final class Client implements ClientInterface
         $apiWrapper = new ApiWrapper(
             $hosts,
             new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6Adapter(new GuzzleClient()),
-            new GuzzleMessageFactory(),
-            new GuzzleUriFactory()
+            new Guzzle6HttpClient(new GuzzleClient)
         );
 
         return new static($apiWrapper);
@@ -51,6 +50,11 @@ final class Client implements ClientInterface
             $requestOptions
         );
 
-        return $this->api->get('/1/indexes/', $requestOptions);
+        return $this->api->read('GET', '/1/indexes/', $requestOptions);
+    }
+
+    public function index($indexName)
+    {
+        return new Index($indexName, $this->api);
     }
 }

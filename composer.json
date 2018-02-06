@@ -23,10 +23,7 @@
     "require": {
         "guzzlehttp/guzzle": "^6.0",
         "guzzlehttp/psr7": "^1.0",
-        "psr/http-message": "^1.0",
-        "php-http/httplug": "^1.0",
-        "php-http/message": "^1.6",
-        "php-http/message-factory": "^1.0"
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5"

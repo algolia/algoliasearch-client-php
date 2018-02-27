@@ -348,6 +348,8 @@ search.start();
 
 
 
+
+
 ## Getting Help
 
 - **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).

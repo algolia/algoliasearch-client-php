@@ -84,6 +84,38 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
             'maxHitsPerQuery' => 23,
         ), $mixKey);
 
+        // Delete them all
+        foreach ($createdKeys as $key) {
+            $this->client->deleteApiKey($key['key']);
+        }
+    }
+
+    public function testUpdateApiKey()
+    {
+        $createdKeys = array();
+
+        $createdKeys[] = $res = $this->client->addApiKey(array('search'), 1000, 12, 2);
+
+        $originalKey = $this->getKey($res['key']);
+        $this->assertLessThan(1000, $originalKey['validity']);
+
+        $res = $this->client->updateApiKey($originalKey['value'], array(
+            'acl' => array('search', 'browse'),
+            'validity' => 2000,
+            'maxQueriesPerIPPerHour' => 20,
+            'maxHitsPerQuery' => 20,
+        ));
+        $updatedKey = $this->getUpdatedKey($res['key'], $originalKey);
+
+        $subArray = array(
+            'acl' => array('search', 'browse'),
+            'maxQueriesPerIPPerHour' => 20,
+            'maxHitsPerQuery' => 20,
+        );
+        $this->assertGreaterThan(1000, $updatedKey['validity']);
+        $this->assertArraySubset($subArray, $updatedKey);
+
+        // Delete them all
         foreach ($createdKeys as $key) {
             $this->client->deleteApiKey($key['key']);
         }
@@ -230,5 +262,29 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
                 }
             }
         } while ($loop < 10);
+    }
+
+    private function getUpdatedKey($key, $original)
+    {
+        // Validity change every second, it cannot be compared
+        unset($original['validity']);
+        $loop = 0;
+        do {
+            $loop++;
+            sleep(1);
+            $updatedKey = $this->client->getApiKey($key);
+
+            try{
+                // Validity change every second, it cannot be compared
+                $tempWithoutValidity = $updatedKey;
+                unset($tempWithoutValidity['validity']);
+                $this->assertArraySubset($tempWithoutValidity, $original);
+            } catch (\Exception $e) {
+                // The key was updated
+                return $updatedKey;
+            }
+        } while ($loop < 10);
+
+        throw new \Exception('The key could not be updated.');
     }
 }

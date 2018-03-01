@@ -1078,6 +1078,9 @@ class Index
      * @return mixed
      *
      * @throws AlgoliaException
+     *
+     * @deprecated 1.26 All keys should be created with the Client class.
+     *                  If possible, delete keys attached to the index and re-create them with an index restriction
      */
     public function listApiKeys()
     {
@@ -1123,6 +1126,9 @@ class Index
      * @return mixed
      *
      * @throws AlgoliaException
+     *
+     * @deprecated 1.26 All keys should be created with the Client class.
+     *                  If possible, delete keys attached to the index and re-create them with an index restriction
      */
     public function getApiKey($key)
     {
@@ -1144,6 +1150,11 @@ class Index
 
     /**
      * Delete an existing API key associated to this index.
+     *
+     * All API keys should be created and modified using the Client class
+     * with an index restriction if necessary.
+     * Use this method to delete existing keys attached to the index but
+     * create new once with the client (to attach them to the app)
      *
      * @param string $key
      *
@@ -1210,6 +1221,7 @@ class Index
      * @return mixed
      *
      * @throws AlgoliaException
+     * @deprecated 1.26 All API keys should be created and modified using the Client class with an index restriction if necessary.
      */
     public function addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
@@ -1255,7 +1267,7 @@ class Index
      * @param int $maxQueriesPerIPPerHour
      * @param int $maxHitsPerQuery
      * @return mixed
-     * @deprecated use addApiKey instead
+     * @deprecated 1.26 All API keys should be created and modified using the Client class with an index restriction if necessary.
      */
     public function addUserKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {
@@ -1296,6 +1308,7 @@ class Index
      * @return mixed
      *
      * @throws AlgoliaException
+     * @deprecated 1.26 All API keys should be created and modified using the Client class with an index restriction if necessary.
      */
     public function updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)
     {

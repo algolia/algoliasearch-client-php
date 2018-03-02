@@ -82,6 +82,9 @@ class Client
         if (!function_exists('json_decode')) {
             throw new \Exception('AlgoliaSearch requires the JSON PHP extension.');
         }
+        if (version_compare(PHP_VERSION, '7.1.0', '>') && ini_get('serialize_precision') !== '-1') {
+            @trigger_error('When using PHP 7.1+, you must set the "serialize_precision" ini settings to -1. See https://github.com/algolia/algoliasearch-client-php/issues/365', E_USER_WARNING);
+        }
 
         $this->caInfoPath = __DIR__.'/../../resources/ca-bundle.crt';
         foreach ($options as $option => $value) {

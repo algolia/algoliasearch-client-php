@@ -1,5 +1,12 @@
 ## Change Log
 
+### 1.25.1
+
+- feat(places): Set write hosts when using Places
+
+Even though Algolia Places indices are read-only, we still need to take into
+account the write hosts to let the user generate its own API keys.
+
 ### 1.25.0
 
 - feat: Let you define all API keys capabilities in one array

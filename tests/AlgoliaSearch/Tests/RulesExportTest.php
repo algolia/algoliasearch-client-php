@@ -21,7 +21,7 @@ class RulesExportTest extends AlgoliaSearchTestCase
     protected function setUp()
     {
         $this->client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'));
-        $this->index = $this->client->initIndex($this->indexName);
+        $this->index = $this->client->initIndex($this->safe_name($this->indexName));
         $this->index->addObject(array('note' => 'Create index in Algolia'));
 
         try {

@@ -27,6 +27,9 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 
 
+1. **[Supported platforms](#supported-platforms)**
+
+
 1. **[Install](#install)**
 
 
@@ -51,6 +54,10 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 # Getting Started
 
 
+
+## Supported platforms
+
+This library is compatible with PHP version 5.3 and later.
 
 ## Install
 

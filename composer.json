@@ -20,7 +20,8 @@
     ],
     "require": {
         "php": ">=5.3",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-curl": "*"
     },
     "require-dev": {
         "satooshi/php-coveralls": "^1.0",

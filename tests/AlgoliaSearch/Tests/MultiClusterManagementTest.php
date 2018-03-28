@@ -17,7 +17,7 @@ class MultiClusterManagementTest extends AlgoliaSearchTestCase
             return $name;
         }
 
-        return 'TRAVIS_php_'.$name.'_job-'.getenv('TRAVIS_JOB_ID');
+        return $name.'-job-'.getenv('TRAVIS_JOB_ID');
     }
 
     protected function setUp()

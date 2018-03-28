@@ -1414,9 +1414,9 @@ class Index
      *
      * @return IndexBrowser
      */
-    private function doBrowse($query, $params = null)
+    private function doBrowse($query, $params = null, $requestHeaders = array())
     {
-        return new IndexBrowser($this, $query, $params);
+        return new IndexBrowser($this, $query, $params, null, $requestHeaders);
     }
 
     /**

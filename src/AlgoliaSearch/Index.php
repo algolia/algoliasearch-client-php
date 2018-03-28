@@ -420,6 +420,8 @@ class Index
 
     public function deleteBy(array $args)
     {
+        $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
+
         return $this->client->request(
             $this->context,
             'POST',
@@ -428,7 +430,8 @@ class Index
             array('params' => $this->client->buildQuery($args)),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
-            $this->context->readTimeout
+            $this->context->readTimeout,
+            $requestHeaders
         );
     }
 

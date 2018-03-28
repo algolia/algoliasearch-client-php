@@ -57,4 +57,53 @@ class IndexTest extends AlgoliaSearchTestCase
         $results = $this->index->search('');
         $this->assertEquals(1, $results['nbHits']);
     }
+
+    public function testAddObjectsWithLegacySignature()
+    {
+        $res = $this->index->addObjects(
+            array(array(
+                'note' => 'this object should map `alpha` to the objectID',
+                'alpha' => 'primary-key-1',
+            )),
+            'alpha'
+        );
+        $this->index->waitTask($res['taskID']);
+
+        $res = $this->index->saveObjects(
+            array(array(
+                'note' => '`alpha` is the objectID',
+                'alpha' => 'primary-key-2',
+            )),
+            'alpha'
+        );
+        $this->index->waitTask($res['taskID']);
+
+        $res = $this->index->saveObject(
+            array(
+                'note' => '`alpha` is the objectID again',
+                'alpha' => 'primary-key-3',
+            ),
+            'alpha'
+        );
+        $this->index->waitTask($res['taskID']);
+
+        $results = $this->index->search('');
+        $this->assertEquals(3, $results['nbHits']);
+
+        foreach ($results['hits'] as $hit) {
+            $this->assertEquals($hit['objectID'], $hit['alpha']);
+        }
+
+        $res = $this->index->partialUpdateObjects(
+            array(array(
+                'extra' => 'this object should have `extra` and `note` attributes',
+                'alpha' => 'primary-key-1',
+            )),
+            'alpha'
+        );
+        $this->index->waitTask($res['taskID']);
+
+        $objects = $this->index->getObject('primary-key-1');
+        $this->assertArrayHasKey('note', $objects);
+    }
 }

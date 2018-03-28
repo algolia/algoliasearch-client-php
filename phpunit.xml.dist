@@ -5,7 +5,6 @@
             <directory>tests/</directory>
             <exclude>./tests/AlgoliaSearch/Tests/SecurityTest.php</exclude>
             <exclude>./tests/AlgoliaSearch/Tests/SecurityNewNamingTest.php</exclude>
-            <exclude>./tests/AlgoliaSearch/Tests/MultiClusterManagementTest.php</exclude>
         </testsuite>
         <testsuite name="all">
             <directory>tests/</directory>

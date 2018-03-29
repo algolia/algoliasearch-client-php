@@ -199,7 +199,7 @@ class Client
      */
     public function isAlive()
     {
-        $this->request(
+        return $this->request(
             $this->context,
             'GET',
             '/1/isalive',

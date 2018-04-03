@@ -12,7 +12,7 @@ your PHP code.
 
 If you're a Symfony or Laravel user, you're probably looking for the following integrations:
 
-- **Laravel**: [Laravel Scout](/doc/api-client/laravel/algolia-and-scout/)
+- **Laravel**: [Laravel Scout](https://www.algolia.com/doc/api-client/laravel/algolia-and-scout/)
 - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
 

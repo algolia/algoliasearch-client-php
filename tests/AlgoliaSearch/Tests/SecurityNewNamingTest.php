@@ -97,7 +97,7 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
         $res = $this->index->listApiKeys();
         $newKey = $this->index->addApiKey(array('search'));
 
-        $this->assertTrue($newKey['key'] != '');
+        $this->assertNotSame('', $newKey['key']);
         $this->assertFalse($this->containsValue($res['keys'], 'value', $newKey['key']));
 
         $self = $this;
@@ -174,7 +174,7 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
         $b->waitTask($res['taskID']);
 
         $newKey = $this->client->addApiKey(array('search', 'addObject', 'deleteObject'), 0, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
-        $this->assertTrue($newKey['key'] != '');
+        $this->assertNotSame('', $newKey['key']);
 
         $self = $this;
         $this->poolingTask(function ($timeouted) use ($newKey, $self) {

@@ -41,6 +41,16 @@ class RulesTest extends AlgoliaSearchTestCase
     }
 
     /**
+     * @expectedException \AlgoliaSearch\AlgoliaException
+     */
+    public function testSaveRuleWithEmptyObjectID()
+    {
+        $rule = $this->getRuleStub('');
+        $this->index->saveRule('', $rule);
+    }
+
+
+    /**
      * @depends testSaveAndGetRule
      * @expectedException \AlgoliaSearch\AlgoliaException
      * @expectedExceptionMessage ObjectID does not exist

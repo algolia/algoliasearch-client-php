@@ -1782,6 +1782,10 @@ class Index
             $content['objectID'] = $objectID;
         }
 
+        if (! $content['objectID']) {
+            throw new AlgoliaException('Cannot save the rule because `objectID` must be set and non-empty.');
+        }
+
         return $this->client->request(
             $this->context,
             'PUT',

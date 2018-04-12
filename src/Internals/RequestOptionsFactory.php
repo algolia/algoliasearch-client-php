@@ -59,6 +59,8 @@ class RequestOptionsFactory
             $normalized[$type][$optionName] = $value;
         }
 
+        $normalized = $this->removeEmptyValue($normalized);
+
         return $normalized;
     }
 
@@ -73,5 +75,18 @@ class RequestOptionsFactory
         } else {
             return 'body';
         }
+    }
+
+    private function removeEmptyValue($normalized)
+    {
+        foreach (['headers', 'query', 'body'] as $category) {
+            foreach ($normalized[$category] as $key => $value) {
+                if (empty($value)) {
+                    unset($normalized[$category][$key]);
+                }
+            }
+        }
+
+        return $normalized;
     }
 }

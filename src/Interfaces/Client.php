@@ -1,8 +1,8 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Contracts;
+namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface ClientInterface
+interface Client
 {
 //    public function multipleQueries($queries, $strategy, $requestOptions);
 //

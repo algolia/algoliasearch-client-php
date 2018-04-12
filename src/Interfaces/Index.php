@@ -1,8 +1,8 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Contracts;
+namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface IndexInterface
+interface Index
 {
     ## Search
 

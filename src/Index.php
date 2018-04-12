@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Contracts\IndexInterface;
+use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 
 final class Index implements IndexInterface

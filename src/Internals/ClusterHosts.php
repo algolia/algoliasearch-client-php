@@ -47,10 +47,15 @@ class ClusterHosts
 
     public function failed($host)
     {
-        $key = array_search($host, $this->hosts);
+        $writeIndex = array_search($host, $this->hosts['write']);
+        $readIndex = array_search($host, $this->hosts['read']);
 
-        if (false !== $key) {
-            unset($this->hosts[$key]);
+        if (false !== $writeIndex) {
+            unset($this->hosts['write'][$writeIndex]);
+        }
+
+        if (false !== $readIndex) {
+            unset($this->hosts['read'][$readIndex]);
         }
 
         return $this;

@@ -33,6 +33,38 @@ final class Index implements IndexInterface
         );
     }
 
+    public function getSynonyms($objectID, $requestOptions = [])
+    {
+        return $this->api->read(
+            'GET',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID),
+            $requestOptions
+        );
+    }
+
+
+    public function clearSynonyms($forwardToReplicas = true, $requestOptions = [])
+    {
+        $requestOptions += [
+            'forwardToReplicas' => $forwardToReplicas,
+        ];
+
+        return $this->api->write(
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/synonyms/clear',
+            $requestOptions
+        );
+    }
+
+    public function searchRules($requestOptions = [])
+    {
+        return $this->api->read(
+            'POST',
+            '/1/indexes/'.$this->urlIndexName.'/rules/search',
+            $requestOptions
+        );
+    }
+
     private function buildBatch($action, $objects)
     {
         $operations = [];

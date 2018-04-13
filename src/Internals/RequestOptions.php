@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
-use function GuzzleHttp\Psr7\build_query;
-
 class RequestOptions
 {
     private $options;
@@ -25,7 +23,7 @@ class RequestOptions
 
     public function getBuiltQuery()
     {
-        return build_query($this->options['query']);
+        return \GuzzleHttp\Psr7\build_query($this->options['query']);
     }
 
     public function getBody()

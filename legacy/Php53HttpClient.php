@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use Algolia\AlgoliaSearch\Legacy\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -9,7 +10,12 @@ class Php53HttpClient implements HttpClientInterface
 {
     public function createUri($uri)
     {
-        // TODO: Implement createUri() method.
+        if ($uri instanceof UriInterface) {
+            return $uri;
+        } elseif (is_string($uri)) {
+            return new Uri($uri);
+        }
+        throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
     public function createRequest(

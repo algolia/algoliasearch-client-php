@@ -57,7 +57,11 @@ class ApiWrapper
             $requestOptions['writeTimeout'] = $requestOptions['timeout'];
         }
 
-        $requestOptions = $this->requestOptionsFactory->create($requestOptions);
+        if ('DELETE' == strtoupper($method)) {
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+        } else {
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
+        }
 
         return $this->request(
             $method,

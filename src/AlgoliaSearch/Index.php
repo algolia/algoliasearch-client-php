@@ -476,7 +476,7 @@ class Index
     /**
      * Search inside the index.
      *
-     * @param string $query the full text query
+     * @param string|null $query the full text query or null for disabling it
      * @param mixed $args (optional) if set, contains an associative array with query parameters:
      *                      - page: (integer) Pagination parameter used to select the page to retrieve.
      *                      Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9

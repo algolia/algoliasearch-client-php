@@ -46,16 +46,11 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @link https://alg.li/list-indices-php
+     * @link https://alg.li/list-indexes-php
      * @Api
      */
-    public function listIndices($page = 0, $requestOptions = [])
+    public function listIndexes($requestOptions = [])
     {
-        $requestOptions = array_merge(
-            compact('page'),
-            $requestOptions
-        );
-
         return $this->api->read('GET', '/1/indexes/', $requestOptions);
     }
 
@@ -63,11 +58,11 @@ final class Client implements ClientInterface
      * @link https://alg.li/copy-index-php
      * @Api
      */
-    public function copyIndex($srcIndexName, $dstIndexName, $scope = [], $requestOptions = [])
+    public function copyIndex($srcIndexName, $destIndexName, $scope = [], $requestOptions = [])
     {
         $requestOptions += [
             'operation' => 'copy',
-            'destination' => $dstIndexName,
+            'destination' => $destIndexName,
             'scope' => $scope
         ];
 
@@ -78,6 +73,33 @@ final class Client implements ClientInterface
         );
     }
 
+    public function moveIndex($srcIndexName, $destIndexName, $requestOptions = [])
+    {
+        $requestOptions += [
+            'operation' => 'move',
+            'destination' => $destIndexName,
+        ];
+
+        return $this->api->write(
+            'POST',
+            '/1/indexes/'.urlencode($srcIndexName).'/operation',
+            $requestOptions
+        );
+    }
+
+    public function deleteIndex($indexName, $requestOptions = [])
+    {
+        return $this->api->write(
+            'DELETE',
+            '/1/indexes/'.urlencode($indexName),
+            $requestOptions
+        );
+    }
+
+    public function listApiKeys($requestOptions = [])
+    {
+        return $this->api->read('GET', '/1/keys', $requestOptions);
+    }
     /**
      * @link https://alg.li/get-api-key-php
      * @Api
@@ -88,14 +110,6 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @link https://alg.li/delete-api-key-php
-     */
-    public function deleteApiKey($key, $requestOptions = [])
-    {
-        return $this->api->write('DELETE', '/1/keys/'.urlencode($key), $requestOptions);
-    }
-
-    /**
      * @link https://alg.li/add-api-key-php
      */
     public function addApiKey($keyDetails, $requestOptions = [])
@@ -103,5 +117,13 @@ final class Client implements ClientInterface
         $requestOptions += $keyDetails;
 
         return $this->api->write('POST', '/1/keys', $requestOptions);
+    }
+
+    /**
+     * @link https://alg.li/delete-api-key-php
+     */
+    public function deleteApiKey($key, $requestOptions = [])
+    {
+        return $this->api->write('DELETE', '/1/keys/'.urlencode($key), $requestOptions);
     }
 }

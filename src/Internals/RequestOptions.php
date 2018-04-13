@@ -13,22 +13,22 @@ class RequestOptions
         $this->options = $options;
     }
 
-    public function getHeaders(): array
+    public function getHeaders()
     {
         return $this->options['headers'];
     }
 
-    public function getQuery(): array
+    public function getQuery()
     {
         return $this->options['query'];
     }
 
-    public function getBuiltQuery(): string
+    public function getBuiltQuery()
     {
         return build_query($this->options['query']);
     }
 
-    public function getBody(): array
+    public function getBody()
     {
         return $this->options['body'];
     }

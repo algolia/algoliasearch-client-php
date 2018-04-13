@@ -32,7 +32,7 @@ class Guzzle6HttpClient implements HttpClientInterface
         return new self(static::buildClient($config));
     }
 
-    public function createUri($uri): UriInterface
+    public function createUri($uri)
     {
         return uri_for($uri);
     }
@@ -43,7 +43,7 @@ class Guzzle6HttpClient implements HttpClientInterface
         array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
-    ): RequestInterface {
+    ) {
         if (is_array($body)) {
             $body = \GuzzleHttp\json_encode($body);
         }

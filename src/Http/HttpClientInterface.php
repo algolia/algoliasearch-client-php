@@ -3,11 +3,10 @@
 namespace Algolia\AlgoliaSearch\Http;
 
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 
 interface HttpClientInterface
 {
-    public function createUri($uri): UriInterface;
+    public function createUri($uri);
 
     public function createRequest(
         $method,
@@ -15,7 +14,7 @@ interface HttpClientInterface
         array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
-    ): RequestInterface;
+    );
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout);
 }

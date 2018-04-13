@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Exception;
+namespace Algolia\AlgoliaSearch\Exceptions;
 
 use Throwable;
 

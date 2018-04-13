@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
-use Algolia\AlgoliaSearch\Exception\BadRequestException;
-use Algolia\AlgoliaSearch\Exception\RetriableException;
+use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;

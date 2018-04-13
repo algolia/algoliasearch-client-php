@@ -8,16 +8,16 @@ class RequestOptionsFactory
 
     private $apiKey;
 
-    private $validQueryParameters = ['forwardToReplicas'];
+    private $validQueryParameters = array('forwardToReplicas');
 
-    private $validHeaders = [
+    private $validHeaders = array(
         'X-Algolia-Application-Id',
         'X-Algolia-API-Key',
         'X-Forwarded-For',
         'X-Algolia-UserToken',
         'X-Forwarded-API-Key',
         'Content-type',
-    ];
+    );
 
     public function __construct($appId, $apiKey)
     {
@@ -34,29 +34,29 @@ class RequestOptionsFactory
     {
         $normalized = $this->normalize($options);
         $normalized['query'] = array_merge($normalized['query'], $normalized['body']);
-        $normalized['body'] = [];
+        $normalized['body'] = array();
 
         return new RequestOptions($normalized);
     }
 
     protected function normalize($options)
     {
-        $normalized =  [
-            'headers' => [
+        $normalized = array(
+            'headers' => array(
                 'X-Algolia-Application-Id' => $this->appId,
                 'X-Algolia-API-Key' => $this->apiKey,
-            ],
-            'query' => [],
-            'body' => [],
+            ),
+            'query' => array(),
+            'body' => array(),
             'readTimeout' => 5,
             'writeTimeout' => 5,
             'connectTimeout' => 2,
-        ];
+        );
 
         foreach ($options as $optionName => $value) {
             $type = $this->getOptionType($optionName);
 
-            if (in_array($type, ['readTimeout', 'writeTimeout', 'connectTimeout'])) {
+            if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'))) {
                 $normalized[$type] = $value;
             } else {
                 $normalized[$type][$optionName] = $value;
@@ -74,7 +74,7 @@ class RequestOptionsFactory
             return 'headers';
         } elseif (in_array($optionName, $this->validQueryParameters)) {
             return 'query';
-        } elseif (in_array($optionName, ['connectTimeout', 'readTimeout', 'writeTimeout'])) {
+        } elseif (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'))) {
             return $optionName;
         } else {
             return 'body';
@@ -83,7 +83,7 @@ class RequestOptionsFactory
 
     private function removeEmptyValue($normalized)
     {
-        foreach (['headers', 'query', 'body'] as $category) {
+        foreach (array('headers', 'query', 'body') as $category) {
             foreach ($normalized[$category] as $key => $value) {
                 if (empty($value)) {
                     unset($normalized[$category][$key]);

@@ -8,7 +8,7 @@ use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 final class Index implements IndexInterface
 {
     private $indexName;
-    protected $urlIndexName;
+    private $urlIndexName;
 
     /**
      * @var ApiWrapper
@@ -22,7 +22,7 @@ final class Index implements IndexInterface
         $this->api = $apiWrapper;
     }
 
-    public function addObjects($objects, $requestOptions = [])
+    public function addObjects($objects, $requestOptions = array())
     {
         $requestOptions['requests'] = $this->buildBatch('addObject', $objects);
 
@@ -33,7 +33,7 @@ final class Index implements IndexInterface
         );
     }
 
-    public function getSynonyms($objectID, $requestOptions = [])
+    public function getSynonyms($objectID, $requestOptions = array())
     {
         return $this->api->read(
             'GET',
@@ -42,12 +42,11 @@ final class Index implements IndexInterface
         );
     }
 
-
-    public function clearSynonyms($forwardToReplicas = true, $requestOptions = [])
+    public function clearSynonyms($forwardToReplicas = true, $requestOptions = array())
     {
-        $requestOptions += [
+        $requestOptions += array(
             'forwardToReplicas' => $forwardToReplicas,
-        ];
+        );
 
         return $this->api->write(
             'POST',
@@ -56,7 +55,7 @@ final class Index implements IndexInterface
         );
     }
 
-    public function searchRules($requestOptions = [])
+    public function searchRules($requestOptions = array())
     {
         return $this->api->read(
             'POST',
@@ -67,12 +66,12 @@ final class Index implements IndexInterface
 
     private function buildBatch($action, $objects)
     {
-        $operations = [];
+        $operations = array();
         foreach ($objects as $obj) {
-            $operations[] = [
+            $operations[] = array(
                 'action' => $action,
-                'body' => $obj
-            ];
+                'body' => $obj,
+            );
         }
 
         return $operations;

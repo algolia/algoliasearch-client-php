@@ -24,7 +24,7 @@ class PublicApiTest extends TestCase
         $definition = Yaml::parse(file_get_contents(__DIR__.'/client.yaml'));
 
         foreach ($definition as &$def) {
-            if (! isset($def['args'])) {
+            if (!isset($def['args'])) {
                 $def['args'] = array();
             }
         }

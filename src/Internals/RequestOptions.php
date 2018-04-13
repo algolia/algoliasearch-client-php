@@ -8,27 +8,27 @@ class RequestOptions
 {
     private $options;
 
-    public function __construct(array $options = [])
+    public function __construct(array $options = array())
     {
         $this->options = $options;
     }
 
-    public function getHeaders() : array
+    public function getHeaders(): array
     {
         return $this->options['headers'];
     }
 
-    public function getQuery() : array
+    public function getQuery(): array
     {
         return $this->options['query'];
     }
 
-    public function getBuiltQuery() : string
+    public function getBuiltQuery(): string
     {
         return build_query($this->options['query']);
     }
 
-    public function getBody() : array
+    public function getBody(): array
     {
         return $this->options['body'];
     }

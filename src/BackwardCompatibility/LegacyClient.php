@@ -35,7 +35,6 @@ class LegacyClient
 
     public static function __callStatic($name, $arguments)
     {
-        return call_user_func(array(Client::class, $name), $arguments);
-
+        return call_user_func(array('\Algolia\AlgoliaSearch\Client', $name), $arguments);
     }
 }

@@ -9,10 +9,8 @@ use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
-use function GuzzleHttp\Psr7\uri_for;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
 
 class Guzzle6HttpClient implements HttpClientInterface
 {
@@ -34,7 +32,7 @@ class Guzzle6HttpClient implements HttpClientInterface
 
     public function createUri($uri)
     {
-        return uri_for($uri);
+        return \GuzzleHttp\Psr7\uri_for($uri);
     }
 
     public function createRequest(
@@ -75,14 +73,6 @@ class Guzzle6HttpClient implements HttpClientInterface
         return new GuzzleClient($config);
     }
 
-    /**
-     * Converts a Guzzle exception into an Httplug exception.
-     *
-     * @param \Exception       $exception
-     * @param RequestInterface $request
-     *
-     * @return RetriableException
-     */
     private function handleException(\Exception $exception, RequestInterface $request)
     {
         if ($exception instanceof GuzzleRequestException) {

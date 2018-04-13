@@ -1,5 +1,6 @@
 <?php
-namespace GuzzleHttp\Psr7;
+
+namespace Algolia\AlgoliaSearch\Legacy;
 
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
@@ -11,8 +12,6 @@ use Psr\Http\Message\UriInterface;
  */
 class Request implements RequestInterface
 {
-    use MessageTrait;
-
     /** @var string */
     private $method;
 
@@ -21,6 +20,18 @@ class Request implements RequestInterface
 
     /** @var UriInterface */
     private $uri;
+
+    /** @var array Map of all registered headers, as original name => array of values */
+    private $headers = array();
+
+    /** @var array Map of lowercase header name => original name at registration */
+    private $headerNames = array();
+
+    /** @var string */
+    private $protocol = '1.1';
+
+    /** @var StreamInterface */
+    private $stream;
 
     /**
      * @param string                               $method  HTTP method
@@ -32,7 +43,7 @@ class Request implements RequestInterface
     public function __construct(
         $method,
         $uri,
-        array $headers = [],
+        array $headers = array(),
         $body = null,
         $version = '1.1'
     ) {
@@ -49,23 +60,23 @@ class Request implements RequestInterface
             $this->updateHostFromUri();
         }
 
-        if ($body !== '' && $body !== null) {
+        if ('' !== $body && null !== $body) {
             $this->stream = stream_for($body);
         }
     }
 
     public function getRequestTarget()
     {
-        if ($this->requestTarget !== null) {
+        if (null !== $this->requestTarget) {
             return $this->requestTarget;
         }
 
         $target = $this->uri->getPath();
-        if ($target == '') {
+        if ('' == $target) {
             $target = '/';
         }
-        if ($this->uri->getQuery() != '') {
-            $target .= '?' . $this->uri->getQuery();
+        if ('' != $this->uri->getQuery()) {
+            $target .= '?'.$this->uri->getQuery();
         }
 
         return $target;
@@ -81,6 +92,7 @@ class Request implements RequestInterface
 
         $new = clone $this;
         $new->requestTarget = $requestTarget;
+
         return $new;
     }
 
@@ -93,6 +105,7 @@ class Request implements RequestInterface
     {
         $new = clone $this;
         $new->method = strtoupper($method);
+
         return $new;
     }
 
@@ -121,12 +134,12 @@ class Request implements RequestInterface
     {
         $host = $this->uri->getHost();
 
-        if ($host == '') {
+        if ('' == $host) {
             return;
         }
 
-        if (($port = $this->uri->getPort()) !== null) {
-            $host .= ':' . $port;
+        if (null !== ($port = $this->uri->getPort())) {
+            $host .= ':'.$port;
         }
 
         if (isset($this->headerNames['host'])) {
@@ -137,6 +150,157 @@ class Request implements RequestInterface
         }
         // Ensure Host is the first header.
         // See: http://tools.ietf.org/html/rfc7230#section-5.4
-        $this->headers = [$header => [$host]] + $this->headers;
+        $this->headers = array($header => array($host)) + $this->headers;
+    }
+
+    public function getProtocolVersion()
+    {
+        return $this->protocol;
+    }
+
+    public function withProtocolVersion($version)
+    {
+        if ($this->protocol === $version) {
+            return $this;
+        }
+        $new = clone $this;
+        $new->protocol = $version;
+
+        return $new;
+    }
+
+    public function getHeaders()
+    {
+        return $this->headers;
+    }
+
+    public function hasHeader($header)
+    {
+        return isset($this->headerNames[strtolower($header)]);
+    }
+
+    public function getHeader($header)
+    {
+        $header = strtolower($header);
+        if (!isset($this->headerNames[$header])) {
+            return array();
+        }
+        $header = $this->headerNames[$header];
+
+        return $this->headers[$header];
+    }
+
+    public function getHeaderLine($header)
+    {
+        return implode(', ', $this->getHeader($header));
+    }
+
+    public function withHeader($header, $value)
+    {
+        if (!is_array($value)) {
+            $value = array($value);
+        }
+        $value = $this->trimHeaderValues($value);
+        $normalized = strtolower($header);
+        $new = clone $this;
+        if (isset($new->headerNames[$normalized])) {
+            unset($new->headers[$new->headerNames[$normalized]]);
+        }
+        $new->headerNames[$normalized] = $header;
+        $new->headers[$header] = $value;
+
+        return $new;
+    }
+
+    public function withAddedHeader($header, $value)
+    {
+        if (!is_array($value)) {
+            $value = array($value);
+        }
+        $value = $this->trimHeaderValues($value);
+        $normalized = strtolower($header);
+        $new = clone $this;
+        if (isset($new->headerNames[$normalized])) {
+            $header = $this->headerNames[$normalized];
+            $new->headers[$header] = array_merge($this->headers[$header], $value);
+        } else {
+            $new->headerNames[$normalized] = $header;
+            $new->headers[$header] = $value;
+        }
+
+        return $new;
+    }
+
+    public function withoutHeader($header)
+    {
+        $normalized = strtolower($header);
+        if (!isset($this->headerNames[$normalized])) {
+            return $this;
+        }
+        $header = $this->headerNames[$normalized];
+        $new = clone $this;
+        unset($new->headers[$header], $new->headerNames[$normalized]);
+
+        return $new;
+    }
+
+    public function getBody()
+    {
+        if (!$this->stream) {
+            $this->stream = stream_for('');
+        }
+
+        return $this->stream;
+    }
+
+    public function withBody(StreamInterface $body)
+    {
+        if ($body === $this->stream) {
+            return $this;
+        }
+        $new = clone $this;
+        $new->stream = $body;
+
+        return $new;
+    }
+
+    private function setHeaders(array $headers)
+    {
+        $this->headerNames = $this->headers = array();
+        foreach ($headers as $header => $value) {
+            if (!is_array($value)) {
+                $value = array($value);
+            }
+            $value = $this->trimHeaderValues($value);
+            $normalized = strtolower($header);
+            if (isset($this->headerNames[$normalized])) {
+                $header = $this->headerNames[$normalized];
+                $this->headers[$header] = array_merge($this->headers[$header], $value);
+            } else {
+                $this->headerNames[$normalized] = $header;
+                $this->headers[$header] = $value;
+            }
+        }
+    }
+
+    /**
+     * Trims whitespace from the header values.
+     *
+     * Spaces and tabs ought to be excluded by parsers when extracting the field value from a header field.
+     *
+     * header-field = field-name ":" OWS field-value OWS
+     * OWS          = *( SP / HTAB )
+     *
+     * @param string[] $values Header values
+     *
+     * @return string[] Trimmed header values
+     *
+     * @see https://tools.ietf.org/html/rfc7230#section-3.2.4
+     */
+    private function trimHeaderValues(array $values)
+    {
+        return array_map(function ($value) {
+            return trim($value, " \t");
+        }, $values);
     }
 }

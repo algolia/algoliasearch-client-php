@@ -321,6 +321,7 @@ class Uri implements UriInterface
         $decodedKey = rawurldecode($key);
         $result = array_filter(explode('&', $current), function ($part) use ($decodedKey) {
             $parts = explode('=', $part);
+
             return rawurldecode($parts[0]) !== $decodedKey;
         });
 
@@ -352,6 +353,7 @@ class Uri implements UriInterface
             $decodedKey = rawurldecode($key);
             $result = array_filter(explode('&', $current), function ($part) use ($decodedKey) {
                 $parts = explode('=', $part);
+
                 return rawurldecode($parts[0]) !== $decodedKey;
             });
         }

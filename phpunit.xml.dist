@@ -2,7 +2,10 @@
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="AlgoliaSearch">
-            <directory suffix=".php">tests/TestCases/</directory>
+            <directory suffix="Test.php">tests/Integration/</directory>
+        </testsuite>
+        <testsuite name="Definition">
+            <file>tests/API/PublicApiTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

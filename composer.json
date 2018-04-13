@@ -16,9 +16,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Algolia\\AlgoliaSearch\\Tests\\": "tests/TestCases"
-        },
-        "files": ["tests/TestCase.php"]
+            "Algolia\\AlgoliaSearch\\Tests\\": "tests"
+        }
     },
     "require": {
         "guzzlehttp/guzzle": "^6.0",
@@ -26,7 +25,8 @@
         "psr/http-message": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "symfony/yaml": "^4.0"
     },
     "bin": [
         "bin/algolia-doctor"

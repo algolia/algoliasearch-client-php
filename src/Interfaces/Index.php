@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Interfaces;
 
 interface Index
 {
-    ## Search
+    //# Search
 
 //    public function search($query, $searchParameters, $requestOptions);
 
@@ -34,7 +34,7 @@ interface Index
 //
 //    public function waitTask($taskId, $requestOptions);
 
-    ## Settings
+    //# Settings
 
 //    public function getSettings();
 //

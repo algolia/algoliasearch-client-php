@@ -22,7 +22,7 @@ class RequestOptionsFactoryTest extends TestCase
     {
         $actual = $this->factory->create($options);
 
-        $this->assertEquals($expectedRequestOptions, [
+        $this->assertEquals($expectedRequestOptions, array(
             'headers' => $actual->getHeaders(),
             'body' => $actual->getBody(),
             'query' => $actual->getQuery(),
@@ -30,7 +30,7 @@ class RequestOptionsFactoryTest extends TestCase
             'readTimeout' => $actual->getReadTimeout(),
             'writeTimeout' => $actual->getWriteTimeout(),
             'connectTimeout' => $actual->getConnectTimeout(),
-        ]);
+        ));
     }
 
     public function provideRequestOptionsData()

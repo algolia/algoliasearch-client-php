@@ -25,7 +25,7 @@ class Places
         if (is_null($hosts)) {
             $hosts = ClusterHosts::createForPlaces();
         } elseif (is_string($hosts)) {
-            $hosts = new ClusterHosts([$hosts]);
+            $hosts = new ClusterHosts(array($hosts));
         } elseif (is_array($hosts)) {
             $hosts = new ClusterHosts($hosts);
         }
@@ -33,7 +33,7 @@ class Places
         $apiWrapper = new ApiWrapper(
             $hosts,
             new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6HttpClient(new GuzzleClient)
+            new Guzzle6HttpClient(new GuzzleClient())
         );
 
         return new static($apiWrapper);

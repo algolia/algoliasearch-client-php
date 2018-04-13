@@ -40,25 +40,24 @@ class Guzzle6HttpClient implements HttpClientInterface
     public function createRequest(
         $method,
         $uri,
-        array $headers = [],
+        array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
-    ): RequestInterface
-    {
+    ): RequestInterface {
         if (is_array($body)) {
             $body = \GuzzleHttp\json_encode($body);
         }
 
         return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
-    
+
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
-            $response = $this->client->send($request, [
+            $response = $this->client->send($request, array(
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
-            ]);
+            ));
 
             return $this->handleResponse($response);
         } catch (\Exception $e) {
@@ -66,12 +65,12 @@ class Guzzle6HttpClient implements HttpClientInterface
             throw $exception;
         }
     }
-    
-    private static function buildClient(array $config = [])
+
+    private static function buildClient(array $config = array())
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
         $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
-        $config = array_merge(['handler' => $handlerStack], $config);
+        $config = array_merge(array('handler' => $handlerStack), $config);
 
         return new GuzzleClient($config);
     }
@@ -79,8 +78,8 @@ class Guzzle6HttpClient implements HttpClientInterface
     /**
      * Converts a Guzzle exception into an Httplug exception.
      *
-     * @param \Exception $exception
-     * @param RequestInterface                 $request
+     * @param \Exception       $exception
+     * @param RequestInterface $request
      *
      * @return RetriableException
      */

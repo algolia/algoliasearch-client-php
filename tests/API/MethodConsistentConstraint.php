@@ -16,8 +16,9 @@ class MethodConsistentConstraint extends Constraint
 
     public function evaluate($other, $description = '', $returnResult = false)
     {
-        if (! method_exists($this->instance, $other['method'])) {
+        if (!method_exists($this->instance, $other['method'])) {
             $description = 'The method '.$other['method'].' is not implemented.';
+
             return $returnResult ? false : $this->fail($other, $description);
         }
 
@@ -39,22 +40,22 @@ class MethodConsistentConstraint extends Constraint
                 break;
             }
 
-           if (isset($argDef['default'])) {
+            if (isset($argDef['default'])) {
                 if (!$arg->isOptional() && $arg->getDefaultValue() != $argDef['default']) {
                     $success = false;
                     $description = 'The parameter '.$arg->getName().' should have '.print_r($argDef['default'], true).' as a default value';
                     break;
                 }
-           } else {
-               if ($arg->isOptional()) {
-                   $success = false;
-                   $description = 'The parameter '.$arg->getName().' shouldn\' have default value';
-                   break;
-               }
-           }
+            } else {
+                if ($arg->isOptional()) {
+                    $success = false;
+                    $description = 'The parameter '.$arg->getName().' shouldn\' have default value';
+                    break;
+                }
+            }
         }
 
-        if (! $success) {
+        if (!$success) {
             return $returnResult ? false : $this->fail($other, $description);
         }
 

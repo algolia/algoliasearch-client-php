@@ -26,7 +26,7 @@ final class Client implements ClientInterface
         if (is_null($hosts)) {
             $hosts = ClusterHosts::createFromAppId($appId);
         } elseif (is_string($hosts)) {
-            $hosts = new ClusterHosts([$hosts]);
+            $hosts = new ClusterHosts(array($hosts));
         } elseif (is_array($hosts)) {
             $hosts = new ClusterHosts($hosts);
         }
@@ -34,7 +34,7 @@ final class Client implements ClientInterface
         $apiWrapper = new ApiWrapper(
             $hosts,
             new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6HttpClient(new GuzzleClient)
+            new Guzzle6HttpClient(new GuzzleClient())
         );
 
         return new static($apiWrapper);
@@ -46,25 +46,25 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @link https://alg.li/list-indexes-php
+     * @see https://alg.li/list-indexes-php
      * @Api
      */
-    public function listIndexes($requestOptions = [])
+    public function listIndexes($requestOptions = array())
     {
         return $this->api->read('GET', '/1/indexes/', $requestOptions);
     }
 
     /**
-     * @link https://alg.li/copy-index-php
+     * @see https://alg.li/copy-index-php
      * @Api
      */
-    public function copyIndex($srcIndexName, $destIndexName, $scope = [], $requestOptions = [])
+    public function copyIndex($srcIndexName, $destIndexName, $scope = array(), $requestOptions = array())
     {
-        $requestOptions += [
+        $requestOptions += array(
             'operation' => 'copy',
             'destination' => $destIndexName,
-            'scope' => $scope
-        ];
+            'scope' => $scope,
+        );
 
         return $this->api->write(
             'POST',
@@ -73,12 +73,12 @@ final class Client implements ClientInterface
         );
     }
 
-    public function moveIndex($srcIndexName, $destIndexName, $requestOptions = [])
+    public function moveIndex($srcIndexName, $destIndexName, $requestOptions = array())
     {
-        $requestOptions += [
+        $requestOptions += array(
             'operation' => 'move',
             'destination' => $destIndexName,
-        ];
+        );
 
         return $this->api->write(
             'POST',
@@ -87,7 +87,7 @@ final class Client implements ClientInterface
         );
     }
 
-    public function deleteIndex($indexName, $requestOptions = [])
+    public function deleteIndex($indexName, $requestOptions = array())
     {
         return $this->api->write(
             'DELETE',
@@ -96,23 +96,24 @@ final class Client implements ClientInterface
         );
     }
 
-    public function listApiKeys($requestOptions = [])
+    public function listApiKeys($requestOptions = array())
     {
         return $this->api->read('GET', '/1/keys', $requestOptions);
     }
+
     /**
-     * @link https://alg.li/get-api-key-php
+     * @see https://alg.li/get-api-key-php
      * @Api
      */
-    public function getApiKey($key, $requestOptions = [])
+    public function getApiKey($key, $requestOptions = array())
     {
         return $this->api->read('GET', '/1/keys/'.urlencode($key), $requestOptions);
     }
 
     /**
-     * @link https://alg.li/add-api-key-php
+     * @see https://alg.li/add-api-key-php
      */
-    public function addApiKey($keyDetails, $requestOptions = [])
+    public function addApiKey($keyDetails, $requestOptions = array())
     {
         $requestOptions += $keyDetails;
 
@@ -120,9 +121,9 @@ final class Client implements ClientInterface
     }
 
     /**
-     * @link https://alg.li/delete-api-key-php
+     * @see https://alg.li/delete-api-key-php
      */
-    public function deleteApiKey($key, $requestOptions = [])
+    public function deleteApiKey($key, $requestOptions = array())
     {
         return $this->api->write('DELETE', '/1/keys/'.urlencode($key), $requestOptions);
     }

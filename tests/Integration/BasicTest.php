@@ -28,24 +28,25 @@ class BasicTest extends TestCase
         $client = $this->getClient();
         $indexName = 'really_cool_test_'.rand(0, 20);
         $index = $client->index($indexName);
-        $index->addObjects([['name' => 'fleur'], ['name' => 'orange'], ['name' => 'chien']]);
+        $index->addObjects(array(array('name' => 'fleur'), array('name' => 'orange'), array('name' => 'chien')));
 
-        $client->copyIndex($indexName, $indexName.'_COPY', [], [
-            'destination' => $indexName.'_wrong_name'
-        ]);
+        $client->copyIndex($indexName, $indexName.'_COPY', array(), array(
+            'destination' => $indexName.'_wrong_name',
+        ));
     }
 
     public function example($settings)
     {
         $client = Client::create(
-            getenv('ALGOLIA_APP_ID'), getenv('ALGOLIA_API_KEY')
+            getenv('ALGOLIA_APP_ID'),
+            getenv('ALGOLIA_API_KEY')
         );
 
-        $response = $client->setSettings($settings, true, [
+        $response = $client->setSettings($settings, true, array(
             'timeout' => 25,
             'clickAnalytics' => false,
             'X-CUSTOM-HEADER' => 'hop là',
-        ]);
+        ));
 
         dump($response);
     }
@@ -53,17 +54,18 @@ class BasicTest extends TestCase
     public function alternativeExample($settings)
     {
         $client = Client::create(
-            getenv('ALGOLIA_APP_ID'), getenv('ALGOLIA_API_KEY')
+            getenv('ALGOLIA_APP_ID'),
+            getenv('ALGOLIA_API_KEY')
         );
 
         $response = $client
             ->setSettings($settings)
             ->forwardToReplica()
-            ->with([
+            ->with(array(
                 'timeout' => 25,
                 'clickAnalytics' => true,
                 'X-CUSTOM-HEADER' => 'hop là',
-            ])->send();
+            ))->send();
 
         dump($response);
     }
@@ -72,9 +74,9 @@ class BasicTest extends TestCase
     {
         $index = $this->getClient()->index('really_cool_test_Synonyms');
 
-        $response = $index->clearSynonyms(false, [
+        $response = $index->clearSynonyms(false, array(
             'forwardToReplicas' => true,
-        ]);
+        ));
 
         dump($response);
     }
@@ -83,10 +85,10 @@ class BasicTest extends TestCase
     {
         $client = $this->getClient();
 
-        $response = $client->addApiKey([
-            'acl' => ['search', 'settings'],
+        $response = $client->addApiKey(array(
+            'acl' => array('search', 'settings'),
             'validity' => 300,
-        ]);
+        ));
 
         dump($response);
     }

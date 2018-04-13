@@ -34,7 +34,7 @@ class ApiWrapper
         $this->http = $http;
     }
 
-    public function read($method, $path, array $requestOptions = [])
+    public function read($method, $path, array $requestOptions = array())
     {
         if ('GET' == strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
@@ -51,7 +51,7 @@ class ApiWrapper
         );
     }
 
-    public function write($method, $path, array $requestOptions = [])
+    public function write($method, $path, array $requestOptions = array())
     {
         if (isset($requestOptions['timeout'])) {
             $requestOptions['writeTimeout'] = $requestOptions['timeout'];
@@ -69,7 +69,6 @@ class ApiWrapper
             $requestOptions,
             $this->clusterHosts->write(),
             $requestOptions->getWriteTimeout()
-
         );
     }
 
@@ -93,7 +92,7 @@ class ApiWrapper
                 $responseBody = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
-                    $requestOptions->getConnectTimeout()  * $retry
+                    $requestOptions->getConnectTimeout() * $retry
                 );
 
                 return $responseBody;
@@ -109,7 +108,7 @@ class ApiWrapper
                 die;
             }
 
-            $retry++;
+            ++$retry;
         }
 
         throw new UnreachableException();

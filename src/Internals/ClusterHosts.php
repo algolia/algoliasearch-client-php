@@ -15,11 +15,11 @@ class ClusterHosts
 
     public static function createFromAppId($applicationId)
     {
-        $read = $write = [
+        $read = $write = array(
             $applicationId.'-1.algolianet.com',
             $applicationId.'-2.algolianet.com',
             $applicationId.'-3.algolianet.com',
-        ];
+        );
 
         shuffle($read);
         array_unshift($read, $applicationId.'-dsn.algolia.net');
@@ -27,21 +27,21 @@ class ClusterHosts
         shuffle($write);
         array_unshift($write, $applicationId.'.algolia.net');
 
-        $hosts = [
+        $hosts = array(
             'read' => $read,
             'write' => $write,
-        ];
+        );
 
         return new static($hosts);
     }
 
     public static function createForPlaces()
     {
-        $read = $write = [
+        $read = $write = array(
             'places-1.algolianet.com',
             'places-2.algolianet.com',
             'places-3.algolianet.com',
-        ];
+        );
 
         shuffle($read);
         array_unshift($read, 'places-dsn.algolia.net');
@@ -49,10 +49,10 @@ class ClusterHosts
         shuffle($write);
         array_unshift($write, 'places-dsn.algolia.net');
 
-        $hosts = [
+        $hosts = array(
             'read' => $read,
             'write' => $write,
-        ];
+        );
 
         return new static($hosts);
     }
@@ -85,7 +85,7 @@ class ClusterHosts
 
     private function assertHostsAreValid($hosts)
     {
-        foreach (['read', 'write'] as $action) {
+        foreach (array('read', 'write') as $action) {
             if (!(isset($hosts[$action]) && is_array($hosts[$action]))) {
                 throw new \Exception('hosts array passed to '.self::class.' is invalid');
             }

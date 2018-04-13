@@ -12,7 +12,7 @@ interface HttpClientInterface
     public function createRequest(
         $method,
         $uri,
-        array $headers = [],
+        array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
     ): RequestInterface;

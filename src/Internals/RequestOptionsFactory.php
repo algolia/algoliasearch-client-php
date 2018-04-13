@@ -56,7 +56,11 @@ class RequestOptionsFactory
         foreach ($options as $optionName => $value) {
             $type = $this->getOptionType($optionName);
 
-            $normalized[$type][$optionName] = $value;
+            if (in_array($type, ['readTimeout', 'writeTimeout', 'connectTimeout'])) {
+                $normalized[$type] = $value;
+            } else {
+                $normalized[$type][$optionName] = $value;
+            }
         }
 
         $normalized = $this->removeEmptyValue($normalized);

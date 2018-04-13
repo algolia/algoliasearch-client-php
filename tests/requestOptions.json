@@ -1,0 +1,89 @@
+{
+    "Default": [
+        [],
+        {
+            "headers": {
+                "X-Algolia-Application-Id": "Algolia-Id",
+                "X-Algolia-API-Key": "Algolia-Key"
+            },
+            "body": [],
+            "query": [],
+            "builtQuery": "",
+            "readTimeout": 5,
+            "writeTimeout": 5,
+            "connectTimeout": 2
+        }
+    ],
+    "Custom header for backend implem": [
+        {
+            "X-Forwarded-For": "this is an IP",
+            "X-Algolia-UserToken": "User Token for MCM",
+            "X-Forwarded-API-Key": "Another api key to use"
+        },
+        {
+            "headers": {
+                "X-Algolia-Application-Id": "Algolia-Id",
+                "X-Algolia-API-Key": "Algolia-Key",
+                "X-Forwarded-For": "this is an IP",
+                "X-Algolia-UserToken": "User Token for MCM",
+                "X-Forwarded-API-Key": "Another api key to use"
+            },
+            "body": [],
+            "query": [],
+            "builtQuery": "",
+            "readTimeout": 5,
+            "writeTimeout": 5,
+            "connectTimeout": 2
+        }
+    ],
+    "Check query parameters": [
+        {
+            "forwardToReplicas": true
+        },
+        {
+            "headers": {
+                "X-Algolia-Application-Id": "Algolia-Id",
+                "X-Algolia-API-Key": "Algolia-Key"
+            },
+            "body": [],
+            "query": {
+                "forwardToReplicas": true
+            },
+            "builtQuery": "forwardToReplicas=1",
+            "readTimeout": 5,
+            "writeTimeout": 5,
+            "connectTimeout": 2
+        }
+    ],
+    "All the options": [
+        {
+            "X-Forwarded-API-Key": "Another api key to use",
+            "cursor": "qwertyuiop",
+            "operation": "move",
+            "destination": "destIndexName",
+            "forwardToReplicas": true,
+            "connectTimeout": 12,
+            "readTimeout": 13,
+            "writeTimeout": 14
+        },
+        {
+            "headers": {
+                "X-Algolia-Application-Id": "Algolia-Id",
+                "X-Algolia-API-Key": "Algolia-Key",
+                "X-Forwarded-API-Key": "Another api key to use"
+            },
+            "body": {
+                "cursor": "qwertyuiop",
+                "operation": "move",
+                "destination": "destIndexName"
+            },
+            "query": {
+                "forwardToReplicas": true
+            },
+            "builtQuery": "forwardToReplicas=1",
+            "readTimeout": 13,
+            "writeTimeout": 14,
+            "connectTimeout": 12
+        }
+    ]
+}

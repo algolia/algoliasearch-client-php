@@ -7,7 +7,7 @@ use Psr\Http\Message\UriInterface;
 
 class Php53HttpClient implements HttpClientInterface
 {
-    public function createUri($uri): UriInterface
+    public function createUri($uri)
     {
         // TODO: Implement createUri() method.
     }
@@ -18,7 +18,7 @@ class Php53HttpClient implements HttpClientInterface
         array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
-    ): RequestInterface {
+    ) {
         // TODO: Implement createRequest() method.
     }
 

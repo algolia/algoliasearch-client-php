@@ -12,7 +12,7 @@ class BasicTest extends TestCase
     {
         $client = $this->getClient();
 
-        $this->assertThat($client, new IsInstanceOf(Client::class));
+        $this->assertThat($client, new IsInstanceOf("\Algolia\AlgoliaSearch\Client"));
     }
 
     public function testClientIsAbleToListIndices()

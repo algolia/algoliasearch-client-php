@@ -87,7 +87,7 @@ class ClusterHosts
     {
         foreach (array('read', 'write') as $action) {
             if (!(isset($hosts[$action]) && is_array($hosts[$action]))) {
-                throw new \Exception('hosts array passed to '.self::class.' is invalid');
+                throw new \Exception('hosts array passed to '.get_class($this).' is invalid');
             }
         }
     }

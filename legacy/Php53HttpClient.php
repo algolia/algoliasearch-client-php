@@ -1,8 +1,9 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Http;
+namespace Algolia\AlgoliaSearch\Legacy;
 
-use Algolia\AlgoliaSearch\Legacy\Uri;
+use Algolia\AlgoliaSearch\Legacy\Psr7\Request;
+use Algolia\AlgoliaSearch\Legacy\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 

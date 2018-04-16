@@ -49,25 +49,7 @@ class Php53HttpClient implements HttpClientInterface
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        if (strpos($host, 'http') === 0) {
-            $url = $host.$path;
-        } else {
-            $url = 'https://'.$host.$path;
-        }
 
-        if ($params != null && count($params) > 0) {
-            $params2 = array();
-            foreach ($params as $key => $val) {
-                if (is_array($val)) {
-                    $params2[$key] = Json::encode($val);
-                } else {
-                    $params2[$key] = $val;
-                }
-            }
-            $url .= '?'.http_build_query($params2);
-        }
-
-        // initialize curl library
         $curlHandle = curl_init();
 
         // set curl options
@@ -79,52 +61,31 @@ class Php53HttpClient implements HttpClientInterface
             $this->invalidOptions($this->curlOptions, $e->getMessage());
         }
 
-        //curl_setopt($curlHandle, CURLOPT_VERBOSE, true);
-
-        $defaultHeaders = null;
-        if ($context->adminAPIKey == null) {
-            $defaultHeaders = array(
-                'X-Algolia-Application-Id' => $context->applicationID,
-                'X-Algolia-API-Key'        => $context->apiKey,
-                'Content-type'             => 'application/json',
-            );
-        } else {
-            $defaultHeaders = array(
-                'X-Algolia-Application-Id' => $context->applicationID,
-                'X-Algolia-API-Key'        => $context->adminAPIKey,
-                'X-Forwarded-For'          => $context->endUserIP,
-                'X-Algolia-UserToken'      => $context->algoliaUserToken,
-                'X-Forwarded-API-Key'      => $context->rateLimitAPIKey,
-                'Content-type'             => 'application/json',
-            );
-        }
-
-        $headers = array_merge($defaultHeaders, $context->headers, $requestHeaders);
-
         $curlHeaders = array();
-        foreach ($headers as $key => $value) {
-            $curlHeaders[] = $key.': '.$value;
+        foreach ($request->getHeaders() as $key => $values) {
+            $curlHeaders[] = $key.': '.implode(',', $values);
         }
 
         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $curlHeaders);
 
-        curl_setopt($curlHandle, CURLOPT_USERAGENT, Version::getUserAgent());
+        curl_setopt($curlHandle, CURLOPT_USERAGENT, implode(',', $request->getHeader('User-Agent')));
         //Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
+        // TODO: look into cert
+//        curl_setopt($curlHandle, CURLOPT_CAINFO, $this->caInfoPath);
 
-        curl_setopt($curlHandle, CURLOPT_URL, $url);
+        curl_setopt($curlHandle, CURLOPT_URL, (string) $request->getUri());
         $version = curl_version();
-        if (version_compare(phpversion(), '5.2.3', '>=') && version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {
+        if (version_compare($version['version'], '7.16.2', '>=') && $connectTimeout < 1) {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT_MS, $connectTimeout * 1000);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $readTimeout * 1000);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT_MS, $timeout * 1000);
         } else {
             curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $connectTimeout);
-            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $readTimeout);
+            curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
         }
 
         // The problem is that on (Li|U)nix, when libcurl uses the standard name resolver,
@@ -132,13 +93,14 @@ class Php53HttpClient implements HttpClientInterface
         curl_setopt($curlHandle, CURLOPT_NOSIGNAL, 1);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 
+        $method = $request->getMethod();
         if ($method === 'GET') {
             curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
             curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
             curl_setopt($curlHandle, CURLOPT_POST, false);
         } else {
             if ($method === 'POST') {
-                $body = ($data) ? Json::encode($data) : '';
+                $body = (string) $request->getBody();
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
                 curl_setopt($curlHandle, CURLOPT_POST, true);
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
@@ -146,13 +108,13 @@ class Php53HttpClient implements HttpClientInterface
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 curl_setopt($curlHandle, CURLOPT_POST, false);
             } elseif ($method === 'PUT') {
-                $body = ($data) ? Json::encode($data) : '';
+                $body = (string) $request->getBody();
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
                 curl_setopt($curlHandle, CURLOPT_POST, true);
             }
         }
-        $mhandle = $context->getMHandle($curlHandle);
+        $mhandle = $this->getMHandle($curlHandle);
 
         // Do all the processing.
         $running = null;
@@ -179,18 +141,19 @@ class Php53HttpClient implements HttpClientInterface
 
         if ($http_status === 0 || $http_status === 503) {
             // Could not reach host or service unavailable, try with another one if we have it
-            $context->releaseMHandle($curlHandle);
+            $this->releaseMHandle($curlHandle);
             curl_close($curlHandle);
 
             return;
         }
 
-        $answer = Json::decode($response, true);
-        $context->releaseMHandle($curlHandle);
+        $answer = \json_decode($response, true);
+
+        $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
         if (intval($http_status / 100) == 4) {
-            throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);
+            throw new BadRequestException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);
         } elseif (intval($http_status / 100) != 2) {
             throw new \Exception($http_status.': '.$response, $http_status);
         }

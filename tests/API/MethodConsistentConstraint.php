@@ -22,7 +22,8 @@ class MethodConsistentConstraint extends Constraint
             return $returnResult ? false : $this->fail($other, $description);
         }
 
-        $args = (new \ReflectionMethod($this->instance, $other['method']))->getParameters();
+        $refl = new \ReflectionMethod($this->instance, $other['method']);
+        $args = $refl->getParameters();
 
         $success = true;
         foreach ($args as $arg) {

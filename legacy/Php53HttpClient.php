@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Legacy;
 
+use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Legacy\Psr7\Request;
 use Algolia\AlgoliaSearch\Legacy\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
@@ -26,7 +28,15 @@ class Php53HttpClient implements HttpClientInterface
         $body = null,
         $protocolVersion = '1.1'
     ) {
-        // TODO: Implement createRequest() method.
+        if (is_array($body)) {
+            $body = \json_encode($body);
+            if (JSON_ERROR_NONE !== json_last_error()) {
+                throw new \InvalidArgumentException(
+                    'json_encode error: ' . json_last_error_msg());
+            }
+        }
+
+        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)

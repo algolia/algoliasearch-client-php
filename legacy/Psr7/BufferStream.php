@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Legacy;
+namespace Algolia\AlgoliaSearch\Legacy\Psr7;
 
 use Psr\Http\Message\StreamInterface;
 

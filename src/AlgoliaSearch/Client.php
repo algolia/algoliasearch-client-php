@@ -916,11 +916,18 @@ class Client
     ) {
         $requestHeaders = func_num_args() === 7 && is_array(func_get_arg(6)) ? func_get_arg(6) : array();
 
-        if ($obj !== array_values($obj)) { // is dict of value
+        if ($obj !== array_values($obj)) {
+            // if $obj doesn't have required entries, we add the default values
             $params = $obj;
-            $params['validity'] = $validity;
-            $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
-            $params['maxHitsPerQuery'] = $maxHitsPerQuery;
+            if ($validity != 0) {
+                $params['validity'] = $validity;
+            }
+            if ($maxQueriesPerIPPerHour != 0) {
+                $params['maxQueriesPerIPPerHour'] = $maxQueriesPerIPPerHour;
+            }
+            if ($maxHitsPerQuery != 0) {
+                $params['maxHitsPerQuery'] = $maxHitsPerQuery;
+            }
         } else {
             $params = array(
                 'acl'                    => $obj,
@@ -929,6 +936,7 @@ class Client
                 'maxHitsPerQuery'        => $maxHitsPerQuery,
             );
         }
+
         if ($indexes != null) {
             $params['indexes'] = $indexes;
         }

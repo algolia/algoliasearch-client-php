@@ -23,11 +23,8 @@ If you're a Symfony or Laravel user, you're probably looking for the following i
 You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
 
-## Table of Contents
+## In this page
 
-
-
-1. **[Supported platforms](#supported-platforms)**
 
 
 1. **[Install](#install)**
@@ -54,10 +51,6 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 # Getting Started
 
 
-
-## Supported platforms
-
-This library is compatible with PHP version 5.3 and later.
 
 ## Install
 
@@ -244,8 +237,6 @@ search.start();
 
 
 
-
-
 ### Search
 
 - [Search an index](https://algolia.com/doc/api-reference/api-methods/search/?language=php)
@@ -256,18 +247,15 @@ search.start();
 
 
 
-
 ### Indexing
 
 - [Add objects](https://algolia.com/doc/api-reference/api-methods/add-objects/?language=php)
 - [Update objects](https://algolia.com/doc/api-reference/api-methods/update-objects/?language=php)
 - [Partial update objects](https://algolia.com/doc/api-reference/api-methods/partial-update-objects/?language=php)
 - [Delete objects](https://algolia.com/doc/api-reference/api-methods/delete-objects/?language=php)
-- [Delete by query](https://algolia.com/doc/api-reference/api-methods/delete-by-query/?language=php)
+- [Delete by](https://algolia.com/doc/api-reference/api-methods/delete-by/?language=php)
 - [Get objects](https://algolia.com/doc/api-reference/api-methods/get-objects/?language=php)
 - [Custom batch](https://algolia.com/doc/api-reference/api-methods/batch/?language=php)
-- [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=php)
-
 
 
 
@@ -276,7 +264,6 @@ search.start();
 
 - [Get settings](https://algolia.com/doc/api-reference/api-methods/get-settings/?language=php)
 - [Set settings](https://algolia.com/doc/api-reference/api-methods/set-settings/?language=php)
-
 
 
 
@@ -292,7 +279,6 @@ search.start();
 
 
 
-
 ### API Keys
 
 - [Create secured API Key](https://algolia.com/doc/api-reference/api-methods/generate-secured-api-key/?language=php)
@@ -301,7 +287,6 @@ search.start();
 - [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=php)
 - [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=php)
 - [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=php)
-
 
 
 
@@ -319,17 +304,15 @@ search.start();
 
 
 
-
 ### Query rules
 
 - [Save a single rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=php)
 - [Batch save multiple rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=php)
-- [Read a rule](https://algolia.com/doc/api-reference/api-methods/rules-read/?language=php)
+- [Get a rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=php)
 - [Delete a single rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=php)
 - [Clear all rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=php)
 - [Search for rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=php)
 - [Export rules](https://algolia.com/doc/api-reference/api-methods/rules-export/?language=php)
-
 
 
 
@@ -340,18 +323,19 @@ search.start();
 - [Get top userID](https://algolia.com/doc/api-reference/api-methods/get-top-user-id/?language=php)
 - [Get userID](https://algolia.com/doc/api-reference/api-methods/get-user-id/?language=php)
 - [List clusters](https://algolia.com/doc/api-reference/api-methods/list-clusters/?language=php)
-- [List userID](https://algolia.com/doc/api-reference/api-methods/list-user-id/?language=php)
+- [List userIDs](https://algolia.com/doc/api-reference/api-methods/list-user-id/?language=php)
 - [Remove userID](https://algolia.com/doc/api-reference/api-methods/remove-user-id/?language=php)
 - [Search userID](https://algolia.com/doc/api-reference/api-methods/search-user-id/?language=php)
 
 
 
 
-
 ### Advanced
 
-- [Get latest logs](https://algolia.com/doc/api-reference/api-methods/get-logs/?language=php)
+- [Get logs](https://algolia.com/doc/api-reference/api-methods/get-logs/?language=php)
+- [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=php)
 - [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=php)
+- [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=php)
 
 
 

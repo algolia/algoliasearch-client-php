@@ -13,6 +13,6 @@ class PlacesIndexTest extends AlgoliaSearchTestCase
         $placesIndex = Client::initPlaces();
         $response = $placesIndex->search('Paris', array('hitsPerPage' => 12));
 
-        $this->assertEquals(12, count($response['hits']));
+        $this->assertCount(12, $response['hits']);
     }
 }

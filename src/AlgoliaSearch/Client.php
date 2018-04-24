@@ -97,7 +97,9 @@ class Client
                     break;
                 case self::FAILING_HOSTS_CACHE:
                     if (! $value instanceof FailingHostsCache) {
-                        throw new \InvalidArgumentException('failingHostsCache must be an instance of \AlgoliaSearch\FailingHostsCache.');
+                        throw new \InvalidArgumentException(
+                            'failingHostsCache must be an instance of \AlgoliaSearch\FailingHostsCache.'
+                        );
                     }
                     break;
                 default:
@@ -106,7 +108,13 @@ class Client
         }
 
         $failingHostsCache = isset($options[self::FAILING_HOSTS_CACHE]) ? $options[self::FAILING_HOSTS_CACHE] : null;
-        $this->context = new ClientContext($applicationID, $apiKey, $hostsArray, $this->placesEnabled, $failingHostsCache);
+        $this->context = new ClientContext(
+            $applicationID,
+            $apiKey,
+            $hostsArray,
+            $this->placesEnabled,
+            $failingHostsCache
+        );
     }
 
     /**
@@ -244,12 +252,13 @@ class Client
         }
         $requests = array();
         foreach ($queries as $query) {
-            if (array_key_exists($indexNameKey, $query)) {
-                $indexes = $query[$indexNameKey];
-                unset($query[$indexNameKey]);
-            } else {
+            if (!array_key_exists($indexNameKey, $query)) {
                 throw new \Exception('indexName is mandatory');
             }
+
+            $indexes = $query[$indexNameKey];
+            unset($query[$indexNameKey]);
+
             $req = array('indexName' => $indexes, 'params' => $this->buildQuery($query));
 
             array_push($requests, $req);

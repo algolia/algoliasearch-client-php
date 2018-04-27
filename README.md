@@ -23,8 +23,8 @@ If you're a Symfony or Laravel user, you're probably looking for the following i
 You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
 
-## In this page
 
+1. **[Supported platforms](#supported-platforms)**
 
 
 1. **[Install](#install)**
@@ -51,6 +51,10 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 # Getting Started
 
 
+
+## Supported platforms
+
+This library is compatible with PHP version 5.3 and later.
 
 ## Install
 

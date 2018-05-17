@@ -8,7 +8,6 @@ use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 final class Index implements IndexInterface
 {
     private $indexName;
-    private $urlIndexName;
 
     /**
      * @var ApiWrapper
@@ -18,7 +17,6 @@ final class Index implements IndexInterface
     public function __construct($indexName, ApiWrapper $apiWrapper)
     {
         $this->indexName = $indexName;
-        $this->urlIndexName = urlencode($indexName);
         $this->api = $apiWrapper;
     }
 
@@ -28,7 +26,7 @@ final class Index implements IndexInterface
 
         return $this->api->write(
             'POST',
-            '/1/indexes/'.$this->urlIndexName.'/batch',
+            api_path('/1/indexes/%s/batch', $this->indexName),
             $requestOptions
         );
     }
@@ -37,7 +35,7 @@ final class Index implements IndexInterface
     {
         return $this->api->read(
             'GET',
-            '/1/indexes/'.$this->urlIndexName.'/synonyms/'.urlencode($objectID),
+            api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectID),
             $requestOptions
         );
     }
@@ -50,7 +48,7 @@ final class Index implements IndexInterface
 
         return $this->api->write(
             'POST',
-            '/1/indexes/'.$this->urlIndexName.'/synonyms/clear',
+            api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             $requestOptions
         );
     }
@@ -59,7 +57,7 @@ final class Index implements IndexInterface
     {
         return $this->api->read(
             'POST',
-            '/1/indexes/'.$this->urlIndexName.'/rules/search',
+            api_path('/1/indexes/%s/rules/search', $this->indexName),
             $requestOptions
         );
     }

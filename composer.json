@@ -14,7 +14,10 @@
             "Algolia\\AlgoliaSearch\\": "src/",
             "Algolia\\AlgoliaSearch\\Legacy\\": "legacy/"
         },
-        "files": ["legacy/Psr7/functions.php"]
+        "files": [
+            "legacy/Psr7/functions.php",
+            "src/functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

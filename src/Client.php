@@ -51,7 +51,7 @@ final class Client implements ClientInterface
      */
     public function listIndexes($requestOptions = array())
     {
-        return $this->api->read('GET', '/1/indexes/', $requestOptions);
+        return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
     }
 
     /**
@@ -68,7 +68,7 @@ final class Client implements ClientInterface
 
         return $this->api->write(
             'POST',
-            '/1/indexes/'.urlencode($srcIndexName).'/operation',
+            api_path('/1/indexes/%s/operation', $srcIndexName),
             $requestOptions
         );
     }
@@ -82,7 +82,7 @@ final class Client implements ClientInterface
 
         return $this->api->write(
             'POST',
-            '/1/indexes/'.urlencode($srcIndexName).'/operation',
+            api_path('/1/indexes/%s/operation', $srcIndexName),
             $requestOptions
         );
     }
@@ -91,14 +91,14 @@ final class Client implements ClientInterface
     {
         return $this->api->write(
             'DELETE',
-            '/1/indexes/'.urlencode($indexName),
+            api_path('/1/indexes/%s', $indexName),
             $requestOptions
         );
     }
 
     public function listApiKeys($requestOptions = array())
     {
-        return $this->api->read('GET', '/1/keys', $requestOptions);
+        return $this->api->read('GET', api_path('/1/keys'), $requestOptions);
     }
 
     /**
@@ -107,7 +107,7 @@ final class Client implements ClientInterface
      */
     public function getApiKey($key, $requestOptions = array())
     {
-        return $this->api->read('GET', '/1/keys/'.urlencode($key), $requestOptions);
+        return $this->api->read('GET', api_path('/1/keys/%s', $key), $requestOptions);
     }
 
     /**
@@ -117,7 +117,7 @@ final class Client implements ClientInterface
     {
         $requestOptions += $keyDetails;
 
-        return $this->api->write('POST', '/1/keys', $requestOptions);
+        return $this->api->write('POST', api_path('/1/keys'), $requestOptions);
     }
 
     /**
@@ -125,6 +125,6 @@ final class Client implements ClientInterface
      */
     public function deleteApiKey($key, $requestOptions = array())
     {
-        return $this->api->write('DELETE', '/1/keys/'.urlencode($key), $requestOptions);
+        return $this->api->write('DELETE', api_path('/1/keys/%s', $key), $requestOptions);
     }
 }

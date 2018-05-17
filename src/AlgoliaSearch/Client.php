@@ -128,14 +128,12 @@ class Client
      */
     public function setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)
     {
-        if ($this->context->connectTimeout < 1) {
+        if ($connectTimeout < 1) {
             $version = curl_version();
-            $isPhpSupported = version_compare(phpversion(), '5.2.3', '>=');
-            $isCurlSupported = version_compare($version['version'], '7.16.2', '>=');
 
-            if (! $isPhpSupported || ! $isCurlSupported) {
+            if (version_compare($version['version'], '7.16.2', '<')) {
                 throw new AlgoliaException(
-                    "The timeout can't be a float with a PHP version less than 5.2.3 or a curl version less than 7.16.2"
+                    "The timeout can't be a float with a curl version less than 7.16.2"
                 );
             }
         }

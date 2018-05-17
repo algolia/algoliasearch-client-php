@@ -7,16 +7,31 @@ use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class TestCase extends PHPUitTestCase
 {
-    public function safeName($name)
+    /** @var Client */
+    private static $client;
+
+    public static function safeName($name)
     {
         return $name;
     }
 
-    protected function getClient()
+    protected static function getClient()
     {
-        return Client::create(
-            getenv('ALGOLIA_APP_ID'),
-            getenv('ALGOLIA_API_KEY')
+        if (! self::$client) {
+            self::$client = self::newClient();
+        }
+
+        return self::$client;
+    }
+
+    protected static function newClient($config = array())
+    {
+        $config += array(
+            'app-id' => getenv('ALGOLIA_APP_ID'),
+            'key' => getenv('ALGOLIA_API_KEY'),
+            'hosts' => array(),
         );
+
+        return Client::create($config['app-id'], $config['key'], $config['hosts']);
     }
 }

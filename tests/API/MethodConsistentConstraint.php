@@ -14,26 +14,31 @@ class MethodConsistentConstraint extends Constraint
         $this->instance = $instance;
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($definition, $description = '', $returnResult = false)
     {
-        if (!method_exists($this->instance, $other['method'])) {
-            $description = 'The method '.$other['method'].' is not implemented.';
+        if (!method_exists($this->instance, $definition['method'])) {
+            $description = 'The method '.$definition['method'].' is not implemented.';
 
-            return $returnResult ? false : $this->fail($other, $description);
+            return $returnResult ? false : $this->fail($definition, $description);
         }
 
-        $refl = new \ReflectionMethod($this->instance, $other['method']);
-        $args = $refl->getParameters();
+        $refl = new \ReflectionMethod($this->instance, $definition['method']);
+        $argsImplemented = $refl->getParameters();
 
+        if(count($argsImplemented) != count($definition['args'])) {
+            return $returnResult ?
+                false :
+                $this->fail($definition, 'The method '.$definition['method'].' has a wong number of arguments.');
+        }
         $success = true;
-        foreach ($args as $arg) {
-            if (!isset($other['args'][$arg->getPosition()])) {
+        foreach ($argsImplemented as $arg) {
+            if (!isset($definition['args'][$arg->getPosition()])) {
                 $success = false;
-                $description = 'The parameter '.$arg->getName().' #'.$arg->getPosition().' is missing in '.$other['method'];
+                $description = 'The parameter '.$arg->getName().' #'.$arg->getPosition().' is missing in '.$definition['method'];
                 break;
             }
 
-            $argDef = $other['args'][$arg->getPosition()];
+            $argDef = $definition['args'][$arg->getPosition()];
 
             if ($arg->getName() !== $argDef['name']) {
                 $success = false;
@@ -50,14 +55,14 @@ class MethodConsistentConstraint extends Constraint
             } else {
                 if ($arg->isOptional()) {
                     $success = false;
-                    $description = 'The parameter '.$arg->getName().' shouldn\' have default value';
+                    $description = 'The parameter '.$arg->getName().' shouldn\'t have default value';
                     break;
                 }
             }
         }
 
         if (!$success) {
-            return $returnResult ? false : $this->fail($other, $description);
+            return $returnResult ? false : $this->fail($definition, $description);
         }
 
         return true;

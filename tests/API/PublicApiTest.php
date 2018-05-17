@@ -13,15 +13,26 @@ class PublicApiTest extends TestCase
     {
         $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
         $client = new Client($apiWrapper);
-        $definition = $this->getDefinition();
+        $definition = $this->getDefinition('client.yaml');
 
         $c = new PublicApiChecker($client, $definition);
         $c->check();
     }
 
-    private function getDefinition()
+    public function testIndex()
     {
-        $definition = Yaml::parse(file_get_contents(__DIR__.'/client.yaml'));
+        $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
+        $client = new Client($apiWrapper);
+        $index = $client->index('someindex');
+        $definition = $this->getDefinition('index.yaml');
+
+        $c = new PublicApiChecker($index, $definition);
+        $c->check();
+    }
+
+    private function getDefinition($filename)
+    {
+        $definition = Yaml::parse(file_get_contents(__DIR__.'/'.$filename));
 
         foreach ($definition as &$def) {
             if (!isset($def['args'])) {

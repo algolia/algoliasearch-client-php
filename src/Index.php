@@ -20,6 +20,32 @@ final class Index implements IndexInterface
         $this->api = $apiWrapper;
     }
 
+    public function getSettings($requestOptions = array())
+    {
+        $requestOptions['getVersion'] = 2;
+
+        return $this->api->read(
+            'GET',
+            api_path('/1/indexes/%s/settings', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function setSettings(
+        $settings,
+        $requestOptions = array(
+            'forwardToReplicas' => true,
+        )
+    ) {
+        $requestOptions += $settings;
+
+        return $this->api->write(
+            'PUT',
+            api_path('/1/indexes/%s/settings', $this->indexName),
+            $requestOptions
+        );
+    }
+
     public function addObjects($objects, $requestOptions = array())
     {
         $requestOptions['requests'] = $this->buildBatch('addObject', $objects);

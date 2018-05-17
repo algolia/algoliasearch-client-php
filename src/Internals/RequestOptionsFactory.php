@@ -8,7 +8,10 @@ class RequestOptionsFactory
 
     private $apiKey;
 
-    private $validQueryParameters = array('forwardToReplicas');
+    private $validQueryParameters = array(
+        'forwardToReplicas',
+        'getVersion',
+    );
 
     private $validHeaders = array(
         'X-Algolia-Application-Id',

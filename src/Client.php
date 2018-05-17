@@ -23,7 +23,7 @@ final class Client implements ClientInterface
 
     public static function create($appId, $apiKey, $hosts = null)
     {
-        if (is_null($hosts)) {
+        if (! $hosts) {
             $hosts = ClusterHosts::createFromAppId($appId);
         } elseif (is_string($hosts)) {
             $hosts = new ClusterHosts(array($hosts));

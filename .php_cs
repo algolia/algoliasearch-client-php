@@ -5,9 +5,9 @@ $finder = PhpCsFixer\Finder::create()
 ;
 
 return PhpCsFixer\Config::create()
-    ->setRules([
+    ->setRules(array(
         '@Symfony' => true,
-        'array_syntax' => ['syntax' => 'long'],
-    ])
+        'array_syntax' => array('syntax' => 'long'),
+    ))
     ->setFinder($finder)
 ;

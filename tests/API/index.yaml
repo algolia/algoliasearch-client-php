@@ -1,0 +1,14 @@
+#
+# Settings Management
+#
+-
+  method: getSettings
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: setSettings
+  args:
+    - name: settings
+    - name: requestOptions
+      default: []

@@ -23,7 +23,7 @@ class RequestOptions
 
     public function getBuiltQuery()
     {
-        return \GuzzleHttp\Psr7\build_query($this->options['query']);
+        return \Algolia\AlgoliaSearch\build_query($this->options['query']);
     }
 
     public function getBody()

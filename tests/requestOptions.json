@@ -49,7 +49,7 @@
             "query": {
                 "forwardToReplicas": true
             },
-            "builtQuery": "forwardToReplicas=1",
+            "builtQuery": "forwardToReplicas=true",
             "readTimeout": 5,
             "writeTimeout": 5,
             "connectTimeout": 2
@@ -80,7 +80,7 @@
             "query": {
                 "forwardToReplicas": true
             },
-            "builtQuery": "forwardToReplicas=1",
+            "builtQuery": "forwardToReplicas=true",
             "readTimeout": 13,
             "writeTimeout": 14,
             "connectTimeout": 12

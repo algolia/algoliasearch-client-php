@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
+use Algolia\AlgoliaSearch\Config;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
@@ -92,7 +93,8 @@ class ApiWrapper
                 $responseBody = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
-                    $requestOptions->getConnectTimeout() * $retry
+                    $requestOptions->getConnectTimeout() * $retry,
+                    Config::getUserAgent()
                 );
 
                 return $responseBody;

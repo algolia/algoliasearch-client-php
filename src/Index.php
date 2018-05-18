@@ -123,6 +123,7 @@ final class Index implements IndexInterface
     public function ProposalWaitTask($taskId, $requestOptions = array())
     {
         $retry = 1;
+        $maxRetry = Config::$waitTaskRetry;
 
         do {
             $res = $this->getTask($taskId, $requestOptions);
@@ -134,7 +135,7 @@ final class Index implements IndexInterface
             $retry++;
             $factor = ceil($retry/10);
             usleep($factor * 100000); // 0.1 second
-        } while ($retry < 100);
+        } while ($retry < $maxRetry);
 
         throw new TaskTooLongException;
     }

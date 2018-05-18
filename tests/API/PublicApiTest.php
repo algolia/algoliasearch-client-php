@@ -3,8 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\API;
 
 use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Internals\ApiWrapper;
-use Algolia\AlgoliaSearch\Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 class PublicApiTest extends TestCase

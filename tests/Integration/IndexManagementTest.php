@@ -2,13 +2,11 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Tests\TestCase;
-
-class IndexManagementTest extends TestCase
+class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
     public function testListIndexes()
     {
-        $client = self::getClient();
+        $client = static::getClient();
         $list = $client->listIndexes();
         $this->assertArrayHasKey('items', $list);
         $this->assertEquals(1, $list['nbPages']);

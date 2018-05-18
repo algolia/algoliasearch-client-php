@@ -45,30 +45,39 @@
 #
 # API Keys Management
 #
-#-
-#  method: listApiKeys
-#
-#-
-#  method: getApiKey
-#  args:
-#    - name: key
-#-
-#  method: addApiKey
-#  args:
-#    - name: keyParams
-#-
-#  method: updateApiKey
-#  args:
-#    - name: key
-#    - name: keyParams
-#-
-#  method: deleteApiKey
-#  args:
-#    - name: key
-#-
-#  method: copyIndex
-#  args:
-#    - name: srcIndexName
-#    - name: destIndexName
-#    - name: scope
-#      default: []
+-
+  method: listApiKeys
+  args:
+    - name: requestOptions
+      default: []
+
+-
+  method: getApiKey
+  args:
+    - name: key
+    - name: requestOptions
+      default: []
+-
+  method: addApiKey
+  args:
+    - name: keyParams
+    - name: requestOptions
+      default: []
+-
+  method: updateApiKey
+  args:
+    - name: key
+    - name: keyParams
+    - name: requestOptions
+      default: []
+-
+  method: deleteApiKey
+  args:
+    - name: key
+    - name: requestOptions
+      default: []
+-
+  method: generateSecuredApiKey
+  args:
+    - name: parentApiKey
+    - name: restrictions

@@ -47,7 +47,7 @@ class Php53HttpClient implements HttpClientInterface
         return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout, $userAgent)
     {
 
         $curlHandle = curl_init();

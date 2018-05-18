@@ -3,13 +3,14 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
     protected static $indexes = array();
 
-    /** @var Client */
+    /** @var SyncClient */
     private static $client;
 
     public static function tearDownAfterClass()
@@ -43,6 +44,8 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             'hosts' => array(),
         );
 
-        return Client::create($config['app-id'], $config['key'], $config['hosts']);
+        return new SyncClient(
+            Client::create($config['app-id'], $config['key'], $config['hosts'])
+        );
     }
 }

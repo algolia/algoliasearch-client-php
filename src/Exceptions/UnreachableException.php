@@ -2,11 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-use Throwable;
-
-class UnreachableException extends \Exception
+class UnreachableException extends AlgoliaException
 {
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, $previous = null)
     {
         if (!$message) {
             $message = 'Impossible to connect, please check your Algolia Application Id. Troubleshooting: https://algo.li/unreachable-php';

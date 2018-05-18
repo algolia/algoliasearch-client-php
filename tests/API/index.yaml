@@ -11,4 +11,5 @@
   args:
     - name: settings
     - name: requestOptions
-      default: []
+      default:
+        forwardToReplicas: true

@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 
@@ -95,6 +96,47 @@ final class Index implements IndexInterface
             api_path('/1/indexes/%s/rules/search', $this->indexName),
             $requestOptions
         );
+    }
+
+    public function getTask($taskId, $requestOptions = array())
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/indexes/%s/task/%s', $this->indexName, $taskId),
+            $requestOptions
+        );
+    }
+
+    public function waitTask($taskId, $requestOptions = array())
+    {
+        do {
+            $res = $this->getTask($taskId, $requestOptions);
+
+            if ($res['status'] === 'published') {
+                return $res;
+            }
+
+            usleep(100000); // 0.1 second
+        } while (true);
+    }
+
+    public function ProposalWaitTask($taskId, $requestOptions = array())
+    {
+        $retry = 1;
+
+        do {
+            $res = $this->getTask($taskId, $requestOptions);
+
+            if ($res['status'] === 'published') {
+                return $res;
+            }
+
+            $retry++;
+            $factor = ceil($retry/10);
+            usleep($factor * 100000); // 0.1 second
+        } while ($retry < 100);
+
+        throw new TaskTooLongException;
     }
 
     private function buildBatch($action, $objects)

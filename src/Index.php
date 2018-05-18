@@ -20,6 +20,15 @@ final class Index implements IndexInterface
         $this->api = $apiWrapper;
     }
 
+    public function clear($requestOptions = array())
+    {
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/clear', $this->indexName),
+            $requestOptions
+        );
+    }
+
     public function getSettings($requestOptions = array())
     {
         $requestOptions['getVersion'] = 2;

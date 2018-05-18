@@ -47,7 +47,12 @@ class MethodConsistentConstraint extends Constraint
             }
 
             if (isset($argDef['default'])) {
-                if (!$arg->isOptional() && $arg->getDefaultValue() != $argDef['default']) {
+                try {
+                    $default = $arg->getDefaultValue();
+                } catch (\ReflectionException $e) {
+                    $default = 'Oops'.mt_rand(1, 12);
+                }
+                if ($default != $argDef['default']) {
                     $success = false;
                     $description = 'The parameter '.$arg->getName().' should have '.print_r($argDef['default'], true).' as a default value';
                     break;

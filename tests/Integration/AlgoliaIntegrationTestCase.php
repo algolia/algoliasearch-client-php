@@ -1,14 +1,25 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests;
+namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Client;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
-abstract class TestCase extends PHPUitTestCase
+abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
+    protected static $indexes = array();
+
     /** @var Client */
     private static $client;
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+
+        foreach (static::$indexes as $indexName) {
+            static::getClient()->deleteIndex($indexName);
+        }
+    }
 
     public static function safeName($name)
     {

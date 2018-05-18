@@ -54,25 +54,6 @@ final class Client implements ClientInterface
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
     }
 
-    /**
-     * @see https://alg.li/copy-index-php
-     * @Api
-     */
-    public function copyIndex($srcIndexName, $destIndexName, $scope = array(), $requestOptions = array())
-    {
-        $requestOptions += array(
-            'operation' => 'copy',
-            'destination' => $destIndexName,
-            'scope' => $scope,
-        );
-
-        return $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $srcIndexName),
-            $requestOptions
-        );
-    }
-
     public function moveIndex($srcIndexName, $destIndexName, $requestOptions = array())
     {
         $requestOptions += array(
@@ -85,6 +66,29 @@ final class Client implements ClientInterface
             api_path('/1/indexes/%s/operation', $srcIndexName),
             $requestOptions
         );
+    }
+
+    /**
+     * @see https://alg.li/copy-index-php
+     * @Api
+     */
+    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    {
+        $requestOptions += array(
+            'operation' => 'copy',
+            'destination' => $destIndexName,
+        );
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $srcIndexName),
+            $requestOptions
+        );
+    }
+
+    public function clearIndex($indexName, $requestOptions = array())
+    {
+        return $this->index($indexName)->clear($requestOptions);
     }
 
     public function deleteIndex($indexName, $requestOptions = array())

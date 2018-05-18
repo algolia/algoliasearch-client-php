@@ -5,19 +5,6 @@
   method: index
   args:
     - name: indexName
-#-
-#  method: places
-#  args: []
-#
-##
-## Search & Queries
-##
-#-
-#  method:
-#  args:
-#-
-#  method:
-#  args:
 
 #
 # Index Management
@@ -28,26 +15,29 @@
     - name: requestOptions
       default: []
 -
-  method: deleteIndex
-  args:
-    - name: indexName
-    - name: requestOptions
-      default: []
--
   method: moveIndex
   args:
     - name: srcIndexName
     - name: destIndexName
     - name: requestOptions
       default: []
-
 -
   method: copyIndex
   args:
     - name: srcIndexName
     - name: destIndexName
-    - name: scope
+    - name: requestOptions
       default: []
+-
+  method: clearIndex
+  args:
+    - name: indexName
+    - name: requestOptions
+      default: []
+-
+  method: deleteIndex
+  args:
+    - name: indexName
     - name: requestOptions
       default: []
 
@@ -55,30 +45,30 @@
 #
 # API Keys Management
 #
--
-  method: listApiKeys
-
--
-  method: getApiKey
-  args:
-    - name: key
--
-  method: addApiKey
-  args:
-    - name: keyParams
--
-  method: updateApiKey
-  args:
-    - name: key
-    - name: keyParams
--
-  method: deleteApiKey
-  args:
-    - name: key
--
-  method: copyIndex
-  args:
-    - name: srcIndexName
-    - name: destIndexName
-    - name: scope
-      default: []
+#-
+#  method: listApiKeys
+#
+#-
+#  method: getApiKey
+#  args:
+#    - name: key
+#-
+#  method: addApiKey
+#  args:
+#    - name: keyParams
+#-
+#  method: updateApiKey
+#  args:
+#    - name: key
+#    - name: keyParams
+#-
+#  method: deleteApiKey
+#  args:
+#    - name: key
+#-
+#  method: copyIndex
+#  args:
+#    - name: srcIndexName
+#    - name: destIndexName
+#    - name: scope
+#      default: []

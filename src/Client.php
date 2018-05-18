@@ -45,10 +45,6 @@ final class Client implements ClientInterface
         return new Index($indexName, $this->api);
     }
 
-    /**
-     * @see https://alg.li/list-indexes-php
-     * @Api
-     */
     public function listIndexes($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
@@ -68,10 +64,7 @@ final class Client implements ClientInterface
         );
     }
 
-    /**
-     * @see https://alg.li/copy-index-php
-     * @Api
-     */
+    // BC Break: ScopedCopyIndex was removed
     public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
     {
         $requestOptions += array(
@@ -105,30 +98,37 @@ final class Client implements ClientInterface
         return $this->api->read('GET', api_path('/1/keys'), $requestOptions);
     }
 
-    /**
-     * @see https://alg.li/get-api-key-php
-     * @Api
-     */
     public function getApiKey($key, $requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/keys/%s', $key), $requestOptions);
     }
 
-    /**
-     * @see https://alg.li/add-api-key-php
-     */
-    public function addApiKey($keyDetails, $requestOptions = array())
+    public function addApiKey($keyParams, $requestOptions = array())
     {
-        $requestOptions += $keyDetails;
+        $requestOptions += $keyParams;
 
         return $this->api->write('POST', api_path('/1/keys'), $requestOptions);
     }
 
-    /**
-     * @see https://alg.li/delete-api-key-php
-     */
+    public function updateApiKey($key, $keyParams, $requestOptions = array())
+    {
+        $requestOptions += $keyParams;
+
+        return $this->api->write('PUT', api_path('/1/keys/%s', $key), $requestOptions);
+    }
+
     public function deleteApiKey($key, $requestOptions = array())
     {
         return $this->api->write('DELETE', api_path('/1/keys/%s', $key), $requestOptions);
+    }
+
+    // BC Break: signature was changed
+    public static function generateSecuredApiKey($parentApiKey, $restrictions)
+    {
+        $urlEncodedRestrictions = build_query($restrictions);
+
+        $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
+
+        return base64_encode($content);
     }
 }

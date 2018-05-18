@@ -152,4 +152,14 @@ final class Index implements IndexInterface
 
         return $operations;
     }
+
+    public function getDeprecatedIndexApiKey($key)
+    {
+        return $this->api->write('GET', api_path('/1/indexes/%s/keys/%s', $this->indexName, $key));
+    }
+
+    public function deleteDeprecatedIndexApiKey($key)
+    {
+        return $this->api->write('DELETE', api_path('/1/indexes/%s/keys/%s', $this->indexName, $key));
+    }
 }

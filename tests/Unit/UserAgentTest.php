@@ -12,7 +12,7 @@ class UserAgentTest extends TestCase
     public function setUp()
     {
         $this->default =
-            'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); ' .
+            'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); '.
             'Algolia for PHP ('.Config::VERSION.')'
         ;
     }
@@ -31,7 +31,6 @@ class UserAgentTest extends TestCase
         $custom1 = '; '.$segment1.' ('.$version1.')';
         // Add extra spaces to ensure they're trimmed
         Config::addCustomUserAgent(' '.$segment1.' ', ' '.$version1.' ');
-
 
         $this->assertEquals(
             $this->default.$custom1,

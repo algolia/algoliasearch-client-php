@@ -40,7 +40,7 @@ class Php53HttpClient implements HttpClientInterface
             $body = \json_encode($body);
             if (JSON_ERROR_NONE !== json_last_error()) {
                 throw new \InvalidArgumentException(
-                    'json_encode error: ' . json_last_error_msg());
+                    'json_encode error: '.json_last_error_msg());
             }
         }
 
@@ -49,7 +49,6 @@ class Php53HttpClient implements HttpClientInterface
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout, $userAgent)
     {
-
         $curlHandle = curl_init();
 
         // set curl options
@@ -94,20 +93,20 @@ class Php53HttpClient implements HttpClientInterface
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, false);
 
         $method = $request->getMethod();
-        if ($method === 'GET') {
+        if ('GET' === $method) {
             curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'GET');
             curl_setopt($curlHandle, CURLOPT_HTTPGET, true);
             curl_setopt($curlHandle, CURLOPT_POST, false);
         } else {
-            if ($method === 'POST') {
+            if ('POST' === $method) {
                 $body = (string) $request->getBody();
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
                 curl_setopt($curlHandle, CURLOPT_POST, true);
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
-            } elseif ($method === 'DELETE') {
+            } elseif ('DELETE' === $method) {
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 curl_setopt($curlHandle, CURLOPT_POST, false);
-            } elseif ($method === 'PUT') {
+            } elseif ('PUT' === $method) {
                 $body = (string) $request->getBody();
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
@@ -120,15 +119,15 @@ class Php53HttpClient implements HttpClientInterface
         $running = null;
         do {
             $mrc = curl_multi_exec($mhandle, $running);
-        } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+        } while (CURLM_CALL_MULTI_PERFORM == $mrc);
 
-        while ($running && $mrc == CURLM_OK) {
+        while ($running && CURLM_OK == $mrc) {
             if (curl_multi_select($mhandle, 0.1) == -1) {
                 usleep(100);
             }
             do {
                 $mrc = curl_multi_exec($mhandle, $running);
-            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+            } while (CURLM_CALL_MULTI_PERFORM == $mrc);
         }
 
         $http_status = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
@@ -139,7 +138,7 @@ class Php53HttpClient implements HttpClientInterface
             throw new \Exception($error);
         }
 
-        if ($http_status === 0 || $http_status === 503) {
+        if (0 === $http_status || 503 === $http_status) {
             // Could not reach host or service unavailable, try with another one if we have it
             $this->releaseMHandle($curlHandle);
             curl_close($curlHandle);
@@ -152,9 +151,9 @@ class Php53HttpClient implements HttpClientInterface
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        if (intval($http_status / 100) == 4) {
+        if (4 == intval($http_status / 100)) {
             throw new BadRequestException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);
-        } elseif (intval($http_status / 100) != 2) {
+        } elseif (2 != intval($http_status / 100)) {
             throw new \Exception($http_status.': '.$response, $http_status);
         }
 

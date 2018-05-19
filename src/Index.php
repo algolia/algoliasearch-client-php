@@ -209,7 +209,7 @@ final class Index implements IndexInterface
         do {
             $res = $this->getTask($taskId, $requestOptions);
 
-            if ($res['status'] === 'published') {
+            if ('published' === $res['status']) {
                 return $res;
             }
 
@@ -225,16 +225,16 @@ final class Index implements IndexInterface
         do {
             $res = $this->getTask($taskId, $requestOptions);
 
-            if ($res['status'] === 'published') {
+            if ('published' === $res['status']) {
                 return $res;
             }
 
-            $retry++;
-            $factor = ceil($retry/10);
+            ++$retry;
+            $factor = ceil($retry / 10);
             usleep($factor * 100000); // 0.1 second
         } while ($retry < $maxRetry);
 
-        throw new TaskTooLongException;
+        throw new TaskTooLongException();
     }
 
     public function getDeprecatedIndexApiKey($key)

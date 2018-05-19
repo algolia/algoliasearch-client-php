@@ -56,9 +56,106 @@ final class Index implements IndexInterface
         );
     }
 
+    public function getObject($objectId, $requestOptions = array(
+        'attributesToRetrieve' => array(),
+    ))
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/indexes/%s/%s', $this->indexName, $objectId),
+            $requestOptions
+        );
+    }
+
+    public function getObjects($objectIds, $requestOptions = array(
+        'attributesToRetrieve' => array(),
+    ))
+    {
+        $attributesToRetrieve = '';
+        if ($requestOptions['attributesToRetrieve']) {
+            $attributesToRetrieve = $requestOptions['attributesToRetrieve'];
+        }
+        if (is_array($attributesToRetrieve)) {
+            $attributesToRetrieve = implode(',', $attributesToRetrieve);
+        }
+
+        $requests = array();
+        foreach ($objectIds as $id) {
+            $req = array(
+                'indexName' => $this->indexName,
+                'objectID' => $id,
+            );
+
+            if ($attributesToRetrieve) {
+                $req['attributesToRetrieve'] = $attributesToRetrieve;
+            }
+
+            $requests[] = $req;
+        }
+
+        return $this->api->read(
+            'POST',
+            api_path('/1/indexes/*/objects'),
+            $requestOptions
+        );
+    }
+
+    public function addObject($object, $requestOptions = array())
+    {
+        return $this->addObjects(array($object), $requestOptions);
+    }
+
     public function addObjects($objects, $requestOptions = array())
     {
-        $requestOptions['requests'] = $this->buildBatch('addObject', $objects);
+        return $this->batch(build_batch($objects, 'addObject'), $requestOptions);
+    }
+
+    public function updateObject($object, $requestOptions = array(
+        'createIfNotExists' => true,
+    ))
+    {
+        return $this->updateObjects(array($object), $requestOptions);
+    }
+
+    public function updateObjects($objects, $requestOptions = array(
+        'createIfNotExists' => true,
+    ))
+    {
+        $create = isset($requestOptions['createIfNotExists']) ? $requestOptions['createIfNotExists'] : true;
+
+        $action = $create ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate';
+
+        return $this->batch(build_query($objects, $action), $requestOptions);
+    }
+
+    public function deleteObject($objectId, $requestOptions = array())
+    {
+        return $this->deleteObjects(array($objectId), $requestOptions);
+    }
+
+    public function deleteObjects($objectIds, $requestOptions = array())
+    {
+        $objects = array_map(function ($id) {
+            return array('objectID' => $id);
+        }, $objectIds);
+
+        return $this->batch(build_batch($objects, 'deleteObject'), $requestOptions);
+    }
+
+    public function deleteBy(array $args, $requestOptions = array())
+    {
+        $requestOptions['params'] = build_query($args);
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/deleteByQuery', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function batch($requests, $requestOptions = array())
+    {
+        $requestOptions['requests'] = $requests;
 
         return $this->api->write(
             'POST',
@@ -138,19 +235,6 @@ final class Index implements IndexInterface
         } while ($retry < $maxRetry);
 
         throw new TaskTooLongException;
-    }
-
-    private function buildBatch($action, $objects)
-    {
-        $operations = array();
-        foreach ($objects as $obj) {
-            $operations[] = array(
-                'action' => $action,
-                'body' => $obj,
-            );
-        }
-
-        return $operations;
     }
 
     public function getDeprecatedIndexApiKey($key)

@@ -56,3 +56,13 @@ function build_query(array $args) {
 
     return http_build_query($args);
 }
+
+function build_batch($items, $action)
+{
+    return array_map(function ($item) use ($action) {
+        return array(
+            'action' => $action,
+            'body' => $item,
+        );
+    }, $items);
+}

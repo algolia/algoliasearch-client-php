@@ -11,6 +11,11 @@ final class Config
     private static $userAgent;
     private static $customUserAgent = '';
 
+
+    private static $readTimeout = 5;
+    private static $writeTimeout = 5;
+    private static $connectTimeout = 2;
+
     static public function getUserAgent()
     {
         if (! static::$userAgent) {
@@ -26,4 +31,36 @@ final class Config
     {
         static::$customUserAgent .= '; '.trim($segment, ' ').' ('.trim($version, ' ').')';
     }
+
+    public static function getReadTimeout()
+    {
+        return self::$readTimeout;
+    }
+
+    public static function setReadTimeout($readTimeout)
+    {
+        self::$readTimeout = $readTimeout;
+    }
+
+    public static function getWriteTimeout()
+    {
+        return self::$writeTimeout;
+    }
+
+    public static function setWriteTimeout($writeTimeout)
+    {
+        self::$writeTimeout = $writeTimeout;
+    }
+
+    public static function getConnectTimeout()
+    {
+        return self::$connectTimeout;
+    }
+
+    public static function setConnectTimeout($connectTimeout)
+    {
+        self::$connectTimeout = $connectTimeout;
+    }
+
+
 }

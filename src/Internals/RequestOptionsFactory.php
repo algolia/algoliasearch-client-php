@@ -32,6 +32,8 @@ class RequestOptionsFactory
 
     public function create($options)
     {
+        $options = $this->format($options);
+
         return new RequestOptions($this->normalize($options));
     }
 
@@ -44,7 +46,7 @@ class RequestOptionsFactory
         return new RequestOptions($normalized);
     }
 
-    protected function normalize($options)
+    private function normalize($options)
     {
         $normalized = array(
             'headers' => array(
@@ -71,6 +73,18 @@ class RequestOptionsFactory
         $normalized = $this->removeEmptyValue($normalized);
 
         return $normalized;
+    }
+
+    private function format($options)
+    {
+        foreach ($options as $name => $value) {
+            if (in_array($name, array('attributesToRetrieve'))) {
+                if (is_array($value)) {
+                    $options[$name] = implode(',', $value);
+                }
+            }
+        }
+        return $options;
     }
 
     private function getOptionType($optionName)

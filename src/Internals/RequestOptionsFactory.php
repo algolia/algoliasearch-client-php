@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
+use Algolia\AlgoliaSearch\Config;
+
 class RequestOptionsFactory
 {
     private $appId;
@@ -51,9 +53,9 @@ class RequestOptionsFactory
             ),
             'query' => array(),
             'body' => array(),
-            'readTimeout' => 5,
-            'writeTimeout' => 5,
-            'connectTimeout' => 2,
+            'readTimeout' => Config::getReadTimeout(),
+            'writeTimeout' => Config::getWriteTimeout(),
+            'connectTimeout' => Config::getConnectTimeout(),
         );
 
         foreach ($options as $optionName => $value) {

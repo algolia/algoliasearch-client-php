@@ -25,7 +25,7 @@ class MethodConsistentConstraint extends Constraint
         $refl = new \ReflectionMethod($this->instance, $definition['method']);
         $argsImplemented = $refl->getParameters();
 
-        if(count($argsImplemented) != count($definition['args'])) {
+        if (count($argsImplemented) != count($definition['args'])) {
             return $returnResult ?
                 false :
                 $this->fail($definition, 'The method '.$definition['method'].' has a wong number of arguments.');

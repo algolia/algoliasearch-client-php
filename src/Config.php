@@ -11,23 +11,22 @@ final class Config
     private static $userAgent;
     private static $customUserAgent = '';
 
-
     private static $readTimeout = 5;
     private static $writeTimeout = 5;
     private static $connectTimeout = 2;
 
-    static public function getUserAgent()
+    public static function getUserAgent()
     {
-        if (! static::$userAgent) {
+        if (!static::$userAgent) {
             static::$userAgent =
-                'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); ' .
+                'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); '.
                 'Algolia for PHP ('.self::VERSION.')';
         }
 
         return static::$userAgent.static::$customUserAgent;
     }
 
-    static public function addCustomUserAgent($segment, $version)
+    public static function addCustomUserAgent($segment, $version)
     {
         static::$customUserAgent .= '; '.trim($segment, ' ').' ('.trim($version, ' ').')';
     }
@@ -61,6 +60,4 @@ final class Config
     {
         self::$connectTimeout = $connectTimeout;
     }
-
-
 }

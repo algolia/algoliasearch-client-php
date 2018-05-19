@@ -16,9 +16,11 @@ namespace Algolia\AlgoliaSearch;
  * @param      $pathFormat
  * @param null $args
  * @param null $_
+ *
  * @return mixed
  */
-function api_path($pathFormat, $args = null, $_ = null) {
+function api_path($pathFormat, $args = null, $_ = null)
+{
     $arguments = array_slice(func_get_args(), 1);
     foreach ($arguments as &$arg) {
         $arg = urlencode(urldecode($arg));
@@ -30,16 +32,18 @@ function api_path($pathFormat, $args = null, $_ = null) {
 
 /**
  * When building a query string, array values must be json_encoded.
- * This function can be used to turn any array into a Algilia-valid query string
+ * This function can be used to turn any array into a Algilia-valid query string.
  *
  * Do not use a typical implementation where ['key' => ['one', 'two']] is
  * turned into key[1]=one&key[2]=two. Algolia will not understand key[x].
  * It should be turned into key=['one','two'] (before being url_encoded).
  *
  * @param array $args
+ *
  * @return string The urlencoded query string to send to Algolia
  */
-function build_query(array $args) {
+function build_query(array $args)
+{
     if (!$args) {
         return '';
     }

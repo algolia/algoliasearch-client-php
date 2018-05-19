@@ -84,6 +84,7 @@ class RequestOptionsFactory
                 }
             }
         }
+
         return $options;
     }
 

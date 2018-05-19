@@ -29,7 +29,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 
     protected static function getClient()
     {
-        if (! self::$client) {
+        if (!self::$client) {
             self::$client = self::newClient();
         }
 

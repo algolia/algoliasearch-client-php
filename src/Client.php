@@ -131,4 +131,13 @@ final class Client implements ClientInterface
 
         return base64_encode($content);
     }
+
+    public function getLogs($requestOptions = array(
+        'offset' => 0,
+        'length' => 10,
+        'type' => 'all',
+    ))
+    {
+        return $this->api->read('GET', api_path('/1/logs'), $requestOptions);
+    }
 }

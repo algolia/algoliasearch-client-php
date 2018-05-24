@@ -21,6 +21,13 @@ final class Index implements IndexInterface
         $this->api = $apiWrapper;
     }
 
+    public function search($query, $requestOptions = array())
+    {
+        $requestOptions['query' = $query];
+
+        return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
+    }
+
     public function clear($requestOptions = array())
     {
         return $this->api->write(

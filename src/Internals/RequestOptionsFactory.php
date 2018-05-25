@@ -78,7 +78,7 @@ class RequestOptionsFactory
     private function format($options)
     {
         foreach ($options as $name => $value) {
-            if (in_array($name, array('attributesToRetrieve'))) {
+            if (in_array($name, array('attributesToRetrieve'), true)) {
                 if (is_array($value)) {
                     $options[$name] = implode(',', $value);
                 }
@@ -90,11 +90,13 @@ class RequestOptionsFactory
 
     private function getOptionType($optionName)
     {
-        if (in_array($optionName, $this->validHeaders)) {
+        if (is_int($optionName)) {
+            return 'body';
+        } elseif (in_array($optionName, $this->validHeaders, true)) {
             return 'headers';
-        } elseif (in_array($optionName, $this->validQueryParameters)) {
+        } elseif (in_array($optionName, $this->validQueryParameters, true)) {
             return 'query';
-        } elseif (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'))) {
+        } elseif (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'), true)) {
             return $optionName;
         } else {
             return 'body';

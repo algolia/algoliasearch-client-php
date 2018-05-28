@@ -62,4 +62,19 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         $this->assertArraySubset(array('nbHits' => 0), $res);
 
     }
+
+    public function testBrowseSynonyms()
+    {
+        $index = static::getClient()->index(static::$indexes['main']);
+
+        $index->freshSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
+
+        $previousObjectID = '';
+        $iterator = $index->browseSynonyms(array('hitsPerPage' => 1));
+        foreach ($iterator as $synonym) {
+            $this->assertArraySubset(array('type' => 'synonym'), $synonym);
+            $this->assertFalse($synonym['objectID'] == $previousObjectID);
+            $previousObjectID = $synonym['objectID'];
+        }
+    }
 }

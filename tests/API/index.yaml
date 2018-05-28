@@ -70,3 +70,60 @@
   args:
     - name: requestOptions
       default: []
+
+
+#
+# Rules Management
+#
+-
+  method: searchRules
+  args:
+    - name: query
+    - name: requestOptions
+      default:
+        page: 0
+-
+  method: getRule
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: saveRule
+  args:
+    - name: rule
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: saveRules
+  args:
+    - name: rules
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: freshRules
+  args:
+    - name: rules
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: deleteRule
+  args:
+    - name: objectId
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: clearRules
+  args:
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: browseRules
+  args:
+    - name: requestOptions
+      default: []

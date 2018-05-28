@@ -132,6 +132,65 @@ final class Client implements ClientInterface
         return base64_encode($content);
     }
 
+    public function searchUserIds($query, $requestOptions = array(
+        'cluster' => null,
+        'page' => 0,
+        'hitsPerPage' => 20,
+    ))
+    {
+        return $this->api->read('POST', api_path('/1/clusters/mapping/search'), $requestOptions);
+    }
+
+    public function listClusters($requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/clusters'), $requestOptions);
+    }
+
+    public function listUserIds($requestOptions = array(
+        'page' => 0,
+        'hitsPerPage' => 20,
+    ))
+    {
+        return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions);
+    }
+
+    public function getUserId($userId, $requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/clusters/mapping/%s', $userId), $requestOptions);
+    }
+
+    public function getTopUserId($requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/clusters/mapping/%top'), $requestOptions);
+    }
+
+    public function assignUserId($userId, $clusterName, $requestOptions = array())
+    {
+        $requestOptions += array(
+            'X-Algolia-User-ID' => $userId,
+            'cluster' => $clusterName,
+        );
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/clusters/mapping'),
+            $requestOptions
+        );
+    }
+
+    public function removeUserId($userId, $requestOptions = array())
+    {
+        $requestOptions += array(
+            'X-Algolia-User-ID' => $userId,
+        );
+
+        return $this->api->write(
+            'DELETE',
+            api_path('/1/clusters/mapping'),
+            $requestOptions
+        );
+    }
+
     public function getLogs($requestOptions = array(
         'offset' => 0,
         'length' => 10,

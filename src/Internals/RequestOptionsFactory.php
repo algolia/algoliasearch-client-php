@@ -13,6 +13,7 @@ class RequestOptionsFactory
     private $validQueryParameters = array(
         'forwardToReplicas',
         'replaceExistingSynonyms',
+        'clearExistingRules',
         'getVersion',
     );
 
@@ -22,6 +23,7 @@ class RequestOptionsFactory
         'X-Forwarded-For',
         'X-Algolia-UserToken',
         'X-Forwarded-API-Key',
+        'X-Algolia-User-ID',
         'Content-type',
     );
 

@@ -107,12 +107,26 @@ class RequestOptionsFactory
     {
         foreach (array('headers', 'query', 'body') as $category) {
             foreach ($normalized[$category] as $key => $value) {
-                if (empty($value)) {
+                if ($this->isEmpty($value)) {
                     unset($normalized[$category][$key]);
                 }
             }
         }
 
         return $normalized;
+    }
+
+    /**
+     * PHP native empty() function will consider int(0) or bool(false) empty
+     * but `forwardToReplica = false` or `page = 0` are meaningful and need to be sent
+     * to the API.
+     */
+    private function isEmpty($value)
+    {
+        if (is_array($value) || is_string($value)) {
+            return empty($value);
+        }
+
+        return false;
     }
 }

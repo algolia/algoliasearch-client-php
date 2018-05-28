@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
+use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 
 final class Index implements IndexInterface
 {
@@ -239,6 +240,11 @@ final class Index implements IndexInterface
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             $requestOptions
         );
+    }
+
+    public function browseSynonyms($requestOptions = array())
+    {
+        return new SynonymIterator($this, $requestOptions);
     }
 
     public function getTask($taskId, $requestOptions = array())

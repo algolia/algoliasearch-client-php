@@ -1,6 +1,7 @@
 <?php
 
 namespace Algolia\AlgoliaSearch;
+use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 
 /**
  * Use this function to generate API path. It will ensure
@@ -69,4 +70,19 @@ function build_batch($items, $action)
             'body' => $item,
         );
     }, $items);
+}
+
+function ensure_objectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
+{
+    // In case a single objects is passed
+    if (isset($objects['objectID'])) {
+        return;
+    }
+
+    // In case multiple objects are passed
+    foreach ($objects as $o) {
+        if (!isset($o['objectID'])) {
+            throw new MissingObjectId($message);
+        }
+    }
 }

@@ -184,11 +184,11 @@ final class Index implements IndexInterface
         );
     }
 
-    public function getSynonym($objectID, $requestOptions = array())
+    public function getSynonym($objectId, $requestOptions = array())
     {
         return $this->api->read(
             'GET',
-            api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectID),
+            api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
             $requestOptions
         );
     }
@@ -213,7 +213,9 @@ final class Index implements IndexInterface
         );
     }
 
-    public function freshSynonyms($synonyms, $requestOptions = array())
+    public function freshSynonyms($synonyms, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
     {
         $requestOptions['replaceExistingSynonyms'] = true;
 

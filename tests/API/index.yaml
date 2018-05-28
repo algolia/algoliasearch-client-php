@@ -13,3 +13,60 @@
     - name: requestOptions
       default:
         forwardToReplicas: true
+
+#
+# Synonyms Management
+#
+-
+  method: searchSynonyms
+  args:
+    - name: query
+    - name: requestOptions
+      default:
+        page: 0
+        type: []
+-
+  method: getSynonym
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: saveSynonym
+  args:
+    - name: synonym
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: saveSynonyms
+  args:
+    - name: synonyms
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: freshSynonyms
+  args:
+    - name: synonyms
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: deleteSynonym
+  args:
+    - name: objectId
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: clearSynonyms
+  args:
+    - name: requestOptions
+      default:
+        forwardToReplicas: true
+-
+  method: browseSynonyms
+  args:
+    - name: requestOptions
+      default: []

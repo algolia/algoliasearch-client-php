@@ -61,6 +61,12 @@ class RequestOptionsFactory
         );
 
         foreach ($options as $optionName => $value) {
+
+            // In this case, requestOptions is holding objects, not params
+            if (is_int($optionName) && is_array($value)) {
+                $normalized['body'][] = $value;
+            }
+
             $type = $this->getOptionType($optionName);
 
             if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'))) {

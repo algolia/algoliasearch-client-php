@@ -114,6 +114,8 @@ final class Index implements IndexInterface
 
     public function addObjects($objects, $requestOptions = array())
     {
+        ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid');
+
         return $this->batch(build_batch($objects, 'addObject'), $requestOptions);
     }
 
@@ -231,6 +233,8 @@ final class Index implements IndexInterface
         'forwardToReplicas' => true,
     ))
     {
+        ensure_objectID($synonyms, 'All synonyms must have an unique objectID to be valid');
+
         $requestOptions = array_merge($synonyms, $requestOptions);
 
         return $this->api->write(
@@ -309,6 +313,8 @@ final class Index implements IndexInterface
         'forwardToReplicas' => true,
     ))
     {
+        ensure_objectID($rules, 'All rules must have an unique objectID to be valid');
+
         $requestOptions = array_merge($rules, $requestOptions);
 
         return $this->api->write(

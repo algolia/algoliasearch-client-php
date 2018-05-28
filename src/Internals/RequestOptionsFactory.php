@@ -12,6 +12,7 @@ class RequestOptionsFactory
 
     private $validQueryParameters = array(
         'forwardToReplicas',
+        'replaceExistingSynonyms',
         'getVersion',
     );
 
@@ -84,7 +85,7 @@ class RequestOptionsFactory
     private function format($options)
     {
         foreach ($options as $name => $value) {
-            if (in_array($name, array('attributesToRetrieve'), true)) {
+            if (in_array($name, array('attributesToRetrieve', 'type'), true)) {
                 if (is_array($value)) {
                     $options[$name] = implode(',', $value);
                 }

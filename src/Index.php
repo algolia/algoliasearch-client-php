@@ -48,12 +48,10 @@ final class Index implements IndexInterface
         );
     }
 
-    public function setSettings(
-        $settings,
-        $requestOptions = array(
+    public function setSettings($settings, $requestOptions = array(
             'forwardToReplicas' => true,
-        )
-    ) {
+    ))
+    {
         $requestOptions += $settings;
 
         return $this->api->write(
@@ -171,7 +169,21 @@ final class Index implements IndexInterface
         );
     }
 
-    public function getSynonyms($objectID, $requestOptions = array())
+    public function searchSynonyms($query, $requestOptions = array(
+        'type' => array(),
+        'page' => 0,
+    ))
+    {
+        $requestOptions['query'] = $query;
+
+        return $this->api->read(
+            'POST',
+            api_path('/1/indexes/%s/synonyms/search', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function getSynonym($objectID, $requestOptions = array())
     {
         return $this->api->read(
             'GET',
@@ -180,24 +192,51 @@ final class Index implements IndexInterface
         );
     }
 
-    public function clearSynonyms($forwardToReplicas = true, $requestOptions = array())
+    public function saveSynonym($synonym, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
     {
-        $requestOptions += array(
-            'forwardToReplicas' => $forwardToReplicas,
-        );
+        return $this->saveSynonyms(array($synonym), $requestOptions);
+    }
+
+    public function saveSynonyms($synonyms, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        $requestOptions = array_merge($synonyms, $requestOptions);
 
         return $this->api->write(
             'POST',
-            api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
+            api_path('/1/indexes/%s/synonyms/batch', $this->indexName),
             $requestOptions
         );
     }
 
-    public function searchRules($requestOptions = array())
+    public function freshSynonyms($synonyms, $requestOptions = array())
     {
-        return $this->api->read(
+        $requestOptions['replaceExistingSynonyms'] = true;
+
+        return $this->saveSynonyms($synonyms, $requestOptions);
+    }
+
+    public function deleteSynonym($objectId, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        return $this->api->write(
+            'DELETE',
+            api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
+            $requestOptions
+        );
+    }
+
+    public function clearSynonyms($requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        return $this->api->write(
             'POST',
-            api_path('/1/indexes/%s/rules/search', $this->indexName),
+            api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             $requestOptions
         );
     }

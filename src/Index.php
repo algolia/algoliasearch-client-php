@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
+use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 
@@ -199,6 +200,13 @@ final class Index implements IndexInterface
         );
     }
 
+    public function browse($requestOptions = array(
+        'cursor' => null,
+    ))
+    {
+        return new ObjectIterator($this->api, $requestOptions);
+    }
+
     public function searchSynonyms($query, $requestOptions = array(
         'type' => array(),
         'page' => 0,
@@ -277,7 +285,7 @@ final class Index implements IndexInterface
 
     public function browseSynonyms($requestOptions = array())
     {
-        return new SynonymIterator($this, $requestOptions);
+        return new SynonymIterator($this->api, $requestOptions);
     }
 
     public function searchRules($query, $requestOptions = array(
@@ -357,7 +365,7 @@ final class Index implements IndexInterface
 
     public function browseRules($requestOptions = array())
     {
-        return new RuleIterator($this, $requestOptions);
+        return new RuleIterator($this->api, $requestOptions);
     }
 
     public function getTask($taskId, $requestOptions = array())

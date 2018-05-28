@@ -3,13 +3,16 @@
 namespace Algolia\AlgoliaSearch\Iterators;
 
 use Algolia\AlgoliaSearch\Interfaces\Index;
+use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 
 abstract class AlgoliaIterator implements \Iterator
 {
+    protected $indexName;
+
     /**
-     * @var Index
+     * @var ApiWrapper
      */
-    protected $index;
+    protected $api;
 
     /**
      * @var array RequestOptions passed when getting new batch from Algolia
@@ -27,9 +30,10 @@ abstract class AlgoliaIterator implements \Iterator
      */
     protected $response;
 
-    public function __construct(Index $index, $requestOptions = array())
+    public function __construct($indexName, ApiWrapper $api, $requestOptions = array())
     {
-        $this->index = $index;
+        $this->indexName = $indexName;
+        $this->api = $api;
         $this->requestOptions = $requestOptions + array(
             'hitsPerPage' => 1000,
         );
@@ -134,7 +138,7 @@ abstract class AlgoliaIterator implements \Iterator
     abstract protected function fetchCurrentPageResults();
 
     /**
-     * The export method might be is using search internally, this method
+     * Sometimes the Iterator is using search internally, this method
      * is used to clean the results, like remove the highlight.
      *
      * @param array $hit

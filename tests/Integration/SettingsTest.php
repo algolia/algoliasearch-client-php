@@ -39,7 +39,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 
         // Assert that settings are forwarded by default
         $formula = array('customRanking' => array('asc(something)'));
-        $index->setSettings($formula, array('forwaredToReplicas' => false));
+        $index->setSettings($formula, array('forwardToReplicas' => false));
         $retrievedSettings = $replica->getSettings();
         $this->assertEquals(null, $retrievedSettings['customRanking']);
     }

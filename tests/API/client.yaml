@@ -27,7 +27,8 @@
     - name: srcIndexName
     - name: destIndexName
     - name: requestOptions
-      default: []
+      default:
+        scope: ~
 -
   method: clearIndex
   args:

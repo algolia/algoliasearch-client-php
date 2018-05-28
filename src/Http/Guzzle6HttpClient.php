@@ -43,7 +43,9 @@ class Guzzle6HttpClient implements HttpClientInterface
         $protocolVersion = '1.1'
     ) {
         if (is_array($body)) {
-            $body = \GuzzleHttp\json_encode($body);
+            // Send an empty body instead of "[]" in case there are
+            // no content/params to send
+            $body = empty($body) ? '' : \GuzzleHttp\json_encode($body);
         }
 
         return new Request($method, $uri, $headers, $body, $protocolVersion);

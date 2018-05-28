@@ -113,6 +113,11 @@ class RequestOptionsFactory
     {
         foreach (array('headers', 'query', 'body') as $category) {
             foreach ($normalized[$category] as $key => $value) {
+                if ($key === 'query') {
+                    // query is one of the very rate paramters allowed to be empty
+                    continue;
+                }
+
                 if ($this->isEmpty($value)) {
                     unset($normalized[$category][$key]);
                 }

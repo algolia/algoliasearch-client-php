@@ -135,6 +135,32 @@ final class Index implements IndexInterface
         return $this->batch(build_query($objects, $action), $requestOptions);
     }
 
+    public function freshObjects($objects, $requestOptions = array())
+    {
+        $tmpName = $this->indexName.'_tmp_'.uniqid();
+
+        $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array_merge($requestOptions, array(
+                'operation' => 'copy',
+                'destination' => $tmpName,
+                'scope' => array('settings', 'synonyms', 'rules'),
+            ))
+        );
+
+        $this->addObjects($objects, $requestOptions);
+
+        $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array_merge($requestOptions, array(
+                'operation' => 'move',
+                'destination' => $tmpName,
+            ))
+        );
+    }
+
     public function deleteObject($objectId, $requestOptions = array())
     {
         return $this->deleteObjects(array($objectId), $requestOptions);

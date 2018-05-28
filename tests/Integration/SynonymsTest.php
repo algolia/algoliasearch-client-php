@@ -29,7 +29,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('synomyms-mgmt');
+            static::$indexes['main'] = $this->safeName('synomyaefaefms-mgmt');
         }
     }
 
@@ -66,6 +66,8 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
     public function testBrowseSynonyms()
     {
         $index = static::getClient()->index(static::$indexes['main']);
+
+        $index->addObject($this->airports[0]);
 
         $index->freshSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
 

@@ -103,7 +103,7 @@ class ApiWrapper
             } catch (BadRequestException $e) {
                 // TODO: something
                 dump('Bad request: '.$e->getMessage());
-                die;
+                throw $e;
             } catch (\Exception $e) {
                 // TODO: panic
                 dump($e);

@@ -23,7 +23,7 @@ final class Index implements IndexInterface
 
     public function search($query, $requestOptions = array())
     {
-        $requestOptions['query' = $query];
+        $requestOptions['query'] = $query;
 
         return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
     }

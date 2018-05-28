@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
+use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 
 final class Index implements IndexInterface
@@ -247,6 +248,84 @@ final class Index implements IndexInterface
     public function browseSynonyms($requestOptions = array())
     {
         return new SynonymIterator($this, $requestOptions);
+    }
+
+    public function searchRules($query, $requestOptions = array(
+        'page' => 0,
+    ))
+    {
+        $requestOptions['query'] = $query;
+
+        return $this->api->read(
+            'POST',
+            api_path('/1/indexes/%s/rules/search', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function getRule($objectId, $requestOptions = array())
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
+            $requestOptions
+        );
+    }
+
+    public function saveRule($rule, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        return $this->saveRules(array($rule), $requestOptions);
+    }
+
+    public function saveRules($rules, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        $requestOptions = array_merge($rules, $requestOptions);
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/rules/batch', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function freshRules($rules, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        $requestOptions['clearExistingRules'] = true;
+
+        return $this->saveRules($rules, $requestOptions);
+    }
+
+    public function deleteRule($objectId, $requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        return $this->api->write(
+            'DELETE',
+            api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
+            $requestOptions
+        );
+    }
+
+    public function clearRules($requestOptions = array(
+        'forwardToReplicas' => true,
+    ))
+    {
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/rules/clear', $this->indexName),
+            $requestOptions
+        );
+    }
+
+    public function browseRules($requestOptions = array())
+    {
+        return new RuleIterator($this, $requestOptions);
     }
 
     public function getTask($taskId, $requestOptions = array())

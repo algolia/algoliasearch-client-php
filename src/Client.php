@@ -65,7 +65,9 @@ final class Client implements ClientInterface
     }
 
     // BC Break: ScopedCopyIndex was removed
-    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array(
+        'scope' => null,
+    ))
     {
         $requestOptions += array(
             'operation' => 'copy',

@@ -20,7 +20,7 @@ class SyncIndex
     {
         $response = call_user_func_array(array($this->realIndex, $name), $arguments);
 
-        if (isset($response['taskID'])) {
+        if (is_array($response) && isset($response['taskID'])) {
             $this->realIndex->waitTask($response['taskID']);
         }
 

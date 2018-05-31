@@ -42,19 +42,25 @@ class BrowseTest extends AlgoliaSearchTestCase
         $this->index->waitTask($task['taskID']);
 
         $i = 0;
-
         foreach ($this->index->browse('') as $key => $value) {
             $i++;
         }
-
         $this->assertEquals(1500, $i);
 
         $i = 0;
-
         foreach ($this->index->browse('', array('numericFilters' => 'i<42')) as $key => $value) {
             $i++;
         }
-
         $this->assertEquals(42, $i);
+
+        // Test Browse with cursor
+        $response = $this->index->browseFrom(null, array());
+        $i = count($response['hits']);
+        $cursor = $response['cursor'];
+
+        $response = $this->index->browseFrom(null, array(), $cursor);
+        $i += count($response['hits']);
+
+        $this->assertEquals(1500, $i);
     }
 }

@@ -1445,19 +1445,20 @@ class Index
                 $params[$key] = Json::encode($value);
             }
         }
-        if ($query != null) {
+        if ($query !== null) {
             $params['query'] = $query;
         }
-        if ($cursor != null) {
+
+        if ($cursor !== null) {
             $params['cursor'] = $cursor;
         }
 
         return $this->client->request(
             $this->context,
-            'GET',
+            empty($params) ? 'GET' : 'POST',
             '/1/indexes/'.$this->urlIndexName.'/browse',
-            $params,
             null,
+            $params,
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,

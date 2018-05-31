@@ -30,6 +30,10 @@ class BrowseIndexTest extends AlgoliaSearchTestCase
         }
     }
 
+    /**
+     * This test is testing the legacy browse method
+     * See Index::_call() and Index::doBcBrowse()
+     */
     public function testBrowseIndex()
     {
         $task = $this->index->addObject(array('firstname' => 'Robin'));

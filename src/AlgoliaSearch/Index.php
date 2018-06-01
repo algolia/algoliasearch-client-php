@@ -247,7 +247,7 @@ class Index
      *
      * @throws \Exception
      */
-    public function getObjects($objectIDs, $attributesToRetrieve = null)
+    public function getObjects($objectIDs, $attributesToRetrieve = '')
     {
         $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
 
@@ -459,7 +459,7 @@ class Index
         return $this->batch($requests, $requestHeaders);
     }
 
-    public function deleteBy(array $args)
+    public function deleteBy(array $filterParameters)
     {
         $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
 
@@ -468,7 +468,7 @@ class Index
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/deleteByQuery',
             null,
-            array('params' => $this->client->buildQuery($args)),
+            array('params' => $this->client->buildQuery($filterParameters)),
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
@@ -521,7 +521,7 @@ class Index
      * Search inside the index.
      *
      * @param string $query the full text query
-     * @param mixed $args (optional) if set, contains an associative array with query parameters:
+     * @param mixed $searchParameters (optional) if set, contains an associative array with query parameters:
      *                      - page: (integer) Pagination parameter used to select the page to retrieve.
      *                      Page is zero-based and defaults to 0. Thus, to retrieve the 10th page you need to set page=9
      *                      - hitsPerPage: (integer) Pagination parameter used to select the number of hits per page.
@@ -602,17 +602,17 @@ class Index
      * @return mixed
      * @throws AlgoliaException
      */
-    public function search($query, $args = null)
+    public function search($query, $searchParameters = null)
     {
         $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
 
-        if ($args === null) {
-            $args = array();
+        if ($searchParameters === null) {
+            $searchParameters = array();
         }
-        $args['query'] = $query;
+        $searchParameters['query'] = $query;
 
-        if (isset($args['disjunctiveFacets'])) {
-            return $this->searchWithDisjunctiveFaceting($query, $args);
+        if (isset($searchParameters['disjunctiveFacets'])) {
+            return $this->searchWithDisjunctiveFaceting($query, $searchParameters);
         }
 
         return $this->client->request(
@@ -620,7 +620,7 @@ class Index
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/query',
             array(),
-            array('params' => $this->client->buildQuery($args)),
+            array('params' => $this->client->buildQuery($searchParameters)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout,
@@ -773,23 +773,23 @@ class Index
      *
      * @param $facetName
      * @param $facetQuery
-     * @param array $query
+     * @param array $searchParameters
      * @param array $requestHeaders
      *
      * @return mixed
      */
-    public function searchForFacetValues($facetName, $facetQuery, $query = array())
+    public function searchForFacetValues($facetName, $facetQuery, $searchParameters = array())
     {
         $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
 
-        $query['facetQuery'] = $facetQuery;
+        $searchParameters['facetQuery'] = $facetQuery;
 
         return $this->client->request(
             $this->context,
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/facets/'.$facetName.'/query',
             array(),
-            array('params' => $this->client->buildQuery($query)),
+            array('params' => $this->client->buildQuery($searchParameters)),
             $this->context->readHostsArray,
             $this->context->connectTimeout,
             $this->context->searchTimeout,
@@ -1409,12 +1409,12 @@ class Index
     /**
      * Send a batch request.
      *
-     * @param array $requests an associative array defining the batch request body
+     * @param array $operations an associative array defining the batch request body
      * @param array $requestHeaders pass custom header only for this request
      *
      * @return mixed
      */
-    public function batch($requests)
+    public function batch($operations)
     {
         $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
 
@@ -1423,7 +1423,7 @@ class Index
             'POST',
             '/1/indexes/'.$this->urlIndexName.'/batch',
             array(),
-            $requests,
+            $operations,
             $this->context->writeHostsArray,
             $this->context->connectTimeout,
             $this->context->readTimeout,
@@ -1517,7 +1517,7 @@ class Index
      *
      * @throws AlgoliaException
      */
-    public function searchSynonyms($query, array $synonymType = array(), $page = null, $hitsPerPage = null)
+    public function searchSynonyms($query, array $synonymType = array(), $page = 0, $hitsPerPage = 100)
     {
         $requestHeaders = func_num_args() === 5 && is_array(func_get_arg(4)) ? func_get_arg(4) : array();
 

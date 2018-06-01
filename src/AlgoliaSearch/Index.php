@@ -172,9 +172,19 @@ class Index
      *
      * @return mixed
      */
-    public function addObjects($objects, $objectIDKey = 'objectID')
+    public function addObjects($objects, $objectIDKeyLegacy = 'objectID')
     {
-        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+
+        $objectIDKey = 'objectID';
+        if (is_string($objectIDKeyLegacy)) {
+            $objectIDKey = $objectIDKeyLegacy;
+        }
+
+        $requestHeaders = array();
+        $nbArgs = func_num_args();
+        if ($nbArgs > 1) {
+            $requestHeaders = is_array(func_get_arg($nbArgs-1)) ? func_get_arg($nbArgs-1) : array();
+        }
 
         $requests = $this->buildBatch('addObject', $objects, true, $objectIDKey);
 
@@ -307,14 +317,27 @@ class Index
      * Partially Override the content of several objects.
      *
      * @param array  $objects           contains an array of objects to update (each object must contains a objectID attribute)
-     * @param string $objectIDKey
+     * @param string $objectIDKey       This parameter is deprecated and should not be used
      * @param bool   $createIfNotExists
      *
      * @return mixed
      */
-    public function partialUpdateObjects($objects, $objectIDKey = 'objectID', $createIfNotExists = true)
+    public function partialUpdateObjects($objects, $createIfNotExistsOrObjectIDKeyLegacy = 'objectID', $createIfNotExistsLegacy = true)
     {
-        $requestHeaders = func_num_args() === 4 && is_array(func_get_arg(3)) ? func_get_arg(3) : array();
+        if (is_bool($createIfNotExistsOrObjectIDKeyLegacy)) {
+            $createIfNotExists = $createIfNotExistsOrObjectIDKeyLegacy;
+            $objectIDKey = 'objectID';
+        } elseif (is_string($createIfNotExistsOrObjectIDKeyLegacy)) {
+            $createIfNotExists = $createIfNotExistsLegacy;
+            $objectIDKey = $createIfNotExistsOrObjectIDKeyLegacy;
+        }
+
+        $requestHeaders = array();
+        $nbArgs = func_num_args();
+        if ($nbArgs > 2) {
+            $requestHeaders = is_array(func_get_arg($nbArgs-1)) ? func_get_arg($nbArgs-1) : array();
+        }
+
         if ($createIfNotExists) {
             $requests = $this->buildBatch('partialUpdateObject', $objects, true, $objectIDKey);
         } else {
@@ -327,15 +350,24 @@ class Index
     /**
      * Override the content of object.
      *
-     * @param array  $object      contains the object to save, the object must contains an objectID attribute
-     *                            or attribute specified in $objectIDKey considered as objectID
-     * @param string $objectIDKey
+     * @param array  $object        contains the object to save, the object must contains an objectID attribute
+     *                              or attribute specified in $objectIDKey considered as objectID
+     * @param string $objectIDKey   This parameter is deprecated and should not be used
      *
      * @return mixed
      */
-    public function saveObject($object, $objectIDKey = 'objectID')
+    public function saveObject($object, $objectIDKeyLegacy = 'objectID')
     {
-        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+        $objectIDKey = 'objectID';
+        if (is_string($objectIDKeyLegacy)) {
+            $objectIDKey = $objectIDKeyLegacy;
+        }
+
+        $requestHeaders = array();
+        $nbArgs = func_num_args();
+        if ($nbArgs > 1) {
+            $requestHeaders = is_array(func_get_arg($nbArgs-1)) ? func_get_arg($nbArgs-1) : array();
+        }
 
         return $this->client->request(
             $this->context,
@@ -353,14 +385,23 @@ class Index
     /**
      * Override the content of several objects.
      *
-     * @param array  $objects     contains an array of objects to update (each object must contains a objectID attribute)
-     * @param string $objectIDKey
+     * @param array  $objects       contains an array of objects to update (each object must contains a objectID attribute)
+     * @param string $objectIDKey   This parameter is deprecated and should not be used
      *
      * @return mixed
      */
-    public function saveObjects($objects, $objectIDKey = 'objectID')
+    public function saveObjects($objects, $objectIDKeyLegacy = 'objectID')
     {
-        $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
+        $objectIDKey = 'objectID';
+        if (is_string($objectIDKeyLegacy)) {
+            $objectIDKey = $objectIDKeyLegacy;
+        }
+
+        $requestHeaders = array();
+        $nbArgs = func_num_args();
+        if ($nbArgs > 1) {
+            $requestHeaders = is_array(func_get_arg($nbArgs-1)) ? func_get_arg($nbArgs-1) : array();
+        }
 
         $requests = $this->buildBatch('updateObject', $objects, true, $objectIDKey);
 

@@ -716,6 +716,11 @@ class Client
         return new Index($this->context, $this, $indexName);
     }
 
+    public function initAnalytics()
+    {
+        return new Analytics($this);
+    }
+
     /**
      * List all existing API keys with their associated ACLs.
      *
@@ -1327,9 +1332,14 @@ class Client
             return;
         }
 
-        $answer = Json::decode($response, true);
         $context->releaseMHandle($curlHandle);
         curl_close($curlHandle);
+
+        if ($http_status == 204) {
+            return '';
+        }
+
+        $answer = Json::decode($response, true);
 
         if (intval($http_status / 100) == 4) {
             throw new AlgoliaException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);

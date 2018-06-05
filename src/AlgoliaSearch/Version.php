@@ -33,7 +33,6 @@ class Version
 
     public static $custom_value = '';
 
-    private static $prefixUserAgentSegments = '';
     private static $defaultUserAgentSegments = '';
     private static $suffixUserAgentSegments = '';
 
@@ -55,10 +54,7 @@ class Version
                 'PHP ('.$version.')';
         }
 
-        $userAgent =
-            self::$prefixUserAgentSegments .
-            self::$defaultUserAgentSegments .
-            static::$suffixUserAgentSegments;
+        $userAgent = self::$defaultUserAgentSegments . static::$suffixUserAgentSegments;
 
         // Keep backward compatibility
         $userAgent .= static::$custom_value;
@@ -68,11 +64,7 @@ class Version
 
     public static function addPrefixUserAgentSegment($segment, $version)
     {
-        $prefix = $segment.' ('.$version.'); ';
-
-        if (false === mb_strpos(self::getUserAgent(), $prefix)) {
-            self::$prefixUserAgentSegments = $prefix . self::$prefixUserAgentSegments;
-        }
+        self::addSuffixUserAgentSegment($segment, $version);
     }
 
     public static function addSuffixUserAgentSegment($segment, $version)
@@ -88,6 +80,5 @@ class Version
     {
         self::$suffixUserAgentSegments = '';
         self::$defaultUserAgentSegments = '';
-        self::$prefixUserAgentSegments = '';
     }
 }

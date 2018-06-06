@@ -10,7 +10,15 @@ class VersionTest extends AlgoliaSearchTestCase
 
     public function setUp()
     {
-        $this->php = str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION);
+        $version = PHP_VERSION;
+        if ($hyphen = strpos($version, '-')) {
+            $version = substr($version, 0, $hyphen);
+        }
+        $this->php = 'PHP ('.$version.')';
+
+        if (defined('HHVM_VERSION')) {
+            $this->php .= '; HHVM ('.HHVM_VERSION.')';
+        }
     }
 
     public function tearDown()
@@ -22,13 +30,13 @@ class VersionTest extends AlgoliaSearchTestCase
     public function testVersionAddOnePrefixAndOneSuffix()
     {
         $userAgent = Version::getUserAgent();
-        $this->assertRegExp('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\)$/', $userAgent);
+        $this->assertRegExp('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\)(; HHVM \(\d+\.\d+\.\d+\))?$/', $userAgent);
 
         Version::addPrefixUserAgentSegment('Prefix integration', '0.0.8');
         Version::addSuffixUserAgentSegment('Suffix platform', '1.2.3');
 
         $userAgent = Version::getUserAgent();
-        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); PHP ('.$this->php.'); Prefix integration (0.0.8); Suffix platform (1.2.3)', $userAgent);
+        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); '.$this->php.'; Prefix integration (0.0.8); Suffix platform (1.2.3)', $userAgent);
     }
 
     public function testVersionAddTwoPrefixAndTwoSuffix()
@@ -39,7 +47,7 @@ class VersionTest extends AlgoliaSearchTestCase
         Version::addSuffixUserAgentSegment('Different suffix', '7.8.9');
 
         $userAgent = Version::getUserAgent();
-        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); PHP ('.$this->php.'); Prefix integration (0.0.8); Suffix platform (1.2.3); Another prefix (5.6.7); Different suffix (7.8.9)', $userAgent);
+        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); '.$this->php.'; Prefix integration (0.0.8); Suffix platform (1.2.3); Another prefix (5.6.7); Different suffix (7.8.9)', $userAgent);
 
         // Should be "X.Y.Z"
         $version = Version::get();
@@ -66,7 +74,7 @@ class VersionTest extends AlgoliaSearchTestCase
         Version::addPrefixUserAgentSegment('Another prefix', '5.6.7');
 
         $userAgent = Version::getUserAgent();
-        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); PHP ('.$this->php.'); Another prefix (5.6.7)', $userAgent);
+        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); '.$this->php.'; Another prefix (5.6.7)', $userAgent);
     }
 
     public function testVersionDuplicatesSuffix()
@@ -75,7 +83,7 @@ class VersionTest extends AlgoliaSearchTestCase
         Version::addSuffixUserAgentSegment('Another suffix', '5.6.7');
 
         $userAgent = Version::getUserAgent();
-        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); PHP ('.$this->php.'); Another suffix (5.6.7)', $userAgent);
+        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); '.$this->php.'; Another suffix (5.6.7)', $userAgent);
     }
 
     public function testVersionTwoPrefix()
@@ -84,6 +92,6 @@ class VersionTest extends AlgoliaSearchTestCase
         Version::addPrefixUserAgentSegment('Another prefix', '5.6.7');
 
         $userAgent = Version::getUserAgent();
-        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); PHP ('.$this->php.'); prefix (5.6.7); Another prefix (5.6.7)', $userAgent);
+        $this->assertEquals('Algolia for PHP ('.Version::VALUE.'); '.$this->php.'; prefix (5.6.7); Another prefix (5.6.7)', $userAgent);
     }
 }

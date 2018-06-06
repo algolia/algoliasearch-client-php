@@ -52,6 +52,10 @@ class Version
             self::$defaultUserAgentSegments =
                 'Algolia for PHP ('.self::VALUE.'); ' .
                 'PHP ('.$version.')';
+
+            if (defined('HHVM_VERSION')) {
+                self::$defaultUserAgentSegments .= '; HHVM ('.HHVM_VERSION.')';
+            }
         }
 
         $userAgent = self::$defaultUserAgentSegments . static::$suffixUserAgentSegments;

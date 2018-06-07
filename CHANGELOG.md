@@ -1,5 +1,44 @@
 ## Change Log
 
+### Unreleased
+
+<Contributors, please add your changes below this line>
+
+
+### 1.26.0
+
+🎉 Note to contributors:
+Everybody is now able to run the test on Travis, since we moved to temporary credentials.️ ⤵️
+https://blog.algolia.com/travis-encrypted-variables-external-contributions/
+
+- Fix: `addApiKey` was fixed in 1.25.0 (see changelog entry below). The same fix was ported to `updateApiKey`.
+
+- Fix: Curl was added to the composer requirements. If you get an error because curl is not enabled in CLI, enable it or use the flag `--ignore-platform-reqs`
+
+- Fix: Adding a rule with an empty ID failed silently, it will now throw an exception
+
+- Deprecation: Keys should not be managed at the Index level but at the Client level
+
+    All methods `Index::(list|get|add|update)ApiKeys()` are now
+    deprecated. If you already have keys on the Index, it would be best
+    to delete them and regenerate new keys with client, adding the `indexes`
+    restriction.
+
+    Example:
+    ```php
+    $client->addApiKey([
+        'acl' => 'search',
+        'indexes' => 'my_index_name',
+    ])
+    ```
+- Fix: Add $requestHeaders arg to Index::browse and Index::deleteBy
+
+- Fix: When browsing, ensure cursor is passed in the body
+    Cursor can become so long that the generated URL fails (error HTTP 414).
+
+- Chore: Add PHP version to the UserAgent
+
+
 ### 1.25.1
 
 - feat(places): Set write hosts when using Places
@@ -11,23 +50,23 @@ account the write hosts to let the user generate its own API keys.
 
 - feat: Let you define all API keys capabilities in one array
 
-Example:
-```php
-$client->addApiKey([
-    'acl' => [
-        'search',
-        'listIndexes',
-    ],
-    'validity' => $validity,
-    'maxQueriesPerIPPerHour' => 1000,
-    'maxHitsPerQuery' => 50,
-    'indexes' => ['prefix_*'],
-]);
-```
-instead of
-```php
-$client->addApiKey(['search', 'listIndexes'], $validity, 1000, 50, ['prefix_*']);
-```
+    Example:
+    ```php
+    $client->addApiKey([
+        'acl' => [
+            'search',
+            'listIndexes',
+        ],
+        'validity' => $validity,
+        'maxQueriesPerIPPerHour' => 1000,
+        'maxHitsPerQuery' => 50,
+        'indexes' => ['prefix_*'],
+    ]);
+    ```
+    instead of
+    ```php
+    $client->addApiKey(['search', 'listIndexes'], $validity, 1000, 50, ['prefix_*']);
+    ```
 
 ### 1.24.0
 

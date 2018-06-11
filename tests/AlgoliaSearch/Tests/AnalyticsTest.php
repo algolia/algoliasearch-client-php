@@ -24,8 +24,8 @@ class AnalyticsTest extends AlgoliaSearchTestCase
 
     public function testListABTests()
     {
-        $this->analytics->listABTests(array('offset' => 1, 'limit' => 2));
-        $abTests = $this->analytics->listABTests();
+        $this->analytics->getABTests(array('offset' => 1, 'limit' => 2));
+        $abTests = $this->analytics->getABTests();
 
         $this->assertEquals(count($abTests['abtests']), $abTests['count']);
     }
@@ -89,7 +89,7 @@ class AnalyticsTest extends AlgoliaSearchTestCase
 
     private function guessABTestID($indexName)
     {
-        $list = $this->analytics->listABTests(array('limit' => 1000));
+        $list = $this->analytics->getABTests(array('limit' => 1000));
         foreach ($list['abtests'] as $ab) {
             if ($ab['variants'][0]['index'] == $indexName) {
                 return $ab['abtestID'];

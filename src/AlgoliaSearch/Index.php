@@ -942,13 +942,7 @@ class Index
     {
         $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
 
-        while (true) {
-            $res = $this->getTaskStatus($taskID, $requestHeaders);
-            if ($res['status'] === 'published') {
-                return $res;
-            }
-            usleep($timeBeforeRetry * 1000);
-        }
+        $this->client->waitTask($this->indexName, $taskID, $timeBeforeRetry, $requestHeaders);
     }
 
     /**
@@ -963,17 +957,7 @@ class Index
     {
         $requestHeaders = func_num_args() === 2 && is_array(func_get_arg(1)) ? func_get_arg(1) : array();
 
-        return $this->client->request(
-            $this->context,
-            'GET',
-            '/1/indexes/'.$this->urlIndexName.'/task/'.$taskID,
-            null,
-            null,
-            $this->context->readHostsArray,
-            $this->context->connectTimeout,
-            $this->context->readTimeout,
-            $requestHeaders
-        );
+        return $this->client->getTaskStatus($this->indexName, $taskID, $requestHeaders);
     }
 
     /**

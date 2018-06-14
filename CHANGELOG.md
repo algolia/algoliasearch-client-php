@@ -4,6 +4,15 @@
 
 <Contributors, please add your changes below this line>
 
+* 2 methods about taskID initially available in the `Index` moved to the `Client`. 
+    You could get some taskID from the engine without necessarily have an instance of Index, 
+    instead of instanciating an index that you won't need, you can now call waitTask and getTaskStatus on the client.
+    The original methods on the index still work are **not** deprecated.
+ 
+     ```php
+     $client->waitTask($indexName, $taskID)
+     $client->getTaskStatus($indexName, $taskID)
+    ```
 
 ### 1.26.0
 

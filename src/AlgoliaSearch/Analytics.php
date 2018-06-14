@@ -14,11 +14,10 @@ class Analytics
         $this->client = $client;
     }
 
-    public function getABTests($params = array(
-        'offset' => 0,
-        'limit' => 10,
-    ))
+    public function getABTests($params = array())
     {
+        $params += array('offset' => 0, 'limit' => 10);
+
         return $this->request('GET', '/2/abtests', $params);
     }
 
@@ -57,6 +56,11 @@ class Analytics
         }
 
         return $this->request('DELETE', sprintf('/2/abtests/%s', urlencode($abTestID)));
+    }
+
+    public function waitTask($indexName, $taskID, $timeBeforeRetry = 100, $requestHeaders = array())
+    {
+        $this->client->waitTask($indexName, $taskID, $timeBeforeRetry, $requestHeaders);
     }
 
     protected function request(

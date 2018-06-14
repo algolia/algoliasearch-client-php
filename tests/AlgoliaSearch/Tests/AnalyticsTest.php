@@ -9,6 +9,7 @@ class AnalyticsTest extends AlgoliaSearchTestCase
 {
     /** @var \AlgoliaSearch\Analytics */
     private $analytics;
+    private $indexName;
 
     protected function setUp()
     {
@@ -17,8 +18,8 @@ class AnalyticsTest extends AlgoliaSearchTestCase
 
         $this->indexName = $this->safe_name('àlgol?à-php-ABTest-tmp');
         $index = $client->initIndex($this->indexName);
-        $res = $index->addObject(['record' => 'I need this index']);
-        $res = $index->setSettings(['replicas' => [$this->indexName.'-alt']]);
+        $res = $index->addObject(array('record' => 'I need this index'));
+        $res = $index->setSettings(array('replicas' => array($this->indexName.'-alt')));
         $index->waitTask($res['taskID']);
     }
 
@@ -27,34 +28,38 @@ class AnalyticsTest extends AlgoliaSearchTestCase
         $this->analytics->getABTests(array('offset' => 1, 'limit' => 2));
         $abTests = $this->analytics->getABTests();
 
-        $this->assertEquals(count($abTests['abtests']), $abTests['count']);
+        $this->assertEquals(count((array) $abTests['abtests']), $abTests['count']);
     }
 
-    public function testAddGetAndDeleteABTest()
+    public function testSingleABTestOperations()
     {
-        $abTestToAdd = $this->getABTest('Some test');
+        $abTestToAdd = $this->getExampleABTest('Some test');
 
-        try {
-            $response = $this->analytics->addABTest($abTestToAdd);
-            $abTestID = $response['abtestID'];
-        } catch (AlgoliaException $e) {
-            $idToDelete = $this->guessABTestID($this->indexName);
-            $this->analytics->deleteABTest($idToDelete);
-            sleep(3);
-
-            $response = $this->analytics->addABTest($abTestToAdd);
-            $abTestID = $response['abtestID'];
-        }
-
-        sleep(2); // Just in case
+        $res = $this->analytics->addABTest($abTestToAdd);
+        $this->analytics->waitTask($res['index'], $res['taskID']);
+        $abTestID = $res['abTestID'];
 
         $abTest = $this->analytics->getABTest($abTestID);
-        $this->assertEquals($abTest['abtestID'], $abTestID);
+        $this->assertEquals($abTest['abTestID'], $abTestID);
         $this->assertArraySubset($abTestToAdd['variants'][0], $abTest['variants'][0]);
         unset($abTestToAdd['variants']);
 
         unset($abTestToAdd['endAt']); // Because time is modified by the API
         $this->assertArraySubset($abTestToAdd, $abTest);
+
+        $res = $this->analytics->stopABTest($abTestID);
+        $this->analytics->waitTask($res['index'], $res['taskID']);
+        $abTest = $this->analytics->getABTest($abTestID);
+        $this->assertEquals($abTest['status'], 'stopped');
+
+        $res = $this->analytics->deleteABTest($abTestID);
+        $this->analytics->waitTask($res['index'], $res['taskID']);
+        try {
+            $abTest = $this->analytics->getABTest($abTestID);
+            $this->assertTrue(false, "ABTest wasn't deleted properly.");
+        } catch (AlgoliaException $e) {
+            $this->assertEquals(404, $e->getCode());
+        }
     }
 
     /**
@@ -75,27 +80,16 @@ class AnalyticsTest extends AlgoliaSearchTestCase
         );
     }
 
-    public function getABTest($name)
+    public function getExampleABTest($name)
     {
+        $dt = new \DateTime('tomorrow');
         return array(
             "name" => $name,
             "variants" => array(
                 array("index" => $this->indexName,"trafficPercentage" => 90, "description" =>  ""),
                 array("index" => $this->indexName."-alt","trafficPercentage" => 10),
             ),
-            "endAt" =>  (new \DateTime('tomorrow'))->format('Y-m-d\TH:i:s\Z'),
+            "endAt" =>  $dt->format('Y-m-d\TH:i:s\Z'),
         );
-    }
-
-    private function guessABTestID($indexName)
-    {
-        $list = $this->analytics->getABTests(array('limit' => 1000));
-        foreach ($list['abtests'] as $ab) {
-            if ($ab['variants'][0]['index'] == $indexName) {
-                return $ab['abtestID'];
-            }
-        }
-
-        return null; // this will fail later
     }
 }

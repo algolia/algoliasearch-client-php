@@ -4,6 +4,9 @@
 
 <Contributors, please add your changes below this line>
 
+### 1.26.1
+
+* Fix PHP warning when using `searchDisjunctiveFaceting` - See [#407](https://github.com/algolia/algoliasearch-client-php/pull/407)
 
 ### 1.26.0
 

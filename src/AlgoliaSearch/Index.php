@@ -888,6 +888,10 @@ class Index
         $aggregated_answer = $answers['results'][0];
         $aggregated_answer['disjunctiveFacets'] = array();
         for ($i = 1; $i < count($answers['results']); $i++) {
+            if (!isset($answers['results'][$i]['facets'])) {
+                continue;
+            }
+
             foreach ($answers['results'][$i]['facets'] as $key => $facet) {
                 $aggregated_answer['disjunctiveFacets'][$key] = $facet;
                 if (!in_array($key, $disjunctive_refinements)) {

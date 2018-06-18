@@ -231,6 +231,32 @@ class Client
         $this->context->setExtraHeader($key, $value);
     }
 
+    public function waitTask($indexName, $taskID, $timeBeforeRetry = 100, $requestHeaders = array())
+    {
+        while (true) {
+            $res = $this->getTaskStatus($indexName, $taskID, $requestHeaders);
+            if ($res['status'] === 'published') {
+                return $res;
+            }
+            usleep($timeBeforeRetry * 1000);
+        }
+    }
+
+    public function getTaskStatus($indexName, $taskID, $requestHeaders = array())
+    {
+        return $this->request(
+            $this->context,
+            'GET',
+            sprintf('/1/indexes/%s/task/%s', urlencode($indexName), urlencode($taskID)),
+            null,
+            null,
+            $this->context->readHostsArray,
+            $this->context->connectTimeout,
+            $this->context->readTimeout,
+            $requestHeaders
+        );
+    }
+
     /**
      * This method allows to query multiple indexes with one API call.
      *

@@ -1,8 +1,13 @@
 ## Change Log
 
-### Unreleased
+### UNRELEASED
 
 <Contributors, please add your changes below this line>
+
+* Introduce AB Testing feature - PR [#408](https://github.com/algolia/algoliasearch-client-php/pull/#408)
+    List/Create/Stop/Delete AB Tests programmatically
+    Introduce new Analytics object, wrapper around the
+    [Analytics API](https://www.algolia.com/doc/rest-api/analytics/) (more methods to come).
 
 * 2 methods about taskID initially available in the `Index` moved to the `Client`. 
     You could get some taskID from the engine without necessarily have an instance of Index, 
@@ -50,7 +55,6 @@ https://blog.algolia.com/travis-encrypted-variables-external-contributions/
     Cursor can become so long that the generated URL fails (error HTTP 414).
 
 - Chore: Add PHP version to the UserAgent
-
 
 ### 1.25.1
 

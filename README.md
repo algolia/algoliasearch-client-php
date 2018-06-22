@@ -243,10 +243,10 @@ search.start();
 
 ### Search
 
-- [Search an index](https://algolia.com/doc/api-reference/api-methods/search/?language=php)
+- [Search index](https://algolia.com/doc/api-reference/api-methods/search/?language=php)
 - [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=php)
 - [Search multiple indexes](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=php)
-- [Browse an index](https://algolia.com/doc/api-reference/api-methods/browse/?language=php)
+- [Browse index](https://algolia.com/doc/api-reference/api-methods/browse/?language=php)
 
 
 
@@ -310,12 +310,12 @@ search.start();
 
 ### Query rules
 
-- [Save a single rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=php)
-- [Batch save multiple rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=php)
-- [Get a rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=php)
-- [Delete a single rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=php)
-- [Clear all rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=php)
-- [Search for rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=php)
+- [Save rule](https://algolia.com/doc/api-reference/api-methods/rules-save/?language=php)
+- [Batch rules](https://algolia.com/doc/api-reference/api-methods/rules-save-batch/?language=php)
+- [Get rule](https://algolia.com/doc/api-reference/api-methods/rules-get/?language=php)
+- [Delete rule](https://algolia.com/doc/api-reference/api-methods/rules-delete/?language=php)
+- [Clear rules](https://algolia.com/doc/api-reference/api-methods/rules-clear/?language=php)
+- [Search rules](https://algolia.com/doc/api-reference/api-methods/rules-search/?language=php)
 - [Export rules](https://algolia.com/doc/api-reference/api-methods/rules-export/?language=php)
 
 
@@ -323,11 +323,11 @@ search.start();
 
 ### A/B Test
 
-- [Add an A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=php)
-- [Get an A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=php)
+- [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=php)
+- [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=php)
 - [List A/B tests](https://algolia.com/doc/api-reference/api-methods/get-ab-tests/?language=php)
-- [Stop an A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=php)
-- [Delete an A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=php)
+- [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=php)
+- [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=php)
 
 
 

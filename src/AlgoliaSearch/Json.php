@@ -19,8 +19,6 @@ class Json
     public static function decode($json, $assoc = false, $depth = 512)
     {
         $value = json_decode($json, $assoc, $depth);
-        if (null === $value)
-            print_r($json);
 
         self::checkError();
 

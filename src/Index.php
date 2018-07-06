@@ -378,19 +378,6 @@ final class Index implements IndexInterface
 
     public function waitTask($taskId, $requestOptions = array())
     {
-        do {
-            $res = $this->getTask($taskId, $requestOptions);
-
-            if ('published' === $res['status']) {
-                return $res;
-            }
-
-            usleep(100000); // 0.1 second
-        } while (true);
-    }
-
-    public function ProposalWaitTask($taskId, $requestOptions = array())
-    {
         $retry = 1;
         $maxRetry = Config::$waitTaskRetry;
 

@@ -16,5 +16,5 @@ interface HttpClientInterface
         $protocolVersion = '1.1'
     );
 
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout, $userAgent);
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout);
 }

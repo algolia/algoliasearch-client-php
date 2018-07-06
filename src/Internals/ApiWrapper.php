@@ -110,8 +110,7 @@ class ApiWrapper
                 $responseBody = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
-                    $requestOptions->getConnectTimeout() * $retry,
-                    Config::getUserAgent()
+                    $requestOptions->getConnectTimeout() * $retry
                 );
 
                 return $responseBody;

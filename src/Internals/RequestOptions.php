@@ -58,6 +58,22 @@ class RequestOptions
         return $this;
     }
 
+    public function addDefaultHeader($name, $value)
+    {
+        if (!isset($this->headers[$name])) {
+            $this->headers[$name] = $value;
+        }
+        return $this;
+    }
+
+    public function addDefaultHeaders($headers)
+    {
+        foreach ($headers as $name => $value) {
+            $this->addDefaultHeader($name, $value);
+        }
+        return $this;
+    }
+
     public function getQueryParameters()
     {
         return $this->query;
@@ -127,24 +143,6 @@ class RequestOptions
     public function setConnectTimeout($connectTimeout)
     {
         $this->connectTimeout = $connectTimeout;
-        return $this;
-    }
-
-    public function addDefaultAppId($appId)
-    {
-        if (!isset($this->headers['X-Algolia-Application-Id'])) {
-            $this->headers['X-Algolia-Application-Id'] = $appId;
-        }
-
-        return $this;
-    }
-
-    public function addDefaultApiKey($apiKey)
-    {
-        if (!isset($this->headers['X-Algolia-API-Key'])) {
-            $this->headers['X-Algolia-API-Key'] = $apiKey;
-        }
-
         return $this;
     }
 }

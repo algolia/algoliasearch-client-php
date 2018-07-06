@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
+use Algolia\AlgoliaSearch\Config;
+
 class RequestOptionsFactory
 {
     private $appId;
@@ -27,37 +29,25 @@ class RequestOptionsFactory
 
     public function create($options)
     {
-        if ($options instanceof RequestOptions) {
-            return $options
-                ->addDefaultAppId($this->appId)
-                ->addDefaultApiKey($this->apiKey);
+        if (is_array($options)) {
+            $options = $this->format($options);
+            $options = $this->normalize($options);
+
+            $options = new RequestOptions($options);
         }
 
-        // TODO: Add exception if not array
-        $options = $this->format($options);
-        $options = $this->normalize($options);
-        $options = $this->addDefaultCredentials($options);
-
-        return new RequestOptions($options);
+        return $options->addDefaultHeaders(array(
+            'X-Algolia-Application-Id' => $this->appId,
+            'X-Algolia-API-Key' => $this->apiKey,
+            'User-Agent' => Config::getUserAgent(),
+        ));
     }
 
     public function createBodyLess($options)
     {
-        if ($options instanceof RequestOptions) {
-            return $options
-                ->addQueryParameters($options->getBody())
-                ->setBody(array())
-                ->addDefaultAppId($this->appId)
-                ->addDefaultApiKey($this->apiKey);
-        }
-
-        // TODO: Add exception if not array
-        $options = $this->normalize($options);
-        $options['query'] = array_merge($options['query'], $options['body']);
-        $options['body'] = array();
-        $options = $this->addDefaultCredentials($options);
-
-        return new RequestOptions($options);
+        return $this->create($options)
+            ->addQueryParameters($options->getBody())
+            ->setBody(array());
     }
 
     private function normalize($options)
@@ -119,15 +109,5 @@ class RequestOptionsFactory
         }
 
         return false;
-    }
-
-    private function addDefaultCredentials($options)
-    {
-        $options['headers'] += array(
-            'X-Algolia-Application-Id' => $this->appId,
-            'X-Algolia-API-Key' => $this->apiKey,
-        );
-
-        return $options;
     }
 }

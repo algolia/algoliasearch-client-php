@@ -51,15 +51,12 @@ class Guzzle6HttpClient implements HttpClientInterface
         return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout, $userAgent)
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
             $response = $this->client->send($request, array(
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
-                'headers' => array(
-                    'User-Agent' => $userAgent,
-                ),
             ));
 
             return $this->handleResponse($response);

@@ -203,7 +203,7 @@ final class Index implements IndexInterface
         'cursor' => null,
     ))
     {
-        return new ObjectIterator($this->api, $requestOptions);
+        return new ObjectIterator($this->indexName, $this->api, $requestOptions);
     }
 
     public function searchSynonyms($query, $requestOptions = array(
@@ -284,7 +284,7 @@ final class Index implements IndexInterface
 
     public function browseSynonyms($requestOptions = array())
     {
-        return new SynonymIterator($this->api, $requestOptions);
+        return new SynonymIterator($this->indexName, $this->api, $requestOptions);
     }
 
     public function searchRules($query, $requestOptions = array(
@@ -364,7 +364,7 @@ final class Index implements IndexInterface
 
     public function browseRules($requestOptions = array())
     {
-        return new RuleIterator($this->api, $requestOptions);
+        return new RuleIterator($this->indexName, $this->api, $requestOptions);
     }
 
     public function getTask($taskId, $requestOptions = array())

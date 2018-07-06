@@ -25,8 +25,8 @@ class RequestOptionsFactoryTest extends TestCase
         $this->assertEquals($expectedRequestOptions, array(
             'headers' => $actual->getHeaders(),
             'body' => $actual->getBody(),
-            'query' => $actual->getQuery(),
-            'builtQuery' => $actual->getBuiltQuery(),
+            'query' => $actual->getQueryParameters(),
+            'builtQuery' => $actual->getBuiltQueryParameters(),
             'readTimeout' => $actual->getReadTimeout(),
             'writeTimeout' => $actual->getWriteTimeout(),
             'connectTimeout' => $actual->getConnectTimeout(),

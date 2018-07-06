@@ -35,7 +35,7 @@ class ApiWrapper
         $this->http = $http;
     }
 
-    public function read($method, $path, array $requestOptions = array())
+    public function read($method, $path, $requestOptions = array())
     {
         if ('GET' == strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
@@ -52,14 +52,11 @@ class ApiWrapper
         );
     }
 
-    public function write($method, $path, array $requestOptions = array())
+    public function write($method, $path, $requestOptions = array(), $data = array())
     {
-        if (isset($requestOptions['timeout'])) {
-            $requestOptions['writeTimeout'] = $requestOptions['timeout'];
-        }
-
         if ('DELETE' == strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+            $data = array();
         } else {
             $requestOptions = $this->requestOptionsFactory->create($requestOptions);
         }
@@ -69,16 +66,36 @@ class ApiWrapper
             $path,
             $requestOptions,
             $this->clusterHosts->write(),
-            $requestOptions->getWriteTimeout()
+            $requestOptions->getWriteTimeout(),
+            $data
         );
     }
 
-    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout)
+    public function send($method, $hosts, $path, $requestOptions = array()/*s, $timeout*/)
+    {
+        $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+
+        if (!is_array($hosts)) {
+            $hosts = array($hosts);
+        }
+
+        return $this->request(
+            $method,
+            $path,
+            $requestOptions,
+            $hosts,
+            $requestOptions->getReadTimeout()
+        );
+    }
+
+    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
         $uri = $this->http
             ->createUri($path)
-            ->withQuery($requestOptions->getBuiltQuery())
+            ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
+
+        $body = array_merge($data, $requestOptions->getBody());
 
         $retry = 1;
         foreach ($hosts as $host) {
@@ -87,7 +104,7 @@ class ApiWrapper
                     $method,
                     $uri->withHost($host),
                     $requestOptions->getHeaders(),
-                    $requestOptions->getBody()
+                    $body
                 );
 
                 $responseBody = $this->http->sendRequest(
@@ -102,6 +119,7 @@ class ApiWrapper
                 $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
                 // TODO: something
+                dump($request);
                 dump('Bad request: '.$e->getMessage());
                 throw $e;
             } catch (\Exception $e) {

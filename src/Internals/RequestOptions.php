@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Internals;
 
 use Algolia\AlgoliaSearch\Config;
+use Algolia\AlgoliaSearch\Helpers;
 
 class RequestOptions
 {
@@ -82,7 +83,7 @@ class RequestOptions
 
     public function getBuiltQueryParameters()
     {
-        return \Algolia\AlgoliaSearch\build_query($this->query);
+        return Helpers::build_query($this->query);
     }
 
     public function getBody()

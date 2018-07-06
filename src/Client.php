@@ -201,4 +201,16 @@ final class Client implements ClientInterface
     {
         return $this->api->read('GET', api_path('/1/logs'), $requestOptions);
     }
+
+    public function getTask($indexName, $taskId, $requestOptions = array())
+    {
+        $index = $this->index($indexName);
+        return $index->getTask($taskId, $requestOptions);
+    }
+
+    public function waitTask($indexName, $taskId, $requestOptions = array())
+    {
+        $index = $this->index($indexName);
+        return $index->waitTask($taskId, $requestOptions);
+    }
 }

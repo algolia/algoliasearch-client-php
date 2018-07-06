@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
+use Algolia\AlgoliaSearch\Helpers;
 use PHPUnit\Framework\TestCase;
 
 class FunctionsTest extends TestCase
@@ -32,7 +33,7 @@ class FunctionsTest extends TestCase
     {
         $this->assertEquals(
             $expected,
-            \Algolia\AlgoliaSearch\build_query($queryParams)
+            Helpers::build_query($queryParams)
         );
     }
 

@@ -114,9 +114,9 @@ final class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid');
+        Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid');
 
-        return $this->batch(build_batch($objects, 'addObject'), $requestOptions);
+        return $this->batch(Helpers::build_batch($objects, 'addObject'), $requestOptions);
     }
 
     public function updateObject($object, $requestOptions = array(
@@ -134,7 +134,7 @@ final class Index implements IndexInterface
 
         $action = $create ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate';
 
-        return $this->batch(build_query($objects, $action), $requestOptions);
+        return $this->batch(Helpers::build_query($objects, $action), $requestOptions);
     }
 
     public function freshObjects($objects, $requestOptions = array())
@@ -174,12 +174,12 @@ final class Index implements IndexInterface
             return array('objectID' => $id);
         }, $objectIds);
 
-        return $this->batch(build_batch($objects, 'deleteObject'), $requestOptions);
+        return $this->batch(Helpers::build_batch($objects, 'deleteObject'), $requestOptions);
     }
 
     public function deleteBy(array $args, $requestOptions = array())
     {
-        $requestOptions['params'] = build_query($args);
+        $requestOptions['params'] = Helpers::build_query($args);
 
         return $this->api->write(
             'POST',
@@ -240,7 +240,7 @@ final class Index implements IndexInterface
         'forwardToReplicas' => true,
     ))
     {
-        ensure_objectID($synonyms, 'All synonyms must have an unique objectID to be valid');
+        Helpers::ensure_objectID($synonyms, 'All synonyms must have an unique objectID to be valid');
 
         $requestOptions = array_merge($synonyms, $requestOptions);
 
@@ -320,7 +320,7 @@ final class Index implements IndexInterface
         'forwardToReplicas' => true,
     ))
     {
-        ensure_objectID($rules, 'All rules must have an unique objectID to be valid');
+        Helpers::ensure_objectID($rules, 'All rules must have an unique objectID to be valid');
 
         $requestOptions = array_merge($rules, $requestOptions);
 

@@ -127,7 +127,7 @@ final class Client implements ClientInterface
     // BC Break: signature was changed
     public static function generateSecuredApiKey($parentApiKey, $restrictions)
     {
-        $urlEncodedRestrictions = build_query($restrictions);
+        $urlEncodedRestrictions = Helpers::build_query($restrictions);
 
         $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
 

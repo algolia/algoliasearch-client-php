@@ -38,7 +38,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
     {
         $index = static::getClient()->index(static::$indexes['main']);
 
-        $index->addObjects($this->airports);
+        $index->saveObjects($this->airports);
 
         $index->saveSynonym($this->pekingSyn);
 
@@ -67,7 +67,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
     {
         $index = static::getClient()->index(static::$indexes['main']);
 
-        $index->addObject($this->airports[0]);
+        $index->saveObject($this->airports[0]);
 
         $index->freshSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
 

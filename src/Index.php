@@ -107,12 +107,12 @@ final class Index implements IndexInterface
         );
     }
 
-    public function addObject($object, $requestOptions = array())
+    public function saveObject($object, $requestOptions = array())
     {
-        return $this->addObjects(array($object), $requestOptions);
+        return $this->saveObjects(array($object), $requestOptions);
     }
 
-    public function addObjects($objects, $requestOptions = array())
+    public function saveObjects($objects, $requestOptions = array())
     {
         ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid');
 
@@ -151,7 +151,7 @@ final class Index implements IndexInterface
             ))
         );
 
-        $this->addObjects($objects, $requestOptions);
+        $this->saveObjects($objects, $requestOptions);
 
         $this->api->write(
             'POST',

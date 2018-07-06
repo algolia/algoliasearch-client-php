@@ -18,7 +18,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
     {
         $index = static::getClient()->index(static::$indexes['main']);
 
-        $index->addObject($this->airports[0]);
+        $index->saveObject($this->airports[0]);
 
         $index->saveRule($this->getRuleStub('rule-1'));
 
@@ -46,7 +46,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
     {
         $index = static::getClient()->index(static::$indexes['main']);
 
-        $index->addObject($this->airports[0]);
+        $index->saveObject($this->airports[0]);
 
         $index->freshRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
 

@@ -4,6 +4,11 @@ namespace Algolia\AlgoliaSearch\Iterators;
 
 class ObjectIterator extends AlgoliaIterator
 {
+    public function getCursor()
+    {
+        return isset($this->response['cursor']) ? $this->response['cursor'] : '';
+    }
+
     /**
      * Exporting objects (records) doesn't use the search function but the
      * browse method, no client-side formatting is required.

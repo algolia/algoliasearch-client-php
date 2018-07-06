@@ -55,12 +55,11 @@ final class Index implements IndexInterface
             'forwardToReplicas' => true,
     ))
     {
-        $requestOptions += $settings;
-
         return $this->api->write(
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
-            $requestOptions
+            $requestOptions,
+            $settings
         );
     }
 

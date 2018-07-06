@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
-use Algolia\AlgoliaSearch\Config;
-
 class RequestOptionsFactory
 {
     private $appId;
@@ -18,16 +16,10 @@ class RequestOptionsFactory
     );
 
     private $validHeaders = array(
-        'X-Algolia-Application-Id',
-        'X-Algolia-API-Key',
-        'X-Forwarded-For',
-        'X-Algolia-UserToken',
-        'X-Forwarded-API-Key',
-        'X-Algolia-User-ID',
         'Content-type',
     );
 
-    public function __construct($appId, $apiKey)
+    public function __construct($appId = null, $apiKey = null)
     {
         $this->appId = $appId;
         $this->apiKey = $apiKey;
@@ -35,40 +27,48 @@ class RequestOptionsFactory
 
     public function create($options)
     {
-        $options = $this->format($options);
+        if ($options instanceof RequestOptions) {
+            return $options
+                ->addDefaultAppId($this->appId)
+                ->addDefaultApiKey($this->apiKey);
+        }
 
-        return new RequestOptions($this->normalize($options));
+        // TODO: Add exception if not array
+        $options = $this->format($options);
+        $options = $this->normalize($options);
+        $options = $this->addDefaultCredentials($options);
+
+        return new RequestOptions($options);
     }
 
     public function createBodyLess($options)
     {
-        $normalized = $this->normalize($options);
-        $normalized['query'] = array_merge($normalized['query'], $normalized['body']);
-        $normalized['body'] = array();
+        if ($options instanceof RequestOptions) {
+            return $options
+                ->addQueryParameters($options->getBody())
+                ->setBody(array())
+                ->addDefaultAppId($this->appId)
+                ->addDefaultApiKey($this->apiKey);
+        }
 
-        return new RequestOptions($normalized);
+        // TODO: Add exception if not array
+        $options = $this->normalize($options);
+        $options['query'] = array_merge($options['query'], $options['body']);
+        $options['body'] = array();
+        $options = $this->addDefaultCredentials($options);
+
+        return new RequestOptions($options);
     }
 
     private function normalize($options)
     {
         $normalized = array(
-            'headers' => array(
-                'X-Algolia-Application-Id' => $this->appId,
-                'X-Algolia-API-Key' => $this->apiKey,
-            ),
+            'headers' => array(),
             'query' => array(),
             'body' => array(),
-            'readTimeout' => Config::getReadTimeout(),
-            'writeTimeout' => Config::getWriteTimeout(),
-            'connectTimeout' => Config::getConnectTimeout(),
         );
 
         foreach ($options as $optionName => $value) {
-
-            // In this case, requestOptions is holding objects, not params
-            if (is_int($optionName) && is_array($value)) {
-                $normalized['body'][] = $value;
-            }
 
             $type = $this->getOptionType($optionName);
 
@@ -78,8 +78,6 @@ class RequestOptionsFactory
                 $normalized[$type][$optionName] = $value;
             }
         }
-
-        $normalized = $this->removeEmptyValue($normalized);
 
         return $normalized;
     }
@@ -99,9 +97,7 @@ class RequestOptionsFactory
 
     private function getOptionType($optionName)
     {
-        if (is_int($optionName)) {
-            return 'body';
-        } elseif (in_array($optionName, $this->validHeaders, true)) {
+        if ($this->isValidHeaderName($optionName)) {
             return 'headers';
         } elseif (in_array($optionName, $this->validQueryParameters, true)) {
             return 'query';
@@ -112,35 +108,26 @@ class RequestOptionsFactory
         }
     }
 
-    private function removeEmptyValue($normalized)
+    private function isValidHeaderName($name)
     {
-        foreach (array('headers', 'query', 'body') as $category) {
-            foreach ($normalized[$category] as $key => $value) {
-                if ($key === 'query') {
-                    // query is one of the very rate paramters allowed to be empty
-                    continue;
-                }
-
-                if ($this->isEmpty($value)) {
-                    unset($normalized[$category][$key]);
-                }
-            }
+        if (preg_match('/^X-[a-zA-Z-]+/', $name)) {
+            return true;
         }
 
-        return $normalized;
-    }
-
-    /**
-     * PHP native empty() function will consider int(0) or bool(false) empty
-     * but `forwardToReplica = false` or `page = 0` are meaningful and need to be sent
-     * to the API.
-     */
-    private function isEmpty($value)
-    {
-        if (is_array($value) || is_string($value)) {
-            return empty($value);
+        if (in_array($name, $this->validHeaders, true)) {
+            return true;
         }
 
         return false;
+    }
+
+    private function addDefaultCredentials($options)
+    {
+        $options['headers'] += array(
+            'X-Algolia-Application-Id' => $this->appId,
+            'X-Algolia-API-Key' => $this->apiKey,
+        );
+
+        return $options;
     }
 }

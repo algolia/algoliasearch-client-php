@@ -2,47 +2,148 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
+use Algolia\AlgoliaSearch\Config;
+
 class RequestOptions
 {
-    private $options;
+    private $headers = array();
+
+    private $query = array();
+
+    private $body = array();
+
+    private $readTimeout;
+
+    private $writeTimeout;
+
+    private $connectTimeout;
 
     public function __construct(array $options = array())
     {
-        $this->options = $options;
+        foreach(array('headers', 'query', 'body') as $name) {
+            if (isset($options[$name]) && !empty($options[$name])) {
+                $this->{$name} = $options[$name];
+            }
+        }
+
+        $this->readTimeout =
+            isset($options['readTimeout']) ? $options['readTimeout'] : Config::getReadTimeout();
+        $this->writeTimeout =
+            isset($options['writeTimeout']) ? $options['writeTimeout'] : Config::getWriteTimeout();
+        $this->connectTimeout =
+            isset($options['connectTimeout']) ? $options['connectTimeout'] : Config::getConnectTimeout();
     }
 
     public function getHeaders()
     {
-        return $this->options['headers'];
+        return $this->headers;
     }
 
-    public function getQuery()
+    public function setHeaders($headers)
     {
-        return $this->options['query'];
+        $this->headers = $headers;
+        return $this;
     }
 
-    public function getBuiltQuery()
+    public function addHeader($name, $value)
     {
-        return \Algolia\AlgoliaSearch\build_query($this->options['query']);
+        $this->headers[$name] = $value;
+        return $this;
+    }
+
+    public function addHeaders($headers)
+    {
+        $this->headers = array_merge($this->headers, $headers);
+        return $this;
+    }
+
+    public function getQueryParameters()
+    {
+        return $this->query;
+    }
+
+    public function addQueryParameter($name, $value)
+    {
+        $this->query[$name] = $value;
+        return $this;
+    }
+
+    public function addQueryParameters($headers)
+    {
+        $this->headers = array_merge($this->headers, $headers);
+        return $this;
+    }
+
+    public function setQueryParameters($queryParameters)
+    {
+        $this->query = $queryParameters;
+        return $this;
+    }
+
+    public function getBuiltQueryParameters()
+    {
+        return \Algolia\AlgoliaSearch\build_query($this->query);
     }
 
     public function getBody()
     {
-        return $this->options['body'];
+        return $this->body;
+    }
+
+    public function setBody($body)
+    {
+        $this->body = $body;
+        return $this;
     }
 
     public function getReadTimeout()
     {
-        return $this->options['readTimeout'];
+        return $this->readTimeout;
+    }
+
+    public function setReadTimeout($readTimeout)
+    {
+        $this->readTimeout = $readTimeout;
+        return $this;
     }
 
     public function getWriteTimeout()
     {
-        return $this->options['writeTimeout'];
+        return $this->writeTimeout;
+    }
+
+    public function setWriteTimeout($writeTimeout)
+    {
+        $this->writeTimeout = $writeTimeout;
+        return $this;
     }
 
     public function getConnectTimeout()
     {
-        return $this->options['connectTimeout'];
+        return $this->connectTimeout;
+    }
+
+    public function setConnectTimeout($connectTimeout)
+    {
+        $this->connectTimeout = $connectTimeout;
+        return $this;
+    }
+
+    public function addDefaultAppId($appId)
+    {
+        if (!isset($this->headers['X-Algolia-Application-Id'])) {
+            $this->headers['X-Algolia-Application-Id'] = $appId;
+        }
+
+        return $this;
+    }
+
+    public function addDefaultApiKey($apiKey)
+    {
+        if (!isset($this->headers['X-Algolia-API-Key'])) {
+            $this->headers['X-Algolia-API-Key'] = $apiKey;
+        }
+
+        return $this;
     }
 }

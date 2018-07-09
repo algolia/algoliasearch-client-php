@@ -8,6 +8,7 @@ use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\Debug;
 
 class ApiWrapper
 {
@@ -116,16 +117,19 @@ class ApiWrapper
 
                 return $responseBody;
             } catch (RetriableException $e) {
+                if (Debug::isEnabled()) {
+                    Debug::handle("The host [$host] failed, retrying with another host.");
+                }
+
                 $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
-                // TODO: something
-                dump($request);
-                dump('Bad request: '.$e->getMessage());
+                if (Debug::isEnabled()) {
+                    Debug::handle("The following request was malformed: ", $request);
+                }
+
                 throw $e;
             } catch (\Exception $e) {
-                // TODO: panic
-                dump($e);
-                die;
+                throw $e;
             }
 
             ++$retry;

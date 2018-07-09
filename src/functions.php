@@ -6,7 +6,3 @@ function api_path($pathFormat, $args = null, $_ = null)
 {
     return call_user_func_array(array('\Algolia\AlgoliaSearch\Helpers', 'api_path'), func_get_args());
 }
-
-
-
-

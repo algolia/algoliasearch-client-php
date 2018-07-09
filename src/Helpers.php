@@ -75,7 +75,7 @@ class Helpers
         }, $items);
     }
 
-    function ensure_objectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
+    public static function ensure_objectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
     {
         // In case a single objects is passed
         if (isset($objects['objectID'])) {

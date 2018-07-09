@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
+use Algolia\AlgoliaSearch\Helpers;
+
 class RuleIterator extends AlgoliaIterator
 {
     protected function formatHit(array $hit)
@@ -15,7 +17,7 @@ class RuleIterator extends AlgoliaIterator
     {
         $this->response = $this->api->read(
             'POST',
-            api_path('/1/indexes/%s/rules/search', $this->indexName),
+            Helpers::api_path('/1/indexes/%s/rules/search', $this->indexName),
             array_merge(
                 $this->requestOptions,
                 array('page' => $this->getCurrentPage())

@@ -35,11 +35,15 @@ class RequestOptionsFactory
             $options = $this->normalize($options);
 
             $options = new RequestOptions($options);
-        } else {
+        } elseif ($options instanceof RequestOptions) {
             $defaults = $this->create($defaults);
             $options->addDefaultHeaders($defaults->getHeaders());
             $options->addDefaultQueryParameters($defaults->getQueryParameters());
             $options->addDefaultBodyParameters($defaults->getBody());
+        } else {
+            throw new \InvalidArgumentException(
+                'RequestOptions can only be created from array or from RequestOptions object'
+            );
         }
 
         return $options->addDefaultHeaders(array(

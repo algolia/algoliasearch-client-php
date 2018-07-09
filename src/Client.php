@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Interfaces\Client as ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
+use Algolia\AlgoliaSearch\Internals\RequestOptions;
 use Algolia\AlgoliaSearch\Internals\RequestOptionsFactory;
 use GuzzleHttp\Client as GuzzleClient;
 
@@ -52,31 +53,27 @@ final class Client implements ClientInterface
 
     public function moveIndex($srcIndexName, $destIndexName, $requestOptions = array())
     {
-        $requestOptions += array(
-            'operation' => 'move',
-            'destination' => $destIndexName,
-        );
-
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
+            array(
+                'operation' => 'move',
+                'destination' => $destIndexName,
+            ),
             $requestOptions
         );
     }
 
     // BC Break: ScopedCopyIndex was removed
-    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array(
-        'scope' => null,
-    ))
+    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
     {
-        $requestOptions += array(
-            'operation' => 'copy',
-            'destination' => $destIndexName,
-        );
-
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
+            array(
+                'operation' => 'copy',
+                'destination' => $destIndexName,
+            ),
             $requestOptions
         );
     }
@@ -91,6 +88,7 @@ final class Client implements ClientInterface
         return $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s', $indexName),
+            array(),
             $requestOptions
         );
     }
@@ -107,21 +105,17 @@ final class Client implements ClientInterface
 
     public function addApiKey($keyParams, $requestOptions = array())
     {
-        $requestOptions += $keyParams;
-
-        return $this->api->write('POST', api_path('/1/keys'), $requestOptions);
+        return $this->api->write('POST', api_path('/1/keys'), $keyParams, $requestOptions);
     }
 
     public function updateApiKey($key, $keyParams, $requestOptions = array())
     {
-        $requestOptions += $keyParams;
-
-        return $this->api->write('PUT', api_path('/1/keys/%s', $key), $requestOptions);
+        return $this->api->write('PUT', api_path('/1/keys/%s', $key), $keyParams, $requestOptions);
     }
 
     public function deleteApiKey($key, $requestOptions = array())
     {
-        return $this->api->write('DELETE', api_path('/1/keys/%s', $key), $requestOptions);
+        return $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
     }
 
     // BC Break: signature was changed
@@ -134,12 +128,14 @@ final class Client implements ClientInterface
         return base64_encode($content);
     }
 
-    public function searchUserIds($query, $requestOptions = array(
-        'cluster' => null,
-        'page' => 0,
-        'hitsPerPage' => 20,
-    ))
+    public function searchUserIds($query, $requestOptions = array())
     {
+        if (is_array($requestOptions)) {
+            $requestOptions['query'] = $query;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('query', $query);
+        }
+
         return $this->api->read('POST', api_path('/1/clusters/mapping/search'), $requestOptions);
     }
 
@@ -148,12 +144,12 @@ final class Client implements ClientInterface
         return $this->api->read('GET', api_path('/1/clusters'), $requestOptions);
     }
 
-    public function listUserIds($requestOptions = array(
-        'page' => 0,
-        'hitsPerPage' => 20,
-    ))
+    public function listUserIds($requestOptions = array())
     {
-        return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions);
+        return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions, array(
+            'page' => 0,
+            'hitsPerPage' => 20,
+        ));
     }
 
     public function getUserId($userId, $requestOptions = array())
@@ -168,38 +164,47 @@ final class Client implements ClientInterface
 
     public function assignUserId($userId, $clusterName, $requestOptions = array())
     {
-        $requestOptions += array(
-            'X-Algolia-User-ID' => $userId,
-            'cluster' => $clusterName,
-        );
+
+        if (is_array($requestOptions)) {
+            $requestOptions['X-Algolia-User-ID'] = $userId;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addHeader('X-Algolia-User-ID', $userId);
+        }
 
         return $this->api->write(
             'POST',
             api_path('/1/clusters/mapping'),
+            array(
+                'cluster' => $clusterName,
+            ),
             $requestOptions
         );
     }
 
     public function removeUserId($userId, $requestOptions = array())
     {
-        $requestOptions += array(
-            'X-Algolia-User-ID' => $userId,
-        );
+
+        if (is_array($requestOptions)) {
+            $requestOptions['X-Algolia-User-ID'] = $userId;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addHeader('X-Algolia-User-ID', $userId);
+        }
 
         return $this->api->write(
             'DELETE',
             api_path('/1/clusters/mapping'),
+            array(),
             $requestOptions
         );
     }
 
-    public function getLogs($requestOptions = array(
-        'offset' => 0,
-        'length' => 10,
-        'type' => 'all',
-    ))
+    public function getLogs($requestOptions = array())
     {
-        return $this->api->read('GET', api_path('/1/logs'), $requestOptions);
+        return $this->api->read('GET', api_path('/1/logs'), $requestOptions, array(
+            'offset' => 0,
+            'length' => 10,
+            'type' => 'all',
+        ));
     }
 
     public function getTask($indexName, $taskId, $requestOptions = array())

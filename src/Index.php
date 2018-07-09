@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\Index as IndexInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
+use Algolia\AlgoliaSearch\Internals\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
@@ -26,7 +27,11 @@ final class Index implements IndexInterface
 
     public function search($query, $requestOptions = array())
     {
-        $requestOptions['query'] = $query;
+        if (is_array($requestOptions)) {
+            $requestOptions['query'] = $query;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('query', $query);
+        }
 
         return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
     }
@@ -36,36 +41,37 @@ final class Index implements IndexInterface
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/clear', $this->indexName),
+            array(),
             $requestOptions
         );
     }
 
     public function getSettings($requestOptions = array())
     {
-        $requestOptions['getVersion'] = 2;
-
         return $this->api->read(
             'GET',
             api_path('/1/indexes/%s/settings', $this->indexName),
-            $requestOptions
+            $requestOptions,
+            array(
+                'getVersion' => 2,
+            )
         );
     }
 
-    public function setSettings($settings, $requestOptions = array(
-            'forwardToReplicas' => true,
-    ))
+    public function setSettings($settings, $requestOptions = array())
     {
         return $this->api->write(
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
+            $settings,
             $requestOptions,
-            $settings
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
-    public function getObject($objectId, $requestOptions = array(
-        'attributesToRetrieve' => array(),
-    ))
+    public function getObject($objectId, $requestOptions = array())
     {
         return $this->api->read(
             'GET',
@@ -74,9 +80,7 @@ final class Index implements IndexInterface
         );
     }
 
-    public function getObjects($objectIds, $requestOptions = array(
-        'attributesToRetrieve' => array(),
-    ))
+    public function getObjects($objectIds, $requestOptions = array())
     {
         $attributesToRetrieve = '';
         if ($requestOptions['attributesToRetrieve']) {
@@ -100,6 +104,7 @@ final class Index implements IndexInterface
             $requests[] = $req;
         }
 
+        // TODO: Probably doesnt work
         return $this->api->read(
             'POST',
             api_path('/1/indexes/*/objects'),
@@ -114,27 +119,29 @@ final class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid');
+        Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
 
         return $this->batch(Helpers::build_batch($objects, 'addObject'), $requestOptions);
     }
 
-    public function updateObject($object, $requestOptions = array(
-        'createIfNotExists' => true,
-    ))
+    public function partialUpdateObject($object, $requestOptions = array())
     {
-        return $this->updateObjects(array($object), $requestOptions);
+        return $this->partialUpdateObjects(array($object), $requestOptions);
     }
 
-    public function updateObjects($objects, $requestOptions = array(
-        'createIfNotExists' => true,
-    ))
+    public function partialUpdateObjects($objects, $requestOptions = array())
     {
-        $create = isset($requestOptions['createIfNotExists']) ? $requestOptions['createIfNotExists'] : true;
+        return $this->batch(Helpers::build_batch($objects, 'partialUpdateObjectNoCreate'), $requestOptions);
+    }
 
-        $action = $create ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate';
+    public function partialUpdateOrCreateObject($object, $requestOptions = array())
+    {
+        return $this->partialUpdateOrCreateObjects(array($object), $requestOptions);
+    }
 
-        return $this->batch(Helpers::build_query($objects, $action), $requestOptions);
+    public function partialUpdateOrCreateObjects($objects, $requestOptions = array())
+    {
+        return $this->batch(Helpers::build_batch($objects, 'partialUpdateObject'), $requestOptions);
     }
 
     public function freshObjects($objects, $requestOptions = array())
@@ -144,11 +151,12 @@ final class Index implements IndexInterface
         $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $this->indexName),
-            array_merge($requestOptions, array(
+            array(
                 'operation' => 'copy',
                 'destination' => $tmpName,
                 'scope' => array('settings', 'synonyms', 'rules'),
-            ))
+            ),
+            $requestOptions
         );
 
         $this->saveObjects($objects, $requestOptions);
@@ -156,10 +164,11 @@ final class Index implements IndexInterface
         $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $this->indexName),
-            array_merge($requestOptions, array(
+            array(
                 'operation' => 'move',
                 'destination' => $tmpName,
-            ))
+            ),
+            $requestOptions
         );
     }
 
@@ -179,39 +188,36 @@ final class Index implements IndexInterface
 
     public function deleteBy(array $args, $requestOptions = array())
     {
-        $requestOptions['params'] = Helpers::build_query($args);
-
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/deleteByQuery', $this->indexName),
+            array('params' => Helpers::build_query($args)),
             $requestOptions
         );
     }
 
     public function batch($requests, $requestOptions = array())
     {
-        $requestOptions['requests'] = $requests;
-
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/batch', $this->indexName),
+            array('requests' => $requests),
             $requestOptions
         );
     }
 
-    public function browse($requestOptions = array(
-        'cursor' => null,
-    ))
+    public function browse($requestOptions = array())
     {
         return new ObjectIterator($this->indexName, $this->api, $requestOptions);
     }
 
-    public function searchSynonyms($query, $requestOptions = array(
-        'type' => array(),
-        'page' => 0,
-    ))
+    public function searchSynonyms($query, $requestOptions = array())
     {
-        $requestOptions['query'] = $query;
+        if (is_array($requestOptions)) {
+            $requestOptions['query'] = $query;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('query', $query);
+        }
 
         return $this->api->read(
             'POST',
@@ -229,56 +235,60 @@ final class Index implements IndexInterface
         );
     }
 
-    public function saveSynonym($synonym, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function saveSynonym($synonym, $requestOptions = array())
     {
         return $this->saveSynonyms(array($synonym), $requestOptions);
     }
 
-    public function saveSynonyms($synonyms, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function saveSynonyms($synonyms, $requestOptions = array())
     {
         Helpers::ensure_objectID($synonyms, 'All synonyms must have an unique objectID to be valid');
-
-        $requestOptions = array_merge($synonyms, $requestOptions);
 
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/batch', $this->indexName),
-            $requestOptions
+            $synonyms,
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
-    public function freshSynonyms($synonyms, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function freshSynonyms($synonyms, $requestOptions = array())
     {
-        $requestOptions['replaceExistingSynonyms'] = true;
+        if (is_array($requestOptions)) {
+            $requestOptions['replaceExistingSynonyms'] = true;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addQueryParameter('replaceExistingSynonyms', true);
+        }
 
         return $this->saveSynonyms($synonyms, $requestOptions);
     }
 
-    public function deleteSynonym($objectId, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function deleteSynonym($objectId, $requestOptions = array())
     {
         return $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
-            $requestOptions
+            array(),
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
-    public function clearSynonyms($requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function clearSynonyms($requestOptions = array())
     {
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
-            $requestOptions
+            array(),
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
@@ -287,11 +297,13 @@ final class Index implements IndexInterface
         return new SynonymIterator($this->indexName, $this->api, $requestOptions);
     }
 
-    public function searchRules($query, $requestOptions = array(
-        'page' => 0,
-    ))
+    public function searchRules($query, $requestOptions = array())
     {
-        $requestOptions['query'] = $query;
+        if (is_array($requestOptions)) {
+            $requestOptions['query'] = $query;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('query', $query);
+        }
 
         return $this->api->read(
             'POST',
@@ -309,56 +321,60 @@ final class Index implements IndexInterface
         );
     }
 
-    public function saveRule($rule, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function saveRule($rule, $requestOptions = array())
     {
         return $this->saveRules(array($rule), $requestOptions);
     }
 
-    public function saveRules($rules, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function saveRules($rules, $requestOptions = array())
     {
         Helpers::ensure_objectID($rules, 'All rules must have an unique objectID to be valid');
-
-        $requestOptions = array_merge($rules, $requestOptions);
 
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/batch', $this->indexName),
-            $requestOptions
+            $rules,
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
-    public function freshRules($rules, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function freshRules($rules, $requestOptions = array())
     {
-        $requestOptions['clearExistingRules'] = true;
+        if (is_array($requestOptions)) {
+            $requestOptions['clearExistingRules'] = true;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addQueryParameter('clearExistingRules', true);
+        }
 
         return $this->saveRules($rules, $requestOptions);
     }
 
-    public function deleteRule($objectId, $requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function deleteRule($objectId, $requestOptions = array())
     {
         return $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
-            $requestOptions
+            array(),
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
-    public function clearRules($requestOptions = array(
-        'forwardToReplicas' => true,
-    ))
+    public function clearRules($requestOptions = array())
     {
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/clear', $this->indexName),
-            $requestOptions
+            array(),
+            $requestOptions,
+            array(
+                'forwardToReplicas' => true,
+            )
         );
     }
 
@@ -396,13 +412,22 @@ final class Index implements IndexInterface
         throw new TaskTooLongException();
     }
 
-    public function getDeprecatedIndexApiKey($key)
+    public function getDeprecatedIndexApiKey($key, $requestOptions = array())
     {
-        return $this->api->write('GET', api_path('/1/indexes/%s/keys/%s', $this->indexName, $key));
+        return $this->api->read(
+            'GET',
+            api_path('/1/indexes/%s/keys/%s', $this->indexName, $key),
+            $requestOptions
+        );
     }
 
-    public function deleteDeprecatedIndexApiKey($key)
+    public function deleteDeprecatedIndexApiKey($key, $requestOptions = array())
     {
-        return $this->api->write('DELETE', api_path('/1/indexes/%s/keys/%s', $this->indexName, $key));
+        return $this->api->write(
+            'DELETE',
+            api_path('/1/indexes/%s/keys/%s', $this->indexName, $key),
+            array(),
+            $requestOptions
+        );
     }
 }

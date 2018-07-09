@@ -9,7 +9,7 @@ use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use GuzzleHttp\Client as GuzzleClient;
 
-class Analytics
+final class Analytics
 {
     /**
      * @var ApiWrapper

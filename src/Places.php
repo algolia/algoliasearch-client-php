@@ -8,7 +8,7 @@ use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use GuzzleHttp\Client as GuzzleClient;
 
-class Places
+final class Places
 {
     /**
      * @var ApiWrapper

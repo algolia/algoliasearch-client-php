@@ -73,7 +73,7 @@ class ApiWrapper
         );
     }
 
-    public function send($method, $hosts, $path, $requestOptions = array()/*s, $timeout*/)
+    public function send($method, $hosts, $path, $requestOptions = array())
     {
         $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
 

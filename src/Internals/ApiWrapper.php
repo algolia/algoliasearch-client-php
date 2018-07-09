@@ -2,11 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Internals;
 
-use Algolia\AlgoliaSearch\Config;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 
 class ApiWrapper
 {

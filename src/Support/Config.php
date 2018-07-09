@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch;
+namespace Algolia\AlgoliaSearch\Support;
 
 final class Config
 {

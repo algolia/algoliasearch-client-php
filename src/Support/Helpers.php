@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch;
+namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 

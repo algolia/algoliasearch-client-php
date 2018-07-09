@@ -6,8 +6,8 @@ use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Interfaces\Client as ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
-use Algolia\AlgoliaSearch\Internals\RequestOptions;
-use Algolia\AlgoliaSearch\Internals\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use GuzzleHttp\Client as GuzzleClient;
 
 final class Client implements ClientInterface

@@ -1,8 +1,8 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Internals;
+namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Config;
+use Algolia\AlgoliaSearch\Support\Config;
 
 class RequestOptionsFactory
 {

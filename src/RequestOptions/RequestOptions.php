@@ -1,9 +1,9 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Internals;
+namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Config;
-use Algolia\AlgoliaSearch\Helpers;
+use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\Helpers;
 
 class RequestOptions
 {

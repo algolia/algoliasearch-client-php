@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Internals\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use PHPUnit\Framework\TestCase;
 
 class RequestOptionsFactoryTest extends TestCase

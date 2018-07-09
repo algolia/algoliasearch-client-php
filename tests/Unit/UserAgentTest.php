@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Config;
+use Algolia\AlgoliaSearch\Support\Config;
 use PHPUnit\Framework\TestCase;
 
 class UserAgentTest extends TestCase

@@ -40,12 +40,6 @@ class RequestOptions
         return $this->headers;
     }
 
-    public function setHeaders($headers)
-    {
-        $this->headers = $headers;
-        return $this;
-    }
-
     public function addHeader($name, $value)
     {
         $this->headers[$name] = $value;
@@ -74,9 +68,20 @@ class RequestOptions
         return $this;
     }
 
+    public function setHeaders($headers)
+    {
+        $this->headers = $headers;
+        return $this;
+    }
+
     public function getQueryParameters()
     {
         return $this->query;
+    }
+
+    public function getBuiltQueryParameters()
+    {
+        return Helpers::build_query($this->query);
     }
 
     public function addQueryParameter($name, $value)
@@ -85,9 +90,25 @@ class RequestOptions
         return $this;
     }
 
-    public function addQueryParameters($headers)
+    public function addQueryParameters($parameters)
     {
-        $this->headers = array_merge($this->headers, $headers);
+        $this->query = array_merge($this->query, $parameters);
+        return $this;
+    }
+
+    public function addDefaultQueryParameter($name, $value)
+    {
+        if (!isset($this->query[$name])) {
+            $this->query[$name] = $value;
+        }
+        return $this;
+    }
+
+    public function addDefaultQueryParameters($parameters)
+    {
+        foreach ($parameters as $name => $value) {
+            $this->addDefaultQueryParameter($name, $value);
+        }
         return $this;
     }
 
@@ -97,14 +118,37 @@ class RequestOptions
         return $this;
     }
 
-    public function getBuiltQueryParameters()
-    {
-        return Helpers::build_query($this->query);
-    }
-
     public function getBody()
     {
         return $this->body;
+    }
+
+    public function addBodyParameter($name, $value)
+    {
+        $this->body[$name] = $value;
+        return $this;
+    }
+
+    public function addBodyParameters($parameters)
+    {
+        $this->body = array_merge($this->body, $parameters);
+        return $this;
+    }
+
+    public function addDefaultBodyParameter($name, $value)
+    {
+        if (!isset($this->body[$name])) {
+            $this->body[$name] = $value;
+        }
+        return $this;
+    }
+
+    public function addDefaultBodyParameters($parameters)
+    {
+        foreach ($parameters as $name => $value) {
+            $this->addDefaultBodyParameter($name, $value);
+        }
+        return $this;
     }
 
     public function setBody($body)

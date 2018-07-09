@@ -27,13 +27,19 @@ class RequestOptionsFactory
         $this->apiKey = $apiKey;
     }
 
-    public function create($options)
+    public function create($options, $defaults = array())
     {
         if (is_array($options)) {
+            $options  += $defaults;
             $options = $this->format($options);
             $options = $this->normalize($options);
 
             $options = new RequestOptions($options);
+        } else {
+            $defaults = $this->create($defaults);
+            $options->addDefaultHeaders($defaults->getHeaders());
+            $options->addDefaultQueryParameters($defaults->getQueryParameters());
+            $options->addDefaultBodyParameters($defaults->getBody());
         }
 
         return $options->addDefaultHeaders(array(
@@ -43,9 +49,11 @@ class RequestOptionsFactory
         ));
     }
 
-    public function createBodyLess($options)
+    public function createBodyLess($options, $defaults = array())
     {
-        return $this->create($options)
+        $options = $this->create($options, $defaults);
+
+        return $options
             ->addQueryParameters($options->getBody())
             ->setBody(array());
     }

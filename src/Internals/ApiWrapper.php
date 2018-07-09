@@ -35,12 +35,12 @@ class ApiWrapper
         $this->http = $http;
     }
 
-    public function read($method, $path, $requestOptions = array())
+    public function read($method, $path, $requestOptions = array(), $defaults = array())
     {
         if ('GET' == strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaults);
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaults);
         }
 
         return $this->request(
@@ -52,13 +52,13 @@ class ApiWrapper
         );
     }
 
-    public function write($method, $path, $requestOptions = array(), $data = array())
+    public function write($method, $path, $data = array(), $requestOptions = array(), $defaults = array())
     {
         if ('DELETE' == strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaults);
             $data = array();
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaults);
         }
 
         return $this->request(

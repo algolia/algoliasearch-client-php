@@ -7,6 +7,7 @@ use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\Config;
 use GuzzleHttp\Client as GuzzleClient;
 
 final class Analytics

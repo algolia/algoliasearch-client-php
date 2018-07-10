@@ -74,7 +74,7 @@ final class Config
                 });
             } else {
                 self::setHttpClient(function () {
-                    return new \Algolia\AlgoliaSearch\Legacy\Php53HttpClient();
+                    return new \Algolia\AlgoliaSearch\Http\Php53HttpClient();
                 });
             }
         }

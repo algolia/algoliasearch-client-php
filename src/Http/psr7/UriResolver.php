@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Legacy\Psr7;
+namespace Algolia\AlgoliaSearch\Http\Psr7;
 
 use Psr\Http\Message\UriInterface;
 

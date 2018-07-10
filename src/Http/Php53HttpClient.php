@@ -1,11 +1,10 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Legacy;
+namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
-use Algolia\AlgoliaSearch\Http\HttpClientInterface;
-use Algolia\AlgoliaSearch\Legacy\Psr7\Request;
-use Algolia\AlgoliaSearch\Legacy\Psr7\Uri;
+use Algolia\AlgoliaSearch\Http\Psr7\Request;
+use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 

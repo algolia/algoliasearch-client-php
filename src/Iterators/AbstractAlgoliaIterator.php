@@ -2,10 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-use Algolia\AlgoliaSearch\Interfaces\Index;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 
-abstract class AlgoliaIterator implements \Iterator
+abstract class AbstractAlgoliaIterator implements \Iterator
 {
     protected $indexName;
 

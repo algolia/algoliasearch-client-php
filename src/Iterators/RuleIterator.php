@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Iterators;
 
 use Algolia\AlgoliaSearch\Helpers;
 
-class RuleIterator extends AlgoliaIterator
+class RuleIterator extends AbstractAlgoliaIterator
 {
     protected function formatHit(array $hit)
     {

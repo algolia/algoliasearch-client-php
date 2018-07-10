@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface Client
+interface ClientInterface
 {
 }

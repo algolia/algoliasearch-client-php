@@ -25,9 +25,6 @@
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "^6.0",
-        "guzzlehttp/psr7": "^1.0",
-        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",

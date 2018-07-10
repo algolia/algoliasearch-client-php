@@ -17,6 +17,8 @@ final class Config
     private static $writeTimeout = 5;
     private static $connectTimeout = 2;
 
+    private static $httpClientConstructor;
+
     public static function getUserAgent()
     {
         if (!static::$userAgent) {
@@ -61,6 +63,28 @@ final class Config
     public static function setConnectTimeout($connectTimeout)
     {
         self::$connectTimeout = $connectTimeout;
+    }
+
+    public static function getHttpClient()
+    {
+        if (!is_callable(self::$httpClientConstructor)) {
+            if (class_exists('\GuzzleHttp\Client')) {
+                self::setHttpClient(function () {
+                    return new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient(new \GuzzleHttp\Client());
+                });
+            } else {
+                self::setHttpClient(function () {
+                    return new \Algolia\AlgoliaSearch\Legacy\Php53HttpClient();
+                });
+            }
+        }
+
+        return forward_static_call(self::$httpClientConstructor);
+    }
+
+    public static function setHttpClient(callable $httpClientConstructor)
+    {
+        self::$httpClientConstructor = $httpClientConstructor;
     }
 
     public static function getAnalyticsApiHost()

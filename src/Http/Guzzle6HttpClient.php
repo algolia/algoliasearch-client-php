@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
+use Algolia\AlgoliaSearch\Support\Debug;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -54,6 +55,10 @@ class Guzzle6HttpClient implements HttpClientInterface
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
+            if (Debug::isEnabled()) {
+                Debug::handle("Sending the following request: ", $request);
+            }
+
             $response = $this->client->send($request, array(
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
@@ -81,10 +86,13 @@ class Guzzle6HttpClient implements HttpClientInterface
             // Make sure we have a response for the HttpException
             if ($exception->hasResponse()) {
                 $statusCode = $exception->getResponse()->getStatusCode();
-                $body = \GuzzleHttp\json_decode(
-                    (string) $exception->getResponse()->getBody(),
-                    true
-                );
+                $jsonBody = (string) $exception->getResponse()->getBody();
+
+                if (Debug::isEnabled()) {
+                    Debug::handle("Api returned code $statusCode with the following body: ", $jsonBody);
+                }
+    
+                $body = \GuzzleHttp\json_decode($jsonBody, true);
 
                 if ($statusCode >= 500) {
                     return new RetriableException(

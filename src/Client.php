@@ -10,12 +10,12 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use GuzzleHttp\Client as GuzzleClient;
 
-final class Client implements ClientInterface
+class Client implements ClientInterface
 {
     /**
      * @var ApiWrapper
      */
-    private $api;
+    protected $api;
 
     public function __construct(ApiWrapper $apiWrapper)
     {

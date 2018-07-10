@@ -10,7 +10,7 @@ use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 
-final class Index implements IndexInterface
+class Index implements IndexInterface
 {
     private $indexName;
 

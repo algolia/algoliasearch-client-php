@@ -57,6 +57,16 @@ class ClusterHosts
         return new static($hosts);
     }
 
+    public function createForAnalytics()
+    {
+        $hosts = array(
+            'read' => array('analytics.algolia.com'),
+            'write' => array('analytics.algolia.com'),
+        );
+
+        return new static($hosts);
+    }
+
     public function read()
     {
         return $this->hosts['read'];
@@ -87,7 +97,7 @@ class ClusterHosts
     {
         foreach (array('read', 'write') as $action) {
             if (!(isset($hosts[$action]) && is_array($hosts[$action]))) {
-                throw new \Exception('hosts array passed to '.get_class($this).' is invalid');
+                throw new \InvalidArgumentException('hosts array passed to '.get_class($this).' is invalid');
             }
         }
     }

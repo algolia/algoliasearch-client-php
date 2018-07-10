@@ -7,7 +7,6 @@ use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Algolia\AlgoliaSearch\Support\Config;
 use GuzzleHttp\Client as GuzzleClient;
 
 final class Analytics
@@ -25,7 +24,7 @@ final class Analytics
     public static function create($appId, $apiKey)
     {
         $apiWrapper = new ApiWrapper(
-            new ClusterHosts(array(Config::getAnalyticsApiHost())),
+            ClusterHosts::createForAnalytics(),
             new RequestOptionsFactory($appId, $apiKey),
             new Guzzle6HttpClient(new GuzzleClient())
         );

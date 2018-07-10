@@ -2,13 +2,13 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use GuzzleHttp\Client as GuzzleClient;
+use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\Helpers;
 
 class Client implements ClientInterface
 {
@@ -35,7 +35,7 @@ class Client implements ClientInterface
         $apiWrapper = new ApiWrapper(
             $hosts,
             new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6HttpClient(new GuzzleClient())
+            Config::getHttpClient()
         );
 
         return new static($apiWrapper);

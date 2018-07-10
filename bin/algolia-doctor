@@ -2,7 +2,10 @@
 <?php
 
 $doc = new AlgoliaDoctor;
+$doc->checkPhpVersion();
+$doc->checkExtensionRequirements();
 $doc->checkSerializeParam();
+$doc->checkHttpClient();
 
 class AlgoliaDoctor {
     public function checkPhpVersion()
@@ -27,6 +30,15 @@ class AlgoliaDoctor {
         if (version_compare(PHP_VERSION, '7.1.0', '>') && ini_get('serialize_precision') !== '-1') {
             echo 'When using PHP 7.1+, you must set the "serialize_precision" ini settings to -1.
                 See https://github.com/algolia/algoliasearch-client-php/issues/365';
+        }
+    }
+
+    public function checkHttpClient()
+    {
+        if (version_compare(PHP_VERSION, '5.5.0', '>') && !class_exists('GuzzleHttp\Client')) {
+            echo "You're using a recent enough version of PHP to use the Guzzle Http library.
+            It's highly recommended to use. Simple install it via `composer require guzzlehttp/guzzle`
+            and it will be used automatically.";
         }
     }
 }

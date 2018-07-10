@@ -87,7 +87,11 @@ class Guzzle6HttpClient implements HttpClientInterface
                 );
 
                 if ($statusCode >= 500) {
-                    throw new \Exception('PANIC', $statusCode);
+                    return new RetriableException(
+                        "An internal server error occurred on ".$request->getUri()->getHost(),
+                        $statusCode,
+                        $exception
+                    );
                 } elseif ($statusCode >= 400) {
                     throw new BadRequestException($body['message'], $statusCode);
                 }
@@ -100,13 +104,12 @@ class Guzzle6HttpClient implements HttpClientInterface
     private function handleResponse(ResponseInterface $response)
     {
         $body = (string) $response->getBody();
-        $body = \GuzzleHttp\json_decode($body, true);
-
         $statusCode = $response->getStatusCode();
-        if ($statusCode >= 400) {
-            die('TODO: WTF?');
+
+        if ('' === $body && 204 == $statusCode) {
+            return '';
         }
 
-        return $body;
+        return \GuzzleHttp\json_decode($body, true);
     }
 }

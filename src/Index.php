@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Support\Config;
 
 class Index implements IndexInterface
 {

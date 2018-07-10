@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface Index
+interface IndexInterface
 {
 }

@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
-use Algolia\AlgoliaSearch\Interfaces\Client as ClientInterface;
+use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;

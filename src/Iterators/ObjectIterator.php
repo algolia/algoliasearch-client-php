@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-class ObjectIterator extends AlgoliaIterator
+class ObjectIterator extends AbstractAlgoliaIterator
 {
     public function getCursor()
     {

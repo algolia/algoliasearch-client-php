@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-class SynonymIterator extends AlgoliaIterator
+class SynonymIterator extends AbstractAlgoliaIterator
 {
     protected function formatHit(array $hit)
     {

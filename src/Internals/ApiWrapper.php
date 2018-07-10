@@ -73,11 +73,13 @@ class ApiWrapper
         );
     }
 
-    public function send($method, $hosts, $path, $requestOptions = array())
+    public function send($method, $path, $requestOptions = array(), $hosts = null)
     {
-        $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
+        $requestOptions = $this->requestOptionsFactory->create($requestOptions);
 
-        if (!is_array($hosts)) {
+        if (null === $hosts) {
+            $hosts = $this->clusterHosts->write();
+        } elseif (!is_array($hosts)) {
             $hosts = array($hosts);
         }
 
@@ -86,7 +88,7 @@ class ApiWrapper
             $path,
             $requestOptions,
             $hosts,
-            $requestOptions->getReadTimeout()
+            $requestOptions->getWriteTimeout()
         );
     }
 

@@ -413,6 +413,11 @@ class Index implements IndexInterface
         throw new TaskTooLongException();
     }
 
+    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    {
+        return $this->api->send($method, $path, $requestOptions, $hosts);
+    }
+
     public function getDeprecatedIndexApiKey($key, $requestOptions = array())
     {
         return $this->api->read(

@@ -71,4 +71,9 @@ final class Analytics
 
         return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID));
     }
+
+    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    {
+        return $this->api->send($method, $path, $requestOptions, $hosts);
+    }
 }

@@ -218,4 +218,9 @@ class Client implements ClientInterface
         $index = $this->index($indexName);
         return $index->waitTask($taskId, $requestOptions);
     }
+
+    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    {
+        return $this->api->send($method, $path, $requestOptions, $hosts);
+    }
 }

@@ -6,8 +6,6 @@ final class Config
 {
     const VERSION = '2.0.0';
 
-    public static $analyticsApiHost = 'analytics.algolia.com';
-
     public static $waitTaskRetry = 100;
 
     private static $userAgent;
@@ -85,10 +83,5 @@ final class Config
     public static function setHttpClient(callable $httpClientConstructor)
     {
         self::$httpClientConstructor = $httpClientConstructor;
-    }
-
-    public static function getAnalyticsApiHost()
-    {
-        return self::$analyticsApiHost;
     }
 }

@@ -38,4 +38,9 @@ final class Places
 
         return new static($apiWrapper);
     }
+
+    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    {
+        return $this->api->send($method, $path, $requestOptions, $hosts);
+    }
 }

@@ -11,11 +11,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "Algolia\\AlgoliaSearch\\": "src/",
-            "Algolia\\AlgoliaSearch\\Legacy\\": "legacy/"
+            "Algolia\\AlgoliaSearch\\": "src/"
         },
         "files": [
-            "legacy/Psr7/functions.php",
+            "src/Http/psr7/functions.php",
             "src/functions.php"
         ]
     },
@@ -25,6 +24,7 @@
         }
     },
     "require": {
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",

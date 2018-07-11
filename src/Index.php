@@ -402,7 +402,7 @@ class Index implements IndexInterface
             $res = $this->getTask($taskId, $requestOptions);
 
             if ('published' === $res['status']) {
-                return $res;
+                return;
             }
 
             ++$retry;

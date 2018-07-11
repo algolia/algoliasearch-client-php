@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
+use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
@@ -217,6 +219,27 @@ class Client implements ClientInterface
     {
         $index = $this->index($indexName);
         return $index->waitTask($taskId, $requestOptions);
+    }
+
+    public function waitForKeyAdded($key, $requestOptions = array())
+    {
+        $retry = 1;
+        $maxRetry = Config::$waitTaskRetry;
+
+        do {
+            try {
+                $this->getApiKey($key, $requestOptions);
+                return;
+            } catch (NotFoundException $e) {
+                // Try again
+            }
+
+            ++$retry;
+            $factor = ceil($retry / 10);
+            usleep($factor * 100000); // 0.1 second
+        } while ($retry < $maxRetry);
+
+        throw new TaskTooLongException("The key ".substr($key, 0, 6)."... isn't added yet.");
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

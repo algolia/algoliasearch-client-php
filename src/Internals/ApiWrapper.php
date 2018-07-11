@@ -126,7 +126,7 @@ class ApiWrapper
                 $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
                 if (Debug::isEnabled()) {
-                    Debug::handle("The following request was malformed: ", $request);
+                    Debug::handle("The following request returned a 4xx error: ", $request);
                 }
 
                 throw $e;

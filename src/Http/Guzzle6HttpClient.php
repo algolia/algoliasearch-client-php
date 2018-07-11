@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Support\Debug;
 use GuzzleHttp\Client as GuzzleClient;
@@ -96,10 +97,12 @@ class Guzzle6HttpClient implements HttpClientInterface
 
                 if ($statusCode >= 500) {
                     return new RetriableException(
-                        "An internal server error occurred on ".$request->getUri()->getHost(),
+                        "An internal server error occurred on " . $request->getUri()->getHost(),
                         $statusCode,
                         $exception
                     );
+                } elseif ($statusCode == 404) {
+                    throw new NotFoundException($body['message'], $statusCode);
                 } elseif ($statusCode >= 400) {
                     throw new BadRequestException($body['message'], $statusCode);
                 }

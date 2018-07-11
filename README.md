@@ -325,7 +325,7 @@ search.start();
 
 - [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=php)
 - [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=php)
-- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/get-ab-tests/?language=php)
+- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/list-ab-tests/?language=php)
 - [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=php)
 - [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=php)
 

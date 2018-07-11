@@ -83,29 +83,30 @@ class Index implements IndexInterface
 
     public function getObjects($objectIds, $requestOptions = array())
     {
-        $attributesToRetrieve = '';
-        if ($requestOptions['attributesToRetrieve']) {
-            $attributesToRetrieve = $requestOptions['attributesToRetrieve'];
-        }
-        if (is_array($attributesToRetrieve)) {
-            $attributesToRetrieve = implode(',', $attributesToRetrieve);
-        }
-
-        $requests = array();
-        foreach ($objectIds as $id) {
-            $req = array(
-                'indexName' => $this->indexName,
-                'objectID' => $id,
-            );
-
-            if ($attributesToRetrieve) {
-                $req['attributesToRetrieve'] = $attributesToRetrieve;
+        if (is_array($requestOptions)) {
+            $attributesToRetrieve = '';
+            if (isset($requestOptions['attributesToRetrieve'])) {
+                $attributesToRetrieve = $requestOptions['attributesToRetrieve'];
+                unset($requestOptions['attributesToRetrieve']);
             }
 
-            $requests[] = $req;
+            $request = array();
+            foreach ($objectIds as $id) {
+                $req = array(
+                    'indexName' => $this->indexName,
+                    'objectID' => (string) $id,
+                );
+
+                if ($attributesToRetrieve) {
+                    $req['attributesToRetrieve'] = $attributesToRetrieve;
+                }
+
+                $request[] = $req;
+            }
+
+            $requestOptions['requests'] = $request;
         }
 
-        // TODO: Probably doesnt work
         return $this->api->read(
             'POST',
             api_path('/1/indexes/*/objects'),

@@ -57,7 +57,7 @@ class Guzzle6HttpClient implements HttpClientInterface
     {
         try {
             if (Debug::isEnabled()) {
-                Debug::handle("Sending the following request: ", $request);
+                Debug::handle("Sending the following request: ", $request, $request->getBody()->getContents());
             }
 
             $response = $this->client->send($request, array(

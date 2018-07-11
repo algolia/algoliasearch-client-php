@@ -49,4 +49,14 @@ class Debug
     {
         self::$handler = $handler;
     }
+
+    public static function getRecordSize(array $record)
+    {
+        $strlen = mb_strlen(json_encode($record));
+        if ($strlen < 1024) {
+            return 1;
+        } else {
+            return round($strlen / 1024, 2);
+        }
+    }
 }

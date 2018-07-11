@@ -38,6 +38,10 @@ class Debug
 
     public static function handle()
     {
+        if (!is_callable(self::$handler)) {
+            return;
+        }
+
         forward_static_call_array(self::$handler, func_get_args());
     }
 

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
-
 class SynonymsTest extends AlgoliaIntegrationTestCase
 {
     private $caliSyn = array(
@@ -29,7 +27,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('synomyaefaefms-mgmt');
+            static::$indexes['main'] = $this->safeName('synomyms-mgmt');
         }
     }
 

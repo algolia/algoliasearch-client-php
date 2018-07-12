@@ -20,9 +20,11 @@ final class Config
     public static function getUserAgent()
     {
         if (!static::$userAgent) {
-            static::$userAgent =
-                'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); '.
-                'Algolia for PHP ('.self::VERSION.')';
+            static::$userAgent = 'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); ';
+            if (defined('HHVM_VERSION')) {
+                static::$userAgent .= '; HHVM ('.HHVM_VERSION.')';
+            }
+            static::$userAgent .= 'Algolia for PHP ('.self::VERSION.')';
         }
 
         return static::$userAgent.static::$customUserAgent;

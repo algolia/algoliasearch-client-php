@@ -11,8 +11,7 @@
   args:
     - name: settings
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 
 #
 # Synonyms Management
@@ -22,9 +21,7 @@
   args:
     - name: query
     - name: requestOptions
-      default:
-        page: 0
-        type: []
+      default: []
 -
   method: getSynonym
   args:
@@ -36,35 +33,30 @@
   args:
     - name: synonym
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: saveSynonyms
   args:
     - name: synonyms
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: freshSynonyms
   args:
     - name: synonyms
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: deleteSynonym
   args:
     - name: objectId
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: clearSynonyms
   args:
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: browseSynonyms
   args:
@@ -80,8 +72,7 @@
   args:
     - name: query
     - name: requestOptions
-      default:
-        page: 0
+      default: []
 -
   method: getRule
   args:
@@ -93,35 +84,30 @@
   args:
     - name: rule
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: saveRules
   args:
     - name: rules
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: freshRules
   args:
     - name: rules
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: deleteRule
   args:
     - name: objectId
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: clearRules
   args:
     - name: requestOptions
-      default:
-        forwardToReplicas: true
+      default: []
 -
   method: browseRules
   args:

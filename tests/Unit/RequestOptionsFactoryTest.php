@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\Config;
 use PHPUnit\Framework\TestCase;
 
 class RequestOptionsFactoryTest extends TestCase
@@ -21,6 +22,8 @@ class RequestOptionsFactoryTest extends TestCase
     public function testRequestRequestOptions($options, $expectedRequestOptions)
     {
         $actual = $this->factory->create($options);
+
+        $expectedRequestOptions['headers'] += array("User-Agent" => Config::getUserAgent());
 
         $this->assertEquals($expectedRequestOptions, array(
             'headers' => $actual->getHeaders(),

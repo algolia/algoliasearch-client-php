@@ -27,8 +27,7 @@
     - name: srcIndexName
     - name: destIndexName
     - name: requestOptions
-      default:
-        scope: ~
+      default: []
 -
   method: clearIndex
   args:
@@ -91,10 +90,7 @@
   args:
     - name: query
     - name: requestOptions
-      default:
-        cluster: ~
-        page: 0
-        hitsPerPage: 20
+      default: []
 -
   method: listClusters
   args:
@@ -104,9 +100,7 @@
   method: listUserIds
   args:
     - name: requestOptions
-      default:
-        page: 0
-        hitsPerPage: 20
+      default: []
 -
   method: getUserId
   args:
@@ -139,7 +133,4 @@
   method: getLogs
   args:
     - name: requestOptions
-      default:
-        offset: 0
-        length: 10
-        type: "all"
+      default: []

@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
+use Algolia\AlgoliaSearch\Support\Helpers;
+
 class SynonymIterator extends AbstractAlgoliaIterator
 {
     protected function formatHit(array $hit)
@@ -15,7 +17,7 @@ class SynonymIterator extends AbstractAlgoliaIterator
     {
         $this->response = $this->api->read(
             'POST',
-            api_path('/1/indexes/%s/synonyms/search', $this->indexName),
+            Helpers::api_path('/1/indexes/%s/synonyms/search', $this->indexName),
             array_merge(
                 $this->requestOptions,
                 array('page' => $this->getCurrentPage())

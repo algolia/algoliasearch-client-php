@@ -2,10 +2,10 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Helpers;
+use Algolia\AlgoliaSearch\Support\Helpers;
 use PHPUnit\Framework\TestCase;
 
-class FunctionsTest extends TestCase
+class HelpersTest extends TestCase
 {
     /**
      * @dataProvider dataTestApiPathHelper
@@ -18,10 +18,10 @@ class FunctionsTest extends TestCase
     public function dataTestApiPathHelper()
     {
         return array(array(
-            \Algolia\AlgoliaSearch\api_path('/1/indexes/%s/cool/%s', 'index name', 'b&w'),
+            Helpers::api_path('/1/indexes/%s/cool/%s', 'index name', 'b&w'),
             '/1/indexes/index+name/cool/b%26w',
         ), array(
-            \Algolia\AlgoliaSearch\api_path('/1/indexes/%s/cool/%s', 'index name', urlencode('b&w')),
+            Helpers::api_path('/1/indexes/%s/cool/%s', 'index name', urlencode('b&w')),
             '/1/indexes/index+name/cool/b%26w',
         ));
     }

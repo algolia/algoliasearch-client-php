@@ -23,6 +23,38 @@ class SyncClient
         );
     }
 
+    public function moveIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    {
+        $response = $this->realClient->moveIndex($srcIndexName, $destIndexName, $requestOptions);
+        $this->realClient->waitTask($srcIndexName, $response['taskID']);
+
+        return $response;
+    }
+
+    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    {
+        $response = $this->realClient->copyIndex($srcIndexName, $destIndexName, $requestOptions);
+        $this->realClient->waitTask($srcIndexName, $response['taskID']);
+
+        return $response;
+    }
+
+    public function clearIndex($indexName, $requestOptions = array())
+    {
+        $response = $this->realClient->clearIndex($indexName, $requestOptions);
+        $this->realClient->waitTask($indexName, $response['taskID']);
+
+        return $response;
+    }
+
+    public function deleteIndex($indexName, $requestOptions = array())
+    {
+        $response = $this->realClient->deleteIndex($indexName, $requestOptions);
+        $this->realClient->waitTask($indexName, $response['taskID']);
+
+        return $response;
+    }
+
     public function __call($name, $arguments)
     {
         return call_user_func_array(array($this->realClient, $name), $arguments);

@@ -11,10 +11,11 @@ class UserAgentTest extends TestCase
 
     public function setUp()
     {
-        $this->default =
-            'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); '.
-            'Algolia for PHP ('.Config::VERSION.')'
-        ;
+        $this->default = 'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); ';
+        if (defined('HHVM_VERSION')) {
+            $this->default .= '; HHVM ('.HHVM_VERSION.')';
+        }
+        $this->default .= 'Algolia for PHP ('.Config::VERSION.')';
     }
 
     public function testDefaultUserAgent()

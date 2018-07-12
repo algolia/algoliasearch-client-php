@@ -10,6 +10,7 @@ use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\Helpers;
 
 class Index implements IndexInterface
 {

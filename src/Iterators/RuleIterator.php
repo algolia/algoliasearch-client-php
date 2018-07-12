@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-use Algolia\AlgoliaSearch\Helpers;
+use Algolia\AlgoliaSearch\Support\Helpers;
 
 class RuleIterator extends AbstractAlgoliaIterator
 {

@@ -10,9 +10,17 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         'paginationLimitedTo' => 999,
     );
 
+    protected function setUp()
+    {
+        parent::setUp();
+
+        if (!isset(static::$indexes['main'])) {
+            static::$indexes['main'] = $this->safeName('settings-mgmt');
+        }
+    }
+
     public function testSettingsCanBeUpdatedAndRetrieved()
     {
-        static::$indexes['main'] = $this->safeName('settings-mgmt');
         $index = static::getClient()->index(static::$indexes['main']);
 
         $index->setSettings($this->settings);
@@ -26,11 +34,11 @@ class SettingsTest extends AlgoliaIntegrationTestCase
      */
     public function testSettingsWithReplicas()
     {
-        $replicaName = $this->safeName('settings-mgmt_REPLICA');
+        static::$indexes['replica1'] = $this->safeName('settings-mgmt_REPLICA');
         $index = static::getClient()->index(static::$indexes['main']);
-        $replica = static::getClient()->index($replicaName);
+        $replica = static::getClient()->index(static::$indexes['replica1']);
 
-        $settingsWithReplicas = array_merge($this->settings, array('replicas' => array($replicaName)));
+        $settingsWithReplicas = array_merge($this->settings, array('replicas' => array(static::$indexes['replica1'])));
 
         // Assert that settings are forwarded by default
         $index->setSettings($settingsWithReplicas);

@@ -1,10 +1,14 @@
-# PHP Client v2
+# Introducing PHP Client v2
+
+A new version of the PHP client is coming. This will be the base for a new version of other client within the next few months.
+
+If you ever found yourself thinking _"I wish I could do this with the client"_, please email me (julien.bourdeau@algolia.com) or open an issue on GitHub.
 
 ## Why
 
 All the Algolia clients were designed years ago, we think rewriting them from scratch will help improve the developer experience for every user and make them more maintainable.
 
-More maintainable means faster feature development and less bugs, so in the end, it all comes down to improve the developer experience for the entire Algolia community.
+More maintainable means faster feature development and less bugs, so in the end, it all comes down to improving the developer experience for the entire Algolia community.
 
 
 ## Requirements
@@ -13,51 +17,52 @@ More maintainable means faster feature development and less bugs, so in the end,
 
 We believe it's sometimes necessary to break backward compatibility, however we want to keep it as minimal as possible, upgrading to the new major version has to be very smooth.
 
-For that reason, most of the public API is kept as-is or slightly changed. The library still rely on 2 main classes to access most of the API: `Client` and `Index`.
+#### Similar public API
+
+For that reason, most of the public API is kept as-is or has very slightly changed. The library still relies on 2 main classes to access most of the API: `Client` and `Index`.
 
 Even if we considered doing something more eloquent or even build some sort of query language, we are convinced that this will add a lot of complexity, make upgrade really hard and bring very little value in the end. Simplicity for the win.
 
-About language support, this new version support the exact same PHP version range as before: 5.3+
+#### PHP 5.3+ supported
 
-### New backward compatibility promise
+This new version support the exact same PHP version range as before: 5.3+. We chose to do it to simplify upgrade as much as possible. Even if it made my life more difficult, I believe it will make everybody else's easier.
 
-All API clients follow SEMVER.
+#### New backward compatibility promise
 
-Backward compatibility is guaranteed on all classes and interface outside of the `Internal` folder
-
-New exceptions can be added at any time but they will necessarily extend AlgoliaException class.
-
-Configuration entry can be added in minor versions.
-
-The type of response from the API (array) can change independently of this library.
+* All API clients follow [SemVer](https://semver.org/).
+* Backward compatibility is guaranteed on all classes and interface except of the `Internal` folder
+* New exceptions can be added at any time but they will necessarily extend AlgoliaException class.
+* Configuration entry can be added in minor versions.
+* The structure of the API response can have new field added independently of this library.
 
 
 ### Conventions
 
 A good library should be obvious to use.
 
-* Method signatures have one args for all required parameters and then one array of `requestOptions` which can contain about anything
+* Method signatures have an argument for all required parameters and then one array of `requestOptions` which can contain about anything
 
-* the requestOptions array takes precedence.
-    In the following example, `better query` will override `some query`.
+* Required arguments take precedence over the requestOptions array.
+
+    In the following example, `some query` will override `better query`.
     ```php
     $index->search('some query', ['query' => 'better query']);
     ```
 
 * Verbs:
     * **save** means add or replace existing <-- /!\
-    * **update** means partial updates
+    * **partialUpdate** means updates only the given fields
     * **clear** means delete all
     * **delete** means delete
     * **fresh** means remove all existing and save what is passed
 
-* There is no method doc in the code for public API method, because it's always outdated clusters the code. Instead, there is a link to the Algolia method doc. If the method is internal, doc can be added.
+* There is no phpdoc in the code for public API method, because it's usually outdated and clutters the code. Instead, refers to the doc on algolia.com (to be published along with the final version). If the method is internal, doc can be added if necessary.
 
 ## What's new
 
 ### The transport layer
 
-This new version allows developer to change the transport layer easily. If your PHP version is recent enough, all HTTP calls are done by the Guzzle library. The lib also follow the PSR7 norm.
+This new version allows developers to change the transport layer easily. If your PHP version is recent enough, all HTTP calls are done by the Guzzle library. The lib also follow the PSR7 norm.
 
 If you have an old version, use the embedded http layer.
 
@@ -70,12 +75,39 @@ Timeouts and parameters all managed by requestOptions
 
 RequestOptionsFactory is responsible for splitting the given array into 4 sections: headers, query params (url), post content and timeouts.
 
-Timeouts are the transport layer's responsibility but in order to make them easily customisation per query, they are added to the RequestOptions.
+Timeouts are the transport layer's responsibility but in order to change them easily per query, they were added to the RequestOptions.
 
-Some params like `forwardToReplicas` or `createIfNotExists` should always be passed in the query params, while other parameters like `cursor` (in browse) should be passed in body since its since could exceed the URL max size.
+Some params like `forwardToReplicas` or `createIfNotExists` should always be passed in the query params, while other parameters like `cursor` (in browse) should be passed in body, RequestOptions will take care of that.
 
 ![RequestOptions schema](/docs/RequestOptions.png)
 
+**NOTE:** Passing an array makes the library much easier to use but if you need total control, you can pass a `RequestOption` object instead.
+
+### Debug Mode
+
+The client now integrates a debug mode, which allow you to print some information by default (typically, the request being sent).
+
+You can enable/disable it via a static call. This way, as opposed to a env variable, you can enable it only in certain conditions.
+
+By default, the `handle()` method will check if the `dump` function is defined (in Symfony or Laravel for instance), otherwise fallback on `var_dump`. You can override this behavior (to write to the logs for instance) via the `setHandler()` method.
+
+```php
+Debug::setHandler(function ($var) {
+    Log::debug($var);
+});
+
+Debug::enable();
+Debug::handle($request);
+Debug::disable();
+```
+
+### Canary Release
+
+The library ships with a `CanaryClient` class which extends `Client`. The point would be to add methods in _beta_ in this class so you can start using them if necessary. Once they're considered stable, they'll be moved to the Client class.
+
+The idea is that features here don't have to follow the normal release cycle. A feature in canary could be in beta while 6 minor versions are deployed.
+
+Features in canary could change or be removed.
 
 ### New methods
 
@@ -86,89 +118,91 @@ Now you can use `$index->freshObjects($objects)` (yes it cold be called 'reindex
 
 **WaitFor**
 
-Operations on keys or userIds don't return a taskID. If you need to ensure this is done, you can use the following method wish simulate the `waitForTask` when there is no taksID.
+Operations on keys or userIds don't return a taskID. To ensure the task is completed, new methods were added to simulate the behavior.
 
-* `$client->waitForAddedKey($key)`
-* `$client->waitForUpdatedKey($key)`
-* `$client->waitForRemovedKey($key)`
-* `$client->waitForAssignedUserId($userId)`
-* `$client->waitForRemovedUserId($userId)`
+Currently, only `$client->waitForKeyAdded($key)` is implemented, others are coming.
 
 ### Configuration
 
-All available configuration like default timeouts or user agent are now grouped under the Config class.
+All available configurations like default timeouts or user agent are now grouped under the Config class. Today, every API clients implement user agent differently.
 
-Today, all API clients implement user agent differently.
+This is also how you set the HTTP Client you want to use.
+
+Example:
+
+```php
+Config::setHttpClient(function () {
+    if (Debug::isEnabled()) {
+        return new SpecialHttpClient();
+    }
+
+    return new MyHttpClient(getenv('SOMETHING'));
+});
+```
 
 
-### The `doctor` debugging tool
 
-Having an issue? Run `./vendor/bin/algolia-doctor` to get a full configuration check and helpful error message
+### The `doctor` tool
+
+Having an issue? 💊 Run `./vendor/bin/algolia-doctor` to get a full configuration check and provide helpful message to improve your setup.
+
+You can find the check in the `bin/` directory. **What other check would you like to see?**
 
 ### Exceptions
 
 A bunch of new Exceptions have been introduced. The main reason is to help the developer debugging but also catch them in production.
 
-* `QuotaExceededException` if you reached your plan limits
 * `TaskTooLongException` if a task never completes
 * `MissingObjectId` if you tried to add object without objectID
 * `BadRequestException` if your request cannot work
+* `NotFoundException` if the API returned a 404 (extends `BadRequestException`)
 * `RetriableException` if something went wrong and query again
 * `UnreachableException` - hu ho
+
+Could be added if necessary:
+
+* `QuotaExceededException` if you reached your plan limits
 * `ACLExceptions` if you're using an key that cannot perform this action
 
 
 
 ## Upgrade
 
-### ObjectID is required for all objects
+Please follow the upgrade guide in [docs/UPGRADE-from-v1-to-v2.md.md]().
 
-Because this feature was a mistake (according to API Core team)
-
-### ForwardToReplicas is `true` by default
-
-Because it makes more sense :D
-
-### ApiKeys can only be managed by the client, not the index
-
-This was already deprecated and has been removed in v2
-
-### Method signature change
-
-Here goes a table with the whole list
-
-| Before                                                      | After                                                                                                 |
-|-------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| copyIndex('source', 'dest')                                 | copyIndex('source', 'dest')                                                                           |
-| scopedCopyIndex('source', 'dest', ['settings', 'synonyms']) | ]copyIndex('source', 'dest', ['scope' => scopedCopyIndex('source', 'dest', ['settings', 'synonyms'])) |
-| batchSynonyms($objects, true, false)                        | saveSynonmys($objects)                                                                                |
-| batchSynonyms($objects, true, true)                         | freshSynonmys($objects)                                                                               |
-| batchSynonyms($objects, false, false)                       | saveSynonmys($objects, ['forwardToReplicas' => false])                                                |
-| batchSynonyms($objects, false, true)                        | freshSynonmys($objects, ['forwardToReplicas' => false])                                               |
-
-### Misc
-
-* All `browse*` method return an iterator
-* `Index::browseFrom` was removed, use `browse` and pass the cursor in the `$requestOptions`.
-Note: this method could easily be added back for DX purpose, as long as it uses browse internally.
-
+This doc will be updated during the beta and will be complete before the final release.
 
 ## Tests
 
-There are 3 types of tests:
+There are 3 types of tests.
 
-* Public API tests
-Check the library has correct method names and arguments (using reflexion)
-* Integration test
-Call Algolia API to ensure method behave the way they should
-* Unit tests
-Some part of the code is absolutely critical and must be Unit tested, the RequestOptionsFactory for instance.
+| Type              | Description                                                                                                   |
+|-------------------|---------------------------------------------------------------------------------------------------------------|
+| Public API tests  | Check the library has correct method names and arguments (using reflexion)                                    |
+| Integration tests | Call Algolia API to ensure method behave the way they should                                                  |
+| Unit tests        | Some part of the code is absolutely critical and must be Unit tested, the RequestOptionsFactory for instance. |
 
-Note: Integration tests use a `SyncClient` and `SyncIndex` which automatically wait for all taskID, making tests easier to read.
-
+Integration tests use a `SyncClient` and `SyncIndex` which automatically wait for all taskID, making tests easier to read and more stable.
 
 
 
-Questions:
+# Call for feedback
 
-* needs more tests about empty or `[]` POST content (see browse)
+If you are already an Algolia user or if you plan to be, please share any feedback you may have via:
+
+* [GitHub issues](https://github.com/algolia/algoliasearch-client-php/issues/new) or [Pull Requests](https://github.com/algolia/algoliasearch-client-php/pulls)
+* Email at <mailto:julien.bourdeau@algolia.com>
+
+In general, I'd like to hear:
+
+* What you would like to see added
+* How long was it to upgrade
+* If it's clear enough
+* What feature you'd like to see added
+* How well (or not) it integrates in your stack
+
+## Question
+
+#### Should we consider `client`, `index` and such as final or let developers extend them?
+
+#### Do you see any missing feature?

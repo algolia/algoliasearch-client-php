@@ -404,7 +404,7 @@ class Client
     }
 
     /**
-     * Copy an existing index and define what to copy along with records:
+     * Copy an existing index and define what to copy instead of records:
      *  - settings
      *  - synonyms
      *  - query rules
@@ -413,7 +413,7 @@ class Client
      *
      * @param string $srcIndexName the name of index to copy.
      * @param string $dstIndexName the new index name that will contains a copy of srcIndexName (destination will be overwritten if it already exist).
-     * @param array $scope Resource to copy along with records: 'settings', 'rules', 'synonyms'
+     * @param array $scope Resource to copy instead of records: 'settings', 'rules', 'synonyms'
      * @param array $requestHeaders
      * @return mixed
      */

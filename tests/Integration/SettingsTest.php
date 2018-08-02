@@ -21,7 +21,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 
     public function testSettingsCanBeUpdatedAndRetrieved()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->setSettings($this->settings);
 
@@ -35,8 +35,8 @@ class SettingsTest extends AlgoliaIntegrationTestCase
     public function testSettingsWithReplicas()
     {
         static::$indexes['replica1'] = $this->safeName('settings-mgmt_REPLICA');
-        $index = static::getClient()->index(static::$indexes['main']);
-        $replica = static::getClient()->index(static::$indexes['replica1']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
+        $replica = static::getClient()->initIndex(static::$indexes['replica1']);
 
         $settingsWithReplicas = array_merge($this->settings, array('replicas' => array(static::$indexes['replica1'])));
 

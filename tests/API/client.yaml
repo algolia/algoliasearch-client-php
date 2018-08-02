@@ -2,7 +2,7 @@
 # Constructor
 #
 -
-  method: index
+  method: initIndex
   args:
     - name: indexName
 

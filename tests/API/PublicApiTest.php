@@ -22,7 +22,7 @@ class PublicApiTest extends TestCase
     {
         $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
         $client = new Client($apiWrapper);
-        $index = $client->index('someindex');
+        $index = $client->initIndex('someindex');
         $definition = $this->getDefinition('index.yaml');
 
         $c = new PublicApiChecker($index, $definition);

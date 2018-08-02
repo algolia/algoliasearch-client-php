@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Client;
 
 class CanaryClient extends Client
 {
-    public function index($indexName)
+    public function initIndex($indexName)
     {
         return new CanaryIndex($indexName, $this->api);
     }

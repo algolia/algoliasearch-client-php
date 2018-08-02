@@ -43,7 +43,7 @@ class Client implements ClientInterface
         return new static($apiWrapper);
     }
 
-    public function index($indexName)
+    public function initIndex($indexName)
     {
         return new Index($indexName, $this->api);
     }
@@ -82,7 +82,7 @@ class Client implements ClientInterface
 
     public function clearIndex($indexName, $requestOptions = array())
     {
-        return $this->index($indexName)->clear($requestOptions);
+        return $this->initIndex($indexName)->clear($requestOptions);
     }
 
     public function deleteIndex($indexName, $requestOptions = array())
@@ -211,13 +211,13 @@ class Client implements ClientInterface
 
     public function getTask($indexName, $taskId, $requestOptions = array())
     {
-        $index = $this->index($indexName);
+        $index = $this->initIndex($indexName);
         return $index->getTask($taskId, $requestOptions);
     }
 
     public function waitTask($indexName, $taskId, $requestOptions = array())
     {
-        $index = $this->index($indexName);
+        $index = $this->initIndex($indexName);
         return $index->waitTask($taskId, $requestOptions);
     }
 

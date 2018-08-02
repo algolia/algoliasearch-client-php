@@ -16,10 +16,10 @@ class SyncClient
         $this->realClient = $realClient;
     }
 
-    public function index($indexName)
+    public function initIndex($indexName)
     {
         return new SyncIndex(
-            $this->realClient->index($indexName)
+            $this->realClient->initIndex($indexName)
         );
     }
 

@@ -28,7 +28,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     public function testCopyAndMoveIndex()
     {
         $client = static::getClient();
-        $client->index(static::$indexes['main'])->setSettings(
+        $client->initIndex(static::$indexes['main'])->setSettings(
             array('hitsPerPage' => 31)
         );
 
@@ -43,7 +43,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
 
     public function testClearIndex()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
         $index->saveObjects($this->airports);
 
         $response = $index->search('');
@@ -57,7 +57,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     {
         $client = static::getClient();
         $name = $this->safeName('index-to-be-delete-within-test-case');
-        $client->index($name)->setSettings(
+        $client->initIndex($name)->setSettings(
             array('hitsPerPage' => 32)
         );
 

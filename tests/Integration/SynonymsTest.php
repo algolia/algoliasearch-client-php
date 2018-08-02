@@ -34,7 +34,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
 
     public function testSynonymsCanBeSavedAndRetrieved()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObjects($this->airports);
 
@@ -63,7 +63,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
 
     public function testBrowseSynonyms()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObject($this->airports[0]);
 

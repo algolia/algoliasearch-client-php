@@ -15,7 +15,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
     public function testRulesCanBeSavedAndRetrieved()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObject($this->airports[0]);
 
@@ -43,7 +43,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
     public function testBrowseRules()
     {
-        $index = static::getClient()->index(static::$indexes['main']);
+        $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObject($this->airports[0]);
 

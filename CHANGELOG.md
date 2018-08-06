@@ -1,5 +1,18 @@
 ## Change Log
 
+## 2.0
+
+<To Be Written>
+
+#### 2.0 Alpha 1
+
+* Add multiple indexes search/index methods
+* Add common files (licence, changelog...)
+* **Rename `index` to `initIndex` for easier upgrade**
+* Fix default HttpClient wrapper for PHP53
+* Setup Travis
+
+
 ### UNRELEASED
 
 <Contributors, please add your changes below this line>

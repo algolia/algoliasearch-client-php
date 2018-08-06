@@ -82,6 +82,31 @@
     - name: parentApiKey
     - name: restrictions
 
+
+#
+# Multiple Indices
+#
+-
+  method: multipleQueries
+  args:
+  - name: queries
+  - name: requestOptions
+    default: []
+
+-
+  method: multipleBatchObjects
+  args:
+  - name: operations
+  - name: requestOptions
+    default: []
+-
+  method: multipleGetObjects
+  args:
+  - name: requests
+  - name: requestOptions
+    default: []
+
+
 #
 # MultiCluster Management
 #

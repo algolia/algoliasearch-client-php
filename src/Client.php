@@ -48,6 +48,53 @@ class Client implements ClientInterface
         return new Index($indexName, $this->api);
     }
 
+    public function multipleQueries($queries, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['requests'] = $queries;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('requests', $queries);
+        }
+
+        return $this->api->read(
+            'POST',
+            api_path('/1/indexes/*/queries'),
+            $requestOptions
+        );
+    }
+
+    public function multipleBatchObjects($operations, $requestOptions = array())
+    {
+        Helpers::ensure_objectID($operations);
+
+        if (is_array($requestOptions)) {
+            $requestOptions['requests'] = $operations;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('requests', $operations);
+        }
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/*/batch'),
+            $requestOptions
+        );
+    }
+
+    public function multipleGetObjects($requests, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['requests'] = $requests;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('requests', $requests);
+        }
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/*/objects'),
+            $requestOptions
+        );
+    }
+
     public function listIndexes($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
@@ -166,7 +213,6 @@ class Client implements ClientInterface
 
     public function assignUserId($userId, $clusterName, $requestOptions = array())
     {
-
         if (is_array($requestOptions)) {
             $requestOptions['X-Algolia-User-ID'] = $userId;
         } elseif ($requestOptions instanceof RequestOptions) {

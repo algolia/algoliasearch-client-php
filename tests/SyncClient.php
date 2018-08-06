@@ -57,6 +57,14 @@ class SyncClient
 
     public function __call($name, $arguments)
     {
-        return call_user_func_array(array($this->realClient, $name), $arguments);
+        $response = call_user_func_array(array($this->realClient, $name), $arguments);
+
+        if (is_array($response) && isset($response['taskID']) && is_array($response['taskID'])) {
+            foreach ($response['taskID'] as $indexName => $taskId) {
+                $this->realClient->waitTask($indexName, $taskId);
+            }
+        }
+
+        return $response;
     }
 }

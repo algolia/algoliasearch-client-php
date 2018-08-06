@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
+        <testsuite name="Community">
+            <directory suffix="Test.php">tests/Integration/</directory>
+            <exclude>./tests/Integration/KeysTest.php</exclude>
+        </testsuite>
         <testsuite name="AlgoliaSearch">
             <directory suffix="Test.php">tests/Integration/</directory>
         </testsuite>

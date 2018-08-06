@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Http\Psr7\Request;
 use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
@@ -46,7 +47,7 @@ class Php53HttpClient implements HttpClientInterface
         return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout, $userAgent)
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         $curlHandle = curl_init();
 
@@ -129,34 +130,39 @@ class Php53HttpClient implements HttpClientInterface
             } while (CURLM_CALL_MULTI_PERFORM == $mrc);
         }
 
-        $http_status = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
+        $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $response = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
-
-        if (!empty($error)) {
-            throw new \Exception($error);
-        }
-
-        if (0 === $http_status || 503 === $http_status) {
-            // Could not reach host or service unavailable, try with another one if we have it
-            $this->releaseMHandle($curlHandle);
-            curl_close($curlHandle);
-
-            return;
-        }
-
-        $answer = \json_decode($response, true);
 
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        if (4 == intval($http_status / 100)) {
-            throw new BadRequestException(isset($answer['message']) ? $answer['message'] : $http_status.' error', $http_status);
-        } elseif (2 != intval($http_status / 100)) {
-            throw new \Exception($http_status.': '.$response, $http_status);
+        if (!empty($error)) {
+            throw new RetriableException(
+                "An internal server error occurred on " . $request->getUri()->getHost(),
+                $statusCode
+            );
         }
 
-        return $answer;
+        if (0 === $statusCode || $statusCode >= 500) {
+            throw new RetriableException(
+                "An internal server error occurred on " . $request->getUri()->getHost(),
+                $statusCode
+            );
+        }
+
+        $response = \json_decode($response, true);
+        if (json_last_error() !== 0) {
+            throw new \Exception($statusCode.': Server responded with invalid Json response', $statusCode);
+        }
+
+        if (4 == intval($statusCode / 100)) {
+            throw new BadRequestException(isset($response['message']) ? $response['message'] : $http_status.' error', $statusCode);
+        } elseif (2 != intval($statusCode / 100)) {
+            throw new \Exception($statusCode.': '.$response, $statusCode);
+        }
+
+        return $response;
     }
 
     private function getMHandle($curlHandle)

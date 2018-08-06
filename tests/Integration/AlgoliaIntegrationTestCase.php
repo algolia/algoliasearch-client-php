@@ -55,6 +55,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             "city" => "Chicago",
             "country" => "United States",
             "iata_code" => "ORD",
+            "zone" => "america",
             "_geoloc" => array(
                 "lat" => 41.978603,
                 "lng" => -87.904842
@@ -66,6 +67,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             "city" => "Beijing",
             "country" => "China",
             "iata_code" => "PEK",
+            "zone" => "asia",
             "_geoloc" => array(
                 "lat" => 40.080111,
                 "lng" => 116.584556
@@ -77,6 +79,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             "city" => "London",
             "country" => "United Kingdom",
             "iata_code" => "LHR",
+            "zone" => "europe",
             "_geoloc" => array(
                 "lat" => 51.4775,
                 "lng" => -0.461389
@@ -88,6 +91,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             "city" => "Paris",
             "country" => "France",
             "iata_code" => "CDG",
+            "zone" => "europe",
             "_geoloc" => array(
                 "lat" => 49.012779,
                 "lng" => 2.55
@@ -99,6 +103,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             "city" => "Los Angeles",
             "country" => "United States",
             "iata_code" => "LAX",
+            "zone" => "america",
             "_geoloc" => array(
                 "lat" => 33.942536,
                 "lng" => -118.408075

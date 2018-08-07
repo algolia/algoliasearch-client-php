@@ -7,15 +7,16 @@
 | Need Doc update   | yes/no
 
 
-## What was changed
+## Describe your change
 
 <!-- 
-    Please give the reviewers and contributors 
-    as many details as possible to understand your changes
+    Please describe your change, add as much detail as 
+    necessary to understand your code.
 -->
 
-## Why it was changed
+## What problem is this fixing?
 
 <!-- 
-    Please explain why this change is necessary or interesting 
+    Please include everything needed to understand the problem, 
+    its context and consequences, and, if possible, how to recreate it.
 -->

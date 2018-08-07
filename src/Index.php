@@ -27,6 +27,16 @@ class Index implements IndexInterface
         $this->api = $apiWrapper;
     }
 
+    public function getIndexName()
+    {
+        return $this->indexName;
+    }
+
+    public function setIndexName($indexName)
+    {
+        $this->indexName = $indexName;
+    }
+
     public function search($query, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

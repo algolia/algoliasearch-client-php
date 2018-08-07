@@ -12,6 +12,10 @@
 * Fix default HttpClient wrapper for PHP53
 * Setup Travis
 
+#### 2.0 Alpha 2
+
+* Add getter and setter for `Index::indexName` property
+
 
 ### UNRELEASED
 

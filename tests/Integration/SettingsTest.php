@@ -34,11 +34,11 @@ class SettingsTest extends AlgoliaIntegrationTestCase
      */
     public function testSettingsWithReplicas()
     {
-        static::$indexes['replica1'] = $this->safeName('settings-mgmt_REPLICA');
+        $replica1 = $this->safeName('settings-mgmt_REPLICA');
         $index = static::getClient()->initIndex(static::$indexes['main']);
         $replica = static::getClient()->initIndex(static::$indexes['replica1']);
 
-        $settingsWithReplicas = array_merge($this->settings, array('replicas' => array(static::$indexes['replica1'])));
+        $settingsWithReplicas = array_merge($this->settings, array('replicas' => array($replica1)));
 
         // Assert that settings are forwarded by default
         $index->setSettings($settingsWithReplicas);

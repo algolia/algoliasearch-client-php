@@ -82,8 +82,14 @@ final class Config
         return forward_static_call(self::$httpClientConstructor);
     }
 
-    public static function setHttpClient(callable $httpClientConstructor)
+    public static function setHttpClient($httpClientConstructor)
     {
+        if (!is_callable($httpClientConstructor)) {
+            throw new \InvalidArgumentException(
+                "setHttpClient requires a function that build the HttpClient."
+            );
+        }
+
         self::$httpClientConstructor = $httpClientConstructor;
     }
 }

@@ -13,6 +13,12 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
     /** @var SyncClient */
     private static $client;
 
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        static::$indexes = array();
+    }
+
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();

@@ -33,7 +33,7 @@ cache:
 
 install:
   - composer install
-  - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzles ; fi
+  - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
 
 before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-
 class MultipleIndexTest extends AlgoliaIntegrationTestCase
 {
     public function testMultipleIndexMethods()
@@ -28,12 +26,8 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
 
         $client->multipleBatchObjects($this->getDeleteBatch());
         foreach (static::$indexes as $indexName) {
-            try {
-                $res = $client->initIndex($indexName)->search('');
-                $this->assertTrue(false);
-            } catch (NotFoundException $e) {
-                $this->assertTrue(true);
-            }
+            $res = $client->initIndex($indexName)->search('');
+            $this->assertEquals(0, $res['nbHits']);
         }
     }
 

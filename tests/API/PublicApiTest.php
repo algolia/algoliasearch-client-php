@@ -41,4 +41,13 @@ class PublicApiTest extends TestCase
 
         return $definition;
     }
+
+    protected function createMock($originalClassName)
+    {
+        if (method_exists($this, 'getMock')) {
+            return $this->getMock($originalClassName);
+        }
+
+        return parent::createMock($originalClassName);
+    }
 }

@@ -57,7 +57,7 @@ class ClusterHosts
         return new static($hosts);
     }
 
-    public function createForAnalytics()
+    public static function createForAnalytics()
     {
         $hosts = array(
             'read' => array('analytics.algolia.com'),

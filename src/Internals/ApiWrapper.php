@@ -8,10 +8,21 @@ use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Debug;
 
 class ApiWrapper
 {
+    /**
+     * @var HttpClientInterface
+     */
+    private $http;
+
+    /**
+     * @var \Algolia\AlgoliaSearch\Support\ClientConfig
+     */
+    private $config;
+
     /**
      * @var ClusterHosts
      */
@@ -22,19 +33,16 @@ class ApiWrapper
      */
     private $requestOptionsFactory;
 
-    /**
-     * @var HttpClientInterface
-     */
-    private $http;
-
     public function __construct(
+        HttpClientInterface $http,
+        ClientConfig $config,
         ClusterHosts $clusterHosts,
-        RequestOptionsFactory $requestOptionsFactory,
-        HttpClientInterface $http
+        RequestOptionsFactory $RqstOptsFactory = null
     ) {
-        $this->clusterHosts = $clusterHosts;
-        $this->requestOptionsFactory = $requestOptionsFactory;
         $this->http = $http;
+        $this->config = $config;
+        $this->clusterHosts = $clusterHosts;
+        $this->requestOptionsFactory = $RqstOptsFactory ? $RqstOptsFactory : new RequestOptionsFactory($config);
     }
 
     public function read($method, $path, $requestOptions = array(), $defaults = array())

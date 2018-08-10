@@ -2,11 +2,10 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use GuzzleHttp\Client as GuzzleClient;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Support\Config;
 
 final class Places
 {
@@ -20,20 +19,22 @@ final class Places
         $this->apiWrapper = $apiWrapper;
     }
 
-    public static function create($appId = null, $apiKey = null, $hosts = null)
+    public static function create($appId = null, $apiKey = null)
     {
-        if (is_null($hosts)) {
-            $hosts = ClusterHosts::createForPlaces();
-        } elseif (is_string($hosts)) {
-            $hosts = new ClusterHosts(array($hosts));
-        } elseif (is_array($hosts)) {
-            $hosts = new ClusterHosts($hosts);
-        }
+        $config = new ClientConfig(array(
+            'appId' => $appId,
+            'apiKey' => $apiKey,
+        ));
 
+        return static::createWithConfig($config);
+    }
+
+    public static function createWithConfig(ClientConfig $config)
+    {
         $apiWrapper = new ApiWrapper(
-            $hosts,
-            new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6HttpClient(new GuzzleClient())
+            Config::getHttpClient(),
+            $config,
+            ClusterHosts::createForPlaces()
         );
 
         return new static($apiWrapper);

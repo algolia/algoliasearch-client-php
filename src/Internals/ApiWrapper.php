@@ -147,4 +147,10 @@ class ApiWrapper
 
         throw new UnreachableException();
     }
+
+    public function setExtraHeader($headerName, $headerValue)
+    {
+        $this->requestOptionsFactory->setCustomHeader($headerName, $headerValue);
+        return $this;
+    }
 }

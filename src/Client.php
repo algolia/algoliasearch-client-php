@@ -61,6 +61,12 @@ class Client implements ClientInterface
         return new Index($indexName, $this->api);
     }
 
+    public function setExtraHeader($headerName, $headerValue)
+    {
+        $this->api->setExtraHeader($headerName, $headerValue);
+        return $this;
+    }
+
     public function multipleQueries($queries, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

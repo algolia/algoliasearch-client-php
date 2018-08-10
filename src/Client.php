@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -26,8 +27,20 @@ class Client implements ClientInterface
 
     public static function create($appId, $apiKey, $hosts = null)
     {
+        $config = new ClientConfig(array(
+            'appId' => $appId,
+            'apiKey' => $apiKey,
+            'hosts' => $hosts,
+        ));
+
+        return static::createWithConfig($config);
+    }
+
+    public static function createWithConfig(ClientConfig $config)
+    {
+        $hosts = $config->getHosts();
         if (!$hosts) {
-            $hosts = ClusterHosts::createFromAppId($appId);
+            $hosts = ClusterHosts::createFromAppId($config->getAppId());
         } elseif (is_string($hosts)) {
             $hosts = new ClusterHosts(array($hosts));
         } elseif (is_array($hosts)) {
@@ -35,9 +48,9 @@ class Client implements ClientInterface
         }
 
         $apiWrapper = new ApiWrapper(
-            $hosts,
-            new RequestOptionsFactory($appId, $apiKey),
-            Config::getHttpClient()
+            Config::getHttpClient(),
+            $config,
+            $hosts
         );
 
         return new static($apiWrapper);

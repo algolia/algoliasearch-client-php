@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Support\Config;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class RequestOptions
@@ -27,12 +26,9 @@ class RequestOptions
             }
         }
 
-        $this->readTimeout =
-            isset($options['readTimeout']) ? $options['readTimeout'] : Config::getReadTimeout();
-        $this->writeTimeout =
-            isset($options['writeTimeout']) ? $options['writeTimeout'] : Config::getWriteTimeout();
-        $this->connectTimeout =
-            isset($options['connectTimeout']) ? $options['connectTimeout'] : Config::getConnectTimeout();
+        $this->readTimeout =$options['readTimeout'];
+        $this->writeTimeout = $options['writeTimeout'];
+        $this->connectTimeout =$options['connectTimeout'];
     }
 
     public function getHeaders()

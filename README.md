@@ -140,6 +140,29 @@ Config::setHttpClient(function () {
 });
 ```
 
+#### Client configuration
+
+We also added a way to have a different configuration for each Client instance, in case you are
+using multiple apps, in case you need 2 clients with the same app different timeouts or anything similar.
+
+
+```php
+$config1 = new ClientConfig([
+    'appId' => getenv('LEGACY_APP_ID')
+    'apiKey' => getenv('LEGACY_API_KEY'),
+    'writeTimeout' => 90,
+]);
+
+$client1 = Client::createWithConfig($config1);
+
+$config2 = new ClientConfig(
+    'writeTimeout' => 10,
+]);
+// Note that credentials will automatically be read from env variables
+// Make sure you have set `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`
+$client2 = Client::createWithConfig($config1);
+
+```
 
 
 ### The `doctor` tool

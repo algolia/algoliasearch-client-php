@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +14,10 @@ class RequestOptionsFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->factory = new RequestOptionsFactory('Algolia-Id', 'Algolia-Key');
+        $this->factory = new RequestOptionsFactory(new ClientConfig(array(
+            'appId' => 'Algolia-Id',
+            'apiKey' => 'Algolia-Key',
+        )));
     }
 
     /**

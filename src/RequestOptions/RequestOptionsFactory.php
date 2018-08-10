@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 
 class RequestOptionsFactory
 {
-    private $appId;
-
-    private $apiKey;
+    private $config;
 
     private $validQueryParameters = array(
         'forwardToReplicas',
@@ -21,10 +20,9 @@ class RequestOptionsFactory
         'Content-type',
     );
 
-    public function __construct($appId = null, $apiKey = null)
+    public function __construct(ClientConfig $config)
     {
-        $this->appId = $appId;
-        $this->apiKey = $apiKey;
+        $this->config = $config;
     }
 
     public function create($options, $defaults = array())
@@ -46,11 +44,7 @@ class RequestOptionsFactory
             );
         }
 
-        return $options->addDefaultHeaders(array(
-            'X-Algolia-Application-Id' => $this->appId,
-            'X-Algolia-API-Key' => $this->apiKey,
-            'User-Agent' => Config::getUserAgent(),
-        ));
+        return $options;
     }
 
     public function createBodyLess($options, $defaults = array())
@@ -65,9 +59,16 @@ class RequestOptionsFactory
     private function normalize($options)
     {
         $normalized = array(
-            'headers' => array(),
+            'headers' => array(
+                'X-Algolia-Application-Id' => $this->config->getAppId(),
+                'X-Algolia-API-Key' => $this->config->getApiKey(),
+                'User-Agent' => Config::getUserAgent(),
+            ),
             'query' => array(),
             'body' => array(),
+            'readTimeout' => $this->config->getReadTimeout(),
+            'writeTimeout' => $this->config->getWriteTimeout(),
+            'connectTimeout' => $this->config->getConnectTimeout(),
         );
 
         foreach ($options as $optionName => $value) {

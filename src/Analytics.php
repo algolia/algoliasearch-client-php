@@ -3,11 +3,10 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
-use Algolia\AlgoliaSearch\Http\Guzzle6HttpClient;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use GuzzleHttp\Client as GuzzleClient;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Support\Config;
 
 final class Analytics
 {
@@ -23,10 +22,20 @@ final class Analytics
 
     public static function create($appId, $apiKey)
     {
+        $config = new ClientConfig(array(
+            'appId' => $appId,
+            'apiKey' => $apiKey,
+        ));
+
+        return static::createWithConfig($config);
+    }
+
+    public static function createWithConfig(ClientConfig $config)
+    {
         $apiWrapper = new ApiWrapper(
-            ClusterHosts::createForAnalytics(),
-            new RequestOptionsFactory($appId, $apiKey),
-            new Guzzle6HttpClient(new GuzzleClient())
+            Config::getHttpClient(),
+            $config,
+            ClusterHosts::createForAnalytics()
         );
 
         return new static($apiWrapper);

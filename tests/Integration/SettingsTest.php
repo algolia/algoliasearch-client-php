@@ -36,7 +36,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
     {
         $replica1 = $this->safeName('settings-mgmt_REPLICA');
         $index = static::getClient()->initIndex(static::$indexes['main']);
-        $replica = static::getClient()->initIndex(static::$indexes['replica1']);
+        $replica = static::getClient()->initIndex($replica1);
 
         $settingsWithReplicas = array_merge($this->settings, array('replicas' => array($replica1)));
 

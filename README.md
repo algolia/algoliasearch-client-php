@@ -161,6 +161,20 @@ $config2 = new ClientConfig(
 // Note that credentials will automatically be read from env variables
 // Make sure you have set `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`
 $client2 = Client::createWithConfig($config1);
+```
+
+### Singleton
+
+A new way to use the client was added. In most cases, you need one client, everywhere in your application and
+you are using only one Algolia app. In this case, I believe it's best to use a singleton, and our lib
+now takes care of it for you.
+
+**In this case, the client will automatically read the credentials from the env variables: `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`.(())
+
+```php
+Client::get()->getLogs();
+//...
+Client::get()->waitTask($indexName, $taskId);
 
 ```
 

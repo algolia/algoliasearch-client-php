@@ -20,9 +20,20 @@ class Client implements ClientInterface
      */
     protected $api;
 
+    protected static $client;
+
     public function __construct(ApiWrapper $apiWrapper)
     {
         $this->api = $apiWrapper;
+    }
+
+    public static function get()
+    {
+        if (!static::$client) {
+            static::$client = static::create(null, null);
+        }
+
+        return static::$client;
     }
 
     public static function create($appId, $apiKey, $hosts = null)

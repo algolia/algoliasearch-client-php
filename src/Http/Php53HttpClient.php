@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Http\Psr7\Request;
 use Algolia\AlgoliaSearch\Http\Psr7\Uri;
@@ -37,7 +38,9 @@ class Php53HttpClient implements HttpClientInterface
         $protocolVersion = '1.1'
     ) {
         if (is_array($body)) {
-            $body = \json_encode($body);
+            // Send an empty body instead of "[]" in case there are
+            // no content/params to send
+            $body = empty($body) ? '' : \json_encode($body);
             if (JSON_ERROR_NONE !== json_last_error()) {
                 throw new \InvalidArgumentException(
                     'json_encode error: '.json_last_error_msg());
@@ -156,7 +159,10 @@ class Php53HttpClient implements HttpClientInterface
             throw new \Exception($statusCode.': Server responded with invalid Json response', $statusCode);
         }
 
-        if (4 == intval($statusCode / 100)) {
+
+        if ($statusCode == 404) {
+            throw new NotFoundException($response['message'], $statusCode);
+        } elseif (4 == intval($statusCode / 100)) {
             throw new BadRequestException(isset($response['message']) ? $response['message'] : $http_status.' error', $statusCode);
         } elseif (2 != intval($statusCode / 100)) {
             throw new \Exception($statusCode.': '.$response, $statusCode);

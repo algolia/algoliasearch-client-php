@@ -36,19 +36,20 @@ class Client implements ClientInterface
         return static::$client;
     }
 
-    public static function create($appId, $apiKey, $hosts = null)
+    public static function create($appId = null, $apiKey = null, ClientConfig $config = null)
     {
-        $config = new ClientConfig(array(
-            'appId' => $appId,
-            'apiKey' => $apiKey,
-            'hosts' => $hosts,
-        ));
+        if (null === $config) {
+            $config = new ClientConfig();
+        }
 
-        return static::createWithConfig($config);
-    }
+        if (null !== $appId) {
+            $config->setAppId($appId);
+        }
 
-    public static function createWithConfig(ClientConfig $config)
-    {
+        if (null !== $apiKey) {
+            $config->setApiKey($apiKey);
+        }
+
         $hosts = $config->getHosts();
         if (!$hosts) {
             $hosts = ClusterHosts::createFromAppId($config->getAppId());

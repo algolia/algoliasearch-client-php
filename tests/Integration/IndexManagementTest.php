@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\Support\Debug;
+
 class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()
@@ -27,17 +29,33 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
 
     public function testCopyAndMoveIndex()
     {
-        $client = static::getClient();
-        $client->initIndex(static::$indexes['main'])->setSettings(
-            array('hitsPerPage' => 31)
+        $settings = array(
+            'hitsPerPage' => 31,
+            'userData' => 'API Client copy test',
         );
+        $client = static::getClient();
+        $mainIndex = $client->initIndex(static::$indexes['main']);
+        $mainIndex->setSettings($settings);
+        $mainIndex->saveObjects($this->airports);
 
-        $copyName = static::$indexes['main'].'-COPY';
-        $client->copyIndex(static::$indexes['main'], $copyName);
-        $this->assertIndexExists($copyName);
+        $copyIndexName = static::$indexes['main'].'-COPY';
+        $client->copyIndex(static::$indexes['main'], $copyIndexName);
+        $this->assertIndexExists($copyIndexName);
+        $res = $client->initIndex($copyIndexName)->search('');
+        $this->assertEquals(count($this->airports), $res['nbHits']);
+        $set = $client->initIndex($copyIndexName)->getSettings();
+        $this->assertArraySubset($settings, $set);
 
-        static::$indexes['moved'] = $copyName.'-MOVED';
-        $client->copyIndex($copyName, static::$indexes['moved']);
+        static::$indexes['copy-scoped'] = $copyIndexName.'-scoped-settings';
+        $client->copyIndex(static::$indexes['main'], static::$indexes['copy-scoped'], array('scope' => 'settings'));
+        $this->assertIndexExists(static::$indexes['copy-scoped']);
+        $res = $client->initIndex(static::$indexes['copy-scoped'])->search('');
+        $this->assertEquals(0, $res['nbHits']);
+        $set = $client->initIndex(static::$indexes['copy-scoped'])->getSettings();
+        $this->assertArraySubset($settings, $set);
+
+        static::$indexes['moved'] = $copyIndexName.'-MOVED';
+        $client->moveIndex($copyIndexName, static::$indexes['moved']);
         $this->assertIndexExists(static::$indexes['moved']);
     }
 

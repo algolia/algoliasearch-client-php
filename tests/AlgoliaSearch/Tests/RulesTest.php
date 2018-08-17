@@ -116,8 +116,8 @@ class RulesTest extends AlgoliaSearchTestCase
     {
         $rule = $this->getRuleStub();
         $rule2 = $this->getRuleStub('my-second-rule');
-        $rule3 = $this->getRuleStub('my-second-rule-3');
-        $rule4 = $this->getRuleStub('my-second-rule-4');
+        $rule3 = $this->getDisabledRuleStub ('my-second-rule-3');
+        $rule4 = $this->getTimedRuleStub('my-second-rule-4');
 
         $response = $this->index->batchRules(array($rule, $rule2));
         $this->index->waitTask($response['taskID']);
@@ -134,11 +134,28 @@ class RulesTest extends AlgoliaSearchTestCase
         $this->assertEquals(array($rule4, $rule3), $rules['hits']);
     }
 
+    private function getDisabledRuleStub($objectID = 'my-other-rule')
+    {
+        return array_merge(
+            $this->getRuleStub($objectID),
+            array('enabled' => false)
+        );
+    }
 
+    private function getTimedRuleStub($objectID = 'my-other-rule')
+    {
+        return array_merge(
+            $this->getRuleStub($objectID),
+            array('validity' => array(
+                array('from' => time(), 'until' => time() + 1*24*60*60),
+                array('from' => time() + 4*24*60*60, 'until' => time() + 5*24*60*60),
+            ))
+        );
+    }
 
     private function getRuleStub($objectID = 'my-rule')
     {
-        return $rule = array(
+        return array(
             'objectID' => $objectID,
             'condition' => array(
                 'pattern'   => 'some text',

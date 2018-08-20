@@ -14,10 +14,9 @@ class RequestOptionsFactoryTest extends TestCase
 
     public function setUp()
     {
-        $this->factory = new RequestOptionsFactory(new ClientConfig(array(
-            'appId' => 'Algolia-Id',
-            'apiKey' => 'Algolia-Key',
-        )));
+        $this->factory = new RequestOptionsFactory(
+            new ClientConfig('Algolia-Id', 'Algolia-Key'
+        ));
     }
 
     /**

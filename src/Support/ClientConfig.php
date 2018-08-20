@@ -2,13 +2,16 @@
 
 namespace Algolia\AlgoliaSearch\Support;
 
+use Algolia\AlgoliaSearch\Internals\ClusterHosts;
+
 class ClientConfig
 {
     private $config;
 
     public function __construct($appId = null, $apiKey = null)
     {
-        $config = array();
+        $config = $this->getDefaultConfig();
+
         if (null !== $appId) {
             $config['appId'] = $appId;
         }
@@ -16,7 +19,11 @@ class ClientConfig
             $config['apiKey'] = $apiKey;
         }
 
-        $this->config = $config + $this->getDefaultConfig();
+        if (null === $config['hosts']) {
+            $config['hosts'] = ClusterHosts::createFromAppId($config['appId']);
+        }
+
+        $this->config = $config;
     }
 
     private function getDefaultConfig()
@@ -24,7 +31,7 @@ class ClientConfig
         return array(
             'appId' => getenv('ALGOLIA_APP_ID'),
             'apiKey' => getenv('ALGOLIA_API_KEY'),
-            'hosts' => array(),
+            'hosts' => null,
             'waitTaskRetry' => Config::$waitTaskRetry,
             'readTimeout' => Config::getReadTimeout(),
             'writeTimeout' => Config::getWriteTimeout(),
@@ -59,7 +66,7 @@ class ClientConfig
         return $this->config['hosts'];
     }
 
-    public function setHosts($hosts)
+    public function setHosts(ClusterHosts $hosts)
     {
         $this->config['hosts'] = $hosts;
         return $this;

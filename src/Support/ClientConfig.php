@@ -6,14 +6,14 @@ class ClientConfig
 {
     private $config;
 
-    public function __construct($config = array())
+    public function __construct($appId = null, $apiKey = null)
     {
-        // We want to set default credentials
-        // if they are set to null, and only null
-        foreach (array('appId', 'apiKey') as $key) {
-            if (isset($config[$key]) && is_null($config[$key])) {
-                unset($config[$key]);
-            }
+        $config = array();
+        if (null !== $appId) {
+            $config['appId'] = $appId;
+        }
+        if (null !== $apiKey) {
+            $config['apiKey'] = $apiKey;
         }
 
         $this->config = $config + $this->getDefaultConfig();

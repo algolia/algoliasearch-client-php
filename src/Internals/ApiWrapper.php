@@ -24,11 +24,6 @@ class ApiWrapper
     private $config;
 
     /**
-     * @var ClusterHosts
-     */
-    private $clusterHosts;
-
-    /**
      * @var RequestOptionsFactory
      */
     private $requestOptionsFactory;
@@ -36,12 +31,10 @@ class ApiWrapper
     public function __construct(
         HttpClientInterface $http,
         ClientConfig $config,
-        ClusterHosts $clusterHosts,
         RequestOptionsFactory $RqstOptsFactory = null
     ) {
         $this->http = $http;
         $this->config = $config;
-        $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $RqstOptsFactory ? $RqstOptsFactory : new RequestOptionsFactory($config);
     }
 
@@ -57,7 +50,7 @@ class ApiWrapper
             $method,
             $path,
             $requestOptions,
-            $this->clusterHosts->read(),
+            $this->config->getHosts()->read(),
             $requestOptions->getReadTimeout()
         );
     }
@@ -75,7 +68,7 @@ class ApiWrapper
             $method,
             $path,
             $requestOptions,
-            $this->clusterHosts->write(),
+            $this->config->getHosts()->write(),
             $requestOptions->getWriteTimeout(),
             $data
         );
@@ -86,7 +79,7 @@ class ApiWrapper
         $requestOptions = $this->requestOptionsFactory->create($requestOptions);
 
         if (null === $hosts) {
-            $hosts = $this->clusterHosts->write();
+            $hosts = $this->config->getHosts()->write();
         } elseif (!is_array($hosts)) {
             $hosts = array($hosts);
         }
@@ -131,7 +124,7 @@ class ApiWrapper
                     Debug::handle("The host [$host] failed, retrying with another host.");
                 }
 
-                $this->clusterHosts->failed($host);
+                $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
                 if (Debug::isEnabled()) {
                     Debug::handle("The following request returned a 4xx error: ", $request);

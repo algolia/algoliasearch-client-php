@@ -20,12 +20,10 @@ final class Analytics
         $this->api = $api;
     }
 
-    public static function create($appId, $apiKey)
+    public static function create($appId = null, $apiKey = null)
     {
-        $config = new ClientConfig(array(
-            'appId' => $appId,
-            'apiKey' => $apiKey,
-        ));
+        $config = new ClientConfig($appId, $apiKey);
+        $config->setHosts(ClusterHosts::createForAnalytics());
 
         return static::createWithConfig($config);
     }
@@ -34,8 +32,7 @@ final class Analytics
     {
         $apiWrapper = new ApiWrapper(
             Config::getHttpClient(),
-            $config,
-            ClusterHosts::createForAnalytics()
+            $config
         );
 
         return new static($apiWrapper);

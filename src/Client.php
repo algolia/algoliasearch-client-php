@@ -36,33 +36,13 @@ class Client implements ClientInterface
         return static::$client;
     }
 
-    public static function create($appId = null, $apiKey = null, ClientConfig $config = null)
+    public static function create($appId = null, $apiKey = null)
     {
-        if (null === $config) {
-            $config = new ClientConfig();
-        }
-
-        if (null !== $appId) {
-            $config->setAppId($appId);
-        }
-
-        if (null !== $apiKey) {
-            $config->setApiKey($apiKey);
-        }
-
-        $hosts = $config->getHosts();
-        if (!$hosts) {
-            $hosts = ClusterHosts::createFromAppId($config->getAppId());
-        } elseif (is_string($hosts)) {
-            $hosts = new ClusterHosts(array($hosts));
-        } elseif (is_array($hosts)) {
-            $hosts = new ClusterHosts($hosts);
-        }
+        $config = new ClientConfig($appId, $apiKey);
 
         $apiWrapper = new ApiWrapper(
             Config::getHttpClient(),
-            $config,
-            $hosts
+            $config
         );
 
         return new static($apiWrapper);

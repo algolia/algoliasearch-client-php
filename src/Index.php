@@ -161,6 +161,7 @@ class Index implements IndexInterface
     {
         $tmpName = $this->indexName.'_tmp_'.uniqid();
 
+        // TODO: Replica!
         $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $this->indexName),

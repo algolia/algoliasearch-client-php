@@ -47,11 +47,10 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         $config += array(
             'app-id' => getenv('ALGOLIA_APP_ID'),
             'key' => getenv('ALGOLIA_API_KEY'),
-            'hosts' => array(),
         );
 
         return new SyncClient(
-            Client::create($config['app-id'], $config['key'], $config['hosts'])
+            Client::create($config['app-id'], $config['key'])
         );
     }
 

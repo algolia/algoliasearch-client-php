@@ -15,7 +15,9 @@
 #### 2.0 Alpha 2
 
 * Add getter and setter for `Index::indexName` property
-* Fix Traviss
+* Fix Travis
+* Introduce ClientConfiguration
+* Introduce Client singleton with `Client::get()`
 
 
 ### UNRELEASED

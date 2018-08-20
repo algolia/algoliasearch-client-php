@@ -30,7 +30,7 @@ class Client implements ClientInterface
     public static function get()
     {
         if (!static::$client) {
-            static::$client = static::create(null, null);
+            static::$client = static::create();
         }
 
         return static::$client;

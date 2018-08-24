@@ -205,7 +205,7 @@ class SecurityNewNamingTest extends AlgoliaSearchTestCase
         $res = $b->setSettings(array('hitsPerPage' => 10));
         $b->waitTask($res['taskID']);
 
-        $newKey = $this->client->addApiKey(array('search', 'addObject', 'deleteObject'), 0, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
+        $newKey = $this->client->addApiKey(array('search', 'addObject', 'deleteObject'), 500, 0, 0, array($this->safe_name('a-12'), $this->safe_name('b-13')));
         $this->assertNotSame('', $newKey['key']);
 
         $self = $this;

@@ -47,6 +47,7 @@ class ClientConfig
     public function setAppId($appId)
     {
         $this->config['appId'] = $appId;
+
         return $this;
     }
 
@@ -58,6 +59,7 @@ class ClientConfig
     public function setApiKey($apiKey)
     {
         $this->config['apiKey'] = $apiKey;
+
         return $this;
     }
 
@@ -69,6 +71,7 @@ class ClientConfig
     public function setHosts(ClusterHosts $hosts)
     {
         $this->config['hosts'] = $hosts;
+
         return $this;
     }
 
@@ -80,6 +83,7 @@ class ClientConfig
     public function setWaitTaskRetry($waitTaskRetry)
     {
         $this->config['waitTaskRetry'] = $waitTaskRetry;
+
         return $this;
     }
 
@@ -91,6 +95,7 @@ class ClientConfig
     public function setReadTimeout($readTimeout)
     {
         $this->config['readTimeout'] = $readTimeout;
+
         return $this;
     }
 
@@ -102,6 +107,7 @@ class ClientConfig
     public function setWriteTimeout($writeTimeout)
     {
         $this->config['writeTimeout'] = $writeTimeout;
+
         return $this;
     }
 
@@ -113,6 +119,7 @@ class ClientConfig
     public function setConnectTimeout($connectTimeout)
     {
         $this->config['connectTimeout'] = $connectTimeout;
+
         return $this;
     }
 }

@@ -418,7 +418,7 @@ class Index implements IndexInterface
                 return;
             }
 
-            ++$retry;
+            $retry++;
             $factor = ceil($retry / 10);
             usleep($factor * 100000); // 0.1 second
         } while ($retry < $maxRetry);

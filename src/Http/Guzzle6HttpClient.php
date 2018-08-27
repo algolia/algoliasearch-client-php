@@ -57,7 +57,7 @@ class Guzzle6HttpClient implements HttpClientInterface
     {
         try {
             if (Debug::isEnabled()) {
-                Debug::handle("Sending the following request: ", $request, $request->getBody()->getContents());
+                Debug::handle('Sending the following request: ', $request, $request->getBody()->getContents());
             }
 
             $response = $this->client->send($request, array(
@@ -97,11 +97,11 @@ class Guzzle6HttpClient implements HttpClientInterface
 
                 if ($statusCode >= 500) {
                     return new RetriableException(
-                        "An internal server error occurred on " . $request->getUri()->getHost(),
+                        'An internal server error occurred on '.$request->getUri()->getHost(),
                         $statusCode,
                         $exception
                     );
-                } elseif ($statusCode == 404) {
+                } elseif (404 == $statusCode) {
                     throw new NotFoundException($body['message'], $statusCode);
                 } elseif ($statusCode >= 400) {
                     throw new BadRequestException($body['message'], $statusCode);

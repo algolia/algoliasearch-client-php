@@ -57,7 +57,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
     public function next()
     {
         $previousPage = $this->getCurrentPage();
-        ++$this->key;
+        $this->key++;
         if ($this->getCurrentPage() !== $previousPage) {
             // Discard the response if the page has changed.
             $this->response = null;

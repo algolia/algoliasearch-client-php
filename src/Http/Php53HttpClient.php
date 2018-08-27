@@ -142,25 +142,24 @@ class Php53HttpClient implements HttpClientInterface
 
         if (!empty($error)) {
             throw new RetriableException(
-                "An internal server error occurred on " . $request->getUri()->getHost(),
+                'An internal server error occurred on '.$request->getUri()->getHost(),
                 $statusCode
             );
         }
 
         if (0 === $statusCode || $statusCode >= 500) {
             throw new RetriableException(
-                "An internal server error occurred on " . $request->getUri()->getHost(),
+                'An internal server error occurred on '.$request->getUri()->getHost(),
                 $statusCode
             );
         }
 
         $response = \json_decode($response, true);
-        if (json_last_error() !== 0) {
+        if (0 !== json_last_error()) {
             throw new \Exception($statusCode.': Server responded with invalid Json response', $statusCode);
         }
 
-
-        if ($statusCode == 404) {
+        if (404 == $statusCode) {
             throw new NotFoundException($response['message'], $statusCode);
         } elseif (4 == intval($statusCode / 100)) {
             throw new BadRequestException(isset($response['message']) ? $response['message'] : $http_status.' error', $statusCode);

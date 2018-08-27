@@ -86,7 +86,7 @@ final class Config
     {
         if (!is_callable($httpClientConstructor)) {
             throw new \InvalidArgumentException(
-                "setHttpClient requires a function that build the HttpClient."
+                'setHttpClient requires a function that build the HttpClient.'
             );
         }
 

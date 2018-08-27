@@ -6,19 +6,19 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
 {
     private $caliSyn = array(
         'objectID' => 'cali',
-        'type'     => 'synonym',
+        'type' => 'synonym',
         'synonyms' => array('Los Angeles', 'LA', 'Venice'),
     );
 
     private $pekingSyn = array(
         'objectID' => 'china',
-        'type'     => 'synonym',
+        'type' => 'synonym',
         'synonyms' => array('Beijing', 'Peking'),
     );
 
     private $anotherSyn = array(
         'objectID' => 'city',
-        'type'     => 'synonym',
+        'type' => 'synonym',
         'synonyms' => array('city', 'town', 'village'),
     );
 
@@ -30,7 +30,6 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
             static::$indexes['main'] = $this->safeName('synomyms-mgmt');
         }
     }
-
 
     public function testSynonymsCanBeSavedAndRetrieved()
     {
@@ -58,7 +57,6 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         $index->clearSynonyms();
         $res = $index->searchSynonyms('');
         $this->assertArraySubset(array('nbHits' => 0), $res);
-
     }
 
     public function testBrowseSynonyms()

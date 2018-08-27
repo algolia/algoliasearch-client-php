@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Support\Debug;
-
 class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()
@@ -90,6 +88,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         foreach ($list['items'] as $index) {
             if ($index['name'] === $indexName) {
                 $this->assertTrue(true);
+
                 return;
             }
         }
@@ -103,6 +102,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         foreach ($list['items'] as $index) {
             if ($index['name'] === $indexName) {
                 $this->assertTrue(false);
+
                 return;
             }
         }

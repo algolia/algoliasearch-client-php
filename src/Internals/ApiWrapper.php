@@ -127,7 +127,7 @@ class ApiWrapper
                 $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
                 if (Debug::isEnabled()) {
-                    Debug::handle("The following request returned a 4xx error: ", $request);
+                    Debug::handle('The following request returned a 4xx error: ', $request);
                 }
 
                 throw $e;
@@ -135,7 +135,7 @@ class ApiWrapper
                 throw $e;
             }
 
-            ++$retry;
+            $retry++;
         }
 
         throw new UnreachableException();
@@ -144,6 +144,7 @@ class ApiWrapper
     public function setExtraHeader($headerName, $headerValue)
     {
         $this->requestOptionsFactory->setCustomHeader($headerName, $headerValue);
+
         return $this;
     }
 }

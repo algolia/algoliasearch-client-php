@@ -23,7 +23,7 @@ class Helpers
      *
      * @return mixed
      */
-    public static function api_path($pathFormat, $args = null, $_ = null    )
+    public static function api_path($pathFormat, $args = null, $_ = null)
     {
         $arguments = array_slice(func_get_args(), 1);
         foreach ($arguments as &$arg) {

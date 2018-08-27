@@ -20,15 +20,15 @@ class RequestOptions
 
     public function __construct(array $options = array())
     {
-        foreach(array('headers', 'query', 'body') as $name) {
+        foreach (array('headers', 'query', 'body') as $name) {
             if (isset($options[$name]) && !empty($options[$name])) {
                 $this->{$name} = $options[$name];
             }
         }
 
-        $this->readTimeout =$options['readTimeout'];
+        $this->readTimeout = $options['readTimeout'];
         $this->writeTimeout = $options['writeTimeout'];
-        $this->connectTimeout =$options['connectTimeout'];
+        $this->connectTimeout = $options['connectTimeout'];
     }
 
     public function getHeaders()
@@ -39,12 +39,14 @@ class RequestOptions
     public function addHeader($name, $value)
     {
         $this->headers[$name] = $value;
+
         return $this;
     }
 
     public function addHeaders($headers)
     {
         $this->headers = array_merge($this->headers, $headers);
+
         return $this;
     }
 
@@ -53,6 +55,7 @@ class RequestOptions
         if (!isset($this->headers[$name])) {
             $this->headers[$name] = $value;
         }
+
         return $this;
     }
 
@@ -61,12 +64,14 @@ class RequestOptions
         foreach ($headers as $name => $value) {
             $this->addDefaultHeader($name, $value);
         }
+
         return $this;
     }
 
     public function setHeaders($headers)
     {
         $this->headers = $headers;
+
         return $this;
     }
 
@@ -83,12 +88,14 @@ class RequestOptions
     public function addQueryParameter($name, $value)
     {
         $this->query[$name] = $value;
+
         return $this;
     }
 
     public function addQueryParameters($parameters)
     {
         $this->query = array_merge($this->query, $parameters);
+
         return $this;
     }
 
@@ -97,6 +104,7 @@ class RequestOptions
         if (!isset($this->query[$name])) {
             $this->query[$name] = $value;
         }
+
         return $this;
     }
 
@@ -105,12 +113,14 @@ class RequestOptions
         foreach ($parameters as $name => $value) {
             $this->addDefaultQueryParameter($name, $value);
         }
+
         return $this;
     }
 
     public function setQueryParameters($queryParameters)
     {
         $this->query = $queryParameters;
+
         return $this;
     }
 
@@ -122,12 +132,14 @@ class RequestOptions
     public function addBodyParameter($name, $value)
     {
         $this->body[$name] = $value;
+
         return $this;
     }
 
     public function addBodyParameters($parameters)
     {
         $this->body = array_merge($this->body, $parameters);
+
         return $this;
     }
 
@@ -136,6 +148,7 @@ class RequestOptions
         if (!isset($this->body[$name])) {
             $this->body[$name] = $value;
         }
+
         return $this;
     }
 
@@ -144,12 +157,14 @@ class RequestOptions
         foreach ($parameters as $name => $value) {
             $this->addDefaultBodyParameter($name, $value);
         }
+
         return $this;
     }
 
     public function setBody($body)
     {
         $this->body = $body;
+
         return $this;
     }
 
@@ -161,6 +176,7 @@ class RequestOptions
     public function setReadTimeout($readTimeout)
     {
         $this->readTimeout = $readTimeout;
+
         return $this;
     }
 
@@ -172,6 +188,7 @@ class RequestOptions
     public function setWriteTimeout($writeTimeout)
     {
         $this->writeTimeout = $writeTimeout;
+
         return $this;
     }
 
@@ -183,6 +200,7 @@ class RequestOptions
     public function setConnectTimeout($connectTimeout)
     {
         $this->connectTimeout = $connectTimeout;
+
         return $this;
     }
 }

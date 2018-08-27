@@ -30,7 +30,7 @@ class RequestOptionsFactory
     public function create($options, $defaults = array())
     {
         if (is_array($options)) {
-            $options  += $defaults;
+            $options += $defaults;
             $options = $this->format($options);
             $options = $this->normalize($options);
 
@@ -61,6 +61,7 @@ class RequestOptionsFactory
     public function setDefaultHeader($headerName, $headerValue)
     {
         $this->defaultHeaders[$headerName] = $headerValue;
+
         return $this;
     }
 
@@ -80,7 +81,6 @@ class RequestOptionsFactory
         );
 
         foreach ($options as $optionName => $value) {
-
             $type = $this->getOptionType($optionName);
 
             if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'))) {

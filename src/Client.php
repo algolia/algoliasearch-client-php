@@ -6,9 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
-use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 use Algolia\AlgoliaSearch\Support\Helpers;
@@ -56,6 +54,7 @@ class Client implements ClientInterface
     public function setExtraHeader($headerName, $headerValue)
     {
         $this->api->setExtraHeader($headerName, $headerValue);
+
         return $this;
     }
 
@@ -242,7 +241,6 @@ class Client implements ClientInterface
 
     public function removeUserId($userId, $requestOptions = array())
     {
-
         if (is_array($requestOptions)) {
             $requestOptions['X-Algolia-User-ID'] = $userId;
         } elseif ($requestOptions instanceof RequestOptions) {
@@ -269,12 +267,14 @@ class Client implements ClientInterface
     public function getTask($indexName, $taskId, $requestOptions = array())
     {
         $index = $this->initIndex($indexName);
+
         return $index->getTask($taskId, $requestOptions);
     }
 
     public function waitTask($indexName, $taskId, $requestOptions = array())
     {
         $index = $this->initIndex($indexName);
+
         return $index->waitTask($taskId, $requestOptions);
     }
 
@@ -286,17 +286,18 @@ class Client implements ClientInterface
         do {
             try {
                 $this->getApiKey($key, $requestOptions);
+
                 return;
             } catch (NotFoundException $e) {
                 // Try again
             }
 
-            ++$retry;
+            $retry++;
             $factor = ceil($retry / 10);
             usleep($factor * 100000); // 0.1 second
         } while ($retry < $maxRetry);
 
-        throw new TaskTooLongException("The key ".substr($key, 0, 6)."... isn't added yet.");
+        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

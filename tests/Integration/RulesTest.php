@@ -54,8 +54,8 @@ class RulesTest extends AlgoliaIntegrationTestCase
         foreach ($iterator as $rule) {
             $this->assertArraySubset(
                 array(
-                    'pattern'   => 'some text',
-                    'anchoring' => 'is'
+                    'pattern' => 'some text',
+                    'anchoring' => 'is',
                 ),
                 $rule['condition']
             );
@@ -69,14 +69,14 @@ class RulesTest extends AlgoliaIntegrationTestCase
         return $rule = array(
             'objectID' => $objectID,
             'condition' => array(
-                'pattern'   => 'some text',
-                'anchoring' => 'is'
+                'pattern' => 'some text',
+                'anchoring' => 'is',
             ),
             'consequence' => array(
                 'params' => array(
-                    'query' => 'other text'
-                )
-            )
+                    'query' => 'other text',
+                ),
+            ),
         );
     }
 }

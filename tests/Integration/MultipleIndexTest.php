@@ -8,7 +8,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
     {
         /** @var \Algolia\AlgoliaSearch\Client $client */
         $client = $this->getClient();
-        $batch =  $this->getBatch();
+        $batch = $this->getBatch();
 
         $client->multipleBatchObjects($batch);
 
@@ -38,6 +38,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
     {
         $batch = array_map(function ($item) {
             unset($item['body']['objectID']);
+
             return $item;
         }, $this->getBatch());
 
@@ -47,7 +48,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
     private function getBatch()
     {
         $batch = array();
-        $actions = array("addObject", "updateObject", "partialUpdateObject");
+        $actions = array('addObject', 'updateObject', 'partialUpdateObject');
 
         foreach ($this->airports as $airport) {
             static::$indexes[$airport['zone']] = $this->safeName($airport['zone']);
@@ -66,6 +67,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
     {
         return array_map(function ($item) {
             $item['action'] = 'deleteObject';
+
             return $item;
         }, $this->getBatch());
     }

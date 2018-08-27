@@ -16,6 +16,7 @@ class ObjectIterator extends AbstractAlgoliaIterator
      * browse method, no client-side formatting is required.
      *
      * @param array $hit
+     *
      * @return array the exact same $hit
      */
     protected function formatHit(array $hit)

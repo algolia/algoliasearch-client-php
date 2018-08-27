@@ -26,7 +26,7 @@ class RequestOptionsFactoryTest extends TestCase
     {
         $actual = $this->factory->create($options);
 
-        $expectedRequestOptions['headers'] += array("User-Agent" => Config::getUserAgent());
+        $expectedRequestOptions['headers'] += array('User-Agent' => Config::getUserAgent());
 
         $this->assertEquals($expectedRequestOptions, array(
             'headers' => $actual->getHeaders(),

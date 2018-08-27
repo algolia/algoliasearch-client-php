@@ -7,7 +7,7 @@ $finder = PhpCsFixer\Finder::create()
 return PhpCsFixer\Config::create()
     ->setRules(array(
         '@Symfony' => true,
-        'array_syntax' => array('syntax' => 'long'),
+        'increment_style' => array('style' => 'post'),
     ))
     ->setFinder($finder)
-;
+    ;

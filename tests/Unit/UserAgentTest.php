@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\UserAgent;
 use PHPUnit\Framework\TestCase;
 
 class UserAgentTest extends TestCase
@@ -11,18 +12,21 @@ class UserAgentTest extends TestCase
 
     public function setUp()
     {
-        $this->default = 'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).'); ';
+        $this->default = 'Algolia for PHP ('.Config::VERSION.'); ';
+        $this->default .= 'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).')';
         if (defined('HHVM_VERSION')) {
             $this->default .= '; HHVM ('.HHVM_VERSION.')';
         }
-        $this->default .= 'Algolia for PHP ('.Config::VERSION.')';
+        if (interface_exists('\GuzzleHttp\ClientInterface')) {
+            $this->default .= '; Guzzle ('.\GuzzleHttp\ClientInterface::VERSION.')';
+        }
     }
 
     public function testDefaultUserAgent()
     {
-        $this->assertRegExp('/^PHP \(\d+\.\d+\.\d+\); Algolia for PHP \(\d+\.\d+\.\d+\)$/', Config::getUserAgent());
+        $this->assertRegExp('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\).*$/', UserAgent::get());
 
-        $this->assertEquals($this->default, Config::getUserAgent());
+        $this->assertEquals($this->default, UserAgent::get());
     }
 
     public function testWithCustomUserAgent()
@@ -31,22 +35,22 @@ class UserAgentTest extends TestCase
         $version1 = '1.23.4';
         $custom1 = '; '.$segment1.' ('.$version1.')';
         // Add extra spaces to ensure they're trimmed
-        Config::addCustomUserAgent(' '.$segment1.' ', ' '.$version1.' ');
+        UserAgent::addCustomUserAgent(' '.$segment1.' ', ' '.$version1.' ');
 
         $this->assertEquals(
             $this->default.$custom1,
-            Config::getUserAgent()
+            UserAgent::get()
         );
 
         $segment2 = 'Framework Xtra lib';
         $version2 = '1.0.4';
         $custom2 = '; '.$segment2.' ('.$version2.')';
         // Add extra spaces to ensure they're trimmed
-        Config::addCustomUserAgent(' '.$segment2.' ', ' '.$version2.' ');
+        UserAgent::addCustomUserAgent(' '.$segment2.' ', ' '.$version2.' ');
 
         $this->assertEquals(
             $this->default.$custom1.$custom2,
-            Config::getUserAgent()
+            UserAgent::get()
         );
     }
 }

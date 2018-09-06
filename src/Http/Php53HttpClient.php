@@ -162,7 +162,7 @@ class Php53HttpClient implements HttpClientInterface
         if (404 == $statusCode) {
             throw new NotFoundException($response['message'], $statusCode);
         } elseif (4 == intval($statusCode / 100)) {
-            throw new BadRequestException(isset($response['message']) ? $response['message'] : $http_status.' error', $statusCode);
+            throw new BadRequestException(isset($response['message']) ? $response['message'] : $statusCode.' error', $statusCode);
         } elseif (2 != intval($statusCode / 100)) {
             throw new \Exception($statusCode.': '.$response, $statusCode);
         }
@@ -183,5 +183,16 @@ class Php53HttpClient implements HttpClientInterface
     private function releaseMHandle($curlHandle)
     {
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
+    }
+
+    private function invalidOptions(array $curlOptions = array(), $errorMsg = '')
+    {
+        throw new \OutOfBoundsException(
+            sprintf(
+                'AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s',
+                json_encode($curlOptions),
+                $errorMsg
+            )
+        );
     }
 }

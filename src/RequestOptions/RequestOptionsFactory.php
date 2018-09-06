@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\UserAgent;
 
 class RequestOptionsFactory
 {
@@ -71,7 +71,7 @@ class RequestOptionsFactory
             'headers' => array(
                 'X-Algolia-Application-Id' => $this->config->getAppId(),
                 'X-Algolia-API-Key' => $this->config->getApiKey(),
-                'User-Agent' => Config::getUserAgent(),
+                'User-Agent' => UserAgent::get(),
             ),
             'query' => array(),
             'body' => array(),

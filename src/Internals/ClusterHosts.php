@@ -4,13 +4,31 @@ namespace Algolia\AlgoliaSearch\Internals;
 
 class ClusterHosts
 {
-    private $hosts;
+    private $read;
 
-    public function __construct(array $hosts)
+    private $write;
+
+    public function __construct(array $read, array $write)
     {
-        $this->assertHostsAreValid($hosts);
+        $this->read = $read;
+        $this->write = $write;
+    }
 
-        $this->hosts = $hosts;
+    public static function create($read, $write = null)
+    {
+        if (null === $write) {
+            $write = $read;
+        }
+
+        if (is_string($read)) {
+            $read = array($read);
+        }
+
+        if (is_string($write)) {
+            $write = array($write);
+        }
+
+        return new static($read, $write);
     }
 
     public static function createFromAppId($applicationId)
@@ -27,12 +45,7 @@ class ClusterHosts
         shuffle($write);
         array_unshift($write, $applicationId.'.algolia.net');
 
-        $hosts = array(
-            'read' => $read,
-            'write' => $write,
-        );
-
-        return new static($hosts);
+        return static::create($read, $write);
     }
 
     public static function createForPlaces()
@@ -47,58 +60,39 @@ class ClusterHosts
         array_unshift($read, 'places-dsn.algolia.net');
 
         shuffle($write);
-        array_unshift($write, 'places-dsn.algolia.net');
+        array_unshift($write, 'places.algolia.net');
 
-        $hosts = array(
-            'read' => $read,
-            'write' => $write,
-        );
-
-        return new static($hosts);
+        return static::create($read, $write);
     }
 
     public static function createForAnalytics()
     {
-        $hosts = array(
-            'read' => array('analytics.algolia.com'),
-            'write' => array('analytics.algolia.com'),
-        );
-
-        return new static($hosts);
+        return static::create('analytics.algolia.com');
     }
 
     public function read()
     {
-        return $this->hosts['read'];
+        return $this->read;
     }
 
     public function write()
     {
-        return $this->hosts['write'];
+        return $this->write;
     }
 
     public function failed($host)
     {
-        $writeIndex = array_search($host, $this->hosts['write']);
-        $readIndex = array_search($host, $this->hosts['read']);
+        $writeIndex = array_search($host, $this->write);
+        $readIndex = array_search($host, $this->read);
 
         if (false !== $writeIndex) {
-            unset($this->hosts['write'][$writeIndex]);
+            unset($this->write[$writeIndex]);
         }
 
         if (false !== $readIndex) {
-            unset($this->hosts['read'][$readIndex]);
+            unset($this->read[$readIndex]);
         }
 
         return $this;
-    }
-
-    private function assertHostsAreValid($hosts)
-    {
-        foreach (array('read', 'write') as $action) {
-            if (!(isset($hosts[$action]) && is_array($hosts[$action]))) {
-                throw new \InvalidArgumentException('hosts array passed to '.get_class($this).' is invalid');
-            }
-        }
     }
 }

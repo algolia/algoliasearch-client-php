@@ -8,6 +8,11 @@ class ClientConfig
 {
     private $config;
 
+    private $defaultWaitTaskRetry = 100;
+    private $defaultReadTimeout = 5;
+    private $defaultWriteTimeout = 5;
+    private $defaultConnectTimeout = 2;
+
     public function __construct($appId = null, $apiKey = null)
     {
         $config = $this->getDefaultConfig();
@@ -32,10 +37,10 @@ class ClientConfig
             'appId' => getenv('ALGOLIA_APP_ID'),
             'apiKey' => getenv('ALGOLIA_API_KEY'),
             'hosts' => null,
-            'waitTaskRetry' => Config::$waitTaskRetry,
-            'readTimeout' => Config::getReadTimeout(),
-            'writeTimeout' => Config::getWriteTimeout(),
-            'connectTimeout' => Config::getConnectTimeout(),
+            'waitTaskRetry' => $this->defaultWaitTaskRetry,
+            'readTimeout' => $this->defaultReadTimeout,
+            'writeTimeout' => $this->defaultWriteTimeout,
+            'connectTimeout' => $this->defaultConnectTimeout,
         );
     }
 

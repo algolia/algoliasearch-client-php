@@ -13,9 +13,20 @@ class ClientConfig
     private $defaultWriteTimeout = 5;
     private $defaultConnectTimeout = 2;
 
-    public function __construct($appId = null, $apiKey = null)
+    public function __construct($config = array())
     {
-        $config = $this->getDefaultConfig();
+        $config += $this->getDefaultConfig();
+
+        if (null === $config['hosts']) {
+            $config['hosts'] = ClusterHosts::createFromAppId($config['appId']);
+        }
+
+        $this->config = $config;
+    }
+
+    public static function create($appId = null, $apiKey = null)
+    {
+        $config = array();
 
         if (null !== $appId) {
             $config['appId'] = $appId;
@@ -24,11 +35,7 @@ class ClientConfig
             $config['apiKey'] = $apiKey;
         }
 
-        if (null === $config['hosts']) {
-            $config['hosts'] = ClusterHosts::createFromAppId($config['appId']);
-        }
-
-        $this->config = $config;
+        return new static($config);
     }
 
     private function getDefaultConfig()

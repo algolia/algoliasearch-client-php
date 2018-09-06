@@ -36,8 +36,11 @@ class Client implements ClientInterface
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = new ClientConfig($appId, $apiKey);
+        return static::createWithConfig(ClientConfig::create($appId, $apiKey));
+    }
 
+    public static function createWithConfig(ClientConfig $config)
+    {
         $apiWrapper = new ApiWrapper(
             Config::getHttpClient(),
             $config

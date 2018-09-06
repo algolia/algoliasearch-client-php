@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Http\Psr7;
+namespace Algolia\AlgoliaSearch\Internals\Psr7;
 
 use Psr\Http\Message\UriInterface;
 
@@ -30,6 +30,7 @@ final class UriResolver
 
         $results = array();
         $segments = explode('/', $path);
+        $segment = null;
         foreach ($segments as $segment) {
             if ('..' === $segment) {
                 array_pop($results);

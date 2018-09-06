@@ -14,7 +14,7 @@
             "Algolia\\AlgoliaSearch\\": "src/"
         },
         "files": [
-            "src/Http/Psr7/functions.php",
+            "src/Internals/Psr7/functions.php",
             "src/functions.php"
         ]
     },

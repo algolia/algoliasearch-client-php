@@ -67,13 +67,16 @@ class Index implements IndexInterface
 
     public function getSettings($requestOptions = array())
     {
+        if (is_array($requestOptions)) {
+            $requestOptions['getVersion'] = 2;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addQueryParameter('getVersion', 2);
+        }
+
         return $this->api->read(
             'GET',
             api_path('/1/indexes/%s/settings', $this->indexName),
-            $requestOptions,
-            array(
-                'getVersion' => 2,
-            )
+            $requestOptions
         );
     }
 

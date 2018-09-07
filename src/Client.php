@@ -214,10 +214,7 @@ class Client implements ClientInterface
 
     public function listUserIds($requestOptions = array())
     {
-        return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions, array(
-            'page' => 0,
-            'hitsPerPage' => 20,
-        ));
+        return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions);
     }
 
     public function getUserId($userId, $requestOptions = array())
@@ -266,11 +263,7 @@ class Client implements ClientInterface
 
     public function getLogs($requestOptions = array())
     {
-        return $this->api->read('GET', api_path('/1/logs'), $requestOptions, array(
-            'offset' => 0,
-            'length' => 10,
-            'type' => 'all',
-        ));
+        return $this->api->read('GET', api_path('/1/logs'), $requestOptions);
     }
 
     public function getTask($indexName, $taskId, $requestOptions = array())

@@ -19,6 +19,12 @@
 * Introduce ClientConfiguration
 * Introduce Client singleton with `Client::get()`
 
+#### 2.0 Alpha 3
+
+* Remove all default values for optional parameters
+    To enforce that, $default parameters is removed from APIWrapper methods.
+    It's still available in the RequestOptionsFactory
+
 
 ### UNRELEASED
 

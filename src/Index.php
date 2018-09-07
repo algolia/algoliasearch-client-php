@@ -67,13 +67,16 @@ class Index implements IndexInterface
 
     public function getSettings($requestOptions = array())
     {
+        if (is_array($requestOptions)) {
+            $requestOptions['getVersion'] = 2;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addQueryParameter('getVersion', 2);
+        }
+
         return $this->api->read(
             'GET',
             api_path('/1/indexes/%s/settings', $this->indexName),
-            $requestOptions,
-            array(
-                'getVersion' => 2,
-            )
+            $requestOptions
         );
     }
 
@@ -83,10 +86,7 @@ class Index implements IndexInterface
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
             $settings,
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -269,10 +269,7 @@ class Index implements IndexInterface
             'POST',
             api_path('/1/indexes/%s/synonyms/batch', $this->indexName),
             $synonyms,
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -293,10 +290,7 @@ class Index implements IndexInterface
             'DELETE',
             api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
             array(),
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -306,10 +300,7 @@ class Index implements IndexInterface
             'POST',
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             array(),
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -355,10 +346,7 @@ class Index implements IndexInterface
             'POST',
             api_path('/1/indexes/%s/rules/batch', $this->indexName),
             $rules,
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -379,10 +367,7 @@ class Index implements IndexInterface
             'DELETE',
             api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
             array(),
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 
@@ -392,10 +377,7 @@ class Index implements IndexInterface
             'POST',
             api_path('/1/indexes/%s/rules/clear', $this->indexName),
             array(),
-            $requestOptions,
-            array(
-                'forwardToReplicas' => true,
-            )
+            $requestOptions
         );
     }
 

@@ -38,12 +38,12 @@ class ApiWrapper
         $this->requestOptionsFactory = $RqstOptsFactory ? $RqstOptsFactory : new RequestOptionsFactory($config);
     }
 
-    public function read($method, $path, $requestOptions = array(), $defaults = array())
+    public function read($method, $path, $requestOptions = array())
     {
         if ('GET' == strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaults);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaults);
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
         }
 
         return $this->request(
@@ -55,13 +55,13 @@ class ApiWrapper
         );
     }
 
-    public function write($method, $path, $data = array(), $requestOptions = array(), $defaults = array())
+    public function write($method, $path, $data = array(), $requestOptions = array())
     {
         if ('DELETE' == strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaults);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions);
             $data = array();
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaults);
+            $requestOptions = $this->requestOptionsFactory->create($requestOptions);
         }
 
         return $this->request(

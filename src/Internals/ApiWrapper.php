@@ -143,7 +143,7 @@ class ApiWrapper
 
     public function setExtraHeader($headerName, $headerValue)
     {
-        $this->requestOptionsFactory->setCustomHeader($headerName, $headerValue);
+        $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
 
         return $this;
     }

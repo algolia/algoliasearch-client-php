@@ -8,7 +8,9 @@ class ClientConfig
 {
     private $config;
 
-    private $defaultWaitTaskRetry = 100;
+    private $defaultWaitTaskTimeBeforeRetry = 100000;
+    private $defaultWaitTaskMaxRetry = 30;
+
     private $defaultReadTimeout = 5;
     private $defaultWriteTimeout = 5;
     private $defaultConnectTimeout = 2;
@@ -44,10 +46,11 @@ class ClientConfig
             'appId' => getenv('ALGOLIA_APP_ID'),
             'apiKey' => getenv('ALGOLIA_API_KEY'),
             'hosts' => null,
-            'waitTaskRetry' => $this->defaultWaitTaskRetry,
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
+            'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
+            'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
         );
     }
 
@@ -87,18 +90,6 @@ class ClientConfig
         return $this;
     }
 
-    public function getWaitTaskRetry()
-    {
-        return $this->config['waitTaskRetry'];
-    }
-
-    public function setWaitTaskRetry($waitTaskRetry)
-    {
-        $this->config['waitTaskRetry'] = $waitTaskRetry;
-
-        return $this;
-    }
-
     public function getReadTimeout()
     {
         return $this->config['readTimeout'];
@@ -131,6 +122,30 @@ class ClientConfig
     public function setConnectTimeout($connectTimeout)
     {
         $this->config['connectTimeout'] = $connectTimeout;
+
+        return $this;
+    }
+
+    public function getWaitTaskMaxRetry()
+    {
+        return $this->config['waitTaskMaxRetry'];
+    }
+
+    public function setWaitMaxTaskRetry($max)
+    {
+        $this->config['waitTaskMaxRetry'] = $max;
+
+        return $this;
+    }
+
+    public function getWaitTaskTimeBeforeRetry()
+    {
+        return $this->config['waitTaskTimeBeforeRetry'];
+    }
+
+    public function setWaitTaskTimeBeforeRetry($time)
+    {
+        $this->config['waitTaskTimeBeforeRetry'] = $time;
 
         return $this;
     }

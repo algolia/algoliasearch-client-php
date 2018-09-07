@@ -8,7 +8,7 @@ use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\HttpLayer;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class Client implements ClientInterface
@@ -48,7 +48,7 @@ class Client implements ClientInterface
     public static function createWithConfig(ClientConfig $config)
     {
         $apiWrapper = new ApiWrapper(
-            Config::getHttpClient(),
+            HttpLayer::get(),
             $config
         );
 

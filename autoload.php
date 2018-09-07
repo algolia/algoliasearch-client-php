@@ -1,5 +1,19 @@
 <?php
 
+/*
+ * In order to use the client without Composer, you can require
+ * this file to load all the lib classes but note that you need
+ * to pull https://github.com/php-fig/http-message library in
+ * your project and require_once all the classes inside src/
+ *
+ * The other way is to already have Guzzle loaded
+ */
+
+/*
+ * Some helper functions are outside classes and need to be loaded
+ */
+require_once './src/functions.php';
+
 /**
  * Based on https://www.php-fig.org/psr/psr-4/examples/.
  */

@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -19,13 +20,13 @@ class Client implements ClientInterface
     protected $api;
 
     /**
-     * @var ClientConfig
+     * @var ClientConfigInterface
      */
     protected $config;
 
     protected static $client;
 
-    public function __construct(ApiWrapper $apiWrapper, ClientConfig $config)
+    public function __construct(ApiWrapper $apiWrapper, ClientConfigInterface $config)
     {
         $this->api = $apiWrapper;
         $this->config = $config;
@@ -45,7 +46,7 @@ class Client implements ClientInterface
         return static::createWithConfig(ClientConfig::create($appId, $apiKey));
     }
 
-    public static function createWithConfig(ClientConfig $config)
+    public static function createWithConfig(ClientConfigInterface $config)
     {
         $apiWrapper = new ApiWrapper(
             HttpLayer::get(),

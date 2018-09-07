@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
@@ -15,11 +16,11 @@ final class Places
     private $api;
 
     /**
-     * @var ClientConfig
+     * @var ClientConfigInterface
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, ClientConfig $config)
+    public function __construct(ApiWrapper $api, ClientConfigInterface $config)
     {
         $this->api = $api;
         $this->config = $config;
@@ -33,7 +34,7 @@ final class Places
         return static::createWithConfig($config);
     }
 
-    public static function createWithConfig(ClientConfig $config)
+    public static function createWithConfig(ClientConfigInterface $config)
     {
         $apiWrapper = new ApiWrapper(
             HttpLayer::get(),

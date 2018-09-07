@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Internals\ApiWrapper;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\HttpLayer;
 
 final class Analytics
 {
@@ -37,7 +37,7 @@ final class Analytics
     public static function createWithConfig(ClientConfig $config)
     {
         $apiWrapper = new ApiWrapper(
-            Config::getHttpClient(),
+            HttpLayer::get(),
             $config
         );
 

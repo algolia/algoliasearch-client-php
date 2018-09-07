@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 use PHPUnit\Framework\TestCase;
 
@@ -12,7 +12,7 @@ class UserAgentTest extends TestCase
 
     public function setUp()
     {
-        $this->default = 'Algolia for PHP ('.Config::VERSION.'); ';
+        $this->default = 'Algolia for PHP ('.Algolia::VERSION.'); ';
         $this->default .= 'PHP ('.str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION).')';
         if (defined('HHVM_VERSION')) {
             $this->default .= '; HHVM ('.HHVM_VERSION.')';

@@ -8,16 +8,16 @@ class ClientConfig
 {
     private $config;
 
-    public function __construct($appId = null, $apiKey = null)
-    {
-        $config = $this->getDefaultConfig();
+    private $defaultWaitTaskTimeBeforeRetry = 100000;
+    private $defaultWaitTaskMaxRetry = 30;
 
-        if (null !== $appId) {
-            $config['appId'] = $appId;
-        }
-        if (null !== $apiKey) {
-            $config['apiKey'] = $apiKey;
-        }
+    private $defaultReadTimeout = 5;
+    private $defaultWriteTimeout = 5;
+    private $defaultConnectTimeout = 2;
+
+    public function __construct(array $config = array())
+    {
+        $config += $this->getDefaultConfig();
 
         if (null === $config['hosts']) {
             $config['hosts'] = ClusterHosts::createFromAppId($config['appId']);
@@ -26,16 +26,31 @@ class ClientConfig
         $this->config = $config;
     }
 
+    public static function create($appId = null, $apiKey = null)
+    {
+        $config = array();
+
+        if (null !== $appId) {
+            $config['appId'] = $appId;
+        }
+        if (null !== $apiKey) {
+            $config['apiKey'] = $apiKey;
+        }
+
+        return new static($config);
+    }
+
     private function getDefaultConfig()
     {
         return array(
             'appId' => getenv('ALGOLIA_APP_ID'),
             'apiKey' => getenv('ALGOLIA_API_KEY'),
             'hosts' => null,
-            'waitTaskRetry' => Config::$waitTaskRetry,
-            'readTimeout' => Config::getReadTimeout(),
-            'writeTimeout' => Config::getWriteTimeout(),
-            'connectTimeout' => Config::getConnectTimeout(),
+            'readTimeout' => $this->defaultReadTimeout,
+            'writeTimeout' => $this->defaultWriteTimeout,
+            'connectTimeout' => $this->defaultConnectTimeout,
+            'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
+            'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
         );
     }
 
@@ -75,18 +90,6 @@ class ClientConfig
         return $this;
     }
 
-    public function getWaitTaskRetry()
-    {
-        return $this->config['waitTaskRetry'];
-    }
-
-    public function setWaitTaskRetry($waitTaskRetry)
-    {
-        $this->config['waitTaskRetry'] = $waitTaskRetry;
-
-        return $this;
-    }
-
     public function getReadTimeout()
     {
         return $this->config['readTimeout'];
@@ -119,6 +122,30 @@ class ClientConfig
     public function setConnectTimeout($connectTimeout)
     {
         $this->config['connectTimeout'] = $connectTimeout;
+
+        return $this;
+    }
+
+    public function getWaitTaskMaxRetry()
+    {
+        return $this->config['waitTaskMaxRetry'];
+    }
+
+    public function setWaitMaxTaskRetry($max)
+    {
+        $this->config['waitTaskMaxRetry'] = $max;
+
+        return $this;
+    }
+
+    public function getWaitTaskTimeBeforeRetry()
+    {
+        return $this->config['waitTaskTimeBeforeRetry'];
+    }
+
+    public function setWaitTaskTimeBeforeRetry($time)
+    {
+        $this->config['waitTaskTimeBeforeRetry'] = $time;
 
         return $this;
     }

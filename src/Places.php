@@ -14,14 +14,20 @@ final class Places
      */
     private $api;
 
-    public function __construct(ApiWrapper $apiWrapper)
+    /**
+     * @var ClientConfig
+     */
+    private $config;
+
+    public function __construct(ApiWrapper $api, ClientConfig $config)
     {
-        $this->api = $apiWrapper;
+        $this->api = $api;
+        $this->config = $config;
     }
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = new ClientConfig($appId, $apiKey);
+        $config = ClientConfig::create($appId, $apiKey);
         $config->setHosts(ClusterHosts::createForPlaces());
 
         return static::createWithConfig($config);
@@ -34,7 +40,7 @@ final class Places
             $config
         );
 
-        return new static($apiWrapper);
+        return new static($apiWrapper, $config);
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

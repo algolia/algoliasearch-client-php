@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -19,12 +20,18 @@ class Index implements IndexInterface
     /**
      * @var ApiWrapper
      */
-    private $api;
+    protected $api;
 
-    public function __construct($indexName, ApiWrapper $apiWrapper)
+    /**
+     * @var ClientConfig
+     */
+    protected $config;
+
+    public function __construct($indexName, ApiWrapper $apiWrapper, ClientConfig $config)
     {
         $this->indexName = $indexName;
         $this->api = $apiWrapper;
+        $this->config = $config;
     }
 
     public function getIndexName()
@@ -409,7 +416,8 @@ class Index implements IndexInterface
     public function waitTask($taskId, $requestOptions = array())
     {
         $retry = 1;
-        $maxRetry = Config::$waitTaskRetry;
+        $maxRetry = $this->config->getWaitTaskMaxRetry();
+        $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
             $res = $this->getTask($taskId, $requestOptions);
@@ -420,7 +428,7 @@ class Index implements IndexInterface
 
             $retry++;
             $factor = ceil($retry / 10);
-            usleep($factor * 100000); // 0.1 second
+            usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);
 
         throw new TaskTooLongException();

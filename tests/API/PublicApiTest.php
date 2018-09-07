@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\API;
 
 use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
@@ -11,7 +12,7 @@ class PublicApiTest extends TestCase
     public function testClient()
     {
         $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
-        $client = new Client($apiWrapper);
+        $client = new Client($apiWrapper, ClientConfig::create());
         $definition = $this->getDefinition('client.yaml');
 
         $c = new PublicApiChecker($client, $definition);
@@ -21,7 +22,7 @@ class PublicApiTest extends TestCase
     public function testIndex()
     {
         $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
-        $client = new Client($apiWrapper);
+        $client = new Client($apiWrapper, ClientConfig::create());
         $index = $client->initIndex('someindex');
         $definition = $this->getDefinition('index.yaml');
 

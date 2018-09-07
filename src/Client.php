@@ -18,11 +18,17 @@ class Client implements ClientInterface
      */
     protected $api;
 
+    /**
+     * @var ClientConfig
+     */
+    protected $config;
+
     protected static $client;
 
-    public function __construct(ApiWrapper $apiWrapper)
+    public function __construct(ApiWrapper $apiWrapper, ClientConfig $config)
     {
         $this->api = $apiWrapper;
+        $this->config = $config;
     }
 
     public static function get()
@@ -36,19 +42,22 @@ class Client implements ClientInterface
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = new ClientConfig($appId, $apiKey);
+        return static::createWithConfig(ClientConfig::create($appId, $apiKey));
+    }
 
+    public static function createWithConfig(ClientConfig $config)
+    {
         $apiWrapper = new ApiWrapper(
             Config::getHttpClient(),
             $config
         );
 
-        return new static($apiWrapper);
+        return new static($apiWrapper, $config);
     }
 
     public function initIndex($indexName)
     {
-        return new Index($indexName, $this->api);
+        return new Index($indexName, $this->api, $this->config);
     }
 
     public function setExtraHeader($headerName, $headerValue)
@@ -281,7 +290,8 @@ class Client implements ClientInterface
     public function waitForKeyAdded($key, $requestOptions = array())
     {
         $retry = 1;
-        $maxRetry = Config::$waitTaskRetry;
+        $maxRetry = $this->config->getWaitTaskMaxRetry();
+        $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
             try {
@@ -294,7 +304,7 @@ class Client implements ClientInterface
 
             $retry++;
             $factor = ceil($retry / 10);
-            usleep($factor * 100000); // 0.1 second
+            usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);
 
         throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");

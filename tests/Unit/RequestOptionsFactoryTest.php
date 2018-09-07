@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Config;
+use Algolia\AlgoliaSearch\Support\UserAgent;
 use PHPUnit\Framework\TestCase;
 
 class RequestOptionsFactoryTest extends TestCase
@@ -15,18 +15,21 @@ class RequestOptionsFactoryTest extends TestCase
     public function setUp()
     {
         $this->factory = new RequestOptionsFactory(
-            new ClientConfig('Algolia-Id', 'Algolia-Key'
-        ));
+            new ClientConfig(array(
+                'appId' => 'Algolia-Id',
+                'apiKey' => 'Algolia-Key'
+            ))
+        );
     }
 
     /**
      * @dataProvider provideRequestOptionsData
      */
-    public function testRequestRequestOptions($options, $expectedRequestOptions)
+    public function testRequestOptionsFactory($options, $expectedRequestOptions)
     {
         $actual = $this->factory->create($options);
 
-        $expectedRequestOptions['headers'] += array('User-Agent' => Config::getUserAgent());
+        $expectedRequestOptions['headers'] += array('User-Agent' => UserAgent::get());
 
         $this->assertEquals($expectedRequestOptions, array(
             'headers' => $actual->getHeaders(),

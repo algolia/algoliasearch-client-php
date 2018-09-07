@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Config;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -19,12 +20,18 @@ class Index implements IndexInterface
     /**
      * @var ApiWrapper
      */
-    private $api;
+    protected $api;
 
-    public function __construct($indexName, ApiWrapper $apiWrapper)
+    /**
+     * @var ClientConfig
+     */
+    protected $config;
+
+    public function __construct($indexName, ApiWrapper $apiWrapper, ClientConfig $config)
     {
         $this->indexName = $indexName;
         $this->api = $apiWrapper;
+        $this->config = $config;
     }
 
     public function getIndexName()

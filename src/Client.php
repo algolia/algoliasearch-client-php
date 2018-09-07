@@ -18,11 +18,17 @@ class Client implements ClientInterface
      */
     protected $api;
 
+    /**
+     * @var ClientConfig
+     */
+    protected $config;
+
     protected static $client;
 
-    public function __construct(ApiWrapper $apiWrapper)
+    public function __construct(ApiWrapper $apiWrapper, ClientConfig $config)
     {
         $this->api = $apiWrapper;
+        $this->config = $config;
     }
 
     public static function get()
@@ -46,12 +52,12 @@ class Client implements ClientInterface
             $config
         );
 
-        return new static($apiWrapper);
+        return new static($apiWrapper, $config);
     }
 
     public function initIndex($indexName)
     {
-        return new Index($indexName, $this->api);
+        return new Index($indexName, $this->api, $this->config);
     }
 
     public function setExtraHeader($headerName, $headerValue)

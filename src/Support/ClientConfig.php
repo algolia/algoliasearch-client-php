@@ -13,7 +13,7 @@ class ClientConfig
     private $defaultWriteTimeout = 5;
     private $defaultConnectTimeout = 2;
 
-    public function __construct($config = array())
+    public function __construct(array $config = array())
     {
         $config += $this->getDefaultConfig();
 

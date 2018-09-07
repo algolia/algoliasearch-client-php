@@ -20,6 +20,7 @@ class RequestOptionsFactory
 
     private $validHeaders = array(
         'Content-type',
+        'User-Agent',
     );
 
     public function __construct(ClientConfig $config)

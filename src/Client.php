@@ -290,7 +290,8 @@ class Client implements ClientInterface
     public function waitForKeyAdded($key, $requestOptions = array())
     {
         $retry = 1;
-        $maxRetry = Config::$waitTaskRetry;
+        $maxRetry = $this->config->getWaitTaskMaxRetry();
+        $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
             try {
@@ -303,7 +304,7 @@ class Client implements ClientInterface
 
             $retry++;
             $factor = ceil($retry / 10);
-            usleep($factor * 100000); // 0.1 second
+            usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);
 
         throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");

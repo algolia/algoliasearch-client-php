@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
@@ -19,7 +20,7 @@ class ApiWrapper
     private $http;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Support\ClientConfig
+     * @var ClientConfigInterface
      */
     private $config;
 
@@ -30,7 +31,7 @@ class ApiWrapper
 
     public function __construct(
         HttpClientInterface $http,
-        ClientConfig $config,
+        ClientConfigInterface $config,
         RequestOptionsFactory $RqstOptsFactory = null
     ) {
         $this->http = $http;

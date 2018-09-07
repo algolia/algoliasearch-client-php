@@ -2,9 +2,10 @@
 
 namespace Algolia\AlgoliaSearch\Support;
 
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Internals\ClusterHosts;
 
-class ClientConfig
+class ClientConfig implements ClientConfigInterface
 {
     private $config;
 
@@ -40,7 +41,7 @@ class ClientConfig
         return new static($config);
     }
 
-    private function getDefaultConfig()
+    public function getDefaultConfig()
     {
         return array(
             'appId' => getenv('ALGOLIA_APP_ID'),

@@ -4,8 +4,6 @@ namespace Algolia\AlgoliaSearch\Support;
 
 final class Config
 {
-    const VERSION = '2.0.0';
-
     private static $httpClientConstructor;
 
     public static function getHttpClient()

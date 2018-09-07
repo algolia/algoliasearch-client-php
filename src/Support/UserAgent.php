@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Support;
 
+use Algolia\AlgoliaSearch\Algolia;
+
 final class UserAgent
 {
     private static $value;
@@ -39,7 +41,7 @@ final class UserAgent
     {
         $segments = array();
 
-        $segments['Algolia for PHP'] = Config::VERSION;
+        $segments['Algolia for PHP'] = Algolia::VERSION;
         $segments['PHP'] = str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION);
         if (defined('HHVM_VERSION')) {
             $segments['HHVM'] = HHVM_VERSION;

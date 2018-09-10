@@ -8,7 +8,7 @@ class ClusterHosts
 
     private $write;
 
-    public function __construct(array $read, array $write)
+    public function __construct(HostCollection $read, HostCollection $write)
     {
         $this->read = $read;
         $this->write = $write;
@@ -28,22 +28,19 @@ class ClusterHosts
             $write = array($write);
         }
 
-        return new static($read, $write);
+        return new static(HostCollection::create($read), HostCollection::create($write));
     }
 
     public static function createFromAppId($applicationId)
     {
         $read = $write = array(
-            $applicationId.'-1.algolianet.com',
-            $applicationId.'-2.algolianet.com',
-            $applicationId.'-3.algolianet.com',
+            $applicationId.'-1.algolianet.com' => 0,
+            $applicationId.'-2.algolianet.com' => 0,
+            $applicationId.'-3.algolianet.com' => 0,
         );
 
-        shuffle($read);
-        array_unshift($read, $applicationId.'-dsn.algolia.net');
-
-        shuffle($write);
-        array_unshift($write, $applicationId.'.algolia.net');
+        $read[$applicationId.'-dsn.algolia.net'] = 10;
+        $write[$applicationId.'.algolia.net'] = 10;
 
         return static::create($read, $write);
     }
@@ -51,16 +48,13 @@ class ClusterHosts
     public static function createForPlaces()
     {
         $read = $write = array(
-            'places-1.algolianet.com',
-            'places-2.algolianet.com',
-            'places-3.algolianet.com',
+            'places-1.algolianet.com' => 0,
+            'places-2.algolianet.com' => 0,
+            'places-3.algolianet.com' => 0,
         );
 
-        shuffle($read);
-        array_unshift($read, 'places-dsn.algolia.net');
-
-        shuffle($write);
-        array_unshift($write, 'places.algolia.net');
+        $read['places-dsn.algolia.net'] = 10;
+        $write['places.algolia.net'] = 10;
 
         return static::create($read, $write);
     }
@@ -72,27 +66,36 @@ class ClusterHosts
 
     public function read()
     {
-        return $this->read;
+        return $this->read->getUrls();
     }
 
     public function write()
     {
-        return $this->write;
+        return $this->write->getUrls();
     }
 
     public function failed($host)
     {
-        $writeIndex = array_search($host, $this->write);
-        $readIndex = array_search($host, $this->read);
-
-        if (false !== $writeIndex) {
-            unset($this->write[$writeIndex]);
-        }
-
-        if (false !== $readIndex) {
-            unset($this->read[$readIndex]);
-        }
+        $this->read->markAsDown($host);
+        $this->write->markAsDown($host);
 
         return $this;
     }
+
+    public function reset()
+    {
+        $this->read->reset();
+        $this->write->reset();
+
+        return $this;
+    }
+
+    public function shuffle()
+    {
+        $this->read->shuffle();
+        $this->write->shuffle();
+
+        return $this;
+    }
+
 }

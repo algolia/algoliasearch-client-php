@@ -4,8 +4,8 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-use Algolia\AlgoliaSearch\Internals\ApiWrapper;
-use Algolia\AlgoliaSearch\Internals\ClusterHosts;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\HttpLayer;
 

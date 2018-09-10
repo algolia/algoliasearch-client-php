@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-use Algolia\AlgoliaSearch\Internals\ClusterHosts;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 class ClientConfig implements ClientConfigInterface
 {

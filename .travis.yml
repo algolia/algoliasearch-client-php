@@ -34,9 +34,11 @@ cache:
 install:
   - composer install
   - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
+  - if [ "$LEGACY_HTTP" != "true" ] && [ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]; then composer require phpstan/phpstan ; fi
 
 before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys
 
 script:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [[ ! "$TRAVIS_PULL_REQUEST_SLUG" =~ ^algolia\/ ]]; then eval $(./algolia-keys export) && php vendor/bin/phpunit --testsuite Unit,Definition,Community; else php vendor/bin/phpunit; fi
+  - if [ "$LEGACY_HTTP" != "true" ] && [ ${TRAVIS_PHP_VERSION:0:3} == "7.2" ]; then php vendor/bin/phpstan ; fi

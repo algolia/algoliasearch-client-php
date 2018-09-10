@@ -105,6 +105,7 @@ class ApiWrapper
 
         $retry = 1;
         foreach ($hosts as $host) {
+            $request = null;
             try {
                 $request = $this->http->createRequest(
                     $method,

@@ -1,0 +1,3 @@
+preset: symfony
+enabled:
+  - long_array_syntax

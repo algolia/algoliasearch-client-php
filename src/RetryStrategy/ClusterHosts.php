@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Internals;
+namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 class ClusterHosts
 {

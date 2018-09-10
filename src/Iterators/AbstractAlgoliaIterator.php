@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-use Algolia\AlgoliaSearch\Internals\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 
 abstract class AbstractAlgoliaIterator implements \Iterator
 {

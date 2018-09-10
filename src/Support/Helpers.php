@@ -17,9 +17,9 @@ class Helpers
      *      - api_path('1/indexes/%s/search', $indexName)
      *      - api_path('/1/indexes/%s/synonyms/%s', $indexName, $objectID)
      *
-     * @param      $pathFormat
-     * @param null $args
-     * @param null $_
+     * @param string $pathFormat
+     * @param mixed $args
+     * @param mixed $_
      *
      * @return mixed
      */

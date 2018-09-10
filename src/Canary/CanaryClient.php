@@ -8,7 +8,7 @@ class CanaryClient extends Client
 {
     public function initIndex($indexName)
     {
-        return new CanaryIndex($indexName, $this->api);
+        return new CanaryIndex($indexName, $this->api, $this->config);
     }
 
     /*

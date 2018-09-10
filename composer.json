@@ -1,14 +1,27 @@
 {
-    "name": "julienbourdeau/php-v2-poc",
-    "description": "POC of a possible v2 for Algolia/algoliasearch-client-php",
+    "name": "algolia/algoliasearch-client-php",
+    "description": "Algolia Search API Client for PHP",
+    "keywords": ["algolia", "search", "api", "client", "php"],
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Julien Bourdeau",
-            "email": "julien@sigerr.org"
+            "name": "Algolia Team",
+            "email": "contact@algolia.com"
         }
     ],
+    "require": {
+        "php": "^5.3 || ^7.0",
+        "psr/http-message": "^1.0",
+        "ext-mbstring": "*",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8 || ^6.5",
+        "symfony/yaml": "^2.0 || ^4.0",
+        "friendsofphp/php-cs-fixer": "^1.13 || ^2.11"
+    },
     "autoload": {
         "psr-4": {
             "Algolia\\AlgoliaSearch\\": "src/"
@@ -23,16 +36,16 @@
             "Algolia\\AlgoliaSearch\\Tests\\": "tests"
         }
     },
-    "require": {
-        "psr/http-message": "^1.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^4.8 || ^6.5",
-        "symfony/yaml": "^2.0 || ^4.0",
-        "friendsofphp/php-cs-fixer": "^1.13 || ^2.11"
+    "suggest": {
+        "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation"
     },
     "bin": [
         "bin/algolia-doctor"
     ],
-    "sort-packages": true
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist"
+    }
 }

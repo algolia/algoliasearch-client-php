@@ -37,7 +37,7 @@ class AlgoliaDoctor {
     {
         if (version_compare(PHP_VERSION, '5.5.0', '>') && !class_exists('GuzzleHttp\Client')) {
             echo "You're using a recent enough version of PHP to use the Guzzle Http library.
-            It's highly recommended to use. Simple install it via `composer require guzzlehttp/guzzle`
+            It's highly recommended to use. Install it via `composer require guzzlehttp/guzzle`
             and it will be used automatically.";
         }
     }

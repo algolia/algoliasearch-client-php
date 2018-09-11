@@ -10,6 +10,7 @@ final class LogManager
      * Holds the current logger.
      *
      * @var \Psr\Log\LoggerInterface;
+     */
     private static $logger;
 
     /**

@@ -29,7 +29,34 @@ class IndexTest extends TestCase
         );
     }
 
-    public function testBatchIterator()
+    public function testSaveObjectsWithArray()
+    {
+        $objects = array();
+        for ($i = 1; $i <= 100; $i++) {
+            $objects[] = array(
+                'objectID' => $i,
+                'someAttribute' => 'array'
+            );
+        }
+
+        $response = $this->index->saveObjects($objects);
+
+        $this->assertCount(1, $response);
+
+        $last = end($response);
+        $batch1 = (string)$last['request']->getBody();
+        $batch1 = json_decode($batch1, true);
+        $batch1 = $batch1['requests'];
+        $this->assertArraySubset(array(
+            'action' => 'addObject',
+            'body' => array(
+                'objectID' => 1,
+                'someAttribute' => 'array',
+            ),
+        ), reset($batch1));
+    }
+
+    public function testSaveObjectsWithIterator()
     {
         $objects = new FakeBatchIterator();
         $response = $this->index->saveObjects($objects);
@@ -44,7 +71,7 @@ class IndexTest extends TestCase
             'action' => 'addObject',
             'body' => array(
                 'objectID' => 1100,
-                'someAttribute' => 'text',
+                'someAttribute' => 'iterator',
             ),
         ), reset($batch1));
     }

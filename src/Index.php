@@ -7,13 +7,13 @@ use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Iterators\AbstractBatchIterator;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\Iterators\ArrayBatchIterator;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\HttpLayer;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use InvalidArgumentException;
 
 class Index implements IndexInterface
 {
@@ -144,17 +144,17 @@ class Index implements IndexInterface
         $response = array();
 
         if (is_array($objects)) {
-            Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
+            $objects = new ArrayBatchIterator($objects, $this->config->getBatchSize());
+        }
 
-            $response[1] = $this->batch(Helpers::build_batch($objects, 'addObject'), $requestOptions);
-        } elseif ($objects instanceof AbstractBatchIterator) {
-            foreach ($objects as $number => $batch) {
-                Helpers::ensure_objectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        if (! $objects instanceof AbstractBatchIterator) {
+            throw new InvalidArgumentException("Cannot save this type object.");
+        }
 
-                $response[$number] = $this->batch(Helpers::build_batch($batch, 'addObject'), $requestOptions);
-            }
-        } else {
-            throw new \InvalidArgumentException("Cannot save this type object.");
+        foreach ($objects as $number => $batch) {
+            Helpers::ensure_objectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+
+            $response[$number] = $this->batch(Helpers::build_batch($batch, 'addObject'), $requestOptions);
         }
 
         return $response;

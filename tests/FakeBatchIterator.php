@@ -14,7 +14,7 @@ class FakeBatchIterator extends AbstractBatchIterator
         foreach (range(1000, 1100) as $id) {
             $this->data[] = array(
                 'objectID' => $id,
-                'someAttribute' => 'text'
+                'someAttribute' => 'iterator'
             );
         }
         $this->perPage = 10;

@@ -2,7 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Iterators;
 
-abstract class AbstractBatchIterator implements \Iterator
+use Iterator;
+
+abstract class AbstractBatchIterator implements Iterator
 {
     protected $batch;
 

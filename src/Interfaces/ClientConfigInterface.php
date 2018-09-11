@@ -23,4 +23,6 @@ interface ClientConfigInterface
     public function getWaitTaskMaxRetry();
 
     public function getWaitTaskTimeBeforeRetry();
+
+    public function getBatchSize();
 }

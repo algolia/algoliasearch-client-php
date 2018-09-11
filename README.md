@@ -95,11 +95,14 @@ $index->addObjects(objects)
 Logger::disable();
 ```
 
-2. Or you can also inject your own `PSR-3` Logger:
+2. Or you can also define your own `PSR-3` Logger:
 
 ```php
-LoggerManager::setLogger($myLogger);
-$index->addObjects(objects)
+// Make sure you define the logger implementation before creating an instance of `Client::class`.
+LogManager::setLogger($myLogger);
+
+$client = Client::create($appId, $apiKey);
+$client->initIndex('index_name')->saveObjects($objects);
 ```
 
 ### Canary Release

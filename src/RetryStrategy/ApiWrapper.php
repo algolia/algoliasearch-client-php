@@ -7,9 +7,13 @@ use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Log\LogManager;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Algolia\AlgoliaSearch\Support\Debug;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Support\Logger;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
 class ApiWrapper
 {
@@ -28,14 +32,23 @@ class ApiWrapper
      */
     private $requestOptionsFactory;
 
+    /**
+     * The logger instance.
+     *
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
     public function __construct(
         HttpClientInterface $http,
         ClientConfigInterface $config,
-        RequestOptionsFactory $RqstOptsFactory = null
+        RequestOptionsFactory $RqstOptsFactory = null,
+        LoggerInterface $logger = null
     ) {
         $this->http = $http;
         $this->config = $config;
-        $this->requestOptionsFactory = $RqstOptsFactory ? $RqstOptsFactory : new RequestOptionsFactory($config);
+        $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
+        $this->logger = $logger ?: LogManager::getLogger();
     }
 
     public function read($method, $path, $requestOptions = array())
@@ -106,6 +119,11 @@ class ApiWrapper
         foreach ($hosts as $host) {
             $request = null;
             try {
+                $this->logger->debug('Algolia API client: Request attempt.', array(
+                    'uri' => $uri->__toString(),
+                    'retryNumber' => $retry
+                ));
+
                 $request = $this->http->createRequest(
                     $method,
                     $uri->withHost($host),
@@ -121,16 +139,15 @@ class ApiWrapper
 
                 return $responseBody;
             } catch (RetriableException $e) {
-                if (Debug::isEnabled()) {
-                    Debug::handle("The host [$host] failed, retrying with another host.");
-                }
+
+                $this->logger->info('Algolia API client: Host failed.', array(
+                    'uri' => $uri->__toString(),
+                    'host' => $host,
+                    'retryNumber' => $retry
+                ));
 
                 $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
-                if (Debug::isEnabled()) {
-                    Debug::handle('The following request returned a 4xx error: ', $request);
-                }
-
                 throw $e;
             } catch (\Exception $e) {
                 throw $e;

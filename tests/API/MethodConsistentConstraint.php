@@ -2,9 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\API;
 
-use PHPUnit\Framework\Constraint\Constraint;
-
-class MethodConsistentConstraint extends Constraint
+class MethodConsistentConstraint extends \PHPUnit_Framework_Constraint
 {
     private $instance;
 

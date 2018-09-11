@@ -26,6 +26,12 @@ abstract class RequestTestCase extends TestCase
         });
     }
 
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+        HttpClientFactory::reset();
+    }
+
     protected function assertEndpointEquals(RequestInterface $request, $endpoint)
     {
         $this->assertEquals($endpoint, $request->getUri()->getPath());

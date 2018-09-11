@@ -35,6 +35,11 @@ class SettingsTest extends AlgoliaIntegrationTestCase
     public function testSettingsWithReplicas()
     {
         $replica1 = self::safeName('settings-mgmt_REPLICA');
+        try {
+            static::getClient()->deleteIndex($replica1);
+        } catch (\Exception $e) {
+            //
+        }
         $index = static::getClient()->initIndex(static::$indexes['main']);
         $replica = static::getClient()->initIndex($replica1);
 
@@ -45,14 +50,14 @@ class SettingsTest extends AlgoliaIntegrationTestCase
             'paginationLimitedTo' => 885,
         ));
 
-        // Assert that settings are forwarded by default
+        // Assert that settings are NOT forwarded by default
         $index->setSettings($settingsWithReplicas);
         $retrievedPrimarySettings = $index->getSettings();
         $retrievedReplicaSettings = $replica->getSettings();
         $this->assertNotEquals($retrievedPrimarySettings['hitsPerPage'], $retrievedReplicaSettings['hitsPerPage']);
 
         // If I set forwardToReplicas to true by default, it should work
-        $index = $this->newClient(array('defaultForwardToReplicas' => true))
+        $index = self::newClient(array('defaultForwardToReplicas' => true))
             ->initIndex(static::$indexes['main']);
         $index->setSettings($settingsWithReplicas);
         $retrievedPrimarySettings = $index->getSettings();

@@ -15,8 +15,8 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
         $result = $client->multipleQueries(array(), array('strategy' => 'stopIfEnoughMatches'));
         $this->assertArraySubset(array('results' => array()), $result);
         $result = $client->multipleQueries(array(
-            array('indexName' => 'europe'),
-            array('indexName' => 'america'),
+            array('indexName' => static::$indexes['europe']),
+            array('indexName' => static::$indexes['america']),
         ));
         $this->assertGreaterThan(0, count($result['results'][0]['hits']));
         $this->assertGreaterThan(0, count($result['results'][1]['hits']));

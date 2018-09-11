@@ -31,6 +31,10 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 
     public static function safeName($name)
     {
+        if (getenv('TRAVIS')) {
+            return sprintf('TRAVIS_php_%s_%s', $name, getenv('TRAVIS_JOB_NUMBER'));
+        }
+
         return $name;
     }
 

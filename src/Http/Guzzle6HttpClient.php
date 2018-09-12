@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch\Http;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Support\Debug;
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -16,20 +16,19 @@ use Psr\Http\Message\ResponseInterface;
 
 class Guzzle6HttpClient implements HttpClientInterface
 {
+    /**
+     * The config instance.
+     *
+     * @var \Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface
+     */
+    private $config;
+
     private $client;
 
-    public function __construct(GuzzleClient $client = null)
+    public function __construct(ClientConfigInterface $config, GuzzleClient $client = null)
     {
-        if (!$client) {
-            $client = static::buildClient();
-        }
-
-        $this->client = $client;
-    }
-
-    public static function createWithConfig(array $config)
-    {
-        return new self(static::buildClient($config));
+        $this->config = $config;
+        $this->client = $client ?: static::buildClient();
     }
 
     public function createUri($uri)
@@ -56,20 +55,15 @@ class Guzzle6HttpClient implements HttpClientInterface
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
-            if (Debug::isEnabled()) {
-                Debug::handle('Sending the following request: ', $request, $request->getBody()->getContents());
-            }
-
             $response = $this->client->send($request, array(
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
             ));
-
-            return $this->handleResponse($response);
         } catch (\Exception $e) {
-            $exception = $this->handleException($e, $request);
-            throw $exception;
+            throw $this->handleException($e, $request);
         }
+
+        return $this->handleResponse($response);
     }
 
     private static function buildClient(array $config = array())
@@ -87,13 +81,15 @@ class Guzzle6HttpClient implements HttpClientInterface
             // Make sure we have a response for the HttpException
             if ($exception->hasResponse()) {
                 $statusCode = $exception->getResponse()->getStatusCode();
-                $jsonBody = (string) $exception->getResponse()->getBody();
+                $contents = (string) $exception->getResponse()->getBody();
 
-                if (Debug::isEnabled()) {
-                    Debug::handle("Api returned code $statusCode with the following body: ", $jsonBody);
-                }
+                $body = \GuzzleHttp\json_decode($contents, true);
 
-                $body = \GuzzleHttp\json_decode($jsonBody, true);
+                $this->config->getLogger()->warning('Algolia API client: Request failed.', array(
+                    'statusCode' => $statusCode,
+                    'message' => $body['message']
+                ));
+
 
                 if ($statusCode >= 500) {
                     return new RetriableException(

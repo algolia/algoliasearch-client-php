@@ -83,22 +83,33 @@ Some params like `forwardToReplicas` or `createIfNotExists` should always be pas
 
 **NOTE:** Passing an array makes the library much easier to use but if you need total control, you can pass a `RequestOption` object instead.
 
-### Debug Mode
+### Logger
 
-The client now integrates a debug mode, which allow you to print some information by default (typically, the request being sent).
+The client now integrates a logger, which allow you to get some information about the request lifecycle.
 
-You can enable/disable it via a static call. This way, as opposed to a env variable, you can enable it only in certain conditions. 
-
-By default, the `handle()` method will check if the `dump` function is defined (in Symfony or Laravel for instance), otherwise fallback on `var_dump`. You can override this behavior (to write to the logs for instance) via the `setHandler()` method.
+1. You can enable/disable it via a static call.
 
 ```php
-Debug::setHandler(function ($var) {
-    Log::debug($var);
-});
+Logger::enable();
+$index->addObjects(objects)
+Logger::disable();
+```
 
-Debug::enable();
-Debug::handle($request);
-Debug::disable();
+2. Or you can also define your own `PSR-3` Logger:
+
+```php
+// Injecting a default logger for all clients.
+ClientConfig::setDefaultLogger($myLogger);
+
+$client = Client::create($appId, $apiKey);
+$client->initIndex('index_name')->saveObjects($objects);
+
+// Or injecting a specific logger.
+$config = ClientConfig::create($appId, $apiKey);
+$config->setLogger($myOtherLogger);
+
+$client = Client::createWithConfig($config);
+$client->initIndex('index_name')->saveObjects($objects);
 ```
 
 ### Canary Release
@@ -131,11 +142,7 @@ This is also how you set the HTTP Client you want to use.
 Example:
 
 ```php
-Config::setHttpClient(function () {
-    if (Debug::isEnabled()) {
-        return new SpecialHttpClient();
-    }
-    
+Config::setHttpClient(function () {    
     return new MyHttpClient(getenv('SOMETHING'));
 });
 ```

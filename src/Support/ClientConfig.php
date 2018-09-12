@@ -4,10 +4,19 @@ namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use Algolia\AlgoliaSearch\Log\Logger;
+use Psr\Log\LoggerInterface;
 
 class ClientConfig implements ClientConfigInterface
 {
     private $config;
+
+    /**
+     * Holds an instance of the logger.
+     *
+     * @var \Psr\Log\LoggerInterface|null
+     */
+    private $logger;
 
     private $defaultWaitTaskTimeBeforeRetry = 100000;
     private $defaultWaitTaskMaxRetry = 30;
@@ -15,6 +24,13 @@ class ClientConfig implements ClientConfigInterface
     private $defaultReadTimeout = 5;
     private $defaultWriteTimeout = 5;
     private $defaultConnectTimeout = 2;
+
+    /**
+     * Holds an instance of the default logger.
+     *
+     * @var \Psr\Log\LoggerInterface|null
+     */
+    private static $defaultLogger;
 
     public function __construct(array $config = array())
     {
@@ -149,5 +165,33 @@ class ClientConfig implements ClientConfigInterface
         $this->config['waitTaskTimeBeforeRetry'] = $time;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogger()
+    {
+        return $this->logger ?: self::$defaultLogger ?: new Logger;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * Sets the default logger.
+     *
+     * @param \Psr\Log\LoggerInterface $logger
+     *
+     * @return void
+     */
+    public static function setDefaultLogger(LoggerInterface $logger)
+    {
+        self::$defaultLogger = $logger;
     }
 }

@@ -9,7 +9,9 @@ use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Algolia\AlgoliaSearch\Support\Debug;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 
 class ApiWrapper
 {
@@ -35,7 +37,7 @@ class ApiWrapper
     ) {
         $this->http = $http;
         $this->config = $config;
-        $this->requestOptionsFactory = $RqstOptsFactory ? $RqstOptsFactory : new RequestOptionsFactory($config);
+        $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
     }
 
     public function read($method, $path, $requestOptions = array())
@@ -106,6 +108,11 @@ class ApiWrapper
         foreach ($hosts as $host) {
             $request = null;
             try {
+                $this->config->getLogger()->debug('Algolia API client: Request attempt.', array(
+                    'uri' => $uri->__toString(),
+                    'retryNumber' => $retry
+                ));
+
                 $request = $this->http->createRequest(
                     $method,
                     $uri->withHost($host),
@@ -121,16 +128,15 @@ class ApiWrapper
 
                 return $responseBody;
             } catch (RetriableException $e) {
-                if (Debug::isEnabled()) {
-                    Debug::handle("The host [$host] failed, retrying with another host.");
-                }
+
+                $this->config->getLogger()->info('Algolia API client: Host failed.', array(
+                    'uri' => $uri->__toString(),
+                    'host' => $host,
+                    'retryNumber' => $retry
+                ));
 
                 $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
-                if (Debug::isEnabled()) {
-                    Debug::handle('The following request returned a 4xx error: ', $request);
-                }
-
                 throw $e;
             } catch (\Exception $e) {
                 throw $e;

@@ -15,7 +15,6 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "guzzlehttp/guzzle": "^6.3",
         "psr/http-message": "^1.0",
         "psr/log": "^1.0"
     },

@@ -4,12 +4,12 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
+use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\HttpLayer;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class Client implements ClientInterface
@@ -51,7 +51,7 @@ class Client implements ClientInterface
         $config = clone $config;
 
         $apiWrapper = new ApiWrapper(
-            HttpLayer::get($config),
+            HttpClientFactory::get($config),
             $config
         );
 

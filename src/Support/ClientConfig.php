@@ -11,6 +11,13 @@ class ClientConfig implements ClientConfigInterface
 {
     private $config;
 
+    /**
+     * Holds an instance of the logger.
+     *
+     * @var \Psr\Log\LoggerInterface|null
+     */
+    private $logger;
+
     private $defaultWaitTaskTimeBeforeRetry = 100000;
     private $defaultWaitTaskMaxRetry = 30;
 
@@ -158,6 +165,22 @@ class ClientConfig implements ClientConfigInterface
         $this->config['waitTaskTimeBeforeRetry'] = $time;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogger()
+    {
+        return $this->logger ?: self::getDefaultLogger();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 
     /**

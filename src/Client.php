@@ -48,8 +48,10 @@ class Client implements ClientInterface
 
     public static function createWithConfig(ClientConfigInterface $config)
     {
+        $config = clone $config;
+
         $apiWrapper = new ApiWrapper(
-            HttpLayer::get(),
+            HttpLayer::get($config),
             $config
         );
 

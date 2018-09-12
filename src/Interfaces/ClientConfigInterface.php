@@ -2,7 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface ClientConfigInterface
+use Psr\Log\LoggerAwareInterface;
+
+interface ClientConfigInterface extends LoggerAwareInterface
 {
     public static function create($appId = null, $apiKey = null);
 
@@ -23,4 +25,11 @@ interface ClientConfigInterface
     public function getWaitTaskMaxRetry();
 
     public function getWaitTaskTimeBeforeRetry();
+
+    /**
+     * Gets the logger instance of the object.
+     *
+     * @return \Psr\Log\LoggerInterface
+     */
+    public function getLogger();
 }

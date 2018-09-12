@@ -172,7 +172,7 @@ class ClientConfig implements ClientConfigInterface
      */
     public function getLogger()
     {
-        return $this->logger ?: self::getDefaultLogger();
+        return $this->logger ?: self::$defaultLogger ?: new Logger;
     }
 
     /**
@@ -181,20 +181,6 @@ class ClientConfig implements ClientConfigInterface
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
-    }
-
-    /**
-     * Gets the default logger.
-     *
-     * @return \Psr\Log\LoggerInterface
-     */
-    public static function getDefaultLogger()
-    {
-        if (null === self::$defaultLogger) {
-            self::$defaultLogger = new Logger();
-        }
-
-        return self::$defaultLogger;
     }
 
     /**

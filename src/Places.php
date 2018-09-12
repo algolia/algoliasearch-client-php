@@ -37,7 +37,7 @@ final class Places
     public static function createWithConfig(ClientConfigInterface $config)
     {
         $apiWrapper = new ApiWrapper(
-            HttpClientFactory::get(),
+            HttpClientFactory::get($config),
             $config
         );
 

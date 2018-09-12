@@ -5,8 +5,7 @@ namespace Algolia\AlgoliaSearch\Http;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Logger;
+use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -14,28 +13,22 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
 
 class Guzzle6HttpClient implements HttpClientInterface
 {
+    /**
+     * The config instance.
+     *
+     * @var \Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface
+     */
+    private $config;
+
     private $client;
 
-    /**
-     * The logger instance.
-     *
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(GuzzleClient $client = null, LoggerInterface $logger = null)
+    public function __construct(ClientConfigInterface $config, GuzzleClient $client = null)
     {
-        $this->client = $client ?: static::buildClient();;
-        $this->logger = $logger ?: ClientConfig::getDefaultLogger();
-    }
-
-    public static function createWithConfig(array $config)
-    {
-        return new self(static::buildClient($config));
+        $this->config = $config;
+        $this->client = $client ?: static::buildClient();
     }
 
     public function createUri($uri)
@@ -92,7 +85,7 @@ class Guzzle6HttpClient implements HttpClientInterface
 
                 $body = \GuzzleHttp\json_decode($contents, true);
 
-                $this->logger->warning('Algolia API client: Request failed.', array(
+                $this->config->getLogger()->warning('Algolia API client: Request failed.', array(
                     'statusCode' => $statusCode,
                     'message' => $body['message']
                 ));

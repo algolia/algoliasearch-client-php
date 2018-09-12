@@ -30,23 +30,14 @@ class ApiWrapper
      */
     private $requestOptionsFactory;
 
-    /**
-     * The logger instance.
-     *
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
         HttpClientInterface $http,
         ClientConfigInterface $config,
-        RequestOptionsFactory $RqstOptsFactory = null,
-        LoggerInterface $logger = null
+        RequestOptionsFactory $RqstOptsFactory = null
     ) {
         $this->http = $http;
         $this->config = $config;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
-        $this->logger = $logger ?: ClientConfig::getDefaultLogger();
     }
 
     public function read($method, $path, $requestOptions = array())
@@ -117,7 +108,7 @@ class ApiWrapper
         foreach ($hosts as $host) {
             $request = null;
             try {
-                $this->logger->debug('Algolia API client: Request attempt.', array(
+                $this->config->getLogger()->debug('Algolia API client: Request attempt.', array(
                     'uri' => $uri->__toString(),
                     'retryNumber' => $retry
                 ));
@@ -138,7 +129,7 @@ class ApiWrapper
                 return $responseBody;
             } catch (RetriableException $e) {
 
-                $this->logger->info('Algolia API client: Host failed.', array(
+                $this->config->getLogger()->info('Algolia API client: Host failed.', array(
                     'uri' => $uri->__toString(),
                     'host' => $host,
                     'retryNumber' => $retry

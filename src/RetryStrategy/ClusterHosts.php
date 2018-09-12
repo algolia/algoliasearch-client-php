@@ -97,5 +97,4 @@ class ClusterHosts
 
         return $this;
     }
-
 }

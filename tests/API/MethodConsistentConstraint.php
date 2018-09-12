@@ -35,6 +35,7 @@ class MethodConsistentConstraint extends Constraint
             if (!isset($definition['args'][$arg->getPosition()])) {
                 $success = false;
                 $description = 'The parameter '.$arg->getName().' #'.$arg->getPosition().' is missing in '.$definition['method'];
+
                 break;
             }
 
@@ -43,6 +44,7 @@ class MethodConsistentConstraint extends Constraint
             if ($arg->getName() !== $argDef['name']) {
                 $success = false;
                 $description = 'The parameter '.$arg->getName().' should be named '.$argDef['name'];
+
                 break;
             }
 
@@ -55,12 +57,14 @@ class MethodConsistentConstraint extends Constraint
                 if ($default != $argDef['default']) {
                     $success = false;
                     $description = 'The parameter '.$arg->getName().' should have '.print_r($argDef['default'], true).' as a default value';
+
                     break;
                 }
             } else {
                 if ($arg->isOptional()) {
                     $success = false;
                     $description = 'The parameter '.$arg->getName().' shouldn\'t have default value';
+
                     break;
                 }
             }

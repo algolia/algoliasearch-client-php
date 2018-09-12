@@ -10,8 +10,6 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\HttpLayer;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class Index implements IndexInterface
@@ -409,7 +407,7 @@ class Index implements IndexInterface
                 return;
             }
 
-            $retry++;
+            ++$retry;
             $factor = ceil($retry / 10);
             usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);

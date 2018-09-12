@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Support\ClientConfig;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\AbstractLogger;
 use Psr\Log\NullLogger;
 
 class ClientConfigTest extends TestCase
@@ -18,7 +17,7 @@ class ClientConfigTest extends TestCase
         $loggerA = new NullLogger();
 
         ClientConfig::setDefaultLogger($loggerA);
-        
+
         $this->assertSame($loggerA, $config->getLogger());
 
         $loggerB = new NullLogger();
@@ -28,5 +27,3 @@ class ClientConfigTest extends TestCase
         $this->assertSame($loggerB, $config->getLogger());
     }
 }
-
-

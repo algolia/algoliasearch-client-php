@@ -14,7 +14,7 @@
  */
 require_once './src/functions.php';
 
-/**
+/*
  * Based on https://www.php-fig.org/psr/psr-4/examples/.
  */
 spl_autoload_register(function ($class) {

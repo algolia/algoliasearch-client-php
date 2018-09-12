@@ -19,10 +19,13 @@ class ClientConfig implements ClientConfigInterface
     private $logger;
 
     private $defaultWaitTaskTimeBeforeRetry = 100000;
+
     private $defaultWaitTaskMaxRetry = 30;
 
     private $defaultReadTimeout = 5;
+
     private $defaultWriteTimeout = 5;
+
     private $defaultConnectTimeout = 2;
 
     /**
@@ -172,7 +175,7 @@ class ClientConfig implements ClientConfigInterface
      */
     public function getLogger()
     {
-        return $this->logger ?: self::$defaultLogger ?: new Logger;
+        return $this->logger ?: self::$defaultLogger ?: new Logger();
     }
 
     /**
@@ -187,8 +190,6 @@ class ClientConfig implements ClientConfigInterface
      * Sets the default logger.
      *
      * @param \Psr\Log\LoggerInterface $logger
-     *
-     * @return void
      */
     public static function setDefaultLogger(LoggerInterface $logger)
     {

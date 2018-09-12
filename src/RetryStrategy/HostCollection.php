@@ -70,6 +70,7 @@ class HostCollection
             if ($prioA == $prioB) {
                 return 0;
             }
+
             return ($prioA > $prioB) ? -1 : 1;
         });
     }

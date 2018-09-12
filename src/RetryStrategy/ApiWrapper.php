@@ -9,9 +9,6 @@ use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 
 class ApiWrapper
 {
@@ -107,10 +104,11 @@ class ApiWrapper
         $retry = 1;
         foreach ($hosts as $host) {
             $request = null;
+
             try {
                 $this->config->getLogger()->debug('Algolia API client: Request attempt.', array(
                     'uri' => $uri->__toString(),
-                    'retryNumber' => $retry
+                    'retryNumber' => $retry,
                 ));
 
                 $request = $this->http->createRequest(
@@ -128,11 +126,10 @@ class ApiWrapper
 
                 return $responseBody;
             } catch (RetriableException $e) {
-
                 $this->config->getLogger()->info('Algolia API client: Host failed.', array(
                     'uri' => $uri->__toString(),
                     'host' => $host,
-                    'retryNumber' => $retry
+                    'retryNumber' => $retry,
                 ));
 
                 $this->config->getHosts()->failed($host);
@@ -142,7 +139,7 @@ class ApiWrapper
                 throw $e;
             }
 
-            $retry++;
+            ++$retry;
         }
 
         throw new UnreachableException();

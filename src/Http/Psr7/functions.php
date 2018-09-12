@@ -34,6 +34,7 @@ function stream_for($resource = '', array $options = array())
             } elseif (method_exists($resource, '__toString')) {
                 return stream_for((string) $resource, $options);
             }
+
             break;
         case 'NULL':
             return new Stream(fopen('php://temp', 'r+'), $options);
@@ -41,6 +42,7 @@ function stream_for($resource = '', array $options = array())
     if (is_callable($resource)) {
         return new PumpStream($resource, $options);
     }
+
     throw new \InvalidArgumentException('Invalid resource type: '.gettype($resource));
 }
 

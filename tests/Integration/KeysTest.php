@@ -38,6 +38,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
 
         $client->deleteApiKey($key['value']);
         sleep(5);
+
         try {
             $key = $client->getApiKey($key['value']);
             $this->assertTrue(false);

@@ -14,6 +14,7 @@ use Psr\Http\Message\UriInterface;
 class Php53HttpClient implements HttpClientInterface
 {
     private $curlMHandle = null;
+
     private $curlOptions;
 
     /**
@@ -37,6 +38,7 @@ class Php53HttpClient implements HttpClientInterface
         } elseif (is_string($uri)) {
             return new Uri($uri);
         }
+
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 

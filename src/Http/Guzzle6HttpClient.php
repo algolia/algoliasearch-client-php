@@ -87,9 +87,8 @@ class Guzzle6HttpClient implements HttpClientInterface
 
                 $this->config->getLogger()->warning('Algolia API client: Request failed.', array(
                     'statusCode' => $statusCode,
-                    'message' => $body['message']
+                    'message' => $body['message'],
                 ));
-
 
                 if ($statusCode >= 500) {
                     return new RetriableException(

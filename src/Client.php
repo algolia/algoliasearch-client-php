@@ -298,7 +298,7 @@ class Client implements ClientInterface
                 // Try again
             }
 
-            $retry++;
+            ++$retry;
             $factor = ceil($retry / 10);
             usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);

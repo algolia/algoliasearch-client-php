@@ -18,8 +18,8 @@ class Helpers
      *      - api_path('/1/indexes/%s/synonyms/%s', $indexName, $objectID)
      *
      * @param string $pathFormat
-     * @param mixed $args
-     * @param mixed $_
+     * @param mixed  $args
+     * @param mixed  $_
      *
      * @return mixed
      */

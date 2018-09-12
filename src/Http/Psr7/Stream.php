@@ -10,11 +10,17 @@ use Psr\Http\Message\StreamInterface;
 class Stream implements StreamInterface
 {
     private $stream;
+
     private $size;
+
     private $seekable;
+
     private $readable;
+
     private $writable;
+
     private $uri;
+
     private $customMetadata;
 
     /** @var array Hash of readable and writable stream types */

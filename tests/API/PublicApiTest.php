@@ -11,7 +11,7 @@ class PublicApiTest extends TestCase
 {
     public function testClient()
     {
-        $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\Internals\ApiWrapper');
+        $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper');
         $client = new Client($apiWrapper, ClientConfig::create());
         $definition = $this->getDefinition('client.yaml');
 

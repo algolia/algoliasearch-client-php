@@ -9,38 +9,23 @@ use Psr\Log\NullLogger;
 
 class ClientConfigTest extends TestCase
 {
-    private $defaultLogger;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->defaultLogger = $this->defaultLogger ?: ClientConfig::getDefaultLogger();
-
-        ClientConfig::setDefaultLogger($this->defaultLogger);
-    }
-
     public function testLogger()
     {
-        $this->assertInstanceOf("Algolia\AlgoliaSearch\Log\Logger", ClientConfig::getDefaultLogger());
-
-        $logger = new NullLogger();
-
-        ClientConfig::setDefaultLogger($logger);
-
-        $this->assertSame(ClientConfig::getDefaultLogger(), $logger);
-
-        ClientConfig::setDefaultLogger($this->defaultLogger);
-
         $config = ClientConfig::create();
 
-        $this->assertSame(ClientConfig::getDefaultLogger(), $config->getLogger());
+        $this->assertInstanceOf("Algolia\AlgoliaSearch\Log\Logger", $config->getLogger());
 
-        $logger = new NullLogger();
+        $loggerA = new NullLogger();
 
-        $config->setLogger($logger);
+        ClientConfig::setDefaultLogger($loggerA);
+        
+        $this->assertSame($loggerA, $config->getLogger());
 
-        $this->assertSame($logger, $config->getLogger());
+        $loggerB = new NullLogger();
+
+        $config->setLogger($loggerB);
+
+        $this->assertSame($loggerB, $config->getLogger());
     }
 }
 

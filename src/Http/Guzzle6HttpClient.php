@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch\Http;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Log\LogManager;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Logger;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
@@ -30,7 +30,7 @@ class Guzzle6HttpClient implements HttpClientInterface
     public function __construct(GuzzleClient $client = null, LoggerInterface $logger = null)
     {
         $this->client = $client ?: static::buildClient();;
-        $this->logger = $logger ?: LogManager::getLogger();
+        $this->logger = $logger ?: ClientConfig::getDefaultLogger();
     }
 
     public static function createWithConfig(array $config)

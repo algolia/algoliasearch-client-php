@@ -16,6 +16,8 @@ class ClientConfig implements ClientConfigInterface
     private $defaultWriteTimeout = 5;
     private $defaultConnectTimeout = 2;
 
+    private $defaultBatchSize = 100;
+
     public function __construct(array $config = array())
     {
         $config += $this->getDefaultConfig();
@@ -52,6 +54,7 @@ class ClientConfig implements ClientConfigInterface
             'connectTimeout' => $this->defaultConnectTimeout,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
             'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
+            'batchSize' => $this->defaultBatchSize,
         );
     }
 
@@ -147,6 +150,18 @@ class ClientConfig implements ClientConfigInterface
     public function setWaitTaskTimeBeforeRetry($time)
     {
         $this->config['waitTaskTimeBeforeRetry'] = $time;
+
+        return $this;
+    }
+
+    public function getBatchSize()
+    {
+        return $this->config['batchSize'];
+    }
+
+    public function setBatchSize($batchSize)
+    {
+        $this->config['batchSize'] = (int)$batchSize;
 
         return $this;
     }

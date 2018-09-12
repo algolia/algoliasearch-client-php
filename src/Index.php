@@ -4,15 +4,16 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Iterators\AbstractBatchIterator;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\Iterators\ArrayBatchIterator;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\HttpLayer;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use InvalidArgumentException;
 
 class Index implements IndexInterface
 {
@@ -140,9 +141,23 @@ class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        $response = array();
 
-        return $this->batch(Helpers::build_batch($objects, 'addObject'), $requestOptions);
+        if (is_array($objects)) {
+            $objects = new ArrayBatchIterator($objects, $this->config->getBatchSize());
+        }
+
+        if (! $objects instanceof AbstractBatchIterator) {
+            throw new InvalidArgumentException("Cannot save this type object.");
+        }
+
+        foreach ($objects as $number => $batch) {
+            Helpers::ensure_objectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+
+            $response[$number] = $this->batch(Helpers::build_batch($batch, 'addObject'), $requestOptions);
+        }
+
+        return $response;
     }
 
     public function partialUpdateObject($object, $requestOptions = array())

@@ -1,10 +1,10 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Support;
+namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 
-final class HttpLayer
+final class HttpClientFactory
 {
     private static $httpClientConstructor;
 

@@ -2,11 +2,11 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\HttpLayer;
 
 final class Places
 {
@@ -37,7 +37,7 @@ final class Places
     public static function createWithConfig(ClientConfigInterface $config)
     {
         $apiWrapper = new ApiWrapper(
-            HttpLayer::get(),
+            HttpClientFactory::get(),
             $config
         );
 

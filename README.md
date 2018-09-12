@@ -98,8 +98,8 @@ Logger::disable();
 2. Or you can also define your own `PSR-3` Logger:
 
 ```php
-// Make sure you define the logger implementation before creating an instance of `Client::class`.
-LogManager::setLogger($myLogger);
+// Make sure you define the default logger implementation before creating an instance of `Client::class`.
+ClientConfig::setDefaultLogger($myLogger);
 
 $client = Client::create($appId, $apiKey);
 $client->initIndex('index_name')->saveObjects($objects);

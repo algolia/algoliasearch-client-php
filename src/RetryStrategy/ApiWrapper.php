@@ -7,11 +7,9 @@ use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-use Algolia\AlgoliaSearch\Log\LogManager;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Algolia\AlgoliaSearch\Support\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
@@ -48,7 +46,7 @@ class ApiWrapper
         $this->http = $http;
         $this->config = $config;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
-        $this->logger = $logger ?: LogManager::getLogger();
+        $this->logger = $logger ?: ClientConfig::getDefaultLogger();
     }
 
     public function read($method, $path, $requestOptions = array())

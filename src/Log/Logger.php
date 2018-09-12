@@ -38,7 +38,7 @@ final class Logger extends AbstractLogger
             $logMessage = array(
                 'level' => $level,
                 'message' => $message,
-                'content' => $context,
+                'context' => $context,
             );
 
             if (function_exists('dump')) {

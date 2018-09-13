@@ -53,7 +53,7 @@ class Host
 
     private function resetIfExpired()
     {
-        $expired = $this->lastCheck + self::TTL > time();
+        $expired = $this->lastCheck + self::TTL < time();
 
         if ($expired) {
             $this->reset();

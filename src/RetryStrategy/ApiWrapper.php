@@ -25,6 +25,11 @@ class ApiWrapper
     private $config;
 
     /**
+     * @var \Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts
+     */
+    private $clusterHosts;
+
+    /**
      * @var RequestOptionsFactory
      */
     private $requestOptionsFactory;
@@ -32,16 +37,18 @@ class ApiWrapper
     public function __construct(
         HttpClientInterface $http,
         ClientConfigInterface $config,
+        ClusterHosts $clusterHosts,
         RequestOptionsFactory $RqstOptsFactory = null
     ) {
         $this->http = $http;
         $this->config = $config;
+        $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
     }
 
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
     {
-        if ('GET' == strtoupper($method)) {
+        if ('GET' === strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
         } else {
             $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaultRequestOptions);
@@ -51,14 +58,14 @@ class ApiWrapper
             $method,
             $path,
             $requestOptions,
-            $this->config->getHosts()->read(),
+            $this->clusterHosts->read(),
             $requestOptions->getReadTimeout()
         );
     }
 
     public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array())
     {
-        if ('DELETE' == strtoupper($method)) {
+        if ('DELETE' === strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
             $data = array();
         } else {
@@ -69,7 +76,7 @@ class ApiWrapper
             $method,
             $path,
             $requestOptions,
-            $this->config->getHosts()->write(),
+            $this->clusterHosts->write(),
             $requestOptions->getWriteTimeout(),
             $data
         );
@@ -80,7 +87,7 @@ class ApiWrapper
         $requestOptions = $this->requestOptionsFactory->create($requestOptions);
 
         if (null === $hosts) {
-            $hosts = $this->config->getHosts()->write();
+            $hosts = $this->clusterHosts->write();
         } elseif (!is_array($hosts)) {
             $hosts = array($hosts);
         }
@@ -139,16 +146,19 @@ class ApiWrapper
                 $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, array(
                     'description' => $e->getMessage()
                 )));
+
                 $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
                 unset($logParams['body'], $logParams['headers']);
                 $logParams['description'] = $e->getMessage();
                 $this->log(LogLevel::WARNING, 'Bad request.', $logParams);
+
                 throw $e;
             } catch (\Exception $e) {
                 unset($logParams['body'], $logParams['headers']);
                 $logParams['description'] = $e->getMessage();
                 $this->log(LogLevel::ERROR, 'Generic error.', $logParams);
+
                 throw $e;
             }
 

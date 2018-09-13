@@ -2,11 +2,19 @@
 
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
+use Algolia\AlgoliaSearch\Algolia;
+
 class ClusterHosts
 {
     private $read;
 
     private $write;
+
+    private $cacheKey;
+
+    private $lastReadHash;
+
+    private $lastWriteHash;
 
     public function __construct(HostCollection $read, HostCollection $write)
     {
@@ -16,6 +24,7 @@ class ClusterHosts
 
     public static function create($read, $write = null)
     {
+        // TODO: To be fixed
         if (null === $write) {
             $write = $read;
         }
@@ -66,18 +75,20 @@ class ClusterHosts
 
     public function read()
     {
-        return $this->read->getUrls();
+        return $this->getUrls('read');
     }
 
     public function write()
     {
-        return $this->write->getUrls();
+        return $this->getUrls('write');
     }
 
     public function failed($host)
     {
         $this->read->markAsDown($host);
         $this->write->markAsDown($host);
+
+        $this->updateCache();
 
         return $this;
     }
@@ -98,4 +109,39 @@ class ClusterHosts
         return $this;
     }
 
+    /**
+     * Sets the cache key to save the state of the ClusterHosts
+     *
+     * @param $cacheKey
+     * @return string $cacheKey
+     */
+    public function setCacheKey($cacheKey)
+    {
+        $this->cacheKey = $cacheKey;
+
+        return $this;
+    }
+
+    private function getUrls($type)
+    {
+        $urls = $this->{$type}->getUrls();
+        $lashHashName = 'last'.ucfirst($type).'Hash';
+
+        if (Algolia::isCacheEnabled()) {
+            $hash = sha1(implode('-', $urls));
+            if ($hash !== $this->{$lashHashName}) {
+                $this->updateCache();
+            }
+            $this->{$lashHashName} = $hash;
+        }
+
+        return $urls;
+    }
+
+    private function updateCache()
+    {
+        if (null !== $this->cacheKey && Algolia::isCacheEnabled()) {
+            Algolia::getCache()->set($this->cacheKey, serialize($this));
+        }
+    }
 }

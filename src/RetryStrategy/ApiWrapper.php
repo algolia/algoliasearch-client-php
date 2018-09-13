@@ -148,7 +148,7 @@ class ApiWrapper
             } catch (\Exception $e) {
                 unset($logParams['body'], $logParams['headers']);
                 $logParams['description'] = $e->getMessage();
-                $this->log(LogLevel::ERROR, 'Algolia API client: Generic error.', $logParams);
+                $this->log(LogLevel::ERROR, 'Generic error.', $logParams);
                 throw $e;
             }
 

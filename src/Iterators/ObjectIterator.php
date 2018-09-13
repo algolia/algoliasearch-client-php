@@ -33,7 +33,7 @@ class ObjectIterator extends AbstractAlgoliaIterator
 
         $this->response = $this->api->read(
             empty($reqOpts) ? 'GET' : 'POST',
-            Helpers::api_path('/1/indexes/%s/browse', $this->indexName),
+            Helpers::apiPath('/1/indexes/%s/browse', $this->indexName),
             array_merge(
                 $this->requestOptions,
                 $cursor

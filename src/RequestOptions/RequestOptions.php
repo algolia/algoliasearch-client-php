@@ -82,7 +82,7 @@ class RequestOptions
 
     public function getBuiltQueryParameters()
     {
-        return Helpers::build_query($this->query);
+        return Helpers::buildQuery($this->query);
     }
 
     public function addQueryParameter($name, $value)

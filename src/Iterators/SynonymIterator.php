@@ -17,7 +17,7 @@ class SynonymIterator extends AbstractAlgoliaIterator
     {
         $this->response = $this->api->read(
             'POST',
-            Helpers::api_path('/1/indexes/%s/synonyms/search', $this->indexName),
+            Helpers::apiPath('/1/indexes/%s/synonyms/search', $this->indexName),
             array_merge(
                 $this->requestOptions,
                 array('page' => $this->getCurrentPage())

@@ -9,9 +9,8 @@ use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
-use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 class ApiWrapper
 {
@@ -104,41 +103,52 @@ class ApiWrapper
 
         $body = array_merge($data, $requestOptions->getBody());
 
+        $logParams = array(
+            'body' => $body,
+            'headers' => $requestOptions->getHeaders(),
+            'method' => $method,
+            'query' => $requestOptions->getQueryParameters(),
+        );
+
         $retry = 1;
         foreach ($hosts as $host) {
+            $uri = $uri->withHost($host);
             $request = null;
+            $logParams['retryNumber'] = $retry;
+            $logParams['host'] = (string) $uri;
             try {
-                $this->config->getLogger()->debug('Algolia API client: Request attempt.', array(
-                    'uri' => $uri->__toString(),
-                    'retryNumber' => $retry
-                ));
-
                 $request = $this->http->createRequest(
                     $method,
-                    $uri->withHost($host),
+                    $uri,
                     $requestOptions->getHeaders(),
                     $body
                 );
+
+                $this->log(LogLevel::DEBUG, 'Sending request.', $logParams);
 
                 $responseBody = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
                     $requestOptions->getConnectTimeout() * $retry
                 );
+                $logParams['response'] = $responseBody;
+                $this->log(LogLevel::DEBUG, 'Response received.', $logParams);
 
                 return $responseBody;
             } catch (RetriableException $e) {
-
-                $this->config->getLogger()->info('Algolia API client: Host failed.', array(
-                    'uri' => $uri->__toString(),
-                    'host' => $host,
-                    'retryNumber' => $retry
-                ));
-
+                $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, array(
+                    'description' => $e->getMessage()
+                )));
                 $this->config->getHosts()->failed($host);
             } catch (BadRequestException $e) {
+                unset($logParams['body'], $logParams['headers']);
+                $logParams['description'] = $e->getMessage();
+                $this->log(LogLevel::WARNING, 'Bad request.', $logParams);
                 throw $e;
             } catch (\Exception $e) {
+                unset($logParams['body'], $logParams['headers']);
+                $logParams['description'] = $e->getMessage();
+                $this->log(LogLevel::ERROR, 'Algolia API client: Generic error.', $logParams);
                 throw $e;
             }
 
@@ -153,5 +163,17 @@ class ApiWrapper
         $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
 
         return $this;
+    }
+
+    /**
+     * @param string $level
+     * @param string $message
+     * @param array $context
+     *
+     * @return void
+     */
+    private function log($level, $message, array $context = array())
+    {
+        $this->config->getLogger()->log($level, 'Algolia API client: ' . $message, $context);
     }
 }

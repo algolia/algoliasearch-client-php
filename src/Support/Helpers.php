@@ -83,8 +83,8 @@ class Helpers
         }
 
         // In case multiple objects are passed
-        foreach ($objects as $o) {
-            if (!(isset($o['objectID']) || isset($o['body']['objectID']))) {
+        foreach ($objects as $object) {
+            if (! isset($object['objectID']) && ! isset($object['body']['objectID'])) {
                 throw new MissingObjectId($message);
             }
         }

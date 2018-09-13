@@ -23,7 +23,7 @@ class Helpers
      *
      * @return mixed
      */
-    public static function api_path($pathFormat, $args = null, $_ = null)
+    public static function apiPath($pathFormat, $args = null, $_ = null)
     {
         $arguments = array_slice(func_get_args(), 1);
         foreach ($arguments as &$arg) {
@@ -36,7 +36,7 @@ class Helpers
 
     /**
      * When building a query string, array values must be json_encoded.
-     * This function can be used to turn any array into a Algilia-valid query string.
+     * This function can be used to turn any array into a Algolia-valid query string.
      *
      * Do not use a typical implementation where ['key' => ['one', 'two']] is
      * turned into key[1]=one&key[2]=two. Algolia will not understand key[x].
@@ -46,7 +46,7 @@ class Helpers
      *
      * @return string The urlencoded query string to send to Algolia
      */
-    public static function build_query(array $args)
+    public static function buildQuery(array $args)
     {
         if (!$args) {
             return '';
@@ -65,7 +65,7 @@ class Helpers
         return http_build_query($args);
     }
 
-    public static function build_batch($items, $action)
+    public static function buildBatch($items, $action)
     {
         return array_map(function ($item) use ($action) {
             return array(
@@ -75,7 +75,7 @@ class Helpers
         }, $items);
     }
 
-    public static function ensure_objectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
+    public static function ensureObjectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
     {
         // In case a single objects is passed
         if (isset($objects['objectID'])) {

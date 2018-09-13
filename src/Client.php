@@ -87,7 +87,7 @@ class Client implements ClientInterface
 
     public function multipleBatchObjects($operations, $requestOptions = array())
     {
-        Helpers::ensure_objectID($operations);
+        Helpers::ensureObjectID($operations);
 
         if (is_array($requestOptions)) {
             $requestOptions['requests'] = $operations;
@@ -224,7 +224,7 @@ class Client implements ClientInterface
     // BC Break: signature was changed
     public static function generateSecuredApiKey($parentApiKey, $restrictions)
     {
-        $urlEncodedRestrictions = Helpers::build_query($restrictions);
+        $urlEncodedRestrictions = Helpers::buildQuery($restrictions);
 
         $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
 

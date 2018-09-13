@@ -138,9 +138,9 @@ class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        Helpers::ensure_objectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        Helpers::ensureObjectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
 
-        return $this->batch(Helpers::build_batch($objects, 'addObject'), $requestOptions);
+        return $this->batch(Helpers::buildBatch($objects, 'addObject'), $requestOptions);
     }
 
     public function partialUpdateObject($object, $requestOptions = array())
@@ -150,7 +150,7 @@ class Index implements IndexInterface
 
     public function partialUpdateObjects($objects, $requestOptions = array())
     {
-        return $this->batch(Helpers::build_batch($objects, 'partialUpdateObjectNoCreate'), $requestOptions);
+        return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObjectNoCreate'), $requestOptions);
     }
 
     public function partialUpdateOrCreateObject($object, $requestOptions = array())
@@ -160,7 +160,7 @@ class Index implements IndexInterface
 
     public function partialUpdateOrCreateObjects($objects, $requestOptions = array())
     {
-        return $this->batch(Helpers::build_batch($objects, 'partialUpdateObject'), $requestOptions);
+        return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObject'), $requestOptions);
     }
 
     public function freshObjects($objects, $requestOptions = array())
@@ -203,7 +203,7 @@ class Index implements IndexInterface
             return array('objectID' => $id);
         }, $objectIds);
 
-        return $this->batch(Helpers::build_batch($objects, 'deleteObject'), $requestOptions);
+        return $this->batch(Helpers::buildBatch($objects, 'deleteObject'), $requestOptions);
     }
 
     public function deleteBy(array $args, $requestOptions = array())
@@ -211,7 +211,7 @@ class Index implements IndexInterface
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/deleteByQuery', $this->indexName),
-            array('params' => Helpers::build_query($args)),
+            array('params' => Helpers::buildQuery($args)),
             $requestOptions
         );
     }
@@ -262,7 +262,7 @@ class Index implements IndexInterface
 
     public function saveSynonyms($synonyms, $requestOptions = array())
     {
-        Helpers::ensure_objectID($synonyms, 'All synonyms must have an unique objectID to be valid');
+        Helpers::ensureObjectID($synonyms, 'All synonyms must have an unique objectID to be valid');
 
         return $this->api->write(
             'POST',
@@ -339,7 +339,7 @@ class Index implements IndexInterface
 
     public function saveRules($rules, $requestOptions = array())
     {
-        Helpers::ensure_objectID($rules, 'All rules must have an unique objectID to be valid');
+        Helpers::ensureObjectID($rules, 'All rules must have an unique objectID to be valid');
 
         return $this->api->write(
             'POST',

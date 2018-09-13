@@ -18,10 +18,10 @@ class HelpersTest extends TestCase
     public function dataTestApiPathHelper()
     {
         return array(array(
-            Helpers::api_path('/1/indexes/%s/cool/%s', 'index name', 'b&w'),
+            Helpers::apiPath('/1/indexes/%s/cool/%s', 'index name', 'b&w'),
             '/1/indexes/index+name/cool/b%26w',
         ), array(
-            Helpers::api_path('/1/indexes/%s/cool/%s', 'index name', urlencode('b&w')),
+            Helpers::apiPath('/1/indexes/%s/cool/%s', 'index name', urlencode('b&w')),
             '/1/indexes/index+name/cool/b%26w',
         ));
     }
@@ -33,7 +33,7 @@ class HelpersTest extends TestCase
     {
         $this->assertEquals(
             $expected,
-            Helpers::build_query($queryParams)
+            Helpers::buildQuery($queryParams)
         );
     }
 

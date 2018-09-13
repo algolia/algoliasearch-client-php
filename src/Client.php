@@ -122,28 +122,27 @@ class Client implements ClientInterface
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
     }
 
-    public function moveIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    public function moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())
     {
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
             array(
                 'operation' => 'move',
-                'destination' => $destIndexName,
+                'destination' => $dstIndexName,
             ),
             $requestOptions
         );
     }
 
-    // BC Break: ScopedCopyIndex was removed
-    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())
     {
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
             array(
                 'operation' => 'copy',
-                'destination' => $destIndexName,
+                'destination' => $dstIndexName,
             ),
             $requestOptions
         );
@@ -162,6 +161,39 @@ class Client implements ClientInterface
             array(),
             $requestOptions
         );
+    }
+
+    public function copySettings($srcIndexName, $dstIndexName, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['scope'] = array('settings');
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('scope', array('settings'));
+        }
+
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
+    }
+
+    public function copySynonyms($srcIndexName, $dstIndexName, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['scope'] = array('synonyms');
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('scope', array('synonyms'));
+        }
+
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
+    }
+
+    public function copyRules($srcIndexName, $dstIndexName, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['scope'] = array('rules');
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('scope', array('rules'));
+        }
+
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
     }
 
     public function listApiKeys($requestOptions = array())

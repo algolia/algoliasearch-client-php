@@ -89,6 +89,22 @@ class Index implements IndexInterface
         );
     }
 
+    public function setSettingsWithReplicas($settings, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['forwardToReplicas'] = true;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addQueryParameter('forwardToReplicas', true);
+        }
+
+        return $this->api->write(
+            'PUT',
+            api_path('/1/indexes/%s/settings', $this->indexName),
+            $settings,
+            $requestOptions
+        );
+    }
+
     public function getObject($objectId, $requestOptions = array())
     {
         return $this->api->read(

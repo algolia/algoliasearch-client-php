@@ -112,13 +112,6 @@ $client = Client::createWithConfig($config);
 $client->initIndex('index_name')->saveObjects($objects);
 ```
 
-### Canary Release
-
-The library ships with a `CanaryClient` class which extends `Client`. The point would be to add methods in _beta_ in this class so you can start using them if necessary. Once they're considered stable, they'll be moved to the Client class.
-
-The idea is that features here don't have to follow the normal release cycle. A feature in canary could be in beta while 6 minor versions are deployed.
-
-Features in canary could change or be removed.
 
 ### New methods
 

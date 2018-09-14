@@ -25,6 +25,8 @@
     To enforce that, $default parameters is removed from APIWrapper methods.
     It's still available in the RequestOptionsFactory
 
+* Remove Canary Client and Index
+
 
 ### UNRELEASED
 

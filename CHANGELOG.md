@@ -18,6 +18,8 @@
 * Fix Travis
 * Introduce ClientConfiguration
 * Introduce Client singleton with `Client::get()`
+* Remove Canary
+* Add PSR-16 compliant Cache
 
 #### 2.0 Alpha 3
 

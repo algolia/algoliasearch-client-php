@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Cache\NullCache;
+use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
 use Psr\SimpleCache\CacheInterface;
 
 class Algolia
@@ -22,7 +22,7 @@ class Algolia
             return false;
         }
 
-        return (! self::getCache() instanceof NullCache);
+        return (! self::getCache() instanceof NullCacheDriver);
     }
 
     /**
@@ -33,7 +33,7 @@ class Algolia
     public static function getCache()
     {
         if (! self::$cache) {
-            self::setCache(new NullCache());
+            self::setCache(new NullCacheDriver());
         }
 
         return self::$cache;

@@ -45,6 +45,12 @@ final class Analytics
         return new static($apiWrapper, $config);
     }
 
+    /**
+     * Get a paginated list of AB Test from the API
+     *
+     * @param array $params
+     * @return array
+     */
     public function getABTests($params = array())
     {
         $params += array('offset' => 0, 'limit' => 10);
@@ -52,6 +58,13 @@ final class Analytics
         return $this->api->read('GET', api_path('/2/abtests'), $params);
     }
 
+    /**
+     * Get an AB Test.
+     *
+     * @param int $abTestID Id of the AB Test to retrieve
+     * @return array
+     * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     */
     public function getABTest($abTestID)
     {
         if (!$abTestID) {
@@ -61,11 +74,24 @@ final class Analytics
         return $this->api->read('GET', api_path('/2/abtests/%s', $abTestID));
     }
 
+    /**
+     * Create new AB Test
+     *
+     * @param array $abTest
+     * @return array Information about the creation like TaskID and date
+     */
     public function addABTest($abTest)
     {
         return $this->api->write('POST', api_path('/2/abtests'), array(), $abTest);
     }
 
+    /**
+     * Stop a running AB Test
+     *
+     * @param int $abTestID
+     * @return array
+     * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     */
     public function stopABTest($abTestID)
     {
         if (!$abTestID) {
@@ -75,6 +101,13 @@ final class Analytics
         return $this->api->write('POST', api_path('/2/abtests/%s', $abTestID));
     }
 
+    /**
+     * Delete an AB Test
+     *
+     * @param int $abTestID
+     * @return array
+     * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     */
     public function deleteABTest($abTestID)
     {
         if (!$abTestID) {

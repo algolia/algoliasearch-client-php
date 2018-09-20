@@ -171,7 +171,7 @@ class Client implements ClientInterface
             $requestOptions->addBodyParameter('scope', array('settings'));
         }
 
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
     }
 
     public function copySynonyms($srcIndexName, $dstIndexName, $requestOptions = array())
@@ -182,7 +182,7 @@ class Client implements ClientInterface
             $requestOptions->addBodyParameter('scope', array('synonyms'));
         }
 
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
     }
 
     public function copyRules($srcIndexName, $dstIndexName, $requestOptions = array())
@@ -193,7 +193,7 @@ class Client implements ClientInterface
             $requestOptions->addBodyParameter('scope', array('rules'));
         }
 
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions = array());
+        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
     }
 
     public function listApiKeys($requestOptions = array())

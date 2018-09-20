@@ -32,13 +32,6 @@ class ClientConfig implements ClientConfigInterface
      */
     private static $defaultLogger;
 
-    /**
-     * Holds an instance of the default cache repository.
-     *
-     * @var \Psr\SimpleCache\CacheInterface|null
-     */
-    private static $defaultCache;
-
     public function __construct(array $config = array())
     {
         $config += $this->getDefaultConfig();
@@ -104,7 +97,7 @@ class ClientConfig implements ClientConfigInterface
         return $this->config['hosts'];
     }
 
-    public function setHosts(ClusterHosts $hosts)
+    public function setHosts($hosts)
     {
         $this->config['hosts'] = $hosts;
 

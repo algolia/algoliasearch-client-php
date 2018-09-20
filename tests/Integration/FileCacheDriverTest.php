@@ -13,7 +13,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 
     public static function setUpBeforeClass()
     {
-        parent::setUp();
+        parent::setUpBeforeClass();
 
         self::$cacheDir = dirname(__DIR__).'/cache/';
         if (!file_exists(self::$cacheDir)) {
@@ -50,7 +50,39 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
         $this->assertEquals($this->hash($readAfter2failed), $this->hash($readAfterReadingCache));
     }
 
-    public function getClusterHostFromClient($clientInstance)
+    public function testClusterHostsIsCachedAndDoesntFailIfCacheIsInvalid()
+    {
+        $client = Client::create();
+        $clusterHosts = $this->getClusterHostFromClient($client)->reset();
+        $readOriginal = $clusterHosts->read();
+        $this->assertCount(4, $readOriginal);
+
+        $clusterHosts->failed($readOriginal[0]);
+        $clusterHosts->failed($readOriginal[1]);
+        $readAfter2failed = $clusterHosts->read();
+
+        $ref = new \ReflectionProperty('Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts', 'cacheKey');
+        $ref->setAccessible(true);
+        $cacheKey = $ref->getValue($clusterHosts);
+
+        unset($client);
+
+        // Let's mess with the cache to see if we recreate the ClusterHost
+        $cacheFilename = str_replace('\\', '-', self::$cacheDir . FileCacheDriver::PREFIX . $cacheKey);
+        file_put_contents($cacheFilename, '{1:"segse"}');
+        $shaMessedUpCache = sha1_file($cacheFilename);
+
+        $client = Client::create();
+        $clusterHosts = $this->getClusterHostFromClient($client);
+        $readAfterReadingCache = $clusterHosts->read();
+
+        $this->assertCount(4, $readAfterReadingCache);
+
+        // Calling Read should have updated the cache
+        $this->assertNotEquals($shaMessedUpCache, sha1_file($cacheFilename));
+    }
+
+    private function getClusterHostFromClient($clientInstance)
     {
         $ref = new \ReflectionProperty('Algolia\AlgoliaSearch\Client', 'api');
         $ref->setAccessible(true);

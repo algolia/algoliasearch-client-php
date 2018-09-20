@@ -24,17 +24,16 @@ class ClusterHosts
 
     public static function create($read, $write = null)
     {
-        // TODO: To be fixed
         if (null === $write) {
             $write = $read;
         }
 
         if (is_string($read)) {
-            $read = array($read);
+            $read = array($read => 0);
         }
 
         if (is_string($write)) {
-            $write = array($write);
+            $write = array($write => 0);
         }
 
         return new static(HostCollection::create($read), HostCollection::create($write));
@@ -71,6 +70,19 @@ class ClusterHosts
     public static function createForAnalytics()
     {
         return static::create('analytics.algolia.com');
+    }
+
+    public static function createFromCache($cacheKey)
+    {
+        if (! Algolia::isCacheEnabled()) {
+            return false;
+        }
+
+        if (! Algolia::getCache()->has($cacheKey)) {
+            return false;
+        }
+
+        return @unserialize(Algolia::getCache()->get($cacheKey));
     }
 
     public function read()
@@ -112,8 +124,8 @@ class ClusterHosts
     /**
      * Sets the cache key to save the state of the ClusterHosts
      *
-     * @param $cacheKey
-     * @return string $cacheKey
+     * @param string $cacheKey
+     * @return $this
      */
     public function setCacheKey($cacheKey)
     {

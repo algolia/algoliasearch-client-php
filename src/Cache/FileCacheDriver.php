@@ -104,7 +104,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return string
      */
     private function getFilenameFromKey($key)

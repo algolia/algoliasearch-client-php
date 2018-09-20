@@ -34,18 +34,32 @@ class SettingsTest extends AlgoliaIntegrationTestCase
      */
     public function testSettingsWithReplicas()
     {
-        $replica1 = $this->safeName('settings-mgmt_REPLICA');
+        $replica1 = self::safeName('settings-mgmt_REPLICA');
         $index = static::getClient()->initIndex(static::$indexes['main']);
         $replica = static::getClient()->initIndex($replica1);
 
-        $settingsWithReplicas = array_merge($this->settings, array('replicas' => array($replica1)));
+        $settingsWithReplicas = array_merge($this->settings, array(
+            'replicas' => array($replica1),
+            'hitsPerPage' => 16,
+            'minWordSizefor2Typos' => 9,
+            'paginationLimitedTo' => 885,
+        ));
 
         // Assert that settings are forwarded by default
         $index->setSettings($settingsWithReplicas);
-        $retrievedSettings = $replica->getSettings();
-        $this->assertArraySubset($this->settings, $retrievedSettings);
+        $retrievedPrimarySettings = $index->getSettings();
+        $retrievedReplicaSettings = $replica->getSettings();
+        $this->assertNotEquals($retrievedPrimarySettings['hitsPerPage'], $retrievedReplicaSettings['hitsPerPage']);
 
-        // Assert that settings are forwarded by default
+        // If I set forwardToReplicas to true by default, it should work
+        $index = $this->newClient(array('defaultForwardToReplicas' => true))
+            ->initIndex(static::$indexes['main']);
+        $index->setSettings($settingsWithReplicas);
+        $retrievedPrimarySettings = $index->getSettings();
+        $retrievedReplicaSettings = $replica->getSettings();
+        $this->assertEquals($retrievedPrimarySettings['hitsPerPage'], $retrievedReplicaSettings['hitsPerPage']);
+
+        // If the new default is true, I can still override it
         $formula = array('customRanking' => array('asc(something)'));
         $index->setSettings($formula, array('forwardToReplicas' => false));
         $retrievedSettings = $replica->getSettings();

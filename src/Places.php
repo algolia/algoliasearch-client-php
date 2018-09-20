@@ -36,9 +36,24 @@ final class Places
 
     public static function createWithConfig(ClientConfigInterface $config)
     {
+        $config = clone $config;
+
+        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
+
+        if ($hosts = $config->getHosts()) {
+            // If a list of hosts was passed, we ignore the cache
+            $clusterHosts = ClusterHosts::create($hosts);
+        } elseif (false !== ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
+            // We'll try to restore the ClusterHost from cache, if we cannot
+            // we create a new instance and set the cache key
+            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
+                ->setCacheKey($cacheKey);
+        }
+
         $apiWrapper = new ApiWrapper(
             HttpClientFactory::get($config),
-            $config
+            $config,
+            $clusterHosts
         );
 
         return new static($apiWrapper, $config);

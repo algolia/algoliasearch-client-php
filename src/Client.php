@@ -36,7 +36,7 @@ class Client implements ClientInterface
     public static function get($appId = null, $apiKey = null)
     {
         if (!static::$client) {
-            static::$client = static::create($appId = null, $apiKey = null);
+            static::$client = static::create($appId, $apiKey);
         }
 
         return static::$client;
@@ -53,10 +53,12 @@ class Client implements ClientInterface
 
         $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
 
-        if (Algolia::isCacheEnabled() && Algolia::getCache()->has($cacheKey)) {
-            $serializedClusterHosts = Algolia::getCache()->get($cacheKey);
-            $clusterHosts = unserialize($serializedClusterHosts);
-        } else {
+        if ($hosts = $config->getHosts()) {
+            // If a list of hosts was passed, we ignore the cache
+            $clusterHosts = ClusterHosts::create($hosts);
+        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
+            // We'll try to restore the ClusterHost from cache, if we cannot
+            // we create a new instance and set the cache key
             $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
                 ->setCacheKey($cacheKey);
         }

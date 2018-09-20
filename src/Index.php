@@ -81,11 +81,17 @@ class Index implements IndexInterface
 
     public function setSettings($settings, $requestOptions = array())
     {
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
             $settings,
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
@@ -264,11 +270,17 @@ class Index implements IndexInterface
     {
         Helpers::ensureObjectID($synonyms, 'All synonyms must have an unique objectID to be valid');
 
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/batch', $this->indexName),
             $synonyms,
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
@@ -285,21 +297,33 @@ class Index implements IndexInterface
 
     public function deleteSynonym($objectId, $requestOptions = array())
     {
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
             array(),
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
     public function clearSynonyms($requestOptions = array())
     {
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             array(),
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
@@ -341,11 +365,17 @@ class Index implements IndexInterface
     {
         Helpers::ensureObjectID($rules, 'All rules must have an unique objectID to be valid');
 
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/batch', $this->indexName),
             $rules,
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
@@ -362,21 +392,33 @@ class Index implements IndexInterface
 
     public function deleteRule($objectId, $requestOptions = array())
     {
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
             array(),
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 
     public function clearRules($requestOptions = array())
     {
+        $default = array();
+        if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
+            $default['forwardToReplicas'] = $fwd;
+        }
+
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/clear', $this->indexName),
             array(),
-            $requestOptions
+            $requestOptions,
+            $default
         );
     }
 

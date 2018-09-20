@@ -26,6 +26,19 @@ interface ClientConfigInterface extends LoggerAwareInterface
 
     public function getWaitTaskTimeBeforeRetry();
 
+    public function getDefaultForwardToReplicas();
+
+    /**
+     * Every methods accepting `forwardToReplicas` parameters will use
+     * this value by default. If you don't set it, the engine default
+     * value will be used.
+     *
+     * @param boolean $default
+     * @return $this
+     */
+    public function setDefaultForwardToReplicas($default);
+
+
     /**
      * Gets the logger instance of the object.
      *

@@ -171,7 +171,7 @@ class Index implements IndexInterface
 
     public function freshObjects($objects, $requestOptions = array())
     {
-        $tmpName = $this->indexName.'_tmp_'.uniqid();
+        $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
 
         // TODO: Replica!
         $this->api->write(

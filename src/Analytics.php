@@ -37,9 +37,18 @@ final class Analytics
 
     public static function createWithConfig(ClientConfigInterface $config)
     {
+        $config = clone $config;
+
+        if ($hosts = $config->getHosts()) {
+            $clusterHosts = ClusterHosts::create($hosts);
+        } else {
+            $clusterHosts = ClusterHosts::createForAnalytics();
+        }
+
         $apiWrapper = new ApiWrapper(
             HttpClientFactory::get($config),
-            $config
+            $config,
+            $clusterHosts
         );
 
         return new static($apiWrapper, $config);

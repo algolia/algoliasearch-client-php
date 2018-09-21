@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -32,10 +33,10 @@ class Client implements ClientInterface
         $this->config = $config;
     }
 
-    public static function get()
+    public static function get($appId = null, $apiKey = null)
     {
         if (!static::$client) {
-            static::$client = static::create();
+            static::$client = static::create($appId, $apiKey);
         }
 
         return static::$client;
@@ -50,9 +51,22 @@ class Client implements ClientInterface
     {
         $config = clone $config;
 
+        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
+
+        if ($hosts = $config->getHosts()) {
+            // If a list of hosts was passed, we ignore the cache
+            $clusterHosts = ClusterHosts::create($hosts);
+        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
+            // We'll try to restore the ClusterHost from cache, if we cannot
+            // we create a new instance and set the cache key
+            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
+                ->setCacheKey($cacheKey);
+        }
+
         $apiWrapper = new ApiWrapper(
             HttpClientFactory::get($config),
-            $config
+            $config,
+            $clusterHosts
         );
 
         return new static($apiWrapper, $config);

@@ -25,9 +25,12 @@ class HostCollection
 
     public function get()
     {
-        return array_filter($this->hosts, function (Host $host) {
+        // We pass the result through array_values because sometimes
+        // we need to make sure you can access the first element
+        // via $result[0]
+        return array_values(array_filter($this->hosts, function (Host $host) {
             return $host->isUp();
-        });
+        }));
     }
 
     public function getUrls()
@@ -39,9 +42,11 @@ class HostCollection
 
     public function markAsDown($hostKey)
     {
-        if (isset($this->hosts[$hostKey])) {
-            $this->hosts[$hostKey]->markAsDown();
-        }
+        array_map(function (Host $host) use ($hostKey) {
+            if ($host->getUrl() === $hostKey) {
+                $host->markAsDown();
+            }
+        }, $this->hosts);
     }
 
     public function shuffle()

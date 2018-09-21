@@ -36,10 +36,6 @@ class ClientConfig implements ClientConfigInterface
     {
         $config += $this->getDefaultConfig();
 
-        if (null === $config['hosts']) {
-            $config['hosts'] = ClusterHosts::createFromAppId($config['appId']);
-        }
-
         $this->config = $config;
     }
 
@@ -101,7 +97,7 @@ class ClientConfig implements ClientConfigInterface
         return $this->config['hosts'];
     }
 
-    public function setHosts(ClusterHosts $hosts)
+    public function setHosts($hosts)
     {
         $this->config['hosts'] = $hosts;
 

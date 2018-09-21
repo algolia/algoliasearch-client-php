@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Interfaces;
 
 use Psr\Log\LoggerAwareInterface;
+use Psr\SimpleCache\CacheInterface;
 
 interface ClientConfigInterface extends LoggerAwareInterface
 {

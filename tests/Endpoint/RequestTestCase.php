@@ -36,4 +36,24 @@ abstract class RequestTestCase extends TestCase
         $body = json_decode((string) $request->getBody(), true);
         $this->assertArraySubset($subset, $body);
     }
+
+    protected function assertQueryParametersSubset(array $subset, RequestInterface $request)
+    {
+        $params = $this->requestQueryParametersToArray($request);
+        $this->assertArraySubset($subset, $params);
+    }
+
+    protected function assertQueryParametersNotHasKey($key, RequestInterface $request)
+    {
+        $params = $this->requestQueryParametersToArray($request);
+        $this->assertArrayNotHasKey($key, $params);
+    }
+
+    private function requestQueryParametersToArray(RequestInterface $request)
+    {
+        $array = array();
+        parse_str($request->getUri()->getQuery(), $array);
+
+        return $array;
+    }
 }

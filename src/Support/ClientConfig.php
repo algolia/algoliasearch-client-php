@@ -68,6 +68,7 @@ class ClientConfig implements ClientConfigInterface
             'connectTimeout' => $this->defaultConnectTimeout,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
             'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
+            'defaultForwardToReplicas' => null,
         );
     }
 
@@ -163,6 +164,22 @@ class ClientConfig implements ClientConfigInterface
     public function setWaitTaskTimeBeforeRetry($time)
     {
         $this->config['waitTaskTimeBeforeRetry'] = $time;
+
+        return $this;
+    }
+
+    public function getDefaultForwardToReplicas()
+    {
+        return $this->config['defaultForwardToReplicas'];
+    }
+
+    public function setDefaultForwardToReplicas($default)
+    {
+        if (! is_bool($default)) {
+            throw new \InvalidArgumentException('Default configuration for ForwardToReplicas must be a boolean');
+        }
+
+        $this->config['defaultForwardToReplicas'] = $default;
 
         return $this;
     }

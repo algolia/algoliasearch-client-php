@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
@@ -45,12 +46,12 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
     protected static function newClient($config = array())
     {
         $config += array(
-            'app-id' => getenv('ALGOLIA_APP_ID'),
-            'key' => getenv('ALGOLIA_API_KEY'),
+            'appId' => getenv('ALGOLIA_APP_ID'),
+            'apiKey' => getenv('ALGOLIA_API_KEY'),
         );
 
         return new SyncClient(
-            Client::create($config['app-id'], $config['key'])
+            Client::createWithConfig(new ClientConfig($config))
         );
     }
 

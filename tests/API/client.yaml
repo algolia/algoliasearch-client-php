@@ -18,14 +18,14 @@
   method: moveIndex
   args:
     - name: srcIndexName
-    - name: destIndexName
+    - name: dstIndexName
     - name: requestOptions
       default: []
 -
   method: copyIndex
   args:
     - name: srcIndexName
-    - name: destIndexName
+    - name: dstIndexName
     - name: requestOptions
       default: []
 -
@@ -40,7 +40,27 @@
     - name: indexName
     - name: requestOptions
       default: []
-
+-
+  method: copySettings
+  args:
+    - name: srcIndexName
+    - name: dstIndexName
+    - name: requestOptions
+      default: []
+-
+  method: copySynonyms
+  args:
+    - name: srcIndexName
+    - name: dstIndexName
+    - name: requestOptions
+      default: []
+-
+  method: copyRules
+  args:
+    - name: srcIndexName
+    - name: dstIndexName
+    - name: requestOptions
+      default: []
 
 #
 # API Keys Management

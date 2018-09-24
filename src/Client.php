@@ -7,6 +7,9 @@ use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
+use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
+use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -109,11 +112,13 @@ class Client implements ClientInterface
             $requestOptions->addBodyParameter('requests', $operations);
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/*/batch'),
             $requestOptions
         );
+
+        return new MultipleIndexingResponse($response, $this);
     }
 
     public function multipleGetObjects($requests, $requestOptions = array())
@@ -222,7 +227,9 @@ class Client implements ClientInterface
 
     public function addApiKey($keyParams, $requestOptions = array())
     {
-        return $this->api->write('POST', api_path('/1/keys'), $keyParams, $requestOptions);
+        $response = $this->api->write('POST', api_path('/1/keys'), $keyParams, $requestOptions);
+
+        return new AddApiKeyResponse($response, $this, $this->config);
     }
 
     public function updateApiKey($key, $keyParams, $requestOptions = array())
@@ -232,7 +239,9 @@ class Client implements ClientInterface
 
     public function deleteApiKey($key, $requestOptions = array())
     {
-        return $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
+        $response = $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
+
+        return new DeleteApiKeyResponse($response, $this, $this->config);
     }
 
     // BC Break: signature was changed
@@ -327,29 +336,6 @@ class Client implements ClientInterface
         $index = $this->initIndex($indexName);
 
         return $index->waitTask($taskId, $requestOptions);
-    }
-
-    public function waitForKeyAdded($key, $requestOptions = array())
-    {
-        $retry = 1;
-        $maxRetry = $this->config->getWaitTaskMaxRetry();
-        $time = $this->config->getWaitTaskTimeBeforeRetry();
-
-        do {
-            try {
-                $this->getApiKey($key, $requestOptions);
-
-                return;
-            } catch (NotFoundException $e) {
-                // Try again
-            }
-
-            $retry++;
-            $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
-        } while ($retry < $maxRetry);
-
-        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

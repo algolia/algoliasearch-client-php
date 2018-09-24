@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
+use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
@@ -56,12 +57,14 @@ class Index implements IndexInterface
 
     public function clear($requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/clear', $this->indexName),
             array(),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function getSettings($requestOptions = array())
@@ -86,13 +89,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
             $settings,
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function getObject($objectId, $requestOptions = array())
@@ -187,7 +192,7 @@ class Index implements IndexInterface
 
         $this->saveObjects($objects, $requestOptions);
 
-        $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $this->indexName),
             array(
@@ -196,6 +201,8 @@ class Index implements IndexInterface
             ),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function deleteObject($objectId, $requestOptions = array())
@@ -214,22 +221,26 @@ class Index implements IndexInterface
 
     public function deleteBy(array $args, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/deleteByQuery', $this->indexName),
             array('params' => Helpers::buildQuery($args)),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function batch($requests, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/batch', $this->indexName),
             array('requests' => $requests),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function browse($requestOptions = array())
@@ -275,13 +286,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/batch', $this->indexName),
             $synonyms,
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function freshSynonyms($synonyms, $requestOptions = array())
@@ -302,13 +315,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
             array(),
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function clearSynonyms($requestOptions = array())
@@ -318,13 +333,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
             array(),
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function browseSynonyms($requestOptions = array())
@@ -370,13 +387,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/batch', $this->indexName),
             $rules,
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function freshRules($rules, $requestOptions = array())
@@ -397,13 +416,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
             array(),
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function clearRules($requestOptions = array())
@@ -413,13 +434,15 @@ class Index implements IndexInterface
             $default['forwardToReplicas'] = $fwd;
         }
 
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/clear', $this->indexName),
             array(),
             $requestOptions,
             $default
         );
+
+        return new IndexingResponse($response, $this);
     }
 
     public function browseRules($requestOptions = array())
@@ -473,11 +496,13 @@ class Index implements IndexInterface
 
     public function deleteDeprecatedIndexApiKey($key, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/keys/%s', $this->indexName, $key),
             array(),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
     }
 }

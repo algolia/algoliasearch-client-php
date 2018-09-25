@@ -40,7 +40,7 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
     {
         /** @var \Algolia\AlgoliaSearch\Index $index */
         $index = Client::createWithConfig(new ClientConfig(array(
-            'defaultForwardToReplicas' => $defaultValue
+            'defaultForwardToReplicas' => $defaultValue,
         )))->initIndex('test');
 
         $methods = array(
@@ -61,7 +61,7 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
             list($request, $timeout, $connectTimeout) = $index->{$methodName}($arg1);
 
             $this->assertQueryParametersSubset(
-                array('forwardToReplicas' => $defaultValue ? 'true':'false'),
+                array('forwardToReplicas' => $defaultValue ? 'true' : 'false'),
                 $request
             );
         }

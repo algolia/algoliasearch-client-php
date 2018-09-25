@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch\Interfaces;
 
 use Psr\Log\LoggerAwareInterface;
-use Psr\SimpleCache\CacheInterface;
 
 interface ClientConfigInterface extends LoggerAwareInterface
 {
@@ -34,11 +33,11 @@ interface ClientConfigInterface extends LoggerAwareInterface
      * this value by default. If you don't set it, the engine default
      * value will be used.
      *
-     * @param boolean $default
+     * @param bool $default
+     *
      * @return $this
      */
     public function setDefaultForwardToReplicas($default);
-
 
     /**
      * Gets the logger instance of the object.

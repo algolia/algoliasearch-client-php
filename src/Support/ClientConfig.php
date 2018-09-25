@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Log\Logger;
 use Psr\Log\LoggerInterface;
 
@@ -171,7 +170,7 @@ class ClientConfig implements ClientConfigInterface
 
     public function setDefaultForwardToReplicas($default)
     {
-        if (! is_bool($default)) {
+        if (!is_bool($default)) {
             throw new \InvalidArgumentException('Default configuration for ForwardToReplicas must be a boolean');
         }
 
@@ -185,7 +184,7 @@ class ClientConfig implements ClientConfigInterface
      */
     public function getLogger()
     {
-        return $this->logger ?: self::$defaultLogger ?: new Logger;
+        return $this->logger ?: self::$defaultLogger ?: new Logger();
     }
 
     /**
@@ -200,8 +199,6 @@ class ClientConfig implements ClientConfigInterface
      * Sets the default logger.
      *
      * @param \Psr\Log\LoggerInterface $logger
-     *
-     * @return void
      */
     public static function setDefaultLogger(LoggerInterface $logger)
     {

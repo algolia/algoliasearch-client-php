@@ -14,9 +14,9 @@ class CopyResourcesTest extends RequestTestCase
 
         $this->assertEndpointEquals($request, '/1/indexes/src/operation');
         $this->assertBodySubset(array(
-            "operation" => "copy",
-            "destination" => "dest",
-            "scope" => array("settings"),
+            'operation' => 'copy',
+            'destination' => 'dest',
+            'scope' => array('settings'),
         ),
             $request
         );
@@ -30,9 +30,9 @@ class CopyResourcesTest extends RequestTestCase
 
         $this->assertEndpointEquals($request, '/1/indexes/src/operation');
         $this->assertBodySubset(array(
-            "operation" => "copy",
-            "destination" => "dest",
-            "scope" => array("synonyms"),
+            'operation' => 'copy',
+            'destination' => 'dest',
+            'scope' => array('synonyms'),
         ),
             $request
         );

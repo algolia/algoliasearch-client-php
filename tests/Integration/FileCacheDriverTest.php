@@ -26,7 +26,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
-        Algolia::setCache(new NullCacheDriver);
+        Algolia::setCache(new NullCacheDriver());
     }
 
     public function testClusterHostsIsCached()
@@ -68,7 +68,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
         unset($client);
 
         // Let's mess with the cache to see if we recreate the ClusterHost
-        $cacheFilename = str_replace('\\', '-', self::$cacheDir . FileCacheDriver::PREFIX . $cacheKey);
+        $cacheFilename = str_replace('\\', '-', self::$cacheDir.FileCacheDriver::PREFIX.$cacheKey);
         file_put_contents($cacheFilename, '{1:"segse"}');
         $shaMessedUpCache = sha1_file($cacheFilename);
 

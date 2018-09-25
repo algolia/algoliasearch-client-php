@@ -9,7 +9,6 @@ use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
-use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 class ApiWrapper
@@ -144,7 +143,7 @@ class ApiWrapper
                 return $responseBody;
             } catch (RetriableException $e) {
                 $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, array(
-                    'description' => $e->getMessage()
+                    'description' => $e->getMessage(),
                 )));
 
                 $this->config->getHosts()->failed($host);
@@ -178,12 +177,10 @@ class ApiWrapper
     /**
      * @param string $level
      * @param string $message
-     * @param array $context
-     *
-     * @return void
+     * @param array  $context
      */
     private function log($level, $message, array $context = array())
     {
-        $this->config->getLogger()->log($level, 'Algolia API client: ' . $message, $context);
+        $this->config->getLogger()->log($level, 'Algolia API client: '.$message, $context);
     }
 }

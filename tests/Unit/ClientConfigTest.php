@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Support\ClientConfig;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\AbstractLogger;
 use Psr\Log\NullLogger;
 
 class ClientConfigTest extends TestCase
@@ -28,4 +27,3 @@ class ClientConfigTest extends TestCase
         $this->assertSame($loggerB, $config->getLogger());
     }
 }
-

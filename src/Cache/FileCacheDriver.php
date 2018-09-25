@@ -12,15 +12,15 @@ class FileCacheDriver implements CacheInterface
 
     public function __construct($directory)
     {
-        $this->directory = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        $this->directory = rtrim($directory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function get($key, $default = null)
     {
-        if (! $this->has($key)) {
+        if (!$this->has($key)) {
             return $default;
         }
 
@@ -28,7 +28,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function set($key, $value, $ttl = null)
     {
@@ -36,7 +36,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function delete($key)
     {
@@ -44,7 +44,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clear()
     {
@@ -57,7 +57,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getMultiple($keys, $default = null)
     {
@@ -70,7 +70,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setMultiple($values, $ttl = null)
     {
@@ -83,12 +83,12 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function deleteMultiple($keys)
     {
         $result = true;
-        foreach ($keys as $key ) {
+        foreach ($keys as $key) {
             $result &= $this->delete($key);
         }
 
@@ -96,7 +96,7 @@ class FileCacheDriver implements CacheInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function has($key)
     {
@@ -105,11 +105,12 @@ class FileCacheDriver implements CacheInterface
 
     /**
      * @param string $key
+     *
      * @return string
      */
     private function getFilenameFromKey($key)
     {
-        $name = $this->directory . self::PREFIX .$key;
+        $name = $this->directory.self::PREFIX.$key;
 
         return str_replace('\\', '-', $name);
     }

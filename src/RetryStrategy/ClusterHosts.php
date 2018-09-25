@@ -74,11 +74,11 @@ class ClusterHosts
 
     public static function createFromCache($cacheKey)
     {
-        if (! Algolia::isCacheEnabled()) {
+        if (!Algolia::isCacheEnabled()) {
             return false;
         }
 
-        if (! Algolia::getCache()->has($cacheKey)) {
+        if (!Algolia::getCache()->has($cacheKey)) {
             return false;
         }
 
@@ -122,9 +122,10 @@ class ClusterHosts
     }
 
     /**
-     * Sets the cache key to save the state of the ClusterHosts
+     * Sets the cache key to save the state of the ClusterHosts.
      *
      * @param string $cacheKey
+     *
      * @return $this
      */
     public function setCacheKey($cacheKey)

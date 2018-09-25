@@ -79,8 +79,8 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      * is not valid, we call Algolia' API to load more results
      * until it's the last page.
      *
-     * @return bool The return value will be casted to boolean and then evaluated.
-     *              Returns true on success or false on failure.
+     * @return bool the return value will be casted to boolean and then evaluated.
+     *              Returns true on success or false on failure
      */
     public function valid()
     {

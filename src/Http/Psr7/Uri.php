@@ -38,7 +38,9 @@ class Uri implements UriInterface
     );
 
     private static $charUnreserved = 'a-zA-Z0-9_\-\.~';
+
     private static $charSubDelims = '!\$&\'\(\)\*\+,;=';
+
     private static $replaceQuery = array('=' => '%3D', '&' => '%26');
 
     /** @var string Uri scheme. */

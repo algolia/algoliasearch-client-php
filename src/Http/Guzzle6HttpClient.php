@@ -64,6 +64,7 @@ class Guzzle6HttpClient implements HttpClientInterface
             if ($e->hasResponse()) {
                 return $this->handleResponse($e->getResponse(), $request);
             }
+
             throw $this->handleException($e, $request);
         } catch (\Exception $e) {
             throw $this->handleException($e, $request);

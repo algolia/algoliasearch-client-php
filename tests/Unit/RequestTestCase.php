@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Endpoint;
+namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;

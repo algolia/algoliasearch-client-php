@@ -47,7 +47,7 @@ function stream_for($resource = '', array $options = array())
 function copy_to_string(StreamInterface $stream, $maxLen = -1)
 {
     $buffer = '';
-    if ($maxLen === -1) {
+    if (-1 === $maxLen) {
         while (!$stream->eof()) {
             $buf = $stream->read(1048576);
             // Using a loose equality here to match on '' and false.

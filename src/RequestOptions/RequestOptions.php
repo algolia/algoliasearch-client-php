@@ -32,7 +32,7 @@ class RequestOptions
     }
 
     /**
-     * Get the HTTP headers to add to the request
+     * Get the HTTP headers to add to the request.
      *
      * @return array List of name/value pairs
      */
@@ -69,7 +69,7 @@ class RequestOptions
     }
 
     /**
-     * Add a new header to the list if there is no value already set
+     * Add a new header to the list if there is no value already set.
      *
      * @param string $name Name of the header
      * @param $value string Value of the header
@@ -151,6 +151,7 @@ class RequestOptions
      * If a value already exists for a name, it will be overwritten.
      *
      * @param $parameters
+     *
      * @return $this
      */
     public function addQueryParameters($parameters)
@@ -163,7 +164,7 @@ class RequestOptions
     /**
      * Add a query parameter if it isn't already set.
      *
-     * @param string $name Name of the query parameter
+     * @param string $name  Name of the query parameter
      * @param string $value Value of the query parameter
      *
      * @return $this
@@ -199,7 +200,6 @@ class RequestOptions
      * @param array $queryParameters
      *
      * @return $this
-
      */
     public function setQueryParameters($queryParameters)
     {
@@ -209,7 +209,7 @@ class RequestOptions
     }
 
     /**
-     * Get HTTP body to add
+     * Get HTTP body to add.
      *
      * @return array
      */
@@ -233,7 +233,6 @@ class RequestOptions
         return $this;
     }
 
-
     /**
      * Add parameters if they aren't already set.
      *
@@ -251,7 +250,7 @@ class RequestOptions
     /**
      * Add a body parameter if it isn't already set.
      *
-     * @param string $name Name of the query parameter
+     * @param string $name  Name of the query parameter
      * @param string $value Value of the query parameter
      *
      * @return $this
@@ -285,6 +284,7 @@ class RequestOptions
      * Replace all existing body parameters with the given name/value pairs.
      *
      * @param $body
+     *
      * @return $this
      */
     public function setBody($body)
@@ -295,7 +295,7 @@ class RequestOptions
     }
 
     /**
-     * Get timeout for read operations
+     * Get timeout for read operations.
      *
      * @return int Timeout in seconds
      */
@@ -305,9 +305,10 @@ class RequestOptions
     }
 
     /**
-     * Set timeout for read operations
+     * Set timeout for read operations.
      *
      * @param int $readTimeout Timeout in seconds
+     *
      * @return $this
      */
     public function setReadTimeout($readTimeout)
@@ -327,11 +328,11 @@ class RequestOptions
         return $this->writeTimeout;
     }
 
-
     /**
      * Set timeout for write operations.
      *
      * @param int $writeTimeout Timeout in seconds
+     *
      * @return $this
      */
     public function setWriteTimeout($writeTimeout)
@@ -355,6 +356,7 @@ class RequestOptions
      * Set connect timeout.
      *
      * @param $connectTimeout Connect timeout in seconds
+     *
      * @return $this
      */
     public function setConnectTimeout($connectTimeout)

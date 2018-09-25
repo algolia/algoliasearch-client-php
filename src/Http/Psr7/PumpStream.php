@@ -37,9 +37,9 @@ class PumpStream implements StreamInterface
      *                          amount of data to return. The callable MUST
      *                          return a string when called, or false on error
      *                          or EOF.
-     * @param array    $options Stream options:
+     * @param array    $options stream options:
      *                          - metadata: Hash of metadata to use with stream.
-     *                          - size: Size of the stream, if known.
+     *                          - size: Size of the stream, if known
      */
     public function __construct(callable $source, array $options = array())
     {

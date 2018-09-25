@@ -204,7 +204,7 @@ class Stream implements StreamInterface
         if (!$this->seekable) {
             throw new \RuntimeException('Stream is not seekable');
         }
-        if (fseek($this->stream, $offset, $whence) === -1) {
+        if (-1 === fseek($this->stream, $offset, $whence)) {
             throw new \RuntimeException('Unable to seek to stream position '
                 .$offset.' with whence '.var_export($whence, true));
         }

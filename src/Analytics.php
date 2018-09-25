@@ -55,9 +55,10 @@ final class Analytics
     }
 
     /**
-     * Get a paginated list of AB Test from the API
+     * Get a paginated list of AB Test from the API.
      *
      * @param array $params
+     *
      * @return array
      */
     public function getABTests($params = array())
@@ -71,7 +72,9 @@ final class Analytics
      * Get an AB Test.
      *
      * @param int $abTestID Id of the AB Test to retrieve
+     *
      * @return array
+     *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
     public function getABTest($abTestID)
@@ -84,9 +87,10 @@ final class Analytics
     }
 
     /**
-     * Create new AB Test
+     * Create new AB Test.
      *
      * @param array $abTest
+     *
      * @return array Information about the creation like TaskID and date
      */
     public function addABTest($abTest)
@@ -95,10 +99,12 @@ final class Analytics
     }
 
     /**
-     * Stop a running AB Test
+     * Stop a running AB Test.
      *
      * @param int $abTestID
+     *
      * @return array
+     *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
     public function stopABTest($abTestID)
@@ -111,10 +117,12 @@ final class Analytics
     }
 
     /**
-     * Delete an AB Test
+     * Delete an AB Test.
      *
      * @param int $abTestID
+     *
      * @return array
+     *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
     public function deleteABTest($abTestID)

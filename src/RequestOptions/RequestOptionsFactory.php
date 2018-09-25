@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 
 class RequestOptionsFactory

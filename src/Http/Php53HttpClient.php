@@ -136,7 +136,7 @@ class Php53HttpClient implements HttpClientInterface
         } while (CURLM_CALL_MULTI_PERFORM == $mrc);
 
         while ($running && CURLM_OK == $mrc) {
-            if (curl_multi_select($mhandle, 0.1) == -1) {
+            if (-1 == curl_multi_select($mhandle, 0.1)) {
                 usleep(100);
             }
             do {
@@ -168,7 +168,7 @@ class Php53HttpClient implements HttpClientInterface
         $response = \json_decode($response, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException(
-                'json_decode error: ' . json_last_error_msg()
+                'json_decode error: '.json_last_error_msg()
             );
         }
 

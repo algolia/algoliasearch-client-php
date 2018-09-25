@@ -22,7 +22,7 @@ class Algolia
             return false;
         }
 
-        return (! self::getCache() instanceof NullCacheDriver);
+        return !self::getCache() instanceof NullCacheDriver;
     }
 
     /**
@@ -32,7 +32,7 @@ class Algolia
      */
     public static function getCache()
     {
-        if (! self::$cache) {
+        if (!self::$cache) {
             self::setCache(new NullCacheDriver());
         }
 
@@ -43,7 +43,6 @@ class Algolia
      * Sets the cache instance of the object.
      *
      * @param \Psr\SimpleCache\CacheInterface $cache
-     * @return void
      */
     public static function setCache(CacheInterface $cache)
     {

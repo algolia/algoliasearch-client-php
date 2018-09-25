@@ -38,7 +38,6 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         try {
             static::getClient()->deleteIndex($replica1);
         } catch (\Exception $e) {
-            //
         }
         $index = static::getClient()->initIndex(static::$indexes['main']);
         $replica = static::getClient()->initIndex($replica1);

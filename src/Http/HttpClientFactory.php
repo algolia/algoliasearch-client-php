@@ -35,4 +35,9 @@ final class HttpClientFactory
 
         self::$httpClientConstructor = $httpClientConstructor;
     }
+
+    public static function reset()
+    {
+        self::$httpClientConstructor = null;
+    }
 }

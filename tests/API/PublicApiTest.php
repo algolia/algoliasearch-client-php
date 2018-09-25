@@ -3,16 +3,32 @@
 namespace Algolia\AlgoliaSearch\Tests\API;
 
 use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
 class PublicApiTest extends TestCase
 {
+    public static function setUpBeforeClass()
+    {
+        $actualHttp = HttpClientFactory::get(new ClientConfig());
+
+        HttpClientFactory::set(function () use ($actualHttp) {
+            return new RequestHttpClient($actualHttp);
+        });
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+        HttpClientFactory::reset();
+    }
+
     public function testClient()
     {
-        $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper');
-        $client = new Client($apiWrapper, ClientConfig::create());
+        $client = Client::get();
         $definition = $this->getDefinition('client.yaml');
 
         $c = new PublicApiChecker($client, $definition);
@@ -21,9 +37,7 @@ class PublicApiTest extends TestCase
 
     public function testIndex()
     {
-        $apiWrapper = $this->createMock('\Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper');
-        $client = new Client($apiWrapper, ClientConfig::create());
-        $index = $client->initIndex('someindex');
+        $index = Client::get()->initIndex('someindex');
         $definition = $this->getDefinition('index.yaml');
 
         $c = new PublicApiChecker($index, $definition);
@@ -41,14 +55,5 @@ class PublicApiTest extends TestCase
         }
 
         return $definition;
-    }
-
-    protected function createMock($originalClassName)
-    {
-        if (method_exists($this, 'getMock')) {
-            return $this->getMock($originalClassName);
-        }
-
-        return parent::createMock($originalClassName);
     }
 }

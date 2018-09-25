@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
@@ -59,11 +60,16 @@ class Guzzle6HttpClient implements HttpClientInterface
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
             ));
+        } catch (GuzzleRequestException $e) {
+            if ($e->hasResponse()) {
+                return $this->handleResponse($e->getResponse(), $request);
+            }
+            throw $this->handleException($e, $request);
         } catch (\Exception $e) {
             throw $this->handleException($e, $request);
         }
 
-        return $this->handleResponse($response);
+        return $this->handleResponse($response, $request);
     }
 
     private static function buildClient(array $config = array())
@@ -77,46 +83,31 @@ class Guzzle6HttpClient implements HttpClientInterface
 
     private function handleException(\Exception $exception, RequestInterface $request)
     {
-        if ($exception instanceof GuzzleRequestException) {
-            // Make sure we have a response for the HttpException
-            if ($exception->hasResponse()) {
-                $statusCode = $exception->getResponse()->getStatusCode();
-                $contents = (string) $exception->getResponse()->getBody();
-
-                $body = \GuzzleHttp\json_decode($contents, true);
-
-                $this->config->getLogger()->warning('Algolia API client: Request failed.', array(
-                    'statusCode' => $statusCode,
-                    'message' => $body['message']
-                ));
-
-
-                if ($statusCode >= 500) {
-                    return new RetriableException(
-                        'An internal server error occurred on '.$request->getUri()->getHost(),
-                        $statusCode,
-                        $exception
-                    );
-                } elseif (404 == $statusCode) {
-                    throw new NotFoundException($body['message'], $statusCode);
-                } elseif ($statusCode >= 400) {
-                    throw new BadRequestException($body['message'], $statusCode);
-                }
-            }
-        }
-
         return new RetriableException($exception->getMessage(), 0, $exception);
     }
 
-    private function handleResponse(ResponseInterface $response)
+    private function handleResponse(ResponseInterface $response, RequestInterface $request)
     {
         $body = (string) $response->getBody();
         $statusCode = $response->getStatusCode();
 
-        if ('' === $body && 204 == $statusCode) {
-            return '';
+        if ($statusCode >= 500) {
+            throw new RetriableException(
+                'An internal server error occurred on '.$request->getUri()->getHost(),
+                $statusCode
+            );
         }
 
-        return \GuzzleHttp\json_decode($body, true);
+        $responseArray = \GuzzleHttp\json_decode($body, true);
+
+        if (404 == $statusCode) {
+            throw new NotFoundException($responseArray['message'], $statusCode);
+        } elseif ($statusCode >= 400) {
+            throw new BadRequestException($responseArray['message'], $statusCode);
+        } elseif (2 != ($statusCode / 100)) {
+            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+        }
+
+        return $responseArray;
     }
 }

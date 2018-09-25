@@ -42,7 +42,7 @@ final class UserAgent
         $segments = array();
 
         $segments['Algolia for PHP'] = Algolia::VERSION;
-        $segments['PHP'] = str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION);
+        $segments['PHP'] = rtrim(str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION), '-');
         if (defined('HHVM_VERSION')) {
             $segments['HHVM'] = HHVM_VERSION;
         }

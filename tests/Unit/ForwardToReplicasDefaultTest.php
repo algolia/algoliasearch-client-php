@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Endpoint;
+namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Support\ClientConfig;
@@ -27,9 +27,9 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
         );
 
         foreach ($methods as $methodName => $arg1) {
-            list($request, $timeout, $connectTimeout) = $index->{$methodName}($arg1);
+            $mockedResponse = $index->{$methodName}($arg1);
 
-            $this->assertQueryParametersNotHasKey('forwardToReplicas', $request);
+            $this->assertQueryParametersNotHasKey('forwardToReplicas', $mockedResponse['request']);
         }
     }
 
@@ -58,11 +58,11 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
         );
 
         foreach ($methods as $methodName => $arg1) {
-            list($request, $timeout, $connectTimeout) = $index->{$methodName}($arg1);
+            $mockedResponse = $index->{$methodName}($arg1);
 
             $this->assertQueryParametersSubset(
                 array('forwardToReplicas' => $defaultValue ? 'true' : 'false'),
-                $request
+                $mockedResponse['request']
             );
         }
     }

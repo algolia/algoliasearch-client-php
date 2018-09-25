@@ -33,6 +33,6 @@ class RequestHttpClient implements HttpClientInterface
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        return array($request, $timeout, $connectTimeout);
+        return compact('request', 'timeout', 'connectTimeout');
     }
 }

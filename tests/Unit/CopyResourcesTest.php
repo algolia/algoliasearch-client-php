@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Endpoint;
+namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Client;
 
@@ -10,15 +10,15 @@ class CopyResourcesTest extends RequestTestCase
     {
         /** @var Client $client */
         $client = Client::get();
-        list($request, $timeout, $connectTimeout) = $client->copySettings('src', 'dest');
+        $mockedResponse = $client->copySettings('src', 'dest');
 
-        $this->assertEndpointEquals($request, '/1/indexes/src/operation');
+        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
         $this->assertBodySubset(array(
             'operation' => 'copy',
             'destination' => 'dest',
             'scope' => array('settings'),
         ),
-            $request
+            $mockedResponse['request']
         );
     }
 
@@ -26,15 +26,15 @@ class CopyResourcesTest extends RequestTestCase
     {
         /** @var Client $client */
         $client = Client::get();
-        list($request, $timeout, $connectTimeout) = $client->copySynonyms('src', 'dest');
+        $mockedResponse = $client->copySynonyms('src', 'dest');
 
-        $this->assertEndpointEquals($request, '/1/indexes/src/operation');
+        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
         $this->assertBodySubset(array(
             'operation' => 'copy',
             'destination' => 'dest',
             'scope' => array('synonyms'),
         ),
-            $request
+            $mockedResponse['request']
         );
     }
 
@@ -42,15 +42,15 @@ class CopyResourcesTest extends RequestTestCase
     {
         /** @var Client $client */
         $client = Client::get();
-        list($request, $timeout, $connectTimeout) = $client->copyRules('src', 'dest');
+        $mockedResponse = $client->copyRules('src', 'dest');
 
-        $this->assertEndpointEquals($request, '/1/indexes/src/operation');
+        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
         $this->assertBodySubset(array(
                 'operation' => 'copy',
                 'destination' => 'dest',
                 'scope' => array('rules'),
             ),
-            $request
+            $mockedResponse['request']
         );
     }
 }

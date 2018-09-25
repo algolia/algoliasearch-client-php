@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
@@ -165,16 +166,18 @@ class Php53HttpClient implements HttpClientInterface
         }
 
         $response = \json_decode($response, true);
-        if (0 !== json_last_error()) {
-            throw new \Exception($statusCode.': Server responded with invalid Json response', $statusCode);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \InvalidArgumentException(
+                'json_decode error: ' . json_last_error_msg()
+            );
         }
 
         if (404 == $statusCode) {
             throw new NotFoundException($response['message'], $statusCode);
-        } elseif (4 == intval($statusCode / 100)) {
+        } elseif (4 == ($statusCode / 100)) {
             throw new BadRequestException(isset($response['message']) ? $response['message'] : $statusCode.' error', $statusCode);
-        } elseif (2 != intval($statusCode / 100)) {
-            throw new \Exception($statusCode.': '.$response, $statusCode);
+        } elseif (2 != ($statusCode / 100)) {
+            throw new AlgoliaException($statusCode.': '.$response, $statusCode);
         }
 
         return $response;

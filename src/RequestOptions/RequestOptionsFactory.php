@@ -30,7 +30,8 @@ class RequestOptionsFactory
 
     /**
      * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $options
-     * @param array $defaults
+     * @param array                                                      $defaults
+     *
      * @return \Algolia\AlgoliaSearch\RequestOptions\RequestOptions
      */
     public function create($options, $defaults = array())

@@ -59,7 +59,7 @@ class Algolia
     }
 
     /**
-     * Gets the logger instance
+     * Gets the logger instance.
      *
      * @return \Psr\Log\LoggerInterface
      */
@@ -73,7 +73,7 @@ class Algolia
     }
 
     /**
-     * Sets the logger instance
+     * Sets the logger instance.
      *
      * @param \Psr\Log\LoggerInterface $logger
      */

@@ -2,12 +2,10 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-use Algolia\AlgoliaSearch\Log\Logger;
-use Psr\Log\LoggerInterface;
-
 final class ClientConfig extends AbstractConfig
 {
     private $defaultWaitTaskTimeBeforeRetry = 100000;
+
     private $defaultWaitTaskMaxRetry = 30;
 
     public static function create($appId = null, $apiKey = null)

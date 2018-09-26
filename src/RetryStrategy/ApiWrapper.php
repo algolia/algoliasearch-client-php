@@ -2,11 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
+use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Psr\Log\LogLevel;
@@ -19,7 +20,7 @@ class ApiWrapper
     private $http;
 
     /**
-     * @var ClientConfigInterface
+     * @var ConfigInterface
      */
     private $config;
 
@@ -35,7 +36,7 @@ class ApiWrapper
 
     public function __construct(
         HttpClientInterface $http,
-        ClientConfigInterface $config,
+        ConfigInterface $config,
         ClusterHosts $clusterHosts,
         RequestOptionsFactory $RqstOptsFactory = null
     ) {
@@ -146,7 +147,7 @@ class ApiWrapper
                     'description' => $e->getMessage(),
                 )));
 
-                $this->config->getHosts()->failed($host);
+                $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
                 unset($logParams['body'], $logParams['headers']);
                 $logParams['description'] = $e->getMessage();
@@ -181,6 +182,6 @@ class ApiWrapper
      */
     private function log($level, $message, array $context = array())
     {
-        $this->config->getLogger()->log($level, 'Algolia API client: '.$message, $context);
+        Algolia::getLogger()->log($level, 'Algolia API client: '.$message, $context);
     }
 }

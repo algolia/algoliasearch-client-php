@@ -15,6 +15,7 @@ use Psr\Http\Message\StreamInterface;
 class BufferStream implements StreamInterface
 {
     private $hwm;
+
     private $buffer = '';
 
     /**

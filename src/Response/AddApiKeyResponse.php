@@ -13,6 +13,7 @@ class AddApiKeyResponse extends AbstractResponse
      * @var \Algolia\AlgoliaSearch\Interfaces\ClientInterface
      */
     private $client;
+
     /**
      * @var \Algolia\AlgoliaSearch\Config\ClientConfig
      */
@@ -41,6 +42,7 @@ class AddApiKeyResponse extends AbstractResponse
                 $this->client->getApiKey($key, $requestOptions);
 
                 unset($this->client, $this->config);
+
                 return $this;
             } catch (NotFoundException $e) {
                 // Try again

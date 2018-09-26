@@ -9,7 +9,9 @@ abstract class AbstractConfig implements ConfigInterface
     protected $config;
 
     protected $defaultReadTimeout = 5;
+
     protected $defaultWriteTimeout = 5;
+
     protected $defaultConnectTimeout = 2;
 
     public function __construct(array $config = array())

@@ -72,6 +72,11 @@ class ClusterHosts
         return static::create('analytics.algolia.com');
     }
 
+    public static function createForMonitoring()
+    {
+        return static::create('status.algolia.com');
+    }
+
     public static function createFromCache($cacheKey)
     {
         if (!Algolia::isCacheEnabled()) {

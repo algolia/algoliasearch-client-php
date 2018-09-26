@@ -29,6 +29,15 @@
     
 * Remove Canary Client and Index
 
+* Introduce ResponseObjects
+    Every indexing operations returns an object with a `wait()` method.
+    The response from the API is still accessible as an array.
+    ```php
+    $response = $index->saveSynonym($synonym);
+    $response->wait();
+    echo $response['objectID'];
+    ```
+
 
 ### UNRELEASED
 

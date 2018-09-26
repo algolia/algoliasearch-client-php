@@ -18,10 +18,13 @@ class ClientConfig implements ClientConfigInterface
     private $logger;
 
     private $defaultWaitTaskTimeBeforeRetry = 100000;
+
     private $defaultWaitTaskMaxRetry = 30;
 
     private $defaultReadTimeout = 5;
+
     private $defaultWriteTimeout = 5;
+
     private $defaultConnectTimeout = 2;
 
     /**

@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 

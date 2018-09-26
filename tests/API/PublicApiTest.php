@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Tests\API;
 
 use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;

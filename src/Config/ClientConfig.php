@@ -43,6 +43,10 @@ final class ClientConfig extends AbstractConfig
 
     public function setWaitMaxTaskRetry($max)
     {
+        if (!is_int($max)) {
+            throw new \InvalidArgumentException('Max retry must be an integer');
+        }
+
         $this->config['waitTaskMaxRetry'] = $max;
 
         return $this;
@@ -55,6 +59,10 @@ final class ClientConfig extends AbstractConfig
 
     public function setWaitTaskTimeBeforeRetry($time)
     {
+        if (!is_numeric($time)) {
+            throw new \InvalidArgumentException('Time before retry must be a numeric value');
+        }
+
         $this->config['waitTaskTimeBeforeRetry'] = $time;
 
         return $this;

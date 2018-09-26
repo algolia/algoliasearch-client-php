@@ -5,9 +5,9 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\SimpleConfig;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
 
 final class Places
 {
@@ -43,10 +43,10 @@ final class Places
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
-        } elseif (false !== ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
+        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
             // We'll try to restore the ClusterHost from cache, if we cannot
             // we create a new instance and set the cache key
-            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
+            $clusterHosts = ClusterHosts::createForPlaces()
                 ->setCacheKey($cacheKey);
         }
 
@@ -57,6 +57,22 @@ final class Places
         );
 
         return new static($apiWrapper, $config);
+    }
+
+    public function search($query, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['query'] = $query;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('query', $query);
+        }
+
+        return $this->api->read('POST', api_path('/1/places/query'), $requestOptions);
+    }
+
+    public function getObject($objectID, $requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/places/%s', $objectID), $requestOptions);
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

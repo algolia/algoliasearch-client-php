@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -22,11 +22,11 @@ class Index implements IndexInterface
     protected $api;
 
     /**
-     * @var ClientConfigInterface
+     * @var ConfigInterface
      */
     protected $config;
 
-    public function __construct($indexName, ApiWrapper $apiWrapper, ClientConfigInterface $config)
+    public function __construct($indexName, ApiWrapper $apiWrapper, ConfigInterface $config)
     {
         $this->indexName = $indexName;
         $this->api = $apiWrapper;

@@ -8,7 +8,6 @@ use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Http\Psr7\Request;
 use Algolia\AlgoliaSearch\Http\Psr7\Uri;
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -17,17 +16,8 @@ class Php53HttpClient implements HttpClientInterface
     private $curlMHandle = null;
     private $curlOptions;
 
-    /**
-     * The config instance.
-     *
-     * @var \Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface
-     */
-    private $config;
-
-    public function __construct(ClientConfigInterface $config, $curlOptions = array())
+    public function __construct($curlOptions = array())
     {
-        $this->config = $config;
-
         $this->curlOptions = $curlOptions;
     }
 

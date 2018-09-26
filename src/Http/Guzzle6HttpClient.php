@@ -6,7 +6,6 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -17,18 +16,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Guzzle6HttpClient implements HttpClientInterface
 {
-    /**
-     * The config instance.
-     *
-     * @var \Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface
-     */
-    private $config;
-
     private $client;
 
-    public function __construct(ClientConfigInterface $config, GuzzleClient $client = null)
+    public function __construct(GuzzleClient $client = null)
     {
-        $this->config = $config;
         $this->client = $client ?: static::buildClient();
     }
 

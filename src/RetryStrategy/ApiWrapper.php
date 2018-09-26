@@ -123,6 +123,7 @@ class ApiWrapper
             $request = null;
             $logParams['retryNumber'] = $retry;
             $logParams['host'] = (string) $uri;
+
             try {
                 $request = $this->http->createRequest(
                     $method,

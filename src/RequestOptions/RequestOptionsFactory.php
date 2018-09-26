@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 
 class RequestOptionsFactory
@@ -23,11 +23,17 @@ class RequestOptionsFactory
         'User-Agent',
     );
 
-    public function __construct(ClientConfigInterface $config)
+    public function __construct(ConfigInterface $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $options
+     * @param array                                                      $defaults
+     *
+     * @return \Algolia\AlgoliaSearch\RequestOptions\RequestOptions
+     */
     public function create($options, $defaults = array())
     {
         if (is_array($options)) {

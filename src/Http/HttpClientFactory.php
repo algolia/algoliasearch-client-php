@@ -2,27 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
-
 final class HttpClientFactory
 {
     private static $httpClientConstructor;
 
-    public static function get(ClientConfigInterface $config)
+    public static function get()
     {
         if (!is_callable(self::$httpClientConstructor)) {
             if (class_exists('\GuzzleHttp\Client')) {
-                self::set(function () use ($config) {
-                    return new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient($config);
+                self::set(function () {
+                    return new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient();
                 });
             } else {
-                self::set(function () use ($config) {
-                    return new \Algolia\AlgoliaSearch\Http\Php53HttpClient($config);
+                self::set(function () {
+                    return new \Algolia\AlgoliaSearch\Http\Php53HttpClient();
                 });
             }
         }
 
-        return forward_static_call(self::$httpClientConstructor, $config);
+        return forward_static_call(self::$httpClientConstructor);
     }
 
     public static function set($httpClientConstructor)

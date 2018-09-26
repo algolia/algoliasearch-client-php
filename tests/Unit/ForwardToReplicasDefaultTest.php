@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {

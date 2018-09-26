@@ -2,12 +2,12 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Config\SimpleConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
+use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
 
 final class Analytics
 {
@@ -17,11 +17,11 @@ final class Analytics
     private $api;
 
     /**
-     * @var ClientConfigInterface
+     * @var ConfigInterface
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, ClientConfigInterface $config)
+    public function __construct(ApiWrapper $api, ConfigInterface $config)
     {
         $this->api = $api;
         $this->config = $config;
@@ -29,13 +29,19 @@ final class Analytics
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = ClientConfig::create($appId, $apiKey);
-        $config->setHosts(ClusterHosts::createForAnalytics());
+        if (null === $appId) {
+            $appId = getenv('ALGOLIA_APP_ID');
+        }
+        if (null === $apiKey) {
+            $apiKey = getenv('ALGOLIA_API_KEY');
+        }
+
+        $config = SimpleConfig::create($appId, $apiKey);
 
         return static::createWithConfig($config);
     }
 
-    public static function createWithConfig(ClientConfigInterface $config)
+    public static function createWithConfig(ConfigInterface $config)
     {
         $config = clone $config;
 
@@ -46,7 +52,7 @@ final class Analytics
         }
 
         $apiWrapper = new ApiWrapper(
-            HttpClientFactory::get($config),
+            HttpClientFactory::get(),
             $config,
             $clusterHosts
         );

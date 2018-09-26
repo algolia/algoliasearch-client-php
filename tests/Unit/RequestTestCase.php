@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;

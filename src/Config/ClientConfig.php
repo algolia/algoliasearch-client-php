@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch\Config;
 final class ClientConfig extends AbstractConfig
 {
     private $defaultWaitTaskTimeBeforeRetry = 100000;
+
     private $defaultWaitTaskMaxRetry = 30;
 
     public static function create($appId = null, $apiKey = null)

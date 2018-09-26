@@ -35,6 +35,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
     public function testSettingsWithReplicas()
     {
         $replica1 = self::safeName('settings-mgmt_REPLICA');
+
         try {
             static::getClient()->deleteIndex($replica1);
         } catch (\Exception $e) {

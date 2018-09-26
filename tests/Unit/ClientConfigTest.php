@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 

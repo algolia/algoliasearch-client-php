@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Support;
+namespace Algolia\AlgoliaSearch\Config;
 
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\Log\Logger;

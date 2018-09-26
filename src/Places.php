@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ClientConfigInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Support\ClientConfig;
+use Algolia\AlgoliaSearch\Config\ClientConfig;
 
 final class Places
 {

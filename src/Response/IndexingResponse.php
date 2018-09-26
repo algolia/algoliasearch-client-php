@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-use Algolia\AlgoliaSearch\Exceptions\CannotWaitException;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 
 class IndexingResponse extends AbstractResponse

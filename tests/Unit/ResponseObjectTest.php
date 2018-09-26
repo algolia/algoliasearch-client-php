@@ -51,7 +51,7 @@ class ResponseObjectTest extends RequestTestCase
         $this->assertInstanceOfIndexingResponse($i->deleteRule('objectID'));
         $this->assertInstanceOfIndexingResponse($i->clearRules(array('objectID' => 'test')));
 
-        $this->assertInstanceOfIndexingResponse($i->deleteDeprecatedIndexApiKey("key"));
+        $this->assertInstanceOfIndexingResponse($i->deleteDeprecatedIndexApiKey('key'));
     }
 
     private function assertInstanceOfIndexingResponse($response)

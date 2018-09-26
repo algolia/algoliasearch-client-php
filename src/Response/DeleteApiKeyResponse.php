@@ -40,9 +40,9 @@ class DeleteApiKeyResponse extends AbstractResponse
         do {
             try {
                 $this->client->getApiKey($key, $requestOptions);
-
             } catch (NotFoundException $e) {
                 unset($this->client, $this->config);
+
                 return $this;
             }
 

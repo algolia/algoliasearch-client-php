@@ -7,6 +7,7 @@ use PHPUnit\Framework\Assert;
 class PublicApiChecker extends Assert
 {
     private $instance;
+
     private $definition;
 
     public function __construct($instance, $definition)

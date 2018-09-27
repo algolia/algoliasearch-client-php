@@ -23,7 +23,7 @@ class MultipleIndexingResponse extends AbstractResponse
             return $this;
         }
 
-        foreach ($this->apiResponse['taskId'] as $indexName => $taskId) {
+        foreach ($this->apiResponse['taskID'] as $indexName => $taskId) {
             $this->client->waitTask($indexName, $taskId, $requestOptions);
         }
 

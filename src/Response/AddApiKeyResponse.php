@@ -32,7 +32,7 @@ class AddApiKeyResponse extends AbstractResponse
             return $this;
         }
 
-        $key = $this->apiResponse['value'];
+        $key = $this->apiResponse['key'];
         $retry = 1;
         $maxRetry = $this->config->getWaitTaskMaxRetry();
         $time = $this->config->getWaitTaskTimeBeforeRetry();

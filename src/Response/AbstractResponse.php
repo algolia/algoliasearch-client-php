@@ -12,6 +12,14 @@ abstract class AbstractResponse implements \ArrayAccess
     abstract public function wait($requestOptions = array());
 
     /**
+     * @return array The actual response from Algolia API
+     */
+    public function getBody()
+    {
+        return $this->apiResponse;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)

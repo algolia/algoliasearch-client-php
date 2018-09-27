@@ -2,9 +2,8 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Config\SimpleConfig;
+use Algolia\AlgoliaSearch\Config\PlacesConfig;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -17,11 +16,11 @@ final class Places
     private $api;
 
     /**
-     * @var ConfigInterface
+     * @var PlacesConfig
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, ConfigInterface $config)
+    public function __construct(ApiWrapper $api, PlacesConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
@@ -29,12 +28,12 @@ final class Places
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = SimpleConfig::create($appId, $apiKey);
+        $config = PlacesConfig::create($appId, $apiKey);
 
         return static::createWithConfig($config);
     }
 
-    public static function createWithConfig(ConfigInterface $config)
+    public static function createWithConfig(PlacesConfig $config)
     {
         $config = clone $config;
 

@@ -21,7 +21,17 @@ abstract class AbstractConfig implements ConfigInterface
         $this->config = $config;
     }
 
-    abstract public function getDefaultConfig();
+    public function getDefaultConfig()
+    {
+        return array(
+            'appId' => '',
+            'apiKey' => '',
+            'hosts' => null,
+            'readTimeout' => $this->defaultReadTimeout,
+            'writeTimeout' => $this->defaultWriteTimeout,
+            'connectTimeout' => $this->defaultConnectTimeout,
+        );
+    }
 
     public function getAppId()
     {

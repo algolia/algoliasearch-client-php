@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests;
 
 use Algolia\AlgoliaSearch\Index;
+use Algolia\AlgoliaSearch\Response\AbstractResponse;
 
 class SyncIndex
 {
@@ -20,8 +21,8 @@ class SyncIndex
     {
         $response = call_user_func_array(array($this->realIndex, $name), $arguments);
 
-        if (is_array($response) && isset($response['taskID'])) {
-            $this->realIndex->waitTask($response['taskID']);
+        if ($response instanceof AbstractResponse) {
+            $response->wait();
         }
 
         return $response;

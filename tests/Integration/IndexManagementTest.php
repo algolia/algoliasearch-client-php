@@ -72,7 +72,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     public function testDeleteIndex()
     {
         $client = static::getClient();
-        $name = $this->safeName('index-to-be-delete-within-test-case');
+        $name = self::safeName('index-to-be-delete-within-test-case');
         $client->initIndex($name)->setSettings(
             array('hitsPerPage' => 32)
         );

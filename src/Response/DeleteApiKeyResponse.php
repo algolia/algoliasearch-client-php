@@ -19,27 +19,32 @@ class DeleteApiKeyResponse extends AbstractResponse
      */
     private $config;
 
-    public function __construct(array $apiResponse, ClientInterface $client, ClientConfig $config)
+    /**
+     * @var string API Key to be deleted
+     */
+    private $key;
+
+    public function __construct(array $apiResponse, ClientInterface $client, ClientConfig $config, $key)
     {
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;
+        $this->key = $key;
     }
 
     public function wait($requestOptions = array())
     {
-        if (!$this->client) {
+        if (!isset($this->client)) {
             return $this;
         }
 
-        $key = $this->apiResponse['key'];
         $retry = 1;
         $maxRetry = $this->config->getWaitTaskMaxRetry();
         $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
             try {
-                $this->client->getApiKey($key, $requestOptions);
+                $this->client->getApiKey($this->key, $requestOptions);
             } catch (NotFoundException $e) {
                 unset($this->client, $this->config);
 
@@ -51,6 +56,6 @@ class DeleteApiKeyResponse extends AbstractResponse
             usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);
 
-        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");
+        throw new TaskTooLongException('The key '.substr($this->key, 0, 6)."... isn't deleted yet.");
     }
 }

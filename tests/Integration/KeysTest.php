@@ -25,8 +25,9 @@ class KeysTest extends AlgoliaIntegrationTestCase
         /** @var \Algolia\AlgoliaSearch\Client $client */
         $client = static::getClient();
 
-        $response = $client->addApiKey(array_merge($this->keyParams, array('validity' => 800)));
-        $client->waitForKeyAdded($response['key']);
+        $response = $client
+            ->addApiKey(array_merge($this->keyParams, array('validity' => 800)))
+            ->wait();
 
         $key = $client->getApiKey($response['key']);
 
@@ -36,8 +37,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
             var_dump($this->keyParams, $key);
         }
 
-        $client->deleteApiKey($key['value']);
-        sleep(5);
+        $client->deleteApiKey($key['value'])->wait();
 
         try {
             $key = $client->getApiKey($key['value']);

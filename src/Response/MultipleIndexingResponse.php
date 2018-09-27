@@ -19,7 +19,7 @@ class MultipleIndexingResponse extends AbstractResponse
 
     public function wait($requestOptions = array())
     {
-        if (!$this->client) {
+        if (!isset($this->client)) {
             return $this;
         }
 

@@ -8,8 +8,12 @@ class ResponseObjectTest extends RequestTestCase
 {
     public function testResponseObjectIsArrayAccessible()
     {
-        $response = Client::get()->addApiKey(array());
+        $response = Client::get()->addApiKey(array('acl' => 'search'));
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AddApiKeyResponse', $response);
+        $this->assertTrue(method_exists($response, 'wait'));
+
+        $response = Client::get()->updateApiKey('the-key', array('acl' => 'analytics', 'editSettings'));
+        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
         $response = Client::get()->deleteApiKey('key');

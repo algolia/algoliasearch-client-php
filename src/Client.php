@@ -6,8 +6,10 @@ use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -141,7 +143,7 @@ class Client implements ClientInterface
 
     public function moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
             array(
@@ -150,11 +152,13 @@ class Client implements ClientInterface
             ),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this->initIndex($dstIndexName));
     }
 
     public function copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
             array(
@@ -163,6 +167,8 @@ class Client implements ClientInterface
             ),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this->initIndex($dstIndexName));
     }
 
     public function clearIndex($indexName, $requestOptions = array())
@@ -172,12 +178,14 @@ class Client implements ClientInterface
 
     public function deleteIndex($indexName, $requestOptions = array())
     {
-        return $this->api->write(
+        $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s', $indexName),
             array(),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this->initIndex($indexName));
     }
 
     public function copySettings($srcIndexName, $dstIndexName, $requestOptions = array())
@@ -232,17 +240,18 @@ class Client implements ClientInterface
 
     public function updateApiKey($key, $keyParams, $requestOptions = array())
     {
-        return $this->api->write('PUT', api_path('/1/keys/%s', $key), $keyParams, $requestOptions);
+        $response = $this->api->write('PUT', api_path('/1/keys/%s', $key), $keyParams, $requestOptions);
+
+        return new UpdateApiKeyResponse($response, $this, $this->config, $keyParams);
     }
 
     public function deleteApiKey($key, $requestOptions = array())
     {
         $response = $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
 
-        return new DeleteApiKeyResponse($response, $this, $this->config);
+        return new DeleteApiKeyResponse($response, $this, $this->config, $key);
     }
 
-    // BC Break: signature was changed
     public static function generateSecuredApiKey($parentApiKey, $restrictions)
     {
         $urlEncodedRestrictions = Helpers::buildQuery($restrictions);

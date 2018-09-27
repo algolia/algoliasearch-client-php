@@ -2,15 +2,15 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
+use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
-use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 
-class AddApiKeyResponse extends AbstractResponse
+class UpdateApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\ClientInterface
+     * @var \Algolia\AlgoliaSearch\Client
      */
     private $client;
 
@@ -19,11 +19,19 @@ class AddApiKeyResponse extends AbstractResponse
      */
     private $config;
 
-    public function __construct(array $apiResponse, ClientInterface $client, ClientConfig $config)
-    {
+    private $keyParams;
+
+    public function __construct(
+        array $apiResponse,
+        Client $client,
+        ClientConfig $config,
+        $keyParams
+    ) {
+
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;
+        $this->keyParams = $keyParams;
     }
 
     public function wait($requestOptions = array())
@@ -41,9 +49,11 @@ class AddApiKeyResponse extends AbstractResponse
             try {
                 $this->client->getApiKey($key, $requestOptions);
 
-                unset($this->client, $this->config);
+                if ($this->isKeyUpdated($key, $this->keyParams)) {
+                    unset($this->client, $this->config);
 
-                return $this;
+                    return $this;
+                }
             } catch (NotFoundException $e) {
                 // Try again
             }
@@ -53,6 +63,18 @@ class AddApiKeyResponse extends AbstractResponse
             usleep($factor * $time); // 0.1 second
         } while ($retry < $maxRetry);
 
-        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't added yet.");
+        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't updated yet.");
+    }
+
+    private function isKeyUpdated($key, $keyParams)
+    {
+        $upToDate = true;
+        foreach ($keyParams as $param => $value) {
+            if (isset($key[$param])) {
+                $upToDate &= ($key[$param] == $value);
+            }
+        }
+
+        return $upToDate;
     }
 }

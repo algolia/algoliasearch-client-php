@@ -7,11 +7,10 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
     public function testMultipleIndexMethods()
     {
         /** @var \Algolia\AlgoliaSearch\Client $client */
-        $client = $this->getClient();
+        $client = self::getClient();
         $batch = $this->getBatch();
 
         $client->multipleBatchObjects($batch);
-
         $result = $client->multipleQueries(array(), array('strategy' => 'stopIfEnoughMatches'));
         $this->assertArraySubset(array('results' => array()), $result);
         $result = $client->multipleQueries(array(

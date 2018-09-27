@@ -452,6 +452,10 @@ class Index implements IndexInterface
 
     public function getTask($taskId, $requestOptions = array())
     {
+        if (!$taskId) {
+            throw new \InvalidArgumentException('taskID cannot be empty');
+        }
+
         return $this->api->read(
             'GET',
             api_path('/1/indexes/%s/task/%s', $this->indexName, $taskId),

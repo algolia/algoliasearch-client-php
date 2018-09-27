@@ -36,6 +36,14 @@ class ClusterHosts
             $write = array($write => 0);
         }
 
+        if (array_values($read) === $read) {
+            $read = array_fill_keys($read, 0);
+        }
+
+        if (array_values($write) === $write) {
+            $write = array_fill_keys($write, 0);
+        }
+
         return new static(HostCollection::create($read), HostCollection::create($write));
     }
 

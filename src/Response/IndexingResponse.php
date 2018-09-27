@@ -20,7 +20,7 @@ class IndexingResponse extends AbstractResponse
     public function wait($requestOptions = array())
     {
         if ($this->index) {
-            $this->index->waitTask($this->apiResponse['taskId'], $requestOptions);
+            $this->index->waitTask($this->apiResponse['taskID'], $requestOptions);
             unset($this->index);
         }
 

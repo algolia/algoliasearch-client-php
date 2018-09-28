@@ -207,7 +207,7 @@ var search = instantsearch({
   appId: 'YourApplicationID',
   apiKey: 'YourSearchOnlyAPIKey', // search only API key, no ADMIN key
   indexName: 'contacts',
-  urlSync: true,
+  routing: true,
   searchParameters: {
     hitsPerPage: 10
   }

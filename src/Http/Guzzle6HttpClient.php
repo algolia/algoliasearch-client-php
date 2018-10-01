@@ -10,7 +10,6 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -21,27 +20,6 @@ class Guzzle6HttpClient implements HttpClientInterface
     public function __construct(GuzzleClient $client = null)
     {
         $this->client = $client ?: static::buildClient();
-    }
-
-    public function createUri($uri)
-    {
-        return \GuzzleHttp\Psr7\uri_for($uri);
-    }
-
-    public function createRequest(
-        $method,
-        $uri,
-        array $headers = array(),
-        $body = null,
-        $protocolVersion = '1.1'
-    ) {
-        if (is_array($body)) {
-            // Send an empty body instead of "[]" in case there are
-            // no content/params to send
-            $body = empty($body) ? '' : \GuzzleHttp\json_encode($body);
-        }
-
-        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)

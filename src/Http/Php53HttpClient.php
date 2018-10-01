@@ -6,51 +6,17 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Http\Psr7\Request;
-use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 
 class Php53HttpClient implements HttpClientInterface
 {
-    private $curlMHandle = null;
+    private $curlMHandle;
 
     private $curlOptions;
 
     public function __construct($curlOptions = array())
     {
         $this->curlOptions = $curlOptions;
-    }
-
-    public function createUri($uri)
-    {
-        if ($uri instanceof UriInterface) {
-            return $uri;
-        } elseif (is_string($uri)) {
-            return new Uri($uri);
-        }
-
-        throw new \InvalidArgumentException('URI must be a string or UriInterface');
-    }
-
-    public function createRequest(
-        $method,
-        $uri,
-        array $headers = array(),
-        $body = null,
-        $protocolVersion = '1.1'
-    ) {
-        if (is_array($body)) {
-            // Send an empty body instead of "[]" in case there are
-            // no content/params to send
-            $body = empty($body) ? '' : \json_encode($body);
-            if (JSON_ERROR_NONE !== json_last_error()) {
-                throw new \InvalidArgumentException(
-                    'json_encode error: '.json_last_error_msg());
-            }
-        }
-
-        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)

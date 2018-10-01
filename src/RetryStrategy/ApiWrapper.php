@@ -7,9 +7,12 @@ use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\Psr7\Request;
+use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Psr\Http\Message\UriInterface;
 use Psr\Log\LogLevel;
 
 class ApiWrapper
@@ -103,8 +106,7 @@ class ApiWrapper
 
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
-        $uri = $this->http
-            ->createUri($path)
+        $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
 
@@ -125,7 +127,7 @@ class ApiWrapper
             $logParams['host'] = (string) $uri;
 
             try {
-                $request = $this->http->createRequest(
+                $request = $this->createRequest(
                     $method,
                     $uri,
                     $requestOptions->getHeaders(),
@@ -174,6 +176,37 @@ class ApiWrapper
         $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
 
         return $this;
+    }
+
+    private function createUri($uri)
+    {
+        if ($uri instanceof UriInterface) {
+            return $uri;
+        } elseif (is_string($uri)) {
+            return new Uri($uri);
+        }
+
+        throw new \InvalidArgumentException('URI must be a string or UriInterface');
+    }
+
+    private function createRequest(
+        $method,
+        $uri,
+        array $headers = array(),
+        $body = null,
+        $protocolVersion = '1.1'
+    ) {
+        if (is_array($body)) {
+            // Send an empty body instead of "[]" in case there are
+            // no content/params to send
+            $body = empty($body) ? '' : \json_encode($body);
+            if (JSON_ERROR_NONE !== json_last_error()) {
+                throw new \InvalidArgumentException(
+                    'json_encode error: '.json_last_error_msg());
+            }
+        }
+
+        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     /**

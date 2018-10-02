@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * This script will automatically require guzzle library if your
+ * setup is compatible.
+ * If you don't want to use it, you can remove it with
+ *  `composer remove guzzlehttp/guzzle`
+ *
+ * Setting a LEGACY_HTTP=true in your environment variable will
+ * prevent the installation of guzzle.
+ *
+ * Note that it's *HIGHLY* recommended to use it.
+ */
+
+if (getenv('LEGACY_HTTP') || PHP_VERSION_ID < 50500) {
+    exit(0);
+}
+
+if ('composer.json' !== $COMPOSER_JSON = getenv('COMPOSER') ?: 'composer.json') {
+    putenv('COMPOSER=composer.json');
+    $_SERVER['COMPOSER'] = $_ENV['COMPOSER'] = 'composer.json';
+}
+
+$root = __DIR__;
+while (!file_exists($root.'/'.$COMPOSER_JSON) || file_exists($root.'vendor/bin/algolia-doctor')) {
+    if ($root === dirname($root)) {
+        break;
+    }
+    $root = dirname($root);
+}
+dump($root);
+
+$oldPwd = getcwd();
+$PHP = 'php';
+if ('phpdbg' === PHP_SAPI) {
+    $PHP .= ' -qrr';
+}
+
+$COMPOSER = file_exists($COMPOSER = $oldPwd.'/composer.phar') || ($COMPOSER = rtrim('\\' === DIRECTORY_SEPARATOR ? preg_replace('/[\r\n].*/', '', `where.exe composer.phar`) : `which composer.phar 2> /dev/null`))
+    ? $PHP.' '.escapeshellarg($COMPOSER)
+    : 'composer';
+
+passthru("$COMPOSER require guzzlehttp/guzzle");

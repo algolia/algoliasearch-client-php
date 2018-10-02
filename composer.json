@@ -37,17 +37,23 @@
             "Algolia\\AlgoliaSearch\\Tests\\": "tests"
         }
     },
-    "suggest": {
-        "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
-    },
     "bin": [
-        "bin/algolia-doctor"
+        "bin/algolia-doctor",
+        "bin/algolia-deps"
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
         "preferred-install": "dist"
+    },
+    "scripts": {
+        "post-package-install": [
+            "php vendor/bin/algolia-deps"
+        ],
+        "post-package-update": [
+            "php vendor/bin/algolia-deps"
+        ]
     },
     "extra": {
         "branch-alias": {

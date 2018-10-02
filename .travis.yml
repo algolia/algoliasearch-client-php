@@ -4,7 +4,6 @@ matrix:
   include:
     - php: 5.3
       dist: precise
-      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
     - php: 5.6
       dist: trusty
       sudo: required
@@ -33,7 +32,6 @@ cache:
 
 install:
   - composer install
-  - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
 
 before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys

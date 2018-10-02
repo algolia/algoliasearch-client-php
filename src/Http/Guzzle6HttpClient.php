@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
+use Algolia\AlgoliaSearch\Support\Helpers;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -68,7 +69,7 @@ class Guzzle6HttpClient implements HttpClientInterface
             );
         }
 
-        $responseArray = \GuzzleHttp\json_decode($body, true);
+        $responseArray = Helpers::json_decode($body, true);
 
         if (404 == $statusCode) {
             throw new NotFoundException($responseArray['message'], $statusCode);

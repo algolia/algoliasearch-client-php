@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
+use Algolia\AlgoliaSearch\Support\Helpers;
 use Psr\Http\Message\RequestInterface;
 
 class Php53HttpClient implements HttpClientInterface
@@ -123,12 +124,7 @@ class Php53HttpClient implements HttpClientInterface
             );
         }
 
-        $response = \json_decode($response, true);
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException(
-                'json_decode error: '.json_last_error_msg()
-            );
-        }
+        $response = Helpers::json_decode($response, true);
 
         if (404 == $statusCode) {
             throw new NotFoundException($response['message'], $statusCode);

@@ -27,7 +27,6 @@ class UpdateApiKeyResponse extends AbstractResponse
         ClientConfig $config,
         $keyParams
     ) {
-
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;

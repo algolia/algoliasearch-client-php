@@ -10,14 +10,10 @@ final class ClientConfig extends AbstractConfig
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = array();
-
-        if (null !== $appId) {
-            $config['appId'] = $appId;
-        }
-        if (null !== $apiKey) {
-            $config['apiKey'] = $apiKey;
-        }
+        $config = array(
+            'appId' => null !== $appId ? $appId : getenv('ALGOLIA_APP_ID'),
+            'apiKey' => null !== $apiKey ? $apiKey : getenv('ALGOLIA_API_KEY'),
+        );
 
         return new static($config);
     }
@@ -25,8 +21,8 @@ final class ClientConfig extends AbstractConfig
     public function getDefaultConfig()
     {
         return array(
-            'appId' => getenv('ALGOLIA_APP_ID'),
-            'apiKey' => getenv('ALGOLIA_API_KEY'),
+            'appId' => '',
+            'apiKey' => '',
             'hosts' => null,
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,

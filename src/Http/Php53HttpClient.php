@@ -2,11 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
-use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
-use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
-use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Support\Helpers;
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
 class Php53HttpClient implements HttpClientInterface
@@ -104,9 +101,8 @@ class Php53HttpClient implements HttpClientInterface
         }
 
         $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-        $response = curl_multi_getcontent($curlHandle);
+        $responseBody = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
-
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
@@ -117,24 +113,7 @@ class Php53HttpClient implements HttpClientInterface
             );
         }
 
-        if (0 === $statusCode || $statusCode >= 500) {
-            throw new RetriableException(
-                'An internal server error occurred on '.$request->getUri()->getHost(),
-                $statusCode
-            );
-        }
-
-        $response = Helpers::json_decode($response, true);
-
-        if (404 == $statusCode) {
-            throw new NotFoundException($response['message'], $statusCode);
-        } elseif (4 == ($statusCode / 100)) {
-            throw new BadRequestException(isset($response['message']) ? $response['message'] : $statusCode.' error', $statusCode);
-        } elseif (2 != ($statusCode / 100)) {
-            throw new AlgoliaException($statusCode.': '.$response, $statusCode);
-        }
-
-        return $response;
+        return new Response($statusCode, array(), $responseBody);
     }
 
     private function getMHandle($curlHandle)

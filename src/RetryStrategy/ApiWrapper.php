@@ -3,7 +3,9 @@
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
@@ -12,6 +14,9 @@ use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\Helpers;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Log\LogLevel;
 
@@ -136,11 +141,14 @@ class ApiWrapper
 
                 $this->log(LogLevel::DEBUG, 'Sending request.', $logParams);
 
-                $responseBody = $this->http->sendRequest(
+                $response = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
                     $requestOptions->getConnectTimeout() * $retry
                 );
+
+                $responseBody = $this->handleResponse($response, $request);
+
                 $logParams['response'] = $responseBody;
                 $this->log(LogLevel::DEBUG, 'Response received.', $logParams);
 
@@ -176,6 +184,31 @@ class ApiWrapper
         $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
 
         return $this;
+    }
+
+    private function handleResponse(ResponseInterface $response, RequestInterface $request)
+    {
+        $body = (string) $response->getBody();
+        $statusCode = $response->getStatusCode();
+
+        if (0 === $statusCode || $statusCode >= 500) {
+            throw new RetriableException(
+                'An internal server error occurred on '.$request->getUri()->getHost(),
+                $statusCode
+            );
+        }
+
+        $responseArray = Helpers::json_decode($body, true);
+
+        if (404 == $statusCode) {
+            throw new NotFoundException($responseArray['message'], $statusCode);
+        } elseif ($statusCode >= 400) {
+            throw new BadRequestException($responseArray['message'], $statusCode);
+        } elseif (2 != ($statusCode / 100)) {
+            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+        }
+
+        return $responseArray;
     }
 
     private function createUri($uri)

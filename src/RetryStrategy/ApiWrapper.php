@@ -3,13 +3,21 @@
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\Psr7\Request;
+use Algolia\AlgoliaSearch\Http\Psr7\Uri;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+use Algolia\AlgoliaSearch\Support\Helpers;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Log\LogLevel;
 
 class ApiWrapper
@@ -103,8 +111,7 @@ class ApiWrapper
 
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
-        $uri = $this->http
-            ->createUri($path)
+        $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
 
@@ -125,7 +132,7 @@ class ApiWrapper
             $logParams['host'] = (string) $uri;
 
             try {
-                $request = $this->http->createRequest(
+                $request = $this->createRequest(
                     $method,
                     $uri,
                     $requestOptions->getHeaders(),
@@ -134,11 +141,14 @@ class ApiWrapper
 
                 $this->log(LogLevel::DEBUG, 'Sending request.', $logParams);
 
-                $responseBody = $this->http->sendRequest(
+                $response = $this->http->sendRequest(
                     $request,
                     $timeout * $retry,
                     $requestOptions->getConnectTimeout() * $retry
                 );
+
+                $responseBody = $this->handleResponse($response, $request);
+
                 $logParams['response'] = $responseBody;
                 $this->log(LogLevel::DEBUG, 'Response received.', $logParams);
 
@@ -174,6 +184,62 @@ class ApiWrapper
         $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
 
         return $this;
+    }
+
+    private function handleResponse(ResponseInterface $response, RequestInterface $request)
+    {
+        $body = (string) $response->getBody();
+        $statusCode = $response->getStatusCode();
+
+        if (0 === $statusCode || $statusCode >= 500) {
+            throw new RetriableException(
+                'An internal server error occurred on '.$request->getUri()->getHost(),
+                $statusCode
+            );
+        }
+
+        $responseArray = Helpers::json_decode($body, true);
+
+        if (404 == $statusCode) {
+            throw new NotFoundException($responseArray['message'], $statusCode);
+        } elseif ($statusCode >= 400) {
+            throw new BadRequestException($responseArray['message'], $statusCode);
+        } elseif (2 != (int) ($statusCode / 100)) {
+            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+        }
+
+        return $responseArray;
+    }
+
+    private function createUri($uri)
+    {
+        if ($uri instanceof UriInterface) {
+            return $uri;
+        } elseif (is_string($uri)) {
+            return new Uri($uri);
+        }
+
+        throw new \InvalidArgumentException('URI must be a string or UriInterface');
+    }
+
+    private function createRequest(
+        $method,
+        $uri,
+        array $headers = array(),
+        $body = null,
+        $protocolVersion = '1.1'
+    ) {
+        if (is_array($body)) {
+            // Send an empty body instead of "[]" in case there are
+            // no content/params to send
+            $body = empty($body) ? '' : \json_encode($body);
+            if (JSON_ERROR_NONE !== json_last_error()) {
+                throw new \InvalidArgumentException(
+                    'json_encode error: '.json_last_error_msg());
+            }
+        }
+
+        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     /**

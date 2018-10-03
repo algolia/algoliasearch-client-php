@@ -2,55 +2,19 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
-use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
-use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
-use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\RetriableException;
-use Algolia\AlgoliaSearch\Http\Psr7\Request;
-use Algolia\AlgoliaSearch\Http\Psr7\Uri;
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\UriInterface;
 
 class Php53HttpClient implements HttpClientInterface
 {
-    private $curlMHandle = null;
+    private $curlMHandle;
 
     private $curlOptions;
 
     public function __construct($curlOptions = array())
     {
         $this->curlOptions = $curlOptions;
-    }
-
-    public function createUri($uri)
-    {
-        if ($uri instanceof UriInterface) {
-            return $uri;
-        } elseif (is_string($uri)) {
-            return new Uri($uri);
-        }
-
-        throw new \InvalidArgumentException('URI must be a string or UriInterface');
-    }
-
-    public function createRequest(
-        $method,
-        $uri,
-        array $headers = array(),
-        $body = null,
-        $protocolVersion = '1.1'
-    ) {
-        if (is_array($body)) {
-            // Send an empty body instead of "[]" in case there are
-            // no content/params to send
-            $body = empty($body) ? '' : \json_encode($body);
-            if (JSON_ERROR_NONE !== json_last_error()) {
-                throw new \InvalidArgumentException(
-                    'json_encode error: '.json_last_error_msg());
-            }
-        }
-
-        return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
@@ -137,9 +101,8 @@ class Php53HttpClient implements HttpClientInterface
         }
 
         $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
-        $response = curl_multi_getcontent($curlHandle);
+        $responseBody = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
-
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
@@ -150,29 +113,7 @@ class Php53HttpClient implements HttpClientInterface
             );
         }
 
-        if (0 === $statusCode || $statusCode >= 500) {
-            throw new RetriableException(
-                'An internal server error occurred on '.$request->getUri()->getHost(),
-                $statusCode
-            );
-        }
-
-        $response = \json_decode($response, true);
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException(
-                'json_decode error: '.json_last_error_msg()
-            );
-        }
-
-        if (404 == $statusCode) {
-            throw new NotFoundException($response['message'], $statusCode);
-        } elseif (4 == ($statusCode / 100)) {
-            throw new BadRequestException(isset($response['message']) ? $response['message'] : $statusCode.' error', $statusCode);
-        } elseif (2 != ($statusCode / 100)) {
-            throw new AlgoliaException($statusCode.': '.$response, $statusCode);
-        }
-
-        return $response;
+        return new Response($statusCode, array(), $responseBody);
     }
 
     private function getMHandle($curlHandle)

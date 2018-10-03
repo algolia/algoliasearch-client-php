@@ -2,16 +2,14 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
-class RequestHttpClient implements HttpClientInterface
+class NullHttpClient implements HttpClientInterface
 {
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        $e = new RequestException();
-
-        throw $e->setRequest($request);
+        return new Response(201, array(), '[]');
     }
 }

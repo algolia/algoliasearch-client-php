@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class RetriableException extends AlgoliaException
+class RetriableException extends RequestException
 {
 }

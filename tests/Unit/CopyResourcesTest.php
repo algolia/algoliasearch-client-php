@@ -2,55 +2,57 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\Exceptions\RequestException;
 
 class CopyResourcesTest extends RequestTestCase
 {
     public function testCopySettings()
     {
-        /** @var Client $client */
-        $client = Client::get();
-        $mockedResponse = $client->copySettings('src', 'dest');
-
-        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
-        $this->assertBodySubset(array(
-            'operation' => 'copy',
-            'destination' => 'dest',
-            'scope' => array('settings'),
-        ),
-            $mockedResponse['request']
-        );
+        try {
+            static::$client->copySettings('src', 'dest');
+        } catch (RequestException $e) {
+            $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
+            $this->assertBodySubset(array(
+                    'operation' => 'copy',
+                    'destination' => 'dest',
+                    'scope' => array('settings'),
+                ),
+                $e->getRequest()
+            );
+        }
     }
 
     public function testCopySynonyms()
     {
-        /** @var Client $client */
-        $client = Client::get();
-        $mockedResponse = $client->copySynonyms('src', 'dest');
+        try {
+            static::$client->copySynonyms('src', 'dest');
+        } catch (RequestException $e) {
+            $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
+            $this->assertBodySubset(array(
+                    'operation' => 'copy',
+                    'destination' => 'dest',
+                    'scope' => array('synonyms'),
+                ),
+                $e->getRequest()
+            );
+        }
 
-        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
-        $this->assertBodySubset(array(
-            'operation' => 'copy',
-            'destination' => 'dest',
-            'scope' => array('synonyms'),
-        ),
-            $mockedResponse['request']
-        );
     }
 
     public function testCopyRules()
     {
-        /** @var Client $client */
-        $client = Client::get();
-        $mockedResponse = $client->copyRules('src', 'dest');
+        try {
+            static::$client->copyRules('src', 'dest');
+        } catch (RequestException $e) {
+            $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
+            $this->assertBodySubset(array(
+                    'operation' => 'copy',
+                    'destination' => 'dest',
+                    'scope' => array('rules'),
+                ),
+                $e->getRequest()
+            );
+        }
 
-        $this->assertEndpointEquals($mockedResponse['request'], '/1/indexes/src/operation');
-        $this->assertBodySubset(array(
-                'operation' => 'copy',
-                'destination' => 'dest',
-                'scope' => array('rules'),
-            ),
-            $mockedResponse['request']
-        );
     }
 }

@@ -2,28 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
+use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
-    private static $actualHttp;
+    /** @var \Algolia\AlgoliaSearch\Client */
+    protected static $client;
 
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-
-        if (null === self::$actualHttp) {
-            self::$actualHttp = HttpClientFactory::get(new ClientConfig());
-        }
-
-        $actualHttp = self::$actualHttp;
-        HttpClientFactory::set(function () use ($actualHttp) {
-            return new RequestHttpClient($actualHttp);
+        HttpClientFactory::set(function () {
+            return new RequestHttpClient();
         });
+        static::$client = Client::create('id', 'key');
     }
 
     public static function tearDownAfterClass()

@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
+use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
@@ -16,7 +16,7 @@ abstract class RequestTestCase extends TestCase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        HttpClientFactory::set(function () {
+        Algolia::setHttpClient(function () {
             return new RequestHttpClient();
         });
         static::$client = Client::create('id', 'key');
@@ -25,7 +25,7 @@ abstract class RequestTestCase extends TestCase
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
-        HttpClientFactory::reset();
+        Algolia::resetHttpClient();
     }
 
     protected function assertEndpointEquals(RequestInterface $request, $endpoint)

@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\AnalyticsConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
-use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
@@ -42,7 +41,7 @@ final class Analytics
         }
 
         $apiWrapper = new ApiWrapper(
-            HttpClientFactory::get(),
+            Algolia::getHttpClient(),
             $config,
             $clusterHosts
         );

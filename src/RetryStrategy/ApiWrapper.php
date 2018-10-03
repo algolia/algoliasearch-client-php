@@ -204,7 +204,7 @@ class ApiWrapper
             throw new NotFoundException($responseArray['message'], $statusCode);
         } elseif ($statusCode >= 400) {
             throw new BadRequestException($responseArray['message'], $statusCode);
-        } elseif (2 != ($statusCode / 100)) {
+        } elseif (2 != (int)($statusCode / 100)) {
             throw new AlgoliaException($statusCode.': '.$body, $statusCode);
         }
 

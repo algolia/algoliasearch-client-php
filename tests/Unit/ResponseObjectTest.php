@@ -2,32 +2,30 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Client;
-
-class ResponseObjectTest extends RequestTestCase
+class ResponseObjectTest extends NullTestCase
 {
     public function testResponseObjectIsArrayAccessible()
     {
-        $response = Client::get()->addApiKey(array('acl' => 'search'));
+        $response = static::$client->addApiKey(array('acl' => 'search'));
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AddApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
-        $response = Client::get()->updateApiKey('the-key', array('acl' => 'analytics', 'editSettings'));
+        $response = static::$client->updateApiKey('the-key', array('acl' => 'analytics', 'editSettings'));
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
-        $response = Client::get()->deleteApiKey('key');
+        $response = static::$client->deleteApiKey('key');
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
-        $response = Client::get()->multipleBatchObjects(array());
+        $response = static::$client->multipleBatchObjects(array());
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\MultipleIndexingResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }
 
     public function testIndexingResponse()
     {
-        $i = Client::get()->initIndex('cool');
+        $i = static::$client->initIndex('cool');
 
         $this->assertInstanceOfIndexingResponse($i->clear());
         $this->assertInstanceOfIndexingResponse($i->setSettings(array('objectID' => 'test')));

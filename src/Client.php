@@ -36,10 +36,10 @@ class Client implements ClientInterface
         $this->config = $config;
     }
 
-    public static function get($appId = null, $apiKey = null)
+    public static function get()
     {
         if (!static::$client) {
-            static::$client = static::create($appId, $apiKey);
+            static::$client = static::create();
         }
 
         return static::$client;

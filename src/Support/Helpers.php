@@ -96,10 +96,10 @@ class Helpers
      * This function is extracted from Guzzlehttp/Guzzle package which is not
      * compatible with PHP 5.3 so the client cannot always use it.
      *
-     * @param string $json    JSON data to parse
-     * @param bool   $assoc   when true, returned objects will be converted
-     *                        into associative arrays
-     * @param int    $depth   user specified recursion depth
+     * @param string $json  JSON data to parse
+     * @param bool   $assoc when true, returned objects will be converted
+     *                      into associative arrays
+     * @param int    $depth user specified recursion depth
      *
      * @return mixed
      *

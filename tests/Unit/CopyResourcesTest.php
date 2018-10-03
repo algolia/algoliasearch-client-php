@@ -36,7 +36,6 @@ class CopyResourcesTest extends RequestTestCase
                 $e->getRequest()
             );
         }
-
     }
 
     public function testCopyRules()
@@ -53,6 +52,5 @@ class CopyResourcesTest extends RequestTestCase
                 $e->getRequest()
             );
         }
-
     }
 }

@@ -100,7 +100,6 @@ class Helpers
      * @param bool   $assoc   when true, returned objects will be converted
      *                        into associative arrays
      * @param int    $depth   user specified recursion depth
-     * @param int    $options bitmask of JSON decode options
      *
      * @return mixed
      *
@@ -108,9 +107,9 @@ class Helpers
      *
      * @see http://www.php.net/manual/en/function.json-decode.php
      */
-    public static function json_decode($json, $assoc = false, $depth = 512, $options = 0)
+    public static function json_decode($json, $assoc = false, $depth = 512)
     {
-        $data = \json_decode($json, $assoc, $depth, $options);
+        $data = \json_decode($json, $assoc, $depth);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \InvalidArgumentException(
                 'json_decode error: '.json_last_error_msg()

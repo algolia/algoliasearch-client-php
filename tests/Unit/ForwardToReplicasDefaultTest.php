@@ -4,13 +4,14 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\Exceptions\RequestException;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {
     public function testIndexDoesNotSetForwardToReplicasByDefault()
     {
         /** @var \Algolia\AlgoliaSearch\Index $index */
-        $index = Client::get()->initIndex('test');
+        $index = static::$client->initIndex('test');
 
         $methods = array(
             'setSettings' => array(),
@@ -27,9 +28,11 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
         );
 
         foreach ($methods as $methodName => $arg1) {
-            $mockedResponse = $index->{$methodName}($arg1);
-
-            $this->assertQueryParametersNotHasKey('forwardToReplicas', $mockedResponse['request']);
+            try {
+                $index->{$methodName}($arg1);
+            } catch (RequestException $e) {
+                $this->assertQueryParametersNotHasKey('forwardToReplicas', $e->getRequest());
+            }
         }
     }
 
@@ -58,12 +61,14 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
         );
 
         foreach ($methods as $methodName => $arg1) {
-            $mockedResponse = $index->{$methodName}($arg1);
-
-            $this->assertQueryParametersSubset(
-                array('forwardToReplicas' => $defaultValue ? 'true' : 'false'),
-                $mockedResponse['request']
-            );
+            try {
+                $index->{$methodName}($arg1);
+            } catch (RequestException $e) {
+                $this->assertQueryParametersSubset(
+                    array('forwardToReplicas' => $defaultValue ? 'true' : 'false'),
+                    $e->getRequest()
+                );
+            }
         }
     }
 

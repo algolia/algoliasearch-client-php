@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class BadRequestException extends AlgoliaException
+class BadRequestException extends RequestException
 {
 }

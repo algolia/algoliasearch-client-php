@@ -15,9 +15,7 @@ class NullTestCase extends TestCase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        Algolia::setHttpClient(function () {
-            return new NullHttpClient();
-        });
+        Algolia::setHttpClient(new NullHttpClient());
         static::$client = Client::create('id', 'key');
     }
 

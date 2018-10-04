@@ -12,9 +12,7 @@ class PublicApiTest extends TestCase
 {
     public static function setUpBeforeClass()
     {
-        Algolia::setHttpClient(function () {
-            return new NullHttpClient();
-        });
+        Algolia::setHttpClient(new NullHttpClient());
     }
 
     public static function tearDownAfterClass()

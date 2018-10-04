@@ -16,9 +16,7 @@ abstract class RequestTestCase extends TestCase
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        Algolia::setHttpClient(function () {
-            return new RequestHttpClient();
-        });
+        Algolia::setHttpClient(new RequestHttpClient());
         static::$client = Client::create('id', 'key');
     }
 

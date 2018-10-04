@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Log\Logger;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -26,9 +27,9 @@ class Algolia
     private static $logger;
 
     /**
-     * @var callable function to instantiate new HttpClient
+     * @var \Algolia\AlgoliaSearch\Http\HttpClientInterface
      */
-    private static $httpClientConstructor;
+    private static $httpClient;
 
     public static function isCacheEnabled()
     {
@@ -89,34 +90,24 @@ class Algolia
 
     public static function getHttpClient()
     {
-        if (!is_callable(self::$httpClientConstructor)) {
+        if (null === self::$httpClient) {
             if (class_exists('\GuzzleHttp\Client')) {
-                self::setHttpClient(function () {
-                    return new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient();
-                });
+                self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
             } else {
-                self::setHttpClient(function () {
-                    return new \Algolia\AlgoliaSearch\Http\Php53HttpClient();
-                });
+                self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());
             }
         }
 
-        return forward_static_call(self::$httpClientConstructor);
+        return self::$httpClient;
     }
 
-    public static function setHttpClient($httpClientConstructor)
+    public static function setHttpClient(HttpClientInterface $httpClient)
     {
-        if (!is_callable($httpClientConstructor)) {
-            throw new \InvalidArgumentException(
-                'setHttpClient requires a function that build the HttpClient.'
-            );
-        }
-
-        self::$httpClientConstructor = $httpClientConstructor;
+        self::$httpClient = $httpClient;
     }
 
     public static function resetHttpClient()
     {
-        self::$httpClientConstructor = null;
+        self::$httpClient = null;
     }
 }

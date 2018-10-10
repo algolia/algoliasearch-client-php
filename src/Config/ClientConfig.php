@@ -33,22 +33,6 @@ final class ClientConfig extends AbstractConfig
         );
     }
 
-    public function getWaitTaskMaxRetry()
-    {
-        return $this->config['waitTaskMaxRetry'];
-    }
-
-    public function setWaitMaxTaskRetry($max)
-    {
-        if (!is_int($max)) {
-            throw new \InvalidArgumentException('Max retry must be an integer');
-        }
-
-        $this->config['waitTaskMaxRetry'] = $max;
-
-        return $this;
-    }
-
     public function getWaitTaskTimeBeforeRetry()
     {
         return $this->config['waitTaskTimeBeforeRetry'];

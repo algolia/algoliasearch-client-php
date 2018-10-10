@@ -316,26 +316,8 @@ class Client
      * @throws AlgoliaException
      * @throws \Exception
      */
-    public function multipleObjects($queries, $indexNameKey = 'indexName', $objectIdKey = 'objectID')
+    public function multipleGetObjects($requests, $requestOptions = array())
     {
-        if ($queries === null) {
-            throw new \Exception('No query provided');
-        }
-
-        $requests = array();
-        foreach ($queries as $query) {
-            if (array_key_exists($indexNameKey, $query) && array_key_exists($objectIdKey, $query)) {
-                $indexes = $query[$indexNameKey];
-                $objectID = $query[$objectIdKey];
-                unset($query[$indexNameKey]);
-            } else {
-                throw new \Exception('indexName is mandatory');
-            }
-            $req = array('indexName' => $indexes, 'objectID' => $objectID);
-
-            array_push($requests, $req);
-        }
-
         return $this->request(
             $this->context,
             'POST',

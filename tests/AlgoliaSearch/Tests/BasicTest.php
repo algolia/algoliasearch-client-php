@@ -167,12 +167,12 @@ class BasicTest extends AlgoliaSearchTestCase
         $this->assertEquals(1, count($results['results'][0]['hits']) + count($results['results'][1]['hits']) + count($results['results'][2]['hits']));
     }
 
-    public function testMultipleObjects()
+    public function testMultipleGetObjects()
     {
         $res = $this->index->saveObject(array('firstname' => 'Robin', 'objectID' => '1'));
         $this->index->waitTask($res['taskID']);
 
-        $results = $this->client->multipleObjects(array(
+        $results = $this->client->multipleGetObjects(array(
             array(
                 'indexName' => $this->safe_name('àlgol?à-php'),
                 'objectID'  => '1',
@@ -186,7 +186,7 @@ class BasicTest extends AlgoliaSearchTestCase
         $res = $this->index->saveObject(array('firstname' => 'Robin', 'objectID' => '2'));
         $this->index->waitTask($res['taskID']);
 
-        $results = $this->client->multipleObjects(array(
+        $results = $this->client->multipleGetObjects(array(
             array(
                 'indexName'   => $this->safe_name('àlgol?à-php'),
                 'objectID'    => '1',

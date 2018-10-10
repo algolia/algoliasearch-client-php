@@ -13,7 +13,7 @@ class AccessTest extends AlgoliaSearchTestCase
             'http://'.getenv('ALGOLIA_APPLICATION_ID').'-1.algolianet.com'
         ));
 
-        $client->isAlive();
+        $this->assertNull($client->isAlive());
     }
 
     public function testHTTPSAccess()
@@ -23,14 +23,15 @@ class AccessTest extends AlgoliaSearchTestCase
             'https://'.getenv('ALGOLIA_APPLICATION_ID').'-1.algolianet.com'
         ));
 
-        $client->isAlive();
+        $this->assertNull($client->isAlive());
+
     }
 
     public function testAccessWithOptions()
     {
         $client = new Client(getenv('ALGOLIA_APPLICATION_ID'), getenv('ALGOLIA_API_KEY'), null, array('curloptions' => array('CURLOPT_FAILONERROR' => 0)));
 
-        $client->isAlive();
+        $this->assertNull($client->isAlive());
     }
 
     public function testStatefullRetryStrategy()
@@ -49,7 +50,7 @@ class AccessTest extends AlgoliaSearchTestCase
             )
         );
 
-        $client1->isAlive();
+        $this->assertNull($client1->isAlive());
 
         $client2 = new Client(
             getenv('ALGOLIA_APPLICATION_ID'),
@@ -61,7 +62,7 @@ class AccessTest extends AlgoliaSearchTestCase
             )
         );
 
-        $client2->isAlive();
+        $this->assertNull($client2->isAlive());
 
         $client3 = new Client(
             getenv('ALGOLIA_APPLICATION_ID'),

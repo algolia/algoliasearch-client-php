@@ -109,7 +109,8 @@ class SynonymsExportTest extends AlgoliaSearchTestCase
         $res = $this->index->clearSynonyms();
         $this->index->waitTask($res['taskID']);
 
-        $this->index->batchSynonyms($synonyms);
+        $res = $this->index->batchSynonyms($synonyms);
+        $this->assertTrue(is_array($res));
     }
 
     /**

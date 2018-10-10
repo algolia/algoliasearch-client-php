@@ -102,7 +102,8 @@ class RulesExportTest extends AlgoliaSearchTestCase
         $res = $this->index->clearRules();
         $this->index->waitTask($res['taskID']);
 
-        $this->index->batchRules($rules);
+        $res = $this->index->batchRules($rules);
+        $this->assertTrue(is_array($res));
     }
 
     private function getRuleStub($objectID = 'my-rule')

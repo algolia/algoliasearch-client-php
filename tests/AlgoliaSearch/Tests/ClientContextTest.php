@@ -176,6 +176,7 @@ class ClientContextTest extends TestCase
     public function testShouldAllowEmptyCredentialsIfInPlacesContext()
     {
         $placesEnabled = true;
-        new ClientContext(null, null, null, $placesEnabled);
+        $context = new ClientContext(null, null, null, $placesEnabled);
+        $this->assertInstanceOf('\AlgoliaSearch\ClientContext', $context);
     }
 }

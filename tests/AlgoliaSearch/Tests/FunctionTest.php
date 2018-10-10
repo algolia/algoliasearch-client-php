@@ -91,5 +91,6 @@ class FunctionTest extends AlgoliaSearchTestCase
     {
         $this->client->disableRateLimitForward();
         $this->client->listIndexes();
+        $this->assertTrue(true);
     }
 }

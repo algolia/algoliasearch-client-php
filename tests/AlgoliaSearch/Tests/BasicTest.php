@@ -167,6 +167,39 @@ class BasicTest extends AlgoliaSearchTestCase
         $this->assertEquals(1, count($results['results'][0]['hits']) + count($results['results'][1]['hits']) + count($results['results'][2]['hits']));
     }
 
+    public function testMultipleGetObjects()
+    {
+        $res = $this->index->saveObject(array('firstname' => 'Robin', 'objectID' => '1'));
+        $this->index->waitTask($res['taskID']);
+
+        $results = $this->client->multipleGetObjects(array(
+            array(
+                'indexName' => $this->safe_name('àlgol?à-php'),
+                'objectID'  => '1',
+            ),
+        ));
+
+
+        $this->assertCount(1, $results['results']);
+        $this->assertEquals('Robin', $results['results'][0]['firstname']);
+
+        $res = $this->index->saveObject(array('firstname' => 'Robin', 'objectID' => '2'));
+        $this->index->waitTask($res['taskID']);
+
+        $results = $this->client->multipleGetObjects(array(
+            array(
+                'indexName'   => $this->safe_name('àlgol?à-php'),
+                'objectID'    => '1',
+            ),
+            array(
+                'indexName'   => $this->safe_name('àlgol?à-php'),
+                'objectID'    => '2',
+            ),
+        ));
+
+        $this->assertCount(2, $results['results']);
+    }
+
     public function testDisjunctiveFaceting()
     {
         $this->index->setSettings(array('attributesForFacetting' => array('city', 'stars', 'facilities')));

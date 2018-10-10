@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 
@@ -39,7 +38,6 @@ class DeleteApiKeyResponse extends AbstractResponse
         }
 
         $retry = 1;
-        $maxRetry = $this->config->getWaitTaskMaxRetry();
         $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
@@ -54,8 +52,6 @@ class DeleteApiKeyResponse extends AbstractResponse
             $retry++;
             $factor = ceil($retry / 10);
             usleep($factor * $time); // 0.1 second
-        } while ($retry < $maxRetry);
-
-        throw new TaskTooLongException('The key '.substr($this->key, 0, 6)."... isn't deleted yet.");
+        } while (true);
     }
 }

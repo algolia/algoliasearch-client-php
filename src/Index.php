@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
@@ -466,7 +465,6 @@ class Index implements IndexInterface
     public function waitTask($taskId, $requestOptions = array())
     {
         $retry = 1;
-        $maxRetry = $this->config->getWaitTaskMaxRetry();
         $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
@@ -479,9 +477,7 @@ class Index implements IndexInterface
             $retry++;
             $factor = ceil($retry / 10);
             usleep($factor * $time); // 0.1 second
-        } while ($retry < $maxRetry);
-
-        throw new TaskTooLongException();
+        } while (true);
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

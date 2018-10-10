@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Response;
 use Algolia\AlgoliaSearch\Client;
 use Algolia\AlgoliaSearch\Config\ClientConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-use Algolia\AlgoliaSearch\Exceptions\TaskTooLongException;
 
 class UpdateApiKeyResponse extends AbstractResponse
 {
@@ -41,7 +40,6 @@ class UpdateApiKeyResponse extends AbstractResponse
 
         $key = $this->apiResponse['key'];
         $retry = 1;
-        $maxRetry = $this->config->getWaitTaskMaxRetry();
         $time = $this->config->getWaitTaskTimeBeforeRetry();
 
         do {
@@ -60,9 +58,7 @@ class UpdateApiKeyResponse extends AbstractResponse
             $retry++;
             $factor = ceil($retry / 10);
             usleep($factor * $time); // 0.1 second
-        } while ($retry < $maxRetry);
-
-        throw new TaskTooLongException('The key '.substr($key, 0, 6)."... isn't updated yet.");
+        } while (true);
     }
 
     private function isKeyUpdated($key, $keyParams)

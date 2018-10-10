@@ -2,10 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\API;
 
+use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Http\HttpClientFactory;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
-use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
+use Algolia\AlgoliaSearch\Tests\NullHttpClient;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
@@ -13,22 +12,18 @@ class PublicApiTest extends TestCase
 {
     public static function setUpBeforeClass()
     {
-        $actualHttp = HttpClientFactory::get(new ClientConfig());
-
-        HttpClientFactory::set(function () use ($actualHttp) {
-            return new RequestHttpClient($actualHttp);
-        });
+        Algolia::setHttpClient(new NullHttpClient());
     }
 
     public static function tearDownAfterClass()
     {
         parent::tearDownAfterClass();
-        HttpClientFactory::reset();
+        Algolia::resetHttpClient();
     }
 
     public function testClient()
     {
-        $client = Client::get();
+        $client = Client::create();
         $definition = $this->getDefinition('client.yaml');
 
         $c = new PublicApiChecker($client, $definition);
@@ -37,7 +32,7 @@ class PublicApiTest extends TestCase
 
     public function testIndex()
     {
-        $index = Client::get()->initIndex('someindex');
+        $index = Client::create()->initIndex('someindex');
         $definition = $this->getDefinition('index.yaml');
 
         $c = new PublicApiChecker($index, $definition);

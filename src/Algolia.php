@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Log\Logger;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -24,6 +25,11 @@ class Algolia
      * @var \Psr\Log\LoggerInterface|null
      */
     private static $logger;
+
+    /**
+     * @var \Algolia\AlgoliaSearch\Http\HttpClientInterface
+     */
+    private static $httpClient;
 
     public static function isCacheEnabled()
     {
@@ -80,5 +86,28 @@ class Algolia
     public static function setLogger(LoggerInterface $logger)
     {
         self::$logger = $logger;
+    }
+
+    public static function getHttpClient()
+    {
+        if (null === self::$httpClient) {
+            if (class_exists('\GuzzleHttp\Client')) {
+                self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
+            } else {
+                self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());
+            }
+        }
+
+        return self::$httpClient;
+    }
+
+    public static function setHttpClient(HttpClientInterface $httpClient)
+    {
+        self::$httpClient = $httpClient;
+    }
+
+    public static function resetHttpClient()
+    {
+        self::$httpClient = null;
     }
 }

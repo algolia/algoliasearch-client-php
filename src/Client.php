@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
@@ -67,7 +66,7 @@ class Client implements ClientInterface
         }
 
         $apiWrapper = new ApiWrapper(
-            HttpClientFactory::get(),
+            Algolia::getHttpClient(),
             $config,
             $clusterHosts
         );

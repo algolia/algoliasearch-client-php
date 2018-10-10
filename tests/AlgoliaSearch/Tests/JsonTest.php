@@ -39,4 +39,13 @@ class JsonTest extends AlgoliaSearchTestCase
 
         Json::encode($malformedString);
     }
+
+    public function testMultiByteString()
+    {
+        $multiByteString = '검색 엔진';
+
+        $json = Json::encode($multiByteString);
+
+        $this->assertEquals('"검색 엔진"', $json);
+    }
 }

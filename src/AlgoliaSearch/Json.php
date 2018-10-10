@@ -7,7 +7,7 @@ namespace AlgoliaSearch;
  */
 class Json
 {
-    public static function encode($value, $options = 0)
+    public static function encode($value, $options = JSON_UNESCAPED_UNICODE)
     {
         $json = json_encode($value, $options);
 

@@ -4,6 +4,8 @@
 
 <Contributors, please add your changes below this line>
 
+* Sets the JSON encode method to not escape unicode characters by default
+
 
 ### 1.27.0
 

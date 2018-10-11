@@ -142,17 +142,7 @@ class Client implements ClientInterface
 
     public function moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())
     {
-        $response = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $srcIndexName),
-            array(
-                'operation' => 'move',
-                'destination' => $dstIndexName,
-            ),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this->initIndex($dstIndexName));
+        return $this->initIndex($srcIndexName)->move($dstIndexName, $requestOptions);
     }
 
     public function copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())

@@ -41,6 +41,8 @@ class Index implements IndexInterface
     public function setIndexName($indexName)
     {
         $this->indexName = $indexName;
+
+        return $this;
     }
 
     public function search($query, $requestOptions = array())
@@ -62,6 +64,23 @@ class Index implements IndexInterface
             array(),
             $requestOptions
         );
+
+        return new IndexingResponse($response, $this);
+    }
+
+    public function move($newIndexName, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array(
+                'operation' => 'move',
+                'destination' => $newIndexName,
+            ),
+            $requestOptions
+        );
+
+        $this->setIndexName($newIndexName);
 
         return new IndexingResponse($response, $this);
     }

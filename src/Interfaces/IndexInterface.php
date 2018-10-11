@@ -8,6 +8,8 @@ interface IndexInterface
 
     public function clear($requestOptions = array());
 
+    public function move($newIndexName, $requestOptions = array());
+
     public function getSettings($requestOptions = array());
 
     public function setSettings($settings, $requestOptions = array());

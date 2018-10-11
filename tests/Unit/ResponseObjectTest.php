@@ -28,6 +28,8 @@ class ResponseObjectTest extends NullTestCase
         $i = static::$client->initIndex('cool');
 
         $this->assertInstanceOfIndexingResponse($i->clear());
+        $this->assertInstanceOfIndexingResponse($i->rename('new-name'));
+
         $this->assertInstanceOfIndexingResponse($i->setSettings(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveObjects(array('objectID' => 'test')));

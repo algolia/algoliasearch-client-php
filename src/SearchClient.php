@@ -77,6 +77,11 @@ class SearchClient
         return new SearchIndex($indexName, $this->api, $this->config);
     }
 
+    public function isAlive($requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/isalive'), $requestOptions);
+    }
+
     public function multipleQueries($queries, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

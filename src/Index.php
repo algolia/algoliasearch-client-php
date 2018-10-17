@@ -173,37 +173,6 @@ class Index implements IndexInterface
         return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObject'), $requestOptions);
     }
 
-    public function freshObjects($objects, $requestOptions = array())
-    {
-        $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
-
-        // TODO: Replica!
-        $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'copy',
-                'destination' => $tmpName,
-                'scope' => array('settings', 'synonyms', 'rules'),
-            ),
-            $requestOptions
-        );
-
-        $this->saveObjects($objects, $requestOptions);
-
-        $response = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'move',
-                'destination' => $tmpName,
-            ),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this);
-    }
-
     public function deleteObject($objectId, $requestOptions = array())
     {
         return $this->deleteObjects(array($objectId), $requestOptions);

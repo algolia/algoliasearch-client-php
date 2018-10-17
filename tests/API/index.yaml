@@ -13,7 +13,7 @@
   - name: requestOptions
     default: []
 -
-  method: rename
+  method: move
   args:
   - name: newIndexName
   - name: requestOptions

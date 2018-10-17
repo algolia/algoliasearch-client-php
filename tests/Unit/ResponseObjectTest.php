@@ -28,7 +28,7 @@ class ResponseObjectTest extends NullTestCase
         $i = static::$client->initIndex('cool');
 
         $this->assertInstanceOfIndexingResponse($i->clear());
-        $this->assertInstanceOfIndexingResponse($i->rename('new-name'));
+        $this->assertInstanceOfIndexingResponse($i->move('new-name'));
 
         $this->assertInstanceOfIndexingResponse($i->setSettings(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveObject(array('objectID' => 'test')));
@@ -37,7 +37,6 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfIndexingResponse($i->partialUpdateObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteBy(array('objectID' => 'test')));

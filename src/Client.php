@@ -128,7 +128,7 @@ class Client implements ClientInterface
             $requestOptions->addBodyParameter('requests', $requests);
         }
 
-        return $this->api->write(
+        return $this->api->read(
             'POST',
             api_path('/1/indexes/*/objects'),
             $requestOptions

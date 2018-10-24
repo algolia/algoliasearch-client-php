@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
+use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -544,5 +545,80 @@ class Index implements IndexInterface
         );
 
         return new IndexingResponse($response, $this);
+    }
+
+    public function reindex(IndexContentInterface $indexContent, $wait = false)
+    {
+        $allResponses = array();
+        $tmpIndexName = $this->indexName.'_tmp_'.uniqid('php_', true);
+        $tmpIndex = new self($tmpIndexName, $this->api, $this->config);
+
+        $settings = $indexContent->getSettings();
+        $synonyms = $indexContent->getSynonyms();
+        $rules = $indexContent->getRules();
+
+        $allResponses[] = $this->initIndexForReindex($tmpIndexName, $settings, $synonyms, $rules);
+
+        if ($settings) {
+            $allResponses[] = $tmpIndex->setSettings($settings);
+        }
+
+        if ($synonyms) {
+            $allResponses[] = $tmpIndex->saveSynonyms($synonyms);
+        }
+
+        if ($rules) {
+            $allResponses[] = $tmpIndex->saveRules($rules);
+        }
+
+        $objectResponse = $this->saveObjects($indexContent->getObjects());
+        $allResponses = array_merge($allResponses, $objectResponse);
+
+        $allResponses = array_filter($allResponses);
+        if ($wait) {
+            foreach($allResponses as $response) {
+                $response->wait();
+            }
+        }
+
+        $moveResponse = $tmpIndex->move($this->indexName);
+
+        if ($wait) {
+            $moveResponse->wait();
+        }
+        $allResponses[] = $moveResponse;
+
+        return $allResponses;
+    }
+
+    private function initIndexForReindex($tmpName, $settings, $synonyms, $rules)
+    {
+        $scope = array();
+
+        if (!$settings) {
+            $scope[] = 'settings';
+        }
+
+        if (!$synonyms) {
+            $scope[] = 'synonyms';
+        }
+
+        if (!$rules) {
+            $scope[] = 'rules';
+        }
+
+        if (empty($scope)) {
+            return null;
+        }
+
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array(
+                'operation' => 'copy',
+                'destination' => $tmpName,
+                'scope' => array('settings', 'synonyms', 'rules'),
+            )
+        );
     }
 }

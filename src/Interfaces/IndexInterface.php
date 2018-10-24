@@ -6,6 +6,8 @@ interface IndexInterface
 {
     public function search($query, $requestOptions = array());
 
+    public function reindex(IndexContentInterface $indexContent, $wait = false);
+
     public function clear($requestOptions = array());
 
     public function move($newIndexName, $requestOptions = array());

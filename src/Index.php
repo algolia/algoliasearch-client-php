@@ -330,12 +330,20 @@ class Index implements IndexInterface
 
     public function saveSynonyms($synonyms, $requestOptions = array())
     {
-        Helpers::ensureObjectID($synonyms, 'All synonyms must have an unique objectID to be valid');
-
         $default = array();
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
+
+        if ($synonyms instanceof \Iterator) {
+            $iteratedOver = array();
+            foreach ($synonyms as $r) {
+                $iteratedOver[] = $r;
+            }
+            $synonyms = $iteratedOver;
+        }
+
+        Helpers::ensureObjectID($synonyms, 'All synonyms must have an unique objectID to be valid');
 
         $response = $this->api->write(
             'POST',
@@ -431,12 +439,20 @@ class Index implements IndexInterface
 
     public function saveRules($rules, $requestOptions = array())
     {
-        Helpers::ensureObjectID($rules, 'All rules must have an unique objectID to be valid');
-
         $default = array();
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
+
+        if ($rules instanceof \Iterator) {
+            $iteratedOver = array();
+            foreach ($rules as $r) {
+                $iteratedOver[] = $r;
+            }
+            $rules = $iteratedOver;
+        }
+
+        Helpers::ensureObjectID($rules, 'All rules must have an unique objectID to be valid');
 
         $response = $this->api->write(
             'POST',

@@ -6,8 +6,6 @@ interface IndexInterface
 {
     public function search($query, $requestOptions = array());
 
-    public function clear($requestOptions = array());
-
     public function move($newIndexName, $requestOptions = array());
 
     public function getSettings($requestOptions = array());
@@ -36,9 +34,11 @@ interface IndexInterface
 
     public function deleteBy(array $args, $requestOptions = array());
 
+    public function clearObjects($requestOptions = array());
+
     public function batch($requests, $requestOptions = array());
 
-    public function browse($requestOptions = array());
+    public function browseObjects($requestOptions = array());
 
     public function searchSynonyms($query, $requestOptions = array());
 

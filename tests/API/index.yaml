@@ -8,7 +8,7 @@
   - name: requestOptions
     default: []
 -
-  method: clear
+  method: clearObjects
   args:
   - name: requestOptions
     default: []

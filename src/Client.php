@@ -162,7 +162,7 @@ class Client implements ClientInterface
 
     public function clearIndex($indexName, $requestOptions = array())
     {
-        return $this->initIndex($indexName)->clear($requestOptions);
+        return $this->initIndex($indexName)->clearObjects($requestOptions);
     }
 
     public function deleteIndex($indexName, $requestOptions = array())

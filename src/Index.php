@@ -167,9 +167,14 @@ class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        Helpers::ensureObjectID($objects, 'All objects must have an unique objectID (like a primary key) to be valid.');
 
-        return $this->batch(Helpers::buildBatch($objects, 'addObject'), $requestOptions);
+        $allResponses = array();
+        foreach (array_chunk($objects, 1000) as $batch) {
+            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+            $allResponses[] = $this->batch(Helpers::buildBatch($batch, 'addObject'), $requestOptions);
+        }
+
+        return $allResponses;
     }
 
     public function partialUpdateObject($object, $requestOptions = array())

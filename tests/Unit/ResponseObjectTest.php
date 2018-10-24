@@ -32,7 +32,7 @@ class ResponseObjectTest extends NullTestCase
 
         $this->assertInstanceOfIndexingResponse($i->setSettings(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveObject(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->saveObjects(array('objectID' => 'test')));
+        $this->assertInstanceOfIndexingResponse($i->saveObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObject(array('objectID' => 'test')));
@@ -59,6 +59,13 @@ class ResponseObjectTest extends NullTestCase
 
     private function assertInstanceOfIndexingResponse($response)
     {
+        if (is_array($response)) {
+            foreach ($response as $r) {
+                $this->assertInstanceOfIndexingResponse($r);
+            }
+            return;
+        }
+
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\IndexingResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }

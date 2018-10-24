@@ -114,7 +114,7 @@
     default: []
 
 -
-  method: multipleBatchObjects
+  method: multipleBatch
   args:
   - name: operations
   - name: requestOptions

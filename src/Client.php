@@ -101,19 +101,14 @@ class Client implements ClientInterface
         );
     }
 
-    public function multipleBatchObjects($operations, $requestOptions = array())
+    public function multipleBatch($operations, $requestOptions = array())
     {
         Helpers::ensureObjectID($operations);
-
-        if (is_array($requestOptions)) {
-            $requestOptions['requests'] = $operations;
-        } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('requests', $operations);
-        }
 
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/*/batch'),
+            array('requests' => $operations),
             $requestOptions
         );
 

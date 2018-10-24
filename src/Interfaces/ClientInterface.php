@@ -10,7 +10,7 @@ interface ClientInterface
 
     public function multipleQueries($queries, $requestOptions = array());
 
-    public function multipleBatchObjects($operations, $requestOptions = array());
+    public function multipleBatch($operations, $requestOptions = array());
 
     public function multipleGetObjects($requests, $requestOptions = array());
 

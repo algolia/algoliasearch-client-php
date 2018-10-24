@@ -48,7 +48,7 @@ interface IndexInterface
 
     public function saveSynonyms($synonyms, $requestOptions = array());
 
-    public function freshSynonyms($synonyms, $requestOptions = array());
+    public function replaceAllSynonyms($synonyms, $requestOptions = array());
 
     public function deleteSynonym($objectId, $requestOptions = array());
 
@@ -64,7 +64,7 @@ interface IndexInterface
 
     public function saveRules($rules, $requestOptions = array());
 
-    public function freshRules($rules, $requestOptions = array());
+    public function replaceAllRules($rules, $requestOptions = array());
 
     public function deleteRule($objectId, $requestOptions = array());
 

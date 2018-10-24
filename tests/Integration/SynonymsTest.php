@@ -49,7 +49,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         $res = $index->searchSynonyms('');
         $this->assertArraySubset(array('nbHits' => 1), $res);
 
-        $index->freshSynonyms(array($this->anotherSyn));
+        $index->replaceAllSynonyms(array($this->anotherSyn));
         $res = $index->searchSynonyms('');
         $this->assertArraySubset(array('nbHits' => 1), $res);
         $this->assertArraySubset($this->anotherSyn, $res['hits'][0]);
@@ -65,7 +65,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
 
         $index->saveObject($this->airports[0]);
 
-        $index->freshSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
+        $index->replaceAllSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
 
         $previousObjectID = '';
         $iterator = $index->browseSynonyms(array('hitsPerPage' => 1));

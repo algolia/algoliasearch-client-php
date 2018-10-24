@@ -44,13 +44,13 @@ class ResponseObjectTest extends NullTestCase
 
         $this->assertInstanceOfIndexingResponse($i->saveSynonym(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveSynonyms(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshSynonyms(array('objectID' => 'test')));
+        $this->assertInstanceOfIndexingResponse($i->replaceAllSynonyms(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteSynonym('objectID'));
         $this->assertInstanceOfIndexingResponse($i->clearSynonyms(array('objectID' => 'test')));
 
         $this->assertInstanceOfIndexingResponse($i->saveRule(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->saveRules(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshRules(array('objectID' => 'test')));
+        $this->assertInstanceOfIndexingResponse($i->replaceAllRules(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteRule('objectID'));
         $this->assertInstanceOfIndexingResponse($i->clearRules(array('objectID' => 'test')));
 

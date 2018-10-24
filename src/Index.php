@@ -284,7 +284,7 @@ class Index implements IndexInterface
         return new IndexingResponse($response, $this);
     }
 
-    public function freshSynonyms($synonyms, $requestOptions = array())
+    public function replaceAllSynonyms($synonyms, $requestOptions = array())
     {
         if (is_array($requestOptions)) {
             $requestOptions['replaceExistingSynonyms'] = true;
@@ -385,7 +385,7 @@ class Index implements IndexInterface
         return new IndexingResponse($response, $this);
     }
 
-    public function freshRules($rules, $requestOptions = array())
+    public function replaceAllRules($rules, $requestOptions = array())
     {
         if (is_array($requestOptions)) {
             $requestOptions['clearExistingRules'] = true;

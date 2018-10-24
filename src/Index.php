@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
+use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -156,24 +157,7 @@ class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-        $allResponses = array();
-        $batch = array();
-        $batchSize = $this->config->getBatchSize();
-        $count = 0;
-
-        foreach ($objects as $object) {
-            $batch[] = $object;
-            $count++;
-
-            if ($count === $batchSize) {
-                Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
-                $allResponses[] = $this->batch(Helpers::buildBatch($batch, 'addObject'), $requestOptions);
-                $batch = array();
-                $count = 0;
-            }
-        }
-
-        return $allResponses;
+        return $this->splitIntoBatches('addObject', $objects, $requestOptions);
     }
 
     public function partialUpdateObject($object, $requestOptions = array())
@@ -183,7 +167,7 @@ class Index implements IndexInterface
 
     public function partialUpdateObjects($objects, $requestOptions = array())
     {
-        return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObjectNoCreate'), $requestOptions);
+        return $this->splitIntoBatches('partialUpdateObjectNoCreate', $objects);
     }
 
     public function partialUpdateOrCreateObject($object, $requestOptions = array())
@@ -193,7 +177,7 @@ class Index implements IndexInterface
 
     public function partialUpdateOrCreateObjects($objects, $requestOptions = array())
     {
-        return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObject'), $requestOptions);
+        return $this->splitIntoBatches('partialUpdateObject', $objects);
     }
 
     public function replaceAllObjects($objects, $wait = false)
@@ -244,7 +228,7 @@ class Index implements IndexInterface
             return array('objectID' => $id);
         }, $objectIds);
 
-        return $this->batch(Helpers::buildBatch($objects, 'deleteObject'), $requestOptions);
+        return $this->splitIntoBatches('deleteObject', $objects);
     }
 
     public function deleteBy(array $args, $requestOptions = array())
@@ -273,14 +257,41 @@ class Index implements IndexInterface
 
     public function batch($requests, $requestOptions = array())
     {
-        $response = $this->api->write(
+        $response = $this->rawBatch($requests, $requestOptions);
+
+        return new IndexingResponse($response, $this);
+    }
+
+    protected function rawBatch($requests, $requestOptions = array())
+    {
+        return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/batch', $this->indexName),
             array('requests' => $requests),
             $requestOptions
         );
+    }
 
-        return new IndexingResponse($response, $this);
+    protected function splitIntoBatches($action, $objects, $requestOptions = array())
+    {
+        $allResponses = array();
+        $batch = array();
+        $batchSize = $this->config->getBatchSize();
+        $count = 0;
+
+        foreach ($objects as $object) {
+            $batch[] = $object;
+            $count++;
+
+            if ($count === $batchSize) {
+                Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+                $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
+                $batch = array();
+                $count = 0;
+            }
+        }
+
+        return new IndexingObjectsResponse($allResponses, $this);
     }
 
     public function browseObjects($requestOptions = array())

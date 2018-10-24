@@ -57,18 +57,6 @@ class Index implements IndexInterface
         return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
     }
 
-    public function clear($requestOptions = array())
-    {
-        $response = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/clear', $this->indexName),
-            array(),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this);
-    }
-
     public function move($newIndexName, $requestOptions = array())
     {
         $response = $this->api->write(
@@ -271,6 +259,18 @@ class Index implements IndexInterface
         return new IndexingResponse($response, $this);
     }
 
+    public function clearObjects($requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/clear', $this->indexName),
+            array(),
+            $requestOptions
+        );
+
+        return new IndexingResponse($response, $this);
+    }
+
     public function batch($requests, $requestOptions = array())
     {
         $response = $this->api->write(
@@ -283,7 +283,7 @@ class Index implements IndexInterface
         return new IndexingResponse($response, $this);
     }
 
-    public function browse($requestOptions = array())
+    public function browseObjects($requestOptions = array())
     {
         return new ObjectIterator($this->indexName, $this->api, $requestOptions);
     }

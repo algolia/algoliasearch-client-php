@@ -167,11 +167,21 @@ class Index implements IndexInterface
 
     public function saveObjects($objects, $requestOptions = array())
     {
-
         $allResponses = array();
-        foreach (array_chunk($objects, $this->config->getBatchSize()) as $batch) {
-            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
-            $allResponses[] = $this->batch(Helpers::buildBatch($batch, 'addObject'), $requestOptions);
+        $batch = array();
+        $batchSize = $this->config->getBatchSize();
+        $count = 0;
+
+        foreach ($objects as $object) {
+            $batch[] = $object;
+            $count++;
+
+            if ($count === $batchSize) {
+                Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+                $allResponses[] = $this->batch(Helpers::buildBatch($batch, 'addObject'), $requestOptions);
+                $batch = array();
+                $count = 0;
+            }
         }
 
         return $allResponses;

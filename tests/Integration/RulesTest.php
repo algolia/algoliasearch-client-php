@@ -31,7 +31,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         $res = $index->searchRules('');
         $this->assertArraySubset(array('nbHits' => 2), $res);
 
-        $index->freshRules(array($this->getRuleStub('rule-X')));
+        $index->replaceRules(array($this->getRuleStub('rule-X')));
         $res = $index->searchRules('');
         $this->assertArraySubset(array('nbHits' => 1), $res);
         $this->assertArraySubset($this->getRuleStub('rule-X'), $res['hits'][0]);
@@ -47,7 +47,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
         $index->saveObject($this->airports[0]);
 
-        $index->freshRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
+        $index->replaceRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
 
         $previousObjectID = '';
         $iterator = $index->browseRules(array('hitsPerPage' => 1));

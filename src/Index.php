@@ -648,4 +648,21 @@ class Index implements IndexInterface
             )
         );
     }
+
+    public function migrateTo($newAppId, $newApiKey)
+    {
+        $newIndex = Client::create($newAppId, $newApiKey)->initIndex($this->indexName);
+
+        $settings = $this->getSettings();
+        $newIndex->setSettings($settings);
+
+        $objectsIterator = $this->browseObjects();
+        $newIndex->saveObjects($objectsIterator);
+
+        $synonymsIterator = $this->browseSynonyms();
+        $newIndex->saveSynonyms($synonymsIterator);
+
+        $rulesIterator = $this->browseRules();
+        $newIndex->saveRules($rulesIterator);
+    }
 }

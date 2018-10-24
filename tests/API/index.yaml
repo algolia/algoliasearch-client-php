@@ -134,3 +134,12 @@
   args:
     - name: requestOptions
       default: []
+
+#
+# Misc
+#
+-
+  method: migrateTo
+  args:
+  - name: appId
+  - name: apiKey

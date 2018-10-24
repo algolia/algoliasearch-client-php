@@ -169,7 +169,7 @@ class Index implements IndexInterface
     {
 
         $allResponses = array();
-        foreach (array_chunk($objects, 1000) as $batch) {
+        foreach (array_chunk($objects, $this->config->getBatchSize()) as $batch) {
             Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
             $allResponses[] = $this->batch(Helpers::buildBatch($batch, 'addObject'), $requestOptions);
         }

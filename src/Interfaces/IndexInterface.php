@@ -30,6 +30,8 @@ interface IndexInterface
 
     public function partialUpdateOrCreateObjects($objects, $requestOptions = array());
 
+    public function replaceAllObjects($objects, $wait = false);
+
     public function deleteObject($objectId, $requestOptions = array());
 
     public function deleteObjects($objectIds, $requestOptions = array());

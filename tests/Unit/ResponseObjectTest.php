@@ -37,6 +37,7 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfIndexingResponse($i->partialUpdateObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObjects(array('objectID' => 'test')));
+        $this->assertInstanceOfIndexingResponse($i->replaceAllObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfIndexingResponse($i->deleteObject(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteObjects(array('objectID' => 'test')));
         $this->assertInstanceOfIndexingResponse($i->deleteBy(array('objectID' => 'test')));

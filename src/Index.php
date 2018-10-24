@@ -207,6 +207,43 @@ class Index implements IndexInterface
         return $this->batch(Helpers::buildBatch($objects, 'partialUpdateObject'), $requestOptions);
     }
 
+    public function replaceAllObjects($objects, $wait = false)
+    {
+        $allResponses = array();
+        $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
+
+        // Copy all index resources from production index
+        $allResponses[] = $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array(
+                'operation' => 'copy',
+                'destination' => $tmpName,
+                'scope' => array('settings', 'synonyms', 'rules'),
+            )
+        );
+
+        $saveObjectResponses = $this->saveObjects($objects);
+        $allResponses = array_merge($allResponses, $saveObjectResponses);
+
+        if ($wait) {
+            foreach ($saveObjectResponses as $batchResponse) {
+                $batchResponse->wait();
+            }
+        }
+
+        $allResponses[] = $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array(
+                'operation' => 'move',
+                'destination' => $tmpName,
+            )
+        );
+
+        return $allResponses;
+    }
+
     public function deleteObject($objectId, $requestOptions = array())
     {
         return $this->deleteObjects(array($objectId), $requestOptions);

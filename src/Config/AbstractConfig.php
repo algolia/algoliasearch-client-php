@@ -28,6 +28,7 @@ abstract class AbstractConfig
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
+            'defaultHeaders' => array(),
         );
     }
 
@@ -99,6 +100,18 @@ abstract class AbstractConfig
     public function setConnectTimeout($connectTimeout)
     {
         $this->config['connectTimeout'] = $connectTimeout;
+
+        return $this;
+    }
+
+    public function getDefaultHeaders()
+    {
+        return $this->config['defaultHeaders'];
+    }
+
+    public function setDefaultHeaders(array $defaultHeaders)
+    {
+        $this->config['defaultHeaders'] = $defaultHeaders;
 
         return $this;
     }

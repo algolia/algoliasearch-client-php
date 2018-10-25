@@ -29,6 +29,7 @@ final class SearchConfig extends AbstractConfig
             'connectTimeout' => $this->defaultConnectTimeout,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
             'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
+            'defaultHeaders' => array(),
             'defaultForwardToReplicas' => null,
             'batchSize' => 1000,
         );

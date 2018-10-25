@@ -578,19 +578,36 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function reindex(IndexContentInterface $indexContent, $wait = false)
+    public function reindex(IndexContentInterface $indexContent, $requestOptions = array())
     {
+        $safe = isset($requestOptions['safe']) && $requestOptions['safe'];
+        unset($requestOptions['safe']);
         $allResponses = array();
-        $tmpIndexName = $this->indexName.'_tmp_'.uniqid('php_', true);
-        $tmpIndex = new self($tmpIndexName, $this->api, $this->config);
+        $replicas = false;
+        $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
 
-        $settings = $indexContent->getSettings();
-        $synonyms = $indexContent->getSynonyms();
-        $rules = $indexContent->getRules();
+        $client = new SearchClient($this->api, $this->config);
+        $tmpIndex = new self($tmpName, $this->api, $this->config);
 
-        $allResponses[] = $this->initIndexForReindex($tmpIndexName, $settings, $synonyms, $rules);
+        if (false === $settings = $indexContent->getSettings()) {
+            $scope[] = 'settings';
+        }
+        if (false === $synonyms = $indexContent->getSynonyms()) {
+            $scope[] = 'synonyms';
+        }
+        if (false === $rules = $indexContent->getRules()) {
+            $scope[] = 'rules';
+        }
+
+        if (!empty($scope)) {
+            $allResponses[] = $client->copyIndex($this->indexName, $tmpName, $scope);
+        }
 
         if ($settings) {
+            if (isset($settings['replicas'])) {
+                $replicas = $settings['replicas'];
+                unset($settings['replicas']);
+            }
             $allResponses[] = $tmpIndex->setSettings($settings);
         }
 
@@ -602,55 +619,26 @@ class SearchIndex
             $allResponses[] = $tmpIndex->saveRules($rules);
         }
 
-        $objectResponse = $this->saveObjects($indexContent->getObjects());
-        $allResponses = array_merge($allResponses, $objectResponse);
+        $allResponses[] = $this->saveObjects($indexContent->getObjects());
 
-        $allResponses = array_filter($allResponses);
-        if ($wait) {
-            foreach($allResponses as $response) {
+        if ($safe) {
+            foreach ($allResponses as $response) {
                 $response->wait();
             }
         }
 
         $moveResponse = $tmpIndex->move($this->indexName);
 
-        if ($wait) {
+        if ($safe) {
             $moveResponse->wait();
         }
         $allResponses[] = $moveResponse;
 
+        if ($replicas) {
+            $allResponses[] = $this->setSettings(array('replicas' => false));
+        }
+
         return $allResponses;
-    }
-
-    private function initIndexForReindex($tmpName, $settings, $synonyms, $rules)
-    {
-        $scope = array();
-
-        if (!$settings) {
-            $scope[] = 'settings';
-        }
-
-        if (!$synonyms) {
-            $scope[] = 'synonyms';
-        }
-
-        if (!$rules) {
-            $scope[] = 'rules';
-        }
-
-        if (empty($scope)) {
-            return null;
-        }
-
-        return $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'copy',
-                'destination' => $tmpName,
-                'scope' => array('settings', 'synonyms', 'rules'),
-            )
-        );
     }
 
     public function migrateTo($newAppId, $newApiKey)

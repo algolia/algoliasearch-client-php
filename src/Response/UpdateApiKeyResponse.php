@@ -24,12 +24,12 @@ class UpdateApiKeyResponse extends AbstractResponse
         array $apiResponse,
         Client $client,
         ClientConfig $config,
-        $keyParams
+        $requestOptions
     ) {
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;
-        $this->keyParams = $keyParams;
+        $this->keyParams = $this->filterOnlyKeyParams($requestOptions);
     }
 
     public function wait($requestOptions = array())
@@ -71,5 +71,16 @@ class UpdateApiKeyResponse extends AbstractResponse
         }
 
         return $upToDate;
+    }
+
+    private function filterOnlyKeyParams($requestOptions)
+    {
+        $validKeyParams = array(
+            'acl',  'indexes',  'referers',
+            'restrictSources', 'queryParameters',  'description',
+            'validity',  'maxQueriesPerIPPerHour',  'maxHitsPerQuery',
+        );
+
+        return array_intersect_key($requestOptions, array_flip($validKeyParams));
     }
 }

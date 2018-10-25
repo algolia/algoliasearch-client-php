@@ -34,9 +34,9 @@ interface ClientInterface
 
     public function getApiKey($key, $requestOptions = array());
 
-    public function addApiKey($keyParams, $requestOptions = array());
+    public function addApiKey($acl, $requestOptions = array());
 
-    public function updateApiKey($key, $keyParams, $requestOptions = array());
+    public function updateApiKey($key, $requestOptions = array());
 
     public function deleteApiKey($key, $requestOptions = array());
 

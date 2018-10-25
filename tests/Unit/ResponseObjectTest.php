@@ -6,7 +6,7 @@ class ResponseObjectTest extends NullTestCase
 {
     public function testResponseObjectIsArrayAccessible()
     {
-        $response = static::$client->addApiKey(array('acl' => 'search'));
+        $response = static::$client->addApiKey(array('search'));
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AddApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 

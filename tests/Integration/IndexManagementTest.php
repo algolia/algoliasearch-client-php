@@ -29,7 +29,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     {
         $settings = array(
             'hitsPerPage' => 31,
-            'userData' => 'API Client copy test',
+            'userData' => 'API SearchClient copy test',
         );
         $client = static::getClient();
         $mainIndex = $client->initIndex(static::$indexes['main']);

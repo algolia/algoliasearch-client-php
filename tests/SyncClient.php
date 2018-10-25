@@ -2,17 +2,17 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Response\AbstractResponse;
 
 class SyncClient
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Client
+     * @var \Algolia\AlgoliaSearch\SearchClient
      */
     private $realClient;
 
-    public function __construct(Client $realClient)
+    public function __construct(SearchClient $realClient)
     {
         $this->realClient = $realClient;
     }

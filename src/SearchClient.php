@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
-use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
+use Algolia\AlgoliaSearch\Interfaces\SearchClientInterface;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
@@ -12,10 +12,10 @@ use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class Client implements ClientInterface
+class SearchClient implements SearchClientInterface
 {
     /**
      * @var ApiWrapper
@@ -29,7 +29,7 @@ class Client implements ClientInterface
 
     protected static $client;
 
-    public function __construct(ApiWrapper $apiWrapper, ClientConfig $config)
+    public function __construct(ApiWrapper $apiWrapper, SearchConfig $config)
     {
         $this->api = $apiWrapper;
         $this->config = $config;
@@ -46,10 +46,10 @@ class Client implements ClientInterface
 
     public static function create($appId = null, $apiKey = null)
     {
-        return static::createWithConfig(ClientConfig::create($appId, $apiKey));
+        return static::createWithConfig(SearchConfig::create($appId, $apiKey));
     }
 
-    public static function createWithConfig(ClientConfig $config)
+    public static function createWithConfig(SearchConfig $config)
     {
         $config = clone $config;
 

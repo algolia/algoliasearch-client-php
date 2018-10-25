@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface ClientInterface
+interface SearchClientInterface
 {
     public function initIndex($indexName);
 

@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
@@ -55,7 +55,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         );
 
         return new SyncClient(
-            Client::createWithConfig(new ClientConfig($config))
+            SearchClient::createWithConfig(new SearchConfig($config))
         );
     }
 

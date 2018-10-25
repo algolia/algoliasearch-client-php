@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
@@ -42,7 +42,7 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
     public function testIndexUseConfigDefaultForwardToReplicas($defaultValue)
     {
         /** @var \Algolia\AlgoliaSearch\Index $index */
-        $index = Client::createWithConfig(new ClientConfig(array(
+        $index = SearchClient::createWithConfig(new SearchConfig(array(
             'defaultForwardToReplicas' => $defaultValue,
         )))->initIndex('test');
 

@@ -6,7 +6,7 @@ class LogsTest extends AlgoliaIntegrationTestCase
 {
     public function testLogs()
     {
-        /** @var \Algolia\AlgoliaSearch\Client $client */
+        /** @var \Algolia\AlgoliaSearch\SearchClient $client */
         $client = static ::getClient();
 
         $logs = $client->getLogs(array('length' => 12));

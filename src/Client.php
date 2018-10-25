@@ -215,18 +215,20 @@ class Client implements ClientInterface
         return $this->api->read('GET', api_path('/1/keys/%s', $key), $requestOptions);
     }
 
-    public function addApiKey($keyParams, $requestOptions = array())
+    public function addApiKey($acl, $requestOptions = array())
     {
-        $response = $this->api->write('POST', api_path('/1/keys'), $keyParams, $requestOptions);
+        $acl = array('acl' => $acl);
+
+        $response = $this->api->write('POST', api_path('/1/keys'), $acl, $requestOptions);
 
         return new AddApiKeyResponse($response, $this, $this->config);
     }
 
-    public function updateApiKey($key, $keyParams, $requestOptions = array())
+    public function updateApiKey($key, $requestOptions = array())
     {
-        $response = $this->api->write('PUT', api_path('/1/keys/%s', $key), $keyParams, $requestOptions);
+        $response = $this->api->write('PUT', api_path('/1/keys/%s', $key), array(), $requestOptions);
 
-        return new UpdateApiKeyResponse($response, $this, $this->config, $keyParams);
+        return new UpdateApiKeyResponse($response, $this, $this->config, $requestOptions);
     }
 
     public function deleteApiKey($key, $requestOptions = array())

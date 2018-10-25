@@ -21,6 +21,7 @@ class RequestOptionsFactory
     private $validHeaders = array(
         'Content-type',
         'User-Agent',
+        'createIfNotExists',
     );
 
     public function __construct(ConfigInterface $config)

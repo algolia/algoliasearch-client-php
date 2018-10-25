@@ -2,16 +2,16 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
+use Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface;
 
 class IndexingResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\IndexInterface
+     * @var \Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface
      */
     private $index;
 
-    public function __construct(array $apiResponse, IndexInterface $index)
+    public function __construct(array $apiResponse, SearchIndexInterface $index)
     {
         $this->apiResponse = $apiResponse;
         $this->index = $index;

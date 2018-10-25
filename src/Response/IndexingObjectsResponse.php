@@ -2,12 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
+use Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface;
 
 class IndexingObjectsResponse extends AbstractResponse implements \Iterator, \Countable
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\IndexInterface
+     * @var \Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface
      */
     private $index;
 
@@ -16,7 +16,7 @@ class IndexingObjectsResponse extends AbstractResponse implements \Iterator, \Co
      */
     private $key = 0;
 
-    public function __construct(array $apiResponse, IndexInterface $index)
+    public function __construct(array $apiResponse, SearchIndexInterface $index)
     {
         $this->apiResponse = array_values($apiResponse); // Ensure there aren't any keys
         $this->index = $index;

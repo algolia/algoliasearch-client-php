@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Interfaces;
 
-interface IndexInterface
+interface SearchIndexInterface
 {
     public function search($query, $requestOptions = array());
 

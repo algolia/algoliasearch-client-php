@@ -7,7 +7,7 @@
     - name: indexName
 
 #
-# Index Management
+# SearchIndex Management
 #
 -
   method: listIndexes

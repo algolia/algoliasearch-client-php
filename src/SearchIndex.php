@@ -191,41 +191,34 @@ class SearchIndex
         return $this->splitIntoBatches($action, $objects, $requestOptions);
     }
 
-    public function replaceAllObjects($objects, $wait = false)
+    public function replaceAllObjects($objects, $requestOptions = array())
     {
-        $allResponses = array();
+        $safe = isset($requestOptions['safe']) && $requestOptions['safe'];
+        unset($requestOptions['safe']);
         $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
 
+        $client = new SearchClient($this->api, $this->config);
+
         // Copy all index resources from production index
-        $allResponses[] = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'copy',
-                'destination' => $tmpName,
-                'scope' => array('settings', 'synonyms', 'rules'),
-            )
-        );
+        $copyResponse = $client->copyIndex($this->indexName, $tmpName, array(
+            'scope' => array('settings', 'synonyms', 'rules')
+        ));
 
-        $saveObjectResponses = $this->saveObjects($objects);
-        $allResponses = array_merge($allResponses, $saveObjectResponses);
-
-        if ($wait) {
-            foreach ($saveObjectResponses as $batchResponse) {
-                $batchResponse->wait();
-            }
+        if ($safe) {
+            $copyResponse->wait();
         }
 
-        $allResponses[] = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'move',
-                'destination' => $tmpName,
-            )
-        );
+        // Send records (batched automatically)
+        $batchResponse = $this->saveObjects($objects, $requestOptions);
 
-        return $allResponses;
+        if ($safe) {
+            $batchResponse->wait();
+        }
+
+        // Move temporary index to production
+        $moveResponse = $client->moveIndex($tmpName, $this->indexName);
+
+        return array($copyResponse, $batchResponse, $moveResponse);
     }
 
     public function deleteObject($objectId, $requestOptions = array())

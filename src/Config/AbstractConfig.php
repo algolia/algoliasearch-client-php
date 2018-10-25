@@ -2,9 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
-
-abstract class AbstractConfig implements ConfigInterface
+abstract class AbstractConfig
 {
     protected $config;
 

@@ -179,13 +179,6 @@ class ApiWrapper
         throw new UnreachableException();
     }
 
-    public function setExtraHeader($headerName, $headerValue)
-    {
-        $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
-
-        return $this;
-    }
-
     private function handleResponse(ResponseInterface $response, RequestInterface $request)
     {
         $body = (string) $response->getBody();

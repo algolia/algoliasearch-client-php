@@ -9,8 +9,6 @@ class RequestOptionsFactory
 {
     private $config;
 
-    private $defaultHeaders = array();
-
     private $validQueryParameters = array(
         'forwardToReplicas',
         'replaceExistingSynonyms',
@@ -54,7 +52,7 @@ class RequestOptionsFactory
             );
         }
 
-        return $options->addDefaultHeaders($this->defaultHeaders);
+        return $options->addDefaultHeaders($this->config->getDefaultHeaders());
     }
 
     public function createBodyLess($options, $defaults = array())
@@ -64,13 +62,6 @@ class RequestOptionsFactory
         return $options
             ->addQueryParameters($options->getBody())
             ->setBody(array());
-    }
-
-    public function setDefaultHeader($headerName, $headerValue)
-    {
-        $this->defaultHeaders[$headerName] = $headerValue;
-
-        return $this;
     }
 
     private function normalize($options)

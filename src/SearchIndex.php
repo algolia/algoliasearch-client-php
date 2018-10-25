@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
-use Algolia\AlgoliaSearch\Interfaces\IndexInterface;
+use Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface;
 use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -14,7 +14,7 @@ use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class Index implements IndexInterface
+class SearchIndex implements SearchIndexInterface
 {
     private $indexName;
 

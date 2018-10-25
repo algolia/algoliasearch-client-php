@@ -7,7 +7,7 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
-final class Analytics
+final class AnalyticsClient
 {
     /**
      * @var ApiWrapper

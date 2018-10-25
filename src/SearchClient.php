@@ -76,7 +76,7 @@ class SearchClient implements SearchClientInterface
 
     public function initIndex($indexName)
     {
-        return new Index($indexName, $this->api, $this->config);
+        return new SearchIndex($indexName, $this->api, $this->config);
     }
 
     public function setExtraHeader($headerName, $headerValue)

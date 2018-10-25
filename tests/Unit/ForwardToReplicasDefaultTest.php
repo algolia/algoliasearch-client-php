@@ -10,7 +10,7 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
 {
     public function testIndexDoesNotSetForwardToReplicasByDefault()
     {
-        /** @var \Algolia\AlgoliaSearch\Index $index */
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = static::$client->initIndex('test');
 
         $methods = array(
@@ -41,7 +41,7 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
      */
     public function testIndexUseConfigDefaultForwardToReplicas($defaultValue)
     {
-        /** @var \Algolia\AlgoliaSearch\Index $index */
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = SearchClient::createWithConfig(new SearchConfig(array(
             'defaultForwardToReplicas' => $defaultValue,
         )))->initIndex('test');

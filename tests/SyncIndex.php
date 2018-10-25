@@ -2,17 +2,17 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\Index;
+use Algolia\AlgoliaSearch\SearchIndex;
 use Algolia\AlgoliaSearch\Response\AbstractResponse;
 
 class SyncIndex
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Index
+     * @var \Algolia\AlgoliaSearch\SearchIndex
      */
     private $realIndex;
 
-    public function __construct(Index $realIndex)
+    public function __construct(SearchIndex $realIndex)
     {
         $this->realIndex = $realIndex;
     }

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
-use Algolia\AlgoliaSearch\Interfaces\SearchClientInterface;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
@@ -15,7 +13,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class SearchClient implements SearchClientInterface
+class SearchClient
 {
     /**
      * @var ApiWrapper
@@ -23,7 +21,7 @@ class SearchClient implements SearchClientInterface
     protected $api;
 
     /**
-     * @var ConfigInterface
+     * @var SearchConfig
      */
     protected $config;
 

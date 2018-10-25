@@ -4,12 +4,12 @@ namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-use Algolia\AlgoliaSearch\Interfaces\SearchClientInterface;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class AddApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\SearchClientInterface
+     * @var \Algolia\AlgoliaSearch\SearchClient
      */
     private $client;
 
@@ -18,7 +18,7 @@ class AddApiKeyResponse extends AbstractResponse
      */
     private $config;
 
-    public function __construct(array $apiResponse, SearchClientInterface $client, SearchConfig $config)
+    public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config)
     {
         $this->apiResponse = $apiResponse;
         $this->client = $client;

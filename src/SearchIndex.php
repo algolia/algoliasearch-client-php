@@ -2,9 +2,8 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
-use Algolia\AlgoliaSearch\Interfaces\SearchIndexInterface;
 use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -14,7 +13,7 @@ use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class SearchIndex implements SearchIndexInterface
+class SearchIndex
 {
     private $indexName;
 
@@ -24,11 +23,11 @@ class SearchIndex implements SearchIndexInterface
     protected $api;
 
     /**
-     * @var ConfigInterface
+     * @var SearchConfig
      */
     protected $config;
 
-    public function __construct($indexName, ApiWrapper $apiWrapper, ConfigInterface $config)
+    public function __construct($indexName, ApiWrapper $apiWrapper, SearchConfig $config)
     {
         $this->indexName = $indexName;
         $this->api = $apiWrapper;

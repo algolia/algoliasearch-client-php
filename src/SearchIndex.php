@@ -166,17 +166,14 @@ class SearchIndex
 
     public function partialUpdateObjects($objects, $requestOptions = array())
     {
-        return $this->splitIntoBatches('partialUpdateObjectNoCreate', $objects);
-    }
+        $action = 'partialUpdateObjectNoCreate';
 
-    public function partialUpdateOrCreateObject($object, $requestOptions = array())
-    {
-        return $this->partialUpdateOrCreateObjects(array($object), $requestOptions);
-    }
+        if (isset($requestOptions['createIfNotExists']) && $requestOptions['createIfNotExists']) {
+            $action = 'partialUpdateObject';
+            unset($requestOptions['createIfNotExists']);
+        }
 
-    public function partialUpdateOrCreateObjects($objects, $requestOptions = array())
-    {
-        return $this->splitIntoBatches('partialUpdateObject', $objects);
+        return $this->splitIntoBatches($action, $objects, $requestOptions);
     }
 
     public function replaceAllObjects($objects, $wait = false)
@@ -227,7 +224,7 @@ class SearchIndex
             return array('objectID' => $id);
         }, $objectIds);
 
-        return $this->splitIntoBatches('deleteObject', $objects);
+        return $this->splitIntoBatches('deleteObject', $objects, $requestOptions);
     }
 
     public function deleteBy($filters, $requestOptions = array())

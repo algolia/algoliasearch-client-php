@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
+use Algolia\AlgoliaSearch\Config\AbstractConfig;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 
 class RequestOptionsFactory
@@ -24,7 +24,7 @@ class RequestOptionsFactory
         'createIfNotExists',
     );
 
-    public function __construct(ConfigInterface $config)
+    public function __construct(AbstractConfig $config)
     {
         $this->config = $config;
     }

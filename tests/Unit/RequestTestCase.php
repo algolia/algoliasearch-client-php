@@ -3,21 +3,21 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
-    /** @var \Algolia\AlgoliaSearch\Client */
+    /** @var \Algolia\AlgoliaSearch\SearchClient */
     protected static $client;
 
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         Algolia::setHttpClient(new RequestHttpClient());
-        static::$client = Client::create('id', 'key');
+        static::$client = SearchClient::create('id', 'key');
     }
 
     public static function tearDownAfterClass()

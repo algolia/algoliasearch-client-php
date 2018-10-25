@@ -6,7 +6,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
 {
     public function testMultipleIndexMethods()
     {
-        /** @var \Algolia\AlgoliaSearch\Client $client */
+        /** @var \Algolia\AlgoliaSearch\SearchClient $client */
         $client = self::getClient();
         $batch = $this->getBatch();
 

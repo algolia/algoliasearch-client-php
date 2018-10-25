@@ -22,7 +22,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
 
     public function testApiKeys()
     {
-        /** @var \Algolia\AlgoliaSearch\Client $client */
+        /** @var \Algolia\AlgoliaSearch\SearchClient $client */
         $client = static::getClient();
 
         $response = $client

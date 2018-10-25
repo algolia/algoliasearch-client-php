@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Cache\FileCacheDriver;
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
-use Algolia\AlgoliaSearch\Client;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 {
@@ -31,7 +31,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 
     public function testClusterHostsIsCached()
     {
-        $client = Client::create();
+        $client = SearchClient::create();
         $clusterHosts = $this->getClusterHostFromClient($client)->reset();
         $readOriginal = $clusterHosts->read();
         $this->assertCount(4, $readOriginal);
@@ -42,7 +42,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 
         unset($client);
 
-        $client = Client::create();
+        $client = SearchClient::create();
         $clusterHosts = $this->getClusterHostFromClient($client);
         $readAfterReadingCache = $clusterHosts->read();
 
@@ -52,7 +52,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 
     public function testClusterHostsIsCachedAndDoesntFailIfCacheIsInvalid()
     {
-        $client = Client::create();
+        $client = SearchClient::create();
         $clusterHosts = $this->getClusterHostFromClient($client)->reset();
         $readOriginal = $clusterHosts->read();
         $this->assertCount(4, $readOriginal);
@@ -72,7 +72,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
         file_put_contents($cacheFilename, '{1:"segse"}');
         $shaMessedUpCache = sha1_file($cacheFilename);
 
-        $client = Client::create();
+        $client = SearchClient::create();
         $clusterHosts = $this->getClusterHostFromClient($client);
         $readAfterReadingCache = $clusterHosts->read();
 
@@ -84,7 +84,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 
     private function getClusterHostFromClient($clientInstance)
     {
-        $ref = new \ReflectionProperty('Algolia\AlgoliaSearch\Client', 'api');
+        $ref = new \ReflectionProperty('Algolia\AlgoliaSearch\SearchClient', 'api');
         $ref->setAccessible(true);
         $apiWrapper = $ref->getValue($clientInstance);
 

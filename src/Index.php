@@ -651,7 +651,7 @@ class Index implements IndexInterface
 
     public function migrateTo($newAppId, $newApiKey)
     {
-        $newIndex = Client::create($newAppId, $newApiKey)->initIndex($this->indexName);
+        $newIndex = SearchClient::create($newAppId, $newApiKey)->initIndex($this->indexName);
 
         $settings = $this->getSettings();
         $newIndex->setSettings($settings);

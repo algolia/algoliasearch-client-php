@@ -3,18 +3,18 @@
 namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
-use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\Interfaces\SearchClientInterface;
 
 class DeleteApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\ClientInterface
+     * @var \Algolia\AlgoliaSearch\Interfaces\SearchClientInterface
      */
     private $client;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\ClientConfig
+     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
      */
     private $config;
 
@@ -23,7 +23,7 @@ class DeleteApiKeyResponse extends AbstractResponse
      */
     private $key;
 
-    public function __construct(array $apiResponse, ClientInterface $client, ClientConfig $config, $key)
+    public function __construct(array $apiResponse, SearchClientInterface $client, SearchConfig $config, $key)
     {
         $this->apiResponse = $apiResponse;
         $this->client = $client;

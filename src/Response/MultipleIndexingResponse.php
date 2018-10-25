@@ -2,16 +2,16 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-use Algolia\AlgoliaSearch\Interfaces\ClientInterface;
+use Algolia\AlgoliaSearch\Interfaces\SearchClientInterface;
 
 class MultipleIndexingResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Interfaces\ClientInterface
+     * @var \Algolia\AlgoliaSearch\Interfaces\SearchClientInterface
      */
     private $client;
 
-    public function __construct(array $apiResponse, ClientInterface $client)
+    public function __construct(array $apiResponse, SearchClientInterface $client)
     {
         $this->apiResponse = $apiResponse;
         $this->client = $client;

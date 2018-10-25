@@ -57,6 +57,21 @@ class SearchIndex
         return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
     }
 
+    public function searchForFacetValue($facetName, $facetQuery, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['facetQuery'] = $facetQuery;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('facetQuery', $facetQuery);
+        }
+
+        return $this->api->read(
+            'POST',
+            api_path('/1/indexes/%s/facets/%s/query', $this->indexName, $facetName),
+            $requestOptions
+        );
+    }
+
     public function move($newIndexName, $requestOptions = array())
     {
         $response = $this->api->write(

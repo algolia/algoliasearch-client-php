@@ -231,12 +231,12 @@ class Index implements IndexInterface
         return $this->splitIntoBatches('deleteObject', $objects);
     }
 
-    public function deleteBy(array $args, $requestOptions = array())
+    public function deleteBy($filters, $requestOptions = array())
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/deleteByQuery', $this->indexName),
-            array('params' => Helpers::buildQuery($args)),
+            $filters,
             $requestOptions
         );
 

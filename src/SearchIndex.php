@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
-use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
 use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -12,6 +11,7 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Support\AbstractIndexContent;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class SearchIndex
@@ -609,7 +609,7 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function reindex(IndexContentInterface $indexContent, $requestOptions = array())
+    public function reindex(AbstractIndexContent $indexContent, $requestOptions = array())
     {
         $safe = isset($requestOptions['safe']) && $requestOptions['safe'];
         unset($requestOptions['safe']);

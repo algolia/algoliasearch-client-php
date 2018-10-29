@@ -588,27 +588,6 @@ class SearchIndex
         return $this->api->send($method, $path, $requestOptions, $hosts);
     }
 
-    public function getDeprecatedIndexApiKey($key, $requestOptions = array())
-    {
-        return $this->api->read(
-            'GET',
-            api_path('/1/indexes/%s/keys/%s', $this->indexName, $key),
-            $requestOptions
-        );
-    }
-
-    public function deleteDeprecatedIndexApiKey($key, $requestOptions = array())
-    {
-        $response = $this->api->write(
-            'DELETE',
-            api_path('/1/indexes/%s/keys/%s', $this->indexName, $key),
-            array(),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this);
-    }
-
     public function reindex(AbstractIndexContent $indexContent, $requestOptions = array())
     {
         $safe = isset($requestOptions['safe']) && $requestOptions['safe'];

@@ -52,8 +52,6 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfResponse($i->replaceAllRules(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->deleteRule('objectID'));
         $this->assertInstanceOfResponse($i->clearRules(array('objectID' => 'test')));
-
-        $this->assertInstanceOfResponse($i->deleteDeprecatedIndexApiKey('key'));
     }
 
     private function assertInstanceOfResponse($response)

@@ -7,7 +7,7 @@
     - name: indexName
 
 #
-# Index Management
+# SearchIndex Management
 #
 -
   method: listIndexes
@@ -80,14 +80,13 @@
 -
   method: addApiKey
   args:
-    - name: keyParams
+    - name: acl
     - name: requestOptions
       default: []
 -
   method: updateApiKey
   args:
     - name: key
-    - name: keyParams
     - name: requestOptions
       default: []
 -
@@ -114,7 +113,7 @@
     default: []
 
 -
-  method: multipleBatchObjects
+  method: multipleBatch
   args:
   - name: operations
   - name: requestOptions

@@ -13,6 +13,14 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         }
     }
 
+    public static function tearDownAfterClass()
+    {
+    }
+
+    protected function tearDown()
+    {
+    }
+
     public function testListIndexes()
     {
         $client = static::getClient();
@@ -29,7 +37,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     {
         $settings = array(
             'hitsPerPage' => 31,
-            'userData' => 'API Client copy test',
+            'userData' => 'API SearchClient copy test',
         );
         $client = static::getClient();
         $mainIndex = $client->initIndex(static::$indexes['main']);

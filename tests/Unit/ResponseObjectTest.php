@@ -6,7 +6,7 @@ class ResponseObjectTest extends NullTestCase
 {
     public function testResponseObjectIsArrayAccessible()
     {
-        $response = static::$client->addApiKey(array('acl' => 'search'));
+        $response = static::$client->addApiKey(array('search'));
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AddApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
@@ -18,7 +18,7 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
 
-        $response = static::$client->multipleBatchObjects(array());
+        $response = static::$client->multipleBatch(array());
         $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\MultipleIndexingResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }
@@ -27,40 +27,46 @@ class ResponseObjectTest extends NullTestCase
     {
         $i = static::$client->initIndex('cool');
 
-        $this->assertInstanceOfIndexingResponse($i->clear());
-        $this->assertInstanceOfIndexingResponse($i->rename('new-name'));
+        $this->assertInstanceOfResponse($i->move('new-name'));
 
-        $this->assertInstanceOfIndexingResponse($i->setSettings(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->saveObject(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->saveObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->partialUpdateObject(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->partialUpdateObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObject(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->partialUpdateOrCreateObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->deleteObject(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->deleteObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->deleteBy(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->batch(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->setSettings(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveObject(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveObjects(array(array('objectID' => 'test'))));
+        $this->assertInstanceOfResponse($i->partialUpdateObject(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->partialUpdateObjects(array(array('objectID' => 'test'))));
+        $this->assertInstanceOfResponse($i->replaceAllObjects(array(array('objectID' => 'test'))));
+        $this->assertInstanceOfResponse($i->deleteObject(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->deleteObjects(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->deleteBy(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->clearObjects());
+        $this->assertInstanceOfResponse($i->batch(array('objectID' => 'test')));
 
-        $this->assertInstanceOfIndexingResponse($i->saveSynonym(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->saveSynonyms(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshSynonyms(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->deleteSynonym('objectID'));
-        $this->assertInstanceOfIndexingResponse($i->clearSynonyms(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveSynonym(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveSynonyms(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->replaceAllSynonyms(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->deleteSynonym('objectID'));
+        $this->assertInstanceOfResponse($i->clearSynonyms(array('objectID' => 'test')));
 
-        $this->assertInstanceOfIndexingResponse($i->saveRule(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->saveRules(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->freshRules(array('objectID' => 'test')));
-        $this->assertInstanceOfIndexingResponse($i->deleteRule('objectID'));
-        $this->assertInstanceOfIndexingResponse($i->clearRules(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveRule(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveRules(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->replaceAllRules(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->deleteRule('objectID'));
+        $this->assertInstanceOfResponse($i->clearRules(array('objectID' => 'test')));
 
-        $this->assertInstanceOfIndexingResponse($i->deleteDeprecatedIndexApiKey('key'));
+        $this->assertInstanceOfResponse($i->deleteDeprecatedIndexApiKey('key'));
     }
 
-    private function assertInstanceOfIndexingResponse($response)
+    private function assertInstanceOfResponse($response)
     {
-        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\IndexingResponse', $response);
+        if (is_array($response)) {
+            foreach ($response as $r) {
+                $this->assertInstanceOfResponse($r);
+            }
+
+            return;
+        }
+
+        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AbstractResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }
 }

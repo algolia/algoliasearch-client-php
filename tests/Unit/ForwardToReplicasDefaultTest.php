@@ -2,15 +2,15 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {
     public function testIndexDoesNotSetForwardToReplicasByDefault()
     {
-        /** @var \Algolia\AlgoliaSearch\Index $index */
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = static::$client->initIndex('test');
 
         $methods = array(
@@ -19,8 +19,8 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
             'saveRule' => array('objectID' => 'xx'),
             'saveSynonyms' => array(array('objectID' => 'xx')),
             'saveRules' => array(array('objectID' => 'xx')),
-            'freshSynonyms' => array(array('objectID' => 'xx')),
-            'freshRules' => array(array('objectID' => 'xx')),
+            'replaceAllSynonyms' => array(array('objectID' => 'xx')),
+            'replaceAllRules' => array(array('objectID' => 'xx')),
             'deleteSynonym' => 'id',
             'deleteRule' => 'id',
             'clearSynonyms' => array(),
@@ -41,8 +41,8 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
      */
     public function testIndexUseConfigDefaultForwardToReplicas($defaultValue)
     {
-        /** @var \Algolia\AlgoliaSearch\Index $index */
-        $index = Client::createWithConfig(new ClientConfig(array(
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
+        $index = SearchClient::createWithConfig(new SearchConfig(array(
             'defaultForwardToReplicas' => $defaultValue,
         )))->initIndex('test');
 
@@ -52,8 +52,8 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
             'saveRule' => array('objectID' => 'xx'),
             'saveSynonyms' => array(array('objectID' => 'xx')),
             'saveRules' => array(array('objectID' => 'xx')),
-            'freshSynonyms' => array(array('objectID' => 'xx')),
-            'freshRules' => array(array('objectID' => 'xx')),
+            'replaceAllSynonyms' => array(array('objectID' => 'xx')),
+            'replaceAllRules' => array(array('objectID' => 'xx')),
             'deleteSynonym' => 'id',
             'deleteRule' => 'id',
             'clearSynonyms' => array(),

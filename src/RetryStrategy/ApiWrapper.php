@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Config\AbstractConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
@@ -11,7 +12,6 @@ use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Http\Psr7\Request;
 use Algolia\AlgoliaSearch\Http\Psr7\Uri;
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\Helpers;
@@ -28,7 +28,7 @@ class ApiWrapper
     private $http;
 
     /**
-     * @var ConfigInterface
+     * @var AbstractConfig
      */
     private $config;
 
@@ -44,7 +44,7 @@ class ApiWrapper
 
     public function __construct(
         HttpClientInterface $http,
-        ConfigInterface $config,
+        AbstractConfig $config,
         ClusterHosts $clusterHosts,
         RequestOptionsFactory $RqstOptsFactory = null
     ) {
@@ -177,13 +177,6 @@ class ApiWrapper
         }
 
         throw new UnreachableException();
-    }
-
-    public function setExtraHeader($headerName, $headerValue)
-    {
-        $this->requestOptionsFactory->setDefaultHeader($headerName, $headerValue);
-
-        return $this;
     }
 
     private function handleResponse(ResponseInterface $response, RequestInterface $request)

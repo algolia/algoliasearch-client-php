@@ -15,7 +15,7 @@ composer require guzzlehttp/guzzle
 ### Usage
 
 ```php
-$client = \Algolia\AlgoliaSearch\Client::create('YOUR_APP_ID', 'API_KEY');
+$client = \Algolia\AlgoliaSearch\SearchClient::create('YOUR_APP_ID', 'API_KEY');
 
 $client->initIndex('my_index_name')->saveObjects($data);
 

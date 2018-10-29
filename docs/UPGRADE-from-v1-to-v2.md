@@ -21,9 +21,9 @@ Here goes a table with the whole list
 | copyIndex('source', 'dest')                                 | copyIndex('source', 'dest')                                                                           |
 | scopedCopyIndex('source', 'dest', ['settings', 'synonyms']) | ]copyIndex('source', 'dest', ['scope' => scopedCopyIndex('source', 'dest', ['settings', 'synonyms'])) |
 | batchSynonyms($objects, true, false)                        | saveSynonyms($objects)                                                                                |
-| batchSynonyms($objects, true, true)                         | freshSynonyms($objects)                                                                               |
+| batchSynonyms($objects, true, true)                         | replaceAllSynonyms($objects)                                                                               |
 | batchSynonyms($objects, false, false)                       | saveSynonyms($objects, ['forwardToReplicas' => false])                                                |
-| batchSynonyms($objects, false, true)                        | freshSynonyms($objects, ['forwardToReplicas' => false])                                               |
+| batchSynonyms($objects, false, true)                        | replaceAllSynonyms($objects, ['forwardToReplicas' => false])                                               |
 
 ### Misc
 

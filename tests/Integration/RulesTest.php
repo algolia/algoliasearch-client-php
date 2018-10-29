@@ -15,6 +15,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
     public function testRulesCanBeSavedAndRetrieved()
     {
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObject($this->airports[0]);
@@ -31,7 +32,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         $res = $index->searchRules('');
         $this->assertArraySubset(array('nbHits' => 2), $res);
 
-        $index->freshRules(array($this->getRuleStub('rule-X')));
+        $index->replaceAllRules(array($this->getRuleStub('rule-X')));
         $res = $index->searchRules('');
         $this->assertArraySubset(array('nbHits' => 1), $res);
         $this->assertArraySubset($this->getRuleStub('rule-X'), $res['hits'][0]);
@@ -43,11 +44,12 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
     public function testBrowseRules()
     {
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = static::getClient()->initIndex(static::$indexes['main']);
 
         $index->saveObject($this->airports[0]);
 
-        $index->freshRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
+        $index->replaceAllRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
 
         $previousObjectID = '';
         $iterator = $index->browseRules(array('hitsPerPage' => 1));
@@ -59,14 +61,14 @@ class RulesTest extends AlgoliaIntegrationTestCase
                 ),
                 $rule['condition']
             );
-            $this->assertFalse($rule['objectID'] == $previousObjectID);
+            $this->assertNotEquals($rule['objectID'], $previousObjectID);
             $previousObjectID = $rule['objectID'];
         }
     }
 
     private function getRuleStub($objectID = 'my-rule')
     {
-        return $rule = array(
+        return array(
             'objectID' => $objectID,
             'condition' => array(
                 'pattern' => 'some text',

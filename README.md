@@ -54,7 +54,7 @@ A good library should be obvious to use.
     * **partialUpdate** means updates only the given fields
     * **clear** means delete all
     * **delete** means delete
-    * **fresh** means remove all existing and save what is passed
+    * **replaceAll** means remove all existing and save what is passed
 
 * There is no phpdoc in the code for public API method, because it's usually outdated and clutters the code. Instead, refers to the doc on algolia.com (to be published along with the final version). If the method is internal, doc can be added if necessary.
 
@@ -101,14 +101,14 @@ Logger::disable();
 // Injecting a default logger for all clients.
 ClientConfig::setDefaultLogger($myLogger);
 
-$client = Client::create($appId, $apiKey);
+$client = SearchClient::create($appId, $apiKey);
 $client->initIndex('index_name')->saveObjects($objects);
 
 // Or injecting a specific logger.
 $config = ClientConfig::create($appId, $apiKey);
 $config->setLogger($myOtherLogger);
 
-$client = Client::createWithConfig($config);
+$client = SearchClient::createWithConfig($config);
 $client->initIndex('index_name')->saveObjects($objects);
 ```
 
@@ -117,8 +117,7 @@ $client->initIndex('index_name')->saveObjects($objects);
 
 **reindex**
 
-Ever wanted to reindex your data without down time? You had to create a temporary index, add synonyms, rules and settings, index data and rename your index. 
-Now you can use `$index->freshObjects($objects)` (yes it cold be called 'reindex' but it doesn't work with synonyms and rules)
+// TO BE WRITTEN
 
 **WaitFor**
 
@@ -153,14 +152,14 @@ $config1 = new ClientConfig([
     'writeTimeout' => 90,
 ]);
 
-$client1 = Client::createWithConfig($config1);
+$client1 = SearchClient::createWithConfig($config1);
 
 $config2 = new ClientConfig(
     'writeTimeout' => 10,
 ]);
 // Note that credentials will automatically be read from env variables
 // Make sure you have set `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`
-$client2 = Client::createWithConfig($config1);
+$client2 = SearchClient::createWithConfig($config1);
 ```
 
 ### Singleton
@@ -172,9 +171,9 @@ now takes care of it for you.
 **In this case, the client will automatically read the credentials from the env variables: `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`.(())
 
 ```php
-Client::get()->getLogs();
+SearchClient::get()->getLogs();
 //...
-Client::get()->waitTask($indexName, $taskId);
+SearchClient::get()->waitTask($indexName, $taskId);
 
 ```
 

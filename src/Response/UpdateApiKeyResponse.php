@@ -2,19 +2,19 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-use Algolia\AlgoliaSearch\Client;
-use Algolia\AlgoliaSearch\Config\ClientConfig;
+use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 
 class UpdateApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Client
+     * @var \Algolia\AlgoliaSearch\SearchClient
      */
     private $client;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\ClientConfig
+     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
      */
     private $config;
 
@@ -22,14 +22,14 @@ class UpdateApiKeyResponse extends AbstractResponse
 
     public function __construct(
         array $apiResponse,
-        Client $client,
-        ClientConfig $config,
-        $keyParams
+        SearchClient $client,
+        SearchConfig $config,
+        $requestOptions
     ) {
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;
-        $this->keyParams = $keyParams;
+        $this->keyParams = $this->filterOnlyKeyParams($requestOptions);
     }
 
     public function wait($requestOptions = array())
@@ -71,5 +71,16 @@ class UpdateApiKeyResponse extends AbstractResponse
         }
 
         return $upToDate;
+    }
+
+    private function filterOnlyKeyParams($requestOptions)
+    {
+        $validKeyParams = array(
+            'acl',  'indexes',  'referers',
+            'restrictSources', 'queryParameters',  'description',
+            'validity',  'maxQueriesPerIPPerHour',  'maxHitsPerQuery',
+        );
+
+        return array_intersect_key($requestOptions, array_flip($validKeyParams));
     }
 }

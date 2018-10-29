@@ -2,14 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
-use Algolia\AlgoliaSearch\Interfaces\ConfigInterface;
+use Algolia\AlgoliaSearch\Config\AbstractConfig;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 
 class RequestOptionsFactory
 {
     private $config;
-
-    private $defaultHeaders = array();
 
     private $validQueryParameters = array(
         'forwardToReplicas',
@@ -21,9 +19,10 @@ class RequestOptionsFactory
     private $validHeaders = array(
         'Content-type',
         'User-Agent',
+        'createIfNotExists',
     );
 
-    public function __construct(ConfigInterface $config)
+    public function __construct(AbstractConfig $config)
     {
         $this->config = $config;
     }
@@ -53,7 +52,7 @@ class RequestOptionsFactory
             );
         }
 
-        return $options->addDefaultHeaders($this->defaultHeaders);
+        return $options->addDefaultHeaders($this->config->getDefaultHeaders());
     }
 
     public function createBodyLess($options, $defaults = array())
@@ -63,13 +62,6 @@ class RequestOptionsFactory
         return $options
             ->addQueryParameters($options->getBody())
             ->setBody(array());
-    }
-
-    public function setDefaultHeader($headerName, $headerValue)
-    {
-        $this->defaultHeaders[$headerName] = $headerValue;
-
-        return $this;
     }
 
     private function normalize($options)

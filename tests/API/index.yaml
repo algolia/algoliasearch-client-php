@@ -8,12 +8,12 @@
   - name: requestOptions
     default: []
 -
-  method: clear
+  method: clearObjects
   args:
   - name: requestOptions
     default: []
 -
-  method: rename
+  method: move
   args:
   - name: newIndexName
   - name: requestOptions
@@ -62,7 +62,7 @@
     - name: requestOptions
       default: []
 -
-  method: freshSynonyms
+  method: replaceAllSynonyms
   args:
     - name: synonyms
     - name: requestOptions
@@ -113,7 +113,7 @@
     - name: requestOptions
       default: []
 -
-  method: freshRules
+  method: replaceAllRules
   args:
     - name: rules
     - name: requestOptions
@@ -134,3 +134,12 @@
   args:
     - name: requestOptions
       default: []
+
+#
+# Misc
+#
+-
+  method: migrateTo
+  args:
+  - name: newAppId
+  - name: newApiKey

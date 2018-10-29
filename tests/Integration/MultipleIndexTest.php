@@ -6,11 +6,11 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
 {
     public function testMultipleIndexMethods()
     {
-        /** @var \Algolia\AlgoliaSearch\Client $client */
+        /** @var \Algolia\AlgoliaSearch\SearchClient $client */
         $client = self::getClient();
         $batch = $this->getBatch();
 
-        $client->multipleBatchObjects($batch);
+        $client->multipleBatch($batch);
         $result = $client->multipleQueries(array(), array('strategy' => 'stopIfEnoughMatches'));
         $this->assertArraySubset(array('results' => array()), $result);
         $result = $client->multipleQueries(array(
@@ -23,7 +23,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
         $retrieved = $client->multipleGetObjects($this->getMultipleGetBatch());
         $this->assertEquals(count($batch), count($retrieved['results']));
 
-        $client->multipleBatchObjects($this->getDeleteBatch());
+        $client->multipleBatch($this->getDeleteBatch());
         foreach (static::$indexes as $indexName) {
             $res = $client->initIndex($indexName)->search('');
             $this->assertEquals(0, $res['nbHits']);
@@ -41,7 +41,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
             return $item;
         }, $this->getBatch());
 
-        $this->getClient()->multipleBatchObjects($batch);
+        $this->getClient()->multipleBatch($batch);
     }
 
     private function getBatch()

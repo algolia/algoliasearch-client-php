@@ -4,8 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 class KeysTest extends AlgoliaIntegrationTestCase
 {
+    protected $acl = array('search', 'analytics');
+
     protected $keyParams = array(
-        'acl' => array('search', 'analytics'),
         'maxQueriesPerIPPerHour' => 12,
         'maxHitsPerQuery' => 2,
     );
@@ -15,7 +16,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('keys-mgmt');
+            static::$indexes['main'] = self::safeName('keys-mgmt');
             static::getClient()->clearIndex(static::$indexes['main']);
         }
     }
@@ -26,7 +27,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
         $client = static::getClient();
 
         $response = $client
-            ->addApiKey(array_merge($this->keyParams, array('validity' => 800)))
+            ->addApiKey($this->acl, array_merge($this->keyParams, array('validity' => 800)))
             ->wait();
 
         $key = $client->getApiKey($response['key']);

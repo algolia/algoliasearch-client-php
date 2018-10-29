@@ -33,9 +33,7 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfResponse($i->saveObject(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->saveObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfResponse($i->partialUpdateObject(array('objectID' => 'test')));
-        $this->assertInstanceOfResponse($i->partialUpdateObjects(array('objectID' => 'test')));
-        $this->assertInstanceOfResponse($i->partialUpdateOrCreateObject(array('objectID' => 'test')));
-        $this->assertInstanceOfResponse($i->partialUpdateOrCreateObjects(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->partialUpdateObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfResponse($i->replaceAllObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfResponse($i->deleteObject(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->deleteObjects(array('objectID' => 'test')));
@@ -64,6 +62,7 @@ class ResponseObjectTest extends NullTestCase
             foreach ($response as $r) {
                 $this->assertInstanceOfResponse($r);
             }
+
             return;
         }
 

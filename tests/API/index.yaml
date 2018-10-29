@@ -141,5 +141,5 @@
 -
   method: migrateTo
   args:
-  - name: appId
-  - name: apiKey
+  - name: newAppId
+  - name: newApiKey

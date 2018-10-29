@@ -37,7 +37,7 @@ class IndexingObjectsResponse extends AbstractResponse implements \Iterator, \Co
     /**
      * Count response for the operations. Because indexing objects
      * is always split in batches, the apiResponse property and an
-     * array of response from the API
+     * array of response from the API.
      *
      * @return number of response from the API (number of batches sent)
      */

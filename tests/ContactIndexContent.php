@@ -6,7 +6,6 @@ use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
 
 class ContactIndexContent implements IndexContentInterface
 {
-
     public function getObjects()
     {
         return \Contact::getAll();

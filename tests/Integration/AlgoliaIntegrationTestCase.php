@@ -38,6 +38,9 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         return $name;
     }
 
+    /**
+     * @return \Algolia\AlgoliaSearch\SearchClient
+     */
     protected static function getClient()
     {
         if (!self::$client) {

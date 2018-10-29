@@ -201,7 +201,7 @@ class SearchIndex
 
         // Copy all index resources from production index
         $copyResponse = $client->copyIndex($this->indexName, $tmpName, array(
-            'scope' => array('settings', 'synonyms', 'rules')
+            'scope' => array('settings', 'synonyms', 'rules'),
         ));
 
         if ($safe) {
@@ -294,6 +294,9 @@ class SearchIndex
                 $count = 0;
             }
         }
+
+        Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
 
         return new IndexingObjectsResponse($allResponses, $this);
     }

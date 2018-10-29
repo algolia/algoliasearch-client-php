@@ -13,6 +13,14 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         }
     }
 
+    public static function tearDownAfterClass()
+    {
+    }
+
+    protected function tearDown()
+    {
+    }
+
     public function testListIndexes()
     {
         $client = static::getClient();

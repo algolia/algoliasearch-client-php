@@ -80,14 +80,13 @@
 -
   method: addApiKey
   args:
-    - name: keyParams
+    - name: acl
     - name: requestOptions
       default: []
 -
   method: updateApiKey
   args:
     - name: key
-    - name: keyParams
     - name: requestOptions
       default: []
 -

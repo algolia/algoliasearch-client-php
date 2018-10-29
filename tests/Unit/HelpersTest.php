@@ -62,4 +62,22 @@ class HelpersTest extends TestCase
             ),
         );
     }
+
+    public function testMapObjectIDs()
+    {
+        $objects = array(array('primary' => 1, 'name' => 'test'), array('primary' => 2, 'name' => 'cool'));
+        $mapped = Helpers::mapObjectIDs('primary', $objects);
+        foreach ($mapped as $object) {
+            $this->assertEquals($object['primary'], $object['objectID']);
+        }
+    }
+
+    /**
+     * @expectedException \Algolia\AlgoliaSearch\Exceptions\MissingObjectId
+     */
+    public function testMapObjectIDsWithMissingPrimary()
+    {
+        $objects = array(array('name' => 'test'), array('primary' => 1, 'name' => 'cool'));
+        Helpers::mapObjectIDs('primary', $objects);
+    }
 }

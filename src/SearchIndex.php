@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Interfaces\IndexContentInterface;
 use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
@@ -170,6 +171,33 @@ class SearchIndex
     }
 
     public function saveObjects($objects, $requestOptions = array())
+    {
+        if (isset($requestOptions['autoGenerateObjectIDIfNotExist'])
+            && $requestOptions['autoGenerateObjectIDIfNotExist']) {
+            unset($requestOptions['autoGenerateObjectIDIfNotExist']);
+
+            return $this->addObjects($objects, $requestOptions);
+        }
+
+        if (isset($requestOptions['objectIDKey']) && $requestOptions['objectIDKey']) {
+            $objects = Helpers::mapObjectIDs($requestOptions['objectIDKey'], $objects);
+            unset($requestOptions['objectIDKey']);
+        }
+
+        try {
+            return $this->splitIntoBatches('updateObject', $objects, $requestOptions);
+        } catch (MissingObjectId $e) {
+            $message = "\nAll objects must have an unique objectID (like a primary key) to be valid.\n\n";
+            $message .= "If your batch has a unique identifier but isn't called objectID,\n";
+            $message .= "you can map it automatically using `saveObjects(\$objects, ['objectIDKey' => 'primary'])`\n\n";
+            $message .= "Algolia is also able to generate objectIDs automatically but *it's not recommended*.\n";
+            $message .= "To do it, use `saveObjects(\$objects, ['autoGenerateObjectIDIfNotExist' => true])`\n\n";
+
+            throw new MissingObjectId($message);
+        }
+    }
+
+    protected function addObjects($objects, $requestOptions = array())
     {
         return $this->splitIntoBatches('addObject', $objects, $requestOptions);
     }

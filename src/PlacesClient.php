@@ -3,12 +3,11 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\PlacesConfig;
-use Algolia\AlgoliaSearch\Http\HttpClientFactory;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
-final class Places
+final class PlacesClient
 {
     /**
      * @var ApiWrapper
@@ -50,7 +49,7 @@ final class Places
         }
 
         $apiWrapper = new ApiWrapper(
-            HttpClientFactory::get(),
+            Algolia::getHttpClient(),
             $config,
             $clusterHosts
         );

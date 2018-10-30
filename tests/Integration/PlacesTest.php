@@ -2,13 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Places;
+use Algolia\AlgoliaSearch\PlacesClient;
 
 class PlacesTest extends AlgoliaIntegrationTestCase
 {
     public function testSearch()
     {
-        $places = Places::create();
+        $places = PlacesClient::create();
         $requestOptions = array('hitsPerPage' => 2, 'type' => 'country');
         $response = $places->search('paris', $requestOptions);
 
@@ -18,7 +18,7 @@ class PlacesTest extends AlgoliaIntegrationTestCase
 
     public function testGetObject()
     {
-        $places = Places::create();
+        $places = PlacesClient::create();
         $response = $places->getObject('4637652be1b003cfe1e7bccc1abd833e');
 
         $subset = array(

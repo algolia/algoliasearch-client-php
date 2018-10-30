@@ -1,88 +1,171 @@
 # Upgrading from v1 to v2
 
-### Creating client
+Find the complete guide on our documentation:
 
-The `Client` class now takes its dependencies in the constructor, so you cannot only use the
-constructor with Algolia credentials. Instead you need to call the `create` static factory.
-
-```php
-// Replace
-$client = new \AlgoliaSearch\Client($appId, $apiKey);
-// By
-$client = \Algolia\AlgoliaSearch\Client::create($appId, $apiKey)
-```
-
-If you passed hosts to the constructor, you need to use the configuration. Checkout the
-documentation to learn more about the configuration.
-
-```php
-// Replace
-$client = new \AlgoliaSearch\Client($appId, $apiKey, $hosts);
-// By
-$config = (new \Algolia\AlgoliaSearch\Config\ClientConfig())
-            ->setAppId($appId)
-            ->setApiKey($apiKey)
-            ->setHosts($hosts);
-$client = \Algolia\AlgoliaSearch\Client::createWithConfig($config)
-```
+https://deploy-preview-2021--algolia-doc.netlify.com/doc/api-client/getting-started/upgrade-guide/php/
 
 
-## Method signature change
+## Methods signature change
 
-In v2, all methods follow a more consistent norm.
+It is recommend to go over your Algolia implementation and check if the method signature has changed
 
-* All arguments required by the REST API match one argument in the method signature.
-* All optional arguments are passed to the `$requestOptions`
-* The client never set any default values
+✅ Unchanged
+🤞 Changed but similar
+🛑 Requires attention
 
-#### Example
-
-Most methods change are simply moving optional parameters to RequestOptions.
-
-```php
-// Replace
-$client->getLogs($offset, $length, $type);
-// By
-$client->getLogs([
-    'offset' => $offset,
-    'length' => $length,
-    'type' => $type,
-]);
-```
-
-This allows you to use the default value without passing them
-
-```php
-// v1
-$client->getLogs(0, 10, $type);
-// v2
-$client->getLogs([
-    'type' => $type,
-]);
-```
-
-### List of method signature change
-
-Please review all changes here: [PHP v2 method signature change]().
+Note that the v1 had a magic `$requestHeaders` which as became part of `$requestOptions`. The argument was magic
+so it's not used a lot, it's ignored for clarity purpose.
 
 
-## Misc
+### Client
 
-### ObjectID is required for all objects
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `isAlive()`         | `isAlive($requestOptions = array())` |
+| 🤞 | `getTaskStatus($indexName, $taskID, $requestHeaders = array())`         | `getTask($indexName, $taskId, $requestOptions = array())` |
+| 🤞 | `multipleQueries($queries, $indexNameKey = 'indexName', $strategy = 'none')`          | `multipleQueries($queries, $requestOptions = array())` |
+| 🤞 | `batch($operations)`          | `multipleBatch($operations, $requestOptions = array())` |
+| ✅ | **ADDED**          | `multipleGetObjects($queries, $requestOptions = array())` |
+| 🤞 | `waitTask($indexName, $taskID, $timeBeforeRetry = 100, $requestHeaders = array())`          | `waitTask($indexName, $taskId, $requestOptions = array())` |
+| 🤞 | `getLogs($offset = 0, $length = 10, $type = 'all')`         | `getLogs($requestOptions = array())` |
+| 🤞 | `request($context, $method, $path, $params, $data, $hostsArray, $connectTimeout, $readTimeout)`         | `custom($method, $path, $requestOptions = array(), $hosts = null)` |
+| 🛑 | `doRequest($context, $method, $host, $path, $params, $data, $connectTimeout, $readTimeout)`         | **REMOVED** |
 
-`addObjects` was removed because we want to enforce people to set their own objectID.
 
-### ApiKeys can only be managed by the client, not the index
+##### Index management
 
-This was already deprecated and has been removed in v2. You can't add new keys on the index,
-but if you already have set some, you can use the 2 following methods to get and delete them.
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `listIndexes()`         | `listIndexes($requestOptions = array())` |
+| ✅ | `deleteIndex($indexName)`         | `deleteIndex($indexName, $requestOptions = array())` |
+| ✅ | `moveIndex($srcIndexName, $dstIndexName)`         | `moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())` |
+| ✅ | `copyIndex($srcIndexName, $dstIndexName)`         | `copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())` |
+| 🤞 | `scopedCopyIndex($srcIndexName, $dstIndexName, array $scope = array(), array $requestHeaders = array())`          | `copyIndex($srcIndexName, $dstIndexName, ['scope' => $scope] + $requestOptions)` |
+| ✅ | **ADDED**         | `clearIndex($indexName, $requestOptions = array())` |
 
-If you relied on keys on the index, update your code to use `Client::*ApiKey` and set an index restriction.
+##### MultiCluster
 
-Delete the keys on the index from the dashboard.
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `assignUserID($userID, $clusterName)`         | `assignUserId($userId, $clusterName, $requestOptions = array())` |
+| ✅ | `removeUserID($userID)`         | `removeUserId($userId, $requestOptions = array())` |
+| ✅ | `listClusters()`          | `listClusters($requestOptions = array())` |
+| ✅ | `getUserID($userID)`          | `getUserId($userId, $requestOptions = array())` |
+| 🤞 | `listUserIDs($page = 0, $hitsPerPage = 20)`         | `listUserIds($requestOptions = array())` |
+| ✅ | `getTopUserID()`         | `getTopUserId($requestOptions = array())` |
+| 🤞 | `searchUserIDs($query, $clusterName = null, $page = 0, $hitsPerPage = 20)`          | `searchUserIds($query, $requestOptions = array())` |
 
-### Browse
+##### API Keys
 
-* All `browse*` method return an iterator
-* `Index::browseFrom` was removed, use `browse` and pass the cursor in the `$requestOptions`.
-Note: this method could easily be added back for DX purpose, as long as it uses browse internally.
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `listApiKeys()`         | `listApiKeys($requestOptions = array())` |
+| ✅ | `getApiKey($key)`         | `getApiKey($key, $requestOptions = array())` |
+| ✅ | `deleteApiKey($key)`          | `deleteApiKey($key, $requestOptions = array())` |
+| 🤞 | `addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)`          | `addApiKey($keyParams, $requestOptions = array())` |
+| 🤞 | `updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0, $indexes = null)`         | `updateApiKey($key, $keyParams, $requestOptions = array())` |
+
+##### Misc
+
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `initIndex($indexName)`         | `initIndex($indexName)` |
+| 🛑 | `initAnalytics()`         | **REMOVED** use Analytics::create($appId, $apiKey) |
+| 🛑 | `generateSecuredApiKey($privateApiKey, $query, $userToken = null)` (static)      | `generateSecuredApiKey($parentApiKey, $restrictions)` |
+| 🛑 | `buildQuery($args)` (static)     | **REMOVED** use `Helpers::buildQuery($args)` |
+
+|    | v1 | v2 |
+|----|----|----|
+| 🛑 | `setExtraHeader($key, $value)`          | **UNKNOWN**  |
+| 🛑 | `setConnectTimeout($connectTimeout, $timeout = 30, $searchTimeout = 5)`         | **REMOVED** Use configuration |
+| 🛑 | `enableRateLimitForward($adminAPIKey, $endUserIP, $rateLimitAPIKey)`          | **REMOVED** Use `$requestOptions` |
+| 🛑 | `setForwardedFor($ip)`          | **REMOVED** Use `$requestOptions` |
+| 🛑 | `setAlgoliaUserToken($token)`         | **REMOVED** Use `$requestOptions` |
+| 🛑 | `disableRateLimitForward()`         | **REMOVED** |
+| 🛑 | `initPlaces($appId = null, $apiKey = null, $hostsArray = null, $options = array())` (static )     | **REMOVED** Place was removed |
+| 🛑 | `getContext()`          | **REMOVED** `Context` was removed |
+
+
+### Index
+
+##### Search
+
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `search($query, $searchParameters = null)`      | `search($query, $requestOptions = array())` |
+| ✅ | `searchForFacetValues($facetName, $facetQuery, $searchParameters = array())`      | **OOPS**  |
+| ✅ | `searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())`     | **OOPS** |
+| ✅ | `searchFacet($facetName, $facetQuery, $query = array())`      | **OOPS** |
+
+
+##### objects
+
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `batch($operations)`      | `batch($requests, $requestOptions = array())` |
+| 🛑 | `batchObjects($objects, $objectIDKey = 'objectID', $objectActionKey = 'objectAction')`      | **REMOVED** Use `batch` |
+| 🛑 | `addObject($content, $objectID = null)`     | **REMOVED** Use saveObject |
+| 🛑 | `addObjects($objects, $objectIDKeyLegacy = 'objectID')`     | **REMOVED** Use saveObjects |
+| 🤞 | `getObject($objectID, $attributesToRetrieve = null)`      | `getObject($objectId, $requestOptions = array())` |
+| 🤞 | `getObjects($objectIDs, $attributesToRetrieve = '')`      | `getObjects($objectIds, $requestOptions = array())` |
+| 🛑 | `partialUpdateObject($partialObject, $createIfNotExists = true)`      | `partialUpdateObject($object, $requestOptions = array())` and `partialUpdateOrCreateObject($object, $requestOptions = array())` |
+| 🛑 | `partialUpdateObjects($objects, $createIfNotExistsOrObjectIDKeyLegacy = 'objectID', $createIfNotExistsLegacy = true)`     | `partialUpdateObjects($object, $requestOptions = array())` and `partialUpdateOrCreateObjects($object, $requestOptions = array())` |
+| ✅ | `saveObject($object, $objectIDKeyLegacy = 'objectID')`      | `saveObject($object, $requestOptions = array())` |
+| ✅ | `saveObjects($objects, $objectIDKeyLegacy = 'objectID')`      | `saveObjects($objects, $requestOptions = array())` |
+| ✅ | `deleteObject($objectID)`     | `deleteObject($objectId, $requestOptions = array())` |
+| ✅ | `deleteObjects($objects)`     | `deleteObject($objectId, $requestOptions = array())` |
+| ✅ | `deleteBy(array $filterParameters)`     | `deleteBy(array $args, $requestOptions = array())` |
+| 🛑 | `deleteByQuery($query, $args = array(), $waitLastCall = true)`      | **REMOVED** use deleteBy |
+
+
+##### Index resources
+
+###### Settings
+
+|    | v1 | v2 |
+|----|----|----|
+| ✅ | `getSettings()`     | `getSettings($requestOptions = array())` |
+| 🤞 | `setSettings($settings, $forwardToReplicas = false)`      | `setSettings($settings, $requestOptions = array())` |
+
+###### Synonyms
+
+|    | v1 | v2 |
+|----|----|----|
+| 🤞 | `searchSynonyms($query, array $synonymType = array(), $page = 0, $hitsPerPage = 100)`       | `searchSynonyms($query, $requestOptions = array())` |
+| ✅ | `getSynonym($objectID)`       | `getSynonym($objectId, $requestOptions = array())` |
+| 🤞 | `deleteSynonym($objectID, $forwardToReplicas = false)`        | `deleteSynonym($objectId, $requestOptions = array())` |
+| 🤞 | `clearSynonyms($forwardToReplicas = false)`       | `clearSynonyms($requestOptions = array())` |
+| 🛑 | `batchSynonyms($objects, $forwardToReplicas = false, $replaceExistingSynonyms = false)`       | **REMOVED** Use `saveSynonyms`, `deleteSynonyms` (plurial) |
+| 🤞 | `saveSynonym($objectID, $content, $forwardToReplicas = false)`        | `saveSynonym($synonym, $requestOptions = array())` |
+| 🤞 | `initSynonymIterator($batchSize = 1000)`      | `browseSynonyms($requestOptions = array())` |
+
+###### Rules
+
+|    | v1 | v2 |
+|----|----|----|
+| 🤞 | `searchRules(array $params = array())`      | `searchRules($query, $requestOptions = array())` |
+| ✅ | `getRule($objectID)`      | `getRule($objectId, $requestOptions = array())` |
+| 🤞 | `deleteRule($objectID, $forwardToReplicas = false)`     | `deleteRule($objectId, $requestOptions = array())` |
+| 🤞 | `clearRules($forwardToReplicas = false)`      | `clearRules($requestOptions = array())` |
+| 🛑 | `batchRules($rules, $forwardToReplicas = false, $clearExistingRules = false)`     | **REMOVED** Use `saveRules`, `deleteRules` (plurial) |
+| 🤞 | `saveRule($objectID, $content, $forwardToReplicas = false)`     | `saveRule($rule, $requestOptions = array())` |
+| 🤞 | `initRuleIterator($batchSize = 500)`      | `browseRules($requestOptions = array())` |
+
+##### Api Keys
+
+|    | v1 | v2 |
+|----|----|----|
+| 🛑 | `listApiKeys()`     | **REMOVED** Manage keys on the Client |
+| 🤞 | `getApiKey($key)`     | `getDeprecatedIndexApiKey($key, $requestOptions = array())` |
+| 🤞 | `deleteApiKey($key)`      | `deleteDeprecatedIndexApiKey($key, $requestOptions = array())` |
+| 🛑 | `addApiKey($obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)`     | **REMOVED** Manage keys on the Client |
+| 🛑 | `updateApiKey($key, $obj, $validity = 0, $maxQueriesPerIPPerHour = 0, $maxHitsPerQuery = 0)`      | **REMOVED** Manage keys on the Client |
+
+##### Misc
+
+|    | v1 | v2 |
+|----|----|----|
+| 🤞 | `waitTask($taskID, $timeBeforeRetry = 100)`     | `waitTask($taskId, $requestOptions = array())` |
+| 🤞 | `getTaskStatus($taskID)`      | `getTask($taskId, $requestOptions = array())` |
+| 🤞 | `clearIndex()`      | `clear($requestOptions = array())` |
+| 🤞 | `browseFrom($query, $params = null, $cursor = null)`      | `browse($requestOptions = array())` |

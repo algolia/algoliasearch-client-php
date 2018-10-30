@@ -13,7 +13,6 @@ class RuleIterator extends AbstractAlgoliaIterator
         return $hit;
     }
 
-
     protected function fetchNextPage()
     {
         if (is_array($this->response) && $this->key >= $this->response['nbHits']) {

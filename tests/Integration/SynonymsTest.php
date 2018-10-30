@@ -68,11 +68,15 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         $index->replaceAllSynonyms(array($this->caliSyn, $this->pekingSyn, $this->anotherSyn));
 
         $previousObjectID = '';
+        $i = 0;
         $iterator = $index->browseSynonyms(array('hitsPerPage' => 1));
         foreach ($iterator as $synonym) {
             $this->assertArraySubset(array('type' => 'synonym'), $synonym);
-            $this->assertFalse($synonym['objectID'] == $previousObjectID);
+            $this->assertNotEquals($synonym['objectID'], $previousObjectID);
             $previousObjectID = $synonym['objectID'];
+            $i++;
         }
+
+        $this->assertEquals(3, $i);
     }
 }

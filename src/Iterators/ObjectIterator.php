@@ -8,7 +8,7 @@ class ObjectIterator extends AbstractAlgoliaIterator
 {
     public function getCursor()
     {
-        return isset($this->response['cursor']) ? $this->response['cursor'] : '';
+        return isset($this->response['cursor']) ? $this->response['cursor'] : null;
     }
 
     /**
@@ -24,20 +24,26 @@ class ObjectIterator extends AbstractAlgoliaIterator
         return $hit;
     }
 
-    protected function fetchCurrentPageResults()
+    protected function fetchNextPage()
     {
+        if (is_array($this->response) && !isset($this->response['cursor'])) {
+            return;
+        }
+
         $cursor = array();
         if (isset($this->response['cursor'])) {
             $cursor['cursor'] = $this->response['cursor'];
         }
 
         $this->response = $this->api->read(
-            empty($reqOpts) ? 'GET' : 'POST',
+            'POST',
             Helpers::apiPath('/1/indexes/%s/browse', $this->indexName),
             array_merge(
                 $this->requestOptions,
                 $cursor
             )
         );
+
+        $this->batchKey = 0;
     }
 }

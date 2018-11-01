@@ -41,7 +41,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
             return $item;
         }, $this->getBatch());
 
-        $this->getClient()->multipleBatch($batch);
+        self::getClient()->multipleBatch($batch);
     }
 
     private function getBatch()
@@ -50,7 +50,7 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
         $actions = array('addObject', 'updateObject', 'partialUpdateObject');
 
         foreach ($this->airports as $airport) {
-            static::$indexes[$airport['zone']] = $this->safeName($airport['zone']);
+            static::$indexes[$airport['zone']] = self::safeName($airport['zone']);
 
             $batch[] = array(
                 'action' => $actions[rand(0, 2)],

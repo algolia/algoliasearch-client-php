@@ -25,7 +25,7 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         parent::tearDownAfterClass();
 
         foreach (static::$indexes as $indexName) {
-            static::getClient()->deleteIndex($indexName);
+            static::getClient()->initIndex($indexName)->delete();
         }
     }
 

@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
-use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
@@ -77,6 +76,11 @@ class SearchClient
         return new SearchIndex($indexName, $this->api, $this->config);
     }
 
+    public function isAlive($requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/isalive'), $requestOptions);
+    }
+
     public function multipleQueries($queries, $requestOptions = array())
     {
         if (is_array($requestOptions)) {
@@ -124,76 +128,6 @@ class SearchClient
     public function listIndexes($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
-    }
-
-    public function moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())
-    {
-        return $this->initIndex($srcIndexName)->move($dstIndexName, $requestOptions);
-    }
-
-    public function copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())
-    {
-        $response = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $srcIndexName),
-            array(
-                'operation' => 'copy',
-                'destination' => $dstIndexName,
-            ),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this->initIndex($dstIndexName));
-    }
-
-    public function clearIndex($indexName, $requestOptions = array())
-    {
-        return $this->initIndex($indexName)->clearObjects($requestOptions);
-    }
-
-    public function deleteIndex($indexName, $requestOptions = array())
-    {
-        $response = $this->api->write(
-            'DELETE',
-            api_path('/1/indexes/%s', $indexName),
-            array(),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this->initIndex($indexName));
-    }
-
-    public function copySettings($srcIndexName, $dstIndexName, $requestOptions = array())
-    {
-        if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('settings');
-        } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('settings'));
-        }
-
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
-    }
-
-    public function copySynonyms($srcIndexName, $dstIndexName, $requestOptions = array())
-    {
-        if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('synonyms');
-        } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('synonyms'));
-        }
-
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
-    }
-
-    public function copyRules($srcIndexName, $dstIndexName, $requestOptions = array())
-    {
-        if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('rules');
-        } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('rules'));
-        }
-
-        return $this->copyIndex($srcIndexName, $dstIndexName, $requestOptions);
     }
 
     public function listApiKeys($requestOptions = array())

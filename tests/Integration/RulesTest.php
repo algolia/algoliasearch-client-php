@@ -9,7 +9,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('rules-mgmt');
+            static::$indexes['main'] = self::safeName('rules-mgmt');
         }
     }
 
@@ -52,6 +52,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         $index->replaceAllRules(array($this->getRuleStub('rule-1'), $this->getRuleStub('rule-2'), $this->getRuleStub('rule-3')));
 
         $previousObjectID = '';
+        $i = 0;
         $iterator = $index->browseRules(array('hitsPerPage' => 1));
         foreach ($iterator as $rule) {
             $this->assertArraySubset(
@@ -63,7 +64,10 @@ class RulesTest extends AlgoliaIntegrationTestCase
             );
             $this->assertNotEquals($rule['objectID'], $previousObjectID);
             $previousObjectID = $rule['objectID'];
+            $i++;
         }
+
+        $this->assertEquals(3, $i);
     }
 
     private function getRuleStub($objectID = 'my-rule')

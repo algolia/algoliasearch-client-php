@@ -90,6 +90,42 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
+    public function copyTo($destIndexName, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/operation', $this->indexName),
+            array(
+                'operation' => 'copy',
+                'destination' => $destIndexName,
+            ),
+            $requestOptions
+        );
+
+        return new IndexingResponse($response, $this);
+    }
+
+    public function copyIndexToApp($newAppId, $newApiKey, $requestOptions = array())
+    {
+        $allResponses = array();
+
+        $newIndex = SearchClient::create($newAppId, $newApiKey)->initIndex($this->indexName);
+
+        $settings = $this->getSettings();
+        $allResponses[] = $newIndex->setSettings($settings);
+
+        $objectsIterator = $this->browseObjects();
+        $allResponses[] = $newIndex->saveObjects($objectsIterator);
+
+        $synonymsIterator = $this->browseSynonyms();
+        $allResponses[] = $newIndex->saveSynonyms($synonymsIterator);
+
+        $rulesIterator = $this->browseRules();
+        $allResponses[] = $newIndex->saveRules($rulesIterator);
+
+        return $allResponses;
+    }
+
     public function getSettings($requestOptions = array())
     {
         if (is_array($requestOptions)) {
@@ -343,21 +379,6 @@ class SearchIndex
     public function browseObjects($requestOptions = array())
     {
         return new ObjectIterator($this->indexName, $this->api, $requestOptions);
-    }
-
-    public function copyTo($destIndexName, $requestOptions = array())
-    {
-        $response = $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
-                'operation' => 'copy',
-                'destination' => $destIndexName,
-            ),
-            $requestOptions
-        );
-
-        return new IndexingResponse($response, $this);
     }
 
     public function searchSynonyms($query, $requestOptions = array())
@@ -696,23 +717,6 @@ class SearchIndex
         }
 
         return $allResponses;
-    }
-
-    public function migrateTo($newAppId, $newApiKey)
-    {
-        $newIndex = SearchClient::create($newAppId, $newApiKey)->initIndex($this->indexName);
-
-        $settings = $this->getSettings();
-        $newIndex->setSettings($settings);
-
-        $objectsIterator = $this->browseObjects();
-        $newIndex->saveObjects($objectsIterator);
-
-        $synonymsIterator = $this->browseSynonyms();
-        $newIndex->saveSynonyms($synonymsIterator);
-
-        $rulesIterator = $this->browseRules();
-        $newIndex->saveRules($rulesIterator);
     }
 
     public function delete($requestOptions = array())

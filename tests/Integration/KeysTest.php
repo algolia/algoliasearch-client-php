@@ -17,7 +17,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
 
         if (!isset(static::$indexes['main'])) {
             static::$indexes['main'] = self::safeName('keys-mgmt');
-            static::getClient()->clearIndex(static::$indexes['main']);
+            static::getClient()->initIndex(static::$indexes['main'])->clearObjects();
         }
     }
 

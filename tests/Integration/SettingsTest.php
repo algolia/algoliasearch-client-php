@@ -15,7 +15,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('settings-mgmt');
+            static::$indexes['main'] = self::safeName('settings-mgmt');
         }
     }
 
@@ -37,7 +37,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $replica1 = self::safeName('settings-mgmt_REPLICA');
 
         try {
-            static::getClient()->deleteIndex($replica1);
+            static::getClient()->initIndex($replica1)->delete();
         } catch (\Exception $e) {
         }
         $index = static::getClient()->initIndex(static::$indexes['main']);
@@ -57,6 +57,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $this->assertNotEquals($retrievedPrimarySettings['hitsPerPage'], $retrievedReplicaSettings['hitsPerPage']);
 
         // If I set forwardToReplicas to true by default, it should work
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = self::newClient(array('defaultForwardToReplicas' => true))
             ->initIndex(static::$indexes['main']);
         $index->setSettings($settingsWithReplicas);

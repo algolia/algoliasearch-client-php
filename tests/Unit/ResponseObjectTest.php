@@ -27,9 +27,12 @@ class ResponseObjectTest extends NullTestCase
     {
         $i = static::$client->initIndex('cool');
 
-        $this->assertInstanceOfResponse($i->move('new-name'));
+        $this->assertInstanceOfResponse($i->moveTo('new-name'));
+        $this->assertInstanceOfResponse($i->copyTo('new-name'));
 
         $this->assertInstanceOfResponse($i->setSettings(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->copySettingsTo('indexName'));
+
         $this->assertInstanceOfResponse($i->saveObject(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->saveObjects(array(array('objectID' => 'test'))));
         $this->assertInstanceOfResponse($i->partialUpdateObject(array('objectID' => 'test')));
@@ -44,12 +47,14 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfResponse($i->saveSynonym(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->saveSynonyms(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->replaceAllSynonyms(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->copySynonymsTo('indexName'));
         $this->assertInstanceOfResponse($i->deleteSynonym('objectID'));
         $this->assertInstanceOfResponse($i->clearSynonyms(array('objectID' => 'test')));
 
         $this->assertInstanceOfResponse($i->saveRule(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->saveRules(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($i->replaceAllRules(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->copyRulesTo('indexName'));
         $this->assertInstanceOfResponse($i->deleteRule('objectID'));
         $this->assertInstanceOfResponse($i->clearRules(array('objectID' => 'test')));
     }

@@ -9,7 +9,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('general-index-mgmt');
+            static::$indexes['main'] = self::safeName('general-index-mgmt');
         }
     }
 
@@ -45,15 +45,16 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $mainIndex->saveObjects($this->airports);
 
         $copyIndexName = static::$indexes['main'].'-COPY';
-        $client->copyIndex(static::$indexes['main'], $copyIndexName);
+        $mainIndex->copyTo($copyIndexName);
         $this->assertIndexExists($copyIndexName);
-        $res = $client->initIndex($copyIndexName)->search('');
+        $copiedIndex = $client->initIndex($copyIndexName);
+        $res = $copiedIndex->search('');
         $this->assertEquals(count($this->airports), $res['nbHits']);
-        $set = $client->initIndex($copyIndexName)->getSettings();
+        $set = $copiedIndex->getSettings();
         $this->assertArraySubset($settings, $set);
 
         static::$indexes['copy-scoped'] = $copyIndexName.'-scoped-settings';
-        $client->copyIndex(static::$indexes['main'], static::$indexes['copy-scoped'], array('scope' => 'settings'));
+        $mainIndex->copyTo(static::$indexes['copy-scoped'], array('scope' => 'settings'));
         $this->assertIndexExists(static::$indexes['copy-scoped']);
         $res = $client->initIndex(static::$indexes['copy-scoped'])->search('');
         $this->assertEquals(0, $res['nbHits']);
@@ -61,7 +62,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $this->assertArraySubset($settings, $set);
 
         static::$indexes['moved'] = $copyIndexName.'-MOVED';
-        $client->moveIndex($copyIndexName, static::$indexes['moved']);
+        $copiedIndex->moveTo(static::$indexes['moved']);
         $this->assertIndexExists(static::$indexes['moved']);
     }
 
@@ -72,21 +73,21 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
 
         $response = $index->search('');
         $this->assertGreaterThanOrEqual(count($this->airports), $response['nbHits']);
-        static::getClient()->clearIndex(static::$indexes['main']);
+        $index->clearObjects();
         $response = $index->search('');
         $this->assertEquals(0, $response['nbHits']);
     }
 
     public function testDeleteIndex()
     {
-        $client = static::getClient();
         $name = self::safeName('index-to-be-delete-within-test-case');
-        $client->initIndex($name)->setSettings(
+        $index = static::getClient()->initIndex($name);
+        $index->setSettings(
             array('hitsPerPage' => 32)
         );
 
         $this->assertIndexExists($name);
-        $client->deleteIndex($name);
+        $index->delete();
         $this->assertIndexDoesNotExist($name);
     }
 

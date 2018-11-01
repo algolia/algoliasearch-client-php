@@ -9,7 +9,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('rules-mgmt');
+            static::$indexes['main'] = self::safeName('rules-mgmt');
         }
     }
 

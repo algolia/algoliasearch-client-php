@@ -7,9 +7,10 @@ require_once dirname(__DIR__).'/autoload.php';
 $client = \Algolia\AlgoliaSearch\SearchClient::get();
 
 $indexName = safeName('client-tests-co-composer');
-$index = $client->initIndex($indexName)->setSettings(array('hitsPerPage' => 30))->wait();
+$index = $client->initIndex($indexName);
 
-$client->deleteIndex($indexName)->wait();
+$index->setSettings(array('hitsPerPage' => 30))->wait();
+$index->delete()->wait();
 
 function safeName($name)
 {

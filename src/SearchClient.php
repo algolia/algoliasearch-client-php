@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
-use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;

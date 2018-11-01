@@ -27,7 +27,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         parent::setUp();
 
         if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = $this->safeName('synomyms-mgmt');
+            static::$indexes['main'] = self::safeName('synomyms-mgmt');
         }
     }
 

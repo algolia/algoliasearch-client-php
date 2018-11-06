@@ -26,6 +26,7 @@
 
 require_once 'src/AlgoliaSearch/AlgoliaException.php';
 require_once 'src/AlgoliaSearch/AlgoliaConnectionException.php';
+require_once 'src/AlgoliaSearch/Analytics.php';
 require_once 'src/AlgoliaSearch/Client.php';
 require_once 'src/AlgoliaSearch/ClientContext.php';
 require_once 'src/AlgoliaSearch/Index.php';

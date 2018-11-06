@@ -4,6 +4,12 @@
 
 <Contributors, please add your changes below this line>
 
+### 1.28.0
+
+* Introduce `$client->multipleGetObjects()` to retrieve objects via ObjectID
+    across multiple indices
+    
+* fix `$index->waitTask` to return task, behavior prior to 1.27.0
 
 ### 1.27.0
 

@@ -946,7 +946,7 @@ class Index
     {
         $requestHeaders = func_num_args() === 3 && is_array(func_get_arg(2)) ? func_get_arg(2) : array();
 
-        $this->client->waitTask($this->indexName, $taskID, $timeBeforeRetry, $requestHeaders);
+        return $this->client->waitTask($this->indexName, $taskID, $timeBeforeRetry, $requestHeaders);
     }
 
     /**

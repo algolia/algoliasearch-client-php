@@ -93,9 +93,9 @@ so it's not used a lot, it's ignored for clarity purpose.
 |    | v1 | v2 |
 |----|----|----|
 | ✅ | `search($query, $searchParameters = null)`      | `search($query, $requestOptions = array())` |
-| ✅ | `searchForFacetValues($facetName, $facetQuery, $searchParameters = array())`      | **OOPS**  |
-| ✅ | `searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())`     | **OOPS** |
-| ✅ | `searchFacet($facetName, $facetQuery, $query = array())`      | **OOPS** |
+| ✅ | `searchForFacetValues($facetName, $facetQuery, $searchParameters = array())`      | `searchForFacetValues($facetName, $facetQuery, $searchParameters + $requestOptions)`  |
+| ✅ | `searchDisjunctiveFaceting($query, $disjunctive_facets, $params = array(), $refinements = array())`     | Coming soon |
+| ✅ | `searchFacet($facetName, $facetQuery, $query = array())`      | Use `searchForFacetValues`|
 
 
 ##### objects

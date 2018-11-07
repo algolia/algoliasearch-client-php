@@ -10,7 +10,7 @@
 # SearchIndex Management
 #
 -
-  method: listIndexes
+  method: listIndices
   args:
     - name: requestOptions
       default: []

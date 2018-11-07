@@ -126,7 +126,7 @@ class SearchClient
         );
     }
 
-    public function listIndexes($requestOptions = array())
+    public function listIndices($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
     }

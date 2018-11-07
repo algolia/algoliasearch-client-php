@@ -24,12 +24,12 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
     public function testListIndexes()
     {
         $client = static::getClient();
-        $list = $client->listIndexes();
+        $list = $client->listIndices();
         $this->assertArrayHasKey('items', $list);
         $this->assertEquals(1, $list['nbPages']);
 
         $nbPages = ceil(count($list['items']) / 100);
-        $list = $client->listIndexes(array('page' => 1));
+        $list = $client->listIndices(array('page' => 1));
         $this->assertEquals($nbPages, $list['nbPages']);
     }
 
@@ -93,7 +93,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
 
     private function assertIndexExists($indexName)
     {
-        $list = static::getClient()->listIndexes();
+        $list = static::getClient()->listIndices();
         foreach ($list['items'] as $index) {
             if ($index['name'] === $indexName) {
                 $this->assertTrue(true);
@@ -107,7 +107,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
 
     private function assertIndexDoesNotExist($indexName)
     {
-        $list = static::getClient()->listIndexes();
+        $list = static::getClient()->listIndices();
         foreach ($list['items'] as $index) {
             if ($index['name'] === $indexName) {
                 $this->assertTrue(false);

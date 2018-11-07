@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-class PlacesConfig extends AbstractConfig
+final class PlacesConfig extends AbstractConfig
 {
     public static function create($appId, $apiKey)
     {

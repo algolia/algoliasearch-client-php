@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-class AnalyticsConfig extends AbstractConfig
+final class AnalyticsConfig extends AbstractConfig
 {
     public static function create($appId = null, $apiKey = null)
     {

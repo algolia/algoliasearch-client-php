@@ -5,12 +5,13 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\PlacesConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class PlacesClient
 {
     /**
-     * @var ApiWrapper
+     * @var ApiWrapperInterface
      */
     private $api;
 
@@ -19,7 +20,7 @@ final class PlacesClient
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, PlacesConfig $config)
+    public function __construct(ApiWrapperInterface $api, PlacesConfig $config)
     {
         $this->api = $api;
         $this->config = $config;

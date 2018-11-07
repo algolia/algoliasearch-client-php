@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
-class Php53HttpClient implements HttpClientInterface
+final class Php53HttpClient implements HttpClientInterface
 {
     private $curlMHandle;
 

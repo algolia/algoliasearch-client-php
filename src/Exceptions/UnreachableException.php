@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class UnreachableException extends AlgoliaException
+final class UnreachableException extends AlgoliaException
 {
     public function __construct($message = '', $code = 0, $previous = null)
     {

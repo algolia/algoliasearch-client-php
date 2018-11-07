@@ -5,12 +5,13 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\AnalyticsConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class AnalyticsClient
 {
     /**
-     * @var ApiWrapper
+     * @var ApiWrapperInterface
      */
     private $api;
 
@@ -19,7 +20,7 @@ final class AnalyticsClient
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, AnalyticsConfig $config)
+    public function __construct(ApiWrapperInterface $api, AnalyticsConfig $config)
     {
         $this->api = $api;
         $this->config = $config;

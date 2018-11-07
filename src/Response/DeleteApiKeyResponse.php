@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;
 
-class DeleteApiKeyResponse extends AbstractResponse
+final class DeleteApiKeyResponse extends AbstractResponse
 {
     /**
      * @var \Algolia\AlgoliaSearch\Config\SearchConfig

@@ -36,7 +36,7 @@ so it's not used a lot, it's ignored for clarity purpose.
 
 |    | v1 | v2 |
 |----|----|----|
-| ✅ | `listIndexes()`         | `listIndexes($requestOptions = array())` |
+| 🤞 | `listIndexes()`         | `listIndices($requestOptions = array())` |
 | ✅ | `deleteIndex($indexName)`         | `deleteIndex($indexName, $requestOptions = array())` |
 | ✅ | `moveIndex($srcIndexName, $dstIndexName)`         | `moveIndex($srcIndexName, $dstIndexName, $requestOptions = array())` |
 | ✅ | `copyIndex($srcIndexName, $dstIndexName)`         | `copyIndex($srcIndexName, $dstIndexName, $requestOptions = array())` |

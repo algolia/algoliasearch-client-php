@@ -4,12 +4,13 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
-use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
+use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\AbstractIndexContent;
 use Algolia\AlgoliaSearch\Support\Helpers;
@@ -123,7 +124,7 @@ class SearchIndex
         $rulesIterator = $this->browseRules();
         $allResponses[] = $newIndex->saveRules($rulesIterator);
 
-        return $allResponses;
+        return new MultiResponse($allResponses);
     }
 
     public function getSettings($requestOptions = array())
@@ -293,7 +294,11 @@ class SearchIndex
         // Move temporary index to production
         $moveResponse = $tmpIndex->moveTo($this->indexName);
 
-        return array($copyResponse, $batchResponse, $moveResponse);
+        if ($safe) {
+            $moveResponse->wait();
+        }
+
+        return new MultiResponse(array($copyResponse, $batchResponse, $moveResponse));
     }
 
     public function deleteObject($objectId, $requestOptions = array())
@@ -377,7 +382,7 @@ class SearchIndex
         }
         $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
 
-        return new IndexingObjectsResponse($allResponses, $this);
+        return new BatchIndexingResponse($allResponses, $this);
     }
 
     public function browseObjects($requestOptions = array())
@@ -720,7 +725,7 @@ class SearchIndex
             $allResponses[] = $this->setSettings(array('replicas' => $settings));
         }
 
-        return $allResponses;
+        return new MultiResponse($allResponses);
     }
 
     public function delete($requestOptions = array())

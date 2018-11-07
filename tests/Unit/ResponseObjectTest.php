@@ -19,7 +19,7 @@ class ResponseObjectTest extends NullTestCase
         $this->assertTrue(method_exists($response, 'wait'));
 
         $response = static::$client->multipleBatch(array());
-        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\MultipleIndexingResponse', $response);
+        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse', $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }
 

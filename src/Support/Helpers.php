@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 
-class Helpers
+final class Helpers
 {
     /**
      * Use this function to generate API path. It will ensure

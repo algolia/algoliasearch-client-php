@@ -12,6 +12,8 @@ use Psr\Http\Message\UriInterface;
  * @author Matthew Weier O'Phinney
  *
  * Adapted for PHP 5.3 by Algolia.
+ *
+ * @internal
  */
 class Uri implements UriInterface
 {

@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\SearchClient;
 
-class AddApiKeyResponse extends AbstractResponse
+final class AddApiKeyResponse extends AbstractResponse
 {
     /**
      * @var \Algolia\AlgoliaSearch\SearchClient

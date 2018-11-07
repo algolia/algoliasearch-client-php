@@ -6,8 +6,9 @@ use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
-use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Support\Helpers;
@@ -15,7 +16,7 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 class SearchClient
 {
     /**
-     * @var ApiWrapper
+     * @var ApiWrapperInterface
      */
     protected $api;
 
@@ -26,7 +27,7 @@ class SearchClient
 
     protected static $client;
 
-    public function __construct(ApiWrapper $apiWrapper, SearchConfig $config)
+    public function __construct(ApiWrapperInterface $apiWrapper, SearchConfig $config)
     {
         $this->api = $apiWrapper;
         $this->config = $config;

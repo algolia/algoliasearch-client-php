@@ -6,6 +6,8 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * PHP stream implementation.
+ *
+ * @internal
  */
 class Stream implements StreamInterface
 {

@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\SearchIndex;
 
-class IndexingObjectsResponse extends AbstractResponse implements \Iterator, \Countable
+final class IndexingObjectsResponse extends AbstractResponse implements \Iterator, \Countable
 {
     /**
      * @var \Algolia\AlgoliaSearch\SearchIndex

@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Iterators;
 
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class ObjectIterator extends AbstractAlgoliaIterator
+final class ObjectIterator extends AbstractAlgoliaIterator
 {
     public function getCursor()
     {

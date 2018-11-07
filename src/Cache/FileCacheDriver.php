@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Cache;
 
 use Psr\SimpleCache\CacheInterface;
 
-class FileCacheDriver implements CacheInterface
+final class FileCacheDriver implements CacheInterface
 {
     const PREFIX = 'algolia-client-';
 

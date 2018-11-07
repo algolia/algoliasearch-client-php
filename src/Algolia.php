@@ -8,7 +8,7 @@ use Algolia\AlgoliaSearch\Log\Logger;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 
-class Algolia
+final class Algolia
 {
     const VERSION = '2.0.0';
 

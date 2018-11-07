@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Cache;
 
 use Psr\SimpleCache\CacheInterface;
 
-class NullCacheDriver implements CacheInterface
+final class NullCacheDriver implements CacheInterface
 {
     /**
      * {@inheritdoc}

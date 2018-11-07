@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Log\LogLevel;
 
-class ApiWrapper
+final class ApiWrapper implements ApiWrapperInterface
 {
     /**
      * @var HttpClientInterface

@@ -2,7 +2,10 @@
 
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
-class Host
+/**
+ * @internal
+ */
+final class Host
 {
     private $url;
 

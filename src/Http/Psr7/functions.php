@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Http\Psr7;
 
 use Psr\Http\Message\StreamInterface;
 
+/**
+ * @internal
+ */
 function stream_for($resource = '', array $options = array())
 {
     if (is_scalar($resource)) {
@@ -46,6 +49,9 @@ function stream_for($resource = '', array $options = array())
     throw new \InvalidArgumentException('Invalid resource type: '.gettype($resource));
 }
 
+/**
+ * @internal
+ */
 function copy_to_string(StreamInterface $stream, $maxLen = -1)
 {
     $buffer = '';

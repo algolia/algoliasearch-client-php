@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class NotFoundException extends BadRequestException
+final class NotFoundException extends BadRequestException
 {
 }

@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Iterators;
 
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class SynonymIterator extends AbstractAlgoliaIterator
+final class SynonymIterator extends AbstractAlgoliaIterator
 {
     protected function formatHit(array $hit)
     {

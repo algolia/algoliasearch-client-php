@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch\RequestOptions;
 use Algolia\AlgoliaSearch\Config\AbstractConfig;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 
-class RequestOptionsFactory
+final class RequestOptionsFactory
 {
     private $config;
 

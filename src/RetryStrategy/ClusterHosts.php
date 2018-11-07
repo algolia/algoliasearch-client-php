@@ -4,7 +4,10 @@ namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
 
-class ClusterHosts
+/**
+ * @internal
+ */
+final class ClusterHosts
 {
     private $read;
 

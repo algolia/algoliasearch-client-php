@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-final class SearchConfig extends AbstractConfig
+class SearchConfig extends AbstractConfig
 {
     private $defaultWaitTaskTimeBeforeRetry = 100000;
 

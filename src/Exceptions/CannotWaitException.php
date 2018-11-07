@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class CannotWaitException extends AlgoliaException
+final class CannotWaitException extends AlgoliaException
 {
 }

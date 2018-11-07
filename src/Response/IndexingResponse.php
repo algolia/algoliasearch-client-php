@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\SearchIndex;
 
-class IndexingResponse extends AbstractResponse
+final class IndexingResponse extends AbstractResponse
 {
     /**
      * @var \Algolia\AlgoliaSearch\SearchIndex

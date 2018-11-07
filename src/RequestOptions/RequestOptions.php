@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\RequestOptions;
 
 use Algolia\AlgoliaSearch\Support\Helpers;
 
-class RequestOptions
+final class RequestOptions
 {
     private $headers = array();
 

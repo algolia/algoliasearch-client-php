@@ -10,6 +10,8 @@ use Psr\Http\Message\StreamInterface;
  *
  * This class was modified to support PHP 5.3,
  * same for all the classes under PSR7 folder.
+ *
+ * @internal
  */
 class Response implements ResponseInterface
 {

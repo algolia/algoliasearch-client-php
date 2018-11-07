@@ -6,11 +6,11 @@ use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Response\IndexingObjectsResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
-use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\AbstractIndexContent;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -19,7 +19,7 @@ class SearchIndex
     private $indexName;
 
     /**
-     * @var ApiWrapper
+     * @var ApiWrapperInterface
      */
     protected $api;
 
@@ -28,7 +28,7 @@ class SearchIndex
      */
     protected $config;
 
-    public function __construct($indexName, ApiWrapper $apiWrapper, SearchConfig $config)
+    public function __construct($indexName, ApiWrapperInterface $apiWrapper, SearchConfig $config)
     {
         $this->indexName = $indexName;
         $this->api = $apiWrapper;
@@ -363,14 +363,18 @@ class SearchIndex
             $count++;
 
             if ($count === $batchSize) {
-                Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+                if ('addObject' !== $action) {
+                    Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+                }
                 $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
                 $batch = array();
                 $count = 0;
             }
         }
 
-        Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        if ('addObject' !== $action) {
+            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        }
         $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
 
         return new IndexingObjectsResponse($allResponses, $this);

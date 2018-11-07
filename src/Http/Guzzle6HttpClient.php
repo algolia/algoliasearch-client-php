@@ -8,7 +8,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
 
-class Guzzle6HttpClient implements HttpClientInterface
+final class Guzzle6HttpClient implements HttpClientInterface
 {
     private $client;
 

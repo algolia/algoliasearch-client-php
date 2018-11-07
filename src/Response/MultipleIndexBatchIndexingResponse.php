@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\SearchClient;
 
-final class MultipleIndexingResponse extends AbstractResponse
+final class MultipleIndexBatchIndexingResponse extends AbstractResponse
 {
     /**
      * @var \Algolia\AlgoliaSearch\SearchClient

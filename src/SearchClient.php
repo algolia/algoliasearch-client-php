@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
-use Algolia\AlgoliaSearch\Response\MultipleIndexingResponse;
+use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -108,7 +108,7 @@ class SearchClient
             $requestOptions
         );
 
-        return new MultipleIndexingResponse($response, $this);
+        return new MultipleIndexBatchIndexingResponse($response, $this);
     }
 
     public function multipleGetObjects($requests, $requestOptions = array())

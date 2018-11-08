@@ -41,13 +41,6 @@ class SearchIndex
         return $this->indexName;
     }
 
-    public function setIndexName($indexName)
-    {
-        $this->indexName = $indexName;
-
-        return $this;
-    }
-
     public function search($query, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

@@ -5,6 +5,7 @@ enabled:
 
 disabled:
   - pre_increment
+  - self_accessor
 
 finder:
   path:

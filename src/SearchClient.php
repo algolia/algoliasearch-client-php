@@ -254,7 +254,7 @@ class SearchClient
     {
         $index = $this->initIndex($indexName);
 
-        return $index->waitTask($taskId, $requestOptions);
+        $index->waitTask($taskId, $requestOptions);
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

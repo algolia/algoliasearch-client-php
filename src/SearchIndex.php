@@ -67,25 +67,6 @@ class SearchIndex
         );
     }
 
-    public function copyIndexToApp(SearchIndex $index, $requestOptions = array())
-    {
-        $allResponses = array();
-
-        $settings = $this->getSettings();
-        $allResponses[] = $index->setSettings($settings);
-
-        $synonymsIterator = $this->browseSynonyms();
-        $allResponses[] = $index->saveSynonyms($synonymsIterator);
-
-        $objectsIterator = $this->browseObjects();
-        $allResponses[] = $index->saveObjects($objectsIterator);
-
-        $rulesIterator = $this->browseRules();
-        $allResponses[] = $index->saveRules($rulesIterator);
-
-        return new MultiResponse($allResponses);
-    }
-
     public function getSettings($requestOptions = array())
     {
         if (is_array($requestOptions)) {

@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase as PHPUitTestCase;
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
     protected static $indexes = array();
+
     private static $instance;
 
     /** @var SyncClient */

@@ -106,23 +106,21 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function copyIndexToApp($newAppId, $newApiKey, $requestOptions = array())
+    public function copyIndexToApp(SearchIndex $index, $requestOptions = array())
     {
         $allResponses = array();
 
-        $newIndex = SearchClient::create($newAppId, $newApiKey)->initIndex($this->indexName);
-
         $settings = $this->getSettings();
-        $allResponses[] = $newIndex->setSettings($settings);
-
-        $objectsIterator = $this->browseObjects();
-        $allResponses[] = $newIndex->saveObjects($objectsIterator);
+        $allResponses[] = $index->setSettings($settings);
 
         $synonymsIterator = $this->browseSynonyms();
-        $allResponses[] = $newIndex->saveSynonyms($synonymsIterator);
+        $allResponses[] = $index->saveSynonyms($synonymsIterator);
+
+        $objectsIterator = $this->browseObjects();
+        $allResponses[] = $index->saveObjects($objectsIterator);
 
         $rulesIterator = $this->browseRules();
-        $allResponses[] = $newIndex->saveRules($rulesIterator);
+        $allResponses[] = $index->saveRules($rulesIterator);
 
         return new MultiResponse($allResponses);
     }

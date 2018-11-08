@@ -273,7 +273,7 @@ class SearchIndex
         unset($requestOptions['safe']);
 
         $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
-        $tmpIndex = new self($tmpName, $this->api, $this->config);
+        $tmpIndex = new static($tmpName, $this->api, $this->config);
 
         // Copy all index resources from production index
         $copyResponse = $this->copyTo($tmpIndex->getIndexName(), array(
@@ -674,7 +674,7 @@ class SearchIndex
         $replicas = false;
 
         $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
-        $tmpIndex = new self($tmpName, $this->api, $this->config);
+        $tmpIndex = new static($tmpName, $this->api, $this->config);
 
         if (false === $settings = $indexContent->getSettings()) {
             $scope[] = 'settings';

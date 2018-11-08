@@ -45,7 +45,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $mainIndex->saveObjects($this->airports);
 
         $copyIndexName = static::$indexes['main'].'-COPY';
-        $mainIndex->copyTo($copyIndexName);
+        $client->copyIndex(static::$indexes['main'], $copyIndexName);
         $this->assertIndexExists($copyIndexName);
         $copiedIndex = $client->initIndex($copyIndexName);
         $res = $copiedIndex->search('');
@@ -54,7 +54,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $this->assertArraySubset($settings, $set);
 
         static::$indexes['copy-scoped'] = $copyIndexName.'-scoped-settings';
-        $mainIndex->copyTo(static::$indexes['copy-scoped'], array('scope' => 'settings'));
+        $client->copyIndex(static::$indexes['main'], static::$indexes['copy-scoped'], array('scope' => 'settings'));
         $this->assertIndexExists(static::$indexes['copy-scoped']);
         $res = $client->initIndex(static::$indexes['copy-scoped'])->search('');
         $this->assertEquals(0, $res['nbHits']);
@@ -62,7 +62,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $this->assertArraySubset($settings, $set);
 
         static::$indexes['moved'] = $copyIndexName.'-MOVED';
-        $copiedIndex->moveTo(static::$indexes['moved']);
+        $client->moveIndex($copyIndexName, static::$indexes['moved']);
         $this->assertIndexExists(static::$indexes['moved']);
     }
 

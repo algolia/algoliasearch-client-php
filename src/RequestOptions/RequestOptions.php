@@ -222,7 +222,7 @@ final class RequestOptions
      * Add a body parameter. If a value already exists for that name, it will be overwritten.
      *
      * @param string $name
-     * @param string $value
+     * @param mixed  $value
      *
      * @return $this
      */

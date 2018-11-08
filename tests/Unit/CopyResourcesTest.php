@@ -9,7 +9,7 @@ class CopyResourcesTest extends RequestTestCase
     public function testCopySettings()
     {
         try {
-            static::$client->initIndex('src')->copySettingsTo('dest');
+            static::$client->copySettings('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
             $this->assertBodySubset(array(
@@ -25,7 +25,7 @@ class CopyResourcesTest extends RequestTestCase
     public function testCopySynonyms()
     {
         try {
-            static::$client->initIndex('src')->copySynonymsTo('dest');
+            static::$client->copySynonyms('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
             $this->assertBodySubset(array(
@@ -41,7 +41,7 @@ class CopyResourcesTest extends RequestTestCase
     public function testCopyRules()
     {
         try {
-            static::$client->initIndex('src')->copyRulesTo('dest');
+            static::$client->copyRules('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
             $this->assertBodySubset(array(

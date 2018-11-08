@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase as PHPUitTestCase;
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
     protected static $indexes = array();
+    private static $instance;
 
     /** @var SyncClient */
     private static $client;
@@ -31,11 +32,16 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 
     public static function safeName($name)
     {
-        if (getenv('TRAVIS')) {
-            return sprintf('TRAVIS_php_%s_%s', $name, getenv('TRAVIS_JOB_NUMBER'));
+        if (!self::$instance) {
+            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
         }
 
-        return $name;
+        return sprintf(
+            'php_%s_%s_%s',
+            date('Y-M-d_H:i:s'),
+            self::$instance,
+            $name
+        );
     }
 
     /**

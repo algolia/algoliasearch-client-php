@@ -78,9 +78,9 @@ final class ClusterHosts
         return static::create($read, $write);
     }
 
-    public static function createForAnalytics()
+    public static function createForAnalytics($region)
     {
-        return static::create('analytics.algolia.com');
+        return static::create('analytics.'.$region.'.algolia.com');
     }
 
     public static function createFromCache($cacheKey)

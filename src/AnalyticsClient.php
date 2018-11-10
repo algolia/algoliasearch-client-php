@@ -26,9 +26,9 @@ final class AnalyticsClient
         $this->config = $config;
     }
 
-    public static function create($appId = null, $apiKey = null)
+    public static function create($appId = null, $apiKey = null, $region = null)
     {
-        return static::createWithConfig(AnalyticsConfig::create($appId, $apiKey));
+        return static::createWithConfig(AnalyticsConfig::create($appId, $apiKey, $region));
     }
 
     public static function createWithConfig(AnalyticsConfig $config)
@@ -38,7 +38,7 @@ final class AnalyticsClient
         if ($hosts = $config->getHosts()) {
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::createForAnalytics();
+            $clusterHosts = ClusterHosts::createForAnalytics($config->getRegion());
         }
 
         $apiWrapper = new ApiWrapper(

@@ -372,10 +372,12 @@ class SearchIndex
             }
         }
 
-        if ('addObject' !== $action) {
-            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        if (!empty($batch)) {
+            if ('addObject' !== $action) {
+                Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+            }
+            $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
         }
-        $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
 
         return new IndexingObjectsResponse($allResponses, $this);
     }

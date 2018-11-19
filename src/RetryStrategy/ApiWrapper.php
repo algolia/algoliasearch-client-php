@@ -228,7 +228,7 @@ final class ApiWrapper implements ApiWrapperInterface
             if (empty($body)) {
                 $body = '';
             } else {
-                \json_encode($body);
+                $body = \json_encode($body);
                 if (JSON_ERROR_NONE !== json_last_error()) {
                     throw new \InvalidArgumentException(
                         'json_encode error: ' . json_last_error_msg());

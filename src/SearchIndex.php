@@ -12,7 +12,6 @@ use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
-use Algolia\AlgoliaSearch\Support\AbstractIndexContent;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class SearchIndex
@@ -571,68 +570,6 @@ class SearchIndex
     public function custom($method, $path, $requestOptions = array(), $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
-    }
-
-    public function reindex(AbstractIndexContent $indexContent, $requestOptions = array())
-    {
-        $safe = isset($requestOptions['safe']) && $requestOptions['safe'];
-        unset($requestOptions['safe']);
-        $allResponses = array();
-        $replicas = false;
-
-        $tmpName = $this->indexName.'_tmp_'.uniqid('php_', true);
-        $tmpIndex = new static($tmpName, $this->api, $this->config);
-
-        if (false === $settings = $indexContent->getSettings()) {
-            $scope[] = 'settings';
-        }
-        if (false === $synonyms = $indexContent->getSynonyms()) {
-            $scope[] = 'synonyms';
-        }
-        if (false === $rules = $indexContent->getRules()) {
-            $scope[] = 'rules';
-        }
-
-        if (!empty($scope)) {
-            $allResponses[] = $this->copyTo($tmpName, $scope);
-        }
-
-        if ($settings) {
-            if (isset($settings['replicas'])) {
-                $replicas = $settings['replicas'];
-                unset($settings['replicas']);
-            }
-            $allResponses[] = $tmpIndex->setSettings($settings);
-        }
-
-        if ($synonyms) {
-            $allResponses[] = $tmpIndex->saveSynonyms($synonyms);
-        }
-
-        if ($rules) {
-            $allResponses[] = $tmpIndex->saveRules($rules);
-        }
-
-        $allResponses[] = $tmpIndex->saveObjects($indexContent->getObjects());
-
-        if ($safe) {
-            foreach ($allResponses as $response) {
-                $response->wait();
-            }
-        }
-
-        $moveResponse = $this->moveFrom($tmpName);
-
-        if ($safe) {
-            $moveResponse->wait();
-        }
-        $allResponses[] = $moveResponse;
-
-        if ($replicas) {
-            $allResponses[] = $this->setSettings(array('replicas' => $replicas));
-        }
-
-        return new MultiResponse($allResponses);
     }
 
     public function delete($requestOptions = array())

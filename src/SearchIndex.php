@@ -40,6 +40,11 @@ class SearchIndex
         return $this->indexName;
     }
 
+    public function getAppId()
+    {
+        return $this->config->getAppId();
+    }
+
     public function search($query, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

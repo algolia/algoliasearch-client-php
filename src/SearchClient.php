@@ -78,6 +78,11 @@ class SearchClient
         return new SearchIndex($indexName, $this->api, $this->config);
     }
 
+    public function getAppId()
+    {
+        return $this->config->getAppId();
+    }
+
     public function moveIndex($srcIndexName, $newIndexName, $requestOptions = array())
     {
         $response = $this->api->write(

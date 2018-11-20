@@ -225,10 +225,14 @@ final class ApiWrapper implements ApiWrapperInterface
         if (is_array($body)) {
             // Send an empty body instead of "[]" in case there are
             // no content/params to send
-            $body = empty($body) ? '' : \json_encode($body);
-            if (JSON_ERROR_NONE !== json_last_error()) {
-                throw new \InvalidArgumentException(
-                    'json_encode error: '.json_last_error_msg());
+            if (empty($body)) {
+                $body = '';
+            } else {
+                $body = \json_encode($body);
+                if (JSON_ERROR_NONE !== json_last_error()) {
+                    throw new \InvalidArgumentException(
+                        'json_encode error: '.json_last_error_msg());
+                }
             }
         }
 

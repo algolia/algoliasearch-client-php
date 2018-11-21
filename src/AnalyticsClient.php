@@ -53,27 +53,26 @@ final class AnalyticsClient
     /**
      * Get a paginated list of AB Test from the API.
      *
-     * @param array $params
+     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
      */
-    public function getABTests($params = array())
+        public function getABTests($requestOptions = array())
     {
-        $params += array('offset' => 0, 'limit' => 10);
-
-        return $this->api->read('GET', api_path('/2/abtests'), $params);
+        return $this->api->read('GET', api_path('/2/abtests'), $requestOptions);
     }
 
     /**
      * Get an AB Test.
      *
      * @param int $abTestID Id of the AB Test to retrieve
+     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function getABTest($abTestID)
+    public function getABTest($abTestID, $requestOptions = array())
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
@@ -86,48 +85,51 @@ final class AnalyticsClient
      * Create new AB Test.
      *
      * @param array $abTest
+     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array Information about the creation like TaskID and date
      */
-    public function addABTest($abTest)
+    public function addABTest($abTest, $requestOptions = array())
     {
-        return $this->api->write('POST', api_path('/2/abtests'), array(), $abTest);
+        return $this->api->write('POST', api_path('/2/abtests'), $abTest, $requestOptions);
     }
 
     /**
      * Stop a running AB Test.
      *
      * @param int $abTestID
+     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function stopABTest($abTestID)
+    public function stopABTest($abTestID, $requestOptions = array())
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
         }
 
-        return $this->api->write('POST', api_path('/2/abtests/%s', $abTestID));
+        return $this->api->write('POST', api_path('/2/abtests/%s', $abTestID), array(), $requestOptions);
     }
 
     /**
      * Delete an AB Test.
      *
      * @param int $abTestID
+     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function deleteABTest($abTestID)
+    public function deleteABTest($abTestID, $requestOptions = array())
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
         }
 
-        return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID));
+        return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID), array(), $requestOptions);
     }
 
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

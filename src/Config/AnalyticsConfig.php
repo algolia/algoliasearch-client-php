@@ -9,7 +9,7 @@ final class AnalyticsConfig extends AbstractConfig
         $config = array(
             'appId' => null !== $appId ? $appId : getenv('ALGOLIA_APP_ID'),
             'apiKey' => null !== $apiKey ? $apiKey : getenv('ALGOLIA_API_KEY'),
-            'region' => null !== $region ? $region : getenv('ALGOLIA_ANALYTICS_REGION'),
+            'region' => null !== $region ? $region : 'us',
         );
 
         return new static($config);

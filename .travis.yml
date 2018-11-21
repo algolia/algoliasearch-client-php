@@ -1,5 +1,10 @@
 language: php
 
+branches:
+  only:
+    - master
+    - 1.x
+
 matrix:
   include:
     - php: 5.3

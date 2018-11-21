@@ -1,0 +1,130 @@
+#
+# Main methods
+#
+-
+  method: search
+  args:
+  - name: query
+  - name: requestOptions
+    default: []
+-
+  method: clearObjects
+  args:
+  - name: requestOptions
+    default: []
+
+#
+# Settings Management
+#
+-
+  method: getSettings
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: setSettings
+  args:
+    - name: settings
+    - name: requestOptions
+      default: []
+
+#
+# Synonyms Management
+#
+-
+  method: searchSynonyms
+  args:
+    - name: query
+    - name: requestOptions
+      default: []
+-
+  method: getSynonym
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: saveSynonym
+  args:
+    - name: synonym
+    - name: requestOptions
+      default: []
+-
+  method: saveSynonyms
+  args:
+    - name: synonyms
+    - name: requestOptions
+      default: []
+-
+  method: replaceAllSynonyms
+  args:
+    - name: synonyms
+    - name: requestOptions
+      default: []
+-
+  method: deleteSynonym
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: clearSynonyms
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: browseSynonyms
+  args:
+    - name: requestOptions
+      default: []
+
+
+#
+# Rules Management
+#
+-
+  method: searchRules
+  args:
+    - name: query
+    - name: requestOptions
+      default: []
+-
+  method: getRule
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: saveRule
+  args:
+    - name: rule
+    - name: requestOptions
+      default: []
+-
+  method: saveRules
+  args:
+    - name: rules
+    - name: requestOptions
+      default: []
+-
+  method: replaceAllRules
+  args:
+    - name: rules
+    - name: requestOptions
+      default: []
+-
+  method: deleteRule
+  args:
+    - name: objectId
+    - name: requestOptions
+      default: []
+-
+  method: clearRules
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: browseRules
+  args:
+    - name: requestOptions
+      default: []

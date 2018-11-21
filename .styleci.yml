@@ -1,0 +1,13 @@
+preset: symfony
+
+enabled:
+  - long_array_syntax
+
+disabled:
+  - pre_increment
+  - self_accessor
+
+finder:
+  path:
+    - "src"
+    - "tests"

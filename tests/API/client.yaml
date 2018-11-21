@@ -1,0 +1,133 @@
+#
+# Constructor
+#
+-
+  method: initIndex
+  args:
+    - name: indexName
+
+#
+# SearchIndex Management
+#
+-
+  method: listIndices
+  args:
+    - name: requestOptions
+      default: []
+
+#
+# API Keys Management
+#
+-
+  method: listApiKeys
+  args:
+    - name: requestOptions
+      default: []
+
+-
+  method: getApiKey
+  args:
+    - name: key
+    - name: requestOptions
+      default: []
+-
+  method: addApiKey
+  args:
+    - name: acl
+    - name: requestOptions
+      default: []
+-
+  method: updateApiKey
+  args:
+    - name: key
+    - name: requestOptions
+      default: []
+-
+  method: deleteApiKey
+  args:
+    - name: key
+    - name: requestOptions
+      default: []
+-
+  method: generateSecuredApiKey
+  args:
+    - name: parentApiKey
+    - name: restrictions
+
+
+#
+# Multiple Indices
+#
+-
+  method: multipleQueries
+  args:
+  - name: queries
+  - name: requestOptions
+    default: []
+
+-
+  method: multipleBatch
+  args:
+  - name: operations
+  - name: requestOptions
+    default: []
+-
+  method: multipleGetObjects
+  args:
+  - name: requests
+  - name: requestOptions
+    default: []
+
+
+#
+# MultiCluster Management
+#
+-
+  method: searchUserIds
+  args:
+    - name: query
+    - name: requestOptions
+      default: []
+-
+  method: listClusters
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: listUserIds
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: getUserId
+  args:
+    - name: userId
+    - name: requestOptions
+      default: []
+-
+  method: getTopUserId
+  args:
+    - name: requestOptions
+      default: []
+-
+  method: assignUserId
+  args:
+    - name: userId
+    - name: clusterName
+    - name: requestOptions
+      default: []
+-
+  method: removeUserId
+  args:
+    - name: userId
+    - name: requestOptions
+      default: []
+
+#
+# Advanced
+#
+-
+  method: getLogs
+  args:
+    - name: requestOptions
+      default: []

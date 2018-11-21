@@ -1,0 +1,43 @@
+language: php
+
+matrix:
+  include:
+    - php: 5.3
+      dist: precise
+      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+    - php: 5.6
+      dist: trusty
+      sudo: required
+    - php: 7.2
+      dist: trusty
+      sudo: required
+    - php: 7.2
+      dist: trusty
+      sudo: required
+      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+
+    - php: hhvm
+      dist: trusty
+      sudo: required
+    - php: nightly
+      dist: trusty
+      sudo: required
+
+  allow_failures:
+    - php: hhvm
+    - php: nightly
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - composer install
+  - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
+
+before_script:
+  - wget https://alg.li/algolia-keys && chmod +x algolia-keys
+
+script:
+  - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [[ ! "$TRAVIS_PULL_REQUEST_SLUG" =~ ^algolia\/ ]]; then eval $(./algolia-keys export) && php vendor/bin/phpunit -v --testsuite Unit,Definition,Community; else php vendor/bin/phpunit -v; fi
+  - php tests/tests-no-composer.php

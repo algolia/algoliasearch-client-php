@@ -1,0 +1,76 @@
+#!/usr/bin/env php
+<?php
+
+$doc = new AlgoliaDoctor();
+$doc->checkPhpVersion();
+$doc->checkExtensionRequirements();
+$doc->checkSerializeParam();
+$doc->checkHttpClient();
+$doc->checkCurlAsynchDNS();
+
+exit($doc->exitCode);
+
+class AlgoliaDoctor
+{
+    public $exitCode = 0;
+
+    public function checkPhpVersion()
+    {
+        if (PHP_VERSION_ID < 50300) {
+            echo 'Unfortunately your version of PHP is too old. Consider upgrading to PHP 7+.';
+            $this->exitCode = 1;
+        }
+    }
+
+    public function checkExtensionRequirements()
+    {
+        if (!function_exists('curl_init')) {
+            echo 'AlgoliaSearch requires the CURL PHP extension.';
+            $this->exitCode = 1;
+        }
+        if (!function_exists('json_decode')) {
+            echo 'AlgoliaSearch requires the JSON PHP extension.';
+            $this->exitCode = 1;
+        }
+        if (!function_exists('mb_strtolower')) {
+            echo 'AlgoliaSearch requires the MBSTRING PHP extension.';
+            $this->exitCode = 1;
+        }
+    }
+
+    public function checkSerializeParam()
+    {
+        if (version_compare(PHP_VERSION, '7.1.0', '>') && '-1' !== ini_get('serialize_precision')) {
+            echo '
+When using PHP 7.1+, you must set the "serialize_precision" ini settings to -1.
+See https://github.com/algolia/algoliasearch-client-php/issues/365
+';
+            $this->exitCode = 1;
+        }
+    }
+
+    public function checkHttpClient()
+    {
+        if (PHP_VERSION_ID > 50500 && !class_exists('GuzzleHttp\Client')) {
+            echo "
+You're using a recent enough version of PHP to use the Guzzle Http library.
+It's highly recommended to use Guzzle.
+Install it via `composer require guzzlehttp/guzzle` and it will be used automatically.
+";
+        }
+    }
+
+    public function checkCurlAsynchDNS()
+    {
+        // See https://github.com/algolia/algoliasearch-client-php/pull/109/files#r114370030
+        $curlVersion = curl_version();
+        $hasAsynchDNS = $curlVersion['features'] & (1 << 7);
+
+        if (!$hasAsynchDNS) {
+            echo '
+cURL AsynchDSN feature is disabled. Please compile your libcurl with ARES enabled
+to avoid potential issues with DNS resolution.
+';
+        }
+    }
+}

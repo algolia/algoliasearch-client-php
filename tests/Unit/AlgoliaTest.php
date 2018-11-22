@@ -10,7 +10,7 @@ class AlgoliaTest extends TestCase
 {
     public function testLogger()
     {
-        $this->assertInstanceOf("Algolia\AlgoliaSearch\Log\Logger", Algolia::getLogger());
+        $this->assertInstanceOf("Algolia\AlgoliaSearch\Log\DebugLogger", Algolia::getLogger());
 
         $loggerB = new NullLogger();
 

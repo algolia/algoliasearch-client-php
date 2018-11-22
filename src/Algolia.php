@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
-use Algolia\AlgoliaSearch\Log\Logger;
+use Algolia\AlgoliaSearch\Log\DebugLogger;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -72,7 +72,7 @@ final class Algolia
     public static function getLogger()
     {
         if (null === self::$logger) {
-            self::setLogger(new Logger());
+            self::setLogger(new DebugLogger());
         }
 
         return self::$logger;

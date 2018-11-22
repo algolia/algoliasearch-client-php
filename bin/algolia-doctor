@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+// This kind of sucks.. but we need the composer autoloader, in order to fully check for GuzzleHttp
+include __DIR__ . '/../../../autoload.php';
+
 $doc = new AlgoliaDoctor();
 $doc->checkPhpVersion();
 $doc->checkExtensionRequirements();

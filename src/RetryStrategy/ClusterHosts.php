@@ -83,6 +83,11 @@ final class ClusterHosts
         return static::create('analytics.'.$region.'.algolia.com');
     }
 
+    public static function createForInsights($region)
+    {
+        return static::create('insights.'.$region.'.algolia.io');
+    }
+
     public static function createFromCache($cacheKey)
     {
         if (!Algolia::isCacheEnabled()) {

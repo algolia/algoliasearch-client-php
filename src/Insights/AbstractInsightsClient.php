@@ -24,26 +24,28 @@ abstract class AbstractInsightsClient
         $this->config = $config;
     }
 
-    public function click($clickEvent, $requestOptions = array())
+    public function afterSearch($queryId)
     {
-        $clickEvent['eventType'] = 'click';
+        if (!$queryId) {
+            throw new \InvalidArgumentException('QueryID must be a non-null string');
+        }
 
-        return $this->addEvent($clickEvent, $requestOptions);
+        $search = new SearchInsightClient($this->api, $this->config);
+
+        return $search->setQueryId($queryId);
     }
 
-    public function conversion($renameEvent, $requestOptions = array())
+    public function sendEvent($event, $requestOptions = array())
     {
-        $renameEvent['eventType'] = 'conversion';
+        if ($requestOptions['timestamp']) {
+            $clickEvent['timestamp'] = $requestOptions['timestamp'];
+            unset($requestOptions['timestamp']);
+        }
 
-        return $this->addEvent($renameEvent, $requestOptions);
+        return $this->sendEvents(array($event), $requestOptions);
     }
 
-    public function addEvent($event, $requestOptions = array())
-    {
-        return $this->addEvents(array($event), $requestOptions);
-    }
-
-    public function addEvents($events, $requestOptions = array())
+    public function sendEvents($events, $requestOptions = array())
     {
         $events = array_map(array($this, 'reformatEvent'), $events);
 
@@ -74,10 +76,6 @@ abstract class AbstractInsightsClient
 
         if (!isset($e['userToken'])) {
             $e['userToken'] = $this->config->getUserToken();
-        }
-
-        if (isset($this->queryId) && !isset($e['queryID'])) {
-            $e['queryID'] = $this->queryId;
         }
 
         return $e;

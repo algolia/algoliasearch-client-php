@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\InsightsConfig;
 use Algolia\AlgoliaSearch\Insights\AbstractInsightsClient;
 use Algolia\AlgoliaSearch\Insights\SearchInsightClient;
-use Algolia\AlgoliaSearch\Insights\VisitInsightClient;
+use Algolia\AlgoliaSearch\Insights\PersoInsightClient;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
@@ -43,26 +43,11 @@ final class InsightsClient extends AbstractInsightsClient
         return new static($apiWrapper, $config);
     }
 
-    public function setUserToken($userToken)
+    public function user($userToken)
     {
-        $this->config->setUserToken($userToken);
+        $config = clone $this->config;
+        $config->setUserToken($userToken);
 
-        return $this;
-    }
-
-    public function search($queryId)
-    {
-        if (!$queryId) {
-            throw new \InvalidArgumentException('QueryID must be a non-null string');
-        }
-
-        $search = new SearchInsightClient($this->api, $this->config);
-
-        return $search->setQueryId($queryId);
-    }
-
-    public function visit()
-    {
-        return new VisitInsightClient($this->api, $this->config);
+        return new PersoInsightClient($this->api, $config);
     }
 }

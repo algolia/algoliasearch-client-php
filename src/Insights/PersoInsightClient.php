@@ -2,16 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Insights;
 
-final class SearchInsightClient extends AbstractInsightsClient
+final class PersoInsightClient extends AbstractInsightsClient
 {
-    protected $queryId;
-
-    public function setQueryId($queryId)
-    {
-        $this->queryId = $queryId;
-
-        return $this;
-    }
 
     public function clickedObjectID($eventName, $indexName, $objectIDs, $positions, $requestOptions = array())
     {
@@ -38,10 +30,38 @@ final class SearchInsightClient extends AbstractInsightsClient
             'eventType' => 'click',
             'eventName' => $eventName,
             'index' => $indexName,
-            'queryId' => $this->queryId,
         ));
 
         return $this->sendEvent($clickEvent, $requestOptions);
+    }
+
+    public function viewedObjectID($eventName, $indexName, $objectIDs, $requestOptions = array())
+    {
+        $clickEvent = array(
+            'objectsIDs' => is_array($objectIDs) ? $objectIDs : array($objectIDs),
+        );
+
+        return $this->viewed($clickEvent, $eventName, $indexName, $requestOptions);
+    }
+
+    public function viewedFilters($eventName, $indexName, $filters, $requestOptions = array())
+    {
+        $clickEvent = array(
+            'filters' => is_array($filters) ? $filters : array($filters),
+        );
+
+        return $this->viewed($clickEvent, $eventName, $indexName, $requestOptions);
+    }
+
+    private function viewed($viewEvent, $eventName, $indexName, $requestOptions = array())
+    {
+        $viewEvent = array_merge($viewEvent, array(
+            'eventType' => 'conversion',
+            'eventName' => $eventName,
+            'index' => $indexName,
+        ));
+
+        return $this->sendEvent($viewEvent, $requestOptions);
     }
 
     public function converted($eventName, $indexName, $objectIDs, $requestOptions = array())
@@ -54,12 +74,5 @@ final class SearchInsightClient extends AbstractInsightsClient
         );
 
         return $this->sendEvent($renameEvent, $requestOptions);
-    }
-
-    public function sentEvent($event, $requestOptions = array())
-    {
-        $event['queryId'] = $this->queryId;
-
-        return parent::sendEvent($event, $requestOptions);
     }
 }

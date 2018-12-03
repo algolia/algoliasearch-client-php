@@ -168,8 +168,6 @@ class SearchClient
 
     public function multipleBatch($operations, $requestOptions = array())
     {
-        Helpers::ensureObjectID($operations);
-
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/*/batch'),

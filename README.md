@@ -1,244 +1,377 @@
-# Introducing PHP Client v2
+# Algolia Search API Client for PHP
 
-A new version of the PHP client is coming. This will be the base for a new version of other client within the next few months.
+[Algolia Search](https://www.algolia.com) is a hosted full-text, numerical,
+and faceted search engine capable of delivering realtime results from the first keystroke.
 
-If you ever found yourself thinking _"I wish I could do this with the client"_, please email me (julien.bourdeau@algolia.com) or open an issue on GitHub.
+The **Algolia Search API Client for PHP** lets
+you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-api/search) from
+your PHP code.
 
-## Why
-
-All the Algolia clients were designed years ago, we think rewriting them from scratch will help improve the developer experience for every user and make them more maintainable.
-
-More maintainable means faster feature development and less bugs, so in the end, it all comes down to improving the developer experience for the entire Algolia community.
-
-
-## Requirements
-
-### Backward compatibility
-
-We believe it's sometimes necessary to break backward compatibility, however we want to keep it as minimal as possible, upgrading to the new major version has to be very smooth.
-
-#### Similar public API
-
-For that reason, most of the public API is kept as-is or has very slightly changed. The library still relies on 2 main classes to access most of the API: `Client` and `Index`.
-
-Even if we considered doing something more eloquent or even build some sort of query language, we are convinced that this will add a lot of complexity, make upgrade really hard and bring very little value in the end. Simplicity for the win.
-
-#### PHP 5.3+ supported
-
-This new version support the exact same PHP version range as before: 5.3+. We chose to do it to simplify upgrade as much as possible. Even if it made my life more difficult, I believe it will make everybody else's easier.
-
-#### New backward compatibility promise
-
-* All API clients follow [SemVer](https://semver.org/).
-* Backward compatibility is guaranteed on all classes and interface except of the `Internal` folder
-* New exceptions can be added at any time but they will necessarily extend AlgoliaException class.
-* Configuration entry can be added in minor versions.
-* The structure of the API response can have new field added independently of this library.
+[![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.svg)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 
-### Conventions
+If you're a Symfony or Laravel user, you're probably looking for the following integrations:
 
-A good library should be obvious to use.
-
-* Method signatures have an argument for all required parameters and then one array of `requestOptions` which can contain about anything
-
-* Required arguments take precedence over the requestOptions array.
-
-    In the following example, `some query` will override `better query`.
-    ```php
-    $index->search('some query', ['query' => 'better query']);
-    ```
-
-* Verbs:
-    * **save** means add or replace existing <-- /!\
-    * **partialUpdate** means updates only the given fields
-    * **clear** means delete all
-    * **delete** means delete
-    * **replaceAll** means remove all existing and save what is passed
-
-* There is no phpdoc in the code for public API method, because it's usually outdated and clutters the code. Instead, refers to the doc on algolia.com (to be published along with the final version). If the method is internal, doc can be added if necessary.
-
-## What's new
-
-### The transport layer
-
-This new version allows developers to change the transport layer easily. If your PHP version is recent enough, all HTTP calls are done by the Guzzle library. The lib also follow the PSR7 norm.
-
-If you have an old version, use the embedded http layer.
-
-In order to implement your own, implement the `HttpClientIntercace` (more doc necessary)
+- **Laravel**: [Laravel Scout](https://www.algolia.com/doc/framework-integration/laravel/algolia-and-scout/)
+- **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
 
-### RequestOptions as a first-class citizen
 
-Timeouts and parameters all managed by requestOptions
 
-RequestOptionsFactory is responsible for splitting the given array into 4 sections: headers, query params (url), post content and timeouts.
+## API Documentation
 
-Timeouts are the transport layer's responsibility but in order to change them easily per query, they were added to the RequestOptions.
+You can find the full reference on [Algolia's website](https://www.algolia.com/doc/api-client/php/).
 
-Some params like `forwardToReplicas` or `createIfNotExists` should always be passed in the query params, while other parameters like `cursor` (in browse) should be passed in body, RequestOptions will take care of that.
 
-![RequestOptions schema](/docs/RequestOptions.png)
 
-**NOTE:** Passing an array makes the library much easier to use but if you need total control, you can pass a `RequestOption` object instead.
+1. **[Supported platforms](#supported-platforms)**
 
-### Logger
 
-The client now integrates a logger, which allow you to get some information about the request lifecycle.
+1. **[Install](#install)**
 
-1. You can enable/disable it via a static call.
 
-```php
-Logger::enable();
-$index->addObjects(objects)
-Logger::disable();
+1. **[Quick Start](#quick-start)**
+
+
+1. **[Push data](#push-data)**
+
+
+1. **[Configure](#configure)**
+
+
+1. **[Search](#search)**
+
+
+1. **[Search UI](#search-ui)**
+
+
+1. **[List of available methods](#list-of-available-methods)**
+
+
+# Getting Started
+
+
+
+## Supported platforms
+
+The API client is compatible with PHP version 5.3 and later.
+
+## Install
+
+### With Composer (recommended)
+
+Install the package via [Composer](https://getcomposer.org/doc/00-intro.md):
+
+```bash
+composer require algolia/algoliasearch-client-php
 ```
 
-2. Or you can also define your own `PSR-3` Logger:
+### Without Composer
+
+1. Download the client from GitHub and unzip it in your project
+2. Inside the client root folder, execute `./bin/install-dependencies-without-composer`
+3. In your code, require the `autoload.php` in the client root folder
+
+### Framework Integrations
+
+We officially provide support for the **Laravel** and **Symfony** frameworks:
+
+If you are using one of those two frameworks have a look at our
+[Laravel documentation](https://www.algolia.com/doc/framework-integration/laravel/algolia-and-scout/) or [Symfony documentation](https://www.algolia.com/doc/framework-integration/symfony/getting-started/)
+
+## Quick Start
+
+In 30 seconds, this quick start tutorial will show you how to index and search objects.
+
+### Initialize the client
+
+To begin, you will need to initialize the client. In order to do this you will need your **Application ID** and **API Key**.
+You can find both on [your Algolia account](https://www.algolia.com/api-keys).
 
 ```php
-// Injecting a default logger for all clients.
-ClientConfig::setDefaultLogger($myLogger);
+// composer autoload
+require __DIR__ . '/vendor/autoload.php';
 
-$client = SearchClient::create($appId, $apiKey);
-$client->initIndex('index_name')->saveObjects($objects);
+// if you are not using composer
+// require_once 'path/to/algolia/folder/autoload.php';
 
-// Or injecting a specific logger.
-$config = ClientConfig::create($appId, $apiKey);
-$config->setLogger($myOtherLogger);
+$client = Algolia\AlgoliaSearch\SearchClient::create(
+  'YourApplicationID',
+  'YourAdminAPIKey'
+);
 
-$client = SearchClient::createWithConfig($config);
-$client->initIndex('index_name')->saveObjects($objects);
+$index = $client->initIndex('your_index_name');
 ```
 
+## Push data
 
-### New methods
-
-**reindex**
-
-// TO BE WRITTEN
-
-**WaitFor**
-
-Operations on keys or userIds don't return a taskID. To ensure the task is completed, new methods were added to simulate the behavior.
-
-Currently, only `$client->waitForKeyAdded($key)` is implemented, others are coming.
-
-### Configuration
-
-All available configurations like default timeouts or user agent are now grouped under the Config class. Today, every API clients implement user agent differently.
-
-This is also how you set the HTTP Client you want to use.
-
-Example:
+Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the `contacts` index using the following code:
 
 ```php
-Config::setHttpClient(function () {
-    return new MyHttpClient(getenv('SOMETHING'));
+$client = \Algolia\AlgoliaSearch\SearchClient::create('YourApplicationID', 'YourAPIKey');
+$index = $client->initIndex('contacts');
+$batch = json_decode(file_get_contents('contacts.json'), true);
+$index->addObjects($batch);
+```
+
+## Configure
+
+Settings can be customized to fine tune the search behavior. For example, you can add a custom sort by number of followers to further enhance the built-in relevance:
+
+```php
+$index->setSettings(['customRanking' => ['desc(followers)']]);
+```
+
+You can also configure the list of attributes you want to index by order of importance (most important first).
+
+**Note:** The Algolia engine is designed to suggest results as you type, which means you'll generally search by prefix.
+In this case, the order of attributes is very important to decide which hit is the best:
+
+```php
+$index->setSettings(
+  [
+    'searchableAttributes' => [
+      'lastname',
+      'firstname',
+      'company',
+      'email',
+      'city',
+      'address'
+    ]
+  ]
+);
+```
+
+## Search
+
+You can now search for contacts using `firstname`, `lastname`, `company`, etc. (even with typos):
+
+```php
+// Search for a first name
+var_dump($index->search('jimmie'));
+
+// Search for a first name with typo
+var_dump($index->search('jimie'));
+
+// Search for a company
+var_dump($index->search('california paint'));
+
+// Search for a first name and a company
+var_dump($index->search('jimmie paint'));
+```
+
+## Search UI
+
+**Warning:** If you are building a web application, you may be more interested in using one of our
+[frontend search UI libraries](https://www.algolia.com/doc/guides/search-ui/search-libraries/)
+
+The following example shows how to build a front-end search quickly using
+[InstantSearch.js](https://community.algolia.com/instantsearch.js/)
+
+### index.html
+
+```html
+<!doctype html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.css">
+  <!-- Always use `2.x` versions in production rather than `2` to mitigate any side effects on your website,
+  Find the latest version on InstantSearch.js website: https://community.algolia.com/instantsearch.js/v2/guides/usage.html -->
+</head>
+<body>
+  <header>
+    <div>
+       <input id="search-input" placeholder="Search for products">
+       <!-- We use a specific placeholder in the input to guides users in their search. -->
+    
+  </header>
+  <main>
+      
+      
+  </main>
+
+  <script type="text/html" id="hit-template">
+    
+      <p class="hit-name">{{{_highlightResult.firstname.value}}} {{{_highlightResult.lastname.value}}}</p>
+    
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3/dist/instantsearch.min.js"></script>
+  <script src="app.js"></script>
+</body>
+```
+
+### app.js
+
+```js
+var search = instantsearch({
+  // Replace with your own values
+  appId: 'YourApplicationID',
+  apiKey: 'YourSearchOnlyAPIKey', // search only API key, no ADMIN key
+  indexName: 'contacts',
+  routing: true,
+  searchParameters: {
+    hitsPerPage: 10
+  }
 });
-```
 
-#### Client configuration
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '#search-input'
+  })
+);
 
-We also added a way to have a different configuration for each Client instance, in case you are
-using multiple apps, in case you need 2 clients with the same app different timeouts or anything similar.
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '#hits',
+    templates: {
+      item: document.getElementById('hit-template').innerHTML,
+      empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
+    }
+  })
+);
 
-
-```php
-$config1 = new ClientConfig([
-    'appId' => getenv('LEGACY_APP_ID')
-    'apiKey' => getenv('LEGACY_API_KEY'),
-    'writeTimeout' => 90,
-]);
-
-$client1 = SearchClient::createWithConfig($config1);
-
-$config2 = new ClientConfig(
-    'writeTimeout' => 10,
-]);
-// Note that credentials will automatically be read from env variables
-// Make sure you have set `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`
-$client2 = SearchClient::createWithConfig($config1);
-```
-
-### Singleton
-
-A new way to use the client was added. In most cases, you need one client, everywhere in your application and
-you are using only one Algolia app. In this case, I believe it's best to use a singleton, and our lib
-now takes care of it for you.
-
-**In this case, the client will automatically read the credentials from the env variables: `ALGOLIA_APP_ID` and `ALGOLIA_API_KEY`.(())
-
-```php
-SearchClient::get()->getLogs();
-//...
-SearchClient::get()->waitTask($indexName, $taskId);
-
+search.start();
 ```
 
 
-### The `doctor` tool
 
-Having an issue? 💊 Run `./vendor/bin/algolia-doctor` to get a full configuration check and provide helpful message to improve your setup.
 
-You can find the check in the `bin/` directory. **What other check would you like to see?**
-
-### Exceptions
-
-A bunch of new Exceptions have been introduced. The main reason is to help the developer debugging but also catch them in production.
-
-* `TaskTooLongException` if a task never completes
-* `MissingObjectId` if you tried to add object without objectID
-* `BadRequestException` if your request cannot work
-* `NotFoundException` if the API returned a 404 (extends `BadRequestException`)
-* `RetriableException` if something went wrong and query again
-* `UnreachableException` - hu ho
-
-Could be added if necessary:
-
-* `QuotaExceededException` if you reached your plan limits
-* `ACLExceptions` if you're using an key that cannot perform this action
+## List of available methods
 
 
 
-## Upgrade
 
-Please follow the upgrade guide in [docs/UPGRADE-from-v1-to-v2.md.md]().
 
-This doc will be updated during the beta and will be complete before the final release.
-
-## Tests
-
-There are 3 types of tests.
-
-| Type              | Description                                                                                                   |
-|-------------------|---------------------------------------------------------------------------------------------------------------|
-| Public API tests  | Check the library has correct method names and arguments (using reflexion)                                    |
-| Integration tests | Call Algolia API to ensure method behave the way they should                                                  |
-| Unit tests        | Some part of the code is absolutely critical and must be Unit tested, the RequestOptionsFactory for instance. |
-
-Integration tests use a `SyncClient` and `SyncIndex` which automatically wait for all taskID, making tests easier to read and more stable.
+### Personalization
 
 
 
-# Call for feedback
 
-If you are already an Algolia user or if you plan to be, please share any feedback you may have via:
 
-* [GitHub issues](https://github.com/algolia/algoliasearch-client-php/issues/new) or [Pull Requests](https://github.com/algolia/algoliasearch-client-php/pulls)
-* Email at <mailto:julien.bourdeau@algolia.com>
+### Search
 
-In general, I'd like to hear:
+- [Search index](https://algolia.com/doc/api-reference/api-methods/search/?language=php)
+- [Search for facet values](https://algolia.com/doc/api-reference/api-methods/search-for-facet-values/?language=php)
+- [Search multiple indices](https://algolia.com/doc/api-reference/api-methods/multiple-queries/?language=php)
+- [Browse index](https://algolia.com/doc/api-reference/api-methods/browse/?language=php)
 
-* What you would like to see added
-* How long was it to upgrade
-* If it's clear enough
-* What feature you'd like to see added
-* How well (or not) it integrates in your stack
 
-## Question
 
-#### Should we consider `client`, `index` and such as final or let developers extend them?
 
-#### Do you see any missing feature?
+### Indexing
+
+- [Add objects](https://algolia.com/doc/api-reference/api-methods/add-objects/?language=php)
+- [Save objects](https://algolia.com/doc/api-reference/api-methods/save-objects/?language=php)
+- [Partial update objects](https://algolia.com/doc/api-reference/api-methods/partial-update-objects/?language=php)
+- [Delete objects](https://algolia.com/doc/api-reference/api-methods/delete-objects/?language=php)
+- [Replace all objects](https://algolia.com/doc/api-reference/api-methods/replace-all-objects/?language=php)
+- [Delete by](https://algolia.com/doc/api-reference/api-methods/delete-by/?language=php)
+- [Clear objects](https://algolia.com/doc/api-reference/api-methods/clear-objects/?language=php)
+- [Get objects](https://algolia.com/doc/api-reference/api-methods/get-objects/?language=php)
+- [Custom batch](https://algolia.com/doc/api-reference/api-methods/batch/?language=php)
+
+
+
+
+### Settings
+
+- [Get settings](https://algolia.com/doc/api-reference/api-methods/get-settings/?language=php)
+- [Set settings](https://algolia.com/doc/api-reference/api-methods/set-settings/?language=php)
+- [Copy settings](https://algolia.com/doc/api-reference/api-methods/copy-settings/?language=php)
+
+
+
+
+### Manage indices
+
+- [List indices](https://algolia.com/doc/api-reference/api-methods/list-indices/?language=php)
+- [Delete index](https://algolia.com/doc/api-reference/api-methods/delete-index/?language=php)
+- [Copy index](https://algolia.com/doc/api-reference/api-methods/copy-index/?language=php)
+- [Move index](https://algolia.com/doc/api-reference/api-methods/move-index/?language=php)
+
+
+
+
+### API Keys
+
+- [Create secured API Key](https://algolia.com/doc/api-reference/api-methods/generate-secured-api-key/?language=php)
+- [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=php)
+- [Update API Key](https://algolia.com/doc/api-reference/api-methods/update-api-key/?language=php)
+- [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=php)
+- [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=php)
+- [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=php)
+
+
+
+
+### Synonyms
+
+- [Save synonym](https://algolia.com/doc/api-reference/api-methods/save-synonym/?language=php)
+- [Batch synonyms](https://algolia.com/doc/api-reference/api-methods/batch-synonyms/?language=php)
+- [Delete synonym](https://algolia.com/doc/api-reference/api-methods/delete-synonym/?language=php)
+- [Clear all synonyms](https://algolia.com/doc/api-reference/api-methods/clear-synonyms/?language=php)
+- [Get synonym](https://algolia.com/doc/api-reference/api-methods/get-synonym/?language=php)
+- [Search synonyms](https://algolia.com/doc/api-reference/api-methods/search-synonyms/?language=php)
+- [Replace all synonyms](https://algolia.com/doc/api-reference/api-methods/replace-all-synonyms/?language=php)
+- [Copy synonyms](https://algolia.com/doc/api-reference/api-methods/copy-synonyms/?language=php)
+- [Export Synonyms](https://algolia.com/doc/api-reference/api-methods/export-synonyms/?language=php)
+
+
+
+
+### Query rules
+
+- [Save rule](https://algolia.com/doc/api-reference/api-methods/save-rule/?language=php)
+- [Batch rules](https://algolia.com/doc/api-reference/api-methods/batch-rules/?language=php)
+- [Get rule](https://algolia.com/doc/api-reference/api-methods/get-rule/?language=php)
+- [Delete rule](https://algolia.com/doc/api-reference/api-methods/delete-rule/?language=php)
+- [Clear rules](https://algolia.com/doc/api-reference/api-methods/clear-rules/?language=php)
+- [Search rules](https://algolia.com/doc/api-reference/api-methods/search-rules/?language=php)
+- [Replace all rules](https://algolia.com/doc/api-reference/api-methods/replace-all-rules/?language=php)
+- [Copy rules](https://algolia.com/doc/api-reference/api-methods/copy-rules/?language=php)
+- [Export rules](https://algolia.com/doc/api-reference/api-methods/export-rules/?language=php)
+
+
+
+
+### A/B Test
+
+- [Add A/B test](https://algolia.com/doc/api-reference/api-methods/add-ab-test/?language=php)
+- [Get A/B test](https://algolia.com/doc/api-reference/api-methods/get-ab-test/?language=php)
+- [List A/B tests](https://algolia.com/doc/api-reference/api-methods/list-ab-tests/?language=php)
+- [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=php)
+- [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=php)
+
+
+
+
+### MultiClusters
+
+- [Assign or Move userID](https://algolia.com/doc/api-reference/api-methods/assign-user-id/?language=php)
+- [Get top userID](https://algolia.com/doc/api-reference/api-methods/get-top-user-id/?language=php)
+- [Get userID](https://algolia.com/doc/api-reference/api-methods/get-user-id/?language=php)
+- [List clusters](https://algolia.com/doc/api-reference/api-methods/list-clusters/?language=php)
+- [List userIDs](https://algolia.com/doc/api-reference/api-methods/list-user-id/?language=php)
+- [Remove userID](https://algolia.com/doc/api-reference/api-methods/remove-user-id/?language=php)
+- [Search userID](https://algolia.com/doc/api-reference/api-methods/search-user-id/?language=php)
+
+
+
+
+### Advanced
+
+- [Get logs](https://algolia.com/doc/api-reference/api-methods/get-logs/?language=php)
+- [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=php)
+- [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=php)
+- [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=php)
+
+
+
+
+
+## Getting Help
+
+- **Need help**? Ask a question to the [Algolia Community](https://discourse.algolia.com/) or on [Stack Overflow](http://stackoverflow.com/questions/tagged/algolia).
+- **Found a bug?** You can open a [GitHub issue](https://github.com/algolia/algoliasearch-client-php/issues).
+

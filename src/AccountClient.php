@@ -14,6 +14,7 @@ final class AccountClient
                 'If both index are on the same app, please use SearchClient::copyIndex method instead.'
             );
         }
+
         try {
             $destIndex->getSettings();
 

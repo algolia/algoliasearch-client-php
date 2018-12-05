@@ -20,6 +20,13 @@ matrix:
       dist: trusty
       sudo: required
       env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+    - php: 7.3
+      dist: trusty
+      sudo: required
+    - php: 7.3
+      dist: trusty
+      sudo: required
+      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
 
     - php: hhvm
       dist: trusty

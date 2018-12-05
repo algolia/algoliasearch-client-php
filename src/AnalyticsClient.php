@@ -57,7 +57,7 @@ final class AnalyticsClient
      *
      * @return array
      */
-        public function getABTests($requestOptions = array())
+    public function getABTests($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/2/abtests'), $requestOptions);
     }
@@ -65,7 +65,7 @@ final class AnalyticsClient
     /**
      * Get an AB Test.
      *
-     * @param int $abTestID Id of the AB Test to retrieve
+     * @param int                                                        $abTestID       Id of the AB Test to retrieve
      * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
@@ -84,7 +84,7 @@ final class AnalyticsClient
     /**
      * Create new AB Test.
      *
-     * @param array $abTest
+     * @param array                                                      $abTest
      * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array Information about the creation like TaskID and date
@@ -97,7 +97,7 @@ final class AnalyticsClient
     /**
      * Stop a running AB Test.
      *
-     * @param int $abTestID
+     * @param int                                                        $abTestID
      * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array
@@ -116,7 +116,7 @@ final class AnalyticsClient
     /**
      * Delete an AB Test.
      *
-     * @param int $abTestID
+     * @param int                                                        $abTestID
      * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
      *
      * @return array

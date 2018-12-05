@@ -11,6 +11,7 @@ use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
+use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
@@ -313,7 +314,16 @@ class SearchIndex
         if ('addObject' !== $action) {
             Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
         }
-        $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
+
+        // If not calls were made previously, not objects are passed
+        // so we return a NullResponse
+        // If there are already responses and something left in the
+        // batch, we send it.
+        if (empty($allResponses) && empty($batch)) {
+            return new NullResponse();
+        } elseif (!empty($batch)) {
+            $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
+        }
 
         return new BatchIndexingResponse($allResponses, $this);
     }

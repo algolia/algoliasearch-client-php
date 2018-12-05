@@ -65,6 +65,7 @@ class ResponseObjectTest extends NullTestCase
         $c = static::$client;
         $i = $c->initIndex('cool');
 
+        $this->assertInstanceOfResponse($i->saveObjects(array()), 'Algolia\AlgoliaSearch\Response\NullResponse');
         $this->assertInstanceOfResponse($i->saveSynonyms(array()), 'Algolia\AlgoliaSearch\Response\NullResponse');
         $this->assertInstanceOfResponse($i->saveRules(array()), 'Algolia\AlgoliaSearch\Response\NullResponse');
     }

@@ -60,8 +60,21 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfResponse($i->clearRules(array('objectID' => 'test')));
     }
 
-    private function assertInstanceOfResponse($response)
+    public function testNullResponseForEmptyDataset()
     {
+        $c = static::$client;
+        $i = $c->initIndex('cool');
+
+        $this->assertInstanceOfResponse($i->saveSynonyms(array()), 'Algolia\AlgoliaSearch\Response\NullResponse');
+        $this->assertInstanceOfResponse($i->saveRules(array()), 'Algolia\AlgoliaSearch\Response\NullResponse');
+    }
+
+    private function assertInstanceOfResponse($response, $class = '')
+    {
+        if (!$class) {
+            $class = 'Algolia\AlgoliaSearch\Response\AbstractResponse';
+        }
+
         if (is_array($response)) {
             foreach ($response as $r) {
                 $this->assertInstanceOfResponse($r);
@@ -70,7 +83,7 @@ class ResponseObjectTest extends NullTestCase
             return;
         }
 
-        $this->assertInstanceOf('Algolia\AlgoliaSearch\Response\AbstractResponse', $response);
+        $this->assertInstanceOf($class, $response);
         $this->assertTrue(method_exists($response, 'wait'));
     }
 }

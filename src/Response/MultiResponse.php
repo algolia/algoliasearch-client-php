@@ -16,6 +16,8 @@ class MultiResponse extends AbstractResponse implements \Iterator, \Countable
         foreach ($this->apiResponse as $response) {
             $response->wait();
         }
+
+        return $this;
     }
 
     public function count()

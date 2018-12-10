@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-class NullResponse extends AbstractResponse
+final class NullResponse extends AbstractResponse
 {
     public function __construct()
     {

@@ -242,6 +242,23 @@ class SearchClient
         return base64_encode($content);
     }
 
+    public function getPersonalizationStrategy($requestOptions = array())
+    {
+        return $this->api->read('GET', api_path('/1/recommendation/personalization/strategy'), $requestOptions);
+    }
+
+    public function setPersonalizationStrategy($strategy, $requestOptions = array())
+    {
+        $apiResponse = $this->api->write(
+            'POST',
+            api_path('1/recommendation/personalization/strategy'),
+            $strategy,
+            $requestOptions
+        );
+
+        return $apiResponse;
+    }
+
     public function searchUserIds($query, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

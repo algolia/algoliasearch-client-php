@@ -3,9 +3,19 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class CopyResourcesTest extends RequestTestCase
 {
+    /** @var \Algolia\AlgoliaSearch\SearchClient */
+    private static $client;
+
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        static::$client = SearchClient::create('id', 'key');
+    }
+
     public function testCopySettings()
     {
         try {

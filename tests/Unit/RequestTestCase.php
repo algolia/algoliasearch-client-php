@@ -10,14 +10,10 @@ use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
-    /** @var \Algolia\AlgoliaSearch\SearchClient */
-    protected static $client;
-
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
         Algolia::setHttpClient(new RequestHttpClient());
-        static::$client = SearchClient::create('id', 'key');
     }
 
     public static function tearDownAfterClass()

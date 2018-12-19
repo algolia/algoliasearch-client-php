@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class InsightsClientTest extends TestCase
 {
-
     public function testUserInsights()
     {
         $u = InsightsClient::create()->user('userTokenForTest');
@@ -19,7 +18,7 @@ class InsightsClientTest extends TestCase
             $u->clickedObjectIDs('eventName', 'indexName', 'objectIDs')
         );
         $this->assertEvent(
-            $u->clickedObjectIDsAfterSearch('eventName', 'indexName', 'objID', 2,  md5('queryID'))
+            $u->clickedObjectIDsAfterSearch('eventName', 'indexName', 'objID', 2, md5('queryID'))
         );
 
         $this->assertEvent(

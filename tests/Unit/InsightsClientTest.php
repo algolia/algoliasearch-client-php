@@ -32,11 +32,11 @@ class InsightsClientTest extends RequestTestCase
             $this->assertRequest($expected, $e);
         }
 
-        $expected['queryID'] = $qID = 'queryID';
         $expected['positions'] = array($position = 12);
+        $expected['queryID'] = $qID = 'queryID';
 
         try {
-            self::$client->user($usrToken)->clickedObjectIDsAfterSearch($name, $idx, $objectID, $qID, $position);
+            self::$client->user($usrToken)->clickedObjectIDsAfterSearch($name, $idx, $objectID, $position, $qID);
         } catch (RequestException $e) {
             $this->assertRequest($expected, $e);
         }

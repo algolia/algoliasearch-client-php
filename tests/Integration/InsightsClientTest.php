@@ -19,7 +19,7 @@ class InsightsClientTest extends TestCase
             $u->clickedObjectIDs('eventName', 'indexName', 'objectIDs')
         );
         $this->assertEvent(
-            $u->clickedObjectIDsAfterSearch('eventName', 'indexName', 'objID', md5('queryID'), 2)
+            $u->clickedObjectIDsAfterSearch('eventName', 'indexName', 'objID', 2,  md5('queryID'))
         );
 
         $this->assertEvent(

@@ -29,12 +29,12 @@ final class UserInsightsClient
         return $this->clicked(array('objectIDs' => $objectIDs), $eventName, $indexName, $requestOptions);
     }
 
-    public function clickedObjectIDsAfterSearch($eventName, $indexName, $objectIDs, $queryID, $positions, $requestOptions = array())
+    public function clickedObjectIDsAfterSearch($eventName, $indexName, $objectIDs, $positions, $queryID, $requestOptions = array())
     {
         $event = array(
             'objectIDs' => $objectIDs,
-            'queryID' => $queryID,
             'positions' => $positions,
+            'queryID' => $queryID
         );
 
         return $this->clicked($event, $eventName, $indexName, $requestOptions);

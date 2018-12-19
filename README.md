@@ -245,6 +245,8 @@ search.start();
 
 ### Personalization
 
+- [Add strategy](https://algolia.com/doc/api-reference/api-methods/add-strategy/?language=php)
+- [Get strategy](https://algolia.com/doc/api-reference/api-methods/get-strategy/?language=php)
 
 
 
@@ -342,6 +344,20 @@ search.start();
 - [List A/B tests](https://algolia.com/doc/api-reference/api-methods/list-ab-tests/?language=php)
 - [Stop A/B test](https://algolia.com/doc/api-reference/api-methods/stop-ab-test/?language=php)
 - [Delete A/B test](https://algolia.com/doc/api-reference/api-methods/delete-ab-test/?language=php)
+
+
+
+
+### Insights
+
+- [Clicked Object IDs After Search](https://algolia.com/doc/api-reference/api-methods/clicked-object-ids-after-search/?language=php)
+- [Clicked Object IDs](https://algolia.com/doc/api-reference/api-methods/clicked-object-ids/?language=php)
+- [Clicked Filters](https://algolia.com/doc/api-reference/api-methods/clicked-filters/?language=php)
+- [Converted Objects IDs After Search](https://algolia.com/doc/api-reference/api-methods/converted-object-ids-after-search/?language=php)
+- [Converted Object IDs](https://algolia.com/doc/api-reference/api-methods/converted-object-ids/?language=php)
+- [Converted Filters](https://algolia.com/doc/api-reference/api-methods/converted-filters/?language=php)
+- [Viewed Object IDs](https://algolia.com/doc/api-reference/api-methods/viewed-object-ids/?language=php)
+- [Viewed Filters](https://algolia.com/doc/api-reference/api-methods/viewed-filters/?language=php)
 
 
 

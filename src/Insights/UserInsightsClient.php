@@ -34,7 +34,7 @@ final class UserInsightsClient
         $event = array(
             'objectIDs' => $objectIDs,
             'positions' => $positions,
-            'queryID' => $queryID
+            'queryID' => $queryID,
         );
 
         return $this->clicked($event, $eventName, $indexName, $requestOptions);

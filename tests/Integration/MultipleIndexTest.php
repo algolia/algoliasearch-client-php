@@ -30,20 +30,6 @@ class MultipleIndexTest extends AlgoliaIntegrationTestCase
         }
     }
 
-    /**
-     * @expectedException \Algolia\AlgoliaSearch\Exceptions\MissingObjectId
-     */
-    public function testObjectIdIsRequired()
-    {
-        $batch = array_map(function ($item) {
-            unset($item['body']['objectID']);
-
-            return $item;
-        }, $this->getBatch());
-
-        self::getClient()->multipleBatch($batch);
-    }
-
     private function getBatch()
     {
         $batch = array();

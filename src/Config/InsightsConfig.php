@@ -26,16 +26,4 @@ final class InsightsConfig extends AbstractConfig
     {
         return $this->config['region'];
     }
-
-    public function setUserToken($userToken)
-    {
-        $this->config['userToken'] = $userToken;
-
-        return $this;
-    }
-
-    public function getUserToken()
-    {
-        return $this->config['userToken'];
-    }
 }

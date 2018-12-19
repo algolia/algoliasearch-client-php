@@ -10,7 +10,7 @@ class RequestHttpClient implements HttpClientInterface
 {
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        $e = new RequestException();
+        $e = new RequestException('Use a try/catch to get the request');
 
         throw $e->setRequest($request);
     }

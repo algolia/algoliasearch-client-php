@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
+## [v2.1.0](https://github.com/algolia/algoliasearch-client-php/compare/2.0.1...2.1.0)
+
+### Added
+- Personalization related methods ([#493](https://github.com/algolia/algoliasearch-client-php/pull/493))
+- Insights Client related methods ([#487](https://github.com/algolia/algoliasearch-client-php/pull/487))
+
 ## [v2.0.1](https://github.com/algolia/algoliasearch-client-php/compare/2.0.0...2.0.1)
 
 ### Fixed

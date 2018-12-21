@@ -29,7 +29,7 @@ abstract class RequestTestCase extends TestCase
     protected function assertBodySubset($subset, RequestInterface $request)
     {
         $body = json_decode((string) $request->getBody(), true);
-        $this->assertArraySubset($subset, $body);
+        $this->assertArraySubset($subset, $body, true);
     }
 
     protected function assertQueryParametersSubset(array $subset, RequestInterface $request)

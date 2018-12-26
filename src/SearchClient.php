@@ -259,6 +259,8 @@ class SearchClient
 
     public function searchUserIds($query, $requestOptions = array())
     {
+        $query = (string) $query;
+
         if (is_array($requestOptions)) {
             $requestOptions['query'] = $query;
         } elseif ($requestOptions instanceof RequestOptions) {

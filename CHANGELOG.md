@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
+## [v2.1.2](https://github.com/algolia/algoliasearch-client-php/compare/2.1.1...2.1.2)
+
+### Fixed
+- Adds `null` resilience to search `$query` ([#499](https://github.com/algolia/algoliasearch-client-php/pull/499))
+
 ## [v2.1.1](https://github.com/algolia/algoliasearch-client-php/compare/2.1.0...2.1.1)
 
 ### Fixed

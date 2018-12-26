@@ -1,7 +1,6 @@
 # Algolia Search API Client for PHP
 
-[Algolia Search](https://www.algolia.com) is a hosted full-text, numerical,
-and faceted search engine capable of delivering realtime results from the first keystroke.
+[Algolia Search](https://www.algolia.com) is a hosted search engine capable of delivering realtime results from the first keystroke.
 
 The **Algolia Search API Client for PHP** lets
 you easily use the [Algolia Search REST API](https://www.algolia.com/doc/rest-api/search) from

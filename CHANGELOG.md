@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
+## [Unreleased]
+
+### Added
+- `SearchClient::restoreApiKey` method ([#502](https://github.com/algolia/algoliasearch-client-php/pull/502))
+
 ## [v2.1.2](https://github.com/algolia/algoliasearch-client-php/compare/2.1.1...2.1.2)
 
 ### Fixed

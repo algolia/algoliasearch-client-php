@@ -6,6 +6,7 @@ use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\RestoreApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -229,6 +230,13 @@ class SearchClient
         $response = $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
 
         return new DeleteApiKeyResponse($response, $this, $this->config, $key);
+    }
+
+    public function restoreApiKey($key, $requestOptions = array())
+    {
+        $response = $this->api->write('POST', api_path('/1/keys/%s/restore', $key), array(), $requestOptions);
+
+        return new RestoreApiKeyResponse($response, $this, $this->config, $key);
     }
 
     public static function generateSecuredApiKey($parentApiKey, $restrictions)

@@ -19,17 +19,17 @@ final class RestoreApiKeyResponse extends AbstractResponse
     private $config;
 
     /**
-     * @var string API Key to be deleted.
+     * @var string API Key to be deleted
      */
     private $key;
 
     /**
      * RestoreApiKeyResponse constructor.
      *
-     * @param array $apiResponse
-     * @param \Algolia\AlgoliaSearch\SearchClient $client
+     * @param array                                      $apiResponse
+     * @param \Algolia\AlgoliaSearch\SearchClient        $client
      * @param \Algolia\AlgoliaSearch\Config\SearchConfig $config
-     * @param string $key
+     * @param string                                     $key
      */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config, $key)
     {
@@ -44,7 +44,7 @@ final class RestoreApiKeyResponse extends AbstractResponse
      */
     public function wait($requestOptions = array())
     {
-        if (! isset($this->client)) {
+        if (!isset($this->client)) {
             return $this;
         }
 

@@ -11,7 +11,7 @@
             "query": [],
             "builtQuery": "",
             "readTimeout": 5,
-            "writeTimeout": 5,
+            "writeTimeout": 30,
             "connectTimeout": 2
         }
     ],

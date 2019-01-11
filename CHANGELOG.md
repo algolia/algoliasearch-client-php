@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
+## [v2.1.3](https://github.com/algolia/algoliasearch-client-php/compare/2.1.2...2.1.3)
+
+### Fixed
+- Default write timeout - changed from `5s` to `30s` ([#505](https://github.com/algolia/algoliasearch-client-php/pull/505))
+
 ## [v2.1.2](https://github.com/algolia/algoliasearch-client-php/compare/2.1.1...2.1.2)
 
 ### Fixed

@@ -2,10 +2,13 @@
 
 /docs              export-ignore
 /tests             export-ignore
+/.github           export-ignore
 .editorconfig      export-ignore
 .gitattributes     export-ignore
 .gitignore         export-ignore
 .php_cs            export-ignore
+.php_cs.dist       export-ignore
+.styleci.yml       export-ignore
 .travis.yml        export-ignore
 CHANGELOG.md       export-ignore
 CONTRIBUTING.md    export-ignore

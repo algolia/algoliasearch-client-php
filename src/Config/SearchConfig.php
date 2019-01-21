@@ -6,8 +6,6 @@ class SearchConfig extends AbstractConfig
 {
     private $defaultWaitTaskTimeBeforeRetry = 100000;
 
-    private $defaultWaitTaskMaxRetry = 30;
-
     public static function create($appId = null, $apiKey = null)
     {
         $config = array(
@@ -28,7 +26,6 @@ class SearchConfig extends AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
-            'waitTaskMaxRetry' => $this->defaultWaitTaskMaxRetry,
             'defaultHeaders' => array(),
             'defaultForwardToReplicas' => null,
             'batchSize' => 1000,

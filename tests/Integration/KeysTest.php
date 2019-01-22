@@ -46,5 +46,9 @@ class KeysTest extends AlgoliaIntegrationTestCase
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
+
+        $client->restoreApiKey($key['value'])->wait();
+        $client->getApiKey($key['value']);
+        $client->deleteApiKey($key['value'])->wait();
     }
 }

@@ -11,7 +11,7 @@
             "query": [],
             "builtQuery": "",
             "readTimeout": 5,
-            "writeTimeout": 5,
+            "writeTimeout": 30,
             "connectTimeout": 2
         }
     ],
@@ -34,7 +34,7 @@
             "query": [],
             "builtQuery": "",
             "readTimeout": 5,
-            "writeTimeout": 5,
+            "writeTimeout": 30,
             "connectTimeout": 2
         }
     ],
@@ -54,7 +54,7 @@
             },
             "builtQuery": "forwardToReplicas=true",
             "readTimeout": 5,
-            "writeTimeout": 5,
+            "writeTimeout": 30,
             "connectTimeout": 2
         }
     ],

@@ -8,7 +8,7 @@ abstract class AbstractConfig
 
     protected $defaultReadTimeout = 5;
 
-    protected $defaultWriteTimeout = 5;
+    protected $defaultWriteTimeout = 30;
 
     protected $defaultConnectTimeout = 2;
 

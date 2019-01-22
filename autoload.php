@@ -16,10 +16,10 @@
 /*
  * Some helper functions are outside classes and need to be loaded
  */
-require_once './src/functions.php';
-require_once './src/Http/Psr7/functions.php';
+require_once __DIR__.'/src/functions.php';
+require_once __DIR__.'/src/Http/Psr7/functions.php';
 
-/**
+/*
  * Based on https://www.php-fig.org/psr/psr-4/examples/.
  */
 spl_autoload_register(function ($class) {
@@ -49,7 +49,6 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
-
 
 spl_autoload_register(function ($class) {
     $prefixes = array(

@@ -49,5 +49,6 @@ class KeysTest extends AlgoliaIntegrationTestCase
 
         $client->restoreApiKey($key['value'])->wait();
         $client->getApiKey($key['value']);
+        $client->deleteApiKey($key['value'])->wait();
     }
 }

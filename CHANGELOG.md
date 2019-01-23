@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - `SearchClient::restoreApiKey` method ([#502](https://github.com/algolia/algoliasearch-client-php/pull/502))
 
+### Fixed
+- Autoload when not using composer ([#506](https://github.com/algolia/algoliasearch-client-php/pull/506))
+
 ## [v2.1.3](https://github.com/algolia/algoliasearch-client-php/compare/2.1.2...2.1.3)
 
 ### Fixed

@@ -42,6 +42,8 @@ class AnalyticsClientTest extends AlgoliaIntegrationTestCase
 
         $searchClient->waitTask(static::$indexes['aa_testing'], $response['taskID']);
         $abTest = $analyticsClient->getABTest($response['abTestID']);
+
+        $this->assertSame($abTest['name'], 'aaTestName');
         $this->assertSame($abTest['status'], 'active');
     }
 }

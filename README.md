@@ -11,7 +11,7 @@ your PHP code.
 
 If you're a Symfony or Laravel user, you're probably looking for the following integrations:
 
-- **Laravel**: [Laravel Scout](https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/)
+- **Laravel**: [Scout Extended](https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/)
 - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
 

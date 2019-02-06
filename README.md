@@ -11,7 +11,7 @@ your PHP code.
 
 If you're a Symfony or Laravel user, you're probably looking for the following integrations:
 
-- **Laravel**: [Scout Extended](https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/)
+- **Laravel**: [Laravel Scout](https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/)
 - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
 
 
@@ -297,7 +297,7 @@ search.start();
 
 
 
-### API Keys
+### API keys
 
 - [Create secured API Key](https://algolia.com/doc/api-reference/api-methods/generate-secured-api-key/?language=php)
 - [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=php)

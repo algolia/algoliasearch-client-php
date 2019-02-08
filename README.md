@@ -108,7 +108,7 @@ Without any prior configuration, you can start indexing [500 contacts](https://g
 $client = \Algolia\AlgoliaSearch\SearchClient::create('YourApplicationID', 'YourAPIKey');
 $index = $client->initIndex('contacts');
 $batch = json_decode(file_get_contents('contacts.json'), true);
-$index->saveObjects($batch);
+$index->saveObjects($batch, ['autoGenerateObjectIDIfNotExist' => true]);
 ```
 
 ## Configure

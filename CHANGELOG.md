@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- Missing iterator key increment ([#515](https://github.com/algolia/algoliasearch-client-php/pull/515))
+
 ## [v2.2.0](https://github.com/algolia/algoliasearch-client-php/compare/2.1.3...2.2.0)
 
 ### Added

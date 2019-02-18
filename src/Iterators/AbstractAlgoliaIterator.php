@@ -82,6 +82,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      */
     public function next()
     {
+        $this->key++;
         $this->batchKey++;
         if ($this->valid()) {
             return;

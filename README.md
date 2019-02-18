@@ -303,6 +303,7 @@ search.start();
 - [Add API Key](https://algolia.com/doc/api-reference/api-methods/add-api-key/?language=php)
 - [Update API Key](https://algolia.com/doc/api-reference/api-methods/update-api-key/?language=php)
 - [Delete API Key](https://algolia.com/doc/api-reference/api-methods/delete-api-key/?language=php)
+- [Restore API Key](https://algolia.com/doc/api-reference/api-methods/restore-api-key/?language=php)
 - [Get API Key permissions](https://algolia.com/doc/api-reference/api-methods/get-api-key/?language=php)
 - [List API Keys](https://algolia.com/doc/api-reference/api-methods/list-api-keys/?language=php)
 

@@ -23,7 +23,8 @@ class BrowseAndIteratorsTest extends AlgoliaIntegrationTestCase
 
         $i = 0;
         $total = count($this->airports);
-        foreach ($iterator as $airport) {
+        foreach ($iterator as $key => $airport) {
+            $this->assertEquals($i, $key);
             $i++;
             if ($i > $total) {
                 break;

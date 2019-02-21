@@ -2,7 +2,7 @@
 
 Find the complete guide on our documentation:
 
-https://deploy-preview-2021--algolia-doc.netlify.com/doc/api-client/getting-started/upgrade-guide/php/
+https://www.algolia.com/doc/api-client/getting-started/upgrade-guides/php
 
 
 ## Methods signature change

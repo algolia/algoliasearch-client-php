@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v2.2.2](https://github.com/algolia/algoliasearch-client-php/compare/2.2.1...2.2.2)
+
+### Fixed
+- Adds missing optional certificate ([#521](https://github.com/algolia/algoliasearch-client-php/pull/521))
+
 ## [v2.2.1](https://github.com/algolia/algoliasearch-client-php/compare/2.2.0...2.2.1)
 
 ### Fixed

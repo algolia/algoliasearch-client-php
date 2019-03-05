@@ -45,7 +45,7 @@ final class RequestOptions
      * Add a header to the list. If a value already exists for that name, it will be overwritten.
      *
      * @param string $name Name of the header
-     * @param $value string Value of the header
+     * @param string $value Value of the header
      *
      * @return $this
      */
@@ -72,7 +72,7 @@ final class RequestOptions
      * Add a new header to the list if there is no value already set.
      *
      * @param string $name Name of the header
-     * @param $value string Value of the header
+     * @param string $value Value of the header
      *
      * @return $this
      */

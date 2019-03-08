@@ -38,7 +38,8 @@
         }
     },
     "suggest": {
-        "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
+        "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package",
+        "symfony/http-client": "If you prefer to use Symfony HTTP client instead of the built-in Http Client implementation"
     },
     "bin": [
         "bin/algolia-doctor"

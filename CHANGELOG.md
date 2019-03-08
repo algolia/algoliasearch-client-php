@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 # Release Notes
 
 ## [Unreleased]
+- Add experimental support for Symfony HTTP Client ([#525](https://github.com/algolia/algoliasearch-client-php/issues/525))
 
 ## [v2.2.3](https://github.com/algolia/algoliasearch-client-php/compare/2.2.2...2.2.3)
 

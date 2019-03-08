@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\SymfonyHttpClient;
 use Algolia\AlgoliaSearch\Log\DebugLogger;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -91,7 +92,9 @@ final class Algolia
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
-            if (class_exists('\GuzzleHttp\Client')) {
+            if (\class_exists('\Symfony\Component\HttpClient\HttpClient')) {
+                self::setHttpClient(new SymfonyHttpClient());
+            } elseif (class_exists('\GuzzleHttp\Client')) {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
             } else {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());

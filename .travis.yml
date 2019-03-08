@@ -54,7 +54,7 @@ cache:
 install:
   - composer install
   - if [ "$LEGACY_HTTP" != "true" ] && [ "$SYMFONY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
-  - if [ "$SYMFONY_HTTP" = "true" ]; then composer require symfony/http-client ; fi
+  - if [ "$SYMFONY_HTTP" = "true" ]; then composer req symfony/http-client ; fi
 
 before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys

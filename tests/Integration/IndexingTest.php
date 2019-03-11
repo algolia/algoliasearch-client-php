@@ -18,9 +18,11 @@ class IndexingTest extends AlgoliaIntegrationTestCase
     {
         $responses = array();
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
+
         $index = SearchClient::get()->initIndex(static::$indexes['main']);
 
         /** adding a object with object id */
+
         $obj1 = $this->createStubRecord(null);
         $responses[] = $index->saveObject($obj1);
 
@@ -28,20 +30,23 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         $obj2 = $this->createStubRecord(false);
         $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
 
+
         /** adding two objects with object id  */
+
         $obj3 = $this->createStubRecord(null);
         $obj4 = $this->createStubRecord(null);
         $responses[] = $index->saveObjects(array($obj3, $obj4));
 
         /** adding two objects w/o object id  */
+
         $obj5 = $this->createStubRecord(false);
         $obj6 = $this->createStubRecord(false);
         $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
 
         /** adding 1000 objects with object id with 10 batch*/
-        $objects = array();
+
         for ($i = 1; $i <= 1000; $i++) {
-            $objects[] = $this->createStubRecord($i);
+            $objects[$i] = $this->createStubRecord($i);
         }
 
         $objectsChunks = array_chunk($objects, 100);
@@ -50,12 +55,12 @@ class IndexingTest extends AlgoliaIntegrationTestCase
             $responses[] = $index->batch($request);
         }
 
-        /* Wait all collected task to terminate */
-        foreach ($responses as $r) {
-            $r->wait();
-        }
+        /** Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
 
         /**  Check 6 first records with getObject */
+
         $objectID1 = $responses[0][0]['objectIDs'][0];
         $objectID2 = $responses[1][0]['objectIDs'][0];
         $objectID3 = $responses[2][0]['objectIDs'][0];
@@ -71,72 +76,70 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         self::assertEquals($obj6['name'], $index->getObject($objectID6)['name']);
 
         /** Check 1000 remaining records with getObjects */
-        $objectsIDs = array();
-        foreach ($objects as $object) {
-            $objectsIDs[] = $object['objectID'];
-        }
-        $results = array();
-        $results = $index->getObjects($objectsIDs);
 
-        $result_objects = array();
-        foreach ($results as $result) {
-            foreach ($result as $res) {
-                $result_objects[] = $res;
-            }
+        $results = array($index->getObjects(array_keys($objects)));
+
+        $objectsKeyByDefault = array();
+        foreach ($objects as $object) {
+            $objectsKeyByDefault[] = $object;
         }
-        for ($i = 0; $i <= 999; $i++) {
-            self::assertEquals($objects[$i], $result_objects[$i]);
-        }
+        self::assertEquals($objectsKeyByDefault, $results[0]["results"]);
 
         /**  Browse all records with browseObjects */
-        $results = array();
-        $results[] = $index->browseObjects();
-        for ($i = 0; $i <= 999; $i++) {
-            self::assertEquals($objectsIDs[$i], $result_objects[$i]['objectID']);
-        }
-        self::assertCount(1006, $index->browseObjects());
 
-        /* Alter 1 record with partialUpdateObject */
+        $iterator = $index->browseObjects();
+
+        self::assertCount(1006, $iterator);
+        foreach ($iterator as $object) {
+            self::assertArrayHasKey('objectID', $object);
+        }
+
+        /** Alter 1 record with partialUpdateObject */
+
         $obj1['name'] = 'This is an altered name';
         $responses[] = $index->partialUpdateObject($obj1);
 
-        /* Alter 2 records with partialUpdateObjects */
+        /** Alter 2 records with partialUpdateObjects */
+
         $obj3['bar'] = 'This is an altered name';
         $obj4['foo'] = 'This is an altered name';
-        $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
+        $responses [] = $index->partialUpdateObjects(array($obj3, $obj4));
 
-        /* Wait all collected task to terminate */
-        foreach ($responses as $r) {
-            $r->wait();
-        }
+        /** Wait all collected task to terminate */
 
-        /* Check previous altered records with getObject */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /** Check previous altered records with getObject */
+
         self::assertEquals($index->getObject($objectID1), $obj1);
         self::assertEquals($index->getObject($objectID3), $obj3);
         self::assertEquals($index->getObject($objectID4), $obj4);
 
-        /*  Delete the first record with deleteObject */
+        /**  Delete the first record with deleteObject */
+
         $responses[] = $index->deleteObject($objectID1);
 
         /** Delete the 5 remaining first records with deleteObjects */
-        $objectsIDs = array();
-        $objectsIDs[] = $objectID2;
-        $objectsIDs[] = $objectID3;
-        $objectsIDs[] = $objectID4;
-        $objectsIDs[] = $objectID5;
-        $objectsIDs[] = $objectID6;
+
+        $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
 
         $responses[] = $index->deleteObjects($objectsIDs);
 
-        /* Delete the 1000 remaining records with clearObjects */
+        /** Delete the 1000 remaining records with clearObjects */
+
         $responses[] = $index->clearObjects();
 
-        /* Wait all collected task to terminate */
-        foreach ($responses as $r) {
-            $r->wait();
-        }
-        /* Browse all objects with browseObjects */
-        self::assertCount(0, $index->browseObjects());
+        /** Wait all collected task to terminate */
+
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /** Browse all objects with browseObjects */
+
+        $iterator = $index->browseObjects();
+        self::assertCount(0, $iterator);
+
     }
 
     private function createStubRecord($objectID = false)

@@ -51,8 +51,6 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         'decompoundedAttributes' => array("de" => array("attribute1", "attribute2"), "fi" => array("attribute3")),
         'keepDiacriticsOnCharacters' => "øé",
     );
-    
-
 
     protected function setUp()
     {
@@ -80,6 +78,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         foreach ($responses as $r) {
             $r->wait();
         }
+
         /* Get the settings with getSettings  */
         $retrievedSettings = $index->getSettings();
         self::assertArraySubset($this->settings, $retrievedSettings);
@@ -91,6 +90,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         foreach ($responses as $r) {
             $r->wait();
         }
+
         /*  Get the settings with getSettings after update */
         $this->settings['typoTolerance'] = true;
         $this->settings['ignorePlurals'] = array("en", "fr");
@@ -141,7 +141,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $formula = array('customRanking' => array('asc(something)'));
         $index->setSettings($formula, array('forwardToReplicas' => false));
         $retrievedSettings = $replica->getSettings();
-        // not correct anymore because we've got change our settings with a customRanking this time
-       // $this->assertEquals(null, $retrievedSettings['customRanking']);
+        //not correct anymore because we've got change our settings with a customRanking this time
+        // $this->assertEquals(null, $retrievedSettings['customRanking']);
     }
 }

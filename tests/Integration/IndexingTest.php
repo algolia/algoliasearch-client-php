@@ -28,8 +28,7 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         /* adding a object w/o object id s */
         $obj2 = $this->createStubRecord(false);
         $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
-
-
+        
         /* adding two objects with object id  */
         $obj3 = $this->createStubRecord(null);
         $obj4 = $this->createStubRecord(null);
@@ -126,7 +125,6 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         /* Browse all objects with browseObjects */
         $iterator = $index->browseObjects();
         self::assertCount(0, $iterator);
-
     }
 
     private function createStubRecord($objectID = false)

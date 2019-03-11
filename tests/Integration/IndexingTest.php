@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Support\Helpers;
 use Faker\Factory;
@@ -18,11 +19,9 @@ class IndexingTest extends AlgoliaIntegrationTestCase
     {
         $responses = array();
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
-
         $index = SearchClient::get()->initIndex(static::$indexes['main']);
 
         /** adding a object with object id */
-
         $obj1 = $this->createStubRecord(null);
         $responses[] = $index->saveObject($obj1);
 
@@ -32,7 +31,6 @@ class IndexingTest extends AlgoliaIntegrationTestCase
 
 
         /** adding two objects with object id  */
-
         $obj3 = $this->createStubRecord(null);
         $obj4 = $this->createStubRecord(null);
         $responses[] = $index->saveObjects(array($obj3, $obj4));
@@ -43,7 +41,7 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         $obj6 = $this->createStubRecord(false);
         $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
 
-        /** adding 1000 objects with object id with 10 batch*/
+        /** adding 1000 objects with object id with 10 batch */
 
         for ($i = 1; $i <= 1000; $i++) {
             $objects[$i] = $this->createStubRecord($i);
@@ -76,17 +74,15 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         self::assertEquals($obj6['name'], $index->getObject($objectID6)['name']);
 
         /** Check 1000 remaining records with getObjects */
-
         $results = array($index->getObjects(array_keys($objects)));
 
         $objectsKeyByDefault = array();
         foreach ($objects as $object) {
             $objectsKeyByDefault[] = $object;
         }
-        self::assertEquals($objectsKeyByDefault, $results[0]["results"]);
+        self::assertEquals($objectsKeyByDefault, $results[0]['results']);
 
         /**  Browse all records with browseObjects */
-
         $iterator = $index->browseObjects();
 
         self::assertCount(1006, $iterator);
@@ -95,48 +91,39 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         }
 
         /** Alter 1 record with partialUpdateObject */
-
         $obj1['name'] = 'This is an altered name';
         $responses[] = $index->partialUpdateObject($obj1);
 
         /** Alter 2 records with partialUpdateObjects */
-
         $obj3['bar'] = 'This is an altered name';
         $obj4['foo'] = 'This is an altered name';
-        $responses [] = $index->partialUpdateObjects(array($obj3, $obj4));
+        $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
 
         /** Wait all collected task to terminate */
-
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
         /** Check previous altered records with getObject */
-
         self::assertEquals($index->getObject($objectID1), $obj1);
         self::assertEquals($index->getObject($objectID3), $obj3);
         self::assertEquals($index->getObject($objectID4), $obj4);
 
         /**  Delete the first record with deleteObject */
-
         $responses[] = $index->deleteObject($objectID1);
 
         /** Delete the 5 remaining first records with deleteObjects */
-
         $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
 
         $responses[] = $index->deleteObjects($objectsIDs);
 
         /** Delete the 1000 remaining records with clearObjects */
-
         $responses[] = $index->clearObjects();
 
         /** Wait all collected task to terminate */
-
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
         /** Browse all objects with browseObjects */
-
         $iterator = $index->browseObjects();
         self::assertCount(0, $iterator);
 

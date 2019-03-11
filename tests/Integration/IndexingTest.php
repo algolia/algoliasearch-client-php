@@ -28,14 +28,13 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         /* adding a object w/o object id s */
         $obj2 = $this->createStubRecord(false);
         $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
-        
+
         /* adding two objects with object id  */
         $obj3 = $this->createStubRecord(null);
         $obj4 = $this->createStubRecord(null);
         $responses[] = $index->saveObjects(array($obj3, $obj4));
 
         /* adding two objects w/o object id  */
-
         $obj5 = $this->createStubRecord(false);
         $obj6 = $this->createStubRecord(false);
         $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
@@ -73,29 +72,25 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         self::assertEquals($obj6['name'], $index->getObject($objectID6)['name']);
 
         /* Check 1000 remaining records with getObjects */
-        $results = array($index->getObjects(array_keys($objects)));
-
-        $objectsKeyByDefault = array();
-        foreach ($objects as $object) {
-            $objectsKeyByDefault[] = $object;
-        }
-        self::assertEquals($objectsKeyByDefault, $results[0]['results']);
+        $results = $index->getObjects(array_keys($objects));
+        self::assertEquals(array_values($objects), $results['results']);
 
         /*  Browse all records with browseObjects */
         $iterator = $index->browseObjects();
 
         self::assertCount(1006, $iterator);
-        foreach ($iterator as $object) {
-            self::assertArrayHasKey('objectID', $object);
+        $results = iterator_to_array($iterator);
+        foreach ($objects as $object) {
+            self::assertContains($object, $results);
         }
 
         /* Alter 1 record with partialUpdateObject */
-        $obj1['name'] = 'This is an altered name';
+        $obj1['name'] = 'This is an altered name 1';
         $responses[] = $index->partialUpdateObject($obj1);
 
         /* Alter 2 records with partialUpdateObjects */
-        $obj3['bar'] = 'This is an altered name';
-        $obj4['foo'] = 'This is an altered name';
+        $obj3['bar'] = 'This is an altered name 3';
+        $obj4['foo'] = 'This is an altered name 4';
         $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
 
         /* Wait all collected task to terminate */

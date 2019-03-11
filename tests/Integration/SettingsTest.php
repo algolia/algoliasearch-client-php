@@ -5,20 +5,20 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 class SettingsTest extends AlgoliaIntegrationTestCase
 {
     private $settings = array(
-        'searchableAttributes' => array("attribute1", "attribute2", "attribute3", "ordered(attribute4)", "unordered(attribute5)"),
-        'attributesForFaceting' => array("attribute1", "filterOnly(attribute2)", "searchable(attribute3)"),
-        'unretrievableAttributes' => array("attribute1", "attribute2"),
-        'attributesToRetrieve' => array("attribute3", "attribute4"),
-        'ranking' => array("asc(attribute1)", "desc(attribute2)", "attribute", "custom", "exact", "filters", "geo", "proximity", "typo", "words"),
-        'customRanking' => array("asc(attribute1)", "desc(attribute1)"),
-        'replicas' => array("main_replica1", "main_replica2"),
+        'searchableAttributes' => array('attribute1', 'attribute2', 'attribute3', 'ordered(attribute4)', 'unordered(attribute5)'),
+        'attributesForFaceting' => array('attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'),
+        'unretrievableAttributes' => array('attribute1', 'attribute2'),
+        'attributesToRetrieve' => array('attribute3', 'attribute4'),
+        'ranking' => array('asc(attribute1)', 'desc(attribute2)', 'attribute', 'custom', 'exact', 'filters', 'geo', 'proximity', 'typo', 'words'),
+        'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
+        'replicas' => array('main_replica1', 'main_replica2'),
         'maxValuesPerFacet' => 100,
-        'sortFacetValuesBy' => "count",
-        'attributesToHighlight' => array("attribute1", "attribute2"),
-        'attributesToSnippet' => array("attribute1:10", "attribute2:8"),
-        'highlightPreTag' => "<strong>",
-        'highlightPostTag' => "</strong>",
-        'snippetEllipsisText' => " and so on.",
+        'sortFacetValuesBy' => 'count',
+        'attributesToHighlight' => array('attribute1', 'attribute2'),
+        'attributesToSnippet' => array('attribute1:10', 'attribute2:8'),
+        'highlightPreTag' => '<strong>',
+        'highlightPostTag' => '</strong>',
+        'snippetEllipsisText' => ' and so on.',
         'restrictHighlightAndSnippetArrays' => true,
         'hitsPerPage' => 42,
         'paginationLimitedTo' => 43,
@@ -27,29 +27,29 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         'typoTolerance' => 'false',
         'allowTyposOnNumericTokens' => false,
         'ignorePlurals' => true,
-        'disableTypoToleranceOnAttributes' => array("attribute1", "attribute2"),
-        'disableTypoToleranceOnWords' => array("word1", "word2"),
-        'separatorsToIndex' => "()array()(",
-        'queryType' => "prefixNone",
-        'removeWordsIfNoResults' => "allOptional",
+        'disableTypoToleranceOnAttributes' => array('attribute1', 'attribute2'),
+        'disableTypoToleranceOnWords' => array('word1', 'word2'),
+        'separatorsToIndex' => '()array()(',
+        'queryType' => 'prefixNone',
+        'removeWordsIfNoResults' => 'allOptional',
         'advancedSyntax' => true,
-        'optionalWords' => array("word1", "word2"),
+        'optionalWords' => array('word1', 'word2'),
         'removeStopWords' => true,
-        'disablePrefixOnAttributes' => array("attribute1", "attribute2"),
-        'disableExactOnAttributes' => array("attribute1", "attribute2"),
-        'exactOnSingleWordQuery' => "word",
+        'disablePrefixOnAttributes' => array('attribute1', 'attribute2'),
+        'disableExactOnAttributes' => array('attribute1', 'attribute2'),
+        'exactOnSingleWordQuery' => 'word',
         'enableRules' => false,
-        'numericAttributesForFiltering' => array("attribute1", "attribute2"),
+        'numericAttributesForFiltering' => array('attribute1', 'attribute2'),
         'allowCompressionOfIntegerArray' => true,
-        'attributeForDistinct' => "attribute1",
+        'attributeForDistinct' => 'attribute1',
         'distinct' => 2,
         'replaceSynonymsInHighlight' => false,
         'minProximity' => 7,
-        'responseFields' => array("hits", "hitsPerPage"),
+        'responseFields' => array('hits', 'hitsPerPage'),
         'maxFacetHits' => 100,
-        'camelCaseAttributes' => array("attribute1", "attribute2"),
-        'decompoundedAttributes' => array("de" => array("attribute1", "attribute2"), "fi" => array("attribute3")),
-        'keepDiacriticsOnCharacters' => "øé",
+        'camelCaseAttributes' => array('attribute1', 'attribute2'),
+        'decompoundedAttributes' => array('de' => array('attribute1', 'attribute2'), 'fi' => array('attribute3')),
+        'keepDiacriticsOnCharacters' => 'øé',
     );
 
     protected function setUp()
@@ -72,7 +72,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $index->saveObject($object);
 
         /* Set the settings with $settings with setSettings */
-        $responses [] = $index->setSettings($this->settings);
+        $responses[] = $index->setSettings($this->settings);
 
         /* Wait all collected task to terminate */
         foreach ($responses as $r) {
@@ -84,7 +84,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         self::assertArraySubset($this->settings, $retrievedSettings);
 
         /* Set the settings with the following parameters with setSettings */
-        $responses[] = $index->setSettings(array('typoTolerance' => "min", 'ignorePlurals' => array("en", "fr"), 'removeStopWords' => array("en", "fr"), 'distinct' => true));
+        $responses[] = $index->setSettings(array('typoTolerance' => 'min', 'ignorePlurals' => array('en', 'fr'), 'removeStopWords' => array('en', 'fr'), 'distinct' => true));
 
         /* Wait all collected task to terminate */
         foreach ($responses as $r) {
@@ -93,8 +93,8 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 
         /*  Get the settings with getSettings after update */
         $this->settings['typoTolerance'] = true;
-        $this->settings['ignorePlurals'] = array("en", "fr");
-        $this->settings['removeStopWords'] = array("en", "fr");
+        $this->settings['ignorePlurals'] = array('en', 'fr');
+        $this->settings['removeStopWords'] = array('en', 'fr');
         $this->settings['distinct'] = true;
 
         $retrievedSettings = $index->getSettings();

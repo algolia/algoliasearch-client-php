@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\Response\MultiResponse;
+
 class SettingsTest extends AlgoliaIntegrationTestCase
 {
     private $settings = array(
@@ -75,9 +77,8 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $responses[] = $index->setSettings($this->settings);
 
         /* Wait all collected task to terminate */
-        foreach ($responses as $r) {
-            $r->wait();
-        }
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
 
         /* Get the settings with getSettings  */
         $retrievedSettings = $index->getSettings();
@@ -87,18 +88,18 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $responses[] = $index->setSettings(array('typoTolerance' => 'min', 'ignorePlurals' => array('en', 'fr'), 'removeStopWords' => array('en', 'fr'), 'distinct' => true));
 
         /* Wait all collected task to terminate */
-        foreach ($responses as $r) {
-            $r->wait();
-        }
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
 
         /*  Get the settings with getSettings after update */
-        $this->settings['typoTolerance'] = true;
-        $this->settings['ignorePlurals'] = array('en', 'fr');
-        $this->settings['removeStopWords'] = array('en', 'fr');
-        $this->settings['distinct'] = true;
+        $settingsCopy = $this->settings;
+        $settingsCopy['typoTolerance'] = true;
+        $settingsCopy['ignorePlurals'] = array('en', 'fr');
+        $settingsCopy['removeStopWords'] = array('en', 'fr');
+        $settingsCopy['distinct'] = true;
 
         $retrievedSettings = $index->getSettings();
-        self::assertArraySubset($this->settings, $retrievedSettings);
+        self::assertArraySubset($settingsCopy, $retrievedSettings);
     }
 
     /**
@@ -116,6 +117,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $replica = static::getClient()->initIndex($replica1);
 
         $settingsWithReplicas = array_merge($this->settings, array(
+            'customRanking' => null,
             'replicas' => array($replica1),
             'hitsPerPage' => 16,
             'minWordSizefor2Typos' => 9,
@@ -141,7 +143,6 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $formula = array('customRanking' => array('asc(something)'));
         $index->setSettings($formula, array('forwardToReplicas' => false));
         $retrievedSettings = $replica->getSettings();
-        //not correct anymore because we've got change our settings with a customRanking this time
-        // $this->assertEquals(null, $retrievedSettings['customRanking']);
+        $this->assertEquals(null, $retrievedSettings['customRanking']);
     }
 }

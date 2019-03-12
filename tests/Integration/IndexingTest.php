@@ -64,12 +64,18 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         $objectID5 = $responses[3][0]['objectIDs'][0];
         $objectID6 = $responses[3][0]['objectIDs'][1];
 
-        self::assertEquals($obj1['name'], $index->getObject($objectID1)['name']);
-        self::assertEquals($obj2['name'], $index->getObject($objectID2)['name']);
-        self::assertEquals($obj3['name'], $index->getObject($objectID3)['name']);
-        self::assertEquals($obj4['name'], $index->getObject($objectID4)['name']);
-        self::assertEquals($obj5['name'], $index->getObject($objectID5)['name']);
-        self::assertEquals($obj6['name'], $index->getObject($objectID6)['name']);
+        $result1 = $index->getObject($objectID1);
+        self::assertEquals($obj1['name'], $result1['name']);
+        $result2 = $index->getObject($objectID2);
+        self::assertEquals($obj2['name'], $result2['name']);
+        $result3 = $index->getObject($objectID3);
+        self::assertEquals($obj3['name'], $result3['name']);
+        $result4 = $index->getObject($objectID4);
+        self::assertEquals($obj4['name'], $result4['name']);
+        $result5 = $index->getObject($objectID5);
+        self::assertEquals($obj5['name'], $result5['name']);
+        $result6 = $index->getObject($objectID6);
+        self::assertEquals($obj6['name'], $result6['name']);
 
         /* Check 1000 remaining records with getObjects */
         $results = $index->getObjects(array_keys($objects));

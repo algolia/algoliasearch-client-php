@@ -1,11 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-// This kind of sucks.. but we need the composer autoloader, in order to fully check for GuzzleHttp
 if (file_exists(__DIR__ . '/../../../autoload.php')) {
     include __DIR__ . '/../../../autoload.php';
 } else if (file_exists(__DIR__ . '/../autoload.php')) {
-    // fallback to the local non-composer autoloader which seems to fail to check for Guzzle
     include __DIR__ . '/../autoload.php';
 }
 

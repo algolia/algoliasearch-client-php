@@ -53,4 +53,4 @@ before_script:
 script:
   - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [[ ! "$TRAVIS_PULL_REQUEST_SLUG" =~ ^algolia\/ ]]; then eval $(./algolia-keys export) && php vendor/bin/phpunit -v --testsuite Unit,Definition,Community; else php vendor/bin/phpunit -v; fi
   - php tests/tests-no-composer.php
-  - ./vendor/bin/php-cs-fixer fix -v --dry-run
+  - vendor/bin/php-cs-fixer fix -v --dry-run

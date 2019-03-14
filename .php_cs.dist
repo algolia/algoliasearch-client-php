@@ -10,6 +10,7 @@ return \PhpCsFixer\Config::create()
     ->setRules(array(
         '@Symfony' => true,
         'array_syntax' => array('syntax' => 'long'),
+        'pre_increment' => false,
     ))
     ->setFinder($finder)
 ;

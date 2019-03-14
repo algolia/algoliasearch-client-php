@@ -9,8 +9,8 @@ return \PhpCsFixer\Config::create()
     ->setUsingCache(true)
     ->setRules(array(
         '@Symfony' => true,
-        'array_syntax' => ['syntax' => 'long'],
-        'increment_style' => ['style' => 'post'],
+        'array_syntax' => array('syntax' => 'long'),
+        'increment_style' => array('style' => 'post'),
     ))
     ->setFinder($finder)
 ;

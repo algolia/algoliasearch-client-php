@@ -4,7 +4,7 @@ $finder = \PhpCsFixer\Finder::create()
     ->in(__DIR__ . DIRECTORY_SEPARATOR . 'src')
     ->in(__DIR__ . DIRECTORY_SEPARATOR . 'tests')
 ;
-if(PHP_VERSION_ID == 50300){
+if(PHP_VERSION_ID < 50400){
 return \PhpCsFixer\Config::create()
     ->setUsingCache(true)
     ->setRules(array(

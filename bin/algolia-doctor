@@ -1,6 +1,13 @@
 #!/usr/bin/env php
 <?php
 
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    include __DIR__ . '/../../../autoload.php';
+} else if (file_exists(__DIR__ . '/../autoload.php')) {
+    include __DIR__ . '/../autoload.php';
+}
+
+
 $doc = new AlgoliaDoctor();
 $doc->checkPhpVersion();
 $doc->checkExtensionRequirements();
@@ -40,7 +47,7 @@ class AlgoliaDoctor
 
     public function checkSerializeParam()
     {
-        if (version_compare(PHP_VERSION, '7.1.0', '>') && '-1' !== ini_get('serialize_precision')) {
+        if (PHP_VERSION_ID > 70100 && '-1' !== ini_get('serialize_precision')) {
             echo '
 When using PHP 7.1+, you must set the "serialize_precision" ini settings to -1.
 See https://github.com/algolia/algoliasearch-client-php/issues/365

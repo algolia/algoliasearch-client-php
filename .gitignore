@@ -3,3 +3,4 @@ composer.lock
 .php_cs.cache
 /tests/cache/
 .idea/
+.php_cs.dist

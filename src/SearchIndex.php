@@ -59,7 +59,15 @@ class SearchIndex
         return $this->api->read('POST', api_path('/1/indexes/%s/query', $this->indexName), $requestOptions);
     }
 
+    /**
+     * @deprecated Please use searchForFacetValues instead
+     */
     public function searchForFacetValue($facetName, $facetQuery, $requestOptions = array())
+    {
+        return $this->searchForFacetValues($facetName, $facetQuery, $requestOptions);
+    }
+
+    public function searchForFacetValues($facetName, $facetQuery, $requestOptions = array())
     {
         if (is_array($requestOptions)) {
             $requestOptions['facetQuery'] = $facetQuery;

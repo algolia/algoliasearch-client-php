@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 # Release Notes
 
 ## [Unreleased]
+### Added
+- Magento registration file was added to allow interceptor creation
 
 ## [v2.2.3](https://github.com/algolia/algoliasearch-client-php/compare/2.2.2...2.2.3)
 

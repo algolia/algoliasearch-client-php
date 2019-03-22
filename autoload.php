@@ -18,6 +18,7 @@
  */
 require_once __DIR__.'/src/functions.php';
 require_once __DIR__.'/src/Http/Psr7/functions.php';
+require_once __DIR__.'/src/magento_registration.php';
 
 /*
  * Based on https://www.php-fig.org/psr/psr-4/examples/.

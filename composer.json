@@ -31,7 +31,8 @@
         },
         "files": [
             "src/Http/Psr7/functions.php",
-            "src/functions.php"
+            "src/functions.php",
+            "src/magento_registration.php"
         ]
     },
     "autoload-dev": {

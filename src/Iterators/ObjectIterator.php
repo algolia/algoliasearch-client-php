@@ -12,7 +12,7 @@ final class ObjectIterator extends AbstractAlgoliaIterator
     }
 
     /**
-     * Count the number of objects in the iterator
+     * Count the number of objects in the iterator.
      *
      * @return mixed
      */

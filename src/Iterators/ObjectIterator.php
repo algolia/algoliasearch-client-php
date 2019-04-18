@@ -12,6 +12,16 @@ final class ObjectIterator extends AbstractAlgoliaIterator
     }
 
     /**
+     * Count the number of objects in the iterator
+     *
+     * @return mixed
+     */
+    public function count()
+    {
+        return isset($this->response['nbHits']) ? (int) $this->response['nbHits'] : null;
+    }
+
+    /**
      * Exporting objects (records) doesn't use the search function but the
      * browse method, no client-side formatting is required.
      *

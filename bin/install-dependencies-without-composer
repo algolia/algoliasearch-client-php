@@ -6,7 +6,7 @@
 //    true
 //);
 
-$vendorDir = dirname(__DIR__).'/vendor';
+$vendorDir = str_replace(" ", "\\ ", dirname(__DIR__)).'/vendor';
 $dependencies = array(
     'psr/http-message' => 'https://github.com/php-fig/http-message/archive/master.zip',
     'psr/log' => 'https://github.com/php-fig/log/archive/master.zip',

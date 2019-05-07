@@ -10,8 +10,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [v2.2.4](https://github.com/algolia/algoliasearch-client-php/compare/2.2.3...2.2.4)
 
+### Added
+- `SearchIndex::searchForFacetValues` method, and deprecates `SearchIndex::searchForFacetValue` ([#523](https://github.com/algolia/algoliasearch-client-php/pull/523))
+
 ### Fixed
-- Missing autoload in `bin/algolia-doctor` ([#534](https://github.com/algolia/algoliasearch-client-php/pull/534/files))
+- Missing autoload in `bin/algolia-doctor` ([#534](https://github.com/algolia/algoliasearch-client-php/pull/534))
 - Issue when manually installing dependencies within a folder name with spaces ([#540](https://github.com/algolia/algoliasearch-client-php/pull/540))
 
 ## [v2.2.3](https://github.com/algolia/algoliasearch-client-php/compare/2.2.2...2.2.3)

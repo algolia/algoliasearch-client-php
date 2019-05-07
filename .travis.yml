@@ -44,7 +44,7 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  - composer install
+  - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install
   - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
 
 before_script:

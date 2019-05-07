@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [v2.2.4](https://github.com/algolia/algoliasearch-client-php/compare/2.2.3...2.2.4)
 
 ### Fixed
+- Missing autoload in `bin/algolia-doctor` ([#534](https://github.com/algolia/algoliasearch-client-php/pull/534/files))
 - Issue when manually installing dependencies within a folder name with spaces ([#540](https://github.com/algolia/algoliasearch-client-php/pull/540))
 
 ## [v2.2.3](https://github.com/algolia/algoliasearch-client-php/compare/2.2.2...2.2.3)

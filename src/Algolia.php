@@ -91,7 +91,7 @@ final class Algolia
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
-            if (class_exists('\GuzzleHttp\Client')) {
+            if (\GuzzleHttp\Client::VERSION >= 6) {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
             } else {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());

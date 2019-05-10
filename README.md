@@ -9,10 +9,14 @@ your PHP code.
 [![Build Status](https://travis-ci.org/algolia/algoliasearch-client-php.svg?branch=master)](https://travis-ci.org/algolia/algoliasearch-client-php) [![Latest Stable Version](https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg)](https://packagist.org/packages/algolia/algoliasearch-client-php) [![Coverage Status](https://coveralls.io/repos/algolia/algoliasearch-client-php/badge.svg)](https://coveralls.io/r/algolia/algoliasearch-client-php)
 
 
-If you're a Symfony or Laravel user, you're probably looking for the following integrations:
+
+  ## Contributing
+
+  If you're a Symfony or Laravel user, you're probably looking for the following integrations:
 
 - **Laravel**: [Laravel Scout](https://www.algolia.com/doc/framework-integration/laravel/getting-started/introduction-to-scout-extended/)
 - **Symfony**: [algolia/AlgoliaSearchBundle](https://github.com/algolia/AlgoliaSearchBundle)
+
 
 
 
@@ -42,6 +46,12 @@ You can find the full reference on [Algolia's website](https://www.algolia.com/d
 
 
 1. **[Search UI](#search-ui)**
+
+
+1. **[List of available methods](#list-of-available-methods)**
+
+
+1. **[Getting Help](#getting-help)**
 
 
 1. **[List of available methods](#list-of-available-methods)**
@@ -105,7 +115,7 @@ $index = $client->initIndex('your_index_name');
 Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the `contacts` index using the following code:
 
 ```php
-$client = \Algolia\AlgoliaSearch\SearchClient::create('YourApplicationID', 'YourAPIKey');
+$client = \Algolia\AlgoliaSearch\SearchClient::create('YourApplicationID', 'YourAdminAPIKey');
 $index = $client->initIndex('contacts');
 $batch = json_decode(file_get_contents('contacts.json'), true);
 $index->saveObjects($batch, ['autoGenerateObjectIDIfNotExist' => true]);
@@ -171,15 +181,13 @@ The following example shows how to quickly build a front-end search using
 <!doctype html>
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/algolia.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.1/themes/algolia.css" integrity="sha256-4SlodglhMbXjGQfNWiCBLSGNiq90FUw3Mtre9u4vLG8=" crossorigin="anonymous">
 </head>
 <body>
   <header>
-    <div>
-       <input id="search-input" placeholder="Search for products">
-       <!-- We use a specific placeholder in the input to guide users in their search. -->
     
   </header>
+
   <main>
       
       
@@ -194,7 +202,8 @@ The following example shows how to quickly build a front-end search using
     
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3.32.1/dist/algoliasearchLite.min.js" integrity="sha256-NSTRUP9bvh8kBKi7IHQSmOrMAdVEoSJFBbTA+LoRr3A=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@3.2.0" integrity="sha256-/8usMtTwZ01jujD7KAZctG0UMk2S2NDNirGFVBbBZCM=" crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
 ```
@@ -203,23 +212,27 @@ The following example shows how to quickly build a front-end search using
 
 ```js
 // Replace with your own values
-var searchClient = algoliasearch(
+const searchClient = algoliasearch(
   'YourApplicationID',
-  'YourAPIKey' // search only API key, no ADMIN key
+  'YourSearchOnlyAPIKey' // search only API key, not admin API key
 );
 
-var search = instantsearch({
+const search = instantsearch({
   indexName: 'instant_search',
-  searchClient: searchClient,
+  searchClient,
   routing: true,
-  searchParameters: {
-    hitsPerPage: 10
-  }
 });
 
 search.addWidget(
+  instantsearch.widgets.configure({
+    hitsPerPage: 10,
+  })
+);
+
+search.addWidget(
   instantsearch.widgets.searchBox({
-    container: '#search-input'
+    container: '#search-box',
+    placeholder: 'Search for products',
   })
 );
 
@@ -228,8 +241,8 @@ search.addWidget(
     container: '#hits',
     templates: {
       item: document.getElementById('hit-template').innerHTML,
-      empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
-    }
+      empty: `We didn't find any results for the search <em>"{{query}}"</em>`,
+    },
   })
 );
 
@@ -384,6 +397,12 @@ search.start();
 - [Configuring timeouts](https://algolia.com/doc/api-reference/api-methods/configuring-timeouts/?language=php)
 - [Set extra header](https://algolia.com/doc/api-reference/api-methods/set-extra-header/?language=php)
 - [Wait for operations](https://algolia.com/doc/api-reference/api-methods/wait-task/?language=php)
+
+
+
+
+### Vault
+
 
 
 

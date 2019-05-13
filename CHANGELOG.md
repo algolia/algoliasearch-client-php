@@ -4,6 +4,8 @@
 
 <Contributors, please add your changes below this line>
 
+* Enable `JSON_UNESCAPED_UNICODE` option on POST/PUT requests payload. 
+
 ### 1.28.0
 
 * Introduce `$client->multipleGetObjects()` to retrieve objects via ObjectID

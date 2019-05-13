@@ -37,7 +37,7 @@ final class Algolia
             return false;
         }
 
-        return ! self::getCache() instanceof NullCacheDriver;
+        return !self::getCache() instanceof NullCacheDriver;
     }
 
     /**

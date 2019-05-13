@@ -37,7 +37,7 @@ final class Algolia
             return false;
         }
 
-        return !self::getCache() instanceof NullCacheDriver;
+        return ! self::getCache() instanceof NullCacheDriver;
     }
 
     /**
@@ -91,7 +91,7 @@ final class Algolia
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
-            if (\GuzzleHttp\Client::VERSION >= 6) {
+            if (class_exists('\GuzzleHttp\Client') && (\GuzzleHttp\Client::VERSION >= 6 && \GuzzleHttp\Client::VERSION < 7)) {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
             } else {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());

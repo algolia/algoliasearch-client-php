@@ -60,6 +60,11 @@ class Client
     protected $curlOptions = array();
 
     /**
+     * @var int
+     */
+    protected $jsonOptions = 0;
+
+    /**
      * @var bool
      */
     protected $placesEnabled = false;
@@ -105,6 +110,11 @@ class Client
                 default:
                     throw new \Exception('Unknown option: '.$option);
             }
+        }
+
+        if (defined('JSON_UNESCAPED_UNICODE')) {
+            // "JSON_UNESCAPED_UNICODE" is introduced in PHP 5.4.0
+            $this->jsonOptions = JSON_UNESCAPED_UNICODE;
         }
 
         $failingHostsCache = isset($options[self::FAILING_HOSTS_CACHE]) ? $options[self::FAILING_HOSTS_CACHE] : null;
@@ -1311,7 +1321,7 @@ class Client
             curl_setopt($curlHandle, CURLOPT_POST, false);
         } else {
             if ($method === 'POST') {
-                $body = ($data) ? Json::encode($data) : '';
+                $body = ($data) ? Json::encode($data, $this->jsonOptions) : '';
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'POST');
                 curl_setopt($curlHandle, CURLOPT_POST, true);
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
@@ -1319,7 +1329,7 @@ class Client
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 curl_setopt($curlHandle, CURLOPT_POST, false);
             } elseif ($method === 'PUT') {
-                $body = ($data) ? Json::encode($data) : '';
+                $body = ($data) ? Json::encode($data, $this->jsonOptions) : '';
                 curl_setopt($curlHandle, CURLOPT_CUSTOMREQUEST, 'PUT');
                 curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $body);
                 curl_setopt($curlHandle, CURLOPT_POST, true);

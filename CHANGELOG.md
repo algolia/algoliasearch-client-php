@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- Enable `JSON_UNESCAPED_UNICODE` option for requests bodies JSON encoding. 
+
 ## [v2.2.4](https://github.com/algolia/algoliasearch-client-php/compare/2.2.3...2.2.4)
 
 ### Added

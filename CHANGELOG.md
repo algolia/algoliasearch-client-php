@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v2.2.5](https://github.com/algolia/algoliasearch-client-php/compare/2.2.4...2.2.5)
+
+### Fixed
+- Usage of non-supported guzzle versions ([#544](https://github.com/algolia/algoliasearch-client-php/pull/544))
+
 ## [v2.2.4](https://github.com/algolia/algoliasearch-client-php/compare/2.2.3...2.2.4)
 
 ### Added

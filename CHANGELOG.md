@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased]
+## [v2.2.6](https://github.com/algolia/algoliasearch-client-php/compare/2.2.5...2.2.6)
 
 ### Fixed
 - Syntax error in old php versions ([#548](https://github.com/algolia/algoliasearch-client-php/pull/548))

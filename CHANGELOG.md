@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- Syntax error in old php versions ([#548](https://github.com/algolia/algoliasearch-client-php/pull/548))
+
 ## [v2.2.5](https://github.com/algolia/algoliasearch-client-php/compare/2.2.4...2.2.5)
 
 ### Fixed

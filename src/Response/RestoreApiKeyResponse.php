@@ -9,7 +9,7 @@ use Algolia\AlgoliaSearch\SearchClient;
 final class RestoreApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
+     * @var \Algolia\AlgoliaSearch\SearchClient
      */
     private $client;
 

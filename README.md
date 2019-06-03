@@ -48,7 +48,7 @@ $index->saveObjects(['objectID' => 1, 'name' => 'Foo']);
 ```
 
 Finally, you may begin searching a object using the `search` method:
-```py
+```php
 objects = $index->search('Fo');
 ```
 

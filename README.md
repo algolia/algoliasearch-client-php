@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.algolia.com">
-    <img alt="Algolia for PHP" src="https://raw.githubusercontent.com/algolia/algoliasearch-client-common/master/readme-banner.png" >
+    <img alt="Algolia for PHP" src="https://raw.githubusercontent.com/algolia/algoliasearch-client-common/master/banners/php.png" >
   </a>
 
   <h4 align="center">The perfect starting point to integrate <a href="https://algolia.com" target="_blank">Algolia</a> within your PHP project</h4>
@@ -49,7 +49,7 @@ $index->saveObjects(['objectID' => 1, 'name' => 'Foo']);
 
 Finally, you may begin searching a object using the `search` method:
 ```php
-objects = $index->search('Fo');
+$objects = $index->search('Fo');
 ```
 
 For full documentation, visit the **[Algolia PHP API Client](https://www.algolia.com/doc/api-client/getting-started/install/php/)**.

@@ -1,0 +1,25 @@
+parameters:
+  tasks:
+    phpcsfixer2:
+      allow_risky: ~
+      cache_file: ~
+      config: .php_cs
+      rules: []
+      using_cache: ~
+      config_contains_finder: true
+      verbose: true
+      diff: false
+      triggered_by: ['php']
+    phpmd:
+      whitelist_patterns: []
+      exclude: []
+      ruleset: ['cleancode', 'codesize', 'naming']
+      triggered_by: ['php']
+    git_blacklist:
+      keywords:
+        - "die("
+        - "var_dump("
+        - "exit;"
+      whitelist_patterns: []
+      triggered_by: ['php']
+      regexp_type: G

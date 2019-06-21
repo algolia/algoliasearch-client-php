@@ -1,0 +1,15 @@
+includes:
+    - tests/QualityTools/vendor/phpstan/phpstan-strict-rules/rules.neon
+    - tests/QualityTools/vendor/localheinz/phpstan-rules/rules.neon
+    - tests/QualityTools/vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+    - tests/QualityTools/vendor/roave/no-floaters/rules.neon
+
+parameters:
+    level: 0
+    excludes_analyse:
+        - tests/QualityTools/*
+        - tests/*
+    paths:
+        - src
+        - autoload.php
+    ignoreErrors:

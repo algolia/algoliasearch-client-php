@@ -1,6 +1,7 @@
 <?php
 
 $finder = \PhpCsFixer\Finder::create()
+    ->exclude(array(__DIR__.DIRECTORY_SEPARATOR.'tests/vendor'))
     ->in(__DIR__.DIRECTORY_SEPARATOR.'src')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'tests')
     ->in(__DIR__.DIRECTORY_SEPARATOR.'bin')

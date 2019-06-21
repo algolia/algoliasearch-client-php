@@ -1,0 +1,21 @@
+{
+    "name": "algolia/algoliasearch-client-php",
+    "description": "Algolia Search API Client for PHP",
+    "keywords": ["algolia", "search", "api", "client", "php"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Algolia Team",
+            "email": "contact@algolia.com"
+        }
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^0.11.5",
+        "localheinz/phpstan-rules": "^0.6.0",
+        "phpstan/phpstan-strict-rules": "^0.11",
+        "roave/no-floaters": "^1.1",
+        "thecodingmachine/phpstan-strict-rules": "^0.11.0",
+        "nunomaduro/phpinsights": "^1.7"
+    }
+}

@@ -9,17 +9,27 @@ use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 final class UpdateApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\SearchClient
+     * @var SearchClient
      */
     private $client;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
+     * @var SearchConfig
      */
     private $config;
 
+    /**
+     * @var array
+     */
     private $keyParams;
 
+    /**
+     * UpdateApiKeyResponse constructor.
+     * @param array $apiResponse
+     * @param SearchClient $client
+     * @param SearchConfig $config
+     * @param array $requestOptions
+     */
     public function __construct(
         array $apiResponse,
         SearchClient $client,
@@ -32,6 +42,10 @@ final class UpdateApiKeyResponse extends AbstractResponse
         $this->keyParams = $this->filterOnlyKeyParams($requestOptions);
     }
 
+    /**
+     * @param array $requestOptions
+     * @return $this
+     */
     public function wait($requestOptions = array())
     {
         if (!isset($this->client)) {
@@ -53,14 +67,19 @@ final class UpdateApiKeyResponse extends AbstractResponse
                 }
             } catch (NotFoundException $e) {
                 // Try again
+                // @ignoreException
             }
 
             $retry++;
-            $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
+            usleep(($retry / 10) * $time); // 0.1 second
         } while (true);
     }
 
+    /**
+     * @param string $key
+     * @param array $keyParams
+     * @return bool
+     */
     private function isKeyUpdated($key, $keyParams)
     {
         $upToDate = true;
@@ -73,6 +92,10 @@ final class UpdateApiKeyResponse extends AbstractResponse
         return $upToDate;
     }
 
+    /**
+     * @param array $requestOptions
+     * @return array
+     */
     private function filterOnlyKeyParams($requestOptions)
     {
         $validKeyParams = array(

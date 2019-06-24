@@ -7,8 +7,14 @@ use Algolia\AlgoliaSearch\Support\UserAgent;
 
 final class RequestOptionsFactory
 {
+    /**
+     * @var AbstractConfig
+     */
     private $config;
 
+    /**
+     * @var array
+     */
     private $validQueryParameters = array(
         'forwardToReplicas',
         'replaceExistingSynonyms',
@@ -16,12 +22,19 @@ final class RequestOptionsFactory
         'getVersion',
     );
 
+    /**
+     * @var array
+     */
     private $validHeaders = array(
         'Content-type',
         'User-Agent',
         'createIfNotExists',
     );
 
+    /**
+     * RequestOptionsFactory constructor.
+     * @param AbstractConfig $config
+     */
     public function __construct(AbstractConfig $config)
     {
         $this->config = $config;
@@ -55,6 +68,11 @@ final class RequestOptionsFactory
         return $options->addDefaultHeaders($this->config->getDefaultHeaders());
     }
 
+    /**
+     * @param array $options
+     * @param array $defaults
+     * @return RequestOptions
+     */
     public function createBodyLess($options, $defaults = array())
     {
         $options = $this->create($options, $defaults);
@@ -64,6 +82,10 @@ final class RequestOptionsFactory
             ->setBody(array());
     }
 
+    /**
+     * @param array $options
+     * @return array
+     */
     private function normalize($options)
     {
         $normalized = array(
@@ -83,7 +105,7 @@ final class RequestOptionsFactory
         foreach ($options as $optionName => $value) {
             $type = $this->getOptionType($optionName);
 
-            if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'))) {
+            if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'), true)) {
                 $normalized[$type] = $value;
             } else {
                 $normalized[$type][$optionName] = $value;
@@ -93,6 +115,10 @@ final class RequestOptionsFactory
         return $normalized;
     }
 
+    /**
+     * @param array $options
+     * @return mixed
+     */
     private function format($options)
     {
         foreach ($options as $name => $value) {
@@ -106,6 +132,10 @@ final class RequestOptionsFactory
         return $options;
     }
 
+    /**
+     * @param string $optionName
+     * @return string
+     */
     private function getOptionType($optionName)
     {
         if ($this->isValidHeaderName($optionName)) {
@@ -119,6 +149,10 @@ final class RequestOptionsFactory
         }
     }
 
+    /**
+     * @param string $name
+     * @return bool
+     */
     private function isValidHeaderName($name)
     {
         if (preg_match('/^X-[a-zA-Z-]+/', $name)) {

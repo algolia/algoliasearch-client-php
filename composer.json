@@ -62,12 +62,15 @@
         "phpstan:test": "tests/QualityTools/vendor/bin/phpstan analyse --ansi",
         "phpinsights:test": "tests/QualityTools/vendor/bin/phpinsights analyse --ansi",
         "phpunit:test": "phpunit --colors=always",
-        "php-cs-fixer:test": "php-cs-fixer fix -v --dry-run",
-        "test": [
-            "@phpunit:test",
+        "php-cs-fixer:test": "php-cs-fixer fix -v",
+        "quality": [
             "@php-cs-fixer:test",
             "@phpinsights:test",
             "@phpstan:test"
+        ],
+        "test": [
+            "@quality",
+            "@phpunit:test"
         ]
     }
 }

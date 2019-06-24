@@ -6,6 +6,9 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 
 final class ObjectIterator extends AbstractAlgoliaIterator
 {
+    /**
+     * @return string|null
+     */
     public function getCursor()
     {
         return isset($this->response['cursor']) ? $this->response['cursor'] : null;
@@ -24,6 +27,12 @@ final class ObjectIterator extends AbstractAlgoliaIterator
         return $hit;
     }
 
+    /**
+     * @return void
+     * @throws \Algolia\AlgoliaSearch\Exceptions\BadRequestException
+     * @throws \Algolia\AlgoliaSearch\Exceptions\UnreachableException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     protected function fetchNextPage()
     {
         if (is_array($this->response) && !isset($this->response['cursor'])) {

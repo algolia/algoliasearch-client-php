@@ -10,21 +10,32 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 final class InsightsClient
 {
     /**
-     * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
+     * @var ApiWrapper
      */
     private $api;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\InsightsConfig
+     * @var InsightsConfig
      */
     private $config;
 
+    /**
+     * InsightsClient constructor.
+     * @param ApiWrapper $api
+     * @param InsightsConfig $config
+     */
     public function __construct(ApiWrapper $api, InsightsConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
     }
 
+    /**
+     * @param string|null $appId
+     * @param string|null $apiKey
+     * @param string|null $region
+     * @return InsightsClient
+     */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $config = InsightsConfig::create($appId, $apiKey, $region);
@@ -32,6 +43,10 @@ final class InsightsClient
         return static::createWithConfig($config);
     }
 
+    /**
+     * @param InsightsConfig $config
+     * @return InsightsClient
+     */
     public static function createWithConfig(InsightsConfig $config)
     {
         $config = clone $config;
@@ -52,16 +67,36 @@ final class InsightsClient
         return new static($apiWrapper, $config);
     }
 
+    /**
+     * @param string $userToken
+     * @return UserInsightsClient
+     */
     public function user($userToken)
     {
         return new UserInsightsClient($this, $userToken);
     }
 
+    /**
+     * @param array $event
+     * @param array $requestOptions
+     * @return array
+     * @throws Exceptions\BadRequestException
+     * @throws Exceptions\UnreachableException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function sendEvent($event, $requestOptions = array())
     {
         return $this->sendEvents(array($event), $requestOptions);
     }
 
+    /**
+     * @param array $events
+     * @param array $requestOptions
+     * @return array
+     * @throws Exceptions\BadRequestException
+     * @throws Exceptions\UnreachableException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function sendEvents($events, $requestOptions = array())
     {
         $payload = array('events' => $events);

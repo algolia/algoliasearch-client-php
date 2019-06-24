@@ -31,6 +31,9 @@ final class Algolia
      */
     private static $httpClient;
 
+    /**
+     * @return bool
+     */
     public static function isCacheEnabled()
     {
         if (null === self::$cache) {
@@ -58,6 +61,7 @@ final class Algolia
      * Sets the cache instance.
      *
      * @param \Psr\SimpleCache\CacheInterface $cache
+     * @return void
      */
     public static function setCache(CacheInterface $cache)
     {
@@ -82,12 +86,16 @@ final class Algolia
      * Sets the logger instance.
      *
      * @param \Psr\Log\LoggerInterface $logger
+     * @return void
      */
     public static function setLogger(LoggerInterface $logger)
     {
         self::$logger = $logger;
     }
 
+    /**
+     * @return HttpClientInterface
+     */
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
@@ -101,11 +109,19 @@ final class Algolia
         return self::$httpClient;
     }
 
+    /**
+     * @param HttpClientInterface $httpClient
+     * @return void
+     */
     public static function setHttpClient(HttpClientInterface $httpClient)
     {
         self::$httpClient = $httpClient;
     }
 
+    /**
+     * Reset the Http Client
+     * @return void
+     */
     public static function resetHttpClient()
     {
         self::$httpClient = null;

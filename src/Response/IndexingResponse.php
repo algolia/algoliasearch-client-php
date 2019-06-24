@@ -7,16 +7,25 @@ use Algolia\AlgoliaSearch\SearchIndex;
 final class IndexingResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\SearchIndex
+     * @var SearchIndex
      */
     private $index;
 
+    /**
+     * IndexingResponse constructor.
+     * @param array $apiResponse
+     * @param SearchIndex $index
+     */
     public function __construct(array $apiResponse, SearchIndex $index)
     {
         $this->apiResponse = $apiResponse;
         $this->index = $index;
     }
 
+    /**
+     * @param array $requestOptions
+     * @return $this
+     */
     public function wait($requestOptions = array())
     {
         if (isset($this->index)) {

@@ -9,12 +9,12 @@ use Algolia\AlgoliaSearch\SearchClient;
 final class RestoreApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\SearchClient
+     * @var SearchClient
      */
     private $client;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
+     * @var SearchConfig
      */
     private $config;
 
@@ -27,8 +27,8 @@ final class RestoreApiKeyResponse extends AbstractResponse
      * RestoreApiKeyResponse constructor.
      *
      * @param array                                      $apiResponse
-     * @param \Algolia\AlgoliaSearch\SearchClient        $client
-     * @param \Algolia\AlgoliaSearch\Config\SearchConfig $config
+     * @param SearchClient        $client
+     * @param SearchConfig $config
      * @param string                                     $key
      */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config, $key)
@@ -59,12 +59,12 @@ final class RestoreApiKeyResponse extends AbstractResponse
 
                 return $this;
             } catch (NotFoundException $e) {
+                // @ignoreException
                 // Try again
             }
 
             $retry++;
-            $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
+            usleep(($retry / 10) * $time); // 0.1 second
         } while (true);
     }
 }

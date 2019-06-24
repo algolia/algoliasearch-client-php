@@ -15,8 +15,8 @@ interface HttpClientInterface
      * the retry strategy working as expected.
      *
      * @param \Psr\Http\Message\RequestInterface $request
-     * @param                                    $timeout
-     * @param                                    $connectTimeout
+     * @param int                                $timeout
+     * @param int                                $connectTimeout
      *
      * @return mixed
      */

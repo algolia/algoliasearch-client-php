@@ -9,6 +9,10 @@ abstract class AbstractResponse implements \ArrayAccess
      */
     protected $apiResponse;
 
+    /**
+     * @param array $requestOptions
+     * @return mixed
+     */
     abstract public function wait($requestOptions = array());
 
     /**
@@ -20,7 +24,8 @@ abstract class AbstractResponse implements \ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -28,7 +33,8 @@ abstract class AbstractResponse implements \ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     * @return AbstractResponse
      */
     public function offsetGet($offset)
     {
@@ -36,7 +42,10 @@ abstract class AbstractResponse implements \ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     * @param AbstractResponse $value
+     *
+     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -44,7 +53,9 @@ abstract class AbstractResponse implements \ArrayAccess
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $offset
+     *
+     * @return void
      */
     public function offsetUnset($offset)
     {

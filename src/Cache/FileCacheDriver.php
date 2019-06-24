@@ -6,10 +6,20 @@ use Psr\SimpleCache\CacheInterface;
 
 final class FileCacheDriver implements CacheInterface
 {
+    /**
+     * @var string
+     */
     const PREFIX = 'algolia-client-';
 
+    /**
+     * @var string
+     */
     private $directory;
 
+    /**
+     * FileCacheDriver constructor.
+     * @param string $directory
+     */
     public function __construct($directory)
     {
         $this->directory = rtrim($directory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;

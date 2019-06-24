@@ -7,9 +7,20 @@ includes:
 parameters:
     level: 0
     excludes_analyse:
-        - tests/QualityTools/*
-        - tests/*
+        - tests/QualityTools/
+        - tests/
+        - src/Http/
     paths:
         - src
         - autoload.php
     ignoreErrors:
+        - '#In (method|function).*type-hinted.*More info#'
+        - '#In (method|function).*return type can be added..*More info#'
+        - '#(Method|Function|Constructor).*has parameter.*with.*default value.#'
+        - '#In (method|function).*parameter.*is "array". Please provide a more specific @param.*#'
+        - '#Only booleans are allowed in &&, mixed given on the right side.#'
+        - '#Construct empty\(\) is not allowed. Use more strict comparison.#'
+        - '#Thrown exceptions in a catch block must bundle the previous exception#'
+        - '#Function dump not found.#'
+        - '#Class.*is neither abstract nor final#'
+        - '#Access to constant VERSION on an unknown class GuzzleHttp\\.*.#'

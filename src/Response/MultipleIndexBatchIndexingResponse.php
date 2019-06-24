@@ -7,16 +7,25 @@ use Algolia\AlgoliaSearch\SearchClient;
 final class MultipleIndexBatchIndexingResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\SearchClient
+     * @var SearchClient
      */
     private $client;
 
+    /**
+     * MultipleIndexBatchIndexingResponse constructor.
+     * @param array $apiResponse
+     * @param SearchClient $client
+     */
     public function __construct(array $apiResponse, SearchClient $client)
     {
         $this->apiResponse = $apiResponse;
         $this->client = $client;
     }
 
+    /**
+     * @param array $requestOptions
+     * @return $this
+     */
     public function wait($requestOptions = array())
     {
         if (!isset($this->client)) {

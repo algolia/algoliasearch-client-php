@@ -7,6 +7,13 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 
 final class AccountClient
 {
+    /**
+     * @param SearchIndex $srcIndex
+     * @param SearchIndex $destIndex
+     * @param array $requestOptions
+     * @return MultiResponse
+     * @throws Exceptions\MissingObjectId
+     */
     public static function copyIndex(SearchIndex $srcIndex, SearchIndex $destIndex, $requestOptions = array())
     {
         if ($srcIndex->getAppId() === $destIndex->getAppId()) {
@@ -23,6 +30,7 @@ final class AccountClient
             );
         } catch (NotFoundException $e) {
             // All good
+            // @ignoreException
         }
 
         $allResponses = array();

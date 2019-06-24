@@ -4,12 +4,25 @@ namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Algolia;
 
+/**
+ * Class UserAgent
+ * @package Algolia\AlgoliaSearch\Support
+ */
 final class UserAgent
 {
+    /**
+     * @var string
+     */
     private static $value;
 
+    /**
+     * @var array
+     */
     private static $customSegments = array();
 
+    /**
+     * @return string
+     */
     public static function get()
     {
         if (null === self::$value) {
@@ -19,12 +32,21 @@ final class UserAgent
         return self::$value;
     }
 
+    /**
+     * @param string $segment
+     * @param string $version
+     *
+     * @return void
+     */
     public static function addCustomUserAgent($segment, $version)
     {
         self::$value = null;
         self::$customSegments[trim($segment, ' ')] = trim($version, ' ');
     }
 
+    /**
+     * @return string
+     */
     private static function getComputedValue()
     {
         $ua = array();
@@ -37,6 +59,9 @@ final class UserAgent
         return implode('; ', $ua);
     }
 
+    /**
+     * @return array
+     */
     private static function getDefaultSegments()
     {
         $segments = array();

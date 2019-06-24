@@ -6,6 +6,9 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 
 abstract class AbstractAlgoliaIterator implements \Iterator
 {
+    /**
+     * @var string
+     */
     protected $indexName;
 
     /**
@@ -41,6 +44,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
 
     /**
      * Call Algolia' API to get new result batch.
+     * @return void
      */
     abstract protected function fetchNextPage();
 
@@ -54,6 +58,12 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      */
     abstract protected function formatHit(array $hit);
 
+    /**
+     * AbstractAlgoliaIterator constructor.
+     * @param string $indexName
+     * @param ApiWrapper $api
+     * @param array $requestOptions
+     */
     public function __construct($indexName, ApiWrapper $api, $requestOptions = array())
     {
         $this->indexName = $indexName;
@@ -79,6 +89,8 @@ abstract class AbstractAlgoliaIterator implements \Iterator
 
     /**
      * Move forward to next element.
+     *
+     * @return void
      */
     public function next()
     {
@@ -116,6 +128,8 @@ abstract class AbstractAlgoliaIterator implements \Iterator
 
     /**
      * Rewind the Iterator to the first element.
+     *
+     * @return void
      */
     public function rewind()
     {

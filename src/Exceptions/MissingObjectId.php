@@ -2,6 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class MissingObjectId extends AlgoliaException
+final class MissingObjectId extends AlgoliaException
 {
 }

@@ -20,17 +20,32 @@ final class AnalyticsClient
      */
     private $config;
 
+    /**
+     * AnalyticsClient constructor.
+     * @param ApiWrapperInterface $api
+     * @param AnalyticsConfig $config
+     */
     public function __construct(ApiWrapperInterface $api, AnalyticsConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
     }
 
+    /**
+     * @param string|null $appId
+     * @param string|null $apiKey
+     * @param string|null $region
+     * @return AnalyticsClient
+     */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         return static::createWithConfig(AnalyticsConfig::create($appId, $apiKey, $region));
     }
 
+    /**
+     * @param AnalyticsConfig $config
+     * @return AnalyticsClient
+     */
     public static function createWithConfig(AnalyticsConfig $config)
     {
         $config = clone $config;
@@ -132,6 +147,13 @@ final class AnalyticsClient
         return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID), array(), $requestOptions);
     }
 
+    /**
+     * @param string $method
+     * @param string $path
+     * @param array $requestOptions
+     * @param array|null $hosts
+     * @return mixed
+     */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);

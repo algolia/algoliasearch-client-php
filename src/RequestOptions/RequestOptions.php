@@ -6,24 +6,50 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 
 final class RequestOptions
 {
+    /**
+     * @var array
+     */
     private $headers = array();
 
+    /**
+     * @var array
+     */
     private $query = array();
 
+    /**
+     * @var array
+     */
     private $body = array();
 
+    /**
+     * @var int
+     */
     private $readTimeout;
 
+    /**
+     * @var int
+     */
     private $writeTimeout;
 
+    /**
+     * @var int
+     */
     private $connectTimeout;
 
+    /**
+     * RequestOptions constructor.
+     * @param array $options
+     */
     public function __construct(array $options = array())
     {
-        foreach (array('headers', 'query', 'body') as $name) {
-            if (isset($options[$name]) && !empty($options[$name])) {
-                $this->{$name} = $options[$name];
-            }
+        if (array_key_exists('headers', $options) && $options['headers'] !== null) {
+            $this->headers = $options['headers'];
+        }
+        if (array_key_exists('query', $options) && $options['query'] !== null) {
+            $this->query = $options['query'];
+        }
+        if (array_key_exists('body', $options) && $options['body'] !== null) {
+            $this->body = $options['body'];
         }
 
         $this->readTimeout = $options['readTimeout'];
@@ -57,7 +83,7 @@ final class RequestOptions
     }
 
     /**
-     * @param $headers
+     * @param array $headers
      *
      * @return $this
      */
@@ -150,7 +176,7 @@ final class RequestOptions
      * Add a list of query parameters name/value pairs.
      * If a value already exists for a name, it will be overwritten.
      *
-     * @param $parameters
+     * @param array $parameters
      *
      * @return $this
      */
@@ -283,7 +309,7 @@ final class RequestOptions
     /**
      * Replace all existing body parameters with the given name/value pairs.
      *
-     * @param $body
+     * @param array $body
      *
      * @return $this
      */
@@ -355,7 +381,7 @@ final class RequestOptions
     /**
      * Set connect timeout.
      *
-     * @param $connectTimeout Connect timeout in seconds
+     * @param int $connectTimeout Connect timeout in seconds
      *
      * @return $this
      */

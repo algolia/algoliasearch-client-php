@@ -65,6 +65,11 @@ final class Helpers
         return http_build_query($args);
     }
 
+    /**
+     * @param array $items
+     * @param string $action
+     * @return array
+     */
     public static function buildBatch($items, $action)
     {
         return array_map(function ($item) use ($action) {
@@ -75,6 +80,13 @@ final class Helpers
         }, $items);
     }
 
+    /**
+     * @param array $objects
+     * @param string $message
+     * @throws MissingObjectId
+     *
+     * @return void
+     */
     public static function ensureObjectID($objects, $message = 'ObjectID is required to add a record, a synonym or a query rule.')
     {
         // In case a single objects is passed
@@ -119,6 +131,11 @@ final class Helpers
         return $data;
     }
 
+    /**
+     * @param string $objectIDKey
+     * @param array $objects
+     * @return array
+     */
     public static function mapObjectIDs($objectIDKey, $objects)
     {
         return array_map(function ($object) use ($objectIDKey) {

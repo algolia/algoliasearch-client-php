@@ -16,12 +16,22 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
      */
     private $key = 0;
 
+    /**
+     * BatchIndexingResponse constructor.
+     * @param array $apiResponse
+     * @param SearchIndex $index
+     */
     public function __construct(array $apiResponse, SearchIndex $index)
     {
         $this->apiResponse = array_values($apiResponse); // Ensure there aren't any keys
         $this->index = $index;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return $this
+     */
     public function wait($requestOptions = array())
     {
         if (isset($this->index)) {
@@ -39,33 +49,48 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
      * is always split in batches, the apiResponse property and an
      * array of response from the API.
      *
-     * @return number of response from the API (number of batches sent)
+     * @return int number of response from the API (number of batches sent)
      */
     public function count()
     {
         return count($this->apiResponse);
     }
 
+    /**
+     * @return AbstractResponse
+     */
     public function current()
     {
         return $this->apiResponse[$this->key];
     }
 
+    /**
+     * @return void
+     */
     public function next()
     {
         $this->key++;
     }
 
+    /**
+     * @return int
+     */
     public function key()
     {
         return $this->key;
     }
 
+    /**
+     * @return bool
+     */
     public function valid()
     {
         return isset($this->apiResponse[$this->key]);
     }
 
+    /**
+     * @return void
+     */
     public function rewind()
     {
         $this->key = 0;

@@ -20,12 +20,23 @@ final class PlacesClient
      */
     private $config;
 
+    /**
+     * PlacesClient constructor.
+     * @param ApiWrapperInterface $api
+     * @param PlacesConfig $config
+     */
     public function __construct(ApiWrapperInterface $api, PlacesConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
     }
 
+    /**
+     * @param null $appId
+     * @param null $apiKey
+     * @return PlacesClient
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public static function create($appId = null, $apiKey = null)
     {
         $config = PlacesConfig::create($appId, $apiKey);
@@ -33,6 +44,11 @@ final class PlacesClient
         return static::createWithConfig($config);
     }
 
+    /**
+     * @param PlacesConfig $config
+     * @return PlacesClient
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public static function createWithConfig(PlacesConfig $config)
     {
         $config = clone $config;
@@ -58,6 +74,11 @@ final class PlacesClient
         return new static($apiWrapper, $config);
     }
 
+    /**
+     * @param mixed $query
+     * @param array $requestOptions
+     * @return mixed
+     */
     public function search($query, $requestOptions = array())
     {
         $query = (string) $query;
@@ -71,11 +92,23 @@ final class PlacesClient
         return $this->api->read('POST', api_path('/1/places/query'), $requestOptions);
     }
 
+    /**
+     * @param string $objectID
+     * @param array $requestOptions
+     * @return mixed
+     */
     public function getObject($objectID, $requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/places/%s', $objectID), $requestOptions);
     }
 
+    /**
+     * @param string $method
+     * @param string $path
+     * @param array $requestOptions
+     * @param array|null $hosts
+     * @return mixed
+     */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);

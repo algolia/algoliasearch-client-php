@@ -4,6 +4,12 @@ namespace Algolia\AlgoliaSearch\Config;
 
 final class InsightsConfig extends AbstractConfig
 {
+    /**
+     * @param string|null $appId
+     * @param string|null $apiKey
+     * @param string|null $region
+     * @return InsightsConfig
+     */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $config = array(
@@ -15,6 +21,10 @@ final class InsightsConfig extends AbstractConfig
         return new static($config);
     }
 
+    /**
+     * @param string $region
+     * @return $this
+     */
     public function setRegion($region)
     {
         $this->config['region'] = $region;
@@ -22,6 +32,9 @@ final class InsightsConfig extends AbstractConfig
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getRegion()
     {
         return $this->config['region'];

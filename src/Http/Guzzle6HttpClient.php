@@ -17,6 +17,9 @@ final class Guzzle6HttpClient implements HttpClientInterface
         $this->client = $client ?: static::buildClient();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
@@ -35,6 +38,9 @@ final class Guzzle6HttpClient implements HttpClientInterface
         return $response;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private static function buildClient(array $config = array())
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());

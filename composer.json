@@ -57,20 +57,23 @@
         }
     },
     "scripts": {
-        "install:test": "composer install -d tests/PhpStan/",
-        "update:test": "composer update -d tests/PhpStan/",
+        "install:test": "composer install -d tests/QualityTools/",
+        "update:test": "composer update -d tests/QualityTools/",
         "phpstan:test": "tests/QualityTools/vendor/bin/phpstan analyse --ansi",
-        "phpinsights:test": "tests/QualityTools/vendor/bin/phpinsights analyse --ansi --min-quality=64.5 --min-complexity=68 --min-architecture=60.9 --min-style=89.1",
-        "phpunit:test": "phpunit --colors=always",
-        "php-cs-fixer:test": "php-cs-fixer fix -v --dry-run",
-        "quality": [
-            "@php-cs-fixer:test",
+        "phpinsights:test": "tests/QualityTools/vendor/bin/phpinsights analyse --ansi --min-quality=64.5 --min-complexity=68 --min-architecture=60.9 --min-style=84.8",
+        "phpunit": "phpunit --colors=always",
+        "php-cs-fixer": "php-cs-fixer fix -v --dry-run",
+        "quality:7.2": [
             "@phpinsights:test",
             "@phpstan:test"
         ],
+        "quality": [
+            "@php-cs-fixer",
+            "@quality:7.2"
+        ],
         "test": [
             "@quality",
-            "@phpunit:test"
+            "@phpunit"
         ]
     }
 }

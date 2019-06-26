@@ -17,6 +17,7 @@ final class Guzzle6HttpClient implements HttpClientInterface
 
     /**
      * Guzzle6HttpClient constructor.
+     *
      * @param GuzzleClient|null $client
      */
     public function __construct(GuzzleClient $client = null)

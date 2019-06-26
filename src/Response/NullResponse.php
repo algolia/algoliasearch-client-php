@@ -14,6 +14,7 @@ final class NullResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())

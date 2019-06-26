@@ -20,7 +20,8 @@ final class AddApiKeyResponse extends AbstractResponse
 
     /**
      * AddApiKeyResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array        $apiResponse
      * @param SearchClient $client
      * @param SearchConfig $config
      */

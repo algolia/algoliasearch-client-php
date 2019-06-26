@@ -33,6 +33,7 @@ final class RequestOptionsFactory
 
     /**
      * RequestOptionsFactory constructor.
+     *
      * @param AbstractConfig $config
      */
     public function __construct(AbstractConfig $config)
@@ -71,6 +72,7 @@ final class RequestOptionsFactory
     /**
      * @param array $options
      * @param array $defaults
+     *
      * @return RequestOptions
      */
     public function createBodyLess($options, $defaults = array())
@@ -84,6 +86,7 @@ final class RequestOptionsFactory
 
     /**
      * @param array $options
+     *
      * @return array
      */
     private function normalize($options)
@@ -117,6 +120,7 @@ final class RequestOptionsFactory
 
     /**
      * @param array $options
+     *
      * @return mixed
      */
     private function format($options)
@@ -134,6 +138,7 @@ final class RequestOptionsFactory
 
     /**
      * @param string $optionName
+     *
      * @return string
      */
     private function getOptionType($optionName)
@@ -151,6 +156,7 @@ final class RequestOptionsFactory
 
     /**
      * @param string $name
+     *
      * @return bool
      */
     private function isValidHeaderName($name)

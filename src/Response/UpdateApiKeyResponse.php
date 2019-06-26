@@ -25,10 +25,11 @@ final class UpdateApiKeyResponse extends AbstractResponse
 
     /**
      * UpdateApiKeyResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array        $apiResponse
      * @param SearchClient $client
      * @param SearchConfig $config
-     * @param array $requestOptions
+     * @param array        $requestOptions
      */
     public function __construct(
         array $apiResponse,
@@ -44,6 +45,7 @@ final class UpdateApiKeyResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())
@@ -77,7 +79,8 @@ final class UpdateApiKeyResponse extends AbstractResponse
 
     /**
      * @param string $key
-     * @param array $keyParams
+     * @param array  $keyParams
+     *
      * @return bool
      */
     private function isKeyUpdated($key, $keyParams)
@@ -94,6 +97,7 @@ final class UpdateApiKeyResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return array
      */
     private function filterOnlyKeyParams($requestOptions)

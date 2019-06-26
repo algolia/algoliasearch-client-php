@@ -19,8 +19,9 @@ final class UserInsightsClient
 
     /**
      * UserInsightsClient constructor.
+     *
      * @param InsightsClient $client
-     * @param string $userToken
+     * @param string         $userToken
      */
     public function __construct(InsightsClient $client, $userToken)
     {
@@ -31,8 +32,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $filters
-     * @param array $requestOptions
+     * @param mixed  $filters
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function clickedFilters($eventName, $indexName, $filters, $requestOptions = array())
@@ -43,8 +45,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $objectIDs
-     * @param array $requestOptions
+     * @param mixed  $objectIDs
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function clickedObjectIDs($eventName, $indexName, $objectIDs, $requestOptions = array())
@@ -55,10 +58,11 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $objectIDs
-     * @param int $positions
-     * @param mixed $queryID
-     * @param array $requestOptions
+     * @param mixed  $objectIDs
+     * @param int    $positions
+     * @param mixed  $queryID
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function clickedObjectIDsAfterSearch($eventName, $indexName, $objectIDs, $positions, $queryID, $requestOptions = array())
@@ -73,10 +77,11 @@ final class UserInsightsClient
     }
 
     /**
-     * @param array $event
-     * @param string $eventName
-     * @param string $indexName
+     * @param array                $event
+     * @param string               $eventName
+     * @param string               $indexName
      * @param array|RequestOptions $requestOptions
+     *
      * @return array
      */
     private function clicked($event, $eventName, $indexName, $requestOptions)
@@ -93,8 +98,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $filters
-     * @param array $requestOptions
+     * @param mixed  $filters
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function convertedFilters($eventName, $indexName, $filters, $requestOptions = array())
@@ -105,8 +111,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $objectIDs
-     * @param array $requestOptions
+     * @param mixed  $objectIDs
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function convertedObjectIDs($eventName, $indexName, $objectIDs, $requestOptions = array())
@@ -117,9 +124,10 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $objectIDs
+     * @param mixed  $objectIDs
      * @param string $queryID
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function convertedObjectIDsAfterSearch($eventName, $indexName, $objectIDs, $queryID, $requestOptions = array())
@@ -133,10 +141,11 @@ final class UserInsightsClient
     }
 
     /**
-     * @param array $event
-     * @param string $eventName
-     * @param string $indexName
+     * @param array                $event
+     * @param string               $eventName
+     * @param string               $indexName
      * @param array|RequestOptions $requestOptions
+     *
      * @return array
      */
     private function converted($event, $eventName, $indexName, $requestOptions)
@@ -153,8 +162,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $filters
-     * @param array $requestOptions
+     * @param mixed  $filters
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function viewedFilters($eventName, $indexName, $filters, $requestOptions = array())
@@ -169,8 +179,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed $objectIDs
-     * @param array $requestOptions
+     * @param mixed  $objectIDs
+     * @param array  $requestOptions
+     *
      * @return array
      */
     public function viewedObjectIDs($eventName, $indexName, $objectIDs, $requestOptions = array())
@@ -183,10 +194,11 @@ final class UserInsightsClient
     }
 
     /**
-     * @param array $event
-     * @param string $eventName
-     * @param string $indexName
+     * @param array                $event
+     * @param string               $eventName
+     * @param string               $indexName
      * @param array|RequestOptions $requestOptions
+     *
      * @return array
      */
     private function viewed($event, $eventName, $indexName, $requestOptions)
@@ -203,6 +215,7 @@ final class UserInsightsClient
     /**
      * @param array $event
      * @param array $requestOptions
+     *
      * @return array
      */
     private function sendEvent($event, $requestOptions = array())
@@ -212,6 +225,7 @@ final class UserInsightsClient
 
     /**
      * @param array $event
+     *
      * @return mixed
      */
     private function reformatEvent($event)

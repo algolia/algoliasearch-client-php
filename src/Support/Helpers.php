@@ -66,8 +66,9 @@ final class Helpers
     }
 
     /**
-     * @param array $items
+     * @param array  $items
      * @param string $action
+     *
      * @return array
      */
     public static function buildBatch($items, $action)
@@ -81,8 +82,9 @@ final class Helpers
     }
 
     /**
-     * @param array $objects
+     * @param array  $objects
      * @param string $message
+     *
      * @throws MissingObjectId
      *
      * @return void
@@ -133,7 +135,8 @@ final class Helpers
 
     /**
      * @param string $objectIDKey
-     * @param array $objects
+     * @param array  $objects
+     *
      * @return array
      */
     public static function mapObjectIDs($objectIDKey, $objects)

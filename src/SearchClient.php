@@ -20,22 +20,23 @@ final class SearchClient
     /**
      * @var ApiWrapperInterface
      */
-    protected $api;
+    private $api;
 
     /**
      * @var SearchConfig
      */
-    protected $config;
+    private $config;
 
     /**
      * @var SearchClient
      */
-    protected static $client;
+    private static $client;
 
     /**
      * SearchClient constructor.
+     *
      * @param ApiWrapperInterface $apiWrapper
-     * @param SearchConfig $config
+     * @param SearchConfig        $config
      */
     public function __construct(ApiWrapperInterface $apiWrapper, SearchConfig $config)
     {
@@ -45,6 +46,7 @@ final class SearchClient
 
     /**
      * @return SearchClient
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function get()
@@ -59,7 +61,9 @@ final class SearchClient
     /**
      * @param string|null $appId
      * @param string|null $apiKey
+     *
      * @return SearchClient
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function create($appId = null, $apiKey = null)
@@ -69,7 +73,9 @@ final class SearchClient
 
     /**
      * @param SearchConfig $config
+     *
      * @return SearchClient
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function createWithConfig(SearchConfig $config)
@@ -99,6 +105,7 @@ final class SearchClient
 
     /**
      * @param string $indexName
+     *
      * @return SearchIndex
      */
     public function initIndex($indexName)
@@ -117,7 +124,8 @@ final class SearchClient
     /**
      * @param string $srcIndexName
      * @param string $newIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function moveIndex($srcIndexName, $newIndexName, $requestOptions = array())
@@ -138,7 +146,8 @@ final class SearchClient
     /**
      * @param string $srcIndexName
      * @param string $destIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
@@ -159,7 +168,8 @@ final class SearchClient
     /**
      * @param string $srcIndexName
      * @param string $destIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function copySettings($srcIndexName, $destIndexName, $requestOptions = array())
@@ -176,7 +186,8 @@ final class SearchClient
     /**
      * @param string $srcIndexName
      * @param string $destIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function copySynonyms($srcIndexName, $destIndexName, $requestOptions = array())
@@ -193,7 +204,8 @@ final class SearchClient
     /**
      * @param string $srcIndexName
      * @param string $destIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function copyRules($srcIndexName, $destIndexName, $requestOptions = array())
@@ -209,6 +221,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return array
      */
     public function isAlive($requestOptions = array())
@@ -219,6 +232,7 @@ final class SearchClient
     /**
      * @param array $queries
      * @param array $requestOptions
+     *
      * @return array
      */
     public function multipleQueries($queries, $requestOptions = array())
@@ -239,6 +253,7 @@ final class SearchClient
     /**
      * @param array $operations
      * @param array $requestOptions
+     *
      * @return MultipleIndexBatchIndexingResponse
      */
     public function multipleBatch($operations, $requestOptions = array())
@@ -256,6 +271,7 @@ final class SearchClient
     /**
      * @param array $requests
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function multipleGetObjects($requests, $requestOptions = array())
@@ -275,6 +291,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function listIndices($requestOptions = array())
@@ -284,6 +301,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function listApiKeys($requestOptions = array())
@@ -293,7 +311,8 @@ final class SearchClient
 
     /**
      * @param string $key
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getApiKey($key, $requestOptions = array())
@@ -304,6 +323,7 @@ final class SearchClient
     /**
      * @param array $acl
      * @param array $requestOptions
+     *
      * @return AddApiKeyResponse
      */
     public function addApiKey($acl, $requestOptions = array())
@@ -317,7 +337,8 @@ final class SearchClient
 
     /**
      * @param string $key
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return UpdateApiKeyResponse
      */
     public function updateApiKey($key, $requestOptions = array())
@@ -329,7 +350,8 @@ final class SearchClient
 
     /**
      * @param string $key
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return DeleteApiKeyResponse
      */
     public function deleteApiKey($key, $requestOptions = array())
@@ -341,7 +363,8 @@ final class SearchClient
 
     /**
      * @param string $key
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return RestoreApiKeyResponse
      */
     public function restoreApiKey($key, $requestOptions = array())
@@ -353,7 +376,8 @@ final class SearchClient
 
     /**
      * @param string $parentApiKey
-     * @param mixed $restrictions
+     * @param mixed  $restrictions
+     *
      * @return string
      */
     public static function generateSecuredApiKey($parentApiKey, $restrictions)
@@ -367,6 +391,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getPersonalizationStrategy($requestOptions = array())
@@ -377,6 +402,7 @@ final class SearchClient
     /**
      * @param mixed $strategy
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function setPersonalizationStrategy($strategy, $requestOptions = array())
@@ -394,6 +420,7 @@ final class SearchClient
     /**
      * @param mixed $query
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function searchUserIds($query, $requestOptions = array())
@@ -411,6 +438,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function listClusters($requestOptions = array())
@@ -420,6 +448,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function listUserIds($requestOptions = array())
@@ -430,6 +459,7 @@ final class SearchClient
     /**
      * @param mixed $userId
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getUserId($userId, $requestOptions = array())
@@ -439,6 +469,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getTopUserId($requestOptions = array())
@@ -447,9 +478,10 @@ final class SearchClient
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed  $userId
      * @param string $clusterName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function assignUserId($userId, $clusterName, $requestOptions = array())
@@ -473,6 +505,7 @@ final class SearchClient
     /**
      * @param mixed $userId
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function removeUserId($userId, $requestOptions = array())
@@ -493,6 +526,7 @@ final class SearchClient
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getLogs($requestOptions = array())
@@ -502,8 +536,9 @@ final class SearchClient
 
     /**
      * @param string $indexName
-     * @param int $taskId
-     * @param array $requestOptions
+     * @param int    $taskId
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getTask($indexName, $taskId, $requestOptions = array())
@@ -515,8 +550,8 @@ final class SearchClient
 
     /**
      * @param string $indexName
-     * @param int $taskId
-     * @param array $requestOptions
+     * @param int    $taskId
+     * @param array  $requestOptions
      *
      * @return void
      */
@@ -528,10 +563,11 @@ final class SearchClient
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array $requestOptions
+     * @param string     $method
+     * @param string     $path
+     * @param array      $requestOptions
      * @param array|null $hosts
+     *
      * @return mixed
      */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

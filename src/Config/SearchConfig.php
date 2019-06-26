@@ -12,6 +12,7 @@ class SearchConfig extends AbstractConfig
     /**
      * @param string|null $appId
      * @param string|null $apiKey
+     *
      * @return SearchConfig
      */
     public static function create($appId = null, $apiKey = null)
@@ -53,6 +54,7 @@ class SearchConfig extends AbstractConfig
 
     /**
      * @param int $time
+     *
      * @return $this
      */
     public function setWaitTaskTimeBeforeRetry($time)
@@ -76,6 +78,7 @@ class SearchConfig extends AbstractConfig
 
     /**
      * @param bool $default
+     *
      * @return $this
      */
     public function setDefaultForwardToReplicas($default)
@@ -95,6 +98,7 @@ class SearchConfig extends AbstractConfig
 
     /**
      * @param int $batchSize
+     *
      * @return $this
      */
     public function setBatchSize($batchSize)

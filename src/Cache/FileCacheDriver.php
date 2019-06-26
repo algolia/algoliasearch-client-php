@@ -18,6 +18,7 @@ final class FileCacheDriver implements CacheInterface
 
     /**
      * FileCacheDriver constructor.
+     *
      * @param string $directory
      */
     public function __construct($directory)

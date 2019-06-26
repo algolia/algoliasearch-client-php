@@ -38,6 +38,7 @@ final class RequestOptions
 
     /**
      * RequestOptions constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options = array())

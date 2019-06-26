@@ -10,6 +10,8 @@ $finder = \PhpCsFixer\Finder::create()
 $rules = array(
     '@Symfony' => true,
     'array_syntax' => array('syntax' => 'long'),
+    'phpdoc_no_empty_return' => false,
+    'yoda_style' => false,
 );
 
 if (PHP_VERSION_ID < 50400) {

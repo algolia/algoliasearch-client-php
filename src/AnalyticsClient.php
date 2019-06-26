@@ -22,8 +22,9 @@ final class AnalyticsClient
 
     /**
      * AnalyticsClient constructor.
+     *
      * @param ApiWrapperInterface $api
-     * @param AnalyticsConfig $config
+     * @param AnalyticsConfig     $config
      */
     public function __construct(ApiWrapperInterface $api, AnalyticsConfig $config)
     {
@@ -35,6 +36,7 @@ final class AnalyticsClient
      * @param string|null $appId
      * @param string|null $apiKey
      * @param string|null $region
+     *
      * @return AnalyticsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
@@ -44,6 +46,7 @@ final class AnalyticsClient
 
     /**
      * @param AnalyticsConfig $config
+     *
      * @return AnalyticsClient
      */
     public static function createWithConfig(AnalyticsConfig $config)
@@ -148,10 +151,11 @@ final class AnalyticsClient
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array $requestOptions
+     * @param string     $method
+     * @param string     $path
+     * @param array      $requestOptions
      * @param array|null $hosts
+     *
      * @return mixed
      */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

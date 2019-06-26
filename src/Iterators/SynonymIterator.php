@@ -8,6 +8,7 @@ final class SynonymIterator extends AbstractAlgoliaIterator
 {
     /**
      * @param array $hit
+     *
      * @return array
      */
     protected function formatHit(array $hit)
@@ -19,6 +20,7 @@ final class SynonymIterator extends AbstractAlgoliaIterator
 
     /**
      * @return void
+     *
      * @throws \Algolia\AlgoliaSearch\Exceptions\BadRequestException
      * @throws \Algolia\AlgoliaSearch\Exceptions\UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException

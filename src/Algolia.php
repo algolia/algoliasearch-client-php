@@ -61,6 +61,7 @@ final class Algolia
      * Sets the cache instance.
      *
      * @param \Psr\SimpleCache\CacheInterface $cache
+     *
      * @return void
      */
     public static function setCache(CacheInterface $cache)
@@ -86,6 +87,7 @@ final class Algolia
      * Sets the logger instance.
      *
      * @param \Psr\Log\LoggerInterface $logger
+     *
      * @return void
      */
     public static function setLogger(LoggerInterface $logger)
@@ -111,6 +113,7 @@ final class Algolia
 
     /**
      * @param HttpClientInterface $httpClient
+     *
      * @return void
      */
     public static function setHttpClient(HttpClientInterface $httpClient)
@@ -119,7 +122,8 @@ final class Algolia
     }
 
     /**
-     * Reset the Http Client
+     * Reset the Http Client.
+     *
      * @return void
      */
     public static function resetHttpClient()

@@ -11,6 +11,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
 
     /**
      * MultiResponse constructor.
+     *
      * @param array<int, AbstractResponse> $responses
      */
     public function __construct($responses)
@@ -20,6 +21,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())
@@ -50,7 +52,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * Fetch next key
+     * Fetch next key.
      *
      * @return void
      */
@@ -76,7 +78,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * Rewind API key
+     * Rewind API key.
      *
      * @return void
      */

@@ -26,6 +26,7 @@ abstract class AbstractConfig
 
     /**
      * AbstractConfig constructor.
+     *
      * @param array $config
      */
     public function __construct(array $config = array())
@@ -61,6 +62,7 @@ abstract class AbstractConfig
 
     /**
      * @param string $appId
+     *
      * @return $this
      */
     public function setAppId($appId)
@@ -80,6 +82,7 @@ abstract class AbstractConfig
 
     /**
      * @param string $apiKey
+     *
      * @return $this
      */
     public function setApiKey($apiKey)
@@ -99,6 +102,7 @@ abstract class AbstractConfig
 
     /**
      * @param array $hosts
+     *
      * @return $this
      */
     public function setHosts($hosts)
@@ -118,6 +122,7 @@ abstract class AbstractConfig
 
     /**
      * @param int $readTimeout
+     *
      * @return $this
      */
     public function setReadTimeout($readTimeout)
@@ -137,6 +142,7 @@ abstract class AbstractConfig
 
     /**
      * @param int $writeTimeout
+     *
      * @return $this
      */
     public function setWriteTimeout($writeTimeout)
@@ -156,6 +162,7 @@ abstract class AbstractConfig
 
     /**
      * @param int $connectTimeout
+     *
      * @return $this
      */
     public function setConnectTimeout($connectTimeout)
@@ -175,6 +182,7 @@ abstract class AbstractConfig
 
     /**
      * @param array $defaultHeaders
+     *
      * @return $this
      */
     public function setDefaultHeaders(array $defaultHeaders)

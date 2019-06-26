@@ -22,8 +22,9 @@ final class PlacesClient
 
     /**
      * PlacesClient constructor.
+     *
      * @param ApiWrapperInterface $api
-     * @param PlacesConfig $config
+     * @param PlacesConfig        $config
      */
     public function __construct(ApiWrapperInterface $api, PlacesConfig $config)
     {
@@ -34,7 +35,9 @@ final class PlacesClient
     /**
      * @param null $appId
      * @param null $apiKey
+     *
      * @return PlacesClient
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function create($appId = null, $apiKey = null)
@@ -46,7 +49,9 @@ final class PlacesClient
 
     /**
      * @param PlacesConfig $config
+     *
      * @return PlacesClient
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function createWithConfig(PlacesConfig $config)
@@ -77,6 +82,7 @@ final class PlacesClient
     /**
      * @param mixed $query
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function search($query, $requestOptions = array())
@@ -94,7 +100,8 @@ final class PlacesClient
 
     /**
      * @param string $objectID
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getObject($objectID, $requestOptions = array())
@@ -103,10 +110,11 @@ final class PlacesClient
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array $requestOptions
+     * @param string     $method
+     * @param string     $path
+     * @param array      $requestOptions
      * @param array|null $hosts
+     *
      * @return mixed
      */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)

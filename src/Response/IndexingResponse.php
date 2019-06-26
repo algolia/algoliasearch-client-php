@@ -13,7 +13,8 @@ final class IndexingResponse extends AbstractResponse
 
     /**
      * IndexingResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array       $apiResponse
      * @param SearchIndex $index
      */
     public function __construct(array $apiResponse, SearchIndex $index)
@@ -24,6 +25,7 @@ final class IndexingResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())

@@ -25,10 +25,11 @@ final class DeleteApiKeyResponse extends AbstractResponse
 
     /**
      * DeleteApiKeyResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array        $apiResponse
      * @param SearchClient $client
      * @param SearchConfig $config
-     * @param int|string $key
+     * @param int|string   $key
      */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config, $key)
     {
@@ -40,6 +41,7 @@ final class DeleteApiKeyResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())

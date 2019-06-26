@@ -26,10 +26,10 @@ final class RestoreApiKeyResponse extends AbstractResponse
     /**
      * RestoreApiKeyResponse constructor.
      *
-     * @param array                                      $apiResponse
-     * @param SearchClient        $client
+     * @param array        $apiResponse
+     * @param SearchClient $client
      * @param SearchConfig $config
-     * @param string                                     $key
+     * @param string       $key
      */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config, $key)
     {

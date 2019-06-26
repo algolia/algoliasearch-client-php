@@ -5,8 +5,7 @@ namespace Algolia\AlgoliaSearch\Support;
 use Algolia\AlgoliaSearch\Algolia;
 
 /**
- * Class UserAgent
- * @package Algolia\AlgoliaSearch\Support
+ * Class UserAgent.
  */
 final class UserAgent
 {

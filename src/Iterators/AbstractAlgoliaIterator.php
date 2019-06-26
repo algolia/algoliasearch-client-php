@@ -44,6 +44,7 @@ abstract class AbstractAlgoliaIterator implements \Iterator
 
     /**
      * Call Algolia' API to get new result batch.
+     *
      * @return void
      */
     abstract protected function fetchNextPage();
@@ -60,9 +61,10 @@ abstract class AbstractAlgoliaIterator implements \Iterator
 
     /**
      * AbstractAlgoliaIterator constructor.
-     * @param string $indexName
+     *
+     * @param string     $indexName
      * @param ApiWrapper $api
-     * @param array $requestOptions
+     * @param array      $requestOptions
      */
     public function __construct($indexName, ApiWrapper $api, $requestOptions = array())
     {

@@ -21,7 +21,8 @@ final class InsightsClient
 
     /**
      * InsightsClient constructor.
-     * @param ApiWrapper $api
+     *
+     * @param ApiWrapper     $api
      * @param InsightsConfig $config
      */
     public function __construct(ApiWrapper $api, InsightsConfig $config)
@@ -34,6 +35,7 @@ final class InsightsClient
      * @param string|null $appId
      * @param string|null $apiKey
      * @param string|null $region
+     *
      * @return InsightsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
@@ -45,6 +47,7 @@ final class InsightsClient
 
     /**
      * @param InsightsConfig $config
+     *
      * @return InsightsClient
      */
     public static function createWithConfig(InsightsConfig $config)
@@ -69,6 +72,7 @@ final class InsightsClient
 
     /**
      * @param string $userToken
+     *
      * @return UserInsightsClient
      */
     public function user($userToken)
@@ -79,7 +83,9 @@ final class InsightsClient
     /**
      * @param array $event
      * @param array $requestOptions
+     *
      * @return array
+     *
      * @throws Exceptions\BadRequestException
      * @throws Exceptions\UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -92,7 +98,9 @@ final class InsightsClient
     /**
      * @param array $events
      * @param array $requestOptions
+     *
      * @return array
+     *
      * @throws Exceptions\BadRequestException
      * @throws Exceptions\UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException

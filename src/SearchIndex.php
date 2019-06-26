@@ -26,18 +26,19 @@ final class SearchIndex
     /**
      * @var ApiWrapperInterface
      */
-    protected $api;
+    private $api;
 
     /**
      * @var SearchConfig
      */
-    protected $config;
+    private $config;
 
     /**
      * SearchIndex constructor.
-     * @param string $indexName
+     *
+     * @param string              $indexName
      * @param ApiWrapperInterface $apiWrapper
-     * @param SearchConfig $config
+     * @param SearchConfig        $config
      */
     public function __construct($indexName, ApiWrapperInterface $apiWrapper, SearchConfig $config)
     {
@@ -65,6 +66,7 @@ final class SearchIndex
     /**
      * @param mixed $query
      * @param array $requestOptions
+     *
      * @return array
      */
     public function search($query, $requestOptions = array())
@@ -85,7 +87,8 @@ final class SearchIndex
      *
      * @param string $facetName
      * @param string $facetQuery
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function searchForFacetValue($facetName, $facetQuery, $requestOptions = array())
@@ -96,7 +99,8 @@ final class SearchIndex
     /**
      * @param string $facetName
      * @param string $facetQuery
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function searchForFacetValues($facetName, $facetQuery, $requestOptions = array())
@@ -116,6 +120,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getSettings($requestOptions = array())
@@ -136,6 +141,7 @@ final class SearchIndex
     /**
      * @param array $settings
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function setSettings($settings, $requestOptions = array())
@@ -158,7 +164,8 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getObject($objectId, $requestOptions = array())
@@ -173,6 +180,7 @@ final class SearchIndex
     /**
      * @param array $objectIds
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getObjects($objectIds, $requestOptions = array())
@@ -211,7 +219,9 @@ final class SearchIndex
     /**
      * @param array $object
      * @param array $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function saveObject($object, $requestOptions = array())
@@ -222,7 +232,9 @@ final class SearchIndex
     /**
      * @param array $objects
      * @param array $requestOptions
+     *
      * @return AbstractResponse
+     *
      * @throws MissingObjectId
      */
     public function saveObjects($objects, $requestOptions = array())
@@ -255,10 +267,12 @@ final class SearchIndex
     /**
      * @param array $objects
      * @param array $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
-    protected function addObjects($objects, $requestOptions = array())
+    private function addObjects($objects, $requestOptions = array())
     {
         return $this->splitIntoBatches('addObject', $objects, $requestOptions);
     }
@@ -266,7 +280,9 @@ final class SearchIndex
     /**
      * @param array $object
      * @param array $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function partialUpdateObject($object, $requestOptions = array())
@@ -277,7 +293,9 @@ final class SearchIndex
     /**
      * @param array $objects
      * @param array $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function partialUpdateObjects($objects, $requestOptions = array())
@@ -295,6 +313,7 @@ final class SearchIndex
     /**
      * @param array $objects
      * @param array $requestOptions
+     *
      * @return MultiResponse
      */
     public function replaceAllObjects($objects, $requestOptions = array())
@@ -333,8 +352,10 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function deleteObject($objectId, $requestOptions = array())
@@ -345,7 +366,9 @@ final class SearchIndex
     /**
      * @param array $objectIds
      * @param array $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function deleteObjects($objectIds, $requestOptions = array())
@@ -360,6 +383,7 @@ final class SearchIndex
     /**
      * @param mixed $filters
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function deleteBy($filters, $requestOptions = array())
@@ -376,6 +400,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function clearObjects($requestOptions = array())
@@ -393,6 +418,7 @@ final class SearchIndex
     /**
      * @param array $requests
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function batch($requests, $requestOptions = array())
@@ -405,9 +431,10 @@ final class SearchIndex
     /**
      * @param array $requests
      * @param array $requestOptions
+     *
      * @return mixed
      */
-    protected function rawBatch($requests, $requestOptions = array())
+    private function rawBatch($requests, $requestOptions = array())
     {
         return $this->api->write(
             'POST',
@@ -419,12 +446,14 @@ final class SearchIndex
 
     /**
      * @param string $action
-     * @param array $objects
-     * @param array $requestOptions
+     * @param array  $objects
+     * @param array  $requestOptions
+     *
      * @return BatchIndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
-    protected function splitIntoBatches($action, $objects, $requestOptions = array())
+    private function splitIntoBatches($action, $objects, $requestOptions = array())
     {
         $allResponses = array();
         $batch = array();
@@ -464,6 +493,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return ObjectIterator
      */
     public function browseObjects($requestOptions = array())
@@ -473,7 +503,8 @@ final class SearchIndex
 
     /**
      * @param string|int $query
-     * @param array $requestOptions
+     * @param array      $requestOptions
+     *
      * @return mixed
      */
     public function searchSynonyms($query, $requestOptions = array())
@@ -495,7 +526,8 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getSynonym($objectId, $requestOptions = array())
@@ -509,8 +541,10 @@ final class SearchIndex
 
     /**
      * @param string $synonym
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function saveSynonym($synonym, $requestOptions = array())
@@ -521,7 +555,9 @@ final class SearchIndex
     /**
      * @param mixed $synonyms
      * @param array $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function saveSynonyms($synonyms, $requestOptions = array())
@@ -559,7 +595,9 @@ final class SearchIndex
     /**
      * @param mixed $synonyms
      * @param array $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function replaceAllSynonyms($synonyms, $requestOptions = array())
@@ -575,7 +613,8 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function deleteSynonym($objectId, $requestOptions = array())
@@ -598,6 +637,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function clearSynonyms($requestOptions = array())
@@ -620,6 +660,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return SynonymIterator
      */
     public function browseSynonyms($requestOptions = array())
@@ -629,7 +670,8 @@ final class SearchIndex
 
     /**
      * @param string|int $query
-     * @param array $requestOptions
+     * @param array      $requestOptions
+     *
      * @return mixed
      */
     public function searchRules($query, $requestOptions = array())
@@ -651,7 +693,8 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return mixed
      */
     public function getRule($objectId, $requestOptions = array())
@@ -665,8 +708,10 @@ final class SearchIndex
 
     /**
      * @param string $rule
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function saveRule($rule, $requestOptions = array())
@@ -677,7 +722,9 @@ final class SearchIndex
     /**
      * @param mixed $rules
      * @param array $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function saveRules($rules, $requestOptions = array())
@@ -715,7 +762,9 @@ final class SearchIndex
     /**
      * @param mixed $rules
      * @param array $requestOptions
+     *
      * @return IndexingResponse|NullResponse
+     *
      * @throws MissingObjectId
      */
     public function replaceAllRules($rules, $requestOptions = array())
@@ -731,7 +780,8 @@ final class SearchIndex
 
     /**
      * @param string $objectId
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     public function deleteRule($objectId, $requestOptions = array())
@@ -754,6 +804,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function clearRules($requestOptions = array())
@@ -776,6 +827,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return RuleIterator
      */
     public function browseRules($requestOptions = array())
@@ -784,8 +836,9 @@ final class SearchIndex
     }
 
     /**
-     * @param int $taskId
+     * @param int   $taskId
      * @param array $requestOptions
+     *
      * @return mixed
      */
     public function getTask($taskId, $requestOptions = array())
@@ -802,7 +855,7 @@ final class SearchIndex
     }
 
     /**
-     * @param int $taskId
+     * @param int   $taskId
      * @param array $requestOptions
      *
      * @return void
@@ -825,10 +878,11 @@ final class SearchIndex
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array $requestOptions
+     * @param string     $method
+     * @param string     $path
+     * @param array      $requestOptions
      * @param array|null $hosts
+     *
      * @return mixed
      */
     public function custom($method, $path, $requestOptions = array(), $hosts = null)
@@ -838,6 +892,7 @@ final class SearchIndex
 
     /**
      * @param array $requestOptions
+     *
      * @return IndexingResponse
      */
     public function delete($requestOptions = array())
@@ -854,7 +909,8 @@ final class SearchIndex
 
     /**
      * @param string $tmpIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     private function copyTo($tmpIndexName, $requestOptions = array())
@@ -874,7 +930,8 @@ final class SearchIndex
 
     /**
      * @param string $tmpIndexName
-     * @param array $requestOptions
+     * @param array  $requestOptions
+     *
      * @return IndexingResponse
      */
     private function moveFrom($tmpIndexName, $requestOptions = array())

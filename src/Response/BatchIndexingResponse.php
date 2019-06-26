@@ -18,7 +18,8 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
 
     /**
      * BatchIndexingResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array       $apiResponse
      * @param SearchIndex $index
      */
     public function __construct(array $apiResponse, SearchIndex $index)

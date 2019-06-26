@@ -13,7 +13,8 @@ final class MultipleIndexBatchIndexingResponse extends AbstractResponse
 
     /**
      * MultipleIndexBatchIndexingResponse constructor.
-     * @param array $apiResponse
+     *
+     * @param array        $apiResponse
      * @param SearchClient $client
      */
     public function __construct(array $apiResponse, SearchClient $client)
@@ -24,6 +25,7 @@ final class MultipleIndexBatchIndexingResponse extends AbstractResponse
 
     /**
      * @param array $requestOptions
+     *
      * @return $this
      */
     public function wait($requestOptions = array())

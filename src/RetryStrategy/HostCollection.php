@@ -14,6 +14,7 @@ final class HostCollection
 
     /**
      * HostCollection constructor.
+     *
      * @param array $hosts
      */
     public function __construct(array $hosts)
@@ -25,6 +26,7 @@ final class HostCollection
 
     /**
      * @param array $urlsWithPriority
+     *
      * @return HostCollection
      */
     public static function create(array $urlsWithPriority)
@@ -99,7 +101,7 @@ final class HostCollection
     }
 
     /**
-     * Sorts the hosts
+     * Sorts the hosts.
      *
      * @return void
      */

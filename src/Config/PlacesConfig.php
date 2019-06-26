@@ -7,6 +7,7 @@ final class PlacesConfig extends AbstractConfig
     /**
      * @param string $appId
      * @param string $apiKey
+     *
      * @return PlacesConfig
      */
     public static function create($appId, $apiKey)

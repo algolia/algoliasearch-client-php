@@ -34,8 +34,9 @@ final class Host
 
     /**
      * Host constructor.
+     *
      * @param string $url
-     * @param int $priority
+     * @param int    $priority
      */
     public function __construct($url, $priority = 0)
     {
@@ -72,7 +73,7 @@ final class Host
     }
 
     /**
-     * Marks host as down
+     * Marks host as down.
      *
      * @return void
      */
@@ -83,7 +84,7 @@ final class Host
     }
 
     /**
-     * Reset host
+     * Reset host.
      *
      * @return void
      */
@@ -94,7 +95,7 @@ final class Host
     }
 
     /**
-     * Reset host if expired
+     * Reset host if expired.
      *
      * @return void
      */

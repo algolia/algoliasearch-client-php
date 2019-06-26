@@ -13,6 +13,7 @@ class RequestException extends AlgoliaException
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)

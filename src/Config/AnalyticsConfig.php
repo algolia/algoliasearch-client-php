@@ -8,6 +8,7 @@ final class AnalyticsConfig extends AbstractConfig
      * @param string|null $appId
      * @param string|null $apiKey
      * @param string|null $region
+     *
      * @return AnalyticsConfig
      */
     public static function create($appId = null, $apiKey = null, $region = null)
@@ -23,6 +24,7 @@ final class AnalyticsConfig extends AbstractConfig
 
     /**
      * @param string $region
+     *
      * @return $this
      */
     public function setRegion($region)

@@ -10,8 +10,10 @@ final class AccountClient
     /**
      * @param SearchIndex $srcIndex
      * @param SearchIndex $destIndex
-     * @param array $requestOptions
+     * @param array       $requestOptions
+     *
      * @return MultiResponse
+     *
      * @throws Exceptions\MissingObjectId
      */
     public static function copyIndex(SearchIndex $srcIndex, SearchIndex $destIndex, $requestOptions = array())

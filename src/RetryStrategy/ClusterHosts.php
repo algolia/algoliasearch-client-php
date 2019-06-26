@@ -36,6 +36,7 @@ final class ClusterHosts
 
     /**
      * ClusterHosts constructor.
+     *
      * @param HostCollection $read
      * @param HostCollection $write
      */
@@ -46,8 +47,9 @@ final class ClusterHosts
     }
 
     /**
-     * @param mixed $read
+     * @param mixed      $read
      * @param mixed|null $write
+     *
      * @return ClusterHosts
      */
     public static function create($read, $write = null)
@@ -77,6 +79,7 @@ final class ClusterHosts
 
     /**
      * @param string $applicationId
+     *
      * @return ClusterHosts
      */
     public static function createFromAppId($applicationId)
@@ -112,6 +115,7 @@ final class ClusterHosts
 
     /**
      * @param string $region
+     *
      * @return ClusterHosts
      */
     public static function createForAnalytics($region)
@@ -121,6 +125,7 @@ final class ClusterHosts
 
     /**
      * @param string $region
+     *
      * @return ClusterHosts
      */
     public static function createForInsights($region)
@@ -130,7 +135,9 @@ final class ClusterHosts
 
     /**
      * @param string $cacheKey
+     *
      * @return bool|mixed
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function createFromCache($cacheKey)
@@ -148,6 +155,7 @@ final class ClusterHosts
 
     /**
      * @return array
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function read()
@@ -157,6 +165,7 @@ final class ClusterHosts
 
     /**
      * @return array
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function write()
@@ -166,7 +175,9 @@ final class ClusterHosts
 
     /**
      * @param string $host
+     *
      * @return $this
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function failed($host)
@@ -217,7 +228,9 @@ final class ClusterHosts
 
     /**
      * @param string $type
+     *
      * @return array mixed
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function getUrls($type)
@@ -248,6 +261,7 @@ final class ClusterHosts
 
     /**
      * @return void
+     *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function updateCache()

@@ -44,9 +44,10 @@ final class ApiWrapper implements ApiWrapperInterface
 
     /**
      * ApiWrapper constructor.
-     * @param HttpClientInterface $http
-     * @param AbstractConfig $config
-     * @param ClusterHosts $clusterHosts
+     *
+     * @param HttpClientInterface        $http
+     * @param AbstractConfig             $config
+     * @param ClusterHosts               $clusterHosts
      * @param RequestOptionsFactory|null $RqstOptsFactory
      */
     public function __construct(
@@ -64,9 +65,11 @@ final class ApiWrapper implements ApiWrapperInterface
     /**
      * @param string $method
      * @param string $path
-     * @param array $requestOptions
-     * @param array $defaultRequestOptions
+     * @param array  $requestOptions
+     * @param array  $defaultRequestOptions
+     *
      * @return array
+     *
      * @throws BadRequestException
      * @throws UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -91,10 +94,12 @@ final class ApiWrapper implements ApiWrapperInterface
     /**
      * @param string $method
      * @param string $path
-     * @param array $data
-     * @param array $requestOptions
-     * @param array $defaultRequestOptions
+     * @param array  $data
+     * @param array  $requestOptions
+     * @param array  $defaultRequestOptions
+     *
      * @return array
+     *
      * @throws BadRequestException
      * @throws UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -121,9 +126,11 @@ final class ApiWrapper implements ApiWrapperInterface
     /**
      * @param string $method
      * @param string $path
-     * @param array $requestOptions
-     * @param null $hosts
+     * @param array  $requestOptions
+     * @param null   $hosts
+     *
      * @return array
+     *
      * @throws BadRequestException
      * @throws UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -148,13 +155,15 @@ final class ApiWrapper implements ApiWrapperInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
+     * @param string         $method
+     * @param string         $path
      * @param RequestOptions $requestOptions
-     * @param array $hosts
-     * @param int $timeout
-     * @param array $data
+     * @param array          $hosts
+     * @param int            $timeout
+     * @param array          $data
+     *
      * @return array
+     *
      * @throws BadRequestException
      * @throws UnreachableException
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -231,8 +240,10 @@ final class ApiWrapper implements ApiWrapperInterface
 
     /**
      * @param ResponseInterface $response
-     * @param RequestInterface $request
+     * @param RequestInterface  $request
+     *
      * @return array
+     *
      * @throws AlgoliaException
      * @throws BadRequestException
      * @throws NotFoundException
@@ -265,6 +276,7 @@ final class ApiWrapper implements ApiWrapperInterface
 
     /**
      * @param string $uri
+     *
      * @return Uri|UriInterface
      */
     private function createUri($uri)
@@ -279,11 +291,12 @@ final class ApiWrapper implements ApiWrapperInterface
     }
 
     /**
-     * @param string $method
-     * @param string $uri
-     * @param array $headers
+     * @param string            $method
+     * @param string            $uri
+     * @param array             $headers
      * @param array|string|null $body
-     * @param string $protocolVersion
+     * @param string            $protocolVersion
+     *
      * @return Request
      */
     private function createRequest(

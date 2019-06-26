@@ -6,6 +6,11 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 
 final class RuleIterator extends AbstractAlgoliaIterator
 {
+    /**
+     * @param array $hit
+     *
+     * @return array
+     */
     protected function formatHit(array $hit)
     {
         unset($hit['_highlightResult']);
@@ -13,6 +18,9 @@ final class RuleIterator extends AbstractAlgoliaIterator
         return $hit;
     }
 
+    /**
+     * @return void
+     */
     protected function fetchNextPage()
     {
         if (is_array($this->response) && $this->key >= $this->response['nbHits']) {

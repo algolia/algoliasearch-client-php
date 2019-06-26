@@ -7,8 +7,16 @@ namespace Algolia\AlgoliaSearch\RetryStrategy;
  */
 final class HostCollection
 {
+    /**
+     * @var array
+     */
     private $hosts;
 
+    /**
+     * HostCollection constructor.
+     *
+     * @param array $hosts
+     */
     public function __construct(array $hosts)
     {
         $this->hosts = $hosts;
@@ -16,6 +24,11 @@ final class HostCollection
         $this->shuffle();
     }
 
+    /**
+     * @param array $urlsWithPriority
+     *
+     * @return HostCollection
+     */
     public static function create(array $urlsWithPriority)
     {
         $hosts = array();
@@ -26,6 +39,9 @@ final class HostCollection
         return new static($hosts);
     }
 
+    /**
+     * @return array
+     */
     public function get()
     {
         // We pass the result through array_values because sometimes
@@ -36,6 +52,9 @@ final class HostCollection
         }));
     }
 
+    /**
+     * @return array
+     */
     public function getUrls()
     {
         return array_map(function (Host $host) {
@@ -43,6 +62,11 @@ final class HostCollection
         }, $this->get());
     }
 
+    /**
+     * @param string $hostKey
+     *
+     * @return void
+     */
     public function markAsDown($hostKey)
     {
         array_map(function (Host $host) use ($hostKey) {
@@ -52,6 +76,9 @@ final class HostCollection
         }, $this->hosts);
     }
 
+    /**
+     * @return $this
+     */
     public function shuffle()
     {
         if (shuffle($this->hosts)) {
@@ -61,6 +88,9 @@ final class HostCollection
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function reset()
     {
         foreach ($this->hosts as $host) {
@@ -70,6 +100,11 @@ final class HostCollection
         return $this;
     }
 
+    /**
+     * Sorts the hosts.
+     *
+     * @return void
+     */
     private function sort()
     {
         usort($this->hosts, function (Host $a, Host $b) {

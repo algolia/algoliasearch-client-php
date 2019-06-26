@@ -9,15 +9,22 @@ use Algolia\AlgoliaSearch\SearchClient;
 final class AddApiKeyResponse extends AbstractResponse
 {
     /**
-     * @var \Algolia\AlgoliaSearch\SearchClient
+     * @var SearchClient
      */
     private $client;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
+     * @var SearchConfig
      */
     private $config;
 
+    /**
+     * AddApiKeyResponse constructor.
+     *
+     * @param array        $apiResponse
+     * @param SearchClient $client
+     * @param SearchConfig $config
+     */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config)
     {
         $this->apiResponse = $apiResponse;
@@ -25,6 +32,9 @@ final class AddApiKeyResponse extends AbstractResponse
         $this->config = $config;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function wait($requestOptions = array())
     {
         if (!isset($this->client)) {
@@ -44,6 +54,7 @@ final class AddApiKeyResponse extends AbstractResponse
                 return $this;
             } catch (NotFoundException $e) {
                 // Try again
+                // @ignoreException
             }
 
             $retry++;

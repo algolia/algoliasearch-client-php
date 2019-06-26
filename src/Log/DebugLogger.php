@@ -21,6 +21,8 @@ final class DebugLogger extends AbstractLogger
 
     /**
      * Disables the logger.
+     *
+     * @return void
      */
     public static function disable()
     {
@@ -29,6 +31,8 @@ final class DebugLogger extends AbstractLogger
 
     /**
      * Enables the logger.
+     *
+     * @return void
      */
     public static function enable()
     {

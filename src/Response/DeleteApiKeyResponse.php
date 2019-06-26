@@ -23,6 +23,14 @@ final class DeleteApiKeyResponse extends AbstractResponse
      */
     private $key;
 
+    /**
+     * DeleteApiKeyResponse constructor.
+     *
+     * @param array        $apiResponse
+     * @param SearchClient $client
+     * @param SearchConfig $config
+     * @param int|string   $key
+     */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config, $key)
     {
         $this->apiResponse = $apiResponse;
@@ -31,6 +39,9 @@ final class DeleteApiKeyResponse extends AbstractResponse
         $this->key = $key;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function wait($requestOptions = array())
     {
         if (!isset($this->client)) {

@@ -42,6 +42,14 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private $requestOptionsFactory;
 
+    /**
+     * ApiWrapper constructor.
+     *
+     * @param HttpClientInterface        $http
+     * @param AbstractConfig             $config
+     * @param ClusterHosts               $clusterHosts
+     * @param RequestOptionsFactory|null $RqstOptsFactory
+     */
     public function __construct(
         HttpClientInterface $http,
         AbstractConfig $config,
@@ -54,6 +62,9 @@ final class ApiWrapper implements ApiWrapperInterface
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
     {
         if ('GET' === strtoupper($method)) {
@@ -71,6 +82,9 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array())
     {
         if ('DELETE' === strtoupper($method)) {
@@ -90,6 +104,9 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function send($method, $path, $requestOptions = array(), $hosts = null)
     {
         $requestOptions = $this->requestOptionsFactory->create($requestOptions);
@@ -109,6 +126,16 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
+    /**
+     * @param string         $method
+     * @param string         $path
+     * @param RequestOptions $requestOptions
+     * @param array          $hosts
+     * @param int            $timeout
+     * @param array          $data
+     *
+     * @return array
+     */
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
         $uri = $this->createUri($path)
@@ -179,6 +206,17 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new UnreachableException();
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @param RequestInterface  $request
+     *
+     * @return array
+     *
+     * @throws AlgoliaException
+     * @throws BadRequestException
+     * @throws NotFoundException
+     * @throws RetriableException
+     */
     private function handleResponse(ResponseInterface $response, RequestInterface $request)
     {
         $body = (string) $response->getBody();
@@ -204,6 +242,11 @@ final class ApiWrapper implements ApiWrapperInterface
         return $responseArray;
     }
 
+    /**
+     * @param string $uri
+     *
+     * @return UriInterface
+     */
     private function createUri($uri)
     {
         if ($uri instanceof UriInterface) {
@@ -215,6 +258,15 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
+    /**
+     * @param string            $method
+     * @param string            $uri
+     * @param array             $headers
+     * @param array|string|null $body
+     * @param string            $protocolVersion
+     *
+     * @return Request
+     */
     private function createRequest(
         $method,
         $uri,
@@ -243,6 +295,8 @@ final class ApiWrapper implements ApiWrapperInterface
      * @param string $level
      * @param string $message
      * @param array  $context
+     *
+     * @return void
      */
     private function log($level, $message, array $context = array())
     {

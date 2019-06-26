@@ -9,22 +9,49 @@ use Algolia\AlgoliaSearch\Algolia;
  */
 final class ClusterHosts
 {
+    /**
+     * @var HostCollection
+     */
     private $read;
 
+    /**
+     * @var HostCollection
+     */
     private $write;
 
+    /**
+     * @var string
+     */
     private $cacheKey;
 
+    /**
+     * @var string
+     */
     private $lastReadHash;
 
+    /**
+     * @var string
+     */
     private $lastWriteHash;
 
+    /**
+     * ClusterHosts constructor.
+     *
+     * @param HostCollection $read
+     * @param HostCollection $write
+     */
     public function __construct(HostCollection $read, HostCollection $write)
     {
         $this->read = $read;
         $this->write = $write;
     }
 
+    /**
+     * @param array|string      $read
+     * @param array|string|null $write
+     *
+     * @return ClusterHosts
+     */
     public static function create($read, $write = null)
     {
         if (null === $write) {
@@ -50,6 +77,11 @@ final class ClusterHosts
         return new static(HostCollection::create($read), HostCollection::create($write));
     }
 
+    /**
+     * @param string $applicationId
+     *
+     * @return ClusterHosts
+     */
     public static function createFromAppId($applicationId)
     {
         $read = $write = array(
@@ -64,6 +96,9 @@ final class ClusterHosts
         return static::create($read, $write);
     }
 
+    /**
+     * @return ClusterHosts
+     */
     public static function createForPlaces()
     {
         $read = $write = array(
@@ -78,16 +113,31 @@ final class ClusterHosts
         return static::create($read, $write);
     }
 
+    /**
+     * @param string $region
+     *
+     * @return ClusterHosts
+     */
     public static function createForAnalytics($region)
     {
         return static::create('analytics.'.$region.'.algolia.com');
     }
 
+    /**
+     * @param string $region
+     *
+     * @return ClusterHosts
+     */
     public static function createForInsights($region)
     {
         return static::create('insights.'.$region.'.algolia.io');
     }
 
+    /**
+     * @param string $cacheKey
+     *
+     * @return mixed
+     */
     public static function createFromCache($cacheKey)
     {
         if (!Algolia::isCacheEnabled()) {
@@ -101,16 +151,27 @@ final class ClusterHosts
         return @unserialize(Algolia::getCache()->get($cacheKey));
     }
 
+    /**
+     * @return array
+     */
     public function read()
     {
         return $this->getUrls('read');
     }
 
+    /**
+     * @return array
+     */
     public function write()
     {
         return $this->getUrls('write');
     }
 
+    /**
+     * @param string $host
+     *
+     * @return $this
+     */
     public function failed($host)
     {
         $this->read->markAsDown($host);
@@ -121,6 +182,9 @@ final class ClusterHosts
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function reset()
     {
         $this->read->reset();
@@ -129,6 +193,9 @@ final class ClusterHosts
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function shuffle()
     {
         $this->read->shuffle();
@@ -151,22 +218,40 @@ final class ClusterHosts
         return $this;
     }
 
+    /**
+     * @param string $type
+     *
+     * @return array mixed
+     */
     private function getUrls($type)
     {
-        $urls = $this->{$type}->getUrls();
-        $lashHashName = 'last'.ucfirst($type).'Hash';
+        if ($type === 'read') {
+            $urls = $this->read->getUrls();
+            $lashHashName = $this->lastReadHash;
+        } else {
+            $urls = $this->write->getUrls();
+            $lashHashName = $this->lastWriteHash;
+        }
 
         if (Algolia::isCacheEnabled()) {
             $hash = sha1(implode('-', $urls));
-            if ($hash !== $this->{$lashHashName}) {
+            if ($hash !== $lashHashName) {
                 $this->updateCache();
             }
-            $this->{$lashHashName} = $hash;
+
+            if ($type === 'read') {
+                $this->lastReadHash = $hash;
+            } else {
+                $this->lastWriteHash = $hash;
+            }
         }
 
         return $urls;
     }
 
+    /**
+     * @return void
+     */
     private function updateCache()
     {
         if (null !== $this->cacheKey && Algolia::isCacheEnabled()) {

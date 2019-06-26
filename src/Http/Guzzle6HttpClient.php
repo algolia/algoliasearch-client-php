@@ -10,13 +10,24 @@ use Psr\Http\Message\RequestInterface;
 
 final class Guzzle6HttpClient implements HttpClientInterface
 {
+    /**
+     * @var GuzzleClient
+     */
     private $client;
 
+    /**
+     * Guzzle6HttpClient constructor.
+     *
+     * @param GuzzleClient|null $client
+     */
     public function __construct(GuzzleClient $client = null)
     {
         $this->client = $client ?: static::buildClient();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
@@ -35,6 +46,11 @@ final class Guzzle6HttpClient implements HttpClientInterface
         return $response;
     }
 
+    /**
+     * @param array $config
+     *
+     * @return GuzzleClient
+     */
     private static function buildClient(array $config = array())
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());

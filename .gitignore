@@ -4,3 +4,5 @@ composer.lock
 /tests/cache/
 .idea/
 .php_cs.dist
+/tests/QualityTools/vendor/
+/tests/QualityTools/.idea/

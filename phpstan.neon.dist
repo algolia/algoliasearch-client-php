@@ -2,14 +2,14 @@ includes:
     - tests/QualityTools/vendor/phpstan/phpstan-strict-rules/rules.neon
     - tests/QualityTools/vendor/localheinz/phpstan-rules/rules.neon
     - tests/QualityTools/vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
-    - tests/QualityTools/vendor/roave/no-floaters/rules.neon
 
 parameters:
     level: 0
     excludes_analyse:
         - tests/QualityTools/
         - tests/
-        - src/Http/
+        - src/Http/Psr7/
+        - src/Http/Php53HttpClient.php
     paths:
         - src
         - autoload.php
@@ -23,4 +23,6 @@ parameters:
         - '#Thrown exceptions in a catch block must bundle the previous exception#'
         - '#Function dump not found.#'
         - '#Class.*is neither abstract nor final#'
-        - '#Access to constant VERSION on an unknown class GuzzleHttp\\.*.#'
+        - '#.*unknown.*GuzzleHttp\\.*.#'
+        - '#.*GuzzleHttp\\.*not found.#'
+        - '#.*invalid.*type GuzzleHttp\\.*.#'

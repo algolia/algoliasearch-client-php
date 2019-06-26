@@ -10,8 +10,15 @@ use Psr\Http\Message\RequestInterface;
 
 final class Guzzle6HttpClient implements HttpClientInterface
 {
+    /**
+     * @var GuzzleClient
+     */
     private $client;
 
+    /**
+     * Guzzle6HttpClient constructor.
+     * @param GuzzleClient|null $client
+     */
     public function __construct(GuzzleClient $client = null)
     {
         $this->client = $client ?: static::buildClient();
@@ -39,7 +46,9 @@ final class Guzzle6HttpClient implements HttpClientInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $config
+     *
+     * @return GuzzleClient
      */
     private static function buildClient(array $config = array())
     {

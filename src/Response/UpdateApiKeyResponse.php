@@ -73,7 +73,8 @@ final class UpdateApiKeyResponse extends AbstractResponse
             }
 
             $retry++;
-            usleep(($retry / 10) * $time); // 0.1 second
+            $factor = ceil($retry / 10);
+            usleep($factor * $time); // 0.1 second
         } while (true);
     }
 

@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Response;
 
-final class MultiResponse extends AbstractResponse implements \Iterator, \Countable
+class MultiResponse extends AbstractResponse implements \Iterator, \Countable
 {
     /**
      * @var int
@@ -12,7 +12,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     /**
      * MultiResponse constructor.
      *
-     * @param array<int, AbstractResponse> $responses
+     * @param array $responses
      */
     public function __construct($responses)
     {
@@ -20,9 +20,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * @param array $requestOptions
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function wait($requestOptions = array())
     {
@@ -34,7 +32,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * @return int|void
+     * @return int
      */
     public function count()
     {
@@ -42,9 +40,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @return AbstractResponse
+     * @return array
      */
     public function current()
     {
@@ -62,7 +58,7 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * @return int|mixed
+     * @return int
      */
     public function key()
     {
@@ -78,8 +74,6 @@ final class MultiResponse extends AbstractResponse implements \Iterator, \Counta
     }
 
     /**
-     * Rewind API key.
-     *
      * @return void
      */
     public function rewind()

@@ -121,7 +121,7 @@ final class RequestOptionsFactory
     /**
      * @param array $options
      *
-     * @return mixed
+     * @return array
      */
     private function format($options)
     {

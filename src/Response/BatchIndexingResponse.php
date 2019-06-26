@@ -30,8 +30,6 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
 
     /**
      * {@inheritdoc}
-     *
-     * @return $this
      */
     public function wait($requestOptions = array())
     {

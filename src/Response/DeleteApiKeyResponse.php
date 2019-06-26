@@ -40,9 +40,7 @@ final class DeleteApiKeyResponse extends AbstractResponse
     }
 
     /**
-     * @param array $requestOptions
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function wait($requestOptions = array())
     {

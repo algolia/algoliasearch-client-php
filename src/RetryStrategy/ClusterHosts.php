@@ -47,8 +47,8 @@ final class ClusterHosts
     }
 
     /**
-     * @param mixed      $read
-     * @param mixed|null $write
+     * @param array|string      $read
+     * @param array|string|null $write
      *
      * @return ClusterHosts
      */
@@ -136,9 +136,7 @@ final class ClusterHosts
     /**
      * @param string $cacheKey
      *
-     * @return bool|mixed
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @return mixed
      */
     public static function createFromCache($cacheKey)
     {
@@ -155,8 +153,6 @@ final class ClusterHosts
 
     /**
      * @return array
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function read()
     {
@@ -165,8 +161,6 @@ final class ClusterHosts
 
     /**
      * @return array
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function write()
     {
@@ -177,8 +171,6 @@ final class ClusterHosts
      * @param string $host
      *
      * @return $this
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function failed($host)
     {
@@ -230,8 +222,6 @@ final class ClusterHosts
      * @param string $type
      *
      * @return array mixed
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function getUrls($type)
     {
@@ -261,8 +251,6 @@ final class ClusterHosts
 
     /**
      * @return void
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function updateCache()
     {

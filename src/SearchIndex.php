@@ -64,8 +64,8 @@ final class SearchIndex
     }
 
     /**
-     * @param mixed $query
-     * @param array $requestOptions
+     * @param string $query
+     * @param array  $requestOptions
      *
      * @return array
      */

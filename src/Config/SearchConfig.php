@@ -26,7 +26,7 @@ class SearchConfig extends AbstractConfig
     }
 
     /**
-     * @return array<string, string|int|array>
+     * @return array
      */
     public function getDefaultConfig()
     {

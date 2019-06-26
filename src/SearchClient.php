@@ -46,8 +46,6 @@ final class SearchClient
 
     /**
      * @return SearchClient
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function get()
     {
@@ -63,8 +61,6 @@ final class SearchClient
      * @param string|null $apiKey
      *
      * @return SearchClient
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function create($appId = null, $apiKey = null)
     {
@@ -75,8 +71,6 @@ final class SearchClient
      * @param SearchConfig $config
      *
      * @return SearchClient
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public static function createWithConfig(SearchConfig $config)
     {

@@ -12,7 +12,7 @@ abstract class AbstractResponse implements \ArrayAccess
     /**
      * @param array $requestOptions
      *
-     * @return mixed
+     * @return $this
      */
     abstract public function wait($requestOptions = array());
 

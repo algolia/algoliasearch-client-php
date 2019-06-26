@@ -85,10 +85,6 @@ final class InsightsClient
      * @param array $requestOptions
      *
      * @return array
-     *
-     * @throws Exceptions\BadRequestException
-     * @throws Exceptions\UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function sendEvent($event, $requestOptions = array())
     {
@@ -100,10 +96,6 @@ final class InsightsClient
      * @param array $requestOptions
      *
      * @return array
-     *
-     * @throws Exceptions\BadRequestException
-     * @throws Exceptions\UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function sendEvents($events, $requestOptions = array())
     {

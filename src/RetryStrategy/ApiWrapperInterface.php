@@ -26,10 +26,10 @@ interface ApiWrapperInterface
     public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array());
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array  $requestOptions
-     * @param null   $hosts
+     * @param string     $method
+     * @param string     $path
+     * @param array      $requestOptions
+     * @param array|null $hosts
      *
      * @return array
      */

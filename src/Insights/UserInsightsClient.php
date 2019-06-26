@@ -32,7 +32,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $filters
+     * @param array  $filters
      * @param array  $requestOptions
      *
      * @return array
@@ -45,7 +45,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $objectIDs
+     * @param array  $objectIDs
      * @param array  $requestOptions
      *
      * @return array
@@ -58,9 +58,9 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $objectIDs
-     * @param int    $positions
-     * @param mixed  $queryID
+     * @param array  $objectIDs
+     * @param array  $positions
+     * @param string $queryID
      * @param array  $requestOptions
      *
      * @return array
@@ -98,7 +98,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $filters
+     * @param array  $filters
      * @param array  $requestOptions
      *
      * @return array
@@ -111,7 +111,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $objectIDs
+     * @param array  $objectIDs
      * @param array  $requestOptions
      *
      * @return array
@@ -124,7 +124,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $objectIDs
+     * @param array  $objectIDs
      * @param string $queryID
      * @param array  $requestOptions
      *
@@ -162,7 +162,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $filters
+     * @param array  $filters
      * @param array  $requestOptions
      *
      * @return array
@@ -179,7 +179,7 @@ final class UserInsightsClient
     /**
      * @param string $eventName
      * @param string $indexName
-     * @param mixed  $objectIDs
+     * @param array  $objectIDs
      * @param array  $requestOptions
      *
      * @return array
@@ -226,7 +226,7 @@ final class UserInsightsClient
     /**
      * @param array $event
      *
-     * @return mixed
+     * @return array
      */
     private function reformatEvent($event)
     {

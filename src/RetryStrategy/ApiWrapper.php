@@ -63,16 +63,7 @@ final class ApiWrapper implements ApiWrapperInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array  $requestOptions
-     * @param array  $defaultRequestOptions
-     *
-     * @return array
-     *
-     * @throws BadRequestException
-     * @throws UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * {@inheritdoc}
      */
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
     {
@@ -92,17 +83,7 @@ final class ApiWrapper implements ApiWrapperInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array  $data
-     * @param array  $requestOptions
-     * @param array  $defaultRequestOptions
-     *
-     * @return array
-     *
-     * @throws BadRequestException
-     * @throws UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * {@inheritdoc}
      */
     public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array())
     {
@@ -124,16 +105,7 @@ final class ApiWrapper implements ApiWrapperInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array  $requestOptions
-     * @param null   $hosts
-     *
-     * @return array
-     *
-     * @throws BadRequestException
-     * @throws UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * {@inheritdoc}
      */
     public function send($method, $path, $requestOptions = array(), $hosts = null)
     {
@@ -163,10 +135,6 @@ final class ApiWrapper implements ApiWrapperInterface
      * @param array          $data
      *
      * @return array
-     *
-     * @throws BadRequestException
-     * @throws UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
@@ -277,7 +245,7 @@ final class ApiWrapper implements ApiWrapperInterface
     /**
      * @param string $uri
      *
-     * @return Uri|UriInterface
+     * @return UriInterface
      */
     private function createUri($uri)
     {

@@ -20,10 +20,6 @@ final class RuleIterator extends AbstractAlgoliaIterator
 
     /**
      * @return void
-     *
-     * @throws \Algolia\AlgoliaSearch\Exceptions\BadRequestException
-     * @throws \Algolia\AlgoliaSearch\Exceptions\UnreachableException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     protected function fetchNextPage()
     {

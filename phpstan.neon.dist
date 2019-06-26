@@ -6,7 +6,6 @@ includes:
 parameters:
     level: 0
     excludes_analyse:
-        - tests/QualityTools/
         - tests/
         - src/Http/Psr7/
         - src/Http/Php53HttpClient.php
@@ -26,3 +25,4 @@ parameters:
         - '#.*unknown.*GuzzleHttp\\.*.#'
         - '#.*GuzzleHttp\\.*not found.#'
         - '#.*invalid.*type GuzzleHttp\\.*.#'
+        - '#Casting to string something that#'

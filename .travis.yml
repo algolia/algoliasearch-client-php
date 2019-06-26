@@ -51,8 +51,8 @@ before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys
 
 script:
-  - if [[$(phpenv version-name) >= "7.2" ]]; then composer install:test; fi
-  - if [[$(phpenv version-name) >= "7.2" ]]; then composer quality:7.2; fi
+  - if [[$(phpenv version-name) >= "7.2" ]]; then composer install:quality-tools; fi
+  - if [[$(phpenv version-name) >= "7.2" ]]; then composer test:quality-tools; fi
   - if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [[ ! "$TRAVIS_PULL_REQUEST_SLUG" =~ ^algolia\/ ]]; then eval $(./algolia-keys export) && php vendor/bin/phpunit -v --testsuite Unit,Definition,Community; else php vendor/bin/phpunit -v; fi
   - composer php-cs-fixer
   - php tests/tests-no-composer.php

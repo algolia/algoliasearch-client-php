@@ -12,7 +12,7 @@ class ExistsTest extends AlgoliaIntegrationTestCase
         static::$indexes['main'] = self::safeName('exists');
     }
 
-    public function testIndexNotExists()
+    public function testIndexNotExist()
     {
         $index = SearchClient::get()->initIndex(static::$indexes['main']);
 

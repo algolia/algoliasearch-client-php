@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -14,7 +15,6 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\Helpers;
-use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 
 class SearchIndex
 {

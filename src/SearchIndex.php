@@ -14,6 +14,7 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 
 class SearchIndex
 {
@@ -619,6 +620,17 @@ class SearchIndex
         );
 
         return new IndexingResponse($response, $this);
+    }
+
+    public function exists()
+    {
+        try {
+            $this->getSettings();
+        } catch (NotFoundException $exception) {
+            return false;
+        }
+
+        return true;
     }
 
     private function copyTo($tmpIndexName, $requestOptions = array())

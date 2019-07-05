@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -619,6 +620,17 @@ class SearchIndex
         );
 
         return new IndexingResponse($response, $this);
+    }
+
+    public function exists()
+    {
+        try {
+            $this->getSettings();
+        } catch (NotFoundException $exception) {
+            return false;
+        }
+
+        return true;
     }
 
     private function copyTo($tmpIndexName, $requestOptions = array())

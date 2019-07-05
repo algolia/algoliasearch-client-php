@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [v2.3.0](https://github.com/algolia/algoliasearch-client-php/compare/2.2.6...2.3.0)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.2.6...master)
 
 ### Added
 - `SearchClient::exists` method ([#565](https://github.com/algolia/algoliasearch-client-php/pull/565))

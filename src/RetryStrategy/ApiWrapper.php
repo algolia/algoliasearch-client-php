@@ -111,6 +111,10 @@ final class ApiWrapper implements ApiWrapperInterface
 
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
+        if ($this->canEnableGzipCompress($method)) {
+            $requestOptions->addHeader('Content-Encoding', 'gzip');
+        }
+
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
@@ -215,6 +219,14 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
+    /**
+     * @param $method
+     * @param $uri
+     * @param array $headers
+     * @param null $body
+     * @param string $protocolVersion
+     * @return Request
+     */
     private function createRequest(
         $method,
         $uri,
@@ -237,6 +249,12 @@ final class ApiWrapper implements ApiWrapperInterface
         }
 
         return new Request($method, $uri, $headers, $body, $protocolVersion);
+    }
+
+    private function canEnableGzipCompress($method)
+    {
+        return (strtoupper($method) === 'POST' || strtoupper($method) === 'PUT')
+            && $this->config->getGzipEnabled();
     }
 
     /**

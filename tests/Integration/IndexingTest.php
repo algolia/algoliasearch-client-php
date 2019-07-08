@@ -56,7 +56,6 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         $multiResponse->wait();
 
         /* Check 6 first records with getObject */
-
         $objectID1 = $responses[0][0]['objectIDs'][0];
         $objectID2 = $responses[1][0]['objectIDs'][0];
         $objectID3 = $responses[2][0]['objectIDs'][0];

@@ -29,6 +29,7 @@ abstract class AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => array(),
+            'gzipEnabled' => false,
         );
     }
 
@@ -112,6 +113,30 @@ abstract class AbstractConfig
     public function setDefaultHeaders(array $defaultHeaders)
     {
         $this->config['defaultHeaders'] = $defaultHeaders;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getGzipEnabled()
+    {
+        return $this->config['gzipEnabled'];
+    }
+
+    /**
+     * @param boolean $gzipEnabled
+     *
+     * @return $this
+     */
+    public function setGzipEnabled($gzipEnabled)
+    {
+        if (!is_bool($gzipEnabled)) {
+            throw new \InvalidArgumentException('Default configuration for GzipEnabled must be a boolean');
+        }
+
+        $this->config['gzipEnabled'] = $gzipEnabled;
 
         return $this;
     }

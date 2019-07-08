@@ -7,6 +7,9 @@ use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Support\Helpers;
 use Faker\Factory;
 
+/**
+ * @internal
+ */
 class IndexingTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()
@@ -21,25 +24,25 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = SearchClient::get()->initIndex(static::$indexes['main']);
 
-        /* adding a object with object id */
+        // adding a object with object id
         $obj1 = $this->createStubRecord(null);
         $responses[] = $index->saveObject($obj1);
 
-        /* adding a object w/o object id s */
+        // adding a object w/o object id s
         $obj2 = $this->createStubRecord(false);
         $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
 
-        /* adding two objects with object id  */
+        // adding two objects with object id
         $obj3 = $this->createStubRecord(null);
         $obj4 = $this->createStubRecord(null);
         $responses[] = $index->saveObjects(array($obj3, $obj4));
 
-        /* adding two objects w/o object id  */
+        // adding two objects w/o object id
         $obj5 = $this->createStubRecord(false);
         $obj6 = $this->createStubRecord(false);
         $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
 
-        /* adding 1000 objects with object id with 10 batch */
+        // adding 1000 objects with object id with 10 batch
 
         for ($i = 1; $i <= 1000; $i++) {
             $objects[$i] = $this->createStubRecord($i);
@@ -51,11 +54,11 @@ class IndexingTest extends AlgoliaIntegrationTestCase
             $responses[] = $index->batch($request);
         }
 
-        /* Wait all collected task to terminate */
+        // Wait all collected task to terminate
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        /* Check 6 first records with getObject */
+        // Check 6 first records with getObject
 
         $objectID1 = $responses[0][0]['objectIDs'][0];
         $objectID2 = $responses[1][0]['objectIDs'][0];
@@ -77,11 +80,11 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         $result6 = $index->getObject($objectID6);
         self::assertEquals($obj6['name'], $result6['name']);
 
-        /* Check 1000 remaining records with getObjects */
+        // Check 1000 remaining records with getObjects
         $results = $index->getObjects(array_keys($objects));
         self::assertEquals(array_values($objects), $results['results']);
 
-        /*  Browse all records with browseObjects */
+        // Browse all records with browseObjects
         $iterator = $index->browseObjects();
 
         self::assertCount(1006, $iterator);
@@ -90,40 +93,40 @@ class IndexingTest extends AlgoliaIntegrationTestCase
             self::assertContains($object, $results);
         }
 
-        /* Alter 1 record with partialUpdateObject */
+        // Alter 1 record with partialUpdateObject
         $obj1['name'] = 'This is an altered name 1';
         $responses[] = $index->partialUpdateObject($obj1);
 
-        /* Alter 2 records with partialUpdateObjects */
+        // Alter 2 records with partialUpdateObjects
         $obj3['bar'] = 'This is an altered name 3';
         $obj4['foo'] = 'This is an altered name 4';
         $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
 
-        /* Wait all collected task to terminate */
+        // Wait all collected task to terminate
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        /* Check previous altered records with getObject */
+        // Check previous altered records with getObject
         self::assertEquals($index->getObject($objectID1), $obj1);
         self::assertEquals($index->getObject($objectID3), $obj3);
         self::assertEquals($index->getObject($objectID4), $obj4);
 
-        /*  Delete the first record with deleteObject */
+        // Delete the first record with deleteObject
         $responses[] = $index->deleteObject($objectID1);
 
-        /* Delete the 5 remaining first records with deleteObjects */
+        // Delete the 5 remaining first records with deleteObjects
         $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
 
         $responses[] = $index->deleteObjects($objectsIDs);
 
-        /* Delete the 1000 remaining records with clearObjects */
+        // Delete the 1000 remaining records with clearObjects
         $responses[] = $index->clearObjects();
 
-        /* Wait all collected task to terminate */
+        // Wait all collected task to terminate
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        /* Browse all objects with browseObjects */
+        // Browse all objects with browseObjects
         $iterator = $index->browseObjects();
         self::assertCount(0, $iterator);
     }

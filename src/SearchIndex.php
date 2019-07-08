@@ -5,12 +5,12 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
-use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
-use Algolia\AlgoliaSearch\Response\IndexingResponse;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
+use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -18,8 +18,6 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 
 class SearchIndex
 {
-    private $indexName;
-
     /**
      * @var ApiWrapperInterface
      */
@@ -29,6 +27,7 @@ class SearchIndex
      * @var SearchConfig
      */
     protected $config;
+    private $indexName;
 
     public function __construct($indexName, ApiWrapperInterface $apiWrapper, SearchConfig $config)
     {
@@ -62,6 +61,10 @@ class SearchIndex
 
     /**
      * @deprecated Please use searchForFacetValues instead
+     *
+     * @param mixed $facetName
+     * @param mixed $facetQuery
+     * @param mixed $requestOptions
      */
     public function searchForFacetValue($facetName, $facetQuery, $requestOptions = array())
     {
@@ -190,11 +193,6 @@ class SearchIndex
         }
     }
 
-    protected function addObjects($objects, $requestOptions = array())
-    {
-        return $this->splitIntoBatches('addObject', $objects, $requestOptions);
-    }
-
     public function partialUpdateObject($object, $requestOptions = array())
     {
         return $this->partialUpdateObjects(array($object), $requestOptions);
@@ -289,54 +287,6 @@ class SearchIndex
         $response = $this->rawBatch($requests, $requestOptions);
 
         return new IndexingResponse($response, $this);
-    }
-
-    protected function rawBatch($requests, $requestOptions = array())
-    {
-        return $this->api->write(
-            'POST',
-            api_path('/1/indexes/%s/batch', $this->indexName),
-            array('requests' => $requests),
-            $requestOptions
-        );
-    }
-
-    protected function splitIntoBatches($action, $objects, $requestOptions = array())
-    {
-        $allResponses = array();
-        $batch = array();
-        $batchSize = $this->config->getBatchSize();
-        $count = 0;
-
-        foreach ($objects as $object) {
-            $batch[] = $object;
-            $count++;
-
-            if ($count === $batchSize) {
-                if ('addObject' !== $action) {
-                    Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
-                }
-                $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
-                $batch = array();
-                $count = 0;
-            }
-        }
-
-        if ('addObject' !== $action) {
-            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
-        }
-
-        // If not calls were made previously, not objects are passed
-        // so we return a NullResponse
-        // If there are already responses and something left in the
-        // batch, we send it.
-        if (empty($allResponses) && empty($batch)) {
-            return new NullResponse();
-        } elseif (!empty($batch)) {
-            $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
-        }
-
-        return new BatchIndexingResponse($allResponses, $this);
     }
 
     public function browseObjects($requestOptions = array())
@@ -631,6 +581,60 @@ class SearchIndex
         }
 
         return true;
+    }
+
+    protected function addObjects($objects, $requestOptions = array())
+    {
+        return $this->splitIntoBatches('addObject', $objects, $requestOptions);
+    }
+
+    protected function rawBatch($requests, $requestOptions = array())
+    {
+        return $this->api->write(
+            'POST',
+            api_path('/1/indexes/%s/batch', $this->indexName),
+            array('requests' => $requests),
+            $requestOptions
+        );
+    }
+
+    protected function splitIntoBatches($action, $objects, $requestOptions = array())
+    {
+        $allResponses = array();
+        $batch = array();
+        $batchSize = $this->config->getBatchSize();
+        $count = 0;
+
+        foreach ($objects as $object) {
+            $batch[] = $object;
+            $count++;
+
+            if ($count === $batchSize) {
+                if ('addObject' !== $action) {
+                    Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+                }
+                $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
+                $batch = array();
+                $count = 0;
+            }
+        }
+
+        if ('addObject' !== $action) {
+            Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
+        }
+
+        // If not calls were made previously, not objects are passed
+        // so we return a NullResponse
+        // If there are already responses and something left in the
+        // batch, we send it.
+        if (empty($allResponses) && empty($batch)) {
+            return new NullResponse();
+        }
+        if (!empty($batch)) {
+            $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
+        }
+
+        return new BatchIndexingResponse($allResponses, $this);
     }
 
     private function copyTo($tmpIndexName, $requestOptions = array())

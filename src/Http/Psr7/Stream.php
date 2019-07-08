@@ -266,9 +266,11 @@ class Stream implements StreamInterface
     {
         if (!isset($this->stream)) {
             return $key ? null : array();
-        } elseif (!$key) {
+        }
+        if (!$key) {
             return $this->customMetadata + stream_get_meta_data($this->stream);
-        } elseif (isset($this->customMetadata[$key])) {
+        }
+        if (isset($this->customMetadata[$key])) {
             return $this->customMetadata[$key];
         }
 

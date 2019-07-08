@@ -5,6 +5,9 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\InsightsClient;
 
+/**
+ * @internal
+ */
 class InsightsClientTest extends RequestTestCase
 {
     /** @var InsightsClient */

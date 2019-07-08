@@ -2,11 +2,14 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class RequestOptionsFactoryTest extends TestCase
 {
     /** @var RequestOptionsFactory */
@@ -24,6 +27,9 @@ class RequestOptionsFactoryTest extends TestCase
 
     /**
      * @dataProvider provideRequestOptionsData
+     *
+     * @param mixed $options
+     * @param mixed $expectedRequestOptions
      */
     public function testRequestOptionsFactory($options, $expectedRequestOptions)
     {

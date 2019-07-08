@@ -2,10 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
+use Algolia\AlgoliaSearch\SearchClient;
 
+/**
+ * @internal
+ */
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {
     public function testIndexDoesNotSetForwardToReplicasByDefault()
@@ -38,6 +41,8 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
 
     /**
      * @dataProvider provideConfigDefaultValue
+     *
+     * @param mixed $defaultValue
      */
     public function testIndexUseConfigDefaultForwardToReplicas($defaultValue)
     {

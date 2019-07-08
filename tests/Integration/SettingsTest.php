@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 
+/**
+ * @internal
+ */
 class SettingsTest extends AlgoliaIntegrationTestCase
 {
     private $settings = array(
@@ -65,33 +68,33 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 
     public function testSettings()
     {
-        /*  Instantiate the client and index setting */
+        // Instantiate the client and index setting
         $index = static::getClient()->initIndex(static::$indexes['main']);
         $responses = array();
 
-        /* Add one record to create the index with saveObject */
+        // Add one record to create the index with saveObject
         $object = array('objectID' => 1, 'name' => 'foo');
         $index->saveObject($object);
 
-        /* Set the settings with $settings with setSettings */
+        // Set the settings with $settings with setSettings
         $responses[] = $index->setSettings($this->settings);
 
-        /* Wait all collected task to terminate */
+        // Wait all collected task to terminate
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        /* Get the settings with getSettings  */
+        // Get the settings with getSettings
         $retrievedSettings = $index->getSettings();
         self::assertArraySubset($this->settings, $retrievedSettings);
 
-        /* Set the settings with the following parameters with setSettings */
+        // Set the settings with the following parameters with setSettings
         $responses[] = $index->setSettings(array('typoTolerance' => 'min', 'ignorePlurals' => array('en', 'fr'), 'removeStopWords' => array('en', 'fr'), 'distinct' => true));
 
-        /* Wait all collected task to terminate */
+        // Wait all collected task to terminate
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        /*  Get the settings with getSettings after update */
+        // Get the settings with getSettings after update
         $settingsCopy = $this->settings;
         $settingsCopy['typoTolerance'] = true;
         $settingsCopy['ignorePlurals'] = array('en', 'fr');

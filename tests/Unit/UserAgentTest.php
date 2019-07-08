@@ -6,6 +6,9 @@ use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Support\UserAgent;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class UserAgentTest extends TestCase
 {
     private $default;

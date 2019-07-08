@@ -40,17 +40,6 @@ final class UserInsightsClient
         return $this->clicked($event, $eventName, $indexName, $requestOptions);
     }
 
-    private function clicked($event, $eventName, $indexName, $requestOptions)
-    {
-        $event = array_merge($event, array(
-            'eventType' => 'click',
-            'eventName' => $eventName,
-            'index' => $indexName,
-        ));
-
-        return $this->sendEvent($event, $requestOptions);
-    }
-
     public function convertedFilters($eventName, $indexName, $filters, $requestOptions = array())
     {
         return $this->converted(array('filters' => $filters), $eventName, $indexName, $requestOptions);
@@ -71,17 +60,6 @@ final class UserInsightsClient
         return $this->converted($event, $eventName, $indexName, $requestOptions);
     }
 
-    private function converted($event, $eventName, $indexName, $requestOptions)
-    {
-        $event = array_merge($event, array(
-            'eventType' => 'conversion',
-            'eventName' => $eventName,
-            'index' => $indexName,
-        ));
-
-        return $this->sendEvent($event, $requestOptions);
-    }
-
     public function viewedFilters($eventName, $indexName, $filters, $requestOptions = array())
     {
         $event = array(
@@ -98,6 +76,28 @@ final class UserInsightsClient
         );
 
         return $this->viewed($event, $eventName, $indexName, $requestOptions);
+    }
+
+    private function clicked($event, $eventName, $indexName, $requestOptions)
+    {
+        $event = array_merge($event, array(
+            'eventType' => 'click',
+            'eventName' => $eventName,
+            'index' => $indexName,
+        ));
+
+        return $this->sendEvent($event, $requestOptions);
+    }
+
+    private function converted($event, $eventName, $indexName, $requestOptions)
+    {
+        $event = array_merge($event, array(
+            'eventType' => 'conversion',
+            'eventName' => $eventName,
+            'index' => $indexName,
+        ));
+
+        return $this->sendEvent($event, $requestOptions);
     }
 
     private function viewed($event, $eventName, $indexName, $requestOptions)

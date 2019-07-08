@@ -2,8 +2,15 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
+    public static function tearDownAfterClass()
+    {
+    }
+
     protected function setUp()
     {
         parent::setUp();
@@ -11,10 +18,6 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         if (!isset(static::$indexes['main'])) {
             static::$indexes['main'] = self::safeName('general-index-mgmt');
         }
-    }
-
-    public static function tearDownAfterClass()
-    {
     }
 
     protected function tearDown()

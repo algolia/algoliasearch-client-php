@@ -3,9 +3,12 @@
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\PlacesClient;
+use Algolia\AlgoliaSearch\SearchClient;
 
+/**
+ * @internal
+ */
 class SearchTest extends RequestTestCase
 {
     public function testQueryAsNullValue()

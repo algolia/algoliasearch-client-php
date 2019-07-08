@@ -5,10 +5,16 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Support\Helpers;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class HelpersTest extends TestCase
 {
     /**
      * @dataProvider dataTestApiPathHelper
+     *
+     * @param mixed $generatedPath
+     * @param mixed $expected
      */
     public function testApiPathHelper($generatedPath, $expected)
     {
@@ -28,6 +34,9 @@ class HelpersTest extends TestCase
 
     /**
      * @dataProvider dataTestBuildQueryHelper
+     *
+     * @param mixed $queryParams
+     * @param mixed $expected
      */
     public function testBuildQueryHelper($queryParams, $expected)
     {

@@ -97,6 +97,8 @@ class BufferStream implements StreamInterface
 
     /**
      * Reads data from the buffer.
+     *
+     * @param mixed $length
      */
     public function read($length)
     {
@@ -117,6 +119,8 @@ class BufferStream implements StreamInterface
 
     /**
      * Writes data to the buffer.
+     *
+     * @param mixed $string
      */
     public function write($string)
     {

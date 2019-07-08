@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
+/**
+ * @internal
+ */
 class ResponseObjectTest extends NullTestCase
 {
     public function testResponseObjectIsArrayAccessible()

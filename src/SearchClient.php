@@ -2,17 +2,17 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
+use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
-use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\RestoreApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\UpdateApiKeyResponse;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Support\Helpers;
 
 class SearchClient
@@ -255,14 +255,12 @@ class SearchClient
 
     public function setPersonalizationStrategy($strategy, $requestOptions = array())
     {
-        $apiResponse = $this->api->write(
+        return $this->api->write(
             'POST',
             api_path('1/recommendation/personalization/strategy'),
             $strategy,
             $requestOptions
         );
-
-        return $apiResponse;
     }
 
     public function searchUserIds($query, $requestOptions = array())

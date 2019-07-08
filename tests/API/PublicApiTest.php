@@ -8,6 +8,9 @@ use Algolia\AlgoliaSearch\Tests\NullHttpClient;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @internal
+ */
 class PublicApiTest extends TestCase
 {
     public static function setUpBeforeClass()

@@ -15,14 +15,14 @@ final class Algolia
     /**
      * Holds an instance of the simple cache repository (PSR-16).
      *
-     * @var \Psr\SimpleCache\CacheInterface|null
+     * @var null|\Psr\SimpleCache\CacheInterface
      */
     private static $cache;
 
     /**
      * Holds an instance of the logger (PSR-3).
      *
-     * @var \Psr\Log\LoggerInterface|null
+     * @var null|\Psr\Log\LoggerInterface
      */
     private static $logger;
 

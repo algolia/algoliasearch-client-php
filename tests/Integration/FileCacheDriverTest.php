@@ -7,6 +7,9 @@ use Algolia\AlgoliaSearch\Cache\FileCacheDriver;
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
 use Algolia\AlgoliaSearch\SearchClient;
 
+/**
+ * @internal
+ */
 class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 {
     private static $cacheDir;

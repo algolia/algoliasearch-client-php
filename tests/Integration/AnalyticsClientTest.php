@@ -6,6 +6,9 @@ use Algolia\AlgoliaSearch\AnalyticsClient;
 use Algolia\AlgoliaSearch\SearchClient;
 use DateTime;
 
+/**
+ * @internal
+ */
 class AnalyticsClientTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()

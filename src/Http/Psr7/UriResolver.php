@@ -15,6 +15,11 @@ use Psr\Http\Message\UriInterface;
  */
 final class UriResolver
 {
+    private function __construct()
+    {
+        // cannot be instantiated
+    }
+
     /**
      * Removes dot segments from a path and returns the new path.
      *
@@ -207,21 +212,16 @@ final class UriResolver
         // as the first segment of a relative-path reference, as it would be mistaken for a scheme name.
         $pathParts = explode('/', $relativePath, 2);
         if ('' === $relativePath || false !== strpos($pathParts[0], ':')) {
-            $relativePath = "./$relativePath";
+            $relativePath = "./{$relativePath}";
         } elseif ('/' === $relativePath[0]) {
             if ('' != $base->getAuthority() && '' === $base->getPath()) {
                 // In this case an extra slash is added by resolve() automatically. So we must not add one here.
-                $relativePath = ".$relativePath";
+                $relativePath = ".{$relativePath}";
             } else {
-                $relativePath = "./$relativePath";
+                $relativePath = "./{$relativePath}";
             }
         }
 
         return $relativePath;
-    }
-
-    private function __construct()
-    {
-        // cannot be instantiated
     }
 }

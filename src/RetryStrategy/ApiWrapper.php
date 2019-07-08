@@ -195,9 +195,11 @@ final class ApiWrapper implements ApiWrapperInterface
 
         if (404 == $statusCode) {
             throw new NotFoundException($responseArray['message'], $statusCode);
-        } elseif ($statusCode >= 400) {
+        }
+        if ($statusCode >= 400) {
             throw new BadRequestException($responseArray['message'], $statusCode);
-        } elseif (2 != (int) ($statusCode / 100)) {
+        }
+        if (2 != (int) ($statusCode / 100)) {
             throw new AlgoliaException($statusCode.': '.$body, $statusCode);
         }
 
@@ -208,7 +210,8 @@ final class ApiWrapper implements ApiWrapperInterface
     {
         if ($uri instanceof UriInterface) {
             return $uri;
-        } elseif (is_string($uri)) {
+        }
+        if (is_string($uri)) {
             return new Uri($uri);
         }
 
@@ -231,7 +234,8 @@ final class ApiWrapper implements ApiWrapperInterface
                 $body = \json_encode($body);
                 if (JSON_ERROR_NONE !== json_last_error()) {
                     throw new \InvalidArgumentException(
-                        'json_encode error: '.json_last_error_msg());
+                        'json_encode error: '.json_last_error_msg()
+                    );
                 }
             }
         }

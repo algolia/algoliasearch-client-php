@@ -6,11 +6,14 @@ use Algolia\AlgoliaSearch\Algolia;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
+/**
+ * @internal
+ */
 class AlgoliaTest extends TestCase
 {
     public function testLogger()
     {
-        $this->assertInstanceOf("Algolia\AlgoliaSearch\Log\DebugLogger", Algolia::getLogger());
+        $this->assertInstanceOf('Algolia\\AlgoliaSearch\\Log\\DebugLogger', Algolia::getLogger());
 
         $loggerB = new NullLogger();
 

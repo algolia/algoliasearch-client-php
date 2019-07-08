@@ -6,20 +6,31 @@ $finder = \PhpCsFixer\Finder::create()
     ->in(__DIR__.DIRECTORY_SEPARATOR.'bin')
     ->append(array('.php_cs.dist'));
 
-$rules = array(
-    '@Symfony' => true,
-    '@PhpCsFixer' => true,
-    'php_unit_test_class_requires_covers' => false,
-    'array_syntax' => array('syntax' => 'long'),
-);
+    if (PHP_VERSION_ID < 50400) {
+        $rules = array(
+            '@Symfony' => true,
+            'no_multiline_whitespace_before_semicolons' => true,
+            'array_syntax' => array('syntax' => 'long'),
+            'pre_increment' => false,
+        );
 
-if (PHP_VERSION_ID < 50400) {
-    $rules['pre_increment'] = false;
-} else {
-    $rules['increment_style'] = array('style' => 'post');
-}
+        return \PhpCsFixer\Config::create()
+            ->setUsingCache(true)
+            ->setRules($rules)
+            ->setFinder($finder);
+        $rules['pre_increment'] = false;
+    } else {
+        $rules = array(
+            '@Symfony' => true,
+            '@PhpCsFixer' => true,
+            'php_unit_test_class_requires_covers' => false,
+            'multiline_whitespace_before_semicolons' => true,
+            'array_syntax' => array('syntax' => 'long'),
+            'increment_style' => array('style' => 'post'),
+        );
 
-return \PhpCsFixer\Config::create()
-    ->setUsingCache(true)
-    ->setRules($rules)
-    ->setFinder($finder);
+        return \PhpCsFixer\Config::create()
+            ->setUsingCache(true)
+            ->setRules($rules)
+            ->setFinder($finder);
+    }

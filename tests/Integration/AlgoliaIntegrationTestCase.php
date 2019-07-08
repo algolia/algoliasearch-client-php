@@ -2,73 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
-    protected static $indexes = array();
-
-    private static $instance;
-
-    /** @var SyncClient */
-    private static $client;
-
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-        static::$indexes = array();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-
-        foreach (static::$indexes as $indexName) {
-            static::getClient()->initIndex($indexName)->delete();
-        }
-    }
-
-    public static function safeName($name)
-    {
-        if (!self::$instance) {
-            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
-        }
-
-        return sprintf(
-            'php_%s_%s_%s',
-            date('Y-M-d_H:i:s'),
-            self::$instance,
-            $name
-        );
-    }
-
-    /**
-     * @return \Algolia\AlgoliaSearch\SearchClient
-     */
-    protected static function getClient()
-    {
-        if (!self::$client) {
-            self::$client = self::newClient();
-        }
-
-        return self::$client;
-    }
-
-    protected static function newClient($config = array())
-    {
-        $config += array(
-            'appId' => getenv('ALGOLIA_APP_ID'),
-            'apiKey' => getenv('ALGOLIA_API_KEY'),
-        );
-
-        return new SyncClient(
-            SearchClient::createWithConfig(new SearchConfig($config))
-        );
-    }
-
     public $airports = array(
         array(
             'name' => 'Chicago Ohare Intl',
@@ -132,4 +72,63 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             'objectID' => '3484',
         ),
     );
+    protected static $indexes = array();
+
+    private static $instance;
+
+    /** @var SyncClient */
+    private static $client;
+
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+        static::$indexes = array();
+    }
+
+    public static function tearDownAfterClass()
+    {
+        parent::tearDownAfterClass();
+
+        foreach (static::$indexes as $indexName) {
+            static::getClient()->initIndex($indexName)->delete();
+        }
+    }
+
+    public static function safeName($name)
+    {
+        if (!self::$instance) {
+            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
+        }
+
+        return sprintf(
+            'php_%s_%s_%s',
+            date('Y-M-d_H:i:s'),
+            self::$instance,
+            $name
+        );
+    }
+
+    /**
+     * @return \Algolia\AlgoliaSearch\SearchClient
+     */
+    protected static function getClient()
+    {
+        if (!self::$client) {
+            self::$client = self::newClient();
+        }
+
+        return self::$client;
+    }
+
+    protected static function newClient($config = array())
+    {
+        $config += array(
+            'appId' => getenv('ALGOLIA_APP_ID'),
+            'apiKey' => getenv('ALGOLIA_API_KEY'),
+        );
+
+        return new SyncClient(
+            SearchClient::createWithConfig(new SearchConfig($config))
+        );
+    }
 }

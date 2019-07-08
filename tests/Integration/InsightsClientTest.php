@@ -5,6 +5,9 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 use Algolia\AlgoliaSearch\InsightsClient;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class InsightsClientTest extends TestCase
 {
     public function testUserInsights()

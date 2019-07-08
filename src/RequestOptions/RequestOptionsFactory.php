@@ -110,13 +110,15 @@ final class RequestOptionsFactory
     {
         if ($this->isValidHeaderName($optionName)) {
             return 'headers';
-        } elseif (in_array($optionName, $this->validQueryParameters, true)) {
-            return 'query';
-        } elseif (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'), true)) {
-            return $optionName;
-        } else {
-            return 'body';
         }
+        if (in_array($optionName, $this->validQueryParameters, true)) {
+            return 'query';
+        }
+        if (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'), true)) {
+            return $optionName;
+        }
+
+        return 'body';
     }
 
     private function isValidHeaderName($name)

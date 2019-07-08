@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class RulesTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()

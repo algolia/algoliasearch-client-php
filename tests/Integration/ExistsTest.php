@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\SearchClient;
 
+/**
+ * @internal
+ */
 class ExistsTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()

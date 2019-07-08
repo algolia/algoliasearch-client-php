@@ -55,11 +55,12 @@ final class Helpers
         $args = array_map(function ($value) {
             if (is_array($value)) {
                 return json_encode($value);
-            } elseif (is_bool($value)) {
-                return $value ? 'true' : 'false';
-            } else {
-                return $value;
             }
+            if (is_bool($value)) {
+                return $value ? 'true' : 'false';
+            }
+
+            return $value;
         }, $args);
 
         return http_build_query($args);
@@ -101,9 +102,9 @@ final class Helpers
      *                      into associative arrays
      * @param int    $depth user specified recursion depth
      *
-     * @return mixed
-     *
      * @throws \InvalidArgumentException if the JSON cannot be decoded
+     *
+     * @return mixed
      *
      * @see http://www.php.net/manual/en/function.json-decode.php
      */
@@ -123,7 +124,7 @@ final class Helpers
     {
         return array_map(function ($object) use ($objectIDKey) {
             if (!isset($object[$objectIDKey])) {
-                throw new MissingObjectId("At least one object is missing the required $objectIDKey key: ".json_encode($object));
+                throw new MissingObjectId("At least one object is missing the required {$objectIDKey} key: ".json_encode($object));
             }
             $object['objectID'] = $object[$objectIDKey];
 

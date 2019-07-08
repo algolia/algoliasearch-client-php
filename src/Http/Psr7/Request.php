@@ -17,7 +17,7 @@ class Request implements RequestInterface
     /** @var string */
     private $method;
 
-    /** @var string|null */
+    /** @var null|string */
     private $requestTarget;
 
     /** @var UriInterface */
@@ -39,7 +39,7 @@ class Request implements RequestInterface
      * @param string                               $method  HTTP method
      * @param string|UriInterface                  $uri     URI
      * @param array                                $headers Request headers
-     * @param string|resource|StreamInterface|null $body    Request body
+     * @param null|resource|StreamInterface|string $body    Request body
      * @param string                               $version Protocol version
      */
     public function __construct(
@@ -130,29 +130,6 @@ class Request implements RequestInterface
         }
 
         return $new;
-    }
-
-    private function updateHostFromUri()
-    {
-        $host = $this->uri->getHost();
-
-        if ('' == $host) {
-            return;
-        }
-
-        if (null !== ($port = $this->uri->getPort())) {
-            $host .= ':'.$port;
-        }
-
-        if (isset($this->headerNames['host'])) {
-            $header = $this->headerNames['host'];
-        } else {
-            $header = 'Host';
-            $this->headerNames['host'] = 'Host';
-        }
-        // Ensure Host is the first header.
-        // See: http://tools.ietf.org/html/rfc7230#section-5.4
-        $this->headers = array($header => array($host)) + $this->headers;
     }
 
     public function getProtocolVersion()
@@ -264,6 +241,29 @@ class Request implements RequestInterface
         $new->stream = $body;
 
         return $new;
+    }
+
+    private function updateHostFromUri()
+    {
+        $host = $this->uri->getHost();
+
+        if ('' == $host) {
+            return;
+        }
+
+        if (null !== ($port = $this->uri->getPort())) {
+            $host .= ':'.$port;
+        }
+
+        if (isset($this->headerNames['host'])) {
+            $header = $this->headerNames['host'];
+        } else {
+            $header = 'Host';
+            $this->headerNames['host'] = 'Host';
+        }
+        // Ensure Host is the first header.
+        // See: http://tools.ietf.org/html/rfc7230#section-5.4
+        $this->headers = array($header => array($host)) + $this->headers;
     }
 
     private function setHeaders(array $headers)

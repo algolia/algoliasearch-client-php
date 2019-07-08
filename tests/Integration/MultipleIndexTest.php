@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class MultipleIndexTest extends AlgoliaIntegrationTestCase
 {
     public function testMultipleIndexMethods()

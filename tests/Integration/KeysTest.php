@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class KeysTest extends AlgoliaIntegrationTestCase
 {
     protected $acl = array('search', 'analytics');

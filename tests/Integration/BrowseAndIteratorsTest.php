@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class BrowseAndIteratorsTest extends AlgoliaIntegrationTestCase
 {
     protected static $index;

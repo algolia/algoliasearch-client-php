@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Response\AbstractResponse;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class SyncClient
 {
@@ -17,13 +17,6 @@ class SyncClient
         $this->realClient = $realClient;
     }
 
-    public function initIndex($indexName)
-    {
-        return new SyncIndex(
-            $this->realClient->initIndex($indexName)
-        );
-    }
-
     public function __call($name, $arguments)
     {
         $response = call_user_func_array(array($this->realClient, $name), $arguments);
@@ -33,5 +26,12 @@ class SyncClient
         }
 
         return $response;
+    }
+
+    public function initIndex($indexName)
+    {
+        return new SyncIndex(
+            $this->realClient->initIndex($indexName)
+        );
     }
 }

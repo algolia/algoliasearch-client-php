@@ -7,6 +7,9 @@ use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\NullHttpClient;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 class NullTestCase extends TestCase
 {
     /** @var \Algolia\AlgoliaSearch\SearchClient */

@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\PlacesClient;
 
+/**
+ * @internal
+ */
 class PlacesTest extends AlgoliaIntegrationTestCase
 {
     public function testSearch()

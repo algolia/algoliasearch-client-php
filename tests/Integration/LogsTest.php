@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class LogsTest extends AlgoliaIntegrationTestCase
 {
     public function testLogs()

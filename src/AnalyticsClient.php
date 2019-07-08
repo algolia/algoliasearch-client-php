@@ -53,7 +53,7 @@ final class AnalyticsClient
     /**
      * Get a paginated list of AB Test from the API.
      *
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $requestOptions
      *
      * @return array
      */
@@ -66,11 +66,11 @@ final class AnalyticsClient
      * Get an AB Test.
      *
      * @param int                                                        $abTestID       Id of the AB Test to retrieve
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
-     *
-     * @return array
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $requestOptions
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     *
+     * @return array
      */
     public function getABTest($abTestID, $requestOptions = array())
     {
@@ -85,7 +85,7 @@ final class AnalyticsClient
      * Create new AB Test.
      *
      * @param array                                                      $abTest
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $requestOptions
      *
      * @return array Information about the creation like TaskID and date
      */
@@ -98,11 +98,11 @@ final class AnalyticsClient
      * Stop a running AB Test.
      *
      * @param int                                                        $abTestID
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
-     *
-     * @return array
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $requestOptions
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     *
+     * @return array
      */
     public function stopABTest($abTestID, $requestOptions = array())
     {
@@ -117,11 +117,11 @@ final class AnalyticsClient
      * Delete an AB Test.
      *
      * @param int                                                        $abTestID
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
-     *
-     * @return array
+     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $requestOptions
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
+     *
+     * @return array
      */
     public function deleteABTest($abTestID, $requestOptions = array())
     {

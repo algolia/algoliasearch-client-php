@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+/**
+ * @internal
+ */
 class SynonymsTest extends AlgoliaIntegrationTestCase
 {
     private $caliSyn = array(

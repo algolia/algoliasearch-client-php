@@ -8,6 +8,8 @@ $finder = \PhpCsFixer\Finder::create()
 
 $rules = array(
     '@Symfony' => true,
+    '@PhpCsFixer' => true,
+    'php_unit_test_class_requires_covers' => false,
     'array_syntax' => array('syntax' => 'long'),
 );
 

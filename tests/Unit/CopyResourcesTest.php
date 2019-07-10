@@ -22,7 +22,10 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copySettings('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertBodyEncoded($e->getRequest());
+            $this->assertEncodedBodySubset(array(
                     'operation' => 'copy',
                     'destination' => 'dest',
                     'scope' => array('settings'),
@@ -38,7 +41,10 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copySynonyms('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertBodyEncoded($e->getRequest());
+            $this->assertEncodedBodySubset(array(
                     'operation' => 'copy',
                     'destination' => 'dest',
                     'scope' => array('synonyms'),
@@ -54,7 +60,10 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copyRules('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertBodyEncoded($e->getRequest());
+            $this->assertEncodedBodySubset(array(
                     'operation' => 'copy',
                     'destination' => 'dest',
                     'scope' => array('rules'),

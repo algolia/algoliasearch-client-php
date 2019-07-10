@@ -111,8 +111,11 @@ final class ApiWrapper implements ApiWrapperInterface
 
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
-        if ($this->canEnableGzipCompress($method)) {
+        $canCompress = $this->canEnableGzipCompress($method);
+
+        if ($canCompress) {
             $requestOptions->addHeader('Content-Encoding', 'gzip');
+            $requestOptions->addHeader('Content-Length', null);
         }
 
         $uri = $this->createUri($path)
@@ -139,6 +142,7 @@ final class ApiWrapper implements ApiWrapperInterface
                 $request = $this->createRequest(
                     $method,
                     $uri,
+                    $canCompress,
                     $requestOptions->getHeaders(),
                     $body
                 );
@@ -219,17 +223,10 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
-    /**
-     * @param $method
-     * @param $uri
-     * @param array $headers
-     * @param null $body
-     * @param string $protocolVersion
-     * @return Request
-     */
     private function createRequest(
         $method,
         $uri,
+        $canCompress,
         array $headers = array(),
         $body = null,
         $protocolVersion = '1.1'
@@ -248,13 +245,18 @@ final class ApiWrapper implements ApiWrapperInterface
             }
         }
 
+        if ($canCompress) {
+            $body = gzencode($body, 9);
+            $headers['Content-Length'] = strlen($body);
+        }
+
         return new Request($method, $uri, $headers, $body, $protocolVersion);
     }
 
     private function canEnableGzipCompress($method)
     {
-        return (strtoupper($method) === 'POST' || strtoupper($method) === 'PUT')
-            && $this->config->getGzipEnabled();
+        return (AbstractConfig::COMPRESSION_TYPE_GZIP === $this->config->getGzipEnabled())
+            && ('POST' === strtoupper($method) || 'PUT' === strtoupper($method));
     }
 
     /**

@@ -62,10 +62,6 @@ class Request implements RequestInterface
             $this->updateHostFromUri();
         }
 
-        if ($this->hasHeader('Content-Encoding')) {
-            $body = gzencode($body, 9);
-        }
-
         if ('' !== $body && null !== $body) {
             $this->stream = stream_for($body);
         }

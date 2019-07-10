@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Config;
 
 abstract class AbstractConfig
 {
+    const COMPRESSION_TYPE_NONE = 'none';
+    const COMPRESSION_TYPE_GZIP = 'gzip';
+
     protected $config;
 
     protected $defaultReadTimeout = 5;
@@ -29,7 +32,7 @@ abstract class AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => array(),
-            'gzipEnabled' => false,
+            'gzipEnabled' => self::COMPRESSION_TYPE_NONE,
         );
     }
 
@@ -118,7 +121,7 @@ abstract class AbstractConfig
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getGzipEnabled()
     {
@@ -126,14 +129,18 @@ abstract class AbstractConfig
     }
 
     /**
-     * @param boolean $gzipEnabled
+     * @param string $gzipEnabled
      *
      * @return $this
      */
     public function setGzipEnabled($gzipEnabled)
     {
-        if (!is_bool($gzipEnabled)) {
-            throw new \InvalidArgumentException('Default configuration for GzipEnabled must be a boolean');
+        if (!in_array(
+            $gzipEnabled,
+            array(self::COMPRESSION_TYPE_GZIP, self::COMPRESSION_TYPE_NONE),
+            true
+        )) {
+            throw new \InvalidArgumentException('gzipEnabled must be equal to '.self::COMPRESSION_TYPE_GZIP.' or '.self::COMPRESSION_TYPE_NONE);
         }
 
         $this->config['gzipEnabled'] = $gzipEnabled;

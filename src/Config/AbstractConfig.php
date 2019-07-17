@@ -32,7 +32,7 @@ abstract class AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => array(),
-            'gzipEnabled' => self::COMPRESSION_TYPE_NONE,
+            'compressionType' => self::COMPRESSION_TYPE_NONE,
         );
     }
 
@@ -121,29 +121,29 @@ abstract class AbstractConfig
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getGzipEnabled()
+    public function getCompressionType()
     {
-        return $this->config['gzipEnabled'];
+        return $this->config['compressionType'];
     }
 
     /**
-     * @param string $gzipEnabled
+     * @param string $compressionType
      *
      * @return $this
      */
-    public function setGzipEnabled($gzipEnabled)
+    public function setCompressionType($compressionType)
     {
         if (!in_array(
-            $gzipEnabled,
+            $compressionType,
             array(self::COMPRESSION_TYPE_GZIP, self::COMPRESSION_TYPE_NONE),
             true
         )) {
-            throw new \InvalidArgumentException('gzipEnabled must be equal to '.self::COMPRESSION_TYPE_GZIP.' or '.self::COMPRESSION_TYPE_NONE);
+            throw new \InvalidArgumentException('Compression type not supported');
         }
 
-        $this->config['gzipEnabled'] = $gzipEnabled;
+        $this->config['compressionType'] = $compressionType;
 
         return $this;
     }

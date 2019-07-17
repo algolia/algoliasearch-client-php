@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Compressors\CompressorFactory;
 use Algolia\AlgoliaSearch\Config\AbstractConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 use Algolia\AlgoliaSearch\Exceptions\BadRequestException;
@@ -42,6 +43,11 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private $requestOptionsFactory;
 
+    /**
+     * @var \Algolia\AlgoliaSearch\Compressors\Compressor
+     */
+    private $compressor;
+
     public function __construct(
         HttpClientInterface $http,
         AbstractConfig $config,
@@ -52,6 +58,8 @@ final class ApiWrapper implements ApiWrapperInterface
         $this->config = $config;
         $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
+
+        $this->compressor = CompressorFactory::create($this->config->getCompressionType());
     }
 
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
@@ -111,18 +119,17 @@ final class ApiWrapper implements ApiWrapperInterface
 
     private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
     {
-        $canCompress = $this->canEnableGzipCompress($method);
-
-        if ($canCompress) {
-            $requestOptions->addHeader('Content-Encoding', 'gzip');
-            $requestOptions->addHeader('Content-Length', null);
-        }
-
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
 
-        $body = array_merge($data, $requestOptions->getBody());
+        $body = $this->sanitizeBody(array_merge($data, $requestOptions->getBody()));
+
+        if ('POST' === strtoupper($method) || 'PUT' === strtoupper($method)) {
+            $compressedBody = $this->compressor->compress($requestOptions, $body);
+        } else {
+            $compressedBody = $body;
+        }
 
         $logParams = array(
             'body' => $body,
@@ -132,6 +139,7 @@ final class ApiWrapper implements ApiWrapperInterface
         );
 
         $retry = 1;
+
         foreach ($hosts as $host) {
             $uri = $uri->withHost($host);
             $request = null;
@@ -139,13 +147,7 @@ final class ApiWrapper implements ApiWrapperInterface
             $logParams['host'] = (string) $uri;
 
             try {
-                $request = $this->createRequest(
-                    $method,
-                    $uri,
-                    $canCompress,
-                    $requestOptions->getHeaders(),
-                    $body
-                );
+                $request = new Request($method, $uri, $requestOptions->getHeaders(), $compressedBody, '1.1');
 
                 $this->log(LogLevel::DEBUG, 'Sending request.', $logParams);
 
@@ -223,17 +225,24 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
-    private function createRequest(
-        $method,
-        $uri,
-        $canCompress,
-        array $headers = array(),
-        $body = null,
-        $protocolVersion = '1.1'
-    ) {
+    /**
+     * @param string $level
+     * @param string $message
+     * @param array  $context
+     */
+    private function log($level, $message, array $context = array())
+    {
+        Algolia::getLogger()->log($level, 'Algolia API client: '.$message, $context);
+    }
+
+    /**
+     * @param string $body
+     *
+     * @return string
+     */
+    private function sanitizeBody($body)
+    {
         if (is_array($body)) {
-            // Send an empty body instead of "[]" in case there are
-            // no content/params to send
             if (empty($body)) {
                 $body = '';
             } else {
@@ -245,27 +254,6 @@ final class ApiWrapper implements ApiWrapperInterface
             }
         }
 
-        if ($canCompress) {
-            $body = gzencode($body, 9);
-            $headers['Content-Length'] = strlen($body);
-        }
-
-        return new Request($method, $uri, $headers, $body, $protocolVersion);
-    }
-
-    private function canEnableGzipCompress($method)
-    {
-        return (AbstractConfig::COMPRESSION_TYPE_GZIP === $this->config->getGzipEnabled())
-            && ('POST' === strtoupper($method) || 'PUT' === strtoupper($method));
-    }
-
-    /**
-     * @param string $level
-     * @param string $message
-     * @param array  $context
-     */
-    private function log($level, $message, array $context = array())
-    {
-        Algolia::getLogger()->log($level, 'Algolia API client: '.$message, $context);
+        return $body;
     }
 }

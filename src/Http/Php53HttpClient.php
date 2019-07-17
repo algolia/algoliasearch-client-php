@@ -103,17 +103,11 @@ final class Php53HttpClient implements HttpClientInterface
         $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $responseBody = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
+
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        if (!empty($error)) {
-            throw new RetriableException(
-                'An internal server error occurred on '.$request->getUri()->getHost(),
-                $statusCode
-            );
-        }
-
-        return new Response($statusCode, array(), $responseBody);
+        return new Response($statusCode, array(), $responseBody, '1.1', $error);
     }
 
     private function getMHandle($curlHandle)

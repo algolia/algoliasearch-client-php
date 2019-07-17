@@ -20,14 +20,11 @@ final class Guzzle6HttpClient implements HttpClientInterface
 
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        $e = null;
-
         try {
             $response = $this->client->send($request, array(
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
             ));
-
         } catch (GuzzleRequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();

@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
-use Algolia\AlgoliaSearch\Exceptions\RetriableException;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 

@@ -185,7 +185,11 @@ final class ApiWrapper implements ApiWrapperInterface
         $statusCode = $response->getStatusCode();
 
         if (0 === $statusCode || $statusCode >= 500) {
-            $reason = $response->getReasonPhrase() ?: 'connection problem.';
+            $reason = $response->getReasonPhrase();
+
+            if (null === $response->getReasonPhrase() || '' === $response->getReasonPhrase()) {
+                $reason = $statusCode >= 500 ? 'Internal Server Error' : 'Unreachable Host';
+            }
 
             throw new RetriableException(
                 'Retriable failure on '.$request->getUri()->getHost().': '.$reason,

@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Http;
 
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
@@ -27,9 +28,15 @@ final class Guzzle6HttpClient implements HttpClientInterface
         } catch (GuzzleRequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
+            } else {
+                return new Response(
+                    0,
+                    array(),
+                    null,
+                    '1.1',
+                    $e->getMessage()
+                );
             }
-
-            throw $e;
         }
 
         return $response;

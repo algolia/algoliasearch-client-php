@@ -8,8 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.2.6...master)
 
+## [v2.3.0](https://github.com/algolia/algoliasearch-client-php/compare/2.2.6...2.3.0)
+
 ### Added
 - `SearchClient::exists` method ([#565](https://github.com/algolia/algoliasearch-client-php/pull/565))
+
+### Fixed
+- Retry strategy bug while using `Guzzle` requester: `cURL error XX: Failed to connect` ([#572](https://github.com/algolia/algoliasearch-client-php/pull/572))
 
 ## [v2.2.6](https://github.com/algolia/algoliasearch-client-php/compare/2.2.5...2.2.6)
 

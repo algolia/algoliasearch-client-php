@@ -6,61 +6,65 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 
 class SettingsTest extends AlgoliaIntegrationTestCase
 {
-    private $settings = array(
-        'searchableAttributes' => array('attribute1', 'attribute2', 'attribute3', 'ordered(attribute4)', 'unordered(attribute5)'),
-        'attributesForFaceting' => array('attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'),
-        'unretrievableAttributes' => array('attribute1', 'attribute2'),
-        'attributesToRetrieve' => array('attribute3', 'attribute4'),
-        'ranking' => array('asc(attribute1)', 'desc(attribute2)', 'attribute', 'custom', 'exact', 'filters', 'geo', 'proximity', 'typo', 'words'),
-        'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
-        'replicas' => array('main_replica1', 'main_replica2'),
-        'maxValuesPerFacet' => 100,
-        'sortFacetValuesBy' => 'count',
-        'attributesToHighlight' => array('attribute1', 'attribute2'),
-        'attributesToSnippet' => array('attribute1:10', 'attribute2:8'),
-        'highlightPreTag' => '<strong>',
-        'highlightPostTag' => '</strong>',
-        'snippetEllipsisText' => ' and so on.',
-        'restrictHighlightAndSnippetArrays' => true,
-        'hitsPerPage' => 42,
-        'paginationLimitedTo' => 43,
-        'minWordSizefor1Typo' => 2,
-        'minWordSizefor2Typos' => 6,
-        'typoTolerance' => 'false',
-        'allowTyposOnNumericTokens' => false,
-        'ignorePlurals' => true,
-        'disableTypoToleranceOnAttributes' => array('attribute1', 'attribute2'),
-        'disableTypoToleranceOnWords' => array('word1', 'word2'),
-        'separatorsToIndex' => '()array()(',
-        'queryType' => 'prefixNone',
-        'removeWordsIfNoResults' => 'allOptional',
-        'advancedSyntax' => true,
-        'optionalWords' => array('word1', 'word2'),
-        'removeStopWords' => true,
-        'disablePrefixOnAttributes' => array('attribute1', 'attribute2'),
-        'disableExactOnAttributes' => array('attribute1', 'attribute2'),
-        'exactOnSingleWordQuery' => 'word',
-        'enableRules' => false,
-        'numericAttributesForFiltering' => array('attribute1', 'attribute2'),
-        'allowCompressionOfIntegerArray' => true,
-        'attributeForDistinct' => 'attribute1',
-        'distinct' => 2,
-        'replaceSynonymsInHighlight' => false,
-        'minProximity' => 7,
-        'responseFields' => array('hits', 'hitsPerPage'),
-        'maxFacetHits' => 100,
-        'camelCaseAttributes' => array('attribute1', 'attribute2'),
-        'decompoundedAttributes' => array('de' => array('attribute1', 'attribute2'), 'fi' => array('attribute3')),
-        'keepDiacriticsOnCharacters' => 'øé',
-    );
+    private $settings = array();
 
     protected function setUp()
     {
         parent::setUp();
 
-        if (!isset(static::$indexes['main'])) {
+        if (! isset(static::$indexes['main'])) {
+            static::$indexes['main_replica_1'] = self::safeName('settings-mgmt-replica-1');
+            static::$indexes['main_replica_2'] = self::safeName('settings-mgmt-replica-2');
             static::$indexes['main'] = self::safeName('settings-mgmt');
         }
+
+        $this->settings = array(
+            'searchableAttributes' => array('attribute1', 'attribute2', 'attribute3', 'ordered(attribute4)', 'unordered(attribute5)'),
+            'attributesForFaceting' => array('attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'),
+            'unretrievableAttributes' => array('attribute1', 'attribute2'),
+            'attributesToRetrieve' => array('attribute3', 'attribute4'),
+            'ranking' => array('asc(attribute1)', 'desc(attribute2)', 'attribute', 'custom', 'exact', 'filters', 'geo', 'proximity', 'typo', 'words'),
+            'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
+            'replicas' => array(static::$indexes['main_replica_1'], static::$indexes['main_replica_2']),
+            'maxValuesPerFacet' => 100,
+            'sortFacetValuesBy' => 'count',
+            'attributesToHighlight' => array('attribute1', 'attribute2'),
+            'attributesToSnippet' => array('attribute1:10', 'attribute2:8'),
+            'highlightPreTag' => '<strong>',
+            'highlightPostTag' => '</strong>',
+            'snippetEllipsisText' => ' and so on.',
+            'restrictHighlightAndSnippetArrays' => true,
+            'hitsPerPage' => 42,
+            'paginationLimitedTo' => 43,
+            'minWordSizefor1Typo' => 2,
+            'minWordSizefor2Typos' => 6,
+            'typoTolerance' => 'false',
+            'allowTyposOnNumericTokens' => false,
+            'ignorePlurals' => true,
+            'disableTypoToleranceOnAttributes' => array('attribute1', 'attribute2'),
+            'disableTypoToleranceOnWords' => array('word1', 'word2'),
+            'separatorsToIndex' => '()array()(',
+            'queryType' => 'prefixNone',
+            'removeWordsIfNoResults' => 'allOptional',
+            'advancedSyntax' => true,
+            'optionalWords' => array('word1', 'word2'),
+            'removeStopWords' => true,
+            'disablePrefixOnAttributes' => array('attribute1', 'attribute2'),
+            'disableExactOnAttributes' => array('attribute1', 'attribute2'),
+            'exactOnSingleWordQuery' => 'word',
+            'enableRules' => false,
+            'numericAttributesForFiltering' => array('attribute1', 'attribute2'),
+            'allowCompressionOfIntegerArray' => true,
+            'attributeForDistinct' => 'attribute1',
+            'distinct' => 2,
+            'replaceSynonymsInHighlight' => false,
+            'minProximity' => 7,
+            'responseFields' => array('hits', 'hitsPerPage'),
+            'maxFacetHits' => 100,
+            'camelCaseAttributes' => array('attribute1', 'attribute2'),
+            'decompoundedAttributes' => array('de' => array('attribute1', 'attribute2'), 'fi' => array('attribute3')),
+            'keepDiacriticsOnCharacters' => 'øé',
+        );
     }
 
     public function testSettings()

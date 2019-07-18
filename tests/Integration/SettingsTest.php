@@ -12,7 +12,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
     {
         parent::setUp();
 
-        if (! isset(static::$indexes['main'])) {
+        if (!isset(static::$indexes['main'])) {
             static::$indexes['main_replica_1'] = self::safeName('settings-mgmt-replica-1');
             static::$indexes['main_replica_2'] = self::safeName('settings-mgmt-replica-2');
             static::$indexes['main'] = self::safeName('settings-mgmt');

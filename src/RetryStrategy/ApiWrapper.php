@@ -42,6 +42,11 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private $requestOptionsFactory;
 
+    /**
+     * @var int
+     */
+    private $jsonOptions = 0;
+
     public function __construct(
         HttpClientInterface $http,
         AbstractConfig $config,
@@ -52,6 +57,10 @@ final class ApiWrapper implements ApiWrapperInterface
         $this->config = $config;
         $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
+        if (defined('JSON_UNESCAPED_UNICODE')) {
+            // `JSON_UNESCAPED_UNICODE` is introduced in PHP 5.4.0
+            $this->jsonOptions = JSON_UNESCAPED_UNICODE;
+        }
     }
 
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
@@ -228,7 +237,7 @@ final class ApiWrapper implements ApiWrapperInterface
             if (empty($body)) {
                 $body = '';
             } else {
-                $body = \json_encode($body);
+                $body = \json_encode($body, $this->jsonOptions);
                 if (JSON_ERROR_NONE !== json_last_error()) {
                     throw new \InvalidArgumentException(
                         'json_encode error: '.json_last_error_msg());

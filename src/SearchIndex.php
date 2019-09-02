@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
+use Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
@@ -635,31 +636,30 @@ class SearchIndex
     }
 
     /**
+     * Find object by the given $callback.
+     * Options can be passed in $requestOptions body:
+     *  - query (string): pass a query
+     *  - paginate (bool): choose if you want to iterate through all the
+     * documents (true) or only the first page (false). Default is true.
      *
-     * findObject search iteratively through the search response `hits`
-     * field to find the first response hit that would match against the given
-     * `filterFunc` function. The name of the argument `filterFunc` may change
-     * up the language, as example you may use `callback` in php.
+     * Usage:
      *
-     * If no object has been found within the first result set, the function
-     * will perform a new search operation on the next page of results, if any,
-     * until a matching object is found or the end of results, whichever
-     * happens first.
+     * $index->findObject(
+     *  function($object) { return $object['objectID'] === 'foo'; },
+     *  array(
+     *      'query' => 'bar',
+     *      'paginate' => false,
+     *      'hitsPerPage' => 50,
+     *  )
+     * );
      *
-     * To prevent the iteration through pages of results, `paginate` in
-     * requestOptions can be set to false. This will stop the function at the end of
-     * the first page of search results even if no object does match.
+     * @param callable                                       $callback       The callback used to find the object
+     *                                                                       Takes an array as parameter and returns a boolean
+     * @param array<string, int|string|array>|RequestOptions $requestOptions array of options or RequestOptions object
      *
-     * Of course, the `opts` parameter, should be used behind the scenes by the
-     * search method. And, in some languages, the `opts` parameter may contain all
-     * the optional parameters.
+     * @return array<string, int|string|array>
      *
-     * @param $callback
-     * @param array $requestOptions
-     *
-     * @return array<string, string>
-     *
-     * @throws NotFoundException
+     * @throws ObjectNotFoundException
      */
     public function findObject($callback, $requestOptions = array())
     {
@@ -669,20 +669,24 @@ class SearchIndex
         $requestOptionsFactory = new RequestOptionsFactory($this->config);
 
         if (is_array($requestOptions)) {
-            $query = isset($requestOptions['query']) && $requestOptions['query'];
-            unset($requestOptions['query']);
+            if (array_key_exists('query', $requestOptions)) {
+                $query = $requestOptions['query'];
+                unset($requestOptions['query']);
+            }
 
-            $paginate = isset($requestOptions['paginate']) && $requestOptions['paginate'];
-            unset($requestOptions['paginate']);
+            if (array_key_exists('paginate', $requestOptions)) {
+                $paginate = $requestOptions['paginate'];
+                unset($requestOptions['paginate']);
+            }
         }
 
-        $opts = $requestOptionsFactory->create($requestOptions);
+        $requestOptions = $requestOptionsFactory->create($requestOptions);
 
         while (true) {
-            $opts->addBodyParameter('page', $page);
+            $requestOptions->addBodyParameter('page', $page);
 
-            $res = $this->search($query, $opts);
-            foreach($res['hits'] as $key => $hit) {
+            $result = $this->search($query, $requestOptions);
+            foreach ($result['hits'] as $key => $hit) {
                 if ($callback($hit)) {
                     return array(
                         'object' => $hit,
@@ -692,18 +696,26 @@ class SearchIndex
                 }
             }
 
-            $hasNextPage = $page + 1 < $res['nbPages'];
+            $hasNextPage = $page + 1 < $result['nbPages'];
             if (!$paginate || !$hasNextPage) {
-                throw new NotFoundException('Object not found');
+                throw new ObjectNotFoundException('Object not found');
             }
 
-            ++$page;
+            $page++;
         }
     }
 
-    public static function getObjectPosition($res, $objectID)
+    /**
+     * Retrieve the given object position in a set of results.
+     *
+     * @param array<string, array|string|int> $result   The set of results you want to iterate in
+     * @param string                          $objectID The objectID you want to find
+     *
+     * @return int
+     */
+    public static function getObjectPosition($result, $objectID)
     {
-        foreach($res['hits'] as $key => $hit) {
+        foreach ($result['hits'] as $key => $hit) {
             if ($hit['objectID'] === $objectID) {
                 return $key;
             }

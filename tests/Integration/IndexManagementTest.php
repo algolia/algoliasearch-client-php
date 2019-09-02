@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Support\Helpers;
-
 class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
     protected function setUp()

@@ -15,14 +15,6 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         }
     }
 
-    public static function tearDownAfterClass()
-    {
-    }
-
-    protected function tearDown()
-    {
-    }
-
     public function testFindObject()
     {
         $index = static::getClient()->initIndex(static::$indexes['main']);
@@ -34,46 +26,33 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         $this->assertEquals(SearchIndex::getObjectPosition($res, ''), -1);
 
         try {
-            $index->findObject(function() { return false; });
+            $index->findObject(function () { return false; });
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
-
-        $found = $index->findObject(function() { return true; });
+        $found = $index->findObject(function () { return true; });
         $this->assertEquals($found['position'], 0);
         $this->assertEquals($found['page'], 0);
 
-        $callback = function($obj) {
-            return array_key_exists('company', $obj) && $obj['company'] === 'Apple';
+        $callback = function ($obj) {
+            return array_key_exists('company', $obj) && 'Apple' === $obj['company'];
         };
 
         try {
             $index->findObject($callback, array('query' => 'algolia'));
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         try {
             $index->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         $obj = $index->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
         $this->assertEquals($obj['position'], 0);
         $this->assertEquals($obj['page'], 2);
-    }
-
-    public function testGetObjectPosition()
-    {
-        $objects = array(
-            'hits' => array(
-                array('objectID' => 'one', 'name' => 'test'),
-                array('objectID' => 'two', 'name' => 'cool')
-            )
-        );
-        $found = SearchIndex::getObjectPosition($objects, 'one');
-        $this->assertEquals($found, 0);
     }
 }

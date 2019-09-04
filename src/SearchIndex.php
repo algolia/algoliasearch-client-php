@@ -624,10 +624,10 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function exists()
+    public function exists($requestOptions = array())
     {
         try {
-            $this->getSettings();
+            $this->getSettings($requestOptions);
         } catch (NotFoundException $exception) {
             return false;
         }

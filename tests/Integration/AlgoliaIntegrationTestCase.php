@@ -132,4 +132,20 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
             'objectID' => '3484',
         ),
     );
+
+    public $companies = array(
+        array('company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'),
+        array('company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'),
+        array('company' => 'Amazon', 'name' => 'Jeff Bezos', 'objectID' => '1234'),
+        array('company' => 'Apple', 'name' => 'Steve Jobs', 'objectID' => '1235'),
+        array('company' => 'Apple', 'name' => 'Steve Wozniak', 'objectID' => '1236'),
+        array('company' => 'Arista Networks', 'name' => 'Jayshree Ullal', 'objectID' => '1237'),
+        array('company' => 'Google', 'name' => 'Larry Page', 'objectID' => '1238'),
+        array('company' => 'Google', 'name' => 'Rob Pike', 'objectID' => '1239'),
+        array('company' => 'Google', 'name' => 'Serguey Brin', 'objectID' => '1240'),
+        array('company' => 'Microsoft', 'name' => 'Bill Gates', 'objectID' => '1241'),
+        array('company' => 'SpaceX', 'name' => 'Elon Musk', 'objectID' => '1242'),
+        array('company' => 'Tesla', 'name' => 'Elon Musk', 'objectID' => '1243'),
+        array('company' => 'Yahoo', 'name' => 'Marissa Mayer', 'objectID' => '1244'),
+    );
 }

@@ -5,6 +5,8 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
+use Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\Response\BatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
@@ -631,6 +633,95 @@ class SearchIndex
         }
 
         return true;
+    }
+
+    /**
+     * Find object by the given $callback.
+     * Options can be passed in $requestOptions body:
+     *  - query (string): pass a query
+     *  - paginate (bool): choose if you want to iterate through all the
+     * documents (true) or only the first page (false). Default is true.
+     *
+     * Usage:
+     *
+     * $index->findObject(
+     *  function($object) { return $object['objectID'] === 'foo'; },
+     *  array(
+     *      'query' => 'bar',
+     *      'paginate' => false,
+     *      'hitsPerPage' => 50,
+     *  )
+     * );
+     *
+     * @param callable                                       $callback       The callback used to find the object
+     *                                                                       Takes an array as parameter and returns a boolean
+     * @param array<string, int|string|array>|RequestOptions $requestOptions array of options or RequestOptions object
+     *
+     * @return array<string, int|string|array>
+     *
+     * @throws ObjectNotFoundException
+     */
+    public function findObject($callback, $requestOptions = array())
+    {
+        $query = '';
+        $paginate = true;
+        $page = 0;
+        $requestOptionsFactory = new RequestOptionsFactory($this->config);
+
+        if (is_array($requestOptions)) {
+            if (array_key_exists('query', $requestOptions)) {
+                $query = $requestOptions['query'];
+                unset($requestOptions['query']);
+            }
+
+            if (array_key_exists('paginate', $requestOptions)) {
+                $paginate = $requestOptions['paginate'];
+                unset($requestOptions['paginate']);
+            }
+        }
+
+        $requestOptions = $requestOptionsFactory->create($requestOptions);
+
+        while (true) {
+            $requestOptions->addBodyParameter('page', $page);
+
+            $result = $this->search($query, $requestOptions);
+            foreach ($result['hits'] as $key => $hit) {
+                if ($callback($hit)) {
+                    return array(
+                        'object' => $hit,
+                        'position' => $key,
+                        'page' => $page,
+                    );
+                }
+            }
+
+            $hasNextPage = $page + 1 < $result['nbPages'];
+            if (!$paginate || !$hasNextPage) {
+                throw new ObjectNotFoundException('Object not found');
+            }
+
+            $page++;
+        }
+    }
+
+    /**
+     * Retrieve the given object position in a set of results.
+     *
+     * @param array<string, array|string|int> $result   The set of results you want to iterate in
+     * @param string                          $objectID The objectID you want to find
+     *
+     * @return int
+     */
+    public static function getObjectPosition($result, $objectID)
+    {
+        foreach ($result['hits'] as $key => $hit) {
+            if ($hit['objectID'] === $objectID) {
+                return $key;
+            }
+        }
+
+        return -1;
     }
 
     private function copyTo($tmpIndexName, $requestOptions = array())

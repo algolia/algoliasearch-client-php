@@ -2,6 +2,7 @@
 
 namespace Algolia\AlgoliaSearch;
 
+use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
@@ -354,5 +355,29 @@ class SearchClient
     public function custom($method, $path, $requestOptions = array(), $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
+    }
+
+    /**
+     * Returns the time the given securedAPIKey remains valid in seconds.
+     *
+     * @param string $securedAPIKey the key to check
+     *
+     * @return int remaining validity in seconds
+     *
+     * @throws ValidUntilNotFoundException
+     */
+    public static function getSecuredApiKeyRemainingValidity($securedAPIKey)
+    {
+        $decodedKey = base64_decode($securedAPIKey);
+        $regex = '/validUntil=(\d+)/';
+        preg_match($regex, $decodedKey, $matches);
+
+        if (0 === count($matches)) {
+            throw new ValidUntilNotFoundException("The SecuredAPIKey doesn't have a validUntil parameter.");
+        }
+
+        $validUntil = (int) $matches[1];
+
+        return $validUntil - time();
     }
 }

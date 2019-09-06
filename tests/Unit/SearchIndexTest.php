@@ -10,11 +10,20 @@ use PHPUnit_Framework_Assert as Assert;
 
 class SearchIndexTest extends TestCase
 {
+    /** @var SearchConfig */
+    protected $config;
+
+    /** @var RequestOptionsFactory */
+    protected $requestOptionsFactory;
+
+    public function setUp()
+    {
+        $this->config = SearchConfig::create('foo', 'bar');
+        $this->requestOptionsFactory = new RequestOptionsFactory($this->config);
+    }
+
     public function testFindObject()
     {
-        $config = SearchConfig::create('foo', 'bar');
-        $requestOptionsFactory = new RequestOptionsFactory($config);
-
         // Test without requestOptions
         $apiWrapperMock = $this->getMock('Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface');
         $apiWrapperMock->method('read')
@@ -29,7 +38,7 @@ class SearchIndexTest extends TestCase
                 'nbPages' => 1,
             ));
 
-        $client = new SearchClient($apiWrapperMock, $config);
+        $client = new SearchClient($apiWrapperMock, $this->config);
         $client->initIndex('foo')->findObject(
             function () { return true; }
         );
@@ -48,7 +57,7 @@ class SearchIndexTest extends TestCase
                 'nbPages' => 1,
             ));
 
-        $client = new SearchClient($apiWrapperMock, $config);
+        $client = new SearchClient($apiWrapperMock, $this->config);
         $client->initIndex('foo')->findObject(
             function () { return true; },
             array('query' => 'foo', 'hitsPerPage' => 5)
@@ -69,10 +78,50 @@ class SearchIndexTest extends TestCase
                 'nbPages' => 1,
             ));
 
-        $client = new SearchClient($apiWrapperMock, $config);
+        $client = new SearchClient($apiWrapperMock, $this->config);
         $client->initIndex('foo')->findObject(
             function () { return true; },
-            $requestOptionsFactory->create(array('User-Agent' => 'blabla'))
+            $this->requestOptionsFactory->create(array('User-Agent' => 'blabla'))
         );
+    }
+
+    public function testExistsWithRequestOptions()
+    {
+        $requestOptions = $this->requestOptionsFactory->create(array('X-Algolia-User-ID' => 'foo'));
+        $apiWrapperMock = $this->getMock('Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface');
+
+        $apiWrapperMock->method('read')
+            ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
+                Assert::assertInstanceOf('Algolia\AlgoliaSearch\RequestOptions\RequestOptions', $requestOptions);
+                Assert::assertArraySubset(array('X-Algolia-User-ID' => 'foo'), $requestOptions->getHeaders());
+
+                return $requestOptions;
+            }))
+            ->willReturn(array(
+                'hitsPerPage' => 31,
+                'userData' => 'API SearchClient copy test',
+            ));
+        $client = new SearchClient($apiWrapperMock, $this->config);
+        $client->initIndex('foo')->exists($requestOptions);
+    }
+
+    public function testExistsWithoutRequestOptions()
+    {
+        $apiWrapperMock = $this->getMock('Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface');
+
+        // getVersion is added by default in requestOptions
+        $apiWrapperMock->method('read')
+            ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
+                Assert::assertInternalType('array', $requestOptions);
+                Assert::assertArraySubset(array('getVersion' => 2), $requestOptions);
+
+                return $requestOptions;
+            }))
+            ->willReturn(array(
+                'hitsPerPage' => 31,
+                'userData' => 'API SearchClient copy test',
+            ));
+        $client = new SearchClient($apiWrapperMock, $this->config);
+        $client->initIndex('foo')->exists();
     }
 }

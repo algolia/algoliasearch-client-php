@@ -624,6 +624,13 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
+    /**
+     * Check whether an index exists or not.
+     *
+     * @param array<string, int|string|array>|RequestOptions $requestOptions array of options or RequestOptions object
+     *
+     * @return bool
+     */
     public function exists($requestOptions = array())
     {
         try {

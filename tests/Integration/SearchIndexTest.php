@@ -84,7 +84,7 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         try {
             $this->index->saveObjects($this->companies[0]);
         } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ArrayOfObjectsExpected', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\InvalidArgumentObjectsException', $e);
         }
     }
 }

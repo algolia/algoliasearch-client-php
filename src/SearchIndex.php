@@ -624,10 +624,17 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function exists()
+    /**
+     * Check whether an index exists or not.
+     *
+     * @param array<string, int|string|array>|RequestOptions $requestOptions array of options or RequestOptions object
+     *
+     * @return bool
+     */
+    public function exists($requestOptions = array())
     {
         try {
-            $this->getSettings();
+            $this->getSettings($requestOptions);
         } catch (NotFoundException $exception) {
             return false;
         }

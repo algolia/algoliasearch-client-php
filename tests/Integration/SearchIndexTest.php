@@ -15,9 +15,33 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         }
     }
 
+    public function testIndexDoesNotExist()
+    {
+        $index = static::getClient()->initIndex(static::$indexes['main']);
+
+        self::assertFalse($index->exists());
+    }
+
+    public function testIndexExists()
+    {
+        $index = static::getClient()->initIndex(static::$indexes['main']);
+
+        $index
+            ->saveObject(
+                array(
+                    'firstname' => 'Jimmie',
+                ),
+                array('autoGenerateObjectIDIfNotExist' => true)
+            )
+            ->wait();
+
+        self::assertTrue($index->exists());
+    }
+
     public function testFindObject()
     {
         $index = static::getClient()->initIndex(static::$indexes['main']);
+        $index->clearObjects();
         $index->saveObjects($this->companies);
 
         $res = $index->search('Algolia');

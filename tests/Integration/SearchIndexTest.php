@@ -6,6 +6,8 @@ use Algolia\AlgoliaSearch\SearchIndex;
 
 class SearchIndexTest extends AlgoliaIntegrationTestCase
 {
+    protected $index;
+
     protected function setUp()
     {
         parent::setUp();
@@ -13,20 +15,18 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         if (!isset(static::$indexes['main'])) {
             static::$indexes['main'] = self::safeName('general-index-mgmt');
         }
+
+        $this->index = static::getClient()->initIndex(static::$indexes['main']);
     }
 
     public function testIndexDoesNotExist()
     {
-        $index = static::getClient()->initIndex(static::$indexes['main']);
-
-        self::assertFalse($index->exists());
+        self::assertFalse($this->index->exists());
     }
 
     public function testIndexExists()
     {
-        $index = static::getClient()->initIndex(static::$indexes['main']);
-
-        $index
+        $this->index
             ->saveObject(
                 array(
                     'firstname' => 'Jimmie',
@@ -35,27 +35,26 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
             )
             ->wait();
 
-        self::assertTrue($index->exists());
+        self::assertTrue($this->index->exists());
     }
 
     public function testFindObject()
     {
-        $index = static::getClient()->initIndex(static::$indexes['main']);
-        $index->clearObjects();
-        $index->saveObjects($this->companies);
+        $this->index->clearObjects();
+        $this->index->saveObjects($this->companies);
 
-        $res = $index->search('Algolia');
+        $res = $this->index->search('Algolia');
         $this->assertEquals(SearchIndex::getObjectPosition($res, 'nicolas-dessaigne'), 0);
         $this->assertEquals(SearchIndex::getObjectPosition($res, 'julien-lemoine'), 1);
         $this->assertEquals(SearchIndex::getObjectPosition($res, ''), -1);
 
         try {
-            $index->findObject(function () { return false; });
+            $this->index->findObject(function () { return false; });
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
-        $found = $index->findObject(function () { return true; });
+        $found = $this->index->findObject(function () { return true; });
         $this->assertEquals($found['position'], 0);
         $this->assertEquals($found['page'], 0);
 
@@ -64,19 +63,28 @@ class SearchIndexTest extends AlgoliaIntegrationTestCase
         };
 
         try {
-            $index->findObject($callback, array('query' => 'algolia'));
+            $this->index->findObject($callback, array('query' => 'algolia'));
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         try {
-            $index->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
+            $this->index->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
-        $obj = $index->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
+        $obj = $this->index->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
         $this->assertEquals($obj['position'], 0);
         $this->assertEquals($obj['page'], 2);
+    }
+
+    public function testSaveObjectsFails()
+    {
+        try {
+            $this->index->saveObjects($this->companies[0]);
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ArrayOfObjectsExpected', $e);
+        }
     }
 }

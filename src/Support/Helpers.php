@@ -136,6 +136,6 @@ final class Helpers
      */
     public static function isIterable($object)
     {
-        return is_array($object) || is_object($object) || $object instanceof \Traversable;
+        return is_array($object) || $object instanceof \Traversable;
     }
 }

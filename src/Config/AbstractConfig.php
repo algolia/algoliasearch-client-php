@@ -4,6 +4,9 @@ namespace Algolia\AlgoliaSearch\Config;
 
 abstract class AbstractConfig
 {
+    const COMPRESSION_TYPE_NONE = 'none';
+    const COMPRESSION_TYPE_GZIP = 'gzip';
+
     protected $config;
 
     protected $defaultReadTimeout = 5;
@@ -29,6 +32,7 @@ abstract class AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'defaultHeaders' => array(),
+            'compressionType' => self::COMPRESSION_TYPE_NONE,
         );
     }
 
@@ -112,6 +116,34 @@ abstract class AbstractConfig
     public function setDefaultHeaders(array $defaultHeaders)
     {
         $this->config['defaultHeaders'] = $defaultHeaders;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCompressionType()
+    {
+        return $this->config['compressionType'];
+    }
+
+    /**
+     * @param string $compressionType
+     *
+     * @return $this
+     */
+    public function setCompressionType($compressionType)
+    {
+        if (!in_array(
+            $compressionType,
+            array(self::COMPRESSION_TYPE_GZIP, self::COMPRESSION_TYPE_NONE),
+            true
+        )) {
+            throw new \InvalidArgumentException('Compression type not supported');
+        }
+
+        $this->config['compressionType'] = $compressionType;
 
         return $this;
     }

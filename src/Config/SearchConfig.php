@@ -29,6 +29,7 @@ class SearchConfig extends AbstractConfig
             'defaultHeaders' => array(),
             'defaultForwardToReplicas' => null,
             'batchSize' => 1000,
+            'compressionType' => self::COMPRESSION_TYPE_GZIP,
         );
     }
 

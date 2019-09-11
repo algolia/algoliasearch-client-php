@@ -15,7 +15,10 @@ class SearchTest extends RequestTestCase
         try {
             $client->searchUserIds(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertEncodedBodySubset(array('query' => ''),
+                $e->getRequest());
         }
 
         $index = $client->initIndex('foo');
@@ -23,25 +26,37 @@ class SearchTest extends RequestTestCase
         try {
             $index->search(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertEncodedBodySubset(array('query' => ''),
+                $e->getRequest());
         }
 
         try {
             $index->searchSynonyms(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertEncodedBodySubset(array('query' => ''),
+                $e->getRequest());
         }
 
         try {
             $index->searchRules(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertEncodedBodySubset(array('query' => ''),
+                $e->getRequest());
         }
 
         try {
             $index->searchRules(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertHeaderIsSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsSet('Content-Length', $e->getRequest());
+            $this->assertEncodedBodySubset(array('query' => ''),
+                $e->getRequest());
         }
 
         $client = PlacesClient::create('id', 'key');
@@ -49,6 +64,8 @@ class SearchTest extends RequestTestCase
         try {
             $client->search(null);
         } catch (RequestException $e) {
+            $this->assertHeaderIsNotSet('Content-Encoding', $e->getRequest());
+            $this->assertHeaderIsNotSet('Content-Length', $e->getRequest());
             $this->assertBodySubset(array('query' => ''), $e->getRequest());
         }
     }

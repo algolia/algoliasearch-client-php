@@ -6,7 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.3.0...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.4.0...master)
+
+## [v2.4.0](https://github.com/algolia/algoliasearch-client-php/compare/2.3.0...2.4.0)
+
+### Added
+- `SearchClient::getSecuredApiKeyRemainingValidity` method ([#581](https://github.com/algolia/algoliasearch-client-php/pull/581))
+- `SearchIndex::findObject` and `SearchIndex::getObjectPosition` methods ([#579](https://github.com/algolia/algoliasearch-client-php/pull/579))
+
+### Fixed
+- Adds missing `requestOptions` to `SearchIndex::exists` ([#582](https://github.com/algolia/algoliasearch-client-php/pull/582))
 
 ## [v2.3.0](https://github.com/algolia/algoliasearch-client-php/compare/2.2.6...2.3.0)
 

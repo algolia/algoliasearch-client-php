@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 # Release Notes
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.4.0...master)
-- `PlacesClient::reverse` method (#589)
+- `PlacesClient::reverse` method ([#589](https://github.com/algolia/algoliasearch-client-php/issues/589))
 
 ## [v2.4.0](https://github.com/algolia/algoliasearch-client-php/compare/2.3.0...2.4.0)
 

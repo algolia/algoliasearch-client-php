@@ -71,6 +71,16 @@ final class PlacesClient
         return $this->api->read('POST', api_path('/1/places/query'), $requestOptions);
     }
 
+    public function reverse($lat, $lng, $requestOptions = array())
+    {
+        if (is_array($requestOptions)) {
+            $requestOptions['aroundLatLng'] = $lat.','.$lng;
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $requestOptions->addBodyParameter('aroundLatLng', $lat.','.$lng);
+        }
+        return $this->api->read('GET', api_path('/1/places/reverse'), $requestOptions);
+    }
+
     public function getObject($objectID, $requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/places/%s', $objectID), $requestOptions);

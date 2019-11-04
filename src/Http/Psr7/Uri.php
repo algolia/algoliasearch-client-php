@@ -150,8 +150,6 @@ class Uri implements UriInterface
      * `Psr\Http\Message\UriInterface::getPort` may return null or the standard port. This method can be used
      * independently of the implementation.
      *
-     * @param UriInterface $uri
-     *
      * @return bool
      */
     public static function isDefaultPort(UriInterface $uri)
@@ -170,8 +168,6 @@ class Uri implements UriInterface
      * - absolute-path references, e.g. '/path'
      * - relative-path references, e.g. 'subpath'
      *
-     * @param UriInterface $uri
-     *
      * @return bool
      *
      * @see Uri::isNetworkPathReference
@@ -189,8 +185,6 @@ class Uri implements UriInterface
      *
      * A relative reference that begins with two slash characters is termed an network-path reference.
      *
-     * @param UriInterface $uri
-     *
      * @return bool
      *
      * @see https://tools.ietf.org/html/rfc3986#section-4.2
@@ -204,8 +198,6 @@ class Uri implements UriInterface
      * Whether the URI is a absolute-path reference.
      *
      * A relative reference that begins with a single slash character is termed an absolute-path reference.
-     *
-     * @param UriInterface $uri
      *
      * @return bool
      *
@@ -225,8 +217,6 @@ class Uri implements UriInterface
      * Whether the URI is a relative-path reference.
      *
      * A relative reference that does not begin with a slash character is termed a relative-path reference.
-     *
-     * @param UriInterface $uri
      *
      * @return bool
      *
@@ -378,8 +368,6 @@ class Uri implements UriInterface
 
     /**
      * Creates a URI from a hash of `parse_url` components.
-     *
-     * @param array $parts
      *
      * @return UriInterface
      *
@@ -633,9 +621,7 @@ class Uri implements UriInterface
 
         $port = (int) $port;
         if (1 > $port || 0xffff < $port) {
-            throw new \InvalidArgumentException(
-                sprintf('Invalid port: %d. Must be between 1 and 65535', $port)
-            );
+            throw new \InvalidArgumentException(sprintf('Invalid port: %d. Must be between 1 and 65535', $port));
         }
 
         return $port;

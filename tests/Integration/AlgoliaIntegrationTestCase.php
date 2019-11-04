@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 

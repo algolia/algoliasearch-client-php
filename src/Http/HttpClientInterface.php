@@ -14,9 +14,8 @@ interface HttpClientInterface
      * for instance, they must be converted to a Response to keep
      * the retry strategy working as expected.
      *
-     * @param \Psr\Http\Message\RequestInterface $request
-     * @param                                    $timeout
-     * @param                                    $connectTimeout
+     * @param $timeout
+     * @param $connectTimeout
      *
      * @return mixed
      */

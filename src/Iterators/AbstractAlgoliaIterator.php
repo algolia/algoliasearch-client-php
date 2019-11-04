@@ -48,8 +48,6 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      * Sometimes the Iterator is using search internally, this method
      * is used to clean the results, like remove the highlight.
      *
-     * @param array $hit
-     *
      * @return array formatted synonym array
      */
     abstract protected function formatHit(array $hit);

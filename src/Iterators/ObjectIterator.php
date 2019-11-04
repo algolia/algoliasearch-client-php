@@ -15,8 +15,6 @@ final class ObjectIterator extends AbstractAlgoliaIterator
      * Exporting objects (records) doesn't use the search function but the
      * browse method, no client-side formatting is required.
      *
-     * @param array $hit
-     *
      * @return array the exact same $hit
      */
     protected function formatHit(array $hit)

@@ -126,12 +126,6 @@ final class Php53HttpClient implements HttpClientInterface
 
     private function invalidOptions(array $curlOptions = array(), $errorMsg = '')
     {
-        throw new \OutOfBoundsException(
-            sprintf(
-                'AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s',
-                json_encode($curlOptions),
-                $errorMsg
-            )
-        );
+        throw new \OutOfBoundsException(sprintf('AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s', json_encode($curlOptions), $errorMsg));
     }
 }

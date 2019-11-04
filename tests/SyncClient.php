@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Response\AbstractResponse;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class SyncClient
 {

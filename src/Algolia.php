@@ -56,8 +56,6 @@ final class Algolia
 
     /**
      * Sets the cache instance.
-     *
-     * @param \Psr\SimpleCache\CacheInterface $cache
      */
     public static function setCache(CacheInterface $cache)
     {
@@ -80,8 +78,6 @@ final class Algolia
 
     /**
      * Sets the logger instance.
-     *
-     * @param \Psr\Log\LoggerInterface $logger
      */
     public static function setLogger(LoggerInterface $logger)
     {

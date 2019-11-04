@@ -42,8 +42,6 @@ final class Helpers
      * turned into key[1]=one&key[2]=two. Algolia will not understand key[x].
      * It should be turned into key=['one','two'] (before being url_encoded).
      *
-     * @param array $args
-     *
      * @return string The urlencoded query string to send to Algolia
      */
     public static function buildQuery(array $args)
@@ -111,9 +109,7 @@ final class Helpers
     {
         $data = \json_decode($json, $assoc, $depth);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException(
-                'json_decode error: '.json_last_error_msg()
-            );
+            throw new \InvalidArgumentException('json_decode error: '.json_last_error_msg());
         }
 
         return $data;

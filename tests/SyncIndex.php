@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests;
 
-use Algolia\AlgoliaSearch\SearchIndex;
 use Algolia\AlgoliaSearch\Response\AbstractResponse;
+use Algolia\AlgoliaSearch\SearchIndex;
 
 class SyncIndex
 {

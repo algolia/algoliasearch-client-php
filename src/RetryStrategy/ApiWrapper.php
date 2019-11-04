@@ -199,10 +199,7 @@ final class ApiWrapper implements ApiWrapperInterface
                 $reason = $statusCode >= 500 ? 'Internal Server Error' : 'Unreachable Host';
             }
 
-            throw new RetriableException(
-                'Retriable failure on '.$request->getUri()->getHost().': '.$reason,
-                $statusCode
-            );
+            throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode);
         }
 
         $responseArray = Helpers::json_decode($body, true);
@@ -244,8 +241,7 @@ final class ApiWrapper implements ApiWrapperInterface
             } else {
                 $body = \json_encode($body);
                 if (JSON_ERROR_NONE !== json_last_error()) {
-                    throw new \InvalidArgumentException(
-                        'json_encode error: '.json_last_error_msg());
+                    throw new \InvalidArgumentException('json_encode error: '.json_last_error_msg());
                 }
             }
         }
@@ -256,7 +252,6 @@ final class ApiWrapper implements ApiWrapperInterface
     /**
      * @param string $level
      * @param string $message
-     * @param array  $context
      */
     private function log($level, $message, array $context = array())
     {

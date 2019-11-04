@@ -47,9 +47,7 @@ final class RequestOptionsFactory
             $options->addDefaultQueryParameters($defaults->getQueryParameters());
             $options->addDefaultBodyParameters($defaults->getBody());
         } else {
-            throw new \InvalidArgumentException(
-                'RequestOptions can only be created from array or from RequestOptions object'
-            );
+            throw new \InvalidArgumentException('RequestOptions can only be created from array or from RequestOptions object');
         }
 
         return $options->addDefaultHeaders($this->config->getDefaultHeaders());

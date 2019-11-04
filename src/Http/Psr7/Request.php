@@ -87,9 +87,7 @@ class Request implements RequestInterface
     public function withRequestTarget($requestTarget)
     {
         if (preg_match('#\s#', $requestTarget)) {
-            throw new InvalidArgumentException(
-                'Invalid request target provided; cannot contain whitespace'
-            );
+            throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
         }
 
         $new = clone $this;

@@ -2,9 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
+use Algolia\AlgoliaSearch\SearchClient;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {

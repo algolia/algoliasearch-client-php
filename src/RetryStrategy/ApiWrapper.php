@@ -18,6 +18,7 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
+use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
 final class ApiWrapper implements ApiWrapperInterface
@@ -42,16 +43,23 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private $requestOptionsFactory;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
     public function __construct(
         HttpClientInterface $http,
         AbstractConfig $config,
         ClusterHosts $clusterHosts,
-        RequestOptionsFactory $RqstOptsFactory = null
+        RequestOptionsFactory $RqstOptsFactory = null,
+        LoggerInterface $logger = null
     ) {
         $this->http = $http;
         $this->config = $config;
         $this->clusterHosts = $clusterHosts;
         $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
+        $this->logger = $logger ?: Algolia::getLogger();
     }
 
     public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
@@ -252,6 +260,6 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private function log($level, $message, array $context = array())
     {
-        Algolia::getLogger()->log($level, 'Algolia API client: '.$message, $context);
+        $this->logger->log($level, 'Algolia API client: '.$message, $context);
     }
 }

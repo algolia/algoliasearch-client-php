@@ -54,7 +54,7 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         $this->assertArraySubset($settings, $set);
 
         static::$indexes['copy-scoped'] = $copyIndexName.'-scoped-settings';
-        $client->copyIndex(static::$indexes['main'], static::$indexes['copy-scoped'], array('scope' => 'settings'));
+        $client->copyIndex(static::$indexes['main'], static::$indexes['copy-scoped'], array('scope' => array('settings')));
         $this->assertIndexExists(static::$indexes['copy-scoped']);
         $res = $client->initIndex(static::$indexes['copy-scoped'])->search('');
         $this->assertEquals(0, $res['nbHits']);

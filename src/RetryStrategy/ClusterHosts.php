@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Config\SearchConfig;
 
 /**
  * @internal
@@ -23,6 +24,24 @@ final class ClusterHosts
     {
         $this->read = $read;
         $this->write = $write;
+    }
+
+    public static function createFromSearchConfig(SearchConfig $config)
+    {
+        if ($hosts = $config->getHosts()) {
+            // If a list of hosts was passed, we ignore the cache
+            return static::create($hosts);
+        }
+
+        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
+
+        if (false !== ($clusterHosts = static::createFromCache($cacheKey))) {
+            return $clusterHosts;
+        }
+
+        // We'll try to restore the ClusterHost from cache, if we cannot
+        // we create a new instance and set the cache key
+        return static::createFromAppId($config->getAppId())->setCacheKey($cacheKey);
     }
 
     public static function create($read, $write = null)

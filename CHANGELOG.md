@@ -6,7 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.4.0...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...master)
+
+## [v2.5.0](https://github.com/algolia/algoliasearch-client-php/compare/2.4.0...2.5.0)
+
+### Added
+- Make Logger injectacle in ApiWrapper ([#593](https://github.com/algolia/algoliasearch-client-php/pull/593))
+
+### Fixed
+- Type information in `HttpClientInterface:sendRequest` ([#594](https://github.com/algolia/algoliasearch-client-php/pull/594))
+
+### Chore
+- Composer update and CS fix ([#595](https://github.com/algolia/algoliasearch-client-php/pull/595))
 
 ## [v2.4.0](https://github.com/algolia/algoliasearch-client-php/compare/2.3.0...2.4.0)
 

@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Http;
 
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 interface HttpClientInterface
 {
@@ -14,10 +15,10 @@ interface HttpClientInterface
      * for instance, they must be converted to a Response to keep
      * the retry strategy working as expected.
      *
-     * @param $timeout
-     * @param $connectTimeout
+     * @param int $timeout
+     * @param int $connectTimeout
      *
-     * @return mixed
+     * @return ResponseInterface
      */
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout);
 }

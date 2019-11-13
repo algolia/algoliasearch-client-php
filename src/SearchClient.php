@@ -402,4 +402,22 @@ class SearchClient
 
         return $validUntil - time();
     }
+
+    /**
+     * @param bool  $retrieveMappings
+     * @param array $requestOptions
+     *
+     * @return array<string, boolean|array>
+     */
+    public function hasPendingMappings($retrieveMappings = false, $requestOptions = array())
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/clusters/mapping/pending'),
+            array(
+                'getClusters' => $retrieveMappings,
+            ),
+            $requestOptions
+        );
+    }
 }

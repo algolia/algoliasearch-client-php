@@ -4,9 +4,16 @@ namespace Algolia\AlgoliaSearch\Config;
 
 final class RecommendationConfig extends AbstractConfig
 {
+    /**
+     * @param string      $region
+     * @param string|null $appId
+     * @param string|null $apiKey
+     *
+     * @return RecommendationConfig
+     */
     public static function create($region, $appId = null, $apiKey = null)
     {
-        if (!$region || '' === $region) {
+        if (!is_string($region) || '' === $region) {
             throw new \InvalidArgumentException('The region is required');
         }
 
@@ -16,14 +23,7 @@ final class RecommendationConfig extends AbstractConfig
             'region' => $region,
         );
 
-        return new static($config);
-    }
-
-    public function setRegion($region)
-    {
-        $this->config['region'] = $region;
-
-        return $this;
+        return new self($config);
     }
 
     public function getRegion()

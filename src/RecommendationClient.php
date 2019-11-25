@@ -83,14 +83,6 @@ final class RecommendationClient
      */
     public function setPersonalizationStrategy($strategy, $requestOptions = array())
     {
-        if (!array_key_exists('eventsScoring', $strategy)) {
-            throw new \InvalidArgumentException('eventsScoring cannot be null');
-        }
-
-        if (!array_key_exists('facetsScoring', $strategy)) {
-            throw new \InvalidArgumentException('facetsScoring cannot be null');
-        }
-
         return $this->api->write('POST', api_path('/1/strategies/personalization'), $strategy, $requestOptions);
     }
 }

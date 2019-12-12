@@ -11,20 +11,27 @@ matrix:
       dist: precise
       env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
     - php: 5.6
-      dist: trusty
+      dist: xenial
       sudo: required
     - php: 7.2
-      dist: trusty
+      dist: bionic
       sudo: required
     - php: 7.2
-      dist: trusty
+      dist: bionic
       sudo: required
       env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
     - php: 7.3
-      dist: trusty
+      dist: bionic
       sudo: required
     - php: 7.3
-      dist: trusty
+      dist: bionic
+      sudo: required
+      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+    - php: 7.4
+      dist: bionic
+      sudo: required
+    - php: 7.4
+      dist: bionic
       sudo: required
       env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
 

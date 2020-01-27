@@ -95,6 +95,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         );
 
         $index->saveRule($rule)->wait();
+        // saveRule should unset params because is an empty list.
         unset($rule['consequence']['params']);
         self::assertEquals($rule, $index->getRule('rule-with-empty-consequence-params'));
 

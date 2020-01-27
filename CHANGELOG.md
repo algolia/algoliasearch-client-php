@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...master)
 
+## [v2.5.1](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...2.5.1)
+
 ### Fixed
 - Serialization issue on `saveRule` and `saveRules` when rule contains an empty list of consequence params ([#606](https://github.com/algolia/algoliasearch-client-php/pull/606))
 

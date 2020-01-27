@@ -513,6 +513,18 @@ class SearchIndex
 
         Helpers::ensureObjectID($rules, 'All rules must have an unique objectID to be valid');
 
+        /**
+         * If consequence `params` is an array without keys, we are going to remove it
+         * from the payload of the rule. Otherwise the transporter layer will serialize
+         * `params` to an empty array [] instead of an empty object {} making an invalid
+         * rule on the engine side.
+         */
+        foreach ($rules as $key => $rule) {
+            if (isset($rule['consequence']) && empty($rule['consequence']['params'])) {
+                unset($rules[$key]['consequence']['params']);
+            }
+        }
+
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/batch', $this->indexName),

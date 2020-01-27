@@ -8,7 +8,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
     {
         parent::setUp();
 
-        if (!isset(static::$indexes['main'])) {
+        if (! isset(static::$indexes['main'])) {
             static::$indexes['main'] = self::safeName('rules-mgmt');
         }
     }
@@ -69,6 +69,49 @@ class RulesTest extends AlgoliaIntegrationTestCase
 
         $this->assertEquals(3, $i);
     }
+
+    public function testSerializationOfConsequenceParams()
+    {
+        /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
+        $index = static::getClient()->initIndex(static::$indexes['main']);
+
+        $rule = array(
+            'objectID' => 'rule-without-consequence-params',
+            'consequence' => array(
+                // 'params' => array(),
+                'hide' => array(array('objectID' => 'myID1')),
+            ),
+        );
+
+        $index->saveRule($rule)->wait();
+        self::assertEquals($rule, $index->getRule('rule-without-consequence-params'));
+
+        $rule = array(
+            'objectID' => 'rule-with-empty-consequence-params',
+            'consequence' => array(
+                'params' => array(),
+                'hide' => array(array('objectID' => 'myID1')),
+            ),
+        );
+
+        $index->saveRule($rule)->wait();
+        unset($rule['consequence']['params']);
+        self::assertEquals($rule, $index->getRule('rule-with-empty-consequence-params'));
+
+        $rule = array(
+            'objectID' => 'rule-with-consequence-params',
+            'consequence' => array(
+                'params' => array(
+                    'filters' => 'category = 1'
+                ),
+                'hide' => array(array('objectID' => 'myID1')),
+            ),
+        );
+
+        $index->saveRule($rule)->wait();
+        self::assertEquals($rule, $index->getRule('rule-with-consequence-params'));
+    }
+
 
     private function getRuleStub($objectID = 'my-rule')
     {

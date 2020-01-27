@@ -53,7 +53,7 @@ class ResponseObjectTest extends NullTestCase
         $this->assertInstanceOfResponse($i->clearSynonyms(array('objectID' => 'test')));
 
         $this->assertInstanceOfResponse($i->saveRule(array('objectID' => 'test')));
-        $this->assertInstanceOfResponse($i->saveRules(array('objectID' => 'test')));
+        $this->assertInstanceOfResponse($i->saveRules(array(array('objectID' => 'test'))));
         $this->assertInstanceOfResponse($i->replaceAllRules(array('objectID' => 'test')));
         $this->assertInstanceOfResponse($c->copyRules('old-name', 'new-name'));
         $this->assertInstanceOfResponse($i->deleteRule('objectID'));

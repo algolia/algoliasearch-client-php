@@ -45,6 +45,20 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         );
     }
 
+    public static function safeUserName($name)
+    {
+        if (!self::$instance) {
+            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
+        }
+
+        return sprintf(
+            'php-%s-%s-%s',
+            date('Y-m-d-H-i-s'),
+            self::$instance,
+            $name
+        );
+    }
+
     /**
      * @return \Algolia\AlgoliaSearch\SearchClient
      */

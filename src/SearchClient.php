@@ -317,6 +317,19 @@ class SearchClient
         );
     }
 
+    public function assignUserIds($userIds, $clusterName, $requestOptions = array())
+    {
+        return $this->api->write(
+            'POST',
+            api_path('/1/clusters/mapping/batch'),
+            array(
+                'users' => $userIds,
+                'cluster' => $clusterName,
+            ),
+            $requestOptions
+        );
+    }
+
     public function removeUserId($userId, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

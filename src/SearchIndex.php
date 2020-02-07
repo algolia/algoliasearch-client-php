@@ -186,7 +186,7 @@ class SearchIndex
             $message .= "If your batch has a unique identifier but isn't called objectID,\n";
             $message .= "you can map it automatically using `saveObjects(\$objects, ['objectIDKey' => 'primary'])`\n\n";
             $message .= "Algolia is also able to generate objectIDs automatically but *it's not recommended*.\n";
-            $message .= "To do it, use `saveObjects(\$objects, ['autoGenerateObjectIDIfNotExist' => true])`\n\n";
+            $message .= "To do it, use `['autoGenerateObjectIDIfNotExist' => true] on the request options parameter`\n\n";
 
             throw new MissingObjectId($message);
         }

@@ -2,11 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\AnalyticsClient;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;
-use Algolia\AlgoliaSearch\Tests\SyncClient;
-use DateTime;
 
 class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
 {
@@ -102,6 +99,18 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
 
         $response = $this->autoRetryRemoveUserId($this->mcmUserId2);
         $this->assertArrayHasKey('deletedAt', $response);
+
+        $response = $this->mcmClient->hasPendingMappings(array('retrieveMappings' => true));
+        $this->assertArrayHasKey('clusters', $response);
+        $this->assertArrayHasKey('pending', $response);
+
+        $response = $this->mcmClient->hasPendingMappings(array('getClusters' => true));
+        $this->assertArrayHasKey('clusters', $response);
+        $this->assertArrayHasKey('pending', $response);
+
+        $response = $this->mcmClient->hasPendingMappings();
+        $this->assertArrayNotHasKey('clusters', $response);
+        $this->assertArrayHasKey('pending', $response);
     }
 
     private function autoRetryGetUserId($userID)

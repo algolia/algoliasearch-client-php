@@ -249,11 +249,19 @@ class SearchClient
         return base64_encode($content);
     }
 
+    /**
+     * @deprecated endpoint will be deprecated
+     * @see RecommendationClient
+     */
     public function getPersonalizationStrategy($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/recommendation/personalization/strategy'), $requestOptions);
     }
 
+    /**
+     * @deprecated endpoint will be deprecated
+     * @see RecommendationClient
+     */
     public function setPersonalizationStrategy($strategy, $requestOptions = array())
     {
         $apiResponse = $this->api->write(

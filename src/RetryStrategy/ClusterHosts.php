@@ -88,6 +88,11 @@ final class ClusterHosts
         return static::create('insights.'.$region.'.algolia.io');
     }
 
+    public static function createForRecommendation($region)
+    {
+        return static::create('recommendation.'.$region.'.algolia.com');
+    }
+
     public static function createFromCache($cacheKey)
     {
         if (!Algolia::isCacheEnabled()) {

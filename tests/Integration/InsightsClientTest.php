@@ -47,52 +47,53 @@ class InsightsClientTest extends AlgoliaIntegrationTestCase
 
     public function testSendEvent()
     {
-        $two_days_ago_ms = (time() - (2 * 24 * 60 * 60)) * 1000;
-        $insightClient = InsightsClient::create();
+        $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
+        $insightsClient = InsightsClient::create();
         $searchClient = SearchClient::create();
-        $searchClient->initIndex(static::$indexes['insights'])->delete()->wait();
         $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
             'objectID' => 1,
         ))->wait();
 
-        $response = $insightClient->sendEvent(array(
+        $response = $insightsClient->sendEvent(array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
                 'index' => static::$indexes['insights'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
-                'timestamp' => $two_days_ago_ms,
+                'timestamp' => $twoDaysAgoMs,
             )
         );
 
-        $this->assertArraySubset(array('status' => 200), $response);
+        $this->assertEvent($response);
     }
 
     public function testSendEvents()
     {
-        $two_days_ago_ms = (time() - (2 * 24 * 60 * 60)) * 1000;
-        $insightClient = InsightsClient::create();
+        $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
+        $insightsClient = InsightsClient::create();
         $searchClient = SearchClient::create();
-        $searchClient->initIndex(static::$indexes['insights'])->delete()->wait();
         $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
             'objectID' => 1,
         ))->wait();
 
-        $response = $insightClient->sendEvents(array(array(
+        $response = $insightsClient->sendEvents(array(array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
                 'index' => static::$indexes['insights'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
-                'timestamp' => $two_days_ago_ms,
+                'timestamp' => $twoDaysAgoMs,
             ))
         );
 
-        $this->assertArraySubset(array('status' => 200), $response);
+        $this->assertEvent($response);
     }
 
     private function assertEvent($response)
     {
-        $this->assertArraySubset(array('status' => 200), $response);
+        $this->assertArraySubset(array(
+            'message' => 'OK',
+            'status' => 200,
+        ), $response);
     }
 }

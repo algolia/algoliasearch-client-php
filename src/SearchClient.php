@@ -317,6 +317,28 @@ class SearchClient
         );
     }
 
+    /**
+     * Assign multiple userIds to the given cluster name.
+     *
+     * @param  array<int, int> $userIds
+     * @param  string $clusterName    [description]
+     * @param  array  $requestOptions [description]
+     *
+     * @return array<string, mixed>
+     */
+    public function assignUserIds($userIds, $clusterName, $requestOptions = array())
+     {
+         return $this->api->write(
+             'POST',
+             api_path('/1/clusters/mapping/batch'),
+             array(
+                 'users' => $userIds,
+                 'cluster' => $clusterName,
+             ),
+             $requestOptions
+         );
+     }
+
     public function removeUserId($userId, $requestOptions = array())
     {
         if (is_array($requestOptions)) {

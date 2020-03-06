@@ -29,15 +29,15 @@ final class RecommendationClient
     }
 
     /**
-     * @param string      $region
      * @param string|null $appId
      * @param string|null $apiKey
+     * @param string|null $region
      *
      * @return RecommendationClient
      */
-    public static function create($region, $appId = null, $apiKey = null)
+    public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $config = RecommendationConfig::create($region, $appId, $apiKey);
+        $config = RecommendationConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);
     }
@@ -62,7 +62,7 @@ final class RecommendationClient
             $clusterHosts
         );
 
-        return new static($apiWrapper, $config);
+        return new self($apiWrapper, $config);
     }
 
     /**

@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...master)
 
+### Added
+- Method `RecommendationClient.setPersonalizationStrategy` and method `RecommendationClient.getPersonalizationStrategy` ([#600](https://github.com/algolia/algoliasearch-client-php/pull/600))
+- Method `SearchClient.hasPendingMappings` ([#599](https://github.com/algolia/algoliasearch-client-php/pull/599))
+- Method `SearchClient.assignUserIds` ([#610](https://github.com/algolia/algoliasearch-client-php/pull/610))
+
+### Changed
+- Deprecates method `SearchClient.setPersonalizationStrategy` and method `SearchClient.getPersonalizationStrategy` ([#600](https://github.com/algolia/algoliasearch-client-python/pull/600))
+
 ## [v2.5.1](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...2.5.1)
 
 ### Fixed

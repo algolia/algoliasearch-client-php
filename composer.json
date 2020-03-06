@@ -55,5 +55,14 @@
         "branch-alias": {
             "dev-2.0": "2.0.x-dev"
         }
+    },
+    "scripts": {
+        "lint": "php-cs-fixer fix",
+        "test:lint": "php-cs-fixer fix -v --dry-run",
+        "test:unit": "phpunit --colors=always",
+        "test": [
+            "@test:lint",
+            "@test:unit"
+        ]
     }
 }

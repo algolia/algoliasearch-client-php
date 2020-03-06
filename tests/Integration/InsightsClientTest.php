@@ -3,10 +3,16 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\InsightsClient;
-use PHPUnit\Framework\TestCase;
+use Algolia\AlgoliaSearch\SearchClient;
 
-class InsightsClientTest extends TestCase
+class InsightsClientTest extends AlgoliaIntegrationTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        static::$indexes['insights'] = self::safeName('insights');
+    }
+
     public function testUserInsights()
     {
         $u = InsightsClient::create()->user('userTokenForTest');
@@ -39,8 +45,55 @@ class InsightsClientTest extends TestCase
         );
     }
 
+    public function testSendEvent()
+    {
+        $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
+        $insightsClient = InsightsClient::create();
+        $searchClient = SearchClient::create();
+        $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
+            'objectID' => 1,
+        ))->wait();
+
+        $response = $insightsClient->sendEvent(array(
+                'eventType' => 'click',
+                'eventName' => 'foo',
+                'index' => static::$indexes['insights'],
+                'userToken' => 'bar',
+                'objectIDs' => array('one', 'two'),
+                'timestamp' => $twoDaysAgoMs,
+            )
+        );
+
+        $this->assertEvent($response);
+    }
+
+    public function testSendEvents()
+    {
+        $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
+        $insightsClient = InsightsClient::create();
+        $searchClient = SearchClient::create();
+        $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
+            'objectID' => 1,
+        ))->wait();
+
+        $response = $insightsClient->sendEvents(array(array(
+                'eventType' => 'click',
+                'eventName' => 'foo',
+                'index' => static::$indexes['insights'],
+                'userToken' => 'bar',
+                'objectIDs' => array('one', 'two'),
+                'timestamp' => $twoDaysAgoMs,
+            ))
+        );
+
+        $this->assertEvent($response);
+    }
+
     private function assertEvent($response)
     {
-        $this->assertArraySubset(array('status' => 200), $response);
+        $this->assertArraySubset(array(
+            'message' => 'OK',
+            'status' => 200,
+        ), $response);
     }
 }

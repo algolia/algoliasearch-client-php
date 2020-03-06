@@ -14,9 +14,6 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
     private $mcmClient;
 
     /** @var string */
-    private $clusterName = '';
-
-    /** @var string */
     private $mcmUserId0;
 
     /** @var string */
@@ -38,38 +35,35 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
         $this->mcmUserId0 = $this->createMcmUserId('0');
         $this->mcmUserId1 = $this->createMcmUserId('1');
         $this->mcmUserId2 = $this->createMcmUserId('2');
-        $clusterList = $this->mcmClient->listClusters();
-        $this->clusterName = $clusterList['clusters'][0]['clusterName'];
-    }
-
-    public function testListClusters()
-    {
-        $clusterList = $this->mcmClient->listClusters();
-        $this->assertTrue(count($clusterList['clusters']) >= 2);
     }
 
     public function testMultiClusterManagement()
     {
-        $response = $this->mcmClient->assignUserId($this->mcmUserId0, $this->clusterName);
+        $clusterList = $this->mcmClient->listClusters();
+        $this->assertCount(2, $clusterList['clusters']);
+
+        $clusterName = $clusterList['clusters'][0]['clusterName'];
+
+        $response = $this->mcmClient->assignUserId($this->mcmUserId0, $clusterName);
         $this->assertArrayHasKey('createdAt', $response);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId0);
         $this->assertArrayHasKey('userID', $response);
         $this->assertEquals($response['userID'], $this->mcmUserId0);
-        $this->assertEquals($response['clusterName'], $this->clusterName);
+        $this->assertEquals($response['clusterName'], $clusterName);
 
-        $response = $this->mcmClient->assignUserIds(array($this->mcmUserId1, $this->mcmUserId2), $this->clusterName);
+        $response = $this->mcmClient->assignUserIds(array($this->mcmUserId1, $this->mcmUserId2), $clusterName);
         $this->assertArrayHasKey('createdAt', $response);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId1);
         $this->assertArrayHasKey('userID', $response);
         $this->assertEquals($response['userID'], $this->mcmUserId1);
-        $this->assertEquals($response['clusterName'], $this->clusterName);
+        $this->assertEquals($response['clusterName'], $clusterName);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId2);
         $this->assertArrayHasKey('userID', $response);
         $this->assertEquals($response['userID'], $this->mcmUserId2);
-        $this->assertEquals($response['clusterName'], $this->clusterName);
+        $this->assertEquals($response['clusterName'], $clusterName);
 
         $response = $this->mcmClient->searchUserIds($this->mcmUserId0);
         $this->assertTrue($response['nbHits'] > 0);
@@ -94,6 +88,12 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
         }
         $this->assertEquals($result0, $this->mcmUserId0);
 
+        $response = $this->mcmClient->getTopUserId();
+        $topUser = $response['topUsers'][$clusterName][0];
+        $this->assertArrayHasKey('userID', $topUser);
+        $this->assertArrayHasKey('nbRecords', $topUser);
+        $this->assertArrayHasKey('dataSize', $topUser);
+
         $response = $this->autoRetryRemoveUserId($this->mcmUserId0);
         $this->assertArrayHasKey('deletedAt', $response);
 
@@ -102,14 +102,6 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
 
         $response = $this->autoRetryRemoveUserId($this->mcmUserId2);
         $this->assertArrayHasKey('deletedAt', $response);
-
-        $response = $this->mcmClient->listUserIds();
-        $yesterday =  date('Y-m-d',(strtotime ( '-1 day')));
-        foreach ($response['userIDs'] as $userIDset) {
-            if (strpos($userIDset['userID'], "php-${yesterday}") === 0) {
-                $this->autoRetryRemoveUserId($userIDset['userID']);
-            }
-        }
     }
 
     private function autoRetryGetUserId($userID)

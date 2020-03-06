@@ -296,7 +296,7 @@ class SearchClient
 
     public function getTopUserId($requestOptions = array())
     {
-        return $this->api->read('GET', api_path('/1/clusters/mapping/%top'), $requestOptions);
+        return $this->api->read('GET', api_path('/1/clusters/mapping/top'), $requestOptions);
     }
 
     public function assignUserId($userId, $clusterName, $requestOptions = array())
@@ -311,19 +311,6 @@ class SearchClient
             'POST',
             api_path('/1/clusters/mapping'),
             array(
-                'cluster' => $clusterName,
-            ),
-            $requestOptions
-        );
-    }
-
-    public function assignUserIds($userIds, $clusterName, $requestOptions = array())
-    {
-        return $this->api->write(
-            'POST',
-            api_path('/1/clusters/mapping/batch'),
-            array(
-                'users' => $userIds,
                 'cluster' => $clusterName,
             ),
             $requestOptions

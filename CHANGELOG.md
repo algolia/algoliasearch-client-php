@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.5.0...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.6.0...master)
+
+## [v2.6.0](https://github.com/algolia/algoliasearch-client-php/compare/2.5.1...2.6.0)
 
 ### Added
 - Method `RecommendationClient.setPersonalizationStrategy` and method `RecommendationClient.getPersonalizationStrategy` ([#600](https://github.com/algolia/algoliasearch-client-php/pull/600))

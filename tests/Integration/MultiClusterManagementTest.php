@@ -91,6 +91,12 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
         $this->assertArrayHasKey('nbRecords', $topUser);
         $this->assertArrayHasKey('dataSize', $topUser);
 
+        $response = $this->mcmClient->getTopUserIds();
+        $topUser = $response['topUsers'][$clusterName][0];
+        $this->assertArrayHasKey('userID', $topUser);
+        $this->assertArrayHasKey('nbRecords', $topUser);
+        $this->assertArrayHasKey('dataSize', $topUser);
+
         $response = $this->autoRetryRemoveUserId($this->mcmUserId0);
         $this->assertArrayHasKey('deletedAt', $response);
 

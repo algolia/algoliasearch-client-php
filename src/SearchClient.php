@@ -302,7 +302,22 @@ class SearchClient
         return $this->api->read('GET', api_path('/1/clusters/mapping/%s', $userId), $requestOptions);
     }
 
+    /**
+     * @deprecated since 2.6.1, use getTopUserIds instead.
+     */
     public function getTopUserId($requestOptions = array())
+    {
+        return $this->getTopUserIds($requestOptions);
+    }
+
+    /**
+     * Get the top 10 userIDs with the highest number of records per cluster.
+     *
+     * @param array $requestOptions
+     *
+     * @return array<string, mixed>
+     */
+    public function getTopUserIds($requestOptions = array())
     {
         return $this->api->read('GET', api_path('/1/clusters/mapping/top'), $requestOptions);
     }
@@ -329,8 +344,8 @@ class SearchClient
      * Assign multiple userIds to the given cluster name.
      *
      * @param array<int, int> $userIds
-     * @param string          $clusterName    [description]
-     * @param array           $requestOptions [description]
+     * @param string          $clusterName
+     * @param array           $requestOptions
      *
      * @return array<string, mixed>
      */

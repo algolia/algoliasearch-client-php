@@ -192,7 +192,7 @@ final class ApiWrapper implements ApiWrapperInterface
         $body = (string) $response->getBody();
         $statusCode = $response->getStatusCode();
 
-        if (0 === $statusCode || $statusCode >= 500) {
+        if (0 === $statusCode || ($statusCode >= 100 && $statusCode < 200) || $statusCode >= 500) {
             $reason = $response->getReasonPhrase();
 
             if (null === $response->getReasonPhrase() || '' === $response->getReasonPhrase()) {

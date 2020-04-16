@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.6.0...master)
 
 ### Fixed
+- wrong deserialization of 100 status code ([#620](https://github.com/algolia/algoliasearch-client-php/pull/620))
 - name of `getTopUserIds` method ([#616](https://github.com/algolia/algoliasearch-client-php/pull/616))
 
 ## [v2.6.0](https://github.com/algolia/algoliasearch-client-php/compare/2.5.1...2.6.0)

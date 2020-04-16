@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.6.0...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.6.1...master)
+
+## [v2.6.1](https://github.com/algolia/algoliasearch-client-php/compare/2.6.0...2.6.1)
 
 ### Fixed
 - wrong deserialization of 100 status code ([#620](https://github.com/algolia/algoliasearch-client-php/pull/620))

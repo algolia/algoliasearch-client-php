@@ -23,6 +23,7 @@
         "friendsofphp/php-cs-fixer": "^2.0",
         "fzaninotto/faker": "^1.8",
         "phpunit/phpunit": "^4.8",
+        "psr/http-client": "^1.0",
         "symfony/yaml": "^2.0 || ^4.0"
     },
     "autoload": {

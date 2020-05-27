@@ -84,7 +84,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         );
 
         $index->saveRule($rule)->wait();
-        self::assertEquals($rule, $index->getRule('rule-without-consequence-params'));
+        self::assertArraySubset($rule, $index->getRule('rule-without-consequence-params'));
 
         $rule = array(
             'objectID' => 'rule-with-empty-consequence-params',
@@ -97,7 +97,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         $index->saveRule($rule)->wait();
         // saveRule should unset params because is an empty list.
         unset($rule['consequence']['params']);
-        self::assertEquals($rule, $index->getRule('rule-with-empty-consequence-params'));
+        self::assertArraySubset($rule, $index->getRule('rule-with-empty-consequence-params'));
 
         $rule = array(
             'objectID' => 'rule-with-consequence-params',
@@ -110,7 +110,7 @@ class RulesTest extends AlgoliaIntegrationTestCase
         );
 
         $index->saveRule($rule)->wait();
-        self::assertEquals($rule, $index->getRule('rule-with-consequence-params'));
+        self::assertArraySubset($rule, $index->getRule('rule-with-consequence-params'));
     }
 
     private function getRuleStub($objectID = 'my-rule')

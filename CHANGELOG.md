@@ -1,8 +1,9 @@
 ## Change Log
 
-### UNRELEASED
+### [v1.28.1](https://github.com/algolia/algoliasearch-client-php/compare/1.28.0...1.28.1)
 
-<Contributors, please add your changes below this line>
+### Fixed
+- replace expired certificate within embedded certificate chain ([95f2781](https://github.com/algolia/algoliasearch-client-php/commit/95f2781868249c0e02a66ab45f15ef615b8c8d47))
 
 ### 1.28.0
 

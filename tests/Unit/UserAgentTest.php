@@ -18,7 +18,11 @@ class UserAgentTest extends TestCase
             $this->default .= '; HHVM ('.HHVM_VERSION.')';
         }
         if (interface_exists('\GuzzleHttp\ClientInterface')) {
-            $this->default .= '; Guzzle ('.\GuzzleHttp\ClientInterface::VERSION.')';
+            if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+                $this->default .= '; Guzzle ('.\GuzzleHttp\ClientInterface::VERSION.')';
+            } else {
+                $this->default .= '; Guzzle ('.\GuzzleHttp\ClientInterface::MAJOR_VERSION.')';
+            }
         }
     }
 

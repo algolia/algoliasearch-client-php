@@ -47,7 +47,11 @@ final class UserAgent
             $segments['HHVM'] = HHVM_VERSION;
         }
         if (interface_exists('\GuzzleHttp\ClientInterface')) {
-            $segments['Guzzle'] = \GuzzleHttp\ClientInterface::VERSION;
+            if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+                $segments['Guzzle'] = \GuzzleHttp\ClientInterface::VERSION;
+            } else {
+                $segments['Guzzle'] = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            }
         }
 
         return $segments;

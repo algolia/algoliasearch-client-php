@@ -19,21 +19,33 @@ matrix:
     - php: 7.2
       dist: bionic
       sudo: required
-      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+      env: GUZZLE_6=true # Run the CTS against Guzzle 6
+    - php: 7.2
+      dist: bionic
+      sudo: required
+      env: GUZZLE_7=true # Run the CTS against Guzzle 7
     - php: 7.3
       dist: bionic
       sudo: required
     - php: 7.3
       dist: bionic
       sudo: required
-      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+      env: GUZZLE_6=true # Run the CTS against Guzzle 6
+    - php: 7.3
+      dist: bionic
+      sudo: required
+      env: GUZZLE_7=true # Run the CTS against Guzzle 7
     - php: 7.4
       dist: bionic
       sudo: required
     - php: 7.4
       dist: bionic
       sudo: required
-      env: LEGACY_HTTP=true # Don't install Guzzle to test PHP53HttpClient
+      env: GUZZLE_6=true # Run the CTS against Guzzle 6
+    - php: 7.4
+      dist: bionic
+      sudo: required
+      env: GUZZLE_7=true # Run the CTS against Guzzle 7
 
     - php: hhvm
       dist: trusty
@@ -52,7 +64,8 @@ cache:
 
 install:
   - COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install
-  - if [ "$LEGACY_HTTP" != "true" ]; then composer require guzzlehttp/guzzle ; fi
+  - if [ $GUZZLE_6 == "true" ]; then composer require guzzlehttp/guzzle:^6.5 ; fi
+  - if [ $GUZZLE_7 == "true" ]; then composer require guzzlehttp/guzzle:~7 ; fi
 
 before_script:
   - wget https://alg.li/algolia-keys && chmod +x algolia-keys

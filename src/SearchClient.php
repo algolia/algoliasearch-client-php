@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\Exceptions\UnreachableException;
 use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
@@ -53,6 +54,10 @@ class SearchClient
     public static function createWithConfig(SearchConfig $config)
     {
         $config = clone $config;
+
+        if (!$config->getAppId() || !$config->getApiKey()) {
+            throw new UnreachableException('Missing config: AppId or AppKey. Please check your settings');
+        }
 
         $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
 

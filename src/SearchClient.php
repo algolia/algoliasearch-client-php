@@ -15,6 +15,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use const JSON_THROW_ON_ERROR;
 
 class SearchClient
 {
@@ -155,6 +156,12 @@ class SearchClient
 
     public function multipleQueries($queries, $requestOptions = array())
     {
+        $queries = array_map(function($query) {
+            $query['params'] = $this->serializeQueryParameters($query['params'] ?? []);
+
+            return $query;
+        }, $queries);
+
         if (is_array($requestOptions)) {
             $requestOptions['requests'] = $queries;
         } elseif ($requestOptions instanceof RequestOptions) {
@@ -449,5 +456,26 @@ class SearchClient
             api_path('/1/clusters/mapping/pending'),
             $requestOptions
         );
+    }
+
+    /**
+     * @param $parameters
+     *
+     * @return string
+     * @throws \JsonException
+     */
+    protected function serializeQueryParameters($parameters): string
+    {
+        if (is_string($parameters)) {
+            return $parameters;
+        }
+
+        foreach ($parameters as $key => $value) {
+            if (is_array($value)) {
+                $parameters[$key] = json_encode($value, JSON_THROW_ON_ERROR);
+            }
+        }
+
+        return http_build_query($parameters);
     }
 }

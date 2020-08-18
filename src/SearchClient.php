@@ -56,7 +56,7 @@ class SearchClient
         $config = clone $config;
 
         if (!$config->getAppId() || !$config->getApiKey()) {
-            throw new UnreachableException('Missing config: AppId or AppKey. Please check your settings');
+            throw new UnreachableException('Missing config: appId or apiKey. Please check your settings');
         }
 
         $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());

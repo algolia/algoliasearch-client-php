@@ -45,8 +45,6 @@ class ApiWrapperTest extends TestCase implements HttpClientInterface
     /**
      * This test-case implements HttpClientInterface
      * in order to assert request body.
-     *
-     * @inheritDoc
      */
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {

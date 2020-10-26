@@ -86,24 +86,34 @@ final class Algolia
 
     public static function getHttpClient()
     {
-        $guzzleVersion = null;
-        if (interface_exists('\GuzzleHttp\ClientInterface')) {
-            if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
-                $guzzleVersion = (int) substr(\GuzzleHttp\Client::VERSION, 0, 1);
-            } else {
-                $guzzleVersion = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
-            }
-        }
+        $guzzleVersion = self::resolveGuzzleVersion();
 
         if (null === self::$httpClient) {
-            if (class_exists('\GuzzleHttp\Client') && 6 <= $guzzleVersion) {
-                self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
+            if (class_exists('\GuzzleHttp\Client') && is_int($guzzleVersion) && ($guzzleVersion === 6 || $guzzleVersion === 7)) {
+                if($guzzleVersion === 6) {
+                    self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
+                } else {
+                    self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle7HttpClient());
+                }
             } else {
                 self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Php53HttpClient());
             }
         }
 
         return self::$httpClient;
+    }
+
+    protected static function resolveGuzzleVersion()
+    {
+        if (interface_exists('\GuzzleHttp\ClientInterface')) {
+            if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+                return (int) substr(\GuzzleHttp\Client::VERSION, 0, 1);
+            } else {
+                return \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            }
+        }
+
+        return null;
     }
 
     public static function setHttpClient(HttpClientInterface $httpClient)

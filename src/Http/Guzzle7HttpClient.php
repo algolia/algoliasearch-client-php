@@ -4,8 +4,8 @@ namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\Exception\ConnectException as GuzzleConnectException;
+use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;

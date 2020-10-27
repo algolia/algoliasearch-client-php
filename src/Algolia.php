@@ -89,8 +89,8 @@ final class Algolia
         $guzzleVersion = self::resolveGuzzleVersion();
 
         if (null === self::$httpClient) {
-            if (class_exists('\GuzzleHttp\Client') && is_int($guzzleVersion) && ($guzzleVersion === 6 || $guzzleVersion === 7)) {
-                if($guzzleVersion === 6) {
+            if (class_exists('\GuzzleHttp\Client') && is_int($guzzleVersion) && (6 === $guzzleVersion || 7 === $guzzleVersion)) {
+                if (6 === $guzzleVersion) {
                     self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle6HttpClient());
                 } else {
                     self::setHttpClient(new \Algolia\AlgoliaSearch\Http\Guzzle7HttpClient());

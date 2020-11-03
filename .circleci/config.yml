@@ -6,28 +6,17 @@ version: 2
 jobs:
   build:
     docker:
-      # Specify the version you desire here
       - image: circleci/php:7.4
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
 
     steps:
       - checkout
 
-      - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
+      - run: sudo apt update
       - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-            # "composer.lock" can be used if it is committed to the repo
             - v1-dependencies-{{ checksum "composer.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
@@ -38,6 +27,35 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+      - run:
+          name: Get API Key Dealer client
+          command: wget https://alg.li/algolia-keys && chmod +x algolia-keys
 
-      # run tests with phpunit or codecept
-      - run: ./vendor/bin/phpunit
+      - run:
+          name: Check code styles
+          command: vendor/bin/php-cs-fixer fix -v --dry-run
+
+      # Run tests with phpunit
+      #
+      # If the PR is open by an Algolia, we run all the tests
+      # with the keys in the env variables
+      # If the PR was open from a fork (community PR)
+      # we get API keys from the API key dealer https://alg.li/api-key-dealer
+      - run:
+          name: Run tests
+          command: |
+            echo $CIRCLE_PR_REPONAME
+            echo $ALGOLIA_APP_ID
+            if [ -z ${CIRCLE_PR_REPONAME+x} ]
+            then
+              ./vendor/bin/phpunit
+            else
+              export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
+              export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
+              export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
+
+              eval $(./algolia-keys export)
+              echo $ALGOLIA_APP_ID
+              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+            fi
+

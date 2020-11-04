@@ -33,28 +33,20 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 
     public static function safeName($name)
     {
-        if (!self::$instance) {
-            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
-        }
-
         return sprintf(
             'php_%s_%s_%s',
             date('Y-M-d_H:i:s'),
-            self::$instance,
+            self::getInstance(),
             $name
         );
     }
 
     public static function safeUserName($name)
     {
-        if (!self::$instance) {
-            self::$instance = getenv('TRAVIS') ? getenv('TRAVIS_JOB_NUMBER') : get_current_user();
-        }
-
         return sprintf(
             'php-%s-%s-%s',
             date('Y-m-d-H-i-s'),
-            self::$instance,
+            self::getInstance(),
             $name
         );
     }
@@ -81,6 +73,15 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
         return new SyncClient(
             SearchClient::createWithConfig(new SearchConfig($config))
         );
+    }
+
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = getenv('CI_BUILD_NUM') ? getenv('CI_BUILD_NUM') : get_current_user();
+        }
+
+        return self::$instance;
     }
 
     public $airports = array(

@@ -33,14 +33,14 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-<<parameters.version>>-{{ checksum "composer.json" }}
+            - composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+            #- composer-deps-
 
       - run: composer install -n --prefer-dist
 
       - save_cache:
-          key: v1-dependencies-<<parameters.version>>-{{ checksum "composer.json" }}
+          key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
           paths:
             - ./vendor
       - run:
@@ -60,20 +60,22 @@ jobs:
       - run:
           name: Run tests
           command: |
-            echo $CIRCLE_PR_REPONAME
-            echo $ALGOLIA_APP_ID
+            export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
             if [ -z ${CIRCLE_PR_REPONAME+x} ]
             then
-              ./vendor/bin/phpunit
+               php vendor/bin/phpunit
             else
-              export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
               export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
 
               eval $(./algolia-keys export)
-              echo $ALGOLIA_APP_ID
               php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
             fi
+
+      - run:
+          name: Autoloading without Composer
+          command: php tests/tests-no-composer.php
+
 
 workflows:
   matrix-tests:

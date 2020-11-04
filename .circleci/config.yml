@@ -2,11 +2,27 @@
 #
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
-version: 2
-jobs:
-  build:
+version: 2.1
+
+
+executors:
+  php-docker: # declares a reusable executor
+    parameters:
+      version:
+        description: "PHP version tag"
+        type: string
     docker:
-      - image: circleci/php:7.4
+        - image: circleci/php:<<parameters.version>>
+
+jobs:
+  test:
+    parameters:
+      version:
+        description: "PHP version tag"
+        type: string
+    executor:
+      name: php-docker
+      version: <<parameters.version>>
 
     steps:
       - checkout
@@ -59,3 +75,14 @@ jobs:
               php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
             fi
 
+workflows:
+  matrix-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              version:
+                - "latest"
+                - "7.4"
+                - "7.0"
+                - "5.6"

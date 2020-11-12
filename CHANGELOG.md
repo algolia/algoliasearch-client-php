@@ -6,9 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.7.0...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.7.1...master)
 
-### Added
+## [v2.7.1](https://github.com/algolia/algoliasearch-client-php/compare/2.7.0...2.7.1)
+
+### Fix
 - Enable `JSON_UNESCAPED_UNICODE` option for requests bodies JSON encoding. 
 
 ## [v2.7.0](https://github.com/algolia/algoliasearch-client-php/compare/2.6.2...2.7.0)

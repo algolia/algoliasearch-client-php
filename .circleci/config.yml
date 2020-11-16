@@ -20,6 +20,10 @@ jobs:
       version:
         description: "PHP version tag"
         type: string
+      http_client:
+        description: "PHP Client"
+        type: string
+
     executor:
       name: php-docker
       version: <<parameters.version>>
@@ -43,6 +47,17 @@ jobs:
           key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
           paths:
             - ./vendor
+
+      - run:
+          name: Install PHP Client
+          command: |
+            if [ "<<parameters.http_client>>" == "legacy" ]
+            then
+               echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
+            else
+              composer require <<parameters.http_client>>
+            fi
+
       - run:
           name: Get API Key Dealer client
           command: wget https://alg.li/algolia-keys && chmod +x algolia-keys
@@ -78,13 +93,37 @@ jobs:
 
 
 workflows:
-  matrix-tests:
+  workflow:
     jobs:
       - test:
-          matrix:
-            parameters:
-              version:
-                - "latest"
-                - "7.4"
-                - "7.0"
-                - "5.6"
+          version: "latest"
+          http_client: guzzlehttp/guzzle:"^7.0"
+      - test:
+          version: "7.4"
+          http_client: guzzlehttp/guzzle:"^7.0"
+
+      - test:
+          version: "latest"
+          http_client: guzzlehttp/guzzle:"^6.0"
+      - test:
+          version: "7.4"
+          http_client: guzzlehttp/guzzle:"^6.0"
+      - test:
+          version: "7.0"
+          http_client: guzzlehttp/guzzle:"^6.0"
+      - test:
+          version: "5.6"
+          http_client: guzzlehttp/guzzle:"^6.0"
+
+      - test:
+          version: "latest"
+          http_client: legacy
+      - test:
+          version: "7.4"
+          http_client: legacy
+      - test:
+          version: "7.0"
+          http_client: legacy
+      - test:
+          version: "5.6"
+          http_client: legacy

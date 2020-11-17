@@ -379,6 +379,17 @@ class SearchIndex
 
     public function saveSynonyms($synonyms, $requestOptions = array())
     {
+        if (is_array($requestOptions)) {
+            if (array_key_exists('clearExistingSynonyms', $requestOptions)) {
+                $requestOptions['replaceExistingSynonyms'] = $requestOptions['clearExistingSynonyms'];
+            }
+        } elseif ($requestOptions instanceof RequestOptions) {
+            $bodyParams = $requestOptions->getQueryParameters();
+            if (array_key_exists('clearExistingSynonyms', $bodyParams)) {
+                $requestOptions->addQueryParameter('replaceExistingSynonyms', $bodyParams['clearExistingSynonyms']);
+            }
+        }
+
         $default = array();
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
@@ -412,9 +423,9 @@ class SearchIndex
     public function replaceAllSynonyms($synonyms, $requestOptions = array())
     {
         if (is_array($requestOptions)) {
-            $requestOptions['replaceExistingSynonyms'] = true;
+            $requestOptions['clearExistingSynonyms'] = true;
         } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addQueryParameter('replaceExistingSynonyms', true);
+            $requestOptions->addQueryParameter('clearExistingSynonyms', true);
         }
 
         return $this->saveSynonyms($synonyms, $requestOptions);

@@ -43,13 +43,13 @@ docker build -t algolia-php .
 ## Run the image
 
 You need to provide few environment variables at runtime to be able to run the [Common Test Suite](https://github.com/algolia/algoliasearch-client-specs/tree/master/common-test-suite).
-You can set them up directly in the command
+You can set them up directly in the command:
 
 ```bash
-docker run -it --rm --env ALGOLIA_APP_ID=XXXXXX [...] -v $PWD:/app -w /app algolia-php bash
+docker run -it --rm --env ALGOLIA_APP_ID=XXXXXX [...] -v $PWD:/app -w /app algolia-scout-extended bash
 ```
 
-But we advise you export them in your `.bashrc` or `.zshrc`. That way, you can use [Docker's shorten syntax](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file) to retrieve your variables.
+However, we advise you to export them in your `.bashrc` or `.zshrc`. That way, you can use [Docker's shorten syntax](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file) to set your variables.
 
 ```bash
 docker run -it --rm --env ALGOLIA_APP_ID \
@@ -64,9 +64,9 @@ docker run -it --rm --env ALGOLIA_APP_ID \
 -v $PWD:/app -w /app algolia-php bash
 ```
 
-Once the container is up, you can edit files directly in your IDE: changes will be mirrored in the image.
+Once your container is running, any changes you make in your IDE are directly reflected in the container.
 
-Lastly to launch the tests, you can use one of the following commands
+To launch the tests, you can use one of the following commands
 ```shell script
 # run only the unit tests
 ./vendor/bin/phpunit
@@ -75,7 +75,7 @@ Lastly to launch the tests, you can use one of the following commands
 ./vendor/bin/phpunit --filter=nameOfYourTests
 ```
 
-You can find more scripts in the `composer.json` file.
+You can find more commands in the `composer.json` file.
 
 Feel free to contact us if you have any questions.
 

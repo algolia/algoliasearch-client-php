@@ -280,6 +280,13 @@ final class RequestOptions
         return $this;
     }
 
+    public function deleteBodyParameter($parameter)
+    {
+        unset($this->body[$parameter]);
+
+        return $this;
+    }
+
     /**
      * Replace all existing body parameters with the given name/value pairs.
      *

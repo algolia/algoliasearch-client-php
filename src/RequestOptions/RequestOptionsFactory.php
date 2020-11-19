@@ -12,7 +12,6 @@ final class RequestOptionsFactory
     private $validQueryParameters = array(
         'forwardToReplicas',
         'replaceExistingSynonyms',
-        'clearExistingSynonyms',
         'clearExistingRules',
         'getVersion',
     );

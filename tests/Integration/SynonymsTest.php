@@ -2,6 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
+
 class SynonymsTest extends AlgoliaIntegrationTestCase
 {
     private $caliSyn = array(
@@ -57,6 +60,41 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         $index->clearSynonyms();
         $res = $index->searchSynonyms('');
         $this->assertArraySubset(array('nbHits' => 0), $res);
+    }
+
+    public function testClearExistingSynonymsOption()
+    {
+        $index = static::getClient()->initIndex(static::$indexes['main']);
+
+        $index->saveObjects($this->airports);
+
+        $index->saveSynonym($this->pekingSyn);
+
+        $index->saveSynonyms(array($this->caliSyn));
+
+        $this->assertArraySubset($this->pekingSyn, $index->getSynonym('china'));
+        $this->assertArraySubset($this->caliSyn, $index->getSynonym('cali'));
+        $result = $index->searchSynonyms('');
+        $this->assertCount(2, $result['hits']);
+
+        $clearExistingSynonyms = array('clearExistingSynonyms' => true);
+        $factory = new RequestOptionsFactory(
+            new SearchConfig(array(
+                'appId' => getenv('ALGOLIA_APP_ID'),
+                'apiKey' => getenv('ALGOLIA_API_KEY'),
+            ))
+        );
+        $requestOptions = $factory->create($clearExistingSynonyms);
+        $index->saveSynonyms(array($this->anotherSyn), $requestOptions);
+
+        $this->assertArraySubset($this->anotherSyn, $index->getSynonym('city'));
+        $this->assertCount(1, $index->searchSynonyms('')['hits']);
+
+        $index->saveSynonyms(array($this->caliSyn), array('clearExistingSynonyms' => true));
+
+        $this->assertArraySubset($this->caliSyn, $index->getSynonym('cali'));
+        $result = $index->searchSynonyms('');
+        $this->assertCount(1, $result['hits']);
     }
 
     public function testBrowseSynonyms()

@@ -382,11 +382,13 @@ class SearchIndex
         if (is_array($requestOptions)) {
             if (array_key_exists('clearExistingSynonyms', $requestOptions)) {
                 $requestOptions['replaceExistingSynonyms'] = $requestOptions['clearExistingSynonyms'];
+                unset($requestOptions['clearExistingSynonyms']);
             }
         } elseif ($requestOptions instanceof RequestOptions) {
-            $bodyParams = $requestOptions->getQueryParameters();
+            $bodyParams = $requestOptions->getBody();
             if (array_key_exists('clearExistingSynonyms', $bodyParams)) {
                 $requestOptions->addQueryParameter('replaceExistingSynonyms', $bodyParams['clearExistingSynonyms']);
+                $requestOptions->deleteBodyParameter('clearExistingSynonyms');
             }
         }
 

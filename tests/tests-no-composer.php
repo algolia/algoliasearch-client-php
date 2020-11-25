@@ -14,8 +14,8 @@ $index->delete()->wait();
 
 function safeName($name)
 {
-    if (getenv('TRAVIS')) {
-        return sprintf('TRAVIS_php_%s_%s', $name, getenv('TRAVIS_JOB_NUMBER'));
+    if (getenv('CI_BUILD_NUM')) {
+        return sprintf('php_%s_%s', $name, getenv('CI_BUILD_NUM'));
     }
 
     return $name;

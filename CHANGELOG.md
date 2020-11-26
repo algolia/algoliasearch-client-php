@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - PHP 8 Support
 
+
 ## [v2.7.2](https://github.com/algolia/algoliasearch-client-php/compare/2.7.1...2.7.2)
 
 ### Chore

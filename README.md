@@ -6,7 +6,7 @@
   <h4 align="center">The perfect starting point to integrate <a href="https://algolia.com" target="_blank">Algolia</a> within your PHP project</h4>
 
   <p align="center">
-    <a href="https://travis-ci.org/algolia/algoliasearch-client-php"><img src="https://img.shields.io/travis/algolia/algoliasearch-client-php/master.svg" alt="Build Status"></a>
+    <a href="https://circleci.com/gh/algolia/algoliasearch-client-php"><img src="https://circleci.com/gh/algolia/algoliasearch-client-php.svg?style=shield" alt="CircleCI" /></a>
     <a href="https://packagist.org/packages/algolia/algoliasearch-client-php"><img src="https://poser.pugx.org/algolia/algoliasearch-client-php/d/total.svg" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/algolia/algoliasearch-client-php"><img src="https://poser.pugx.org/algolia/algoliasearch-client-php/v/stable.svg" alt="Latest Version"></a>
     <a href="https://packagist.org/packages/algolia/algoliasearch-client-php"><img src="https://poser.pugx.org/algolia/algoliasearch-client-php/license.svg" alt="License"></a>

@@ -105,43 +105,44 @@ workflows:
   workflow:
     jobs:
       - test:
+          name: "nightly - Guzzle 7"
           version: "latest"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
-          version: "8.0"
-          http_client: guzzlehttp/guzzle:"^7.0"
-      - test:
+          name: "PHP 7.4 - Guzzle 7"
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
+          name: "nightly - Guzzle 6"
           version: "latest"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
-          version: "8.0"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
+          name: "PHP 7.4 - Guzzle 6"
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: "PHP 7.0 - Guzzle 6"
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: "PHP 5.6 - Guzzle 6"
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
+          name: "nightly - legacy"
           version: "latest"
           http_client: legacy
       - test:
-          version: "8.0"
-          http_client: legacy
-      - test:
+          name: "PHP 7.4 - legacy"
           version: "7.4"
           http_client: legacy
       - test:
+          name: "PHP 7.0 - legacy"
           version: "7.0"
           http_client: legacy
       - test:
+          name: "PHP 5.6 - legacy"
           version: "5.6"
           http_client: legacy

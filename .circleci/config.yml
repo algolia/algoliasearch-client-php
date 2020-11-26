@@ -114,10 +114,6 @@ workflows:
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
-          name: "nightly - Guzzle 6"
-          version: "latest"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
           name: "PHP 7.4 - Guzzle 6"
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"

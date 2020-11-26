@@ -83,13 +83,22 @@ jobs:
               export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
 
-              eval $(./algolia-keys export)
-              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+              eval $(./algolia-keys export) && php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
             fi
 
       - run:
           name: Autoloading without Composer
-          command: php tests/tests-no-composer.php
+          command: |
+            export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
+            if [ -z ${CIRCLE_PR_REPONAME+x} ]
+            then
+               php vendor/bin/phpunit
+            else
+              export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
+              export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
+
+              eval $(./algolia-keys export) && php tests/tests-no-composer.php
+            fi
 
 
 workflows:

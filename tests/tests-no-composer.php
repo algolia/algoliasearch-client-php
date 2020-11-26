@@ -14,9 +14,10 @@ $index->delete()->wait();
 
 function safeName($name)
 {
-    if (getenv('CI_BUILD_NUM')) {
-        return sprintf('php_%s_%s', $name, getenv('CI_BUILD_NUM'));
-    }
-
-    return $name;
+    return sprintf(
+        'php_%s_%s_%s',
+        date('Y-M-d_H:i:s'),
+        getenv('CI_BUILD_NUM') ? getenv('CI_BUILD_NUM') : get_current_user(),
+        $name
+    );
 }

@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Install PHP Client
           command: |
-            if [ "<<parameters.http_client>>" == "legacy" ]
+            if [ "<<parameters.http_client>>" == "default" ]
             then
                echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
             else
@@ -105,7 +105,7 @@ workflows:
   workflow:
     jobs:
       - test:
-          name: "nightly - Guzzle 7"
+          name: "Nightly - Guzzle 7"
           version: "latest"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
@@ -127,18 +127,18 @@ workflows:
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
-          name: "nightly - legacy"
+          name: "Nightly - Default client"
           version: "latest"
-          http_client: legacy
+          http_client: default
       - test:
-          name: "PHP 7.4 - legacy"
+          name: "PHP 7.4 - Default client"
           version: "7.4"
-          http_client: legacy
+          http_client: default
       - test:
-          name: "PHP 7.0 - legacy"
+          name: "PHP 7.0 - Default client"
           version: "7.0"
-          http_client: legacy
+          http_client: default
       - test:
-          name: "PHP 5.6 - legacy"
+          name: "PHP 5.6 - Default client"
           version: "5.6"
-          http_client: legacy
+          http_client: default

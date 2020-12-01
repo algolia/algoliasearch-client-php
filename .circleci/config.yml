@@ -26,6 +26,9 @@ jobs:
       http_client:
         description: "PHP client"
         type: string
+      foo:
+        description: "Docker image"
+        type: string
 
     executor:
       name: php-docker

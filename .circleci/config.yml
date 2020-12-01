@@ -15,7 +15,7 @@ executors:
         description: "PHP version tag"
         type: string
     docker:
-      - image: <<parameters.docker>>
+        - image: <<parameters.docker>>
 
 jobs:
   test:

@@ -8,14 +8,14 @@ version: 2.1
 executors:
   php-docker: # declares a reusable executor
     parameters:
-      image:
+      docker:
         description: "Docker image"
         type: string
       version:
         description: "PHP version tag"
         type: string
     docker:
-      - image: <<parameters.image>>:<<parameters.version>>
+      - image: <<parameters.docker>>:<<parameters.version>>
 
 jobs:
   test:
@@ -109,48 +109,48 @@ workflows:
     jobs:
       - test:
           name: "PHP 8.0 - Guzzle 7"
-          image: cimg/php
+          docker: cimg/php
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
           name: "PHP 7.4 - Guzzle 7"
-          image: cimg/php
+          docker: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
           name: "PHP 7.4 - Guzzle 6"
-          image: cimg/php
+          docker: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 7.0 - Guzzle 6"
-          image: circleci/php
+          docker: circleci/php
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 5.6 - Guzzle 6"
-          image: cimg/php
+          docker: cimg/php
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
           name: "PHP 8.0 - Default client"
-          image: cimg/php
+          imagedockerphp
           version: "8.0"
           http_client: default
       - test:
           name: "PHP 7.4 - Default client"
-          image: cimg/php
+          docker: cimg/php
           version: "7.4"
           http_client: default
       - test:
           name: "PHP 7.0 - Default client"
-          image: circleci/php
+          docker: circleci/php
           version: "7.0"
           http_client: default
       - test:
           name: "PHP 5.6 - Default client"
-          image: cimg/php
+          docker: cimg/php
           version: "5.6"
           http_client: default

@@ -109,48 +109,48 @@ workflows:
     jobs:
       - test:
           name: "PHP 8.0 - Guzzle 7"
-          docker: cimg/php
+          docker: cimg/php:8.0
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
           name: "PHP 7.4 - Guzzle 7"
-          docker: cimg/php
+          docker: cimg/php:7.4
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
           name: "PHP 7.4 - Guzzle 6"
-          docker: cimg/php
+          docker: cimg/php:7.4
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 7.0 - Guzzle 6"
-          docker: circleci/php
+          docker: circleci/php:7.0
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 5.6 - Guzzle 6"
-          docker: cimg/php
+          docker: cimg/php:5.6
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
           name: "PHP 8.0 - Default client"
-          docker: cimg/php
+          docker: cimg/php:8.0
           version: "8.0"
           http_client: default
       - test:
           name: "PHP 7.4 - Default client"
-          docker: cimg/php
+          docker: cimg/php:7.4
           version: "7.4"
           http_client: default
       - test:
           name: "PHP 7.0 - Default client"
-          docker: circleci/php
+          docker: circleci/php:7.0
           version: "7.0"
           http_client: default
       - test:
           name: "PHP 5.6 - Default client"
-          docker: cimg/php
+          docker: cimg/php:5.6
           version: "5.6"
           http_client: default

@@ -105,8 +105,8 @@ workflows:
   workflow:
     jobs:
       - test:
-          name: "Nightly - Guzzle 7"
-          version: "latest"
+          name: "PHP 8.0 - Guzzle 7"
+          version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
           name: "PHP 7.4 - Guzzle 7"
@@ -127,8 +127,8 @@ workflows:
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
-          name: "Nightly - Default client"
-          version: "latest"
+          name: "PHP 8.0 - Default client"
+          version: "8.0"
           http_client: default
       - test:
           name: "PHP 7.4 - Default client"

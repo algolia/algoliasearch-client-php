@@ -39,7 +39,10 @@ jobs:
       - checkout
 
       - run: sudo apt update
-      - run: sudo docker-php-ext-install zip
+      - run: |
+          if [ "<<parameters.image>>" = "circleci/php" ]; then
+              sudo docker-php-ext-install zip
+          fi
 
       # Download and cache dependencies
       - restore_cache:

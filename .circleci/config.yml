@@ -51,7 +51,12 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             #- composer-deps-
 
-      - run: composer install -n --prefer-dist
+      - run: |
+          if [ "<<parameters.version>>" != "8.0" ]; then
+            composer install -n --prefer-dist
+          else
+            composer install -n --prefer-dist --ignore-platform-req=php
+          fi
 
       - save_cache:
           key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
@@ -74,7 +79,10 @@ jobs:
 
       - run:
           name: Check code styles
-          command: vendor/bin/php-cs-fixer fix -v --dry-run
+          command: |
+            if [ "<<parameters.version>>" != "8.0" ]; then
+              vendor/bin/php-cs-fixer fix -v --dry-run
+            fi
 
       # Run tests with phpunit
       #

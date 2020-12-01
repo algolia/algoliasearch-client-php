@@ -8,30 +8,31 @@ version: 2.1
 executors:
   php-docker: # declares a reusable executor
     parameters:
-      foo:
+      image:
         description: "Docker image"
         type: string
       version:
         description: "PHP version tag"
         type: string
     docker:
-        - image: <<parameters.foo>>
+      - image: <<parameters.image>>:<<parameters.version>>
 
 jobs:
   test:
     parameters:
+      image:
+        description: "Docker image"
+        type: string
       version:
         description: "PHP version tag"
         type: string
       http_client:
         description: "PHP client"
         type: string
-      foo:
-        description: "Docker image"
-        type: string
 
     executor:
       name: php-docker
+      image: <<parameters.image>>
       version: <<parameters.version>>
 
     steps:
@@ -112,48 +113,48 @@ workflows:
     jobs:
       - test:
           name: "PHP 8.0 - Guzzle 7"
-          foo: cimg/php:"8.0"
+          image: cimg/php
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
           name: "PHP 7.4 - Guzzle 7"
-          foo: cimg/php:"7.4"
+          image: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
           name: "PHP 7.4 - Guzzle 6"
-          foo: cimg/php:"7.4"
+          image: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 7.0 - Guzzle 6"
-          foo: circleci/php:"7.0"
+          image: circleci/php
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: "PHP 5.6 - Guzzle 6"
-          foo: cimg/php:"5.6"
+          image: cimg/php
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
           name: "PHP 8.0 - Default client"
-          foo: cimg/php:"8.0"
+          image: cimg/php
           version: "8.0"
           http_client: default
       - test:
           name: "PHP 7.4 - Default client"
-          foo: cimg/php:"7.4"
+          image: cimg/php
           version: "7.4"
           http_client: default
       - test:
           name: "PHP 7.0 - Default client"
-          foo: circleci/php:"7.0"
+          image: circleci/php
           version: "7.0"
           http_client: default
       - test:
           name: "PHP 5.6 - Default client"
-          foo: cimg/php:"5.6"
+          image: cimg/php
           version: "5.6"
           http_client: default

@@ -101,6 +101,9 @@ workflows:
       - test:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
+      - test:
+          version: "7.3"
+          http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
           version: "latest"
@@ -109,10 +112,7 @@ workflows:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
-          version: "7.0"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
-          version: "5.6"
+          version: "7.3"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
@@ -122,8 +122,5 @@ workflows:
           version: "7.4"
           http_client: legacy
       - test:
-          version: "7.0"
-          http_client: legacy
-      - test:
-          version: "5.6"
+          version: "7.3"
           http_client: legacy

@@ -84,12 +84,20 @@ jobs:
               vendor/bin/php-cs-fixer fix -v --dry-run
             fi
 
+      - run:
+          name: Patch PHPUnit tests
+          command: |
+            if [ "<<parameters.version>>" == "7.4" || "<<parameters.version>>" == "8.0" ]; then
+              ./tests/apply-phpunit-patches.sh
+            fi
+
       # Run tests with phpunit
       #
       # If the PR is open by an Algolia, we run all the tests
       # with the keys in the env variables
       # If the PR was open from a fork (community PR)
       # we get API keys from the API key dealer https://alg.li/api-key-dealer
+
       - run:
           name: Run tests
           command: |

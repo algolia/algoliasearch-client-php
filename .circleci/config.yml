@@ -79,7 +79,10 @@ jobs:
 
       - run:
           name: Check code styles
-          command: vendor/bin/php-cs-fixer fix -v --dry-run
+          command: |
+            if [ "<<parameters.version>>" != "8.0" ]; then
+              vendor/bin/php-cs-fixer fix -v --dry-run
+            fi
 
       - run:
           name: Patch PHPUnit tests

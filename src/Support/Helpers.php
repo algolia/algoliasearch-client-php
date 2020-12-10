@@ -29,7 +29,7 @@ final class Helpers
     {
         $arguments = array_slice(func_get_args(), 1);
         foreach ($arguments as &$arg) {
-            $arg = urlencode(urldecode($arg));
+            $arg = urlencode(urldecode((string) $arg));
         }
         array_unshift($arguments, $pathFormat);
 

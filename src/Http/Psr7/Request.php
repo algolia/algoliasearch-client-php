@@ -302,7 +302,7 @@ class Request implements RequestInterface
     private function trimHeaderValues(array $values)
     {
         return array_map(function ($value) {
-            return trim($value, " \t");
+            return trim((string) $value, " \t");
         }, $values);
     }
 }

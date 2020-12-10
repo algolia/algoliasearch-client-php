@@ -617,7 +617,7 @@ class SearchIndex
 
             $retry++;
             $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
+            usleep((int) ($factor * $time)); // 0.1 second
         } while (true);
     }
 

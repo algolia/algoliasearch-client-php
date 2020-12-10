@@ -121,7 +121,7 @@ final class RequestOptionsFactory
 
     private function isValidHeaderName($name)
     {
-        if (preg_match('/^X-[a-zA-Z-]+/', $name)) {
+        if (preg_match('/^X-[a-zA-Z-]+/', (string) $name)) {
             return true;
         }
 

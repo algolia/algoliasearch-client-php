@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\SearchClient;
-use DMS\PHPUnitExtensions\ArraySubset\Assert as AssertArray;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;
 
@@ -70,7 +69,7 @@ class SearchIndexTest extends TestCase
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertInstanceOf('Algolia\AlgoliaSearch\RequestOptions\RequestOptions', $requestOptions);
                 Assert::assertEquals($requestOptions->getBody(), array('page' => 0, 'query' => ''));
-                AssertArray::assertArraySubset(array('User-Agent' => 'blabla'), $requestOptions->getHeaders());
+                Assert::assertArraySubset(array('User-Agent' => 'blabla'), $requestOptions->getHeaders());
 
                 return true;
             }))
@@ -94,7 +93,7 @@ class SearchIndexTest extends TestCase
         $apiWrapperMock->method('read')
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertInstanceOf('Algolia\AlgoliaSearch\RequestOptions\RequestOptions', $requestOptions);
-                AssertArray::assertArraySubset(array('X-Algolia-User-ID' => 'foo'), $requestOptions->getHeaders());
+                Assert::assertArraySubset(array('X-Algolia-User-ID' => 'foo'), $requestOptions->getHeaders());
 
                 return true;
             }))
@@ -114,7 +113,7 @@ class SearchIndexTest extends TestCase
         $apiWrapperMock->method('read')
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertIsArray($requestOptions);
-                AssertArray::assertArraySubset(array('getVersion' => 2), $requestOptions);
+                Assert::assertArraySubset(array('getVersion' => 2), $requestOptions);
 
                 return true;
             }))

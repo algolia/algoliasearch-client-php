@@ -4,12 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\InsightsClient;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class InsightsClientTest extends RequestTestCase
 {
-    use ArraySubsetAsserts;
-
     /** @var InsightsClient */
     private static $client;
 

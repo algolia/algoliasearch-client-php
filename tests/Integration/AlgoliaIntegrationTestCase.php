@@ -5,13 +5,10 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
-    use ArraySubsetAsserts;
-
     protected static $indexes = array();
 
     private static $instance;

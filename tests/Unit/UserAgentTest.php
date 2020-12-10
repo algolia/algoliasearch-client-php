@@ -28,7 +28,7 @@ class UserAgentTest extends TestCase
 
     public function testDefaultUserAgent()
     {
-        $this->assertMatchesRegularExpression('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\).*$/',
+        $this->assertRegExp('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\).*$/',
             UserAgent::get());
 
         $this->assertEquals($this->default, UserAgent::get());

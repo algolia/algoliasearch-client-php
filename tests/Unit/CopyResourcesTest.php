@@ -4,12 +4,9 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\SearchClient;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class CopyResourcesTest extends RequestTestCase
 {
-    use ArraySubsetAsserts;
-
     /** @var \Algolia\AlgoliaSearch\SearchClient */
     private static $client;
 

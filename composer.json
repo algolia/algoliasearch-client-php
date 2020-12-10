@@ -20,10 +20,9 @@
         "psr/simple-cache": "^1.0"
     },
     "require-dev": {
-        "dms/phpunit-arraysubset-asserts": "^0.2.1",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^2.0",
-        "phpunit/phpunit": "^4.8 || ^9.3.0",
+        "phpunit/phpunit": "^4.8 || ^8.5",
         "symfony/yaml": "^2.0 || ^4.0"
     },
     "autoload": {

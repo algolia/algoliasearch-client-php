@@ -5,12 +5,9 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\SearchClient;
-use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class ForwardToReplicasDefaultTest extends RequestTestCase
 {
-    use ArraySubsetAsserts;
-
     public function testIndexDoesNotSetForwardToReplicasByDefault()
     {
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */

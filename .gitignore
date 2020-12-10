@@ -4,3 +4,4 @@ composer.lock
 /tests/cache/
 .idea/
 .php_cs.dist
+.phpunit.result.cache

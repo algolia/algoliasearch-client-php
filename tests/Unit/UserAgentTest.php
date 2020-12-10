@@ -10,7 +10,7 @@ class UserAgentTest extends TestCase
 {
     private $default;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->default = 'Algolia for PHP ('.Algolia::VERSION.'); ';
         $this->default .= 'PHP ('.rtrim(str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION), '-').')';
@@ -28,7 +28,8 @@ class UserAgentTest extends TestCase
 
     public function testDefaultUserAgent()
     {
-        $this->assertRegExp('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\).*$/', UserAgent::get());
+        $this->assertMatchesRegularExpression('/^Algolia for PHP \(\d+\.\d+\.\d+\); PHP \(\d+\.\d+\.\d+\).*$/',
+            UserAgent::get());
 
         $this->assertEquals($this->default, UserAgent::get());
     }

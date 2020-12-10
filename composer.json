@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0",
+        "php": "^5.3 || ^7.0 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -20,9 +20,10 @@
         "psr/simple-cache": "^1.0"
     },
     "require-dev": {
+        "dms/phpunit-arraysubset-asserts": "^0.2.1",
+        "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^2.0",
-        "fzaninotto/faker": "^1.8",
-        "phpunit/phpunit": "^4.8",
+        "phpunit/phpunit": "^4.8 || ^9.3.0",
         "symfony/yaml": "^2.0 || ^4.0"
     },
     "autoload": {

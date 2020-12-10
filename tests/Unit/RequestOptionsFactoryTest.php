@@ -12,7 +12,7 @@ class RequestOptionsFactoryTest extends TestCase
     /** @var RequestOptionsFactory */
     private $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->factory = new RequestOptionsFactory(
             new SearchConfig(array(

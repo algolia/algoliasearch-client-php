@@ -22,7 +22,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         'synonyms' => array('city', 'town', 'village'),
     );
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

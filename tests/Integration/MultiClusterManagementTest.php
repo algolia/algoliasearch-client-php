@@ -19,7 +19,7 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
     /** @var string */
     private $mcmUserId2;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

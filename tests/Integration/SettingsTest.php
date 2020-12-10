@@ -8,7 +8,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 {
     private $settings = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

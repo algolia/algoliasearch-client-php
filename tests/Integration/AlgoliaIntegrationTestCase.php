@@ -5,10 +5,13 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\SyncClient;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
 {
+    use ArraySubsetAsserts;
+
     protected static $indexes = array();
 
     private static $instance;
@@ -16,13 +19,13 @@ abstract class AlgoliaIntegrationTestCase extends PHPUitTestCase
     /** @var SyncClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         static::$indexes = array();
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 

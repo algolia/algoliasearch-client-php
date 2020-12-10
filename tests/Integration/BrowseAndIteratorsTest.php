@@ -6,7 +6,7 @@ class BrowseAndIteratorsTest extends AlgoliaIntegrationTestCase
 {
     protected static $index;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!isset(static::$indexes['main'])) {
             static::$indexes['main'] = static::safeName('browse-and-iterators');

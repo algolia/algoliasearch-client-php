@@ -7,7 +7,7 @@ use Algolia\AlgoliaSearch\SearchClient;
 
 class InsightsClientTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         static::$indexes['insights'] = self::safeName('insights');

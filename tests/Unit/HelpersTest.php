@@ -72,11 +72,10 @@ class HelpersTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException \Algolia\AlgoliaSearch\Exceptions\MissingObjectId
-     */
     public function testMapObjectIDsWithMissingPrimary()
     {
+        $this->expectException(\Algolia\AlgoliaSearch\Exceptions\MissingObjectId::class);
+
         $objects = array(array('name' => 'test'), array('primary' => 1, 'name' => 'cool'));
         Helpers::mapObjectIDs('primary', $objects);
     }

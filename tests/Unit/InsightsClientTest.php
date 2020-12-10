@@ -4,13 +4,16 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\InsightsClient;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class InsightsClientTest extends RequestTestCase
 {
+    use ArraySubsetAsserts;
+
     /** @var InsightsClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$client = InsightsClient::create('id', 'key', 'region');

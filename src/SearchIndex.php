@@ -17,6 +17,7 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use function var_dump;
 
 class SearchIndex
 {

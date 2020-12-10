@@ -2,31 +2,38 @@
 
 namespace Algolia\AlgoliaSearch\Tests\API;
 
-class MethodConsistentConstraint extends \PHPUnit_Framework_Constraint
+use PHPUnit\Framework\Constraint\Constraint;
+
+class MethodConsistentConstraint extends Constraint
 {
     private $instance;
 
     public function __construct($instance)
     {
-        parent::__construct();
         $this->instance = $instance;
     }
 
-    public function evaluate($definition, $description = '', $returnResult = false)
+    public function evaluate($definition, $description = '', $returnResult = false): ?bool
     {
         if (!method_exists($this->instance, $definition['method'])) {
             $description = 'The method '.$definition['method'].' is not implemented.';
 
-            return $returnResult ? false : $this->fail($definition, $description);
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($definition, $description);
         }
 
         $refl = new \ReflectionMethod($this->instance, $definition['method']);
         $argsImplemented = $refl->getParameters();
 
         if (count($argsImplemented) != count($definition['args'])) {
-            return $returnResult ?
-                false :
-                $this->fail($definition, 'The method '.$definition['method'].' has a wong number of arguments.');
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($definition, 'The method '.$definition['method'].' has a wong number of arguments.');
         }
         $success = true;
         foreach ($argsImplemented as $arg) {
@@ -69,18 +76,22 @@ class MethodConsistentConstraint extends \PHPUnit_Framework_Constraint
         }
 
         if (!$success) {
-            return $returnResult ? false : $this->fail($definition, $description);
+            if ($returnResult) {
+                return false;
+            }
+
+            $this->fail($definition, $description);
         }
 
         return true;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return '';
     }
 
-    protected function failureDescription($other)
+    protected function failureDescription($other): string
     {
         return sprintf(
             'the object %s has the method %s correctly implemented',

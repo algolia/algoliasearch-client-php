@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\SearchIndex;
 
 class SearchIndexTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

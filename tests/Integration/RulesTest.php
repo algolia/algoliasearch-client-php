@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 class RulesTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

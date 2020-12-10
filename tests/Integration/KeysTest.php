@@ -11,7 +11,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
         'maxHitsPerQuery' => 2,
     );
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -8,7 +8,7 @@ use DateTime;
 
 class AnalyticsClientTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

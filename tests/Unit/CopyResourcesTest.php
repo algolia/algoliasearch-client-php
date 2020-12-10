@@ -4,13 +4,16 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\SearchClient;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class CopyResourcesTest extends RequestTestCase
 {
+    use ArraySubsetAsserts;
+
     /** @var \Algolia\AlgoliaSearch\SearchClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         static::$client = SearchClient::create('id', 'key');

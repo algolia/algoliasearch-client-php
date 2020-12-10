@@ -8,31 +8,41 @@ version: 2.1
 executors:
   php-docker: # declares a reusable executor
     parameters:
+      image:
+        description: "Docker image"
+        type: string
       version:
         description: "PHP version tag"
         type: string
     docker:
-        - image: circleci/php:<<parameters.version>>
+      - image: <<parameters.image>>:<<parameters.version>>
 
 jobs:
   test:
     parameters:
+      image:
+        description: "Docker image"
+        type: string
       version:
         description: "PHP version tag"
         type: string
       http_client:
-        description: "PHP Client"
+        description: "PHP client"
         type: string
 
     executor:
       name: php-docker
+      image: <<parameters.image>>
       version: <<parameters.version>>
 
     steps:
       - checkout
 
       - run: sudo apt update
-      - run: sudo docker-php-ext-install zip
+      - run: |
+          if [ "<<parameters.image>>" = "circleci/php" ]; then
+              sudo docker-php-ext-install zip
+          fi
 
       # Download and cache dependencies
       - restore_cache:
@@ -41,7 +51,12 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             #- composer-deps-
 
-      - run: composer install -n --prefer-dist
+      - run: |
+          if [ "<<parameters.version>>" != "8.0" ]; then
+            composer install -n --prefer-dist
+          else
+            composer install -n --prefer-dist --ignore-platform-req=php
+          fi
 
       - save_cache:
           key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
@@ -51,7 +66,7 @@ jobs:
       - run:
           name: Install PHP Client
           command: |
-            if [ "<<parameters.http_client>>" == "legacy" ]
+            if [ "<<parameters.http_client>>" == "default" ]
             then
                echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
             else
@@ -64,7 +79,10 @@ jobs:
 
       - run:
           name: Check code styles
-          command: vendor/bin/php-cs-fixer fix -v --dry-run
+          command: |
+            if [ "<<parameters.version>>" != "8.0" ]; then
+              vendor/bin/php-cs-fixer fix -v --dry-run
+            fi
 
       # Run tests with phpunit
       #
@@ -83,47 +101,71 @@ jobs:
               export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
 
-              eval $(./algolia-keys export)
-              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+              eval $(./algolia-keys export) && php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
             fi
 
       - run:
           name: Autoloading without Composer
-          command: php tests/tests-no-composer.php
+          command: |
+            export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
+            if [ -z ${CIRCLE_PR_REPONAME+x} ]
+            then
+               php vendor/bin/phpunit
+            else
+              export CI_PROJ_USERNAME=$CIRCLE_PROJECT_USERNAME
+              export CI_PROJ_REPONAME=$CIRCLE_PROJECT_REPONAME
+
+              eval $(./algolia-keys export) && php tests/tests-no-composer.php
+            fi
 
 
 workflows:
   workflow:
     jobs:
       - test:
-          version: "latest"
+          name: "PHP 8.0 - Guzzle 7"
+          image: cimg/php
+          version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
+          name: "PHP 7.4 - Guzzle 7"
+          image: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
-          version: "latest"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
+          name: "PHP 7.4 - Guzzle 6"
+          image: cimg/php
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: "PHP 7.0 - Guzzle 6"
+          image: circleci/php
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: "PHP 5.6 - Guzzle 6"
+          image: cimg/php
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
-          version: "latest"
-          http_client: legacy
+          name: "PHP 8.0 - Default client"
+          image: cimg/php
+          version: "8.0"
+          http_client: default
       - test:
+          name: "PHP 7.4 - Default client"
+          image: cimg/php
           version: "7.4"
-          http_client: legacy
+          http_client: default
       - test:
+          name: "PHP 7.0 - Default client"
+          image: circleci/php
           version: "7.0"
-          http_client: legacy
+          http_client: default
       - test:
+          name: "PHP 5.6 - Default client"
+          image: cimg/php
           version: "5.6"
-          http_client: legacy
+          http_client: default

@@ -5,9 +5,12 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
 use Algolia\AlgoliaSearch\PlacesClient;
 use Algolia\AlgoliaSearch\SearchClient;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 
 class SearchTest extends RequestTestCase
 {
+    use ArraySubsetAsserts;
+
     public function testQueryAsNullValue()
     {
         $client = SearchClient::create('id', 'key');

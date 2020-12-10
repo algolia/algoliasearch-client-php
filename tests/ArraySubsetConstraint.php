@@ -8,16 +8,6 @@ use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\ExpectationFailedException;
 use SebastianBergmann\Comparator\ComparisonFailure;
 
-/**
- * Constraint that asserts that the array it is evaluated for has a specified subset.
- *
- * Uses array_replace_recursive() to check if a key value subset is part of the
- * subject array.
- *
- * This code was taken from PHPUnit\Framework\Constraint\ArraySubset which was deprecated and then removed.
- *
- * @codeCoverageIgnore
- */
 final class ArraySubsetConstraint extends Constraint
 {
     /**
@@ -44,7 +34,7 @@ final class ArraySubsetConstraint extends Constraint
      *
      * If $returnResult is true, the result of the evaluation is returned as
      * a boolean value instead: true in case of success, false in case of a
-     * failure.
+     * failure
      *
      * @throws ExpectationFailedException
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
@@ -53,7 +43,7 @@ final class ArraySubsetConstraint extends Constraint
     {
         //type cast $other & $this->subset as an array to allow
         //support in standard array functions.
-        $other        = $this->toArray($other);
+        $other = $this->toArray($other);
         $this->subset = $this->toArray($this->subset);
 
         $patched = \array_replace_recursive($other, $this->subset);
@@ -89,7 +79,7 @@ final class ArraySubsetConstraint extends Constraint
      */
     public function toString(): string
     {
-        return 'has the subset ' . $this->exporter()->export($this->subset);
+        return 'has the subset '.$this->exporter()->export($this->subset);
     }
 
     /**
@@ -104,7 +94,7 @@ final class ArraySubsetConstraint extends Constraint
      */
     protected function failureDescription($other): string
     {
-        return 'an array ' . $this->toString();
+        return 'an array '.$this->toString();
     }
 
     private function toArray(iterable $other): array

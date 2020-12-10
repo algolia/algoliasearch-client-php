@@ -11,7 +11,7 @@ $config = (new \PhpCsFixer\Config())
     ->setRules(array(
         '@Symfony' => true,
         'array_syntax' => array('syntax' => 'long'),
-        'increment_style' => array('style' => 'post')
+        'increment_style' => array('style' => 'post'),
     ))
     ->setFinder($finder);
 

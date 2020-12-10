@@ -8,8 +8,8 @@ use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\AssertArraySubsetTrait;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
 class SearchIndexTest extends TestCase
 {

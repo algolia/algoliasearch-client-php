@@ -15,7 +15,6 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
  */
 trait AssertArraySubsetTrait
 {
-
     /**
      * Asserts that an array has a specified subset.
      *
@@ -27,23 +26,15 @@ trait AssertArraySubsetTrait
      * @throws Exception
      *
      * @codeCoverageIgnore
-     *
-     * @deprecated https://github.com/sebastianbergmann/phpunit/issues/3494
      */
     public static function assertArraySubset($subset, $array, bool $checkForObjectIdentity = false, string $message = ''): void
     {
         if (!(\is_array($subset) || $subset instanceof ArrayAccess)) {
-            throw new InvalidArgumentException(
-                1,
-                'array or ArrayAccess'
-            );
+            throw new InvalidArgumentException(1, 'array or ArrayAccess');
         }
 
         if (!(\is_array($array) || $array instanceof ArrayAccess)) {
-            throw new InvalidArgumentException(
-                2,
-                'array or ArrayAccess'
-            );
+            throw new InvalidArgumentException(2, 'array or ArrayAccess');
         }
 
         $constraint = new ArraySubsetConstraint($subset, $checkForObjectIdentity);

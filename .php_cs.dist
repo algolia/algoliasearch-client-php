@@ -6,11 +6,13 @@ $finder = \PhpCsFixer\Finder::create()
     ->in(__DIR__.DIRECTORY_SEPARATOR.'bin')
     ->append(array('.php_cs.dist'));
 
-return \PhpCsFixer\Config::create()
+$config = (new \PhpCsFixer\Config())
     ->setUsingCache(true)
-    ->setRules([
-        '@Symfony'        => true,
-        'array_syntax'    => ['syntax' => 'long'],
-        'increment_style' => ['style' => 'post']
-    ])
+    ->setRules(array(
+        '@Symfony' => true,
+        'array_syntax' => array('syntax' => 'long'),
+        'increment_style' => array('style' => 'post')
+    ))
     ->setFinder($finder);
+
+return $config;

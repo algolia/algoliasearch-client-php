@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Algolia;
@@ -9,13 +11,13 @@ use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         Algolia::setHttpClient(new RequestHttpClient());
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         Algolia::resetHttpClient();

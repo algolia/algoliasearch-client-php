@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\PlacesClient;

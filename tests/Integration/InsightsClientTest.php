@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\InsightsClient;
@@ -7,7 +9,7 @@ use Algolia\AlgoliaSearch\SearchClient;
 
 class InsightsClientTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         static::$indexes['insights'] = self::safeName('insights');

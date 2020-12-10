@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Algolia;
@@ -11,7 +13,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
 {
     private static $cacheDir;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -23,7 +25,7 @@ class FileCacheDriverTest extends AlgoliaIntegrationTestCase
         Algolia::setCache(new FileCacheDriver(self::$cacheDir));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         Algolia::setCache(new NullCacheDriver());

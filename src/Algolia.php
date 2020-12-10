@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;

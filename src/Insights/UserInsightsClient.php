@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Insights;
 
 use Algolia\AlgoliaSearch\InsightsClient;

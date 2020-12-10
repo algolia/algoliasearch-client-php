@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 class KeysTest extends AlgoliaIntegrationTestCase
@@ -11,7 +13,7 @@ class KeysTest extends AlgoliaIntegrationTestCase
         'maxHitsPerQuery' => 2,
     );
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

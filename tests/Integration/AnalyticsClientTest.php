@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\AnalyticsClient;
@@ -8,7 +10,7 @@ use DateTime;
 
 class AnalyticsClientTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

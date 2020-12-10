@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\API;
 
 use Algolia\AlgoliaSearch\Algolia;
@@ -10,12 +12,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class PublicApiTest extends TestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         Algolia::setHttpClient(new NullHttpClient());
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         Algolia::resetHttpClient();

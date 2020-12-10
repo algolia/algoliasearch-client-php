@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 passthru(dirname(__DIR__).'/bin/install-dependencies-without-composer');
 
 require_once dirname(__DIR__).'/autoload.php';

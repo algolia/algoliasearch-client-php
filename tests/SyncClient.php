@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests;
 
 use Algolia\AlgoliaSearch\Response\AbstractResponse;

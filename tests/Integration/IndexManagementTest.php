@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 class IndexManagementTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -13,11 +15,11 @@ class IndexManagementTest extends AlgoliaIntegrationTestCase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
@@ -19,7 +21,7 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
     /** @var string */
     private $mcmUserId2;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

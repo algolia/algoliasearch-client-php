@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 class SynonymsTest extends AlgoliaIntegrationTestCase
@@ -22,7 +24,7 @@ class SynonymsTest extends AlgoliaIntegrationTestCase
         'synonyms' => array('city', 'town', 'village'),
     );
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

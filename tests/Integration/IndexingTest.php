@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Response\MultiResponse;
@@ -9,7 +11,7 @@ use Faker\Factory;
 
 class IndexingTest extends AlgoliaIntegrationTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         static::$indexes['main'] = self::safeName('indexing');
@@ -87,7 +89,7 @@ class IndexingTest extends AlgoliaIntegrationTestCase
         self::assertCount(1006, $iterator);
         $results = iterator_to_array($iterator);
         foreach ($objects as $object) {
-            self::assertContains($object, $results);
+            self::assertContainsEquals($object, $results);
         }
 
         /* Alter 1 record with partialUpdateObject */

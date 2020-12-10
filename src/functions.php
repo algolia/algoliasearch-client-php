@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch;
 
 function api_path($pathFormat, $args = null, $_ = null)

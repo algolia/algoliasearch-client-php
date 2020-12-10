@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Exceptions\RequestException;
@@ -10,7 +12,7 @@ class InsightsClientTest extends RequestTestCase
     /** @var InsightsClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$client = InsightsClient::create('id', 'key', 'region');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Response\MultiResponse;
@@ -8,7 +10,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 {
     private $settings = array();
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

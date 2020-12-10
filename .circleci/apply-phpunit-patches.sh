@@ -10,8 +10,5 @@ find tests/ -type f -print0 | xargs -0 sed -i 's/function setUpBeforeClass(): vo
 find tests/ -type f -print0 | xargs -0 sed -i 's/function setUp(): void/function setUp()/g';
 find tests/ -type f -print0 | xargs -0 sed -i 's/function tearDown(): void/function tearDown()/g';
 
-# Drop the listener from the config file
-sed -i '/<listeners>/,+2d' phpunit.xml.dist;
-
 # Return back to original dir
 cd - > /dev/null

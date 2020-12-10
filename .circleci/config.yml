@@ -87,7 +87,7 @@ jobs:
       - run:
           name: Patch PHPUnit tests
           command: |
-            if [ "<<parameters.version>>" == "7.4" || "<<parameters.version>>" == "8.0" ]; then
+            if [[ "<<parameters.version>>" == "7.4" || "<<parameters.version>>" == "8.0" ]]; then
               ./tests/apply-phpunit-patches.sh
             fi
 

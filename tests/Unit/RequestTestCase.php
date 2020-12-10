@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\Tests\AssertArraySubsetTrait;
 use Algolia\AlgoliaSearch\Tests\RequestHttpClient;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
+    use AssertArraySubsetTrait;
+
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();

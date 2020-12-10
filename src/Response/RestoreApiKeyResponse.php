@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\Response;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\SearchClient;
+use function usleep;
 
 final class RestoreApiKeyResponse extends AbstractResponse
 {
@@ -63,7 +64,7 @@ final class RestoreApiKeyResponse extends AbstractResponse
 
             $retry++;
             $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
+            usleep((int) ($factor * $time)); // 0.1 second
         } while (true);
     }
 }

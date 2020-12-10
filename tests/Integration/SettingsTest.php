@@ -88,7 +88,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
 
         /* Get the settings with getSettings  */
         $retrievedSettings = $index->getSettings();
-        self::assertArraySubset($this->settings, $retrievedSettings);
+        $this->assertArraySubset($this->settings, $retrievedSettings);
 
         /* Set the settings with the following parameters with setSettings */
         $responses[] = $index->setSettings(array('typoTolerance' => 'min', 'ignorePlurals' => array('en', 'fr'), 'removeStopWords' => array('en', 'fr'), 'distinct' => true));
@@ -105,7 +105,7 @@ class SettingsTest extends AlgoliaIntegrationTestCase
         $settingsCopy['distinct'] = true;
 
         $retrievedSettings = $index->getSettings();
-        self::assertArraySubset($settingsCopy, $retrievedSettings);
+        $this->assertArraySubset($settingsCopy, $retrievedSettings);
     }
 
     /**

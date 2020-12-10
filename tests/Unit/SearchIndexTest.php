@@ -7,11 +7,14 @@ namespace Algolia\AlgoliaSearch\Tests\Unit;
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\Tests\AssertArraySubsetTrait;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Assert;
 
 class SearchIndexTest extends TestCase
 {
+    use AssertArraySubsetTrait;
+
     /** @var SearchConfig */
     protected $config;
 
@@ -71,7 +74,7 @@ class SearchIndexTest extends TestCase
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertInstanceOf('Algolia\AlgoliaSearch\RequestOptions\RequestOptions', $requestOptions);
                 Assert::assertEquals($requestOptions->getBody(), array('page' => 0, 'query' => ''));
-                Assert::assertArraySubset(array('User-Agent' => 'blabla'), $requestOptions->getHeaders());
+                $this->assertArraySubset(array('User-Agent' => 'blabla'), $requestOptions->getHeaders());
 
                 return true;
             }))
@@ -95,7 +98,11 @@ class SearchIndexTest extends TestCase
         $apiWrapperMock->method('read')
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertInstanceOf('Algolia\AlgoliaSearch\RequestOptions\RequestOptions', $requestOptions);
-                Assert::assertArraySubset(array('X-Algolia-User-ID' => 'foo'), $requestOptions->getHeaders());
+
+                $headers = $requestOptions->getHeaders();
+
+                Assert::assertArrayHasKey('X-Algolia-User-ID', $headers);
+                Assert::assertEquals('foo', $headers['X-Algolia-User-ID']);
 
                 return true;
             }))
@@ -115,7 +122,8 @@ class SearchIndexTest extends TestCase
         $apiWrapperMock->method('read')
             ->with($this->anything(), $this->anything(), $this->callback(function ($requestOptions) {
                 Assert::assertIsArray($requestOptions);
-                Assert::assertArraySubset(array('getVersion' => 2), $requestOptions);
+                Assert::assertArrayHasKey('getVersion', $requestOptions);
+                Assert::assertEquals($requestOptions['getVersion'], 2);
 
                 return true;
             }))

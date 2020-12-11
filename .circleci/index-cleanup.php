@@ -2,7 +2,7 @@
 
 require '../vendor/autoload.php';
 
-$client = Algolia\AlgoliaSearch\SearchClient::create("I2UB5B7IZB", getenv('ALGOLIA_API_KEY'));
+$client = Algolia\AlgoliaSearch\SearchClient::create(getenv('ALGOLIA_APP_ID'), getenv('ALGOLIA_API_KEY'));
 
 $indices = $client->listIndices();
 

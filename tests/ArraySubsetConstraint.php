@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Algolia\AlgoliaSearch\Tests;
 
 use PHPUnit\Framework\Constraint\Constraint;
-use PHPUnit\Framework\ExpectationFailedException;
 use SebastianBergmann\Comparator\ComparisonFailure;
 
 final class ArraySubsetConstraint extends Constraint
@@ -26,19 +25,6 @@ final class ArraySubsetConstraint extends Constraint
         $this->subset = $subset;
     }
 
-    /**
-     * Evaluates the constraint for parameter $other
-     *
-     * If $returnResult is set to false (the default), an exception is thrown
-     * in case of a failure. null is returned otherwise.
-     *
-     * If $returnResult is true, the result of the evaluation is returned as
-     * a boolean value instead: true in case of success, false in case of a
-     * failure
-     *
-     * @throws ExpectationFailedException
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
     public function evaluate($other, string $description = '', bool $returnResult = false): ?bool
     {
         //type cast $other & $this->subset as an array to allow
@@ -72,26 +58,11 @@ final class ArraySubsetConstraint extends Constraint
         return null;
     }
 
-    /**
-     * Returns a string representation of the constraint.
-     *
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
     public function toString(): string
     {
         return 'has the subset '.$this->exporter()->export($this->subset);
     }
 
-    /**
-     * Returns the description of the failure
-     *
-     * The beginning of failure messages is "Failed asserting that" in most
-     * cases. This method should return the second part of that sentence.
-     *
-     * @param mixed $other evaluated value or object
-     *
-     * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     */
     protected function failureDescription($other): string
     {
         return 'an array '.$this->toString();

@@ -64,7 +64,7 @@ jobs:
 
       - run:
           name: Check code styles
-          command:
+          command: |
             export PHP_CS_FIXER_IGNORE_ENV=1
             vendor/bin/php-cs-fixer fix -v --dry-run
 

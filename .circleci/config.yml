@@ -35,18 +35,18 @@ jobs:
       - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
-            # fallback to using the latest cache if no exact match is found
-            #- composer-deps-
+#      - restore_cache:
+#          keys:
+#            - composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
+#            # fallback to using the latest cache if no exact match is found
+#            #- composer-deps-
 
-      - run: composer install -n --prefer-dist
+      - run: COMPOSER_MEMORY_LIMIT=-1 composer install -n --prefer-dist
 
-      - save_cache:
-          key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
-          paths:
-            - ./vendor
+#      - save_cache:
+#          key: composer-deps-<<parameters.version>>-{{ checksum "composer.json" }}
+#          paths:
+#            - ./vendor
 
       - run:
           name: Install PHP Client
@@ -55,16 +55,16 @@ jobs:
             then
                echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
             else
-              composer require <<parameters.http_client>>
+              COMPOSER_MEMORY_LIMIT=-1 composer require <<parameters.http_client>>
             fi
 
       - run:
           name: Get API Key Dealer client
           command: wget https://alg.li/algolia-keys && chmod +x algolia-keys
 
-      - run:
-          name: Check code styles
-          command: vendor/bin/php-cs-fixer fix -v --dry-run
+#      - run:
+#          name: Check code styles
+#          command: vendor/bin/php-cs-fixer fix -v --dry-run
 
       # Run tests with phpunit
       #
@@ -99,11 +99,17 @@ workflows:
           version: "latest"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
+          version: "8.0"
+          http_client: guzzlehttp/guzzle:"^7.0"
+      - test:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
           version: "latest"
+          http_client: guzzlehttp/guzzle:"^6.0"
+      - test:
+          version: "8.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           version: "7.4"
@@ -117,6 +123,9 @@ workflows:
 
       - test:
           version: "latest"
+          http_client: legacy
+      - test:
+          version: "8.0"
           http_client: legacy
       - test:
           version: "7.4"

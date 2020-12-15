@@ -12,7 +12,7 @@ class AnalyticsClientTest extends AlgoliaIntegrationTestCase
     {
         parent::setUp();
 
-        static::$indexes['aa_testing'] = self::safeName('aa_testing');
+        static::$indexes['aa_testing'] = self::safeName('aa_testing_');
     }
 
     public function testAATesting()

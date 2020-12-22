@@ -130,7 +130,7 @@ class MultiClusterManagementTest extends AlgoliaIntegrationTestCase
                 sleep(1);
                 $retry++;
             }
-        } while (!array_key_exists('userID', $response) && $retry < 10);
+        } while (!array_key_exists('userID', $response) && $retry < 100);
 
         return $response;
     }

@@ -96,43 +96,56 @@ workflows:
   workflow:
     jobs:
       - test:
+          name: 'Guzzle 7 - PHP latest'
           version: "latest"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
+          name: 'Guzzle 7 - PHP 8.0'
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
       - test:
+          name: 'Guzzle 7 - PHP 7.4'
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
 
       - test:
+          name: 'Guzzle 6 - PHP latest'
           version: "latest"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: 'Guzzle 6 - PHP 8.0'
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: 'Guzzle 6 - PHP 7.4'
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: 'Guzzle 6 - PHP 7.0'
           version: "7.0"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
+          name: 'Guzzle 6 - PHP 5.6'
           version: "5.6"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
+          name: 'Legacy client - PHP latest'
           version: "latest"
           http_client: legacy
       - test:
+          name: 'Legacy client - PHP 8.0'
           version: "8.0"
           http_client: legacy
       - test:
+          name: 'Legacy client - PHP 7.4'
           version: "7.4"
           http_client: legacy
       - test:
+          name: 'Legacy client - PHP 7.0'
           version: "7.0"
           http_client: legacy
       - test:
+          name: 'Legacy client - PHP 5.6'
           version: "5.6"
           http_client: legacy

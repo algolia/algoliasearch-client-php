@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.7.2...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.7.3...master)
+
+## [v2.7.3](https://github.com/algolia/algoliasearch-client-php/compare/2.7.2...2.7.3)
+
+### Chore
+- Support PHP 8
+- Use correct en variables for forks
 
 ## [v2.7.2](https://github.com/algolia/algoliasearch-client-php/compare/2.7.1...2.7.2)
 

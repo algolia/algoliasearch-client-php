@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0",
+        "php": "^5.3 || ^7.0 || ^8.0",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -22,7 +22,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
         "fzaninotto/faker": "^1.8",
-        "phpunit/phpunit": "^4.8",
+        "julienbourdeau/phpunit": "4.8.37",
         "symfony/yaml": "^2.0 || ^4.0"
     },
     "autoload": {

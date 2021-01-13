@@ -7,6 +7,7 @@ use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\DictionaryResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\RestoreApiKeyResponse;
@@ -447,6 +448,155 @@ class SearchClient
         return $this->api->read(
             'GET',
             api_path('/1/clusters/mapping/pending'),
+            $requestOptions
+        );
+    }
+
+    /**
+     * Save entries to the given dictionary.
+     *
+     * @param string                      $dictionary
+     * @param array<array<string, mixed>> $entries
+     * @param bool                        $clearExistingDictionaryEntries
+     * @param array|RequestOptions        $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function saveDictionaryEntries($dictionary, $entries, $clearExistingDictionaryEntries = false, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => $clearExistingDictionaryEntries,
+                'requests' => array_map(function ($entry) {
+                    Helpers::ensureObjectID($entry, 'ObjectID is required to add a dictionary entry.');
+
+                    return array(
+                        'action' => 'addEntry',
+                        'body' => $entry,
+                    );
+                }, $entries),
+            ),
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Replace all dictionary entries.
+     *
+     * @param string                      $dictionary
+     * @param array<array<string, mixed>> $entries
+     * @param array                       $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    {
+        return $this->saveDictionaryEntries(
+            $dictionary,
+            $entries,
+            $clearExistingDictionaryEntries = true,
+            $requestOptions
+        );
+    }
+
+    /**
+     * Delete dictionary entries by their objectID.
+     *
+     * @param string        $dictionary
+     * @param array<string> $objectIDs
+     * @param array         $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => false,
+                'requests' => array_map(function ($objectID) {
+                    return array(
+                        'action' => 'deleteEntry',
+                        'body' => array('objectID' => $objectID),
+                    );
+                }, $objectIDs),
+            ),
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Clear all entries in the given dictionary.
+     *
+     * @param string               $dictionary
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function clearDictionaryEntries($dictionary, $requestOptions = array())
+    {
+        return $this->replaceDictionaryEntries($dictionary, array(), $requestOptions);
+    }
+
+    /**
+     * Search the dictionary for entries.
+     *
+     * @param string               $dictionary
+     * @param string               $query
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return mixed
+     */
+    public function searchDictionaryEntries($dictionary, $query, $requestOptions = array())
+    {
+        return $this->api->read(
+            'POST',
+            api_path('/1/dictionaries/%s/search', $dictionary),
+            array('query' => $query),
+            $requestOptions
+        );
+    }
+
+    /**
+     * Update the settings for all dictionaries.
+     *
+     * @param array<mixed> $dictionarySettings
+     * @param array        $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function setDictionarySettings($dictionarySettings, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'PUT',
+            api_path('/1/dictionaries/*/settings'),
+            $dictionarySettings,
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Get the settings for all dictionaries.
+     *
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return mixed
+     */
+    public function getDictionarySettings($requestOptions = array())
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/dictionaries/*/settings'),
+            array(),
             $requestOptions
         );
     }

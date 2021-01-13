@@ -3,32 +3,40 @@
 namespace Algolia\AlgoliaSearch\Response;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\SearchClient;
 
 final class DictionaryResponse extends AbstractResponse
 {
-    /**
-     * @var \Algolia\AlgoliaSearch\SearchClient
-     */
+    /* @var \Algolia\AlgoliaSearch\SearchClient */
     private $client;
 
-    /**
-     * @var \Algolia\AlgoliaSearch\Config\SearchConfig
-     */
+    /* @var \Algolia\AlgoliaSearch\Config\SearchConfig */
     private $config;
 
+    /* @var bool */
     private $done = false;
 
-    public function __construct(
-        array $apiResponse,
-        SearchClient $client,
-        SearchConfig $config
-    ) {
+    /**
+     * DictionaryResponse constructor.
+     * @param array $apiResponse
+     * @param SearchClient $client
+     * @param SearchConfig $config
+     */
+    public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config)
+    {
         $this->apiResponse = $apiResponse;
         $this->client = $client;
         $this->config = $config;
     }
 
+    /**
+     * Wait for the task from this response to finish.
+     *
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return $this
+     */
     public function wait($requestOptions = array())
     {
         $retryCount = 1;
@@ -50,6 +58,14 @@ final class DictionaryResponse extends AbstractResponse
         return $this;
     }
 
+    /**
+     * Get the task details.
+     *
+     * @param int|string           $taskId
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return mixed
+     */
     private function getTask($taskId, $requestOptions = array())
     {
         if (!$taskId) {
@@ -62,5 +78,4 @@ final class DictionaryResponse extends AbstractResponse
             $requestOptions
         );
     }
-
 }

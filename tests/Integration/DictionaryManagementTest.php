@@ -21,29 +21,56 @@ class DictionaryManagementTest extends AlgoliaIntegrationTestCase
         return self::$dictionaryClient;
     }
 
-    public function testDictionaryManagement()
+    private static function randomString()
+    {
+        return substr(str_shuffle(md5(microtime())), 0, 10);
+    }
+
+    public function testStopWordDictionaryManagement()
     {
         $client = self::getDictionaryClient();
+        $objectID = $stopWord = self::randomString();
 
-        /* We start with resetting the state of the dictionaries  */
-        $client->clearDictionaryEntries('stopwords')->wait();
-        $client->clearDictionaryEntries('plurals')->wait();
-        $client->clearDictionaryEntries('compounds')->wait();
+        $initialStopwordCount = $client->searchDictionaryEntries('stopwords', $stopWord)['nbHits'];
 
-        $initialStopwordCount = $client->searchDictionaryEntries('stopwords', 'down')['nbHits'];
-
-        $entry = array('objectID' => '1', 'language' => 'en', 'word' => 'down');
+        $entry = array('objectID' => $objectID, 'language' => 'en', 'word' => $stopWord);
         $client->saveDictionaryEntries(
             'stopwords',
             array($entry)
         )->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', 'down');
+        $searchResponse = $client->searchDictionaryEntries('stopwords', $stopWord);
         $savedEntry = $searchResponse['hits'][0];
 
         $this->assertEquals($initialStopwordCount + 1, $searchResponse['nbHits']);
-        $this->assertEquals($entry['objectID'], $savedEntry['objectID']);
-        $this->assertEquals($entry['word'], $savedEntry['word']);
+        $this->assertEquals($objectID, $savedEntry['objectID']);
+        $this->assertEquals($stopWord, $savedEntry['word']);
+
+        $client->deleteDictionaryEntries('stopwords', array($objectID))->wait();
+
+        $searchResponse = $client->searchDictionaryEntries('stopwords', $stopWord);
+
+        $this->assertEquals($initialStopwordCount, $searchResponse['nbHits']);
+
+        $oldDictionaryState = $client->searchDictionaryEntries('stopwords', '');
+        $oldDictionaryEntries = array_map(function ($hit) {
+            unset($hit['type']);
+
+            return $hit;
+        }, $oldDictionaryState['hits']);
+
+        $client->saveDictionaryEntries(
+            'stopwords',
+            array($entry)
+        )->wait();
+
+        $searchResponse = $client->searchDictionaryEntries('stopwords', '');
+        $this->assertEquals($oldDictionaryState['nbHits'] + 1, $searchResponse['nbHits']);
+
+        $client->replaceDictionaryEntries('stopwords', $oldDictionaryEntries)->wait();
+
+        $searchResponse = $client->searchDictionaryEntries('stopwords', '');
+        $this->assertEquals($oldDictionaryState['nbHits'], $searchResponse['nbHits']);
 
         $stopwordSettings = array(
             'disableStandardEntries' => array(
@@ -56,5 +83,41 @@ class DictionaryManagementTest extends AlgoliaIntegrationTestCase
         $client->setDictionarySettings($stopwordSettings)->wait();
 
         $this->assertEquals($stopwordSettings, $client->getDictionarySettings());
+    }
+
+    public function testCompoundDictionaryManagement()
+    {
+        $client = self::getDictionaryClient();
+        $objectID = self::randomString();
+
+        $initialStopwordCount = $client->searchDictionaryEntries('compounds', 'kopfschmerztablette')['nbHits'];
+
+        $entry = array(
+            'objectID' => $objectID,
+            'language' => 'de',
+            'word' => 'kopfschmerztablette',
+            'decomposition' => array(
+                'kopf', 'schmerz', 'tablette',
+            ),
+        );
+
+        $client->saveDictionaryEntries(
+            'compounds',
+            array($entry)
+        )->wait();
+
+        $searchResponse = $client->searchDictionaryEntries('compounds', 'kopfschmerztablette');
+        $savedEntry = $searchResponse['hits'][0];
+
+        $this->assertEquals($initialStopwordCount + 1, $searchResponse['nbHits']);
+        $this->assertEquals($entry['objectID'], $savedEntry['objectID']);
+        $this->assertEquals($entry['word'], $savedEntry['word']);
+        $this->assertEquals($entry['decomposition'], $savedEntry['decomposition']);
+
+        $client->deleteDictionaryEntries('compounds', array($objectID))->wait();
+
+        $searchResponse = $client->searchDictionaryEntries('compounds', 'kopfschmerztablette');
+
+        $this->assertEquals($initialStopwordCount, $searchResponse['nbHits']);
     }
 }

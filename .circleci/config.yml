@@ -61,9 +61,7 @@ jobs:
       - run:
           name: Get API Key Dealer client
           command: |
-            if [ "$CIRCLE_PR_REPONAME" ]; then
-              curl -s https://algoliasearch-client-keygen.herokuapp.com | sh >> $BASH_ENV
-            fi
+            curl -s https://algoliasearch-client-keygen.herokuapp.com | sh >> $BASH_ENV
 
 #      - run:
 #          name: Check code styles

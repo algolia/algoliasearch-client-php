@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\Exceptions\InvalidArgumentObjectsException;
 use Algolia\AlgoliaSearch\Exceptions\MissingObjectId;
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException;
@@ -311,6 +312,10 @@ class SearchIndex
         $count = 0;
 
         foreach ($objects as $object) {
+            if (!Helpers::isIterable($object)) {
+                throw new InvalidArgumentObjectsException();
+            }
+
             $batch[] = $object;
             $count++;
 

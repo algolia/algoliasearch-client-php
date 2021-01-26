@@ -1,0 +1,279 @@
+<?php
+
+namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
+
+use Algolia\AlgoliaSearch\Response\MultiResponse;
+use Algolia\AlgoliaSearch\SearchIndex;
+use Algolia\AlgoliaSearch\Support\Helpers;
+use Algolia\AlgoliaSearch\Tests\Cts\TestHelper;
+
+class SearchIndexTest extends BaseTest
+{
+    protected function setUp()
+    {
+        parent::setUp();
+
+        if (!isset(static::$indexes['main'])) {
+            static::$indexes['main'] = TestHelper::getTestIndexName('indexing');
+        }
+    }
+
+    public function testIndexing()
+    {
+        $responses = array();
+        /** @var SearchIndex $index */
+        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);
+
+        /* adding an object with object id */
+        $obj1 = TestHelper::createRecord(null);
+        $responses[] = $index->saveObject($obj1);
+
+        /* adding an object w/o object id s */
+        $obj2 = TestHelper::createRecord(false);
+        $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
+
+        /* saving an empty set of objects */
+//        $responses[] = $index->saveObjects(array(), array('autoGenerateObjectIDIfNotExist' => true));
+
+        /* adding two objects with object id  */
+        $obj3 = TestHelper::createRecord(null);
+        $obj4 = TestHelper::createRecord(null);
+        $responses[] = $index->saveObjects(array($obj3, $obj4));
+
+        /* adding two objects w/o object id  */
+        $obj5 = TestHelper::createRecord(false);
+        $obj6 = TestHelper::createRecord(false);
+        $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
+
+        /* adding 1000 objects with object id with 10 batch */
+        $objects = array();
+        for ($i = 1; $i <= 1000; $i++) {
+            $objects[$i] = TestHelper::createRecord($i);
+        }
+
+        $objectsChunks = array_chunk($objects, 100);
+        foreach ($objectsChunks as $chunk) {
+            $request = Helpers::buildBatch($chunk, 'addObject');
+            $responses[] = $index->batch($request);
+        }
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /* Check 6 first records with getObject */
+        $objectID1 = $responses[0][0]['objectIDs'][0];
+
+        $objectID2 = $responses[1][0]['objectIDs'][0];
+
+        $objectID3 = $responses[2][0]['objectIDs'][0];
+        $objectID4 = $responses[2][0]['objectIDs'][1];
+
+        $objectID5 = $responses[3][0]['objectIDs'][0];
+        $objectID6 = $responses[3][0]['objectIDs'][1];
+
+        $result1 = $index->getObject($objectID1);
+        self::assertEquals($obj1['name'], $result1['name']);
+
+        $result2 = $index->getObject($objectID2);
+        self::assertEquals($obj2['name'], $result2['name']);
+
+        $result3 = $index->getObject($objectID3);
+        self::assertEquals($obj3['name'], $result3['name']);
+        $result4 = $index->getObject($objectID4);
+        self::assertEquals($obj4['name'], $result4['name']);
+
+        $result5 = $index->getObject($objectID5);
+        self::assertEquals($obj5['name'], $result5['name']);
+        $result6 = $index->getObject($objectID6);
+        self::assertEquals($obj6['name'], $result6['name']);
+
+        /* Check 1000 remaining records with getObjects */
+        $results = $index->getObjects(array_keys($objects));
+        self::assertEquals(array_values($objects), $results['results']);
+
+        /*  Browse all records with browseObjects */
+        $iterator = $index->browseObjects();
+        self::assertCount(1006, $iterator);
+
+        $results = iterator_to_array($iterator);
+        foreach ($objects as $object) {
+            self::assertContains($object, $results);
+        }
+
+        /* Alter 1 record with partialUpdateObject */
+        $obj1['name'] = 'This is an altered name 1';
+        $responses[] = $index->partialUpdateObject($obj1);
+
+        /* Alter 2 records with partialUpdateObjects */
+        $obj3['name'] = 'This is an altered name 3';
+        $obj4['name'] = 'This is an altered name 4';
+        $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /* Check previous altered records with getObject */
+        self::assertEquals($index->getObject($objectID1), $obj1);
+        self::assertEquals($index->getObject($objectID3), $obj3);
+        self::assertEquals($index->getObject($objectID4), $obj4);
+
+        /* adding an object w/o object id s */
+        $objWithTag = TestHelper::createRecord(null);
+        $objWithTag['_tags'] = array('algolia');
+        $responses[] = $index->saveObject($objWithTag)->wait();
+
+        /*  Delete the first record with deleteObject */
+        $responses[] = $index->deleteObject($objectID1);
+
+        /* Delete the record with the "algolia" tag */
+        $responses[] = $index->deleteBy(array('tagFilters' => array('algolia')));
+
+        /* Delete the 5 remaining first records with deleteObjects */
+        $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
+        $responses[] = $index->deleteObjects($objectsIDs);
+
+        /* Browse all objects with browseObjects */
+        $iterator = $index->browseObjects();
+        self::assertCount(1000, $iterator);
+
+        /* Delete the 1000 remaining records with clearObjects */
+        $responses[] = $index->clearObjects();
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /* Browse all objects with browseObjects */
+        $iterator = $index->browseObjects();
+        self::assertCount(0, $iterator);
+    }
+
+    public function testSettings()
+    {
+        static::$indexes['settings'] = TestHelper::getTestIndexName('settings');
+
+        /** @var SearchIndex $settingsIndex */
+        $settingsIndex = TestHelper::getClient()->initIndex(static::$indexes['settings']);
+
+        $responses = array();
+
+        /* adding an object with object id */
+        $obj1 = TestHelper::createRecord(null);
+        $responses[] = $settingsIndex->saveObject($obj1);
+
+        $settings = array(
+            'searchableAttributes' => array(
+                "attribute1",
+                "attribute2",
+                "attribute3",
+                "ordered(attribute4)",
+                "unordered(attribute5)"
+            ),
+            'attributesForFaceting' => array("attribute1", "filterOnly(attribute2)", "searchable(attribute3)"),
+            'unretrievableAttributes' => array("attribute1", "attribute2"),
+            'attributesToRetrieve' => array("attribute3", "attribute4"),
+            'ranking' => array(
+                "asc(attribute1)",
+                "desc(attribute2)",
+                "attribute",
+                "custom",
+                "exact",
+                "filters",
+                "geo",
+                "proximity",
+                "typo",
+                "words"
+            ),
+            'customRanking' => array("asc(attribute1)", "desc(attribute1)"),
+            'replicas' => array(static::$indexes['settings'] . "_replica1", static::$indexes['settings'] . "_replica2"),
+            'maxValuesPerFacet' => 100,
+            'sortFacetValuesBy' => "count",
+            'attributesToHighlight' => array("attribute1", "attribute2"),
+            'attributesToSnippet' => array("attribute1:10", "attribute2:8"),
+            'highlightPreTag' => "<strong>",
+            'highlightPostTag' => "</strong>",
+            'snippetEllipsisText' => " and so on.",
+            'restrictHighlightAndSnippetArrays' => true,
+            'hitsPerPage' => 42,
+            'paginationLimitedTo' => 43,
+            'minWordSizefor1Typo' => 2,
+            'minWordSizefor2Typos' => 6,
+            'typoTolerance' => "false",
+            'allowTyposOnNumericTokens' => false,
+            'ignorePlurals' => true,
+            'disableTypoToleranceOnAttributes' => array("attribute1", "attribute2"),
+            'disableTypoToleranceOnWords' => array("word1", "word2"),
+            'separatorsToIndex' => "()[]",
+            'queryType' => "prefixNone",
+            'removeWordsIfNoResults' => "allOptional",
+            'advancedSyntax' => true,
+            'optionalWords' => array("word1", "word2"),
+            'removeStopWords' => true,
+            'disablePrefixOnAttributes' => array("attribute1", "attribute2"),
+            'disableExactOnAttributes' => array("attribute1", "attribute2"),
+            'exactOnSingleWordQuery' => "word",
+            'enableRules' => false,
+            'numericAttributesForFiltering' => array("attribute1", "attribute2"),
+            'allowCompressionOfIntegerArray' => true,
+            'attributeForDistinct' => "attribute1",
+            'distinct' => 2,
+            'replaceSynonymsInHighlight' => false,
+            'minProximity' => 7,
+            'responseFields' => array("hits", "hitsPerPage"),
+            'maxFacetHits' => 100,
+            'camelCaseAttributes' => array("attribute1", "attribute2"),
+            'decompoundedAttributes' => array("de" => array("attribute1", "attribute2"), "fi" => array("attribute3")),
+            'keepDiacriticsOnCharacters' => "øé",
+            'queryLanguages' => array("en", "fr"),
+            'alternativesAsExact' => array("ignorePlurals"),
+            'advancedSyntaxFeatures' => array("exactPhrase"),
+            'userData' => '{"customUserData": 42.0}',
+            'indexLanguages' => array("ja"),
+            'customNormalization' => array("default" => array("ä" => "ae", "ö" => "oe")),
+            'enablePersonalization' => true
+        );
+
+        $responses[] = $settingsIndex->setSettings($settings);
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /* Because the response settings dict contains the extra version key, we
+        # also add it to the expected settings dict to prevent the test to fail
+        # for a missing key. */
+        $settings['version'] = 2;
+
+        /* Check values from getSettings method */
+        $fetchedSettings = $settingsIndex->getSettings();
+        self::assertEquals($settings, $fetchedSettings);
+
+        $settings['typoTolerance'] = "min";
+        $settings['ignorePlurals'] = array("en", "fr");
+        $settings['removeStopWords'] = array("en", "fr");
+        $settings['distinct'] = true;
+
+        $responses[] = $settingsIndex->setSettings($settings)->wait();
+
+        /* Check new values from getSettings method */
+        $fetchedSettings = $settingsIndex->getSettings();
+        self::assertEquals($settings, $fetchedSettings);
+    }
+
+    //    public function testIndexExists()
+//    {
+//        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);
+//
+//        self::assertFalse($index->exists());
+//
+//        /* adding a object w/o object id s */
+//        $obj = TestHelper::createRecord();
+//        $index
+//            ->saveObject($obj, array('autoGenerateObjectIDIfNotExist' => true))
+//            ->wait();
+//
+//        self::assertTrue($index->exists());
+//    }
+}

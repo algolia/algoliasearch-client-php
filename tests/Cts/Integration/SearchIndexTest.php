@@ -271,7 +271,6 @@ class SearchIndexTest extends BaseTest
 
         $responses = array();
 
-        /* adding an object with object id */;
         $responses[] = $searchIndex->saveObjects(
             TestHelper::$employees,
             array('autoGenerateObjectIDIfNotExist' => true)
@@ -353,7 +352,91 @@ class SearchIndexTest extends BaseTest
         self::assertContains('Arista Networks', $resultFacets);
     }
 
+    public function testSynonyms()
+    {
+        static::$indexes['synonyms'] = TestHelper::getTestIndexName('synonyms');
 
+        /** @var SearchIndex $synonymsIndex */
+        $synonymsIndex = TestHelper::getClient()->initIndex(static::$indexes['synonyms']);
+
+        $responses = array();
+
+        $responses[] = $synonymsIndex->saveObjects(
+            TestHelper::$consoles,
+            array('autoGenerateObjectIDIfNotExist' => true)
+        );
+
+        $nWaySynonym =  array(
+            'objectID' => 'gba',
+            'type' => 'synonym',
+            'synonyms' => array('gameboy advance', 'game boy advance'),
+        );
+
+        $syn1 = array(
+            'objectID' => 'wii_to_wii_u',
+            'type' => 'onewaysynonym',
+            'input' => 'wii',
+            'synonyms' => array('wii U'),
+        );
+
+        $syn2 = array(
+            'objectID' => 'playstation_version_placeholder',
+            'type' => 'placeholder',
+            'placeholder' => '<PLAYSTATIONVERSION>',
+            'replacements' => array('1', 'One', '2', '3', '4', '4 Pro'),
+        );
+
+        $syn3 = array(
+            'objectID' => 'ps4',
+            'type' => 'altcorrection1',
+            'word' => 'ps4',
+            'corrections' => array('playstation4'),
+        );
+
+        $syn4 = array(
+            'objectID' => 'psone',
+            'type' => 'altcorrection2',
+            'word' => 'psone',
+            'corrections' => array('playstationone'),
+        );
+
+        $synonyms = array($syn1, $syn2, $syn3, $syn4);
+
+        $responses[] = $synonymsIndex->saveSynonym($nWaySynonym);
+        $responses[] = $synonymsIndex->saveSynonyms($synonyms);
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        self::assertEquals($nWaySynonym, $synonymsIndex->getSynonym('gba'));
+        self::assertEquals($synonyms[0], $synonymsIndex->getSynonym('wii_to_wii_u'));
+        self::assertEquals($synonyms[1], $synonymsIndex->getSynonym('playstation_version_placeholder'));
+        self::assertEquals($synonyms[2], $synonymsIndex->getSynonym('ps4'));
+        self::assertEquals($synonyms[3], $synonymsIndex->getSynonym('psone'));
+
+        $res = $synonymsIndex->searchSynonyms('');
+        $this->assertEquals(5, $res['nbHits']);
+
+        $iterator = $synonymsIndex->browseSynonyms(array('hitsPerPage' => 1));
+        $synonymsToCheck = array($nWaySynonym, $syn1, $syn2, $syn3, $syn4);
+        foreach ($iterator as $synonym) {
+            self::assertContains($synonym, $synonymsToCheck);
+        }
+
+        $synonymsIndex->deleteSynonym('gba')->wait();
+
+        try {
+            $synonymsIndex->getSynonym('gba');
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+        }
+
+        $synonymsIndex->clearSynonyms()->wait();
+
+        $res = $synonymsIndex->searchSynonyms('');
+        self::assertArraySubset(array('nbHits' => 0), $res);
+    }
 
     //    public function testIndexExists()
 //    {

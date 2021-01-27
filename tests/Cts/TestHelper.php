@@ -42,6 +42,16 @@ class TestHelper
         array('company' => 'Yahoo', 'name' => 'Marissa Mayer'),
     );
 
+    public static $consoles = array(
+        array('console' => 'Sony PlayStation <PLAYSTATIONVERSION>'),
+        array('console' => 'Nintendo Switch'),
+        array('console' => 'Nintendo Wii U'),
+        array('console' => 'Nintendo Game Boy Advance'),
+        array('console' => 'Microsoft Xbox'),
+        array('console' => 'Microsoft Xbox 360'),
+        array('console' => 'Microsoft Xbox One'),
+    );
+
     /**
      * @throws \Exception
      */

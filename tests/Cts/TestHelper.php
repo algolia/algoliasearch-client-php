@@ -26,7 +26,7 @@ class TestHelper
     /** @var SyncClient */
     private static $client;
 
-    public $employees = array(
+    public static $employees = array(
         array('company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'),
         array('company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'),
         array('company' => 'Amazon', 'name' => 'Jeff Bezos'),

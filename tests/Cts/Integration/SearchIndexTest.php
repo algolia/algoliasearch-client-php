@@ -262,6 +262,99 @@ class SearchIndexTest extends BaseTest
         self::assertEquals($settings, $fetchedSettings);
     }
 
+    public function testSearch()
+    {
+        static::$indexes['search'] = TestHelper::getTestIndexName('search');
+
+        /** @var SearchIndex $searchIndex */
+        $searchIndex = TestHelper::getClient()->initIndex(static::$indexes['search']);
+
+        $responses = array();
+
+        /* adding an object with object id */;
+        $responses[] = $searchIndex->saveObjects(
+            TestHelper::$employees,
+            array('autoGenerateObjectIDIfNotExist' => true)
+        );
+
+        $responses[] = $searchIndex->setSettings(array("attributesForFaceting" => array("searchable(company)")));
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        $res = $searchIndex->search('algolia');
+
+        /* Check if the number of results is 2  */
+        self::assertCount(2, $res["hits"]);
+
+        /* Check item positions */
+        self::assertEquals(SearchIndex::getObjectPosition($res, 'nicolas-dessaigne'), 0);
+        self::assertEquals(SearchIndex::getObjectPosition($res, 'julien-lemoine'), 1);
+        self::assertEquals(SearchIndex::getObjectPosition($res, ''), -1);
+
+        /* Check that no object is found when callback returns always false */
+        try {
+            $searchIndex->findObject(function () { return false; });
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+        }
+
+        /* Check that first object is found when callback returns always true */
+        $found = $searchIndex->findObject(function () { return true; });
+        self::assertEquals($found['position'], 0);
+        self::assertEquals($found['page'], 0);
+
+        /* Callback that checks if the company is Apple */
+        $callback = function ($obj) {
+            return array_key_exists('company', $obj) && 'Apple' === $obj['company'];
+        };
+
+        /* Check that no "apple" employee is returned when we search for "Algolia" */
+        try {
+            $searchIndex->findObject($callback, array('query' => 'algolia'));
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+        }
+
+        /* Check that no object is found when we limit the search to the 5 first objects */
+        try {
+            $searchIndex->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+        }
+
+        /* Check that we actually find the object when we paginate (on page 2) */
+        $obj = $searchIndex->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
+        self::assertEquals($obj['position'], 0);
+        self::assertEquals($obj['page'], 2);
+
+        $res = $searchIndex->search('elon', array('clickAnalytics' => true));
+        self::assertNotEmpty($res['queryID']);
+
+        $res = $searchIndex->search('', array('facets' => '*', 'facetFilters' => 'company:tesla'));
+        self::assertCount(1, $res["hits"]);
+
+        $res = $searchIndex->search(
+            '',
+            array('facets' => '*', 'filters' => 'company:tesla OR company:spacex')
+        );
+        self::assertCount(2, $res["hits"]);
+
+        $res = $searchIndex->searchForFacetValues('company', 'a');
+        $resultFacets = array();
+        foreach ($res['facetHits'] as $facet) {
+            $resultFacets[] = $facet['value'];
+        }
+
+        self::assertContains('Algolia', $resultFacets);
+        self::assertContains('Amazon', $resultFacets);
+        self::assertContains('Apple', $resultFacets);
+        self::assertContains('Arista Networks', $resultFacets);
+    }
+
+
+
     //    public function testIndexExists()
 //    {
 //        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);

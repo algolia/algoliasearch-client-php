@@ -52,6 +52,14 @@ class TestHelper
         array('console' => 'Microsoft Xbox One'),
     );
 
+    public static $smartphones = array(
+        array('objectID' => 'iphone_7', 'brand' => 'Apple', 'model' => '7'),
+        array('objectID' => 'iphone_8', 'brand' => 'Apple', 'model' => '7'),
+        array('objectID' => 'iphone_x', 'brand' => 'Apple', 'model' => '7'),
+        array('objectID' => 'one_plus_one', 'brand' => 'OnePlus', 'model' => 'One'),
+        array('objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'),
+    );
+
     /**
      * @throws \Exception
      */
@@ -129,5 +137,18 @@ class TestHelper
         }
 
         return $record;
+    }
+
+    public static function formatRule($rule)
+    {
+        if (isset($rule['_metadata'])) {
+            unset($rule['_metadata']);
+        }
+
+        if (isset($rule['_highlightResult'])) {
+            unset($rule['_highlightResult']);
+        }
+
+        return $rule;
     }
 }

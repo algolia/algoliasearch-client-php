@@ -438,6 +438,173 @@ class SearchIndexTest extends BaseTest
         self::assertArraySubset(array('nbHits' => 0), $res);
     }
 
+    public function testQueryRules()
+    {
+        static::$indexes['rules'] = TestHelper::getTestIndexName('rules');
+
+        /** @var SearchIndex $rulesIndex */
+        $rulesIndex = TestHelper::getClient()->initIndex(static::$indexes['rules']);
+
+        $responses = array();
+
+        $responses[] = $rulesIndex->saveObjects(
+            TestHelper::$smartphones,
+            array('autoGenerateObjectIDIfNotExist' => true)
+        );
+
+        $responses[] = $rulesIndex->setSettings(array("attributesForFaceting" => array("brand", "model")));
+
+        $rule1 = array(
+            'objectID' => 'brand_automatic_faceting',
+            'enabled' => false,
+            'condition' => array(
+                'anchoring' => 'is',
+                'pattern' => '{facet:brand}',
+            ),
+            'consequence' => array(
+                'params' => array(
+                    'automaticFacetFilters' => array(
+                        array(
+                            'facet' => 'brand',
+                            'disjunctive' => true,
+                            'score' => 42,
+                        ),
+                    ),
+                ),
+            ),
+            'validity' => array(
+                array(
+                    'from' => 1532439300, // 07/24/2018 13:35:00 UTC
+                    'until' => 1532525700, // 07/25/2018 13:35:00 UTC
+                ),
+                array(
+                    'from' => 1532612100, // 07/26/2018 13:35:00 UTC
+                    'until' => 1532698500 // 07/27/2018 13:35:00 UTC
+                ),
+            ),
+            'description' => "Automatic apply the faceting on `brand` if a brand value is found in the query"
+        );
+
+        $responses[] = $rulesIndex->saveRule($rule1);
+
+        $rule2 = array(
+            'objectID' => 'query_edits',
+            'conditions' => array(
+                array(
+                    'anchoring' => 'is',
+                    'pattern' => 'mobile phone',
+                    'alternatives' => true,
+                )
+            ),
+            'consequence' => array(
+                'filterPromotes' => false,
+                'params' => array(
+                    'query' => array(
+                        'edits' => array(
+                            array(
+                                'type' => 'remove',
+                                'delete' => 'mobile',
+                            ),
+                            array(
+                                'type' => 'replace',
+                                'delete' => 'phone',
+                                'insert' => 'iphone',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $rule3 = array(
+            'objectID' => 'query_promo',
+            'consequence' => array(
+                'params' => array(
+                    'filters' => 'brand:OnePlus'
+                ),
+            ),
+        );
+
+        $rule4 = array(
+            'objectID' => 'query_promo_summer',
+            'conditions' => array(
+                array(
+                    'context' => 'summer',
+                ),
+            ),
+            'consequence' => array(
+                'params' => array(
+                    'filters' => 'model:One'
+                ),
+            ),
+        );
+
+        $additionalRules = array($rule2, $rule3, $rule4);
+        $responses[] = $rulesIndex->saveRules($additionalRules);
+
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        $res = $rulesIndex->search('', array('ruleContexts' => 'summer'));
+        self::assertCount(1, $res["hits"]);
+
+        $res = $rulesIndex->getRule($rule1['objectID']);
+        self::assertEquals(TestHelper::formatRule($res), $rule1);
+
+        $res = $rulesIndex->getRule($rule2['objectID']);
+        self::assertEquals(TestHelper::formatRule($res), $rule2);
+
+        $res = $rulesIndex->getRule($rule3['objectID']);
+        self::assertEquals(TestHelper::formatRule($res), $rule3);
+
+        $res = $rulesIndex->getRule($rule4['objectID']);
+        self::assertEquals(TestHelper::formatRule($res), $rule4);
+
+        $allRules = array($rule1, $rule2, $rule3, $rule4);
+
+        $res = $rulesIndex->searchRules('');
+        foreach ($res['hits'] as $fetchedRule) {
+            self::assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+        }
+
+        $iterator = $rulesIndex->browseRules(array('hitsPerPage' => 1));
+        foreach ($iterator as $fetchedRule) {
+            self::assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+        }
+
+        $rulesIndex->deleteRule($rule1['objectID']);
+
+        try {
+            $rulesIndex->getRule($rule1['objectID']);
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+        }
+
+        $rulesIndex->clearRules();
+        $res = $rulesIndex->searchRules('');
+        self::assertCount(0, $res["hits"]);
+
+        $ruleString = '{
+          "objectID": "query_edits",
+          "condition": {"anchoring": "is", "pattern": "mobile phone"},
+          "consequence": {
+            "params": {
+              "query": {
+               "remove": ["mobile", "phone"]
+              }
+            }
+          }
+        }';
+
+        $serializedRule = json_decode($ruleString, true);
+        $rulesIndex->saveRule($serializedRule)->wait();
+
+        $res = $rulesIndex->getRule($serializedRule['objectID']);
+        self::assertEquals(TestHelper::formatRule($res), $serializedRule);
+    }
+
     //    public function testIndexExists()
 //    {
 //        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);
@@ -453,3 +620,4 @@ class SearchIndexTest extends BaseTest
 //        self::assertTrue($index->exists());
 //    }
 }
+

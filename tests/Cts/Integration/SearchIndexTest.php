@@ -605,6 +605,31 @@ class SearchIndexTest extends BaseTest
         self::assertEquals(TestHelper::formatRule($res), $serializedRule);
     }
 
+    public function testBatching()
+    {
+        static::$indexes['index_batching'] = TestHelper::getTestIndexName('index_batching');
+
+        /** @var SearchIndex $batchingIndex */
+        $batchingIndex = TestHelper::getClient()->initIndex(static::$indexes['index_batching']);
+
+        $batchingIndex->saveObjects(
+            TestHelper::$figures,
+            array('autoGenerateObjectIDIfNotExist' => true)
+        )->wait();
+
+        $batchingIndex->batch(TestHelper::$batch)->wait();
+
+        $iterator = $batchingIndex->browseObjects();
+
+        $fetchedResults = array();
+        foreach ($iterator as $object) {
+            $fetchedResults[] = $object;
+            self::assertContains($object, TestHelper::$figuresAfterBatch);
+        }
+
+        self::assertCount(count($fetchedResults), TestHelper::$figuresAfterBatch);
+    }
+
     //    public function testIndexExists()
 //    {
 //        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);

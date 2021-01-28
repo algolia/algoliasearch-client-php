@@ -60,6 +60,32 @@ class TestHelper
         array('objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'),
     );
 
+    public static $figures = array(
+        array('objectID' => 'one', 'key' => 'value'),
+        array('objectID' => 'two', 'key' => 'value'),
+        array('objectID' => 'three', 'key' => 'value'),
+        array('objectID' => 'four', 'key' => 'value'),
+        array('objectID' => 'five', 'key' => 'value'),
+    );
+
+    public static $batch = array(
+        array('action' => 'addObject', 'body' => array('objectID' => 'zero', 'key' => 'value')),
+        array('action' => 'updateObject', 'body' => array('objectID' => 'one', 'k' => 'v')),
+        array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two', 'k' => 'v')),
+        array('action' => 'partialUpdateObject', 'body' =>array('objectID' => 'two_bis', 'key' => 'value')),
+        array('action' => 'partialUpdateObjectNoCreate', 'body' => array('objectID' => 'three', 'k' => 'v')),
+        array('action' => 'deleteObject', 'body' => array('objectID' => 'four')),
+    );
+
+    public static $figuresAfterBatch = array(
+        array('objectID' => 'zero', 'key' => 'value'),
+        array('objectID' => 'one', 'k' => 'v'),
+        array('objectID' => 'two', 'key' => 'value', 'k' => 'v'),
+        array('objectID' => 'two_bis', 'key' => 'value'),
+        array('objectID' => 'three', 'key' => 'value', 'k' => 'v'),
+        array('objectID' => 'five', 'key' => 'value'),
+    );
+
     /**
      * @throws \Exception
      */

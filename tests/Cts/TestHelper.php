@@ -26,66 +26,6 @@ class TestHelper
     /** @var SyncClient */
     private static $client;
 
-    public static $employees = array(
-        array('company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'),
-        array('company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'),
-        array('company' => 'Amazon', 'name' => 'Jeff Bezos'),
-        array('company' => 'Apple', 'name' => 'Steve Jobs'),
-        array('company' => 'Apple', 'name' => 'Steve Wozniak'),
-        array('company' => 'Arista Networks', 'name' => 'Jayshree Ullal'),
-        array('company' => 'Google', 'name' => 'Larry Page'),
-        array('company' => 'Google', 'name' => 'Rob Pike'),
-        array('company' => 'Google', 'name' => 'Serguey Brin'),
-        array('company' => 'Microsoft', 'name' => 'Bill Gates'),
-        array('company' => 'SpaceX', 'name' => 'Elon Musk'),
-        array('company' => 'Tesla', 'name' => 'Elon Musk'),
-        array('company' => 'Yahoo', 'name' => 'Marissa Mayer'),
-    );
-
-    public static $consoles = array(
-        array('console' => 'Sony PlayStation <PLAYSTATIONVERSION>'),
-        array('console' => 'Nintendo Switch'),
-        array('console' => 'Nintendo Wii U'),
-        array('console' => 'Nintendo Game Boy Advance'),
-        array('console' => 'Microsoft Xbox'),
-        array('console' => 'Microsoft Xbox 360'),
-        array('console' => 'Microsoft Xbox One'),
-    );
-
-    public static $smartphones = array(
-        array('objectID' => 'iphone_7', 'brand' => 'Apple', 'model' => '7'),
-        array('objectID' => 'iphone_8', 'brand' => 'Apple', 'model' => '7'),
-        array('objectID' => 'iphone_x', 'brand' => 'Apple', 'model' => '7'),
-        array('objectID' => 'one_plus_one', 'brand' => 'OnePlus', 'model' => 'One'),
-        array('objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'),
-    );
-
-    public static $figures = array(
-        array('objectID' => 'one', 'key' => 'value'),
-        array('objectID' => 'two', 'key' => 'value'),
-        array('objectID' => 'three', 'key' => 'value'),
-        array('objectID' => 'four', 'key' => 'value'),
-        array('objectID' => 'five', 'key' => 'value'),
-    );
-
-    public static $batch = array(
-        array('action' => 'addObject', 'body' => array('objectID' => 'zero', 'key' => 'value')),
-        array('action' => 'updateObject', 'body' => array('objectID' => 'one', 'k' => 'v')),
-        array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two', 'k' => 'v')),
-        array('action' => 'partialUpdateObject', 'body' =>array('objectID' => 'two_bis', 'key' => 'value')),
-        array('action' => 'partialUpdateObjectNoCreate', 'body' => array('objectID' => 'three', 'k' => 'v')),
-        array('action' => 'deleteObject', 'body' => array('objectID' => 'four')),
-    );
-
-    public static $figuresAfterBatch = array(
-        array('objectID' => 'zero', 'key' => 'value'),
-        array('objectID' => 'one', 'k' => 'v'),
-        array('objectID' => 'two', 'key' => 'value', 'k' => 'v'),
-        array('objectID' => 'two_bis', 'key' => 'value'),
-        array('objectID' => 'three', 'key' => 'value', 'k' => 'v'),
-        array('objectID' => 'five', 'key' => 'value'),
-    );
-
     /**
      * @throws \Exception
      */

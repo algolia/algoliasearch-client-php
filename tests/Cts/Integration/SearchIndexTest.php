@@ -33,7 +33,7 @@ class SearchIndexTest extends BaseTest
         $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
 
         /* saving an empty set of objects */
-//        $responses[] = $index->saveObjects(array(), array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $index->saveObjects(array());
 
         /* adding two objects with object id  */
         $obj3 = TestHelper::createRecord(null);
@@ -66,11 +66,11 @@ class SearchIndexTest extends BaseTest
 
         $objectID2 = $responses[1][0]['objectIDs'][0];
 
-        $objectID3 = $responses[2][0]['objectIDs'][0];
-        $objectID4 = $responses[2][0]['objectIDs'][1];
+        $objectID3 = $responses[3][0]['objectIDs'][0];
+        $objectID4 = $responses[3][0]['objectIDs'][1];
 
-        $objectID5 = $responses[3][0]['objectIDs'][0];
-        $objectID6 = $responses[3][0]['objectIDs'][1];
+        $objectID5 = $responses[4][0]['objectIDs'][0];
+        $objectID6 = $responses[4][0]['objectIDs'][1];
 
         $result1 = $index->getObject($objectID1);
         self::assertEquals($obj1['name'], $result1['name']);
@@ -271,11 +271,23 @@ class SearchIndexTest extends BaseTest
 
         $responses = array();
 
-        $responses[] = $searchIndex->saveObjects(
-            TestHelper::$employees,
-            array('autoGenerateObjectIDIfNotExist' => true)
+        $employees = array(
+            array('company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'),
+            array('company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'),
+            array('company' => 'Amazon', 'name' => 'Jeff Bezos'),
+            array('company' => 'Apple', 'name' => 'Steve Jobs'),
+            array('company' => 'Apple', 'name' => 'Steve Wozniak'),
+            array('company' => 'Arista Networks', 'name' => 'Jayshree Ullal'),
+            array('company' => 'Google', 'name' => 'Larry Page'),
+            array('company' => 'Google', 'name' => 'Rob Pike'),
+            array('company' => 'Google', 'name' => 'Serguey Brin'),
+            array('company' => 'Microsoft', 'name' => 'Bill Gates'),
+            array('company' => 'SpaceX', 'name' => 'Elon Musk'),
+            array('company' => 'Tesla', 'name' => 'Elon Musk'),
+            array('company' => 'Yahoo', 'name' => 'Marissa Mayer'),
         );
 
+        $responses[] = $searchIndex->saveObjects($employees, array('autoGenerateObjectIDIfNotExist' => true));
         $responses[] = $searchIndex->setSettings(array("attributesForFaceting" => array("searchable(company)")));
 
         /* Wait all collected task to terminate */
@@ -361,10 +373,17 @@ class SearchIndexTest extends BaseTest
 
         $responses = array();
 
-        $responses[] = $synonymsIndex->saveObjects(
-            TestHelper::$consoles,
-            array('autoGenerateObjectIDIfNotExist' => true)
+        $consoles = array(
+            array('console' => 'Sony PlayStation <PLAYSTATIONVERSION>'),
+            array('console' => 'Nintendo Switch'),
+            array('console' => 'Nintendo Wii U'),
+            array('console' => 'Nintendo Game Boy Advance'),
+            array('console' => 'Microsoft Xbox'),
+            array('console' => 'Microsoft Xbox 360'),
+            array('console' => 'Microsoft Xbox One'),
         );
+
+        $responses[] = $synonymsIndex->saveObjects($consoles, array('autoGenerateObjectIDIfNotExist' => true));
 
         $nWaySynonym =  array(
             'objectID' => 'gba',
@@ -447,11 +466,15 @@ class SearchIndexTest extends BaseTest
 
         $responses = array();
 
-        $responses[] = $rulesIndex->saveObjects(
-            TestHelper::$smartphones,
-            array('autoGenerateObjectIDIfNotExist' => true)
+        $smartphones = array(
+            array('objectID' => 'iphone_7', 'brand' => 'Apple', 'model' => '7'),
+            array('objectID' => 'iphone_8', 'brand' => 'Apple', 'model' => '7'),
+            array('objectID' => 'iphone_x', 'brand' => 'Apple', 'model' => '7'),
+            array('objectID' => 'one_plus_one', 'brand' => 'OnePlus', 'model' => 'One'),
+            array('objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'),
         );
 
+        $responses[] = $rulesIndex->saveObjects($smartphones, array('autoGenerateObjectIDIfNotExist' => true));
         $responses[] = $rulesIndex->setSettings(array("attributesForFaceting" => array("brand", "model")));
 
         $rule1 = array(
@@ -612,37 +635,154 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $batchingIndex */
         $batchingIndex = TestHelper::getClient()->initIndex(static::$indexes['index_batching']);
 
-        $batchingIndex->saveObjects(
-            TestHelper::$figures,
-            array('autoGenerateObjectIDIfNotExist' => true)
-        )->wait();
+        $figures = array(
+            array('objectID' => 'one', 'key' => 'value'),
+            array('objectID' => 'two', 'key' => 'value'),
+            array('objectID' => 'three', 'key' => 'value'),
+            array('objectID' => 'four', 'key' => 'value'),
+            array('objectID' => 'five', 'key' => 'value'),
+        );
 
-        $batchingIndex->batch(TestHelper::$batch)->wait();
+        $batchingIndex->saveObjects($figures, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+
+        $batch = array(
+            array('action' => 'addObject', 'body' => array('objectID' => 'zero', 'key' => 'value')),
+            array('action' => 'updateObject', 'body' => array('objectID' => 'one', 'k' => 'v')),
+            array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two', 'k' => 'v')),
+            array('action' => 'partialUpdateObject', 'body' =>array('objectID' => 'two_bis', 'key' => 'value')),
+            array('action' => 'partialUpdateObjectNoCreate', 'body' => array('objectID' => 'three', 'k' => 'v')),
+            array('action' => 'deleteObject', 'body' => array('objectID' => 'four')),
+        );
+
+        $batchingIndex->batch($batch)->wait();
+
+        $figuresAfterBatch = array(
+            array('objectID' => 'zero', 'key' => 'value'),
+            array('objectID' => 'one', 'k' => 'v'),
+            array('objectID' => 'two', 'key' => 'value', 'k' => 'v'),
+            array('objectID' => 'two_bis', 'key' => 'value'),
+            array('objectID' => 'three', 'key' => 'value', 'k' => 'v'),
+            array('objectID' => 'five', 'key' => 'value'),
+        );
 
         $iterator = $batchingIndex->browseObjects();
-
         $fetchedResults = array();
         foreach ($iterator as $object) {
             $fetchedResults[] = $object;
-            self::assertContains($object, TestHelper::$figuresAfterBatch);
+            self::assertContains($object, $figuresAfterBatch);
         }
 
-        self::assertCount(count($fetchedResults), TestHelper::$figuresAfterBatch);
+        self::assertCount(count($fetchedResults), $figuresAfterBatch);
     }
 
-    //    public function testIndexExists()
-//    {
-//        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);
-//
-//        self::assertFalse($index->exists());
-//
-//        /* adding a object w/o object id s */
-//        $obj = TestHelper::createRecord();
-//        $index
-//            ->saveObject($obj, array('autoGenerateObjectIDIfNotExist' => true))
-//            ->wait();
-//
-//        self::assertTrue($index->exists());
-//    }
+    public function testReplacing()
+    {
+        static::$indexes['replacing'] = TestHelper::getTestIndexName('replacing');
+
+        /** @var SearchIndex $replacingIndex */
+        $replacingIndex = TestHelper::getClient()->initIndex(static::$indexes['replacing']);
+
+        $responses = array();
+
+        $responses[] = $replacingIndex->saveObject(array('objectID' => 'one'));
+
+        $rule = array(
+            'objectID' => 'one',
+            'condition' => array(
+                'anchoring' => 'is',
+                'pattern' => 'pattern',
+            ),
+            'consequence' => array(
+                'params' => array(
+                    'query' => array(
+                        'edits' => array(
+                            array(
+                                'type' => 'remove',
+                                'delete' => 'pattern',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+        );
+
+        $responses[] = $replacingIndex->saveRule($rule);
+
+        $synonym = array(
+            'objectID' => 'one',
+            'type' => 'synonym',
+            'synonyms' => array('one', 'two'),
+        );
+
+        $responses[] = $replacingIndex->saveSynonym($synonym);
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        $responses[] = $replacingIndex->replaceAllObjects(array(array('objectID' => 'two')));
+
+        $altRule = $rule;
+        $altRule['objectID'] = 'two';
+        $responses[] = $replacingIndex->replaceAllRules(array($altRule));
+
+        $altSynonym = $synonym;
+        $altSynonym['objectID'] = 'two';
+        $responses[] = $replacingIndex->replaceAllSynonyms(array($altSynonym));
+
+        /* Wait all collected task to terminate */
+        $multiResponse = new MultiResponse($responses);
+        $multiResponse->wait();
+
+        /* Check Object replacement */
+        try {
+            $replacingIndex->getObject('one');
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+        }
+
+        $res = $replacingIndex->getObject('two');
+        self::assertEquals('two', $res['objectID']);
+
+        /* Check Rule replacement */
+        try {
+            $replacingIndex->getRule('one');
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+        }
+
+        $res = $replacingIndex->getRule('two');
+        self::assertEquals('two', $res['objectID']);
+
+        /* Check Synonym replacement */
+        try {
+            $replacingIndex->getSynonym('one');
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+        }
+
+        $res = $replacingIndex->getSynonym('two');
+        self::assertEquals('two', $res['objectID']);
+    }
+
+    public function testIndexExists()
+    {
+        static::$indexes['exists'] = TestHelper::getTestIndexName('exists');
+
+        /** @var SearchIndex $existsIndex */
+        $existsIndex = TestHelper::getClient()->initIndex(static::$indexes['exists']);
+
+        self::assertFalse($existsIndex->exists());
+
+        /* adding a object w/o object id s */
+        $obj = TestHelper::createRecord();
+        $existsIndex->saveObject($obj, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+
+        self::assertTrue($existsIndex->exists());
+
+        $existsIndex->delete()->wait();
+
+        self::assertFalse($existsIndex->exists());
+    }
 }
 

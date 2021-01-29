@@ -141,4 +141,16 @@ final class Helpers
 
         return http_build_query($parameters);
     }
+
+    public static function buildDictionaryRequests(array $entries, $action)
+    {
+        return array_map(function ($entry) use ($action) {
+            Helpers::ensureObjectID($entry, 'ObjectID is required to add a dictionary entry.');
+
+            return array(
+                'action' => $action,
+                'body' => $entry,
+            );
+        }, $entries);
+    }
 }

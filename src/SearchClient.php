@@ -458,4 +458,149 @@ class SearchClient
             $requestOptions
         );
     }
+
+    /**
+     * Save entries to the given dictionary.
+     *
+     * @param string                      $dictionary
+     * @param array<array<string, mixed>> $entries
+     * @param array|RequestOptions        $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => false,
+                'requests' => Helpers::buildBatch($entries, 'addEntry'),
+            ),
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Replace all dictionary entries.
+     *
+     * @param string                      $dictionary
+     * @param array<array<string, mixed>> $entries
+     * @param array                       $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => true,
+                'requests' => Helpers::buildBatch($entries, 'addEntry'),
+            ),
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Delete dictionary entries by their objectID.
+     *
+     * @param string        $dictionary
+     * @param array<string> $objectIDs
+     * @param array         $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = array())
+    {
+        $entries = array_map(function ($objectID) {
+            return array('objectID' => $objectID);
+        }, $objectIDs);
+
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => false,
+                'requests' => Helpers::buildBatch($entries, 'deleteEntry'),
+            ),
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Clear all entries in the given dictionary.
+     *
+     * @param string               $dictionary
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function clearDictionaryEntries($dictionary, $requestOptions = array())
+    {
+        return $this->replaceDictionaryEntries($dictionary, array(), $requestOptions);
+    }
+
+    /**
+     * Search the dictionary for entries.
+     *
+     * @param string               $dictionary
+     * @param string               $query
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return mixed
+     */
+    public function searchDictionaryEntries($dictionary, $query, $requestOptions = array())
+    {
+        return $this->api->read(
+            'POST',
+            api_path('/1/dictionaries/%s/search', $dictionary),
+            array('query' => $query),
+            $requestOptions
+        );
+    }
+
+    /**
+     * Update the settings for all dictionaries.
+     *
+     * @param array<mixed> $dictionarySettings
+     * @param array        $requestOptions
+     *
+     * @return DictionaryResponse
+     */
+    public function setDictionarySettings($dictionarySettings, $requestOptions = array())
+    {
+        $response = $this->api->write(
+            'PUT',
+            api_path('/1/dictionaries/*/settings'),
+            $dictionarySettings,
+            $requestOptions
+        );
+
+        return new DictionaryResponse($response, $this, $this->config);
+    }
+
+    /**
+     * Get the settings for all dictionaries.
+     *
+     * @param array|RequestOptions $requestOptions
+     *
+     * @return mixed
+     */
+    public function getDictionarySettings($requestOptions = array())
+    {
+        return $this->api->read(
+            'GET',
+            api_path('/1/dictionaries/*/settings'),
+            array(),
+            $requestOptions
+        );
+    }
 }

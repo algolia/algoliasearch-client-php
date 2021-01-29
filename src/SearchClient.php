@@ -457,26 +457,18 @@ class SearchClient
      *
      * @param string                      $dictionary
      * @param array<array<string, mixed>> $entries
-     * @param bool                        $clearExistingDictionaryEntries
      * @param array|RequestOptions        $requestOptions
      *
      * @return DictionaryResponse
      */
-    public function saveDictionaryEntries($dictionary, $entries, $clearExistingDictionaryEntries = false, $requestOptions = array())
+    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = array())
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
             array(
-                'clearExistingDictionaryEntries' => $clearExistingDictionaryEntries,
-                'requests' => array_map(function ($entry) {
-                    Helpers::ensureObjectID($entry, 'ObjectID is required to add a dictionary entry.');
-
-                    return array(
-                        'action' => 'addEntry',
-                        'body' => $entry,
-                    );
-                }, $entries),
+                'clearExistingDictionaryEntries' => false,
+                'requests' => Helpers::buildBatch($entries, 'addEntry'),
             ),
             $requestOptions
         );
@@ -495,12 +487,17 @@ class SearchClient
      */
     public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = array())
     {
-        return $this->saveDictionaryEntries(
-            $dictionary,
-            $entries,
-            $clearExistingDictionaryEntries = true,
+        $response = $this->api->write(
+            'POST',
+            api_path('/1/dictionaries/%s/batch', $dictionary),
+            array(
+                'clearExistingDictionaryEntries' => true,
+                'requests' => Helpers::buildBatch($entries, 'addEntry'),
+            ),
             $requestOptions
         );
+
+        return new DictionaryResponse($response, $this, $this->config);
     }
 
     /**
@@ -514,17 +511,16 @@ class SearchClient
      */
     public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = array())
     {
+        $entries = array_map(function ($objectID) {
+            return array('objectID' => $objectID);
+        }, $objectIDs);
+
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
             array(
                 'clearExistingDictionaryEntries' => false,
-                'requests' => array_map(function ($objectID) {
-                    return array(
-                        'action' => 'deleteEntry',
-                        'body' => array('objectID' => $objectID),
-                    );
-                }, $objectIDs),
+                'requests' => Helpers::buildBatch($entries, 'deleteEntry'),
             ),
             $requestOptions
         );

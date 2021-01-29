@@ -19,9 +19,6 @@ final class DictionaryResponse extends AbstractResponse
 
     /**
      * DictionaryResponse constructor.
-     * @param array $apiResponse
-     * @param SearchClient $client
-     * @param SearchConfig $config
      */
     public function __construct(array $apiResponse, SearchClient $client, SearchConfig $config)
     {

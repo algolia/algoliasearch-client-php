@@ -268,30 +268,49 @@ class SearchClientTest extends BaseTest
         self::assertEquals($objectIds[2], $objects[2]['objectID']);
         self::assertEquals($objectIds[3], $objects[3]['objectID']);
 
-//        $res = TestHelper::getClient()->multipleQueries(
-//            array(
-//                array('indexName' => $index1, 'params' => (array('query' => '', 'hitsPerPage' => 2))),
-//                array('indexName' => $index2, 'params' => array('query' => '', 'hitsPerPage' => 2)),
-//            ),
-//            array('strategy' => 'none')
-//        );
+        $res = TestHelper::getClient()->multipleQueries(
+            array(
+                array(
+                    'indexName' => $index1,
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                ),
+                array(
+                    'indexName' => $index2,
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                ),
+            ),
+            array('strategy' => 'none')
+        );
 
-//        $params = "{ query : '', hitsPerPage: 2 }";
-//
-//        $res = TestHelper::getClient()->multipleQueries(
-//            array(
-//                array('indexName' => $index1, 'params' => $params),
-//                array('indexName' => $index2, 'params' => $params),
-//            ),
-//            array('strategy' => 'none')
-//        );
-//
-//        $results = $res['results'];
-//
-//        self::assertCount(2, $results);
-//        self::assertCount(2, $results[0]['hits']);
-//        self::assertEquals(2, $results[0]['nbHits']);
-//        self::assertCount(2, $results[0]['hits']);
-//        self::assertEquals(2, $results[0]['nbHits']);
+        $results = $res['results'];
+
+        self::assertCount(2, $results);
+        self::assertCount(2, $results[0]['hits']);
+        self::assertEquals(2, $results[0]['nbHits']);
+        self::assertCount(2, $results[1]['hits']);
+        self::assertEquals(2, $results[1]['nbHits']);
+
+        $res = TestHelper::getClient()->multipleQueries(
+            array(
+                array(
+                    'indexName' => $index1,
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                ),
+                array(
+                    'indexName' => $index2,
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                ),
+            ),
+            array('strategy' => 'stopIfEnoughMatches')
+        );
+
+        $results = $res['results'];
+
+        self::assertCount(2, $results);
+        self::assertCount(2, $results[0]['hits']);
+        self::assertEquals(2, $results[0]['nbHits']);
+        self::assertCount(0, $results[1]['hits']);
+        self::assertEquals(0, $results[1]['nbHits']);
     }
+
 }

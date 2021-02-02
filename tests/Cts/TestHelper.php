@@ -16,7 +16,7 @@ class TestHelper
     private static $environmentVariables = array(
         'ALGOLIA_APPLICATION_ID_1',
         'ALGOLIA_ADMIN_KEY_1',
-//        'ALGOLIA_SEARCH_KEY_1',
+        'ALGOLIA_SEARCH_KEY_1',
         'ALGOLIA_APPLICATION_ID_2',
         'ALGOLIA_ADMIN_KEY_2',
 //        'ALGOLIA_APPLICATION_ID_MCM',
@@ -70,7 +70,7 @@ class TestHelper
     /**
      * @param array $config
      *
-     * @return SearchClient[]
+     * @return SearchClient
      */
     public static function getClient($config = array())
     {
@@ -79,11 +79,13 @@ class TestHelper
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_1'),
         );
 
-        if (!isset(self::$client[$config['appId']])) {
-            self::$client[$config['appId']] = SearchClient::createWithConfig(new SearchConfig($config));
+        $idFromApiKey = $config['appId'] . substr($config['apiKey'], 0, 5);
+
+        if (!isset(self::$client[$idFromApiKey])) {
+            self::$client[$idFromApiKey] = SearchClient::createWithConfig(new SearchConfig($config));
         }
 
-        return self::$client[$config['appId']];
+        return self::$client[$idFromApiKey];
     }
 
     public static function createRecord($objectID = false)

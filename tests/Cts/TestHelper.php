@@ -17,14 +17,14 @@ class TestHelper
         'ALGOLIA_APPLICATION_ID_1',
         'ALGOLIA_ADMIN_KEY_1',
 //        'ALGOLIA_SEARCH_KEY_1',
-//        'ALGOLIA_APPLICATION_ID_2',
-//        'ALGOLIA_ADMIN_KEY_2',
+        'ALGOLIA_APPLICATION_ID_2',
+        'ALGOLIA_ADMIN_KEY_2',
 //        'ALGOLIA_APPLICATION_ID_MCM',
 //        'ALGOLIA_ADMIN_KEY_MCM',
     );
 
-    /** @var SyncClient */
-    private static $client;
+    /** @var SearchClient[] */
+    private static $client = array();
 
     /**
      * @throws \Exception
@@ -68,27 +68,22 @@ class TestHelper
     }
 
     /**
-     * @return \Algolia\AlgoliaSearch\SearchClient
+     * @param array $config
+     *
+     * @return SearchClient[]
      */
-    public static function getClient()
-    {
-        if (!self::$client) {
-            self::$client = self::newClient();
-        }
-
-        return self::$client;
-    }
-
-    protected static function newClient($config = array())
+    public static function getClient($config = array())
     {
         $config += array(
             'appId' => getenv('ALGOLIA_APPLICATION_ID_1'),
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_1'),
         );
 
-        return new SyncClient(
-            SearchClient::createWithConfig(new SearchConfig($config))
-        );
+        if (!isset(self::$client[$config['appId']])) {
+            self::$client[$config['appId']] = SearchClient::createWithConfig(new SearchConfig($config));
+        }
+
+        return self::$client[$config['appId']];
     }
 
     public static function createRecord($objectID = false)

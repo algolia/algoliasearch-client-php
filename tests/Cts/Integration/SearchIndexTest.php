@@ -125,14 +125,14 @@ class SearchIndexTest extends BaseTest
         $responses[] = $index->saveObject($objWithTag)->wait();
 
         /*  Delete the first record with deleteObject */
-        $responses[] = $index->deleteObject($objectID1);
+        $responses[] = $index->deleteObject($objectID1)->wait();
 
         /* Delete the record with the "algolia" tag */
-        $responses[] = $index->deleteBy(array('tagFilters' => array('algolia')));
+        $responses[] = $index->deleteBy(array('tagFilters' => array('algolia')))->wait();
 
         /* Delete the 5 remaining first records with deleteObjects */
         $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
-        $responses[] = $index->deleteObjects($objectsIDs);
+        $responses[] = $index->deleteObjects($objectsIDs)->wait();
 
         /* Browse all objects with browseObjects */
         $iterator = $index->browseObjects();
@@ -597,7 +597,7 @@ class SearchIndexTest extends BaseTest
             self::assertContains(TestHelper::formatRule($fetchedRule), $allRules);
         }
 
-        $rulesIndex->deleteRule($rule1['objectID']);
+        $rulesIndex->deleteRule($rule1['objectID'])->wait();
 
         try {
             $rulesIndex->getRule($rule1['objectID']);
@@ -605,7 +605,7 @@ class SearchIndexTest extends BaseTest
             self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
-        $rulesIndex->clearRules();
+        $rulesIndex->clearRules()->wait();
         $res = $rulesIndex->searchRules('');
         self::assertCount(0, $res["hits"]);
 

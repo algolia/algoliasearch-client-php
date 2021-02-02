@@ -196,7 +196,7 @@ class SearchClientTest extends BaseTest
             usleep($factor * $time); // 0.1 second
         } while (true);
 
-        TestHelper::getClient()->deleteApiKey($res['key']);
+        TestHelper::getClient()->deleteApiKey($res['key'])->wait();
 
         try {
             TestHelper::getClient()->getApiKey($res['key']);
@@ -210,7 +210,7 @@ class SearchClientTest extends BaseTest
         self::assertEquals($acl, $restoredApiKey['acl']);
         self::assertEquals($params['description'], $restoredApiKey['description']);
 
-        TestHelper::getClient()->deleteApiKey($res['key']);
+        TestHelper::getClient()->deleteApiKey($res['key'])->wait();
     }
 
     public function testLogs()
@@ -249,7 +249,7 @@ class SearchClientTest extends BaseTest
             array('indexName' => $index2, 'action' => 'addObject', 'body' => array('firstname' => 'Jimmie')),
         );
 
-        $res = TestHelper::getClient()->multipleBatch($batch);
+        $res = TestHelper::getClient()->multipleBatch($batch)->wait();
         $objectIds = $res['objectIDs'];
 
         $res = TestHelper::getClient()->multipleGetObjects(

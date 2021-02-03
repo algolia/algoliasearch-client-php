@@ -112,6 +112,66 @@ class AnalyticsClientTest extends BaseTest
 
     public function testAaTesting()
     {
+        static::$indexes['aa_testing'] = TestHelper::getTestIndexName('aa_testing');
 
+        /** @var SearchIndex $index */
+        $index = TestHelper::getClient()->initIndex(static::$indexes['aa_testing']);
+
+        $analyticsClient = AnalyticsClient::create(
+            getenv('ALGOLIA_APPLICATION_ID_1'),
+            getenv('ALGOLIA_ADMIN_KEY_1')
+        );
+
+        $object = array('objectID' => 'one');
+        $res = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $dateTime = new DateTime('tomorrow');
+
+        $aaTest = array(
+            'name' => 'aaTestName',
+            'variants' => array(
+                array('index' => static::$indexes['aa_testing'], 'trafficPercentage' => 90),
+                array(
+                    'index' => static::$indexes['aa_testing'],
+                    'trafficPercentage' => 10,
+                    'customSearchParameters' => array('ignorePlurals' => true),
+                ),
+            ),
+            'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
+        );
+
+        $response = $analyticsClient->addABTest($aaTest);
+        $aaTestId = $response['abTestID'];
+        TestHelper::getClient()->waitTask(static::$indexes['aa_testing'], $response['taskID']);
+
+        $fetchedAbTest = $analyticsClient->getABTest($aaTestId);
+
+        self::assertSame($aaTest['name'], $fetchedAbTest['name']);
+        self::assertSame($aaTest['endAt'], $fetchedAbTest['endAt']);
+        self::assertSame($aaTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
+        self::assertSame(
+            $aaTest['variants'][0]['trafficPercentage'],
+            $fetchedAbTest['variants'][0]['trafficPercentage']
+        );
+        self::assertSame($aaTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
+        self::assertSame(
+            $aaTest['variants'][1]['trafficPercentage'],
+            $fetchedAbTest['variants'][1]['trafficPercentage']
+        );
+        self::assertSame(
+            $aaTest['variants'][1]['customSearchParameters'],
+            $fetchedAbTest['variants'][1]['customSearchParameters']
+        );
+        self::assertNotEquals('stopped', $fetchedAbTest['status']);
+
+        $response = $analyticsClient->deleteABTest($aaTestId);
+        $index->waitTask($response['taskID']);
+
+        try {
+            $result = $analyticsClient->getABTest($aaTestId);
+        } catch (\Exception $e) {
+            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            self::assertEquals(404, $e->getCode());
+            self::assertEquals('ABTestID not found', $e->getMessage());
+        }
     }
 }

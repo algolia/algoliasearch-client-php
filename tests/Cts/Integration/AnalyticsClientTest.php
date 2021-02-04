@@ -96,9 +96,13 @@ class AnalyticsClientTest extends BaseTest
 
         self::assertTrue($found);
 
-        // @todo check stopABTest
+        $response = $analyticsClient->stopABTest($abTestId);
+        $index->waitTask($response['taskID']);
 
-        $response = $analyticsClient->deleteABTest($result['abTestID']);
+        $result = $analyticsClient->getABTest($abTestId);
+        self::assertEquals('stopped', $result['status']);
+
+        $response = $analyticsClient->deleteABTest($abTestId);
         $index->waitTask($response['taskID']);
 
         try {

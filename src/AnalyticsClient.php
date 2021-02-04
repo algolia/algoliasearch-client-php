@@ -110,7 +110,7 @@ final class AnalyticsClient
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
         }
 
-        return $this->api->write('POST', api_path('/2/abtests/%s', $abTestID), array(), $requestOptions);
+        return $this->api->write('POST', api_path('/2/abtests/%s/stop', $abTestID), array(), $requestOptions);
     }
 
     /**

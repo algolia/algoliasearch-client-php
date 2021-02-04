@@ -55,7 +55,7 @@ class InsightsClientTest extends BaseTest
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
                 'timestamp' => $twoDaysAgoMs,
-            )
+            ),
         );
 
         $insightsClient->sendEvents($events);

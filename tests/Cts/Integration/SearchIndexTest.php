@@ -165,74 +165,74 @@ class SearchIndexTest extends BaseTest
 
         $settings = array(
             'searchableAttributes' => array(
-                "attribute1",
-                "attribute2",
-                "attribute3",
-                "ordered(attribute4)",
-                "unordered(attribute5)"
+                'attribute1',
+                'attribute2',
+                'attribute3',
+                'ordered(attribute4)',
+                'unordered(attribute5)',
             ),
-            'attributesForFaceting' => array("attribute1", "filterOnly(attribute2)", "searchable(attribute3)"),
-            'unretrievableAttributes' => array("attribute1", "attribute2"),
-            'attributesToRetrieve' => array("attribute3", "attribute4"),
+            'attributesForFaceting' => array('attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'),
+            'unretrievableAttributes' => array('attribute1', 'attribute2'),
+            'attributesToRetrieve' => array('attribute3', 'attribute4'),
             'ranking' => array(
-                "asc(attribute1)",
-                "desc(attribute2)",
-                "attribute",
-                "custom",
-                "exact",
-                "filters",
-                "geo",
-                "proximity",
-                "typo",
-                "words"
+                'asc(attribute1)',
+                'desc(attribute2)',
+                'attribute',
+                'custom',
+                'exact',
+                'filters',
+                'geo',
+                'proximity',
+                'typo',
+                'words',
             ),
-            'customRanking' => array("asc(attribute1)", "desc(attribute1)"),
-            'replicas' => array(static::$indexes['settings'] . "_replica1", static::$indexes['settings'] . "_replica2"),
+            'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
+            'replicas' => array(static::$indexes['settings'].'_replica1', static::$indexes['settings'].'_replica2'),
             'maxValuesPerFacet' => 100,
-            'sortFacetValuesBy' => "count",
-            'attributesToHighlight' => array("attribute1", "attribute2"),
-            'attributesToSnippet' => array("attribute1:10", "attribute2:8"),
-            'highlightPreTag' => "<strong>",
-            'highlightPostTag' => "</strong>",
-            'snippetEllipsisText' => " and so on.",
+            'sortFacetValuesBy' => 'count',
+            'attributesToHighlight' => array('attribute1', 'attribute2'),
+            'attributesToSnippet' => array('attribute1:10', 'attribute2:8'),
+            'highlightPreTag' => '<strong>',
+            'highlightPostTag' => '</strong>',
+            'snippetEllipsisText' => ' and so on.',
             'restrictHighlightAndSnippetArrays' => true,
             'hitsPerPage' => 42,
             'paginationLimitedTo' => 43,
             'minWordSizefor1Typo' => 2,
             'minWordSizefor2Typos' => 6,
-            'typoTolerance' => "false",
+            'typoTolerance' => 'false',
             'allowTyposOnNumericTokens' => false,
             'ignorePlurals' => true,
-            'disableTypoToleranceOnAttributes' => array("attribute1", "attribute2"),
-            'disableTypoToleranceOnWords' => array("word1", "word2"),
-            'separatorsToIndex' => "()[]",
-            'queryType' => "prefixNone",
-            'removeWordsIfNoResults' => "allOptional",
+            'disableTypoToleranceOnAttributes' => array('attribute1', 'attribute2'),
+            'disableTypoToleranceOnWords' => array('word1', 'word2'),
+            'separatorsToIndex' => '()[]',
+            'queryType' => 'prefixNone',
+            'removeWordsIfNoResults' => 'allOptional',
             'advancedSyntax' => true,
-            'optionalWords' => array("word1", "word2"),
+            'optionalWords' => array('word1', 'word2'),
             'removeStopWords' => true,
-            'disablePrefixOnAttributes' => array("attribute1", "attribute2"),
-            'disableExactOnAttributes' => array("attribute1", "attribute2"),
-            'exactOnSingleWordQuery' => "word",
+            'disablePrefixOnAttributes' => array('attribute1', 'attribute2'),
+            'disableExactOnAttributes' => array('attribute1', 'attribute2'),
+            'exactOnSingleWordQuery' => 'word',
             'enableRules' => false,
-            'numericAttributesForFiltering' => array("attribute1", "attribute2"),
+            'numericAttributesForFiltering' => array('attribute1', 'attribute2'),
             'allowCompressionOfIntegerArray' => true,
-            'attributeForDistinct' => "attribute1",
+            'attributeForDistinct' => 'attribute1',
             'distinct' => 2,
             'replaceSynonymsInHighlight' => false,
             'minProximity' => 7,
-            'responseFields' => array("hits", "hitsPerPage"),
+            'responseFields' => array('hits', 'hitsPerPage'),
             'maxFacetHits' => 100,
-            'camelCaseAttributes' => array("attribute1", "attribute2"),
-            'decompoundedAttributes' => array("de" => array("attribute1", "attribute2"), "fi" => array("attribute3")),
-            'keepDiacriticsOnCharacters' => "øé",
-            'queryLanguages' => array("en", "fr"),
-            'alternativesAsExact' => array("ignorePlurals"),
-            'advancedSyntaxFeatures' => array("exactPhrase"),
+            'camelCaseAttributes' => array('attribute1', 'attribute2'),
+            'decompoundedAttributes' => array('de' => array('attribute1', 'attribute2'), 'fi' => array('attribute3')),
+            'keepDiacriticsOnCharacters' => 'øé',
+            'queryLanguages' => array('en', 'fr'),
+            'alternativesAsExact' => array('ignorePlurals'),
+            'advancedSyntaxFeatures' => array('exactPhrase'),
             'userData' => '{"customUserData": 42.0}',
-            'indexLanguages' => array("ja"),
-            'customNormalization' => array("default" => array("ä" => "ae", "ö" => "oe")),
-            'enablePersonalization' => true
+            'indexLanguages' => array('ja'),
+            'customNormalization' => array('default' => array('ä' => 'ae', 'ö' => 'oe')),
+            'enablePersonalization' => true,
         );
 
         $responses[] = $settingsIndex->setSettings($settings);
@@ -250,9 +250,9 @@ class SearchIndexTest extends BaseTest
         $fetchedSettings = $settingsIndex->getSettings();
         self::assertEquals($settings, $fetchedSettings);
 
-        $settings['typoTolerance'] = "min";
-        $settings['ignorePlurals'] = array("en", "fr");
-        $settings['removeStopWords'] = array("en", "fr");
+        $settings['typoTolerance'] = 'min';
+        $settings['ignorePlurals'] = array('en', 'fr');
+        $settings['removeStopWords'] = array('en', 'fr');
         $settings['distinct'] = true;
 
         $responses[] = $settingsIndex->setSettings($settings)->wait();
@@ -288,7 +288,7 @@ class SearchIndexTest extends BaseTest
         );
 
         $responses[] = $searchIndex->saveObjects($employees, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $searchIndex->setSettings(array("attributesForFaceting" => array("searchable(company)")));
+        $responses[] = $searchIndex->setSettings(array('attributesForFaceting' => array('searchable(company)')));
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -297,7 +297,7 @@ class SearchIndexTest extends BaseTest
         $res = $searchIndex->search('algolia');
 
         /* Check if the number of results is 2  */
-        self::assertCount(2, $res["hits"]);
+        self::assertCount(2, $res['hits']);
 
         /* Check item positions */
         self::assertEquals(SearchIndex::getObjectPosition($res, 'nicolas-dessaigne'), 0);
@@ -344,13 +344,13 @@ class SearchIndexTest extends BaseTest
         self::assertNotEmpty($res['queryID']);
 
         $res = $searchIndex->search('', array('facets' => '*', 'facetFilters' => 'company:tesla'));
-        self::assertCount(1, $res["hits"]);
+        self::assertCount(1, $res['hits']);
 
         $res = $searchIndex->search(
             '',
             array('facets' => '*', 'filters' => 'company:tesla OR company:spacex')
         );
-        self::assertCount(2, $res["hits"]);
+        self::assertCount(2, $res['hits']);
 
         $res = $searchIndex->searchForFacetValues('company', 'a');
         $resultFacets = array();
@@ -385,7 +385,7 @@ class SearchIndexTest extends BaseTest
 
         $responses[] = $synonymsIndex->saveObjects($consoles, array('autoGenerateObjectIDIfNotExist' => true));
 
-        $nWaySynonym =  array(
+        $nWaySynonym = array(
             'objectID' => 'gba',
             'type' => 'synonym',
             'synonyms' => array('gameboy advance', 'game boy advance'),
@@ -475,7 +475,7 @@ class SearchIndexTest extends BaseTest
         );
 
         $responses[] = $rulesIndex->saveObjects($smartphones, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $rulesIndex->setSettings(array("attributesForFaceting" => array("brand", "model")));
+        $responses[] = $rulesIndex->setSettings(array('attributesForFaceting' => array('brand', 'model')));
 
         $rule1 = array(
             'objectID' => 'brand_automatic_faceting',
@@ -502,10 +502,10 @@ class SearchIndexTest extends BaseTest
                 ),
                 array(
                     'from' => 1532612100, // 07/26/2018 13:35:00 UTC
-                    'until' => 1532698500 // 07/27/2018 13:35:00 UTC
+                    'until' => 1532698500, // 07/27/2018 13:35:00 UTC
                 ),
             ),
-            'description' => "Automatic apply the faceting on `brand` if a brand value is found in the query"
+            'description' => 'Automatic apply the faceting on `brand` if a brand value is found in the query',
         );
 
         $responses[] = $rulesIndex->saveRule($rule1);
@@ -517,7 +517,7 @@ class SearchIndexTest extends BaseTest
                     'anchoring' => 'is',
                     'pattern' => 'mobile phone',
                     'alternatives' => true,
-                )
+                ),
             ),
             'consequence' => array(
                 'filterPromotes' => false,
@@ -543,7 +543,7 @@ class SearchIndexTest extends BaseTest
             'objectID' => 'query_promo',
             'consequence' => array(
                 'params' => array(
-                    'filters' => 'brand:OnePlus'
+                    'filters' => 'brand:OnePlus',
                 ),
             ),
         );
@@ -557,7 +557,7 @@ class SearchIndexTest extends BaseTest
             ),
             'consequence' => array(
                 'params' => array(
-                    'filters' => 'model:One'
+                    'filters' => 'model:One',
                 ),
             ),
         );
@@ -565,13 +565,12 @@ class SearchIndexTest extends BaseTest
         $additionalRules = array($rule2, $rule3, $rule4);
         $responses[] = $rulesIndex->saveRules($additionalRules);
 
-
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
         $res = $rulesIndex->search('', array('ruleContexts' => 'summer'));
-        self::assertCount(1, $res["hits"]);
+        self::assertCount(1, $res['hits']);
 
         $res = $rulesIndex->getRule($rule1['objectID']);
         self::assertEquals(TestHelper::formatRule($res), $rule1);
@@ -607,7 +606,7 @@ class SearchIndexTest extends BaseTest
 
         $rulesIndex->clearRules()->wait();
         $res = $rulesIndex->searchRules('');
-        self::assertCount(0, $res["hits"]);
+        self::assertCount(0, $res['hits']);
 
         $ruleString = '{
           "objectID": "query_edits",
@@ -649,7 +648,7 @@ class SearchIndexTest extends BaseTest
             array('action' => 'addObject', 'body' => array('objectID' => 'zero', 'key' => 'value')),
             array('action' => 'updateObject', 'body' => array('objectID' => 'one', 'k' => 'v')),
             array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two', 'k' => 'v')),
-            array('action' => 'partialUpdateObject', 'body' =>array('objectID' => 'two_bis', 'key' => 'value')),
+            array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two_bis', 'key' => 'value')),
             array('action' => 'partialUpdateObjectNoCreate', 'body' => array('objectID' => 'three', 'k' => 'v')),
             array('action' => 'deleteObject', 'body' => array('objectID' => 'four')),
         );
@@ -785,4 +784,3 @@ class SearchIndexTest extends BaseTest
         self::assertFalse($existsIndex->exists());
     }
 }
-

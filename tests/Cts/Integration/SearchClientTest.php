@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
 
 use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
-use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\SearchIndex;
 use Algolia\AlgoliaSearch\Tests\Cts\TestHelper;
 
@@ -41,7 +40,7 @@ class SearchClientTest extends BaseTest
         $responses[] = $copyIndex->saveObjects($figures, array('autoGenerateObjectIDIfNotExist' => true));
 
         $settings = array(
-            'attributesForFaceting' => array('company')
+            'attributesForFaceting' => array('company'),
         );
 
         $responses[] = $copyIndex->setSettings($settings);
@@ -65,7 +64,7 @@ class SearchClientTest extends BaseTest
             ),
             'consequence' => array(
                 'params' => array(
-                    'automaticFacetFilters' => array('company')
+                    'automaticFacetFilters' => array('company'),
                 ),
             ),
         );
@@ -132,7 +131,7 @@ class SearchClientTest extends BaseTest
     public function testMcm()
     {
         // @todo
-        self::assertEquals(1,1);
+        self::assertEquals(1, 1);
     }
 
     public function testApiKeys()
@@ -183,7 +182,7 @@ class SearchClientTest extends BaseTest
             try {
                 $updatedApiKey = TestHelper::getClient()->getApiKey($res['key']);
 
-                if ($updatedApiKey['maxHitsPerQuery'] !==  $apiKey['maxHitsPerQuery']) {
+                if ($updatedApiKey['maxHitsPerQuery'] !== $apiKey['maxHitsPerQuery']) {
                     self::assertEquals(42, $updatedApiKey['maxHitsPerQuery']);
                     break;
                 }
@@ -272,11 +271,11 @@ class SearchClientTest extends BaseTest
             array(
                 array(
                     'indexName' => $index1,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
                 ),
                 array(
                     'indexName' => $index2,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
                 ),
             ),
             array('strategy' => 'none')
@@ -294,11 +293,11 @@ class SearchClientTest extends BaseTest
             array(
                 array(
                     'indexName' => $index1,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
                 ),
                 array(
                     'indexName' => $index2,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2))
+                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
                 ),
             ),
             array('strategy' => 'stopIfEnoughMatches')
@@ -312,5 +311,4 @@ class SearchClientTest extends BaseTest
         self::assertCount(0, $results[1]['hits']);
         self::assertEquals(0, $results[1]['nbHits']);
     }
-
 }

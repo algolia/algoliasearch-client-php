@@ -105,10 +105,10 @@ class AccountTest extends BaseTest
         self::assertEquals(array('objectID'), $result['searchableAttributes']);
 
         $result = $secondaryIndex->getRule($rule['objectID']);
-        self::assertEquals('one',  $result['objectID']);
+        self::assertEquals('one', $result['objectID']);
 
         $result = $secondaryIndex->getSynonym($synonym['objectID']);
-        self::assertEquals('one',  $result['objectID']);
+        self::assertEquals('one', $result['objectID']);
 
         try {
             AccountClient::copyIndex($copyIndex, $secondaryIndex)->wait();

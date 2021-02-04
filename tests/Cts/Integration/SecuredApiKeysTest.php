@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
 
-use Algolia\AlgoliaSearch\AccountClient;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\SearchIndex;
@@ -36,7 +35,7 @@ class SecuredApiKeysTest extends BaseTest
             getenv('ALGOLIA_SEARCH_KEY_1'),
             array(
                 'validUntil' => time() + 600,
-                'restrictIndices' => static::$indexes['secured_api_keys']
+                'restrictIndices' => static::$indexes['secured_api_keys'],
             )
         );
 
@@ -54,7 +53,7 @@ class SecuredApiKeysTest extends BaseTest
         $securedIndexDev = $securedClient->initIndex(static::$indexes['secured_api_keys_dev']);
 
         $res = $securedIndex->search('');
-        self::assertCount(1, $res["hits"]);
+        self::assertCount(1, $res['hits']);
 
         try {
             $res = $securedIndexDev->search('');
@@ -70,7 +69,7 @@ class SecuredApiKeysTest extends BaseTest
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
             array(
-                'validUntil' => time() + 600
+                'validUntil' => time() + 600,
             )
         );
 
@@ -79,7 +78,7 @@ class SecuredApiKeysTest extends BaseTest
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
             array(
-                'validUntil' => time() - 600
+                'validUntil' => time() - 600,
             )
         );
 

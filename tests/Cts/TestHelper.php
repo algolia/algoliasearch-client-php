@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch\Tests\Cts;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;
-use Algolia\AlgoliaSearch\Tests\SyncClient;
 use Faker\Factory;
 
 class TestHelper
@@ -79,7 +78,7 @@ class TestHelper
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_1'),
         );
 
-        $idFromApiKey = $config['appId'] . substr($config['apiKey'], 0, 5);
+        $idFromApiKey = $config['appId'].substr($config['apiKey'], 0, 5);
 
         if (!isset(self::$client[$idFromApiKey])) {
             self::$client[$idFromApiKey] = SearchClient::createWithConfig(new SearchConfig($config));
@@ -93,9 +92,9 @@ class TestHelper
         $faker = Factory::create();
         $record = array('name' => $faker->name);
 
-        if ($objectID === null) {
+        if (null === $objectID) {
             $record['objectID'] = uniqid('php_client_', true);
-        } elseif ($objectID !== false) {
+        } elseif (false !== $objectID) {
             $record['objectID'] = $objectID;
         }
 

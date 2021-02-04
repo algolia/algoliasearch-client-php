@@ -1,8 +1,8 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
+namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Tests\Cts\TestHelper;
+use Algolia\AlgoliaSearch\Tests\TestHelper;
 use PHPUnit\Framework\TestCase as PHPUitTestCase;
 
 abstract class BaseTest extends PHPUitTestCase

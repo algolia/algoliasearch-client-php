@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Cts;
+namespace Algolia\AlgoliaSearch\Tests;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
 use Algolia\AlgoliaSearch\SearchClient;

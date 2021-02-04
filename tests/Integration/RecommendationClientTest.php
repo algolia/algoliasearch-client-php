@@ -1,6 +1,6 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
+namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\RecommendationClient;
 

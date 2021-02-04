@@ -1,11 +1,11 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Tests\Cts\Integration;
+namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\SearchIndex;
-use Algolia\AlgoliaSearch\Tests\Cts\TestHelper;
+use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class SecuredApiKeysTest extends BaseTest
 {

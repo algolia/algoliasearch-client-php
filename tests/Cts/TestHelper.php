@@ -18,8 +18,8 @@ class TestHelper
         'ALGOLIA_SEARCH_KEY_1',
         'ALGOLIA_APPLICATION_ID_2',
         'ALGOLIA_ADMIN_KEY_2',
-//        'ALGOLIA_APPLICATION_ID_MCM',
-//        'ALGOLIA_ADMIN_KEY_MCM',
+        'ALGOLIA_APPLICATION_ID_MCM',
+        'ALGOLIA_ADMIN_KEY_MCM',
     );
 
     /** @var SearchClient[] */

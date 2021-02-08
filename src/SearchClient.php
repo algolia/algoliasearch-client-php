@@ -156,6 +156,14 @@ class SearchClient
 
     public function multipleQueries($queries, $requestOptions = array())
     {
+        $queries = array_map(function($query) {
+            $query['params'] = isset($query['params']) ?
+                Helpers::serializeQueryParameters($query['params']) :
+                Helpers::serializeQueryParameters(array());
+
+            return $query;
+        }, $queries);
+
         if (is_array($requestOptions)) {
             $requestOptions['requests'] = $queries;
         } elseif ($requestOptions instanceof RequestOptions) {

@@ -62,14 +62,14 @@ class AnalyticsClientTest extends BaseTest
 
         $result = $analyticsClient->getABTest($abTestId);
 
-        self::assertSame($abTest['name'], $result['name']);
-        self::assertSame($abTest['endAt'], $result['endAt']);
-        self::assertSame($abTest['variants'][0]['index'], $result['variants'][0]['index']);
-        self::assertSame($abTest['variants'][0]['trafficPercentage'], $result['variants'][0]['trafficPercentage']);
-        self::assertSame($abTest['variants'][0]['description'], $result['variants'][0]['description']);
-        self::assertSame($abTest['variants'][1]['index'], $result['variants'][1]['index']);
-        self::assertSame($abTest['variants'][1]['trafficPercentage'], $result['variants'][1]['trafficPercentage']);
-        self::assertNotEquals('stopped', $result['status']);
+        $this->assertSame($abTest['name'], $result['name']);
+        $this->assertSame($abTest['endAt'], $result['endAt']);
+        $this->assertSame($abTest['variants'][0]['index'], $result['variants'][0]['index']);
+        $this->assertSame($abTest['variants'][0]['trafficPercentage'], $result['variants'][0]['trafficPercentage']);
+        $this->assertSame($abTest['variants'][0]['description'], $result['variants'][0]['description']);
+        $this->assertSame($abTest['variants'][1]['index'], $result['variants'][1]['index']);
+        $this->assertSame($abTest['variants'][1]['trafficPercentage'], $result['variants'][1]['trafficPercentage']);
+        $this->assertNotEquals('stopped', $result['status']);
 
         $results = $analyticsClient->getABTests();
         $found = false;
@@ -78,30 +78,30 @@ class AnalyticsClientTest extends BaseTest
             if ($fetchedAbTest['name'] != $abTest['name']) {
                 continue;
             }
-            self::assertSame($abTest['name'], $fetchedAbTest['name']);
-            self::assertSame($abTest['endAt'], $fetchedAbTest['endAt']);
-            self::assertSame($abTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
-            self::assertSame(
+            $this->assertSame($abTest['name'], $fetchedAbTest['name']);
+            $this->assertSame($abTest['endAt'], $fetchedAbTest['endAt']);
+            $this->assertSame($abTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
+            $this->assertSame(
                 $abTest['variants'][0]['trafficPercentage'],
                 $fetchedAbTest['variants'][0]['trafficPercentage']
             );
-            self::assertSame($abTest['variants'][0]['description'], $fetchedAbTest['variants'][0]['description']);
-            self::assertSame($abTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
-            self::assertSame(
+            $this->assertSame($abTest['variants'][0]['description'], $fetchedAbTest['variants'][0]['description']);
+            $this->assertSame($abTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
+            $this->assertSame(
                 $abTest['variants'][1]['trafficPercentage'],
                 $fetchedAbTest['variants'][1]['trafficPercentage']
             );
-            self::assertNotEquals('stopped', $fetchedAbTest['status']);
+            $this->assertNotEquals('stopped', $fetchedAbTest['status']);
             $found = true;
         }
 
-        self::assertTrue($found);
+        $this->assertTrue($found);
 
         $response = $analyticsClient->stopABTest($abTestId);
         $index->waitTask($response['taskID']);
 
         $result = $analyticsClient->getABTest($abTestId);
-        self::assertEquals('stopped', $result['status']);
+        $this->assertEquals('stopped', $result['status']);
 
         $response = $analyticsClient->deleteABTest($abTestId);
         $index->waitTask($response['taskID']);
@@ -109,9 +109,9 @@ class AnalyticsClientTest extends BaseTest
         try {
             $result = $analyticsClient->getABTest($abTestId);
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
-            self::assertEquals(404, $e->getCode());
-            self::assertEquals('ABTestID not found', $e->getMessage());
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertEquals(404, $e->getCode());
+            $this->assertEquals('ABTestID not found', $e->getMessage());
         }
     }
 
@@ -151,23 +151,23 @@ class AnalyticsClientTest extends BaseTest
 
         $fetchedAbTest = $analyticsClient->getABTest($aaTestId);
 
-        self::assertSame($aaTest['name'], $fetchedAbTest['name']);
-        self::assertSame($aaTest['endAt'], $fetchedAbTest['endAt']);
-        self::assertSame($aaTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
-        self::assertSame(
+        $this->assertSame($aaTest['name'], $fetchedAbTest['name']);
+        $this->assertSame($aaTest['endAt'], $fetchedAbTest['endAt']);
+        $this->assertSame($aaTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
+        $this->assertSame(
             $aaTest['variants'][0]['trafficPercentage'],
             $fetchedAbTest['variants'][0]['trafficPercentage']
         );
-        self::assertSame($aaTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
-        self::assertSame(
+        $this->assertSame($aaTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
+        $this->assertSame(
             $aaTest['variants'][1]['trafficPercentage'],
             $fetchedAbTest['variants'][1]['trafficPercentage']
         );
-        self::assertSame(
+        $this->assertSame(
             $aaTest['variants'][1]['customSearchParameters'],
             $fetchedAbTest['variants'][1]['customSearchParameters']
         );
-        self::assertNotEquals('stopped', $fetchedAbTest['status']);
+        $this->assertNotEquals('stopped', $fetchedAbTest['status']);
 
         $response = $analyticsClient->deleteABTest($aaTestId);
         $index->waitTask($response['taskID']);
@@ -175,9 +175,9 @@ class AnalyticsClientTest extends BaseTest
         try {
             $result = $analyticsClient->getABTest($aaTestId);
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
-            self::assertEquals(404, $e->getCode());
-            self::assertEquals('ABTestID not found', $e->getMessage());
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertEquals(404, $e->getCode());
+            $this->assertEquals('ABTestID not found', $e->getMessage());
         }
     }
 }

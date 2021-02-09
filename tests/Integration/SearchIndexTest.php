@@ -73,32 +73,32 @@ class SearchIndexTest extends BaseTest
         $objectID6 = $responses[4][0]['objectIDs'][1];
 
         $result1 = $index->getObject($objectID1);
-        self::assertEquals($obj1['name'], $result1['name']);
+        $this->assertEquals($obj1['name'], $result1['name']);
 
         $result2 = $index->getObject($objectID2);
-        self::assertEquals($obj2['name'], $result2['name']);
+        $this->assertEquals($obj2['name'], $result2['name']);
 
         $result3 = $index->getObject($objectID3);
-        self::assertEquals($obj3['name'], $result3['name']);
+        $this->assertEquals($obj3['name'], $result3['name']);
         $result4 = $index->getObject($objectID4);
-        self::assertEquals($obj4['name'], $result4['name']);
+        $this->assertEquals($obj4['name'], $result4['name']);
 
         $result5 = $index->getObject($objectID5);
-        self::assertEquals($obj5['name'], $result5['name']);
+        $this->assertEquals($obj5['name'], $result5['name']);
         $result6 = $index->getObject($objectID6);
-        self::assertEquals($obj6['name'], $result6['name']);
+        $this->assertEquals($obj6['name'], $result6['name']);
 
         /* Check 1000 remaining records with getObjects */
         $results = $index->getObjects(array_keys($objects));
-        self::assertEquals(array_values($objects), $results['results']);
+        $this->assertEquals(array_values($objects), $results['results']);
 
         /*  Browse all records with browseObjects */
         $iterator = $index->browseObjects();
-        self::assertCount(1006, $iterator);
+        $this->assertCount(1006, $iterator);
 
         $results = iterator_to_array($iterator);
         foreach ($objects as $object) {
-            self::assertContains($object, $results);
+            $this->assertContains($object, $results);
         }
 
         /* Alter 1 record with partialUpdateObject */
@@ -115,9 +115,9 @@ class SearchIndexTest extends BaseTest
         $multiResponse->wait();
 
         /* Check previous altered records with getObject */
-        self::assertEquals($index->getObject($objectID1), $obj1);
-        self::assertEquals($index->getObject($objectID3), $obj3);
-        self::assertEquals($index->getObject($objectID4), $obj4);
+        $this->assertEquals($index->getObject($objectID1), $obj1);
+        $this->assertEquals($index->getObject($objectID3), $obj3);
+        $this->assertEquals($index->getObject($objectID4), $obj4);
 
         /* adding an object w/o object id s */
         $objWithTag = TestHelper::createRecord(null);
@@ -136,7 +136,7 @@ class SearchIndexTest extends BaseTest
 
         /* Browse all objects with browseObjects */
         $iterator = $index->browseObjects();
-        self::assertCount(1000, $iterator);
+        $this->assertCount(1000, $iterator);
 
         /* Delete the 1000 remaining records with clearObjects */
         $responses[] = $index->clearObjects();
@@ -147,7 +147,7 @@ class SearchIndexTest extends BaseTest
 
         /* Browse all objects with browseObjects */
         $iterator = $index->browseObjects();
-        self::assertCount(0, $iterator);
+        $this->assertCount(0, $iterator);
     }
 
     public function testSettings()
@@ -248,7 +248,7 @@ class SearchIndexTest extends BaseTest
 
         /* Check values from getSettings method */
         $fetchedSettings = $settingsIndex->getSettings();
-        self::assertEquals($settings, $fetchedSettings);
+        $this->assertEquals($settings, $fetchedSettings);
 
         $settings['typoTolerance'] = 'min';
         $settings['ignorePlurals'] = array('en', 'fr');
@@ -259,7 +259,7 @@ class SearchIndexTest extends BaseTest
 
         /* Check new values from getSettings method */
         $fetchedSettings = $settingsIndex->getSettings();
-        self::assertEquals($settings, $fetchedSettings);
+        $this->assertEquals($settings, $fetchedSettings);
     }
 
     public function testSearch()
@@ -297,24 +297,24 @@ class SearchIndexTest extends BaseTest
         $res = $searchIndex->search('algolia');
 
         /* Check if the number of results is 2  */
-        self::assertCount(2, $res['hits']);
+        $this->assertCount(2, $res['hits']);
 
         /* Check item positions */
-        self::assertEquals(SearchIndex::getObjectPosition($res, 'nicolas-dessaigne'), 0);
-        self::assertEquals(SearchIndex::getObjectPosition($res, 'julien-lemoine'), 1);
-        self::assertEquals(SearchIndex::getObjectPosition($res, ''), -1);
+        $this->assertEquals(SearchIndex::getObjectPosition($res, 'nicolas-dessaigne'), 0);
+        $this->assertEquals(SearchIndex::getObjectPosition($res, 'julien-lemoine'), 1);
+        $this->assertEquals(SearchIndex::getObjectPosition($res, ''), -1);
 
         /* Check that no object is found when callback returns always false */
         try {
             $searchIndex->findObject(function () { return false; });
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         /* Check that first object is found when callback returns always true */
         $found = $searchIndex->findObject(function () { return true; });
-        self::assertEquals($found['position'], 0);
-        self::assertEquals($found['page'], 0);
+        $this->assertEquals($found['position'], 0);
+        $this->assertEquals($found['page'], 0);
 
         /* Callback that checks if the company is Apple */
         $callback = function ($obj) {
@@ -325,32 +325,32 @@ class SearchIndexTest extends BaseTest
         try {
             $searchIndex->findObject($callback, array('query' => 'algolia'));
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         /* Check that no object is found when we limit the search to the 5 first objects */
         try {
             $searchIndex->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         /* Check that we actually find the object when we paginate (on page 2) */
         $obj = $searchIndex->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
-        self::assertEquals($obj['position'], 0);
-        self::assertEquals($obj['page'], 2);
+        $this->assertEquals($obj['position'], 0);
+        $this->assertEquals($obj['page'], 2);
 
         $res = $searchIndex->search('elon', array('clickAnalytics' => true));
-        self::assertNotEmpty($res['queryID']);
+        $this->assertNotEmpty($res['queryID']);
 
         $res = $searchIndex->search('', array('facets' => '*', 'facetFilters' => 'company:tesla'));
-        self::assertCount(1, $res['hits']);
+        $this->assertCount(1, $res['hits']);
 
         $res = $searchIndex->search(
             '',
             array('facets' => '*', 'filters' => 'company:tesla OR company:spacex')
         );
-        self::assertCount(2, $res['hits']);
+        $this->assertCount(2, $res['hits']);
 
         $res = $searchIndex->searchForFacetValues('company', 'a');
         $resultFacets = array();
@@ -358,10 +358,10 @@ class SearchIndexTest extends BaseTest
             $resultFacets[] = $facet['value'];
         }
 
-        self::assertContains('Algolia', $resultFacets);
-        self::assertContains('Amazon', $resultFacets);
-        self::assertContains('Apple', $resultFacets);
-        self::assertContains('Arista Networks', $resultFacets);
+        $this->assertContains('Algolia', $resultFacets);
+        $this->assertContains('Amazon', $resultFacets);
+        $this->assertContains('Apple', $resultFacets);
+        $this->assertContains('Arista Networks', $resultFacets);
     }
 
     public function testSynonyms()
@@ -428,11 +428,11 @@ class SearchIndexTest extends BaseTest
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        self::assertEquals($nWaySynonym, $synonymsIndex->getSynonym('gba'));
-        self::assertEquals($synonyms[0], $synonymsIndex->getSynonym('wii_to_wii_u'));
-        self::assertEquals($synonyms[1], $synonymsIndex->getSynonym('playstation_version_placeholder'));
-        self::assertEquals($synonyms[2], $synonymsIndex->getSynonym('ps4'));
-        self::assertEquals($synonyms[3], $synonymsIndex->getSynonym('psone'));
+        $this->assertEquals($nWaySynonym, $synonymsIndex->getSynonym('gba'));
+        $this->assertEquals($synonyms[0], $synonymsIndex->getSynonym('wii_to_wii_u'));
+        $this->assertEquals($synonyms[1], $synonymsIndex->getSynonym('playstation_version_placeholder'));
+        $this->assertEquals($synonyms[2], $synonymsIndex->getSynonym('ps4'));
+        $this->assertEquals($synonyms[3], $synonymsIndex->getSynonym('psone'));
 
         $res = $synonymsIndex->searchSynonyms('');
         $this->assertEquals(5, $res['nbHits']);
@@ -440,7 +440,7 @@ class SearchIndexTest extends BaseTest
         $iterator = $synonymsIndex->browseSynonyms(array('hitsPerPage' => 1));
         $synonymsToCheck = array($nWaySynonym, $syn1, $syn2, $syn3, $syn4);
         foreach ($iterator as $synonym) {
-            self::assertContains($synonym, $synonymsToCheck);
+            $this->assertContains($synonym, $synonymsToCheck);
         }
 
         $synonymsIndex->deleteSynonym('gba')->wait();
@@ -448,13 +448,13 @@ class SearchIndexTest extends BaseTest
         try {
             $synonymsIndex->getSynonym('gba');
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
         $synonymsIndex->clearSynonyms()->wait();
 
         $res = $synonymsIndex->searchSynonyms('');
-        self::assertArraySubset(array('nbHits' => 0), $res);
+        $this->assertArraySubset(array('nbHits' => 0), $res);
     }
 
     public function testQueryRules()
@@ -570,30 +570,30 @@ class SearchIndexTest extends BaseTest
         $multiResponse->wait();
 
         $res = $rulesIndex->search('', array('ruleContexts' => 'summer'));
-        self::assertCount(1, $res['hits']);
+        $this->assertCount(1, $res['hits']);
 
         $res = $rulesIndex->getRule($rule1['objectID']);
-        self::assertEquals(TestHelper::formatRule($res), $rule1);
+        $this->assertEquals(TestHelper::formatRule($res), $rule1);
 
         $res = $rulesIndex->getRule($rule2['objectID']);
-        self::assertEquals(TestHelper::formatRule($res), $rule2);
+        $this->assertEquals(TestHelper::formatRule($res), $rule2);
 
         $res = $rulesIndex->getRule($rule3['objectID']);
-        self::assertEquals(TestHelper::formatRule($res), $rule3);
+        $this->assertEquals(TestHelper::formatRule($res), $rule3);
 
         $res = $rulesIndex->getRule($rule4['objectID']);
-        self::assertEquals(TestHelper::formatRule($res), $rule4);
+        $this->assertEquals(TestHelper::formatRule($res), $rule4);
 
         $allRules = array($rule1, $rule2, $rule3, $rule4);
 
         $res = $rulesIndex->searchRules('');
         foreach ($res['hits'] as $fetchedRule) {
-            self::assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+            $this->assertContains(TestHelper::formatRule($fetchedRule), $allRules);
         }
 
         $iterator = $rulesIndex->browseRules(array('hitsPerPage' => 1));
         foreach ($iterator as $fetchedRule) {
-            self::assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+            $this->assertContains(TestHelper::formatRule($fetchedRule), $allRules);
         }
 
         $rulesIndex->deleteRule($rule1['objectID'])->wait();
@@ -601,12 +601,12 @@ class SearchIndexTest extends BaseTest
         try {
             $rulesIndex->getRule($rule1['objectID']);
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
         $rulesIndex->clearRules()->wait();
         $res = $rulesIndex->searchRules('');
-        self::assertCount(0, $res['hits']);
+        $this->assertCount(0, $res['hits']);
 
         $ruleString = '{
           "objectID": "query_edits",
@@ -624,7 +624,7 @@ class SearchIndexTest extends BaseTest
         $rulesIndex->saveRule($serializedRule)->wait();
 
         $res = $rulesIndex->getRule($serializedRule['objectID']);
-        self::assertEquals(TestHelper::formatRule($res), $serializedRule);
+        $this->assertEquals(TestHelper::formatRule($res), $serializedRule);
     }
 
     public function testBatching()
@@ -668,10 +668,10 @@ class SearchIndexTest extends BaseTest
         $fetchedResults = array();
         foreach ($iterator as $object) {
             $fetchedResults[] = $object;
-            self::assertContains($object, $figuresAfterBatch);
+            $this->assertContains($object, $figuresAfterBatch);
         }
 
-        self::assertCount(count($fetchedResults), $figuresAfterBatch);
+        $this->assertCount(count($fetchedResults), $figuresAfterBatch);
     }
 
     public function testReplacing()
@@ -737,31 +737,31 @@ class SearchIndexTest extends BaseTest
         try {
             $replacingIndex->getObject('one');
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
         $res = $replacingIndex->getObject('two');
-        self::assertEquals('two', $res['objectID']);
+        $this->assertEquals('two', $res['objectID']);
 
         /* Check Rule replacement */
         try {
             $replacingIndex->getRule('one');
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
         $res = $replacingIndex->getRule('two');
-        self::assertEquals('two', $res['objectID']);
+        $this->assertEquals('two', $res['objectID']);
 
         /* Check Synonym replacement */
         try {
             $replacingIndex->getSynonym('one');
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
         $res = $replacingIndex->getSynonym('two');
-        self::assertEquals('two', $res['objectID']);
+        $this->assertEquals('two', $res['objectID']);
     }
 
     public function testIndexExists()
@@ -771,16 +771,16 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $existsIndex */
         $existsIndex = TestHelper::getClient()->initIndex(static::$indexes['exists']);
 
-        self::assertFalse($existsIndex->exists());
+        $this->assertFalse($existsIndex->exists());
 
         /* adding a object w/o object id s */
         $obj = TestHelper::createRecord();
         $existsIndex->saveObject($obj, array('autoGenerateObjectIDIfNotExist' => true))->wait();
 
-        self::assertTrue($existsIndex->exists());
+        $this->assertTrue($existsIndex->exists());
 
         $existsIndex->delete()->wait();
 
-        self::assertFalse($existsIndex->exists());
+        $this->assertFalse($existsIndex->exists());
     }
 }

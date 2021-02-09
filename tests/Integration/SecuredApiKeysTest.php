@@ -53,14 +53,14 @@ class SecuredApiKeysTest extends BaseTest
         $securedIndexDev = $securedClient->initIndex(static::$indexes['secured_api_keys_dev']);
 
         $res = $securedIndex->search('');
-        self::assertCount(1, $res['hits']);
+        $this->assertCount(1, $res['hits']);
 
         try {
             $res = $securedIndexDev->search('');
         } catch (\Exception $e) {
-            self::assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\BadRequestException', $e);
-            self::assertEquals(403, $e->getCode());
-            self::assertEquals('Index not allowed with this API key', $e->getMessage());
+            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\BadRequestException', $e);
+            $this->assertEquals(403, $e->getCode());
+            $this->assertEquals('Index not allowed with this API key', $e->getMessage());
         }
     }
 
@@ -73,7 +73,7 @@ class SecuredApiKeysTest extends BaseTest
             )
         );
 
-        self::assertGreaterThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));
+        $this->assertGreaterThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));
 
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
@@ -82,6 +82,6 @@ class SecuredApiKeysTest extends BaseTest
             )
         );
 
-        self::assertLessThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));
+        $this->assertLessThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));
     }
 }

@@ -68,8 +68,8 @@ class InsightsClientTest extends BaseTest
             array('one', 'two')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         $insightUser = $insightsClient->user('bar');
 
@@ -83,8 +83,8 @@ class InsightsClientTest extends BaseTest
             $search['queryID']
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // clicked_filters
         $response = $insightUser->clickedFilters(
@@ -93,8 +93,8 @@ class InsightsClientTest extends BaseTest
             array('filter:foo', 'filter:bar')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // converted_object_ids
         $response = $insightUser->convertedObjectIDs(
@@ -103,8 +103,8 @@ class InsightsClientTest extends BaseTest
             array('one', 'two')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // converted_object_ids_after_search
         $search = $index->search('', array('clickAnalytics' => true));
@@ -115,8 +115,8 @@ class InsightsClientTest extends BaseTest
             $search['queryID']
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // converted_filters
         $response = $insightUser->convertedFilters(
@@ -125,8 +125,8 @@ class InsightsClientTest extends BaseTest
             array('filter:foo', 'filter:bar')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // viewed_object_ids
         $response = $insightUser->viewedObjectIDs(
@@ -135,8 +135,8 @@ class InsightsClientTest extends BaseTest
             array('one', 'two')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
 
         // viewed_filters
         $response = $insightUser->viewedFilters(
@@ -145,7 +145,7 @@ class InsightsClientTest extends BaseTest
             array('filter:foo', 'filter:bar')
         );
 
-        self::assertEquals(200, $response['status']);
-        self::assertEquals('OK', $response['message']);
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
     }
 }

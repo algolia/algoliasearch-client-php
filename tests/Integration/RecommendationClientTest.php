@@ -30,11 +30,11 @@ class RecommendationClientTest extends BaseTest
         try {
             $recommendationClient->setPersonalizationStrategy($strategy);
         } catch (\Exception $e) {
-            self::assertEquals(429, $e->getCode());
+            $this->assertEquals(429, $e->getCode());
         }
 
         $fetchedStrategy = $recommendationClient->getPersonalizationStrategy();
 
-        self::assertEquals($strategy, $fetchedStrategy);
+        $this->assertEquals($strategy, $fetchedStrategy);
     }
 }

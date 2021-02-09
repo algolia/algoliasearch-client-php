@@ -23,8 +23,8 @@ class AccountTest extends BaseTest
         try {
             AccountClient::copyIndex($copyIndex, $secondaryIndex)->wait();
         } catch (\Exception $e) {
-            self::assertInstanceOf('\InvalidArgumentException', $e);
-            self::assertEquals(
+            $this->assertInstanceOf('\InvalidArgumentException', $e);
+            $this->assertEquals(
                 'If both index are on the same app, please use SearchClient::copyIndex method instead.',
                 $e->getMessage()
             );
@@ -85,22 +85,22 @@ class AccountTest extends BaseTest
         AccountClient::copyIndex($copyIndex, $secondaryIndex)->wait();
 
         $result = $secondaryIndex->getObject('one');
-        self::assertEquals('one', $result['objectID']);
+        $this->assertEquals('one', $result['objectID']);
 
         $result = $secondaryIndex->getSettings();
-        self::assertEquals(array('objectID'), $result['searchableAttributes']);
+        $this->assertEquals(array('objectID'), $result['searchableAttributes']);
 
         $result = $secondaryIndex->getRule($rule['objectID']);
-        self::assertEquals('one', $result['objectID']);
+        $this->assertEquals('one', $result['objectID']);
 
         $result = $secondaryIndex->getSynonym($synonym['objectID']);
-        self::assertEquals('one', $result['objectID']);
+        $this->assertEquals('one', $result['objectID']);
 
         try {
             AccountClient::copyIndex($copyIndex, $secondaryIndex)->wait();
         } catch (\Exception $e) {
-            self::assertInstanceOf('\InvalidArgumentException', $e);
-            self::assertEquals(
+            $this->assertInstanceOf('\InvalidArgumentException', $e);
+            $this->assertEquals(
                 'Destination index already exists. Please delete it before copying index across applications.',
                 $e->getMessage()
             );

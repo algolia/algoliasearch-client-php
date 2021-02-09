@@ -126,16 +126,16 @@ class SearchClientTest extends BaseTest
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        self::assertEquals($copyIndex->getSettings(), $copyIndexSettings->getSettings());
-        self::assertEquals($copyIndex->getRule($rule['objectID']), $copyIndexRules->getRule($rule['objectID']));
-        self::assertEquals(
+        $this->assertEquals($copyIndex->getSettings(), $copyIndexSettings->getSettings());
+        $this->assertEquals($copyIndex->getRule($rule['objectID']), $copyIndexRules->getRule($rule['objectID']));
+        $this->assertEquals(
             $copyIndex->getSynonym($synonym['objectID']),
             $copyIndexSynonyms->getSynonym($synonym['objectID'])
         );
 
-        self::assertEquals($copyIndex->getSettings(), $copyIndexFull->getSettings());
-        self::assertEquals($copyIndex->getRule($rule['objectID']), $copyIndexFull->getRule($rule['objectID']));
-        self::assertEquals(
+        $this->assertEquals($copyIndex->getSettings(), $copyIndexFull->getSettings());
+        $this->assertEquals($copyIndex->getRule($rule['objectID']), $copyIndexFull->getRule($rule['objectID']));
+        $this->assertEquals(
             $copyIndex->getSynonym($synonym['objectID']),
             $copyIndexFull->getSynonym($synonym['objectID'])
         );
@@ -151,7 +151,7 @@ class SearchClientTest extends BaseTest
         $this->mcmClient = TestHelper::getClient($config);
         $clusterList = $this->mcmClient->listClusters();
 
-        self::assertCount(2, $clusterList['clusters']);
+        $this->assertCount(2, $clusterList['clusters']);
 
         $clusterName = $clusterList['clusters'][0]['clusterName'];
 
@@ -160,14 +160,14 @@ class SearchClientTest extends BaseTest
         $this->mcmUserId2 = TestHelper::getTestUserName('2');
 
         $response = $this->mcmClient->assignUserId($this->mcmUserId0, $clusterName);
-        self::assertArrayHasKey('createdAt', $response);
+        $this->assertArrayHasKey('createdAt', $response);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId0);
         $this->assertEquals($response['userID'], $this->mcmUserId0);
         $this->assertEquals($response['clusterName'], $clusterName);
 
         $response = $this->mcmClient->assignUserIds(array($this->mcmUserId1, $this->mcmUserId2), $clusterName);
-        self::assertArrayHasKey('createdAt', $response);
+        $this->assertArrayHasKey('createdAt', $response);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId1);
         $this->assertEquals($response['userID'], $this->mcmUserId1);
@@ -253,8 +253,8 @@ class SearchClientTest extends BaseTest
 
         $apiKey = TestHelper::getClient()->getApiKey($res['key']);
 
-        self::assertEquals($acl, $apiKey['acl']);
-        self::assertEquals($params['description'], $apiKey['description']);
+        $this->assertEquals($acl, $apiKey['acl']);
+        $this->assertEquals($params['description'], $apiKey['description']);
 
         $allApiKeys = TestHelper::getClient()->listApiKeys();
         $fetchedApiKeyValues = array();
@@ -263,7 +263,7 @@ class SearchClientTest extends BaseTest
             $fetchedApiKeyValues[] = $fetchedApiKey['value'];
         }
 
-        self::assertContains($apiKey['value'], $fetchedApiKeyValues);
+        $this->assertContains($apiKey['value'], $fetchedApiKeyValues);
 
         $newParams = $params;
         $newParams['acl'] = array('search');
@@ -283,7 +283,7 @@ class SearchClientTest extends BaseTest
                 $updatedApiKey = TestHelper::getClient()->getApiKey($res['key']);
 
                 if ($updatedApiKey['maxHitsPerQuery'] !== $apiKey['maxHitsPerQuery']) {
-                    self::assertEquals(42, $updatedApiKey['maxHitsPerQuery']);
+                    $this->assertEquals(42, $updatedApiKey['maxHitsPerQuery']);
                     break;
                 }
             } catch (NotFoundException $e) {
@@ -306,8 +306,8 @@ class SearchClientTest extends BaseTest
         TestHelper::getClient()->restoreApiKey($res['key'])->wait();
 
         $restoredApiKey = TestHelper::getClient()->getApiKey($res['key']);
-        self::assertEquals($acl, $restoredApiKey['acl']);
-        self::assertEquals($params['description'], $restoredApiKey['description']);
+        $this->assertEquals($acl, $restoredApiKey['acl']);
+        $this->assertEquals($params['description'], $restoredApiKey['description']);
 
         TestHelper::getClient()->deleteApiKey($res['key'])->wait();
     }
@@ -324,7 +324,7 @@ class SearchClientTest extends BaseTest
         );
 
         $res = TestHelper::getClient()->getLogs($params);
-        self::assertCount(2, $res['logs']);
+        $this->assertCount(2, $res['logs']);
     }
 
     public function testMultipleOperations()
@@ -362,10 +362,10 @@ class SearchClientTest extends BaseTest
 
         $objects = $res['results'];
 
-        self::assertEquals($objectIds[0], $objects[0]['objectID']);
-        self::assertEquals($objectIds[1], $objects[1]['objectID']);
-        self::assertEquals($objectIds[2], $objects[2]['objectID']);
-        self::assertEquals($objectIds[3], $objects[3]['objectID']);
+        $this->assertEquals($objectIds[0], $objects[0]['objectID']);
+        $this->assertEquals($objectIds[1], $objects[1]['objectID']);
+        $this->assertEquals($objectIds[2], $objects[2]['objectID']);
+        $this->assertEquals($objectIds[3], $objects[3]['objectID']);
 
         $res = TestHelper::getClient()->multipleQueries(
             array(
@@ -383,11 +383,11 @@ class SearchClientTest extends BaseTest
 
         $results = $res['results'];
 
-        self::assertCount(2, $results);
-        self::assertCount(2, $results[0]['hits']);
-        self::assertEquals(2, $results[0]['nbHits']);
-        self::assertCount(2, $results[1]['hits']);
-        self::assertEquals(2, $results[1]['nbHits']);
+        $this->assertCount(2, $results);
+        $this->assertCount(2, $results[0]['hits']);
+        $this->assertEquals(2, $results[0]['nbHits']);
+        $this->assertCount(2, $results[1]['hits']);
+        $this->assertEquals(2, $results[1]['nbHits']);
 
         $res = TestHelper::getClient()->multipleQueries(
             array(
@@ -405,11 +405,11 @@ class SearchClientTest extends BaseTest
 
         $results = $res['results'];
 
-        self::assertCount(2, $results);
-        self::assertCount(2, $results[0]['hits']);
-        self::assertEquals(2, $results[0]['nbHits']);
-        self::assertCount(0, $results[1]['hits']);
-        self::assertEquals(0, $results[1]['nbHits']);
+        $this->assertCount(2, $results);
+        $this->assertCount(2, $results[0]['hits']);
+        $this->assertEquals(2, $results[0]['nbHits']);
+        $this->assertCount(0, $results[1]['hits']);
+        $this->assertEquals(0, $results[1]['nbHits']);
     }
 
     private function autoRetryGetUserId($userID)

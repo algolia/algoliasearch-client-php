@@ -3,9 +3,9 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\Tests\TestHelper;
-use PHPUnit\Framework\TestCase as PHPUitTestCase;
+use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
-abstract class BaseTest extends PHPUitTestCase
+abstract class BaseTest extends PHPUnitTestCase
 {
     protected static $indexes = array();
 
@@ -15,19 +15,10 @@ abstract class BaseTest extends PHPUitTestCase
             TestHelper::checkEnvironmentVariables();
         } catch (\Exception $e) {
             echo $e->getMessage()."\n";
-            exit(255);
+            return;
         }
 
         parent::setUpBeforeClass();
         static::$indexes = array();
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-
-        foreach (static::$indexes as $indexName) {
-            TestHelper::getClient()->initIndex($indexName)->delete();
-        }
     }
 }

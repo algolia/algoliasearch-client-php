@@ -11,20 +11,6 @@ class AccountTest extends BaseTest
 {
     protected static $secondaryIndexes = array();
 
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-
-        $secondaryConfig = array(
-            'appId' => getenv('ALGOLIA_APPLICATION_ID_2'),
-            'apiKey' => getenv('ALGOLIA_ADMIN_KEY_2'),
-        );
-
-        foreach (static::$secondaryIndexes as $indexName) {
-            TestHelper::getClient($secondaryConfig)->initIndex($indexName)->delete();
-        }
-    }
-
     public function testCopyIndex()
     {
         static::$indexes['copy_index'] = TestHelper::getTestIndexName('copy_index');

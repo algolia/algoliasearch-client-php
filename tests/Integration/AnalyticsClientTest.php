@@ -33,9 +33,10 @@ class AnalyticsClientTest extends BaseTest
         $multiResponse->wait();
 
         $dateTime = new DateTime('tomorrow');
+        $abTestName = static::$indexes['ab_testing'];
 
         $abTest = array(
-            'name' => 'abTestName',
+            'name' => $abTestName,
             'variants' => array(
                 array(
                     'index' => static::$indexes['ab_testing'],
@@ -129,9 +130,10 @@ class AnalyticsClientTest extends BaseTest
         $object = array('objectID' => 'one');
         $res = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
         $dateTime = new DateTime('tomorrow');
+        $abTestName = static::$indexes['aa_testing'];
 
         $aaTest = array(
-            'name' => 'aaTestName',
+            'name' => $abTestName,
             'variants' => array(
                 array('index' => static::$indexes['aa_testing'], 'trafficPercentage' => 90),
                 array(

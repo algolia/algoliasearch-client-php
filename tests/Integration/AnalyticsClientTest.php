@@ -3,7 +3,6 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\AnalyticsClient;
-use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\SearchIndex;
 use Algolia\AlgoliaSearch\Tests\TestHelper;
 use DateTime;
@@ -25,12 +24,8 @@ class AnalyticsClientTest extends BaseTest
 
         $object = array('objectID' => 'one');
 
-        $responses[] = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $indexDev->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true));
-
-        /* Wait all collected task to terminate */
-        $multiResponse = new MultiResponse($responses);
-        $multiResponse->wait();
+        $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $indexDev->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
 
         $dateTime = new DateTime('tomorrow');
         $abTestName = static::$indexes['ab_testing'];

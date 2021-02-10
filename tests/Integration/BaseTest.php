@@ -19,6 +19,5 @@ abstract class BaseTest extends PHPUnitTestCase
         }
 
         parent::setUpBeforeClass();
-        static::$indexes = array();
     }
 }

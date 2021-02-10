@@ -11,14 +11,14 @@ class SecuredApiKeysTest extends BaseTest
 {
     public function testSecuredApiKeys()
     {
-        static::$indexes['secured_api_keys'] = TestHelper::getTestIndexName('secured_api_keys');
-        static::$indexes['secured_api_keys_dev'] = TestHelper::getTestIndexName('secured_api_keys_dev');
+        $this->indexes['secured_api_keys'] = TestHelper::getTestIndexName('secured_api_keys');
+        $this->indexes['secured_api_keys_dev'] = TestHelper::getTestIndexName('secured_api_keys_dev');
 
         /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex(static::$indexes['secured_api_keys']);
+        $index = TestHelper::getClient()->initIndex($this->indexes['secured_api_keys']);
 
         /** @var SearchIndex $indexDev */
-        $indexDev = TestHelper::getClient()->initIndex(static::$indexes['secured_api_keys_dev']);
+        $indexDev = TestHelper::getClient()->initIndex($this->indexes['secured_api_keys_dev']);
 
         $responses = array();
 
@@ -35,7 +35,7 @@ class SecuredApiKeysTest extends BaseTest
             getenv('ALGOLIA_SEARCH_KEY_1'),
             array(
                 'validUntil' => time() + 600,
-                'restrictIndices' => static::$indexes['secured_api_keys'],
+                'restrictIndices' => $this->indexes['secured_api_keys'],
             )
         );
 
@@ -47,10 +47,10 @@ class SecuredApiKeysTest extends BaseTest
         $securedClient = TestHelper::getClient($securedConfig);
 
         /** @var SearchIndex $securedIndex */
-        $securedIndex = $securedClient->initIndex(static::$indexes['secured_api_keys']);
+        $securedIndex = $securedClient->initIndex($this->indexes['secured_api_keys']);
 
         /** @var SearchIndex $securedIndexDev */
-        $securedIndexDev = $securedClient->initIndex(static::$indexes['secured_api_keys_dev']);
+        $securedIndexDev = $securedClient->initIndex($this->indexes['secured_api_keys_dev']);
 
         $res = $securedIndex->search('');
         $this->assertCount(1, $res['hits']);

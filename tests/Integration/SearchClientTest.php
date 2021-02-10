@@ -38,10 +38,10 @@ class SearchClientTest extends BaseTest
 
     public function testCopyIndex()
     {
-        static::$indexes['copy_index'] = TestHelper::getTestIndexName('copy_index');
+        $this->indexes['copy_index'] = TestHelper::getTestIndexName('copy_index');
 
         /** @var SearchIndex $copyIndex */
-        $copyIndex = TestHelper::getClient()->initIndex(static::$indexes['copy_index']);
+        $copyIndex = TestHelper::getClient()->initIndex($this->indexes['copy_index']);
 
         $responses = array();
 
@@ -88,38 +88,38 @@ class SearchClientTest extends BaseTest
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        static::$indexes['copy_index_settings'] = TestHelper::getTestIndexName('copy_index_settings');
-        static::$indexes['copy_index_rules'] = TestHelper::getTestIndexName('copy_index_rules');
-        static::$indexes['copy_index_synonyms'] = TestHelper::getTestIndexName('copy_index_synonyms');
-        static::$indexes['copy_index_full_copy'] = TestHelper::getTestIndexName('copy_index_full_copy');
+        $this->indexes['copy_index_settings'] = TestHelper::getTestIndexName('copy_index_settings');
+        $this->indexes['copy_index_rules'] = TestHelper::getTestIndexName('copy_index_rules');
+        $this->indexes['copy_index_synonyms'] = TestHelper::getTestIndexName('copy_index_synonyms');
+        $this->indexes['copy_index_full_copy'] = TestHelper::getTestIndexName('copy_index_full_copy');
 
         /** @var SearchIndex $copyIndexSettings */
-        $copyIndexSettings = TestHelper::getClient()->initIndex(static::$indexes['copy_index_settings']);
+        $copyIndexSettings = TestHelper::getClient()->initIndex($this->indexes['copy_index_settings']);
 
         /** @var SearchIndex $copyIndexRules */
-        $copyIndexRules = TestHelper::getClient()->initIndex(static::$indexes['copy_index_rules']);
+        $copyIndexRules = TestHelper::getClient()->initIndex($this->indexes['copy_index_rules']);
 
         /** @var SearchIndex $copyIndexSynonyms */
-        $copyIndexSynonyms = TestHelper::getClient()->initIndex(static::$indexes['copy_index_synonyms']);
+        $copyIndexSynonyms = TestHelper::getClient()->initIndex($this->indexes['copy_index_synonyms']);
 
         /** @var SearchIndex $copyIndexFull */
-        $copyIndexFull = TestHelper::getClient()->initIndex(static::$indexes['copy_index_full_copy']);
+        $copyIndexFull = TestHelper::getClient()->initIndex($this->indexes['copy_index_full_copy']);
 
         $responses[] = TestHelper::getClient()->copySettings(
-            static::$indexes['copy_index'],
-            static::$indexes['copy_index_settings']
+            $this->indexes['copy_index'],
+            $this->indexes['copy_index_settings']
         );
         $responses[] = TestHelper::getClient()->copyRules(
-            static::$indexes['copy_index'],
-            static::$indexes['copy_index_rules']
+            $this->indexes['copy_index'],
+            $this->indexes['copy_index_rules']
         );
         $responses[] = TestHelper::getClient()->copySynonyms(
-            static::$indexes['copy_index'],
-            static::$indexes['copy_index_synonyms']
+            $this->indexes['copy_index'],
+            $this->indexes['copy_index_synonyms']
         );
         $responses[] = TestHelper::getClient()->copyIndex(
-            static::$indexes['copy_index'],
-            static::$indexes['copy_index_full_copy']
+            $this->indexes['copy_index'],
+            $this->indexes['copy_index_full_copy']
         );
 
         /* Wait all collected task to terminate */
@@ -329,11 +329,11 @@ class SearchClientTest extends BaseTest
 
     public function testMultipleOperations()
     {
-        static::$indexes['multiple_operations'] = TestHelper::getTestIndexName('multiple_operations');
-        static::$indexes['multiple_operations_dev'] = TestHelper::getTestIndexName('multiple_operations_dev');
+        $this->indexes['multiple_operations'] = TestHelper::getTestIndexName('multiple_operations');
+        $this->indexes['multiple_operations_dev'] = TestHelper::getTestIndexName('multiple_operations_dev');
 
-        $index1 = static::$indexes['multiple_operations'];
-        $index2 = static::$indexes['multiple_operations_dev'];
+        $index1 = $this->indexes['multiple_operations'];
+        $index2 = $this->indexes['multiple_operations_dev'];
 
         /** @var SearchIndex $operationsIndex */
         $operationsIndex = TestHelper::getClient()->initIndex($index1);

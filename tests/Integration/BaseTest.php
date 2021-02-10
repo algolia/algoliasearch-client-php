@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
 abstract class BaseTest extends PHPUnitTestCase
 {
-    protected static $indexes = array();
+    protected $indexes = array();
 
     public static function setUpBeforeClass()
     {

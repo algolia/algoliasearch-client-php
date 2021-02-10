@@ -10,10 +10,10 @@ class InsightsClientTest extends BaseTest
 {
     public function testInsightClient()
     {
-        static::$indexes['sending_events'] = TestHelper::getTestIndexName('sending_events');
+        $this->indexes['sending_events'] = TestHelper::getTestIndexName('sending_events');
 
         /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex(static::$indexes['sending_events']);
+        $index = TestHelper::getClient()->initIndex($this->indexes['sending_events']);
 
         /** @var InsightsClient $insightsClient */
         $insightsClient = InsightsClient::create(
@@ -31,7 +31,7 @@ class InsightsClientTest extends BaseTest
         $event = array(
             'eventType' => 'click',
             'eventName' => 'foo',
-            'index' => static::$indexes['sending_events'],
+            'index' => $this->indexes['sending_events'],
             'userToken' => 'bar',
             'objectIDs' => array('one', 'two'),
             'timestamp' => $twoDaysAgoMs,
@@ -43,7 +43,7 @@ class InsightsClientTest extends BaseTest
             array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
-                'index' => static::$indexes['sending_events'],
+                'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
                 'timestamp' => $twoDaysAgoMs,
@@ -51,7 +51,7 @@ class InsightsClientTest extends BaseTest
             array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
-                'index' => static::$indexes['sending_events'],
+                'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
                 'timestamp' => $twoDaysAgoMs,
@@ -64,7 +64,7 @@ class InsightsClientTest extends BaseTest
         $insightUser = $insightsClient->user('bar');
         $response = $insightUser->clickedObjectIDs(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('one', 'two')
         );
 
@@ -77,7 +77,7 @@ class InsightsClientTest extends BaseTest
         $search = $index->search('', array('clickAnalytics' => true));
         $response = $insightUser->clickedObjectIDsAfterSearch(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('one', 'two'),
             array(1, 2),
             $search['queryID']
@@ -89,7 +89,7 @@ class InsightsClientTest extends BaseTest
         // clicked_filters
         $response = $insightUser->clickedFilters(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('filter:foo', 'filter:bar')
         );
 
@@ -99,7 +99,7 @@ class InsightsClientTest extends BaseTest
         // converted_object_ids
         $response = $insightUser->convertedObjectIDs(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('one', 'two')
         );
 
@@ -110,7 +110,7 @@ class InsightsClientTest extends BaseTest
         $search = $index->search('', array('clickAnalytics' => true));
         $response = $insightUser->convertedObjectIDsAfterSearch(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('one', 'two'),
             $search['queryID']
         );
@@ -121,7 +121,7 @@ class InsightsClientTest extends BaseTest
         // converted_filters
         $response = $insightUser->convertedFilters(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('filter:foo', 'filter:bar')
         );
 
@@ -131,7 +131,7 @@ class InsightsClientTest extends BaseTest
         // viewed_object_ids
         $response = $insightUser->viewedObjectIDs(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('one', 'two')
         );
 
@@ -141,7 +141,7 @@ class InsightsClientTest extends BaseTest
         // viewed_filters
         $response = $insightUser->viewedFilters(
             'foo',
-            static::$indexes['sending_events'],
+            $this->indexes['sending_events'],
             array('filter:foo', 'filter:bar')
         );
 

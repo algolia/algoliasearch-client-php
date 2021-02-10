@@ -9,16 +9,16 @@ use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class AccountTest extends BaseTest
 {
-    protected static $secondaryIndexes = array();
+    protected $secondaryIndexes = array();
 
     public function testCopyIndex()
     {
-        static::$indexes['copy_index'] = TestHelper::getTestIndexName('copy_index');
-        static::$indexes['copy_index_2'] = TestHelper::getTestIndexName('copy_index_2');
+        $this->indexes['copy_index'] = TestHelper::getTestIndexName('copy_index');
+        $this->indexes['copy_index_2'] = TestHelper::getTestIndexName('copy_index_2');
 
         /** @var SearchIndex $copyIndex */
-        $copyIndex = TestHelper::getClient()->initIndex(static::$indexes['copy_index']);
-        $secondaryIndex = TestHelper::getClient()->initIndex(static::$indexes['copy_index_2']);
+        $copyIndex = TestHelper::getClient()->initIndex($this->indexes['copy_index']);
+        $secondaryIndex = TestHelper::getClient()->initIndex($this->indexes['copy_index_2']);
 
         try {
             AccountClient::copyIndex($copyIndex, $secondaryIndex)->wait();
@@ -36,10 +36,10 @@ class AccountTest extends BaseTest
         );
 
         $secondaryClient = TestHelper::getClient($secondaryConfig);
-        static::$secondaryIndexes['copy_index_2'] = TestHelper::getTestIndexName('copy_index_2');
+        $this->secondaryIndexes['copy_index_2'] = TestHelper::getTestIndexName('copy_index_2');
 
         /** @var SearchIndex $secondaryIndex */
-        $secondaryIndex = $secondaryClient->initIndex(static::$secondaryIndexes['copy_index_2']);
+        $secondaryIndex = $secondaryClient->initIndex($this->secondaryIndexes['copy_index_2']);
 
         $responses[] = $copyIndex->saveObject(
             array('objectID' => 'one'),

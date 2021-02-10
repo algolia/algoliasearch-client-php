@@ -11,14 +11,14 @@ class AnalyticsClientTest extends BaseTest
 {
     public function testAbTesting()
     {
-        static::$indexes['ab_testing'] = TestHelper::getTestIndexName('ab_testing');
-        static::$indexes['ab_testing_dev'] = TestHelper::getTestIndexName('ab_testing_dev');
+        $this->indexes['ab_testing'] = TestHelper::getTestIndexName('ab_testing');
+        $this->indexes['ab_testing_dev'] = TestHelper::getTestIndexName('ab_testing_dev');
 
         /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex(static::$indexes['ab_testing']);
+        $index = TestHelper::getClient()->initIndex($this->indexes['ab_testing']);
 
         /** @var SearchIndex $indexDev */
-        $indexDev = TestHelper::getClient()->initIndex(static::$indexes['ab_testing_dev']);
+        $indexDev = TestHelper::getClient()->initIndex($this->indexes['ab_testing_dev']);
 
         $responses = array();
 
@@ -28,18 +28,18 @@ class AnalyticsClientTest extends BaseTest
         $indexDev->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
 
         $dateTime = new DateTime('tomorrow');
-        $abTestName = static::$indexes['ab_testing'];
+        $abTestName = $this->indexes['ab_testing'];
 
         $abTest = array(
             'name' => $abTestName,
             'variants' => array(
                 array(
-                    'index' => static::$indexes['ab_testing'],
+                    'index' => $this->indexes['ab_testing'],
                     'trafficPercentage' => 60,
                     'description' => 'a description',
                 ),
                 array(
-                    'index' => static::$indexes['ab_testing_dev'],
+                    'index' => $this->indexes['ab_testing_dev'],
                     'trafficPercentage' => 40,
                 ),
             ),
@@ -112,10 +112,10 @@ class AnalyticsClientTest extends BaseTest
 
     public function testAaTesting()
     {
-        static::$indexes['aa_testing'] = TestHelper::getTestIndexName('aa_testing');
+        $this->indexes['aa_testing'] = TestHelper::getTestIndexName('aa_testing');
 
         /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex(static::$indexes['aa_testing']);
+        $index = TestHelper::getClient()->initIndex($this->indexes['aa_testing']);
 
         $analyticsClient = AnalyticsClient::create(
             getenv('ALGOLIA_APPLICATION_ID_1'),
@@ -125,14 +125,14 @@ class AnalyticsClientTest extends BaseTest
         $object = array('objectID' => 'one');
         $res = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
         $dateTime = new DateTime('tomorrow');
-        $abTestName = static::$indexes['aa_testing'];
+        $abTestName = $this->indexes['aa_testing'];
 
         $aaTest = array(
             'name' => $abTestName,
             'variants' => array(
-                array('index' => static::$indexes['aa_testing'], 'trafficPercentage' => 90),
+                array('index' => $this->indexes['aa_testing'], 'trafficPercentage' => 90),
                 array(
-                    'index' => static::$indexes['aa_testing'],
+                    'index' => $this->indexes['aa_testing'],
                     'trafficPercentage' => 10,
                     'customSearchParameters' => array('ignorePlurals' => true),
                 ),
@@ -142,7 +142,7 @@ class AnalyticsClientTest extends BaseTest
 
         $response = $analyticsClient->addABTest($aaTest);
         $aaTestId = $response['abTestID'];
-        TestHelper::getClient()->waitTask(static::$indexes['aa_testing'], $response['taskID']);
+        TestHelper::getClient()->waitTask($this->indexes['aa_testing'], $response['taskID']);
 
         $fetchedAbTest = $analyticsClient->getABTest($aaTestId);
 

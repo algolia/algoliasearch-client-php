@@ -13,8 +13,8 @@ class SearchIndexTest extends BaseTest
     {
         parent::setUp();
 
-        if (!isset(static::$indexes['main'])) {
-            static::$indexes['main'] = TestHelper::getTestIndexName('indexing');
+        if (!isset($this->indexes['main'])) {
+            $this->indexes['main'] = TestHelper::getTestIndexName('indexing');
         }
     }
 
@@ -22,7 +22,7 @@ class SearchIndexTest extends BaseTest
     {
         $responses = array();
         /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex(static::$indexes['main']);
+        $index = TestHelper::getClient()->initIndex($this->indexes['main']);
 
         /* adding an object with object id */
         $obj1 = TestHelper::createRecord(null);
@@ -152,10 +152,10 @@ class SearchIndexTest extends BaseTest
 
     public function testSettings()
     {
-        static::$indexes['settings'] = TestHelper::getTestIndexName('settings');
+        $this->indexes['settings'] = TestHelper::getTestIndexName('settings');
 
         /** @var SearchIndex $settingsIndex */
-        $settingsIndex = TestHelper::getClient()->initIndex(static::$indexes['settings']);
+        $settingsIndex = TestHelper::getClient()->initIndex($this->indexes['settings']);
 
         $responses = array();
 
@@ -187,7 +187,7 @@ class SearchIndexTest extends BaseTest
                 'words',
             ),
             'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
-            'replicas' => array(static::$indexes['settings'].'_replica1', static::$indexes['settings'].'_replica2'),
+            'replicas' => array($this->indexes['settings'].'_replica1', $this->indexes['settings'].'_replica2'),
             'maxValuesPerFacet' => 100,
             'sortFacetValuesBy' => 'count',
             'attributesToHighlight' => array('attribute1', 'attribute2'),
@@ -264,10 +264,10 @@ class SearchIndexTest extends BaseTest
 
     public function testSearch()
     {
-        static::$indexes['search'] = TestHelper::getTestIndexName('search');
+        $this->indexes['search'] = TestHelper::getTestIndexName('search');
 
         /** @var SearchIndex $searchIndex */
-        $searchIndex = TestHelper::getClient()->initIndex(static::$indexes['search']);
+        $searchIndex = TestHelper::getClient()->initIndex($this->indexes['search']);
 
         $responses = array();
 
@@ -366,10 +366,10 @@ class SearchIndexTest extends BaseTest
 
     public function testSynonyms()
     {
-        static::$indexes['synonyms'] = TestHelper::getTestIndexName('synonyms');
+        $this->indexes['synonyms'] = TestHelper::getTestIndexName('synonyms');
 
         /** @var SearchIndex $synonymsIndex */
-        $synonymsIndex = TestHelper::getClient()->initIndex(static::$indexes['synonyms']);
+        $synonymsIndex = TestHelper::getClient()->initIndex($this->indexes['synonyms']);
 
         $responses = array();
 
@@ -459,10 +459,10 @@ class SearchIndexTest extends BaseTest
 
     public function testQueryRules()
     {
-        static::$indexes['rules'] = TestHelper::getTestIndexName('rules');
+        $this->indexes['rules'] = TestHelper::getTestIndexName('rules');
 
         /** @var SearchIndex $rulesIndex */
-        $rulesIndex = TestHelper::getClient()->initIndex(static::$indexes['rules']);
+        $rulesIndex = TestHelper::getClient()->initIndex($this->indexes['rules']);
 
         $responses = array();
 
@@ -629,10 +629,10 @@ class SearchIndexTest extends BaseTest
 
     public function testBatching()
     {
-        static::$indexes['index_batching'] = TestHelper::getTestIndexName('index_batching');
+        $this->indexes['index_batching'] = TestHelper::getTestIndexName('index_batching');
 
         /** @var SearchIndex $batchingIndex */
-        $batchingIndex = TestHelper::getClient()->initIndex(static::$indexes['index_batching']);
+        $batchingIndex = TestHelper::getClient()->initIndex($this->indexes['index_batching']);
 
         $figures = array(
             array('objectID' => 'one', 'key' => 'value'),
@@ -676,10 +676,10 @@ class SearchIndexTest extends BaseTest
 
     public function testReplacing()
     {
-        static::$indexes['replacing'] = TestHelper::getTestIndexName('replacing');
+        $this->indexes['replacing'] = TestHelper::getTestIndexName('replacing');
 
         /** @var SearchIndex $replacingIndex */
-        $replacingIndex = TestHelper::getClient()->initIndex(static::$indexes['replacing']);
+        $replacingIndex = TestHelper::getClient()->initIndex($this->indexes['replacing']);
 
         $responses = array();
 
@@ -766,10 +766,10 @@ class SearchIndexTest extends BaseTest
 
     public function testIndexExists()
     {
-        static::$indexes['exists'] = TestHelper::getTestIndexName('exists');
+        $this->indexes['exists'] = TestHelper::getTestIndexName('exists');
 
         /** @var SearchIndex $existsIndex */
-        $existsIndex = TestHelper::getClient()->initIndex(static::$indexes['exists']);
+        $existsIndex = TestHelper::getClient()->initIndex($this->indexes['exists']);
 
         $this->assertFalse($existsIndex->exists());
 

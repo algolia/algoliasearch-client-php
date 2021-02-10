@@ -25,8 +25,6 @@ class RecommendationClientTest extends BaseTest
             'personalizationImpact' => 0,
         );
 
-        $recommendationClient->setPersonalizationStrategy($strategy);
-
         try {
             $recommendationClient->setPersonalizationStrategy($strategy);
         } catch (\Exception $e) {

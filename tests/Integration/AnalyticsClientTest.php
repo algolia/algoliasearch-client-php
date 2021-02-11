@@ -51,8 +51,14 @@ class AnalyticsClientTest extends BaseTest
             getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
+        $cpt = 0;
         do {
+            if ($cpt >= 5) {
+                break;
+            }
             $index->exists() && $indexDev->exists();
+            sleep(1);
+            $cpt++;
         } while (false);
 
         $response = $analyticsClient->addABTest($abTest);
@@ -144,8 +150,14 @@ class AnalyticsClientTest extends BaseTest
             'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
         );
 
+        $cpt = 0;
         do {
+            if ($cpt >= 5) {
+                break;
+            }
             $index->exists();
+            sleep(1);
+            $cpt++;
         } while (false);
 
         $response = $analyticsClient->addABTest($aaTest);

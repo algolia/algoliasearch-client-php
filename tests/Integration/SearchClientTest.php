@@ -240,7 +240,7 @@ class SearchClientTest extends BaseTest
 
         $params = array(
             'description' => 'A description',
-            'indexes' => array('index'),
+            'indexes' => array(TestHelper::getTestIndexName('index_api_keys')),
             'maxHitsPerQuery' => 1000,
             'maxQueriesPerIPPerHour' => 1000,
             'queryParameters' => 'typoTolerance=strict',

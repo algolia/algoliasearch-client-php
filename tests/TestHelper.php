@@ -103,13 +103,7 @@ class TestHelper
 
     public static function formatRule($rule)
     {
-        if (isset($rule['_metadata'])) {
-            unset($rule['_metadata']);
-        }
-
-        if (isset($rule['_highlightResult'])) {
-            unset($rule['_highlightResult']);
-        }
+        unset($rule['_metadata'], $rule['_highlightResult']);
 
         return $rule;
     }

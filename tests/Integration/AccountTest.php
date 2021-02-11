@@ -41,6 +41,7 @@ class AccountTest extends BaseTest
         /** @var SearchIndex $secondaryIndex */
         $secondaryIndex = $secondaryClient->initIndex($this->secondaryIndexes['copy_index_2']);
 
+        $responses = array();
         $responses[] = $copyIndex->saveObject(
             array('objectID' => 'one'),
             array('autoGenerateObjectIDIfNotExist' => true)

@@ -53,7 +53,7 @@ class AnalyticsClientTest extends BaseTest
 
         $cpt = 0;
         do {
-            if ($cpt >= 5) {
+            if ($cpt >= 10) {
                 break;
             }
             $index->exists() && $indexDev->exists();
@@ -152,7 +152,7 @@ class AnalyticsClientTest extends BaseTest
 
         $cpt = 0;
         do {
-            if ($cpt >= 5) {
+            if ($cpt >= 10) {
                 break;
             }
             $index->exists();

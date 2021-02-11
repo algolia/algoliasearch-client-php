@@ -51,6 +51,10 @@ class AnalyticsClientTest extends BaseTest
             getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
+        do {
+            $index->exists() && $indexDev->exists();
+        } while (false);
+
         $response = $analyticsClient->addABTest($abTest);
         $abTestId = $response['abTestID'];
         $index->waitTask($response['taskID']);
@@ -139,6 +143,10 @@ class AnalyticsClientTest extends BaseTest
             ),
             'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
         );
+
+        do {
+            $index->exists();
+        } while (false);
 
         $response = $analyticsClient->addABTest($aaTest);
         $aaTestId = $response['abTestID'];

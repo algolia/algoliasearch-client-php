@@ -54,11 +54,12 @@ class AnalyticsClientTest extends BaseTest
         $cpt = 0;
         do {
             if ($cpt >= 10) {
-                return;
+                break;
             }
+            $index->exists() && $indexDev->exists();
             sleep(1);
             $cpt++;
-        } while (!($index->exists() && $indexDev->exists()));
+        } while (false);
 
         $response = $analyticsClient->addABTest($abTest);
         $abTestId = $response['abTestID'];
@@ -152,11 +153,12 @@ class AnalyticsClientTest extends BaseTest
         $cpt = 0;
         do {
             if ($cpt >= 10) {
-                return;
+                break;
             }
+            $index->exists();
             sleep(1);
             $cpt++;
-        } while (!$index->exists());
+        } while (false);
 
         $response = $analyticsClient->addABTest($aaTest);
         $aaTestId = $response['abTestID'];

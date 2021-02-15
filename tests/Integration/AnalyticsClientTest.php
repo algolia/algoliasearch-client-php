@@ -53,7 +53,7 @@ class AnalyticsClientTest extends BaseTest
 
         $cpt = 0;
         do {
-            if ($cpt >= 20) {
+            if ($cpt >= 10) {
                 return;
             }
             sleep(1);
@@ -151,7 +151,7 @@ class AnalyticsClientTest extends BaseTest
 
         $cpt = 0;
         do {
-            if ($cpt >= 20) {
+            if ($cpt >= 10) {
                 return;
             }
             sleep(1);

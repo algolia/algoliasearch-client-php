@@ -3,97 +3,149 @@
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
 use Algolia\AlgoliaSearch\InsightsClient;
-use Algolia\AlgoliaSearch\SearchClient;
+use Algolia\AlgoliaSearch\SearchIndex;
+use Algolia\AlgoliaSearch\Tests\TestHelper;
 
-class InsightsClientTest extends AlgoliaIntegrationTestCase
+class InsightsClientTest extends BaseTest
 {
-    protected function setUp()
+    public function testInsightClient()
     {
-        parent::setUp();
-        static::$indexes['insights'] = self::safeName('insights');
-    }
+        $this->indexes['sending_events'] = TestHelper::getTestIndexName('sending_events');
 
-    public function testUserInsights()
-    {
-        $u = InsightsClient::create()->user('userTokenForTest');
+        /** @var SearchIndex $index */
+        $index = TestHelper::getClient()->initIndex($this->indexes['sending_events']);
 
-        $this->assertEvent(
-            $u->clickedFilters('eventName', 'indexName', 'filters:convertedToArray')
-        );
-        $this->assertEvent(
-            $u->clickedObjectIDs('eventName', 'indexName', 'objectIDs')
-        );
-        $this->assertEvent(
-            $u->clickedObjectIDsAfterSearch('eventName', 'indexName', 'objID', 2, md5('queryID'))
+        /** @var InsightsClient $insightsClient */
+        $insightsClient = InsightsClient::create(
+            getenv('ALGOLIA_APPLICATION_ID_1'),
+            getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
-        $this->assertEvent(
-            $u->convertedFilters('eventName', 'indexName', 'filters:convertedToArray')
-        );
-        $this->assertEvent(
-            $u->convertedObjectIDs('eventName', 'indexName', 'objectIDs')
-        );
-        $this->assertEvent(
-            $u->convertedObjectIDsAfterSearch('eventName', 'indexName', 'objID', md5('queryID'))
-        );
+        $objectOne = array('objectID' => 'one');
+        $objectTwo = array('objectID' => 'two');
 
-        $this->assertEvent(
-            $u->viewedFilters('eventName', 'indexName', 'filters:convertedToArray')
-        );
-        $this->assertEvent(
-            $u->viewedObjectIDs('eventName', 'indexName', 'objectIDs')
-        );
-    }
+        $index->saveObjects(array($objectOne, $objectTwo))->wait();
 
-    public function testSendEvent()
-    {
         $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
-        $insightsClient = InsightsClient::create();
-        $searchClient = SearchClient::create();
-        $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
-            'objectID' => 1,
-        ))->wait();
 
-        $response = $insightsClient->sendEvent(array(
+        $event = array(
+            'eventType' => 'click',
+            'eventName' => 'foo',
+            'index' => $this->indexes['sending_events'],
+            'userToken' => 'bar',
+            'objectIDs' => array('one', 'two'),
+            'timestamp' => $twoDaysAgoMs,
+        );
+
+        $response = $insightsClient->sendEvent($event);
+
+        $events = array(
+            array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
-                'index' => static::$indexes['insights'],
+                'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
                 'timestamp' => $twoDaysAgoMs,
-            )
-        );
-
-        $this->assertEvent($response);
-    }
-
-    public function testSendEvents()
-    {
-        $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
-        $insightsClient = InsightsClient::create();
-        $searchClient = SearchClient::create();
-        $searchClient->initIndex(static::$indexes['insights'])->saveObject(array(
-            'objectID' => 1,
-        ))->wait();
-
-        $response = $insightsClient->sendEvents(array(array(
+            ),
+            array(
                 'eventType' => 'click',
                 'eventName' => 'foo',
-                'index' => static::$indexes['insights'],
+                'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
                 'objectIDs' => array('one', 'two'),
                 'timestamp' => $twoDaysAgoMs,
-            ))
+            ),
         );
 
-        $this->assertEvent($response);
-    }
+        $insightsClient->sendEvents($events);
 
-    private function assertEvent($response)
-    {
-        $this->assertArraySubset(array(
-            'message' => 'OK',
-            'status' => 200,
-        ), $response);
+        // clicked_object_ids
+        $insightUser = $insightsClient->user('bar');
+        $response = $insightUser->clickedObjectIDs(
+            'foo',
+            $this->indexes['sending_events'],
+            array('one', 'two')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        $insightUser = $insightsClient->user('bar');
+
+        // clicked_object_ids_after_search
+        $search = $index->search('', array('clickAnalytics' => true));
+        $response = $insightUser->clickedObjectIDsAfterSearch(
+            'foo',
+            $this->indexes['sending_events'],
+            array('one', 'two'),
+            array(1, 2),
+            $search['queryID']
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // clicked_filters
+        $response = $insightUser->clickedFilters(
+            'foo',
+            $this->indexes['sending_events'],
+            array('filter:foo', 'filter:bar')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // converted_object_ids
+        $response = $insightUser->convertedObjectIDs(
+            'foo',
+            $this->indexes['sending_events'],
+            array('one', 'two')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // converted_object_ids_after_search
+        $search = $index->search('', array('clickAnalytics' => true));
+        $response = $insightUser->convertedObjectIDsAfterSearch(
+            'foo',
+            $this->indexes['sending_events'],
+            array('one', 'two'),
+            $search['queryID']
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // converted_filters
+        $response = $insightUser->convertedFilters(
+            'foo',
+            $this->indexes['sending_events'],
+            array('filter:foo', 'filter:bar')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // viewed_object_ids
+        $response = $insightUser->viewedObjectIDs(
+            'foo',
+            $this->indexes['sending_events'],
+            array('one', 'two')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
+
+        // viewed_filters
+        $response = $insightUser->viewedFilters(
+            'foo',
+            $this->indexes['sending_events'],
+            array('filter:foo', 'filter:bar')
+        );
+
+        $this->assertEquals(200, $response['status']);
+        $this->assertEquals('OK', $response['message']);
     }
 }

@@ -9,7 +9,7 @@ use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class SearchClientTest extends BaseTest
 {
-    protected static $apiKeys = array();
+    protected static $apiKeys = [];
 
     /** @var SearchClient */
     private $mcmClient;
@@ -23,7 +23,7 @@ class SearchClientTest extends BaseTest
     /** @var string */
     private $mcmUserId2;
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 
@@ -31,7 +31,7 @@ class SearchClientTest extends BaseTest
             foreach (self::$apiKeys as $apiKey) {
                 TestHelper::getClient()->deleteApiKey($apiKey)->wait();
             }
-            self::$apiKeys = array();
+            self::$apiKeys = [];
         }
     }
 
@@ -42,44 +42,44 @@ class SearchClientTest extends BaseTest
         /** @var SearchIndex $copyIndex */
         $copyIndex = TestHelper::getClient()->initIndex($this->indexes['copy_index']);
 
-        $responses = array();
+        $responses = [];
 
-        $figures = array(
-            array('objectID' => 'one', 'company' => 'apple'),
-            array('objectID' => 'two', 'company' => 'algolia'),
-        );
+        $figures = [
+            ['objectID' => 'one', 'company' => 'apple'],
+            ['objectID' => 'two', 'company' => 'algolia'],
+        ];
 
-        $responses[] = $copyIndex->saveObjects($figures, array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $copyIndex->saveObjects($figures, ['autoGenerateObjectIDIfNotExist' => true]);
 
-        $settings = array(
-            'attributesForFaceting' => array('company'),
-        );
+        $settings = [
+            'attributesForFaceting' => ['company'],
+        ];
 
         $responses[] = $copyIndex->setSettings($settings);
 
-        $synonym = array(
+        $synonym = [
             'objectID' => 'google_placeholder',
             'type' => 'placeholder',
             'placeholder' => '<GOOG>',
-            'replacements' => array('Google', 'GOOG'),
-        );
+            'replacements' => ['Google', 'GOOG'],
+        ];
 
         $responses[] = $copyIndex->saveSynonym($synonym);
 
-        $rule = array(
+        $rule = [
             'objectID' => 'company_auto_faceting',
-            'conditions' => array(
-                array(
+            'conditions' => [
+                [
                     'anchoring' => 'contains',
                     'pattern' => '{facet:company}',
-                ),
-            ),
-            'consequence' => array(
-                'params' => array(
-                    'automaticFacetFilters' => array('company'),
-                ),
-            ),
-        );
+                ],
+            ],
+            'consequence' => [
+                'params' => [
+                    'automaticFacetFilters' => ['company'],
+                ],
+            ],
+        ];
 
         $responses[] = $copyIndex->saveRule($rule);
 
@@ -142,10 +142,10 @@ class SearchClientTest extends BaseTest
 
     public function testMcm()
     {
-        $config = array(
+        $config = [
             'appId' => getenv('ALGOLIA_APPLICATION_ID_MCM'),
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_MCM'),
-        );
+        ];
 
         $this->mcmClient = TestHelper::getClient($config);
         $clusterList = $this->mcmClient->listClusters();
@@ -165,7 +165,7 @@ class SearchClientTest extends BaseTest
         $this->assertEquals($response['userID'], $this->mcmUserId0);
         $this->assertEquals($response['clusterName'], $clusterName);
 
-        $response = $this->mcmClient->assignUserIds(array($this->mcmUserId1, $this->mcmUserId2), $clusterName);
+        $response = $this->mcmClient->assignUserIds([$this->mcmUserId1, $this->mcmUserId2], $clusterName);
         $this->assertArrayHasKey('createdAt', $response);
 
         $response = $this->autoRetryGetUserId($this->mcmUserId1);
@@ -220,11 +220,11 @@ class SearchClientTest extends BaseTest
         $response = $this->autoRetryRemoveUserId($this->mcmUserId2);
         $this->assertArrayHasKey('deletedAt', $response);
 
-        $response = $this->mcmClient->hasPendingMappings(array('retrieveMappings' => true));
+        $response = $this->mcmClient->hasPendingMappings(['retrieveMappings' => true]);
         $this->assertArrayHasKey('clusters', $response);
         $this->assertArrayHasKey('pending', $response);
 
-        $response = $this->mcmClient->hasPendingMappings(array('getClusters' => true));
+        $response = $this->mcmClient->hasPendingMappings(['getClusters' => true]);
         $this->assertArrayHasKey('clusters', $response);
         $this->assertArrayHasKey('pending', $response);
 
@@ -235,17 +235,17 @@ class SearchClientTest extends BaseTest
 
     public function testApiKeys()
     {
-        $acl = array('search');
+        $acl = ['search'];
 
-        $params = array(
+        $params = [
             'description' => 'A description',
-            'indexes' => array(TestHelper::getTestIndexName('index_api_keys')),
+            'indexes' => [TestHelper::getTestIndexName('index_api_keys')],
             'maxHitsPerQuery' => 1000,
             'maxQueriesPerIPPerHour' => 1000,
             'queryParameters' => 'typoTolerance=strict',
-            'referers' => array('referer'),
+            'referers' => ['referer'],
             'validity' => 600,
-        );
+        ];
 
         $res = TestHelper::getClient()->addApiKey($acl, $params)->wait();
         self::$apiKeys[] = $res['key'];
@@ -256,7 +256,7 @@ class SearchClientTest extends BaseTest
         $this->assertEquals($params['description'], $apiKey['description']);
 
         $allApiKeys = TestHelper::getClient()->listApiKeys();
-        $fetchedApiKeyValues = array();
+        $fetchedApiKeyValues = [];
 
         foreach ($allApiKeys['keys'] as $fetchedApiKey) {
             $fetchedApiKeyValues[] = $fetchedApiKey['value'];
@@ -265,7 +265,7 @@ class SearchClientTest extends BaseTest
         $this->assertContains($apiKey['value'], $fetchedApiKeyValues);
 
         $newParams = $params;
-        $newParams['acl'] = array('search');
+        $newParams['acl'] = ['search'];
         $newParams['maxHitsPerQuery'] = 42;
 
         TestHelper::getClient()->updateApiKey($res['key'], $newParams)->wait();
@@ -305,11 +305,11 @@ class SearchClientTest extends BaseTest
         TestHelper::getClient()->listIndices();
         TestHelper::getClient()->listIndices();
 
-        $params = array(
+        $params = [
           'length' => 2,
           'offset' => 0,
           'type' => 'all',
-        );
+        ];
 
         $res = TestHelper::getClient()->getLogs($params);
         $this->assertCount(2, $res['logs']);
@@ -329,23 +329,23 @@ class SearchClientTest extends BaseTest
         /** @var SearchIndex $operationsDevIndex */
         $operationsDevIndex = TestHelper::getClient()->initIndex($index2);
 
-        $batch = array(
-            array('indexName' => $index1, 'action' => 'addObject', 'body' => array('firstname' => 'Jimmie')),
-            array('indexName' => $index1, 'action' => 'addObject', 'body' => array('firstname' => 'Jimmie')),
-            array('indexName' => $index2, 'action' => 'addObject', 'body' => array('firstname' => 'Jimmie')),
-            array('indexName' => $index2, 'action' => 'addObject', 'body' => array('firstname' => 'Jimmie')),
-        );
+        $batch = [
+            ['indexName' => $index1, 'action' => 'addObject', 'body' => ['firstname' => 'Jimmie']],
+            ['indexName' => $index1, 'action' => 'addObject', 'body' => ['firstname' => 'Jimmie']],
+            ['indexName' => $index2, 'action' => 'addObject', 'body' => ['firstname' => 'Jimmie']],
+            ['indexName' => $index2, 'action' => 'addObject', 'body' => ['firstname' => 'Jimmie']],
+        ];
 
         $res = TestHelper::getClient()->multipleBatch($batch)->wait();
         $objectIds = $res['objectIDs'];
 
         $res = TestHelper::getClient()->multipleGetObjects(
-            array(
-                array('indexName' => $index1, 'objectID' => $objectIds[0]),
-                array('indexName' => $index1, 'objectID' => $objectIds[1]),
-                array('indexName' => $index2, 'objectID' => $objectIds[2]),
-                array('indexName' => $index2, 'objectID' => $objectIds[3]),
-            )
+            [
+                ['indexName' => $index1, 'objectID' => $objectIds[0]],
+                ['indexName' => $index1, 'objectID' => $objectIds[1]],
+                ['indexName' => $index2, 'objectID' => $objectIds[2]],
+                ['indexName' => $index2, 'objectID' => $objectIds[3]],
+            ]
         );
 
         $objects = $res['results'];
@@ -356,17 +356,17 @@ class SearchClientTest extends BaseTest
         $this->assertEquals($objectIds[3], $objects[3]['objectID']);
 
         $res = TestHelper::getClient()->multipleQueries(
-            array(
-                array(
+            [
+                [
                     'indexName' => $index1,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
-                ),
-                array(
+                    'params' => http_build_query(['query' => '', 'hitsPerPage' => 2]),
+                ],
+                [
                     'indexName' => $index2,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
-                ),
-            ),
-            array('strategy' => 'none')
+                    'params' => http_build_query(['query' => '', 'hitsPerPage' => 2]),
+                ],
+            ],
+            ['strategy' => 'none']
         );
 
         $results = $res['results'];
@@ -378,17 +378,17 @@ class SearchClientTest extends BaseTest
         $this->assertEquals(2, $results[1]['nbHits']);
 
         $res = TestHelper::getClient()->multipleQueries(
-            array(
-                array(
+            [
+                [
                     'indexName' => $index1,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
-                ),
-                array(
+                    'params' => http_build_query(['query' => '', 'hitsPerPage' => 2]),
+                ],
+                [
                     'indexName' => $index2,
-                    'params' => http_build_query(array('query' => '', 'hitsPerPage' => 2)),
-                ),
-            ),
-            array('strategy' => 'stopIfEnoughMatches')
+                    'params' => http_build_query(['query' => '', 'hitsPerPage' => 2]),
+                ],
+            ],
+            ['strategy' => 'stopIfEnoughMatches']
         );
 
         $results = $res['results'];
@@ -403,7 +403,7 @@ class SearchClientTest extends BaseTest
     private function autoRetryGetUserId($userID)
     {
         $retry = 0;
-        $response = array();
+        $response = [];
         do {
             try {
                 $response = $this->mcmClient->getUserId($userID);
@@ -419,7 +419,7 @@ class SearchClientTest extends BaseTest
     private function autoRetryRemoveUserId($userID)
     {
         $retry = 0;
-        $response = array();
+        $response = [];
         do {
             try {
                 $response = $this->mcmClient->removeUserId($userID);

@@ -57,7 +57,7 @@ final class AnalyticsClient
      *
      * @return array
      */
-    public function getABTests($requestOptions = array())
+    public function getABTests($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/2/abtests'), $requestOptions);
     }
@@ -72,7 +72,7 @@ final class AnalyticsClient
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function getABTest($abTestID, $requestOptions = array())
+    public function getABTest($abTestID, $requestOptions = [])
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
@@ -89,7 +89,7 @@ final class AnalyticsClient
      *
      * @return array Information about the creation like TaskID and date
      */
-    public function addABTest($abTest, $requestOptions = array())
+    public function addABTest($abTest, $requestOptions = [])
     {
         return $this->api->write('POST', api_path('/2/abtests'), $abTest, $requestOptions);
     }
@@ -104,13 +104,13 @@ final class AnalyticsClient
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function stopABTest($abTestID, $requestOptions = array())
+    public function stopABTest($abTestID, $requestOptions = [])
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
         }
 
-        return $this->api->write('POST', api_path('/2/abtests/%s/stop', $abTestID), array(), $requestOptions);
+        return $this->api->write('POST', api_path('/2/abtests/%s/stop', $abTestID), [], $requestOptions);
     }
 
     /**
@@ -123,16 +123,16 @@ final class AnalyticsClient
      *
      * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
-    public function deleteABTest($abTestID, $requestOptions = array())
+    public function deleteABTest($abTestID, $requestOptions = [])
     {
         if (!$abTestID) {
             throw new AlgoliaException('Cannot retrieve ABTest because the abtestID is invalid.');
         }
 
-        return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID), array(), $requestOptions);
+        return $this->api->write('DELETE', api_path('/2/abtests/%s', $abTestID), [], $requestOptions);
     }
 
-    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    public function custom($method, $path, $requestOptions = [], $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
     }

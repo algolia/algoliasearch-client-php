@@ -20,12 +20,12 @@ class SecuredApiKeysTest extends BaseTest
         /** @var SearchIndex $indexDev */
         $indexDev = TestHelper::getClient()->initIndex($this->indexes['secured_api_keys_dev']);
 
-        $responses = array();
+        $responses = [];
 
-        $object = array('objectID' => 'one');
+        $object = ['objectID' => 'one'];
 
-        $responses[] = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $indexDev->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $index->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true]);
+        $responses[] = $indexDev->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true]);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -33,16 +33,16 @@ class SecuredApiKeysTest extends BaseTest
 
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
-            array(
+            [
                 'validUntil' => time() + 600,
                 'restrictIndices' => $this->indexes['secured_api_keys'],
-            )
+            ]
         );
 
-        $securedConfig = array(
+        $securedConfig = [
             'appId' => getenv('ALGOLIA_APPLICATION_ID_1'),
             'apiKey' => $securedApiKey,
-        );
+        ];
 
         $securedClient = TestHelper::getClient($securedConfig);
 
@@ -71,18 +71,18 @@ class SecuredApiKeysTest extends BaseTest
     {
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
-            array(
+            [
                 'validUntil' => time() + 600,
-            )
+            ]
         );
 
         $this->assertGreaterThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));
 
         $securedApiKey = SearchClient::generateSecuredApiKey(
             getenv('ALGOLIA_SEARCH_KEY_1'),
-            array(
+            [
                 'validUntil' => time() - 600,
-            )
+            ]
         );
 
         $this->assertLessThan(0, SearchClient::getSecuredApiKeyRemainingValidity($securedApiKey));

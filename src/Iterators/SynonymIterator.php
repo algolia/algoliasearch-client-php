@@ -24,7 +24,7 @@ final class SynonymIterator extends AbstractAlgoliaIterator
             Helpers::apiPath('/1/indexes/%s/synonyms/search', $this->indexName),
             array_merge(
                 $this->requestOptions,
-                array('page' => $this->page)
+                ['page' => $this->page]
             )
         );
 

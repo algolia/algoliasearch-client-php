@@ -6,10 +6,10 @@ final class PlacesConfig extends AbstractConfig
 {
     public static function create($appId, $apiKey)
     {
-        $config = array(
+        $config = [
             'appId' => $appId,
             'apiKey' => $apiKey,
-        );
+        ];
 
         return new static($config);
     }

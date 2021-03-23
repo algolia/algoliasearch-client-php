@@ -38,14 +38,14 @@ final class DebugLogger extends AbstractLogger
     /**
      * {@inheritdoc}
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         if (self::$isEnabled) {
-            $logMessage = array(
+            $logMessage = [
                 'level' => $level,
                 'message' => $message,
                 'context' => $context,
-            );
+            ];
 
             if (function_exists('dump')) {
                 dump($logMessage);

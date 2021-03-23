@@ -12,13 +12,13 @@ class RequestOptionsFactoryTest extends TestCase
     /** @var RequestOptionsFactory */
     private $factory;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->factory = new RequestOptionsFactory(
-            new SearchConfig(array(
+            new SearchConfig([
                 'appId' => 'Algolia-Id',
                 'apiKey' => 'Algolia-Key',
-            ))
+            ])
         );
     }
 
@@ -29,9 +29,9 @@ class RequestOptionsFactoryTest extends TestCase
     {
         $actual = $this->factory->create($options);
 
-        $expectedRequestOptions['headers'] += array('User-Agent' => UserAgent::get());
+        $expectedRequestOptions['headers'] += ['User-Agent' => UserAgent::get()];
 
-        $this->assertEquals($expectedRequestOptions, array(
+        $this->assertEquals($expectedRequestOptions, [
             'headers' => $actual->getHeaders(),
             'body' => $actual->getBody(),
             'query' => $actual->getQueryParameters(),
@@ -39,7 +39,7 @@ class RequestOptionsFactoryTest extends TestCase
             'readTimeout' => $actual->getReadTimeout(),
             'writeTimeout' => $actual->getWriteTimeout(),
             'connectTimeout' => $actual->getConnectTimeout(),
-        ));
+        ]);
     }
 
     public function provideRequestOptionsData()

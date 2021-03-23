@@ -17,7 +17,7 @@ final class MultipleIndexBatchIndexingResponse extends AbstractResponse
         $this->client = $client;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (!isset($this->client)) {
             return $this;

@@ -9,7 +9,7 @@ use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class SearchIndexTest extends BaseTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -20,7 +20,7 @@ class SearchIndexTest extends BaseTest
 
     public function testIndexing()
     {
-        $responses = array();
+        $responses = [];
         /** @var SearchIndex $index */
         $index = TestHelper::getClient()->initIndex($this->indexes['main']);
 
@@ -30,23 +30,23 @@ class SearchIndexTest extends BaseTest
 
         /* adding an object w/o object id s */
         $obj2 = TestHelper::createRecord(false);
-        $responses[] = $index->saveObject($obj2, array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $index->saveObject($obj2, ['autoGenerateObjectIDIfNotExist' => true]);
 
         /* saving an empty set of objects */
-        $responses[] = $index->saveObjects(array());
+        $responses[] = $index->saveObjects([]);
 
         /* adding two objects with object id  */
         $obj3 = TestHelper::createRecord(null);
         $obj4 = TestHelper::createRecord(null);
-        $responses[] = $index->saveObjects(array($obj3, $obj4));
+        $responses[] = $index->saveObjects([$obj3, $obj4]);
 
         /* adding two objects w/o object id  */
         $obj5 = TestHelper::createRecord(false);
         $obj6 = TestHelper::createRecord(false);
-        $responses[] = $index->saveObjects(array($obj5, $obj6), array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $index->saveObjects([$obj5, $obj6], ['autoGenerateObjectIDIfNotExist' => true]);
 
         /* adding 1000 objects with object id with 10 batch */
-        $objects = array();
+        $objects = [];
         for ($i = 1; $i <= 1000; $i++) {
             $objects[$i] = TestHelper::createRecord($i);
         }
@@ -98,7 +98,7 @@ class SearchIndexTest extends BaseTest
 
         $results = iterator_to_array($iterator);
         foreach ($objects as $object) {
-            $this->assertContains($object, $results);
+            $this->assertTrue(in_array($object, $results));
         }
 
         /* Alter 1 record with partialUpdateObject */
@@ -108,7 +108,7 @@ class SearchIndexTest extends BaseTest
         /* Alter 2 records with partialUpdateObjects */
         $obj3['name'] = 'This is an altered name 3';
         $obj4['name'] = 'This is an altered name 4';
-        $responses[] = $index->partialUpdateObjects(array($obj3, $obj4));
+        $responses[] = $index->partialUpdateObjects([$obj3, $obj4]);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -121,17 +121,17 @@ class SearchIndexTest extends BaseTest
 
         /* adding an object w/o object id s */
         $objWithTag = TestHelper::createRecord(null);
-        $objWithTag['_tags'] = array('algolia');
+        $objWithTag['_tags'] = ['algolia'];
         $responses[] = $index->saveObject($objWithTag)->wait();
 
         /*  Delete the first record with deleteObject */
         $responses[] = $index->deleteObject($objectID1)->wait();
 
         /* Delete the record with the "algolia" tag */
-        $responses[] = $index->deleteBy(array('tagFilters' => array('algolia')))->wait();
+        $responses[] = $index->deleteBy(['tagFilters' => ['algolia']])->wait();
 
         /* Delete the 5 remaining first records with deleteObjects */
-        $objectsIDs = array($objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6);
+        $objectsIDs = [$objectID1, $objectID2, $objectID3, $objectID4, $objectID5, $objectID6];
         $responses[] = $index->deleteObjects($objectsIDs)->wait();
 
         /* Browse all objects with browseObjects */
@@ -157,24 +157,24 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $settingsIndex */
         $settingsIndex = TestHelper::getClient()->initIndex($this->indexes['settings']);
 
-        $responses = array();
+        $responses = [];
 
         /* adding an object with object id */
         $obj1 = TestHelper::createRecord(null);
         $responses[] = $settingsIndex->saveObject($obj1);
 
-        $settings = array(
-            'searchableAttributes' => array(
+        $settings = [
+            'searchableAttributes' => [
                 'attribute1',
                 'attribute2',
                 'attribute3',
                 'ordered(attribute4)',
                 'unordered(attribute5)',
-            ),
-            'attributesForFaceting' => array('attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'),
-            'unretrievableAttributes' => array('attribute1', 'attribute2'),
-            'attributesToRetrieve' => array('attribute3', 'attribute4'),
-            'ranking' => array(
+            ],
+            'attributesForFaceting' => ['attribute1', 'filterOnly(attribute2)', 'searchable(attribute3)'],
+            'unretrievableAttributes' => ['attribute1', 'attribute2'],
+            'attributesToRetrieve' => ['attribute3', 'attribute4'],
+            'ranking' => [
                 'asc(attribute1)',
                 'desc(attribute2)',
                 'attribute',
@@ -185,13 +185,13 @@ class SearchIndexTest extends BaseTest
                 'proximity',
                 'typo',
                 'words',
-            ),
-            'customRanking' => array('asc(attribute1)', 'desc(attribute1)'),
-            'replicas' => array($this->indexes['settings'].'_replica1', $this->indexes['settings'].'_replica2'),
+            ],
+            'customRanking' => ['asc(attribute1)', 'desc(attribute1)'],
+            'replicas' => [$this->indexes['settings'].'_replica1', $this->indexes['settings'].'_replica2'],
             'maxValuesPerFacet' => 100,
             'sortFacetValuesBy' => 'count',
-            'attributesToHighlight' => array('attribute1', 'attribute2'),
-            'attributesToSnippet' => array('attribute1:10', 'attribute2:8'),
+            'attributesToHighlight' => ['attribute1', 'attribute2'],
+            'attributesToSnippet' => ['attribute1:10', 'attribute2:8'],
             'highlightPreTag' => '<strong>',
             'highlightPostTag' => '</strong>',
             'snippetEllipsisText' => ' and so on.',
@@ -203,37 +203,37 @@ class SearchIndexTest extends BaseTest
             'typoTolerance' => 'false',
             'allowTyposOnNumericTokens' => false,
             'ignorePlurals' => true,
-            'disableTypoToleranceOnAttributes' => array('attribute1', 'attribute2'),
-            'disableTypoToleranceOnWords' => array('word1', 'word2'),
+            'disableTypoToleranceOnAttributes' => ['attribute1', 'attribute2'],
+            'disableTypoToleranceOnWords' => ['word1', 'word2'],
             'separatorsToIndex' => '()[]',
             'queryType' => 'prefixNone',
             'removeWordsIfNoResults' => 'allOptional',
             'advancedSyntax' => true,
-            'optionalWords' => array('word1', 'word2'),
+            'optionalWords' => ['word1', 'word2'],
             'removeStopWords' => true,
-            'disablePrefixOnAttributes' => array('attribute1', 'attribute2'),
-            'disableExactOnAttributes' => array('attribute1', 'attribute2'),
+            'disablePrefixOnAttributes' => ['attribute1', 'attribute2'],
+            'disableExactOnAttributes' => ['attribute1', 'attribute2'],
             'exactOnSingleWordQuery' => 'word',
             'enableRules' => false,
-            'numericAttributesForFiltering' => array('attribute1', 'attribute2'),
+            'numericAttributesForFiltering' => ['attribute1', 'attribute2'],
             'allowCompressionOfIntegerArray' => true,
             'attributeForDistinct' => 'attribute1',
             'distinct' => 2,
             'replaceSynonymsInHighlight' => false,
             'minProximity' => 7,
-            'responseFields' => array('hits', 'hitsPerPage'),
+            'responseFields' => ['hits', 'hitsPerPage'],
             'maxFacetHits' => 100,
-            'camelCaseAttributes' => array('attribute1', 'attribute2'),
-            'decompoundedAttributes' => array('de' => array('attribute1', 'attribute2'), 'fi' => array('attribute3')),
+            'camelCaseAttributes' => ['attribute1', 'attribute2'],
+            'decompoundedAttributes' => ['de' => ['attribute1', 'attribute2'], 'fi' => ['attribute3']],
             'keepDiacriticsOnCharacters' => 'øé',
-            'queryLanguages' => array('en', 'fr'),
-            'alternativesAsExact' => array('ignorePlurals'),
-            'advancedSyntaxFeatures' => array('exactPhrase'),
+            'queryLanguages' => ['en', 'fr'],
+            'alternativesAsExact' => ['ignorePlurals'],
+            'advancedSyntaxFeatures' => ['exactPhrase'],
             'userData' => '{"customUserData": 42.0}',
-            'indexLanguages' => array('ja'),
-            'customNormalization' => array('default' => array('ä' => 'ae', 'ö' => 'oe')),
+            'indexLanguages' => ['ja'],
+            'customNormalization' => ['default' => ['ä' => 'ae', 'ö' => 'oe']],
             'enablePersonalization' => true,
-        );
+        ];
 
         $responses[] = $settingsIndex->setSettings($settings);
 
@@ -251,8 +251,8 @@ class SearchIndexTest extends BaseTest
         $this->assertEquals($settings, $fetchedSettings);
 
         $settings['typoTolerance'] = 'min';
-        $settings['ignorePlurals'] = array('en', 'fr');
-        $settings['removeStopWords'] = array('en', 'fr');
+        $settings['ignorePlurals'] = ['en', 'fr'];
+        $settings['removeStopWords'] = ['en', 'fr'];
         $settings['distinct'] = true;
 
         $responses[] = $settingsIndex->setSettings($settings)->wait();
@@ -269,26 +269,26 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $searchIndex */
         $searchIndex = TestHelper::getClient()->initIndex($this->indexes['search']);
 
-        $responses = array();
+        $responses = [];
 
-        $employees = array(
-            array('company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'),
-            array('company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'),
-            array('company' => 'Amazon', 'name' => 'Jeff Bezos'),
-            array('company' => 'Apple', 'name' => 'Steve Jobs'),
-            array('company' => 'Apple', 'name' => 'Steve Wozniak'),
-            array('company' => 'Arista Networks', 'name' => 'Jayshree Ullal'),
-            array('company' => 'Google', 'name' => 'Larry Page'),
-            array('company' => 'Google', 'name' => 'Rob Pike'),
-            array('company' => 'Google', 'name' => 'Serguey Brin'),
-            array('company' => 'Microsoft', 'name' => 'Bill Gates'),
-            array('company' => 'SpaceX', 'name' => 'Elon Musk'),
-            array('company' => 'Tesla', 'name' => 'Elon Musk'),
-            array('company' => 'Yahoo', 'name' => 'Marissa Mayer'),
-        );
+        $employees = [
+            ['company' => 'Algolia', 'name' => 'Julien Lemoine', 'objectID' => 'julien-lemoine'],
+            ['company' => 'Algolia', 'name' => 'Nicolas Dessaigne', 'objectID' => 'nicolas-dessaigne'],
+            ['company' => 'Amazon', 'name' => 'Jeff Bezos'],
+            ['company' => 'Apple', 'name' => 'Steve Jobs'],
+            ['company' => 'Apple', 'name' => 'Steve Wozniak'],
+            ['company' => 'Arista Networks', 'name' => 'Jayshree Ullal'],
+            ['company' => 'Google', 'name' => 'Larry Page'],
+            ['company' => 'Google', 'name' => 'Rob Pike'],
+            ['company' => 'Google', 'name' => 'Serguey Brin'],
+            ['company' => 'Microsoft', 'name' => 'Bill Gates'],
+            ['company' => 'SpaceX', 'name' => 'Elon Musk'],
+            ['company' => 'Tesla', 'name' => 'Elon Musk'],
+            ['company' => 'Yahoo', 'name' => 'Marissa Mayer'],
+        ];
 
-        $responses[] = $searchIndex->saveObjects($employees, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $searchIndex->setSettings(array('attributesForFaceting' => array('searchable(company)')));
+        $responses[] = $searchIndex->saveObjects($employees, ['autoGenerateObjectIDIfNotExist' => true]);
+        $responses[] = $searchIndex->setSettings(['attributesForFaceting' => ['searchable(company)']]);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -323,37 +323,37 @@ class SearchIndexTest extends BaseTest
 
         /* Check that no "apple" employee is returned when we search for "Algolia" */
         try {
-            $searchIndex->findObject($callback, array('query' => 'algolia'));
+            $searchIndex->findObject($callback, ['query' => 'algolia']);
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         /* Check that no object is found when we limit the search to the 5 first objects */
         try {
-            $searchIndex->findObject($callback, array('query' => '', 'paginate' => false, 'hitsPerPage' => 5));
+            $searchIndex->findObject($callback, ['query' => '', 'paginate' => false, 'hitsPerPage' => 5]);
         } catch (\Exception $e) {
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\ObjectNotFoundException', $e);
         }
 
         /* Check that we actually find the object when we paginate (on page 2) */
-        $obj = $searchIndex->findObject($callback, array('query' => '', 'paginate' => true, 'hitsPerPage' => 5));
+        $obj = $searchIndex->findObject($callback, ['query' => '', 'paginate' => true, 'hitsPerPage' => 5]);
         $this->assertEquals($obj['position'], 0);
         $this->assertEquals($obj['page'], 2);
 
-        $res = $searchIndex->search('elon', array('clickAnalytics' => true));
+        $res = $searchIndex->search('elon', ['clickAnalytics' => true]);
         $this->assertNotEmpty($res['queryID']);
 
-        $res = $searchIndex->search('', array('facets' => '*', 'facetFilters' => 'company:tesla'));
+        $res = $searchIndex->search('', ['facets' => '*', 'facetFilters' => 'company:tesla']);
         $this->assertCount(1, $res['hits']);
 
         $res = $searchIndex->search(
             '',
-            array('facets' => '*', 'filters' => 'company:tesla OR company:spacex')
+            ['facets' => '*', 'filters' => 'company:tesla OR company:spacex']
         );
         $this->assertCount(2, $res['hits']);
 
         $res = $searchIndex->searchForFacetValues('company', 'a');
-        $resultFacets = array();
+        $resultFacets = [];
         foreach ($res['facetHits'] as $facet) {
             $resultFacets[] = $facet['value'];
         }
@@ -371,55 +371,55 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $synonymsIndex */
         $synonymsIndex = TestHelper::getClient()->initIndex($this->indexes['synonyms']);
 
-        $responses = array();
+        $responses = [];
 
-        $consoles = array(
-            array('console' => 'Sony PlayStation <PLAYSTATIONVERSION>'),
-            array('console' => 'Nintendo Switch'),
-            array('console' => 'Nintendo Wii U'),
-            array('console' => 'Nintendo Game Boy Advance'),
-            array('console' => 'Microsoft Xbox'),
-            array('console' => 'Microsoft Xbox 360'),
-            array('console' => 'Microsoft Xbox One'),
-        );
+        $consoles = [
+            ['console' => 'Sony PlayStation <PLAYSTATIONVERSION>'],
+            ['console' => 'Nintendo Switch'],
+            ['console' => 'Nintendo Wii U'],
+            ['console' => 'Nintendo Game Boy Advance'],
+            ['console' => 'Microsoft Xbox'],
+            ['console' => 'Microsoft Xbox 360'],
+            ['console' => 'Microsoft Xbox One'],
+        ];
 
-        $responses[] = $synonymsIndex->saveObjects($consoles, array('autoGenerateObjectIDIfNotExist' => true));
+        $responses[] = $synonymsIndex->saveObjects($consoles, ['autoGenerateObjectIDIfNotExist' => true]);
 
-        $nWaySynonym = array(
+        $nWaySynonym = [
             'objectID' => 'gba',
             'type' => 'synonym',
-            'synonyms' => array('gameboy advance', 'game boy advance'),
-        );
+            'synonyms' => ['gameboy advance', 'game boy advance'],
+        ];
 
-        $syn1 = array(
+        $syn1 = [
             'objectID' => 'wii_to_wii_u',
             'type' => 'onewaysynonym',
             'input' => 'wii',
-            'synonyms' => array('wii U'),
-        );
+            'synonyms' => ['wii U'],
+        ];
 
-        $syn2 = array(
+        $syn2 = [
             'objectID' => 'playstation_version_placeholder',
             'type' => 'placeholder',
             'placeholder' => '<PLAYSTATIONVERSION>',
-            'replacements' => array('1', 'One', '2', '3', '4', '4 Pro'),
-        );
+            'replacements' => ['1', 'One', '2', '3', '4', '4 Pro'],
+        ];
 
-        $syn3 = array(
+        $syn3 = [
             'objectID' => 'ps4',
             'type' => 'altcorrection1',
             'word' => 'ps4',
-            'corrections' => array('playstation4'),
-        );
+            'corrections' => ['playstation4'],
+        ];
 
-        $syn4 = array(
+        $syn4 = [
             'objectID' => 'psone',
             'type' => 'altcorrection2',
             'word' => 'psone',
-            'corrections' => array('playstationone'),
-        );
+            'corrections' => ['playstationone'],
+        ];
 
-        $synonyms = array($syn1, $syn2, $syn3, $syn4);
+        $synonyms = [$syn1, $syn2, $syn3, $syn4];
 
         $responses[] = $synonymsIndex->saveSynonym($nWaySynonym);
         $responses[] = $synonymsIndex->saveSynonyms($synonyms);
@@ -437,10 +437,10 @@ class SearchIndexTest extends BaseTest
         $res = $synonymsIndex->searchSynonyms('');
         $this->assertEquals(5, $res['nbHits']);
 
-        $iterator = $synonymsIndex->browseSynonyms(array('hitsPerPage' => 1));
-        $synonymsToCheck = array($nWaySynonym, $syn1, $syn2, $syn3, $syn4);
+        $iterator = $synonymsIndex->browseSynonyms(['hitsPerPage' => 1]);
+        $synonymsToCheck = [$nWaySynonym, $syn1, $syn2, $syn3, $syn4];
         foreach ($iterator as $synonym) {
-            $this->assertContains($synonym, $synonymsToCheck);
+            $this->assertTrue(in_array($synonym, $synonymsToCheck));
         }
 
         $synonymsIndex->deleteSynonym('gba')->wait();
@@ -454,7 +454,7 @@ class SearchIndexTest extends BaseTest
         $synonymsIndex->clearSynonyms()->wait();
 
         $res = $synonymsIndex->searchSynonyms('');
-        $this->assertArraySubset(array('nbHits' => 0), $res);
+        $this->assertEquals($res['nbHits'], 0);
     }
 
     public function testQueryRules()
@@ -464,112 +464,112 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $rulesIndex */
         $rulesIndex = TestHelper::getClient()->initIndex($this->indexes['rules']);
 
-        $responses = array();
+        $responses = [];
 
-        $smartphones = array(
-            array('objectID' => 'iphone_7', 'brand' => 'Apple', 'model' => '7'),
-            array('objectID' => 'iphone_8', 'brand' => 'Apple', 'model' => '7'),
-            array('objectID' => 'iphone_x', 'brand' => 'Apple', 'model' => '7'),
-            array('objectID' => 'one_plus_one', 'brand' => 'OnePlus', 'model' => 'One'),
-            array('objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'),
-        );
+        $smartphones = [
+            ['objectID' => 'iphone_7', 'brand' => 'Apple', 'model' => '7'],
+            ['objectID' => 'iphone_8', 'brand' => 'Apple', 'model' => '7'],
+            ['objectID' => 'iphone_x', 'brand' => 'Apple', 'model' => '7'],
+            ['objectID' => 'one_plus_one', 'brand' => 'OnePlus', 'model' => 'One'],
+            ['objectID' => 'one_plus_two', 'brand' => 'OnePlus', 'model' => 'Two'],
+        ];
 
-        $responses[] = $rulesIndex->saveObjects($smartphones, array('autoGenerateObjectIDIfNotExist' => true));
-        $responses[] = $rulesIndex->setSettings(array('attributesForFaceting' => array('brand', 'model')));
+        $responses[] = $rulesIndex->saveObjects($smartphones, ['autoGenerateObjectIDIfNotExist' => true]);
+        $responses[] = $rulesIndex->setSettings(['attributesForFaceting' => ['brand', 'model']]);
 
-        $rule1 = array(
+        $rule1 = [
             'objectID' => 'brand_automatic_faceting',
             'enabled' => false,
-            'condition' => array(
+            'condition' => [
                 'anchoring' => 'is',
                 'pattern' => '{facet:brand}',
-            ),
-            'consequence' => array(
-                'params' => array(
-                    'automaticFacetFilters' => array(
-                        array(
+            ],
+            'consequence' => [
+                'params' => [
+                    'automaticFacetFilters' => [
+                        [
                             'facet' => 'brand',
                             'disjunctive' => true,
                             'score' => 42,
-                        ),
-                    ),
-                ),
-            ),
-            'validity' => array(
-                array(
+                        ],
+                    ],
+                ],
+            ],
+            'validity' => [
+                [
                     'from' => 1532439300, // 07/24/2018 13:35:00 UTC
                     'until' => 1532525700, // 07/25/2018 13:35:00 UTC
-                ),
-                array(
+                ],
+                [
                     'from' => 1532612100, // 07/26/2018 13:35:00 UTC
                     'until' => 1532698500, // 07/27/2018 13:35:00 UTC
-                ),
-            ),
+                ],
+            ],
             'description' => 'Automatic apply the faceting on `brand` if a brand value is found in the query',
-        );
+        ];
 
         $responses[] = $rulesIndex->saveRule($rule1);
 
-        $rule2 = array(
+        $rule2 = [
             'objectID' => 'query_edits',
-            'conditions' => array(
-                array(
+            'conditions' => [
+                [
                     'anchoring' => 'is',
                     'pattern' => 'mobile phone',
                     'alternatives' => true,
-                ),
-            ),
-            'consequence' => array(
+                ],
+            ],
+            'consequence' => [
                 'filterPromotes' => false,
-                'params' => array(
-                    'query' => array(
-                        'edits' => array(
-                            array(
+                'params' => [
+                    'query' => [
+                        'edits' => [
+                            [
                                 'type' => 'remove',
                                 'delete' => 'mobile',
-                            ),
-                            array(
+                            ],
+                            [
                                 'type' => 'replace',
                                 'delete' => 'phone',
                                 'insert' => 'iphone',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
-        $rule3 = array(
+        $rule3 = [
             'objectID' => 'query_promo',
-            'consequence' => array(
-                'params' => array(
+            'consequence' => [
+                'params' => [
                     'filters' => 'brand:OnePlus',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
-        $rule4 = array(
+        $rule4 = [
             'objectID' => 'query_promo_summer',
-            'conditions' => array(
-                array(
+            'conditions' => [
+                [
                     'context' => 'summer',
-                ),
-            ),
-            'consequence' => array(
-                'params' => array(
+                ],
+            ],
+            'consequence' => [
+                'params' => [
                     'filters' => 'model:One',
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
 
-        $additionalRules = array($rule2, $rule3, $rule4);
+        $additionalRules = [$rule2, $rule3, $rule4];
         $responses[] = $rulesIndex->saveRules($additionalRules);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        $res = $rulesIndex->search('', array('ruleContexts' => 'summer'));
+        $res = $rulesIndex->search('', ['ruleContexts' => 'summer']);
         $this->assertCount(1, $res['hits']);
 
         $res = $rulesIndex->getRule($rule1['objectID']);
@@ -584,16 +584,16 @@ class SearchIndexTest extends BaseTest
         $res = $rulesIndex->getRule($rule4['objectID']);
         $this->assertEquals(TestHelper::formatRule($res), $rule4);
 
-        $allRules = array($rule1, $rule2, $rule3, $rule4);
+        $allRules = [$rule1, $rule2, $rule3, $rule4];
 
         $res = $rulesIndex->searchRules('');
         foreach ($res['hits'] as $fetchedRule) {
-            $this->assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+            $this->assertTrue(in_array(TestHelper::formatRule($fetchedRule), $allRules));
         }
 
-        $iterator = $rulesIndex->browseRules(array('hitsPerPage' => 1));
+        $iterator = $rulesIndex->browseRules(['hitsPerPage' => 1]);
         foreach ($iterator as $fetchedRule) {
-            $this->assertContains(TestHelper::formatRule($fetchedRule), $allRules);
+            $this->assertTrue(in_array(TestHelper::formatRule($fetchedRule), $allRules));
         }
 
         $rulesIndex->deleteRule($rule1['objectID'])->wait();
@@ -634,41 +634,41 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $batchingIndex */
         $batchingIndex = TestHelper::getClient()->initIndex($this->indexes['index_batching']);
 
-        $figures = array(
-            array('objectID' => 'one', 'key' => 'value'),
-            array('objectID' => 'two', 'key' => 'value'),
-            array('objectID' => 'three', 'key' => 'value'),
-            array('objectID' => 'four', 'key' => 'value'),
-            array('objectID' => 'five', 'key' => 'value'),
-        );
+        $figures = [
+            ['objectID' => 'one', 'key' => 'value'],
+            ['objectID' => 'two', 'key' => 'value'],
+            ['objectID' => 'three', 'key' => 'value'],
+            ['objectID' => 'four', 'key' => 'value'],
+            ['objectID' => 'five', 'key' => 'value'],
+        ];
 
-        $batchingIndex->saveObjects($figures, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $batchingIndex->saveObjects($figures, ['autoGenerateObjectIDIfNotExist' => true])->wait();
 
-        $batch = array(
-            array('action' => 'addObject', 'body' => array('objectID' => 'zero', 'key' => 'value')),
-            array('action' => 'updateObject', 'body' => array('objectID' => 'one', 'k' => 'v')),
-            array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two', 'k' => 'v')),
-            array('action' => 'partialUpdateObject', 'body' => array('objectID' => 'two_bis', 'key' => 'value')),
-            array('action' => 'partialUpdateObjectNoCreate', 'body' => array('objectID' => 'three', 'k' => 'v')),
-            array('action' => 'deleteObject', 'body' => array('objectID' => 'four')),
-        );
+        $batch = [
+            ['action' => 'addObject', 'body' => ['objectID' => 'zero', 'key' => 'value']],
+            ['action' => 'updateObject', 'body' => ['objectID' => 'one', 'k' => 'v']],
+            ['action' => 'partialUpdateObject', 'body' => ['objectID' => 'two', 'k' => 'v']],
+            ['action' => 'partialUpdateObject', 'body' => ['objectID' => 'two_bis', 'key' => 'value']],
+            ['action' => 'partialUpdateObjectNoCreate', 'body' => ['objectID' => 'three', 'k' => 'v']],
+            ['action' => 'deleteObject', 'body' => ['objectID' => 'four']],
+        ];
 
         $batchingIndex->batch($batch)->wait();
 
-        $figuresAfterBatch = array(
-            array('objectID' => 'zero', 'key' => 'value'),
-            array('objectID' => 'one', 'k' => 'v'),
-            array('objectID' => 'two', 'key' => 'value', 'k' => 'v'),
-            array('objectID' => 'two_bis', 'key' => 'value'),
-            array('objectID' => 'three', 'key' => 'value', 'k' => 'v'),
-            array('objectID' => 'five', 'key' => 'value'),
-        );
+        $figuresAfterBatch = [
+            ['objectID' => 'zero', 'key' => 'value'],
+            ['objectID' => 'one', 'k' => 'v'],
+            ['objectID' => 'two', 'key' => 'value', 'k' => 'v'],
+            ['objectID' => 'two_bis', 'key' => 'value'],
+            ['objectID' => 'three', 'key' => 'value', 'k' => 'v'],
+            ['objectID' => 'five', 'key' => 'value'],
+        ];
 
         $iterator = $batchingIndex->browseObjects();
-        $fetchedResults = array();
+        $fetchedResults = [];
         foreach ($iterator as $object) {
             $fetchedResults[] = $object;
-            $this->assertContains($object, $figuresAfterBatch);
+            $this->assertTrue(in_array($object, $figuresAfterBatch));
         }
 
         $this->assertCount(count($fetchedResults), $figuresAfterBatch);
@@ -681,37 +681,37 @@ class SearchIndexTest extends BaseTest
         /** @var SearchIndex $replacingIndex */
         $replacingIndex = TestHelper::getClient()->initIndex($this->indexes['replacing']);
 
-        $responses = array();
+        $responses = [];
 
-        $responses[] = $replacingIndex->saveObject(array('objectID' => 'one'));
+        $responses[] = $replacingIndex->saveObject(['objectID' => 'one']);
 
-        $rule = array(
+        $rule = [
             'objectID' => 'one',
-            'condition' => array(
+            'condition' => [
                 'anchoring' => 'is',
                 'pattern' => 'pattern',
-            ),
-            'consequence' => array(
-                'params' => array(
-                    'query' => array(
-                        'edits' => array(
-                            array(
+            ],
+            'consequence' => [
+                'params' => [
+                    'query' => [
+                        'edits' => [
+                            [
                                 'type' => 'remove',
                                 'delete' => 'pattern',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $responses[] = $replacingIndex->saveRule($rule);
 
-        $synonym = array(
+        $synonym = [
             'objectID' => 'one',
             'type' => 'synonym',
-            'synonyms' => array('one', 'two'),
-        );
+            'synonyms' => ['one', 'two'],
+        ];
 
         $responses[] = $replacingIndex->saveSynonym($synonym);
 
@@ -719,15 +719,15 @@ class SearchIndexTest extends BaseTest
         $multiResponse = new MultiResponse($responses);
         $multiResponse->wait();
 
-        $responses[] = $replacingIndex->replaceAllObjects(array(array('objectID' => 'two')));
+        $responses[] = $replacingIndex->replaceAllObjects([['objectID' => 'two']]);
 
         $altRule = $rule;
         $altRule['objectID'] = 'two';
-        $responses[] = $replacingIndex->replaceAllRules(array($altRule));
+        $responses[] = $replacingIndex->replaceAllRules([$altRule]);
 
         $altSynonym = $synonym;
         $altSynonym['objectID'] = 'two';
-        $responses[] = $replacingIndex->replaceAllSynonyms(array($altSynonym));
+        $responses[] = $replacingIndex->replaceAllSynonyms([$altSynonym]);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -775,7 +775,7 @@ class SearchIndexTest extends BaseTest
 
         /* adding a object w/o object id s */
         $obj = TestHelper::createRecord();
-        $existsIndex->saveObject($obj, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $existsIndex->saveObject($obj, ['autoGenerateObjectIDIfNotExist' => true])->wait();
 
         $this->assertTrue($existsIndex->exists());
 

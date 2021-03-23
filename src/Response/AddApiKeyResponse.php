@@ -25,7 +25,7 @@ final class AddApiKeyResponse extends AbstractResponse
         $this->config = $config;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (!isset($this->client)) {
             return $this;

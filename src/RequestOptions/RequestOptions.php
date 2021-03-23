@@ -6,11 +6,11 @@ use Algolia\AlgoliaSearch\Support\Helpers;
 
 final class RequestOptions
 {
-    private $headers = array();
+    private $headers = [];
 
-    private $query = array();
+    private $query = [];
 
-    private $body = array();
+    private $body = [];
 
     private $readTimeout;
 
@@ -18,9 +18,9 @@ final class RequestOptions
 
     private $connectTimeout;
 
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
-        foreach (array('headers', 'query', 'body') as $name) {
+        foreach (['headers', 'query', 'body'] as $name) {
             if (isset($options[$name]) && !empty($options[$name])) {
                 $this->{$name} = $options[$name];
             }

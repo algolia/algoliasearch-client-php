@@ -21,17 +21,17 @@ final class Guzzle6HttpClient implements HttpClientInterface
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
         try {
-            $response = $this->client->send($request, array(
+            $response = $this->client->send($request, [
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
-            ));
+            ]);
         } catch (GuzzleRequestException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
             } else {
                 return new Response(
                     0,
-                    array(),
+                    [],
                     null,
                     '1.1',
                     $e->getMessage()
@@ -42,11 +42,11 @@ final class Guzzle6HttpClient implements HttpClientInterface
         return $response;
     }
 
-    private static function buildClient(array $config = array())
+    private static function buildClient(array $config = [])
     {
         $handlerStack = new HandlerStack(\GuzzleHttp\choose_handler());
         $handlerStack->push(Middleware::prepareBody(), 'prepare_body');
-        $config = array_merge(array('handler' => $handlerStack), $config);
+        $config = array_merge(['handler' => $handlerStack], $config);
 
         return new GuzzleClient($config);
     }

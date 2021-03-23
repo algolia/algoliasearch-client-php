@@ -66,10 +66,10 @@ final class Helpers
     public static function buildBatch($items, $action)
     {
         return array_map(function ($item) use ($action) {
-            return array(
+            return [
                 'action' => $action,
                 'body' => $item,
-            );
+            ];
         }, $items);
     }
 

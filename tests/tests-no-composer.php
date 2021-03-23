@@ -9,7 +9,7 @@ $client = \Algolia\AlgoliaSearch\SearchClient::get();
 $indexName = safeName('client-tests-co-composer');
 $index = $client->initIndex($indexName);
 
-$index->setSettings(array('hitsPerPage' => 30))->wait();
+$index->setSettings(['hitsPerPage' => 30])->wait();
 $index->delete()->wait();
 
 function safeName($name)

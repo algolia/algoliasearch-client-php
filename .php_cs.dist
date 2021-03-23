@@ -9,13 +9,8 @@ $finder = \PhpCsFixer\Finder::create()
 $rules = [
     '@Symfony' => true,
     'array_syntax' => ['syntax' => 'short'],
+    'increment_style' => ['style' => 'post'],
 ];
-
-if (PHP_VERSION_ID < 50400) {
-    $rules['pre_increment'] = false;
-} else {
-    $rules['increment_style'] = ['style' => 'post'];
-}
 
 return \PhpCsFixer\Config::create()
     ->setUsingCache(true)

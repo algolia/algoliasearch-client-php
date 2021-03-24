@@ -303,11 +303,34 @@ class SearchClientTest extends BaseTest
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
-        TestHelper::getClient()->restoreApiKey($res['key'])->wait();
+        $retry = 1;
+        $time = 100000;
+        $maxRetries = 100;
+        do {
+            try {
+                TestHelper::getClient()->restoreApiKey($res['key'])->wait();
+            } catch (NotFoundException $e) {
+                $retry++;
+                $factor = ceil($retry / 10);
+                usleep($factor * $time); // 0.1 second
+                continue;
+            }
 
-        $restoredApiKey = TestHelper::getClient()->getApiKey($res['key']);
-        $this->assertEquals($acl, $restoredApiKey['acl']);
-        $this->assertEquals($params['description'], $restoredApiKey['description']);
+        } while ($retry >= $maxRetries);
+
+        do {
+            try {
+                $restoredApiKey = TestHelper::getClient()->getApiKey($res['key']);
+                $this->assertEquals($acl, $restoredApiKey['acl']);
+                $this->assertEquals($params['description'], $restoredApiKey['description']);
+            } catch (NotFoundException $e) {
+                $retry++;
+                $factor = ceil($retry / 10);
+                usleep($factor * $time); // 0.1 second
+                continue;
+            }
+
+        } while ($retry >= $maxRetries);
 
         TestHelper::getClient()->deleteApiKey($res['key'])->wait();
     }

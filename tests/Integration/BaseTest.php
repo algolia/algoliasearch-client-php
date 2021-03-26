@@ -15,6 +15,7 @@ abstract class BaseTest extends PHPUnitTestCase
             TestHelper::checkEnvironmentVariables();
         } catch (\Exception $e) {
             echo $e->getMessage()."\n";
+
             return;
         }
 

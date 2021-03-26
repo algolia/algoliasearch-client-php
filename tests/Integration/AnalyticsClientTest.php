@@ -61,7 +61,10 @@ class AnalyticsClientTest extends BaseTest
             $cpt++;
         } while (false);
 
-        $response = $analyticsClient->addABTest($abTest);
+        $response = TestHelper::retry(function () use ($analyticsClient, $abTest) {
+            return $analyticsClient->addABTest($abTest);
+        }, 0.1, 40);
+
         $abTestId = $response['abTestID'];
         $index->waitTask($response['taskID']);
 
@@ -160,7 +163,10 @@ class AnalyticsClientTest extends BaseTest
             $cpt++;
         } while (false);
 
-        $response = $analyticsClient->addABTest($aaTest);
+        $response = TestHelper::retry(function () use ($analyticsClient, $aaTest) {
+            return $analyticsClient->addABTest($aaTest);
+        }, 0.1, 40);
+
         $aaTestId = $response['abTestID'];
         TestHelper::getClient()->waitTask($this->indexes['aa_testing'], $response['taskID']);
 

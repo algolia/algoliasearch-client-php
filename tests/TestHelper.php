@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Tests;
 
 use Algolia\AlgoliaSearch\Config\SearchConfig;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\SearchClient;
 use Faker\Factory;
 
@@ -106,5 +107,28 @@ class TestHelper
         unset($rule['_metadata'], $rule['_highlightResult']);
 
         return $rule;
+    }
+
+    /**
+     * @param mixed $function   function on which to retry
+     * @param float $delay      delay for the retry, in seconds
+     * @param int   $maxRetries maximum of retries
+     *
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public static function retry($function, $delay = 0.1, $maxRetries = 30)
+    {
+        for ($i = 1; $i < $maxRetries; $i++) {
+            try {
+                return $function();
+            } catch (NotFoundException $e) {
+                usleep($delay * 1000000); // 0.1 second
+                continue;
+            }
+        }
+
+        throw new \Exception('reached the maximum number of retries');
     }
 }

@@ -52,7 +52,10 @@ class SecuredApiKeysTest extends BaseTest
         /** @var SearchIndex $securedIndexDev */
         $securedIndexDev = $securedClient->initIndex($this->indexes['secured_api_keys_dev']);
 
-        $res = $securedIndex->search('');
+        $res = TestHelper::retry(function () use ($securedIndex) {
+            return $securedIndex->search('');
+        });
+
         $this->assertCount(1, $res['hits']);
 
         try {

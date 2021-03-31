@@ -2,7 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\SearchIndex;
@@ -271,29 +270,13 @@ class SearchClientTest extends BaseTest
 
         TestHelper::getClient()->updateApiKey($res['key'], $newParams)->wait();
 
-        $retry = 1;
-        $time = 100000;
-        $maxRetries = 100;
-        do {
-            if ($retry >= $maxRetries) {
-                break;
-            }
+        $updatedApiKey = TestHelper::retry(function () use ($res) {
+            return TestHelper::getClient()->getApiKey($res['key']);
+        });
 
-            try {
-                $updatedApiKey = TestHelper::getClient()->getApiKey($res['key']);
-
-                if ($updatedApiKey['maxHitsPerQuery'] !== $apiKey['maxHitsPerQuery']) {
-                    $this->assertEquals(42, $updatedApiKey['maxHitsPerQuery']);
-                    break;
-                }
-            } catch (NotFoundException $e) {
-                // Try again
-            }
-
-            $retry++;
-            $factor = ceil($retry / 10);
-            usleep($factor * $time); // 0.1 second
-        } while (true);
+        if ($updatedApiKey['maxHitsPerQuery'] !== $apiKey['maxHitsPerQuery']) {
+            $this->assertEquals(42, $updatedApiKey['maxHitsPerQuery']);
+        }
 
         TestHelper::getClient()->deleteApiKey($res['key'])->wait();
 
@@ -303,9 +286,14 @@ class SearchClientTest extends BaseTest
             $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
         }
 
-        TestHelper::getClient()->restoreApiKey($res['key'])->wait();
+        TestHelper::retry(function () use ($res) {
+            TestHelper::getClient()->restoreApiKey($res['key'])->wait();
+        });
 
-        $restoredApiKey = TestHelper::getClient()->getApiKey($res['key']);
+        $restoredApiKey = TestHelper::retry(function () use ($res) {
+            return TestHelper::getClient()->getApiKey($res['key']);
+        });
+
         $this->assertEquals($acl, $restoredApiKey['acl']);
         $this->assertEquals($params['description'], $restoredApiKey['description']);
 

@@ -7,6 +7,7 @@ use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\Response\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Response\DeleteApiKeyResponse;
+use Algolia\AlgoliaSearch\Response\DictionaryResponse;
 use Algolia\AlgoliaSearch\Response\IndexingResponse;
 use Algolia\AlgoliaSearch\Response\MultipleIndexBatchIndexingResponse;
 use Algolia\AlgoliaSearch\Response\RestoreApiKeyResponse;

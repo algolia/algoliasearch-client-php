@@ -86,7 +86,7 @@ jobs:
               export CI_PROJ_USERNAME=$CIRCLE_PR_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PR_REPONAME
 
-              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+              php vendor/bin/phpunit
             fi
 
       - run:

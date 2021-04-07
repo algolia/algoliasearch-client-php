@@ -7,7 +7,7 @@ use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class DictionaryManagementTest extends BaseTest
 {
-    /** @var SearchClient $client */
+    /** @var SearchClient */
     private $client;
 
     public function setUp()
@@ -32,6 +32,9 @@ class DictionaryManagementTest extends BaseTest
         return substr(str_shuffle(md5(microtime())), 0, 10);
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testStopWordDictionaryManagement()
     {
         $objectID = self::randomString();
@@ -93,6 +96,9 @@ class DictionaryManagementTest extends BaseTest
         $this->assertEquals($stopwordSettings, $this->client->getDictionarySettings());
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testCompoundDictionaryManagement()
     {
         $objectID = self::randomString();
@@ -131,6 +137,9 @@ class DictionaryManagementTest extends BaseTest
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testPluralsDictionaryManagement()
     {
         $objectID = self::randomString();
@@ -173,7 +182,7 @@ class DictionaryManagementTest extends BaseTest
             array_filter(
                 $entries,
                 function ($hit) use ($objectID) {
-                    return $hit['objectID'] == $objectID;
+                    return $hit['objectID'] === $objectID;
                 }
             )
         );

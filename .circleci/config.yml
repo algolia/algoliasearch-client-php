@@ -75,18 +75,29 @@ jobs:
       # with the keys in the env variables
       # If the PR was open from a fork (community PR)
       # we get API keys from the API key dealer https://alg.li/api-key-dealer
+      # we only run the tests on dictionaries on one case to avoid concurrency problems
       - run:
           name: Run tests
           command: |
             export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
             if [ -z ${CIRCLE_PR_REPONAME+x} ]
             then
-               php vendor/bin/phpunit
+              if [ "<<parameters.version>>" == "latest" && "<<parameters.http_client>>" == "guzzlehttp/guzzle:"^7.0"" ]
+              then
+                 php vendor/bin/phpunit
+              else
+                 php vendor/bin/phpunit --exclude-group=dictionaries
+              fi
             else
               export CI_PROJ_USERNAME=$CIRCLE_PR_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PR_REPONAME
 
-              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+              if [ "<<parameters.version>>" == "latest" && "<<parameters.http_client>>" == "guzzlehttp/guzzle:"^7.0"" ]
+              then
+                 php vendor/bin/phpunit
+              else
+                 php vendor/bin/phpunit --exclude-group=dictionaries
+              fi
             fi
 
       - run:

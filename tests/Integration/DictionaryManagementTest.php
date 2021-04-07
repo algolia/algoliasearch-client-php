@@ -2,22 +2,29 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\SearchClient;
 use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class DictionaryManagementTest extends BaseTest
 {
-    private static $dictionaryClient;
+    /** @var SearchClient */
+    private $client;
 
-    private static function getDictionaryClient()
+    public function setUp()
     {
-        if (!isset(self::$dictionaryClient)) {
-            self::$dictionaryClient = TestHelper::getClient(array(
+        if (!isset($this->client)) {
+            $this->client = TestHelper::getClient(array(
                 'appId' => getenv('ALGOLIA_APPLICATION_ID_2'),
                 'apiKey' => getenv('ALGOLIA_ADMIN_KEY_2'),
             ));
         }
+    }
 
-        return self::$dictionaryClient;
+    public function tearDown()
+    {
+        $this->client->clearDictionaryEntries('stopwords')->wait();
+        $this->client->clearDictionaryEntries('plurals')->wait();
+        $this->client->clearDictionaryEntries('compounds')->wait();
     }
 
     private static function randomString()
@@ -25,55 +32,55 @@ class DictionaryManagementTest extends BaseTest
         return substr(str_shuffle(md5(microtime())), 0, 10);
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testStopWordDictionaryManagement()
     {
-        $client = self::getDictionaryClient();
         $objectID = self::randomString();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('stopwords', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
 
         $entry = array('objectID' => $objectID, 'language' => 'en', 'word' => 'down');
-        $client->saveDictionaryEntries(
+        $this->client->saveDictionaryEntries(
             'stopwords',
             array($entry)
         )->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('stopwords', $objectID);
+        $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits']);
 
-        $this->assertCount(
-            1,
-            $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits'])
-        );
+        $this->assertCount(1, $addedEntries);
 
         $savedEntry = $addedEntries[0];
 
         $this->assertEquals($entry['objectID'], $savedEntry['objectID']);
         $this->assertEquals($entry['word'], $savedEntry['word']);
 
-        $client->deleteDictionaryEntries('stopwords', array($objectID))->wait();
+        $this->client->deleteDictionaryEntries('stopwords', array($objectID))->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('stopwords', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
 
-        $oldDictionaryState = $client->searchDictionaryEntries('stopwords', '');
+        $oldDictionaryState = $this->client->searchDictionaryEntries('stopwords', '');
         $oldDictionaryEntries = array_map(function ($hit) {
             unset($hit['type']);
 
             return $hit;
         }, $oldDictionaryState['hits']);
 
-        $client->saveDictionaryEntries(
+        $this->client->saveDictionaryEntries(
             'stopwords',
             array($entry)
         )->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('stopwords', $objectID);
         $this->assertCount(1, $this->findEntriesWithObjectID($entry['objectID'], $searchResponse['hits']));
 
-        $client->replaceDictionaryEntries('stopwords', $oldDictionaryEntries)->wait();
+        $this->client->replaceDictionaryEntries('stopwords', $oldDictionaryEntries)->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('stopwords', '');
+        $searchResponse = $this->client->searchDictionaryEntries('stopwords', '');
         $this->assertCount(0, $this->findEntriesWithObjectID($entry['objectID'], $searchResponse['hits']));
 
         $stopwordSettings = array(
@@ -84,17 +91,19 @@ class DictionaryManagementTest extends BaseTest
             ),
         );
 
-        $client->setDictionarySettings($stopwordSettings)->wait();
+        $this->client->setDictionarySettings($stopwordSettings)->wait();
 
-        $this->assertEquals($stopwordSettings, $client->getDictionarySettings());
+        $this->assertEquals($stopwordSettings, $this->client->getDictionarySettings());
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testCompoundDictionaryManagement()
     {
-        $client = self::getDictionaryClient();
         $objectID = self::randomString();
 
-        $searchResponse = $client->searchDictionaryEntries('compounds', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('compounds', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
 
         $entry = array(
@@ -106,17 +115,15 @@ class DictionaryManagementTest extends BaseTest
             ),
         );
 
-        $client->saveDictionaryEntries(
+        $this->client->saveDictionaryEntries(
             'compounds',
             array($entry)
         )->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('compounds', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('compounds', $objectID);
+        $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits']);
 
-        $this->assertCount(
-            1,
-            $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits'])
-        );
+        $this->assertCount(1, $addedEntries);
 
         $savedEntry = $addedEntries[0];
 
@@ -124,18 +131,20 @@ class DictionaryManagementTest extends BaseTest
         $this->assertEquals($entry['word'], $savedEntry['word']);
         $this->assertEquals($entry['decomposition'], $savedEntry['decomposition']);
 
-        $client->deleteDictionaryEntries('compounds', array($objectID))->wait();
+        $this->client->deleteDictionaryEntries('compounds', array($objectID))->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('compounds', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('compounds', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
     }
 
+    /**
+     * @group dictionaries
+     */
     public function testPluralsDictionaryManagement()
     {
-        $client = self::getDictionaryClient();
         $objectID = self::randomString();
 
-        $searchResponse = $client->searchDictionaryEntries('plurals', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('plurals', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
 
         $entry = array(
@@ -146,26 +155,24 @@ class DictionaryManagementTest extends BaseTest
             ),
         );
 
-        $client->saveDictionaryEntries(
+        $this->client->saveDictionaryEntries(
             'plurals',
             array($entry)
         )->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('plurals', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('plurals', $objectID);
+        $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits']);
 
-        $this->assertCount(
-            1,
-            $addedEntries = $this->findEntriesWithObjectID($objectID, $searchResponse['hits'])
-        );
+        $this->assertCount(1, $addedEntries);
 
         $savedEntry = $addedEntries[0];
 
         $this->assertEquals($entry['objectID'], $savedEntry['objectID']);
         $this->assertEquals($entry['words'], $savedEntry['words']);
 
-        $client->deleteDictionaryEntries('plurals', array($objectID))->wait();
+        $this->client->deleteDictionaryEntries('plurals', array($objectID))->wait();
 
-        $searchResponse = $client->searchDictionaryEntries('plurals', $objectID);
+        $searchResponse = $this->client->searchDictionaryEntries('plurals', $objectID);
         $this->assertCount(0, $this->findEntriesWithObjectID($objectID, $searchResponse['hits']));
     }
 
@@ -175,7 +182,7 @@ class DictionaryManagementTest extends BaseTest
             array_filter(
                 $entries,
                 function ($hit) use ($objectID) {
-                    return $hit['objectID'] == $objectID;
+                    return $hit['objectID'] === $objectID;
                 }
             )
         );

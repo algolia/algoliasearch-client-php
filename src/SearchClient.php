@@ -469,15 +469,15 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => false,
                 'requests' => Helpers::buildBatch($entries, 'addEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -493,15 +493,15 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => true,
                 'requests' => Helpers::buildBatch($entries, 'addEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -517,19 +517,19 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = array())
+    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = [])
     {
         $entries = array_map(function ($objectID) {
-            return array('objectID' => $objectID);
+            return ['objectID' => $objectID];
         }, $objectIDs);
 
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => false,
                 'requests' => Helpers::buildBatch($entries, 'deleteEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -544,9 +544,9 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function clearDictionaryEntries($dictionary, $requestOptions = array())
+    public function clearDictionaryEntries($dictionary, $requestOptions = [])
     {
-        return $this->replaceDictionaryEntries($dictionary, array(), $requestOptions);
+        return $this->replaceDictionaryEntries($dictionary, [], $requestOptions);
     }
 
     /**
@@ -558,12 +558,12 @@ class SearchClient
      *
      * @return mixed
      */
-    public function searchDictionaryEntries($dictionary, $query, $requestOptions = array())
+    public function searchDictionaryEntries($dictionary, $query, $requestOptions = [])
     {
         return $this->api->read(
             'POST',
             api_path('/1/dictionaries/%s/search', $dictionary),
-            array('query' => $query),
+            ['query' => $query],
             $requestOptions
         );
     }
@@ -576,7 +576,7 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function setDictionarySettings($dictionarySettings, $requestOptions = array())
+    public function setDictionarySettings($dictionarySettings, $requestOptions = [])
     {
         $response = $this->api->write(
             'PUT',
@@ -595,12 +595,12 @@ class SearchClient
      *
      * @return mixed
      */
-    public function getDictionarySettings($requestOptions = array())
+    public function getDictionarySettings($requestOptions = [])
     {
         return $this->api->read(
             'GET',
             api_path('/1/dictionaries/*/settings'),
-            array(),
+            [],
             $requestOptions
         );
     }

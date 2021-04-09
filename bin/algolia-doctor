@@ -9,6 +9,7 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
 
 
 $doc = new AlgoliaDoctor();
+$doc->checkPhpVersion();
 $doc->checkExtensionRequirements();
 $doc->checkSerializeParam();
 $doc->checkHttpClient();
@@ -19,6 +20,14 @@ exit($doc->exitCode);
 class AlgoliaDoctor
 {
     public $exitCode = 0;
+
+    public function checkPhpVersion()
+    {
+        if (PHP_VERSION_ID < 70200) {
+            echo 'Unfortunately your version of PHP is too old. Consider upgrading to PHP 7.2+.';
+            $this->exitCode = 1;
+        }
+    }
 
     public function checkExtensionRequirements()
     {

@@ -5,7 +5,7 @@ namespace Algolia\AlgoliaSearch\Http;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
-final class Php53HttpClient implements HttpClientInterface
+final class CurlHttpClient implements HttpClientInterface
 {
     private $curlMHandle;
 

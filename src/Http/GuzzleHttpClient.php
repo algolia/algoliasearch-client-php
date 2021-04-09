@@ -4,12 +4,13 @@ namespace Algolia\AlgoliaSearch\Http;
 
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use Psr\Http\Message\RequestInterface;
 
-final class Guzzle6HttpClient implements HttpClientInterface
+final class GuzzleHttpClient implements HttpClientInterface
 {
     private $client;
 
@@ -25,7 +26,19 @@ final class Guzzle6HttpClient implements HttpClientInterface
                 'timeout' => $timeout,
                 'connect_timeout' => $connectTimeout,
             ]);
-        } catch (GuzzleRequestException $e) {
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                return $e->getResponse();
+            } else {
+                return new Response(
+                    0,
+                    [],
+                    null,
+                    '1.1',
+                    $e->getMessage()
+                );
+            }
+        } catch (ConnectException $e) {
             if ($e->hasResponse()) {
                 return $e->getResponse();
             } else {

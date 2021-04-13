@@ -30,7 +30,7 @@ final class UriResolver
             return $path;
         }
 
-        $results = array();
+        $results = [];
         $segments = explode('/', $path);
         $segment = null;
         foreach ($segments as $segment) {

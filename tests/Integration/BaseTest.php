@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
 abstract class BaseTest extends PHPUnitTestCase
 {
-    protected $indexes = array();
+    protected $indexes = [];
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         try {
             TestHelper::checkEnvironmentVariables();

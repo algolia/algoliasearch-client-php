@@ -71,7 +71,7 @@ final class ApiWrapper implements ApiWrapperInterface
         }
     }
 
-    public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array())
+    public function read($method, $path, $requestOptions = [], $defaultRequestOptions = [])
     {
         if ('GET' === strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
@@ -88,11 +88,11 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array())
+    public function write($method, $path, $data = [], $requestOptions = [], $defaultRequestOptions = [])
     {
         if ('DELETE' === strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
-            $data = array();
+            $data = [];
         } else {
             $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaultRequestOptions);
         }
@@ -107,14 +107,14 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    public function send($method, $path, $requestOptions = array(), $hosts = null)
+    public function send($method, $path, $requestOptions = [], $hosts = null)
     {
         $requestOptions = $this->requestOptionsFactory->create($requestOptions);
 
         if (null === $hosts) {
             $hosts = $this->clusterHosts->write();
         } elseif (!is_array($hosts)) {
-            $hosts = array($hosts);
+            $hosts = [$hosts];
         }
 
         return $this->request(
@@ -126,7 +126,7 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = array())
+    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = [])
     {
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
@@ -134,12 +134,12 @@ final class ApiWrapper implements ApiWrapperInterface
 
         $body = array_merge($data, $requestOptions->getBody());
 
-        $logParams = array(
+        $logParams = [
             'body' => $body,
             'headers' => $requestOptions->getHeaders(),
             'method' => $method,
             'query' => $requestOptions->getQueryParameters(),
-        );
+        ];
 
         $retry = 1;
         foreach ($hosts as $host) {
@@ -171,9 +171,9 @@ final class ApiWrapper implements ApiWrapperInterface
 
                 return $responseBody;
             } catch (RetriableException $e) {
-                $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, array(
+                $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, [
                     'description' => $e->getMessage(),
-                )));
+                ]));
 
                 $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
@@ -238,7 +238,7 @@ final class ApiWrapper implements ApiWrapperInterface
     private function createRequest(
         $method,
         $uri,
-        array $headers = array(),
+        array $headers = [],
         $body = null,
         $protocolVersion = '1.1'
     ) {
@@ -262,7 +262,7 @@ final class ApiWrapper implements ApiWrapperInterface
      * @param string $level
      * @param string $message
      */
-    private function log($level, $message, array $context = array())
+    private function log($level, $message, array $context = [])
     {
         $this->logger->log($level, 'Algolia API client: '.$message, $context);
     }

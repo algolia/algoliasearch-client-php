@@ -9,7 +9,7 @@ use Algolia\AlgoliaSearch\Tests\TestHelper;
 
 class AccountTest extends BaseTest
 {
-    protected $secondaryIndexes = array();
+    protected $secondaryIndexes = [];
 
     public function testCopyIndex()
     {
@@ -30,10 +30,10 @@ class AccountTest extends BaseTest
             );
         }
 
-        $secondaryConfig = array(
+        $secondaryConfig = [
             'appId' => getenv('ALGOLIA_APPLICATION_ID_2'),
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_2'),
-        );
+        ];
 
         $secondaryClient = TestHelper::getClient($secondaryConfig);
         $this->secondaryIndexes['copy_index_2'] = TestHelper::getTestIndexName('copy_index_2');
@@ -41,43 +41,43 @@ class AccountTest extends BaseTest
         /** @var SearchIndex $secondaryIndex */
         $secondaryIndex = $secondaryClient->initIndex($this->secondaryIndexes['copy_index_2']);
 
-        $responses = array();
+        $responses = [];
         $responses[] = $copyIndex->saveObject(
-            array('objectID' => 'one'),
-            array('autoGenerateObjectIDIfNotExist' => true)
+            ['objectID' => 'one'],
+            ['autoGenerateObjectIDIfNotExist' => true]
         );
 
-        $rule = array(
+        $rule = [
             'objectID' => 'one',
-            'condition' => array(
+            'condition' => [
                 'anchoring' => 'is',
                 'pattern' => 'pattern',
-            ),
-            'consequence' => array(
-                'params' => array(
-                    'query' => array(
-                        'edits' => array(
-                            array(
+            ],
+            'consequence' => [
+                'params' => [
+                    'query' => [
+                        'edits' => [
+                            [
                                 'type' => 'remove',
                                 'delete' => 'pattern',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-        );
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
 
         $responses[] = $copyIndex->saveRule($rule);
 
-        $synonym = array(
+        $synonym = [
             'objectID' => 'one',
             'type' => 'synonym',
-            'synonyms' => array('one', 'two'),
-        );
+            'synonyms' => ['one', 'two'],
+        ];
 
         $responses[] = $copyIndex->saveSynonym($synonym);
 
-        $responses[] = $copyIndex->setSettings(array('searchableAttributes' => array('objectID')));
+        $responses[] = $copyIndex->setSettings(['searchableAttributes' => ['objectID']]);
 
         /* Wait all collected task to terminate */
         $multiResponse = new MultiResponse($responses);
@@ -89,7 +89,7 @@ class AccountTest extends BaseTest
         $this->assertEquals('one', $result['objectID']);
 
         $result = $secondaryIndex->getSettings();
-        $this->assertEquals(array('objectID'), $result['searchableAttributes']);
+        $this->assertEquals(['objectID'], $result['searchableAttributes']);
 
         $result = $secondaryIndex->getRule($rule['objectID']);
         $this->assertEquals('one', $result['objectID']);

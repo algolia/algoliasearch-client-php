@@ -58,7 +58,7 @@ final class PlacesClient
         return new static($apiWrapper, $config);
     }
 
-    public function search($query, $requestOptions = array())
+    public function search($query, $requestOptions = [])
     {
         $query = (string) $query;
 
@@ -71,12 +71,12 @@ final class PlacesClient
         return $this->api->read('POST', api_path('/1/places/query'), $requestOptions);
     }
 
-    public function getObject($objectID, $requestOptions = array())
+    public function getObject($objectID, $requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/places/%s', $objectID), $requestOptions);
     }
 
-    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    public function custom($method, $path, $requestOptions = [], $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
     }

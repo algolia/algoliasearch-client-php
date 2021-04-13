@@ -10,6 +10,6 @@ class NullHttpClient implements HttpClientInterface
 {
     public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
     {
-        return new Response(201, array(), '[]');
+        return new Response(201, [], '[]');
     }
 }

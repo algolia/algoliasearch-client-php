@@ -7,7 +7,7 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 
 final class AccountClient
 {
-    public static function copyIndex(SearchIndex $srcIndex, SearchIndex $destIndex, $requestOptions = array())
+    public static function copyIndex(SearchIndex $srcIndex, SearchIndex $destIndex, $requestOptions = [])
     {
         if ($srcIndex->getAppId() === $destIndex->getAppId()) {
             throw new \InvalidArgumentException('If both index are on the same app, please use SearchClient::copyIndex method instead.');
@@ -21,7 +21,7 @@ final class AccountClient
             // All good
         }
 
-        $allResponses = array();
+        $allResponses = [];
 
         $settings = $srcIndex->getSettings();
         $allResponses[] = $destIndex->setSettings($settings);

@@ -9,11 +9,11 @@ use Faker\Factory;
 
 class TestHelper
 {
-    protected static $indexes = array();
+    protected static $indexes = [];
 
     private static $instance;
 
-    private static $environmentVariables = array(
+    private static $environmentVariables = [
         'ALGOLIA_APPLICATION_ID_1',
         'ALGOLIA_ADMIN_KEY_1',
         'ALGOLIA_SEARCH_KEY_1',
@@ -21,10 +21,10 @@ class TestHelper
         'ALGOLIA_ADMIN_KEY_2',
         'ALGOLIA_APPLICATION_ID_MCM',
         'ALGOLIA_ADMIN_KEY_MCM',
-    );
+    ];
 
     /** @var SearchClient[] */
-    private static $client = array();
+    private static $client = [];
 
     /**
      * @throws \Exception
@@ -72,12 +72,12 @@ class TestHelper
      *
      * @return SearchClient
      */
-    public static function getClient($config = array())
+    public static function getClient($config = [])
     {
-        $config += array(
+        $config += [
             'appId' => getenv('ALGOLIA_APPLICATION_ID_1'),
             'apiKey' => getenv('ALGOLIA_ADMIN_KEY_1'),
-        );
+        ];
 
         $idFromApiKey = $config['appId'].substr($config['apiKey'], 0, 5);
 
@@ -91,7 +91,7 @@ class TestHelper
     public static function createRecord($objectID = false)
     {
         $faker = Factory::create();
-        $record = array('name' => $faker->name);
+        $record = ['name' => $faker->name];
 
         if (null === $objectID) {
             $record['objectID'] = uniqid('php_client_', true);

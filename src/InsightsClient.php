@@ -57,14 +57,14 @@ final class InsightsClient
         return new UserInsightsClient($this, $userToken);
     }
 
-    public function sendEvent($event, $requestOptions = array())
+    public function sendEvent($event, $requestOptions = [])
     {
-        return $this->sendEvents(array($event), $requestOptions);
+        return $this->sendEvents([$event], $requestOptions);
     }
 
-    public function sendEvents($events, $requestOptions = array())
+    public function sendEvents($events, $requestOptions = [])
     {
-        $payload = array('events' => $events);
+        $payload = ['events' => $events];
 
         return $this->api->write('POST', api_path('/1/events'), $payload, $requestOptions);
     }

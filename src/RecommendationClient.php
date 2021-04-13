@@ -70,7 +70,7 @@ final class RecommendationClient
      *
      * @return array<string, int|array>
      */
-    public function getPersonalizationStrategy($requestOptions = array())
+    public function getPersonalizationStrategy($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/strategies/personalization'), $requestOptions);
     }
@@ -81,7 +81,7 @@ final class RecommendationClient
      *
      * @return array<string, int|string>
      */
-    public function setPersonalizationStrategy($strategy, $requestOptions = array())
+    public function setPersonalizationStrategy($strategy, $requestOptions = [])
     {
         return $this->api->write('POST', api_path('/1/strategies/personalization'), $strategy, $requestOptions);
     }

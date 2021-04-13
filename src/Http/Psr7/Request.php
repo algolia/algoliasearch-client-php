@@ -24,10 +24,10 @@ class Request implements RequestInterface
     private $uri;
 
     /** @var array Map of all registered headers, as original name => array of values */
-    private $headers = array();
+    private $headers = [];
 
     /** @var array Map of lowercase header name => original name at registration */
-    private $headerNames = array();
+    private $headerNames = [];
 
     /** @var string */
     private $protocol = '1.1';
@@ -45,7 +45,7 @@ class Request implements RequestInterface
     public function __construct(
         $method,
         $uri,
-        array $headers = array(),
+        array $headers = [],
         $body = null,
         $version = '1.1'
     ) {
@@ -150,7 +150,7 @@ class Request implements RequestInterface
         }
         // Ensure Host is the first header.
         // See: http://tools.ietf.org/html/rfc7230#section-5.4
-        $this->headers = array($header => array($host)) + $this->headers;
+        $this->headers = [$header => [$host]] + $this->headers;
     }
 
     public function getProtocolVersion()
@@ -183,7 +183,7 @@ class Request implements RequestInterface
     {
         $header = strtolower($header);
         if (!isset($this->headerNames[$header])) {
-            return array();
+            return [];
         }
         $header = $this->headerNames[$header];
 
@@ -198,7 +198,7 @@ class Request implements RequestInterface
     public function withHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
         $value = $this->trimHeaderValues($value);
         $normalized = strtolower($header);
@@ -215,7 +215,7 @@ class Request implements RequestInterface
     public function withAddedHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
         $value = $this->trimHeaderValues($value);
         $normalized = strtolower($header);
@@ -266,10 +266,10 @@ class Request implements RequestInterface
 
     private function setHeaders(array $headers)
     {
-        $this->headerNames = $this->headers = array();
+        $this->headerNames = $this->headers = [];
         foreach ($headers as $header => $value) {
             if (!is_array($value)) {
-                $value = array($value);
+                $value = [$value];
             }
             $value = $this->trimHeaderValues($value);
             $normalized = strtolower($header);

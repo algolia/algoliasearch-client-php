@@ -5,13 +5,13 @@ namespace Algolia\AlgoliaSearch\Http;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 
-final class Php53HttpClient implements HttpClientInterface
+final class CurlHttpClient implements HttpClientInterface
 {
     private $curlMHandle;
 
     private $curlOptions;
 
-    public function __construct($curlOptions = array())
+    public function __construct($curlOptions = [])
     {
         $this->curlOptions = $curlOptions;
     }
@@ -29,7 +29,7 @@ final class Php53HttpClient implements HttpClientInterface
             $this->invalidOptions($this->curlOptions, $e->getMessage());
         }
 
-        $curlHeaders = array();
+        $curlHeaders = [];
         foreach ($request->getHeaders() as $key => $values) {
             $curlHeaders[] = $key.': '.implode(',', $values);
         }
@@ -106,7 +106,7 @@ final class Php53HttpClient implements HttpClientInterface
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        return new Response($statusCode, array(), $responseBody, '1.1', $error);
+        return new Response($statusCode, [], $responseBody, '1.1', $error);
     }
 
     private function getMHandle($curlHandle)
@@ -124,7 +124,7 @@ final class Php53HttpClient implements HttpClientInterface
         curl_multi_remove_handle($this->curlMHandle, $curlHandle);
     }
 
-    private function invalidOptions(array $curlOptions = array(), $errorMsg = '')
+    private function invalidOptions(array $curlOptions = [], $errorMsg = '')
     {
         throw new \OutOfBoundsException(sprintf('AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s', json_encode($curlOptions), $errorMsg));
     }

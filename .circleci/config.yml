@@ -65,9 +65,9 @@ jobs:
               curl -s https://algoliasearch-client-keygen.herokuapp.com | sh >> $BASH_ENV
             fi
 
-#      - run:
-#          name: Check code styles
-#          command: vendor/bin/php-cs-fixer fix -v --dry-run
+      - run:
+          name: Check code styles
+          command: vendor/bin/php-cs-fixer fix -v --dry-run
 
       # Run tests with phpunit
       #
@@ -134,12 +134,8 @@ workflows:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
-          name: 'Guzzle 6 - PHP 7.0'
-          version: "7.0"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
-          name: 'Guzzle 6 - PHP 5.6'
-          version: "5.6"
+          name: 'Guzzle 6 - PHP 7.2'
+          version: "7.2"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
@@ -155,10 +151,6 @@ workflows:
           version: "7.4"
           http_client: legacy
       - test:
-          name: 'Legacy client - PHP 7.0'
-          version: "7.0"
-          http_client: legacy
-      - test:
-          name: 'Legacy client - PHP 5.6'
-          version: "5.6"
+          name: 'Legacy client - PHP 7.2'
+          version: "7.2"
           http_client: legacy

@@ -61,7 +61,7 @@ final class FileCacheDriver implements CacheInterface
      */
     public function getMultiple($keys, $default = null)
     {
-        $result = array();
+        $result = [];
         foreach ($keys as $key) {
             $result[$key] = $this->get($key, $default);
         }

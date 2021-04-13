@@ -16,10 +16,10 @@ use Psr\Http\Message\StreamInterface;
 class Response implements ResponseInterface
 {
     /** @var array Map of all registered headers, as original name => array of values */
-    private $headers = array();
+    private $headers = [];
 
     /** @var array Map of lowercase header name => original name at registration */
-    private $headerNames = array();
+    private $headerNames = [];
 
     /** @var string */
     private $protocol = '1.1';
@@ -28,7 +28,7 @@ class Response implements ResponseInterface
     private $stream;
 
     /** @var array Map of standard HTTP status code/reason phrases */
-    private static $phrases = array(
+    private static $phrases = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         102 => 'Processing',
@@ -87,7 +87,7 @@ class Response implements ResponseInterface
         507 => 'Insufficient Storage',
         508 => 'Loop Detected',
         511 => 'Network Authentication Required',
-    );
+    ];
 
     /** @var string */
     private $reasonPhrase = '';
@@ -104,7 +104,7 @@ class Response implements ResponseInterface
      */
     public function __construct(
         $status = 200,
-        array $headers = array(),
+        array $headers = [],
         $body = null,
         $version = '1.1',
         $reason = null
@@ -179,7 +179,7 @@ class Response implements ResponseInterface
         $header = strtolower($header);
 
         if (!isset($this->headerNames[$header])) {
-            return array();
+            return [];
         }
 
         $header = $this->headerNames[$header];
@@ -195,7 +195,7 @@ class Response implements ResponseInterface
     public function withHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
 
         $value = $this->trimHeaderValues($value);
@@ -214,7 +214,7 @@ class Response implements ResponseInterface
     public function withAddedHeader($header, $value)
     {
         if (!is_array($value)) {
-            $value = array($value);
+            $value = [$value];
         }
 
         $value = $this->trimHeaderValues($value);
@@ -271,10 +271,10 @@ class Response implements ResponseInterface
 
     private function setHeaders(array $headers)
     {
-        $this->headerNames = $this->headers = array();
+        $this->headerNames = $this->headers = [];
         foreach ($headers as $header => $value) {
             if (!is_array($value)) {
-                $value = array($value);
+                $value = [$value];
             }
 
             $value = $this->trimHeaderValues($value);

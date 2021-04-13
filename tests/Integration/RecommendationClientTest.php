@@ -13,17 +13,17 @@ class RecommendationClientTest extends BaseTest
             getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
-        $strategy = array(
-            'eventsScoring' => array(
-                array('eventName' => 'Add to cart', 'eventType' => 'conversion', 'score' => 50),
-                array('eventName' => 'Purchase', 'eventType' => 'conversion', 'score' => 100),
-            ),
-            'facetsScoring' => array(
-                array('facetName' => 'brand', 'score' => 100),
-                array('facetName' => 'categories', 'score' => 10),
-            ),
+        $strategy = [
+            'eventsScoring' => [
+                ['eventName' => 'Add to cart', 'eventType' => 'conversion', 'score' => 50],
+                ['eventName' => 'Purchase', 'eventType' => 'conversion', 'score' => 100],
+            ],
+            'facetsScoring' => [
+                ['facetName' => 'brand', 'score' => 100],
+                ['facetName' => 'categories', 'score' => 10],
+            ],
             'personalizationImpact' => 0,
-        );
+        ];
 
         try {
             $recommendationClient->setPersonalizationStrategy($strategy);

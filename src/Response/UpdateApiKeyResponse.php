@@ -32,7 +32,7 @@ final class UpdateApiKeyResponse extends AbstractResponse
         $this->keyParams = $this->filterOnlyKeyParams($requestOptions);
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (!isset($this->client)) {
             return $this;
@@ -75,11 +75,11 @@ final class UpdateApiKeyResponse extends AbstractResponse
 
     private function filterOnlyKeyParams($requestOptions)
     {
-        $validKeyParams = array(
+        $validKeyParams = [
             'acl',  'indexes',  'referers',
             'restrictSources', 'queryParameters',  'description',
             'validity',  'maxQueriesPerIPPerHour',  'maxHitsPerQuery',
-        );
+        ];
 
         return array_intersect_key($requestOptions, array_flip($validKeyParams));
     }

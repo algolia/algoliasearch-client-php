@@ -27,7 +27,7 @@
 ## ✨ Features
 
 - Thin & minimal low-level HTTP client to interact with Algolia's API
-- Supports php `^5.3`.
+- Supports php `^7.2`.
 
 ## 💡 Getting Started
 

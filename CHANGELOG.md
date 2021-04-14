@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.8.0...master)
 
+## [v3.0.0](https://github.com/algolia/algoliasearch-client-php/compare/2.8.0...3.0.0)
+
+### Changed
+- Major version - Drops support for PHP < 7.2
+
 ## [v2.8.0](https://github.com/algolia/algoliasearch-client-php/compare/2.7.3...2.8.0)
 
 ### Fix

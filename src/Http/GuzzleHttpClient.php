@@ -39,17 +39,13 @@ final class GuzzleHttpClient implements HttpClientInterface
                 );
             }
         } catch (ConnectException $e) {
-            if ($e->hasResponse()) {
-                return $e->getResponse();
-            } else {
-                return new Response(
-                    0,
-                    [],
-                    null,
-                    '1.1',
-                    $e->getMessage()
-                );
-            }
+            return new Response(
+                0,
+                [],
+                null,
+                '1.1',
+                $e->getMessage()
+            );
         }
 
         return $response;

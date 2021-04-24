@@ -7,7 +7,7 @@ use Psr\Http\Message\StreamInterface;
 /**
  * @internal
  */
-function stream_for($resource = '', array $options = array())
+function stream_for($resource = '', array $options = [])
 {
     if (is_scalar($resource)) {
         $stream = fopen('php://temp', 'r+');

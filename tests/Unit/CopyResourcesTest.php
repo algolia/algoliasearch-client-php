@@ -10,7 +10,7 @@ class CopyResourcesTest extends RequestTestCase
     /** @var \Algolia\AlgoliaSearch\SearchClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         static::$client = SearchClient::create('id', 'key');
@@ -22,11 +22,11 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copySettings('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertBodySubset([
                     'operation' => 'copy',
                     'destination' => 'dest',
-                    'scope' => array('settings'),
-                ),
+                    'scope' => ['settings'],
+                ],
                 $e->getRequest()
             );
         }
@@ -38,11 +38,11 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copySynonyms('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertBodySubset([
                     'operation' => 'copy',
                     'destination' => 'dest',
-                    'scope' => array('synonyms'),
-                ),
+                    'scope' => ['synonyms'],
+                ],
                 $e->getRequest()
             );
         }
@@ -54,11 +54,11 @@ class CopyResourcesTest extends RequestTestCase
             static::$client->copyRules('src', 'dest');
         } catch (RequestException $e) {
             $this->assertEndpointEquals($e->getRequest(), '/1/indexes/src/operation');
-            $this->assertBodySubset(array(
+            $this->assertBodySubset([
                     'operation' => 'copy',
                     'destination' => 'dest',
-                    'scope' => array('rules'),
-                ),
+                    'scope' => ['rules'],
+                ],
                 $e->getRequest()
             );
         }

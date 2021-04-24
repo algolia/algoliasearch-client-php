@@ -34,7 +34,7 @@ final class DictionaryResponse extends AbstractResponse
      *
      * @return $this
      */
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         $retryCount = 1;
         $time = $this->config->getWaitTaskTimeBeforeRetry();
@@ -63,7 +63,7 @@ final class DictionaryResponse extends AbstractResponse
      *
      * @return mixed
      */
-    private function getTask($taskId, $requestOptions = array())
+    private function getTask($taskId, $requestOptions = [])
     {
         if (!$taskId) {
             throw new \InvalidArgumentException('taskID cannot be empty');

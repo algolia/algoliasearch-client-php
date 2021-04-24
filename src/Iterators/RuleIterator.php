@@ -24,7 +24,7 @@ final class RuleIterator extends AbstractAlgoliaIterator
             Helpers::apiPath('/1/indexes/%s/rules/search', $this->indexName),
             array_merge(
                 $this->requestOptions,
-                array('page' => $this->page)
+                ['page' => $this->page]
             )
         );
 

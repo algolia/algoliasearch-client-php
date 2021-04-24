@@ -39,7 +39,7 @@ final class RestoreApiKeyResponse extends AbstractResponse
     /**
      * {@inheritdoc}
      */
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (!isset($this->client)) {
             return $this;

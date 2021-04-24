@@ -13,19 +13,19 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
         $index = SearchClient::create('id', 'key')->initIndex('test');
 
-        $methods = array(
-            'setSettings' => array(),
-            'saveSynonym' => array('objectID' => 'xx'),
-            'saveRule' => array('objectID' => 'xx'),
-            'saveSynonyms' => array(array('objectID' => 'xx')),
-            'saveRules' => array(array('objectID' => 'xx')),
-            'replaceAllSynonyms' => array(array('objectID' => 'xx')),
-            'replaceAllRules' => array(array('objectID' => 'xx')),
+        $methods = [
+            'setSettings' => [],
+            'saveSynonym' => ['objectID' => 'xx'],
+            'saveRule' => ['objectID' => 'xx'],
+            'saveSynonyms' => [['objectID' => 'xx']],
+            'saveRules' => [['objectID' => 'xx']],
+            'replaceAllSynonyms' => [['objectID' => 'xx']],
+            'replaceAllRules' => [['objectID' => 'xx']],
             'deleteSynonym' => 'id',
             'deleteRule' => 'id',
-            'clearSynonyms' => array(),
-            'clearRules' => array(),
-        );
+            'clearSynonyms' => [],
+            'clearRules' => [],
+        ];
 
         foreach ($methods as $methodName => $arg1) {
             try {
@@ -42,30 +42,30 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
     public function testIndexUseConfigDefaultForwardToReplicas($defaultValue)
     {
         /** @var \Algolia\AlgoliaSearch\SearchIndex $index */
-        $index = SearchClient::createWithConfig(new SearchConfig(array(
+        $index = SearchClient::createWithConfig(new SearchConfig([
             'defaultForwardToReplicas' => $defaultValue,
-        )))->initIndex('test');
+        ]))->initIndex('test');
 
-        $methods = array(
-            'setSettings' => array(),
-            'saveSynonym' => array('objectID' => 'xx'),
-            'saveRule' => array('objectID' => 'xx'),
-            'saveSynonyms' => array(array('objectID' => 'xx')),
-            'saveRules' => array(array('objectID' => 'xx')),
-            'replaceAllSynonyms' => array(array('objectID' => 'xx')),
-            'replaceAllRules' => array(array('objectID' => 'xx')),
+        $methods = [
+            'setSettings' => [],
+            'saveSynonym' => ['objectID' => 'xx'],
+            'saveRule' => ['objectID' => 'xx'],
+            'saveSynonyms' => [['objectID' => 'xx']],
+            'saveRules' => [['objectID' => 'xx']],
+            'replaceAllSynonyms' => [['objectID' => 'xx']],
+            'replaceAllRules' => [['objectID' => 'xx']],
             'deleteSynonym' => 'id',
             'deleteRule' => 'id',
-            'clearSynonyms' => array(),
-            'clearRules' => array(),
-        );
+            'clearSynonyms' => [],
+            'clearRules' => [],
+        ];
 
         foreach ($methods as $methodName => $arg1) {
             try {
                 $index->{$methodName}($arg1);
             } catch (RequestException $e) {
                 $this->assertQueryParametersSubset(
-                    array('forwardToReplicas' => $defaultValue ? 'true' : 'false'),
+                    ['forwardToReplicas' => $defaultValue ? 'true' : 'false'],
                     $e->getRequest()
                 );
             }
@@ -74,8 +74,8 @@ class ForwardToReplicasDefaultTest extends RequestTestCase
 
     public function provideConfigDefaultValue()
     {
-        return array(
-            array(true), array(false),
-        );
+        return [
+            [true], [false],
+        ];
     }
 }

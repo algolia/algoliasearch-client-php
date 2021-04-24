@@ -18,7 +18,7 @@ final class HostCollection
 
     public static function create(array $urlsWithPriority)
     {
-        $hosts = array();
+        $hosts = [];
         foreach ($urlsWithPriority as $url => $priority) {
             $hosts[] = new Host($url, $priority);
         }

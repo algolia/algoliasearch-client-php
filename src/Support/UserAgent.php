@@ -8,7 +8,7 @@ final class UserAgent
 {
     private static $value;
 
-    private static $customSegments = array();
+    private static $customSegments = [];
 
     public static function get()
     {
@@ -27,7 +27,7 @@ final class UserAgent
 
     private static function getComputedValue()
     {
-        $ua = array();
+        $ua = [];
         $segments = array_merge(self::getDefaultSegments(), self::$customSegments);
 
         foreach ($segments as $segment => $version) {
@@ -39,7 +39,7 @@ final class UserAgent
 
     private static function getDefaultSegments()
     {
-        $segments = array();
+        $segments = [];
 
         $segments['Algolia for PHP'] = Algolia::VERSION;
         $segments['PHP'] = rtrim(str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION), '-');

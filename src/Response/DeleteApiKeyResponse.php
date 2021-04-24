@@ -31,7 +31,7 @@ final class DeleteApiKeyResponse extends AbstractResponse
         $this->key = $key;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (!isset($this->client)) {
             return $this;

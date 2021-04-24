@@ -19,7 +19,7 @@ class ApiWrapperTest extends TestCase implements HttpClientInterface
     /**
      * @var RequestInterface[]
      */
-    private $recordedRequests = array();
+    private $recordedRequests = [];
 
     /**
      * @see https://github.com/algolia/algoliasearch-client-php/issues/546
@@ -28,7 +28,7 @@ class ApiWrapperTest extends TestCase implements HttpClientInterface
     {
         $api = new ApiWrapper($this, SearchConfig::create(), ClusterHosts::create('127.0.0.1'));
 
-        $api->write('post', '/', array('data' => self::UNICODE_STRING));
+        $api->write('post', '/', ['data' => self::UNICODE_STRING]);
 
         $this->assertCount(1, $this->recordedRequests);
 
@@ -50,6 +50,6 @@ class ApiWrapperTest extends TestCase implements HttpClientInterface
     {
         $this->recordedRequests[] = $request;
 
-        return new Response(200, array(), '{}');
+        return new Response(200, [], '{}');
     }
 }

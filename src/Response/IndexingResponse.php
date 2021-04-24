@@ -17,7 +17,7 @@ final class IndexingResponse extends AbstractResponse
         $this->index = $index;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (isset($this->index)) {
             $this->index->waitTask($this->apiResponse['taskID'], $requestOptions);

@@ -4,9 +4,9 @@ namespace Algolia\AlgoliaSearch\RetryStrategy;
 
 interface ApiWrapperInterface
 {
-    public function read($method, $path, $requestOptions = array(), $defaultRequestOptions = array());
+    public function read($method, $path, $requestOptions = [], $defaultRequestOptions = []);
 
-    public function write($method, $path, $data = array(), $requestOptions = array(), $defaultRequestOptions = array());
+    public function write($method, $path, $data = [], $requestOptions = [], $defaultRequestOptions = []);
 
-    public function send($method, $path, $requestOptions = array(), $hosts = null);
+    public function send($method, $path, $requestOptions = [], $hosts = null);
 }

@@ -9,7 +9,7 @@ abstract class AbstractResponse implements \ArrayAccess
      */
     protected $apiResponse;
 
-    abstract public function wait($requestOptions = array());
+    abstract public function wait($requestOptions = []);
 
     /**
      * @return array The actual response from Algolia API

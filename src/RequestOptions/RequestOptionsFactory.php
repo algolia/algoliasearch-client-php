@@ -9,18 +9,18 @@ final class RequestOptionsFactory
 {
     private $config;
 
-    private $validQueryParameters = array(
+    private $validQueryParameters = [
         'forwardToReplicas',
         'replaceExistingSynonyms',
         'clearExistingRules',
         'getVersion',
-    );
+    ];
 
-    private $validHeaders = array(
+    private $validHeaders = [
         'Content-type',
         'User-Agent',
         'createIfNotExists',
-    );
+    ];
 
     public function __construct(AbstractConfig $config)
     {
@@ -33,7 +33,7 @@ final class RequestOptionsFactory
      *
      * @return \Algolia\AlgoliaSearch\RequestOptions\RequestOptions
      */
-    public function create($options, $defaults = array())
+    public function create($options, $defaults = [])
     {
         if (is_array($options)) {
             $options += $defaults;
@@ -53,35 +53,35 @@ final class RequestOptionsFactory
         return $options->addDefaultHeaders($this->config->getDefaultHeaders());
     }
 
-    public function createBodyLess($options, $defaults = array())
+    public function createBodyLess($options, $defaults = [])
     {
         $options = $this->create($options, $defaults);
 
         return $options
             ->addQueryParameters($options->getBody())
-            ->setBody(array());
+            ->setBody([]);
     }
 
     private function normalize($options)
     {
-        $normalized = array(
-            'headers' => array(
+        $normalized = [
+            'headers' => [
                 'X-Algolia-Application-Id' => $this->config->getAppId(),
                 'X-Algolia-API-Key' => $this->config->getApiKey(),
                 'User-Agent' => UserAgent::get(),
                 'Content-Type' => 'application/json',
-            ),
-            'query' => array(),
-            'body' => array(),
+            ],
+            'query' => [],
+            'body' => [],
             'readTimeout' => $this->config->getReadTimeout(),
             'writeTimeout' => $this->config->getWriteTimeout(),
             'connectTimeout' => $this->config->getConnectTimeout(),
-        );
+        ];
 
         foreach ($options as $optionName => $value) {
             $type = $this->getOptionType($optionName);
 
-            if (in_array($type, array('readTimeout', 'writeTimeout', 'connectTimeout'))) {
+            if (in_array($type, ['readTimeout', 'writeTimeout', 'connectTimeout'])) {
                 $normalized[$type] = $value;
             } else {
                 $normalized[$type][$optionName] = $value;
@@ -94,7 +94,7 @@ final class RequestOptionsFactory
     private function format($options)
     {
         foreach ($options as $name => $value) {
-            if (in_array($name, array('attributesToRetrieve', 'type'), true)) {
+            if (in_array($name, ['attributesToRetrieve', 'type'], true)) {
                 if (is_array($value)) {
                     $options[$name] = implode(',', $value);
                 }
@@ -110,7 +110,7 @@ final class RequestOptionsFactory
             return 'headers';
         } elseif (in_array($optionName, $this->validQueryParameters, true)) {
             return 'query';
-        } elseif (in_array($optionName, array('connectTimeout', 'readTimeout', 'writeTimeout'), true)) {
+        } elseif (in_array($optionName, ['connectTimeout', 'readTimeout', 'writeTimeout'], true)) {
             return $optionName;
         } else {
             return 'body';

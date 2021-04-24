@@ -43,7 +43,7 @@ final class NullCacheDriver implements CacheInterface
      */
     public function getMultiple($keys, $default = null)
     {
-        $return = array();
+        $return = [];
 
         foreach ($keys as $key) {
             $return[$key] = $default;

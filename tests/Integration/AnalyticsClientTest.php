@@ -20,31 +20,31 @@ class AnalyticsClientTest extends BaseTest
         /** @var SearchIndex $indexDev */
         $indexDev = TestHelper::getClient()->initIndex($this->indexes['ab_testing_dev']);
 
-        $responses = array();
+        $responses = [];
 
-        $object = array('objectID' => 'one');
+        $object = ['objectID' => 'one'];
 
-        $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
-        $indexDev->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $index->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
+        $indexDev->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
 
         $dateTime = new DateTime('tomorrow');
         $abTestName = $this->indexes['ab_testing'];
 
-        $abTest = array(
+        $abTest = [
             'name' => $abTestName,
-            'variants' => array(
-                array(
+            'variants' => [
+                [
                     'index' => $this->indexes['ab_testing'],
                     'trafficPercentage' => 60,
                     'description' => 'a description',
-                ),
-                array(
+                ],
+                [
                     'index' => $this->indexes['ab_testing_dev'],
                     'trafficPercentage' => 40,
-                ),
-            ),
+                ],
+            ],
             'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
-        );
+        ];
 
         $analyticsClient = AnalyticsClient::create(
             getenv('ALGOLIA_APPLICATION_ID_1'),
@@ -135,23 +135,23 @@ class AnalyticsClientTest extends BaseTest
             getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
-        $object = array('objectID' => 'one');
-        $res = $index->saveObject($object, array('autoGenerateObjectIDIfNotExist' => true))->wait();
+        $object = ['objectID' => 'one'];
+        $res = $index->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
         $dateTime = new DateTime('tomorrow');
         $abTestName = $this->indexes['aa_testing'];
 
-        $aaTest = array(
+        $aaTest = [
             'name' => $abTestName,
-            'variants' => array(
-                array('index' => $this->indexes['aa_testing'], 'trafficPercentage' => 90),
-                array(
+            'variants' => [
+                ['index' => $this->indexes['aa_testing'], 'trafficPercentage' => 90],
+                [
                     'index' => $this->indexes['aa_testing'],
                     'trafficPercentage' => 10,
-                    'customSearchParameters' => array('ignorePlurals' => true),
-                ),
-            ),
+                    'customSearchParameters' => ['ignorePlurals' => true],
+                ],
+            ],
             'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
-        );
+        ];
 
         $cpt = 0;
         do {

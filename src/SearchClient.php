@@ -86,80 +86,80 @@ class SearchClient
         return $this->config->getAppId();
     }
 
-    public function moveIndex($srcIndexName, $newIndexName, $requestOptions = array())
+    public function moveIndex($srcIndexName, $newIndexName, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
-            array(
+            [
                 'operation' => 'move',
                 'destination' => $newIndexName,
-            ),
+            ],
             $requestOptions
         );
 
         return new IndexingResponse($response, $this->initIndex($srcIndexName));
     }
 
-    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copyIndex($srcIndexName, $destIndexName, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $srcIndexName),
-            array(
+            [
                 'operation' => 'copy',
                 'destination' => $destIndexName,
-            ),
+            ],
             $requestOptions
         );
 
         return new IndexingResponse($response, $this->initIndex($srcIndexName));
     }
 
-    public function copySettings($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copySettings($srcIndexName, $destIndexName, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('settings');
+            $requestOptions['scope'] = ['settings'];
         } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('settings'));
+            $requestOptions->addBodyParameter('scope', ['settings']);
         }
 
         return $this->copyIndex($srcIndexName, $destIndexName, $requestOptions);
     }
 
-    public function copySynonyms($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copySynonyms($srcIndexName, $destIndexName, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('synonyms');
+            $requestOptions['scope'] = ['synonyms'];
         } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('synonyms'));
+            $requestOptions->addBodyParameter('scope', ['synonyms']);
         }
 
         return $this->copyIndex($srcIndexName, $destIndexName, $requestOptions);
     }
 
-    public function copyRules($srcIndexName, $destIndexName, $requestOptions = array())
+    public function copyRules($srcIndexName, $destIndexName, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
-            $requestOptions['scope'] = array('rules');
+            $requestOptions['scope'] = ['rules'];
         } elseif ($requestOptions instanceof RequestOptions) {
-            $requestOptions->addBodyParameter('scope', array('rules'));
+            $requestOptions->addBodyParameter('scope', ['rules']);
         }
 
         return $this->copyIndex($srcIndexName, $destIndexName, $requestOptions);
     }
 
-    public function isAlive($requestOptions = array())
+    public function isAlive($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/isalive'), $requestOptions);
     }
 
-    public function multipleQueries($queries, $requestOptions = array())
+    public function multipleQueries($queries, $requestOptions = [])
     {
         $queries = array_map(function ($query) {
             $query['params'] = isset($query['params']) ?
                 Helpers::serializeQueryParameters($query['params']) :
-                Helpers::serializeQueryParameters(array());
+                Helpers::serializeQueryParameters([]);
 
             return $query;
         }, $queries);
@@ -177,19 +177,19 @@ class SearchClient
         );
     }
 
-    public function multipleBatch($operations, $requestOptions = array())
+    public function multipleBatch($operations, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/*/batch'),
-            array('requests' => $operations),
+            ['requests' => $operations],
             $requestOptions
         );
 
         return new MultipleIndexBatchIndexingResponse($response, $this);
     }
 
-    public function multipleGetObjects($requests, $requestOptions = array())
+    public function multipleGetObjects($requests, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['requests'] = $requests;
@@ -204,47 +204,47 @@ class SearchClient
         );
     }
 
-    public function listIndices($requestOptions = array())
+    public function listIndices($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/indexes/'), $requestOptions);
     }
 
-    public function listApiKeys($requestOptions = array())
+    public function listApiKeys($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/keys'), $requestOptions);
     }
 
-    public function getApiKey($key, $requestOptions = array())
+    public function getApiKey($key, $requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/keys/%s', $key), $requestOptions);
     }
 
-    public function addApiKey($acl, $requestOptions = array())
+    public function addApiKey($acl, $requestOptions = [])
     {
-        $acl = array('acl' => $acl);
+        $acl = ['acl' => $acl];
 
         $response = $this->api->write('POST', api_path('/1/keys'), $acl, $requestOptions);
 
         return new AddApiKeyResponse($response, $this, $this->config);
     }
 
-    public function updateApiKey($key, $requestOptions = array())
+    public function updateApiKey($key, $requestOptions = [])
     {
-        $response = $this->api->write('PUT', api_path('/1/keys/%s', $key), array(), $requestOptions);
+        $response = $this->api->write('PUT', api_path('/1/keys/%s', $key), [], $requestOptions);
 
         return new UpdateApiKeyResponse($response, $this, $this->config, $requestOptions);
     }
 
-    public function deleteApiKey($key, $requestOptions = array())
+    public function deleteApiKey($key, $requestOptions = [])
     {
-        $response = $this->api->write('DELETE', api_path('/1/keys/%s', $key), array(), $requestOptions);
+        $response = $this->api->write('DELETE', api_path('/1/keys/%s', $key), [], $requestOptions);
 
         return new DeleteApiKeyResponse($response, $this, $this->config, $key);
     }
 
-    public function restoreApiKey($key, $requestOptions = array())
+    public function restoreApiKey($key, $requestOptions = [])
     {
-        $response = $this->api->write('POST', api_path('/1/keys/%s/restore', $key), array(), $requestOptions);
+        $response = $this->api->write('POST', api_path('/1/keys/%s/restore', $key), [], $requestOptions);
 
         return new RestoreApiKeyResponse($response, $this, $this->config, $key);
     }
@@ -262,7 +262,7 @@ class SearchClient
      * @deprecated endpoint will be deprecated
      * @see RecommendationClient
      */
-    public function getPersonalizationStrategy($requestOptions = array())
+    public function getPersonalizationStrategy($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/recommendation/personalization/strategy'), $requestOptions);
     }
@@ -271,7 +271,7 @@ class SearchClient
      * @deprecated endpoint will be deprecated
      * @see RecommendationClient
      */
-    public function setPersonalizationStrategy($strategy, $requestOptions = array())
+    public function setPersonalizationStrategy($strategy, $requestOptions = [])
     {
         $apiResponse = $this->api->write(
             'POST',
@@ -283,7 +283,7 @@ class SearchClient
         return $apiResponse;
     }
 
-    public function searchUserIds($query, $requestOptions = array())
+    public function searchUserIds($query, $requestOptions = [])
     {
         $query = (string) $query;
 
@@ -296,17 +296,17 @@ class SearchClient
         return $this->api->read('POST', api_path('/1/clusters/mapping/search'), $requestOptions);
     }
 
-    public function listClusters($requestOptions = array())
+    public function listClusters($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/clusters'), $requestOptions);
     }
 
-    public function listUserIds($requestOptions = array())
+    public function listUserIds($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/clusters/mapping'), $requestOptions);
     }
 
-    public function getUserId($userId, $requestOptions = array())
+    public function getUserId($userId, $requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/clusters/mapping/%s', $userId), $requestOptions);
     }
@@ -314,7 +314,7 @@ class SearchClient
     /**
      * @deprecated since 2.6.1, use getTopUserIds instead.
      */
-    public function getTopUserId($requestOptions = array())
+    public function getTopUserId($requestOptions = [])
     {
         return $this->getTopUserIds($requestOptions);
     }
@@ -326,12 +326,12 @@ class SearchClient
      *
      * @return array<string, mixed>
      */
-    public function getTopUserIds($requestOptions = array())
+    public function getTopUserIds($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/clusters/mapping/top'), $requestOptions);
     }
 
-    public function assignUserId($userId, $clusterName, $requestOptions = array())
+    public function assignUserId($userId, $clusterName, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['X-Algolia-User-ID'] = $userId;
@@ -342,9 +342,9 @@ class SearchClient
         return $this->api->write(
             'POST',
             api_path('/1/clusters/mapping'),
-            array(
+            [
                 'cluster' => $clusterName,
-            ),
+            ],
             $requestOptions
         );
     }
@@ -358,20 +358,20 @@ class SearchClient
      *
      * @return array<string, mixed>
      */
-    public function assignUserIds($userIds, $clusterName, $requestOptions = array())
+    public function assignUserIds($userIds, $clusterName, $requestOptions = [])
     {
         return $this->api->write(
              'POST',
              api_path('/1/clusters/mapping/batch'),
-             array(
+             [
                  'users' => $userIds,
                  'cluster' => $clusterName,
-             ),
+             ],
              $requestOptions
          );
     }
 
-    public function removeUserId($userId, $requestOptions = array())
+    public function removeUserId($userId, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['X-Algolia-User-ID'] = $userId;
@@ -382,31 +382,31 @@ class SearchClient
         return $this->api->write(
             'DELETE',
             api_path('/1/clusters/mapping'),
-            array(),
+            [],
             $requestOptions
         );
     }
 
-    public function getLogs($requestOptions = array())
+    public function getLogs($requestOptions = [])
     {
         return $this->api->read('GET', api_path('/1/logs'), $requestOptions);
     }
 
-    public function getTask($indexName, $taskId, $requestOptions = array())
+    public function getTask($indexName, $taskId, $requestOptions = [])
     {
         $index = $this->initIndex($indexName);
 
         return $index->getTask($taskId, $requestOptions);
     }
 
-    public function waitTask($indexName, $taskId, $requestOptions = array())
+    public function waitTask($indexName, $taskId, $requestOptions = [])
     {
         $index = $this->initIndex($indexName);
 
         $index->waitTask($taskId, $requestOptions);
     }
 
-    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    public function custom($method, $path, $requestOptions = [], $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
     }
@@ -442,7 +442,7 @@ class SearchClient
      *
      * @return array<string, boolean|array>
      */
-    public function hasPendingMappings($requestOptions = array())
+    public function hasPendingMappings($requestOptions = [])
     {
         if (isset($requestOptions['retrieveMappings'])
             && true === $requestOptions['retrieveMappings']) {
@@ -469,15 +469,15 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    public function saveDictionaryEntries($dictionary, $entries, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => false,
                 'requests' => Helpers::buildBatch($entries, 'addEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -493,15 +493,15 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = array())
+    public function replaceDictionaryEntries($dictionary, $entries, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => true,
                 'requests' => Helpers::buildBatch($entries, 'addEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -517,19 +517,19 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = array())
+    public function deleteDictionaryEntries($dictionary, $objectIDs, $requestOptions = [])
     {
         $entries = array_map(function ($objectID) {
-            return array('objectID' => $objectID);
+            return ['objectID' => $objectID];
         }, $objectIDs);
 
         $response = $this->api->write(
             'POST',
             api_path('/1/dictionaries/%s/batch', $dictionary),
-            array(
+            [
                 'clearExistingDictionaryEntries' => false,
                 'requests' => Helpers::buildBatch($entries, 'deleteEntry'),
-            ),
+            ],
             $requestOptions
         );
 
@@ -544,9 +544,9 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function clearDictionaryEntries($dictionary, $requestOptions = array())
+    public function clearDictionaryEntries($dictionary, $requestOptions = [])
     {
-        return $this->replaceDictionaryEntries($dictionary, array(), $requestOptions);
+        return $this->replaceDictionaryEntries($dictionary, [], $requestOptions);
     }
 
     /**
@@ -558,12 +558,12 @@ class SearchClient
      *
      * @return mixed
      */
-    public function searchDictionaryEntries($dictionary, $query, $requestOptions = array())
+    public function searchDictionaryEntries($dictionary, $query, $requestOptions = [])
     {
         return $this->api->read(
             'POST',
             api_path('/1/dictionaries/%s/search', $dictionary),
-            array('query' => $query),
+            ['query' => $query],
             $requestOptions
         );
     }
@@ -576,7 +576,7 @@ class SearchClient
      *
      * @return DictionaryResponse
      */
-    public function setDictionarySettings($dictionarySettings, $requestOptions = array())
+    public function setDictionarySettings($dictionarySettings, $requestOptions = [])
     {
         $response = $this->api->write(
             'PUT',
@@ -595,12 +595,12 @@ class SearchClient
      *
      * @return mixed
      */
-    public function getDictionarySettings($requestOptions = array())
+    public function getDictionarySettings($requestOptions = [])
     {
         return $this->api->read(
             'GET',
             api_path('/1/dictionaries/*/settings'),
-            array(),
+            [],
             $requestOptions
         );
     }

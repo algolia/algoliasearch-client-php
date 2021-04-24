@@ -21,42 +21,42 @@ class InsightsClientTest extends BaseTest
             getenv('ALGOLIA_ADMIN_KEY_1')
         );
 
-        $objectOne = array('objectID' => 'one');
-        $objectTwo = array('objectID' => 'two');
+        $objectOne = ['objectID' => 'one'];
+        $objectTwo = ['objectID' => 'two'];
 
-        $index->saveObjects(array($objectOne, $objectTwo))->wait();
+        $index->saveObjects([$objectOne, $objectTwo])->wait();
 
         $twoDaysAgoMs = (time() - (2 * 24 * 60 * 60)) * 1000;
 
-        $event = array(
+        $event = [
             'eventType' => 'click',
             'eventName' => 'foo',
             'index' => $this->indexes['sending_events'],
             'userToken' => 'bar',
-            'objectIDs' => array('one', 'two'),
+            'objectIDs' => ['one', 'two'],
             'timestamp' => $twoDaysAgoMs,
-        );
+        ];
 
         $response = $insightsClient->sendEvent($event);
 
-        $events = array(
-            array(
+        $events = [
+            [
                 'eventType' => 'click',
                 'eventName' => 'foo',
                 'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
-                'objectIDs' => array('one', 'two'),
+                'objectIDs' => ['one', 'two'],
                 'timestamp' => $twoDaysAgoMs,
-            ),
-            array(
+            ],
+            [
                 'eventType' => 'click',
                 'eventName' => 'foo',
                 'index' => $this->indexes['sending_events'],
                 'userToken' => 'bar',
-                'objectIDs' => array('one', 'two'),
+                'objectIDs' => ['one', 'two'],
                 'timestamp' => $twoDaysAgoMs,
-            ),
-        );
+            ],
+        ];
 
         $insightsClient->sendEvents($events);
 
@@ -65,7 +65,7 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->clickedObjectIDs(
             'foo',
             $this->indexes['sending_events'],
-            array('one', 'two')
+            ['one', 'two']
         );
 
         $this->assertEquals(200, $response['status']);
@@ -74,12 +74,12 @@ class InsightsClientTest extends BaseTest
         $insightUser = $insightsClient->user('bar');
 
         // clicked_object_ids_after_search
-        $search = $index->search('', array('clickAnalytics' => true));
+        $search = $index->search('', ['clickAnalytics' => true]);
         $response = $insightUser->clickedObjectIDsAfterSearch(
             'foo',
             $this->indexes['sending_events'],
-            array('one', 'two'),
-            array(1, 2),
+            ['one', 'two'],
+            [1, 2],
             $search['queryID']
         );
 
@@ -90,7 +90,7 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->clickedFilters(
             'foo',
             $this->indexes['sending_events'],
-            array('filter:foo', 'filter:bar')
+            ['filter:foo', 'filter:bar']
         );
 
         $this->assertEquals(200, $response['status']);
@@ -100,18 +100,18 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->convertedObjectIDs(
             'foo',
             $this->indexes['sending_events'],
-            array('one', 'two')
+            ['one', 'two']
         );
 
         $this->assertEquals(200, $response['status']);
         $this->assertEquals('OK', $response['message']);
 
         // converted_object_ids_after_search
-        $search = $index->search('', array('clickAnalytics' => true));
+        $search = $index->search('', ['clickAnalytics' => true]);
         $response = $insightUser->convertedObjectIDsAfterSearch(
             'foo',
             $this->indexes['sending_events'],
-            array('one', 'two'),
+            ['one', 'two'],
             $search['queryID']
         );
 
@@ -122,7 +122,7 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->convertedFilters(
             'foo',
             $this->indexes['sending_events'],
-            array('filter:foo', 'filter:bar')
+            ['filter:foo', 'filter:bar']
         );
 
         $this->assertEquals(200, $response['status']);
@@ -132,7 +132,7 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->viewedObjectIDs(
             'foo',
             $this->indexes['sending_events'],
-            array('one', 'two')
+            ['one', 'two']
         );
 
         $this->assertEquals(200, $response['status']);
@@ -142,7 +142,7 @@ class InsightsClientTest extends BaseTest
         $response = $insightUser->viewedFilters(
             'foo',
             $this->indexes['sending_events'],
-            array('filter:foo', 'filter:bar')
+            ['filter:foo', 'filter:bar']
         );
 
         $this->assertEquals(200, $response['status']);

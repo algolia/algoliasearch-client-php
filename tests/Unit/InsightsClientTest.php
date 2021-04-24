@@ -10,7 +10,7 @@ class InsightsClientTest extends RequestTestCase
     /** @var InsightsClient */
     private static $client;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::$client = InsightsClient::create('id', 'key', 'region');
@@ -18,13 +18,13 @@ class InsightsClientTest extends RequestTestCase
 
     public function testClick()
     {
-        $expected = array(
-            'objectIDs' => array($objectID = 'objectID'),
+        $expected = [
+            'objectIDs' => [$objectID = 'objectID'],
             'eventType' => $type = 'click',
             'eventName' => $name = 'Name',
             'index' => $idx = 'index',
             'userToken' => $usrToken = 'token',
-        );
+        ];
 
         try {
             self::$client->user($usrToken)->clickedObjectIDs($name, $idx, $objectID);
@@ -32,7 +32,7 @@ class InsightsClientTest extends RequestTestCase
             $this->assertRequest($expected, $e);
         }
 
-        $expected['positions'] = array($position = 12);
+        $expected['positions'] = [$position = 12];
         $expected['queryID'] = $qID = 'queryID';
 
         try {
@@ -41,7 +41,7 @@ class InsightsClientTest extends RequestTestCase
             $this->assertRequest($expected, $e);
         }
 
-        $expected['filters'] = array($filters = 'filters');
+        $expected['filters'] = [$filters = 'filters'];
         unset($expected['objectIDs'], $expected['queryID'], $expected['positions']);
 
         try {
@@ -53,13 +53,13 @@ class InsightsClientTest extends RequestTestCase
 
     public function testConversion()
     {
-        $expected = array(
-            'objectIDs' => array($objectID = 'objectID'),
+        $expected = [
+            'objectIDs' => [$objectID = 'objectID'],
             'eventType' => $type = 'conversion',
             'eventName' => $name = 'Name',
             'index' => $idx = 'index',
             'userToken' => $usrToken = 'token',
-        );
+        ];
 
         try {
             self::$client->user($usrToken)->convertedObjectIDs($name, $idx, $objectID);
@@ -75,7 +75,7 @@ class InsightsClientTest extends RequestTestCase
             $this->assertRequest($expected, $e);
         }
 
-        $expected['filters'] = array($filters = 'filters');
+        $expected['filters'] = [$filters = 'filters'];
         unset($expected['objectIDs'], $expected['queryID']);
 
         try {
@@ -87,13 +87,13 @@ class InsightsClientTest extends RequestTestCase
 
     public function testView()
     {
-        $expected = array(
-            'objectIDs' => array($objectID = 'objectID'),
+        $expected = [
+            'objectIDs' => [$objectID = 'objectID'],
             'eventType' => $type = 'view',
             'eventName' => $name = 'Name',
             'index' => $idx = 'index',
             'userToken' => $usrToken = 'token',
-        );
+        ];
 
         try {
             self::$client->user($usrToken)->viewedObjectIDs($name, $idx, $objectID);
@@ -101,7 +101,7 @@ class InsightsClientTest extends RequestTestCase
             $this->assertRequest($expected, $e);
         }
 
-        $expected['filters'] = array($filters = 'filters');
+        $expected['filters'] = [$filters = 'filters'];
         unset($expected['objectIDs']);
 
         try {
@@ -114,8 +114,7 @@ class InsightsClientTest extends RequestTestCase
     private function assertRequest($expected, $e)
     {
         $requestBody = json_decode((string) $e->getRequest()->getBody(), true);
-
         $this->assertCount(1, $requestBody['events']);
-        $this->assertArraySubset($expected, $requestBody['events'][0]);
+        $this->assertEquals($expected, $requestBody['events'][0]);
     }
 }

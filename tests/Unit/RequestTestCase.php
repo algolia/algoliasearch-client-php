@@ -9,13 +9,13 @@ use Psr\Http\Message\RequestInterface;
 
 abstract class RequestTestCase extends TestCase
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         Algolia::setHttpClient(new RequestHttpClient());
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
         Algolia::resetHttpClient();
@@ -29,13 +29,17 @@ abstract class RequestTestCase extends TestCase
     protected function assertBodySubset($subset, RequestInterface $request)
     {
         $body = json_decode((string) $request->getBody(), true);
-        $this->assertArraySubset($subset, $body, true);
+        $subsetKey = key($subset);
+        $this->assertArrayHasKey($subsetKey, $body);
+        $this->assertEquals($subset[$subsetKey], $body[$subsetKey]);
     }
 
     protected function assertQueryParametersSubset(array $subset, RequestInterface $request)
     {
         $params = $this->requestQueryParametersToArray($request);
-        $this->assertArraySubset($subset, $params);
+        $subsetKey = key($subset);
+        $this->assertArrayHasKey($subsetKey, $params);
+        $this->assertEquals($subset[$subsetKey], $params[$subsetKey]);
     }
 
     protected function assertQueryParametersNotHasKey($key, RequestInterface $request)
@@ -46,7 +50,7 @@ abstract class RequestTestCase extends TestCase
 
     private function requestQueryParametersToArray(RequestInterface $request)
     {
-        $array = array();
+        $array = [];
         parse_str($request->getUri()->getQuery(), $array);
 
         return $array;

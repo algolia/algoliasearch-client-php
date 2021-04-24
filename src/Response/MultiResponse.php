@@ -11,7 +11,7 @@ class MultiResponse extends AbstractResponse implements \Iterator, \Countable
         $this->apiResponse = $responses;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         foreach ($this->apiResponse as $response) {
             $response->wait();

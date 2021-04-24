@@ -49,7 +49,7 @@ class SearchIndex
         return $this->config->getAppId();
     }
 
-    public function search($query, $requestOptions = array())
+    public function search($query, $requestOptions = [])
     {
         $query = (string) $query;
 
@@ -65,12 +65,12 @@ class SearchIndex
     /**
      * @deprecated Please use searchForFacetValues instead
      */
-    public function searchForFacetValue($facetName, $facetQuery, $requestOptions = array())
+    public function searchForFacetValue($facetName, $facetQuery, $requestOptions = [])
     {
         return $this->searchForFacetValues($facetName, $facetQuery, $requestOptions);
     }
 
-    public function searchForFacetValues($facetName, $facetQuery, $requestOptions = array())
+    public function searchForFacetValues($facetName, $facetQuery, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['facetQuery'] = $facetQuery;
@@ -85,7 +85,7 @@ class SearchIndex
         );
     }
 
-    public function getSettings($requestOptions = array())
+    public function getSettings($requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['getVersion'] = 2;
@@ -100,9 +100,9 @@ class SearchIndex
         );
     }
 
-    public function setSettings($settings, $requestOptions = array())
+    public function setSettings($settings, $requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
@@ -118,7 +118,7 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function getObject($objectId, $requestOptions = array())
+    public function getObject($objectId, $requestOptions = [])
     {
         return $this->api->read(
             'GET',
@@ -127,7 +127,7 @@ class SearchIndex
         );
     }
 
-    public function getObjects($objectIds, $requestOptions = array())
+    public function getObjects($objectIds, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $attributesToRetrieve = '';
@@ -136,12 +136,12 @@ class SearchIndex
                 unset($requestOptions['attributesToRetrieve']);
             }
 
-            $request = array();
+            $request = [];
             foreach ($objectIds as $id) {
-                $req = array(
+                $req = [
                     'indexName' => $this->indexName,
                     'objectID' => (string) $id,
-                );
+                ];
 
                 if ($attributesToRetrieve) {
                     $req['attributesToRetrieve'] = $attributesToRetrieve;
@@ -160,12 +160,12 @@ class SearchIndex
         );
     }
 
-    public function saveObject($object, $requestOptions = array())
+    public function saveObject($object, $requestOptions = [])
     {
-        return $this->saveObjects(array($object), $requestOptions);
+        return $this->saveObjects([$object], $requestOptions);
     }
 
-    public function saveObjects($objects, $requestOptions = array())
+    public function saveObjects($objects, $requestOptions = [])
     {
         if (isset($requestOptions['autoGenerateObjectIDIfNotExist'])
             && $requestOptions['autoGenerateObjectIDIfNotExist']) {
@@ -192,17 +192,17 @@ class SearchIndex
         }
     }
 
-    protected function addObjects($objects, $requestOptions = array())
+    protected function addObjects($objects, $requestOptions = [])
     {
         return $this->splitIntoBatches('addObject', $objects, $requestOptions);
     }
 
-    public function partialUpdateObject($object, $requestOptions = array())
+    public function partialUpdateObject($object, $requestOptions = [])
     {
-        return $this->partialUpdateObjects(array($object), $requestOptions);
+        return $this->partialUpdateObjects([$object], $requestOptions);
     }
 
-    public function partialUpdateObjects($objects, $requestOptions = array())
+    public function partialUpdateObjects($objects, $requestOptions = [])
     {
         $action = 'partialUpdateObjectNoCreate';
 
@@ -214,7 +214,7 @@ class SearchIndex
         return $this->splitIntoBatches($action, $objects, $requestOptions);
     }
 
-    public function replaceAllObjects($objects, $requestOptions = array())
+    public function replaceAllObjects($objects, $requestOptions = [])
     {
         $safe = isset($requestOptions['safe']) && $requestOptions['safe'];
         unset($requestOptions['safe']);
@@ -223,9 +223,9 @@ class SearchIndex
         $tmpIndex = new static($tmpName, $this->api, $this->config);
 
         // Copy all index resources from production index
-        $copyResponse = $this->copyTo($tmpIndex->getIndexName(), array(
-            'scope' => array('settings', 'synonyms', 'rules'),
-        ));
+        $copyResponse = $this->copyTo($tmpIndex->getIndexName(), [
+            'scope' => ['settings', 'synonyms', 'rules'],
+        ]);
 
         if ($safe) {
             $copyResponse->wait();
@@ -245,24 +245,24 @@ class SearchIndex
             $moveResponse->wait();
         }
 
-        return new MultiResponse(array($copyResponse, $batchResponse, $moveResponse));
+        return new MultiResponse([$copyResponse, $batchResponse, $moveResponse]);
     }
 
-    public function deleteObject($objectId, $requestOptions = array())
+    public function deleteObject($objectId, $requestOptions = [])
     {
-        return $this->deleteObjects(array($objectId), $requestOptions);
+        return $this->deleteObjects([$objectId], $requestOptions);
     }
 
-    public function deleteObjects($objectIds, $requestOptions = array())
+    public function deleteObjects($objectIds, $requestOptions = [])
     {
         $objects = array_map(function ($id) {
-            return array('objectID' => $id);
+            return ['objectID' => $id];
         }, $objectIds);
 
         return $this->splitIntoBatches('deleteObject', $objects, $requestOptions);
     }
 
-    public function deleteBy($filters, $requestOptions = array())
+    public function deleteBy($filters, $requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
@@ -274,39 +274,39 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function clearObjects($requestOptions = array())
+    public function clearObjects($requestOptions = [])
     {
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/clear', $this->indexName),
-            array(),
+            [],
             $requestOptions
         );
 
         return new IndexingResponse($response, $this);
     }
 
-    public function batch($requests, $requestOptions = array())
+    public function batch($requests, $requestOptions = [])
     {
         $response = $this->rawBatch($requests, $requestOptions);
 
         return new IndexingResponse($response, $this);
     }
 
-    protected function rawBatch($requests, $requestOptions = array())
+    protected function rawBatch($requests, $requestOptions = [])
     {
         return $this->api->write(
             'POST',
             api_path('/1/indexes/%s/batch', $this->indexName),
-            array('requests' => $requests),
+            ['requests' => $requests],
             $requestOptions
         );
     }
 
-    protected function splitIntoBatches($action, $objects, $requestOptions = array())
+    protected function splitIntoBatches($action, $objects, $requestOptions = [])
     {
-        $allResponses = array();
-        $batch = array();
+        $allResponses = [];
+        $batch = [];
         $batchSize = $this->config->getBatchSize();
         $count = 0;
 
@@ -319,7 +319,7 @@ class SearchIndex
                     Helpers::ensureObjectID($batch, 'All objects must have an unique objectID (like a primary key) to be valid.');
                 }
                 $allResponses[] = $this->rawBatch(Helpers::buildBatch($batch, $action), $requestOptions);
-                $batch = array();
+                $batch = [];
                 $count = 0;
             }
         }
@@ -341,12 +341,12 @@ class SearchIndex
         return new BatchIndexingResponse($allResponses, $this);
     }
 
-    public function browseObjects($requestOptions = array())
+    public function browseObjects($requestOptions = [])
     {
         return new ObjectIterator($this->indexName, $this->api, $requestOptions);
     }
 
-    public function searchSynonyms($query, $requestOptions = array())
+    public function searchSynonyms($query, $requestOptions = [])
     {
         $query = (string) $query;
 
@@ -363,7 +363,7 @@ class SearchIndex
         );
     }
 
-    public function getSynonym($objectId, $requestOptions = array())
+    public function getSynonym($objectId, $requestOptions = [])
     {
         return $this->api->read(
             'GET',
@@ -372,20 +372,20 @@ class SearchIndex
         );
     }
 
-    public function saveSynonym($synonym, $requestOptions = array())
+    public function saveSynonym($synonym, $requestOptions = [])
     {
-        return $this->saveSynonyms(array($synonym), $requestOptions);
+        return $this->saveSynonyms([$synonym], $requestOptions);
     }
 
-    public function saveSynonyms($synonyms, $requestOptions = array())
+    public function saveSynonyms($synonyms, $requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
 
         if ($synonyms instanceof \Iterator) {
-            $iteratedOver = array();
+            $iteratedOver = [];
             foreach ($synonyms as $r) {
                 $iteratedOver[] = $r;
             }
@@ -409,7 +409,7 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function replaceAllSynonyms($synonyms, $requestOptions = array())
+    public function replaceAllSynonyms($synonyms, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['replaceExistingSynonyms'] = true;
@@ -420,9 +420,9 @@ class SearchIndex
         return $this->saveSynonyms($synonyms, $requestOptions);
     }
 
-    public function deleteSynonym($objectId, $requestOptions = array())
+    public function deleteSynonym($objectId, $requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
@@ -430,7 +430,7 @@ class SearchIndex
         $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/synonyms/%s', $this->indexName, $objectId),
-            array(),
+            [],
             $requestOptions,
             $default
         );
@@ -438,9 +438,9 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function clearSynonyms($requestOptions = array())
+    public function clearSynonyms($requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
@@ -448,7 +448,7 @@ class SearchIndex
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/synonyms/clear', $this->indexName),
-            array(),
+            [],
             $requestOptions,
             $default
         );
@@ -456,12 +456,12 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function browseSynonyms($requestOptions = array())
+    public function browseSynonyms($requestOptions = [])
     {
         return new SynonymIterator($this->indexName, $this->api, $requestOptions);
     }
 
-    public function searchRules($query, $requestOptions = array())
+    public function searchRules($query, $requestOptions = [])
     {
         $query = (string) $query;
 
@@ -478,7 +478,7 @@ class SearchIndex
         );
     }
 
-    public function getRule($objectId, $requestOptions = array())
+    public function getRule($objectId, $requestOptions = [])
     {
         return $this->api->read(
             'GET',
@@ -487,20 +487,20 @@ class SearchIndex
         );
     }
 
-    public function saveRule($rule, $requestOptions = array())
+    public function saveRule($rule, $requestOptions = [])
     {
-        return $this->saveRules(array($rule), $requestOptions);
+        return $this->saveRules([$rule], $requestOptions);
     }
 
-    public function saveRules($rules, $requestOptions = array())
+    public function saveRules($rules, $requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
 
         if ($rules instanceof \Iterator) {
-            $iteratedOver = array();
+            $iteratedOver = [];
             foreach ($rules as $r) {
                 $iteratedOver[] = $r;
             }
@@ -536,7 +536,7 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function replaceAllRules($rules, $requestOptions = array())
+    public function replaceAllRules($rules, $requestOptions = [])
     {
         if (is_array($requestOptions)) {
             $requestOptions['clearExistingRules'] = true;
@@ -547,9 +547,9 @@ class SearchIndex
         return $this->saveRules($rules, $requestOptions);
     }
 
-    public function deleteRule($objectId, $requestOptions = array())
+    public function deleteRule($objectId, $requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
@@ -557,7 +557,7 @@ class SearchIndex
         $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s/rules/%s', $this->indexName, $objectId),
-            array(),
+            [],
             $requestOptions,
             $default
         );
@@ -565,9 +565,9 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function clearRules($requestOptions = array())
+    public function clearRules($requestOptions = [])
     {
-        $default = array();
+        $default = [];
         if (is_bool($fwd = $this->config->getDefaultForwardToReplicas())) {
             $default['forwardToReplicas'] = $fwd;
         }
@@ -575,7 +575,7 @@ class SearchIndex
         $response = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/rules/clear', $this->indexName),
-            array(),
+            [],
             $requestOptions,
             $default
         );
@@ -583,12 +583,12 @@ class SearchIndex
         return new IndexingResponse($response, $this);
     }
 
-    public function browseRules($requestOptions = array())
+    public function browseRules($requestOptions = [])
     {
         return new RuleIterator($this->indexName, $this->api, $requestOptions);
     }
 
-    public function getTask($taskId, $requestOptions = array())
+    public function getTask($taskId, $requestOptions = [])
     {
         if (!$taskId) {
             throw new \InvalidArgumentException('taskID cannot be empty');
@@ -601,7 +601,7 @@ class SearchIndex
         );
     }
 
-    public function waitTask($taskId, $requestOptions = array())
+    public function waitTask($taskId, $requestOptions = [])
     {
         $retry = 1;
         $time = $this->config->getWaitTaskTimeBeforeRetry();
@@ -619,17 +619,17 @@ class SearchIndex
         } while (true);
     }
 
-    public function custom($method, $path, $requestOptions = array(), $hosts = null)
+    public function custom($method, $path, $requestOptions = [], $hosts = null)
     {
         return $this->api->send($method, $path, $requestOptions, $hosts);
     }
 
-    public function delete($requestOptions = array())
+    public function delete($requestOptions = [])
     {
         $response = $this->api->write(
             'DELETE',
             api_path('/1/indexes/%s', $this->indexName),
-            array(),
+            [],
             $requestOptions
         );
 
@@ -643,7 +643,7 @@ class SearchIndex
      *
      * @return bool
      */
-    public function exists($requestOptions = array())
+    public function exists($requestOptions = [])
     {
         try {
             $this->getSettings($requestOptions);
@@ -680,7 +680,7 @@ class SearchIndex
      *
      * @throws ObjectNotFoundException
      */
-    public function findObject($callback, $requestOptions = array())
+    public function findObject($callback, $requestOptions = [])
     {
         $query = '';
         $paginate = true;
@@ -707,11 +707,11 @@ class SearchIndex
             $result = $this->search($query, $requestOptions);
             foreach ($result['hits'] as $key => $hit) {
                 if ($callback($hit)) {
-                    return array(
+                    return [
                         'object' => $hit,
                         'position' => $key,
                         'page' => $page,
-                    );
+                    ];
                 }
             }
 
@@ -743,30 +743,30 @@ class SearchIndex
         return -1;
     }
 
-    private function copyTo($tmpIndexName, $requestOptions = array())
+    private function copyTo($tmpIndexName, $requestOptions = [])
     {
         $apiResponse = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $this->indexName),
-            array(
+            [
                 'operation' => 'copy',
                 'destination' => $tmpIndexName,
-            ),
+            ],
             $requestOptions
         );
 
         return new IndexingResponse($apiResponse, $this);
     }
 
-    private function moveFrom($tmpIndexName, $requestOptions = array())
+    private function moveFrom($tmpIndexName, $requestOptions = [])
     {
         $apiResponse = $this->api->write(
             'POST',
             api_path('/1/indexes/%s/operation', $tmpIndexName),
-            array(
+            [
                 'operation' => 'move',
                 'destination' => $this->indexName,
-            ),
+            ],
             $requestOptions
         );
 

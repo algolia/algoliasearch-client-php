@@ -15,7 +15,7 @@ class SearchTest extends RequestTestCase
         try {
             $client->searchUserIds(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
 
         $index = $client->initIndex('foo');
@@ -23,25 +23,25 @@ class SearchTest extends RequestTestCase
         try {
             $index->search(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
 
         try {
             $index->searchSynonyms(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
 
         try {
             $index->searchRules(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
 
         try {
             $index->searchRules(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
 
         $client = PlacesClient::create('id', 'key');
@@ -49,7 +49,7 @@ class SearchTest extends RequestTestCase
         try {
             $client->search(null);
         } catch (RequestException $e) {
-            $this->assertBodySubset(array('query' => ''), $e->getRequest());
+            $this->assertBodySubset(['query' => ''], $e->getRequest());
         }
     }
 }

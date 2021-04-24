@@ -32,11 +32,11 @@ final class ClusterHosts
         }
 
         if (is_string($read)) {
-            $read = array($read => 0);
+            $read = [$read => 0];
         }
 
         if (is_string($write)) {
-            $write = array($write => 0);
+            $write = [$write => 0];
         }
 
         if (array_values($read) === $read) {
@@ -52,11 +52,11 @@ final class ClusterHosts
 
     public static function createFromAppId($applicationId)
     {
-        $read = $write = array(
+        $read = $write = [
             $applicationId.'-1.algolianet.com' => 0,
             $applicationId.'-2.algolianet.com' => 0,
             $applicationId.'-3.algolianet.com' => 0,
-        );
+        ];
 
         $read[$applicationId.'-dsn.algolia.net'] = 10;
         $write[$applicationId.'.algolia.net'] = 10;
@@ -66,11 +66,11 @@ final class ClusterHosts
 
     public static function createForPlaces()
     {
-        $read = $write = array(
+        $read = $write = [
             'places-1.algolianet.com' => 0,
             'places-2.algolianet.com' => 0,
             'places-3.algolianet.com' => 0,
-        );
+        ];
 
         $read['places-dsn.algolia.net'] = 10;
         $write['places.algolia.net'] = 10;

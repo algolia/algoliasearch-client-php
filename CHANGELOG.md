@@ -6,7 +6,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/2.7.3...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.1...master)
+
+## [v3.0.1](https://github.com/algolia/algoliasearch-client-php/compare/3.0.0...3.0.1)
+
+### Fixed
+- Remove invalid method call ([#675](https://github.com/algolia/algoliasearch-client-php/pull/675))
+
+## [v3.0.0](https://github.com/algolia/algoliasearch-client-php/compare/2.8.0...3.0.0)
+
+### Changed
+- Major version - Drops support for PHP < 7.2
+
+## [v2.8.0](https://github.com/algolia/algoliasearch-client-php/compare/2.7.3...2.8.0)
+
+### Fix
+- Add missing part of the url for stopABTest() method ([#666](https://github.com/algolia/algoliasearch-client-php/pull/666))
+- Handling of params array in the $queries array for multipleQueries method ([#663](https://github.com/algolia/algoliasearch-client-php/pull/663))
+
+### Added
+- Custom Dictionaries feature ([#662](https://github.com/algolia/algoliasearch-client-php/pull/662))
 
 ## [v2.7.3](https://github.com/algolia/algoliasearch-client-php/compare/2.7.2...2.7.3)
 

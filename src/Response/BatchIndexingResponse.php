@@ -22,7 +22,7 @@ final class BatchIndexingResponse extends AbstractResponse implements \Iterator,
         $this->index = $index;
     }
 
-    public function wait($requestOptions = array())
+    public function wait($requestOptions = [])
     {
         if (isset($this->index)) {
             foreach ($this->apiResponse as $response) {

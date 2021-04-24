@@ -61,13 +61,14 @@ jobs:
       - run:
           name: Get API Key Dealer client
           command: |
-            if [ "$CIRCLE_PR_REPONAME" ]; then
-              curl -s https://algoliasearch-client-keygen.herokuapp.com | sh >> $BASH_ENV
+            if [ "${CIRCLE_PR_REPONAME}" ]
+            then
+              curl -s https://algoliasearch-client-keygen.herokuapp.com | bash >> "$BASH_ENV"
             fi
 
-#      - run:
-#          name: Check code styles
-#          command: vendor/bin/php-cs-fixer fix -v --dry-run
+      - run:
+          name: Check code styles
+          command: vendor/bin/php-cs-fixer fix -v --dry-run
 
       # Run tests with phpunit
       #
@@ -75,18 +76,29 @@ jobs:
       # with the keys in the env variables
       # If the PR was open from a fork (community PR)
       # we get API keys from the API key dealer https://alg.li/api-key-dealer
+      # we only run the tests on dictionaries on one case to avoid concurrency problems
       - run:
           name: Run tests
           command: |
             export CI_BUILD_NUM=$CIRCLE_BUILD_NUM
             if [ -z ${CIRCLE_PR_REPONAME+x} ]
             then
-               php vendor/bin/phpunit
+              if [ "<<parameters.version>>" == "latest" ] && [ "<<parameters.http_client>>" == "guzzlehttp/guzzle:"^7.0"" ]
+              then
+                 php vendor/bin/phpunit
+              else
+                 php vendor/bin/phpunit --exclude-group=dictionaries
+              fi
             else
               export CI_PROJ_USERNAME=$CIRCLE_PR_USERNAME
               export CI_PROJ_REPONAME=$CIRCLE_PR_REPONAME
 
-              php vendor/bin/phpunit -v --testsuite Unit,Definition,Community
+              if [ "<<parameters.version>>" == "latest" ] && [ "<<parameters.http_client>>" == "guzzlehttp/guzzle:"^7.0"" ]
+              then
+                 php vendor/bin/phpunit
+              else
+                 php vendor/bin/phpunit --exclude-group=dictionaries
+              fi
             fi
 
       - run:
@@ -123,12 +135,8 @@ workflows:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
-          name: 'Guzzle 6 - PHP 7.0'
-          version: "7.0"
-          http_client: guzzlehttp/guzzle:"^6.0"
-      - test:
-          name: 'Guzzle 6 - PHP 5.6'
-          version: "5.6"
+          name: 'Guzzle 6 - PHP 7.2'
+          version: "7.2"
           http_client: guzzlehttp/guzzle:"^6.0"
 
       - test:
@@ -144,10 +152,6 @@ workflows:
           version: "7.4"
           http_client: legacy
       - test:
-          name: 'Legacy client - PHP 7.0'
-          version: "7.0"
-          http_client: legacy
-      - test:
-          name: 'Legacy client - PHP 5.6'
-          version: "5.6"
+          name: 'Legacy client - PHP 7.2'
+          version: "7.2"
           http_client: legacy

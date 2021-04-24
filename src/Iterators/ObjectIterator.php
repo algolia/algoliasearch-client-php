@@ -28,7 +28,7 @@ final class ObjectIterator extends AbstractAlgoliaIterator
             return;
         }
 
-        $cursor = array();
+        $cursor = [];
         if (isset($this->response['cursor'])) {
             $cursor['cursor'] = $this->response['cursor'];
         }

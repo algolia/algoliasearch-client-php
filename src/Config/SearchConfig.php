@@ -8,17 +8,17 @@ class SearchConfig extends AbstractConfig
 
     public static function create($appId = null, $apiKey = null)
     {
-        $config = array(
+        $config = [
             'appId' => null !== $appId ? $appId : getenv('ALGOLIA_APP_ID'),
             'apiKey' => null !== $apiKey ? $apiKey : getenv('ALGOLIA_API_KEY'),
-        );
+        ];
 
         return new static($config);
     }
 
     public function getDefaultConfig()
     {
-        return array(
+        return [
             'appId' => '',
             'apiKey' => '',
             'hosts' => null,
@@ -26,10 +26,10 @@ class SearchConfig extends AbstractConfig
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
             'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
-            'defaultHeaders' => array(),
+            'defaultHeaders' => [],
             'defaultForwardToReplicas' => null,
             'batchSize' => 1000,
-        );
+        ];
     }
 
     public function getWaitTaskTimeBeforeRetry()

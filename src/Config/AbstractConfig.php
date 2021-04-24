@@ -12,7 +12,7 @@ abstract class AbstractConfig
 
     protected $defaultConnectTimeout = 2;
 
-    public function __construct(array $config = array())
+    public function __construct(array $config = [])
     {
         $config += $this->getDefaultConfig();
 
@@ -21,15 +21,15 @@ abstract class AbstractConfig
 
     public function getDefaultConfig()
     {
-        return array(
+        return [
             'appId' => '',
             'apiKey' => '',
             'hosts' => null,
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
-            'defaultHeaders' => array(),
-        );
+            'defaultHeaders' => [],
+        ];
     }
 
     public function getAppId()

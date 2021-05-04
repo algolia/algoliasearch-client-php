@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.1...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...master)
+
+## [v3.0.2](https://github.com/algolia/algoliasearch-client-php/compare/3.0.1...3.0.2)
+
+### Fixed
+- Use ::class instead of string for class name ([#667](https://github.com/algolia/algoliasearch-client-php/pull/667))
 
 ## [v3.0.1](https://github.com/algolia/algoliasearch-client-php/compare/3.0.0...3.0.1)
 

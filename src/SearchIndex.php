@@ -17,6 +17,7 @@ use Algolia\AlgoliaSearch\Response\MultiResponse;
 use Algolia\AlgoliaSearch\Response\NullResponse;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\Support\Helpers;
+use spec\Prophecy\Exception\Prophecy\ObjectProphecyExceptionSpec;
 
 class SearchIndex
 {
@@ -110,12 +111,31 @@ class SearchIndex
         $response = $this->api->write(
             'PUT',
             api_path('/1/indexes/%s/settings', $this->indexName),
-            $settings,
+            $this->castSettings($settings),
             $requestOptions,
             $default
         );
 
         return new IndexingResponse($response, $this);
+    }
+
+    private function castSettings($settings = [])
+    {
+        $casts = [
+            'decompoundedAttributes' => 'object',
+        ];
+
+        foreach ($settings as $key => $value) {
+            if (array_key_exists($key, $casts)) {
+                switch ($casts[$key]) {
+                    case 'object':
+                        $settings[$key] = (object) $value;
+                        break;
+                }
+            }
+        }
+
+        return $settings;
     }
 
     public function getObject($objectId, $requestOptions = [])

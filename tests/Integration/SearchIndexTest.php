@@ -260,6 +260,11 @@ class SearchIndexTest extends BaseTest
         /* Check new values from getSettings method */
         $fetchedSettings = $settingsIndex->getSettings();
         $this->assertEquals($settings, $fetchedSettings);
+
+        /* Ensure a setSettings call also works when `decompoundedAttributes` is an empty array */
+        $settingsIndex->setSettings([
+            'decompoundedAttributes' => [],
+        ]);
     }
 
     public function testSearch()

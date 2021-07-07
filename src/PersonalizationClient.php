@@ -7,10 +7,7 @@ use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
-/**
- * @deprecated Please use Algolia\AlgoliaSearch\PersonalizationClient instead
- */
-final class RecommendationClient
+final class PersonalizationClient
 {
     /**
      * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
@@ -89,3 +86,4 @@ final class RecommendationClient
         return $this->api->write('POST', api_path('/1/strategies/personalization'), $strategy, $requestOptions);
     }
 }
+

@@ -2,17 +2,14 @@
 
 namespace Algolia\AlgoliaSearch\Config;
 
-/**
- * @deprecated Please use Algolia\AlgoliaSearch\Config\PersonalizationConfig instead
- */
-final class RecommendationConfig extends AbstractConfig
+final class PersonalizationConfig extends AbstractConfig
 {
     /**
      * @param string|null $appId
      * @param string|null $apiKey
      * @param string|null $region
      *
-     * @return RecommendationConfig
+     * @return PersonalizationConfig
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {

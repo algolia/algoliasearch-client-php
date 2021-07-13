@@ -2,15 +2,12 @@
 
 namespace Algolia\AlgoliaSearch;
 
-use Algolia\AlgoliaSearch\Config\RecommendationConfig;
+use Algolia\AlgoliaSearch\Config\PersonalizationConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
-/**
- * @deprecated Please use Algolia\AlgoliaSearch\PersonalizationClient instead
- */
-final class RecommendationClient
+final class PersonalizationClient
 {
     /**
      * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
@@ -18,14 +15,14 @@ final class RecommendationClient
     private $api;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Config\RecommendationConfig
+     * @var \Algolia\AlgoliaSearch\Config\PersonalizationConfig
      */
     private $config;
 
     /**
      * RecommendationClient constructor.
      */
-    public function __construct(ApiWrapper $api, RecommendationConfig $config)
+    public function __construct(ApiWrapper $api, PersonalizationConfig $config)
     {
         $this->api = $api;
         $this->config = $config;
@@ -36,19 +33,19 @@ final class RecommendationClient
      * @param string|null $apiKey
      * @param string|null $region
      *
-     * @return RecommendationClient
+     * @return PersonalizationClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $config = RecommendationConfig::create($appId, $apiKey, $region);
+        $config = PersonalizationConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);
     }
 
     /**
-     * @return RecommendationClient
+     * @return PersonalizationClient
      */
-    public static function createWithConfig(RecommendationConfig $config)
+    public static function createWithConfig(PersonalizationConfig $config)
     {
         $config = clone $config;
 

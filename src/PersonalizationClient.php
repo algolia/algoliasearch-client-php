@@ -86,4 +86,3 @@ final class PersonalizationClient
         return $this->api->write('POST', api_path('/1/strategies/personalization'), $strategy, $requestOptions);
     }
 }
-

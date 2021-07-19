@@ -6,7 +6,7 @@ use Algolia\AlgoliaSearch\PersonalizationClient;
 
 class PersonalizationClientTest extends BaseTest
 {
-    public function testRecommendationClient()
+    public function testPersonalizationClient()
     {
         $personalizationClient = PersonalizationClient::create(
             getenv('ALGOLIA_APPLICATION_ID_1'),

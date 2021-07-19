@@ -1,0 +1,4 @@
+requests:
+  - path: /1/dictionaries/stopwords/search
+    method: POST
+    body: '{"query":"query"}'

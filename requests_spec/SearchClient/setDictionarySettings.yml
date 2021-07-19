@@ -1,0 +1,4 @@
+requests:
+  - path: /1/dictionaries/*/settings
+    method: PUT
+    body: '{"disableStandardEntries":{"stopwords":{"en":true}}}'

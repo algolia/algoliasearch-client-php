@@ -265,7 +265,7 @@ class SearchClient
 
     /**
      * @deprecated endpoint will be deprecated
-     * @see RecommendationClient
+     * @see PersonalizationClient
      */
     public function getPersonalizationStrategy($requestOptions = [])
     {
@@ -274,7 +274,7 @@ class SearchClient
 
     /**
      * @deprecated endpoint will be deprecated
-     * @see RecommendationClient
+     * @see PersonalizationClient
      */
     public function setPersonalizationStrategy($strategy, $requestOptions = [])
     {

@@ -9,7 +9,7 @@
 $vendorDir = str_replace(" ", "\\ ", dirname(__DIR__)).'/vendor';
 $dependencies = array(
     'psr/http-message' => 'https://github.com/php-fig/http-message/archive/master.zip',
-    'psr/log' => 'https://github.com/php-fig/log/archive/master.zip',
+    'psr/log' => 'https://github.com/php-fig/log/archive/refs/tags/1.1.4.zip',
     'psr/simple-cache' => 'https://github.com/php-fig/simple-cache/archive/master.zip',
 );
 
@@ -30,7 +30,9 @@ foreach ($dependencies as $name => $zipUrl) {
     passthru('mkdir -p '.$dest);
 
     downloadZipFile($zipUrl, $tmpZip);
-    extractZipFile($tmpZip, $dest);
+
+    $zipBaseName = rtrim(basename($zipUrl), '.zip');
+    extractZipFile($tmpZip, $dest, $zipBaseName);
 }
 
 passthru('rm -rf '.$tmpZip);
@@ -63,8 +65,8 @@ function downloadZipFile($url, $destinationFilePath) {
     }
 }
 
-function extractZipFile($zipFileName, $destinationFolderPath) {
-    $folderName = basename($destinationFolderPath).'-master';
+function extractZipFile($zipFileName, $destinationFolderPath, $zipBasename = 'master') {
+    $folderName = basename($destinationFolderPath).'-'.$zipBasename;
     $tmpFolder = dirname($zipFileName);
     $zip = new ZipArchive;
     $opened = $zip->open($zipFileName);

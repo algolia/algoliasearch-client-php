@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Config\RecommendConfig;
 use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
@@ -58,8 +59,8 @@ final class RecommendClient
     /**
      * Get recommends
      *
-     * @param array                                                      $queries
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
+     * @param array                $queries
+     * @param array|RequestOptions $requestOptions
      *
      * @return array
      *
@@ -74,8 +75,12 @@ final class RecommendClient
         foreach ($queries as $key => $query) {
             // The `threshold` param is required by the endpoint to make it easier to provide a default value later,
             // so we default it in the client so that users don't have to provide a value.
-            if (!isset($query['threshold'])) {
+            if (!isset($query['threshold']) || $query['threshold'] === null) {
                 $queries[$key]['threshold'] = 0;
+            }
+            // Unset fallbackParameters if the model is 'bought-together'
+            if ($query['model'] === self::BOUGHT_TOGETHER && isset($query['fallbackParameters'])) {
+                unset($queries[$key]['fallbackParameters']);
             }
         }
 
@@ -94,8 +99,8 @@ final class RecommendClient
     /**
      * Get Related products
      *
-     * @param array                                                      $queries
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
+     * @param array                $queries
+     * @param array|RequestOptions $requestOptions
      *
      * @return array
      *
@@ -111,8 +116,8 @@ final class RecommendClient
     /**
      * Get product frequently bought together
      *
-     * @param array                                                      $queries
-     * @param array|\Algolia\AlgoliaSearch\RequestOptions\RequestOptions $requestOptions
+     * @param array                $queries
+     * @param array|RequestOptions $requestOptions
      *
      * @return array
      *

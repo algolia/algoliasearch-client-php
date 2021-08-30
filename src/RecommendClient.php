@@ -10,7 +10,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class RecommendClient
 {
-    const RELATED_PRODUCT = 'related-products';
+    const RELATED_PRODUCTS = 'related-products';
     const BOUGHT_TOGETHER = 'bought-together';
 
     /**
@@ -100,7 +100,7 @@ final class RecommendClient
      */
     public function getRelatedProducts(array $queries, $requestOptions = [])
     {
-        $queries = $this->setModel($queries, self::RELATED_PRODUCT);
+        $queries = $this->setModel($queries, self::RELATED_PRODUCTS);
 
         return $this->getRecommendations($queries, $requestOptions);
     }

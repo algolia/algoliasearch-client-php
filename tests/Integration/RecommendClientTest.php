@@ -64,7 +64,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-                'model' => RecommendClient::RELATED_PRODUCT,
+                'model' => RecommendClient::RELATED_PRODUCTS,
             ],
         ]);
 
@@ -73,13 +73,13 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE-1',
-                'model' => RecommendClient::RELATED_PRODUCT,
+                'model' => RecommendClient::RELATED_PRODUCTS,
                 'threshold' => 0,
             ],
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE-2',
-                'model' => RecommendClient::RELATED_PRODUCT,
+                'model' => RecommendClient::RELATED_PRODUCTS,
                 'threshold' => 0,
             ],
         ]);

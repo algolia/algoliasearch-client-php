@@ -55,7 +55,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-                'model' => 'bought-together',
+                'model' => RecommendClient::BOUGHT_TOGETHER,
             ],
         ]);
 
@@ -64,7 +64,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-                'model' => 'related-products',
+                'model' => RecommendClient::RELATED_PRODUCT,
             ],
         ]);
 
@@ -73,13 +73,13 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE-1',
-                'model' => 'related-products',
+                'model' => RecommendClient::RELATED_PRODUCT,
                 'threshold' => 0,
             ],
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE-2',
-                'model' => 'related-products',
+                'model' => RecommendClient::RELATED_PRODUCT,
                 'threshold' => 0,
             ],
         ]);
@@ -89,7 +89,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-                'model' => 'bought-together',
+                'model' => RecommendClient::BOUGHT_TOGETHER,
                 'threshold' => null,
             ],
         ]);
@@ -99,7 +99,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-                'model' => 'bought-together',
+                'model' => RecommendClient::BOUGHT_TOGETHER,
                 'threshold' => 42,
             ],
         ]);

@@ -57,25 +57,20 @@ final class RecommendClient
     }
 
     /**
-     * Get recommends
+     * Get recommendations
      *
      * @param array                $queries
      * @param array|RequestOptions $requestOptions
      *
      * @return array
      *
-     * @throws AlgoliaException
      */
-    public function getRecommendations($queries, $requestOptions = [])
+    public function getRecommendations(array $queries, $requestOptions = [])
     {
-        if (!is_array($queries)) {
-            throw new AlgoliaException('$queries should be an array.');
-        }
-
         foreach ($queries as $key => $query) {
             // The `threshold` param is required by the endpoint to make it easier to provide a default value later,
             // so we default it in the client so that users don't have to provide a value.
-            if (!isset($query['threshold']) || $query['threshold'] === null) {
+            if (!isset($query['threshold'])) {
                 $queries[$key]['threshold'] = 0;
             }
             // Unset fallbackParameters if the model is 'bought-together'
@@ -106,7 +101,7 @@ final class RecommendClient
      *
      * @throws AlgoliaException
      */
-    public function getRelatedProducts($queries, $requestOptions = [])
+    public function getRelatedProducts(array $queries, $requestOptions = [])
     {
         $queries = $this->setModel($queries, self::RELATED_PRODUCT);
 
@@ -123,7 +118,7 @@ final class RecommendClient
      *
      * @throws AlgoliaException
      */
-    public function getFrequentlyBoughtTogether($queries, $requestOptions = [])
+    public function getFrequentlyBoughtTogether(array $queries, $requestOptions = [])
     {
         $queries = $this->setModel($queries, self::BOUGHT_TOGETHER);
 
@@ -140,12 +135,8 @@ final class RecommendClient
      *
      * @throws AlgoliaException
      */
-    private function setModel($queries, $model)
+    private function setModel(array $queries, $model)
     {
-        if (!is_array($queries)) {
-            throw new AlgoliaException('$queries should be an array.');
-        }
-
         foreach ($queries as $key => $query) {
             $queries[$key]['model'] = $model;
         }

@@ -6,8 +6,8 @@ use Algolia\AlgoliaSearch\Config\RecommendConfig;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Algolia\AlgoliaSearch\RecommendClient;
-use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Psr\Http\Message\RequestInterface;
 
 class RecommendClientTest extends BaseTest implements HttpClientInterface
@@ -56,7 +56,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
                 'model' => 'bought-together',
-            ]
+            ],
         ]);
 
         // Test method with 'related-products' model
@@ -65,7 +65,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
                 'model' => 'related-products',
-            ]
+            ],
         ]);
 
         // Test method with multiple requests and specified thresholds
@@ -81,7 +81,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
                 'objectID' => 'B018APC4LE-2',
                 'model' => 'related-products',
                 'threshold' => 0,
-            ]
+            ],
         ]);
 
         // Test overrides undefined threshold with default value
@@ -91,7 +91,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
                 'objectID' => 'B018APC4LE',
                 'model' => 'bought-together',
                 'threshold' => null,
-            ]
+            ],
         ]);
 
         // Test threshold is overriden by specified value
@@ -101,39 +101,34 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
                 'objectID' => 'B018APC4LE',
                 'model' => 'bought-together',
                 'threshold' => 42,
-            ]
+            ],
         ]);
 
         $this->assertRequests([
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
             ],
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"related-products","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"related-products","threshold":0}]}',
             ],
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE-1","model":"related-products","threshold":0},{"indexName":"products","objectID":"B018APC4LE-2","model":"related-products","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE-1","model":"related-products","threshold":0},{"indexName":"products","objectID":"B018APC4LE-2","model":"related-products","threshold":0}]}',
             ],
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
             ],
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":42}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":42}]}',
             ],
         ]);
     }
@@ -146,16 +141,15 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-            ]
+            ],
         ]);
 
         $this->assertRequests([
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"related-products","threshold":0}]}',
-            ]
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"related-products","threshold":0}]}',
+            ],
         ]);
     }
 
@@ -167,7 +161,7 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'indexName' => 'products',
                 'objectID' => 'B018APC4LE',
-            ]
+            ],
         ]);
 
         // Check if `fallbackParameters` param is not passed for 'bought-together' method
@@ -185,14 +179,12 @@ class RecommendClientTest extends BaseTest implements HttpClientInterface
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
             ],
             [
                 'path' => '/1/indexes/*/recommendations',
                 'method' => 'POST',
-                'body' =>
-                    '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
+                'body' => '{"requests":[{"indexName":"products","objectID":"B018APC4LE","model":"bought-together","threshold":0}]}',
             ],
         ]);
     }

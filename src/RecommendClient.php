@@ -57,13 +57,11 @@ final class RecommendClient
     }
 
     /**
-     * Get recommendations
+     * Get recommendations.
      *
-     * @param array                $queries
      * @param array|RequestOptions $requestOptions
      *
      * @return array
-     *
      */
     public function getRecommendations(array $queries, $requestOptions = [])
     {
@@ -74,13 +72,13 @@ final class RecommendClient
                 $queries[$key]['threshold'] = 0;
             }
             // Unset fallbackParameters if the model is 'bought-together'
-            if ($query['model'] === self::BOUGHT_TOGETHER && isset($query['fallbackParameters'])) {
+            if (self::BOUGHT_TOGETHER === $query['model'] && isset($query['fallbackParameters'])) {
                 unset($queries[$key]['fallbackParameters']);
             }
         }
 
         $requests = [
-            'requests' => $queries
+            'requests' => $queries,
         ];
 
         return $this->api->write(
@@ -92,9 +90,8 @@ final class RecommendClient
     }
 
     /**
-     * Get Related products
+     * Get Related products.
      *
-     * @param array                $queries
      * @param array|RequestOptions $requestOptions
      *
      * @return array
@@ -109,9 +106,8 @@ final class RecommendClient
     }
 
     /**
-     * Get product frequently bought together
+     * Get product frequently bought together.
      *
-     * @param array                $queries
      * @param array|RequestOptions $requestOptions
      *
      * @return array
@@ -126,10 +122,9 @@ final class RecommendClient
     }
 
     /**
-     * Add the model for related products and product frequently bought together
+     * Add the model for related products and product frequently bought together.
      *
-     * @param array  $queries
-     * @param string $model   can be either 'related-products' or 'bought-together'
+     * @param string $model can be either 'related-products' or 'bought-together'
      *
      * @return array
      *

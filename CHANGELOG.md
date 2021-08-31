@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...master)
 
+## [v3.1.0](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...3.1.0)
+
+### Added
+- Add search alias for multiple queries ([#684](https://github.com/algolia/algoliasearch-client-php/pull/684))
+- Add RecommendClient class ([#686](https://github.com/algolia/algoliasearch-client-php/pull/686))
+
+### Changed
+- Rename recommendation client ([#682](https://github.com/algolia/algoliasearch-client-php/pull/682))
+
+### Fixed
+-  Pin log dependency ([#685](https://github.com/algolia/algoliasearch-client-php/pull/685))
+
 ## [v3.0.2](https://github.com/algolia/algoliasearch-client-php/compare/3.0.1...3.0.2)
 
 ### Fixed

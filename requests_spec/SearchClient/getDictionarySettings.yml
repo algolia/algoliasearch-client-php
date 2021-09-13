@@ -1,6 +1,0 @@
-requests:
-  - path: /1/dictionaries/*/settings
-    method: GET
-    body: ''
-
-

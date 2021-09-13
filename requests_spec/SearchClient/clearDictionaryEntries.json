@@ -1,0 +1,9 @@
+{
+  "requests": [
+    {
+      "path": "/1/dictionaries/stopwords/batch",
+      "method": "POST",
+      "body": "{\"clearExistingDictionaryEntries\":true,\"requests\":[]}"
+    }
+  ]
+}

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Unit;
 
-use Symfony\Component\Yaml\Yaml;
-
 class SearchClientTest extends AbstractMockClientTest
 {
     public function testSaveDictionaryEntries()
@@ -80,7 +78,7 @@ class SearchClientTest extends AbstractMockClientTest
 
     private function loadRequestsForMethod(string $method): array
     {
-        $request = Yaml::parseFile("./requests_spec/SearchClient/${method}.yml");
+        $request = json_decode(file_get_contents("./requests_spec/SearchClient/${method}.json"), true);
 
         return $request['requests'];
     }

@@ -22,8 +22,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
         "fzaninotto/faker": "^1.8",
-        "phpunit/phpunit": "^8.0 || ^9.0",
-        "symfony/yaml": "^5.3"
+        "phpunit/phpunit": "^8.0 || ^9.0"
     },
     "autoload": {
         "psr-4": {

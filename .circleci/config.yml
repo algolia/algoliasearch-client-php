@@ -31,8 +31,9 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt update
-      - run: sudo docker-php-ext-install zip
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y php-zip
+
 
       # Download and cache dependencies
       - restore_cache:

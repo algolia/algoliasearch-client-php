@@ -12,7 +12,7 @@ executors:
         description: "PHP version tag"
         type: string
     docker:
-        - image: circleci/php:<<parameters.version>>
+        - image: cimg/php:<<parameters.version>>
 
 jobs:
   test:

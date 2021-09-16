@@ -130,11 +130,6 @@ workflows:
           name: 'Guzzle 6 - PHP 7.2'
           version: "7.2"
           http_client: guzzlehttp/guzzle:"^6.0"
-
-      - test:
-          name: 'Legacy client - PHP latest'
-          version: "latest"
-          http_client: legacy
       - test:
           name: 'Legacy client - PHP 8.0'
           version: "8.0"

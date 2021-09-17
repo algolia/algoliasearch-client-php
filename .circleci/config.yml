@@ -12,7 +12,7 @@ executors:
         description: "PHP version tag"
         type: string
     docker:
-        - image: circleci/php:<<parameters.version>>
+        - image: cimg/php:<<parameters.version>>
 
 jobs:
   test:
@@ -31,8 +31,9 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt update
-      - run: sudo docker-php-ext-install zip
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y php-zip
+
 
       # Download and cache dependencies
       - restore_cache:
@@ -110,10 +111,6 @@ workflows:
   workflow:
     jobs:
       - test:
-          name: 'Guzzle 7 - PHP latest'
-          version: "latest"
-          http_client: guzzlehttp/guzzle:"^7.0"
-      - test:
           name: 'Guzzle 7 - PHP 8.0'
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
@@ -121,11 +118,6 @@ workflows:
           name: 'Guzzle 7 - PHP 7.4'
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
-
-      - test:
-          name: 'Guzzle 6 - PHP latest'
-          version: "latest"
-          http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: 'Guzzle 6 - PHP 8.0'
           version: "8.0"
@@ -138,11 +130,6 @@ workflows:
           name: 'Guzzle 6 - PHP 7.2'
           version: "7.2"
           http_client: guzzlehttp/guzzle:"^6.0"
-
-      - test:
-          name: 'Legacy client - PHP latest'
-          version: "latest"
-          http_client: legacy
       - test:
           name: 'Legacy client - PHP 8.0'
           version: "8.0"

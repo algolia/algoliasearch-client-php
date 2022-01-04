@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...master)
 
+## [v3.2.0](https://github.com/algolia/algoliasearch-client-php/compare/3.1.0...3.2.0)
+
+### Added
+- Add #[\ReturnTypeWillChange] when needed for PHP 8.1 compatibility ([#697](https://github.com/algolia/algoliasearch-client-php/pull/697))
+
+### Changed
+- chore: move to newer CircleCI image ([#688](https://github.com/algolia/algoliasearch-client-php/pull/688))
+- chore: add PHP 8.1 image check in the CircleCI workflow ([#699](https://github.com/algolia/algoliasearch-client-php/pull/699))
+
+### Fixed
+- Fix Psr log ([#696](https://github.com/algolia/algoliasearch-client-php/pull/696))
+- Allow newer version of psr/simple-cache ([#698](https://github.com/algolia/algoliasearch-client-php/pull/698))
+
 ## [v3.1.0](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...3.1.0)
 
 ### Added

@@ -2,39 +2,68 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
+use Algolia\AlgoliaSearch\Config\AnalyticsConfig;
 use Algolia\AlgoliaSearch\AnalyticsClient;
-use Algolia\AlgoliaSearch\SearchIndex;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 use Algolia\AlgoliaSearch\Tests\TestHelper;
 use DateTime;
+use Psr\Http\Message\RequestInterface;
 
-class AnalyticsClientTest extends BaseTest
+class AnalyticsClientTest extends BaseTest implements HttpClientInterface
 {
+    /**
+     * @var RequestInterface[]
+     */
+    private $recordedRequests = [];
+
+    protected function assertRequests(array $requests)
+    {
+        $this->assertGreaterThan(0, count($requests));
+        $this->assertEquals(count($requests), count($this->recordedRequests));
+
+        foreach ($requests as $i => $request) {
+            $recordedRequest = $this->recordedRequests[$i];
+
+            $this->assertEquals($request['method'], $recordedRequest->getMethod());
+            $this->assertEquals($request['path'], $recordedRequest->getUri()->getPath());
+            $this->assertEquals($request['body'], $recordedRequest->getBody()->getContents());
+        }
+    }
+
+    protected function getClient()
+    {
+        $api = new ApiWrapper($this, AnalyticsConfig::create(), ClusterHosts::create('127.0.0.1'));
+        $config = AnalyticsConfig::create('foo', 'bar');
+
+        return new AnalyticsClient($api, $config);
+    }
+
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
+    {
+        $this->recordedRequests[] = $request;
+
+        return new Response(200, [], '{}');
+    }
+
     public function testAbTesting()
     {
         $this->indexes['ab_testing'] = TestHelper::getTestIndexName('ab_testing');
         $this->indexes['ab_testing_dev'] = TestHelper::getTestIndexName('ab_testing_dev');
-
-        /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex($this->indexes['ab_testing']);
-
-        /** @var SearchIndex $indexDev */
-        $indexDev = TestHelper::getClient()->initIndex($this->indexes['ab_testing_dev']);
-
-        $responses = [];
-
-        $object = ['objectID' => 'one'];
-
-        $index->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
-        $indexDev->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
+        $this->indexes['aa_testing'] = TestHelper::getTestIndexName('aa_testing');
 
         $dateTime = new DateTime('tomorrow');
         $abTestName = $this->indexes['ab_testing'];
+        $aaTestName = $this->indexes['aa_testing'];
+        $date = $dateTime->format('Y-m-d\TH:i:s\Z');
 
         $abTest = [
             'name' => $abTestName,
             'variants' => [
                 [
-                    'index' => $this->indexes['ab_testing'],
+                    'index' => $abTestName,
                     'trafficPercentage' => 60,
                     'description' => 'a description',
                 ],
@@ -43,162 +72,62 @@ class AnalyticsClientTest extends BaseTest
                     'trafficPercentage' => 40,
                 ],
             ],
-            'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
+            'endAt' => $date,
         ];
 
-        $analyticsClient = AnalyticsClient::create(
-            getenv('ALGOLIA_APPLICATION_ID_1'),
-            getenv('ALGOLIA_ADMIN_KEY_1')
-        );
-
-        $cpt = 0;
-        do {
-            if ($cpt >= 10) {
-                break;
-            }
-            $index->exists() && $indexDev->exists();
-            sleep(1);
-            $cpt++;
-        } while (false);
-
-        $response = TestHelper::retry(function () use ($analyticsClient, $abTest) {
-            return $analyticsClient->addABTest($abTest);
-        }, 0.1, 40);
-
-        $abTestId = $response['abTestID'];
-        $index->waitTask($response['taskID']);
-
-        $result = $analyticsClient->getABTest($abTestId);
-
-        $this->assertSame($abTest['name'], $result['name']);
-        $this->assertSame($abTest['endAt'], $result['endAt']);
-        $this->assertSame($abTest['variants'][0]['index'], $result['variants'][0]['index']);
-        $this->assertSame($abTest['variants'][0]['trafficPercentage'], $result['variants'][0]['trafficPercentage']);
-        $this->assertSame($abTest['variants'][0]['description'], $result['variants'][0]['description']);
-        $this->assertSame($abTest['variants'][1]['index'], $result['variants'][1]['index']);
-        $this->assertSame($abTest['variants'][1]['trafficPercentage'], $result['variants'][1]['trafficPercentage']);
-        $this->assertNotEquals('stopped', $result['status']);
-
-        $results = $analyticsClient->getABTests();
-        $found = false;
-
-        foreach ($results['abtests'] as $fetchedAbTest) {
-            if ($fetchedAbTest['name'] != $abTest['name']) {
-                continue;
-            }
-            $this->assertSame($abTest['name'], $fetchedAbTest['name']);
-            $this->assertSame($abTest['endAt'], $fetchedAbTest['endAt']);
-            $this->assertSame($abTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
-            $this->assertSame(
-                $abTest['variants'][0]['trafficPercentage'],
-                $fetchedAbTest['variants'][0]['trafficPercentage']
-            );
-            $this->assertSame($abTest['variants'][0]['description'], $fetchedAbTest['variants'][0]['description']);
-            $this->assertSame($abTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
-            $this->assertSame(
-                $abTest['variants'][1]['trafficPercentage'],
-                $fetchedAbTest['variants'][1]['trafficPercentage']
-            );
-            $this->assertNotEquals('stopped', $fetchedAbTest['status']);
-            $found = true;
-        }
-
-        $this->assertTrue($found);
-
-        $response = $analyticsClient->stopABTest($abTestId);
-        $index->waitTask($response['taskID']);
-
-        $result = $analyticsClient->getABTest($abTestId);
-        $this->assertEquals('stopped', $result['status']);
-
-        $response = $analyticsClient->deleteABTest($abTestId);
-        $index->waitTask($response['taskID']);
-
-        try {
-            $result = $analyticsClient->getABTest($abTestId);
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
-            $this->assertEquals(404, $e->getCode());
-            $this->assertEquals('ABTestID not found', $e->getMessage());
-        }
-    }
-
-    public function testAaTesting()
-    {
-        $this->indexes['aa_testing'] = TestHelper::getTestIndexName('aa_testing');
-
-        /** @var SearchIndex $index */
-        $index = TestHelper::getClient()->initIndex($this->indexes['aa_testing']);
-
-        $analyticsClient = AnalyticsClient::create(
-            getenv('ALGOLIA_APPLICATION_ID_1'),
-            getenv('ALGOLIA_ADMIN_KEY_1')
-        );
-
-        $object = ['objectID' => 'one'];
-        $res = $index->saveObject($object, ['autoGenerateObjectIDIfNotExist' => true])->wait();
-        $dateTime = new DateTime('tomorrow');
-        $abTestName = $this->indexes['aa_testing'];
-
         $aaTest = [
-            'name' => $abTestName,
+            'name' => $aaTestName,
             'variants' => [
-                ['index' => $this->indexes['aa_testing'], 'trafficPercentage' => 90],
+                ['index' => $aaTestName, 'trafficPercentage' => 90],
                 [
-                    'index' => $this->indexes['aa_testing'],
+                    'index' => $aaTestName,
                     'trafficPercentage' => 10,
                     'customSearchParameters' => ['ignorePlurals' => true],
                 ],
             ],
-            'endAt' => $dateTime->format('Y-m-d\TH:i:s\Z'),
+            'endAt' => $date,
         ];
 
-        $cpt = 0;
-        do {
-            if ($cpt >= 10) {
-                break;
-            }
-            $index->exists();
-            sleep(1);
-            $cpt++;
-        } while (false);
+        $analyticsClient = $this->getClient();
+        // Test AB Testing format
+        $analyticsClient->addABTest($abTest);
+        // Test AA Testing format
+        $analyticsClient->addABTest($aaTest);
 
-        $response = TestHelper::retry(function () use ($analyticsClient, $aaTest) {
-            return $analyticsClient->addABTest($aaTest);
-        }, 0.1, 40);
+        $abTestId = 'myAbTestID';
+        // Test Stop AB test
+        $analyticsClient->stopABTest($abTestId);
+        // Test get AB test
+        $analyticsClient->getABTest($abTestId);
+        // Test delete AB test
+        $analyticsClient->deleteABTest($abTestId);
 
-        $aaTestId = $response['abTestID'];
-        TestHelper::getClient()->waitTask($this->indexes['aa_testing'], $response['taskID']);
-
-        $fetchedAbTest = $analyticsClient->getABTest($aaTestId);
-
-        $this->assertSame($aaTest['name'], $fetchedAbTest['name']);
-        $this->assertSame($aaTest['endAt'], $fetchedAbTest['endAt']);
-        $this->assertSame($aaTest['variants'][0]['index'], $fetchedAbTest['variants'][0]['index']);
-        $this->assertSame(
-            $aaTest['variants'][0]['trafficPercentage'],
-            $fetchedAbTest['variants'][0]['trafficPercentage']
-        );
-        $this->assertSame($aaTest['variants'][1]['index'], $fetchedAbTest['variants'][1]['index']);
-        $this->assertSame(
-            $aaTest['variants'][1]['trafficPercentage'],
-            $fetchedAbTest['variants'][1]['trafficPercentage']
-        );
-        $this->assertSame(
-            $aaTest['variants'][1]['customSearchParameters'],
-            $fetchedAbTest['variants'][1]['customSearchParameters']
-        );
-        $this->assertNotEquals('stopped', $fetchedAbTest['status']);
-
-        $response = $analyticsClient->deleteABTest($aaTestId);
-        $index->waitTask($response['taskID']);
-
-        try {
-            $result = $analyticsClient->getABTest($aaTestId);
-        } catch (\Exception $e) {
-            $this->assertInstanceOf('Algolia\AlgoliaSearch\Exceptions\NotFoundException', $e);
-            $this->assertEquals(404, $e->getCode());
-            $this->assertEquals('ABTestID not found', $e->getMessage());
-        }
+        $this->assertRequests([
+            [
+                'path' => '/2/abtests',
+                'method' => 'POST',
+                'body' => '{"name":"' . $abTestName . '","variants":[{"index":"' . $abTestName . '","trafficPercentage":60,"description":"a description"},{"index":"' . $this->indexes['ab_testing_dev'] . '","trafficPercentage":40}],"endAt":"' . $date . '"}',
+            ],
+            [
+                'path' => '/2/abtests',
+                'method' => 'POST',
+                'body' => '{"name":"' . $aaTestName . '","variants":[{"index":"' . $aaTestName . '","trafficPercentage":90},{"index":"' . $aaTestName . '","trafficPercentage":10,"customSearchParameters":{"ignorePlurals":true}}],"endAt":"' . $date . '"}',
+            ],
+            [
+                'path' => '/2/abtests/myAbTestID/stop',
+                'method' => 'POST',
+                'body' => '',
+            ],
+            [
+                'path' => '/2/abtests/myAbTestID',
+                'method' => 'GET',
+                'body' => '',
+            ],
+            [
+                'path' => '/2/abtests/myAbTestID',
+                'method' => 'DELETE',
+                'body' => '',
+            ],
+        ]);
     }
 }

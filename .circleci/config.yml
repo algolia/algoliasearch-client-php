@@ -69,7 +69,7 @@ jobs:
 
       - run:
           name: Check code styles
-          command: vendor/bin/php-cs-fixer fix -v --dry-run
+          command: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix -v --dry-run
 
       # Run tests with phpunit
       #
@@ -111,6 +111,10 @@ workflows:
   workflow:
     jobs:
       - test:
+          name: 'Guzzle 7 - PHP 8.1'
+          version: "8.1"
+          http_client: guzzlehttp/guzzle:"^7.0"
+      - test:
           name: 'Guzzle 7 - PHP 8.0'
           version: "8.0"
           http_client: guzzlehttp/guzzle:"^7.0"
@@ -118,6 +122,10 @@ workflows:
           name: 'Guzzle 7 - PHP 7.4'
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^7.0"
+      - test:
+          name: 'Guzzle 6 - PHP 8.1'
+          version: "8.1"
+          http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: 'Guzzle 6 - PHP 8.0'
           version: "8.0"
@@ -130,6 +138,10 @@ workflows:
           name: 'Guzzle 6 - PHP 7.2'
           version: "7.2"
           http_client: guzzlehttp/guzzle:"^6.0"
+      - test:
+          name: 'Legacy client - PHP 8.1'
+          version: "8.1"
+          http_client: legacy
       - test:
           name: 'Legacy client - PHP 8.0'
           version: "8.0"

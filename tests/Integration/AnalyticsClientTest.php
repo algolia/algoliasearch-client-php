@@ -2,8 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Tests\Integration;
 
-use Algolia\AlgoliaSearch\Config\AnalyticsConfig;
 use Algolia\AlgoliaSearch\AnalyticsClient;
+use Algolia\AlgoliaSearch\Config\AnalyticsConfig;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Http\Psr7\Response;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -106,12 +106,12 @@ class AnalyticsClientTest extends BaseTest implements HttpClientInterface
             [
                 'path' => '/2/abtests',
                 'method' => 'POST',
-                'body' => '{"name":"' . $abTestName . '","variants":[{"index":"' . $abTestName . '","trafficPercentage":60,"description":"a description"},{"index":"' . $this->indexes['ab_testing_dev'] . '","trafficPercentage":40}],"endAt":"' . $date . '"}',
+                'body' => '{"name":"'.$abTestName.'","variants":[{"index":"'.$abTestName.'","trafficPercentage":60,"description":"a description"},{"index":"'.$this->indexes['ab_testing_dev'].'","trafficPercentage":40}],"endAt":"'.$date.'"}',
             ],
             [
                 'path' => '/2/abtests',
                 'method' => 'POST',
-                'body' => '{"name":"' . $aaTestName . '","variants":[{"index":"' . $aaTestName . '","trafficPercentage":90},{"index":"' . $aaTestName . '","trafficPercentage":10,"customSearchParameters":{"ignorePlurals":true}}],"endAt":"' . $date . '"}',
+                'body' => '{"name":"'.$aaTestName.'","variants":[{"index":"'.$aaTestName.'","trafficPercentage":90},{"index":"'.$aaTestName.'","trafficPercentage":10,"customSearchParameters":{"ignorePlurals":true}}],"endAt":"'.$date.'"}',
             ],
             [
                 'path' => '/2/abtests/myAbTestID/stop',

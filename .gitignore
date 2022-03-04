@@ -1,23 +1,13 @@
-node_modules
-.bash_profile
-.env
-.pnp.cjs
-.parcel-cache
+# ref: https://github.com/github/gitignore/blob/master/Composer.gitignore
 
-yarn-error.log
+composer.phar
+/vendor/
 
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
+# php-cs-fixer cache
+.php_cs.cache
 
-.vscode/
-.idea/
+# PHPUnit cache
+.phpunit.result.cache
 
-target
-**/.DS_Store
-.gradle
-build
-
-dist
-
-.openapi-generator
+.openapi-generator/
+composer.lock

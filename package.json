@@ -28,7 +28,7 @@
     "website": "yarn workspace website start --host 0.0.0.0"
   },
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "2.4.26",
+    "@experimental-api-clients-automation/openapi-generator-cli": "0.0.1",
     "@redocly/openapi-cli": "1.0.0-beta.79",
     "@typescript-eslint/eslint-plugin": "5.5.0",
     "@typescript-eslint/parser": "5.5.0",

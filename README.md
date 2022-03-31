@@ -45,7 +45,7 @@ $client = Algolia\AlgoliaSearch\SearchClient::create(
 
 $index = $client->initIndex('your_index_name');
 
-$index->saveObjects(['objectID' => 1, 'name' => 'Foo']);
+$index->saveObject(['objectID' => 1, 'name' => 'Foo']);
 ```
 
 Finally, you may begin searching a object using the `search` method:

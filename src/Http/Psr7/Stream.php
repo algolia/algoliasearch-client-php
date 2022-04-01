@@ -96,6 +96,9 @@ class Stream implements StreamInterface
         }
     }
 
+    /**
+     * @return string
+     */
     public function getContents()
     {
         if (!isset($this->stream)) {
@@ -111,6 +114,9 @@ class Stream implements StreamInterface
         return $contents;
     }
 
+    /**
+     * @return void
+     */
     public function close()
     {
         if (isset($this->stream)) {
@@ -121,6 +127,9 @@ class Stream implements StreamInterface
         }
     }
 
+    /**
+     * @return resource|null
+     */
     public function detach()
     {
         if (!isset($this->stream)) {
@@ -135,6 +144,9 @@ class Stream implements StreamInterface
         return $result;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function getSize()
     {
         if (null !== $this->size) {
@@ -160,21 +172,33 @@ class Stream implements StreamInterface
         return null;
     }
 
+    /**
+     * @return bool
+     */
     public function isReadable()
     {
         return $this->readable;
     }
 
+    /**
+     * @return bool
+     */
     public function isWritable()
     {
         return $this->writable;
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function isSeekable()
     {
         return $this->seekable;
     }
 
+    /**
+     * @return bool
+     */
     public function eof()
     {
         if (!isset($this->stream)) {
@@ -184,6 +208,9 @@ class Stream implements StreamInterface
         return feof($this->stream);
     }
 
+    /**
+     * @return int
+     */
     public function tell()
     {
         if (!isset($this->stream)) {
@@ -199,11 +226,17 @@ class Stream implements StreamInterface
         return $result;
     }
 
+    /**
+     * @return void
+     */
     public function rewind()
     {
         $this->seek(0);
     }
 
+    /**
+     * @return void
+     */
     public function seek($offset, $whence = SEEK_SET)
     {
         if (!isset($this->stream)) {
@@ -217,6 +250,9 @@ class Stream implements StreamInterface
         }
     }
 
+    /**
+     * @return string
+     */
     public function read($length)
     {
         if (!isset($this->stream)) {
@@ -241,6 +277,9 @@ class Stream implements StreamInterface
         return $string;
     }
 
+    /**
+     * @return int
+     */
     public function write($string)
     {
         if (!isset($this->stream)) {
@@ -261,6 +300,9 @@ class Stream implements StreamInterface
         return $result;
     }
 
+    /**
+     * @return array|mixed|null
+     */
     public function getMetadata($key = null)
     {
         if (!isset($this->stream)) {

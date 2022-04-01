@@ -458,7 +458,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withScheme($scheme)
     {
@@ -477,7 +477,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withUserInfo($user, $password = null)
     {
@@ -498,7 +498,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withHost($host)
     {
@@ -516,7 +516,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withPort($port)
     {
@@ -535,7 +535,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withPath($path)
     {
@@ -553,7 +553,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withQuery($query)
     {
@@ -570,7 +570,7 @@ class Uri implements UriInterface
     }
 
     /**
-     * @return $this|Uri
+     * @return Uri
      */
     public function withFragment($fragment)
     {

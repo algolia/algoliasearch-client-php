@@ -130,7 +130,7 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return $this|Request
+     * @return Request
      */
     public function withUri(UriInterface $uri, $preserveHost = false)
     {
@@ -183,7 +183,7 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return $this|Request
+     * @return Request
      */
     public function withProtocolVersion($version)
     {
@@ -277,7 +277,7 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return $this|Request
+     * @return Request
      */
     public function withoutHeader($header)
     {
@@ -305,7 +305,7 @@ class Request implements RequestInterface
     }
 
     /**
-     * @return $this|Request
+     * @return Request
      */
     public function withBody(StreamInterface $body)
     {

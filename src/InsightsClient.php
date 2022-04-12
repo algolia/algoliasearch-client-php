@@ -5,12 +5,13 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\InsightsConfig;
 use Algolia\AlgoliaSearch\Insights\UserInsightsClient;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class InsightsClient
 {
     /**
-     * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
+     * @var ApiWrapperInterface
      */
     private $api;
 
@@ -19,7 +20,7 @@ final class InsightsClient
      */
     private $config;
 
-    public function __construct(ApiWrapper $api, InsightsConfig $config)
+    public function __construct(ApiWrapperInterface $api, InsightsConfig $config)
     {
         $this->api = $api;
         $this->config = $config;

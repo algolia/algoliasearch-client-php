@@ -5,12 +5,13 @@ namespace Algolia\AlgoliaSearch;
 use Algolia\AlgoliaSearch\Config\PersonalizationConfig;
 use Algolia\AlgoliaSearch\RequestOptions\RequestOptions;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 final class PersonalizationClient
 {
     /**
-     * @var \Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper
+     * @var ApiWrapperInterface
      */
     private $api;
 
@@ -22,7 +23,7 @@ final class PersonalizationClient
     /**
      * RecommendationClient constructor.
      */
-    public function __construct(ApiWrapper $api, PersonalizationConfig $config)
+    public function __construct(ApiWrapperInterface $api, PersonalizationConfig $config)
     {
         $this->api = $api;
         $this->config = $config;

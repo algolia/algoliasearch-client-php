@@ -1,6 +1,7 @@
 {
   "name": "@algolia/api-client-automation",
   "version": "0.0.0",
+  "private": true,
   "workspaces": [
     "clients/algoliasearch-client-javascript/",
     "playground/javascript/node/",

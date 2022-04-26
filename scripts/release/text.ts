@@ -2,6 +2,8 @@ export default {
   header: `## Summary`,
 
   versionChangeHeader: `## Version Changes`,
+  skippedCommitsHeader: `### Skipped Commits`,
+  skippedCommitsDesc: `It doesn't mean these commits are being excluded from the release. It means they're not taken into account when the release process figured out the next version number, and updated the changelog.`,
   noCommit: `no commit`,
   currentVersionNotFound: `current version not found`,
   descriptionVersionChanges: [

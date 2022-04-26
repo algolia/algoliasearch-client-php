@@ -1,6 +1,7 @@
 import {
   parseCommit,
   getVersionChangesText,
+  getSkippedCommitsText,
   decideReleaseStrategy,
   readVersions,
 } from '../create-release-issue';
@@ -246,5 +247,34 @@ describe('create release issue', () => {
     expect(versions.javascript.skipRelease).toEqual(true);
     expect(versions.java.skipRelease).toBeUndefined();
     expect(versions.php.skipRelease).toBeUndefined();
+  });
+
+  it('generates text for skipped commits', () => {
+    expect(
+      getSkippedCommitsText({
+        commitsWithoutLanguageScope: [],
+        commitsWithUnknownLanguageScope: [],
+      })
+    ).toMatchInlineSnapshot(`"_(None)_"`);
+
+    expect(
+      getSkippedCommitsText({
+        commitsWithoutLanguageScope: ['abcdefg fix: something'],
+        commitsWithUnknownLanguageScope: ['abcdef2 fix(pascal): what'],
+      })
+    ).toMatchInlineSnapshot(`
+      "<p></p>
+        <p>It doesn't mean these commits are being excluded from the release. It means they're not taken into account when the release process figured out the next version number, and updated the changelog.</p>
+
+        <p>Commits without language scope:</p>
+        <ul>
+          <li>abcdefg fix: something</li>
+        </ul>
+
+        <p>Commits with unknown language scope:</p>
+        <ul>
+          <li>abcdef2 fix(pascal): what</li>
+        </ul>"
+    `);
   });
 });

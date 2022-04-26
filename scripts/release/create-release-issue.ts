@@ -59,6 +59,34 @@ export function getVersionChangesText(versions: Versions): string {
   }).join('\n');
 }
 
+export function getSkippedCommitsText({
+  commitsWithoutLanguageScope,
+  commitsWithUnknownLanguageScope,
+}: {
+  commitsWithoutLanguageScope: string[];
+  commitsWithUnknownLanguageScope: string[];
+}): string {
+  if (
+    commitsWithoutLanguageScope.length === 0 &&
+    commitsWithUnknownLanguageScope.length === 0
+  ) {
+    return '_(None)_';
+  }
+
+  return `<p></p>
+  <p>${TEXT.skippedCommitsDesc}</p>
+
+  <p>Commits without language scope:</p>
+  <ul>
+    ${commitsWithoutLanguageScope.map((commit) => `<li>${commit}</li>`)}
+  </ul>
+
+  <p>Commits with unknown language scope:</p>
+  <ul>
+    ${commitsWithUnknownLanguageScope.map((commit) => `<li>${commit}</li>`)}
+  </ul>`;
+}
+
 export function parseCommit(commit: string): Commit {
   const LENGTH_SHA1 = 8;
   const hash = commit.slice(0, LENGTH_SHA1);
@@ -217,23 +245,17 @@ async function createReleaseIssue(): Promise<void> {
     })
     .filter(Boolean) as PassedCommit[];
 
-  console.log('[INFO] Skipping these commits due to lack of language scope:');
-  console.log(
-    commitsWithoutLanguageScope.map((commit) => `  ${commit}`).join('\n')
-  );
-
-  console.log('');
-  console.log('[INFO] Skipping these commits due to unknown language scope:');
-  console.log(
-    commitsWithUnknownLanguageScope.map((commit) => `  ${commit}`).join('\n')
-  );
-
   const versions = decideReleaseStrategy({
     versions: readVersions(),
     commits: latestCommits,
   });
 
   const versionChanges = getVersionChangesText(versions);
+
+  const skippedCommits = getSkippedCommitsText({
+    commitsWithoutLanguageScope,
+    commitsWithUnknownLanguageScope,
+  });
 
   const changelogs = LANGUAGES.filter(
     (lang) => !versions[lang].noCommit && versions[lang].current
@@ -256,6 +278,8 @@ async function createReleaseIssue(): Promise<void> {
     TEXT.header,
     TEXT.versionChangeHeader,
     versionChanges,
+    TEXT.skippedCommitsHeader,
+    skippedCommits,
     TEXT.descriptionVersionChanges,
     TEXT.indenpendentVersioning,
     TEXT.changelogHeader,

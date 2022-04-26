@@ -10,43 +10,17 @@ nvm use && yarn
 
 ## Setup dev environment
 
-You can also execute docker commands one by one, see [Docker commands](#docker)
-
 ```bash
 yarn docker:setup
 ```
 
-### Docker
-
-#### Build
-
-Build docker image from [Dockerfile](./Dockerfile)
-
-[How to add a new client](https://api-clients-automation.netlify.app/docs/addNewClient) | [How to add a new language](https://api-clients-automation.netlify.app/docs/addNewLanguage) | [Common Test Suite](https://api-clients-automation.netlify.app/docs/commonTestSuite) | [Run the playground](https://api-clients-automation.netlify.app/docs/playground)
-
-```bash
-yarn docker:build
-```
-
-#### Mount
-
-Mount docker image on `dev` container
-
-```bash
-yarn docker:mount
-```
-
-#### Clean
-
-Stops `dev` container and clean the built image
-
-```bash
-yarn docker:clean
-```
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/setupRepository)
 
 ## Contributing
 
 You can make changes locally and run commands through the docker container.
+
+[Specs CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/specsCommands) • [Clients CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/clientsCommands) • [CTS CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/ctsCommands)
 
 ### Build and validate specs
 
@@ -56,32 +30,7 @@ You can make changes locally and run commands through the docker container.
 yarn docker build specs <client | all>
 ```
 
-#### Build all specs
-
-```bash
-yarn docker build specs
-```
-
-#### Build specific spec
-
-```bash
-yarn docker build specs recommend
-```
-
-#### Fix the specs format
-
-This is used by the build script and should not need to be called manually but if you want to format all specs file do:
-
-```bash
-yarn specs:fix
-```
-
-If you just want to check the format (not override the files), run:
-
-```bash
-yarn specs:lint <client>
-yarn specs:lint search
-```
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/addNewApiClient)
 
 ### Generate clients based on the [`specs`](./specs/)
 
@@ -91,47 +40,11 @@ yarn specs:lint search
 yarn docker generate <language | all> <client | all>
 ```
 
-#### Generate all clients
-
-```bash
-yarn docker generate
-```
-
-### Generate specific client for specific language
-
-#### Usage
-
-```bash
-yarn docker build clients <language | all> <client | all>
-```
-
-### Build specific client for specific language
-
-```bash
-yarn docker build clients java recommend
-```
-
-### Verbose command
-
-You can add `-v` to almost every command to have a more verbose output.
-
-### Interactive command
-
-If you want to choose the language and client from a list you can add the `--interactive` option, or `-i`.
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/addNewLanguage)
 
 ## Testing clients
 
 You can test our generated clients by running:
 
-- The playground [`playground`](./playground) ([Playground README](./docs/playground.md))
-- Tests with our [`Common Test Suite`](./tests/) ([CTS README](./docs/commonTestSuite.md)).
-
-# Troubleshooting
-
-> `Error: The operation couldn't be completed. Unable to locate a Java Runtime.`
-
-Java is not located in your PATH, either source the right `.bash_profile`, `.zshrc`, etc. file or do the following command in this repository:
-
-```bash
-echo 'export PATH="/usr/local/opt/openjdk/bin:$PATH"' > .bash_profile && source .bash_profile
-```
+- The playground [`playground`](./playground) ([Playground](https://api-clients-automation.netlify.app/docs/automation/testing/playground.md))
+- Tests with our [`Common Test Suite`](./tests/) ([Common Test Suite](https://api-clients-automation.netlify.app/docs/automation/testing/commonTestSuite.md)).

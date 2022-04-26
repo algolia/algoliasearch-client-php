@@ -14,13 +14,13 @@ nvm use && yarn
 yarn docker:setup
 ```
 
-[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/setupRepository)
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/setup-repository)
 
 ## Contributing
 
 You can make changes locally and run commands through the docker container.
 
-[Specs CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/specsCommands) • [Clients CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/clientsCommands) • [CTS CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/ctsCommands)
+[Specs CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/specs-commands) • [Clients CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/clients-commands) • [CTS CLI commands](https://api-clients-automation.netlify.app/docs/automation/CLI/cts-commands)
 
 ### Build and validate specs
 
@@ -30,7 +30,7 @@ You can make changes locally and run commands through the docker container.
 yarn docker build specs <client | all>
 ```
 
-[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/addNewApiClient)
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/add-new-api-client)
 
 ### Generate clients based on the [`specs`](./specs/)
 
@@ -40,11 +40,11 @@ yarn docker build specs <client | all>
 yarn docker generate <language | all> <client | all>
 ```
 
-[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/addNewLanguage)
+[Read more on our documentation](https://api-clients-automation.netlify.app/docs/automation/add-new-language)
 
 ## Testing clients
 
 You can test our generated clients by running:
 
 - The playground [`playground`](./playground) ([Playground](https://api-clients-automation.netlify.app/docs/automation/testing/playground.md))
-- Tests with our [`Common Test Suite`](./tests/) ([Common Test Suite](https://api-clients-automation.netlify.app/docs/automation/testing/commonTestSuite.md)).
+- Tests with our [`Common Test Suite`](./tests/) ([Common Test Suite](https://api-clients-automation.netlify.app/docs/automation/testing/common-test-suite.md)).

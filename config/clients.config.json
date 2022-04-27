@@ -22,7 +22,7 @@
     }
   },
   "php": {
-    "folder": "clients/algoliasearch-client-php",
+    "folder": "clients/algoliasearch-client-php/lib",
     "mainPackage": "php-search",
     "modelFolder": "lib/Model",
     "customGenerator": "algolia-php",

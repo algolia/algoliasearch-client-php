@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetRecommendationsResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResponse[]',
+        'results' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResponse[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'results' => null,
     ];
@@ -154,9 +160,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -166,7 +172,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -195,7 +201,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -204,4 +210,3 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
         unset($this->container[$offset]);
     }
 }
-

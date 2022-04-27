@@ -2,33 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ReRankingApplyFilter Class Doc Comment
  *
  * @category Class
  * @description When Dynamic Re-Ranking is enabled, only records that match these filters will be impacted by Dynamic Re-Ranking.
- *
  * @package Algolia\AlgoliaSearch
  */
-class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelTypes = [
-
-    ];
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelTypes = [];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelFormats = [
-
-    ];
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -55,18 +55,14 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @var string[]
      */
-    protected static $setters = [
-
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -130,9 +126,9 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -142,7 +138,7 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -171,7 +167,7 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -180,4 +176,3 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

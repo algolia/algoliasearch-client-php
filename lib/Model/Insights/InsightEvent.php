@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * InsightEvent Class Doc Comment
  *
  * @category Class
  * @description Insights event.
- *
  * @package Algolia\AlgoliaSearch
  */
-class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\EventType',
         'eventName' => 'string',
@@ -30,10 +34,10 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'eventType' => null,
         'eventName' => null,
@@ -172,19 +176,30 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['eventType']) || $this->container['eventType'] === null) {
+        if (
+            !isset($this->container['eventType']) ||
+            $this->container['eventType'] === null
+        ) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (!isset($this->container['eventName']) || $this->container['eventName'] === null) {
+        if (
+            !isset($this->container['eventName']) ||
+            $this->container['eventName'] === null
+        ) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (
+            !isset($this->container['index']) ||
+            $this->container['index'] === null
+        ) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
+        if (
+            !isset($this->container['userToken']) ||
+            $this->container['userToken'] === null
+        ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -236,7 +251,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventName
      *
-     * @param string $eventName a user-defined string used to categorize events
+     * @param string $eventName A user-defined string used to categorize events.
      *
      * @return self
      */
@@ -260,7 +275,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets index
      *
-     * @param string $index name of the targeted index
+     * @param string $index Name of the targeted index.
      *
      * @return self
      */
@@ -308,7 +323,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets timestamp
      *
-     * @param int|null $timestamp time of the event expressed in milliseconds since the Unix epoch
+     * @param int|null $timestamp Time of the event expressed in milliseconds since the Unix epoch.
      *
      * @return self
      */
@@ -417,9 +432,9 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -429,7 +444,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -458,7 +473,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -467,4 +482,3 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
-

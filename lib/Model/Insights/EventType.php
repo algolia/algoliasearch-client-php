@@ -2,12 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * EventType Class Doc Comment
  *
  * @category Class
  * @description An eventType can be a click, a conversion, or a view.
- *
  * @package Algolia\AlgoliaSearch
  */
 class EventType
@@ -15,24 +16,18 @@ class EventType
     /**
      * Possible values of this enum
      */
-    const CLICK = 'click';
+    public const CLICK = 'click';
 
-    const CONVERSION = 'conversion';
+    public const CONVERSION = 'conversion';
 
-    const VIEW = 'view';
+    public const VIEW = 'view';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
     {
-        return [
-            self::CLICK,
-            self::CONVERSION,
-            self::VIEW,
-        ];
+        return [self::CLICK, self::CONVERSION, self::VIEW];
     }
 }
-

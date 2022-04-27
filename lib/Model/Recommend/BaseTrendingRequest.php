@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BaseTrendingRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingModels',
         'facetName' => 'string',
@@ -22,10 +27,10 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'model' => null,
         'facetName' => null,
@@ -128,10 +133,12 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['model']) || $this->container['model'] === null) {
+        if (
+            !isset($this->container['model']) ||
+            $this->container['model'] === null
+        ) {
             $invalidProperties[] = "'model' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -183,7 +190,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetName
      *
-     * @param string|null $facetName the facet name to use for trending models
+     * @param string|null $facetName The facet name to use for trending models.
      *
      * @return self
      */
@@ -207,7 +214,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetValue
      *
-     * @param string|null $facetValue the facet value to use for trending models
+     * @param string|null $facetValue The facet value to use for trending models.
      *
      * @return self
      */
@@ -220,9 +227,9 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -232,7 +239,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -261,7 +268,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -270,4 +277,3 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SnippetResult Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'value' => 'string',
         'matchLevel' => '\Algolia\AlgoliaSearch\Model\Recommend\MatchLevel',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'value' => null,
         'matchLevel' => null,
@@ -148,7 +153,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets value
      *
-     * @param string|null $value markup text with occurrences highlighted
+     * @param string|null $value Markup text with occurrences highlighted.
      *
      * @return self
      */
@@ -185,9 +190,9 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -197,7 +202,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -226,7 +231,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -235,4 +240,3 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         unset($this->container[$offset]);
     }
 }
-

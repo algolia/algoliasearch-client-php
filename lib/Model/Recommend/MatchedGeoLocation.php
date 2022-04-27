@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MatchedGeoLocation Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'lat' => 'double',
         'lng' => 'double',
@@ -22,10 +27,10 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'lat' => 'double',
         'lng' => 'double',
@@ -145,7 +150,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets lat
      *
-     * @return float|null
+     * @return double|null
      */
     public function getLat()
     {
@@ -155,7 +160,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets lat
      *
-     * @param float|null $lat latitude of the matched location
+     * @param double|null $lat Latitude of the matched location.
      *
      * @return self
      */
@@ -169,7 +174,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets lng
      *
-     * @return float|null
+     * @return double|null
      */
     public function getLng()
     {
@@ -179,7 +184,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets lng
      *
-     * @param float|null $lng longitude of the matched location
+     * @param double|null $lng Longitude of the matched location.
      *
      * @return self
      */
@@ -203,7 +208,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets distance
      *
-     * @param int|null $distance distance between the matched location and the search location (in meters)
+     * @param int|null $distance Distance between the matched location and the search location (in meters).
      *
      * @return self
      */
@@ -216,9 +221,9 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -228,7 +233,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -257,7 +262,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -266,4 +271,3 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

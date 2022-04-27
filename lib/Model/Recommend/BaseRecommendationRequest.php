@@ -2,29 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BaseRecommendationRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
+        'model' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
         'objectID' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'model' => null,
         'objectID' => null,
@@ -121,13 +127,18 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['model']) || $this->container['model'] === null) {
+        if (
+            !isset($this->container['model']) ||
+            $this->container['model'] === null
+        ) {
             $invalidProperties[] = "'model' can't be null";
         }
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -179,7 +190,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -192,9 +203,9 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +215,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +244,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +253,3 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
-

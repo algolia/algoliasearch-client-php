@@ -2,12 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TrendingModels Class Doc Comment
  *
  * @category Class
  * @description The trending model to use.
- *
  * @package Algolia\AlgoliaSearch
  */
 class TrendingModels
@@ -15,21 +16,16 @@ class TrendingModels
     /**
      * Possible values of this enum
      */
-    const FACETS = 'trending-facets';
+    public const FACETS = 'trending-facets';
 
-    const ITEMS = 'trending-items';
+    public const ITEMS = 'trending-items';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
     {
-        return [
-            self::FACETS,
-            self::ITEMS,
-        ];
+        return [self::FACETS, self::ITEMS];
     }
 }
-

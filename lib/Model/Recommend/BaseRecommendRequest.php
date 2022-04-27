@@ -2,32 +2,39 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BaseRecommendRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'threshold' => 'int',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'queryParameters' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'fallbackParameters' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'threshold' => null,
@@ -123,13 +130,15 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
             $this->container['threshold'] = $data['threshold'];
         }
         if (isset($data['maxRecommendations'])) {
-            $this->container['maxRecommendations'] = $data['maxRecommendations'];
+            $this->container['maxRecommendations'] =
+                $data['maxRecommendations'];
         }
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
         }
         if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] = $data['fallbackParameters'];
+            $this->container['fallbackParameters'] =
+                $data['fallbackParameters'];
         }
     }
 
@@ -142,18 +151,26 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (!isset($this->container['threshold']) || $this->container['threshold'] === null) {
+        if (
+            !isset($this->container['threshold']) ||
+            $this->container['threshold'] === null
+        ) {
             $invalidProperties[] = "'threshold' can't be null";
         }
-        if (($this->container['threshold'] > 100)) {
-            $invalidProperties[] = "invalid value for 'threshold', must be smaller than or equal to 100.";
+        if ($this->container['threshold'] > 100) {
+            $invalidProperties[] =
+                "invalid value for 'threshold', must be smaller than or equal to 100.";
         }
 
-        if (($this->container['threshold'] < 0)) {
-            $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
+        if ($this->container['threshold'] < 0) {
+            $invalidProperties[] =
+                "invalid value for 'threshold', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -183,7 +200,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName
      *
-     * @param string $indexName the Algolia index name
+     * @param string $indexName The Algolia index name.
      *
      * @return self
      */
@@ -207,17 +224,21 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets threshold
      *
-     * @param int $threshold the threshold to use when filtering recommendations by their score
+     * @param int $threshold The threshold to use when filtering recommendations by their score.
      *
      * @return self
      */
     public function setThreshold($threshold)
     {
-        if (($threshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling BaseRecommendRequest., must be smaller than or equal to 100.');
+        if ($threshold > 100) {
+            throw new \InvalidArgumentException(
+                'invalid value for $threshold when calling BaseRecommendRequest., must be smaller than or equal to 100.'
+            );
         }
-        if (($threshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling BaseRecommendRequest., must be bigger than or equal to 0.');
+        if ($threshold < 0) {
+            throw new \InvalidArgumentException(
+                'invalid value for $threshold when calling BaseRecommendRequest., must be bigger than or equal to 0.'
+            );
         }
 
         $this->container['threshold'] = $threshold;
@@ -299,9 +320,9 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -311,7 +332,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -340,7 +361,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -349,4 +370,3 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

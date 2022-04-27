@@ -2,8 +2,15 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\InsightsConfig;
+use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -30,8 +37,10 @@ class InsightsClient
      * @param InsightsConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(ApiWrapperInterface $apiWrapper, InsightsConfig $config)
-    {
+    public function __construct(
+        ApiWrapperInterface $apiWrapper,
+        InsightsConfig $config
+    ) {
         $this->config = $config;
 
         $this->api = $apiWrapper;
@@ -47,7 +56,12 @@ class InsightsClient
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $allowedRegions = explode('-', 'us-de');
-        $config = InsightsConfig::create($appId, $apiKey, $region, $allowedRegions);
+        $config = InsightsConfig::create(
+            $appId,
+            $apiKey,
+            $region,
+            $allowedRegions
+        );
 
         return static::createWithConfig($config);
     }
@@ -65,7 +79,9 @@ class InsightsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create('insights.'.$config->getRegion().'.algolia.io');
+            $clusterHosts = ClusterHosts::create(
+                'insights.' . $config->getRegion() . '.algolia.io'
+            );
         }
 
         $apiWrapper = new ApiWrapper(
@@ -118,14 +134,15 @@ class InsightsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -161,14 +178,15 @@ class InsightsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -205,18 +223,19 @@ class InsightsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -224,7 +243,6 @@ class InsightsClient
      *
      * @param array $insightEvents insightEvents (required)
      * - $insightEvents['events'] => (array) Array of events sent. (required)
-     *
      * @see \Algolia\AlgoliaSearch\Model\Insights\InsightEvents
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Insights\PushEventsResponse
@@ -232,7 +250,10 @@ class InsightsClient
     public function pushEvents($insightEvents)
     {
         // verify the required parameter 'insightEvents' is set
-        if ($insightEvents === null || (is_array($insightEvents) && count($insightEvents) === 0)) {
+        if (
+            $insightEvents === null ||
+            (is_array($insightEvents) && count($insightEvents) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $insightEvents when calling pushEvents'
             );
@@ -246,7 +267,12 @@ class InsightsClient
             $httpBody = $insightEvents;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -283,25 +309,30 @@ class InsightsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
-    private function sendRequest($method, $resourcePath, $queryParams, $httpBody)
-    {
+    private function sendRequest(
+        $method,
+        $resourcePath,
+        $queryParams,
+        $httpBody
+    ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

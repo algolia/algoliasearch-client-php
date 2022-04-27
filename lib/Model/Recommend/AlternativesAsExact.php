@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AlternativesAsExact Class Doc Comment
  *
@@ -13,15 +15,14 @@ class AlternativesAsExact
     /**
      * Possible values of this enum
      */
-    const IGNORE_PLURALS = 'ignorePlurals';
+    public const IGNORE_PLURALS = 'ignorePlurals';
 
-    const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
+    public const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
 
-    const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
+    public const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
@@ -33,4 +34,3 @@ class AlternativesAsExact
         ];
     }
 }
-

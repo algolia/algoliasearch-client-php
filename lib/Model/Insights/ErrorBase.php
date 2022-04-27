@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ErrorBase Class Doc Comment
  *
  * @category Class
  * @description Error.
- *
  * @package Algolia\AlgoliaSearch
  */
-class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'message' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'message' => null,
     ];
@@ -156,9 +160,9 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -168,7 +172,7 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -197,7 +201,7 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -206,4 +210,3 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         unset($this->container[$offset]);
     }
 }
-

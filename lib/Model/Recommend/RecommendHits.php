@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * RecommendHits Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hits' => null,
     ];
@@ -154,9 +159,9 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -166,7 +171,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -195,7 +200,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -204,4 +209,3 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         unset($this->container[$offset]);
     }
 }
-

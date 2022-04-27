@@ -2,33 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * NumericFilters Class Doc Comment
  *
  * @category Class
  * @description Filter on numeric attributes.
- *
  * @package Algolia\AlgoliaSearch
  */
-class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelTypes = [
-
-    ];
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelTypes = [];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelFormats = [
-
-    ];
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -55,18 +55,14 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @var string[]
      */
-    protected static $setters = [
-
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -130,9 +126,9 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -142,7 +138,7 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -171,7 +167,7 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -180,4 +176,3 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
-

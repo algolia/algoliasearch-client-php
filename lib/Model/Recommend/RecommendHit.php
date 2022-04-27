@@ -2,35 +2,41 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * RecommendHit Class Doc Comment
  *
  * @category Class
  * @description A Recommend hit.
- *
  * @package Algolia\AlgoliaSearch
  */
-class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
-        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult',
-        'snippetResult' => '\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult',
+        'highlightResult' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult',
+        'snippetResult' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo',
         'distinctSeqID' => 'int',
         'score' => 'double',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'highlightResult' => null,
@@ -151,18 +157,26 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['score']) || $this->container['score'] === null) {
+        if (
+            !isset($this->container['score']) ||
+            $this->container['score'] === null
+        ) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if (($this->container['score'] > 100)) {
-            $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
+        if ($this->container['score'] > 100) {
+            $invalidProperties[] =
+                "invalid value for 'score', must be smaller than or equal to 100.";
         }
 
-        if (($this->container['score'] < 0)) {
-            $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
+        if ($this->container['score'] < 0) {
+            $invalidProperties[] =
+                "invalid value for 'score', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -192,7 +206,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -302,7 +316,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets score
      *
-     * @return float
+     * @return double
      */
     public function getScore()
     {
@@ -312,17 +326,21 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param float $score the recommendation score
+     * @param double $score The recommendation score.
      *
      * @return self
      */
     public function setScore($score)
     {
-        if (($score > 100)) {
-            throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be smaller than or equal to 100.');
+        if ($score > 100) {
+            throw new \InvalidArgumentException(
+                'invalid value for $score when calling RecommendHit., must be smaller than or equal to 100.'
+            );
         }
-        if (($score < 0)) {
-            throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be bigger than or equal to 0.');
+        if ($score < 0) {
+            throw new \InvalidArgumentException(
+                'invalid value for $score when calling RecommendHit., must be bigger than or equal to 0.'
+            );
         }
 
         $this->container['score'] = $score;
@@ -332,9 +350,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -344,7 +362,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -373,7 +391,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -382,4 +400,3 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
-

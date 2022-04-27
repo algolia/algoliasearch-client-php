@@ -2,30 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetRecommendationsParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;getRecommendations&#x60; parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]',
+        'requests' =>
+            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'requests' => null,
     ];
@@ -116,10 +121,12 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
             $invalidProperties[] = "'requests' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -147,7 +154,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests the `getRecommendations` requests
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests The `getRecommendations` requests.
      *
      * @return self
      */
@@ -160,9 +167,9 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +179,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +208,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +217,3 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

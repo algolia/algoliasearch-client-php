@@ -2,33 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TagFilters Class Doc Comment
  *
  * @category Class
  * @description Filter hits by tags.
- *
  * @package Algolia\AlgoliaSearch
  */
-class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelTypes = [
-
-    ];
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelTypes = [];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
-    protected static $modelFormats = [
-
-    ];
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -55,18 +55,14 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @var string[]
      */
-    protected static $setters = [
-
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -130,9 +126,9 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -142,7 +138,7 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -171,7 +167,7 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -180,4 +176,3 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         unset($this->container[$offset]);
     }
 }
-

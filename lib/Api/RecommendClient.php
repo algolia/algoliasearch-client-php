@@ -2,8 +2,15 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
+use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -30,8 +37,10 @@ class RecommendClient
      * @param RecommendConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(ApiWrapperInterface $apiWrapper, RecommendConfig $config)
-    {
+    public function __construct(
+        ApiWrapperInterface $apiWrapper,
+        RecommendConfig $config
+    ) {
         $this->config = $config;
 
         $this->api = $apiWrapper;
@@ -45,7 +54,9 @@ class RecommendClient
      */
     public static function create($appId = null, $apiKey = null)
     {
-        return static::createWithConfig(RecommendConfig::create($appId, $apiKey));
+        return static::createWithConfig(
+            RecommendConfig::create($appId, $apiKey)
+        );
     }
 
     /**
@@ -57,16 +68,23 @@ class RecommendClient
     {
         $config = clone $config;
 
-        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
+        $cacheKey = sprintf(
+            '%s-clusterHosts-%s',
+            __CLASS__,
+            $config->getAppId()
+        );
 
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
-        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
+        } elseif (
+            false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))
+        ) {
             // We'll try to restore the ClusterHost from cache, if we cannot
             // we create a new instance and set the cache key
-            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
-                ->setCacheKey($cacheKey);
+            $clusterHosts = ClusterHosts::createFromAppId(
+                $config->getAppId()
+            )->setCacheKey($cacheKey);
         }
 
         $apiWrapper = new ApiWrapper(
@@ -119,14 +137,15 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -162,14 +181,15 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -177,7 +197,6 @@ class RecommendClient
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
      * - $getRecommendationsParams['requests'] => (array) The `getRecommendations` requests. (required)
-     *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse
@@ -185,7 +204,11 @@ class RecommendClient
     public function getRecommendations($getRecommendationsParams)
     {
         // verify the required parameter 'getRecommendationsParams' is set
-        if ($getRecommendationsParams === null || (is_array($getRecommendationsParams) && count($getRecommendationsParams) === 0)) {
+        if (
+            $getRecommendationsParams === null ||
+            (is_array($getRecommendationsParams) &&
+                count($getRecommendationsParams) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $getRecommendationsParams when calling getRecommendations'
             );
@@ -199,7 +222,12 @@ class RecommendClient
             $httpBody = $getRecommendationsParams;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -236,18 +264,19 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -284,25 +313,30 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
-    private function sendRequest($method, $resourcePath, $queryParams, $httpBody)
-    {
+    private function sendRequest(
+        $method,
+        $resourcePath,
+        $queryParams,
+        $httpBody
+    ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

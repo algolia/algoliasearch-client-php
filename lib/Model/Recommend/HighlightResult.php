@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * HighlightResult Class Doc Comment
  *
  * @category Class
  * @description Highlighted attributes.
- *
  * @package Algolia\AlgoliaSearch
  */
-class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'value' => 'string',
         'matchLevel' => '\Algolia\AlgoliaSearch\Model\Recommend\MatchLevel',
@@ -25,10 +29,10 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'value' => null,
         'matchLevel' => null,
@@ -164,7 +168,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value
      *
-     * @param string|null $value markup text with occurrences highlighted
+     * @param string|null $value Markup text with occurrences highlighted.
      *
      * @return self
      */
@@ -212,7 +216,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchedWords
      *
-     * @param string[]|null $matchedWords list of words from the query that matched the object
+     * @param string[]|null $matchedWords List of words from the query that matched the object.
      *
      * @return self
      */
@@ -236,7 +240,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets fullyHighlighted
      *
-     * @param bool|null $fullyHighlighted whether the entire attribute value is highlighted
+     * @param bool|null $fullyHighlighted Whether the entire attribute value is highlighted.
      *
      * @return self
      */
@@ -249,9 +253,9 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -261,7 +265,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -290,7 +294,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -299,4 +303,3 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

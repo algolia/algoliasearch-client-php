@@ -2604,7 +2604,8 @@ public class SearchClient extends ApiClient {
   }
 
   /**
-   * Retrieve dictionaries settings.
+   * Retrieve dictionaries settings. The API stores languages whose standard entries are disabled.
+   * Fetch settings does not return false values.
    *
    * @return GetDictionarySettingsResponse
    * @throws AlgoliaRuntimeException If fail to call the API, e.g. server error or cannot
@@ -2627,7 +2628,8 @@ public class SearchClient extends ApiClient {
   }
 
   /**
-   * (asynchronously) Retrieve dictionaries settings.
+   * (asynchronously) Retrieve dictionaries settings. The API stores languages whose standard
+   * entries are disabled. Fetch settings does not return false values.
    *
    * @param callback The callback to be executed when the API call finishes
    * @return The request call

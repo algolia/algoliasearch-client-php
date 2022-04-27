@@ -669,7 +669,7 @@ class SearchClient
     }
 
     /**
-     * clear all objects from an index.
+     * Clear all objects from an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -1276,7 +1276,7 @@ class SearchClient
     }
 
     /**
-     * Retrieve dictionaries settings. The API stores languages whose standard entries are disabled. Fetch settings does not return false values.
+     * Retrieve dictionaries settings.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse

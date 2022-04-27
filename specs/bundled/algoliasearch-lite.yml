@@ -1948,6 +1948,51 @@ servers:
 security:
   - appId: []
     apiKey: []
+tags:
+  - name: Advanced
+    description: Advanced operations.
+  - name: Api Keys
+    description: Manage your Api Keys.
+  - name: Clusters
+    description: Clusters operations.
+  - name: Dictionnaries
+    description: Dictionnaries operations.
+  - name: Indices
+    description: Manage indices.
+  - name: Records
+    description: Records operations.
+  - name: Rules
+    description: Rules operations.
+  - name: Search
+    description: Perform search operations.
+  - name: Synonyms
+    description: Synonyms operations.
+  - name: Vaults
+    description: Vault operations.
+  - name: _model_index_settings
+    x-displayName: Index Settings
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/indexSettings" />.
+x-tagGroups:
+  - name: Search and Indexing
+    tags:
+      - Indices
+      - Records
+      - Search
+  - name: Relevance
+    tags:
+      - Rules
+      - Synonyms
+      - Dictionnaries
+  - name: Other
+    tags:
+      - Api Keys
+      - Clusters
+      - Vaults
+      - Advanced
+  - name: Models
+    tags:
+      - _model_index_settings
 paths:
   /1{path}:
     post:
@@ -1982,6 +2027,8 @@ paths:
         - algoliasearch-lite
   /1/indexes/{indexName}/query:
     post:
+      tags:
+        - algoliasearch-lite
       operationId: search
       description: Get search results.
       summary: Get search results.
@@ -2008,10 +2055,10 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '404':
           $ref: '#/components/responses/IndexNotFound'
-      tags:
-        - algoliasearch-lite
   /1/indexes/*/queries:
     post:
+      tags:
+        - algoliasearch-lite
       operationId: multipleQueries
       description: Get search results for the given requests.
       summary: Get search results for the given requests.
@@ -2072,10 +2119,10 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '404':
           $ref: '#/components/responses/IndexNotFound'
-      tags:
-        - algoliasearch-lite
   /1/indexes/{indexName}/facets/{facetName}/query:
     post:
+      tags:
+        - algoliasearch-lite
       operationId: searchForFacetValues
       summary: Search for values of a given facet
       description: >-
@@ -2147,5 +2194,3 @@ paths:
           $ref: '#/components/responses/MethodNotAllowed'
         '404':
           $ref: '#/components/responses/IndexNotFound'
-      tags:
-        - algoliasearch-lite

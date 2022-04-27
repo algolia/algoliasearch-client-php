@@ -1,0 +1,99 @@
+<?php
+
+namespace Algolia\AlgoliaSearch\Test\Api;
+
+use Algolia\AlgoliaSearch\Api\{{client}};
+use Algolia\AlgoliaSearch\Configuration\{{clientPrefix}}Config;
+use Algolia\AlgoliaSearch\Http\HttpClientInterface;
+use Algolia\AlgoliaSearch\Http\Psr7\Response;
+use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
+use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestInterface;
+
+/**
+ * {{clientPrefix}}Test
+ *
+ * @category Class
+ * @package  Algolia\AlgoliaSearch
+ */
+class {{clientPrefix}}Test extends TestCase implements HttpClientInterface
+{
+    /**
+     * @var RequestInterface[]
+     */
+    private $recordedRequests = [];
+
+    protected function assertRequests(array $requests)
+    {
+        $this->assertGreaterThan(0, count($requests));
+        $this->assertEquals(count($requests), count($this->recordedRequests));
+
+        foreach ($requests as $i => $request) {
+            $recordedRequest = $this->recordedRequests[$i];
+
+            $this->assertEquals($request['method'], $recordedRequest->getMethod());
+
+            $this->assertEquals($request['path'], $recordedRequest->getUri()->getPath());
+
+            if (isset($request['body'])) {
+                $this->assertEquals(
+                    json_encode($request['body']),
+                    $recordedRequest->getBody()->getContents()
+                );
+            }
+        }
+    }
+
+    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
+    {
+        $this->recordedRequests[] = $request;
+
+        return new Response(200, [], '{}');
+    }
+
+    protected function getClient()
+    {
+        $api = new ApiWrapper($this, {{clientPrefix}}Config::create(getenv('ALGOLIA_APP_ID'), getenv('ALGOLIA_API_KEY')), ClusterHosts::create('127.0.0.1'));
+        $config = {{clientPrefix}}Config::create('foo', 'bar');
+
+        return new {{client}}($api, $config);
+    }
+
+    {{#blocks}}
+    {{#tests}}
+
+    /**
+    * Test case for {{#lambda.titlecase}}{{{method}}}{{/lambda.titlecase}}
+    * {{{testName}}}
+    */
+    public function test{{#lambda.titlecase}}{{method}}{{/lambda.titlecase}}{{testIndex}}()
+    {
+        $client = $this->getClient();
+
+        {{#hasParameters}}
+
+        $client->{{{method}}}(
+        {{#parametersWithDataType}}{{> generateParams}}{{/parametersWithDataType}}
+        );
+        {{/hasParameters}}
+        {{^hasParameters}}
+            $client->{{{method}}}();
+        {{/hasParameters}}
+
+        $this->assertRequests([
+            [
+                "path" => "{{{request.path}}}",
+                "method" => "{{{request.method}}}",
+                {{#request.data}}
+                "body" => json_decode("{{#lambda.escapequotes}}{{{request.data}}}{{/lambda.escapequotes}}"),
+                {{/request.data}}
+                {{#request.searchParams}}
+                "searchParams" => json_decode("{{#lambda.escapequotes}}{{{request.searchParams}}}{{/lambda.escapequotes}}"),
+                {{/request.searchParams}}
+            ],
+        ]);
+    }
+    {{/tests}}
+    {{/blocks}}
+}

@@ -18,9 +18,14 @@ import org.openapitools.codegen.IJsonSchemaValidationProperties;
 public class ParametersWithDataType {
 
   private final Map<String, CodegenModel> models;
+  private final String language;
 
-  public ParametersWithDataType(Map<String, CodegenModel> models) {
+  public ParametersWithDataType(
+    Map<String, CodegenModel> models,
+    String language
+  ) {
     this.models = models;
+    this.language = language;
   }
 
   public Map<String, Object> buildJSONForRequest(
@@ -114,13 +119,16 @@ public class ParametersWithDataType {
     }
 
     String finalParamName = paramName;
-    if (paramName.startsWith("_")) {
+    if (language.equals("java") && paramName.startsWith("_")) {
       finalParamName = paramName.substring(1);
     }
+    Boolean isFirstLevel = suffix == 0;
 
     Map<String, Object> testOutput = createDefaultOutput();
     testOutput.put("key", finalParamName);
     testOutput.put("parentSuffix", suffix - 1);
+    testOutput.put("isFirstLevel", isFirstLevel);
+    testOutput.put("hasGeneratedKey", finalParamName.matches("(.*)_[0-9]$"));
     testOutput.put("suffix", suffix);
     testOutput.put("parent", parent);
     testOutput.put("objectName", Utils.capitalize(baseType));

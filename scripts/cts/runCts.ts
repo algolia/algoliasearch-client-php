@@ -1,4 +1,4 @@
-import { run } from '../common';
+import { CI, run } from '../common';
 import { createSpinner } from '../oraLog';
 
 async function runCtsOne(language: string, verbose: boolean): Promise<void> {
@@ -15,7 +15,6 @@ async function runCtsOne(language: string, verbose: boolean): Promise<void> {
         verbose,
       });
       break;
-    /* not working yet
     case 'php': {
       let php = 'php8';
       if (CI) php = 'php';
@@ -24,7 +23,7 @@ async function runCtsOne(language: string, verbose: boolean): Promise<void> {
         { verbose }
       );
       break;
-    }*/
+    }
     default:
       spinner.warn(`skipping unknown language '${language}' to run the CTS`);
       return;

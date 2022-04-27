@@ -6,11 +6,11 @@ class SearchConfig extends Configuration
 {
     private $defaultWaitTaskTimeBeforeRetry = 100000;
 
-    public static function create($appId = null, $apiKey = null)
+    public static function create($appId, $apiKey)
     {
         $config = [
-            'appId' => null !== $appId ? $appId : getenv('ALGOLIA_APP_ID'),
-            'apiKey' => null !== $apiKey ? $apiKey : getenv('ALGOLIA_API_KEY'),
+            'appId' => $appId,
+            'apiKey' => $apiKey,
         ];
 
         return new static($config);

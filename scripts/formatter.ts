@@ -27,6 +27,7 @@ export async function formatter(
     case 'php':
       cmd = `composer update --working-dir=clients/algoliasearch-client-php \
             && composer dump-autoload --working-dir=clients/algoliasearch-client-php \
+            && yarn run prettier ${folder} --write \
             && PHP_CS_FIXER_IGNORE_ENV=1 ${
               CI ? 'php' : 'php8'
             } clients/algoliasearch-client-php/vendor/bin/php-cs-fixer fix ${folder} --using-cache=no --allow-risky=yes`;

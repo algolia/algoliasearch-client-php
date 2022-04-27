@@ -1,4 +1,12 @@
 {
   "trailingComma": "es5",
-  "singleQuote": true
+  "singleQuote": true,
+  "overrides" : [
+    {
+      "files": "*.php",
+      "options": {
+          "tabWidth": 4
+      }
+    }
+  ]
 }

@@ -76,11 +76,14 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
 
       setTemplateDir("tests/CTS/methods/requests/templates/" + language);
       setOutputDir("tests/output/" + language);
+      String clientName = language.equals("php")
+        ? Utils.createClientName(client, language)
+        : client;
       supportingFiles.add(
         new SupportingFile(
           "requests.mustache",
           testConfig.outputFolder + "/methods/requests",
-          client + testConfig.extension
+          clientName + testConfig.extension
         )
       );
     } catch (IOException e) {
@@ -132,12 +135,16 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
       // We can put whatever we want in the bundle, and it will be accessible in the
       // template
       bundle.put("client", Utils.createClientName(client, language) + "Client");
+      bundle.put("clientPrefix", Utils.createClientName(client, language));
       bundle.put("import", createImportName());
       bundle.put("hasRegionalHost", hasRegionalHost);
       bundle.put("lambda", lambda);
 
       List<Object> blocks = new ArrayList<>();
-      ParametersWithDataType paramsType = new ParametersWithDataType(models);
+      ParametersWithDataType paramsType = new ParametersWithDataType(
+        models,
+        language
+      );
 
       for (Entry<String, Request[]> entry : cts.entrySet()) {
         String operationId = entry.getKey();

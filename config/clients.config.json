@@ -25,7 +25,11 @@
     "folder": "clients/algoliasearch-client-php",
     "mainPackage": "php-search",
     "modelFolder": "lib/Model",
+    "customGenerator": "algolia-php",
     "apiFolder": "lib/Api",
-    "customGenerator": "algolia-php"
+    "tests": {
+      "extension": "Test.php",
+      "outputFolder": "src"
+    }
   }
 }

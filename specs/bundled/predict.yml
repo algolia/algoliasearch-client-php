@@ -92,7 +92,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorBase'
 servers:
-  - url: https://predict-api-oslcbws3zq-ew.a.run.app
+  - url: https://predict-api-432xa6wemq-ew.a.run.app
 security:
   - appId: []
     apiKey: []

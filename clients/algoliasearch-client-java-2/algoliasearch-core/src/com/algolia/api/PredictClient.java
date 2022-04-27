@@ -55,7 +55,7 @@ public class PredictClient extends ApiClient {
     List<StatefulHost> hosts = new ArrayList<StatefulHost>();
     hosts.add(
       new StatefulHost(
-        "predict-api-oslcbws3zq-ew.a.run.app",
+        "predict-api-432xa6wemq-ew.a.run.app",
         "https",
         EnumSet.of(CallType.READ, CallType.WRITE)
       )

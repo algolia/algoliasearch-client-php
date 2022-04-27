@@ -1,6 +1,31 @@
 [
   {
     "method": "multipleQueries",
+    "testName": "multipleQueries for a single request with minimal parameters",
+    "parameters": {
+      "requests": [
+        {
+          "indexName": "theIndexName"
+        }
+      ],
+      "strategy": "stopIfEnoughMatches"
+    },
+    "request": {
+      "path": "/1/indexes/*/queries",
+      "method": "POST",
+      "data": {
+        "requests": [
+          {
+            "indexName": "theIndexName"
+          }
+        ],
+        "strategy": "stopIfEnoughMatches"
+      }
+    }
+  },
+  {
+    "method": "multipleQueries",
+    "testName": "multipleQueries for multiple requests with all parameters",
     "parameters": {
       "requests": [
         {
@@ -8,6 +33,12 @@
           "query": "test",
           "type": "facet",
           "facet": "theFacet",
+          "params": "testParam"
+        },
+        {
+          "indexName": "theIndexName",
+          "query": "test",
+          "type": "default",
           "params": "testParam"
         }
       ],
@@ -23,6 +54,12 @@
             "query": "test",
             "type": "facet",
             "facet": "theFacet",
+            "params": "testParam"
+          },
+          {
+            "indexName": "theIndexName",
+            "query": "test",
+            "type": "default",
             "params": "testParam"
           }
         ],

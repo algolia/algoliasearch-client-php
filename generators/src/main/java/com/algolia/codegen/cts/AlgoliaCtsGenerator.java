@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import org.openapitools.codegen.*;
 
 @SuppressWarnings("unchecked")
@@ -146,20 +147,20 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
         language
       );
 
-      for (Entry<String, Request[]> entry : cts.entrySet()) {
+      for (Entry<String, CodegenOperation> entry : operations.entrySet()) {
         String operationId = entry.getKey();
-        if (!operations.containsKey(operationId)) {
+        if (!cts.containsKey(operationId)) {
           throw new CTSException(
             "operationId " + operationId + " does not exist in the spec"
           );
         }
-        CodegenOperation op = operations.get(operationId);
+        Request[] op = cts.get(operationId);
 
         List<Object> tests = new ArrayList<>();
-        for (int i = 0; i < entry.getValue().length; i++) {
+        for (int i = 0; i < op.length; i++) {
           Map<String, Object> test = paramsType.buildJSONForRequest(
-            entry.getValue()[i],
-            op,
+            op[i],
+            entry.getValue(),
             i
           );
           tests.add(test);
@@ -190,7 +191,18 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
   private Map<String, Request[]> loadCTS()
     throws JsonParseException, JsonMappingException, IOException, CTSException {
     TreeMap<String, Request[]> cts = new TreeMap<>();
-    File dir = new File("tests/CTS/methods/requests/" + client);
+    String clientName = client;
+
+    // This special case allow us to read the `search` CTS to generated the
+    // tests for the `algoliasearch-lite` client, which is only available
+    // in JavaScript
+    if (
+      language.equals("javascript") && clientName.equals("algoliasearch-lite")
+    ) {
+      clientName = "search";
+    }
+
+    File dir = new File("tests/CTS/methods/requests/" + clientName);
     File commonTestDir = new File("tests/CTS/methods/requests/common");
     if (!dir.exists()) {
       throw new CTSException("CTS not found at " + dir.getAbsolutePath(), true);
@@ -217,7 +229,7 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
   }
 
   // operationId -> CodegenOperation
-  private HashMap<String, CodegenOperation> buildOperations(
+  private TreeMap<String, CodegenOperation> buildOperations(
     Map<String, Object> objs
   ) {
     HashMap<String, CodegenOperation> result = new HashMap<>();
@@ -225,20 +237,24 @@ public class AlgoliaCtsGenerator extends DefaultCodegen {
       ((Map<String, List<Map<String, Object>>>) objs.get("apiInfo")).get(
           "apis"
         );
+
     for (Map<String, Object> api : apis) {
       String apiName = ((String) api.get("baseName")).toLowerCase();
       if (!apiName.equals(client.replace("-", ""))) {
         continue;
       }
+
       List<CodegenOperation> operations =
         ((Map<String, List<CodegenOperation>>) api.get("operations")).get(
             "operation"
           );
+
       for (CodegenOperation ope : operations) {
         result.put(ope.operationId, ope);
       }
     }
-    return result;
+
+    return new TreeMap<String, CodegenOperation>(result);
   }
 
   private String createImportName() {

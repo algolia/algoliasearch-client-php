@@ -738,7 +738,22 @@ describe('multipleBatch', () => {
 });
 
 describe('multipleQueries', () => {
-  test('multipleQueries', async () => {
+  test('multipleQueries for a single request with minimal parameters', async () => {
+    const req = (await client.multipleQueries({
+      requests: [{ indexName: 'theIndexName' }],
+      strategy: 'stopIfEnoughMatches',
+    })) as unknown as EchoResponse;
+
+    expect(req.path).toEqual('/1/indexes/*/queries');
+    expect(req.method).toEqual('POST');
+    expect(req.data).toEqual({
+      requests: [{ indexName: 'theIndexName' }],
+      strategy: 'stopIfEnoughMatches',
+    });
+    expect(req.searchParams).toEqual(undefined);
+  });
+
+  test('multipleQueries for multiple requests with all parameters', async () => {
     const req = (await client.multipleQueries({
       requests: [
         {
@@ -746,6 +761,12 @@ describe('multipleQueries', () => {
           query: 'test',
           type: 'facet',
           facet: 'theFacet',
+          params: 'testParam',
+        },
+        {
+          indexName: 'theIndexName',
+          query: 'test',
+          type: 'default',
           params: 'testParam',
         },
       ],
@@ -761,6 +782,12 @@ describe('multipleQueries', () => {
           query: 'test',
           type: 'facet',
           facet: 'theFacet',
+          params: 'testParam',
+        },
+        {
+          indexName: 'theIndexName',
+          query: 'test',
+          type: 'default',
           params: 'testParam',
         },
       ],

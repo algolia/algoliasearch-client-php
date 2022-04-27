@@ -1104,9 +1104,34 @@ class SearchTest extends TestCase implements HttpClientInterface
 
     /**
      * Test case for MultipleQueries
-     * multipleQueries
+     * multipleQueries for a single request with minimal parameters
      */
     public function testMultipleQueries0()
+    {
+        $client = $this->getClient();
+
+        $client->multipleQueries([
+            'requests' => [['indexName' => 'theIndexName']],
+
+            'strategy' => 'stopIfEnoughMatches',
+        ]);
+
+        $this->assertRequests([
+            [
+                'path' => '/1/indexes/*/queries',
+                'method' => 'POST',
+                'body' => json_decode(
+                    "{\"requests\":[{\"indexName\":\"theIndexName\"}],\"strategy\":\"stopIfEnoughMatches\"}"
+                ),
+            ],
+        ]);
+    }
+
+    /**
+     * Test case for MultipleQueries
+     * multipleQueries for multiple requests with all parameters
+     */
+    public function testMultipleQueries1()
     {
         $client = $this->getClient();
 
@@ -1123,6 +1148,16 @@ class SearchTest extends TestCase implements HttpClientInterface
 
                     'params' => 'testParam',
                 ],
+
+                [
+                    'indexName' => 'theIndexName',
+
+                    'query' => 'test',
+
+                    'type' => 'default',
+
+                    'params' => 'testParam',
+                ],
             ],
 
             'strategy' => 'stopIfEnoughMatches',
@@ -1133,7 +1168,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'path' => '/1/indexes/*/queries',
                 'method' => 'POST',
                 'body' => json_decode(
-                    "{\"requests\":[{\"indexName\":\"theIndexName\",\"query\":\"test\",\"type\":\"facet\",\"facet\":\"theFacet\",\"params\":\"testParam\"}],\"strategy\":\"stopIfEnoughMatches\"}"
+                    "{\"requests\":[{\"indexName\":\"theIndexName\",\"query\":\"test\",\"type\":\"facet\",\"facet\":\"theFacet\",\"params\":\"testParam\"},{\"indexName\":\"theIndexName\",\"query\":\"test\",\"type\":\"default\",\"params\":\"testParam\"}],\"strategy\":\"stopIfEnoughMatches\"}"
                 ),
             ],
         ]);

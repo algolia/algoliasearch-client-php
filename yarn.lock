@@ -2627,7 +2627,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@experimental-api-clients-automation/algoliasearch-lite@workspace:clients/algoliasearch-client-javascript/packages/algoliasearch-lite":
+"@experimental-api-clients-automation/algoliasearch-lite@0.0.5, @experimental-api-clients-automation/algoliasearch-lite@workspace:clients/algoliasearch-client-javascript/packages/algoliasearch-lite":
   version: 0.0.0-use.local
   resolution: "@experimental-api-clients-automation/algoliasearch-lite@workspace:clients/algoliasearch-client-javascript/packages/algoliasearch-lite"
   dependencies:
@@ -13234,6 +13234,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "javascript-tests@workspace:tests/output/javascript"
   dependencies:
+    "@experimental-api-clients-automation/algoliasearch-lite": 0.0.5
     "@experimental-api-clients-automation/client-abtesting": 0.0.5
     "@experimental-api-clients-automation/client-analytics": 0.0.5
     "@experimental-api-clients-automation/client-common": 0.0.5

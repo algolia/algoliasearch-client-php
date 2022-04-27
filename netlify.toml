@@ -1,5 +1,5 @@
 [build]
-  command="yarn website:build"
+  command="BUNDLE_WITH_DOC=true DOCKER=true yarn cli build specs all && yarn website:build"
   publish="website/build"
   ignore="git diff --quiet $COMMIT_REF $CACHED_COMMIT_REF -- website/"
 

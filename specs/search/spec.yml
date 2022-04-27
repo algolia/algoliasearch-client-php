@@ -33,6 +33,51 @@ servers:
 security:
   - appId: []
     apiKey: []
+tags:
+  - name: Advanced
+    description: Advanced operations.
+  - name: Api Keys
+    description: Manage your Api Keys.
+  - name: Clusters
+    description: Clusters operations.
+  - name: Dictionnaries
+    description: Dictionnaries operations.
+  - name: Indices
+    description: Manage indices.
+  - name: Records
+    description: Records operations.
+  - name: Rules
+    description: Rules operations.
+  - name: Search
+    description: Perform search operations.
+  - name: Synonyms
+    description: Synonyms operations.
+  - name: Vaults
+    description: Vault operations.
+  - name: _model_index_settings
+    x-displayName: Index Settings
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/indexSettings" />.
+x-tagGroups:
+  - name: Search and Indexing
+    tags:
+      - Indices
+      - Records
+      - Search
+  - name: Relevance
+    tags:
+      - Rules
+      - Synonyms
+      - Dictionnaries
+  - name: Other
+    tags:
+      - Api Keys
+      - Clusters
+      - Vaults
+      - Advanced
+  - name: Models
+    tags:
+      - _model_index_settings
 paths:
   # ######################
   # ### Custom request ###

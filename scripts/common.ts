@@ -24,6 +24,7 @@ export const REPO_URL = `https://github.com/${OWNER}/${REPO}`;
 
 export const CI = Boolean(process.env.CI);
 export const DOCKER = Boolean(process.env.DOCKER);
+export const BUNDLE_WITH_DOC = process.env.BUNDLE_WITH_DOC === 'true';
 
 // This script is run by `yarn workspace ...`, which means the current working directory is `./script`
 export const ROOT_DIR = path.resolve(process.cwd(), '..');
@@ -202,17 +203,12 @@ export async function gitCommit({
   });
 }
 
-export async function checkForCache(
-  {
-    job,
-    folder,
-    generatedFiles,
-    filesToCache,
-    cacheFile,
-  }: CheckForCacheOptions,
-  verbose: boolean
-): Promise<CheckForCache> {
-  const spinner = createSpinner(`checking cache for ${job}`, verbose).start();
+export async function checkForCache({
+  folder,
+  generatedFiles,
+  filesToCache,
+  cacheFile,
+}: CheckForCacheOptions): Promise<CheckForCache> {
   const cache: CheckForCache = {
     cacheExists: false,
     hash: '',
@@ -235,7 +231,6 @@ export async function checkForCache(
   if (generatedFilesExists && (await exists(cacheFile))) {
     const storedHash = (await fsp.readFile(cacheFile)).toString();
     if (storedHash === cache.hash) {
-      spinner.succeed(`job skipped, cache found for ${job}`);
       return {
         cacheExists: true,
         hash: cache.hash,
@@ -243,29 +238,24 @@ export async function checkForCache(
     }
   }
 
-  spinner.info(`cache not found for ${job}`);
-
   return cache;
 }
 
 export async function buildCustomGenerators(verbose: boolean): Promise<void> {
+  const spinner = createSpinner('building custom generators', verbose).start();
+
   const cacheFile = toAbsolutePath('generators/.cache');
-  const { cacheExists, hash } = await checkForCache(
-    {
-      job: 'custom generators',
-      folder: toAbsolutePath('generators/'),
-      generatedFiles: ['build'],
-      filesToCache: ['src', 'build.gradle', 'settings.gradle'],
-      cacheFile,
-    },
-    verbose
-  );
+  const { cacheExists, hash } = await checkForCache({
+    folder: toAbsolutePath('generators/'),
+    generatedFiles: ['build'],
+    filesToCache: ['src', 'build.gradle', 'settings.gradle'],
+    cacheFile,
+  });
 
   if (cacheExists) {
+    spinner.succeed('job skipped, cache found for custom generators');
     return;
   }
-
-  const spinner = createSpinner('building custom generators', verbose).start();
 
   await run('./gradle/gradlew --no-daemon -p generators assemble', {
     verbose,

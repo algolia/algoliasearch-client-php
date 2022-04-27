@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Synonyms
   operationId: clearAllSynonyms
   summary: Clear all synonyms.
   description: Remove all synonyms from an index.

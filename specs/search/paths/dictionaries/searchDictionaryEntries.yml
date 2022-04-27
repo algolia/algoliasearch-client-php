@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Dictionnaries
   operationId: searchDictionaryEntries
   description: Search the dictionary entries.
   summary: Search the dictionary entries.

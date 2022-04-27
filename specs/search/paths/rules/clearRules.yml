@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Rules
   operationId: clearRules
   summary: Clear Rules.
   description: Delete all Rules in the index.

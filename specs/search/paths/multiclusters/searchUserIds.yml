@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Clusters
   operationId: searchUserIds
   summary: Search userID
   description: >

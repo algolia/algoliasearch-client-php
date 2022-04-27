@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Rules
   operationId: batchRules
   summary: Batch Rules.
   description: Create or update a batch of Rules.

@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Api Keys
   operationId: restoreApiKey
   summary: Restore an API key.
   description: Restore a deleted API key, along with its associated rights.

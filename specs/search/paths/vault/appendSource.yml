@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Vaults
   operationId: appendSource
   description: Add a single source to the list of allowed sources.
   summary: Add a single source.

@@ -1,4 +1,31 @@
+get:
+  tags:
+    - Synonyms
+  operationId: getSynonym
+  summary: Get synonym.
+  description: Fetch a synonym object identified by its objectID.
+  parameters:
+    - $ref: '../../../common/parameters.yml#/IndexName'
+    - $ref: '../../../common/parameters.yml#/ObjectID'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: 'common/schemas.yml#/synonymHit'
+    '400':
+      $ref: '../../../common/responses/BadRequest.yml'
+    '402':
+      $ref: '../../../common/responses/FeatureNotEnabled.yml'
+    '403':
+      $ref: '../../../common/responses/MethodNotAllowed.yml'
+    '404':
+      $ref: '../../../common/responses/IndexNotFound.yml'
+
 put:
+  tags:
+    - Synonyms
   operationId: saveSynonym
   summary: Save synonym.
   description: Create a new synonym object or update the existing synonym object with the given object ID.
@@ -41,30 +68,9 @@ put:
     '404':
       $ref: '../../../common/responses/IndexNotFound.yml'
 
-get:
-  operationId: getSynonym
-  summary: Get synonym.
-  description: Fetch a synonym object identified by its objectID.
-  parameters:
-    - $ref: '../../../common/parameters.yml#/IndexName'
-    - $ref: '../../../common/parameters.yml#/ObjectID'
-  responses:
-    '200':
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: 'common/schemas.yml#/synonymHit'
-    '400':
-      $ref: '../../../common/responses/BadRequest.yml'
-    '402':
-      $ref: '../../../common/responses/FeatureNotEnabled.yml'
-    '403':
-      $ref: '../../../common/responses/MethodNotAllowed.yml'
-    '404':
-      $ref: '../../../common/responses/IndexNotFound.yml'
-
 delete:
+  tags:
+    - Synonyms
   operationId: deleteSynonym
   summary: Delete synonym.
   description: Delete a single synonyms set, identified by the given objectID.

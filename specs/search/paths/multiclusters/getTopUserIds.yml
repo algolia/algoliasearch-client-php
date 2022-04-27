@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Clusters
   operationId: getTopUserIds
   summary: Get top userID
   description: >

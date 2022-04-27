@@ -1,30 +1,6 @@
-post:
-  operationId: addApiKey
-  summary: Create a new API key.
-  description: Add a new API Key with specific permissions/restrictions.
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: 'common/schemas.yml#/apiKey'
-  responses:
-    '200':
-      description: OK
-      content:
-        application/json:
-          schema:
-            $ref: 'common/schemas.yml#/addApiKeyResponse'
-    '400':
-      $ref: '../../../common/responses/BadRequest.yml'
-    '402':
-      $ref: '../../../common/responses/FeatureNotEnabled.yml'
-    '403':
-      $ref: '../../../common/responses/MethodNotAllowed.yml'
-    '404':
-      $ref: '../../../common/responses/IndexNotFound.yml'
-
 get:
+  tags:
+    - Api Keys
   operationId: listApiKeys
   summary: Get the full list of API Keys.
   description: List API keys, along with their associated rights.
@@ -45,6 +21,34 @@ get:
                 description: List of api keys.
                 items:
                   $ref: 'common/schemas.yml#/key'
+    '400':
+      $ref: '../../../common/responses/BadRequest.yml'
+    '402':
+      $ref: '../../../common/responses/FeatureNotEnabled.yml'
+    '403':
+      $ref: '../../../common/responses/MethodNotAllowed.yml'
+    '404':
+      $ref: '../../../common/responses/IndexNotFound.yml'
+
+post:
+  tags:
+    - Api Keys
+  operationId: addApiKey
+  summary: Create a new API key.
+  description: Add a new API Key with specific permissions/restrictions.
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'common/schemas.yml#/apiKey'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: 'common/schemas.yml#/addApiKeyResponse'
     '400':
       $ref: '../../../common/responses/BadRequest.yml'
     '402':

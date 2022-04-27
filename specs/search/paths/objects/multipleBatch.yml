@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Records
   operationId: multipleBatch
   description: Perform multiple write operations, potentially targeting multiple indices, in a single API call.
   summary: Perform multiple write operations.

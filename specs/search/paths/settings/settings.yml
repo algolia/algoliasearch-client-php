@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Indices
   operationId: getSettings
   description: Retrieve settings of a given indexName.
   summary: Retrieve settings of a given indexName.
@@ -21,6 +23,8 @@ get:
       $ref: '../../../common/responses/IndexNotFound.yml'
 
 put:
+  tags:
+    - Indices
   operationId: setSettings
   description: Update settings of a given indexName. Only specified settings are overridden; unspecified settings are left unchanged. Specifying null for a setting resets it to its default value.
   summary: Update settings of a given indexName.

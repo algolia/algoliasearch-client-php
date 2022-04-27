@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Clusters
   operationId: hasPendingMappings
   summary: Has pending mappings
   description: >

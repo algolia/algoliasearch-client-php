@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Indices
   operationId: getTask
   description: Check the current status of a given task.
   summary: Check the current status of a given task.

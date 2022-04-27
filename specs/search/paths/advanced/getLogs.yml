@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Advanced
   operationId: getLogs
   description: Return the lastest log entries.
   summary: Return the lastest log entries.

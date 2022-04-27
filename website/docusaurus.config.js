@@ -13,8 +13,8 @@ function getSpecFiles() {
   const specFiles = [];
 
   fs.readdirSync(bundledSpecsPath).forEach((file) => {
-    if (file.endsWith('.yml')) {
-      const fileName = file.replace('.yml', '');
+    if (file.endsWith('.doc.yml')) {
+      const fileName = file.replace('.doc.yml', '');
 
       specFiles.push({
         fileName,
@@ -67,6 +67,16 @@ function getSpecsForNavBar() {
         'redocusaurus',
         {
           specs: getSpecsForPlugin(),
+          theme: {
+            options: { disableSearch: true },
+            theme: {
+              typography: { fontSize: '14px', lineHeight: '1.2em' },
+              spacing: {
+                unit: 5,
+                sectionHorizontal: 30,
+              },
+            },
+          },
         },
       ],
       [

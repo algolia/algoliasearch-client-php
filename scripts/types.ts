@@ -23,7 +23,6 @@ export type AdditionalProperties = Partial<{
   Record<string, any>;
 
 export type CheckForCacheOptions = {
-  job: string;
   folder: string;
   generatedFiles: string[];
   filesToCache: string[];

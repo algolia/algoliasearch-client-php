@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Clusters
   operationId: assignUserId
   summary: Assign or Move userID
   description: >
@@ -38,6 +40,8 @@ post:
       $ref: '../../../common/responses/IndexNotFound.yml'
 
 get:
+  tags:
+    - Clusters
   operationId: listUserIds
   summary: List userIDs
   description: >

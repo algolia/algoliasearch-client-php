@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Search
   operationId: multipleQueries
   description: Get search results for the given requests.
   summary: Get search results for the given requests.

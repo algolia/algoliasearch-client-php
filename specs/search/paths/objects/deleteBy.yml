@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Records
   operationId: deleteBy
   summary: Delete all records matching the query.
   description: >

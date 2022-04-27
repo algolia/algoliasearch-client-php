@@ -10,7 +10,7 @@ components:
     apiKey:
       $ref: '../common/securitySchemes.yml#/apiKey'
 servers:
-  - url: https://predict-api-oslcbws3zq-ew.a.run.app
+  - url: https://predict-api-432xa6wemq-ew.a.run.app
 security:
   - appId: []
     apiKey: []

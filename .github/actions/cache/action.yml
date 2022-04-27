@@ -381,15 +381,16 @@ runs:
           )}}
 
     # Restore Java clients: used during 'cts' or 'codegen'
-    - name: Restore Java client gradle properties
+    - name: Restore Java client gradle files
       if: ${{ inputs.job == 'cts' || inputs.job == 'codegen' || (inputs.job == 'client' && inputs.language == 'java') }}
       uses: actions/cache@v2
       with:
-        path: clients/algoliasearch-client-java-2/gradle.properties
+        path: |
+          clients/algoliasearch-client-java-2/gradle*
+          clients/algoliasearch-client-java-2/gradle/*
         key: |
-          ${{ env.CACHE_VERSION }}-${{
+          ${{ env.CACHE_VERSION }}-java-common-${{
           hashFiles(
-            'specs/bundled/search.yml',
             'templates/java/**',
             'generators/src/**'
           )}}

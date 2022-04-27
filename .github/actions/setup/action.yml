@@ -35,10 +35,9 @@ runs:
         node-version-file: .nvmrc
         cache: yarn
 
-    - name: Restore cache
+    - name: Run yarn install and install java formatter
       uses: ./.github/actions/cache
       with:
-        # We want to load the java formatter
         language: java
 
     - name: Setting diff outputs variables
@@ -51,6 +50,11 @@ runs:
         origin=$( [[ -z $baseRef ]] && echo $previousCommit || echo "origin/$baseRef" )
 
         yarn workspace scripts setRunVariables "$origin"
+
+    - name: Compute cache common hash
+      if: inputs.type != 'minimal'
+      shell: bash
+      run: echo "CACHE_COMMON_HASH=${{ steps.diff.outputs.GITHUB_ACTIONS_CHANGED_HASH }}-${{ steps.diff.outputs.SCRIPTS_CHANGED_HASH }}" >> $GITHUB_ENV
 
     - name: Compute specs matrix
       if: inputs.type != 'minimal'

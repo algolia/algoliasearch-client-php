@@ -40,6 +40,7 @@ jobs:
         run: yarn eslint --ext=json .
 
     outputs:
+      CACHE_COMMON_HASH: ${{ env.CACHE_COMMON_HASH }}
       RUN_SCRIPTS: ${{ steps.setup.outputs.RUN_SCRIPTS }}
 
       RUN_SPECS: ${{ steps.setup.outputs.RUN_SPECS }}
@@ -71,6 +72,8 @@ jobs:
 
       - name: Restore cache
         uses: ./.github/actions/cache
+        with:
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Check script linting
         run: yarn scripts:lint
@@ -93,6 +96,8 @@ jobs:
 
       - name: Restore cache
         uses: ./.github/actions/cache
+        with:
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache '${{ matrix.client.name }}' bundled specs
         id: cache
@@ -126,6 +131,8 @@ jobs:
 
       - name: Restore cache
         uses: ./.github/actions/cache
+        with:
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache '${{ matrix.client }}' client
         id: cache
@@ -164,6 +171,7 @@ jobs:
         with:
           job: client
           language: javascript
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache '${{ matrix.client.name }}' client
         id: cache
@@ -215,6 +223,7 @@ jobs:
         with:
           job: client
           language: java
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache '${{ matrix.client.name }}' client
         id: cache
@@ -264,6 +273,7 @@ jobs:
         with:
           job: client
           language: php
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache '${{ matrix.client.name }}' client
         id: cache
@@ -295,7 +305,9 @@ jobs:
   client_javascript_algoliasearch:
     timeout-minutes: 10
     runs-on: ubuntu-20.04
-    needs: client_javascript
+    needs:
+      - setup
+      - client_javascript
     if: |
       always() &&
       needs.setup.outputs.RUN_JS_ALGOLIASEARCH == 'true' &&
@@ -309,6 +321,7 @@ jobs:
         with:
           job: codegen
           language: javascript
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Cache 'algoliasearch' client
         id: cache
@@ -331,7 +344,9 @@ jobs:
   client_javascript_tests:
     runs-on: ubuntu-20.04
     timeout-minutes: 10
-    needs: client_javascript
+    needs:
+      - setup
+      - client_javascript
     if: |
       always() &&
       needs.setup.outputs.RUN_JS_TESTS == 'true' &&
@@ -344,6 +359,7 @@ jobs:
         uses: ./.github/actions/cache
         with:
           job: cts
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Run client-common tests
         run: yarn workspace @experimental-api-clients-automation/client-common test
@@ -352,6 +368,7 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 20
     needs:
+      - setup
       - client_javascript
       - client_java
       - client_php
@@ -371,6 +388,7 @@ jobs:
         uses: ./.github/actions/cache
         with:
           job: cts
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Push generated code to generated branch
         id: pushGeneratedCode
@@ -398,6 +416,7 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 10
     needs:
+      - setup
       - cts
       - client_javascript_tests
       - client_javascript_algoliasearch
@@ -417,6 +436,7 @@ jobs:
         uses: ./.github/actions/cache
         with:
           job: codegen
+          cache_hash: ${{ needs.setup.outputs.CACHE_COMMON_HASH }}
 
       - name: Push generated code to main
         id: pushGeneratedCode

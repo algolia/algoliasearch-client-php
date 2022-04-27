@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+import type { HashElementOptions } from 'folder-hash';
+import { hashElement } from 'folder-hash';
+
 import { getNbGitDiff } from './utils';
 
 const JS_CLIENT_FOLDER = 'clients/algoliasearch-client-javascript';
@@ -13,10 +16,20 @@ const JS_CLIENT_FOLDER = 'clients/algoliasearch-client-javascript';
  *
  * The variable will be accessible in the CI via `steps.diff.outputs.<name>`.
  */
-const VARIABLES_TO_CHECK = [
+const VARIABLES_TO_CHECK: Array<{
+  name: string;
+  path: string[];
+  needHash?: boolean;
+  hashOptions?: HashElementOptions;
+}> = [
   {
     name: 'GITHUB_ACTIONS_CHANGED',
     path: ['.github/actions', '.github/workflows', '.github/.cache_version'],
+    needHash: true,
+    hashOptions: {
+      folders: { include: ['.github/actions', '.github/workflows'] },
+      files: { include: ['.github/.cache_version'] },
+    },
   },
   {
     name: 'SPECS_CHANGED',
@@ -33,6 +46,10 @@ const VARIABLES_TO_CHECK = [
   {
     name: 'SCRIPTS_CHANGED',
     path: ['scripts'],
+    needHash: true,
+    hashOptions: {
+      folders: { include: ['scripts'] },
+    },
   },
   {
     name: 'GENERATORS_CHANGED',
@@ -107,6 +124,12 @@ async function setRunVariables({
 
     console.log(`Found ${diff} changes for '${check.name}'`);
     console.log(`::set-output name=${check.name}::${diff}`);
+    if (diff && check.needHash) {
+      const hash = (
+        await hashElement('.', { encoding: 'hex', ...check.hashOptions })
+      ).hash;
+      console.log(`::set-output name=${check.name}_HASH::${hash}`);
+    }
   }
 
   console.log(`::set-output name=ORIGIN_BRANCH::${originBranch}`);

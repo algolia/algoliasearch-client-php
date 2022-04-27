@@ -9,13 +9,18 @@ inputs:
   language:
     description: The language to retrieve dependencies.
     required: false
+  cache_hash:
+    description: The cache hash from github actions and scripts
+    required: false
 
 runs:
   using: composite
   steps:
     - name: Read current GitHub Actions cache version
       shell: bash
-      run: echo "CACHE_VERSION=$(< .github/.cache_version)" >> $GITHUB_ENV
+      run: |
+        echo "CACHE_VERSION_YARN=$(< .github/.cache_version)" >> $GITHUB_ENV
+        echo "CACHE_VERSION=$(< .github/.cache_version)-${{ inputs.cache_hash }}" >> $GITHUB_ENV
 
     # JavaScript setup
     - name: Get yarn cache directory path
@@ -27,7 +32,7 @@ runs:
       uses: actions/cache@v2
       with:
         path: ${{ steps.yarn-cache-dir.outputs.dir || '.yarn/cache' }}
-        key: node-cache-${{ env.CACHE_VERSION }}-yarn-${{ hashFiles('yarn.lock') }}
+        key: node-cache-${{ env.CACHE_VERSION_YARN }}-yarn-${{ hashFiles('yarn.lock') }}
 
     # Java setup: used during 'java' generation or 'cts'
     - name: Download Java formatter

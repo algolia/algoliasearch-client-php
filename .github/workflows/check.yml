@@ -370,6 +370,7 @@ jobs:
     needs:
       - setup
       - client_javascript
+      - client_javascript_algoliasearch
       - client_java
       - client_php
     if: |

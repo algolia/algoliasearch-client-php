@@ -54,7 +54,7 @@ runs:
     - name: Compute cache common hash
       if: inputs.type != 'minimal'
       shell: bash
-      run: echo "CACHE_COMMON_HASH=${{ steps.diff.outputs.GITHUB_ACTIONS_CHANGED_HASH }}-${{ steps.diff.outputs.SCRIPTS_CHANGED_HASH }}" >> $GITHUB_ENV
+      run: echo "CACHE_COMMON_HASH=${{ steps.diff.outputs.COMMON_HASH }}" >> $GITHUB_ENV
 
     - name: Compute specs matrix
       if: inputs.type != 'minimal'

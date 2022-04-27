@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
-import type { HashElementOptions } from 'folder-hash';
+import crypto from 'crypto';
+
 import { hashElement } from 'folder-hash';
+
+import { toAbsolutePath } from '../common';
 
 import { getNbGitDiff } from './utils';
 
@@ -16,20 +19,10 @@ const JS_CLIENT_FOLDER = 'clients/algoliasearch-client-javascript';
  *
  * The variable will be accessible in the CI via `steps.diff.outputs.<name>`.
  */
-const VARIABLES_TO_CHECK: Array<{
-  name: string;
-  path: string[];
-  needHash?: boolean;
-  hashOptions?: HashElementOptions;
-}> = [
+const VARIABLES_TO_CHECK = [
   {
     name: 'GITHUB_ACTIONS_CHANGED',
     path: ['.github/actions', '.github/workflows', '.github/.cache_version'],
-    needHash: true,
-    hashOptions: {
-      folders: { include: ['.github/actions', '.github/workflows'] },
-      files: { include: ['.github/.cache_version'] },
-    },
   },
   {
     name: 'SPECS_CHANGED',
@@ -46,10 +39,6 @@ const VARIABLES_TO_CHECK: Array<{
   {
     name: 'SCRIPTS_CHANGED',
     path: ['scripts'],
-    needHash: true,
-    hashOptions: {
-      folders: { include: ['scripts'] },
-    },
   },
   {
     name: 'GENERATORS_CHANGED',
@@ -106,6 +95,28 @@ const VARIABLES_TO_CHECK: Array<{
   },
 ];
 
+async function computeCommonHash(): Promise<string> {
+  const hashGA = await hashElement(toAbsolutePath('.github'), {
+    encoding: 'hex',
+    folders: { exclude: ['ISSUE_TEMPLATE'] },
+    files: { include: ['*.yml', '.cache_version'] },
+  });
+  const hashScripts = await hashElement(toAbsolutePath('scripts'), {
+    encoding: 'hex',
+    folders: { exclude: ['docker', '__tests__'] },
+  });
+  const hashConfig = await hashElement(toAbsolutePath('.'), {
+    encoding: 'hex',
+    folders: { include: ['config'] },
+    files: { include: ['openapitools.json', 'clients.config.json'] },
+  });
+
+  return crypto
+    .createHash('sha256')
+    .update(`${hashGA.hash}-${hashScripts.hash}-${hashConfig.hash}`)
+    .digest('hex');
+}
+
 /**
  * Outputs variables used in the CI to determine if a job should run.
  */
@@ -124,13 +135,9 @@ async function setRunVariables({
 
     console.log(`Found ${diff} changes for '${check.name}'`);
     console.log(`::set-output name=${check.name}::${diff}`);
-    if (diff && check.needHash) {
-      const hash = (
-        await hashElement('.', { encoding: 'hex', ...check.hashOptions })
-      ).hash;
-      console.log(`::set-output name=${check.name}_HASH::${hash}`);
-    }
   }
+
+  console.log(`::set-output name=COMMON_HASH::${await computeCommonHash()}`);
 
   console.log(`::set-output name=ORIGIN_BRANCH::${originBranch}`);
 }

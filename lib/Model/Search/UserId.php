@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * UserId Class Doc Comment
  *
  * @category Class
  * @description A userID.
- *
  * @package Algolia\AlgoliaSearch
  */
-class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userID' => 'string',
         'clusterName' => 'string',
@@ -25,10 +29,10 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userID' => null,
         'clusterName' => null,
@@ -137,23 +141,35 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userID']) || $this->container['userID'] === null) {
+        if (
+            !isset($this->container['userID']) ||
+            $this->container['userID'] === null
+        ) {
             $invalidProperties[] = "'userID' can't be null";
         }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $this->container['userID'])) {
-            $invalidProperties[] = "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
+        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $this->container['userID'])) {
+            $invalidProperties[] =
+                "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
         }
 
-        if (!isset($this->container['clusterName']) || $this->container['clusterName'] === null) {
+        if (
+            !isset($this->container['clusterName']) ||
+            $this->container['clusterName'] === null
+        ) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
-        if (!isset($this->container['nbRecords']) || $this->container['nbRecords'] === null) {
+        if (
+            !isset($this->container['nbRecords']) ||
+            $this->container['nbRecords'] === null
+        ) {
             $invalidProperties[] = "'nbRecords' can't be null";
         }
-        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
+        if (
+            !isset($this->container['dataSize']) ||
+            $this->container['dataSize'] === null
+        ) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -181,14 +197,16 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets userID
      *
-     * @param string $userID userID of the user
+     * @param string $userID userID of the user.
      *
      * @return self
      */
     public function setUserID($userID)
     {
-        if ((!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID))) {
-            throw new \InvalidArgumentException("invalid value for $userID when calling UserId., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.");
+        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $userID)) {
+            throw new \InvalidArgumentException(
+                "invalid value for $userID when calling UserId., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+            );
         }
 
         $this->container['userID'] = $userID;
@@ -209,7 +227,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets clusterName
      *
-     * @param string $clusterName cluster on which the user is assigned
+     * @param string $clusterName Cluster on which the user is assigned.
      *
      * @return self
      */
@@ -233,7 +251,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets nbRecords
      *
-     * @param int $nbRecords number of records belonging to the user
+     * @param int $nbRecords Number of records belonging to the user.
      *
      * @return self
      */
@@ -257,7 +275,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets dataSize
      *
-     * @param int $dataSize data size used by the user
+     * @param int $dataSize Data size used by the user.
      *
      * @return self
      */
@@ -270,9 +288,9 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -282,7 +300,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -311,7 +329,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -320,4 +338,3 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

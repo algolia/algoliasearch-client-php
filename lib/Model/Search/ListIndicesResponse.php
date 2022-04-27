@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ListIndicesResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'items' => '\Algolia\AlgoliaSearch\Model\Search\Indice[]',
         'nbPages' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'items' => null,
         'nbPages' => null,
@@ -148,7 +153,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets items
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Indice[]|null $items list of the fetched indices
+     * @param \Algolia\AlgoliaSearch\Model\Search\Indice[]|null $items List of the fetched indices.
      *
      * @return self
      */
@@ -172,7 +177,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbPages
      *
-     * @param int|null $nbPages number of pages
+     * @param int|null $nbPages Number of pages.
      *
      * @return self
      */
@@ -185,9 +190,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -197,7 +202,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -226,7 +231,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -235,4 +240,3 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

@@ -2,12 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BuiltInOperationType Class Doc Comment
  *
  * @category Class
  * @description The operation to apply on the attribute.
- *
  * @package Algolia\AlgoliaSearch
  */
 class BuiltInOperationType
@@ -15,23 +16,22 @@ class BuiltInOperationType
     /**
      * Possible values of this enum
      */
-    const INCREMENT = 'Increment';
+    public const INCREMENT = 'Increment';
 
-    const DECREMENT = 'Decrement';
+    public const DECREMENT = 'Decrement';
 
-    const ADD = 'Add';
+    public const ADD = 'Add';
 
-    const REMOVE = 'Remove';
+    public const REMOVE = 'Remove';
 
-    const ADD_UNIQUE = 'AddUnique';
+    public const ADD_UNIQUE = 'AddUnique';
 
-    const INCREMENT_FROM = 'IncrementFrom';
+    public const INCREMENT_FROM = 'IncrementFrom';
 
-    const INCREMENT_SET = 'IncrementSet';
+    public const INCREMENT_SET = 'IncrementSet';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
@@ -47,4 +47,3 @@ class BuiltInOperationType
         ];
     }
 }
-

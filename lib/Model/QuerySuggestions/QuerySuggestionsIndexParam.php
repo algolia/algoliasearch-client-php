@@ -2,30 +2,36 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * QuerySuggestionsIndexParam Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
+        'sourceIndices' =>
+            '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
         'languages' => 'string[]',
         'exclude' => 'string[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'sourceIndices' => null,
         'languages' => null,
@@ -128,10 +134,12 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['sourceIndices']) || $this->container['sourceIndices'] === null) {
+        if (
+            !isset($this->container['sourceIndices']) ||
+            $this->container['sourceIndices'] === null
+        ) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -159,7 +167,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets sourceIndices
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices list of source indices used to generate a Query Suggestions index
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices List of source indices used to generate a Query Suggestions index.
      *
      * @return self
      */
@@ -207,7 +215,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets exclude
      *
-     * @param string[]|null $exclude list of words and patterns to exclude from the Query Suggestions index
+     * @param string[]|null $exclude List of words and patterns to exclude from the Query Suggestions index.
      *
      * @return self
      */
@@ -220,9 +228,9 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -232,7 +240,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -261,7 +269,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -270,4 +278,3 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
         unset($this->container[$offset]);
     }
 }
-

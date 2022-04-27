@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTaskResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'status' => '\Algolia\AlgoliaSearch\Model\Search\TaskStatus',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'status' => null,
     ];
@@ -114,10 +119,12 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['status']) || $this->container['status'] === null) {
+        if (
+            !isset($this->container['status']) ||
+            $this->container['status'] === null
+        ) {
             $invalidProperties[] = "'status' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -158,9 +165,9 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

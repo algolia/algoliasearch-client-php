@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SourceIndex Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'analyticsTags' => 'string[]',
@@ -22,14 +27,15 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'minHits' => 'int',
         'minLetters' => 'int',
         'generate' => 'string[][]',
-        'external' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
+        'external' =>
+            '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'analyticsTags' => null,
@@ -156,10 +162,12 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -187,7 +195,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets indexName
      *
-     * @param string $indexName source index name
+     * @param string $indexName Source index name.
      *
      * @return self
      */
@@ -211,7 +219,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets analyticsTags
      *
-     * @param string[]|null $analyticsTags list of analytics tags to filter the popular searches per tag
+     * @param string[]|null $analyticsTags List of analytics tags to filter the popular searches per tag.
      *
      * @return self
      */
@@ -235,7 +243,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets
      *
-     * @param object[]|null $facets list of facets to define as categories for the query suggestions
+     * @param object[]|null $facets List of facets to define as categories for the query suggestions.
      *
      * @return self
      */
@@ -283,7 +291,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minLetters
      *
-     * @param int|null $minLetters minimum number of required letters for a suggestion to remain
+     * @param int|null $minLetters Minimum number of required letters for a suggestion to remain.
      *
      * @return self
      */
@@ -331,7 +339,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets external
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]|null $external list of external indices to use to generate custom Query Suggestions
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]|null $external List of external indices to use to generate custom Query Suggestions.
      *
      * @return self
      */
@@ -344,9 +352,9 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -356,7 +364,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -385,7 +393,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -394,4 +402,3 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         unset($this->container[$offset]);
     }
 }
-

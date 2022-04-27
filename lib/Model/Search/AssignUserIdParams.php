@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AssignUserIdParams Class Doc Comment
  *
  * @category Class
  * @description Assign userID parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'cluster' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'cluster' => null,
     ];
@@ -116,10 +120,12 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['cluster']) || $this->container['cluster'] === null) {
+        if (
+            !isset($this->container['cluster']) ||
+            $this->container['cluster'] === null
+        ) {
             $invalidProperties[] = "'cluster' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -147,7 +153,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets cluster
      *
-     * @param string $cluster name of the cluster
+     * @param string $cluster Name of the cluster.
      *
      * @return self
      */
@@ -160,9 +166,9 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +178,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +207,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +216,3 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

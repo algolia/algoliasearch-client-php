@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TopSearchesResponseWithAnalytics Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\TopSearchesResponseWithAnalyticsSearches[]',
+        'searches' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\TopSearchesResponseWithAnalyticsSearches[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'searches' => null,
     ];
@@ -114,10 +120,12 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['searches']) || $this->container['searches'] === null) {
+        if (
+            !isset($this->container['searches']) ||
+            $this->container['searches'] === null
+        ) {
             $invalidProperties[] = "'searches' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchesResponseWithAnalyticsSearches[] $searches a list of top searches with their count and analytics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchesResponseWithAnalyticsSearches[] $searches A list of top searches with their count and analytics.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
         unset($this->container[$offset]);
     }
 }
-

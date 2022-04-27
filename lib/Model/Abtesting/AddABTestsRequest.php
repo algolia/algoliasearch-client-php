@@ -2,30 +2,36 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AddABTestsRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'name' => 'string',
-        'variant' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
+        'variant' =>
+            '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
         'endAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'name' => null,
         'variant' => null,
@@ -128,24 +134,34 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (
+            !isset($this->container['name']) ||
+            $this->container['name'] === null
+        ) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['variant']) || $this->container['variant'] === null) {
+        if (
+            !isset($this->container['variant']) ||
+            $this->container['variant'] === null
+        ) {
             $invalidProperties[] = "'variant' can't be null";
         }
-        if ((count($this->container['variant']) > 2)) {
-            $invalidProperties[] = "invalid value for 'variant', number of items must be less than or equal to 2.";
+        if (count($this->container['variant']) > 2) {
+            $invalidProperties[] =
+                "invalid value for 'variant', number of items must be less than or equal to 2.";
         }
 
-        if ((count($this->container['variant']) < 2)) {
-            $invalidProperties[] = "invalid value for 'variant', number of items must be greater than or equal to 2.";
+        if (count($this->container['variant']) < 2) {
+            $invalidProperties[] =
+                "invalid value for 'variant', number of items must be greater than or equal to 2.";
         }
 
-        if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
+        if (
+            !isset($this->container['endAt']) ||
+            $this->container['endAt'] === null
+        ) {
             $invalidProperties[] = "'endAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -173,7 +189,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets name
      *
-     * @param string $name A/B test name
+     * @param string $name A/B test name.
      *
      * @return self
      */
@@ -197,17 +213,21 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets variant
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variant list of 2 variants for the A/B test
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variant List of 2 variants for the A/B test.
      *
      * @return self
      */
     public function setVariant($variant)
     {
-        if ((count($variant) > 2)) {
-            throw new \InvalidArgumentException('invalid value for $variant when calling AddABTestsRequest., number of items must be less than or equal to 2.');
+        if (count($variant) > 2) {
+            throw new \InvalidArgumentException(
+                'invalid value for $variant when calling AddABTestsRequest., number of items must be less than or equal to 2.'
+            );
         }
-        if ((count($variant) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $variant when calling AddABTestsRequest., number of items must be greater than or equal to 2.');
+        if (count($variant) < 2) {
+            throw new \InvalidArgumentException(
+                'invalid length for $variant when calling AddABTestsRequest., number of items must be greater than or equal to 2.'
+            );
         }
         $this->container['variant'] = $variant;
 
@@ -227,7 +247,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets endAt
      *
-     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $endAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
      *
      * @return self
      */
@@ -240,9 +260,9 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -252,7 +272,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -281,7 +301,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -290,4 +310,3 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

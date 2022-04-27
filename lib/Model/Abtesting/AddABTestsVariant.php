@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AddABTestsVariant Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'index' => 'string',
         'trafficPercentage' => 'int',
@@ -23,10 +28,10 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'index' => null,
         'trafficPercentage' => null,
@@ -122,7 +127,8 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['description'] = $data['description'];
         }
         if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] = $data['customSearchParameters'];
+            $this->container['customSearchParameters'] =
+                $data['customSearchParameters'];
         }
     }
 
@@ -135,16 +141,24 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (
+            !isset($this->container['index']) ||
+            $this->container['index'] === null
+        ) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['trafficPercentage']) || $this->container['trafficPercentage'] === null) {
+        if (
+            !isset($this->container['trafficPercentage']) ||
+            $this->container['trafficPercentage'] === null
+        ) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if (!isset($this->container['customSearchParameters']) || $this->container['customSearchParameters'] === null) {
+        if (
+            !isset($this->container['customSearchParameters']) ||
+            $this->container['customSearchParameters'] === null
+        ) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -172,7 +186,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index The index performing the A/B test.
      *
      * @return self
      */
@@ -196,7 +210,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage the traffic perfecentage for the A/B test
+     * @param int $trafficPercentage The traffic perfecentage for the A/B test.
      *
      * @return self
      */
@@ -220,7 +234,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets description
      *
-     * @param string|null $description the A/B test description
+     * @param string|null $description The A/B test description.
      *
      * @return self
      */
@@ -257,9 +271,9 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -269,7 +283,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -298,7 +312,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -307,4 +321,3 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

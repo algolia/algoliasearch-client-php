@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * LogFile Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'timestamp' => 'string',
         'level' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel',
@@ -23,10 +28,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'timestamp' => null,
         'level' => null,
@@ -135,19 +140,30 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timestamp']) || $this->container['timestamp'] === null) {
+        if (
+            !isset($this->container['timestamp']) ||
+            $this->container['timestamp'] === null
+        ) {
             $invalidProperties[] = "'timestamp' can't be null";
         }
-        if (!isset($this->container['level']) || $this->container['level'] === null) {
+        if (
+            !isset($this->container['level']) ||
+            $this->container['level'] === null
+        ) {
             $invalidProperties[] = "'level' can't be null";
         }
-        if (!isset($this->container['message']) || $this->container['message'] === null) {
+        if (
+            !isset($this->container['message']) ||
+            $this->container['message'] === null
+        ) {
             $invalidProperties[] = "'message' can't be null";
         }
-        if (!isset($this->container['contextLevel']) || $this->container['contextLevel'] === null) {
+        if (
+            !isset($this->container['contextLevel']) ||
+            $this->container['contextLevel'] === null
+        ) {
             $invalidProperties[] = "'contextLevel' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -175,7 +191,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets timestamp
      *
-     * @param string $timestamp date and time of creation of the record
+     * @param string $timestamp date and time of creation of the record.
      *
      * @return self
      */
@@ -223,7 +239,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets message
      *
-     * @param string $message detailed description of what happened
+     * @param string $message detailed description of what happened.
      *
      * @return self
      */
@@ -260,9 +276,9 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -272,7 +288,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -301,7 +317,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -310,4 +326,3 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         unset($this->container[$offset]);
     }
 }
-

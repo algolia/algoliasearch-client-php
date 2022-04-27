@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MultipleBatchOperation Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
         'body' => 'object',
@@ -22,10 +27,10 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'action' => null,
         'body' => null,
@@ -179,7 +184,7 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets body
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
+     * @param object|null $body arguments to the operation (depends on the type of the operation).
      *
      * @return self
      */
@@ -203,7 +208,7 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexName
      *
-     * @param string|null $indexName index to target for this operation
+     * @param string|null $indexName Index to target for this operation.
      *
      * @return self
      */
@@ -216,9 +221,9 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -228,7 +233,7 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -257,7 +262,7 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -266,4 +271,3 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         unset($this->container[$offset]);
     }
 }
-

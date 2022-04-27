@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'taskID' => 'int',
         'objectIDs' => 'string[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'taskID' => null,
         'objectIDs' => null,
@@ -148,7 +153,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int|null $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -172,7 +177,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs list of objectID
+     * @param string[]|null $objectIDs List of objectID.
      *
      * @return self
      */
@@ -185,9 +190,9 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -197,7 +202,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -226,7 +231,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -235,4 +240,3 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         unset($this->container[$offset]);
     }
 }
-

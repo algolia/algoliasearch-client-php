@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ConsequenceHide Class Doc Comment
  *
  * @category Class
  * @description Unique identifier of the object to hide.
- *
  * @package Algolia\AlgoliaSearch
  */
-class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
     ];
@@ -116,10 +120,12 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -147,7 +153,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -160,9 +166,9 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +178,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +207,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +216,3 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

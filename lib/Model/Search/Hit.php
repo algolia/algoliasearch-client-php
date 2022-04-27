@@ -2,34 +2,39 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Hit Class Doc Comment
  *
  * @category Class
  * @description A single hit.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
-        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
+        'highlightResult' =>
+            '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
         'snippetResult' => '\Algolia\AlgoliaSearch\Model\Search\SnippetResult',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Search\RankingInfo',
         'distinctSeqID' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'highlightResult' => null,
@@ -144,10 +149,12 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -175,7 +182,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -284,9 +291,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -296,7 +303,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -325,7 +332,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -334,4 +341,3 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
         unset($this->container[$offset]);
     }
 }
-

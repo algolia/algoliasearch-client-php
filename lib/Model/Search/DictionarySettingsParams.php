@@ -2,30 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * DictionarySettingsParams Class Doc Comment
  *
  * @category Class
  * @description Disable the builtin Algolia entries for a type of dictionary per language.
- *
  * @package Algolia\AlgoliaSearch
  */
-class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'disableStandardEntries' => '\Algolia\AlgoliaSearch\Model\Search\StandardEntries',
+        'disableStandardEntries' =>
+            '\Algolia\AlgoliaSearch\Model\Search\StandardEntries',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'disableStandardEntries' => null,
     ];
@@ -103,7 +108,8 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     public function __construct(array $data = null)
     {
         if (isset($data['disableStandardEntries'])) {
-            $this->container['disableStandardEntries'] = $data['disableStandardEntries'];
+            $this->container['disableStandardEntries'] =
+                $data['disableStandardEntries'];
         }
     }
 
@@ -116,10 +122,12 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['disableStandardEntries']) || $this->container['disableStandardEntries'] === null) {
+        if (
+            !isset($this->container['disableStandardEntries']) ||
+            $this->container['disableStandardEntries'] === null
+        ) {
             $invalidProperties[] = "'disableStandardEntries' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -160,9 +168,9 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +180,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +209,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +218,3 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

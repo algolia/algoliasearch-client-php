@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchSynonymsResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\SynonymHit[]',
         'nbHits' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
@@ -121,13 +126,18 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+        if (
+            !isset($this->container['hits']) ||
+            $this->container['hits'] === null
+        ) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
+        if (
+            !isset($this->container['nbHits']) ||
+            $this->container['nbHits'] === null
+        ) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits array of synonym objects
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits Array of synonym objects.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits Number of hits that the search query matched.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         unset($this->container[$offset]);
     }
 }
-

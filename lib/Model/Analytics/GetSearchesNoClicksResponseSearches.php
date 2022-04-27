@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetSearchesNoClicksResponseSearches Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
@@ -22,10 +27,10 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
@@ -128,16 +133,24 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || $this->container['search'] === null) {
+        if (
+            !isset($this->container['search']) ||
+            $this->container['search'] === null
+        ) {
             $invalidProperties[] = "'search' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['withFilterCount']) || $this->container['withFilterCount'] === null) {
+        if (
+            !isset($this->container['withFilterCount']) ||
+            $this->container['withFilterCount'] === null
+        ) {
             $invalidProperties[] = "'withFilterCount' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets search
      *
-     * @param string $search the search query
+     * @param string $search The search query.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count The number of occurrences.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets withFilterCount
      *
-     * @param int $withFilterCount the number of occurrences
+     * @param int $withFilterCount The number of occurrences.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
         unset($this->container[$offset]);
     }
 }
-

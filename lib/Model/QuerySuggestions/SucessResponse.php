@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SucessResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'status' => 'int',
         'message' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'status' => null,
         'message' => null,
@@ -121,13 +126,18 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['status']) || $this->container['status'] === null) {
+        if (
+            !isset($this->container['status']) ||
+            $this->container['status'] === null
+        ) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if (!isset($this->container['message']) || $this->container['message'] === null) {
+        if (
+            !isset($this->container['message']) ||
+            $this->container['message'] === null
+        ) {
             $invalidProperties[] = "'message' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets status
      *
-     * @param int $status the status code
+     * @param int $status The status code.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets message
      *
-     * @param string $message message of the response
+     * @param string $message Message of the response.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
-

@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchUserIdsResponseHighlightResult Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userID' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
         'clusterName' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userID' => null,
         'clusterName' => null,
@@ -121,13 +126,18 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userID']) || $this->container['userID'] === null) {
+        if (
+            !isset($this->container['userID']) ||
+            $this->container['userID'] === null
+        ) {
             $invalidProperties[] = "'userID' can't be null";
         }
-        if (!isset($this->container['clusterName']) || $this->container['clusterName'] === null) {
+        if (
+            !isset($this->container['clusterName']) ||
+            $this->container['clusterName'] === null
+        ) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -192,9 +202,9 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
         unset($this->container[$offset]);
     }
 }
-

@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * DeleteUserProfileResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userToken' => 'string',
         'deletedUntil' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userToken' => null,
         'deletedUntil' => null,
@@ -121,13 +126,18 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
+        if (
+            !isset($this->container['userToken']) ||
+            $this->container['userToken'] === null
+        ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (!isset($this->container['deletedUntil']) || $this->container['deletedUntil'] === null) {
+        if (
+            !isset($this->container['deletedUntil']) ||
+            $this->container['deletedUntil'] === null
+        ) {
             $invalidProperties[] = "'deletedUntil' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets userToken
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile
+     * @param string $userToken userToken representing the user for which to fetch the Personalization profile.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
-

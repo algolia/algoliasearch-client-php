@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchForFacetValuesResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponseFacetHits[]',
+        'facetHits' =>
+            '\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponseFacetHits[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facetHits' => null,
     ];
@@ -114,10 +120,12 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facetHits']) || $this->container['facetHits'] === null) {
+        if (
+            !isset($this->container['facetHits']) ||
+            $this->container['facetHits'] === null
+        ) {
             $invalidProperties[] = "'facetHits' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -158,9 +166,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
         unset($this->container[$offset]);
     }
 }
-

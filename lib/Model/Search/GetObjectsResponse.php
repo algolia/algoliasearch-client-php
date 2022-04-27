@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetObjectsResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'results' => 'object[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'results' => null,
     ];
@@ -141,7 +146,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets results
      *
-     * @param object[]|null $results list of results fetched
+     * @param object[]|null $results List of results fetched.
      *
      * @return self
      */
@@ -154,9 +159,9 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -166,7 +171,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -195,7 +200,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -204,4 +209,3 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

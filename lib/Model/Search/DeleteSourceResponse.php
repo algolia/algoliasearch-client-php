@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * DeleteSourceResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'deletedAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'deletedAt' => null,
     ];
@@ -114,10 +119,12 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['deletedAt']) || $this->container['deletedAt'] === null) {
+        if (
+            !isset($this->container['deletedAt']) ||
+            $this->container['deletedAt'] === null
+        ) {
             $invalidProperties[] = "'deletedAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets deletedAt
      *
-     * @param string $deletedAt date of deletion (ISO-8601 format)
+     * @param string $deletedAt Date of deletion (ISO-8601 format).
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class DeleteSourceResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Promote Class Doc Comment
  *
  * @category Class
  * @description Object to promote as hits.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'objectIDs' => 'string[]',
@@ -24,10 +28,10 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'objectIDs' => null,
@@ -130,10 +134,12 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['position']) || $this->container['position'] === null) {
+        if (
+            !isset($this->container['position']) ||
+            $this->container['position'] === null
+        ) {
             $invalidProperties[] = "'position' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -161,7 +167,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets objectID
      *
-     * @param string|null $objectID unique identifier of the object to promote
+     * @param string|null $objectID Unique identifier of the object to promote.
      *
      * @return self
      */
@@ -185,7 +191,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs array of unique identifiers of the objects to promote
+     * @param string[]|null $objectIDs Array of unique identifiers of the objects to promote.
      *
      * @return self
      */
@@ -222,9 +228,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -234,7 +240,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -263,7 +269,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -272,4 +278,3 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         unset($this->container[$offset]);
     }
 }
-

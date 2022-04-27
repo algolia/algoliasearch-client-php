@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetStatusResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'updatedAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'updatedAt' => null,
     ];
@@ -114,10 +119,12 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

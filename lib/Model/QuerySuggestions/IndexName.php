@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * IndexName Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
     ];
@@ -114,10 +119,12 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets indexName
      *
-     * @param string $indexName index name to target
+     * @param string $indexName Index name to target.
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         unset($this->container[$offset]);
     }
 }
-

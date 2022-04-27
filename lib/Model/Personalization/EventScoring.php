@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * EventScoring Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'score' => 'int',
         'eventName' => 'string',
@@ -22,10 +27,10 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'score' => null,
         'eventName' => null,
@@ -128,16 +133,24 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['score']) || $this->container['score'] === null) {
+        if (
+            !isset($this->container['score']) ||
+            $this->container['score'] === null
+        ) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if (!isset($this->container['eventName']) || $this->container['eventName'] === null) {
+        if (
+            !isset($this->container['eventName']) ||
+            $this->container['eventName'] === null
+        ) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if (!isset($this->container['eventType']) || $this->container['eventType'] === null) {
+        if (
+            !isset($this->container['eventType']) ||
+            $this->container['eventType'] === null
+        ) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param int $score the score for the event
+     * @param int $score The score for the event.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventName
      *
-     * @param string $eventName the name of the event
+     * @param string $eventName The name of the event.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventType
      *
-     * @param string $eventType the type of the event
+     * @param string $eventType The type of the event.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
-

@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchRulesResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Rule[]',
         'nbHits' => 'int',
@@ -23,10 +28,10 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
@@ -135,19 +140,30 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+        if (
+            !isset($this->container['hits']) ||
+            $this->container['hits'] === null
+        ) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
+        if (
+            !isset($this->container['nbHits']) ||
+            $this->container['nbHits'] === null
+        ) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (!isset($this->container['page']) || $this->container['page'] === null) {
+        if (
+            !isset($this->container['page']) ||
+            $this->container['page'] === null
+        ) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (!isset($this->container['nbPages']) || $this->container['nbPages'] === null) {
+        if (
+            !isset($this->container['nbPages']) ||
+            $this->container['nbPages'] === null
+        ) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -175,7 +191,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits fetched rules
+     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits Fetched rules.
      *
      * @return self
      */
@@ -199,7 +215,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of fetched rules
+     * @param int $nbHits Number of fetched rules.
      *
      * @return self
      */
@@ -223,7 +239,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page
      *
-     * @param int $page current page
+     * @param int $page Current page.
      *
      * @return self
      */
@@ -247,7 +263,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbPages
      *
-     * @param int $nbPages number of pages
+     * @param int $nbPages Number of pages.
      *
      * @return self
      */
@@ -260,9 +276,9 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -272,7 +288,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -301,7 +317,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -310,4 +326,3 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

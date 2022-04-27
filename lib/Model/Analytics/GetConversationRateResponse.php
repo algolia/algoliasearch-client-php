@@ -2,31 +2,37 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetConversationRateResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'rate' => 'double',
         'trackedSearchCount' => 'int',
         'conversionCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]',
+        'dates' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'rate' => 'double',
         'trackedSearchCount' => null,
@@ -116,7 +122,8 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
             $this->container['rate'] = $data['rate'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] =
+                $data['trackedSearchCount'];
         }
         if (isset($data['conversionCount'])) {
             $this->container['conversionCount'] = $data['conversionCount'];
@@ -135,19 +142,30 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
+        if (
+            !isset($this->container['rate']) ||
+            $this->container['rate'] === null
+        ) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
+        if (
+            !isset($this->container['trackedSearchCount']) ||
+            $this->container['trackedSearchCount'] === null
+        ) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
+        if (
+            !isset($this->container['conversionCount']) ||
+            $this->container['conversionCount'] === null
+        ) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
+        if (
+            !isset($this->container['dates']) ||
+            $this->container['dates'] === null
+        ) {
             $invalidProperties[] = "'dates' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +183,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets rate
      *
-     * @return float
+     * @return double
      */
     public function getRate()
     {
@@ -175,7 +193,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param double $rate The click-through rate.
      *
      * @return self
      */
@@ -199,7 +217,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount The number of tracked search click.
      *
      * @return self
      */
@@ -223,7 +241,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int $conversionCount The number of converted clicks.
      *
      * @return self
      */
@@ -247,7 +265,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[] $dates a list of conversion events with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[] $dates A list of conversion events with their date.
      *
      * @return self
      */
@@ -260,9 +278,9 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -272,7 +290,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -301,7 +319,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -310,4 +328,3 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

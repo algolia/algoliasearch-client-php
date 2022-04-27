@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetUserTokenResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userToken' => 'string',
         'lastEventAt' => 'string',
@@ -22,10 +27,10 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userToken' => null,
         'lastEventAt' => null,
@@ -128,16 +133,24 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
+        if (
+            !isset($this->container['userToken']) ||
+            $this->container['userToken'] === null
+        ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (!isset($this->container['lastEventAt']) || $this->container['lastEventAt'] === null) {
+        if (
+            !isset($this->container['lastEventAt']) ||
+            $this->container['lastEventAt'] === null
+        ) {
             $invalidProperties[] = "'lastEventAt' can't be null";
         }
-        if (!isset($this->container['scores']) || $this->container['scores'] === null) {
+        if (
+            !isset($this->container['scores']) ||
+            $this->container['scores'] === null
+        ) {
             $invalidProperties[] = "'scores' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets userToken
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile
+     * @param string $userToken userToken representing the user for which to fetch the Personalization profile.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets scores
      *
-     * @param object $scores the userToken scores
+     * @param object $scores The userToken scores.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

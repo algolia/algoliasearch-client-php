@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetNoResultsRateResponseDates Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'date' => 'string',
         'noResultCount' => 'int',
@@ -23,10 +28,10 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'date' => null,
         'noResultCount' => null,
@@ -135,19 +140,30 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['date']) || $this->container['date'] === null) {
+        if (
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
+        ) {
             $invalidProperties[] = "'date' can't be null";
         }
-        if (!isset($this->container['noResultCount']) || $this->container['noResultCount'] === null) {
+        if (
+            !isset($this->container['noResultCount']) ||
+            $this->container['noResultCount'] === null
+        ) {
             $invalidProperties[] = "'noResultCount' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
+        if (
+            !isset($this->container['rate']) ||
+            $this->container['rate'] === null
+        ) {
             $invalidProperties[] = "'rate' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -175,7 +191,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets date
      *
-     * @param string $date date of the event
+     * @param string $date Date of the event.
      *
      * @return self
      */
@@ -199,7 +215,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets noResultCount
      *
-     * @param int $noResultCount the number of occurrences
+     * @param int $noResultCount The number of occurrences.
      *
      * @return self
      */
@@ -223,7 +239,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count The number of occurrences.
      *
      * @return self
      */
@@ -237,7 +253,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets rate
      *
-     * @return float
+     * @return double
      */
     public function getRate()
     {
@@ -247,7 +263,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param double $rate The click-through rate.
      *
      * @return self
      */
@@ -260,9 +276,9 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -272,7 +288,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -301,7 +317,7 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -310,4 +326,3 @@ class GetNoResultsRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
-

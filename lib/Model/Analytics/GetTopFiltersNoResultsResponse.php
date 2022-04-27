@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopFiltersNoResultsResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'values' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[]',
+        'values' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'values' => null,
     ];
@@ -114,10 +120,12 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['values']) || $this->container['values'] === null) {
+        if (
+            !isset($this->container['values']) ||
+            $this->container['values'] === null
+        ) {
             $invalidProperties[] = "'values' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Sets values
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values a list of filters without results
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values A list of filters without results.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
         unset($this->container[$offset]);
     }
 }
-

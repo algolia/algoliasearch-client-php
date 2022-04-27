@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SourceIndexExternal Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'count' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'count' => null,
@@ -121,13 +126,18 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
+        if (
+            !isset($this->container['query']) ||
+            $this->container['query'] === null
+        ) {
             $invalidProperties[] = "'query' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets query
      *
-     * @param string $query the suggestion you would like to add
+     * @param string $query The suggestion you would like to add.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count the measure of the suggestion relative popularity
+     * @param int $count The measure of the suggestion relative popularity.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

@@ -2,7 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\QuerySuggestionsConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -31,8 +37,10 @@ class QuerySuggestionsClient
      * @param QuerySuggestionsConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(ApiWrapperInterface $apiWrapper, QuerySuggestionsConfig $config)
-    {
+    public function __construct(
+        ApiWrapperInterface $apiWrapper,
+        QuerySuggestionsConfig $config
+    ) {
         $this->config = $config;
 
         $this->api = $apiWrapper;
@@ -48,7 +56,12 @@ class QuerySuggestionsClient
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $allowedRegions = explode('-', 'us-eu');
-        $config = QuerySuggestionsConfig::create($appId, $apiKey, $region, $allowedRegions);
+        $config = QuerySuggestionsConfig::create(
+            $appId,
+            $apiKey,
+            $region,
+            $allowedRegions
+        );
 
         return static::createWithConfig($config);
     }
@@ -66,7 +79,9 @@ class QuerySuggestionsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create('query-suggestions.'.$config->getRegion().'.algolia.com');
+            $clusterHosts = ClusterHosts::create(
+                'query-suggestions.' . $config->getRegion() . '.algolia.com'
+            );
         }
 
         $apiWrapper = new ApiWrapper(
@@ -90,7 +105,6 @@ class QuerySuggestionsClient
      * Create a configuration of a Query Suggestions index.
      *
      * @param array $querySuggestionsIndexWithIndexParam querySuggestionsIndexWithIndexParam (required)
-     *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexWithIndexParam
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
@@ -98,7 +112,11 @@ class QuerySuggestionsClient
     public function createConfig($querySuggestionsIndexWithIndexParam)
     {
         // verify the required parameter 'querySuggestionsIndexWithIndexParam' is set
-        if ($querySuggestionsIndexWithIndexParam === null || (is_array($querySuggestionsIndexWithIndexParam) && count($querySuggestionsIndexWithIndexParam) === 0)) {
+        if (
+            $querySuggestionsIndexWithIndexParam === null ||
+            (is_array($querySuggestionsIndexWithIndexParam) &&
+                count($querySuggestionsIndexWithIndexParam) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $querySuggestionsIndexWithIndexParam when calling createConfig'
             );
@@ -112,7 +130,12 @@ class QuerySuggestionsClient
             $httpBody = $querySuggestionsIndexWithIndexParam;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -148,14 +171,15 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -168,7 +192,10 @@ class QuerySuggestionsClient
     public function deleteConfig($indexName)
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null || (is_array($indexName) && count($indexName) === 0)) {
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $indexName when calling deleteConfig'
             );
@@ -187,7 +214,12 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -223,14 +255,15 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -245,7 +278,12 @@ class QuerySuggestionsClient
         $queryParams = [];
         $httpBody = [];
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -258,7 +296,10 @@ class QuerySuggestionsClient
     public function getConfig($indexName)
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null || (is_array($indexName) && count($indexName) === 0)) {
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $indexName when calling getConfig'
             );
@@ -277,7 +318,12 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -290,7 +336,10 @@ class QuerySuggestionsClient
     public function getConfigStatus($indexName)
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null || (is_array($indexName) && count($indexName) === 0)) {
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $indexName when calling getConfigStatus'
             );
@@ -309,7 +358,12 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -322,7 +376,10 @@ class QuerySuggestionsClient
     public function getLogFile($indexName)
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null || (is_array($indexName) && count($indexName) === 0)) {
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $indexName when calling getLogFile'
             );
@@ -341,7 +398,12 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -378,18 +440,19 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -426,18 +489,19 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -448,7 +512,6 @@ class QuerySuggestionsClient
      * - $querySuggestionsIndexParam['sourceIndices'] => (array) List of source indices used to generate a Query Suggestions index. (required)
      * - $querySuggestionsIndexParam['languages'] => (array) De-duplicate singular and plural suggestions. For example, let's say your index contains English content, and that two suggestions “shoe” and “shoes” end up in your Query Suggestions index. If the English language is configured, only the most popular of those two suggestions would remain.
      * - $querySuggestionsIndexParam['exclude'] => (array) List of words and patterns to exclude from the Query Suggestions index.
-     *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexParam
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
@@ -456,13 +519,20 @@ class QuerySuggestionsClient
     public function updateConfig($indexName, $querySuggestionsIndexParam)
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null || (is_array($indexName) && count($indexName) === 0)) {
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $indexName when calling updateConfig'
             );
         }
         // verify the required parameter 'querySuggestionsIndexParam' is set
-        if ($querySuggestionsIndexParam === null || (is_array($querySuggestionsIndexParam) && count($querySuggestionsIndexParam) === 0)) {
+        if (
+            $querySuggestionsIndexParam === null ||
+            (is_array($querySuggestionsIndexParam) &&
+                count($querySuggestionsIndexParam) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $querySuggestionsIndexParam when calling updateConfig'
             );
@@ -485,14 +555,23 @@ class QuerySuggestionsClient
             $httpBody = $querySuggestionsIndexParam;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
-    private function sendRequest($method, $resourcePath, $queryParams, $httpBody)
-    {
+    private function sendRequest(
+        $method,
+        $resourcePath,
+        $queryParams,
+        $httpBody
+    ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * DictionaryEntry Class Doc Comment
  *
  * @category Class
  * @description A dictionary entry.
- *
  * @package Algolia\AlgoliaSearch
  */
-class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'language' => 'string',
@@ -27,10 +31,10 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'language' => null,
@@ -151,13 +155,18 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['language']) || $this->container['language'] === null) {
+        if (
+            !isset($this->container['language']) ||
+            $this->container['language'] === null
+        ) {
             $invalidProperties[] = "'language' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -185,7 +194,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -233,7 +242,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets word
      *
-     * @param string|null $word the word of the dictionary entry
+     * @param string|null $word The word of the dictionary entry.
      *
      * @return self
      */
@@ -257,7 +266,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets words
      *
-     * @param string[]|null $words the words of the dictionary entry
+     * @param string[]|null $words The words of the dictionary entry.
      *
      * @return self
      */
@@ -281,7 +290,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets decomposition
      *
-     * @param string[]|null $decomposition a decomposition of the word of the dictionary entry
+     * @param string[]|null $decomposition A decomposition of the word of the dictionary entry.
      *
      * @return self
      */
@@ -318,9 +327,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -330,7 +339,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -359,7 +368,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -368,4 +377,3 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

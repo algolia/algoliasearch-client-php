@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * StandardEntries Class Doc Comment
  *
  * @category Class
  * @description Map of language ISO code supported by the dictionary (e.g., \&quot;en\&quot; for English) to a boolean value.
- *
  * @package Algolia\AlgoliaSearch
  */
-class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'plurals' => 'array<string,bool>',
         'stopwords' => 'array<string,bool>',
@@ -24,10 +28,10 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'plurals' => null,
         'stopwords' => null,
@@ -157,7 +161,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets plurals
      *
-     * @param array<string,bool>|null $plurals language ISO code
+     * @param array<string,bool>|null $plurals Language ISO code.
      *
      * @return self
      */
@@ -181,7 +185,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets stopwords
      *
-     * @param array<string,bool>|null $stopwords language ISO code
+     * @param array<string,bool>|null $stopwords Language ISO code.
      *
      * @return self
      */
@@ -205,7 +209,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets compounds
      *
-     * @param array<string,bool>|null $compounds language ISO code
+     * @param array<string,bool>|null $compounds Language ISO code.
      *
      * @return self
      */
@@ -218,9 +222,9 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -230,7 +234,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -259,7 +263,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -268,4 +272,3 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

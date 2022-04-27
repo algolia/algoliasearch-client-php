@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * CreatedAtObject Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'createdAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'createdAt' => null,
     ];
@@ -114,10 +119,12 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets createdAt
      *
-     * @param string $createdAt date of creation (ISO-8601 format)
+     * @param string $createdAt Date of creation (ISO-8601 format).
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

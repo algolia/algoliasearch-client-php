@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SaveObjectResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'createdAt' => 'string',
         'taskID' => 'int',
@@ -22,10 +27,10 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'createdAt' => null,
         'taskID' => null,
@@ -179,7 +184,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int|null $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -203,7 +208,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets objectID
      *
-     * @param string|null $objectID unique identifier of the object
+     * @param string|null $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -216,9 +221,9 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -228,7 +233,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -257,7 +262,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -266,4 +271,3 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

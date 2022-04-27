@@ -2,29 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MultipleQueriesParams Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueries[]',
-        'strategy' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy',
+        'strategy' =>
+            '\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'requests' => null,
         'strategy' => null,
@@ -121,10 +127,12 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
             $invalidProperties[] = "'requests' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -189,9 +197,9 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -201,7 +209,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -230,7 +238,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -239,4 +247,3 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
-

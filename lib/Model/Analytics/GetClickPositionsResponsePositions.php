@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetClickPositionsResponsePositions Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'position' => 'int[]',
         'clickCount' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'position' => null,
         'clickCount' => null,
@@ -121,13 +126,18 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['position']) || $this->container['position'] === null) {
+        if (
+            !isset($this->container['position']) ||
+            $this->container['position'] === null
+        ) {
             $invalidProperties[] = "'position' can't be null";
         }
-        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
+        if (
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
+        ) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -179,7 +189,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount The number of click event.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
         unset($this->container[$offset]);
     }
 }
-

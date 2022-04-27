@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MultipleGetObjectsParams Class Doc Comment
  *
  * @category Class
  * @description getObjects operation on an index.
- *
  * @package Algolia\AlgoliaSearch
  */
-class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'attributesToRetrieve' => 'string[]',
         'objectID' => 'string',
@@ -24,10 +28,10 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'attributesToRetrieve' => null,
         'objectID' => null,
@@ -111,7 +115,8 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     public function __construct(array $data = null)
     {
         if (isset($data['attributesToRetrieve'])) {
-            $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
+            $this->container['attributesToRetrieve'] =
+                $data['attributesToRetrieve'];
         }
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -130,13 +135,18 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -188,7 +198,7 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets objectID
      *
-     * @param string $objectID ID of the object within that index
+     * @param string $objectID ID of the object within that index.
      *
      * @return self
      */
@@ -212,7 +222,7 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets indexName
      *
-     * @param string $indexName name of the index containing the object
+     * @param string $indexName name of the index containing the object.
      *
      * @return self
      */
@@ -225,9 +235,9 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -237,7 +247,7 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -266,7 +276,7 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -275,4 +285,3 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

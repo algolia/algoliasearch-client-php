@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TimeRange Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'from' => 'int',
         'until' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'from' => null,
         'until' => null,
@@ -121,13 +126,18 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['from']) || $this->container['from'] === null) {
+        if (
+            !isset($this->container['from']) ||
+            $this->container['from'] === null
+        ) {
             $invalidProperties[] = "'from' can't be null";
         }
-        if (!isset($this->container['until']) || $this->container['until'] === null) {
+        if (
+            !isset($this->container['until']) ||
+            $this->container['until'] === null
+        ) {
             $invalidProperties[] = "'until' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets from
      *
-     * @param int $from lower bound of the time range (Unix timestamp)
+     * @param int $from Lower bound of the time range (Unix timestamp).
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets until
      *
-     * @param int $until upper bound of the time range (Unix timestamp)
+     * @param int $until Upper bound of the time range (Unix timestamp).
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         unset($this->container[$offset]);
     }
 }
-

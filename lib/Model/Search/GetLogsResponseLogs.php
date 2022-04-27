@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetLogsResponseLogs Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'timestamp' => 'string',
         'method' => 'string',
@@ -30,14 +35,15 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'index' => 'string',
         'queryParams' => 'string',
         'queryNbHits' => 'string',
-        'innerQueries' => '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]',
+        'innerQueries' =>
+            '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'timestamp' => null,
         'method' => null,
@@ -212,40 +218,69 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timestamp']) || $this->container['timestamp'] === null) {
+        if (
+            !isset($this->container['timestamp']) ||
+            $this->container['timestamp'] === null
+        ) {
             $invalidProperties[] = "'timestamp' can't be null";
         }
-        if (!isset($this->container['method']) || $this->container['method'] === null) {
+        if (
+            !isset($this->container['method']) ||
+            $this->container['method'] === null
+        ) {
             $invalidProperties[] = "'method' can't be null";
         }
-        if (!isset($this->container['answerCode']) || $this->container['answerCode'] === null) {
+        if (
+            !isset($this->container['answerCode']) ||
+            $this->container['answerCode'] === null
+        ) {
             $invalidProperties[] = "'answerCode' can't be null";
         }
-        if (!isset($this->container['queryBody']) || $this->container['queryBody'] === null) {
+        if (
+            !isset($this->container['queryBody']) ||
+            $this->container['queryBody'] === null
+        ) {
             $invalidProperties[] = "'queryBody' can't be null";
         }
-        if (!isset($this->container['answer']) || $this->container['answer'] === null) {
+        if (
+            !isset($this->container['answer']) ||
+            $this->container['answer'] === null
+        ) {
             $invalidProperties[] = "'answer' can't be null";
         }
-        if (!isset($this->container['url']) || $this->container['url'] === null) {
+        if (
+            !isset($this->container['url']) ||
+            $this->container['url'] === null
+        ) {
             $invalidProperties[] = "'url' can't be null";
         }
         if (!isset($this->container['ip']) || $this->container['ip'] === null) {
             $invalidProperties[] = "'ip' can't be null";
         }
-        if (!isset($this->container['queryHeaders']) || $this->container['queryHeaders'] === null) {
+        if (
+            !isset($this->container['queryHeaders']) ||
+            $this->container['queryHeaders'] === null
+        ) {
             $invalidProperties[] = "'queryHeaders' can't be null";
         }
-        if (!isset($this->container['sha1']) || $this->container['sha1'] === null) {
+        if (
+            !isset($this->container['sha1']) ||
+            $this->container['sha1'] === null
+        ) {
             $invalidProperties[] = "'sha1' can't be null";
         }
-        if (!isset($this->container['nbApiCalls']) || $this->container['nbApiCalls'] === null) {
+        if (
+            !isset($this->container['nbApiCalls']) ||
+            $this->container['nbApiCalls'] === null
+        ) {
             $invalidProperties[] = "'nbApiCalls' can't be null";
         }
-        if (!isset($this->container['processingTimeMs']) || $this->container['processingTimeMs'] === null) {
+        if (
+            !isset($this->container['processingTimeMs']) ||
+            $this->container['processingTimeMs'] === null
+        ) {
             $invalidProperties[] = "'processingTimeMs' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -273,7 +308,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets timestamp
      *
-     * @param string $timestamp timestamp in ISO-8601 format
+     * @param string $timestamp Timestamp in ISO-8601 format.
      *
      * @return self
      */
@@ -297,7 +332,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets method
      *
-     * @param string $method HTTP method of the perfomed request
+     * @param string $method HTTP method of the perfomed request.
      *
      * @return self
      */
@@ -321,7 +356,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets answerCode
      *
-     * @param string $answerCode HTTP response code
+     * @param string $answerCode HTTP response code.
      *
      * @return self
      */
@@ -393,7 +428,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets url
      *
-     * @param string $url request URL
+     * @param string $url Request URL.
      *
      * @return self
      */
@@ -417,7 +452,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets ip
      *
-     * @param string $ip IP of the client which perfomed the request
+     * @param string $ip IP of the client which perfomed the request.
      *
      * @return self
      */
@@ -441,7 +476,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryHeaders
      *
-     * @param string $queryHeaders request Headers (API Key is obfuscated)
+     * @param string $queryHeaders Request Headers (API Key is obfuscated).
      *
      * @return self
      */
@@ -465,7 +500,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets sha1
      *
-     * @param string $sha1 SHA1 signature of the log entry
+     * @param string $sha1 SHA1 signature of the log entry.
      *
      * @return self
      */
@@ -489,7 +524,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbApiCalls
      *
-     * @param string $nbApiCalls number of API calls
+     * @param string $nbApiCalls Number of API calls.
      *
      * @return self
      */
@@ -537,7 +572,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets index
      *
-     * @param string|null $index index targeted by the query
+     * @param string|null $index Index targeted by the query.
      *
      * @return self
      */
@@ -561,7 +596,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryParams
      *
-     * @param string|null $queryParams query parameters sent with the request
+     * @param string|null $queryParams Query parameters sent with the request.
      *
      * @return self
      */
@@ -585,7 +620,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryNbHits
      *
-     * @param string|null $queryNbHits number of hits returned for the query
+     * @param string|null $queryNbHits Number of hits returned for the query.
      *
      * @return self
      */
@@ -609,7 +644,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets innerQueries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null $innerQueries array of all performed queries for the given request
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null $innerQueries Array of all performed queries for the given request.
      *
      * @return self
      */
@@ -622,9 +657,9 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -634,7 +669,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -663,7 +698,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -672,4 +707,3 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

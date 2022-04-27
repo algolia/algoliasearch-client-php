@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Key Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'acl' => '\Algolia\AlgoliaSearch\Model\Search\Acl[]',
         'description' => 'string',
@@ -28,10 +33,10 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'acl' => null,
         'description' => null,
@@ -145,7 +150,8 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
             $this->container['maxHitsPerQuery'] = $data['maxHitsPerQuery'];
         }
         if (isset($data['maxQueriesPerIPPerHour'])) {
-            $this->container['maxQueriesPerIPPerHour'] = $data['maxQueriesPerIPPerHour'];
+            $this->container['maxQueriesPerIPPerHour'] =
+                $data['maxQueriesPerIPPerHour'];
         }
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
@@ -170,13 +176,18 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['acl']) || $this->container['acl'] === null) {
+        if (
+            !isset($this->container['acl']) ||
+            $this->container['acl'] === null
+        ) {
             $invalidProperties[] = "'acl' can't be null";
         }
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -204,7 +215,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets acl
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl set of permissions associated with the key
+     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl Set of permissions associated with the key.
      *
      * @return self
      */
@@ -300,7 +311,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets maxQueriesPerIPPerHour
      *
-     * @param int|null $maxQueriesPerIPPerHour maximum number of API calls per hour allowed from a given IP address or a user token
+     * @param int|null $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or a user token.
      *
      * @return self
      */
@@ -396,7 +407,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets createdAt
      *
-     * @param string $createdAt date of creation (ISO-8601 format)
+     * @param string $createdAt Date of creation (ISO-8601 format).
      *
      * @return self
      */
@@ -409,9 +420,9 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -421,7 +432,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -450,7 +461,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -459,4 +470,3 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
         unset($this->container[$offset]);
     }
 }
-

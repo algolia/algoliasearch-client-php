@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchWriteParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;batch&#x60; parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'requests' => '\Algolia\AlgoliaSearch\Model\Search\BatchOperation[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'requests' => null,
     ];
@@ -156,9 +160,9 @@ class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -168,7 +172,7 @@ class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -197,7 +201,7 @@ class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -206,4 +210,3 @@ class BatchWriteParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         unset($this->container[$offset]);
     }
 }
-

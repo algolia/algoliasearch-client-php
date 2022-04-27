@@ -2,31 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * UpdatedAtResponse Class Doc Comment
  *
  * @category Class
  * @description The response with a taskID and an updatedAt timestamp.
- *
  * @package Algolia\AlgoliaSearch
  */
-class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'taskID' => 'int',
         'updatedAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'taskID' => null,
         'updatedAt' => null,
@@ -123,13 +127,18 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
             $invalidProperties[] = "'taskID' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -157,7 +166,7 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -181,7 +190,7 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -194,9 +203,9 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -206,7 +215,7 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -235,7 +244,7 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -244,4 +253,3 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

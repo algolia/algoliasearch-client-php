@@ -2,30 +2,37 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * PersonalizationStrategyParams Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'eventScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]',
-        'facetScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]',
+        'eventScoring' =>
+            '\Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]',
+        'facetScoring' =>
+            '\Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]',
         'personalizationImpact' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'eventScoring' => null,
         'facetScoring' => null,
@@ -115,7 +122,8 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
             $this->container['facetScoring'] = $data['facetScoring'];
         }
         if (isset($data['personalizationImpact'])) {
-            $this->container['personalizationImpact'] = $data['personalizationImpact'];
+            $this->container['personalizationImpact'] =
+                $data['personalizationImpact'];
         }
     }
 
@@ -128,16 +136,24 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['eventScoring']) || $this->container['eventScoring'] === null) {
+        if (
+            !isset($this->container['eventScoring']) ||
+            $this->container['eventScoring'] === null
+        ) {
             $invalidProperties[] = "'eventScoring' can't be null";
         }
-        if (!isset($this->container['facetScoring']) || $this->container['facetScoring'] === null) {
+        if (
+            !isset($this->container['facetScoring']) ||
+            $this->container['facetScoring'] === null
+        ) {
             $invalidProperties[] = "'facetScoring' can't be null";
         }
-        if (!isset($this->container['personalizationImpact']) || $this->container['personalizationImpact'] === null) {
+        if (
+            !isset($this->container['personalizationImpact']) ||
+            $this->container['personalizationImpact'] === null
+        ) {
             $invalidProperties[] = "'personalizationImpact' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +181,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventScoring
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring scores associated with the events
+     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring Scores associated with the events.
      *
      * @return self
      */
@@ -189,7 +205,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets facetScoring
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring scores associated with the facets
+     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring Scores associated with the facets.
      *
      * @return self
      */
@@ -213,7 +229,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets personalizationImpact
      *
-     * @param int $personalizationImpact the impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled)
+     * @param int $personalizationImpact The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled).
      *
      * @return self
      */
@@ -226,9 +242,9 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +254,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +283,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +292,3 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
-

@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ABTest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'abTestID' => 'int',
         'clickSignificance' => 'double',
@@ -27,10 +32,10 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'abTestID' => null,
         'clickSignificance' => 'double',
@@ -135,7 +140,8 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
             $this->container['clickSignificance'] = $data['clickSignificance'];
         }
         if (isset($data['conversionSignificance'])) {
-            $this->container['conversionSignificance'] = $data['conversionSignificance'];
+            $this->container['conversionSignificance'] =
+                $data['conversionSignificance'];
         }
         if (isset($data['endAt'])) {
             $this->container['endAt'] = $data['endAt'];
@@ -163,31 +169,54 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
+        if (
+            !isset($this->container['abTestID']) ||
+            $this->container['abTestID'] === null
+        ) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (!isset($this->container['clickSignificance']) || $this->container['clickSignificance'] === null) {
+        if (
+            !isset($this->container['clickSignificance']) ||
+            $this->container['clickSignificance'] === null
+        ) {
             $invalidProperties[] = "'clickSignificance' can't be null";
         }
-        if (!isset($this->container['conversionSignificance']) || $this->container['conversionSignificance'] === null) {
+        if (
+            !isset($this->container['conversionSignificance']) ||
+            $this->container['conversionSignificance'] === null
+        ) {
             $invalidProperties[] = "'conversionSignificance' can't be null";
         }
-        if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
+        if (
+            !isset($this->container['endAt']) ||
+            $this->container['endAt'] === null
+        ) {
             $invalidProperties[] = "'endAt' can't be null";
         }
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (
+            !isset($this->container['name']) ||
+            $this->container['name'] === null
+        ) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['status']) || $this->container['status'] === null) {
+        if (
+            !isset($this->container['status']) ||
+            $this->container['status'] === null
+        ) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if (!isset($this->container['variants']) || $this->container['variants'] === null) {
+        if (
+            !isset($this->container['variants']) ||
+            $this->container['variants'] === null
+        ) {
             $invalidProperties[] = "'variants' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -215,7 +244,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets abTestID
      *
-     * @param int $abTestID the A/B test ID
+     * @param int $abTestID The A/B test ID.
      *
      * @return self
      */
@@ -229,7 +258,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets clickSignificance
      *
-     * @return float
+     * @return double
      */
     public function getClickSignificance()
     {
@@ -239,7 +268,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets clickSignificance
      *
-     * @param float $clickSignificance A/B test significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param double $clickSignificance A/B test significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
      *
      * @return self
      */
@@ -253,7 +282,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets conversionSignificance
      *
-     * @return float
+     * @return double
      */
     public function getConversionSignificance()
     {
@@ -263,7 +292,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets conversionSignificance
      *
-     * @param float $conversionSignificance A/B test significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param double $conversionSignificance A/B test significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning).
      *
      * @return self
      */
@@ -287,7 +316,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets endAt
      *
-     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $endAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
      *
      * @return self
      */
@@ -311,7 +340,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets createdAt
      *
-     * @param string $createdAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $createdAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
      *
      * @return self
      */
@@ -335,7 +364,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets name
      *
-     * @param string $name A/B test name
+     * @param string $name A/B test name.
      *
      * @return self
      */
@@ -359,7 +388,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status
      *
-     * @param string $status status of the A/B test
+     * @param string $status status of the A/B test.
      *
      * @return self
      */
@@ -383,7 +412,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets variants
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants list of A/B test variant
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants List of A/B test variant.
      *
      * @return self
      */
@@ -396,9 +425,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -408,7 +437,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -437,7 +466,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -446,4 +475,3 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

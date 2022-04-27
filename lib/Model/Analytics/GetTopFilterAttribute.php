@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopFilterAttribute Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'attribute' => 'string',
         'count' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'attribute' => null,
         'count' => null,
@@ -121,13 +126,18 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attribute']) || $this->container['attribute'] === null) {
+        if (
+            !isset($this->container['attribute']) ||
+            $this->container['attribute'] === null
+        ) {
             $invalidProperties[] = "'attribute' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets attribute
      *
-     * @param string $attribute the attribute
+     * @param string $attribute The attribute.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count The number of occurrences.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
-

@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * UpdatedAtWithObjectIdResponse Class Doc Comment
  *
  * @category Class
  * @description The response with a taskID, an objectID and an updatedAt timestamp.
- *
  * @package Algolia\AlgoliaSearch
  */
-class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'taskID' => 'int',
         'updatedAt' => 'string',
@@ -24,10 +28,10 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'taskID' => null,
         'updatedAt' => null,
@@ -157,7 +161,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int|null $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -181,7 +185,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets updatedAt
      *
-     * @param string|null $updatedAt date of last update (ISO-8601 format)
+     * @param string|null $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -205,7 +209,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectID
      *
-     * @param string|null $objectID unique identifier of the object
+     * @param string|null $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -218,9 +222,9 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -230,7 +234,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -259,7 +263,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -268,4 +272,3 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
-

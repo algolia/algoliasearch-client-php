@@ -2,31 +2,36 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchDictionaryEntriesParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;batchDictionaryEntries&#x60; parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'clearExistingDictionaryEntries' => 'bool',
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]',
+        'requests' =>
+            '\Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'clearExistingDictionaryEntries' => null,
         'requests' => null,
@@ -107,7 +112,8 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     public function __construct(array $data = null)
     {
         if (isset($data['clearExistingDictionaryEntries'])) {
-            $this->container['clearExistingDictionaryEntries'] = $data['clearExistingDictionaryEntries'];
+            $this->container['clearExistingDictionaryEntries'] =
+                $data['clearExistingDictionaryEntries'];
         }
         if (isset($data['requests'])) {
             $this->container['requests'] = $data['requests'];
@@ -123,10 +129,12 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
             $invalidProperties[] = "'requests' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -154,13 +162,16 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets clearExistingDictionaryEntries
      *
-     * @param bool|null $clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries from the dictionary
+     * @param bool|null $clearExistingDictionaryEntries When `true`, start the batch by removing all the custom entries from the dictionary.
      *
      * @return self
      */
-    public function setClearExistingDictionaryEntries($clearExistingDictionaryEntries)
-    {
-        $this->container['clearExistingDictionaryEntries'] = $clearExistingDictionaryEntries;
+    public function setClearExistingDictionaryEntries(
+        $clearExistingDictionaryEntries
+    ) {
+        $this->container[
+            'clearExistingDictionaryEntries'
+        ] = $clearExistingDictionaryEntries;
 
         return $this;
     }
@@ -191,9 +202,9 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -203,7 +214,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -232,7 +243,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -241,4 +252,3 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
         unset($this->container[$offset]);
     }
 }
-

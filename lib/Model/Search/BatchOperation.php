@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchOperation Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
         'body' => 'object',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'action' => null,
         'body' => null,
@@ -172,7 +177,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets body
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
+     * @param object|null $body arguments to the operation (depends on the type of the operation).
      *
      * @return self
      */
@@ -185,9 +190,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -197,7 +202,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -226,7 +231,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -235,4 +240,3 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
-

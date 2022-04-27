@@ -2,7 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -31,8 +37,10 @@ class AbtestingClient
      * @param AbtestingConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(ApiWrapperInterface $apiWrapper, AbtestingConfig $config)
-    {
+    public function __construct(
+        ApiWrapperInterface $apiWrapper,
+        AbtestingConfig $config
+    ) {
         $this->config = $config;
 
         $this->api = $apiWrapper;
@@ -48,7 +56,12 @@ class AbtestingClient
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $allowedRegions = explode('-', 'us-de');
-        $config = AbtestingConfig::create($appId, $apiKey, $region, $allowedRegions);
+        $config = AbtestingConfig::create(
+            $appId,
+            $apiKey,
+            $region,
+            $allowedRegions
+        );
 
         return static::createWithConfig($config);
     }
@@ -66,7 +79,9 @@ class AbtestingClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create('analytics.'.$config->getRegion().'.algolia.com');
+            $clusterHosts = ClusterHosts::create(
+                'analytics.' . $config->getRegion() . '.algolia.com'
+            );
         }
 
         $apiWrapper = new ApiWrapper(
@@ -93,7 +108,6 @@ class AbtestingClient
      * - $addABTestsRequest['name'] => (string) A/B test name. (required)
      * - $addABTestsRequest['variant'] => (array) List of 2 variants for the A/B test. (required)
      * - $addABTestsRequest['endAt'] => (string) End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ. (required)
-     *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
@@ -101,7 +115,10 @@ class AbtestingClient
     public function addABTests($addABTestsRequest)
     {
         // verify the required parameter 'addABTestsRequest' is set
-        if ($addABTestsRequest === null || (is_array($addABTestsRequest) && count($addABTestsRequest) === 0)) {
+        if (
+            $addABTestsRequest === null ||
+            (is_array($addABTestsRequest) && count($addABTestsRequest) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $addABTestsRequest when calling addABTests'
             );
@@ -115,7 +132,12 @@ class AbtestingClient
             $httpBody = $addABTestsRequest;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -151,14 +173,15 @@ class AbtestingClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -190,7 +213,12 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -226,14 +254,15 @@ class AbtestingClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -265,7 +294,12 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -302,7 +336,12 @@ class AbtestingClient
             }
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -339,18 +378,19 @@ class AbtestingClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -387,18 +427,19 @@ class AbtestingClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -430,14 +471,23 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
-    private function sendRequest($method, $resourcePath, $queryParams, $httpBody)
-    {
+    private function sendRequest(
+        $method,
+        $resourcePath,
+        $queryParams,
+        $httpBody
+    ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

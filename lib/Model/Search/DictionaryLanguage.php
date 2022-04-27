@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * DictionaryLanguage Class Doc Comment
  *
  * @category Class
  * @description Custom entries for a dictionary.
- *
  * @package Algolia\AlgoliaSearch
  */
-class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'nbCustomEntires' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'nbCustomEntires' => null,
     ];
@@ -156,9 +160,9 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -168,7 +172,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -197,7 +201,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -206,4 +210,3 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

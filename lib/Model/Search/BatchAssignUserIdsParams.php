@@ -2,31 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchAssignUserIdsParams Class Doc Comment
  *
  * @category Class
  * @description Assign userID parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'cluster' => 'string',
         'users' => 'string[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'cluster' => null,
         'users' => null,
@@ -123,13 +127,18 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['cluster']) || $this->container['cluster'] === null) {
+        if (
+            !isset($this->container['cluster']) ||
+            $this->container['cluster'] === null
+        ) {
             $invalidProperties[] = "'cluster' can't be null";
         }
-        if (!isset($this->container['users']) || $this->container['users'] === null) {
+        if (
+            !isset($this->container['users']) ||
+            $this->container['users'] === null
+        ) {
             $invalidProperties[] = "'users' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -157,7 +166,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets cluster
      *
-     * @param string $cluster name of the cluster
+     * @param string $cluster Name of the cluster.
      *
      * @return self
      */
@@ -194,9 +203,9 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -206,7 +215,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -235,7 +244,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -244,4 +253,3 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

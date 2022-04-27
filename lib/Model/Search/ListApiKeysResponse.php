@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ListApiKeysResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'keys' => '\Algolia\AlgoliaSearch\Model\Search\Key[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'keys' => null,
     ];
@@ -114,10 +119,12 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['keys']) || $this->container['keys'] === null) {
+        if (
+            !isset($this->container['keys']) ||
+            $this->container['keys'] === null
+        ) {
             $invalidProperties[] = "'keys' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets keys
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Key[] $keys list of api keys
+     * @param \Algolia\AlgoliaSearch\Model\Search\Key[] $keys List of api keys.
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

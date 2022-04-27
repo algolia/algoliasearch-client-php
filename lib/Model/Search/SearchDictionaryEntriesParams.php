@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchDictionaryEntriesParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;searchDictionaryEntries&#x60; parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'page' => 'int',
@@ -25,10 +29,10 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'page' => null,
@@ -137,10 +141,12 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
+        if (
+            !isset($this->container['query']) ||
+            $this->container['query'] === null
+        ) {
             $invalidProperties[] = "'query' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -168,7 +174,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets query
      *
-     * @param string $query the text to search in the index
+     * @param string $query The text to search in the index.
      *
      * @return self
      */
@@ -192,7 +198,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets page
      *
-     * @param int|null $page specify the page to retrieve
+     * @param int|null $page Specify the page to retrieve.
      *
      * @return self
      */
@@ -216,7 +222,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage Set the number of hits per page.
      *
      * @return self
      */
@@ -253,9 +259,9 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -265,7 +271,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -294,7 +300,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -303,4 +309,3 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
-

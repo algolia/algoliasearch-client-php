@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BaseBrowseResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'cursor' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'cursor' => null,
     ];
@@ -114,10 +119,12 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['cursor']) || $this->container['cursor'] === null) {
+        if (
+            !isset($this->container['cursor']) ||
+            $this->container['cursor'] === null
+        ) {
             $invalidProperties[] = "'cursor' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -158,9 +165,9 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

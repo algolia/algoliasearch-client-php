@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Consequence Class Doc Comment
  *
  * @category Class
  * @description Consequence of the Rule.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'params' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams',
         'promote' => '\Algolia\AlgoliaSearch\Model\Search\Promote[]',
@@ -26,10 +30,10 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'params' => null,
         'promote' => null,
@@ -195,7 +199,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promote
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote objects to promote as hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote Objects to promote as hits.
      *
      * @return self
      */
@@ -280,9 +284,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -292,7 +296,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -321,7 +325,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -330,4 +334,3 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         unset($this->container[$offset]);
     }
 }
-

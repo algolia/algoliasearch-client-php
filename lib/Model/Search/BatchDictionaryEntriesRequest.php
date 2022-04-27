@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BatchDictionaryEntriesRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'action' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryAction',
         'body' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryEntry',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'action' => null,
         'body' => null,
@@ -121,13 +126,18 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['action']) || $this->container['action'] === null) {
+        if (
+            !isset($this->container['action']) ||
+            $this->container['action'] === null
+        ) {
             $invalidProperties[] = "'action' can't be null";
         }
-        if (!isset($this->container['body']) || $this->container['body'] === null) {
+        if (
+            !isset($this->container['body']) ||
+            $this->container['body'] === null
+        ) {
             $invalidProperties[] = "'body' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -192,9 +202,9 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
-

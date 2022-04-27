@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetLogsResponseInnerQueries Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'userToken' => 'string',
@@ -22,10 +27,10 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'userToken' => null,
@@ -155,7 +160,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets indexName
      *
-     * @param string|null $indexName index targeted by the query
+     * @param string|null $indexName Index targeted by the query.
      *
      * @return self
      */
@@ -179,7 +184,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets userToken
      *
-     * @param string|null $userToken user identifier
+     * @param string|null $userToken User identifier.
      *
      * @return self
      */
@@ -203,7 +208,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets queryId
      *
-     * @param string|null $queryId queryID for the given query
+     * @param string|null $queryId QueryID for the given query.
      *
      * @return self
      */
@@ -216,9 +221,9 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -228,7 +233,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -257,7 +262,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -266,4 +271,3 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

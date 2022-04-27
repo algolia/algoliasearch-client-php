@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Rule Class Doc Comment
  *
  * @category Class
  * @description Rule object.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'conditions' => '\Algolia\AlgoliaSearch\Model\Search\Condition[]',
@@ -27,10 +31,10 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'conditions' => null,
@@ -151,13 +155,18 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['consequence']) || $this->container['consequence'] === null) {
+        if (
+            !isset($this->container['consequence']) ||
+            $this->container['consequence'] === null
+        ) {
             $invalidProperties[] = "'consequence' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -185,7 +194,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID Unique identifier of the object.
      *
      * @return self
      */
@@ -318,9 +327,9 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -330,7 +339,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -359,7 +368,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -368,4 +377,3 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         unset($this->container[$offset]);
     }
 }
-

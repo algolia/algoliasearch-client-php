@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopFilterAttributesResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'attributes' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'attributes' => null,
     ];
@@ -114,10 +120,12 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attributes']) || $this->container['attributes'] === null) {
+        if (
+            !isset($this->container['attributes']) ||
+            $this->container['attributes'] === null
+        ) {
             $invalidProperties[] = "'attributes' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Sets attributes
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes a list of attributes with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes A list of attributes with their count.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
         unset($this->container[$offset]);
     }
 }
-

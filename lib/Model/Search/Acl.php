@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Acl Class Doc Comment
  *
@@ -13,37 +15,36 @@ class Acl
     /**
      * Possible values of this enum
      */
-    const ADD_OBJECT = 'addObject';
+    public const ADD_OBJECT = 'addObject';
 
-    const ANALYTICS = 'analytics';
+    public const ANALYTICS = 'analytics';
 
-    const BROWSE = 'browse';
+    public const BROWSE = 'browse';
 
-    const DELETE_OBJECT = 'deleteObject';
+    public const DELETE_OBJECT = 'deleteObject';
 
-    const DELETE_INDEX = 'deleteIndex';
+    public const DELETE_INDEX = 'deleteIndex';
 
-    const EDIT_SETTINGS = 'editSettings';
+    public const EDIT_SETTINGS = 'editSettings';
 
-    const LIST_INDEXES = 'listIndexes';
+    public const LIST_INDEXES = 'listIndexes';
 
-    const LOGS = 'logs';
+    public const LOGS = 'logs';
 
-    const PERSONALIZATION = 'personalization';
+    public const PERSONALIZATION = 'personalization';
 
-    const RECOMMENDATION = 'recommendation';
+    public const RECOMMENDATION = 'recommendation';
 
-    const SEARCH = 'search';
+    public const SEARCH = 'search';
 
-    const SEE_UNRETRIEVABLE_ATTRIBUTES = 'seeUnretrievableAttributes';
+    public const SEE_UNRETRIEVABLE_ATTRIBUTES = 'seeUnretrievableAttributes';
 
-    const SETTINGS = 'settings';
+    public const SETTINGS = 'settings';
 
-    const USAGE = 'usage';
+    public const USAGE = 'usage';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
@@ -66,4 +67,3 @@ class Acl
         ];
     }
 }
-

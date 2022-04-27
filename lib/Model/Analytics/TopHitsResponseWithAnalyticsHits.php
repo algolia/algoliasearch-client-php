@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TopHitsResponseWithAnalyticsHits Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'hit' => 'string',
         'count' => 'int',
@@ -26,10 +31,10 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hit' => null,
         'count' => null,
@@ -137,7 +142,8 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
             $this->container['conversionRate'] = $data['conversionRate'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] =
+                $data['trackedSearchCount'];
         }
         if (isset($data['clickCount'])) {
             $this->container['clickCount'] = $data['clickCount'];
@@ -156,28 +162,48 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hit']) || $this->container['hit'] === null) {
+        if (
+            !isset($this->container['hit']) ||
+            $this->container['hit'] === null
+        ) {
             $invalidProperties[] = "'hit' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
+        if (
+            !isset($this->container['clickThroughRate']) ||
+            $this->container['clickThroughRate'] === null
+        ) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
+        if (
+            !isset($this->container['conversionRate']) ||
+            $this->container['conversionRate'] === null
+        ) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
+        if (
+            !isset($this->container['trackedSearchCount']) ||
+            $this->container['trackedSearchCount'] === null
+        ) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
+        if (
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
+        ) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
+        if (
+            !isset($this->container['conversionCount']) ||
+            $this->container['conversionCount'] === null
+        ) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -205,7 +231,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets hit
      *
-     * @param string $hit the hit
+     * @param string $hit The hit.
      *
      * @return self
      */
@@ -229,7 +255,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count The number of occurrences.
      *
      * @return self
      */
@@ -243,7 +269,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets clickThroughRate
      *
-     * @return float
+     * @return double
      */
     public function getClickThroughRate()
     {
@@ -253,7 +279,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets clickThroughRate
      *
-     * @param float $clickThroughRate the click-through rate
+     * @param double $clickThroughRate The click-through rate.
      *
      * @return self
      */
@@ -267,7 +293,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets conversionRate
      *
-     * @return float
+     * @return double
      */
     public function getConversionRate()
     {
@@ -277,7 +303,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets conversionRate
      *
-     * @param float $conversionRate the conversion rate
+     * @param double $conversionRate The conversion rate.
      *
      * @return self
      */
@@ -301,7 +327,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount The number of tracked search click.
      *
      * @return self
      */
@@ -325,7 +351,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount The number of click event.
      *
      * @return self
      */
@@ -349,7 +375,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int $conversionCount The number of converted clicks.
      *
      * @return self
      */
@@ -362,9 +388,9 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -374,7 +400,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -403,7 +429,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -412,4 +438,3 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
         unset($this->container[$offset]);
     }
 }
-

@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchForFacetValuesResponseFacetHits Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'value' => 'string',
         'highlighted' => 'string',
@@ -22,10 +27,10 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'value' => null,
         'highlighted' => null,
@@ -128,16 +133,24 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['value']) || $this->container['value'] === null) {
+        if (
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
+        ) {
             $invalidProperties[] = "'value' can't be null";
         }
-        if (!isset($this->container['highlighted']) || $this->container['highlighted'] === null) {
+        if (
+            !isset($this->container['highlighted']) ||
+            $this->container['highlighted'] === null
+        ) {
             $invalidProperties[] = "'highlighted' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets value
      *
-     * @param string $value raw value of the facet
+     * @param string $value Raw value of the facet.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets highlighted
      *
-     * @param string $highlighted markup text with occurrences highlighted
+     * @param string $highlighted Markup text with occurrences highlighted.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
         unset($this->container[$offset]);
     }
 }
-

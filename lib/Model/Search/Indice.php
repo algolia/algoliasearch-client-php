@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Indice Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'name' => 'string',
         'createdAt' => 'string',
@@ -30,10 +35,10 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'name' => null,
         'createdAt' => null,
@@ -162,7 +167,8 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
             $this->container['lastBuildTimeS'] = $data['lastBuildTimeS'];
         }
         if (isset($data['numberOfPendingTask'])) {
-            $this->container['numberOfPendingTask'] = $data['numberOfPendingTask'];
+            $this->container['numberOfPendingTask'] =
+                $data['numberOfPendingTask'];
         }
         if (isset($data['pendingTask'])) {
             $this->container['pendingTask'] = $data['pendingTask'];
@@ -184,31 +190,54 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (
+            !isset($this->container['name']) ||
+            $this->container['name'] === null
+        ) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (!isset($this->container['entries']) || $this->container['entries'] === null) {
+        if (
+            !isset($this->container['entries']) ||
+            $this->container['entries'] === null
+        ) {
             $invalidProperties[] = "'entries' can't be null";
         }
-        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
+        if (
+            !isset($this->container['dataSize']) ||
+            $this->container['dataSize'] === null
+        ) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-        if (!isset($this->container['fileSize']) || $this->container['fileSize'] === null) {
+        if (
+            !isset($this->container['fileSize']) ||
+            $this->container['fileSize'] === null
+        ) {
             $invalidProperties[] = "'fileSize' can't be null";
         }
-        if (!isset($this->container['lastBuildTimeS']) || $this->container['lastBuildTimeS'] === null) {
+        if (
+            !isset($this->container['lastBuildTimeS']) ||
+            $this->container['lastBuildTimeS'] === null
+        ) {
             $invalidProperties[] = "'lastBuildTimeS' can't be null";
         }
-        if (!isset($this->container['pendingTask']) || $this->container['pendingTask'] === null) {
+        if (
+            !isset($this->container['pendingTask']) ||
+            $this->container['pendingTask'] === null
+        ) {
             $invalidProperties[] = "'pendingTask' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -236,7 +265,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets name
      *
-     * @param string $name index name
+     * @param string $name Index name.
      *
      * @return self
      */
@@ -284,7 +313,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -308,7 +337,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets entries
      *
-     * @param int $entries number of records contained in the index
+     * @param int $entries Number of records contained in the index.
      *
      * @return self
      */
@@ -332,7 +361,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets dataSize
      *
-     * @param int $dataSize number of bytes of the index in minified format
+     * @param int $dataSize Number of bytes of the index in minified format.
      *
      * @return self
      */
@@ -356,7 +385,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets fileSize
      *
-     * @param int $fileSize number of bytes of the index binary file
+     * @param int $fileSize Number of bytes of the index binary file.
      *
      * @return self
      */
@@ -380,7 +409,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets lastBuildTimeS
      *
-     * @param int $lastBuildTimeS last build time
+     * @param int $lastBuildTimeS Last build time.
      *
      * @return self
      */
@@ -489,9 +518,9 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -501,7 +530,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -530,7 +559,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -539,4 +568,3 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

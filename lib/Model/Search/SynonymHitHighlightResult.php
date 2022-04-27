@@ -2,31 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SynonymHitHighlightResult Class Doc Comment
  *
  * @category Class
  * @description Highlighted results.
- *
  * @package Algolia\AlgoliaSearch
  */
-class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'type' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
         'synonyms' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'type' => null,
         'synonyms' => null,
@@ -187,9 +191,9 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -199,7 +203,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -228,7 +232,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -237,4 +241,3 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
-

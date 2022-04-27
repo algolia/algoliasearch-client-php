@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Status Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'isRunning' => 'bool',
@@ -22,10 +27,10 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'isRunning' => null,
@@ -128,16 +133,24 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (!isset($this->container['isRunning']) || $this->container['isRunning'] === null) {
+        if (
+            !isset($this->container['isRunning']) ||
+            $this->container['isRunning'] === null
+        ) {
             $invalidProperties[] = "'isRunning' can't be null";
         }
-        if (!isset($this->container['lastBuiltAt']) || $this->container['lastBuiltAt'] === null) {
+        if (
+            !isset($this->container['lastBuiltAt']) ||
+            $this->container['lastBuiltAt'] === null
+        ) {
             $invalidProperties[] = "'lastBuiltAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets indexName
      *
-     * @param string $indexName the targeted index name
+     * @param string $indexName The targeted index name.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets isRunning
      *
-     * @param bool $isRunning true if the Query Suggestions index is running
+     * @param bool $isRunning true if the Query Suggestions index is running.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets lastBuiltAt
      *
-     * @param string $lastBuiltAt date and time of the last build
+     * @param string $lastBuiltAt Date and time of the last build.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

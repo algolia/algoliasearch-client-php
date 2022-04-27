@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * IndexSettings Class Doc Comment
  *
  * @category Class
  * @description The Algolia index settings.
- *
  * @package Algolia\AlgoliaSearch
  */
-class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
@@ -59,13 +63,17 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'enableRules' => 'bool',
         'enablePersonalization' => 'bool',
         'queryType' => '\Algolia\AlgoliaSearch\Model\Search\QueryType',
-        'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults',
+        'removeWordsIfNoResults' =>
+            '\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults',
         'advancedSyntax' => 'bool',
         'optionalWords' => 'string[]',
         'disableExactOnAttributes' => 'string[]',
-        'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
-        'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
-        'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
+        'exactOnSingleWordQuery' =>
+            '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
+        'alternativesAsExact' =>
+            '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
+        'advancedSyntaxFeatures' =>
+            '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
         'distinct' => 'int',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
@@ -77,10 +85,10 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
@@ -191,13 +199,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'highlightPreTag' => 'setHighlightPreTag',
         'highlightPostTag' => 'setHighlightPostTag',
         'snippetEllipsisText' => 'setSnippetEllipsisText',
-        'restrictHighlightAndSnippetArrays' => 'setRestrictHighlightAndSnippetArrays',
+        'restrictHighlightAndSnippetArrays' =>
+            'setRestrictHighlightAndSnippetArrays',
         'hitsPerPage' => 'setHitsPerPage',
         'minWordSizefor1Typo' => 'setMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'setMinWordSizefor2Typos',
         'typoTolerance' => 'setTypoTolerance',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
-        'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
+        'disableTypoToleranceOnAttributes' =>
+            'setDisableTypoToleranceOnAttributes',
         'separatorsToIndex' => 'setSeparatorsToIndex',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
@@ -220,7 +230,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
-        'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
+        'attributeCriteriaComputedByMinProximity' =>
+            'setAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'setRenderingContent',
     ];
 
@@ -255,13 +266,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'highlightPreTag' => 'getHighlightPreTag',
         'highlightPostTag' => 'getHighlightPostTag',
         'snippetEllipsisText' => 'getSnippetEllipsisText',
-        'restrictHighlightAndSnippetArrays' => 'getRestrictHighlightAndSnippetArrays',
+        'restrictHighlightAndSnippetArrays' =>
+            'getRestrictHighlightAndSnippetArrays',
         'hitsPerPage' => 'getHitsPerPage',
         'minWordSizefor1Typo' => 'getMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'getMinWordSizefor2Typos',
         'typoTolerance' => 'getTypoTolerance',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
-        'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
+        'disableTypoToleranceOnAttributes' =>
+            'getDisableTypoToleranceOnAttributes',
         'separatorsToIndex' => 'getSeparatorsToIndex',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
@@ -284,7 +297,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
-        'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
+        'attributeCriteriaComputedByMinProximity' =>
+            'getAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'getRenderingContent',
     ];
 
@@ -326,19 +340,24 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['replicas'] = $data['replicas'];
         }
         if (isset($data['paginationLimitedTo'])) {
-            $this->container['paginationLimitedTo'] = $data['paginationLimitedTo'];
+            $this->container['paginationLimitedTo'] =
+                $data['paginationLimitedTo'];
         }
         if (isset($data['disableTypoToleranceOnWords'])) {
-            $this->container['disableTypoToleranceOnWords'] = $data['disableTypoToleranceOnWords'];
+            $this->container['disableTypoToleranceOnWords'] =
+                $data['disableTypoToleranceOnWords'];
         }
         if (isset($data['attributesToTransliterate'])) {
-            $this->container['attributesToTransliterate'] = $data['attributesToTransliterate'];
+            $this->container['attributesToTransliterate'] =
+                $data['attributesToTransliterate'];
         }
         if (isset($data['camelCaseAttributes'])) {
-            $this->container['camelCaseAttributes'] = $data['camelCaseAttributes'];
+            $this->container['camelCaseAttributes'] =
+                $data['camelCaseAttributes'];
         }
         if (isset($data['decompoundedAttributes'])) {
-            $this->container['decompoundedAttributes'] = $data['decompoundedAttributes'];
+            $this->container['decompoundedAttributes'] =
+                $data['decompoundedAttributes'];
         }
         if (isset($data['indexLanguages'])) {
             $this->container['indexLanguages'] = $data['indexLanguages'];
@@ -347,31 +366,39 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['filterPromotes'] = $data['filterPromotes'];
         }
         if (isset($data['disablePrefixOnAttributes'])) {
-            $this->container['disablePrefixOnAttributes'] = $data['disablePrefixOnAttributes'];
+            $this->container['disablePrefixOnAttributes'] =
+                $data['disablePrefixOnAttributes'];
         }
         if (isset($data['allowCompressionOfIntegerArray'])) {
-            $this->container['allowCompressionOfIntegerArray'] = $data['allowCompressionOfIntegerArray'];
+            $this->container['allowCompressionOfIntegerArray'] =
+                $data['allowCompressionOfIntegerArray'];
         }
         if (isset($data['numericAttributesForFiltering'])) {
-            $this->container['numericAttributesForFiltering'] = $data['numericAttributesForFiltering'];
+            $this->container['numericAttributesForFiltering'] =
+                $data['numericAttributesForFiltering'];
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
         }
         if (isset($data['searchableAttributes'])) {
-            $this->container['searchableAttributes'] = $data['searchableAttributes'];
+            $this->container['searchableAttributes'] =
+                $data['searchableAttributes'];
         }
         if (isset($data['attributesForFaceting'])) {
-            $this->container['attributesForFaceting'] = $data['attributesForFaceting'];
+            $this->container['attributesForFaceting'] =
+                $data['attributesForFaceting'];
         }
         if (isset($data['unretrievableAttributes'])) {
-            $this->container['unretrievableAttributes'] = $data['unretrievableAttributes'];
+            $this->container['unretrievableAttributes'] =
+                $data['unretrievableAttributes'];
         }
         if (isset($data['attributesToRetrieve'])) {
-            $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
+            $this->container['attributesToRetrieve'] =
+                $data['attributesToRetrieve'];
         }
         if (isset($data['restrictSearchableAttributes'])) {
-            $this->container['restrictSearchableAttributes'] = $data['restrictSearchableAttributes'];
+            $this->container['restrictSearchableAttributes'] =
+                $data['restrictSearchableAttributes'];
         }
         if (isset($data['ranking'])) {
             $this->container['ranking'] = $data['ranking'];
@@ -380,13 +407,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['customRanking'] = $data['customRanking'];
         }
         if (isset($data['relevancyStrictness'])) {
-            $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
+            $this->container['relevancyStrictness'] =
+                $data['relevancyStrictness'];
         }
         if (isset($data['attributesToHighlight'])) {
-            $this->container['attributesToHighlight'] = $data['attributesToHighlight'];
+            $this->container['attributesToHighlight'] =
+                $data['attributesToHighlight'];
         }
         if (isset($data['attributesToSnippet'])) {
-            $this->container['attributesToSnippet'] = $data['attributesToSnippet'];
+            $this->container['attributesToSnippet'] =
+                $data['attributesToSnippet'];
         }
         if (isset($data['highlightPreTag'])) {
             $this->container['highlightPreTag'] = $data['highlightPreTag'];
@@ -395,28 +425,34 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['highlightPostTag'] = $data['highlightPostTag'];
         }
         if (isset($data['snippetEllipsisText'])) {
-            $this->container['snippetEllipsisText'] = $data['snippetEllipsisText'];
+            $this->container['snippetEllipsisText'] =
+                $data['snippetEllipsisText'];
         }
         if (isset($data['restrictHighlightAndSnippetArrays'])) {
-            $this->container['restrictHighlightAndSnippetArrays'] = $data['restrictHighlightAndSnippetArrays'];
+            $this->container['restrictHighlightAndSnippetArrays'] =
+                $data['restrictHighlightAndSnippetArrays'];
         }
         if (isset($data['hitsPerPage'])) {
             $this->container['hitsPerPage'] = $data['hitsPerPage'];
         }
         if (isset($data['minWordSizefor1Typo'])) {
-            $this->container['minWordSizefor1Typo'] = $data['minWordSizefor1Typo'];
+            $this->container['minWordSizefor1Typo'] =
+                $data['minWordSizefor1Typo'];
         }
         if (isset($data['minWordSizefor2Typos'])) {
-            $this->container['minWordSizefor2Typos'] = $data['minWordSizefor2Typos'];
+            $this->container['minWordSizefor2Typos'] =
+                $data['minWordSizefor2Typos'];
         }
         if (isset($data['typoTolerance'])) {
             $this->container['typoTolerance'] = $data['typoTolerance'];
         }
         if (isset($data['allowTyposOnNumericTokens'])) {
-            $this->container['allowTyposOnNumericTokens'] = $data['allowTyposOnNumericTokens'];
+            $this->container['allowTyposOnNumericTokens'] =
+                $data['allowTyposOnNumericTokens'];
         }
         if (isset($data['disableTypoToleranceOnAttributes'])) {
-            $this->container['disableTypoToleranceOnAttributes'] = $data['disableTypoToleranceOnAttributes'];
+            $this->container['disableTypoToleranceOnAttributes'] =
+                $data['disableTypoToleranceOnAttributes'];
         }
         if (isset($data['separatorsToIndex'])) {
             $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
@@ -428,7 +464,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['removeStopWords'] = $data['removeStopWords'];
         }
         if (isset($data['keepDiacriticsOnCharacters'])) {
-            $this->container['keepDiacriticsOnCharacters'] = $data['keepDiacriticsOnCharacters'];
+            $this->container['keepDiacriticsOnCharacters'] =
+                $data['keepDiacriticsOnCharacters'];
         }
         if (isset($data['queryLanguages'])) {
             $this->container['queryLanguages'] = $data['queryLanguages'];
@@ -440,13 +477,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['enableRules'] = $data['enableRules'];
         }
         if (isset($data['enablePersonalization'])) {
-            $this->container['enablePersonalization'] = $data['enablePersonalization'];
+            $this->container['enablePersonalization'] =
+                $data['enablePersonalization'];
         }
         if (isset($data['queryType'])) {
             $this->container['queryType'] = $data['queryType'];
         }
         if (isset($data['removeWordsIfNoResults'])) {
-            $this->container['removeWordsIfNoResults'] = $data['removeWordsIfNoResults'];
+            $this->container['removeWordsIfNoResults'] =
+                $data['removeWordsIfNoResults'];
         }
         if (isset($data['advancedSyntax'])) {
             $this->container['advancedSyntax'] = $data['advancedSyntax'];
@@ -455,16 +494,20 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['optionalWords'] = $data['optionalWords'];
         }
         if (isset($data['disableExactOnAttributes'])) {
-            $this->container['disableExactOnAttributes'] = $data['disableExactOnAttributes'];
+            $this->container['disableExactOnAttributes'] =
+                $data['disableExactOnAttributes'];
         }
         if (isset($data['exactOnSingleWordQuery'])) {
-            $this->container['exactOnSingleWordQuery'] = $data['exactOnSingleWordQuery'];
+            $this->container['exactOnSingleWordQuery'] =
+                $data['exactOnSingleWordQuery'];
         }
         if (isset($data['alternativesAsExact'])) {
-            $this->container['alternativesAsExact'] = $data['alternativesAsExact'];
+            $this->container['alternativesAsExact'] =
+                $data['alternativesAsExact'];
         }
         if (isset($data['advancedSyntaxFeatures'])) {
-            $this->container['advancedSyntaxFeatures'] = $data['advancedSyntaxFeatures'];
+            $this->container['advancedSyntaxFeatures'] =
+                $data['advancedSyntaxFeatures'];
         }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
@@ -473,7 +516,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['synonyms'] = $data['synonyms'];
         }
         if (isset($data['replaceSynonymsInHighlight'])) {
-            $this->container['replaceSynonymsInHighlight'] = $data['replaceSynonymsInHighlight'];
+            $this->container['replaceSynonymsInHighlight'] =
+                $data['replaceSynonymsInHighlight'];
         }
         if (isset($data['minProximity'])) {
             $this->container['minProximity'] = $data['minProximity'];
@@ -485,7 +529,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
         if (isset($data['attributeCriteriaComputedByMinProximity'])) {
-            $this->container['attributeCriteriaComputedByMinProximity'] = $data['attributeCriteriaComputedByMinProximity'];
+            $this->container['attributeCriteriaComputedByMinProximity'] =
+                $data['attributeCriteriaComputedByMinProximity'];
         }
         if (isset($data['renderingContent'])) {
             $this->container['renderingContent'] = $data['renderingContent'];
@@ -501,24 +546,44 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         $invalidProperties = [];
 
-        if (isset($this->container['distinct']) && ($this->container['distinct'] > 4)) {
-            $invalidProperties[] = "invalid value for 'distinct', must be smaller than or equal to 4.";
+        if (
+            isset($this->container['distinct']) &&
+            $this->container['distinct'] > 4
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'distinct', must be smaller than or equal to 4.";
         }
 
-        if (isset($this->container['distinct']) && ($this->container['distinct'] < 0)) {
-            $invalidProperties[] = "invalid value for 'distinct', must be bigger than or equal to 0.";
+        if (
+            isset($this->container['distinct']) &&
+            $this->container['distinct'] < 0
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'distinct', must be bigger than or equal to 0.";
         }
 
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] > 7)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be smaller than or equal to 7.";
+        if (
+            isset($this->container['minProximity']) &&
+            $this->container['minProximity'] > 7
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'minProximity', must be smaller than or equal to 7.";
         }
 
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] < 1)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be bigger than or equal to 1.";
+        if (
+            isset($this->container['minProximity']) &&
+            $this->container['minProximity'] < 1
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'minProximity', must be bigger than or equal to 1.";
         }
 
-        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
-            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
+        if (
+            isset($this->container['maxFacetHits']) &&
+            $this->container['maxFacetHits'] > 100
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -548,7 +613,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets replicas
      *
-     * @param string[]|null $replicas creates replicas, exact copies of an index
+     * @param string[]|null $replicas Creates replicas, exact copies of an index.
      *
      * @return self
      */
@@ -572,7 +637,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets paginationLimitedTo
      *
-     * @param int|null $paginationLimitedTo set the maximum number of hits accessible via pagination
+     * @param int|null $paginationLimitedTo Set the maximum number of hits accessible via pagination.
      *
      * @return self
      */
@@ -596,13 +661,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets disableTypoToleranceOnWords
      *
-     * @param string[]|null $disableTypoToleranceOnWords a list of words for which you want to turn off typo tolerance
+     * @param string[]|null $disableTypoToleranceOnWords A list of words for which you want to turn off typo tolerance.
      *
      * @return self
      */
     public function setDisableTypoToleranceOnWords($disableTypoToleranceOnWords)
     {
-        $this->container['disableTypoToleranceOnWords'] = $disableTypoToleranceOnWords;
+        $this->container[
+            'disableTypoToleranceOnWords'
+        ] = $disableTypoToleranceOnWords;
 
         return $this;
     }
@@ -620,13 +687,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesToTransliterate
      *
-     * @param string[]|null $attributesToTransliterate specify on which attributes to apply transliteration
+     * @param string[]|null $attributesToTransliterate Specify on which attributes to apply transliteration.
      *
      * @return self
      */
     public function setAttributesToTransliterate($attributesToTransliterate)
     {
-        $this->container['attributesToTransliterate'] = $attributesToTransliterate;
+        $this->container[
+            'attributesToTransliterate'
+        ] = $attributesToTransliterate;
 
         return $this;
     }
@@ -644,7 +713,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets camelCaseAttributes
      *
-     * @param string[]|null $camelCaseAttributes list of attributes on which to do a decomposition of camel case words
+     * @param string[]|null $camelCaseAttributes List of attributes on which to do a decomposition of camel case words.
      *
      * @return self
      */
@@ -668,7 +737,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets decompoundedAttributes
      *
-     * @param object|null $decompoundedAttributes specify on which attributes in your index Algolia should apply word segmentation, also known as decompounding
+     * @param object|null $decompoundedAttributes Specify on which attributes in your index Algolia should apply word segmentation, also known as decompounding.
      *
      * @return self
      */
@@ -692,7 +761,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets indexLanguages
      *
-     * @param string[]|null $indexLanguages sets the languages at the index level for language-specific processing such as tokenization and normalization
+     * @param string[]|null $indexLanguages Sets the languages at the index level for language-specific processing such as tokenization and normalization.
      *
      * @return self
      */
@@ -716,7 +785,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets filterPromotes
      *
-     * @param bool|null $filterPromotes whether promoted results should match the filters of the current search, except for geographic filters
+     * @param bool|null $filterPromotes Whether promoted results should match the filters of the current search, except for geographic filters.
      *
      * @return self
      */
@@ -740,13 +809,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets disablePrefixOnAttributes
      *
-     * @param string[]|null $disablePrefixOnAttributes list of attributes on which you want to disable prefix matching
+     * @param string[]|null $disablePrefixOnAttributes List of attributes on which you want to disable prefix matching.
      *
      * @return self
      */
     public function setDisablePrefixOnAttributes($disablePrefixOnAttributes)
     {
-        $this->container['disablePrefixOnAttributes'] = $disablePrefixOnAttributes;
+        $this->container[
+            'disablePrefixOnAttributes'
+        ] = $disablePrefixOnAttributes;
 
         return $this;
     }
@@ -764,13 +835,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets allowCompressionOfIntegerArray
      *
-     * @param bool|null $allowCompressionOfIntegerArray enables compression of large integer arrays
+     * @param bool|null $allowCompressionOfIntegerArray Enables compression of large integer arrays.
      *
      * @return self
      */
-    public function setAllowCompressionOfIntegerArray($allowCompressionOfIntegerArray)
-    {
-        $this->container['allowCompressionOfIntegerArray'] = $allowCompressionOfIntegerArray;
+    public function setAllowCompressionOfIntegerArray(
+        $allowCompressionOfIntegerArray
+    ) {
+        $this->container[
+            'allowCompressionOfIntegerArray'
+        ] = $allowCompressionOfIntegerArray;
 
         return $this;
     }
@@ -788,13 +862,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets numericAttributesForFiltering
      *
-     * @param string[]|null $numericAttributesForFiltering list of numeric attributes that can be used as numerical filters
+     * @param string[]|null $numericAttributesForFiltering List of numeric attributes that can be used as numerical filters.
      *
      * @return self
      */
-    public function setNumericAttributesForFiltering($numericAttributesForFiltering)
-    {
-        $this->container['numericAttributesForFiltering'] = $numericAttributesForFiltering;
+    public function setNumericAttributesForFiltering(
+        $numericAttributesForFiltering
+    ) {
+        $this->container[
+            'numericAttributesForFiltering'
+        ] = $numericAttributesForFiltering;
 
         return $this;
     }
@@ -812,7 +889,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets userData
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param object|null $userData Lets you store custom data in your indices.
      *
      * @return self
      */
@@ -836,7 +913,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets searchableAttributes
      *
-     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
+     * @param string[]|null $searchableAttributes The complete list of attributes used for searching.
      *
      * @return self
      */
@@ -860,7 +937,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesForFaceting
      *
-     * @param string[]|null $attributesForFaceting the complete list of attributes that will be used for faceting
+     * @param string[]|null $attributesForFaceting The complete list of attributes that will be used for faceting.
      *
      * @return self
      */
@@ -884,7 +961,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets unretrievableAttributes
      *
-     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
+     * @param string[]|null $unretrievableAttributes List of attributes that can't be retrieved at query time.
      *
      * @return self
      */
@@ -908,7 +985,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesToRetrieve
      *
-     * @param string[]|null $attributesToRetrieve this parameter controls which attributes to retrieve and which not to retrieve
+     * @param string[]|null $attributesToRetrieve This parameter controls which attributes to retrieve and which not to retrieve.
      *
      * @return self
      */
@@ -932,13 +1009,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets restrictSearchableAttributes
      *
-     * @param string[]|null $restrictSearchableAttributes restricts a given query to look in only a subset of your searchable attributes
+     * @param string[]|null $restrictSearchableAttributes Restricts a given query to look in only a subset of your searchable attributes.
      *
      * @return self
      */
-    public function setRestrictSearchableAttributes($restrictSearchableAttributes)
-    {
-        $this->container['restrictSearchableAttributes'] = $restrictSearchableAttributes;
+    public function setRestrictSearchableAttributes(
+        $restrictSearchableAttributes
+    ) {
+        $this->container[
+            'restrictSearchableAttributes'
+        ] = $restrictSearchableAttributes;
 
         return $this;
     }
@@ -956,7 +1036,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets ranking
      *
-     * @param string[]|null $ranking controls how Algolia should sort your results
+     * @param string[]|null $ranking Controls how Algolia should sort your results.
      *
      * @return self
      */
@@ -980,7 +1060,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets customRanking
      *
-     * @param string[]|null $customRanking specifies the custom ranking criterion
+     * @param string[]|null $customRanking Specifies the custom ranking criterion.
      *
      * @return self
      */
@@ -1004,7 +1084,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets relevancyStrictness
      *
-     * @param int|null $relevancyStrictness controls the relevancy threshold below which less relevant results aren't included in the results
+     * @param int|null $relevancyStrictness Controls the relevancy threshold below which less relevant results aren't included in the results.
      *
      * @return self
      */
@@ -1028,7 +1108,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesToHighlight
      *
-     * @param string[]|null $attributesToHighlight list of attributes to highlight
+     * @param string[]|null $attributesToHighlight List of attributes to highlight.
      *
      * @return self
      */
@@ -1052,7 +1132,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesToSnippet
      *
-     * @param string[]|null $attributesToSnippet list of attributes to snippet, with an optional maximum number of words to snippet
+     * @param string[]|null $attributesToSnippet List of attributes to snippet, with an optional maximum number of words to snippet.
      *
      * @return self
      */
@@ -1076,7 +1156,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets highlightPreTag
      *
-     * @param string|null $highlightPreTag the HTML string to insert before the highlighted parts in all highlight and snippet results
+     * @param string|null $highlightPreTag The HTML string to insert before the highlighted parts in all highlight and snippet results.
      *
      * @return self
      */
@@ -1100,7 +1180,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets highlightPostTag
      *
-     * @param string|null $highlightPostTag the HTML string to insert after the highlighted parts in all highlight and snippet results
+     * @param string|null $highlightPostTag The HTML string to insert after the highlighted parts in all highlight and snippet results.
      *
      * @return self
      */
@@ -1124,7 +1204,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets snippetEllipsisText
      *
-     * @param string|null $snippetEllipsisText string used as an ellipsis indicator when a snippet is truncated
+     * @param string|null $snippetEllipsisText String used as an ellipsis indicator when a snippet is truncated.
      *
      * @return self
      */
@@ -1148,13 +1228,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets restrictHighlightAndSnippetArrays
      *
-     * @param bool|null $restrictHighlightAndSnippetArrays restrict highlighting and snippeting to items that matched the query
+     * @param bool|null $restrictHighlightAndSnippetArrays Restrict highlighting and snippeting to items that matched the query.
      *
      * @return self
      */
-    public function setRestrictHighlightAndSnippetArrays($restrictHighlightAndSnippetArrays)
-    {
-        $this->container['restrictHighlightAndSnippetArrays'] = $restrictHighlightAndSnippetArrays;
+    public function setRestrictHighlightAndSnippetArrays(
+        $restrictHighlightAndSnippetArrays
+    ) {
+        $this->container[
+            'restrictHighlightAndSnippetArrays'
+        ] = $restrictHighlightAndSnippetArrays;
 
         return $this;
     }
@@ -1172,7 +1255,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage Set the number of hits per page.
      *
      * @return self
      */
@@ -1196,7 +1279,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets minWordSizefor1Typo
      *
-     * @param int|null $minWordSizefor1Typo minimum number of characters a word in the query string must contain to accept matches with 1 typo
+     * @param int|null $minWordSizefor1Typo Minimum number of characters a word in the query string must contain to accept matches with 1 typo.
      *
      * @return self
      */
@@ -1220,7 +1303,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets minWordSizefor2Typos
      *
-     * @param int|null $minWordSizefor2Typos minimum number of characters a word in the query string must contain to accept matches with 2 typos
+     * @param int|null $minWordSizefor2Typos Minimum number of characters a word in the query string must contain to accept matches with 2 typos.
      *
      * @return self
      */
@@ -1268,13 +1351,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets allowTyposOnNumericTokens
      *
-     * @param bool|null $allowTyposOnNumericTokens whether to allow typos on numbers (\"numeric tokens\") in the query string
+     * @param bool|null $allowTyposOnNumericTokens Whether to allow typos on numbers (\"numeric tokens\") in the query string.
      *
      * @return self
      */
     public function setAllowTyposOnNumericTokens($allowTyposOnNumericTokens)
     {
-        $this->container['allowTyposOnNumericTokens'] = $allowTyposOnNumericTokens;
+        $this->container[
+            'allowTyposOnNumericTokens'
+        ] = $allowTyposOnNumericTokens;
 
         return $this;
     }
@@ -1292,13 +1377,16 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets disableTypoToleranceOnAttributes
      *
-     * @param string[]|null $disableTypoToleranceOnAttributes list of attributes on which you want to disable typo tolerance
+     * @param string[]|null $disableTypoToleranceOnAttributes List of attributes on which you want to disable typo tolerance.
      *
      * @return self
      */
-    public function setDisableTypoToleranceOnAttributes($disableTypoToleranceOnAttributes)
-    {
-        $this->container['disableTypoToleranceOnAttributes'] = $disableTypoToleranceOnAttributes;
+    public function setDisableTypoToleranceOnAttributes(
+        $disableTypoToleranceOnAttributes
+    ) {
+        $this->container[
+            'disableTypoToleranceOnAttributes'
+        ] = $disableTypoToleranceOnAttributes;
 
         return $this;
     }
@@ -1316,7 +1404,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets separatorsToIndex
      *
-     * @param string|null $separatorsToIndex control which separators are indexed
+     * @param string|null $separatorsToIndex Control which separators are indexed.
      *
      * @return self
      */
@@ -1340,7 +1428,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets ignorePlurals
      *
-     * @param string|null $ignorePlurals treats singular, plurals, and other forms of declensions as matching terms
+     * @param string|null $ignorePlurals Treats singular, plurals, and other forms of declensions as matching terms.
      *
      * @return self
      */
@@ -1364,7 +1452,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets removeStopWords
      *
-     * @param string|null $removeStopWords removes stop (common) words from the query before executing it
+     * @param string|null $removeStopWords Removes stop (common) words from the query before executing it.
      *
      * @return self
      */
@@ -1388,13 +1476,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets keepDiacriticsOnCharacters
      *
-     * @param string|null $keepDiacriticsOnCharacters list of characters that the engine shouldn't automatically normalize
+     * @param string|null $keepDiacriticsOnCharacters List of characters that the engine shouldn't automatically normalize.
      *
      * @return self
      */
     public function setKeepDiacriticsOnCharacters($keepDiacriticsOnCharacters)
     {
-        $this->container['keepDiacriticsOnCharacters'] = $keepDiacriticsOnCharacters;
+        $this->container[
+            'keepDiacriticsOnCharacters'
+        ] = $keepDiacriticsOnCharacters;
 
         return $this;
     }
@@ -1412,7 +1502,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets queryLanguages
      *
-     * @param string[]|null $queryLanguages sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection
+     * @param string[]|null $queryLanguages Sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection.
      *
      * @return self
      */
@@ -1436,7 +1526,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets decompoundQuery
      *
-     * @param bool|null $decompoundQuery splits compound words into their composing atoms in the query
+     * @param bool|null $decompoundQuery Splits compound words into their composing atoms in the query.
      *
      * @return self
      */
@@ -1460,7 +1550,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets enableRules
      *
-     * @param bool|null $enableRules whether Rules should be globally enabled
+     * @param bool|null $enableRules Whether Rules should be globally enabled.
      *
      * @return self
      */
@@ -1484,7 +1574,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets enablePersonalization
      *
-     * @param bool|null $enablePersonalization enable the Personalization feature
+     * @param bool|null $enablePersonalization Enable the Personalization feature.
      *
      * @return self
      */
@@ -1556,7 +1646,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets advancedSyntax
      *
-     * @param bool|null $advancedSyntax enables the advanced query syntax
+     * @param bool|null $advancedSyntax Enables the advanced query syntax.
      *
      * @return self
      */
@@ -1580,7 +1670,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets optionalWords
      *
-     * @param string[]|null $optionalWords a list of words that should be considered as optional when found in the query
+     * @param string[]|null $optionalWords A list of words that should be considered as optional when found in the query.
      *
      * @return self
      */
@@ -1604,13 +1694,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets disableExactOnAttributes
      *
-     * @param string[]|null $disableExactOnAttributes list of attributes on which you want to disable the exact ranking criterion
+     * @param string[]|null $disableExactOnAttributes List of attributes on which you want to disable the exact ranking criterion.
      *
      * @return self
      */
     public function setDisableExactOnAttributes($disableExactOnAttributes)
     {
-        $this->container['disableExactOnAttributes'] = $disableExactOnAttributes;
+        $this->container[
+            'disableExactOnAttributes'
+        ] = $disableExactOnAttributes;
 
         return $this;
     }
@@ -1652,7 +1744,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets alternativesAsExact
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact list of alternatives that should be considered an exact match by the exact ranking criterion
+     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact List of alternatives that should be considered an exact match by the exact ranking criterion.
      *
      * @return self
      */
@@ -1676,7 +1768,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets advancedSyntaxFeatures
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when ‘advancedSyntax' is enabled
+     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures Allows you to specify which advanced syntax features are active when ‘advancedSyntax' is enabled.
      *
      * @return self
      */
@@ -1700,17 +1792,21 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets distinct
      *
-     * @param int|null $distinct enables de-duplication or grouping of results
+     * @param int|null $distinct Enables de-duplication or grouping of results.
      *
      * @return self
      */
     public function setDistinct($distinct)
     {
-        if (!is_null($distinct) && ($distinct > 4)) {
-            throw new \InvalidArgumentException('invalid value for $distinct when calling IndexSettings., must be smaller than or equal to 4.');
+        if (!is_null($distinct) && $distinct > 4) {
+            throw new \InvalidArgumentException(
+                'invalid value for $distinct when calling IndexSettings., must be smaller than or equal to 4.'
+            );
         }
-        if (!is_null($distinct) && ($distinct < 0)) {
-            throw new \InvalidArgumentException('invalid value for $distinct when calling IndexSettings., must be bigger than or equal to 0.');
+        if (!is_null($distinct) && $distinct < 0) {
+            throw new \InvalidArgumentException(
+                'invalid value for $distinct when calling IndexSettings., must be bigger than or equal to 0.'
+            );
         }
 
         $this->container['distinct'] = $distinct;
@@ -1731,7 +1827,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets synonyms
      *
-     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
+     * @param bool|null $synonyms Whether to take into account an index's synonyms for a particular search.
      *
      * @return self
      */
@@ -1755,13 +1851,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets replaceSynonymsInHighlight
      *
-     * @param bool|null $replaceSynonymsInHighlight whether to highlight and snippet the original word that matches the synonym or the synonym itself
+     * @param bool|null $replaceSynonymsInHighlight Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
      *
      * @return self
      */
     public function setReplaceSynonymsInHighlight($replaceSynonymsInHighlight)
     {
-        $this->container['replaceSynonymsInHighlight'] = $replaceSynonymsInHighlight;
+        $this->container[
+            'replaceSynonymsInHighlight'
+        ] = $replaceSynonymsInHighlight;
 
         return $this;
     }
@@ -1779,17 +1877,21 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets minProximity
      *
-     * @param int|null $minProximity precision of the proximity ranking criterion
+     * @param int|null $minProximity Precision of the proximity ranking criterion.
      *
      * @return self
      */
     public function setMinProximity($minProximity)
     {
-        if (!is_null($minProximity) && ($minProximity > 7)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling IndexSettings., must be smaller than or equal to 7.');
+        if (!is_null($minProximity) && $minProximity > 7) {
+            throw new \InvalidArgumentException(
+                'invalid value for $minProximity when calling IndexSettings., must be smaller than or equal to 7.'
+            );
         }
-        if (!is_null($minProximity) && ($minProximity < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling IndexSettings., must be bigger than or equal to 1.');
+        if (!is_null($minProximity) && $minProximity < 1) {
+            throw new \InvalidArgumentException(
+                'invalid value for $minProximity when calling IndexSettings., must be bigger than or equal to 1.'
+            );
         }
 
         $this->container['minProximity'] = $minProximity;
@@ -1840,8 +1942,10 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling IndexSettings., must be smaller than or equal to 100.');
+        if (!is_null($maxFacetHits) && $maxFacetHits > 100) {
+            throw new \InvalidArgumentException(
+                'invalid value for $maxFacetHits when calling IndexSettings., must be smaller than or equal to 100.'
+            );
         }
 
         $this->container['maxFacetHits'] = $maxFacetHits;
@@ -1856,19 +1960,23 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     public function getAttributeCriteriaComputedByMinProximity()
     {
-        return $this->container['attributeCriteriaComputedByMinProximity'] ?? null;
+        return $this->container['attributeCriteriaComputedByMinProximity'] ??
+            null;
     }
 
     /**
      * Sets attributeCriteriaComputedByMinProximity
      *
-     * @param bool|null $attributeCriteriaComputedByMinProximity when attribute is ranked above proximity in your ranking formula, proximity is used to select which searchable attribute is matched in the attribute ranking stage
+     * @param bool|null $attributeCriteriaComputedByMinProximity When attribute is ranked above proximity in your ranking formula, proximity is used to select which searchable attribute is matched in the attribute ranking stage.
      *
      * @return self
      */
-    public function setAttributeCriteriaComputedByMinProximity($attributeCriteriaComputedByMinProximity)
-    {
-        $this->container['attributeCriteriaComputedByMinProximity'] = $attributeCriteriaComputedByMinProximity;
+    public function setAttributeCriteriaComputedByMinProximity(
+        $attributeCriteriaComputedByMinProximity
+    ) {
+        $this->container[
+            'attributeCriteriaComputedByMinProximity'
+        ] = $attributeCriteriaComputedByMinProximity;
 
         return $this;
     }
@@ -1899,9 +2007,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -1911,7 +2019,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -1940,7 +2048,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -1949,4 +2057,3 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         unset($this->container[$offset]);
     }
 }
-

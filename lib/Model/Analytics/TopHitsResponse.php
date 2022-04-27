@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * TopHitsResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]',
+        'hits' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hits' => null,
     ];
@@ -114,10 +120,12 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+        if (
+            !isset($this->container['hits']) ||
+            $this->container['hits'] === null
+        ) {
             $invalidProperties[] = "'hits' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[] $hits a list of top hits with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[] $hits A list of top hits with their count.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

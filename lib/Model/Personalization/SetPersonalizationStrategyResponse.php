@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SetPersonalizationStrategyResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'message' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'message' => null,
     ];
@@ -114,10 +119,12 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['message']) || $this->container['message'] === null) {
+        if (
+            !isset($this->container['message']) ||
+            $this->container['message'] === null
+        ) {
             $invalidProperties[] = "'message' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +152,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets message
      *
-     * @param string $message a message confirming the strategy update
+     * @param string $message A message confirming the strategy update.
      *
      * @return self
      */
@@ -158,9 +165,9 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +177,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +206,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +215,3 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
         unset($this->container[$offset]);
     }
 }
-

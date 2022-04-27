@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * BaseIndexSettings Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
@@ -31,10 +36,10 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
@@ -148,19 +153,24 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['replicas'] = $data['replicas'];
         }
         if (isset($data['paginationLimitedTo'])) {
-            $this->container['paginationLimitedTo'] = $data['paginationLimitedTo'];
+            $this->container['paginationLimitedTo'] =
+                $data['paginationLimitedTo'];
         }
         if (isset($data['disableTypoToleranceOnWords'])) {
-            $this->container['disableTypoToleranceOnWords'] = $data['disableTypoToleranceOnWords'];
+            $this->container['disableTypoToleranceOnWords'] =
+                $data['disableTypoToleranceOnWords'];
         }
         if (isset($data['attributesToTransliterate'])) {
-            $this->container['attributesToTransliterate'] = $data['attributesToTransliterate'];
+            $this->container['attributesToTransliterate'] =
+                $data['attributesToTransliterate'];
         }
         if (isset($data['camelCaseAttributes'])) {
-            $this->container['camelCaseAttributes'] = $data['camelCaseAttributes'];
+            $this->container['camelCaseAttributes'] =
+                $data['camelCaseAttributes'];
         }
         if (isset($data['decompoundedAttributes'])) {
-            $this->container['decompoundedAttributes'] = $data['decompoundedAttributes'];
+            $this->container['decompoundedAttributes'] =
+                $data['decompoundedAttributes'];
         }
         if (isset($data['indexLanguages'])) {
             $this->container['indexLanguages'] = $data['indexLanguages'];
@@ -169,13 +179,16 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['filterPromotes'] = $data['filterPromotes'];
         }
         if (isset($data['disablePrefixOnAttributes'])) {
-            $this->container['disablePrefixOnAttributes'] = $data['disablePrefixOnAttributes'];
+            $this->container['disablePrefixOnAttributes'] =
+                $data['disablePrefixOnAttributes'];
         }
         if (isset($data['allowCompressionOfIntegerArray'])) {
-            $this->container['allowCompressionOfIntegerArray'] = $data['allowCompressionOfIntegerArray'];
+            $this->container['allowCompressionOfIntegerArray'] =
+                $data['allowCompressionOfIntegerArray'];
         }
         if (isset($data['numericAttributesForFiltering'])) {
-            $this->container['numericAttributesForFiltering'] = $data['numericAttributesForFiltering'];
+            $this->container['numericAttributesForFiltering'] =
+                $data['numericAttributesForFiltering'];
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
@@ -218,7 +231,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets replicas
      *
-     * @param string[]|null $replicas creates replicas, exact copies of an index
+     * @param string[]|null $replicas Creates replicas, exact copies of an index.
      *
      * @return self
      */
@@ -242,7 +255,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets paginationLimitedTo
      *
-     * @param int|null $paginationLimitedTo set the maximum number of hits accessible via pagination
+     * @param int|null $paginationLimitedTo Set the maximum number of hits accessible via pagination.
      *
      * @return self
      */
@@ -266,13 +279,15 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disableTypoToleranceOnWords
      *
-     * @param string[]|null $disableTypoToleranceOnWords a list of words for which you want to turn off typo tolerance
+     * @param string[]|null $disableTypoToleranceOnWords A list of words for which you want to turn off typo tolerance.
      *
      * @return self
      */
     public function setDisableTypoToleranceOnWords($disableTypoToleranceOnWords)
     {
-        $this->container['disableTypoToleranceOnWords'] = $disableTypoToleranceOnWords;
+        $this->container[
+            'disableTypoToleranceOnWords'
+        ] = $disableTypoToleranceOnWords;
 
         return $this;
     }
@@ -290,13 +305,15 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToTransliterate
      *
-     * @param string[]|null $attributesToTransliterate specify on which attributes to apply transliteration
+     * @param string[]|null $attributesToTransliterate Specify on which attributes to apply transliteration.
      *
      * @return self
      */
     public function setAttributesToTransliterate($attributesToTransliterate)
     {
-        $this->container['attributesToTransliterate'] = $attributesToTransliterate;
+        $this->container[
+            'attributesToTransliterate'
+        ] = $attributesToTransliterate;
 
         return $this;
     }
@@ -314,7 +331,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets camelCaseAttributes
      *
-     * @param string[]|null $camelCaseAttributes list of attributes on which to do a decomposition of camel case words
+     * @param string[]|null $camelCaseAttributes List of attributes on which to do a decomposition of camel case words.
      *
      * @return self
      */
@@ -338,7 +355,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets decompoundedAttributes
      *
-     * @param object|null $decompoundedAttributes specify on which attributes in your index Algolia should apply word segmentation, also known as decompounding
+     * @param object|null $decompoundedAttributes Specify on which attributes in your index Algolia should apply word segmentation, also known as decompounding.
      *
      * @return self
      */
@@ -362,7 +379,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets indexLanguages
      *
-     * @param string[]|null $indexLanguages sets the languages at the index level for language-specific processing such as tokenization and normalization
+     * @param string[]|null $indexLanguages Sets the languages at the index level for language-specific processing such as tokenization and normalization.
      *
      * @return self
      */
@@ -386,7 +403,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets filterPromotes
      *
-     * @param bool|null $filterPromotes whether promoted results should match the filters of the current search, except for geographic filters
+     * @param bool|null $filterPromotes Whether promoted results should match the filters of the current search, except for geographic filters.
      *
      * @return self
      */
@@ -410,13 +427,15 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disablePrefixOnAttributes
      *
-     * @param string[]|null $disablePrefixOnAttributes list of attributes on which you want to disable prefix matching
+     * @param string[]|null $disablePrefixOnAttributes List of attributes on which you want to disable prefix matching.
      *
      * @return self
      */
     public function setDisablePrefixOnAttributes($disablePrefixOnAttributes)
     {
-        $this->container['disablePrefixOnAttributes'] = $disablePrefixOnAttributes;
+        $this->container[
+            'disablePrefixOnAttributes'
+        ] = $disablePrefixOnAttributes;
 
         return $this;
     }
@@ -434,13 +453,16 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets allowCompressionOfIntegerArray
      *
-     * @param bool|null $allowCompressionOfIntegerArray enables compression of large integer arrays
+     * @param bool|null $allowCompressionOfIntegerArray Enables compression of large integer arrays.
      *
      * @return self
      */
-    public function setAllowCompressionOfIntegerArray($allowCompressionOfIntegerArray)
-    {
-        $this->container['allowCompressionOfIntegerArray'] = $allowCompressionOfIntegerArray;
+    public function setAllowCompressionOfIntegerArray(
+        $allowCompressionOfIntegerArray
+    ) {
+        $this->container[
+            'allowCompressionOfIntegerArray'
+        ] = $allowCompressionOfIntegerArray;
 
         return $this;
     }
@@ -458,13 +480,16 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets numericAttributesForFiltering
      *
-     * @param string[]|null $numericAttributesForFiltering list of numeric attributes that can be used as numerical filters
+     * @param string[]|null $numericAttributesForFiltering List of numeric attributes that can be used as numerical filters.
      *
      * @return self
      */
-    public function setNumericAttributesForFiltering($numericAttributesForFiltering)
-    {
-        $this->container['numericAttributesForFiltering'] = $numericAttributesForFiltering;
+    public function setNumericAttributesForFiltering(
+        $numericAttributesForFiltering
+    ) {
+        $this->container[
+            'numericAttributesForFiltering'
+        ] = $numericAttributesForFiltering;
 
         return $this;
     }
@@ -482,7 +507,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets userData
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param object|null $userData Lets you store custom data in your indices.
      *
      * @return self
      */
@@ -495,9 +520,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -507,7 +532,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -536,7 +561,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -545,4 +570,3 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

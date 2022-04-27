@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Variant Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'averageClickPosition' => 'int',
         'clickCount' => 'int',
@@ -31,10 +36,10 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'averageClickPosition' => null,
         'clickCount' => null,
@@ -145,7 +150,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function __construct(array $data = null)
     {
         if (isset($data['averageClickPosition'])) {
-            $this->container['averageClickPosition'] = $data['averageClickPosition'];
+            $this->container['averageClickPosition'] =
+                $data['averageClickPosition'];
         }
         if (isset($data['clickCount'])) {
             $this->container['clickCount'] = $data['clickCount'];
@@ -172,7 +178,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
             $this->container['searchCount'] = $data['searchCount'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] =
+                $data['trackedSearchCount'];
         }
         if (isset($data['trafficPercentage'])) {
             $this->container['trafficPercentage'] = $data['trafficPercentage'];
@@ -191,43 +198,78 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['averageClickPosition']) || $this->container['averageClickPosition'] === null) {
+        if (
+            !isset($this->container['averageClickPosition']) ||
+            $this->container['averageClickPosition'] === null
+        ) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
-        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
+        if (
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
+        ) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
+        if (
+            !isset($this->container['clickThroughRate']) ||
+            $this->container['clickThroughRate'] === null
+        ) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
+        if (
+            !isset($this->container['conversionCount']) ||
+            $this->container['conversionCount'] === null
+        ) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
+        if (
+            !isset($this->container['conversionRate']) ||
+            $this->container['conversionRate'] === null
+        ) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (!isset($this->container['description']) || $this->container['description'] === null) {
+        if (
+            !isset($this->container['description']) ||
+            $this->container['description'] === null
+        ) {
             $invalidProperties[] = "'description' can't be null";
         }
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (
+            !isset($this->container['index']) ||
+            $this->container['index'] === null
+        ) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['noResultCount']) || $this->container['noResultCount'] === null) {
+        if (
+            !isset($this->container['noResultCount']) ||
+            $this->container['noResultCount'] === null
+        ) {
             $invalidProperties[] = "'noResultCount' can't be null";
         }
-        if (!isset($this->container['searchCount']) || $this->container['searchCount'] === null) {
+        if (
+            !isset($this->container['searchCount']) ||
+            $this->container['searchCount'] === null
+        ) {
             $invalidProperties[] = "'searchCount' can't be null";
         }
-        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
+        if (
+            !isset($this->container['trackedSearchCount']) ||
+            $this->container['trackedSearchCount'] === null
+        ) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['trafficPercentage']) || $this->container['trafficPercentage'] === null) {
+        if (
+            !isset($this->container['trafficPercentage']) ||
+            $this->container['trafficPercentage'] === null
+        ) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if (!isset($this->container['userCount']) || $this->container['userCount'] === null) {
+        if (
+            !isset($this->container['userCount']) ||
+            $this->container['userCount'] === null
+        ) {
             $invalidProperties[] = "'userCount' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -255,7 +297,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets averageClickPosition
      *
-     * @param int $averageClickPosition average click position for the variant
+     * @param int $averageClickPosition Average click position for the variant.
      *
      * @return self
      */
@@ -279,7 +321,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clickCount
      *
-     * @param int $clickCount distinct click count for the variant
+     * @param int $clickCount Distinct click count for the variant.
      *
      * @return self
      */
@@ -293,7 +335,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets clickThroughRate
      *
-     * @return float
+     * @return double
      */
     public function getClickThroughRate()
     {
@@ -303,7 +345,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clickThroughRate
      *
-     * @param float $clickThroughRate click through rate for the variant
+     * @param double $clickThroughRate Click through rate for the variant.
      *
      * @return self
      */
@@ -327,7 +369,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount distinct conversion count for the variant
+     * @param int $conversionCount Distinct conversion count for the variant.
      *
      * @return self
      */
@@ -341,7 +383,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets conversionRate
      *
-     * @return float
+     * @return double
      */
     public function getConversionRate()
     {
@@ -351,7 +393,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets conversionRate
      *
-     * @param float $conversionRate conversion rate for the variant
+     * @param double $conversionRate Conversion rate for the variant.
      *
      * @return self
      */
@@ -375,7 +417,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets description
      *
-     * @param string $description the A/B test description
+     * @param string $description The A/B test description.
      *
      * @return self
      */
@@ -399,7 +441,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index The index performing the A/B test.
      *
      * @return self
      */
@@ -423,7 +465,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets noResultCount
      *
-     * @param int $noResultCount the number of occurrences
+     * @param int $noResultCount The number of occurrences.
      *
      * @return self
      */
@@ -447,7 +489,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets searchCount
      *
-     * @param int $searchCount the number of search during the A/B test
+     * @param int $searchCount The number of search during the A/B test.
      *
      * @return self
      */
@@ -471,7 +513,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount The number of tracked search click.
      *
      * @return self
      */
@@ -495,7 +537,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage the traffic perfecentage for the A/B test
+     * @param int $trafficPercentage The traffic perfecentage for the A/B test.
      *
      * @return self
      */
@@ -519,7 +561,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets userCount
      *
-     * @param int $userCount the number of user during the A/B test
+     * @param int $userCount The number of user during the A/B test.
      *
      * @return self
      */
@@ -532,9 +574,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -544,7 +586,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -573,7 +615,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -582,4 +624,3 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         unset($this->container[$offset]);
     }
 }
-

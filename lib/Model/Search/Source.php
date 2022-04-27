@@ -2,31 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Source Class Doc Comment
  *
  * @category Class
  * @description The source.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'source' => 'string',
         'description' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'source' => null,
         'description' => null,
@@ -123,10 +127,12 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['source']) || $this->container['source'] === null) {
+        if (
+            !isset($this->container['source']) ||
+            $this->container['source'] === null
+        ) {
             $invalidProperties[] = "'source' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -154,7 +160,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets source
      *
-     * @param string $source the IP range of the source
+     * @param string $source The IP range of the source.
      *
      * @return self
      */
@@ -178,7 +184,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets description
      *
-     * @param string|null $description the description of the source
+     * @param string|null $description The description of the source.
      *
      * @return self
      */
@@ -191,9 +197,9 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -203,7 +209,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -232,7 +238,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -241,4 +247,3 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

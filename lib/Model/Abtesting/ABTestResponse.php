@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * ABTestResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'index' => 'string',
         'abTestID' => 'int',
@@ -22,10 +27,10 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'index' => null,
         'abTestID' => null,
@@ -128,16 +133,24 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (
+            !isset($this->container['index']) ||
+            $this->container['index'] === null
+        ) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
+        if (
+            !isset($this->container['abTestID']) ||
+            $this->container['abTestID'] === null
+        ) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
             $invalidProperties[] = "'taskID' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index The index performing the A/B test.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID
      *
-     * @param int $abTestID the A/B test ID
+     * @param int $abTestID The A/B test ID.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
-

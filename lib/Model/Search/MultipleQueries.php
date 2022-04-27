@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MultipleQueries Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'query' => 'string',
@@ -24,10 +29,10 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'query' => null,
@@ -142,10 +147,12 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -173,7 +180,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets indexName
      *
-     * @param string $indexName the Algolia index name
+     * @param string $indexName The Algolia index name.
      *
      * @return self
      */
@@ -197,7 +204,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets query
      *
-     * @param string|null $query the text to search in the index
+     * @param string|null $query The text to search in the index.
      *
      * @return self
      */
@@ -245,7 +252,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets facet
      *
-     * @param string|null $facet the `facet` name
+     * @param string|null $facet The `facet` name.
      *
      * @return self
      */
@@ -269,7 +276,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets params
      *
-     * @param string|null $params a query string of search parameters
+     * @param string|null $params A query string of search parameters.
      *
      * @return self
      */
@@ -282,9 +289,9 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -294,7 +301,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -323,7 +330,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -332,4 +339,3 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
-

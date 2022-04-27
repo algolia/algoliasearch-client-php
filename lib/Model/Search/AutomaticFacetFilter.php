@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AutomaticFacetFilter Class Doc Comment
  *
  * @category Class
  * @description Automatic facet Filter.
- *
  * @package Algolia\AlgoliaSearch
  */
-class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'facet' => 'string',
         'score' => 'int',
@@ -24,10 +28,10 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facet' => null,
         'score' => null,
@@ -130,10 +134,12 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facet']) || $this->container['facet'] === null) {
+        if (
+            !isset($this->container['facet']) ||
+            $this->container['facet'] === null
+        ) {
             $invalidProperties[] = "'facet' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -209,7 +215,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets disjunctive
      *
-     * @param bool|null $disjunctive whether the filter is disjunctive (true) or conjunctive (false)
+     * @param bool|null $disjunctive Whether the filter is disjunctive (true) or conjunctive (false).
      *
      * @return self
      */
@@ -222,9 +228,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -234,7 +240,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -263,7 +269,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -272,4 +278,3 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * UpdateApiKeyResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'key' => 'string',
         'updatedAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'key' => null,
         'updatedAt' => null,
@@ -121,13 +126,18 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['key']) || $this->container['key'] === null) {
+        if (
+            !isset($this->container['key']) ||
+            $this->container['key'] === null
+        ) {
             $invalidProperties[] = "'key' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets key
      *
-     * @param string $key key string
+     * @param string $key Key string.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

@@ -2,28 +2,33 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * CustomSearchParams Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'customSearchParameters' => 'object',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'customSearchParameters' => null,
     ];
@@ -101,7 +106,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function __construct(array $data = null)
     {
         if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] = $data['customSearchParameters'];
+            $this->container['customSearchParameters'] =
+                $data['customSearchParameters'];
         }
     }
 
@@ -114,10 +120,12 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['customSearchParameters']) || $this->container['customSearchParameters'] === null) {
+        if (
+            !isset($this->container['customSearchParameters']) ||
+            $this->container['customSearchParameters'] === null
+        ) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -158,9 +166,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
-

@@ -2,7 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
+use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\PersonalizationConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -31,8 +37,10 @@ class PersonalizationClient
      * @param PersonalizationConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(ApiWrapperInterface $apiWrapper, PersonalizationConfig $config)
-    {
+    public function __construct(
+        ApiWrapperInterface $apiWrapper,
+        PersonalizationConfig $config
+    ) {
         $this->config = $config;
 
         $this->api = $apiWrapper;
@@ -48,7 +56,12 @@ class PersonalizationClient
     public static function create($appId = null, $apiKey = null, $region = null)
     {
         $allowedRegions = explode('-', 'us-eu');
-        $config = PersonalizationConfig::create($appId, $apiKey, $region, $allowedRegions);
+        $config = PersonalizationConfig::create(
+            $appId,
+            $apiKey,
+            $region,
+            $allowedRegions
+        );
 
         return static::createWithConfig($config);
     }
@@ -66,7 +79,9 @@ class PersonalizationClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create('personalization.'.$config->getRegion().'.algolia.com');
+            $clusterHosts = ClusterHosts::create(
+                'personalization.' . $config->getRegion() . '.algolia.com'
+            );
         }
 
         $apiWrapper = new ApiWrapper(
@@ -119,14 +134,15 @@ class PersonalizationClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -139,7 +155,10 @@ class PersonalizationClient
     public function deleteUserProfile($userToken)
     {
         // verify the required parameter 'userToken' is set
-        if ($userToken === null || (is_array($userToken) && count($userToken) === 0)) {
+        if (
+            $userToken === null ||
+            (is_array($userToken) && count($userToken) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $userToken when calling deleteUserProfile'
             );
@@ -158,7 +177,12 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'DELETE',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -194,14 +218,15 @@ class PersonalizationClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -216,7 +241,12 @@ class PersonalizationClient
         $queryParams = [];
         $httpBody = [];
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -229,7 +259,10 @@ class PersonalizationClient
     public function getUserTokenProfile($userToken)
     {
         // verify the required parameter 'userToken' is set
-        if ($userToken === null || (is_array($userToken) && count($userToken) === 0)) {
+        if (
+            $userToken === null ||
+            (is_array($userToken) && count($userToken) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $userToken when calling getUserTokenProfile'
             );
@@ -248,7 +281,12 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'GET',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -285,18 +323,19 @@ class PersonalizationClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -333,18 +372,19 @@ class PersonalizationClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
+            $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
         if (isset($body)) {
             $httpBody = $body;
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'PUT',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
     /**
@@ -354,7 +394,6 @@ class PersonalizationClient
      * - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)
      * - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with the facets. (required)
      * - $personalizationStrategyParams['personalizationImpact'] => (int) The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required)
-     *
      * @see \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse
@@ -362,7 +401,11 @@ class PersonalizationClient
     public function setPersonalizationStrategy($personalizationStrategyParams)
     {
         // verify the required parameter 'personalizationStrategyParams' is set
-        if ($personalizationStrategyParams === null || (is_array($personalizationStrategyParams) && count($personalizationStrategyParams) === 0)) {
+        if (
+            $personalizationStrategyParams === null ||
+            (is_array($personalizationStrategyParams) &&
+                count($personalizationStrategyParams) === 0)
+        ) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $personalizationStrategyParams when calling setPersonalizationStrategy'
             );
@@ -376,14 +419,23 @@ class PersonalizationClient
             $httpBody = $personalizationStrategyParams;
         }
 
-        return $this->sendRequest('POST', $resourcePath, $queryParams, $httpBody);
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $queryParams,
+            $httpBody
+        );
     }
 
-    private function sendRequest($method, $resourcePath, $queryParams, $httpBody)
-    {
+    private function sendRequest(
+        $method,
+        $resourcePath,
+        $queryParams,
+        $httpBody
+    ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method === 'GET') {
+        if ($method == 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

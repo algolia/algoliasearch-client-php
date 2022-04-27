@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchUserIdsParams Class Doc Comment
  *
  * @category Class
  * @description OK
- *
  * @package Algolia\AlgoliaSearch
  */
-class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'clusterName' => 'string',
@@ -25,10 +29,10 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'clusterName' => null,
@@ -137,10 +141,12 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
+        if (
+            !isset($this->container['query']) ||
+            $this->container['query'] === null
+        ) {
             $invalidProperties[] = "'query' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -192,7 +198,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName
      *
-     * @param string|null $clusterName name of the cluster
+     * @param string|null $clusterName Name of the cluster.
      *
      * @return self
      */
@@ -216,7 +222,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page
      *
-     * @param int|null $page specify the page to retrieve
+     * @param int|null $page Specify the page to retrieve.
      *
      * @return self
      */
@@ -240,7 +246,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage Set the number of hits per page.
      *
      * @return self
      */
@@ -253,9 +259,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -265,7 +271,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -294,7 +300,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -303,4 +309,3 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

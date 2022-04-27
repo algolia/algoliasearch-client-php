@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetSearchesNoClicksResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[]',
+        'searches' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'searches' => null,
     ];
@@ -114,10 +120,12 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['searches']) || $this->container['searches'] === null) {
+        if (
+            !isset($this->container['searches']) ||
+            $this->container['searches'] === null
+        ) {
             $invalidProperties[] = "'searches' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[] $searches a list of searches with no clicks and their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[] $searches A list of searches with no clicks and their count.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

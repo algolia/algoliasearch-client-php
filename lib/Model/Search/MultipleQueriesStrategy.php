@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * MultipleQueriesStrategy Class Doc Comment
  *
@@ -13,21 +15,16 @@ class MultipleQueriesStrategy
     /**
      * Possible values of this enum
      */
-    const NONE = 'none';
+    public const NONE = 'none';
 
-    const STOP_IF_ENOUGH_MATCHES = 'stopIfEnoughMatches';
+    public const STOP_IF_ENOUGH_MATCHES = 'stopIfEnoughMatches';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
     {
-        return [
-            self::NONE,
-            self::STOP_IF_ENOUGH_MATCHES,
-        ];
+        return [self::NONE, self::STOP_IF_ENOUGH_MATCHES];
     }
 }
-

@@ -2,28 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopCountriesResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'countries' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]',
+        'countries' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'countries' => null,
     ];
@@ -114,10 +120,12 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['countries']) || $this->container['countries'] === null) {
+        if (
+            !isset($this->container['countries']) ||
+            $this->container['countries'] === null
+        ) {
             $invalidProperties[] = "'countries' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -145,7 +153,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets countries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[] $countries a list of countries with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[] $countries A list of countries with their count.
      *
      * @return self
      */
@@ -158,9 +166,9 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -170,7 +178,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -199,7 +207,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -208,4 +216,3 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         unset($this->container[$offset]);
     }
 }
-

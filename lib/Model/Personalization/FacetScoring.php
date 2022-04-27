@@ -2,29 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * FacetScoring Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'score' => 'int',
         'facetName' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'score' => null,
         'facetName' => null,
@@ -121,13 +126,18 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['score']) || $this->container['score'] === null) {
+        if (
+            !isset($this->container['score']) ||
+            $this->container['score'] === null
+        ) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if (!isset($this->container['facetName']) || $this->container['facetName'] === null) {
+        if (
+            !isset($this->container['facetName']) ||
+            $this->container['facetName'] === null
+        ) {
             $invalidProperties[] = "'facetName' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +165,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param int $score the score for the event
+     * @param int $score The score for the event.
      *
      * @return self
      */
@@ -179,7 +189,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets facetName
      *
-     * @param string $facetName the name of the facet
+     * @param string $facetName The name of the facet.
      *
      * @return self
      */
@@ -192,9 +202,9 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +214,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +243,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +252,3 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
-

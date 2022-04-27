@@ -2,29 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * AttributeOrBuiltInOperation Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
+        'operation' =>
+            '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
         'value' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'operation' => null,
         'value' => null,
@@ -121,13 +127,18 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['operation']) || $this->container['operation'] === null) {
+        if (
+            !isset($this->container['operation']) ||
+            $this->container['operation'] === null
+        ) {
             $invalidProperties[] = "'operation' can't be null";
         }
-        if (!isset($this->container['value']) || $this->container['value'] === null) {
+        if (
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
+        ) {
             $invalidProperties[] = "'value' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -179,7 +190,7 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets value
      *
-     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove
+     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.
      *
      * @return self
      */
@@ -192,9 +203,9 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +215,7 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +244,7 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +253,3 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

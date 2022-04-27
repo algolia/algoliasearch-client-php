@@ -2,32 +2,38 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Params Class Doc Comment
  *
  * @category Class
  * @description Additional search parameters. Any valid search parameter is allowed.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticFacetFilters' =>
+            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticOptionalFacetFilters' =>
+            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'automaticFacetFilters' => null,
@@ -114,10 +120,12 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
             $this->container['query'] = $data['query'];
         }
         if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] = $data['automaticFacetFilters'];
+            $this->container['automaticFacetFilters'] =
+                $data['automaticFacetFilters'];
         }
         if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] = $data['automaticOptionalFacetFilters'];
+            $this->container['automaticOptionalFacetFilters'] =
+                $data['automaticOptionalFacetFilters'];
         }
     }
 
@@ -157,7 +165,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets query
      *
-     * @param string|null $query query string
+     * @param string|null $query Query string.
      *
      * @return self
      */
@@ -181,7 +189,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets automaticFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
      *
      * @return self
      */
@@ -205,22 +213,25 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets automaticOptionalFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters same syntax as automaticFacetFilters, but the engine treats the filters as optional
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters Same syntax as automaticFacetFilters, but the engine treats the filters as optional.
      *
      * @return self
      */
-    public function setAutomaticOptionalFacetFilters($automaticOptionalFacetFilters)
-    {
-        $this->container['automaticOptionalFacetFilters'] = $automaticOptionalFacetFilters;
+    public function setAutomaticOptionalFacetFilters(
+        $automaticOptionalFacetFilters
+    ) {
+        $this->container[
+            'automaticOptionalFacetFilters'
+        ] = $automaticOptionalFacetFilters;
 
         return $this;
     }
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -230,7 +241,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -259,7 +270,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -268,4 +279,3 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         unset($this->container[$offset]);
     }
 }
-

@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * OperationIndexParams Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'operation' => '\Algolia\AlgoliaSearch\Model\Search\OperationType',
         'destination' => 'string',
@@ -22,10 +27,10 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'operation' => null,
         'destination' => null,
@@ -128,13 +133,18 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['operation']) || $this->container['operation'] === null) {
+        if (
+            !isset($this->container['operation']) ||
+            $this->container['operation'] === null
+        ) {
             $invalidProperties[] = "'operation' can't be null";
         }
-        if (!isset($this->container['destination']) || $this->container['destination'] === null) {
+        if (
+            !isset($this->container['destination']) ||
+            $this->container['destination'] === null
+        ) {
             $invalidProperties[] = "'destination' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -186,7 +196,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets destination
      *
-     * @param string $destination the Algolia index name
+     * @param string $destination The Algolia index name.
      *
      * @return self
      */
@@ -223,9 +233,9 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -235,7 +245,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -264,7 +274,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -273,4 +283,3 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
-

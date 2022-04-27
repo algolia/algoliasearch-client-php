@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Languages Class Doc Comment
  *
  * @category Class
  * @description A dictionary language.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'plurals' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage',
         'stopwords' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage',
@@ -24,10 +28,10 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'plurals' => null,
         'stopwords' => null,
@@ -130,16 +134,24 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['plurals']) || $this->container['plurals'] === null) {
+        if (
+            !isset($this->container['plurals']) ||
+            $this->container['plurals'] === null
+        ) {
             $invalidProperties[] = "'plurals' can't be null";
         }
-        if (!isset($this->container['stopwords']) || $this->container['stopwords'] === null) {
+        if (
+            !isset($this->container['stopwords']) ||
+            $this->container['stopwords'] === null
+        ) {
             $invalidProperties[] = "'stopwords' can't be null";
         }
-        if (!isset($this->container['compounds']) || $this->container['compounds'] === null) {
+        if (
+            !isset($this->container['compounds']) ||
+            $this->container['compounds'] === null
+        ) {
             $invalidProperties[] = "'compounds' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -228,9 +240,9 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -240,7 +252,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -269,7 +281,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -278,4 +290,3 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         unset($this->container[$offset]);
     }
 }
-

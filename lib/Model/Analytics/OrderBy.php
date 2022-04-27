@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * OrderBy Class Doc Comment
  *
@@ -13,17 +15,16 @@ class OrderBy
     /**
      * Possible values of this enum
      */
-    const SEARCH_COUNT = 'searchCount';
+    public const SEARCH_COUNT = 'searchCount';
 
-    const CLICK_THROUGH_RATE = 'clickThroughRate';
+    public const CLICK_THROUGH_RATE = 'clickThroughRate';
 
-    const CONVERSION_RATE = 'conversionRate';
+    public const CONVERSION_RATE = 'conversionRate';
 
-    const AVERAGE_CLICK_POSITION = 'averageClickPosition';
+    public const AVERAGE_CLICK_POSITION = 'averageClickPosition';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
@@ -36,4 +37,3 @@ class OrderBy
         ];
     }
 }
-

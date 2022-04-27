@@ -2,30 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopUserIdsResponse Class Doc Comment
  *
  * @category Class
  * @description Array of userIDs and clusters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'topUsers' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[]',
+        'topUsers' =>
+            'array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'topUsers' => null,
     ];
@@ -116,10 +121,12 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['topUsers']) || $this->container['topUsers'] === null) {
+        if (
+            !isset($this->container['topUsers']) ||
+            $this->container['topUsers'] === null
+        ) {
             $invalidProperties[] = "'topUsers' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -147,7 +154,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets topUsers
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Mapping of cluster names to top users
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Mapping of cluster names to top users.
      *
      * @return self
      */
@@ -160,9 +167,9 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +179,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +208,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +217,3 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
-

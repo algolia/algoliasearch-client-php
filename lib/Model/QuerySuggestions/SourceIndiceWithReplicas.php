@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SourceIndiceWithReplicas Class Doc Comment
  *
  * @category Class
  * @description Source indice with replicas used to generate a Query Suggestions index.
- *
  * @package Algolia\AlgoliaSearch
  */
-class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'replicas' => 'bool',
         'indexName' => 'string',
@@ -25,14 +29,15 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
         'minHits' => 'int',
         'minLetters' => 'int',
         'generate' => 'string[][]',
-        'external' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
+        'external' =>
+            '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'replicas' => null,
         'indexName' => null,
@@ -165,31 +170,54 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['replicas']) || $this->container['replicas'] === null) {
+        if (
+            !isset($this->container['replicas']) ||
+            $this->container['replicas'] === null
+        ) {
             $invalidProperties[] = "'replicas' can't be null";
         }
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (!isset($this->container['analyticsTags']) || $this->container['analyticsTags'] === null) {
+        if (
+            !isset($this->container['analyticsTags']) ||
+            $this->container['analyticsTags'] === null
+        ) {
             $invalidProperties[] = "'analyticsTags' can't be null";
         }
-        if (!isset($this->container['facets']) || $this->container['facets'] === null) {
+        if (
+            !isset($this->container['facets']) ||
+            $this->container['facets'] === null
+        ) {
             $invalidProperties[] = "'facets' can't be null";
         }
-        if (!isset($this->container['minHits']) || $this->container['minHits'] === null) {
+        if (
+            !isset($this->container['minHits']) ||
+            $this->container['minHits'] === null
+        ) {
             $invalidProperties[] = "'minHits' can't be null";
         }
-        if (!isset($this->container['minLetters']) || $this->container['minLetters'] === null) {
+        if (
+            !isset($this->container['minLetters']) ||
+            $this->container['minLetters'] === null
+        ) {
             $invalidProperties[] = "'minLetters' can't be null";
         }
-        if (!isset($this->container['generate']) || $this->container['generate'] === null) {
+        if (
+            !isset($this->container['generate']) ||
+            $this->container['generate'] === null
+        ) {
             $invalidProperties[] = "'generate' can't be null";
         }
-        if (!isset($this->container['external']) || $this->container['external'] === null) {
+        if (
+            !isset($this->container['external']) ||
+            $this->container['external'] === null
+        ) {
             $invalidProperties[] = "'external' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -217,7 +245,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets replicas
      *
-     * @param bool $replicas true if the Query Suggestions index is a replicas
+     * @param bool $replicas true if the Query Suggestions index is a replicas.
      *
      * @return self
      */
@@ -241,7 +269,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets indexName
      *
-     * @param string $indexName source index name
+     * @param string $indexName Source index name.
      *
      * @return self
      */
@@ -265,7 +293,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets analyticsTags
      *
-     * @param string[] $analyticsTags list of analytics tags to filter the popular searches per tag
+     * @param string[] $analyticsTags List of analytics tags to filter the popular searches per tag.
      *
      * @return self
      */
@@ -289,7 +317,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets facets
      *
-     * @param object[] $facets list of facets to define as categories for the query suggestions
+     * @param object[] $facets List of facets to define as categories for the query suggestions.
      *
      * @return self
      */
@@ -337,7 +365,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets minLetters
      *
-     * @param int $minLetters minimum number of required letters for a suggestion to remain
+     * @param int $minLetters Minimum number of required letters for a suggestion to remain.
      *
      * @return self
      */
@@ -385,7 +413,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets external
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[] $external list of external indices to use to generate custom Query Suggestions
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[] $external List of external indices to use to generate custom Query Suggestions.
      *
      * @return self
      */
@@ -398,9 +426,9 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -410,7 +438,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -439,7 +467,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -448,4 +476,3 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

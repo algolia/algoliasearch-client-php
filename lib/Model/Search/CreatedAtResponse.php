@@ -2,30 +2,34 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * CreatedAtResponse Class Doc Comment
  *
  * @category Class
  * @description The response with a createdAt timestamp.
- *
  * @package Algolia\AlgoliaSearch
  */
-class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'createdAt' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'createdAt' => null,
     ];
@@ -116,10 +120,12 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -147,7 +153,7 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt
      *
-     * @param string $createdAt date of creation (ISO-8601 format)
+     * @param string $createdAt Date of creation (ISO-8601 format).
      *
      * @return self
      */
@@ -160,9 +166,9 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -172,7 +178,7 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +207,7 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -210,4 +216,3 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

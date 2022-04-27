@@ -2,29 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetSearchesCountResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'count' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]',
+        'dates' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'count' => null,
         'dates' => null,
@@ -121,13 +127,18 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
+        if (
+            !isset($this->container['dates']) ||
+            $this->container['dates'] === null
+        ) {
             $invalidProperties[] = "'dates' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +166,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count The number of occurrences.
      *
      * @return self
      */
@@ -179,7 +190,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[] $dates a list of search events with their date and count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[] $dates A list of search events with their date and count.
      *
      * @return self
      */
@@ -192,9 +203,9 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -204,7 +215,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -233,7 +244,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -242,4 +253,3 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
-

@@ -2,21 +2,25 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchRulesParams Class Doc Comment
  *
  * @category Class
  * @description Parameters for the search.
- *
  * @package Algolia\AlgoliaSearch
  */
-class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Search\Anchoring',
@@ -28,10 +32,10 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'anchoring' => null,
@@ -185,7 +189,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query
      *
-     * @param string|null $query full text query
+     * @param string|null $query Full text query.
      *
      * @return self
      */
@@ -233,7 +237,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets context
      *
-     * @param string|null $context restricts matches to contextual rules with a specific context (exact match)
+     * @param string|null $context Restricts matches to contextual rules with a specific context (exact match).
      *
      * @return self
      */
@@ -257,7 +261,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets page
      *
-     * @param int|null $page requested page (zero-based)
+     * @param int|null $page Requested page (zero-based).
      *
      * @return self
      */
@@ -329,7 +333,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets requestOptions
      *
-     * @param object[]|null $requestOptions a mapping of requestOptions to send along with the request
+     * @param object[]|null $requestOptions A mapping of requestOptions to send along with the request.
      *
      * @return self
      */
@@ -342,9 +346,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -354,7 +358,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -383,7 +387,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -392,4 +396,3 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
-

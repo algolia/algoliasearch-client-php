@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SearchForFacetValuesRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'params' => 'string',
         'facetQuery' => 'string',
@@ -22,10 +27,10 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'params' => null,
         'facetQuery' => null,
@@ -128,8 +133,12 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
-            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
+        if (
+            isset($this->container['maxFacetHits']) &&
+            $this->container['maxFacetHits'] > 100
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
         }
 
         return $invalidProperties;
@@ -159,7 +168,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets params
      *
-     * @param string|null $params search parameters as URL-encoded query string
+     * @param string|null $params Search parameters as URL-encoded query string.
      *
      * @return self
      */
@@ -183,7 +192,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets facetQuery
      *
-     * @param string|null $facetQuery text to search inside the facet's values
+     * @param string|null $facetQuery Text to search inside the facet's values.
      *
      * @return self
      */
@@ -213,8 +222,10 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchForFacetValuesRequest., must be smaller than or equal to 100.');
+        if (!is_null($maxFacetHits) && $maxFacetHits > 100) {
+            throw new \InvalidArgumentException(
+                'invalid value for $maxFacetHits when calling SearchForFacetValuesRequest., must be smaller than or equal to 100.'
+            );
         }
 
         $this->container['maxFacetHits'] = $maxFacetHits;
@@ -224,9 +235,9 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -236,7 +247,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -265,7 +276,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -274,4 +285,3 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

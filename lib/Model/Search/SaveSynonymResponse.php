@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * SaveSynonymResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'taskID' => 'int',
         'updatedAt' => 'string',
@@ -22,10 +27,10 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'taskID' => null,
         'updatedAt' => null,
@@ -128,16 +133,21 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
             $invalidProperties[] = "'taskID' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
         if (!isset($this->container['id']) || $this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +175,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID taskID of the task to wait for.
      *
      * @return self
      */
@@ -189,7 +199,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Date of last update (ISO-8601 format).
      *
      * @return self
      */
@@ -213,7 +223,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets id
      *
-     * @param string $id objectID of the inserted object
+     * @param string $id objectID of the inserted object.
      *
      * @return self
      */
@@ -226,9 +236,9 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +248,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +277,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +286,3 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
-

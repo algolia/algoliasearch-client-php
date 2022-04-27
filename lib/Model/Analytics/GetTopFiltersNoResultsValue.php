@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetTopFiltersNoResultsValue Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'attribute' => 'string',
         'operator' => 'string',
@@ -22,10 +27,10 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'attribute' => null,
         'operator' => null,
@@ -128,16 +133,24 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attribute']) || $this->container['attribute'] === null) {
+        if (
+            !isset($this->container['attribute']) ||
+            $this->container['attribute'] === null
+        ) {
             $invalidProperties[] = "'attribute' can't be null";
         }
-        if (!isset($this->container['operator']) || $this->container['operator'] === null) {
+        if (
+            !isset($this->container['operator']) ||
+            $this->container['operator'] === null
+        ) {
             $invalidProperties[] = "'operator' can't be null";
         }
-        if (!isset($this->container['value']) || $this->container['value'] === null) {
+        if (
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
+        ) {
             $invalidProperties[] = "'value' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -165,7 +178,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets attribute
      *
-     * @param string $attribute the attribute
+     * @param string $attribute The attribute.
      *
      * @return self
      */
@@ -189,7 +202,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets operator
      *
-     * @param string $operator the operator
+     * @param string $operator The operator.
      *
      * @return self
      */
@@ -213,7 +226,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets value
      *
-     * @param string $value the value of the attribute
+     * @param string $value The value of the attribute.
      *
      * @return self
      */
@@ -226,9 +239,9 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +251,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +280,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +289,3 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
-

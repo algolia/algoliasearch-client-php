@@ -2,30 +2,36 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetAverageClickPositionResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'average' => 'double',
         'clickCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[]',
+        'dates' =>
+            '\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'average' => 'double',
         'clickCount' => null,
@@ -128,16 +134,24 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['average']) || $this->container['average'] === null) {
+        if (
+            !isset($this->container['average']) ||
+            $this->container['average'] === null
+        ) {
             $invalidProperties[] = "'average' can't be null";
         }
-        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
+        if (
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
+        ) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
+        if (
+            !isset($this->container['dates']) ||
+            $this->container['dates'] === null
+        ) {
             $invalidProperties[] = "'dates' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -155,7 +169,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets average
      *
-     * @return float
+     * @return double
      */
     public function getAverage()
     {
@@ -165,7 +179,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets average
      *
-     * @param float $average the average of all the click count event
+     * @param double $average The average of all the click count event.
      *
      * @return self
      */
@@ -189,7 +203,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount The number of click event.
      *
      * @return self
      */
@@ -213,7 +227,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[] $dates a list of average click position with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[] $dates A list of average click position with their date.
      *
      * @return self
      */
@@ -226,9 +240,9 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -238,7 +252,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -267,7 +281,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -276,4 +290,3 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
         unset($this->container[$offset]);
     }
 }
-

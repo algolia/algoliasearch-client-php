@@ -2,30 +2,35 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * GetObjectsParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;getObjects&#x60; parameters.
- *
  * @package Algolia\AlgoliaSearch
  */
-class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+        ModelInterface,
+        \ArrayAccess,
+        \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleGetObjectsParams[]',
+        'requests' =>
+            '\Algolia\AlgoliaSearch\Model\Search\MultipleGetObjectsParams[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'requests' => null,
     ];
@@ -156,9 +161,9 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -168,7 +173,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -197,7 +202,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -206,4 +211,3 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         unset($this->container[$offset]);
     }
 }
-

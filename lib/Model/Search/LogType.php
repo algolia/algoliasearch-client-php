@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * LogType Class Doc Comment
  *
@@ -13,27 +15,20 @@ class LogType
     /**
      * Possible values of this enum
      */
-    const ALL = 'all';
+    public const ALL = 'all';
 
-    const QUERY = 'query';
+    public const QUERY = 'query';
 
-    const BUILD = 'build';
+    public const BUILD = 'build';
 
-    const ERROR = 'error';
+    public const ERROR = 'error';
 
     /**
      * Gets allowable values of the enum
-     *
      * @return string[]
      */
     public static function getAllowableEnumValues()
     {
-        return [
-            self::ALL,
-            self::QUERY,
-            self::BUILD,
-            self::ERROR,
-        ];
+        return [self::ALL, self::QUERY, self::BUILD, self::ERROR];
     }
 }
-

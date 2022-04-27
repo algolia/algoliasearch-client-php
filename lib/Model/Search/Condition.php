@@ -2,19 +2,24 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\ObjectSerializer;
+
 /**
  * Condition Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'pattern' => 'string',
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Search\Anchoring',
@@ -23,10 +28,10 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'pattern' => null,
         'anchoring' => null,
@@ -162,7 +167,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets pattern
      *
-     * @param string|null $pattern query pattern syntax
+     * @param string|null $pattern Query pattern syntax.
      *
      * @return self
      */
@@ -210,7 +215,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets alternatives
      *
-     * @param bool|null $alternatives whether the pattern matches on plurals, synonyms, and typos
+     * @param bool|null $alternatives Whether the pattern matches on plurals, synonyms, and typos.
      *
      * @return self
      */
@@ -234,7 +239,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets context
      *
-     * @param string|null $context rule context format: [A-Za-z0-9_-]+)
+     * @param string|null $context Rule context format: [A-Za-z0-9_-]+).
      *
      * @return self
      */
@@ -247,9 +252,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
-     * @return bool
+     * @return boolean
      */
     public function offsetExists($offset)
     {
@@ -259,7 +264,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return mixed|null
      */
@@ -288,7 +293,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Unsets offset.
      *
-     * @param int $offset Offset
+     * @param integer $offset Offset
      *
      * @return void
      */
@@ -297,4 +302,3 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         unset($this->container[$offset]);
     }
 }
-

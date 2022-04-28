@@ -400,8 +400,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/SearchClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/search/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/SearchClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/search/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -415,8 +415,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/RecommendClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/recommend/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/RecommendClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/recommend/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -430,8 +430,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/PersonalizationClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/personalization/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/PersonalizationClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/personalization/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -445,8 +445,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/AnalyticsClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/analytics/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/AnalyticsClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/analytics/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -460,8 +460,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/InsightsClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/insights/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/InsightsClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/insights/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -475,8 +475,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/AbtestingClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/abtesting/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/AbtestingClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/abtesting/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -490,8 +490,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/QuerySuggestionsClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/querySuggestions/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/QuerySuggestionsClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/querySuggestions/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(
@@ -505,8 +505,8 @@ runs:
       uses: actions/cache@v2
       with:
         path: |
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/api/PredictClient.java
-          clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/model/predict/**
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/api/PredictClient.java
+          clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/model/predict/**
         key: |
           ${{ env.CACHE_VERSION }}-${{
           hashFiles(

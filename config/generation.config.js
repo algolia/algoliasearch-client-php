@@ -13,10 +13,10 @@ module.exports = {
     '!clients/algoliasearch-client-java-2/*.gradle',
     '!clients/algoliasearch-client-java-2/.gitignore',
     '!clients/algoliasearch-client-java-2/algoliasearch-core/build.gradle',
-    '!clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/exceptions/*',
-    '!clients/algoliasearch-client-java-2/algoliasearch-core/src/com/algolia/utils/*',
-    'clients/algoliasearch-client-java-2/algoliasearch-core/com/algolia/utils/echo/EchoResponse*.java',
-    '!clients/algoliasearch-client-java-2/algoliasearch-core/com/algolia/utils/echo/EchoResponseInterface.java',
+    '!clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/exceptions/*',
+    '!clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/utils/*',
+    'clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/utils/echo/EchoResponse*.java',
+    '!clients/algoliasearch-client-java-2/algoliasearch-core/src/main/java/com/algolia/utils/echo/EchoResponseInterface.java',
 
     // JavaScript
     '!clients/algoliasearch-client-javascript/*',

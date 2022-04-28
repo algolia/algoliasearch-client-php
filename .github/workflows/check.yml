@@ -230,8 +230,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ${{ format('{0}/algoliasearch-core/src/com/algolia/api/{1}.java', matrix.client.path, matrix.client.api) }}
-            ${{ format('{0}/algoliasearch-core/src/com/algolia/model/{1}/**', matrix.client.path, matrix.client.camelizedName) }}
+            ${{ format('{0}/algoliasearch-core/src/main/java/com/algolia/api/{1}.java', matrix.client.path, matrix.client.api) }}
+            ${{ format('{0}/algoliasearch-core/src/main/java/com/algolia/model/{1}/**', matrix.client.path, matrix.client.camelizedName) }}
           key: |
             ${{ env.CACHE_VERSION }}-${{
             hashFiles(

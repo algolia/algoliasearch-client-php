@@ -1536,7 +1536,7 @@ public class SearchClient extends ApiClient {
   }
 
   public Object del(String path) throws AlgoliaRuntimeException {
-    return this.del(path, new HashMap<>());
+    return this.del(path, null);
   }
 
   /**
@@ -2382,7 +2382,7 @@ public class SearchClient extends ApiClient {
   }
 
   public Object get(String path) throws AlgoliaRuntimeException {
-    return this.get(path, new HashMap<>());
+    return this.get(path, null);
   }
 
   /**
@@ -2739,7 +2739,7 @@ public class SearchClient extends ApiClient {
   }
 
   public GetLogsResponse getLogs() throws AlgoliaRuntimeException {
-    return this.getLogs(0, 10, null, LogType.ALL);
+    return this.getLogs(null, null, null, null);
   }
 
   /**
@@ -2878,7 +2878,7 @@ public class SearchClient extends ApiClient {
 
   public Map<String, String> getObject(String indexName, String objectID)
     throws AlgoliaRuntimeException {
-    return this.getObject(indexName, objectID, new ArrayList<>());
+    return this.getObject(indexName, objectID, null);
   }
 
   /**
@@ -4035,7 +4035,7 @@ public class SearchClient extends ApiClient {
   }
 
   public ListUserIdsResponse listUserIds() throws AlgoliaRuntimeException {
-    return this.listUserIds(null, 100);
+    return this.listUserIds(null, null);
   }
 
   /**
@@ -4487,7 +4487,7 @@ public class SearchClient extends ApiClient {
         indexName,
         objectID,
         attributeOrBuiltInOperation,
-        true
+        null
       );
   }
 
@@ -4609,7 +4609,7 @@ public class SearchClient extends ApiClient {
   }
 
   public Object post(String path) throws AlgoliaRuntimeException {
-    return this.post(path, new HashMap<>(), null);
+    return this.post(path, null, null);
   }
 
   /**
@@ -4718,7 +4718,7 @@ public class SearchClient extends ApiClient {
   }
 
   public Object put(String path) throws AlgoliaRuntimeException {
-    return this.put(path, new HashMap<>(), null);
+    return this.put(path, null, null);
   }
 
   /**
@@ -6169,7 +6169,7 @@ public class SearchClient extends ApiClient {
 
   public SearchSynonymsResponse searchSynonyms(String indexName)
     throws AlgoliaRuntimeException {
-    return this.searchSynonyms(indexName, "", null, 0, 100);
+    return this.searchSynonyms(indexName, null, null, null, null);
   }
 
   /**

@@ -142,7 +142,7 @@ public class PredictClient extends ApiClient {
   }
 
   public Object del(String path) throws AlgoliaRuntimeException {
-    return this.del(path, new HashMap<>());
+    return this.del(path, null);
   }
 
   /**
@@ -355,7 +355,7 @@ public class PredictClient extends ApiClient {
   }
 
   public Object get(String path) throws AlgoliaRuntimeException {
-    return this.get(path, new HashMap<>());
+    return this.get(path, null);
   }
 
   /**
@@ -462,7 +462,7 @@ public class PredictClient extends ApiClient {
   }
 
   public Object post(String path) throws AlgoliaRuntimeException {
-    return this.post(path, new HashMap<>(), null);
+    return this.post(path, null, null);
   }
 
   /**
@@ -571,7 +571,7 @@ public class PredictClient extends ApiClient {
   }
 
   public Object put(String path) throws AlgoliaRuntimeException {
-    return this.put(path, new HashMap<>(), null);
+    return this.put(path, null, null);
   }
 
   /**

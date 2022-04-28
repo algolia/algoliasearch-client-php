@@ -147,7 +147,7 @@ public class AnalyticsClient extends ApiClient {
   }
 
   public Object del(String path) throws AlgoliaRuntimeException {
-    return this.del(path, new HashMap<>());
+    return this.del(path, null);
   }
 
   /**
@@ -251,7 +251,7 @@ public class AnalyticsClient extends ApiClient {
   }
 
   public Object get(String path) throws AlgoliaRuntimeException {
-    return this.get(path, new HashMap<>());
+    return this.get(path, null);
   }
 
   /**
@@ -1475,7 +1475,7 @@ public class AnalyticsClient extends ApiClient {
 
   public GetSearchesNoClicksResponse getSearchesNoClicks(String index)
     throws AlgoliaRuntimeException {
-    return this.getSearchesNoClicks(index, null, null, 10, 0, null);
+    return this.getSearchesNoClicks(index, null, null, null, null, null);
   }
 
   /**
@@ -1661,7 +1661,7 @@ public class AnalyticsClient extends ApiClient {
 
   public GetSearchesNoResultsResponse getSearchesNoResults(String index)
     throws AlgoliaRuntimeException {
-    return this.getSearchesNoResults(index, null, null, 10, 0, null);
+    return this.getSearchesNoResults(index, null, null, null, null, null);
   }
 
   /**
@@ -1938,7 +1938,7 @@ public class AnalyticsClient extends ApiClient {
 
   public GetTopCountriesResponse getTopCountries(String index)
     throws AlgoliaRuntimeException {
-    return this.getTopCountries(index, null, null, 10, 0, null);
+    return this.getTopCountries(index, null, null, null, null, null);
   }
 
   /**
@@ -2133,7 +2133,15 @@ public class AnalyticsClient extends ApiClient {
 
   public GetTopFilterAttributesResponse getTopFilterAttributes(String index)
     throws AlgoliaRuntimeException {
-    return this.getTopFilterAttributes(index, null, null, null, 10, 0, null);
+    return this.getTopFilterAttributes(
+        index,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      );
   }
 
   /**
@@ -2358,8 +2366,8 @@ public class AnalyticsClient extends ApiClient {
         null,
         null,
         null,
-        10,
-        0,
+        null,
+        null,
         null
       );
   }
@@ -2564,7 +2572,15 @@ public class AnalyticsClient extends ApiClient {
 
   public GetTopFiltersNoResultsResponse getTopFiltersNoResults(String index)
     throws AlgoliaRuntimeException {
-    return this.getTopFiltersNoResults(index, null, null, null, 10, 0, null);
+    return this.getTopFiltersNoResults(
+        index,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      );
   }
 
   /**
@@ -2772,7 +2788,7 @@ public class AnalyticsClient extends ApiClient {
 
   public GetTopHitsResponse getTopHits(String index)
     throws AlgoliaRuntimeException {
-    return this.getTopHits(index, null, false, null, null, 10, 0, null);
+    return this.getTopHits(index, null, null, null, null, null, null, null);
   }
 
   /**
@@ -2998,13 +3014,13 @@ public class AnalyticsClient extends ApiClient {
     throws AlgoliaRuntimeException {
     return this.getTopSearches(
         index,
-        false,
         null,
         null,
-        OrderBy.SEARCH_COUNT,
-        Direction.ASC,
-        10,
-        0,
+        null,
+        null,
+        null,
+        null,
+        null,
         null
       );
   }
@@ -3294,7 +3310,7 @@ public class AnalyticsClient extends ApiClient {
   }
 
   public Object post(String path) throws AlgoliaRuntimeException {
-    return this.post(path, new HashMap<>(), null);
+    return this.post(path, null, null);
   }
 
   /**
@@ -3403,7 +3419,7 @@ public class AnalyticsClient extends ApiClient {
   }
 
   public Object put(String path) throws AlgoliaRuntimeException {
-    return this.put(path, new HashMap<>(), null);
+    return this.put(path, null, null);
   }
 
   /**

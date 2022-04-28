@@ -4,10 +4,19 @@ import crypto from 'crypto';
 import { hashElement } from 'folder-hash';
 
 import { toAbsolutePath } from '../common';
+import { getLanguageFolder } from '../config';
 
 import { getNbGitDiff } from './utils';
 
-const JS_CLIENT_FOLDER = 'clients/algoliasearch-client-javascript';
+const JS_CLIENT_FOLDER = getLanguageFolder('javascript');
+const JAVA_CLIENT_FOLDER = getLanguageFolder('java');
+const PHP_CLIENT_FOLDER = getLanguageFolder('php');
+
+// Files that are common to every clients
+const CLIENTS_COMMON_FILES = [
+  'openapitools.json',
+  'config/clients.config.json',
+];
 
 /**
  * Exhaustive list of output variables to use in the CI.
@@ -47,6 +56,7 @@ const VARIABLES_TO_CHECK = [
   {
     name: 'JS_CLIENT_CHANGED',
     path: [
+      ...CLIENTS_COMMON_FILES,
       JS_CLIENT_FOLDER,
       `:!${JS_CLIENT_FOLDER}/.github`,
       `:!${JS_CLIENT_FOLDER}/README.md`,
@@ -79,7 +89,7 @@ const VARIABLES_TO_CHECK = [
   },
   {
     name: 'JAVA_CLIENT_CHANGED',
-    path: ['clients/algoliasearch-client-java-2'],
+    path: [...CLIENTS_COMMON_FILES, JAVA_CLIENT_FOLDER],
   },
   {
     name: 'JAVA_TEMPLATE_CHANGED',
@@ -87,7 +97,7 @@ const VARIABLES_TO_CHECK = [
   },
   {
     name: 'PHP_CLIENT_CHANGED',
-    path: ['clients/algoliasearch-client-php'],
+    path: [...CLIENTS_COMMON_FILES, PHP_CLIENT_FOLDER],
   },
   {
     name: 'PHP_TEMPLATE_CHANGED',

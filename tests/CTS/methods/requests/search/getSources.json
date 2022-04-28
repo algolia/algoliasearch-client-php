@@ -1,9 +1,0 @@
-[
-  {
-    "parameters": {},
-    "request": {
-      "path": "/1/security/sources",
-      "method": "GET"
-    }
-  }
-]

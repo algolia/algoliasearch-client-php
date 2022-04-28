@@ -1,9 +1,0 @@
-[
-  {
-    "parameters": {},
-    "request": {
-      "path": "/1/clusters/mapping/top",
-      "method": "GET"
-    }
-  }
-]

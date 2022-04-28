@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BrowseRequest Class Doc Comment
  *
@@ -153,7 +151,7 @@ class BrowseRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets params
      *
-     * @param string|null $params Search parameters as URL-encoded query string.
+     * @param string|null $params search parameters as URL-encoded query string
      *
      * @return self
      */
@@ -190,9 +188,9 @@ class BrowseRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -202,7 +200,7 @@ class BrowseRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -231,7 +229,7 @@ class BrowseRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

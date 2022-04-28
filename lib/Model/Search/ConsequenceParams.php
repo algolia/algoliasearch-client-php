@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ConsequenceParams Class Doc Comment
  *
@@ -22,17 +20,13 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $modelTypes = [
         'query' => 'string',
-        'automaticFacetFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
-        'automaticOptionalFacetFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
-        'optionalFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\OptionalFilters',
-        'numericFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\NumericFilters',
+        'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Search\OptionalFilters',
+        'numericFilters' => '\Algolia\AlgoliaSearch\Model\Search\NumericFilters',
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Search\TagFilters',
         'sumOrFiltersScores' => 'bool',
         'facets' => 'string[]',
@@ -60,8 +54,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'percentileComputation' => 'bool',
         'enableABTest' => 'bool',
         'enableReRanking' => 'bool',
-        'reRankingApplyFilter' =>
-            '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
+        'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
         'searchableAttributes' => 'string[]',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
@@ -91,17 +84,13 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'enableRules' => 'bool',
         'enablePersonalization' => 'bool',
         'queryType' => '\Algolia\AlgoliaSearch\Model\Search\QueryType',
-        'removeWordsIfNoResults' =>
-            '\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults',
+        'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults',
         'advancedSyntax' => 'bool',
         'optionalWords' => 'string[]',
         'disableExactOnAttributes' => 'string[]',
-        'exactOnSingleWordQuery' =>
-            '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
-        'alternativesAsExact' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
-        'advancedSyntaxFeatures' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
+        'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
+        'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
+        'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
         'distinct' => 'int',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
@@ -275,15 +264,13 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'highlightPreTag' => 'setHighlightPreTag',
         'highlightPostTag' => 'setHighlightPostTag',
         'snippetEllipsisText' => 'setSnippetEllipsisText',
-        'restrictHighlightAndSnippetArrays' =>
-            'setRestrictHighlightAndSnippetArrays',
+        'restrictHighlightAndSnippetArrays' => 'setRestrictHighlightAndSnippetArrays',
         'hitsPerPage' => 'setHitsPerPage',
         'minWordSizefor1Typo' => 'setMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'setMinWordSizefor2Typos',
         'typoTolerance' => 'setTypoTolerance',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
-        'disableTypoToleranceOnAttributes' =>
-            'setDisableTypoToleranceOnAttributes',
+        'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
         'separatorsToIndex' => 'setSeparatorsToIndex',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
@@ -306,8 +293,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
-        'attributeCriteriaComputedByMinProximity' =>
-            'setAttributeCriteriaComputedByMinProximity',
+        'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'setRenderingContent',
     ];
 
@@ -366,15 +352,13 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'highlightPreTag' => 'getHighlightPreTag',
         'highlightPostTag' => 'getHighlightPostTag',
         'snippetEllipsisText' => 'getSnippetEllipsisText',
-        'restrictHighlightAndSnippetArrays' =>
-            'getRestrictHighlightAndSnippetArrays',
+        'restrictHighlightAndSnippetArrays' => 'getRestrictHighlightAndSnippetArrays',
         'hitsPerPage' => 'getHitsPerPage',
         'minWordSizefor1Typo' => 'getMinWordSizefor1Typo',
         'minWordSizefor2Typos' => 'getMinWordSizefor2Typos',
         'typoTolerance' => 'getTypoTolerance',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
-        'disableTypoToleranceOnAttributes' =>
-            'getDisableTypoToleranceOnAttributes',
+        'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
         'separatorsToIndex' => 'getSeparatorsToIndex',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
@@ -397,8 +381,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
-        'attributeCriteriaComputedByMinProximity' =>
-            'getAttributeCriteriaComputedByMinProximity',
+        'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'getRenderingContent',
     ];
 
@@ -809,7 +792,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query
      *
-     * @param string|null $query Query string.
+     * @param string|null $query query string
      *
      * @return self
      */
@@ -833,7 +816,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern
      *
      * @return self
      */
@@ -857,7 +840,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticOptionalFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters Same syntax as automaticFacetFilters, but the engine treats the filters as optional.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters same syntax as automaticFacetFilters, but the engine treats the filters as optional
      *
      * @return self
      */
@@ -884,7 +867,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets similarQuery
      *
-     * @param string|null $similarQuery Overrides the query parameter and performs a more generic search that can be used to find \"similar\" results.
+     * @param string|null $similarQuery overrides the query parameter and performs a more generic search that can be used to find \"similar\" results
      *
      * @return self
      */
@@ -908,7 +891,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets filters
      *
-     * @param string|null $filters Filter the query with numeric, facet and/or tag filters.
+     * @param string|null $filters filter the query with numeric, facet and/or tag filters
      *
      * @return self
      */
@@ -1028,7 +1011,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets sumOrFiltersScores
      *
-     * @param bool|null $sumOrFiltersScores Determines how to calculate the total score for filtering.
+     * @param bool|null $sumOrFiltersScores determines how to calculate the total score for filtering
      *
      * @return self
      */
@@ -1052,7 +1035,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets facets
      *
-     * @param string[]|null $facets Retrieve facets and their facet values.
+     * @param string[]|null $facets retrieve facets and their facet values
      *
      * @return self
      */
@@ -1076,7 +1059,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets maxValuesPerFacet
      *
-     * @param int|null $maxValuesPerFacet Maximum number of facet values to return for each facet during a regular search.
+     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet during a regular search
      *
      * @return self
      */
@@ -1100,7 +1083,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets facetingAfterDistinct
      *
-     * @param bool|null $facetingAfterDistinct Force faceting to be applied after de-duplication (via the Distinct setting).
+     * @param bool|null $facetingAfterDistinct force faceting to be applied after de-duplication (via the Distinct setting)
      *
      * @return self
      */
@@ -1124,7 +1107,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets sortFacetValuesBy
      *
-     * @param string|null $sortFacetValuesBy Controls how facet values are fetched.
+     * @param string|null $sortFacetValuesBy controls how facet values are fetched
      *
      * @return self
      */
@@ -1148,7 +1131,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets page
      *
-     * @param int|null $page Specify the page to retrieve.
+     * @param int|null $page specify the page to retrieve
      *
      * @return self
      */
@@ -1172,7 +1155,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets offset
      *
-     * @param int|null $offset Specify the offset of the first hit to return.
+     * @param int|null $offset specify the offset of the first hit to return
      *
      * @return self
      */
@@ -1196,7 +1179,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets length
      *
-     * @param int|null $length Set the number of hits to retrieve (used only with offset).
+     * @param int|null $length set the number of hits to retrieve (used only with offset)
      *
      * @return self
      */
@@ -1231,7 +1214,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng Search for entries around a central geolocation, enabling a geo search within a circular area.
+     * @param string|null $aroundLatLng search for entries around a central geolocation, enabling a geo search within a circular area
      *
      * @return self
      */
@@ -1255,7 +1238,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets aroundLatLngViaIP
      *
-     * @param bool|null $aroundLatLngViaIP Search for entries around a given location automatically computed from the requester's IP address.
+     * @param bool|null $aroundLatLngViaIP search for entries around a given location automatically computed from the requester's IP address
      *
      * @return self
      */
@@ -1303,7 +1286,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets aroundPrecision
      *
-     * @param int|null $aroundPrecision Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
+     * @param int|null $aroundPrecision precision of geo search (in meters), to add grouping by geo location to the ranking formula
      *
      * @return self
      */
@@ -1327,7 +1310,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets minimumAroundRadius
      *
-     * @param int|null $minimumAroundRadius Minimum radius (in meters) used for a geo search when aroundRadius is not set.
+     * @param int|null $minimumAroundRadius minimum radius (in meters) used for a geo search when aroundRadius is not set
      *
      * @return self
      */
@@ -1357,7 +1340,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets insideBoundingBox
      *
-     * @param float[]|null $insideBoundingBox Search inside a rectangular area (in geo coordinates).
+     * @param float[]|null $insideBoundingBox search inside a rectangular area (in geo coordinates)
      *
      * @return self
      */
@@ -1381,7 +1364,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets insidePolygon
      *
-     * @param float[]|null $insidePolygon Search inside a polygon (in geo coordinates).
+     * @param float[]|null $insidePolygon search inside a polygon (in geo coordinates)
      *
      * @return self
      */
@@ -1429,7 +1412,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets ruleContexts
      *
-     * @param string[]|null $ruleContexts Enables contextual rules.
+     * @param string[]|null $ruleContexts enables contextual rules
      *
      * @return self
      */
@@ -1453,7 +1436,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets personalizationImpact
      *
-     * @param int|null $personalizationImpact Define the impact of the Personalization feature.
+     * @param int|null $personalizationImpact define the impact of the Personalization feature
      *
      * @return self
      */
@@ -1477,7 +1460,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets userToken
      *
-     * @param string|null $userToken Associates a certain user token with the current search.
+     * @param string|null $userToken associates a certain user token with the current search
      *
      * @return self
      */
@@ -1501,7 +1484,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets getRankingInfo
      *
-     * @param bool|null $getRankingInfo Retrieve detailed ranking information.
+     * @param bool|null $getRankingInfo retrieve detailed ranking information
      *
      * @return self
      */
@@ -1525,7 +1508,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets clickAnalytics
      *
-     * @param bool|null $clickAnalytics Enable the Click Analytics feature.
+     * @param bool|null $clickAnalytics enable the Click Analytics feature
      *
      * @return self
      */
@@ -1549,7 +1532,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets analytics
      *
-     * @param bool|null $analytics Whether the current query will be taken into account in the Analytics.
+     * @param bool|null $analytics whether the current query will be taken into account in the Analytics
      *
      * @return self
      */
@@ -1573,7 +1556,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets analyticsTags
      *
-     * @param string[]|null $analyticsTags List of tags to apply to the query for analytics purposes.
+     * @param string[]|null $analyticsTags list of tags to apply to the query for analytics purposes
      *
      * @return self
      */
@@ -1597,7 +1580,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets percentileComputation
      *
-     * @param bool|null $percentileComputation Whether to include or exclude a query from the processing-time percentile computation.
+     * @param bool|null $percentileComputation whether to include or exclude a query from the processing-time percentile computation
      *
      * @return self
      */
@@ -1621,7 +1604,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enableABTest
      *
-     * @param bool|null $enableABTest Whether this search should participate in running AB tests.
+     * @param bool|null $enableABTest whether this search should participate in running AB tests
      *
      * @return self
      */
@@ -1645,7 +1628,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enableReRanking
      *
-     * @param bool|null $enableReRanking Whether this search should use AI Re-Ranking.
+     * @param bool|null $enableReRanking whether this search should use AI Re-Ranking
      *
      * @return self
      */
@@ -1693,7 +1676,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets searchableAttributes
      *
-     * @param string[]|null $searchableAttributes The complete list of attributes used for searching.
+     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
      *
      * @return self
      */
@@ -1717,7 +1700,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesForFaceting
      *
-     * @param string[]|null $attributesForFaceting The complete list of attributes that will be used for faceting.
+     * @param string[]|null $attributesForFaceting the complete list of attributes that will be used for faceting
      *
      * @return self
      */
@@ -1741,7 +1724,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets unretrievableAttributes
      *
-     * @param string[]|null $unretrievableAttributes List of attributes that can't be retrieved at query time.
+     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
      *
      * @return self
      */
@@ -1765,7 +1748,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToRetrieve
      *
-     * @param string[]|null $attributesToRetrieve This parameter controls which attributes to retrieve and which not to retrieve.
+     * @param string[]|null $attributesToRetrieve this parameter controls which attributes to retrieve and which not to retrieve
      *
      * @return self
      */
@@ -1789,7 +1772,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets restrictSearchableAttributes
      *
-     * @param string[]|null $restrictSearchableAttributes Restricts a given query to look in only a subset of your searchable attributes.
+     * @param string[]|null $restrictSearchableAttributes restricts a given query to look in only a subset of your searchable attributes
      *
      * @return self
      */
@@ -1816,7 +1799,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets ranking
      *
-     * @param string[]|null $ranking Controls how Algolia should sort your results.
+     * @param string[]|null $ranking controls how Algolia should sort your results
      *
      * @return self
      */
@@ -1840,7 +1823,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets customRanking
      *
-     * @param string[]|null $customRanking Specifies the custom ranking criterion.
+     * @param string[]|null $customRanking specifies the custom ranking criterion
      *
      * @return self
      */
@@ -1864,7 +1847,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets relevancyStrictness
      *
-     * @param int|null $relevancyStrictness Controls the relevancy threshold below which less relevant results aren't included in the results.
+     * @param int|null $relevancyStrictness controls the relevancy threshold below which less relevant results aren't included in the results
      *
      * @return self
      */
@@ -1888,7 +1871,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToHighlight
      *
-     * @param string[]|null $attributesToHighlight List of attributes to highlight.
+     * @param string[]|null $attributesToHighlight list of attributes to highlight
      *
      * @return self
      */
@@ -1912,7 +1895,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToSnippet
      *
-     * @param string[]|null $attributesToSnippet List of attributes to snippet, with an optional maximum number of words to snippet.
+     * @param string[]|null $attributesToSnippet list of attributes to snippet, with an optional maximum number of words to snippet
      *
      * @return self
      */
@@ -1936,7 +1919,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets highlightPreTag
      *
-     * @param string|null $highlightPreTag The HTML string to insert before the highlighted parts in all highlight and snippet results.
+     * @param string|null $highlightPreTag the HTML string to insert before the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -1960,7 +1943,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets highlightPostTag
      *
-     * @param string|null $highlightPostTag The HTML string to insert after the highlighted parts in all highlight and snippet results.
+     * @param string|null $highlightPostTag the HTML string to insert after the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -1984,7 +1967,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets snippetEllipsisText
      *
-     * @param string|null $snippetEllipsisText String used as an ellipsis indicator when a snippet is truncated.
+     * @param string|null $snippetEllipsisText string used as an ellipsis indicator when a snippet is truncated
      *
      * @return self
      */
@@ -2008,7 +1991,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets restrictHighlightAndSnippetArrays
      *
-     * @param bool|null $restrictHighlightAndSnippetArrays Restrict highlighting and snippeting to items that matched the query.
+     * @param bool|null $restrictHighlightAndSnippetArrays restrict highlighting and snippeting to items that matched the query
      *
      * @return self
      */
@@ -2035,7 +2018,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage Set the number of hits per page.
+     * @param int|null $hitsPerPage set the number of hits per page
      *
      * @return self
      */
@@ -2059,7 +2042,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets minWordSizefor1Typo
      *
-     * @param int|null $minWordSizefor1Typo Minimum number of characters a word in the query string must contain to accept matches with 1 typo.
+     * @param int|null $minWordSizefor1Typo minimum number of characters a word in the query string must contain to accept matches with 1 typo
      *
      * @return self
      */
@@ -2083,7 +2066,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets minWordSizefor2Typos
      *
-     * @param int|null $minWordSizefor2Typos Minimum number of characters a word in the query string must contain to accept matches with 2 typos.
+     * @param int|null $minWordSizefor2Typos minimum number of characters a word in the query string must contain to accept matches with 2 typos
      *
      * @return self
      */
@@ -2131,7 +2114,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets allowTyposOnNumericTokens
      *
-     * @param bool|null $allowTyposOnNumericTokens Whether to allow typos on numbers (\"numeric tokens\") in the query string.
+     * @param bool|null $allowTyposOnNumericTokens whether to allow typos on numbers (\"numeric tokens\") in the query string
      *
      * @return self
      */
@@ -2157,7 +2140,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disableTypoToleranceOnAttributes
      *
-     * @param string[]|null $disableTypoToleranceOnAttributes List of attributes on which you want to disable typo tolerance.
+     * @param string[]|null $disableTypoToleranceOnAttributes list of attributes on which you want to disable typo tolerance
      *
      * @return self
      */
@@ -2184,7 +2167,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets separatorsToIndex
      *
-     * @param string|null $separatorsToIndex Control which separators are indexed.
+     * @param string|null $separatorsToIndex control which separators are indexed
      *
      * @return self
      */
@@ -2208,7 +2191,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets ignorePlurals
      *
-     * @param string|null $ignorePlurals Treats singular, plurals, and other forms of declensions as matching terms.
+     * @param string|null $ignorePlurals treats singular, plurals, and other forms of declensions as matching terms
      *
      * @return self
      */
@@ -2232,7 +2215,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets removeStopWords
      *
-     * @param string|null $removeStopWords Removes stop (common) words from the query before executing it.
+     * @param string|null $removeStopWords removes stop (common) words from the query before executing it
      *
      * @return self
      */
@@ -2256,7 +2239,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets keepDiacriticsOnCharacters
      *
-     * @param string|null $keepDiacriticsOnCharacters List of characters that the engine shouldn't automatically normalize.
+     * @param string|null $keepDiacriticsOnCharacters list of characters that the engine shouldn't automatically normalize
      *
      * @return self
      */
@@ -2282,7 +2265,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets queryLanguages
      *
-     * @param string[]|null $queryLanguages Sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection.
+     * @param string[]|null $queryLanguages sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection
      *
      * @return self
      */
@@ -2306,7 +2289,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets decompoundQuery
      *
-     * @param bool|null $decompoundQuery Splits compound words into their composing atoms in the query.
+     * @param bool|null $decompoundQuery splits compound words into their composing atoms in the query
      *
      * @return self
      */
@@ -2330,7 +2313,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enableRules
      *
-     * @param bool|null $enableRules Whether Rules should be globally enabled.
+     * @param bool|null $enableRules whether Rules should be globally enabled
      *
      * @return self
      */
@@ -2354,7 +2337,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enablePersonalization
      *
-     * @param bool|null $enablePersonalization Enable the Personalization feature.
+     * @param bool|null $enablePersonalization enable the Personalization feature
      *
      * @return self
      */
@@ -2426,7 +2409,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets advancedSyntax
      *
-     * @param bool|null $advancedSyntax Enables the advanced query syntax.
+     * @param bool|null $advancedSyntax enables the advanced query syntax
      *
      * @return self
      */
@@ -2450,7 +2433,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets optionalWords
      *
-     * @param string[]|null $optionalWords A list of words that should be considered as optional when found in the query.
+     * @param string[]|null $optionalWords a list of words that should be considered as optional when found in the query
      *
      * @return self
      */
@@ -2474,7 +2457,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disableExactOnAttributes
      *
-     * @param string[]|null $disableExactOnAttributes List of attributes on which you want to disable the exact ranking criterion.
+     * @param string[]|null $disableExactOnAttributes list of attributes on which you want to disable the exact ranking criterion
      *
      * @return self
      */
@@ -2524,7 +2507,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets alternativesAsExact
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact List of alternatives that should be considered an exact match by the exact ranking criterion.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact list of alternatives that should be considered an exact match by the exact ranking criterion
      *
      * @return self
      */
@@ -2548,7 +2531,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets advancedSyntaxFeatures
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures Allows you to specify which advanced syntax features are active when ‘advancedSyntax' is enabled.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when ‘advancedSyntax' is enabled
      *
      * @return self
      */
@@ -2572,7 +2555,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets distinct
      *
-     * @param int|null $distinct Enables de-duplication or grouping of results.
+     * @param int|null $distinct enables de-duplication or grouping of results
      *
      * @return self
      */
@@ -2607,7 +2590,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets synonyms
      *
-     * @param bool|null $synonyms Whether to take into account an index's synonyms for a particular search.
+     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
      *
      * @return self
      */
@@ -2631,7 +2614,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets replaceSynonymsInHighlight
      *
-     * @param bool|null $replaceSynonymsInHighlight Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
+     * @param bool|null $replaceSynonymsInHighlight whether to highlight and snippet the original word that matches the synonym or the synonym itself
      *
      * @return self
      */
@@ -2657,7 +2640,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets minProximity
      *
-     * @param int|null $minProximity Precision of the proximity ranking criterion.
+     * @param int|null $minProximity precision of the proximity ranking criterion
      *
      * @return self
      */
@@ -2747,7 +2730,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributeCriteriaComputedByMinProximity
      *
-     * @param bool|null $attributeCriteriaComputedByMinProximity When attribute is ranked above proximity in your ranking formula, proximity is used to select which searchable attribute is matched in the attribute ranking stage.
+     * @param bool|null $attributeCriteriaComputedByMinProximity when attribute is ranked above proximity in your ranking formula, proximity is used to select which searchable attribute is matched in the attribute ranking stage
      *
      * @return self
      */
@@ -2787,9 +2770,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -2799,7 +2782,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -2828,7 +2811,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

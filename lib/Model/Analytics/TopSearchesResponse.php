@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TopSearchesResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'searches' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'searches' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +151,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[] $searches A list of top searches with their count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[] $searches a list of top searches with their count
      *
      * @return self
      */
@@ -166,9 +164,9 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

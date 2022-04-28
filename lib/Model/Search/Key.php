@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Key Class Doc Comment
  *
@@ -188,6 +186,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -215,7 +214,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets acl
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl Set of permissions associated with the key.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl set of permissions associated with the key
      *
      * @return self
      */
@@ -311,7 +310,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets maxQueriesPerIPPerHour
      *
-     * @param int|null $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or a user token.
+     * @param int|null $maxQueriesPerIPPerHour maximum number of API calls per hour allowed from a given IP address or a user token
      *
      * @return self
      */
@@ -407,7 +406,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets createdAt
      *
-     * @param string $createdAt Date of creation (ISO-8601 format).
+     * @param string $createdAt date of creation (ISO-8601 format)
      *
      * @return self
      */
@@ -420,9 +419,9 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -432,7 +431,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -461,7 +460,7 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

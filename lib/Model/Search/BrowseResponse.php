@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BrowseResponse Class Doc Comment
  *
@@ -29,8 +27,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,string>>',
-        'facetsStats' =>
-            'array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>',
+        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>',
         'hitsPerPage' => 'int',
         'index' => 'string',
         'indexUsed' => 'string',
@@ -299,7 +296,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (
             isset($this->container['aroundLatLng']) &&
             !preg_match(
-                "/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/",
+                '/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/',
                 $this->container['aroundLatLng']
             )
         ) {
@@ -373,6 +370,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         ) {
             $invalidProperties[] = "'cursor' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -400,7 +398,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID
      *
-     * @param int|null $abTestID If a search encounters an index that is being A/B tested, abTestID reports the ongoing A/B test ID.
+     * @param int|null $abTestID if a search encounters an index that is being A/B tested, abTestID reports the ongoing A/B test ID
      *
      * @return self
      */
@@ -424,7 +422,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestVariantID
      *
-     * @param int|null $abTestVariantID If a search encounters an index that is being A/B tested, abTestVariantID reports the variant ID of the index used.
+     * @param int|null $abTestVariantID if a search encounters an index that is being A/B tested, abTestVariantID reports the variant ID of the index used
      *
      * @return self
      */
@@ -448,7 +446,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng The computed geo location.
+     * @param string|null $aroundLatLng the computed geo location
      *
      * @return self
      */
@@ -457,7 +455,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (
             !is_null($aroundLatLng) &&
             !preg_match(
-                "/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/",
+                '/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/',
                 $aroundLatLng
             )
         ) {
@@ -508,7 +506,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveFacetsCount
      *
-     * @param bool|null $exhaustiveFacetsCount Whether the facet count is exhaustive or approximate.
+     * @param bool|null $exhaustiveFacetsCount whether the facet count is exhaustive or approximate
      *
      * @return self
      */
@@ -532,7 +530,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveNbHits
      *
-     * @param bool $exhaustiveNbHits Indicate if the nbHits count was exhaustive or approximate.
+     * @param bool $exhaustiveNbHits indicate if the nbHits count was exhaustive or approximate
      *
      * @return self
      */
@@ -556,7 +554,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveTypo
      *
-     * @param bool $exhaustiveTypo Indicate if the typo-tolerence search was exhaustive or approximate (only included when typo-tolerance is enabled).
+     * @param bool $exhaustiveTypo indicate if the typo-tolerence search was exhaustive or approximate (only included when typo-tolerance is enabled)
      *
      * @return self
      */
@@ -580,7 +578,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facets
      *
-     * @param array<string,array<string,string>>|null $facets A mapping of each facet name to the corresponding facet counts.
+     * @param array<string,array<string,string>>|null $facets a mapping of each facet name to the corresponding facet counts
      *
      * @return self
      */
@@ -604,7 +602,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facetsStats
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>|null $facetsStats Statistics for numerical facets.
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>|null $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -628,7 +626,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets hitsPerPage
      *
-     * @param int $hitsPerPage Set the number of hits per page.
+     * @param int $hitsPerPage set the number of hits per page
      *
      * @return self
      */
@@ -652,7 +650,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets index
      *
-     * @param string|null $index Index name used for the query.
+     * @param string|null $index index name used for the query
      *
      * @return self
      */
@@ -700,7 +698,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets message
      *
-     * @param string|null $message Used to return warnings about the query.
+     * @param string|null $message used to return warnings about the query
      *
      * @return self
      */
@@ -724,7 +722,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbHits
      *
-     * @param int $nbHits Number of hits that the search query matched.
+     * @param int $nbHits number of hits that the search query matched
      *
      * @return self
      */
@@ -748,7 +746,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbPages
      *
-     * @param int $nbPages Number of pages available for the current query.
+     * @param int $nbPages number of pages available for the current query
      *
      * @return self
      */
@@ -772,7 +770,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbSortedHits
      *
-     * @param int|null $nbSortedHits The number of hits selected and sorted by the relevant sort algorithm.
+     * @param int|null $nbSortedHits the number of hits selected and sorted by the relevant sort algorithm
      *
      * @return self
      */
@@ -796,7 +794,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets page
      *
-     * @param int $page Specify the page to retrieve.
+     * @param int $page specify the page to retrieve
      *
      * @return self
      */
@@ -820,7 +818,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets params
      *
-     * @param string $params A url-encoded string of all search parameters.
+     * @param string $params a url-encoded string of all search parameters
      *
      * @return self
      */
@@ -844,7 +842,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets parsedQuery
      *
-     * @param string|null $parsedQuery The query string that will be searched, after normalization.
+     * @param string|null $parsedQuery the query string that will be searched, after normalization
      *
      * @return self
      */
@@ -868,7 +866,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets processingTimeMS
      *
-     * @param int $processingTimeMS Time the server took to process the request, in milliseconds.
+     * @param int $processingTimeMS time the server took to process the request, in milliseconds
      *
      * @return self
      */
@@ -892,7 +890,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets query
      *
-     * @param string $query The text to search in the index.
+     * @param string $query the text to search in the index
      *
      * @return self
      */
@@ -916,7 +914,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets queryAfterRemoval
      *
-     * @param string|null $queryAfterRemoval A markup text indicating which parts of the original query have been removed in order to retrieve a non-empty result set.
+     * @param string|null $queryAfterRemoval a markup text indicating which parts of the original query have been removed in order to retrieve a non-empty result set
      *
      * @return self
      */
@@ -940,7 +938,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets serverUsed
      *
-     * @param string|null $serverUsed Actual host name of the server that processed the request.
+     * @param string|null $serverUsed actual host name of the server that processed the request
      *
      * @return self
      */
@@ -964,7 +962,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets userData
      *
-     * @param object|null $userData Lets you store custom data in your indices.
+     * @param object|null $userData lets you store custom data in your indices
      *
      * @return self
      */
@@ -1025,9 +1023,9 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -1037,7 +1035,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1066,7 +1064,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

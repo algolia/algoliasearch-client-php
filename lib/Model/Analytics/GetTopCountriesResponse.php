@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopCountriesResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $modelTypes = [
-        'countries' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]',
+        'countries' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         ) {
             $invalidProperties[] = "'countries' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +151,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets countries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[] $countries A list of countries with their count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[] $countries a list of countries with their count
      *
      * @return self
      */
@@ -166,9 +164,9 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

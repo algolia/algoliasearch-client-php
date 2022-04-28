@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * DictionaryType Class Doc Comment
  *
@@ -15,14 +13,15 @@ class DictionaryType
     /**
      * Possible values of this enum
      */
-    public const PLURALS = 'plurals';
+    const PLURALS = 'plurals';
 
-    public const STOPWORDS = 'stopwords';
+    const STOPWORDS = 'stopwords';
 
-    public const COMPOUNDS = 'compounds';
+    const COMPOUNDS = 'compounds';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

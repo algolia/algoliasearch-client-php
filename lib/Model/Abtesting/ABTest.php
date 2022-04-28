@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ABTest Class Doc Comment
  *
@@ -217,6 +215,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'variants' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -244,7 +243,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets abTestID
      *
-     * @param int $abTestID The A/B test ID.
+     * @param int $abTestID the A/B test ID
      *
      * @return self
      */
@@ -258,7 +257,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets clickSignificance
      *
-     * @return double
+     * @return float
      */
     public function getClickSignificance()
     {
@@ -268,7 +267,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets clickSignificance
      *
-     * @param double $clickSignificance A/B test significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param float $clickSignificance A/B test significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
      *
      * @return self
      */
@@ -282,7 +281,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets conversionSignificance
      *
-     * @return double
+     * @return float
      */
     public function getConversionSignificance()
     {
@@ -292,7 +291,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets conversionSignificance
      *
-     * @param double $conversionSignificance A/B test significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param float $conversionSignificance A/B test significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning).
      *
      * @return self
      */
@@ -316,7 +315,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets endAt
      *
-     * @param string $endAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
+     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
      *
      * @return self
      */
@@ -340,7 +339,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets createdAt
      *
-     * @param string $createdAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
+     * @param string $createdAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
      *
      * @return self
      */
@@ -364,7 +363,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets name
      *
-     * @param string $name A/B test name.
+     * @param string $name A/B test name
      *
      * @return self
      */
@@ -388,7 +387,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets status
      *
-     * @param string $status status of the A/B test.
+     * @param string $status status of the A/B test
      *
      * @return self
      */
@@ -412,7 +411,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets variants
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants List of A/B test variant.
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants list of A/B test variant
      *
      * @return self
      */
@@ -425,9 +424,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -437,7 +436,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -466,7 +465,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

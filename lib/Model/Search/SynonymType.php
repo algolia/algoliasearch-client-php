@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SynonymType Class Doc Comment
  *
  * @category Class
  * @description Type of the synonym object.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SynonymType
@@ -16,18 +15,19 @@ class SynonymType
     /**
      * Possible values of this enum
      */
-    public const SYNONYM = 'synonym';
+    const SYNONYM = 'synonym';
 
-    public const ONEWAYSYNONYM = 'onewaysynonym';
+    const ONEWAYSYNONYM = 'onewaysynonym';
 
-    public const ALTCORRECTION1 = 'altcorrection1';
+    const ALTCORRECTION1 = 'altcorrection1';
 
-    public const ALTCORRECTION2 = 'altcorrection2';
+    const ALTCORRECTION2 = 'altcorrection2';
 
-    public const PLACEHOLDER = 'placeholder';
+    const PLACEHOLDER = 'placeholder';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

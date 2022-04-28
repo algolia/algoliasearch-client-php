@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchUserIdsResponse Class Doc Comment
  *
  * @category Class
  * @description userIDs data.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' =>
-            '\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[]',
         'nbHits' => 'int',
         'page' => 'int',
         'hitsPerPage' => 'int',
@@ -179,6 +177,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -206,7 +205,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[] $hits List of user object matching the query.
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[] $hits list of user object matching the query
      *
      * @return self
      */
@@ -230,7 +229,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets nbHits
      *
-     * @param int $nbHits Number of hits that the search query matched.
+     * @param int $nbHits number of hits that the search query matched
      *
      * @return self
      */
@@ -254,7 +253,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets page
      *
-     * @param int $page Specify the page to retrieve.
+     * @param int $page specify the page to retrieve
      *
      * @return self
      */
@@ -302,7 +301,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -315,9 +314,9 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -327,7 +326,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -356,7 +355,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

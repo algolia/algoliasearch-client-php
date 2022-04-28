@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SourceIndexExternal Class Doc Comment
  *
@@ -138,6 +136,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'count' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets query
      *
-     * @param string $query The suggestion you would like to add.
+     * @param string $query the suggestion you would like to add
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count The measure of the suggestion relative popularity.
+     * @param int $count the measure of the suggestion relative popularity
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

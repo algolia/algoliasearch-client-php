@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AutomaticFacetFilter Class Doc Comment
  *
  * @category Class
  * @description Automatic facet Filter.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -140,6 +139,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'facet' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -215,7 +215,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets disjunctive
      *
-     * @param bool|null $disjunctive Whether the filter is disjunctive (true) or conjunctive (false).
+     * @param bool|null $disjunctive whether the filter is disjunctive (true) or conjunctive (false)
      *
      * @return self
      */
@@ -228,9 +228,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -240,7 +240,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -269,7 +269,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

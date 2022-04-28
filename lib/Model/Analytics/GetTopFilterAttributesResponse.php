@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopFilterAttributesResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributes' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
         ) {
             $invalidProperties[] = "'attributes' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +151,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Sets attributes
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes A list of attributes with their count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes a list of attributes with their count
      *
      * @return self
      */
@@ -166,9 +164,9 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

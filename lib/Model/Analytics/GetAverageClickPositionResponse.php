@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetAverageClickPositionResponse Class Doc Comment
  *
@@ -23,8 +21,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     protected static $modelTypes = [
         'average' => 'double',
         'clickCount' => 'int',
-        'dates' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[]',
     ];
 
     /**
@@ -152,6 +149,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
         ) {
             $invalidProperties[] = "'dates' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -169,7 +167,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets average
      *
-     * @return double
+     * @return float
      */
     public function getAverage()
     {
@@ -179,7 +177,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets average
      *
-     * @param double $average The average of all the click count event.
+     * @param float $average the average of all the click count event
      *
      * @return self
      */
@@ -203,7 +201,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets clickCount
      *
-     * @param int $clickCount The number of click event.
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
@@ -227,7 +225,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[] $dates A list of average click position with their date.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponseDates[] $dates a list of average click position with their date
      *
      * @return self
      */
@@ -240,9 +238,9 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -252,7 +250,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -281,7 +279,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

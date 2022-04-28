@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ListIndicesResponse Class Doc Comment
  *
@@ -153,7 +151,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets items
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Indice[]|null $items List of the fetched indices.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Indice[]|null $items list of the fetched indices
      *
      * @return self
      */
@@ -177,7 +175,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbPages
      *
-     * @param int|null $nbPages Number of pages.
+     * @param int|null $nbPages number of pages
      *
      * @return self
      */
@@ -190,9 +188,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -202,7 +200,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -231,7 +229,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

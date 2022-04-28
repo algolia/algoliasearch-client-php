@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetSearchesNoClicksResponseSearches Class Doc Comment
  *
@@ -151,6 +149,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
         ) {
             $invalidProperties[] = "'withFilterCount' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets search
      *
-     * @param string $search The search query.
+     * @param string $search the search query
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Sets withFilterCount
      *
-     * @param int $withFilterCount The number of occurrences.
+     * @param int $withFilterCount the number of occurrences
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

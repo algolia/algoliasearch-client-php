@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TopHitsResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         ) {
             $invalidProperties[] = "'hits' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +151,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[] $hits A list of top hits with their count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[] $hits a list of top hits with their count
      *
      * @return self
      */
@@ -166,9 +164,9 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

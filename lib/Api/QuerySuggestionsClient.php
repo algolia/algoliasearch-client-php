@@ -2,13 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\QuerySuggestionsConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -105,6 +99,7 @@ class QuerySuggestionsClient
      * Create a configuration of a Query Suggestions index.
      *
      * @param array $querySuggestionsIndexWithIndexParam querySuggestionsIndexWithIndexParam (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexWithIndexParam
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
@@ -512,6 +507,7 @@ class QuerySuggestionsClient
      * - $querySuggestionsIndexParam['sourceIndices'] => (array) List of source indices used to generate a Query Suggestions index. (required)
      * - $querySuggestionsIndexParam['languages'] => (array) De-duplicate singular and plural suggestions. For example, let's say your index contains English content, and that two suggestions “shoe” and “shoes” end up in your Query Suggestions index. If the English language is configured, only the most popular of those two suggestions would remain.
      * - $querySuggestionsIndexParam['exclude'] => (array) List of words and patterns to exclude from the Query Suggestions index.
+     *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexParam
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
@@ -571,7 +567,7 @@ class QuerySuggestionsClient
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method == 'GET') {
+        if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * HighlightResult Class Doc Comment
  *
  * @category Class
  * @description Highlighted attributes.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -168,7 +167,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value
      *
-     * @param string|null $value Markup text with occurrences highlighted.
+     * @param string|null $value markup text with occurrences highlighted
      *
      * @return self
      */
@@ -216,7 +215,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchedWords
      *
-     * @param string[]|null $matchedWords List of words from the query that matched the object.
+     * @param string[]|null $matchedWords list of words from the query that matched the object
      *
      * @return self
      */
@@ -240,7 +239,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets fullyHighlighted
      *
-     * @param bool|null $fullyHighlighted Whether the entire attribute value is highlighted.
+     * @param bool|null $fullyHighlighted whether the entire attribute value is highlighted
      *
      * @return self
      */
@@ -253,9 +252,9 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -265,7 +264,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -294,7 +293,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

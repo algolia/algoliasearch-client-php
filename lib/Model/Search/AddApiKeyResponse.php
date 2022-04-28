@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AddApiKeyResponse Class Doc Comment
  *
@@ -138,6 +136,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets key
      *
-     * @param string $key Key string.
+     * @param string $key key string
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt
      *
-     * @param string $createdAt Date of creation (ISO-8601 format).
+     * @param string $createdAt date of creation (ISO-8601 format)
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

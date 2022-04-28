@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetNoClickRateResponseDates Class Doc Comment
  *
@@ -164,6 +162,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
         ) {
             $invalidProperties[] = "'date' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -181,7 +180,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets rate
      *
-     * @return double
+     * @return float
      */
     public function getRate()
     {
@@ -191,7 +190,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate
      *
-     * @param double $rate The click-through rate.
+     * @param float $rate the click-through rate
      *
      * @return self
      */
@@ -215,7 +214,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets count
      *
-     * @param int $count The number of click event.
+     * @param int $count the number of click event
      *
      * @return self
      */
@@ -239,7 +238,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets noClickCount
      *
-     * @param int $noClickCount The number of click event.
+     * @param int $noClickCount the number of click event
      *
      * @return self
      */
@@ -263,7 +262,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets date
      *
-     * @param string $date Date of the event.
+     * @param string $date date of the event
      *
      * @return self
      */
@@ -276,9 +275,9 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -288,7 +287,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -317,7 +316,7 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

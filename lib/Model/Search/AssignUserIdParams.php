@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AssignUserIdParams Class Doc Comment
  *
  * @category Class
  * @description Assign userID parameters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -126,6 +125,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         ) {
             $invalidProperties[] = "'cluster' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +153,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets cluster
      *
-     * @param string $cluster Name of the cluster.
+     * @param string $cluster name of the cluster
      *
      * @return self
      */
@@ -166,9 +166,9 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +178,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +207,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

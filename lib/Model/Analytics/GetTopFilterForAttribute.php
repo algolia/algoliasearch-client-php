@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopFilterForAttribute Class Doc Comment
  *
@@ -164,6 +162,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'count' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -191,7 +190,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets attribute
      *
-     * @param string $attribute The attribute.
+     * @param string $attribute the attribute
      *
      * @return self
      */
@@ -215,7 +214,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets operator
      *
-     * @param string $operator The operator.
+     * @param string $operator the operator
      *
      * @return self
      */
@@ -239,7 +238,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets value
      *
-     * @param string $value The value of the attribute.
+     * @param string $value the value of the attribute
      *
      * @return self
      */
@@ -263,7 +262,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -276,9 +275,9 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -288,7 +287,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -317,7 +316,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

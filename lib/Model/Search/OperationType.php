@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * OperationType Class Doc Comment
  *
  * @category Class
  * @description Type of operation to perform (move or copy).
+ *
  * @package Algolia\AlgoliaSearch
  */
 class OperationType
@@ -16,12 +15,13 @@ class OperationType
     /**
      * Possible values of this enum
      */
-    public const MOVE = 'move';
+    const MOVE = 'move';
 
-    public const COPY = 'copy';
+    const COPY = 'copy';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

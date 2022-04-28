@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetStatusResponse Class Doc Comment
  *
@@ -125,6 +123,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -152,7 +151,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -165,9 +164,9 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -177,7 +176,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -206,7 +205,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

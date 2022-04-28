@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SourceIndiceWithReplicas Class Doc Comment
  *
  * @category Class
  * @description Source indice with replicas used to generate a Query Suggestions index.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -29,8 +28,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
         'minHits' => 'int',
         'minLetters' => 'int',
         'generate' => 'string[][]',
-        'external' =>
-            '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
+        'external' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
     ];
 
     /**
@@ -218,6 +216,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'external' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -245,7 +244,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets replicas
      *
-     * @param bool $replicas true if the Query Suggestions index is a replicas.
+     * @param bool $replicas true if the Query Suggestions index is a replicas
      *
      * @return self
      */
@@ -269,7 +268,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets indexName
      *
-     * @param string $indexName Source index name.
+     * @param string $indexName source index name
      *
      * @return self
      */
@@ -293,7 +292,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets analyticsTags
      *
-     * @param string[] $analyticsTags List of analytics tags to filter the popular searches per tag.
+     * @param string[] $analyticsTags list of analytics tags to filter the popular searches per tag
      *
      * @return self
      */
@@ -317,7 +316,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets facets
      *
-     * @param object[] $facets List of facets to define as categories for the query suggestions.
+     * @param object[] $facets list of facets to define as categories for the query suggestions
      *
      * @return self
      */
@@ -365,7 +364,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets minLetters
      *
-     * @param int $minLetters Minimum number of required letters for a suggestion to remain.
+     * @param int $minLetters minimum number of required letters for a suggestion to remain
      *
      * @return self
      */
@@ -413,7 +412,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets external
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[] $external List of external indices to use to generate custom Query Suggestions.
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[] $external list of external indices to use to generate custom Query Suggestions
      *
      * @return self
      */
@@ -426,9 +425,9 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -438,7 +437,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -467,7 +466,7 @@ class SourceIndiceWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

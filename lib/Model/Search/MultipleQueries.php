@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * MultipleQueries Class Doc Comment
  *
@@ -153,6 +151,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         ) {
             $invalidProperties[] = "'indexName' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -180,7 +179,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets indexName
      *
-     * @param string $indexName The Algolia index name.
+     * @param string $indexName the Algolia index name
      *
      * @return self
      */
@@ -204,7 +203,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets query
      *
-     * @param string|null $query The text to search in the index.
+     * @param string|null $query the text to search in the index
      *
      * @return self
      */
@@ -252,7 +251,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets facet
      *
-     * @param string|null $facet The `facet` name.
+     * @param string|null $facet the `facet` name
      *
      * @return self
      */
@@ -276,7 +275,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets params
      *
-     * @param string|null $params A query string of search parameters.
+     * @param string|null $params a query string of search parameters
      *
      * @return self
      */
@@ -289,9 +288,9 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -301,7 +300,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -330,7 +329,7 @@ class MultipleQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

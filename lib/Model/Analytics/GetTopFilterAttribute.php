@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopFilterAttribute Class Doc Comment
  *
@@ -138,6 +136,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         ) {
             $invalidProperties[] = "'count' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets attribute
      *
-     * @param string $attribute The attribute.
+     * @param string $attribute the attribute
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

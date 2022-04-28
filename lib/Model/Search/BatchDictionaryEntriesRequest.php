@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BatchDictionaryEntriesRequest Class Doc Comment
  *
@@ -138,6 +136,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
         ) {
             $invalidProperties[] = "'body' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -202,9 +201,9 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

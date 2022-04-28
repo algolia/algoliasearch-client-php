@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchForFacetValuesResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetHits' =>
-            '\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponseFacetHits[]',
+        'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponseFacetHits[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
         ) {
             $invalidProperties[] = "'facetHits' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -166,9 +164,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

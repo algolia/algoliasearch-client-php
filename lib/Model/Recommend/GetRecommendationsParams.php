@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetRecommendationsParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;getRecommendations&#x60; parameters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]',
     ];
 
     /**
@@ -127,6 +125,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'requests' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -154,7 +153,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests The `getRecommendations` requests.
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests the `getRecommendations` requests
      *
      * @return self
      */
@@ -167,9 +166,9 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -179,7 +178,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -208,7 +207,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

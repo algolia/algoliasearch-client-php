@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BuiltInOperation Class Doc Comment
  *
  * @category Class
  * @description To update an attribute without pushing the entire record, you can use these built-in operations.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'operation' =>
-            '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
+        'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
         'value' => 'string',
     ];
 
@@ -140,6 +138,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         ) {
             $invalidProperties[] = "'value' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -191,7 +190,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value
      *
-     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove.
+     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove
      *
      * @return self
      */
@@ -204,9 +203,9 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -216,7 +215,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -245,7 +244,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

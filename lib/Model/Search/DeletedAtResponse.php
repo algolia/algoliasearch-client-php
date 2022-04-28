@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * DeletedAtResponse Class Doc Comment
  *
  * @category Class
  * @description The response with a taskID and a deletedAt timestamp.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -139,6 +138,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         ) {
             $invalidProperties[] = "'deletedAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -166,7 +166,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for.
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -190,7 +190,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets deletedAt
      *
-     * @param string $deletedAt Date of deletion (ISO-8601 format).
+     * @param string $deletedAt date of deletion (ISO-8601 format)
      *
      * @return self
      */
@@ -203,9 +203,9 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -215,7 +215,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -244,7 +244,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

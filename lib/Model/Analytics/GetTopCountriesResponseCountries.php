@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopCountriesResponseCountries Class Doc Comment
  *
@@ -138,6 +136,7 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
         ) {
             $invalidProperties[] = "'count' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets country
      *
-     * @param string $country The country.
+     * @param string $country the country
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

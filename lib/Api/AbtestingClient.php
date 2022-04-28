@@ -2,13 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -108,6 +102,7 @@ class AbtestingClient
      * - $addABTestsRequest['name'] => (string) A/B test name. (required)
      * - $addABTestsRequest['variant'] => (array) List of 2 variants for the A/B test. (required)
      * - $addABTestsRequest['endAt'] => (string) End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
@@ -487,7 +482,7 @@ class AbtestingClient
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method == 'GET') {
+        if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

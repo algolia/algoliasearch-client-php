@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ABTestResponse Class Doc Comment
  *
@@ -151,6 +149,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         ) {
             $invalidProperties[] = "'taskID' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets index
      *
-     * @param string $index The index performing the A/B test.
+     * @param string $index the index performing the A/B test
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID
      *
-     * @param int $abTestID The A/B test ID.
+     * @param int $abTestID the A/B test ID
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for.
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

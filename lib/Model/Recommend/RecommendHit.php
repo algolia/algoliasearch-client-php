@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * RecommendHit Class Doc Comment
  *
  * @category Class
  * @description A Recommend hit.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -23,10 +22,8 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     protected static $modelTypes = [
         'objectID' => 'string',
-        'highlightResult' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult',
-        'snippetResult' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult',
+        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult',
+        'snippetResult' => '\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo',
         'distinctSeqID' => 'int',
         'score' => 'double',
@@ -206,7 +203,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the object.
+     * @param string $objectID unique identifier of the object
      *
      * @return self
      */
@@ -316,7 +313,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets score
      *
-     * @return double
+     * @return float
      */
     public function getScore()
     {
@@ -326,7 +323,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param double $score The recommendation score.
+     * @param float $score the recommendation score
      *
      * @return self
      */
@@ -350,9 +347,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -362,7 +359,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -391,7 +388,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

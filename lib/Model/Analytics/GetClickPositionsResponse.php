@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetClickPositionsResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'positions' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[]',
+        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[]',
     ];
 
     /**
@@ -163,7 +160,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets positions
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[] $positions A list of the click positions with their click count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[] $positions a list of the click positions with their click count
      *
      * @return self
      */
@@ -186,9 +183,9 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -198,7 +195,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -227,7 +224,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchRulesResponse Class Doc Comment
  *
@@ -164,6 +162,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -191,7 +190,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits Fetched rules.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits fetched rules
      *
      * @return self
      */
@@ -215,7 +214,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbHits
      *
-     * @param int $nbHits Number of fetched rules.
+     * @param int $nbHits number of fetched rules
      *
      * @return self
      */
@@ -239,7 +238,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page
      *
-     * @param int $page Current page.
+     * @param int $page current page
      *
      * @return self
      */
@@ -263,7 +262,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbPages
      *
-     * @param int $nbPages Number of pages.
+     * @param int $nbPages number of pages
      *
      * @return self
      */
@@ -276,9 +275,9 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -288,7 +287,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -317,7 +316,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

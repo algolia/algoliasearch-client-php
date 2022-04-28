@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Rule Class Doc Comment
  *
  * @category Class
  * @description Rule object.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -167,6 +166,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'consequence' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -194,7 +194,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the object.
+     * @param string $objectID unique identifier of the object
      *
      * @return self
      */
@@ -327,9 +327,9 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -339,7 +339,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -368,7 +368,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

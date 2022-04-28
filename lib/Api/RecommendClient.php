@@ -2,15 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
-use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -197,6 +190,7 @@ class RecommendClient
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
      * - $getRecommendationsParams['requests'] => (array) The `getRecommendations` requests. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse
@@ -336,7 +330,7 @@ class RecommendClient
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method == 'GET') {
+        if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

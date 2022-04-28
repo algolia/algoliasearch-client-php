@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchUserIdsParams Class Doc Comment
  *
  * @category Class
  * @description OK
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -147,6 +146,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'query' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -198,7 +198,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName
      *
-     * @param string|null $clusterName Name of the cluster.
+     * @param string|null $clusterName name of the cluster
      *
      * @return self
      */
@@ -222,7 +222,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page
      *
-     * @param int|null $page Specify the page to retrieve.
+     * @param int|null $page specify the page to retrieve
      *
      * @return self
      */
@@ -246,7 +246,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage Set the number of hits per page.
+     * @param int|null $hitsPerPage set the number of hits per page
      *
      * @return self
      */
@@ -259,9 +259,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -271,7 +271,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -300,7 +300,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

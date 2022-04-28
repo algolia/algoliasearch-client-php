@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * QuerySuggestionsIndexParam Class Doc Comment
  *
@@ -21,8 +19,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'sourceIndices' =>
-            '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
+        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
         'languages' => 'string[]',
         'exclude' => 'string[]',
     ];
@@ -140,6 +137,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
         ) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -167,7 +165,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets sourceIndices
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices List of source indices used to generate a Query Suggestions index.
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices list of source indices used to generate a Query Suggestions index
      *
      * @return self
      */
@@ -215,7 +213,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets exclude
      *
-     * @param string[]|null $exclude List of words and patterns to exclude from the Query Suggestions index.
+     * @param string[]|null $exclude list of words and patterns to exclude from the Query Suggestions index
      *
      * @return self
      */
@@ -228,9 +226,9 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -240,7 +238,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -269,7 +267,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

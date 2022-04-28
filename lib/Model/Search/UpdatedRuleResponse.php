@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * UpdatedRuleResponse Class Doc Comment
  *
@@ -151,6 +149,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'taskID' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the object.
+     * @param string $objectID unique identifier of the object
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for.
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

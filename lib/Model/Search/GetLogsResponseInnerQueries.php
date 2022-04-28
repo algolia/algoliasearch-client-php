@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetLogsResponseInnerQueries Class Doc Comment
  *
@@ -160,7 +158,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets indexName
      *
-     * @param string|null $indexName Index targeted by the query.
+     * @param string|null $indexName index targeted by the query
      *
      * @return self
      */
@@ -184,7 +182,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets userToken
      *
-     * @param string|null $userToken User identifier.
+     * @param string|null $userToken user identifier
      *
      * @return self
      */
@@ -208,7 +206,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets queryId
      *
-     * @param string|null $queryId QueryID for the given query.
+     * @param string|null $queryId queryID for the given query
      *
      * @return self
      */
@@ -221,9 +219,9 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -233,7 +231,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -262,7 +260,7 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

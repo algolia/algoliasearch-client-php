@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AroundRadius Class Doc Comment
  *
  * @category Class
  * @description Define the maximum radius for a geo search (in meters).
+ *
  * @package Algolia\AlgoliaSearch
  */
 class AroundRadius extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -126,9 +125,9 @@ class AroundRadius extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -138,7 +137,7 @@ class AroundRadius extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -167,7 +166,7 @@ class AroundRadius extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

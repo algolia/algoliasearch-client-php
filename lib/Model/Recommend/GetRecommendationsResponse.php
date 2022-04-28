@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetRecommendationsResponse Class Doc Comment
  *
@@ -21,8 +19,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'results' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResponse[]',
+        'results' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResponse[]',
     ];
 
     /**
@@ -160,9 +157,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -172,7 +169,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +198,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

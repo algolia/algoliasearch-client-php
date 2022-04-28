@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * MultipleBatchResponse Class Doc Comment
  *
@@ -153,7 +151,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets taskID
      *
-     * @param object|null $taskID List of tasksIDs per index.
+     * @param object|null $taskID list of tasksIDs per index
      *
      * @return self
      */
@@ -177,7 +175,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs List of objectID.
+     * @param string[]|null $objectIDs list of objectID
      *
      * @return self
      */
@@ -190,9 +188,9 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -202,7 +200,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -231,7 +229,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

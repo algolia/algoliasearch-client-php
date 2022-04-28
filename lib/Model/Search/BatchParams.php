@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BatchParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;multipleBatch&#x60; parameters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' =>
-            '\Algolia\AlgoliaSearch\Model\Search\MultipleBatchOperation[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleBatchOperation[]',
     ];
 
     /**
@@ -161,9 +159,9 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -173,7 +171,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -202,7 +200,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

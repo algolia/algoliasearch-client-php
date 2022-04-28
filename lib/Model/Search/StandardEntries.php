@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * StandardEntries Class Doc Comment
  *
  * @category Class
  * @description Map of language ISO code supported by the dictionary (e.g., \&quot;en\&quot; for English) to a boolean value.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -161,7 +160,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets plurals
      *
-     * @param array<string,bool>|null $plurals Language ISO code.
+     * @param array<string,bool>|null $plurals language ISO code
      *
      * @return self
      */
@@ -185,7 +184,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets stopwords
      *
-     * @param array<string,bool>|null $stopwords Language ISO code.
+     * @param array<string,bool>|null $stopwords language ISO code
      *
      * @return self
      */
@@ -209,7 +208,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets compounds
      *
-     * @param array<string,bool>|null $compounds Language ISO code.
+     * @param array<string,bool>|null $compounds language ISO code
      *
      * @return self
      */
@@ -222,9 +221,9 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -234,7 +233,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -263,7 +262,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

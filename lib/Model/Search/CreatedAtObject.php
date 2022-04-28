@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * CreatedAtObject Class Doc Comment
  *
@@ -125,6 +123,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         ) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -152,7 +151,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets createdAt
      *
-     * @param string $createdAt Date of creation (ISO-8601 format).
+     * @param string $createdAt date of creation (ISO-8601 format)
      *
      * @return self
      */
@@ -165,9 +164,9 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -177,7 +176,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -206,7 +205,7 @@ class CreatedAtObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

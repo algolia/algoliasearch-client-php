@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetConversationRateResponse Class Doc Comment
  *
@@ -24,8 +22,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         'rate' => 'double',
         'trackedSearchCount' => 'int',
         'conversionCount' => 'int',
-        'dates' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]',
     ];
 
     /**
@@ -166,6 +163,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         ) {
             $invalidProperties[] = "'dates' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -183,7 +181,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets rate
      *
-     * @return double
+     * @return float
      */
     public function getRate()
     {
@@ -193,7 +191,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate
      *
-     * @param double $rate The click-through rate.
+     * @param float $rate the click-through rate
      *
      * @return self
      */
@@ -217,7 +215,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount The number of tracked search click.
+     * @param int $trackedSearchCount the number of tracked search click
      *
      * @return self
      */
@@ -241,7 +239,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount The number of converted clicks.
+     * @param int $conversionCount the number of converted clicks
      *
      * @return self
      */
@@ -265,7 +263,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[] $dates A list of conversion events with their date.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[] $dates a list of conversion events with their date
      *
      * @return self
      */
@@ -278,9 +276,9 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -290,7 +288,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -319,7 +317,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

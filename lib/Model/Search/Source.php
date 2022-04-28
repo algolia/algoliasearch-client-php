@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Source Class Doc Comment
  *
  * @category Class
  * @description The source.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -133,6 +132,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'source' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -160,7 +160,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets source
      *
-     * @param string $source The IP range of the source.
+     * @param string $source the IP range of the source
      *
      * @return self
      */
@@ -184,7 +184,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets description
      *
-     * @param string|null $description The description of the source.
+     * @param string|null $description the description of the source
      *
      * @return self
      */
@@ -197,9 +197,9 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -209,7 +209,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -238,7 +238,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

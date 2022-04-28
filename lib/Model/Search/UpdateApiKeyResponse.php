@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * UpdateApiKeyResponse Class Doc Comment
  *
@@ -138,6 +136,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets key
      *
-     * @param string $key Key string.
+     * @param string $key key string
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SaveSynonymResponse Class Doc Comment
  *
@@ -148,6 +146,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (!isset($this->container['id']) || $this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -175,7 +174,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for.
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -199,7 +198,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -223,7 +222,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets id
      *
-     * @param string $id objectID of the inserted object.
+     * @param string $id objectID of the inserted object
      *
      * @return self
      */
@@ -236,9 +235,9 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -248,7 +247,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -277,7 +276,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

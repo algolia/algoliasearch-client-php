@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchForFacetValuesRequest Class Doc Comment
  *
@@ -168,7 +166,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets params
      *
-     * @param string|null $params Search parameters as URL-encoded query string.
+     * @param string|null $params search parameters as URL-encoded query string
      *
      * @return self
      */
@@ -192,7 +190,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets facetQuery
      *
-     * @param string|null $facetQuery Text to search inside the facet's values.
+     * @param string|null $facetQuery text to search inside the facet's values
      *
      * @return self
      */
@@ -235,9 +233,9 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -247,7 +245,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -276,7 +274,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BaseRecommendationRequest Class Doc Comment
  *
@@ -21,8 +19,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'model' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
         'objectID' => 'string',
     ];
 
@@ -139,6 +136,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
         ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -190,7 +188,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the object.
+     * @param string $objectID unique identifier of the object
      *
      * @return self
      */
@@ -203,9 +201,9 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -215,7 +213,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -244,7 +242,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

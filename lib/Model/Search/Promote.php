@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Promote Class Doc Comment
  *
  * @category Class
  * @description Object to promote as hits.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -140,6 +139,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'position' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -167,7 +167,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string|null $objectID Unique identifier of the object to promote.
+     * @param string|null $objectID unique identifier of the object to promote
      *
      * @return self
      */
@@ -191,7 +191,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs Array of unique identifiers of the objects to promote.
+     * @param string[]|null $objectIDs array of unique identifiers of the objects to promote
      *
      * @return self
      */
@@ -228,9 +228,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -240,7 +240,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -269,7 +269,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

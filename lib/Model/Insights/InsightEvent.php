@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * InsightEvent Class Doc Comment
  *
  * @category Class
  * @description Insights event.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -200,6 +199,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -251,7 +251,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventName
      *
-     * @param string $eventName A user-defined string used to categorize events.
+     * @param string $eventName a user-defined string used to categorize events
      *
      * @return self
      */
@@ -275,7 +275,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets index
      *
-     * @param string $index Name of the targeted index.
+     * @param string $index name of the targeted index
      *
      * @return self
      */
@@ -323,7 +323,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets timestamp
      *
-     * @param int|null $timestamp Time of the event expressed in milliseconds since the Unix epoch.
+     * @param int|null $timestamp time of the event expressed in milliseconds since the Unix epoch
      *
      * @return self
      */
@@ -432,9 +432,9 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -444,7 +444,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -473,7 +473,7 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

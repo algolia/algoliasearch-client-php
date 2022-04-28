@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetUserTokenResponse Class Doc Comment
  *
@@ -151,6 +149,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'scores' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets userToken
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile.
+     * @param string $userToken userToken representing the user for which to fetch the Personalization profile
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets scores
      *
-     * @param object $scores The userToken scores.
+     * @param object $scores the userToken scores
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

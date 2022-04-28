@@ -2,13 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\PersonalizationConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -394,6 +388,7 @@ class PersonalizationClient
      * - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)
      * - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with the facets. (required)
      * - $personalizationStrategyParams['personalizationImpact'] => (int) The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse
@@ -435,7 +430,7 @@ class PersonalizationClient
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method == 'GET') {
+        if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

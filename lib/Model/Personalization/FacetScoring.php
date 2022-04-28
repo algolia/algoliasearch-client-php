@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * FacetScoring Class Doc Comment
  *
@@ -138,6 +136,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'facetName' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param int $score The score for the event.
+     * @param int $score the score for the event
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets facetName
      *
-     * @param string $facetName The name of the facet.
+     * @param string $facetName the name of the facet
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ListClustersResponse Class Doc Comment
  *
  * @category Class
  * @description Array of clusters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -126,6 +125,7 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'topUsers' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +153,7 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets topUsers
      *
-     * @param string[] $topUsers Mapping of cluster names to top users.
+     * @param string[] $topUsers mapping of cluster names to top users
      *
      * @return self
      */
@@ -166,9 +166,9 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +178,7 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +207,7 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

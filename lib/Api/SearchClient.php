@@ -2,18 +2,13 @@
 
 namespace Algolia\AlgoliaSearch\Api;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Algolia\AlgoliaSearch\Algolia;
-use Algolia\AlgoliaSearch\ApiException;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\RequestOptions;
 
 /**
  * SearchClient Class Doc Comment
@@ -114,6 +109,7 @@ class SearchClient
      * - $apiKey['queryParameters'] => (string) URL-encoded query string. Force some query parameters to be applied for each query made with this API key.
      * - $apiKey['referers'] => (array) Restrict this new API key to specific referers. If empty or blank, defaults to all referers.
      * - $apiKey['validity'] => (int) Validity limit for this key in seconds. The key will automatically be removed after this period of time.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\ApiKey
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse
@@ -217,6 +213,7 @@ class SearchClient
      * Add a single source.
      *
      * @param array $source The source to add. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\Source
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
@@ -252,6 +249,7 @@ class SearchClient
      * @param string $xAlgoliaUserID userID to assign. (required)
      * @param array $assignUserIdParams assignUserIdParams (required)
      * - $assignUserIdParams['cluster'] => (string) Name of the cluster. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\AssignUserIdParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
@@ -267,9 +265,9 @@ class SearchClient
                 'Missing the required parameter $xAlgoliaUserID when calling assignUserId'
             );
         }
-        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $xAlgoliaUserID)) {
+        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
-                "invalid value for \"xAlgoliaUserID\" when calling SearchClient.assignUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+                'invalid value for "xAlgoliaUserID" when calling SearchClient.assignUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
             );
         }
 
@@ -315,6 +313,7 @@ class SearchClient
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $batchWriteParams batchWriteParams (required)
      * - $batchWriteParams['requests'] => (array)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchWriteParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\BatchResponse
@@ -372,6 +371,7 @@ class SearchClient
      * @param array $batchAssignUserIdsParams batchAssignUserIdsParams (required)
      * - $batchAssignUserIdsParams['cluster'] => (string) Name of the cluster. (required)
      * - $batchAssignUserIdsParams['users'] => (array) userIDs to assign. Note you cannot move users with this method. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchAssignUserIdsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
@@ -389,9 +389,9 @@ class SearchClient
                 'Missing the required parameter $xAlgoliaUserID when calling batchAssignUserIds'
             );
         }
-        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $xAlgoliaUserID)) {
+        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
-                "invalid value for \"xAlgoliaUserID\" when calling SearchClient.batchAssignUserIds, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+                'invalid value for "xAlgoliaUserID" when calling SearchClient.batchAssignUserIds, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
             );
         }
 
@@ -439,6 +439,7 @@ class SearchClient
      * @param array $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
      * - $batchDictionaryEntriesParams['clearExistingDictionaryEntries'] => (bool) When `true`, start the batch by removing all the custom entries from the dictionary.
      * - $batchDictionaryEntriesParams['requests'] => (array) List of operations to batch. Each operation is described by an `action` and a `body`. (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
@@ -576,6 +577,7 @@ class SearchClient
      * @param array $browseRequest browseRequest (optional)
      * - $browseRequest['params'] => (string) Search parameters as URL-encoded query string.
      * - $browseRequest['cursor'] => (string) Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\BrowseRequest
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\BrowseResponse
@@ -845,6 +847,7 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $searchParams searchParams (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
@@ -1447,6 +1450,7 @@ class SearchClient
      *
      * @param array $getObjectsParams getObjectsParams (required)
      * - $getObjectsParams['requests'] => (array)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\GetObjectsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse
@@ -1748,9 +1752,9 @@ class SearchClient
                 'Missing the required parameter $userID when calling getUserId'
             );
         }
-        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $userID)) {
+        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
             throw new \InvalidArgumentException(
-                "invalid value for \"userID\" when calling SearchClient.getUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+                'invalid value for "userID" when calling SearchClient.getUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
             );
         }
 
@@ -1924,6 +1928,7 @@ class SearchClient
      *
      * @param array $batchParams batchParams (required)
      * - $batchParams['requests'] => (array)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse
@@ -1962,6 +1967,7 @@ class SearchClient
      * @param array $multipleQueriesParams multipleQueriesParams (required)
      * - $multipleQueriesParams['requests'] => (array)  (required)
      * - $multipleQueriesParams['strategy'] => (array)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\MultipleQueriesParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesResponse
@@ -2003,6 +2009,7 @@ class SearchClient
      * - $operationIndexParams['operation'] => (array)  (required)
      * - $operationIndexParams['destination'] => (string) The Algolia index name. (required)
      * - $operationIndexParams['scope'] => (array) Scope of the data to copy. When absent, a full copy is performed. When present, only the selected scopes are copied.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\OperationIndexParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
@@ -2256,9 +2263,9 @@ class SearchClient
                 'Missing the required parameter $userID when calling removeUserId'
             );
         }
-        if (!preg_match("/^[a-zA-Z0-9 \\-*.]+$/", $userID)) {
+        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
             throw new \InvalidArgumentException(
-                "invalid value for \"userID\" when calling SearchClient.removeUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+                'invalid value for "userID" when calling SearchClient.removeUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
             );
         }
 
@@ -2415,7 +2422,9 @@ class SearchClient
      * - $rule['description'] => (string) This field is intended for Rule management purposes, in particular to ease searching for Rules and presenting them to human readers. It's not interpreted by the API.
      * - $rule['enabled'] => (bool) Whether the Rule is enabled. Disabled Rules remain in the index, but aren't applied at query time.
      * - $rule['validity'] => (array) By default, Rules are permanently valid. When validity periods are specified, the Rule applies only during those periods; it's ignored the rest of the time. The list must not be empty.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\Rule
+     *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedRuleResponse
@@ -2510,7 +2519,9 @@ class SearchClient
      * - $synonymHit['placeholder'] => (string) Token to be put inside records.
      * - $synonymHit['replacements'] => (array) List of query words that will match the token.
      * - $synonymHit['_highlightResult'] => (array)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SynonymHit
+     *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse
@@ -2680,6 +2691,7 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $searchParams searchParams (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponse
@@ -2739,6 +2751,7 @@ class SearchClient
      * - $searchDictionaryEntriesParams['page'] => (int) Specify the page to retrieve.
      * - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Set the number of hits per page.
      * - $searchDictionaryEntriesParams['language'] => (string) Language ISO code supported by the dictionary (e.g., \"en\" for English).
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
@@ -2801,6 +2814,7 @@ class SearchClient
      * - $searchForFacetValuesRequest['params'] => (string) Search parameters as URL-encoded query string.
      * - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
      * - $searchForFacetValuesRequest['maxFacetHits'] => (int) Maximum number of facet hits to return during a search for facet values. For performance reasons, the maximum allowed number of returned values is 100.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesRequest
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse
@@ -2875,6 +2889,7 @@ class SearchClient
      * - $searchRulesParams['hitsPerPage'] => (int) Maximum number of hits in a page. Minimum is 1, maximum is 1000.
      * - $searchRulesParams['enabled'] => (bool) When specified, restricts matches to rules with a specific enabled status. When absent (default), all rules are retrieved, regardless of their enabled status.
      * - $searchRulesParams['requestOptions'] => (array) A mapping of requestOptions to send along with the request.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchRulesParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse
@@ -3022,6 +3037,7 @@ class SearchClient
      * - $searchUserIdsParams['clusterName'] => (string) Name of the cluster.
      * - $searchUserIdsParams['page'] => (int) Specify the page to retrieve.
      * - $searchUserIdsParams['hitsPerPage'] => (int) Set the number of hits per page.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse
@@ -3060,6 +3076,7 @@ class SearchClient
      *
      * @param array $dictionarySettingsParams dictionarySettingsParams (required)
      * - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\DictionarySettingsParams
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
@@ -3098,7 +3115,9 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $indexSettings indexSettings (required)
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\IndexSettings
+     *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
@@ -3175,6 +3194,7 @@ class SearchClient
      * - $apiKey['queryParameters'] => (string) URL-encoded query string. Force some query parameters to be applied for each query made with this API key.
      * - $apiKey['referers'] => (array) Restrict this new API key to specific referers. If empty or blank, defaults to all referers.
      * - $apiKey['validity'] => (int) Validity limit for this key in seconds. The key will automatically be removed after this period of time.
+     *
      * @see \Algolia\AlgoliaSearch\Model\Search\ApiKey
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse
@@ -3227,7 +3247,7 @@ class SearchClient
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
-        if ($method == 'GET') {
+        if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : '')

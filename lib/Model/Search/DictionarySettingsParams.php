@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * DictionarySettingsParams Class Doc Comment
  *
  * @category Class
  * @description Disable the builtin Algolia entries for a type of dictionary per language.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $modelTypes = [
-        'disableStandardEntries' =>
-            '\Algolia\AlgoliaSearch\Model\Search\StandardEntries',
+        'disableStandardEntries' => '\Algolia\AlgoliaSearch\Model\Search\StandardEntries',
     ];
 
     /**
@@ -128,6 +126,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'disableStandardEntries' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -168,9 +167,9 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -180,7 +179,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -209,7 +208,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

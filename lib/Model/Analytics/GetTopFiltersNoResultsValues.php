@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopFiltersNoResultsValues Class Doc Comment
  *
@@ -22,8 +20,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $modelTypes = [
         'count' => 'int',
-        'values' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[]',
+        'values' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[]',
     ];
 
     /**
@@ -139,6 +136,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
         ) {
             $invalidProperties[] = "'values' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -166,7 +164,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -190,7 +188,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets values
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values A list of filters without results.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values a list of filters without results
      *
      * @return self
      */
@@ -203,9 +201,9 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -215,7 +213,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -244,7 +242,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

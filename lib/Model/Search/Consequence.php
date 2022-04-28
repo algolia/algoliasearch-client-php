@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Consequence Class Doc Comment
  *
  * @category Class
  * @description Consequence of the Rule.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -199,7 +198,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets promote
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote Objects to promote as hits.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote objects to promote as hits
      *
      * @return self
      */
@@ -284,9 +283,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -296,7 +295,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -325,7 +324,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

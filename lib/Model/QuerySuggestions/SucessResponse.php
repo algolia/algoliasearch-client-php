@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SucessResponse Class Doc Comment
  *
@@ -138,6 +136,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         ) {
             $invalidProperties[] = "'message' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets status
      *
-     * @param int $status The status code.
+     * @param int $status the status code
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets message
      *
-     * @param string $message Message of the response.
+     * @param string $message message of the response
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class SucessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

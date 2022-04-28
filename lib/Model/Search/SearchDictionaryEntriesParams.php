@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchDictionaryEntriesParams Class Doc Comment
  *
  * @category Class
  * @description The &#x60;searchDictionaryEntries&#x60; parameters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -147,6 +146,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         ) {
             $invalidProperties[] = "'query' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -174,7 +174,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets query
      *
-     * @param string $query The text to search in the index.
+     * @param string $query the text to search in the index
      *
      * @return self
      */
@@ -198,7 +198,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets page
      *
-     * @param int|null $page Specify the page to retrieve.
+     * @param int|null $page specify the page to retrieve
      *
      * @return self
      */
@@ -222,7 +222,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage Set the number of hits per page.
+     * @param int|null $hitsPerPage set the number of hits per page
      *
      * @return self
      */
@@ -259,9 +259,9 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -271,7 +271,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -300,7 +300,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

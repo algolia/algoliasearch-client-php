@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BatchResponse Class Doc Comment
  *
@@ -153,7 +151,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for.
+     * @param int|null $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -177,7 +175,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs List of objectID.
+     * @param string[]|null $objectIDs list of objectID
      *
      * @return self
      */
@@ -190,9 +188,9 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -202,7 +200,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -231,7 +229,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

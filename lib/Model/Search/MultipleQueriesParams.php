@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * MultipleQueriesParams Class Doc Comment
  *
@@ -22,8 +20,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelTypes = [
         'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueries[]',
-        'strategy' =>
-            '\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy',
+        'strategy' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy',
     ];
 
     /**
@@ -133,6 +130,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         ) {
             $invalidProperties[] = "'requests' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -197,9 +195,9 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -209,7 +207,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -238,7 +236,7 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

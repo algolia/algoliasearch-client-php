@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchForFacetValuesResponseFacetHits Class Doc Comment
  *
@@ -151,6 +149,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
         ) {
             $invalidProperties[] = "'count' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets value
      *
-     * @param string $value Raw value of the facet.
+     * @param string $value raw value of the facet
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets highlighted
      *
-     * @param string $highlighted Markup text with occurrences highlighted.
+     * @param string $highlighted markup text with occurrences highlighted
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AddABTestsRequest Class Doc Comment
  *
@@ -22,8 +20,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $modelTypes = [
         'name' => 'string',
-        'variant' =>
-            '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
+        'variant' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
         'endAt' => 'string',
     ];
 
@@ -162,6 +159,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         ) {
             $invalidProperties[] = "'endAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -189,7 +187,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets name
      *
-     * @param string $name A/B test name.
+     * @param string $name A/B test name
      *
      * @return self
      */
@@ -213,7 +211,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets variant
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variant List of 2 variants for the A/B test.
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variant list of 2 variants for the A/B test
      *
      * @return self
      */
@@ -247,7 +245,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets endAt
      *
-     * @param string $endAt End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ.
+     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
      *
      * @return self
      */
@@ -260,9 +258,9 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -272,7 +270,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -301,7 +299,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Indice Class Doc Comment
  *
@@ -238,6 +236,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'pendingTask' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -265,7 +264,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets name
      *
-     * @param string $name Index name.
+     * @param string $name index name
      *
      * @return self
      */
@@ -313,7 +312,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt Date of last update (ISO-8601 format).
+     * @param string $updatedAt date of last update (ISO-8601 format)
      *
      * @return self
      */
@@ -337,7 +336,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets entries
      *
-     * @param int $entries Number of records contained in the index.
+     * @param int $entries number of records contained in the index
      *
      * @return self
      */
@@ -361,7 +360,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets dataSize
      *
-     * @param int $dataSize Number of bytes of the index in minified format.
+     * @param int $dataSize number of bytes of the index in minified format
      *
      * @return self
      */
@@ -385,7 +384,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets fileSize
      *
-     * @param int $fileSize Number of bytes of the index binary file.
+     * @param int $fileSize number of bytes of the index binary file
      *
      * @return self
      */
@@ -409,7 +408,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets lastBuildTimeS
      *
-     * @param int $lastBuildTimeS Last build time.
+     * @param int $lastBuildTimeS last build time
      *
      * @return self
      */
@@ -518,9 +517,9 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -530,7 +529,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -559,7 +558,7 @@ class Indice extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

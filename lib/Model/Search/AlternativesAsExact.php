@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AlternativesAsExact Class Doc Comment
  *
@@ -15,14 +13,15 @@ class AlternativesAsExact
     /**
      * Possible values of this enum
      */
-    public const IGNORE_PLURALS = 'ignorePlurals';
+    const IGNORE_PLURALS = 'ignorePlurals';
 
-    public const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
+    const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
 
-    public const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
+    const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

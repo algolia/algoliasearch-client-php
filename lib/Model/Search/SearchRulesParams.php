@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchRulesParams Class Doc Comment
  *
  * @category Class
  * @description Parameters for the search.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -189,7 +188,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query
      *
-     * @param string|null $query Full text query.
+     * @param string|null $query full text query
      *
      * @return self
      */
@@ -237,7 +236,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets context
      *
-     * @param string|null $context Restricts matches to contextual rules with a specific context (exact match).
+     * @param string|null $context restricts matches to contextual rules with a specific context (exact match)
      *
      * @return self
      */
@@ -261,7 +260,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets page
      *
-     * @param int|null $page Requested page (zero-based).
+     * @param int|null $page requested page (zero-based)
      *
      * @return self
      */
@@ -333,7 +332,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets requestOptions
      *
-     * @param object[]|null $requestOptions A mapping of requestOptions to send along with the request.
+     * @param object[]|null $requestOptions a mapping of requestOptions to send along with the request
      *
      * @return self
      */
@@ -346,9 +345,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -358,7 +357,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -387,7 +386,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

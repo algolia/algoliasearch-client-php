@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SetPersonalizationStrategyResponse Class Doc Comment
  *
@@ -125,6 +123,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
         ) {
             $invalidProperties[] = "'message' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -152,7 +151,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets message
      *
-     * @param string $message A message confirming the strategy update.
+     * @param string $message a message confirming the strategy update
      *
      * @return self
      */
@@ -165,9 +164,9 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -177,7 +176,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -206,7 +205,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Params Class Doc Comment
  *
  * @category Class
  * @description Additional search parameters. Any valid search parameter is allowed.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -23,10 +22,8 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     protected static $modelTypes = [
         'query' => 'string',
-        'automaticFacetFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
-        'automaticOptionalFacetFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
     ];
 
     /**
@@ -165,7 +162,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets query
      *
-     * @param string|null $query Query string.
+     * @param string|null $query query string
      *
      * @return self
      */
@@ -189,7 +186,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets automaticFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern
      *
      * @return self
      */
@@ -213,7 +210,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets automaticOptionalFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters Same syntax as automaticFacetFilters, but the engine treats the filters as optional.
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters same syntax as automaticFacetFilters, but the engine treats the filters as optional
      *
      * @return self
      */
@@ -229,9 +226,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -241,7 +238,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -270,7 +267,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

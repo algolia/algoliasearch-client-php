@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopUserIdsResponse Class Doc Comment
  *
  * @category Class
  * @description Array of userIDs and clusters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -22,8 +21,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'topUsers' =>
-            'array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[]',
+        'topUsers' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[]',
     ];
 
     /**
@@ -127,6 +125,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         ) {
             $invalidProperties[] = "'topUsers' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -154,7 +153,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets topUsers
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Mapping of cluster names to top users.
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Mapping of cluster names to top users
      *
      * @return self
      */
@@ -167,9 +166,9 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -179,7 +178,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -208,7 +207,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

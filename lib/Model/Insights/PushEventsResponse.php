@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * PushEventsResponse Class Doc Comment
  *
@@ -125,6 +123,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         ) {
             $invalidProperties[] = "'message' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -152,7 +151,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets message
      *
-     * @param string $message A message confirming the event push.
+     * @param string $message a message confirming the event push
      *
      * @return self
      */
@@ -165,9 +164,9 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -177,7 +176,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -206,7 +205,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

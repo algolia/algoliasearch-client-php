@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SynonymHit Class Doc Comment
  *
  * @category Class
  * @description Synonym object.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -30,8 +29,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'corrections' => 'string[]',
         'placeholder' => 'string',
         'replacements' => 'string[]',
-        'highlightResult' =>
-            '\Algolia\AlgoliaSearch\Model\Search\SynonymHitHighlightResult',
+        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Search\SynonymHitHighlightResult',
     ];
 
     /**
@@ -189,6 +187,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'type' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -216,7 +215,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the synonym object to be created or updated.
+     * @param string $objectID unique identifier of the synonym object to be created or updated
      *
      * @return self
      */
@@ -264,7 +263,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets synonyms
      *
-     * @param string[]|null $synonyms Words or phrases to be considered equivalent.
+     * @param string[]|null $synonyms words or phrases to be considered equivalent
      *
      * @return self
      */
@@ -288,7 +287,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets input
      *
-     * @param string|null $input Word or phrase to appear in query strings (for onewaysynonym).
+     * @param string|null $input word or phrase to appear in query strings (for onewaysynonym)
      *
      * @return self
      */
@@ -312,7 +311,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets word
      *
-     * @param string|null $word Word or phrase to appear in query strings (for altcorrection1 and altcorrection2).
+     * @param string|null $word word or phrase to appear in query strings (for altcorrection1 and altcorrection2)
      *
      * @return self
      */
@@ -336,7 +335,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets corrections
      *
-     * @param string[]|null $corrections Words to be matched in records.
+     * @param string[]|null $corrections words to be matched in records
      *
      * @return self
      */
@@ -360,7 +359,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets placeholder
      *
-     * @param string|null $placeholder Token to be put inside records.
+     * @param string|null $placeholder token to be put inside records
      *
      * @return self
      */
@@ -384,7 +383,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets replacements
      *
-     * @param string[]|null $replacements List of query words that will match the token.
+     * @param string[]|null $replacements list of query words that will match the token
      *
      * @return self
      */
@@ -421,9 +420,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -433,7 +432,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -462,7 +461,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ExactOnSingleWordQuery Class Doc Comment
  *
  * @category Class
  * @description Controls how the exact ranking criterion is computed when the query contains only one word.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class ExactOnSingleWordQuery
@@ -16,14 +15,15 @@ class ExactOnSingleWordQuery
     /**
      * Possible values of this enum
      */
-    public const ATTRIBUTE = 'attribute';
+    const ATTRIBUTE = 'attribute';
 
-    public const NONE = 'none';
+    const NONE = 'none';
 
-    public const WORD = 'word';
+    const WORD = 'word';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

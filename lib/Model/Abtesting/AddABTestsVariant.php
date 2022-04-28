@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AddABTestsVariant Class Doc Comment
  *
@@ -159,6 +157,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         ) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -186,7 +185,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets index
      *
-     * @param string $index The index performing the A/B test.
+     * @param string $index the index performing the A/B test
      *
      * @return self
      */
@@ -210,7 +209,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage The traffic perfecentage for the A/B test.
+     * @param int $trafficPercentage the traffic perfecentage for the A/B test
      *
      * @return self
      */
@@ -234,7 +233,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets description
      *
-     * @param string|null $description The A/B test description.
+     * @param string|null $description the A/B test description
      *
      * @return self
      */
@@ -271,9 +270,9 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -283,7 +282,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -312,7 +311,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

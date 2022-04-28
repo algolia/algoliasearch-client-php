@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * LogFile Class Doc Comment
  *
@@ -164,6 +162,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'contextLevel' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -191,7 +190,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets timestamp
      *
-     * @param string $timestamp date and time of creation of the record.
+     * @param string $timestamp date and time of creation of the record
      *
      * @return self
      */
@@ -239,7 +238,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets message
      *
-     * @param string $message detailed description of what happened.
+     * @param string $message detailed description of what happened
      *
      * @return self
      */
@@ -276,9 +275,9 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -288,7 +287,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -317,7 +316,7 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

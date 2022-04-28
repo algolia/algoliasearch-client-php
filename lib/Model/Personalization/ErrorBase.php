@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ErrorBase Class Doc Comment
  *
  * @category Class
  * @description Error.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -160,9 +159,9 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -172,7 +171,7 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -201,7 +200,7 @@ class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

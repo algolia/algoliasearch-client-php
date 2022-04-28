@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * FacetFilters Class Doc Comment
  *
  * @category Class
  * @description Filter hits by facet value.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -126,9 +125,9 @@ class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -138,7 +137,7 @@ class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -167,7 +166,7 @@ class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

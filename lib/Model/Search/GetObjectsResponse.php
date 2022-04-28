@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetObjectsResponse Class Doc Comment
  *
@@ -146,7 +144,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets results
      *
-     * @param object[]|null $results List of results fetched.
+     * @param object[]|null $results list of results fetched
      *
      * @return self
      */
@@ -159,9 +157,9 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -171,7 +169,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -200,7 +198,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

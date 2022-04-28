@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * RecommendationRequest Class Doc Comment
  *
@@ -21,16 +19,13 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'model' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
         'objectID' => 'string',
         'indexName' => 'string',
         'threshold' => 'int',
         'maxRecommendations' => 'int',
-        'queryParameters' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
-        'fallbackParameters' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
     ];
 
     /**
@@ -251,7 +246,7 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets objectID
      *
-     * @param string $objectID Unique identifier of the object.
+     * @param string $objectID unique identifier of the object
      *
      * @return self
      */
@@ -275,7 +270,7 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets indexName
      *
-     * @param string $indexName The Algolia index name.
+     * @param string $indexName the Algolia index name
      *
      * @return self
      */
@@ -299,7 +294,7 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets threshold
      *
-     * @param int $threshold The threshold to use when filtering recommendations by their score.
+     * @param int $threshold the threshold to use when filtering recommendations by their score
      *
      * @return self
      */
@@ -395,9 +390,9 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -407,7 +402,7 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -436,7 +431,7 @@ class RecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

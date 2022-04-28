@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetSearchesCountResponse Class Doc Comment
  *
@@ -22,8 +20,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
      */
     protected static $modelTypes = [
         'count' => 'int',
-        'dates' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]',
     ];
 
     /**
@@ -139,6 +136,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'dates' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -166,7 +164,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -190,7 +188,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[] $dates A list of search events with their date and count.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[] $dates a list of search events with their date and count
      *
      * @return self
      */
@@ -203,9 +201,9 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -215,7 +213,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -244,7 +242,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

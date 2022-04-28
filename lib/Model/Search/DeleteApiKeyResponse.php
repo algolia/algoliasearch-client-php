@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * DeleteApiKeyResponse Class Doc Comment
  *
@@ -125,6 +123,7 @@ class DeleteApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'deletedAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -152,7 +151,7 @@ class DeleteApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets deletedAt
      *
-     * @param string $deletedAt Date of deletion (ISO-8601 format).
+     * @param string $deletedAt date of deletion (ISO-8601 format)
      *
      * @return self
      */
@@ -165,9 +164,9 @@ class DeleteApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -177,7 +176,7 @@ class DeleteApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -206,7 +205,7 @@ class DeleteApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

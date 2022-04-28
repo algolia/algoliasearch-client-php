@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ScopeType Class Doc Comment
  *
@@ -15,14 +13,15 @@ class ScopeType
     /**
      * Possible values of this enum
      */
-    public const SETTINGS = 'settings';
+    const SETTINGS = 'settings';
 
-    public const SYNONYMS = 'synonyms';
+    const SYNONYMS = 'synonyms';
 
-    public const RULES = 'rules';
+    const RULES = 'rules';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

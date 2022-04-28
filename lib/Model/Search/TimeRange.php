@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TimeRange Class Doc Comment
  *
@@ -138,6 +136,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'until' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets from
      *
-     * @param int $from Lower bound of the time range (Unix timestamp).
+     * @param int $from lower bound of the time range (Unix timestamp)
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets until
      *
-     * @param int $until Upper bound of the time range (Unix timestamp).
+     * @param int $until upper bound of the time range (Unix timestamp)
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

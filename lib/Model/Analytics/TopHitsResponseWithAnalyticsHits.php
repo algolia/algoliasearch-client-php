@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TopHitsResponseWithAnalyticsHits Class Doc Comment
  *
@@ -204,6 +202,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
         ) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -231,7 +230,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets hit
      *
-     * @param string $hit The hit.
+     * @param string $hit the hit
      *
      * @return self
      */
@@ -255,7 +254,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -269,7 +268,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets clickThroughRate
      *
-     * @return double
+     * @return float
      */
     public function getClickThroughRate()
     {
@@ -279,7 +278,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets clickThroughRate
      *
-     * @param double $clickThroughRate The click-through rate.
+     * @param float $clickThroughRate the click-through rate
      *
      * @return self
      */
@@ -293,7 +292,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets conversionRate
      *
-     * @return double
+     * @return float
      */
     public function getConversionRate()
     {
@@ -303,7 +302,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets conversionRate
      *
-     * @param double $conversionRate The conversion rate.
+     * @param float $conversionRate the conversion rate
      *
      * @return self
      */
@@ -327,7 +326,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount The number of tracked search click.
+     * @param int $trackedSearchCount the number of tracked search click
      *
      * @return self
      */
@@ -351,7 +350,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets clickCount
      *
-     * @param int $clickCount The number of click event.
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
@@ -375,7 +374,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount The number of converted clicks.
+     * @param int $conversionCount the number of converted clicks
      *
      * @return self
      */
@@ -388,9 +387,9 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -400,7 +399,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -429,7 +428,7 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

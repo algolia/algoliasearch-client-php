@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BatchAssignUserIdsParams Class Doc Comment
  *
  * @category Class
  * @description Assign userID parameters.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -139,6 +138,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
         ) {
             $invalidProperties[] = "'users' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -166,7 +166,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets cluster
      *
-     * @param string $cluster Name of the cluster.
+     * @param string $cluster name of the cluster
      *
      * @return self
      */
@@ -203,9 +203,9 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -215,7 +215,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -244,7 +244,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Languages Class Doc Comment
  *
  * @category Class
  * @description A dictionary language.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -152,6 +151,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'compounds' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -240,9 +240,9 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -252,7 +252,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -281,7 +281,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

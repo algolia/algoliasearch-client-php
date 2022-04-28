@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AdvancedSyntaxFeatures Class Doc Comment
  *
@@ -15,12 +13,13 @@ class AdvancedSyntaxFeatures
     /**
      * Possible values of this enum
      */
-    public const EXACT_PHRASE = 'exactPhrase';
+    const EXACT_PHRASE = 'exactPhrase';
 
-    public const EXCLUDE_WORDS = 'excludeWords';
+    const EXCLUDE_WORDS = 'excludeWords';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

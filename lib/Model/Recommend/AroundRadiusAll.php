@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * AroundRadiusAll Class Doc Comment
  *
@@ -15,10 +13,11 @@ class AroundRadiusAll
     /**
      * Possible values of this enum
      */
-    public const ALL = 'all';
+    const ALL = 'all';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Personalization Class Doc Comment
  *
@@ -160,7 +158,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets filtersScore
      *
-     * @param int|null $filtersScore The score of the filters.
+     * @param int|null $filtersScore the score of the filters
      *
      * @return self
      */
@@ -184,7 +182,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets rankingScore
      *
-     * @param int|null $rankingScore The score of the ranking.
+     * @param int|null $rankingScore the score of the ranking
      *
      * @return self
      */
@@ -208,7 +206,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets score
      *
-     * @param int|null $score The score of the event.
+     * @param int|null $score the score of the event
      *
      * @return self
      */
@@ -221,9 +219,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -233,7 +231,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -262,7 +260,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

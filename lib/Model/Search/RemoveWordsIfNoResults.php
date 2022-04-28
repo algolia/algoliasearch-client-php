@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * RemoveWordsIfNoResults Class Doc Comment
  *
  * @category Class
  * @description Selects a strategy to remove words from the query when it doesn&#39;t match any hits.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class RemoveWordsIfNoResults
@@ -16,16 +15,17 @@ class RemoveWordsIfNoResults
     /**
      * Possible values of this enum
      */
-    public const NONE = 'none';
+    const NONE = 'none';
 
-    public const LAST_WORDS = 'lastWords';
+    const LAST_WORDS = 'lastWords';
 
-    public const FIRST_WORDS = 'firstWords';
+    const FIRST_WORDS = 'firstWords';
 
-    public const ALL_OPTIONAL = 'allOptional';
+    const ALL_OPTIONAL = 'allOptional';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

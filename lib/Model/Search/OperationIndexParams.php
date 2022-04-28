@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * OperationIndexParams Class Doc Comment
  *
@@ -145,6 +143,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         ) {
             $invalidProperties[] = "'destination' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -196,7 +195,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets destination
      *
-     * @param string $destination The Algolia index name.
+     * @param string $destination the Algolia index name
      *
      * @return self
      */
@@ -233,9 +232,9 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -245,7 +244,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -274,7 +273,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

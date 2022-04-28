@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetClickPositionsResponsePositions Class Doc Comment
  *
@@ -138,6 +136,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
         ) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -189,7 +188,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets clickCount
      *
-     * @param int $clickCount The number of click event.
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

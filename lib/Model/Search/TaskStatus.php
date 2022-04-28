@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TaskStatus Class Doc Comment
  *
@@ -15,12 +13,13 @@ class TaskStatus
     /**
      * Possible values of this enum
      */
-    public const PUBLISHED = 'published';
+    const PUBLISHED = 'published';
 
-    public const NOT_PUBLISHED = 'notPublished';
+    const NOT_PUBLISHED = 'notPublished';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

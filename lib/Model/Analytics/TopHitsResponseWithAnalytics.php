@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TopHitsResponseWithAnalytics Class Doc Comment
  *
@@ -21,8 +19,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' =>
-            '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseWithAnalyticsHits[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseWithAnalyticsHits[]',
     ];
 
     /**
@@ -126,6 +123,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
         ) {
             $invalidProperties[] = "'hits' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -153,7 +151,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseWithAnalyticsHits[] $hits A list of top hits with their count and analytics.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseWithAnalyticsHits[] $hits a list of top hits with their count and analytics
      *
      * @return self
      */
@@ -166,9 +164,9 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -178,7 +176,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -207,7 +205,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

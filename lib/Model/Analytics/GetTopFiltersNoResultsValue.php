@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetTopFiltersNoResultsValue Class Doc Comment
  *
@@ -151,6 +149,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
         ) {
             $invalidProperties[] = "'value' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets attribute
      *
-     * @param string $attribute The attribute.
+     * @param string $attribute the attribute
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets operator
      *
-     * @param string $operator The operator.
+     * @param string $operator the operator
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets value
      *
-     * @param string $value The value of the attribute.
+     * @param string $value the value of the attribute
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

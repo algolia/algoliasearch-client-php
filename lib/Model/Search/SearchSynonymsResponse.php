@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * SearchSynonymsResponse Class Doc Comment
  *
@@ -138,6 +136,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         ) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -165,7 +164,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits Array of synonym objects.
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits array of synonym objects
      *
      * @return self
      */
@@ -189,7 +188,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets nbHits
      *
-     * @param int $nbHits Number of hits that the search query matched.
+     * @param int $nbHits number of hits that the search query matched
      *
      * @return self
      */
@@ -202,9 +201,9 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -214,7 +213,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -243,7 +242,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BaseTrendingRequest Class Doc Comment
  *
@@ -139,6 +137,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'model' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -190,7 +189,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetName
      *
-     * @param string|null $facetName The facet name to use for trending models.
+     * @param string|null $facetName the facet name to use for trending models
      *
      * @return self
      */
@@ -214,7 +213,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetValue
      *
-     * @param string|null $facetValue The facet value to use for trending models.
+     * @param string|null $facetValue the facet value to use for trending models
      *
      * @return self
      */
@@ -227,9 +226,9 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -239,7 +238,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -268,7 +267,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

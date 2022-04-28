@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * GetLogsResponseLogs Class Doc Comment
  *
@@ -35,8 +33,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'index' => 'string',
         'queryParams' => 'string',
         'queryNbHits' => 'string',
-        'innerQueries' =>
-            '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]',
+        'innerQueries' => '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]',
     ];
 
     /**
@@ -281,6 +278,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'processingTimeMs' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -308,7 +306,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets timestamp
      *
-     * @param string $timestamp Timestamp in ISO-8601 format.
+     * @param string $timestamp timestamp in ISO-8601 format
      *
      * @return self
      */
@@ -332,7 +330,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets method
      *
-     * @param string $method HTTP method of the perfomed request.
+     * @param string $method HTTP method of the perfomed request
      *
      * @return self
      */
@@ -356,7 +354,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets answerCode
      *
-     * @param string $answerCode HTTP response code.
+     * @param string $answerCode HTTP response code
      *
      * @return self
      */
@@ -428,7 +426,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets url
      *
-     * @param string $url Request URL.
+     * @param string $url request URL
      *
      * @return self
      */
@@ -452,7 +450,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets ip
      *
-     * @param string $ip IP of the client which perfomed the request.
+     * @param string $ip IP of the client which perfomed the request
      *
      * @return self
      */
@@ -476,7 +474,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryHeaders
      *
-     * @param string $queryHeaders Request Headers (API Key is obfuscated).
+     * @param string $queryHeaders request Headers (API Key is obfuscated)
      *
      * @return self
      */
@@ -500,7 +498,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets sha1
      *
-     * @param string $sha1 SHA1 signature of the log entry.
+     * @param string $sha1 SHA1 signature of the log entry
      *
      * @return self
      */
@@ -524,7 +522,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbApiCalls
      *
-     * @param string $nbApiCalls Number of API calls.
+     * @param string $nbApiCalls number of API calls
      *
      * @return self
      */
@@ -572,7 +570,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets index
      *
-     * @param string|null $index Index targeted by the query.
+     * @param string|null $index index targeted by the query
      *
      * @return self
      */
@@ -596,7 +594,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryParams
      *
-     * @param string|null $queryParams Query parameters sent with the request.
+     * @param string|null $queryParams query parameters sent with the request
      *
      * @return self
      */
@@ -620,7 +618,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryNbHits
      *
-     * @param string|null $queryNbHits Number of hits returned for the query.
+     * @param string|null $queryNbHits number of hits returned for the query
      *
      * @return self
      */
@@ -644,7 +642,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets innerQueries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null $innerQueries Array of all performed queries for the given request.
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null $innerQueries array of all performed queries for the given request
      *
      * @return self
      */
@@ -657,9 +655,9 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -669,7 +667,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -698,7 +696,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

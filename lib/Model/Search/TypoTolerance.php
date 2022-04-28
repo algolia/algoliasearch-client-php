@@ -2,13 +2,12 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TypoTolerance Class Doc Comment
  *
  * @category Class
  * @description Controls whether typo tolerance is enabled and how it is applied.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class TypoTolerance
@@ -16,16 +15,17 @@ class TypoTolerance
     /**
      * Possible values of this enum
      */
-    public const TRUE = 'true';
+    const TRUE = 'true';
 
-    public const FALSE = 'false';
+    const FALSE = 'false';
 
-    public const MIN = 'min';
+    const MIN = 'min';
 
-    public const STRICT = 'strict';
+    const STRICT = 'strict';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

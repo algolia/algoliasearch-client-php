@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Status Class Doc Comment
  *
@@ -151,6 +149,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'lastBuiltAt' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets indexName
      *
-     * @param string $indexName The targeted index name.
+     * @param string $indexName the targeted index name
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets isRunning
      *
-     * @param bool $isRunning true if the Query Suggestions index is running.
+     * @param bool $isRunning true if the Query Suggestions index is running
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets lastBuiltAt
      *
-     * @param string $lastBuiltAt Date and time of the last build.
+     * @param string $lastBuiltAt date and time of the last build
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

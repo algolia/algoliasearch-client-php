@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * RankingInfo Class Doc Comment
  *
@@ -25,10 +23,8 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'firstMatchedWord' => 'int',
         'geoDistance' => 'int',
         'geoPrecision' => 'int',
-        'matchedGeoLocation' =>
-            '\Algolia\AlgoliaSearch\Model\Search\MatchedGeoLocation',
-        'personalization' =>
-            '\Algolia\AlgoliaSearch\Model\Search\Personalization',
+        'matchedGeoLocation' => '\Algolia\AlgoliaSearch\Model\Search\MatchedGeoLocation',
+        'personalization' => '\Algolia\AlgoliaSearch\Model\Search\Personalization',
         'nbExactWords' => 'int',
         'nbTypos' => 'int',
         'promoted' => 'bool',
@@ -255,6 +251,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'words' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -282,7 +279,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets filters
      *
-     * @param int $filters This field is reserved for advanced usage.
+     * @param int $filters this field is reserved for advanced usage
      *
      * @return self
      */
@@ -306,7 +303,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets firstMatchedWord
      *
-     * @param int $firstMatchedWord Position of the most important matched attribute in the attributes to index list.
+     * @param int $firstMatchedWord position of the most important matched attribute in the attributes to index list
      *
      * @return self
      */
@@ -330,7 +327,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets geoDistance
      *
-     * @param int $geoDistance Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters).
+     * @param int $geoDistance distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters)
      *
      * @return self
      */
@@ -354,7 +351,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets geoPrecision
      *
-     * @param int|null $geoPrecision Precision used when computing the geo distance, in meters.
+     * @param int|null $geoPrecision precision used when computing the geo distance, in meters
      *
      * @return self
      */
@@ -426,7 +423,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets nbExactWords
      *
-     * @param int $nbExactWords Number of exactly matched words.
+     * @param int $nbExactWords number of exactly matched words
      *
      * @return self
      */
@@ -450,7 +447,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets nbTypos
      *
-     * @param int $nbTypos Number of typos encountered when matching the record.
+     * @param int $nbTypos number of typos encountered when matching the record
      *
      * @return self
      */
@@ -474,7 +471,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets promoted
      *
-     * @param bool $promoted Present and set to true if a Rule promoted the hit.
+     * @param bool $promoted present and set to true if a Rule promoted the hit
      *
      * @return self
      */
@@ -498,7 +495,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets proximityDistance
      *
-     * @param int|null $proximityDistance When the query contains more than one word, the sum of the distances between matched words (in meters).
+     * @param int|null $proximityDistance when the query contains more than one word, the sum of the distances between matched words (in meters)
      *
      * @return self
      */
@@ -522,7 +519,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets userScore
      *
-     * @param int $userScore Custom ranking for the object, expressed as a single integer value.
+     * @param int $userScore custom ranking for the object, expressed as a single integer value
      *
      * @return self
      */
@@ -546,7 +543,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets words
      *
-     * @param int $words Number of matched words, including prefixes and typos.
+     * @param int $words number of matched words, including prefixes and typos
      *
      * @return self
      */
@@ -570,7 +567,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets promotedByReRanking
      *
-     * @param bool|null $promotedByReRanking Wether the record are promoted by the re-ranking strategy.
+     * @param bool|null $promotedByReRanking wether the record are promoted by the re-ranking strategy
      *
      * @return self
      */
@@ -583,9 +580,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -595,7 +592,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -624,7 +621,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

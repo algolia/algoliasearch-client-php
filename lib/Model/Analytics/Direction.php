@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * Direction Class Doc Comment
  *
@@ -15,12 +13,13 @@ class Direction
     /**
      * Possible values of this enum
      */
-    public const ASC = 'asc';
+    const ASC = 'asc';
 
-    public const DESC = 'desc';
+    const DESC = 'desc';
 
     /**
      * Gets allowable values of the enum
+     *
      * @return string[]
      */
     public static function getAllowableEnumValues()

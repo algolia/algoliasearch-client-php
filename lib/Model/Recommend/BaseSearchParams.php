@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BaseSearchParams Class Doc Comment
  *
@@ -24,10 +22,8 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters',
-        'optionalFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters',
-        'numericFilters' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters',
+        'optionalFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters',
+        'numericFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters',
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\TagFilters',
         'sumOrFiltersScores' => 'bool',
         'facets' => 'string[]',
@@ -55,8 +51,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'percentileComputation' => 'bool',
         'enableABTest' => 'bool',
         'enableReRanking' => 'bool',
-        'reRankingApplyFilter' =>
-            '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
+        'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
     ];
 
     /**
@@ -403,7 +398,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets similarQuery
      *
-     * @param string|null $similarQuery Overrides the query parameter and performs a more generic search that can be used to find \"similar\" results.
+     * @param string|null $similarQuery overrides the query parameter and performs a more generic search that can be used to find \"similar\" results
      *
      * @return self
      */
@@ -427,7 +422,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets filters
      *
-     * @param string|null $filters Filter the query with numeric, facet and/or tag filters.
+     * @param string|null $filters filter the query with numeric, facet and/or tag filters
      *
      * @return self
      */
@@ -547,7 +542,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets sumOrFiltersScores
      *
-     * @param bool|null $sumOrFiltersScores Determines how to calculate the total score for filtering.
+     * @param bool|null $sumOrFiltersScores determines how to calculate the total score for filtering
      *
      * @return self
      */
@@ -571,7 +566,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets facets
      *
-     * @param string[]|null $facets Retrieve facets and their facet values.
+     * @param string[]|null $facets retrieve facets and their facet values
      *
      * @return self
      */
@@ -595,7 +590,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets maxValuesPerFacet
      *
-     * @param int|null $maxValuesPerFacet Maximum number of facet values to return for each facet during a regular search.
+     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet during a regular search
      *
      * @return self
      */
@@ -619,7 +614,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets facetingAfterDistinct
      *
-     * @param bool|null $facetingAfterDistinct Force faceting to be applied after de-duplication (via the Distinct setting).
+     * @param bool|null $facetingAfterDistinct force faceting to be applied after de-duplication (via the Distinct setting)
      *
      * @return self
      */
@@ -643,7 +638,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets sortFacetValuesBy
      *
-     * @param string|null $sortFacetValuesBy Controls how facet values are fetched.
+     * @param string|null $sortFacetValuesBy controls how facet values are fetched
      *
      * @return self
      */
@@ -667,7 +662,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets page
      *
-     * @param int|null $page Specify the page to retrieve.
+     * @param int|null $page specify the page to retrieve
      *
      * @return self
      */
@@ -691,7 +686,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets offset
      *
-     * @param int|null $offset Specify the offset of the first hit to return.
+     * @param int|null $offset specify the offset of the first hit to return
      *
      * @return self
      */
@@ -715,7 +710,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets length
      *
-     * @param int|null $length Set the number of hits to retrieve (used only with offset).
+     * @param int|null $length set the number of hits to retrieve (used only with offset)
      *
      * @return self
      */
@@ -750,7 +745,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng Search for entries around a central geolocation, enabling a geo search within a circular area.
+     * @param string|null $aroundLatLng search for entries around a central geolocation, enabling a geo search within a circular area
      *
      * @return self
      */
@@ -774,7 +769,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets aroundLatLngViaIP
      *
-     * @param bool|null $aroundLatLngViaIP Search for entries around a given location automatically computed from the requester's IP address.
+     * @param bool|null $aroundLatLngViaIP search for entries around a given location automatically computed from the requester's IP address
      *
      * @return self
      */
@@ -822,7 +817,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets aroundPrecision
      *
-     * @param int|null $aroundPrecision Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
+     * @param int|null $aroundPrecision precision of geo search (in meters), to add grouping by geo location to the ranking formula
      *
      * @return self
      */
@@ -846,7 +841,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets minimumAroundRadius
      *
-     * @param int|null $minimumAroundRadius Minimum radius (in meters) used for a geo search when aroundRadius is not set.
+     * @param int|null $minimumAroundRadius minimum radius (in meters) used for a geo search when aroundRadius is not set
      *
      * @return self
      */
@@ -876,7 +871,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets insideBoundingBox
      *
-     * @param float[]|null $insideBoundingBox Search inside a rectangular area (in geo coordinates).
+     * @param float[]|null $insideBoundingBox search inside a rectangular area (in geo coordinates)
      *
      * @return self
      */
@@ -900,7 +895,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets insidePolygon
      *
-     * @param float[]|null $insidePolygon Search inside a polygon (in geo coordinates).
+     * @param float[]|null $insidePolygon search inside a polygon (in geo coordinates)
      *
      * @return self
      */
@@ -948,7 +943,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets ruleContexts
      *
-     * @param string[]|null $ruleContexts Enables contextual rules.
+     * @param string[]|null $ruleContexts enables contextual rules
      *
      * @return self
      */
@@ -972,7 +967,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets personalizationImpact
      *
-     * @param int|null $personalizationImpact Define the impact of the Personalization feature.
+     * @param int|null $personalizationImpact define the impact of the Personalization feature
      *
      * @return self
      */
@@ -996,7 +991,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets userToken
      *
-     * @param string|null $userToken Associates a certain user token with the current search.
+     * @param string|null $userToken associates a certain user token with the current search
      *
      * @return self
      */
@@ -1020,7 +1015,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets getRankingInfo
      *
-     * @param bool|null $getRankingInfo Retrieve detailed ranking information.
+     * @param bool|null $getRankingInfo retrieve detailed ranking information
      *
      * @return self
      */
@@ -1044,7 +1039,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets clickAnalytics
      *
-     * @param bool|null $clickAnalytics Enable the Click Analytics feature.
+     * @param bool|null $clickAnalytics enable the Click Analytics feature
      *
      * @return self
      */
@@ -1068,7 +1063,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets analytics
      *
-     * @param bool|null $analytics Whether the current query will be taken into account in the Analytics.
+     * @param bool|null $analytics whether the current query will be taken into account in the Analytics
      *
      * @return self
      */
@@ -1092,7 +1087,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets analyticsTags
      *
-     * @param string[]|null $analyticsTags List of tags to apply to the query for analytics purposes.
+     * @param string[]|null $analyticsTags list of tags to apply to the query for analytics purposes
      *
      * @return self
      */
@@ -1116,7 +1111,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets percentileComputation
      *
-     * @param bool|null $percentileComputation Whether to include or exclude a query from the processing-time percentile computation.
+     * @param bool|null $percentileComputation whether to include or exclude a query from the processing-time percentile computation
      *
      * @return self
      */
@@ -1140,7 +1135,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets enableABTest
      *
-     * @param bool|null $enableABTest Whether this search should participate in running AB tests.
+     * @param bool|null $enableABTest whether this search should participate in running AB tests
      *
      * @return self
      */
@@ -1164,7 +1159,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets enableReRanking
      *
-     * @param bool|null $enableReRanking Whether this search should use AI Re-Ranking.
+     * @param bool|null $enableReRanking whether this search should use AI Re-Ranking
      *
      * @return self
      */
@@ -1201,9 +1196,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -1213,7 +1208,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -1242,7 +1237,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

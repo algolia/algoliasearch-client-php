@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * BatchOperation Class Doc Comment
  *
@@ -177,7 +175,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets body
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation).
+     * @param object|null $body arguments to the operation (depends on the type of the operation)
      *
      * @return self
      */
@@ -190,9 +188,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -202,7 +200,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -231,7 +229,7 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

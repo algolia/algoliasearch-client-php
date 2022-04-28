@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * ListABTestsResponse Class Doc Comment
  *
@@ -151,6 +149,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         ) {
             $invalidProperties[] = "'total' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -178,7 +177,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets abtests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests List of A/B tests.
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests list of A/B tests
      *
      * @return self
      */
@@ -202,7 +201,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count Number of A/B tests found for the app.
+     * @param int $count number of A/B tests found for the app
      *
      * @return self
      */
@@ -226,7 +225,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets total
      *
-     * @param int $total Number of A/B tests retrievable.
+     * @param int $total number of A/B tests retrievable
      *
      * @return self
      */
@@ -239,9 +238,9 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -251,7 +250,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -280,7 +279,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

@@ -2,8 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
-use Algolia\AlgoliaSearch\ObjectSerializer;
-
 /**
  * TopSearchesResponseWithAnalyticsSearches Class Doc Comment
  *
@@ -231,6 +229,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
         ) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
+
         return $invalidProperties;
     }
 
@@ -258,7 +257,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets search
      *
-     * @param string $search The search query.
+     * @param string $search the search query
      *
      * @return self
      */
@@ -282,7 +281,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets count
      *
-     * @param int $count The number of occurrences.
+     * @param int $count the number of occurrences
      *
      * @return self
      */
@@ -296,7 +295,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Gets clickThroughRate
      *
-     * @return double
+     * @return float
      */
     public function getClickThroughRate()
     {
@@ -306,7 +305,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets clickThroughRate
      *
-     * @param double $clickThroughRate The click-through rate.
+     * @param float $clickThroughRate the click-through rate
      *
      * @return self
      */
@@ -330,7 +329,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets averageClickPosition
      *
-     * @param int $averageClickPosition The average position of all the click count event.
+     * @param int $averageClickPosition the average position of all the click count event
      *
      * @return self
      */
@@ -344,7 +343,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Gets conversionRate
      *
-     * @return double
+     * @return float
      */
     public function getConversionRate()
     {
@@ -354,7 +353,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets conversionRate
      *
-     * @param double $conversionRate The conversion rate.
+     * @param float $conversionRate the conversion rate
      *
      * @return self
      */
@@ -378,7 +377,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount The number of tracked search click.
+     * @param int $trackedSearchCount the number of tracked search click
      *
      * @return self
      */
@@ -402,7 +401,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets clickCount
      *
-     * @param int $clickCount The number of click event.
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
@@ -426,7 +425,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount The number of converted clicks.
+     * @param int $conversionCount the number of converted clicks
      *
      * @return self
      */
@@ -450,7 +449,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Sets nbHits
      *
-     * @param int $nbHits Number of hits that the search query matched.
+     * @param int $nbHits number of hits that the search query matched
      *
      * @return self
      */
@@ -463,9 +462,9 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Returns true if offset exists. False otherwise.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -475,7 +474,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Gets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return mixed|null
      */
@@ -504,7 +503,7 @@ class TopSearchesResponseWithAnalyticsSearches extends \Algolia\AlgoliaSearch\Mo
     /**
      * Unsets offset.
      *
-     * @param integer $offset Offset
+     * @param int $offset Offset
      *
      * @return void
      */

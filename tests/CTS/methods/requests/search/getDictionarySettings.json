@@ -1,6 +1,5 @@
 [
   {
-    "method": "getDictionarySettings",
     "testName": "get getDictionarySettings results",
     "parameters": {},
     "request": {

@@ -1,6 +1,5 @@
 [
   {
-    "method": "getRule",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1"

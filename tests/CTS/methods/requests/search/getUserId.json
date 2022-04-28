@@ -1,6 +1,5 @@
 [
   {
-    "method": "getUserId",
     "parameters": {
       "userID": "uniqueID"
     },

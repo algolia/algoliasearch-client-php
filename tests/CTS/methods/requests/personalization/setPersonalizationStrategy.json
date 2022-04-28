@@ -1,6 +1,5 @@
 [
   {
-    "method": "setPersonalizationStrategy",
     "testName": "set setPersonalizationStrategy",
     "parameters": {
       "eventScoring": [
@@ -21,7 +20,7 @@
     "request": {
       "path": "/1/strategies/personalization",
       "method": "POST",
-      "data": {
+      "body": {
         "eventScoring": [
           {
             "score": 42,

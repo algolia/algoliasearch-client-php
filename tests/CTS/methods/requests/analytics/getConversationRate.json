@@ -1,6 +1,5 @@
 [
   {
-    "method": "getConversationRate",
     "testName": "get getConversationRate with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/conversions/conversionRate",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getConversationRate",
     "testName": "get getConversationRate with all parameters",
     "parameters": {
       "index": "index",
@@ -25,7 +23,7 @@
     "request": {
       "path": "/2/conversions/conversionRate",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "startDate": "1999-09-19",
         "endDate": "2001-01-01",

@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteSource",
     "parameters": {
       "source": "theSource"
     },

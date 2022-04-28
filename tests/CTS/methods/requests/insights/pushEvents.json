@@ -1,6 +1,5 @@
 [
   {
-    "method": "pushEvents",
     "parameters": {
       "events": [
         {
@@ -47,7 +46,7 @@
     "request": {
       "path": "/1/events",
       "method": "POST",
-      "data": {
+      "body": {
         "events": [
           {
             "eventType": "click",

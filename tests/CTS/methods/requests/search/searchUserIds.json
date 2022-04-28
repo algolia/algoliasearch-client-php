@@ -1,6 +1,5 @@
 [
   {
-    "method": "searchUserIds",
     "parameters": {
       "query": "test",
       "clusterName": "theClusterName",
@@ -10,7 +9,7 @@
     "request": {
       "path": "/1/clusters/mapping/search",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "test",
         "clusterName": "theClusterName",
         "page": 5,

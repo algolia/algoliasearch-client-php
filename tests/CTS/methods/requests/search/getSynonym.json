@@ -1,6 +1,5 @@
 [
   {
-    "method": "getSynonym",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1"

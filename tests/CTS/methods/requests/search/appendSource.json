@@ -1,6 +1,5 @@
 [
   {
-    "method": "appendSource",
     "parameters": {
       "source": "theSource",
       "description": "theDescription"
@@ -8,7 +7,7 @@
     "request": {
       "path": "/1/security/sources/append",
       "method": "POST",
-      "data": {
+      "body": {
         "source": "theSource",
         "description": "theDescription"
       }

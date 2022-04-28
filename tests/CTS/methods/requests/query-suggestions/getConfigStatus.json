@@ -1,6 +1,5 @@
 [
   {
-    "method": "getConfigStatus",
     "parameters": {
       "indexName": "theIndexName"
     },

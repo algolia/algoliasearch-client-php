@@ -1,6 +1,5 @@
 [
   {
-    "method": "getLogFile",
     "parameters": {
       "indexName": "theIndexName"
     },

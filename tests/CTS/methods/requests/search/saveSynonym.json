@@ -1,6 +1,5 @@
 [
   {
-    "method": "saveSynonym",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1",
@@ -18,7 +17,7 @@
     "request": {
       "path": "/1/indexes/indexName/synonyms/id1",
       "method": "PUT",
-      "data": {
+      "body": {
         "objectID": "id1",
         "type": "synonym",
         "synonyms": [
@@ -27,7 +26,7 @@
           "auto"
         ]
       },
-      "searchParams": {
+      "queryParameters": {
         "forwardToReplicas": "true"
       }
     }

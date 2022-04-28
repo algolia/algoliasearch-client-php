@@ -1,6 +1,5 @@
 [
   {
-    "method": "saveSynonyms",
     "parameters": {
       "indexName": "indexName",
       "synonymHit": [
@@ -30,7 +29,7 @@
     "request": {
       "path": "/1/indexes/indexName/synonyms/batch",
       "method": "POST",
-      "data": [
+      "body": [
         {
           "objectID": "id1",
           "type": "synonym",
@@ -51,7 +50,7 @@
           ]
         }
       ],
-      "searchParams": {
+      "queryParameters": {
         "forwardToReplicas": "true",
         "replaceExistingSynonyms": "false"
       }

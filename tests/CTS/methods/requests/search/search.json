@@ -1,6 +1,5 @@
 [
   {
-    "method": "search",
     "testName": "search with minimal parameters",
     "parameters": {
       "indexName": "indexName",
@@ -11,7 +10,7 @@
     "request": {
       "path": "/1/indexes/indexName/query",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "myQuery"
       }
     }
@@ -31,7 +30,7 @@
     "request": {
       "path": "/1/indexes/indexName/query",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "myQuery",
         "facetFilters": [
           "tags:algolia"

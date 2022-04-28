@@ -1,6 +1,5 @@
 [
   {
-    "method": "getStatus",
     "testName": "get getStatus with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,7 +7,7 @@
     "request": {
       "path": "/2/status",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }

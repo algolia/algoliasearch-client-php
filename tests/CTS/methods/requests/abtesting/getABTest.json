@@ -1,6 +1,5 @@
 [
   {
-    "method": "getABTest",
     "testName": "getABTest",
     "parameters": {
       "id": 42

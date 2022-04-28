@@ -1,6 +1,5 @@
 [
   {
-    "method": "setDictionarySettings",
     "testName": "get setDictionarySettings results with minimal parameters",
     "parameters": {
       "disableStandardEntries": {
@@ -14,7 +13,7 @@
     "request": {
       "path": "/1/dictionaries/*/settings",
       "method": "PUT",
-      "data": {
+      "body": {
         "disableStandardEntries": {
           "plurals": {
             "fr": false,
@@ -26,7 +25,6 @@
     }
   },
   {
-    "method": "setDictionarySettings",
     "testName": "get setDictionarySettings results with all parameters",
     "parameters": {
       "disableStandardEntries": {
@@ -46,7 +44,7 @@
     "request": {
       "path": "/1/dictionaries/*/settings",
       "method": "PUT",
-      "data": {
+      "body": {
         "disableStandardEntries": {
           "plurals": {
             "fr": false,

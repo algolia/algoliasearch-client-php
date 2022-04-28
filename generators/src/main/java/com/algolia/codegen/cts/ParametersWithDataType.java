@@ -29,13 +29,14 @@ public class ParametersWithDataType {
   }
 
   public Map<String, Object> buildJSONForRequest(
+    String operationId,
     Request req,
     CodegenOperation ope,
     int testIndex
   ) throws CTSException, JsonMappingException, JsonProcessingException {
     Map<String, Object> test = new HashMap<>();
-    test.put("method", req.method);
-    test.put("testName", req.testName == null ? req.method : req.testName);
+    test.put("method", operationId);
+    test.put("testName", req.testName == null ? operationId : req.testName);
     test.put("testIndex", testIndex);
     test.put("request", req.request);
 
@@ -252,7 +253,7 @@ public class ParametersWithDataType {
       HashMap<String, String> oneOfModel = new HashMap<>();
       String typeName = getTypeName(match).replace("<", "").replace(">", "");
 
-      oneOfModel.put("classname", Utils.capitalize(baseType));
+      oneOfModel.put("parentClassName", Utils.capitalize(baseType));
 
       if (typeName.equals("List")) {
         CodegenProperty items = match.getItems();
@@ -264,7 +265,7 @@ public class ParametersWithDataType {
         typeName += getTypeName(items);
       }
 
-      oneOfModel.put("name", typeName);
+      oneOfModel.put("type", typeName);
       testOutput.put("oneOfModel", oneOfModel);
 
       return;

@@ -1,6 +1,5 @@
 [
   {
-    "method": "getTask",
     "parameters": {
       "indexName": "theIndexName",
       "taskID": 123

@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteIndex",
     "parameters": {
       "indexName": "theIndexName"
     },

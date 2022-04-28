@@ -1,6 +1,5 @@
 [
   {
-    "method": "restoreApiKey",
     "parameters": {
       "key": "myApiKey"
     },

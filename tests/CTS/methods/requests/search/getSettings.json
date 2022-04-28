@@ -1,6 +1,5 @@
 [
   {
-    "method": "getSettings",
     "parameters": {
       "indexName": "theIndexName"
     },

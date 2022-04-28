@@ -1,6 +1,5 @@
 [
   {
-    "method": "browse",
     "testName": "get browse results with minimal parameters",
     "parameters": {
       "indexName": "indexName"
@@ -11,7 +10,6 @@
     }
   },
   {
-    "method": "browse",
     "testName": "get browse results with all parameters",
     "parameters": {
       "indexName": "indexName",
@@ -23,7 +21,7 @@
     "request": {
       "path": "/1/indexes/indexName/browse",
       "method": "POST",
-      "data": {
+      "body": {
         "params": "query=foo&facetFilters=['bar']",
         "cursor": "cts"
       }

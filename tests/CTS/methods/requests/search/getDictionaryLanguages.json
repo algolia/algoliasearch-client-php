@@ -1,6 +1,5 @@
 [
   {
-    "method": "getDictionaryLanguages",
     "testName": "get getDictionaryLanguages",
     "parameters": {},
     "request": {

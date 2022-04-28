@@ -1,6 +1,5 @@
 [
   {
-    "method": "assignUserId",
     "parameters": {
       "xAlgoliaUserID": "userID",
       "assignUserIdParams": {
@@ -10,10 +9,10 @@
     "request": {
       "path": "/1/clusters/mapping",
       "method": "POST",
-      "data": {
+      "body": {
         "cluster": "theCluster"
       },
-      "searchParams": {
+      "queryParameters": {
         "X-Algolia-User-ID": "userID"
       }
     }

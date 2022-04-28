@@ -1,6 +1,5 @@
 [
   {
-    "method": "searchDictionaryEntries",
     "testName": "get searchDictionaryEntries results with minimal parameters",
     "parameters": {
       "dictionaryName": "compounds",
@@ -11,13 +10,12 @@
     "request": {
       "path": "/1/dictionaries/compounds/search",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "foo"
       }
     }
   },
   {
-    "method": "searchDictionaryEntries",
     "testName": "get searchDictionaryEntries results with all parameters",
     "parameters": {
       "dictionaryName": "compounds",
@@ -31,7 +29,7 @@
     "request": {
       "path": "/1/dictionaries/compounds/search",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "foo",
         "page": 4,
         "hitsPerPage": 2,

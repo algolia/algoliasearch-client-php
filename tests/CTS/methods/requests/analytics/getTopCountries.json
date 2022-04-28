@@ -1,6 +1,5 @@
 [
   {
-    "method": "getTopCountries",
     "testName": "get getTopCountries with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/countries",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getTopCountries",
     "testName": "get getTopCountries with all parameters",
     "parameters": {
       "index": "index",
@@ -27,7 +25,7 @@
     "request": {
       "path": "/2/countries",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "startDate": "1999-09-19",
         "endDate": "2001-01-01",

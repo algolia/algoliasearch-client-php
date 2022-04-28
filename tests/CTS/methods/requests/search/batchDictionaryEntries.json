@@ -1,6 +1,5 @@
 [
   {
-    "method": "batchDictionaryEntries",
     "testName": "get batchDictionaryEntries results with minimal parameters",
     "parameters": {
       "dictionaryName": "compounds",
@@ -26,7 +25,7 @@
     "request": {
       "path": "/1/dictionaries/compounds/batch",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "action": "addEntry",
@@ -47,7 +46,6 @@
     }
   },
   {
-    "method": "batchDictionaryEntries",
     "testName": "get batchDictionaryEntries results with all parameters",
     "parameters": {
       "dictionaryName": "compounds",
@@ -94,7 +92,7 @@
     "request": {
       "path": "/1/dictionaries/compounds/batch",
       "method": "POST",
-      "data": {
+      "body": {
         "clearExistingDictionaryEntries": false,
         "requests": [
           {

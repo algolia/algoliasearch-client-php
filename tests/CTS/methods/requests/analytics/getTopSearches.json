@@ -1,6 +1,5 @@
 [
   {
-    "method": "getTopSearches",
     "testName": "get getTopSearches with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/searches",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getTopSearches",
     "testName": "get getTopSearches with all parameters",
     "parameters": {
       "index": "index",
@@ -30,7 +28,7 @@
     "request": {
       "path": "/2/searches",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "clickAnalytics": "true",
         "startDate": "1999-09-19",

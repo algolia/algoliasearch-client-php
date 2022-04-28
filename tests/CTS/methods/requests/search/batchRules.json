@@ -1,6 +1,5 @@
 [
   {
-    "method": "batchRules",
     "parameters": {
       "indexName": "indexName",
       "rule": [
@@ -39,7 +38,7 @@
     "request": {
       "path": "/1/indexes/indexName/rules/batch",
       "method": "POST",
-      "data": [
+      "body": [
         {
           "objectID": "a-rule-id",
           "conditions": [
@@ -69,7 +68,7 @@
           }
         }
       ],
-      "searchParams": {
+      "queryParameters": {
         "forwardToReplicas": "true",
         "clearExistingRules": "true"
       }

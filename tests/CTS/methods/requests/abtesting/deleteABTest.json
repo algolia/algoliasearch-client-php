@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteABTest",
     "testName": "deleteABTest",
     "parameters": {
       "id": 42

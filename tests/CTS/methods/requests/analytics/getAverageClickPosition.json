@@ -1,6 +1,5 @@
 [
   {
-    "method": "getAverageClickPosition",
     "testName": "get getAverageClickPosition with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/clicks/averageClickPosition",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getAverageClickPosition",
     "testName": "get getAverageClickPosition with all parameters",
     "parameters": {
       "index": "index",
@@ -25,7 +23,7 @@
     "request": {
       "path": "/2/clicks/averageClickPosition",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "startDate": "1999-09-19",
         "endDate": "2001-01-01",

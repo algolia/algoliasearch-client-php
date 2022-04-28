@@ -1,6 +1,5 @@
 [
   {
-    "method": "getApiKey",
     "parameters": {
       "key": "myTestApiKey"
     },

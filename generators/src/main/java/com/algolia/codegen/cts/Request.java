@@ -12,10 +12,8 @@ import java.util.Map;
 public class Request {
 
   public String testName;
-  public String method;
 
   public Map<String, Object> parameters;
-
   public RequestProp request;
 
   @Override
@@ -23,7 +21,6 @@ public class Request {
     StringBuilder sb = new StringBuilder();
     sb.append("class Request {\n");
     sb.append("    testName: ").append(testName).append("\n");
-    sb.append("    method: ").append(method).append("\n");
     sb.append("    parameters: ").append(parameters).append("\n");
     sb.append("    request: ").append(request).append("\n");
     sb.append("}");
@@ -37,10 +34,10 @@ class RequestProp {
   public String method;
 
   @JsonDeserialize(using = RawDeserializer.class)
-  public String data;
+  public String body;
 
   @JsonDeserialize(using = RawDeserializer.class)
-  public String searchParams;
+  public String queryParameters;
 
   @Override
   public String toString() {
@@ -48,8 +45,8 @@ class RequestProp {
     sb.append("class RequestProp {\n");
     sb.append("    path: ").append(path).append("\n");
     sb.append("    method: ").append(method).append("\n");
-    sb.append("    data: ").append(data).append("\n");
-    sb.append("    searchParams: ").append(searchParams).append("\n");
+    sb.append("    body: ").append(body).append("\n");
+    sb.append("    queryParameters: ").append(queryParameters).append("\n");
     sb.append("}");
     return sb.toString();
   }

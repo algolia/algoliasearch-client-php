@@ -1,6 +1,5 @@
 [
   {
-    "method": "searchRules",
     "parameters": {
       "indexName": "indexName",
       "searchRulesParams": {
@@ -10,7 +9,7 @@
     "request": {
       "path": "/1/indexes/indexName/rules/search",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "something"
       }
     }

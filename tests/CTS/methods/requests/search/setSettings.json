@@ -1,6 +1,5 @@
 [
   {
-    "method": "setSettings",
     "parameters": {
       "indexName": "theIndexName",
       "indexSettings": {
@@ -11,10 +10,10 @@
     "request": {
       "path": "/1/indexes/theIndexName/settings",
       "method": "PUT",
-      "data": {
+      "body": {
         "paginationLimitedTo": 10
       },
-      "searchParams": {
+      "queryParameters": {
         "forwardToReplicas": "true"
       }
     }

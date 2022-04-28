@@ -1,6 +1,5 @@
 [
   {
-    "method": "getTopFilterForAttribute",
     "testName": "get getTopFilterForAttribute with minimal parameters",
     "parameters": {
       "attribute": "myAttribute",
@@ -9,13 +8,12 @@
     "request": {
       "path": "/2/filters/myAttribute",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getTopFilterForAttribute",
     "testName": "get getTopFilterForAttribute with minimal parameters and multiple attributes",
     "parameters": {
       "attribute": "myAttribute1,myAttribute2",
@@ -24,13 +22,12 @@
     "request": {
       "path": "/2/filters/myAttribute1%2CmyAttribute2",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getTopFilterForAttribute",
     "testName": "get getTopFilterForAttribute with all parameters",
     "parameters": {
       "attribute": "myAttribute",
@@ -45,7 +42,7 @@
     "request": {
       "path": "/2/filters/myAttribute",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "search": "mySearch",
         "startDate": "1999-09-19",
@@ -57,7 +54,6 @@
     }
   },
   {
-    "method": "getTopFilterForAttribute",
     "testName": "get getTopFilterForAttribute with all parameters and multiple attributes",
     "parameters": {
       "attribute": "myAttribute1,myAttribute2",
@@ -72,7 +68,7 @@
     "request": {
       "path": "/2/filters/myAttribute1%2CmyAttribute2",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "search": "mySearch",
         "startDate": "1999-09-19",

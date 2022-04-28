@@ -1,6 +1,5 @@
 [
   {
-    "method": "updateApiKey",
     "parameters": {
       "key": "myApiKey",
       "apiKey": {
@@ -16,7 +15,7 @@
     "request": {
       "path": "/1/keys/myApiKey",
       "method": "PUT",
-      "data": {
+      "body": {
         "acl": [
           "search",
           "addObject"

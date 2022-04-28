@@ -1,6 +1,5 @@
 [
   {
-    "method": "addApiKey",
     "parameters": {
       "acl": [
         "search",
@@ -14,7 +13,7 @@
     "request": {
       "path": "/1/keys",
       "method": "POST",
-      "data": {
+      "body": {
         "acl": [
           "search",
           "addObject"

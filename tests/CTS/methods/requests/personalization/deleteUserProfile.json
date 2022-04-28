@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteUserProfile",
     "testName": "delete deleteUserProfile",
     "parameters": {
       "userToken": "UserToken"

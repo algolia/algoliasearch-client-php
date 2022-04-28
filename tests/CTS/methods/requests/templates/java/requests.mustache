@@ -43,25 +43,20 @@ class {{client}}Tests {
         assertEquals(req.getPath(), "{{{request.path}}}");
         assertEquals(req.getMethod(), "{{{request.method}}}");
 
-        {{#request.data}}
+        {{#request.body}}
         assertDoesNotThrow(() -> {
-            JSONAssert.assertEquals("{{#lambda.escapequotes}}{{{request.data}}}{{/lambda.escapequotes}}", req.getBody(), JSONCompareMode.STRICT_ORDER);
+            JSONAssert.assertEquals("{{#lambda.escapequotes}}{{{request.body}}}{{/lambda.escapequotes}}", req.getBody(), JSONCompareMode.STRICT_ORDER);
         });
-        {{/request.data}}
+        {{/request.body}}
 
-        {{#request.searchParams}}
-        Map<String, String> expectedQuery = JSON.deserialize("{{#lambda.escapequotes}}{{{request.searchParams}}}{{/lambda.escapequotes}}", new TypeToken<HashMap<String, String>>() {}.getType());
+        {{#request.queryParameters}}
+        Map<String, String> expectedQuery = JSON.deserialize("{{#lambda.escapequotes}}{{{request.queryParameters}}}{{/lambda.escapequotes}}", new TypeToken<HashMap<String, String>>() {}.getType());
         List<Pair> actualQuery = req.getQueryParams();
-        for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-            boolean found = false;
-            for (Pair p : actualQuery) {
-              if (p.getName().equals(entry.getKey()) && p.getValue().equals(entry.getValue())) {
-                found = true;
-              }
-            }
-            assertTrue(found, "Query parameter " + entry.getKey() + " not found in the actual query");
+        assertEquals(expectedQuery.size(), actualQuery.size());
+        for (Pair p : actualQuery) {
+            assertEquals(expectedQuery.get(p.getName()), p.getValue());
         }
-        {{/request.searchParams}}
+        {{/request.queryParameters}}
     }
     {{/tests}}
     {{/blocks}}

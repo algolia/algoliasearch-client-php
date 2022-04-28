@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteObject",
     "parameters": {
       "indexName": "theIndexName",
       "objectID": "uniqueID"

@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteSynonym",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1"

@@ -22,7 +22,7 @@ describe('multipleQueries', () => {
       requests: [{ indexName: 'theIndexName' }],
       strategy: 'stopIfEnoughMatches',
     });
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('multipleQueries for multiple requests with all parameters', async () => {
@@ -65,7 +65,7 @@ describe('multipleQueries', () => {
       ],
       strategy: 'stopIfEnoughMatches',
     });
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 });
 
@@ -78,7 +78,7 @@ describe('post', () => {
     expect(req.path).toEqual('/1/test/minimal');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('allow post method for a custom path with all parameters', async () => {
@@ -91,7 +91,7 @@ describe('post', () => {
     expect(req.path).toEqual('/1/test/all');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual({ body: 'parameters' });
-    expect(req.searchParams).toEqual({ query: 'parameters' });
+    expect(req.searchParams).toStrictEqual({ query: 'parameters' });
   });
 });
 
@@ -105,7 +105,7 @@ describe('search', () => {
     expect(req.path).toEqual('/1/indexes/indexName/query');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual({ query: 'myQuery' });
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('search with facetFilters', async () => {
@@ -120,7 +120,7 @@ describe('search', () => {
       query: 'myQuery',
       facetFilters: ['tags:algolia'],
     });
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 });
 
@@ -134,7 +134,7 @@ describe('searchForFacetValues', () => {
     expect(req.path).toEqual('/1/indexes/indexName/facets/facetName/query');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('get searchForFacetValues results with all parameters', async () => {
@@ -155,6 +155,6 @@ describe('searchForFacetValues', () => {
       facetQuery: 'foo',
       maxFacetHits: 42,
     });
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 });

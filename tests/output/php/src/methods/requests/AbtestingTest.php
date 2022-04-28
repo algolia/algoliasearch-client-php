@@ -142,7 +142,7 @@ class AbtestingTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/test/all',
                 'method' => 'DELETE',
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -200,7 +200,7 @@ class AbtestingTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/test/all',
                 'method' => 'GET',
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -240,7 +240,7 @@ class AbtestingTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/2/abtests',
                 'method' => 'GET',
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"offset\":\"42\",\"limit\":\"21\"}"
                 ),
             ],
@@ -284,7 +284,7 @@ class AbtestingTest extends TestCase implements HttpClientInterface
                 'path' => '/1/test/all',
                 'method' => 'POST',
                 'body' => json_decode("{\"body\":\"parameters\"}"),
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -326,7 +326,7 @@ class AbtestingTest extends TestCase implements HttpClientInterface
                 'path' => '/1/test/all',
                 'method' => 'PUT',
                 'body' => json_decode("{\"body\":\"parameters\"}"),
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }

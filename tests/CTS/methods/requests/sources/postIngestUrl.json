@@ -1,6 +1,5 @@
 [
   {
-    "method": "postIngestUrl",
     "testName": "post postIngestUrl with minimal parameters",
     "parameters": {
       "type": "csv",
@@ -16,7 +15,7 @@
     "request": {
       "path": "/1/ingest/url",
       "method": "POST",
-      "data": {
+      "body": {
         "type": "csv",
         "input": {
           "url": "https://example.com/file.csv"
@@ -30,7 +29,6 @@
     }
   },
   {
-    "method": "postIngestUrl",
     "testName": "post postIngestUrl with all parameters",
     "parameters": {
       "type": "csv",
@@ -53,7 +51,7 @@
     "request": {
       "path": "/1/ingest/url",
       "method": "POST",
-      "data": {
+      "body": {
         "type": "csv",
         "uniqueIDColumn": "foobar",
         "input": {

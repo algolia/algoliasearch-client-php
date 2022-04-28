@@ -1,6 +1,5 @@
 [
   {
-    "method": "removeUserId",
     "parameters": {
       "userID": "uniqueID"
     },

@@ -1,6 +1,5 @@
 [
   {
-    "method": "getTopFilterAttributes",
     "testName": "get getTopFilterAttributes with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/filters",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getTopFilterAttributes",
     "testName": "get getTopFilterAttributes with all parameters",
     "parameters": {
       "index": "index",
@@ -28,7 +26,7 @@
     "request": {
       "path": "/2/filters",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "search": "mySearch",
         "startDate": "1999-09-19",

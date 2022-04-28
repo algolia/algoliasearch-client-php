@@ -1,6 +1,5 @@
 [
   {
-    "method": "clearRules",
     "parameters": {
       "indexName": "indexName"
     },

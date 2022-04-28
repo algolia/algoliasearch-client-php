@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteApiKey",
     "parameters": {
       "key": "myTestApiKey"
     },

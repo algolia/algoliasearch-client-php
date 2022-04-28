@@ -1,6 +1,5 @@
 [
   {
-    "method": "stopABTest",
     "testName": "stopABTest",
     "parameters": {
       "id": 42

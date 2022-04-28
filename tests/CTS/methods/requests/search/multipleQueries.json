@@ -1,6 +1,5 @@
 [
   {
-    "method": "multipleQueries",
     "testName": "multipleQueries for a single request with minimal parameters",
     "parameters": {
       "requests": [
@@ -13,7 +12,7 @@
     "request": {
       "path": "/1/indexes/*/queries",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "theIndexName"
@@ -24,7 +23,6 @@
     }
   },
   {
-    "method": "multipleQueries",
     "testName": "multipleQueries for multiple requests with all parameters",
     "parameters": {
       "requests": [
@@ -47,7 +45,7 @@
     "request": {
       "path": "/1/indexes/*/queries",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "theIndexName",

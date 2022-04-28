@@ -18,7 +18,7 @@ describe('del', () => {
     expect(req.path).toEqual('/1/test/minimal');
     expect(req.method).toEqual('DELETE');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('allow del method for a custom path with all parameters', async () => {
@@ -30,7 +30,7 @@ describe('del', () => {
     expect(req.path).toEqual('/1/test/all');
     expect(req.method).toEqual('DELETE');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ query: 'parameters' });
+    expect(req.searchParams).toStrictEqual({ query: 'parameters' });
   });
 });
 
@@ -43,7 +43,7 @@ describe('get', () => {
     expect(req.path).toEqual('/1/test/minimal');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('allow get method for a custom path with all parameters', async () => {
@@ -55,7 +55,7 @@ describe('get', () => {
     expect(req.path).toEqual('/1/test/all');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ query: 'parameters' });
+    expect(req.searchParams).toStrictEqual({ query: 'parameters' });
   });
 });
 
@@ -68,7 +68,7 @@ describe('getAverageClickPosition', () => {
     expect(req.path).toEqual('/2/clicks/averageClickPosition');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getAverageClickPosition with all parameters', async () => {
@@ -82,7 +82,7 @@ describe('getAverageClickPosition', () => {
     expect(req.path).toEqual('/2/clicks/averageClickPosition');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -100,7 +100,7 @@ describe('getClickPositions', () => {
     expect(req.path).toEqual('/2/clicks/positions');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getClickPositions with all parameters', async () => {
@@ -114,7 +114,7 @@ describe('getClickPositions', () => {
     expect(req.path).toEqual('/2/clicks/positions');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -132,7 +132,7 @@ describe('getClickThroughRate', () => {
     expect(req.path).toEqual('/2/clicks/clickThroughRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getClickThroughRate with all parameters', async () => {
@@ -146,7 +146,7 @@ describe('getClickThroughRate', () => {
     expect(req.path).toEqual('/2/clicks/clickThroughRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -164,7 +164,7 @@ describe('getConversationRate', () => {
     expect(req.path).toEqual('/2/conversions/conversionRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getConversationRate with all parameters', async () => {
@@ -178,7 +178,7 @@ describe('getConversationRate', () => {
     expect(req.path).toEqual('/2/conversions/conversionRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -196,7 +196,7 @@ describe('getNoClickRate', () => {
     expect(req.path).toEqual('/2/searches/noClickRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getNoClickRate with all parameters', async () => {
@@ -210,7 +210,7 @@ describe('getNoClickRate', () => {
     expect(req.path).toEqual('/2/searches/noClickRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -228,7 +228,7 @@ describe('getNoResultsRate', () => {
     expect(req.path).toEqual('/2/searches/noResultRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getNoResultsRate with all parameters', async () => {
@@ -242,7 +242,7 @@ describe('getNoResultsRate', () => {
     expect(req.path).toEqual('/2/searches/noResultRate');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -260,7 +260,7 @@ describe('getSearchesCount', () => {
     expect(req.path).toEqual('/2/searches/count');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getSearchesCount with all parameters', async () => {
@@ -274,7 +274,7 @@ describe('getSearchesCount', () => {
     expect(req.path).toEqual('/2/searches/count');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -292,7 +292,7 @@ describe('getSearchesNoClicks', () => {
     expect(req.path).toEqual('/2/searches/noClicks');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getSearchesNoClicks with all parameters', async () => {
@@ -308,7 +308,7 @@ describe('getSearchesNoClicks', () => {
     expect(req.path).toEqual('/2/searches/noClicks');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -328,7 +328,7 @@ describe('getSearchesNoResults', () => {
     expect(req.path).toEqual('/2/searches/noResults');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getSearchesNoResults with all parameters', async () => {
@@ -344,7 +344,7 @@ describe('getSearchesNoResults', () => {
     expect(req.path).toEqual('/2/searches/noResults');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -364,7 +364,7 @@ describe('getStatus', () => {
     expect(req.path).toEqual('/2/status');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 });
 
@@ -377,7 +377,7 @@ describe('getTopCountries', () => {
     expect(req.path).toEqual('/2/countries');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopCountries with all parameters', async () => {
@@ -393,7 +393,7 @@ describe('getTopCountries', () => {
     expect(req.path).toEqual('/2/countries');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -413,7 +413,7 @@ describe('getTopFilterAttributes', () => {
     expect(req.path).toEqual('/2/filters');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopFilterAttributes with all parameters', async () => {
@@ -430,7 +430,7 @@ describe('getTopFilterAttributes', () => {
     expect(req.path).toEqual('/2/filters');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       search: 'mySearch',
       startDate: '1999-09-19',
@@ -452,7 +452,7 @@ describe('getTopFilterForAttribute', () => {
     expect(req.path).toEqual('/2/filters/myAttribute');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopFilterForAttribute with minimal parameters and multiple attributes', async () => {
@@ -464,7 +464,7 @@ describe('getTopFilterForAttribute', () => {
     expect(req.path).toEqual('/2/filters/myAttribute1%2CmyAttribute2');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopFilterForAttribute with all parameters', async () => {
@@ -482,7 +482,7 @@ describe('getTopFilterForAttribute', () => {
     expect(req.path).toEqual('/2/filters/myAttribute');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       search: 'mySearch',
       startDate: '1999-09-19',
@@ -508,7 +508,7 @@ describe('getTopFilterForAttribute', () => {
     expect(req.path).toEqual('/2/filters/myAttribute1%2CmyAttribute2');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       search: 'mySearch',
       startDate: '1999-09-19',
@@ -529,7 +529,7 @@ describe('getTopFiltersNoResults', () => {
     expect(req.path).toEqual('/2/filters/noResults');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopFiltersNoResults with all parameters', async () => {
@@ -546,7 +546,7 @@ describe('getTopFiltersNoResults', () => {
     expect(req.path).toEqual('/2/filters/noResults');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       search: 'mySearch',
       startDate: '1999-09-19',
@@ -567,7 +567,7 @@ describe('getTopHits', () => {
     expect(req.path).toEqual('/2/hits');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopHits with all parameters', async () => {
@@ -585,7 +585,7 @@ describe('getTopHits', () => {
     expect(req.path).toEqual('/2/hits');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       search: 'mySearch',
       clickAnalytics: 'true',
@@ -607,7 +607,7 @@ describe('getTopSearches', () => {
     expect(req.path).toEqual('/2/searches');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getTopSearches with all parameters', async () => {
@@ -626,7 +626,7 @@ describe('getTopSearches', () => {
     expect(req.path).toEqual('/2/searches');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       clickAnalytics: 'true',
       startDate: '1999-09-19',
@@ -649,7 +649,7 @@ describe('getUsersCount', () => {
     expect(req.path).toEqual('/2/users/count');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({ index: 'index' });
+    expect(req.searchParams).toStrictEqual({ index: 'index' });
   });
 
   test('get getUsersCount with all parameters', async () => {
@@ -663,7 +663,7 @@ describe('getUsersCount', () => {
     expect(req.path).toEqual('/2/users/count');
     expect(req.method).toEqual('GET');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual({
+    expect(req.searchParams).toStrictEqual({
       index: 'index',
       startDate: '1999-09-19',
       endDate: '2001-01-01',
@@ -681,7 +681,7 @@ describe('post', () => {
     expect(req.path).toEqual('/1/test/minimal');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('allow post method for a custom path with all parameters', async () => {
@@ -694,7 +694,7 @@ describe('post', () => {
     expect(req.path).toEqual('/1/test/all');
     expect(req.method).toEqual('POST');
     expect(req.data).toEqual({ body: 'parameters' });
-    expect(req.searchParams).toEqual({ query: 'parameters' });
+    expect(req.searchParams).toStrictEqual({ query: 'parameters' });
   });
 });
 
@@ -707,7 +707,7 @@ describe('put', () => {
     expect(req.path).toEqual('/1/test/minimal');
     expect(req.method).toEqual('PUT');
     expect(req.data).toEqual(undefined);
-    expect(req.searchParams).toEqual(undefined);
+    expect(req.searchParams).toStrictEqual(undefined);
   });
 
   test('allow put method for a custom path with all parameters', async () => {
@@ -720,6 +720,6 @@ describe('put', () => {
     expect(req.path).toEqual('/1/test/all');
     expect(req.method).toEqual('PUT');
     expect(req.data).toEqual({ body: 'parameters' });
-    expect(req.searchParams).toEqual({ query: 'parameters' });
+    expect(req.searchParams).toStrictEqual({ query: 'parameters' });
   });
 });

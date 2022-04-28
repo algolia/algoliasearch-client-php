@@ -173,7 +173,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'path' => '/1/clusters/mapping',
                 'method' => 'POST',
                 'body' => json_decode("{\"cluster\":\"theCluster\"}"),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"X-Algolia-User-ID\":\"userID\"}"
                 ),
             ],
@@ -228,7 +228,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "{\"cluster\":\"theCluster\",\"users\":[\"user1\",\"user2\"]}"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"X-Algolia-User-ID\":\"userID\"}"
                 ),
             ],
@@ -381,7 +381,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "[{\"objectID\":\"a-rule-id\",\"conditions\":[{\"pattern\":\"smartphone\",\"anchoring\":\"contains\"}],\"consequence\":{\"params\":{\"filters\":\"category:smartphone\"}}},{\"objectID\":\"a-second-rule-id\",\"conditions\":[{\"pattern\":\"apple\",\"anchoring\":\"contains\"}],\"consequence\":{\"params\":{\"filters\":\"brand:apple\"}}}]"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"forwardToReplicas\":\"true\",\"clearExistingRules\":\"true\"}"
                 ),
             ],
@@ -519,7 +519,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/test/all',
                 'method' => 'DELETE',
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -698,7 +698,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/test/all',
                 'method' => 'GET',
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -776,7 +776,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/logs',
                 'method' => 'GET',
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"offset\":\"5\",\"length\":\"10\",\"indexName\":\"theIndexName\",\"type\":\"all\"}"
                 ),
             ],
@@ -801,7 +801,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/indexes/theIndexName/uniqueID',
                 'method' => 'GET',
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"attributesToRetrieve\":\"attr1,attr2\"}"
                 ),
             ],
@@ -988,7 +988,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/clusters/mapping/pending',
                 'method' => 'GET',
-                'searchParams' => json_decode("{\"getClusters\":\"true\"}"),
+                'queryParameters' => json_decode("{\"getClusters\":\"true\"}"),
             ],
         ]);
     }
@@ -1043,7 +1043,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/indexes',
                 'method' => 'GET',
-                'searchParams' => json_decode("{\"page\":\"8\"}"),
+                'queryParameters' => json_decode("{\"page\":\"8\"}"),
             ],
         ]);
     }
@@ -1065,7 +1065,7 @@ class SearchTest extends TestCase implements HttpClientInterface
             [
                 'path' => '/1/clusters/mapping',
                 'method' => 'GET',
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"page\":\"8\",\"hitsPerPage\":\"100\"}"
                 ),
             ],
@@ -1232,7 +1232,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "[{\"id1\":\"test\",\"id2\":{\"_operation\":\"AddUnique\",\"value\":\"test2\"}}]"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"createIfNotExists\":\"true\"}"
                 ),
             ],
@@ -1276,7 +1276,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'path' => '/1/test/all',
                 'method' => 'POST',
                 'body' => json_decode("{\"body\":\"parameters\"}"),
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -1318,7 +1318,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'path' => '/1/test/all',
                 'method' => 'PUT',
                 'body' => json_decode("{\"body\":\"parameters\"}"),
-                'searchParams' => json_decode("{\"query\":\"parameters\"}"),
+                'queryParameters' => json_decode("{\"query\":\"parameters\"}"),
             ],
         ]);
     }
@@ -1434,7 +1434,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "{\"objectID\":\"id1\",\"conditions\":[{\"pattern\":\"apple\",\"anchoring\":\"contains\"}],\"consequence\":{\"params\":{\"filters\":\"brand:apple\"}}}"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"forwardToReplicas\":\"true\"}"
                 ),
             ],
@@ -1469,7 +1469,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "{\"objectID\":\"id1\",\"type\":\"synonym\",\"synonyms\":[\"car\",\"vehicule\",\"auto\"]}"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"forwardToReplicas\":\"true\"}"
                 ),
             ],
@@ -1516,7 +1516,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'body' => json_decode(
                     "[{\"objectID\":\"id1\",\"type\":\"synonym\",\"synonyms\":[\"car\",\"vehicule\",\"auto\"]},{\"objectID\":\"id2\",\"type\":\"onewaysynonym\",\"input\":\"iphone\",\"synonyms\":[\"ephone\",\"aphone\",\"yphone\"]}]"
                 ),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"forwardToReplicas\":\"true\",\"replaceExistingSynonyms\":\"false\"}"
                 ),
             ],
@@ -1815,7 +1815,7 @@ class SearchTest extends TestCase implements HttpClientInterface
                 'path' => '/1/indexes/theIndexName/settings',
                 'method' => 'PUT',
                 'body' => json_decode("{\"paginationLimitedTo\":10}"),
-                'searchParams' => json_decode(
+                'queryParameters' => json_decode(
                     "{\"forwardToReplicas\":\"true\"}"
                 ),
             ],

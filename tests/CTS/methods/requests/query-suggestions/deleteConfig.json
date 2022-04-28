@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteConfig",
     "parameters": {
       "indexName": "theIndexName"
     },

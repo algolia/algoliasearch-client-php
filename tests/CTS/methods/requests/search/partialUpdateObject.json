@@ -1,6 +1,5 @@
 [
   {
-    "method": "partialUpdateObject",
     "parameters": {
       "indexName": "theIndexName",
       "objectID": "uniqueID",
@@ -18,7 +17,7 @@
     "request": {
       "path": "/1/indexes/theIndexName/uniqueID/partial",
       "method": "POST",
-      "data": [
+      "body": [
         {
           "id1": "test",
           "id2": {
@@ -27,7 +26,7 @@
           }
         }
       ],
-      "searchParams": {
+      "queryParameters": {
         "createIfNotExists": "true"
       }
     }

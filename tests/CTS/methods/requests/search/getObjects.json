@@ -1,6 +1,5 @@
 [
   {
-    "method": "getObjects",
     "parameters": {
       "requests": [
         {
@@ -16,7 +15,7 @@
     "request": {
       "path": "/1/indexes/*/objects",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "attributesToRetrieve": [

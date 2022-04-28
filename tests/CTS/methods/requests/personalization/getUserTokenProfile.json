@@ -1,6 +1,5 @@
 [
   {
-    "method": "getUserTokenProfile",
     "testName": "get getUserTokenProfile",
     "parameters": {
       "userToken": "UserToken"

@@ -1,6 +1,5 @@
 [
   {
-    "method": "clearObjects",
     "parameters": {
       "indexName": "theIndexName"
     },

@@ -1,6 +1,5 @@
 [
   {
-    "method": "getLogs",
     "parameters": {
       "offset": 5,
       "length": 10,
@@ -10,7 +9,7 @@
     "request": {
       "path": "/1/logs",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "offset": "5",
         "length": "10",
         "indexName": "theIndexName",

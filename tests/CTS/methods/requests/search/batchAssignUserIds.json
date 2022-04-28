@@ -1,6 +1,5 @@
 [
   {
-    "method": "batchAssignUserIds",
     "parameters": {
       "xAlgoliaUserID": "userID",
       "batchAssignUserIdsParams": {
@@ -14,14 +13,14 @@
     "request": {
       "path": "/1/clusters/mapping/batch",
       "method": "POST",
-      "data": {
+      "body": {
         "cluster": "theCluster",
         "users": [
           "user1",
           "user2"
         ]
       },
-      "searchParams": {
+      "queryParameters": {
         "X-Algolia-User-ID": "userID"
       }
     }

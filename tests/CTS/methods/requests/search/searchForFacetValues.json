@@ -1,6 +1,5 @@
 [
   {
-    "method": "searchForFacetValues",
     "testName": "get searchForFacetValues results with minimal parameters",
     "parameters": {
       "indexName": "indexName",
@@ -12,7 +11,6 @@
     }
   },
   {
-    "method": "searchForFacetValues",
     "testName": "get searchForFacetValues results with all parameters",
     "parameters": {
       "indexName": "indexName",
@@ -26,7 +24,7 @@
     "request": {
       "path": "/1/indexes/indexName/facets/facetName/query",
       "method": "POST",
-      "data": {
+      "body": {
         "params": "query=foo&facetFilters=['bar']",
         "facetQuery": "foo",
         "maxFacetHits": 42

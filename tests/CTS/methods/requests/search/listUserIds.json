@@ -1,6 +1,5 @@
 [
   {
-    "method": "listUserIds",
     "parameters": {
       "page": 8,
       "hitsPerPage": 100
@@ -8,7 +7,7 @@
     "request": {
       "path": "/1/clusters/mapping",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "page": "8",
         "hitsPerPage": "100"
       }

@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteRule",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1"

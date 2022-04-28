@@ -1,6 +1,5 @@
 [
   {
-    "method": "saveRule",
     "parameters": {
       "indexName": "indexName",
       "objectID": "id1",
@@ -23,7 +22,7 @@
     "request": {
       "path": "/1/indexes/indexName/rules/id1",
       "method": "PUT",
-      "data": {
+      "body": {
         "objectID": "id1",
         "conditions": [
           {
@@ -37,7 +36,7 @@
           }
         }
       },
-      "searchParams": {
+      "queryParameters": {
         "forwardToReplicas": "true"
       }
     }

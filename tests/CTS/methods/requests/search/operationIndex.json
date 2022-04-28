@@ -1,6 +1,5 @@
 [
   {
-    "method": "operationIndex",
     "parameters": {
       "indexName": "theIndexName",
       "operationIndexParams": {
@@ -15,7 +14,7 @@
     "request": {
       "path": "/1/indexes/theIndexName/operation",
       "method": "POST",
-      "data": {
+      "body": {
         "operation": "copy",
         "destination": "dest",
         "scope": [

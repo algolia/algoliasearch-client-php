@@ -1,6 +1,5 @@
 [
   {
-    "method": "batch",
     "parameters": {
       "indexName": "theIndexName",
       "batchWriteParams": {
@@ -17,7 +16,7 @@
     "request": {
       "path": "/1/indexes/theIndexName/batch",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "action": "delete",

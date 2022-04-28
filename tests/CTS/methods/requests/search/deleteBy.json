@@ -1,6 +1,5 @@
 [
   {
-    "method": "deleteBy",
     "parameters": {
       "indexName": "theIndexName",
       "searchParams": {
@@ -10,7 +9,7 @@
     "request": {
       "path": "/1/indexes/theIndexName/deleteByQuery",
       "method": "POST",
-      "data": {
+      "body": {
         "query": "testQuery"
       }
     }

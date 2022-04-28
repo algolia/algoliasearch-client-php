@@ -2,7 +2,6 @@ package com.algolia.methods.requests;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.algolia.JSON;
 import com.algolia.Pair;
@@ -173,20 +172,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -282,20 +270,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -617,20 +594,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -761,20 +727,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -939,20 +894,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1018,20 +962,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1065,20 +998,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1248,20 +1170,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1307,20 +1218,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1344,20 +1244,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1629,20 +1518,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1700,20 +1578,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1771,20 +1638,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -1952,20 +1808,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -2029,20 +1874,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -2139,20 +1973,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 
@@ -2587,20 +2410,9 @@ class SearchClientTests {
       new TypeToken<HashMap<String, String>>() {}.getType()
     );
     List<Pair> actualQuery = req.getQueryParams();
-    for (Map.Entry<String, String> entry : expectedQuery.entrySet()) {
-      boolean found = false;
-      for (Pair p : actualQuery) {
-        if (
-          p.getName().equals(entry.getKey()) &&
-          p.getValue().equals(entry.getValue())
-        ) {
-          found = true;
-        }
-      }
-      assertTrue(
-        found,
-        "Query parameter " + entry.getKey() + " not found in the actual query"
-      );
+    assertEquals(expectedQuery.size(), actualQuery.size());
+    for (Pair p : actualQuery) {
+      assertEquals(expectedQuery.get(p.getName()), p.getValue());
     }
   }
 

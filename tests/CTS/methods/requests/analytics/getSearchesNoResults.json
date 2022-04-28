@@ -1,6 +1,5 @@
 [
   {
-    "method": "getSearchesNoResults",
     "testName": "get getSearchesNoResults with minimal parameters",
     "parameters": {
       "index": "index"
@@ -8,13 +7,12 @@
     "request": {
       "path": "/2/searches/noResults",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index"
       }
     }
   },
   {
-    "method": "getSearchesNoResults",
     "testName": "get getSearchesNoResults with all parameters",
     "parameters": {
       "index": "index",
@@ -27,7 +25,7 @@
     "request": {
       "path": "/2/searches/noResults",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "index": "index",
         "startDate": "1999-09-19",
         "endDate": "2001-01-01",

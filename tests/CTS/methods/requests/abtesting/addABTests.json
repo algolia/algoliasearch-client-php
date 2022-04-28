@@ -1,6 +1,5 @@
 [
   {
-    "method": "addABTests",
     "testName": "addABTests with minimal parameters",
     "parameters": {
       "endAt": "2022-12-31T00:00:00.000Z",
@@ -19,7 +18,7 @@
     "request": {
       "path": "/2/abtests",
       "method": "POST",
-      "data": {
+      "body": {
         "endAt": "2022-12-31T00:00:00.000Z",
         "name": "myABTest",
         "variant": [

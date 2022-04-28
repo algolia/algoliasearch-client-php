@@ -1,6 +1,5 @@
 [
   {
-    "method": "searchSynonyms",
     "parameters": {
       "indexName": "indexName"
     },

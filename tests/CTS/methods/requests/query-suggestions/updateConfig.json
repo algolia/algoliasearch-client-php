@@ -1,6 +1,5 @@
 [
   {
-    "method": "updateConfig",
     "parameters": {
       "indexName": "theIndexName",
       "querySuggestionsIndexParam": {
@@ -34,7 +33,7 @@
     "request": {
       "path": "/1/configs/theIndexName",
       "method": "PUT",
-      "data": {
+      "body": {
         "sourceIndices": [
           {
             "indexName": "testIndex",

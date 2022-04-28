@@ -25,7 +25,6 @@ The test generation script requires a JSON file name from the `operationId` (e.g
 [
   {
     "testName": "the name of the test (e.g. test('search endpoint')) (default: 'method')",
-    "method": "the method to call (e.g. search)",
     "parameters": {
       "indexName": "testIndex",
       "searchParam": {
@@ -34,22 +33,24 @@ The test generation script requires a JSON file name from the `operationId` (e.g
         "limit": 21,
         // data parameters
         "query": "the string to search"
-      }
+      },
+      "otherParam": 22
     },
     "request": {
       "path": "/1/indexes/testIndex/query",
       "method": "POST",
-      "data": { "query": "the string to search" },
-      "searchParams": {
-        "offset": "42",
-        "limit": "21"
+      "body": { "query": "the string to search" },
+      "queryParameters": {
+        "otherParam": "22"
       }
     }
   }
 ]
 ```
 
-And that's it! If the name of the file matches a real `operationId` in the spec, then a test will be generated.
+And that's it! If the name of the file matches an `operationId` in the spec, a test will be generated and will be calling the method name `operationId`.
+
+The list of `queryParameters` must match exactly the actual value, the CTS has to check the number of query parameters and the value of each.
 
 ## How to add a new language
 
@@ -79,21 +80,40 @@ When writing your template, here is a list of variables accessible from `mustach
             "key": "key",
             "value": "value",
             // booleans indicating the data type
-            "isDate": "false",
-            "isArray": "false",
-            "isObject": "true",
-            "isString": "false",
+            "isArray": false,
+            "isObject": true,
+            "isFreeFormObject": false,
+            "isString": false,
+            "isInteger": false,
+            "isLong": false,
+            "isDouble": false,
+            "isEnum": false,
+            "isBoolean": false,
+            "objectName": "SearchParams",
+            // oneOfModel empty if there is no oneOf
+            "oneOfModel": {
+              "parentClassName": "SearchParams",
+              "type": "SearchParamsObject"
+            },
+            // properties used to have unique name and link to parent
+            "parent": "theParentObject",
+            "suffix": 7,
+            "parentSuffix": 6,
             // boolean indicating if it is the last parameter
-            "-last": "false",
+            "-last": false,
           }
       ],
       // boolean indicating if the method has parameters, useful for `GET` requests
-      "hasParameters": "true",
+      "hasParameters": true,
       "request": {
         "path": "the expected path of the request",
         "method": "the expected method: GET, POST, PUT, DELETE or PATCH",
-        "data": {
+        "body": {
           // The expected body of the request
+        }
+        "queryParameters": {
+          // key: string map
+          "parameterName": "stringify version of the value"
         }
       }
     }]

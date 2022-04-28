@@ -1,6 +1,5 @@
 [
   {
-    "method": "replaceSources",
     "parameters": {
       "source": [
         {
@@ -12,7 +11,7 @@
     "request": {
       "path": "/1/security/sources",
       "method": "PUT",
-      "data": [
+      "body": [
         {
           "source": "theSource",
           "description": "theDescription"

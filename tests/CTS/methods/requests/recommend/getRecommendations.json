@@ -1,6 +1,5 @@
 [
   {
-    "method": "getRecommendations",
     "testName": "get recommendations for recommend model with minimal parameters",
     "parameters": {
       "requests": [
@@ -15,7 +14,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName",
@@ -28,7 +27,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get recommendations for recommend model with all parameters",
     "parameters": {
       "requests": [
@@ -56,7 +54,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName",
@@ -82,7 +80,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get recommendations for trending model with minimal parameters",
     "parameters": {
       "requests": [
@@ -96,7 +93,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName",
@@ -108,7 +105,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get recommendations for trending model with all parameters",
     "parameters": {
       "requests": [
@@ -137,7 +133,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName",
@@ -164,7 +160,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get multiple recommendations with minimal parameters",
     "parameters": {
       "requests": [
@@ -185,7 +180,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName1",
@@ -204,7 +199,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get multiple recommendations with all parameters",
     "parameters": {
       "requests": [
@@ -251,7 +245,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName1",
@@ -296,7 +290,6 @@
     }
   },
   {
-    "method": "getRecommendations",
     "testName": "get frequently bought together recommendations",
     "parameters": {
       "requests": [
@@ -311,7 +304,7 @@
     "request": {
       "path": "/1/indexes/*/recommendations",
       "method": "POST",
-      "data": {
+      "body": {
         "requests": [
           {
             "indexName": "indexName1",

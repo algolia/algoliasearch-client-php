@@ -15,8 +15,8 @@ describe('{{operationId}}', () => {
 
     expect(req.path).toEqual('{{{request.path}}}');
     expect(req.method).toEqual('{{{request.method}}}');
-    expect(req.data).toEqual({{#request.data}}{{{request.data}}}{{/request.data}}{{^request.data}}undefined{{/request.data}});
-    expect(req.searchParams).toEqual({{#request.searchParams}}{{{request.searchParams}}}{{/request.searchParams}}{{^request.searchParams}}undefined{{/request.searchParams}});
+    expect(req.data).toEqual({{#request.body}}{{{.}}}{{/request.body}}{{^request.body}}undefined{{/request.body}});
+    expect(req.searchParams).toStrictEqual({{#request.queryParameters}}{{{.}}}{{/request.queryParameters}}{{^request.queryParameters}}undefined{{/request.queryParameters}});
   });
 
   {{/tests}}

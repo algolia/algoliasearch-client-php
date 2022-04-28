@@ -1,6 +1,5 @@
 [
   {
-    "method": "listABTests",
     "testName": "listABTests with minimal parameters",
     "parameters": {
       "offset": 42,
@@ -9,7 +8,7 @@
     "request": {
       "path": "/2/abtests",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "offset": "42",
         "limit": "21"
       }

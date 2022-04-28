@@ -1,6 +1,5 @@
 [
   {
-    "method": "getObject",
     "parameters": {
       "indexName": "theIndexName",
       "objectID": "uniqueID",
@@ -12,7 +11,7 @@
     "request": {
       "path": "/1/indexes/theIndexName/uniqueID",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "attributesToRetrieve": "attr1,attr2"
       }
     }

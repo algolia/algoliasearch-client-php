@@ -1,6 +1,5 @@
 [
   {
-    "method": "get",
     "testName": "allow get method for a custom path with minimal parameters",
     "parameters": {
       "path": "/test/minimal"
@@ -11,7 +10,6 @@
     }
   },
   {
-    "method": "get",
     "testName": "allow get method for a custom path with all parameters",
     "parameters": {
       "path": "/test/all",
@@ -22,7 +20,7 @@
     "request": {
       "path": "/1/test/all",
       "method": "GET",
-      "searchParams": {
+      "queryParameters": {
         "query": "parameters"
       }
     }

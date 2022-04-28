@@ -1,6 +1,5 @@
 [
   {
-    "method": "getPersonalizationStrategy",
     "testName": "get getPersonalizationStrategy",
     "parameters": {},
     "request": {

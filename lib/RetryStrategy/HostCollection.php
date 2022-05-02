@@ -31,9 +31,11 @@ final class HostCollection
         // We pass the result through array_values because sometimes
         // we need to make sure you can access the first element
         // via $result[0]
-        return array_values(array_filter($this->hosts, function (Host $host) {
-            return $host->isUp();
-        }));
+        return array_values(
+            array_filter($this->hosts, function (Host $host) {
+                return $host->isUp();
+            })
+        );
     }
 
     public function getUrls()
@@ -79,7 +81,7 @@ final class HostCollection
                 return 0;
             }
 
-            return ($prioA > $prioB) ? -1 : 1;
+            return $prioA > $prioB ? -1 : 1;
         });
     }
 }

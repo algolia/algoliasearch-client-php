@@ -5,7 +5,7 @@ $config = new PhpCsFixer\Config();
 return $config
     ->setUsingCache(true)
     ->setRules([
-        'array_syntax' => [ 'syntax' => 'short' ],
+        'array_syntax' => ['syntax' => 'short'],
         'blank_line_after_namespace' => false,
         'blank_line_after_opening_tag' => true,
         'blank_line_before_statement' => true,
@@ -43,7 +43,7 @@ return $config
         'phpdoc_tag_type' => true,
         'protected_to_private' => true,
         '@PSR2' => true,
-        'short_scalar_cast' => true, 
+        'short_scalar_cast' => true,
         'single_blank_line_at_eof' => false,
         'single_blank_line_before_namespace' => true,
         'single_quote' => true,
@@ -57,7 +57,7 @@ return $config
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-        ->exclude('test')
-        ->exclude('tests')
-        ->in(__DIR__)
+            ->exclude('test')
+            ->exclude('tests')
+            ->in(__DIR__)
     );

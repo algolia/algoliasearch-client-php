@@ -57,7 +57,8 @@ final class ApiWrapper implements ApiWrapperInterface
     ) {
         $this->http = $http;
         $this->clusterHosts = $clusterHosts;
-        $this->requestOptionsFactory = $RqstOptsFactory ?: new RequestOptionsFactory($config);
+        $this->requestOptionsFactory =
+            $RqstOptsFactory ?: new RequestOptionsFactory($config);
         $this->logger = $logger ?: Algolia::getLogger();
         if (defined('JSON_UNESCAPED_UNICODE')) {
             // `JSON_UNESCAPED_UNICODE` is introduced in PHP 5.4.0
@@ -65,12 +66,22 @@ final class ApiWrapper implements ApiWrapperInterface
         }
     }
 
-    public function read($method, $path, $requestOptions = [], $defaultRequestOptions = [])
-    {
+    public function read(
+        $method,
+        $path,
+        $requestOptions = [],
+        $defaultRequestOptions = []
+    ) {
         if ('GET' === mb_strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess(
+                $requestOptions,
+                $defaultRequestOptions
+            );
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaultRequestOptions);
+            $requestOptions = $this->requestOptionsFactory->create(
+                $requestOptions,
+                $defaultRequestOptions
+            );
         }
 
         return $this->request(
@@ -82,13 +93,24 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    public function write($method, $path, $data = [], $requestOptions = [], $defaultRequestOptions = [])
-    {
+    public function write(
+        $method,
+        $path,
+        $data = [],
+        $requestOptions = [],
+        $defaultRequestOptions = []
+    ) {
         if ('DELETE' === mb_strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess($requestOptions, $defaultRequestOptions);
+            $requestOptions = $this->requestOptionsFactory->createBodyLess(
+                $requestOptions,
+                $defaultRequestOptions
+            );
             $data = [];
         } else {
-            $requestOptions = $this->requestOptionsFactory->create($requestOptions, $defaultRequestOptions);
+            $requestOptions = $this->requestOptionsFactory->create(
+                $requestOptions,
+                $defaultRequestOptions
+            );
         }
 
         return $this->request(
@@ -120,8 +142,14 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    private function request($method, $path, RequestOptions $requestOptions, $hosts, $timeout, $data = [])
-    {
+    private function request(
+        $method,
+        $path,
+        RequestOptions $requestOptions,
+        $hosts,
+        $timeout,
+        $data = []
+    ) {
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
@@ -165,9 +193,13 @@ final class ApiWrapper implements ApiWrapperInterface
 
                 return $responseBody;
             } catch (RetriableException $e) {
-                $this->log(LogLevel::DEBUG, 'Host failed.', array_merge($logParams, [
-                    'description' => $e->getMessage(),
-                ]));
+                $this->log(
+                    LogLevel::DEBUG,
+                    'Host failed.',
+                    array_merge($logParams, [
+                        'description' => $e->getMessage(),
+                    ])
+                );
 
                 $this->clusterHosts->failed($host);
             } catch (BadRequestException $e) {
@@ -190,19 +222,37 @@ final class ApiWrapper implements ApiWrapperInterface
         throw new UnreachableException();
     }
 
-    private function handleResponse(ResponseInterface $response, RequestInterface $request)
-    {
+    private function handleResponse(
+        ResponseInterface $response,
+        RequestInterface $request
+    ) {
         $body = (string) $response->getBody();
         $statusCode = $response->getStatusCode();
 
-        if (0 === $statusCode || ($statusCode >= 100 && $statusCode < 200) || $statusCode >= 500) {
+        if (
+            0 === $statusCode ||
+            ($statusCode >= 100 && $statusCode < 200) ||
+            $statusCode >= 500
+        ) {
             $reason = $response->getReasonPhrase();
 
-            if (null === $response->getReasonPhrase() || '' === $response->getReasonPhrase()) {
-                $reason = $statusCode >= 500 ? 'Internal Server Error' : 'Unreachable Host';
+            if (
+                null === $response->getReasonPhrase() ||
+                '' === $response->getReasonPhrase()
+            ) {
+                $reason =
+                    $statusCode >= 500
+                        ? 'Internal Server Error'
+                        : 'Unreachable Host';
             }
 
-            throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode);
+            throw new RetriableException(
+                'Retriable failure on ' .
+                    $request->getUri()->getHost() .
+                    ': ' .
+                    $reason,
+                $statusCode
+            );
         }
 
         $responseArray = Helpers::json_decode($body, true);
@@ -210,9 +260,12 @@ final class ApiWrapper implements ApiWrapperInterface
         if (404 === $statusCode) {
             throw new NotFoundException($responseArray['message'], $statusCode);
         } elseif ($statusCode >= 400) {
-            throw new BadRequestException($responseArray['message'], $statusCode);
+            throw new BadRequestException(
+                $responseArray['message'],
+                $statusCode
+            );
         } elseif (2 !== (int) ($statusCode / 100)) {
-            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
+            throw new AlgoliaException($statusCode . ': ' . $body, $statusCode);
         }
 
         return $responseArray;
@@ -226,7 +279,9 @@ final class ApiWrapper implements ApiWrapperInterface
             return new Uri($uri);
         }
 
-        throw new \InvalidArgumentException('URI must be a string or UriInterface');
+        throw new \InvalidArgumentException(
+            'URI must be a string or UriInterface'
+        );
     }
 
     private function createRequest(
@@ -244,7 +299,9 @@ final class ApiWrapper implements ApiWrapperInterface
             } else {
                 $body = \json_encode($body, $this->jsonOptions);
                 if (JSON_ERROR_NONE !== json_last_error()) {
-                    throw new \InvalidArgumentException('json_encode error: '.json_last_error_msg());
+                    throw new \InvalidArgumentException(
+                        'json_encode error: ' . json_last_error_msg()
+                    );
                 }
             }
         }
@@ -258,6 +315,6 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private function log($level, $message, array $context = [])
     {
-        $this->logger->log($level, 'Algolia API client: '.$message, $context);
+        $this->logger->log($level, 'Algolia API client: ' . $message, $context);
     }
 }

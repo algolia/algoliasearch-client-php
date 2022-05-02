@@ -87,7 +87,9 @@ final class Algolia
     public static function getHttpClient()
     {
         if (null === self::$httpClient) {
-            self::setHttpClient(new \Algolia\AlgoliaSearch\Http\GuzzleHttpClient());
+            self::setHttpClient(
+                new \Algolia\AlgoliaSearch\Http\GuzzleHttpClient()
+            );
         }
 
         return self::$httpClient;

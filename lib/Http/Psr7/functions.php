@@ -46,7 +46,9 @@ function stream_for($resource = '', array $options = [])
         return new PumpStream($resource, $options);
     }
 
-    throw new \InvalidArgumentException('Invalid resource type: '.gettype($resource));
+    throw new \InvalidArgumentException(
+        'Invalid resource type: ' . gettype($resource)
+    );
 }
 
 /**

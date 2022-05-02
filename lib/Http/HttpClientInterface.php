@@ -20,5 +20,9 @@ interface HttpClientInterface
      *
      * @return ResponseInterface
      */
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout);
+    public function sendRequest(
+        RequestInterface $request,
+        $timeout,
+        $connectTimeout
+    );
 }

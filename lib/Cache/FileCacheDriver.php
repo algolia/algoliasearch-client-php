@@ -12,7 +12,8 @@ final class FileCacheDriver implements CacheInterface
 
     public function __construct($directory)
     {
-        $this->directory = rtrim($directory, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        $this->directory =
+            rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -49,7 +50,7 @@ final class FileCacheDriver implements CacheInterface
     public function clear()
     {
         $result = true;
-        foreach (glob($this->directory.self::PREFIX.'*') as $file) {
+        foreach (glob($this->directory . self::PREFIX . '*') as $file) {
             $result &= @unlink($file);
         }
 
@@ -110,7 +111,7 @@ final class FileCacheDriver implements CacheInterface
      */
     private function getFilenameFromKey($key)
     {
-        $name = $this->directory.self::PREFIX.$key;
+        $name = $this->directory . self::PREFIX . $key;
 
         return str_replace('\\', '-', $name);
     }

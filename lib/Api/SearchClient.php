@@ -98,7 +98,7 @@ class SearchClient
     }
 
     /**
-     * Create a new API key.
+     * Create an API key.
      *
      * @param array $apiKey apiKey (required)
      * - $apiKey['acl'] => (array) Set of permissions associated with the key. (required)
@@ -140,7 +140,7 @@ class SearchClient
     }
 
     /**
-     * Add or replace an object with a given object ID.
+     * Add or replace an object.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
@@ -244,7 +244,7 @@ class SearchClient
     }
 
     /**
-     * Assign or Move userID
+     * Assign or Move userID.
      *
      * @param string $xAlgoliaUserID userID to assign. (required)
      * @param array $assignUserIdParams assignUserIdParams (required)
@@ -308,7 +308,7 @@ class SearchClient
     }
 
     /**
-     * Performs multiple write operations in a single API call.
+     * Batch operations to one index.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $batchWriteParams batchWriteParams (required)
@@ -365,7 +365,7 @@ class SearchClient
     }
 
     /**
-     * Batch assign userIDs
+     * Batch assign userIDs.
      *
      * @param string $xAlgoliaUserID userID to assign. (required)
      * @param array $batchAssignUserIdsParams batchAssignUserIdsParams (required)
@@ -433,7 +433,7 @@ class SearchClient
     }
 
     /**
-     * Send a batch of dictionary entries.
+     * Batch dictionary entries.
      *
      * @param array $dictionaryName The dictionary to search in. (required)
      * @param array $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
@@ -939,7 +939,7 @@ class SearchClient
     }
 
     /**
-     * Delete object.
+     * Delete an object.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
@@ -1259,7 +1259,7 @@ class SearchClient
     }
 
     /**
-     * List dictionaries supported per language.
+     * List available languages.
      *
      *
      * @return array<string, mixed>|array<string,\Algolia\AlgoliaSearch\Model\Search\Languages>
@@ -1299,7 +1299,7 @@ class SearchClient
     }
 
     /**
-     * Return the lastest log entries.
+     * Return the latest log entries.
      *
      * @param int $offset First entry to retrieve (zero-based). Log entries are sorted by decreasing date, therefore 0 designates the most recent log entry. (optional, default to 0)
      * @param int $length Maximum number of entries to retrieve. The maximum allowed value is 1000. (optional, default to 10)
@@ -1373,7 +1373,7 @@ class SearchClient
     }
 
     /**
-     * Retrieve one object from the index.
+     * Retrieve an object.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
@@ -1543,7 +1543,7 @@ class SearchClient
     }
 
     /**
-     * Retrieve settings of a given indexName.
+     * Retrieve settings of an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -1662,7 +1662,7 @@ class SearchClient
     }
 
     /**
-     * Check the current status of a given task.
+     * Check the status of a task.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param int $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
@@ -1718,7 +1718,7 @@ class SearchClient
     }
 
     /**
-     * Get top userID
+     * Get top userID.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse
@@ -1738,7 +1738,7 @@ class SearchClient
     }
 
     /**
-     * Get userID
+     * Get userID.
      *
      * @param string $userID userID to assign. (required)
      *
@@ -1780,7 +1780,7 @@ class SearchClient
     }
 
     /**
-     * Has pending mappings
+     * Get migration status.
      *
      * @param bool $getClusters Whether to get clusters or not. (optional)
      *
@@ -1811,7 +1811,7 @@ class SearchClient
     }
 
     /**
-     * Get the full list of API Keys.
+     * List API Keys.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse
@@ -1831,7 +1831,7 @@ class SearchClient
     }
 
     /**
-     * List clusters
+     * List clusters.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListClustersResponse
@@ -1882,7 +1882,7 @@ class SearchClient
     }
 
     /**
-     * List userIDs
+     * List userIDs.
      *
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional)
      * @param int $hitsPerPage Maximum number of objects to retrieve. (optional, default to 100)
@@ -1924,7 +1924,7 @@ class SearchClient
     }
 
     /**
-     * Perform multiple write operations.
+     * Batch operations to many indices.
      *
      * @param array $batchParams batchParams (required)
      * - $batchParams['requests'] => (array)
@@ -1962,7 +1962,7 @@ class SearchClient
     }
 
     /**
-     * Get search results for the given requests.
+     * Search multiple indices.
      *
      * @param array $multipleQueriesParams multipleQueriesParams (required)
      * - $multipleQueriesParams['requests'] => (array)  (required)
@@ -2249,7 +2249,7 @@ class SearchClient
     }
 
     /**
-     * Remove userID
+     * Remove userID.
      *
      * @param string $userID userID to assign. (required)
      *
@@ -2687,7 +2687,7 @@ class SearchClient
     }
 
     /**
-     * Get search results.
+     * Search in an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $searchParams searchParams (required)
@@ -2743,7 +2743,7 @@ class SearchClient
     }
 
     /**
-     * Search the dictionary entries.
+     * Search a dictionary entries.
      *
      * @param array $dictionaryName The dictionary to search in. (required)
      * @param array $searchDictionaryEntriesParams searchDictionaryEntriesParams (required)
@@ -2806,7 +2806,7 @@ class SearchClient
     }
 
     /**
-     * Search for values of a given facet
+     * Search for values of a given facet.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $facetName The facet name. (required)
@@ -2941,7 +2941,7 @@ class SearchClient
     }
 
     /**
-     * Get all synonyms that match a query.
+     * Search synonyms.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $query Search for specific synonyms matching this string. (optional, default to '')
@@ -3030,7 +3030,7 @@ class SearchClient
     }
 
     /**
-     * Search userID
+     * Search userID.
      *
      * @param array $searchUserIdsParams searchUserIdsParams (required)
      * - $searchUserIdsParams['query'] => (string) Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users. (required)
@@ -3072,7 +3072,7 @@ class SearchClient
     }
 
     /**
-     * Set dictionary settings.
+     * Set dictionaries settings.
      *
      * @param array $dictionarySettingsParams dictionarySettingsParams (required)
      * - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
@@ -3111,7 +3111,7 @@ class SearchClient
     }
 
     /**
-     * Update settings of a given indexName.
+     * Update settings of an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $indexSettings indexSettings (required)

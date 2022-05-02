@@ -6,8 +6,12 @@ use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
 
 abstract class ConfigWithRegion extends Configuration
 {
-    public static function create($appId, $apiKey, $region = null, $allowedRegions = null)
-    {
+    public static function create(
+        $appId,
+        $apiKey,
+        $region = null,
+        $allowedRegions = null
+    ) {
         if ($region !== null && !in_array($region, $allowedRegions, true)) {
             throw new AlgoliaException('Specified region is not allowed.');
         }

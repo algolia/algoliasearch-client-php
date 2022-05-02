@@ -19,8 +19,11 @@ final class GuzzleHttpClient implements HttpClientInterface
         $this->client = $client ?: static::buildClient();
     }
 
-    public function sendRequest(RequestInterface $request, $timeout, $connectTimeout)
-    {
+    public function sendRequest(
+        RequestInterface $request,
+        $timeout,
+        $connectTimeout
+    ) {
         try {
             $response = $this->client->send($request, [
                 'timeout' => $timeout,
@@ -31,21 +34,9 @@ final class GuzzleHttpClient implements HttpClientInterface
                 return $e->getResponse();
             }
 
-            return new Response(
-                0,
-                [],
-                null,
-                '1.1',
-                $e->getMessage()
-            );
+            return new Response(0, [], null, '1.1', $e->getMessage());
         } catch (ConnectException $e) {
-            return new Response(
-                0,
-                [],
-                null,
-                '1.1',
-                $e->getMessage()
-            );
+            return new Response(0, [], null, '1.1', $e->getMessage());
         }
 
         return $response;

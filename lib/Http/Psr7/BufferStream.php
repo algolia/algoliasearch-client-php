@@ -92,7 +92,9 @@ class BufferStream implements StreamInterface
 
     public function tell()
     {
-        throw new \RuntimeException('Cannot determine the position of a BufferStream');
+        throw new \RuntimeException(
+            'Cannot determine the position of a BufferStream'
+        );
     }
 
     /**

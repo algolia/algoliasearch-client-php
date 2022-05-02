@@ -28,10 +28,13 @@ final class UserAgent
     private static function getComputedValue()
     {
         $ua = [];
-        $segments = array_merge(self::getDefaultSegments(), self::$customSegments);
+        $segments = array_merge(
+            self::getDefaultSegments(),
+            self::$customSegments
+        );
 
         foreach ($segments as $segment => $version) {
-            $ua[] = $segment.' ('.$version.')';
+            $ua[] = $segment . ' (' . $version . ')';
         }
 
         return implode('; ', $ua);
@@ -42,7 +45,10 @@ final class UserAgent
         $segments = [];
 
         $segments['Algolia for PHP'] = Algolia::VERSION;
-        $segments['PHP'] = rtrim(str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION), '-');
+        $segments['PHP'] = rtrim(
+            str_replace(PHP_EXTRA_VERSION, '', PHP_VERSION),
+            '-'
+        );
         if (defined('HHVM_VERSION')) {
             $segments['HHVM'] = HHVM_VERSION;
         }
@@ -50,7 +56,8 @@ final class UserAgent
             if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
                 $segments['Guzzle'] = \GuzzleHttp\ClientInterface::VERSION;
             } else {
-                $segments['Guzzle'] = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+                $segments['Guzzle'] =
+                    \GuzzleHttp\ClientInterface::MAJOR_VERSION;
             }
         }
 

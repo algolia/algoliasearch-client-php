@@ -16,11 +16,7 @@ final class RequestOptionsFactory
         'getVersion',
     ];
 
-    private $validHeaders = [
-        'Content-type',
-        'User-Agent',
-        'createIfNotExists',
-    ];
+    private $validHeaders = ['Content-type', 'User-Agent', 'createIfNotExists'];
 
     public function __construct(Configuration $config)
     {
@@ -44,10 +40,14 @@ final class RequestOptionsFactory
         } elseif ($options instanceof RequestOptions) {
             $defaults = $this->create($defaults);
             $options->addDefaultHeaders($defaults->getHeaders());
-            $options->addDefaultQueryParameters($defaults->getQueryParameters());
+            $options->addDefaultQueryParameters(
+                $defaults->getQueryParameters()
+            );
             $options->addDefaultBodyParameters($defaults->getBody());
         } else {
-            throw new \InvalidArgumentException('RequestOptions can only be created from array or from RequestOptions object');
+            throw new \InvalidArgumentException(
+                'RequestOptions can only be created from array or from RequestOptions object'
+            );
         }
 
         return $options->addDefaultHeaders($this->config->getDefaultHeaders());
@@ -57,9 +57,7 @@ final class RequestOptionsFactory
     {
         $options = $this->create($options, $defaults);
 
-        return $options
-            ->addQueryParameters($options->getBody())
-            ->setBody([]);
+        return $options->addQueryParameters($options->getBody())->setBody([]);
     }
 
     private function normalize($options)
@@ -68,9 +66,9 @@ final class RequestOptionsFactory
             'headers' => [
                 'X-Algolia-Application-Id' => $this->config->getAppId(),
                 'X-Algolia-API-Key' => $this->config->getAlgoliaApiKey(),
-                'User-Agent' => $this->config->getUserAgent() !== null ?
-                  $this->config->getUserAgent() :
-                  UserAgent::get(),
+                'User-Agent' => $this->config->getUserAgent() !== null
+                        ? $this->config->getUserAgent()
+                        : UserAgent::get(),
                 'Content-Type' => 'application/json',
             ],
             'query' => [],
@@ -83,7 +81,13 @@ final class RequestOptionsFactory
         foreach ($options as $optionName => $value) {
             $type = $this->getOptionType($optionName);
 
-            if (in_array($type, ['readTimeout', 'writeTimeout', 'connectTimeout'], true)) {
+            if (
+                in_array(
+                    $type,
+                    ['readTimeout', 'writeTimeout', 'connectTimeout'],
+                    true
+                )
+            ) {
                 $normalized[$type] = $value;
             } else {
                 $normalized[$type][$optionName] = $value;
@@ -112,7 +116,13 @@ final class RequestOptionsFactory
             return 'headers';
         } elseif (in_array($optionName, $this->validQueryParameters, true)) {
             return 'query';
-        } elseif (in_array($optionName, ['connectTimeout', 'readTimeout', 'writeTimeout'], true)) {
+        } elseif (
+            in_array(
+                $optionName,
+                ['connectTimeout', 'readTimeout', 'writeTimeout'],
+                true
+            )
+        ) {
             return $optionName;
         }
 

@@ -225,7 +225,10 @@ class Response implements ResponseInterface
         $new = clone $this;
         if (isset($new->headerNames[$normalized])) {
             $header = $this->headerNames[$normalized];
-            $new->headers[$header] = array_merge($this->headers[$header], $value);
+            $new->headers[$header] = array_merge(
+                $this->headers[$header],
+                $value
+            );
         } else {
             $new->headerNames[$normalized] = $header;
             $new->headers[$header] = $value;
@@ -283,7 +286,10 @@ class Response implements ResponseInterface
             $normalized = mb_strtolower($header);
             if (isset($this->headerNames[$normalized])) {
                 $header = $this->headerNames[$normalized];
-                $this->headers[$header] = array_merge($this->headers[$header], $value);
+                $this->headers[$header] = array_merge(
+                    $this->headers[$header],
+                    $value
+                );
             } else {
                 $this->headerNames[$normalized] = $header;
                 $this->headers[$header] = $value;

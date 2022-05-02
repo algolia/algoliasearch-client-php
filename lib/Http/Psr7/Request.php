@@ -80,7 +80,7 @@ class Request implements RequestInterface
             $target = '/';
         }
         if ('' !== $this->uri->getQuery()) {
-            $target .= '?'.$this->uri->getQuery();
+            $target .= '?' . $this->uri->getQuery();
         }
 
         return $target;
@@ -89,7 +89,9 @@ class Request implements RequestInterface
     public function withRequestTarget($requestTarget)
     {
         if (preg_match('#\s#', $requestTarget)) {
-            throw new InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
+            throw new InvalidArgumentException(
+                'Invalid request target provided; cannot contain whitespace'
+            );
         }
 
         $new = clone $this;
@@ -141,7 +143,7 @@ class Request implements RequestInterface
         }
 
         if (null !== ($port = $this->uri->getPort())) {
-            $host .= ':'.$port;
+            $host .= ':' . $port;
         }
 
         if (isset($this->headerNames['host'])) {
@@ -224,7 +226,10 @@ class Request implements RequestInterface
         $new = clone $this;
         if (isset($new->headerNames[$normalized])) {
             $header = $this->headerNames[$normalized];
-            $new->headers[$header] = array_merge($this->headers[$header], $value);
+            $new->headers[$header] = array_merge(
+                $this->headers[$header],
+                $value
+            );
         } else {
             $new->headerNames[$normalized] = $header;
             $new->headers[$header] = $value;
@@ -277,7 +282,10 @@ class Request implements RequestInterface
             $normalized = mb_strtolower($header);
             if (isset($this->headerNames[$normalized])) {
                 $header = $this->headerNames[$normalized];
-                $this->headers[$header] = array_merge($this->headers[$header], $value);
+                $this->headers[$header] = array_merge(
+                    $this->headers[$header],
+                    $value
+                );
             } else {
                 $this->headerNames[$normalized] = $header;
                 $this->headers[$header] = $value;

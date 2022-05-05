@@ -49,7 +49,7 @@ class AnalyticsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = explode('-', 'us-de');
+        $allowedRegions = ['de', 'us'];
         $config = AnalyticsConfig::create(
             $appId,
             $apiKey,

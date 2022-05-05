@@ -49,7 +49,7 @@ class QuerySuggestionsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = explode('-', 'us-eu');
+        $allowedRegions = ['eu', 'us'];
         $config = QuerySuggestionsConfig::create(
             $appId,
             $apiKey,

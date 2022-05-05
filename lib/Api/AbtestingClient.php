@@ -49,7 +49,7 @@ class AbtestingClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = explode('-', 'us-de');
+        $allowedRegions = ['de', 'us'];
         $config = AbtestingConfig::create(
             $appId,
             $apiKey,

@@ -2,7 +2,7 @@
 
 namespace Algolia\AlgoliaSearch\Model;
 
-use \Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\ObjectSerializer;
 
 /**
  * Abstract class extended by each models

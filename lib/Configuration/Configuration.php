@@ -104,7 +104,9 @@ abstract class Configuration
      */
     public function getApiKey($apiKeyIdentifier)
     {
-        return isset($this->apiKeys[$apiKeyIdentifier]) ? $this->apiKeys[$apiKeyIdentifier] : null;
+        return isset($this->apiKeys[$apiKeyIdentifier])
+            ? $this->apiKeys[$apiKeyIdentifier]
+            : null;
     }
 
     /**

@@ -72,9 +72,12 @@ class InsightsClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create(
-                'insights.' . $config->getRegion() . '.algolia.io'
+            $url = str_replace(
+                '{region}',
+                $config->getRegion(),
+                'insights.{region}.algolia.io'
             );
+            $clusterHosts = ClusterHosts::create($url);
         }
 
         $apiWrapper = new ApiWrapper(

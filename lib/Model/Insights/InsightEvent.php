@@ -199,6 +199,15 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
+        if (
+            !preg_match(
+                '/[a-zA-Z0-9_-=\/+]{1,128}/',
+                $this->container['userToken']
+            )
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_-=\/+]{1,128}/.";
+        }
 
         return $invalidProperties;
     }
@@ -299,12 +308,18 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets userToken
      *
-     * @param string $userToken A user identifier. Depending if the user is logged-in or not, several strategies can be used from a sessionId to a technical identifier.
+     * @param string $userToken A user identifier. Depending if the user is logged-in or not, several strategies can be used from a sessionId to a technical identifier. You should always send pseudonymous or anonymous userTokens.
      *
      * @return self
      */
     public function setUserToken($userToken)
     {
+        if (!preg_match('/[a-zA-Z0-9_-=\/+]{1,128}/', $userToken)) {
+            throw new \InvalidArgumentException(
+                "invalid value for $userToken when calling InsightEvent., must conform to the pattern /[a-zA-Z0-9_-=\/+]{1,128}/."
+            );
+        }
+
         $this->container['userToken'] = $userToken;
 
         return $this;

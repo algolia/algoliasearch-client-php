@@ -232,7 +232,7 @@ class InsightsClient
     }
 
     /**
-     * Pushes an array of events.
+     * Push events.
      *
      * @param array $insightEvents insightEvents (required)
      * - $insightEvents['events'] => (array) Array of events sent. (required)

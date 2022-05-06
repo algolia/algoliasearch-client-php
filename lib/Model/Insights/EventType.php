@@ -6,8 +6,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * EventType Class Doc Comment
  *
  * @category Class
- * @description An eventType can be a click, a conversion, or a view.
- *
  * @package Algolia\AlgoliaSearch
  */
 class EventType

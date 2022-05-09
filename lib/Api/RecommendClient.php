@@ -186,7 +186,7 @@ class RecommendClient
     }
 
     /**
-     * Returns recommendations for a specific model and objectID.
+     * Get results.
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
      * - $getRecommendationsParams['requests'] => (array) The `getRecommendations` requests. (required)

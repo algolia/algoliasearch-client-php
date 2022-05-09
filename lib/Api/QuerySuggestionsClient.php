@@ -99,7 +99,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Create a configuration of a Query Suggestions index.
+     * Create a configuration.
      *
      * @param array $querySuggestionsIndexWithIndexParam querySuggestionsIndexWithIndexParam (required)
      *
@@ -181,7 +181,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Delete a configuration of a Query Suggestion&#39;s index.
+     * Delete a configuration.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -265,7 +265,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get all the configurations of Query Suggestions.
+     * List configurations.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndex[]
@@ -285,7 +285,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get the configuration of a single Query Suggestions index.
+     * Get a single configuration.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -325,7 +325,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get the status of a Query Suggestion&#39;s index.
+     * Get configuration status.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -365,7 +365,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get the log file of the last build of a single Query Suggestion index.
+     * Get a log file.
      *
      * @param string $indexName The index in which to perform the request. (required)
      *
@@ -503,7 +503,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Update the configuration of a Query Suggestions index.
+     * Update a configuration.
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $querySuggestionsIndexParam querySuggestionsIndexParam (required)

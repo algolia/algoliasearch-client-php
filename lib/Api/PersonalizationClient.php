@@ -143,7 +143,7 @@ class PersonalizationClient
     }
 
     /**
-     * Delete the user profile and all its associated data.
+     * Delete a user profile.
      *
      * @param string $userToken userToken representing the user for which to fetch the Personalization profile. (required)
      *
@@ -227,7 +227,7 @@ class PersonalizationClient
     }
 
     /**
-     * Get the current personalization strategy.
+     * Get the current strategy.
      *
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
@@ -247,7 +247,7 @@ class PersonalizationClient
     }
 
     /**
-     * Get the user profile built from Personalization strategy.
+     * Get a user profile.
      *
      * @param string $userToken userToken representing the user for which to fetch the Personalization profile. (required)
      *
@@ -385,7 +385,7 @@ class PersonalizationClient
     }
 
     /**
-     * Set a new personalization strategy.
+     * Set a new strategy.
      *
      * @param array $personalizationStrategyParams personalizationStrategyParams (required)
      * - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)

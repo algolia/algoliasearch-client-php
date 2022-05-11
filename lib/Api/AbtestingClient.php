@@ -126,18 +126,18 @@ class AbtestingClient
         }
 
         $resourcePath = '/2/abtests';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($addABTestsRequest)) {
             $httpBody = $addABTestsRequest;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -162,7 +162,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -175,10 +175,10 @@ class AbtestingClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -187,12 +187,12 @@ class AbtestingClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -216,7 +216,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/2/abtests/{id}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -228,12 +228,12 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -258,7 +258,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -271,10 +271,10 @@ class AbtestingClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -283,12 +283,12 @@ class AbtestingClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -312,7 +312,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/2/abtests/{id}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -324,12 +324,12 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -350,7 +350,7 @@ class AbtestingClient
         $requestOptions = []
     ) {
         $resourcePath = '/2/abtests';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($offset !== null) {
@@ -363,10 +363,10 @@ class AbtestingClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -380,19 +380,19 @@ class AbtestingClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -422,7 +422,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -435,10 +435,10 @@ class AbtestingClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -450,12 +450,12 @@ class AbtestingClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -485,7 +485,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -498,10 +498,10 @@ class AbtestingClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -513,12 +513,12 @@ class AbtestingClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -542,7 +542,7 @@ class AbtestingClient
         }
 
         $resourcePath = '/2/abtests/{id}/stop';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -554,12 +554,12 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -568,11 +568,11 @@ class AbtestingClient
     private function sendRequest(
         $method,
         $resourcePath,
-        $queryParams,
+        $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
 
         if ($method === 'GET') {
             $request = $this->api->read(

@@ -117,7 +117,7 @@ class RecommendClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -130,10 +130,10 @@ class RecommendClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -142,12 +142,12 @@ class RecommendClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -172,7 +172,7 @@ class RecommendClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -185,10 +185,10 @@ class RecommendClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -197,12 +197,12 @@ class RecommendClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -236,18 +236,18 @@ class RecommendClient
         }
 
         $resourcePath = '/1/indexes/*/recommendations';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($getRecommendationsParams)) {
             $httpBody = $getRecommendationsParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -277,7 +277,7 @@ class RecommendClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -290,10 +290,10 @@ class RecommendClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -305,12 +305,12 @@ class RecommendClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -340,7 +340,7 @@ class RecommendClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -353,10 +353,10 @@ class RecommendClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -368,12 +368,12 @@ class RecommendClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -382,11 +382,11 @@ class RecommendClient
     private function sendRequest(
         $method,
         $resourcePath,
-        $queryParams,
+        $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
 
         if ($method === 'GET') {
             $request = $this->api->read(

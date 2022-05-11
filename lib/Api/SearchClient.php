@@ -126,18 +126,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/keys';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($apiKey)) {
             $httpBody = $apiKey;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -185,7 +185,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -209,12 +209,12 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -241,18 +241,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/security/sources/append';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($source)) {
             $httpBody = $source;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -302,19 +302,19 @@ class SearchClient
         }
 
         $resourcePath = '/1/clusters/mapping';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($assignUserIdParams)) {
             $httpBody = $assignUserIdParams;
         }
-        $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
-        $requestOptions += $queryParams;
+        $queryParameters['X-Algolia-User-ID'] = $xAlgoliaUserID;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -355,7 +355,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -370,12 +370,12 @@ class SearchClient
         if (isset($batchWriteParams)) {
             $httpBody = $batchWriteParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -427,19 +427,19 @@ class SearchClient
         }
 
         $resourcePath = '/1/clusters/mapping/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($batchAssignUserIdsParams)) {
             $httpBody = $batchAssignUserIdsParams;
         }
-        $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
-        $requestOptions += $queryParams;
+        $queryParameters['X-Algolia-User-ID'] = $xAlgoliaUserID;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -485,7 +485,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/dictionaries/{dictionaryName}/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -500,12 +500,12 @@ class SearchClient
         if (isset($batchDictionaryEntriesParams)) {
             $httpBody = $batchDictionaryEntriesParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -546,7 +546,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -559,10 +559,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -576,10 +576,10 @@ class SearchClient
                 )
             ) {
                 foreach ($clearExistingRules as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['clearExistingRules'] = $clearExistingRules;
+                $queryParameters['clearExistingRules'] = $clearExistingRules;
             }
         }
 
@@ -595,12 +595,12 @@ class SearchClient
         if (isset($rule)) {
             $httpBody = $rule;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -636,7 +636,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/browse';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -651,12 +651,12 @@ class SearchClient
         if (isset($browseRequest)) {
             $httpBody = $browseRequest;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -687,7 +687,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/clear';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -700,10 +700,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -716,12 +716,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -748,7 +748,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/clear';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -760,12 +760,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -796,7 +796,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/clear';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -809,10 +809,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -825,12 +825,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -855,7 +855,7 @@ class SearchClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -868,10 +868,10 @@ class SearchClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -880,12 +880,12 @@ class SearchClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -909,7 +909,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/keys/{key}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -921,12 +921,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -966,7 +966,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/deleteByQuery';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -981,12 +981,12 @@ class SearchClient
         if (isset($searchParams)) {
             $httpBody = $searchParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1013,7 +1013,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1025,12 +1025,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1067,7 +1067,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1088,12 +1088,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1135,7 +1135,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -1148,10 +1148,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -1173,12 +1173,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1202,7 +1202,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/security/sources/{source}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1214,12 +1214,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1261,7 +1261,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -1274,10 +1274,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -1299,12 +1299,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1329,7 +1329,7 @@ class SearchClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -1342,10 +1342,10 @@ class SearchClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -1354,12 +1354,12 @@ class SearchClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1383,7 +1383,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/keys/{key}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1395,12 +1395,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1416,15 +1416,15 @@ class SearchClient
     public function getDictionaryLanguages($requestOptions = [])
     {
         $resourcePath = '/1/dictionaries/*/languages';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1440,15 +1440,15 @@ class SearchClient
     public function getDictionarySettings($requestOptions = [])
     {
         $resourcePath = '/1/dictionaries/*/settings';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1479,7 +1479,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/logs';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($offset !== null) {
@@ -1492,10 +1492,10 @@ class SearchClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -1509,10 +1509,10 @@ class SearchClient
                 )
             ) {
                 foreach ($length as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['length'] = $length;
+                $queryParameters['length'] = $length;
             }
         }
 
@@ -1526,10 +1526,10 @@ class SearchClient
                 )
             ) {
                 foreach ($indexName as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['indexName'] = $indexName;
+                $queryParameters['indexName'] = $indexName;
             }
         }
 
@@ -1543,19 +1543,19 @@ class SearchClient
                 )
             ) {
                 foreach ($type as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['type'] = $type;
+                $queryParameters['type'] = $type;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1597,7 +1597,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($attributesToRetrieve !== null) {
@@ -1610,10 +1610,12 @@ class SearchClient
                 )
             ) {
                 foreach ($attributesToRetrieve as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['attributesToRetrieve'] = $attributesToRetrieve;
+                $queryParameters[
+                    'attributesToRetrieve'
+                ] = $attributesToRetrieve;
             }
         }
 
@@ -1635,12 +1637,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1671,18 +1673,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/*/objects';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($getObjectsParams)) {
             $httpBody = $getObjectsParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1719,7 +1721,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1740,12 +1742,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1772,7 +1774,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/settings';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1784,12 +1786,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1805,15 +1807,15 @@ class SearchClient
     public function getSources($requestOptions = [])
     {
         $resourcePath = '/1/security/sources';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1850,7 +1852,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1871,12 +1873,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1910,7 +1912,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/task/{taskID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -1931,12 +1933,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1952,15 +1954,15 @@ class SearchClient
     public function getTopUserIds($requestOptions = [])
     {
         $resourcePath = '/1/clusters/mapping/top';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1989,7 +1991,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/clusters/mapping/{userID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -2001,12 +2003,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2025,7 +2027,7 @@ class SearchClient
         $requestOptions = []
     ) {
         $resourcePath = '/1/clusters/mapping/pending';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($getClusters !== null) {
@@ -2038,19 +2040,19 @@ class SearchClient
                 )
             ) {
                 foreach ($getClusters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['getClusters'] = $getClusters;
+                $queryParameters['getClusters'] = $getClusters;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2066,15 +2068,15 @@ class SearchClient
     public function listApiKeys($requestOptions = [])
     {
         $resourcePath = '/1/keys';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2090,15 +2092,15 @@ class SearchClient
     public function listClusters($requestOptions = [])
     {
         $resourcePath = '/1/clusters';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2115,7 +2117,7 @@ class SearchClient
     public function listIndices($page = null, $requestOptions = [])
     {
         $resourcePath = '/1/indexes';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($page !== null) {
@@ -2128,19 +2130,19 @@ class SearchClient
                 )
             ) {
                 foreach ($page as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['page'] = $page;
+                $queryParameters['page'] = $page;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2161,7 +2163,7 @@ class SearchClient
         $requestOptions = []
     ) {
         $resourcePath = '/1/clusters/mapping';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($page !== null) {
@@ -2174,10 +2176,10 @@ class SearchClient
                 )
             ) {
                 foreach ($page as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['page'] = $page;
+                $queryParameters['page'] = $page;
             }
         }
 
@@ -2191,19 +2193,19 @@ class SearchClient
                 )
             ) {
                 foreach ($hitsPerPage as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['hitsPerPage'] = $hitsPerPage;
+                $queryParameters['hitsPerPage'] = $hitsPerPage;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2234,18 +2236,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/*/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($batchParams)) {
             $httpBody = $batchParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2280,18 +2282,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/*/queries';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($multipleQueriesParams)) {
             $httpBody = $multipleQueriesParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2338,7 +2340,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/operation';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -2353,12 +2355,12 @@ class SearchClient
         if (isset($operationIndexParams)) {
             $httpBody = $operationIndexParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2412,7 +2414,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}/partial';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($createIfNotExists !== null) {
@@ -2425,10 +2427,10 @@ class SearchClient
                 )
             ) {
                 foreach ($createIfNotExists as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['createIfNotExists'] = $createIfNotExists;
+                $queryParameters['createIfNotExists'] = $createIfNotExists;
             }
         }
 
@@ -2453,12 +2455,12 @@ class SearchClient
         if (isset($attributeOrBuiltInOperation)) {
             $httpBody = $attributeOrBuiltInOperation;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2488,7 +2490,7 @@ class SearchClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2501,10 +2503,10 @@ class SearchClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -2516,12 +2518,12 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2551,7 +2553,7 @@ class SearchClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2564,10 +2566,10 @@ class SearchClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -2579,12 +2581,12 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2613,7 +2615,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/clusters/mapping/{userID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -2625,12 +2627,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2654,18 +2656,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/security/sources';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($source)) {
             $httpBody = $source;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2689,7 +2691,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/keys/{key}/restore';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -2701,12 +2703,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2740,7 +2742,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -2755,12 +2757,12 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2819,7 +2821,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -2832,10 +2834,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -2860,12 +2862,12 @@ class SearchClient
         if (isset($rule)) {
             $httpBody = $rule;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2930,7 +2932,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -2943,10 +2945,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -2971,12 +2973,12 @@ class SearchClient
         if (isset($synonymHit)) {
             $httpBody = $synonymHit;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3020,7 +3022,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/batch';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -3033,10 +3035,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -3050,10 +3052,10 @@ class SearchClient
                 )
             ) {
                 foreach ($replaceExistingSynonyms as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams[
+                $queryParameters[
                     'replaceExistingSynonyms'
                 ] = $replaceExistingSynonyms;
             }
@@ -3071,12 +3073,12 @@ class SearchClient
         if (isset($synonymHit)) {
             $httpBody = $synonymHit;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3116,7 +3118,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/query';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -3131,12 +3133,12 @@ class SearchClient
         if (isset($searchParams)) {
             $httpBody = $searchParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3184,7 +3186,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/dictionaries/{dictionaryName}/search';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -3199,12 +3201,12 @@ class SearchClient
         if (isset($searchDictionaryEntriesParams)) {
             $httpBody = $searchDictionaryEntriesParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3252,7 +3254,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/facets/{facetName}/query';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -3276,12 +3278,12 @@ class SearchClient
         if (isset($searchForFacetValuesRequest)) {
             $httpBody = $searchForFacetValuesRequest;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3331,7 +3333,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/search';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -3346,12 +3348,12 @@ class SearchClient
         if (isset($searchRulesParams)) {
             $httpBody = $searchRulesParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3388,7 +3390,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/search';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($query !== null) {
@@ -3401,10 +3403,10 @@ class SearchClient
                 )
             ) {
                 foreach ($query as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['query'] = $query;
+                $queryParameters['query'] = $query;
             }
         }
 
@@ -3418,10 +3420,10 @@ class SearchClient
                 )
             ) {
                 foreach ($type as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['type'] = $type;
+                $queryParameters['type'] = $type;
             }
         }
 
@@ -3435,10 +3437,10 @@ class SearchClient
                 )
             ) {
                 foreach ($page as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['page'] = $page;
+                $queryParameters['page'] = $page;
             }
         }
 
@@ -3452,10 +3454,10 @@ class SearchClient
                 )
             ) {
                 foreach ($hitsPerPage as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['hitsPerPage'] = $hitsPerPage;
+                $queryParameters['hitsPerPage'] = $hitsPerPage;
             }
         }
 
@@ -3468,12 +3470,12 @@ class SearchClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3508,18 +3510,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/clusters/mapping/search';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($searchUserIdsParams)) {
             $httpBody = $searchUserIdsParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3553,18 +3555,18 @@ class SearchClient
         }
 
         $resourcePath = '/1/dictionaries/*/settings';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if (isset($dictionarySettingsParams)) {
             $httpBody = $dictionarySettingsParams;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3609,7 +3611,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/settings';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
@@ -3622,10 +3624,10 @@ class SearchClient
                 )
             ) {
                 foreach ($forwardToReplicas as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['forwardToReplicas'] = $forwardToReplicas;
+                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
             }
         }
 
@@ -3641,12 +3643,12 @@ class SearchClient
         if (isset($indexSettings)) {
             $httpBody = $indexSettings;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3688,7 +3690,7 @@ class SearchClient
         }
 
         $resourcePath = '/1/keys/{key}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         // path params
@@ -3703,12 +3705,12 @@ class SearchClient
         if (isset($apiKey)) {
             $httpBody = $apiKey;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -3717,11 +3719,11 @@ class SearchClient
     private function sendRequest(
         $method,
         $resourcePath,
-        $queryParams,
+        $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
 
         if ($method === 'GET') {
             $request = $this->api->read(

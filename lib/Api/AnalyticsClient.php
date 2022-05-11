@@ -118,7 +118,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -131,10 +131,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -143,12 +143,12 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -173,7 +173,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -186,10 +186,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -198,12 +198,12 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -258,7 +258,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/clicks/averageClickPosition';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -271,10 +271,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -288,10 +288,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -305,10 +305,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -322,19 +322,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -389,7 +389,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/clicks/positions';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -402,10 +402,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -419,10 +419,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -436,10 +436,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -453,19 +453,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -520,7 +520,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/clicks/clickThroughRate';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -533,10 +533,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -550,10 +550,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -567,10 +567,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -584,19 +584,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -651,7 +651,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/conversions/conversionRate';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -664,10 +664,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -681,10 +681,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -698,10 +698,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -715,19 +715,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -782,7 +782,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches/noClickRate';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -795,10 +795,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -812,10 +812,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -829,10 +829,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -846,19 +846,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -913,7 +913,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches/noResultRate';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -926,10 +926,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -943,10 +943,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -960,10 +960,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -977,19 +977,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1044,7 +1044,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches/count';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1057,10 +1057,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1074,10 +1074,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -1091,10 +1091,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -1108,19 +1108,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1179,7 +1179,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches/noClicks';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1192,10 +1192,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1209,10 +1209,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -1226,10 +1226,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -1243,10 +1243,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -1260,10 +1260,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -1277,19 +1277,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1348,7 +1348,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches/noResults';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1361,10 +1361,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1378,10 +1378,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -1395,10 +1395,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -1412,10 +1412,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -1429,10 +1429,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -1446,19 +1446,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1482,7 +1482,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/status';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1495,19 +1495,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1566,7 +1566,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/countries';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1579,10 +1579,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1596,10 +1596,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -1613,10 +1613,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -1630,10 +1630,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -1647,10 +1647,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -1664,19 +1664,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1737,7 +1737,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/filters';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1750,10 +1750,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1767,10 +1767,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($search as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['search'] = $search;
+                $queryParameters['search'] = $search;
             }
         }
 
@@ -1784,10 +1784,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -1801,10 +1801,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -1818,10 +1818,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -1835,10 +1835,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -1852,19 +1852,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -1936,7 +1936,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/filters/{attribute}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1949,10 +1949,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -1966,10 +1966,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($search as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['search'] = $search;
+                $queryParameters['search'] = $search;
             }
         }
 
@@ -1983,10 +1983,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -2000,10 +2000,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -2017,10 +2017,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -2034,10 +2034,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -2051,10 +2051,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
@@ -2067,12 +2067,12 @@ class AnalyticsClient
             );
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2133,7 +2133,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/filters/noResults';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2146,10 +2146,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -2163,10 +2163,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($search as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['search'] = $search;
+                $queryParameters['search'] = $search;
             }
         }
 
@@ -2180,10 +2180,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -2197,10 +2197,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -2214,10 +2214,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -2231,10 +2231,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -2248,19 +2248,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2323,7 +2323,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/hits';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2336,10 +2336,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -2353,10 +2353,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($search as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['search'] = $search;
+                $queryParameters['search'] = $search;
             }
         }
 
@@ -2370,10 +2370,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($clickAnalytics as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['clickAnalytics'] = $clickAnalytics;
+                $queryParameters['clickAnalytics'] = $clickAnalytics;
             }
         }
 
@@ -2387,10 +2387,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -2404,10 +2404,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -2421,10 +2421,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -2438,10 +2438,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -2455,19 +2455,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2532,7 +2532,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/searches';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2545,10 +2545,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -2562,10 +2562,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($clickAnalytics as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['clickAnalytics'] = $clickAnalytics;
+                $queryParameters['clickAnalytics'] = $clickAnalytics;
             }
         }
 
@@ -2579,10 +2579,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -2596,10 +2596,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -2613,10 +2613,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($orderBy as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['orderBy'] = $orderBy;
+                $queryParameters['orderBy'] = $orderBy;
             }
         }
 
@@ -2630,10 +2630,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($direction as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['direction'] = $direction;
+                $queryParameters['direction'] = $direction;
             }
         }
 
@@ -2647,10 +2647,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($limit as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['limit'] = $limit;
+                $queryParameters['limit'] = $limit;
             }
         }
 
@@ -2664,10 +2664,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($offset as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['offset'] = $offset;
+                $queryParameters['offset'] = $offset;
             }
         }
 
@@ -2681,19 +2681,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2748,7 +2748,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/2/users/count';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2761,10 +2761,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($index as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['index'] = $index;
+                $queryParameters['index'] = $index;
             }
         }
 
@@ -2778,10 +2778,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($startDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['startDate'] = $startDate;
+                $queryParameters['startDate'] = $startDate;
             }
         }
 
@@ -2795,10 +2795,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($endDate as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['endDate'] = $endDate;
+                $queryParameters['endDate'] = $endDate;
             }
         }
 
@@ -2812,19 +2812,19 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($tags as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams['tags'] = $tags;
+                $queryParameters['tags'] = $tags;
             }
         }
 
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2854,7 +2854,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2867,10 +2867,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -2882,12 +2882,12 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2917,7 +2917,7 @@ class AnalyticsClient
         }
 
         $resourcePath = '/1{path}';
-        $queryParams = [];
+        $queryParameters = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2930,10 +2930,10 @@ class AnalyticsClient
                 )
             ) {
                 foreach ($parameters as $key => $value) {
-                    $queryParams[$key] = $value;
+                    $queryParameters[$key] = $value;
                 }
             } else {
-                $queryParams = $parameters;
+                $queryParameters = $parameters;
             }
         }
 
@@ -2945,12 +2945,12 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParams;
+        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
-            $queryParams,
+            $queryParameters,
             $httpBody,
             $requestOptions
         );
@@ -2959,11 +2959,11 @@ class AnalyticsClient
     private function sendRequest(
         $method,
         $resourcePath,
-        $queryParams,
+        $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParams);
+        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
 
         if ($method === 'GET') {
             $request = $this->api->read(

@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AnalyticsConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -103,10 +104,11 @@ class AnalyticsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function del($path, $parameters = null)
+    public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -120,7 +122,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -134,11 +143,14 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -147,10 +159,11 @@ class AnalyticsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function get($path, $parameters = null)
+    public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -164,7 +177,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -178,11 +198,14 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -193,6 +216,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse
      */
@@ -200,7 +224,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -237,7 +262,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -247,7 +279,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -257,7 +296,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -267,7 +313,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -276,11 +329,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -291,6 +347,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse
      */
@@ -298,7 +355,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -335,7 +393,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -345,7 +410,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -355,7 +427,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -365,7 +444,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -374,11 +460,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -389,6 +478,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse
      */
@@ -396,7 +486,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -433,7 +524,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -443,7 +541,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -453,7 +558,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -463,7 +575,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -472,11 +591,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -487,6 +609,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponse
      */
@@ -494,7 +617,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -531,7 +655,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -541,7 +672,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -551,7 +689,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -561,7 +706,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -570,11 +722,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -585,6 +740,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse
      */
@@ -592,7 +748,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -629,7 +786,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -639,7 +803,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -649,7 +820,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -659,7 +837,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -668,11 +853,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -683,6 +871,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse
      */
@@ -690,7 +879,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -727,7 +917,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -737,7 +934,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -747,7 +951,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -757,7 +968,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -766,11 +984,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -781,6 +1002,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse
      */
@@ -788,7 +1010,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -825,7 +1048,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -835,7 +1065,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -845,7 +1082,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -855,7 +1099,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -864,11 +1115,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -881,6 +1135,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse
      */
@@ -888,9 +1143,10 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -927,7 +1183,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -937,7 +1200,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -947,7 +1217,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -957,7 +1234,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -967,7 +1251,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -977,7 +1268,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -986,11 +1284,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1003,6 +1304,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse
      */
@@ -1010,9 +1312,10 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1049,7 +1352,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1059,7 +1369,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1069,7 +1386,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1079,7 +1403,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1089,7 +1420,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1099,7 +1437,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1108,11 +1453,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1120,10 +1468,11 @@ class AnalyticsClient
      * Get Analytics API status.
      *
      * @param string $index The index name to target. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse
      */
-    public function getStatus($index)
+    public function getStatus($index, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1137,7 +1486,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1146,11 +1502,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1163,6 +1522,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse
      */
@@ -1170,9 +1530,10 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1209,7 +1570,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1219,7 +1587,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1229,7 +1604,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1239,7 +1621,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1249,7 +1638,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1259,7 +1655,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1268,11 +1671,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1286,6 +1692,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse
      */
@@ -1294,9 +1701,10 @@ class AnalyticsClient
         $search = null,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1333,7 +1741,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1343,7 +1758,14 @@ class AnalyticsClient
         }
 
         if ($search !== null) {
-            if ('form' === 'form' && is_array($search)) {
+            if (
+                is_array($search) &&
+                !in_array(
+                    'search',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($search as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1353,7 +1775,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1363,7 +1792,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1373,7 +1809,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1383,7 +1826,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1393,7 +1843,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1402,11 +1859,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1421,6 +1881,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse
      */
@@ -1430,9 +1891,10 @@ class AnalyticsClient
         $search = null,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'attribute' is set
         if (
@@ -1478,7 +1940,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1488,7 +1957,14 @@ class AnalyticsClient
         }
 
         if ($search !== null) {
-            if ('form' === 'form' && is_array($search)) {
+            if (
+                is_array($search) &&
+                !in_array(
+                    'search',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($search as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1498,7 +1974,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1508,7 +1991,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1518,7 +2008,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1528,7 +2025,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1538,7 +2042,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1556,11 +2067,14 @@ class AnalyticsClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1574,6 +2088,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse
      */
@@ -1582,9 +2097,10 @@ class AnalyticsClient
         $search = null,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1621,7 +2137,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1631,7 +2154,14 @@ class AnalyticsClient
         }
 
         if ($search !== null) {
-            if ('form' === 'form' && is_array($search)) {
+            if (
+                is_array($search) &&
+                !in_array(
+                    'search',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($search as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1641,7 +2171,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1651,7 +2188,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1661,7 +2205,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1671,7 +2222,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1681,7 +2239,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1690,11 +2255,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1709,18 +2277,20 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse
      */
     public function getTopHits(
         $index,
         $search = null,
-        $clickAnalytics = false,
+        $clickAnalytics = null,
         $startDate = null,
         $endDate = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1757,7 +2327,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1767,7 +2344,14 @@ class AnalyticsClient
         }
 
         if ($search !== null) {
-            if ('form' === 'form' && is_array($search)) {
+            if (
+                is_array($search) &&
+                !in_array(
+                    'search',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($search as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1777,7 +2361,14 @@ class AnalyticsClient
         }
 
         if ($clickAnalytics !== null) {
-            if ('form' === 'form' && is_array($clickAnalytics)) {
+            if (
+                is_array($clickAnalytics) &&
+                !in_array(
+                    'clickAnalytics',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($clickAnalytics as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1787,7 +2378,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1797,7 +2395,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1807,7 +2412,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1817,7 +2429,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1827,7 +2446,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1836,11 +2462,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1856,19 +2485,21 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse
      */
     public function getTopSearches(
         $index,
-        $clickAnalytics = false,
+        $clickAnalytics = null,
         $startDate = null,
         $endDate = null,
         $orderBy = null,
         $direction = null,
-        $limit = 10,
-        $offset = 0,
-        $tags = null
+        $limit = null,
+        $offset = null,
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -1905,7 +2536,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1915,7 +2553,14 @@ class AnalyticsClient
         }
 
         if ($clickAnalytics !== null) {
-            if ('form' === 'form' && is_array($clickAnalytics)) {
+            if (
+                is_array($clickAnalytics) &&
+                !in_array(
+                    'clickAnalytics',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($clickAnalytics as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1925,7 +2570,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1935,7 +2587,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1945,7 +2604,14 @@ class AnalyticsClient
         }
 
         if ($orderBy !== null) {
-            if ('form' === 'form' && is_array($orderBy)) {
+            if (
+                is_array($orderBy) &&
+                !in_array(
+                    'orderBy',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($orderBy as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1955,7 +2621,14 @@ class AnalyticsClient
         }
 
         if ($direction !== null) {
-            if ('form' === 'form' && is_array($direction)) {
+            if (
+                is_array($direction) &&
+                !in_array(
+                    'direction',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($direction as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1965,7 +2638,14 @@ class AnalyticsClient
         }
 
         if ($limit !== null) {
-            if ('form' === 'form' && is_array($limit)) {
+            if (
+                is_array($limit) &&
+                !in_array(
+                    'limit',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($limit as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1975,7 +2655,14 @@ class AnalyticsClient
         }
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1985,7 +2672,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1994,11 +2688,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2009,6 +2706,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse
      */
@@ -2016,7 +2714,8 @@ class AnalyticsClient
         $index,
         $startDate = null,
         $endDate = null,
-        $tags = null
+        $tags = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
         if ($index === null || (is_array($index) && count($index) === 0)) {
@@ -2053,7 +2752,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if ('form' === 'form' && is_array($index)) {
+            if (
+                is_array($index) &&
+                !in_array(
+                    'index',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($index as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2063,7 +2769,14 @@ class AnalyticsClient
         }
 
         if ($startDate !== null) {
-            if ('form' === 'form' && is_array($startDate)) {
+            if (
+                is_array($startDate) &&
+                !in_array(
+                    'startDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($startDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2073,7 +2786,14 @@ class AnalyticsClient
         }
 
         if ($endDate !== null) {
-            if ('form' === 'form' && is_array($endDate)) {
+            if (
+                is_array($endDate) &&
+                !in_array(
+                    'endDate',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($endDate as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2083,7 +2803,14 @@ class AnalyticsClient
         }
 
         if ($tags !== null) {
-            if ('form' === 'form' && is_array($tags)) {
+            if (
+                is_array($tags) &&
+                !in_array(
+                    'tags',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($tags as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2092,11 +2819,14 @@ class AnalyticsClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2106,11 +2836,16 @@ class AnalyticsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function post($path, $parameters = null, $body = null)
-    {
+    public function post(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -2123,7 +2858,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2140,12 +2882,14 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2155,11 +2899,16 @@ class AnalyticsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function put($path, $parameters = null, $body = null)
-    {
+    public function put(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -2172,7 +2921,14 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2189,12 +2945,14 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2202,20 +2960,23 @@ class AnalyticsClient
         $method,
         $resourcePath,
         $queryParams,
-        $httpBody
+        $httpBody,
+        $requestOptions
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
         if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
-                $resourcePath . ($query ? "?{$query}" : '')
+                $resourcePath . ($query ? "?{$query}" : ''),
+                $requestOptions
             );
         } else {
             $request = $this->api->write(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : ''),
-                $httpBody
+                $httpBody,
+                $requestOptions
             );
         }
 

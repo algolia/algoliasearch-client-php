@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -102,10 +103,11 @@ class RecommendClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function del($path, $parameters = null)
+    public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -119,7 +121,14 @@ class RecommendClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -133,11 +142,14 @@ class RecommendClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -146,10 +158,11 @@ class RecommendClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function get($path, $parameters = null)
+    public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -163,7 +176,14 @@ class RecommendClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -177,11 +197,14 @@ class RecommendClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -193,10 +216,14 @@ class RecommendClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse
      */
-    public function getRecommendations($getRecommendationsParams)
-    {
+    public function getRecommendations(
+        $getRecommendationsParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'getRecommendationsParams' is set
         if (
             $getRecommendationsParams === null ||
@@ -215,12 +242,14 @@ class RecommendClient
         if (isset($getRecommendationsParams)) {
             $httpBody = $getRecommendationsParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -230,11 +259,16 @@ class RecommendClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function post($path, $parameters = null, $body = null)
-    {
+    public function post(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -247,7 +281,14 @@ class RecommendClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -264,12 +305,14 @@ class RecommendClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -279,11 +322,16 @@ class RecommendClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function put($path, $parameters = null, $body = null)
-    {
+    public function put(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -296,7 +344,14 @@ class RecommendClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -313,12 +368,14 @@ class RecommendClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -326,20 +383,23 @@ class RecommendClient
         $method,
         $resourcePath,
         $queryParams,
-        $httpBody
+        $httpBody,
+        $requestOptions
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
         if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
-                $resourcePath . ($query ? "?{$query}" : '')
+                $resourcePath . ($query ? "?{$query}" : ''),
+                $requestOptions
             );
         } else {
             $request = $this->api->write(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : ''),
-                $httpBody
+                $httpBody,
+                $requestOptions
             );
         }
 

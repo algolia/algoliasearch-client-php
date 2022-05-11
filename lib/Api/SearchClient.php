@@ -5,10 +5,10 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
+use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use GuzzleHttp\RequestOptions;
 
 /**
  * SearchClient Class Doc Comment
@@ -112,9 +112,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\ApiKey
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse
      */
-    public function addApiKey($apiKey)
+    public function addApiKey($apiKey, $requestOptions = [])
     {
         // verify the required parameter 'apiKey' is set
         if ($apiKey === null || (is_array($apiKey) && count($apiKey) === 0)) {
@@ -130,12 +132,14 @@ class SearchClient
         if (isset($apiKey)) {
             $httpBody = $apiKey;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -145,11 +149,16 @@ class SearchClient
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
      * @param array $body The Algolia object. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse
      */
-    public function addOrUpdateObject($indexName, $objectID, $body)
-    {
+    public function addOrUpdateObject(
+        $indexName,
+        $objectID,
+        $body,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -200,12 +209,14 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -216,9 +227,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\Source
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
-    public function appendSource($source)
+    public function appendSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
         if ($source === null || (is_array($source) && count($source) === 0)) {
@@ -234,12 +247,14 @@ class SearchClient
         if (isset($source)) {
             $httpBody = $source;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -252,10 +267,15 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\AssignUserIdParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
-    public function assignUserId($xAlgoliaUserID, $assignUserIdParams)
-    {
+    public function assignUserId(
+        $xAlgoliaUserID,
+        $assignUserIdParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'xAlgoliaUserID' is set
         if (
             $xAlgoliaUserID === null ||
@@ -285,25 +305,18 @@ class SearchClient
         $queryParams = [];
         $httpBody = [];
 
-        if ($xAlgoliaUserID !== null) {
-            if ('form' === 'form' && is_array($xAlgoliaUserID)) {
-                foreach ($xAlgoliaUserID as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            } else {
-                $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
-            }
-        }
-
         if (isset($assignUserIdParams)) {
             $httpBody = $assignUserIdParams;
         }
+        $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -316,9 +329,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchWriteParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\BatchResponse
      */
-    public function batch($indexName, $batchWriteParams)
+    public function batch($indexName, $batchWriteParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -355,12 +370,14 @@ class SearchClient
         if (isset($batchWriteParams)) {
             $httpBody = $batchWriteParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -374,11 +391,14 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchAssignUserIdsParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
     public function batchAssignUserIds(
         $xAlgoliaUserID,
-        $batchAssignUserIdsParams
+        $batchAssignUserIdsParams,
+        $requestOptions = []
     ) {
         // verify the required parameter 'xAlgoliaUserID' is set
         if (
@@ -410,25 +430,18 @@ class SearchClient
         $queryParams = [];
         $httpBody = [];
 
-        if ($xAlgoliaUserID !== null) {
-            if ('form' === 'form' && is_array($xAlgoliaUserID)) {
-                foreach ($xAlgoliaUserID as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            } else {
-                $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
-            }
-        }
-
         if (isset($batchAssignUserIdsParams)) {
             $httpBody = $batchAssignUserIdsParams;
         }
+        $queryParams['X-Algolia-User-ID'] = $xAlgoliaUserID;
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -442,11 +455,14 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
     public function batchDictionaryEntries(
         $dictionaryName,
-        $batchDictionaryEntriesParams
+        $batchDictionaryEntriesParams,
+        $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
         if (
@@ -484,12 +500,14 @@ class SearchClient
         if (isset($batchDictionaryEntriesParams)) {
             $httpBody = $batchDictionaryEntriesParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -500,6 +518,7 @@ class SearchClient
      * @param array $rule rule (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      * @param bool $clearExistingRules When true, existing Rules are cleared before adding this batch. When false, existing Rules are kept. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
@@ -507,7 +526,8 @@ class SearchClient
         $indexName,
         $rule,
         $forwardToReplicas = null,
-        $clearExistingRules = null
+        $clearExistingRules = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -530,7 +550,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -540,7 +567,14 @@ class SearchClient
         }
 
         if ($clearExistingRules !== null) {
-            if ('form' === 'form' && is_array($clearExistingRules)) {
+            if (
+                is_array($clearExistingRules) &&
+                !in_array(
+                    'clearExistingRules',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($clearExistingRules as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -561,12 +595,14 @@ class SearchClient
         if (isset($rule)) {
             $httpBody = $rule;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -580,10 +616,15 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BrowseRequest
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\BrowseResponse
      */
-    public function browse($indexName, $browseRequest = null)
-    {
+    public function browse(
+        $indexName,
+        $browseRequest = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -610,12 +651,14 @@ class SearchClient
         if (isset($browseRequest)) {
             $httpBody = $browseRequest;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -624,11 +667,15 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function clearAllSynonyms($indexName, $forwardToReplicas = null)
-    {
+    public function clearAllSynonyms(
+        $indexName,
+        $forwardToReplicas = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -644,7 +691,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -662,11 +716,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -674,10 +731,11 @@ class SearchClient
      * Clear all objects from an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function clearObjects($indexName)
+    public function clearObjects($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -702,11 +760,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -715,11 +776,15 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function clearRules($indexName, $forwardToReplicas = null)
-    {
+    public function clearRules(
+        $indexName,
+        $forwardToReplicas = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -735,7 +800,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -753,11 +825,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -766,10 +841,11 @@ class SearchClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function del($path, $parameters = null)
+    public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -783,7 +859,14 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -797,11 +880,14 @@ class SearchClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -809,10 +895,11 @@ class SearchClient
      * Delete an API key.
      *
      * @param string $key API Key string. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeleteApiKeyResponse
      */
-    public function deleteApiKey($key)
+    public function deleteApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
@@ -834,11 +921,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -850,9 +940,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
-    public function deleteBy($indexName, $searchParams)
+    public function deleteBy($indexName, $searchParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -889,12 +981,14 @@ class SearchClient
         if (isset($searchParams)) {
             $httpBody = $searchParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -902,10 +996,11 @@ class SearchClient
      * Delete index.
      *
      * @param string $indexName The index in which to perform the request. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
-    public function deleteIndex($indexName)
+    public function deleteIndex($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -930,11 +1025,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -943,10 +1041,11 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
-    public function deleteObject($indexName, $objectID)
+    public function deleteObject($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -989,11 +1088,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1003,11 +1105,16 @@ class SearchClient
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function deleteRule($indexName, $objectID, $forwardToReplicas = null)
-    {
+    public function deleteRule(
+        $indexName,
+        $objectID,
+        $forwardToReplicas = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -1032,7 +1139,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1059,11 +1173,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1071,10 +1188,11 @@ class SearchClient
      * Remove a single source.
      *
      * @param string $source The IP range of the source. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeleteSourceResponse
      */
-    public function deleteSource($source)
+    public function deleteSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
         if ($source === null || (is_array($source) && count($source) === 0)) {
@@ -1096,11 +1214,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1110,13 +1231,15 @@ class SearchClient
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
     public function deleteSynonym(
         $indexName,
         $objectID,
-        $forwardToReplicas = null
+        $forwardToReplicas = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -1142,7 +1265,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1169,11 +1299,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1182,10 +1315,11 @@ class SearchClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function get($path, $parameters = null)
+    public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
@@ -1199,7 +1333,14 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1213,11 +1354,14 @@ class SearchClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1225,10 +1369,11 @@ class SearchClient
      * Get an API key.
      *
      * @param string $key API Key string. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\Key
      */
-    public function getApiKey($key)
+    public function getApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
@@ -1250,51 +1395,62 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * List available languages.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|array<string,\Algolia\AlgoliaSearch\Model\Search\Languages>
      */
-    public function getDictionaryLanguages()
+    public function getDictionaryLanguages($requestOptions = [])
     {
         $resourcePath = '/1/dictionaries/*/languages';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * Retrieve dictionaries settings.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse
      */
-    public function getDictionarySettings()
+    public function getDictionarySettings($requestOptions = [])
     {
         $resourcePath = '/1/dictionaries/*/settings';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1305,14 +1461,16 @@ class SearchClient
      * @param int $length Maximum number of entries to retrieve. The maximum allowed value is 1000. (optional, default to 10)
      * @param string $indexName Index for which log entries should be retrieved. When omitted, log entries are retrieved across all indices. (optional)
      * @param array $type Type of log entries to retrieve. When omitted, all log entries are retrieved. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetLogsResponse
      */
     public function getLogs(
-        $offset = 0,
-        $length = 10,
+        $offset = null,
+        $length = null,
         $indexName = null,
-        $type = null
+        $type = null,
+        $requestOptions = []
     ) {
         if ($length !== null && $length > 1000) {
             throw new \InvalidArgumentException(
@@ -1325,7 +1483,14 @@ class SearchClient
         $httpBody = [];
 
         if ($offset !== null) {
-            if ('form' === 'form' && is_array($offset)) {
+            if (
+                is_array($offset) &&
+                !in_array(
+                    'offset',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($offset as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1335,7 +1500,14 @@ class SearchClient
         }
 
         if ($length !== null) {
-            if ('form' === 'form' && is_array($length)) {
+            if (
+                is_array($length) &&
+                !in_array(
+                    'length',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($length as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1345,7 +1517,14 @@ class SearchClient
         }
 
         if ($indexName !== null) {
-            if ('form' === 'form' && is_array($indexName)) {
+            if (
+                is_array($indexName) &&
+                !in_array(
+                    'indexName',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($indexName as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1355,7 +1534,14 @@ class SearchClient
         }
 
         if ($type !== null) {
-            if ('form' === 'form' && is_array($type)) {
+            if (
+                is_array($type) &&
+                !in_array(
+                    'type',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($type as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1364,11 +1550,14 @@ class SearchClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1378,13 +1567,15 @@ class SearchClient
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
      * @param array $attributesToRetrieve List of attributes to retrieve. If not specified, all retrievable attributes are returned. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|array<string,string>
      */
     public function getObject(
         $indexName,
         $objectID,
-        $attributesToRetrieve = null
+        $attributesToRetrieve = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -1410,7 +1601,14 @@ class SearchClient
         $httpBody = [];
 
         if ($attributesToRetrieve !== null) {
-            if ('form' === 'form' && is_array($attributesToRetrieve)) {
+            if (
+                is_array($attributesToRetrieve) &&
+                !in_array(
+                    'attributesToRetrieve',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($attributesToRetrieve as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1437,11 +1635,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1453,9 +1654,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\GetObjectsParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse
      */
-    public function getObjects($getObjectsParams)
+    public function getObjects($getObjectsParams, $requestOptions = [])
     {
         // verify the required parameter 'getObjectsParams' is set
         if (
@@ -1474,12 +1677,14 @@ class SearchClient
         if (isset($getObjectsParams)) {
             $httpBody = $getObjectsParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1488,10 +1693,11 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\Rule
      */
-    public function getRule($indexName, $objectID)
+    public function getRule($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -1534,11 +1740,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1546,10 +1755,11 @@ class SearchClient
      * Retrieve settings of an index.
      *
      * @param string $indexName The index in which to perform the request. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\IndexSettings
      */
-    public function getSettings($indexName)
+    public function getSettings($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -1574,31 +1784,38 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * List all allowed sources.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\Source[]
      */
-    public function getSources()
+    public function getSources($requestOptions = [])
     {
         $resourcePath = '/1/security/sources';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1607,10 +1824,11 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SynonymHit
      */
-    public function getSynonym($indexName, $objectID)
+    public function getSynonym($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -1653,11 +1871,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1666,10 +1887,11 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param int $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetTaskResponse
      */
-    public function getTask($indexName, $taskID)
+    public function getTask($indexName, $taskID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -1709,31 +1931,38 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * Get top userID.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse
      */
-    public function getTopUserIds()
+    public function getTopUserIds($requestOptions = [])
     {
         $resourcePath = '/1/clusters/mapping/top';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1741,10 +1970,11 @@ class SearchClient
      * Get userID.
      *
      * @param string $userID userID to assign. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UserId
      */
-    public function getUserId($userID)
+    public function getUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
         if ($userID === null || (is_array($userID) && count($userID) === 0)) {
@@ -1771,11 +2001,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1783,17 +2016,27 @@ class SearchClient
      * Get migration status.
      *
      * @param bool $getClusters Whether to get clusters or not. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
-    public function hasPendingMappings($getClusters = null)
-    {
+    public function hasPendingMappings(
+        $getClusters = null,
+        $requestOptions = []
+    ) {
         $resourcePath = '/1/clusters/mapping/pending';
         $queryParams = [];
         $httpBody = [];
 
         if ($getClusters !== null) {
-            if ('form' === 'form' && is_array($getClusters)) {
+            if (
+                is_array($getClusters) &&
+                !in_array(
+                    'getClusters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($getClusters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1802,51 +2045,62 @@ class SearchClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * List API Keys.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse
      */
-    public function listApiKeys()
+    public function listApiKeys($requestOptions = [])
     {
         $resourcePath = '/1/keys';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
     /**
      * List clusters.
      *
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListClustersResponse
      */
-    public function listClusters()
+    public function listClusters($requestOptions = [])
     {
         $resourcePath = '/1/clusters';
         $queryParams = [];
         $httpBody = [];
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1854,17 +2108,25 @@ class SearchClient
      * List existing indexes.
      *
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListIndicesResponse
      */
-    public function listIndices($page = null)
+    public function listIndices($page = null, $requestOptions = [])
     {
         $resourcePath = '/1/indexes';
         $queryParams = [];
         $httpBody = [];
 
         if ($page !== null) {
-            if ('form' === 'form' && is_array($page)) {
+            if (
+                is_array($page) &&
+                !in_array(
+                    'page',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($page as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1873,11 +2135,14 @@ class SearchClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1886,17 +2151,28 @@ class SearchClient
      *
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional)
      * @param int $hitsPerPage Maximum number of objects to retrieve. (optional, default to 100)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse
      */
-    public function listUserIds($page = null, $hitsPerPage = 100)
-    {
+    public function listUserIds(
+        $page = null,
+        $hitsPerPage = null,
+        $requestOptions = []
+    ) {
         $resourcePath = '/1/clusters/mapping';
         $queryParams = [];
         $httpBody = [];
 
         if ($page !== null) {
-            if ('form' === 'form' && is_array($page)) {
+            if (
+                is_array($page) &&
+                !in_array(
+                    'page',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($page as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1906,7 +2182,14 @@ class SearchClient
         }
 
         if ($hitsPerPage !== null) {
-            if ('form' === 'form' && is_array($hitsPerPage)) {
+            if (
+                is_array($hitsPerPage) &&
+                !in_array(
+                    'hitsPerPage',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($hitsPerPage as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -1915,11 +2198,14 @@ class SearchClient
             }
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'GET',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1931,9 +2217,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse
      */
-    public function multipleBatch($batchParams)
+    public function multipleBatch($batchParams, $requestOptions = [])
     {
         // verify the required parameter 'batchParams' is set
         if (
@@ -1952,12 +2240,14 @@ class SearchClient
         if (isset($batchParams)) {
             $httpBody = $batchParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -1970,10 +2260,14 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\MultipleQueriesParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesResponse
      */
-    public function multipleQueries($multipleQueriesParams)
-    {
+    public function multipleQueries(
+        $multipleQueriesParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'multipleQueriesParams' is set
         if (
             $multipleQueriesParams === null ||
@@ -1992,12 +2286,14 @@ class SearchClient
         if (isset($multipleQueriesParams)) {
             $httpBody = $multipleQueriesParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2012,10 +2308,15 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\OperationIndexParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function operationIndex($indexName, $operationIndexParams)
-    {
+    public function operationIndex(
+        $indexName,
+        $operationIndexParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -2052,12 +2353,14 @@ class SearchClient
         if (isset($operationIndexParams)) {
             $httpBody = $operationIndexParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2068,6 +2371,7 @@ class SearchClient
      * @param string $objectID Unique identifier of an object. (required)
      * @param array $attributeOrBuiltInOperation List of attributes to update. (required)
      * @param bool $createIfNotExists Creates the record if it does not exist yet. (optional, default to true)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse
      */
@@ -2075,7 +2379,8 @@ class SearchClient
         $indexName,
         $objectID,
         $attributeOrBuiltInOperation,
-        $createIfNotExists = true
+        $createIfNotExists = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2111,7 +2416,14 @@ class SearchClient
         $httpBody = [];
 
         if ($createIfNotExists !== null) {
-            if ('form' === 'form' && is_array($createIfNotExists)) {
+            if (
+                is_array($createIfNotExists) &&
+                !in_array(
+                    'createIfNotExists',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($createIfNotExists as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2141,12 +2453,14 @@ class SearchClient
         if (isset($attributeOrBuiltInOperation)) {
             $httpBody = $attributeOrBuiltInOperation;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2156,11 +2470,16 @@ class SearchClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function post($path, $parameters = null, $body = null)
-    {
+    public function post(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -2173,7 +2492,14 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2190,12 +2516,14 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2205,11 +2533,16 @@ class SearchClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|object
      */
-    public function put($path, $parameters = null, $body = null)
-    {
+    public function put(
+        $path,
+        $parameters = null,
+        $body = null,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'path' is set
         if ($path === null || (is_array($path) && count($path) === 0)) {
             throw new \InvalidArgumentException(
@@ -2222,7 +2555,14 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if ('form' === 'form' && is_array($parameters)) {
+            if (
+                is_array($parameters) &&
+                !in_array(
+                    'parameters',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($parameters as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2239,12 +2579,14 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2252,10 +2594,11 @@ class SearchClient
      * Remove userID.
      *
      * @param string $userID userID to assign. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse
      */
-    public function removeUserId($userID)
+    public function removeUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
         if ($userID === null || (is_array($userID) && count($userID) === 0)) {
@@ -2282,11 +2625,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2294,10 +2640,11 @@ class SearchClient
      * Replace all allowed sources.
      *
      * @param array $source The sources to allow. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ReplaceSourceResponse
      */
-    public function replaceSources($source)
+    public function replaceSources($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
         if ($source === null || (is_array($source) && count($source) === 0)) {
@@ -2313,12 +2660,14 @@ class SearchClient
         if (isset($source)) {
             $httpBody = $source;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2326,10 +2675,11 @@ class SearchClient
      * Restore an API key.
      *
      * @param string $key API Key string. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse
      */
-    public function restoreApiKey($key)
+    public function restoreApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
@@ -2351,11 +2701,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2364,10 +2717,11 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $body The Algolia record. (required)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SaveObjectResponse
      */
-    public function saveObject($indexName, $body)
+    public function saveObject($indexName, $body, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -2401,12 +2755,14 @@ class SearchClient
         if (isset($body)) {
             $httpBody = $body;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2426,6 +2782,7 @@ class SearchClient
      * @see \Algolia\AlgoliaSearch\Model\Search\Rule
      *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedRuleResponse
      */
@@ -2433,7 +2790,8 @@ class SearchClient
         $indexName,
         $objectID,
         $rule,
-        $forwardToReplicas = null
+        $forwardToReplicas = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2465,7 +2823,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2495,12 +2860,14 @@ class SearchClient
         if (isset($rule)) {
             $httpBody = $rule;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2523,6 +2890,7 @@ class SearchClient
      * @see \Algolia\AlgoliaSearch\Model\Search\SynonymHit
      *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse
      */
@@ -2530,7 +2898,8 @@ class SearchClient
         $indexName,
         $objectID,
         $synonymHit,
-        $forwardToReplicas = null
+        $forwardToReplicas = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2565,7 +2934,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2595,12 +2971,14 @@ class SearchClient
         if (isset($synonymHit)) {
             $httpBody = $synonymHit;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2611,6 +2989,7 @@ class SearchClient
      * @param array $synonymHit synonymHit (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      * @param bool $replaceExistingSynonyms Replace all synonyms of the index with the ones sent with this request. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
@@ -2618,7 +2997,8 @@ class SearchClient
         $indexName,
         $synonymHit,
         $forwardToReplicas = null,
-        $replaceExistingSynonyms = null
+        $replaceExistingSynonyms = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2644,7 +3024,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2654,7 +3041,14 @@ class SearchClient
         }
 
         if ($replaceExistingSynonyms !== null) {
-            if ('form' === 'form' && is_array($replaceExistingSynonyms)) {
+            if (
+                is_array($replaceExistingSynonyms) &&
+                !in_array(
+                    'replaceExistingSynonyms',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($replaceExistingSynonyms as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2677,12 +3071,14 @@ class SearchClient
         if (isset($synonymHit)) {
             $httpBody = $synonymHit;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2694,9 +3090,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponse
      */
-    public function search($indexName, $searchParams)
+    public function search($indexName, $searchParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (
@@ -2733,12 +3131,14 @@ class SearchClient
         if (isset($searchParams)) {
             $httpBody = $searchParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2754,11 +3154,14 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
     public function searchDictionaryEntries(
         $dictionaryName,
-        $searchDictionaryEntriesParams
+        $searchDictionaryEntriesParams,
+        $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
         if (
@@ -2796,12 +3199,14 @@ class SearchClient
         if (isset($searchDictionaryEntriesParams)) {
             $httpBody = $searchDictionaryEntriesParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2817,12 +3222,15 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesRequest
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse
      */
     public function searchForFacetValues(
         $indexName,
         $facetName,
-        $searchForFacetValuesRequest = null
+        $searchForFacetValuesRequest = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2868,12 +3276,14 @@ class SearchClient
         if (isset($searchForFacetValuesRequest)) {
             $httpBody = $searchForFacetValuesRequest;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2892,10 +3302,15 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchRulesParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse
      */
-    public function searchRules($indexName, $searchRulesParams)
-    {
+    public function searchRules(
+        $indexName,
+        $searchRulesParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'indexName' is set
         if (
             $indexName === null ||
@@ -2931,12 +3346,14 @@ class SearchClient
         if (isset($searchRulesParams)) {
             $httpBody = $searchRulesParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -2948,15 +3365,17 @@ class SearchClient
      * @param array $type Only search for specific types of synonyms. (optional)
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional, default to 0)
      * @param int $hitsPerPage Maximum number of objects to retrieve. (optional, default to 100)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse
      */
     public function searchSynonyms(
         $indexName,
-        $query = '',
+        $query = null,
         $type = null,
-        $page = 0,
-        $hitsPerPage = 100
+        $page = null,
+        $hitsPerPage = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -2973,7 +3392,14 @@ class SearchClient
         $httpBody = [];
 
         if ($query !== null) {
-            if ('form' === 'form' && is_array($query)) {
+            if (
+                is_array($query) &&
+                !in_array(
+                    'query',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($query as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2983,7 +3409,14 @@ class SearchClient
         }
 
         if ($type !== null) {
-            if ('form' === 'form' && is_array($type)) {
+            if (
+                is_array($type) &&
+                !in_array(
+                    'type',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($type as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -2993,7 +3426,14 @@ class SearchClient
         }
 
         if ($page !== null) {
-            if ('form' === 'form' && is_array($page)) {
+            if (
+                is_array($page) &&
+                !in_array(
+                    'page',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($page as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -3003,7 +3443,14 @@ class SearchClient
         }
 
         if ($hitsPerPage !== null) {
-            if ('form' === 'form' && is_array($hitsPerPage)) {
+            if (
+                is_array($hitsPerPage) &&
+                !in_array(
+                    'hitsPerPage',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($hitsPerPage as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -3021,11 +3468,14 @@ class SearchClient
             );
         }
 
+        $requestOptions += $queryParams;
+
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -3040,9 +3490,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse
      */
-    public function searchUserIds($searchUserIdsParams)
+    public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {
         // verify the required parameter 'searchUserIdsParams' is set
         if (
@@ -3062,12 +3514,14 @@ class SearchClient
         if (isset($searchUserIdsParams)) {
             $httpBody = $searchUserIdsParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -3079,10 +3533,14 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\DictionarySettingsParams
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function setDictionarySettings($dictionarySettingsParams)
-    {
+    public function setDictionarySettings(
+        $dictionarySettingsParams,
+        $requestOptions = []
+    ) {
         // verify the required parameter 'dictionarySettingsParams' is set
         if (
             $dictionarySettingsParams === null ||
@@ -3101,12 +3559,14 @@ class SearchClient
         if (isset($dictionarySettingsParams)) {
             $httpBody = $dictionarySettingsParams;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -3119,13 +3579,15 @@ class SearchClient
      * @see \Algolia\AlgoliaSearch\Model\Search\IndexSettings
      *
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param array $requestOptions Request Options
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
     public function setSettings(
         $indexName,
         $indexSettings,
-        $forwardToReplicas = null
+        $forwardToReplicas = null,
+        $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
         if (
@@ -3151,7 +3613,14 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if ('form' === 'form' && is_array($forwardToReplicas)) {
+            if (
+                is_array($forwardToReplicas) &&
+                !in_array(
+                    'forwardToReplicas',
+                    RequestOptionsFactory::getAttributesToFormat(),
+                    true
+                )
+            ) {
                 foreach ($forwardToReplicas as $key => $value) {
                     $queryParams[$key] = $value;
                 }
@@ -3172,12 +3641,14 @@ class SearchClient
         if (isset($indexSettings)) {
             $httpBody = $indexSettings;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -3197,9 +3668,11 @@ class SearchClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\ApiKey
      *
+     * @param array $requestOptions Request Options
+     *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse
      */
-    public function updateApiKey($key, $apiKey)
+    public function updateApiKey($key, $apiKey, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
         if ($key === null || (is_array($key) && count($key) === 0)) {
@@ -3230,12 +3703,14 @@ class SearchClient
         if (isset($apiKey)) {
             $httpBody = $apiKey;
         }
+        $requestOptions += $queryParams;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
             $queryParams,
-            $httpBody
+            $httpBody,
+            $requestOptions
         );
     }
 
@@ -3243,20 +3718,23 @@ class SearchClient
         $method,
         $resourcePath,
         $queryParams,
-        $httpBody
+        $httpBody,
+        $requestOptions
     ) {
         $query = \GuzzleHttp\Psr7\Query::build($queryParams);
 
         if ($method === 'GET') {
             $request = $this->api->read(
                 $method,
-                $resourcePath . ($query ? "?{$query}" : '')
+                $resourcePath . ($query ? "?{$query}" : ''),
+                $requestOptions
             );
         } else {
             $request = $this->api->write(
                 $method,
                 $resourcePath . ($query ? "?{$query}" : ''),
-                $httpBody
+                $httpBody,
+                $requestOptions
             );
         }
 

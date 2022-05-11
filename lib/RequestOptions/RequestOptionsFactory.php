@@ -9,14 +9,7 @@ final class RequestOptionsFactory
 {
     private $config;
 
-    private $validQueryParameters = [
-        'forwardToReplicas',
-        'replaceExistingSynonyms',
-        'clearExistingRules',
-        'getVersion',
-    ];
-
-    private $validHeaders = ['Content-type', 'User-Agent', 'createIfNotExists'];
+    private $validHeaders = ['Content-type', 'User-Agent'];
 
     public function __construct(Configuration $config)
     {
@@ -100,7 +93,7 @@ final class RequestOptionsFactory
     private function format($options)
     {
         foreach ($options as $name => $value) {
-            if (in_array($name, ['attributesToRetrieve', 'type'], true)) {
+            if (in_array($name, self::getAttributesToFormat(), true)) {
                 if (is_array($value)) {
                     $options[$name] = implode(',', $value);
                 }
@@ -114,8 +107,6 @@ final class RequestOptionsFactory
     {
         if ($this->isValidHeaderName($optionName)) {
             return 'headers';
-        } elseif (in_array($optionName, $this->validQueryParameters, true)) {
-            return 'query';
         } elseif (
             in_array(
                 $optionName,
@@ -126,7 +117,7 @@ final class RequestOptionsFactory
             return $optionName;
         }
 
-        return 'body';
+        return 'query';
     }
 
     private function isValidHeaderName($name)
@@ -140,5 +131,10 @@ final class RequestOptionsFactory
         }
 
         return false;
+    }
+
+    public static function getAttributesToFormat()
+    {
+        return ['attributesToRetrieve', 'type'];
     }
 }

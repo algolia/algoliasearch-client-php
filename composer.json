@@ -1,5 +1,6 @@
 {
   "name": "algolia/algoliasearch-client-php",
+  "version": "0.0.1",
   "description": "API powering the features of Algolia.",
   "keywords": [
     "openapitools",

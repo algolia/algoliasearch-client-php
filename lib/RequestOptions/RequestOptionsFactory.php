@@ -64,7 +64,19 @@ final class RequestOptionsFactory
 
         foreach ($options as $optionName => $value) {
             if (is_array($value)) {
-                $normalized[$optionName] = $this->format($value);
+                if ($optionName === 'headers') {
+                    $headersToLowerCase = [];
+
+                    foreach ($value as $key => $v) {
+                        $headersToLowerCase[mb_strtolower($key)] = $v;
+                    }
+
+                    $normalized[$optionName] = $this->format(
+                        $headersToLowerCase
+                    );
+                } else {
+                    $normalized[$optionName] = $this->format($value);
+                }
             } else {
                 $normalized[$optionName] = $value;
             }

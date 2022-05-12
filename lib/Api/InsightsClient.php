@@ -103,7 +103,7 @@ class InsightsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -118,6 +118,7 @@ class InsightsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -142,11 +143,10 @@ class InsightsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -158,7 +158,7 @@ class InsightsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -173,6 +173,7 @@ class InsightsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -197,11 +198,10 @@ class InsightsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -214,7 +214,7 @@ class InsightsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -233,6 +233,7 @@ class InsightsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -260,11 +261,11 @@ class InsightsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -279,7 +280,7 @@ class InsightsClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Insights\InsightEvents
      *
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Insights\PushEventsResponse
      */
@@ -297,16 +298,17 @@ class InsightsClient
 
         $resourcePath = '/1/events';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if (isset($insightEvents)) {
             $httpBody = $insightEvents;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -319,7 +321,7 @@ class InsightsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -338,6 +340,7 @@ class InsightsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -365,11 +368,11 @@ class InsightsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -379,11 +382,30 @@ class InsightsClient
     private function sendRequest(
         $method,
         $resourcePath,
+        $headers,
         $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
+        if (!isset($requestOptions['headers'])) {
+            $requestOptions['headers'] = [];
+        }
+        if (!isset($requestOptions['queryParameters'])) {
+            $requestOptions['queryParameters'] = [];
+        }
+
+        $requestOptions['headers'] = array_merge(
+            $headers,
+            $requestOptions['headers']
+        );
+        $requestOptions['queryParameters'] = array_merge(
+            $queryParameters,
+            $requestOptions['queryParameters']
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build(
+            $requestOptions['queryParameters']
+        );
 
         if ($method === 'GET') {
             $request = $this->api->read(

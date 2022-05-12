@@ -8,7 +8,7 @@ final class RequestOptions
 {
     private $headers = [];
 
-    private $query = [];
+    private $queryParameters = [];
 
     private $body = [];
 
@@ -20,7 +20,7 @@ final class RequestOptions
 
     public function __construct(array $options = [])
     {
-        foreach (['headers', 'query', 'body'] as $name) {
+        foreach (['headers', 'queryParameters', 'body'] as $name) {
             if (isset($options[$name]) && !empty($options[$name])) {
                 $this->{$name} = $options[$name];
             }
@@ -120,7 +120,7 @@ final class RequestOptions
      */
     public function getQueryParameters()
     {
-        return $this->query;
+        return $this->queryParameters;
     }
 
     /**
@@ -128,7 +128,7 @@ final class RequestOptions
      */
     public function getBuiltQueryParameters()
     {
-        return Helpers::buildQuery($this->query);
+        return Helpers::buildQuery($this->queryParameters);
     }
 
     /**
@@ -141,7 +141,7 @@ final class RequestOptions
      */
     public function addQueryParameter($name, $value)
     {
-        $this->query[$name] = $value;
+        $this->queryParameters[$name] = $value;
 
         return $this;
     }
@@ -156,7 +156,10 @@ final class RequestOptions
      */
     public function addQueryParameters($parameters)
     {
-        $this->query = array_merge($this->query, $parameters);
+        $this->queryParameters = array_merge(
+            $this->queryParameters,
+            $parameters
+        );
 
         return $this;
     }
@@ -171,8 +174,8 @@ final class RequestOptions
      */
     public function addDefaultQueryParameter($name, $value)
     {
-        if (!isset($this->query[$name])) {
-            $this->query[$name] = $value;
+        if (!isset($this->queryParameters[$name])) {
+            $this->queryParameters[$name] = $value;
         }
 
         return $this;
@@ -203,7 +206,7 @@ final class RequestOptions
      */
     public function setQueryParameters($queryParameters)
     {
-        $this->query = $queryParameters;
+        $this->queryParameters = $queryParameters;
 
         return $this;
     }

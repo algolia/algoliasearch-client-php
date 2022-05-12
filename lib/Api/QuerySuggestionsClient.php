@@ -106,7 +106,7 @@ class QuerySuggestionsClient
      *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexWithIndexParam
      *
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
      */
@@ -127,16 +127,17 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/configs';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if (isset($querySuggestionsIndexWithIndexParam)) {
             $httpBody = $querySuggestionsIndexWithIndexParam;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -148,7 +149,7 @@ class QuerySuggestionsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -163,6 +164,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -187,11 +189,10 @@ class QuerySuggestionsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -202,7 +203,7 @@ class QuerySuggestionsClient
      * Delete a configuration.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
      */
@@ -220,6 +221,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -231,11 +233,10 @@ class QuerySuggestionsClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -247,7 +248,7 @@ class QuerySuggestionsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -262,6 +263,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -286,11 +288,10 @@ class QuerySuggestionsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -300,7 +301,7 @@ class QuerySuggestionsClient
     /**
      * List configurations.
      *
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndex[]
      */
@@ -308,13 +309,13 @@ class QuerySuggestionsClient
     {
         $resourcePath = '/1/configs';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
-
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -325,7 +326,7 @@ class QuerySuggestionsClient
      * Get a single configuration.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndex
      */
@@ -343,6 +344,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -354,11 +356,10 @@ class QuerySuggestionsClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -369,7 +370,7 @@ class QuerySuggestionsClient
      * Get configuration status.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Status
      */
@@ -387,6 +388,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/configs/{indexName}/status';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -398,11 +400,10 @@ class QuerySuggestionsClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -413,7 +414,7 @@ class QuerySuggestionsClient
      * Get a log file.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile[]
      */
@@ -431,6 +432,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/logs/{indexName}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -442,11 +444,10 @@ class QuerySuggestionsClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -459,7 +460,7 @@ class QuerySuggestionsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -478,6 +479,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -505,11 +507,11 @@ class QuerySuggestionsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -522,7 +524,7 @@ class QuerySuggestionsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -541,6 +543,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -568,11 +571,11 @@ class QuerySuggestionsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -590,7 +593,7 @@ class QuerySuggestionsClient
      *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndexParam
      *
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SucessResponse
      */
@@ -621,6 +624,7 @@ class QuerySuggestionsClient
 
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -635,11 +639,11 @@ class QuerySuggestionsClient
         if (isset($querySuggestionsIndexParam)) {
             $httpBody = $querySuggestionsIndexParam;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -649,11 +653,30 @@ class QuerySuggestionsClient
     private function sendRequest(
         $method,
         $resourcePath,
+        $headers,
         $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
+        if (!isset($requestOptions['headers'])) {
+            $requestOptions['headers'] = [];
+        }
+        if (!isset($requestOptions['queryParameters'])) {
+            $requestOptions['queryParameters'] = [];
+        }
+
+        $requestOptions['headers'] = array_merge(
+            $headers,
+            $requestOptions['headers']
+        );
+        $requestOptions['queryParameters'] = array_merge(
+            $queryParameters,
+            $requestOptions['queryParameters']
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build(
+            $requestOptions['queryParameters']
+        );
 
         if ($method === 'GET') {
             $request = $this->api->read(

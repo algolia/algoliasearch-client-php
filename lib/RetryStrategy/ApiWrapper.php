@@ -66,21 +66,15 @@ final class ApiWrapper implements ApiWrapperInterface
         }
     }
 
-    public function read(
-        $method,
-        $path,
-        $requestOptions = [],
-        $defaultRequestOptions = []
-    ) {
+    public function read($method, $path, $requestOptions = [])
+    {
         if ('GET' === mb_strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess(
-                $requestOptions,
-                $defaultRequestOptions
+                $requestOptions
             );
         } else {
             $requestOptions = $this->requestOptionsFactory->create(
-                $requestOptions,
-                $defaultRequestOptions
+                $requestOptions
             );
         }
 
@@ -93,23 +87,16 @@ final class ApiWrapper implements ApiWrapperInterface
         );
     }
 
-    public function write(
-        $method,
-        $path,
-        $data = [],
-        $requestOptions = [],
-        $defaultRequestOptions = []
-    ) {
+    public function write($method, $path, $data = [], $requestOptions = [])
+    {
         if ('DELETE' === mb_strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess(
-                $requestOptions,
-                $defaultRequestOptions
+                $requestOptions
             );
             $data = [];
         } else {
             $requestOptions = $this->requestOptionsFactory->create(
-                $requestOptions,
-                $defaultRequestOptions
+                $requestOptions
             );
         }
 

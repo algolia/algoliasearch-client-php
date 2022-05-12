@@ -109,7 +109,7 @@ class AbtestingClient
      *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
      */
@@ -127,16 +127,17 @@ class AbtestingClient
 
         $resourcePath = '/2/abtests';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if (isset($addABTestsRequest)) {
             $httpBody = $addABTestsRequest;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -148,7 +149,7 @@ class AbtestingClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -163,6 +164,7 @@ class AbtestingClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -187,11 +189,10 @@ class AbtestingClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -202,7 +203,7 @@ class AbtestingClient
      * Delete a test.
      *
      * @param int $id The A/B test ID. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
      */
@@ -217,6 +218,7 @@ class AbtestingClient
 
         $resourcePath = '/2/abtests/{id}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -228,11 +230,10 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -244,7 +245,7 @@ class AbtestingClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -259,6 +260,7 @@ class AbtestingClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -283,11 +285,10 @@ class AbtestingClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -298,7 +299,7 @@ class AbtestingClient
      * Get a test.
      *
      * @param int $id The A/B test ID. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTest
      */
@@ -313,6 +314,7 @@ class AbtestingClient
 
         $resourcePath = '/2/abtests/{id}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -324,11 +326,10 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -340,7 +341,7 @@ class AbtestingClient
      *
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse
      */
@@ -351,6 +352,7 @@ class AbtestingClient
     ) {
         $resourcePath = '/2/abtests';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($offset !== null) {
@@ -387,11 +389,10 @@ class AbtestingClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -404,7 +405,7 @@ class AbtestingClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -423,6 +424,7 @@ class AbtestingClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -450,11 +452,11 @@ class AbtestingClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -467,7 +469,7 @@ class AbtestingClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -486,6 +488,7 @@ class AbtestingClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -513,11 +516,11 @@ class AbtestingClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -528,7 +531,7 @@ class AbtestingClient
      * Stop a test.
      *
      * @param int $id The A/B test ID. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
      */
@@ -543,6 +546,7 @@ class AbtestingClient
 
         $resourcePath = '/2/abtests/{id}/stop';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         // path params
@@ -554,11 +558,10 @@ class AbtestingClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -568,11 +571,30 @@ class AbtestingClient
     private function sendRequest(
         $method,
         $resourcePath,
+        $headers,
         $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
+        if (!isset($requestOptions['headers'])) {
+            $requestOptions['headers'] = [];
+        }
+        if (!isset($requestOptions['queryParameters'])) {
+            $requestOptions['queryParameters'] = [];
+        }
+
+        $requestOptions['headers'] = array_merge(
+            $headers,
+            $requestOptions['headers']
+        );
+        $requestOptions['queryParameters'] = array_merge(
+            $queryParameters,
+            $requestOptions['queryParameters']
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build(
+            $requestOptions['queryParameters']
+        );
 
         if ($method === 'GET') {
             $request = $this->api->read(

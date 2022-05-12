@@ -104,7 +104,7 @@ class AnalyticsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -119,6 +119,7 @@ class AnalyticsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -143,11 +144,10 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'DELETE',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -159,7 +159,7 @@ class AnalyticsClient
      *
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -174,6 +174,7 @@ class AnalyticsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -198,11 +199,10 @@ class AnalyticsClient
             $resourcePath = str_replace('{path}', $path, $resourcePath);
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -216,7 +216,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse
      */
@@ -259,6 +259,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/clicks/averageClickPosition';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -329,11 +330,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -347,7 +347,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse
      */
@@ -390,6 +390,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/clicks/positions';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -460,11 +461,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -478,7 +478,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse
      */
@@ -521,6 +521,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/clicks/clickThroughRate';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -591,11 +592,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -609,7 +609,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponse
      */
@@ -652,6 +652,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/conversions/conversionRate';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -722,11 +723,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -740,7 +740,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse
      */
@@ -783,6 +783,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches/noClickRate';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -853,11 +854,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -871,7 +871,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse
      */
@@ -914,6 +914,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches/noResultRate';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -984,11 +985,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1002,7 +1002,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse
      */
@@ -1045,6 +1045,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches/count';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1115,11 +1116,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1135,7 +1135,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse
      */
@@ -1180,6 +1180,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches/noClicks';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1284,11 +1285,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1304,7 +1304,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse
      */
@@ -1349,6 +1349,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches/noResults';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1453,11 +1454,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1468,7 +1468,7 @@ class AnalyticsClient
      * Get Analytics API status.
      *
      * @param string $index The index name to target. (required)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse
      */
@@ -1483,6 +1483,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/status';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1502,11 +1503,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1522,7 +1522,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse
      */
@@ -1567,6 +1567,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/countries';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1671,11 +1672,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1692,7 +1692,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse
      */
@@ -1738,6 +1738,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/filters';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -1859,11 +1860,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -1881,7 +1881,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse
      */
@@ -1937,6 +1937,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/filters/{attribute}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2067,11 +2068,10 @@ class AnalyticsClient
             );
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2088,7 +2088,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse
      */
@@ -2134,6 +2134,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/filters/noResults';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2255,11 +2256,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2277,7 +2277,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse
      */
@@ -2324,6 +2324,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/hits';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2462,11 +2463,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2485,7 +2485,7 @@ class AnalyticsClient
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse
      */
@@ -2533,6 +2533,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/searches';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2688,11 +2689,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2706,7 +2706,7 @@ class AnalyticsClient
      * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
      * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse
      */
@@ -2749,6 +2749,7 @@ class AnalyticsClient
 
         $resourcePath = '/2/users/count';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($index !== null) {
@@ -2819,11 +2820,10 @@ class AnalyticsClient
             }
         }
 
-        $requestOptions += $queryParameters;
-
         return $this->sendRequest(
             'GET',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2836,7 +2836,7 @@ class AnalyticsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -2855,6 +2855,7 @@ class AnalyticsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2882,11 +2883,11 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'POST',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2899,7 +2900,7 @@ class AnalyticsClient
      * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
      * @param array $parameters Query parameters to be applied to the current query. (optional)
      * @param array $body The parameters to send with the custom request. (optional)
-     * @param array $requestOptions Request Options
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -2918,6 +2919,7 @@ class AnalyticsClient
 
         $resourcePath = '/1{path}';
         $queryParameters = [];
+        $headers = [];
         $httpBody = [];
 
         if ($parameters !== null) {
@@ -2945,11 +2947,11 @@ class AnalyticsClient
         if (isset($body)) {
             $httpBody = $body;
         }
-        $requestOptions += $queryParameters;
 
         return $this->sendRequest(
             'PUT',
             $resourcePath,
+            $headers,
             $queryParameters,
             $httpBody,
             $requestOptions
@@ -2959,11 +2961,30 @@ class AnalyticsClient
     private function sendRequest(
         $method,
         $resourcePath,
+        $headers,
         $queryParameters,
         $httpBody,
         $requestOptions
     ) {
-        $query = \GuzzleHttp\Psr7\Query::build($queryParameters);
+        if (!isset($requestOptions['headers'])) {
+            $requestOptions['headers'] = [];
+        }
+        if (!isset($requestOptions['queryParameters'])) {
+            $requestOptions['queryParameters'] = [];
+        }
+
+        $requestOptions['headers'] = array_merge(
+            $headers,
+            $requestOptions['headers']
+        );
+        $requestOptions['queryParameters'] = array_merge(
+            $queryParameters,
+            $requestOptions['queryParameters']
+        );
+
+        $query = \GuzzleHttp\Psr7\Query::build(
+            $requestOptions['queryParameters']
+        );
 
         if ($method === 'GET') {
             $request = $this->api->read(

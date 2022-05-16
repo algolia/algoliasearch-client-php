@@ -1899,7 +1899,7 @@ class SearchClient
      * Check the status of a task.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param int $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
+     * @param array $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetTaskResponse

@@ -31,7 +31,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
+        'taskID' => 'int64',
         'deletedAt' => null,
     ];
 

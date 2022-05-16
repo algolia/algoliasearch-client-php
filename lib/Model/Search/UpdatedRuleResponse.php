@@ -32,7 +32,7 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $modelFormats = [
         'objectID' => null,
         'updatedAt' => null,
-        'taskID' => null,
+        'taskID' => 'int64',
     ];
 
     /**

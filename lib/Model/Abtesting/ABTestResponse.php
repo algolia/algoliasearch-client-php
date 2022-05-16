@@ -32,7 +32,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     protected static $modelFormats = [
         'index' => null,
         'abTestID' => null,
-        'taskID' => null,
+        'taskID' => 'int64',
     ];
 
     /**

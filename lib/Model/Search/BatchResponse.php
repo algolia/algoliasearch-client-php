@@ -29,7 +29,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
+        'taskID' => 'int64',
         'objectIDs' => null,
     ];
 

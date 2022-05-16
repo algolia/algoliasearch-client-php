@@ -30,7 +30,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
+        'taskID' => 'int64',
         'updatedAt' => null,
         'id' => null,
     ];

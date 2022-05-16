@@ -32,7 +32,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
+        'taskID' => 'int64',
         'updatedAt' => null,
         'objectID' => null,
     ];

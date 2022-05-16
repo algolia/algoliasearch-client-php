@@ -31,7 +31,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     protected static $modelFormats = [
         'createdAt' => null,
-        'taskID' => null,
+        'taskID' => 'int64',
         'objectID' => null,
     ];
 

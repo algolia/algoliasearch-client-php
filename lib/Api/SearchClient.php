@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -558,37 +557,11 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         if ($clearExistingRules !== null) {
-            if (
-                is_array($clearExistingRules) &&
-                !in_array(
-                    'clearExistingRules',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($clearExistingRules as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['clearExistingRules'] = $clearExistingRules;
-            }
+            $queryParameters['clearExistingRules'] = $clearExistingRules;
         }
 
         // path params
@@ -701,20 +674,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -810,20 +770,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -869,20 +816,7 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -1150,20 +1084,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -1276,20 +1197,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -1344,20 +1252,7 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -1494,71 +1389,19 @@ class SearchClient
         $httpBody = [];
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($length !== null) {
-            if (
-                is_array($length) &&
-                !in_array(
-                    'length',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($length as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['length'] = $length;
-            }
+            $queryParameters['length'] = $length;
         }
 
         if ($indexName !== null) {
-            if (
-                is_array($indexName) &&
-                !in_array(
-                    'indexName',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($indexName as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['indexName'] = $indexName;
-            }
+            $queryParameters['indexName'] = $indexName;
         }
 
         if ($type !== null) {
-            if (
-                is_array($type) &&
-                !in_array(
-                    'type',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($type as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['type'] = $type;
-            }
+            $queryParameters['type'] = $type;
         }
 
         return $this->sendRequest(
@@ -1612,22 +1455,7 @@ class SearchClient
         $httpBody = [];
 
         if ($attributesToRetrieve !== null) {
-            if (
-                is_array($attributesToRetrieve) &&
-                !in_array(
-                    'attributesToRetrieve',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($attributesToRetrieve as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters[
-                    'attributesToRetrieve'
-                ] = $attributesToRetrieve;
-            }
+            $queryParameters['attributesToRetrieve'] = $attributesToRetrieve;
         }
 
         // path params
@@ -2043,20 +1871,7 @@ class SearchClient
         $httpBody = [];
 
         if ($getClusters !== null) {
-            if (
-                is_array($getClusters) &&
-                !in_array(
-                    'getClusters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($getClusters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['getClusters'] = $getClusters;
-            }
+            $queryParameters['getClusters'] = $getClusters;
         }
 
         return $this->sendRequest(
@@ -2133,20 +1948,7 @@ class SearchClient
         $httpBody = [];
 
         if ($page !== null) {
-            if (
-                is_array($page) &&
-                !in_array(
-                    'page',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($page as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['page'] = $page;
-            }
+            $queryParameters['page'] = $page;
         }
 
         return $this->sendRequest(
@@ -2179,37 +1981,11 @@ class SearchClient
         $httpBody = [];
 
         if ($page !== null) {
-            if (
-                is_array($page) &&
-                !in_array(
-                    'page',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($page as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['page'] = $page;
-            }
+            $queryParameters['page'] = $page;
         }
 
         if ($hitsPerPage !== null) {
-            if (
-                is_array($hitsPerPage) &&
-                !in_array(
-                    'hitsPerPage',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($hitsPerPage as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['hitsPerPage'] = $hitsPerPage;
-            }
+            $queryParameters['hitsPerPage'] = $hitsPerPage;
         }
 
         return $this->sendRequest(
@@ -2433,20 +2209,7 @@ class SearchClient
         $httpBody = [];
 
         if ($createIfNotExists !== null) {
-            if (
-                is_array($createIfNotExists) &&
-                !in_array(
-                    'createIfNotExists',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($createIfNotExists as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['createIfNotExists'] = $createIfNotExists;
-            }
+            $queryParameters['createIfNotExists'] = $createIfNotExists;
         }
 
         // path params
@@ -2510,20 +2273,7 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -2574,20 +2324,7 @@ class SearchClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -2845,20 +2582,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -2957,20 +2681,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params
@@ -3048,39 +2759,13 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         if ($replaceExistingSynonyms !== null) {
-            if (
-                is_array($replaceExistingSynonyms) &&
-                !in_array(
-                    'replaceExistingSynonyms',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($replaceExistingSynonyms as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters[
-                    'replaceExistingSynonyms'
-                ] = $replaceExistingSynonyms;
-            }
+            $queryParameters[
+                'replaceExistingSynonyms'
+            ] = $replaceExistingSynonyms;
         }
 
         // path params
@@ -3421,71 +3106,19 @@ class SearchClient
         $httpBody = [];
 
         if ($query !== null) {
-            if (
-                is_array($query) &&
-                !in_array(
-                    'query',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($query as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['query'] = $query;
-            }
+            $queryParameters['query'] = $query;
         }
 
         if ($type !== null) {
-            if (
-                is_array($type) &&
-                !in_array(
-                    'type',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($type as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['type'] = $type;
-            }
+            $queryParameters['type'] = $type;
         }
 
         if ($page !== null) {
-            if (
-                is_array($page) &&
-                !in_array(
-                    'page',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($page as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['page'] = $page;
-            }
+            $queryParameters['page'] = $page;
         }
 
         if ($hitsPerPage !== null) {
-            if (
-                is_array($hitsPerPage) &&
-                !in_array(
-                    'hitsPerPage',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($hitsPerPage as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['hitsPerPage'] = $hitsPerPage;
-            }
+            $queryParameters['hitsPerPage'] = $hitsPerPage;
         }
 
         // path params
@@ -3644,20 +3277,7 @@ class SearchClient
         $httpBody = [];
 
         if ($forwardToReplicas !== null) {
-            if (
-                is_array($forwardToReplicas) &&
-                !in_array(
-                    'forwardToReplicas',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($forwardToReplicas as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-            }
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
         }
 
         // path params

@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\PersonalizationConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -123,20 +122,7 @@ class PersonalizationClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -222,20 +208,7 @@ class PersonalizationClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -350,20 +323,7 @@ class PersonalizationClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -414,20 +374,7 @@ class PersonalizationClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params

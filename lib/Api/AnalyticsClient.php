@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AnalyticsConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -123,20 +122,7 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -178,20 +164,7 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -263,71 +236,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -394,71 +315,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -525,71 +394,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -656,71 +473,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -787,71 +552,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -918,71 +631,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1049,71 +710,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1184,105 +793,27 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1353,105 +884,27 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1487,20 +940,7 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         return $this->sendRequest(
@@ -1571,105 +1011,27 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1742,122 +1104,31 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($search !== null) {
-            if (
-                is_array($search) &&
-                !in_array(
-                    'search',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($search as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['search'] = $search;
-            }
+            $queryParameters['search'] = $search;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -1941,122 +1212,31 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($search !== null) {
-            if (
-                is_array($search) &&
-                !in_array(
-                    'search',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($search as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['search'] = $search;
-            }
+            $queryParameters['search'] = $search;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         // path params
@@ -2138,122 +1318,31 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($search !== null) {
-            if (
-                is_array($search) &&
-                !in_array(
-                    'search',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($search as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['search'] = $search;
-            }
+            $queryParameters['search'] = $search;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -2328,139 +1417,35 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($search !== null) {
-            if (
-                is_array($search) &&
-                !in_array(
-                    'search',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($search as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['search'] = $search;
-            }
+            $queryParameters['search'] = $search;
         }
 
         if ($clickAnalytics !== null) {
-            if (
-                is_array($clickAnalytics) &&
-                !in_array(
-                    'clickAnalytics',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($clickAnalytics as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['clickAnalytics'] = $clickAnalytics;
-            }
+            $queryParameters['clickAnalytics'] = $clickAnalytics;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -2537,156 +1522,39 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($clickAnalytics !== null) {
-            if (
-                is_array($clickAnalytics) &&
-                !in_array(
-                    'clickAnalytics',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($clickAnalytics as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['clickAnalytics'] = $clickAnalytics;
-            }
+            $queryParameters['clickAnalytics'] = $clickAnalytics;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($orderBy !== null) {
-            if (
-                is_array($orderBy) &&
-                !in_array(
-                    'orderBy',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($orderBy as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['orderBy'] = $orderBy;
-            }
+            $queryParameters['orderBy'] = $orderBy;
         }
 
         if ($direction !== null) {
-            if (
-                is_array($direction) &&
-                !in_array(
-                    'direction',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($direction as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['direction'] = $direction;
-            }
+            $queryParameters['direction'] = $direction;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -2753,71 +1621,19 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($index !== null) {
-            if (
-                is_array($index) &&
-                !in_array(
-                    'index',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($index as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['index'] = $index;
-            }
+            $queryParameters['index'] = $index;
         }
 
         if ($startDate !== null) {
-            if (
-                is_array($startDate) &&
-                !in_array(
-                    'startDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($startDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['startDate'] = $startDate;
-            }
+            $queryParameters['startDate'] = $startDate;
         }
 
         if ($endDate !== null) {
-            if (
-                is_array($endDate) &&
-                !in_array(
-                    'endDate',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($endDate as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['endDate'] = $endDate;
-            }
+            $queryParameters['endDate'] = $endDate;
         }
 
         if ($tags !== null) {
-            if (
-                is_array($tags) &&
-                !in_array(
-                    'tags',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($tags as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['tags'] = $tags;
-            }
+            $queryParameters['tags'] = $tags;
         }
 
         return $this->sendRequest(
@@ -2859,20 +1675,7 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -2923,20 +1726,7 @@ class AnalyticsClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params

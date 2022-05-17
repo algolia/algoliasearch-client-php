@@ -5,7 +5,6 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
 use Algolia\AlgoliaSearch\ObjectSerializer;
-use Algolia\AlgoliaSearch\RequestOptions\RequestOptionsFactory;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -168,20 +167,7 @@ class AbtestingClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -264,20 +250,7 @@ class AbtestingClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -356,37 +329,11 @@ class AbtestingClient
         $httpBody = [];
 
         if ($offset !== null) {
-            if (
-                is_array($offset) &&
-                !in_array(
-                    'offset',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($offset as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['offset'] = $offset;
-            }
+            $queryParameters['offset'] = $offset;
         }
 
         if ($limit !== null) {
-            if (
-                is_array($limit) &&
-                !in_array(
-                    'limit',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($limit as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters['limit'] = $limit;
-            }
+            $queryParameters['limit'] = $limit;
         }
 
         return $this->sendRequest(
@@ -428,20 +375,7 @@ class AbtestingClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params
@@ -492,20 +426,7 @@ class AbtestingClient
         $httpBody = [];
 
         if ($parameters !== null) {
-            if (
-                is_array($parameters) &&
-                !in_array(
-                    'parameters',
-                    RequestOptionsFactory::getAttributesToFormat(),
-                    true
-                )
-            ) {
-                foreach ($parameters as $key => $value) {
-                    $queryParameters[$key] = $value;
-                }
-            } else {
-                $queryParameters = $parameters;
-            }
+            $queryParameters = $parameters;
         }
 
         // path params

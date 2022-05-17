@@ -75,7 +75,10 @@ final class RequestOptionsFactory
                         $headersToLowerCase
                     );
                 } else {
-                    $normalized[$optionName] = $this->format($value);
+                    $normalized[$optionName] = $this->format(
+                        $value,
+                        $optionName === 'queryParameters'
+                    );
                 }
             } else {
                 $normalized[$optionName] = $value;
@@ -85,21 +88,14 @@ final class RequestOptionsFactory
         return $normalized;
     }
 
-    private function format($options)
+    private function format($options, $isQueryParameters = false)
     {
         foreach ($options as $name => $value) {
-            if (in_array($name, self::getAttributesToFormat(), true)) {
-                if (is_array($value)) {
-                    $options[$name] = implode(',', $value);
-                }
+            if (is_array($value) && $isQueryParameters) {
+                $options[$name] = implode(',', $value);
             }
         }
 
         return $options;
-    }
-
-    public static function getAttributesToFormat()
-    {
-        return ['attributesToRetrieve', 'type'];
     }
 }

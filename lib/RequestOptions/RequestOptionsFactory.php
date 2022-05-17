@@ -63,39 +63,19 @@ final class RequestOptionsFactory
         ];
 
         foreach ($options as $optionName => $value) {
-            if (is_array($value)) {
-                if ($optionName === 'headers') {
-                    $headersToLowerCase = [];
+            if (is_array($value) && $optionName === 'headers') {
+                $headersToLowerCase = [];
 
-                    foreach ($value as $key => $v) {
-                        $headersToLowerCase[mb_strtolower($key)] = $v;
-                    }
-
-                    $normalized[$optionName] = $this->format(
-                        $headersToLowerCase
-                    );
-                } else {
-                    $normalized[$optionName] = $this->format(
-                        $value,
-                        $optionName === 'queryParameters'
-                    );
+                foreach ($value as $key => $v) {
+                    $headersToLowerCase[mb_strtolower($key)] = $v;
                 }
+
+                $normalized[$optionName] = $headersToLowerCase;
             } else {
                 $normalized[$optionName] = $value;
             }
         }
 
         return $normalized;
-    }
-
-    private function format($options, $isQueryParameters = false)
-    {
-        foreach ($options as $name => $value) {
-            if (is_array($value) && $isQueryParameters) {
-                $options[$name] = implode(',', $value);
-            }
-        }
-
-        return $options;
     }
 }

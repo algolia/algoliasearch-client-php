@@ -22,7 +22,18 @@ final class Helpers
 
         $args = array_map(function ($value) {
             if (is_array($value)) {
-                return json_encode($value);
+                // PHP converts `true,false` in arrays to `1,`, so we create strings instead
+                // to avoid sending wrong values
+                $values = array_map(function ($v) {
+                    if (is_bool($v)) {
+                        return $v ? 'true' : 'false';
+                    }
+
+                    return $v;
+                }, $value);
+
+                // We then return the array as a string comma separated
+                return implode(',', $values);
             } elseif (is_bool($value)) {
                 return $value ? 'true' : 'false';
             }

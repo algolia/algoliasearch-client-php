@@ -4,7 +4,7 @@ namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Algolia;
 
-final class UserAgent
+final class AlgoliaAgent
 {
     private static $value;
 
@@ -19,7 +19,7 @@ final class UserAgent
         return self::$value;
     }
 
-    public static function addCustomUserAgent($segment, $version)
+    public static function addCustomAlgoliaAgent($segment, $version)
     {
         self::$value = null;
         self::$customSegments[trim($segment, ' ')] = trim($version, ' ');

@@ -3,7 +3,7 @@
 namespace Algolia\AlgoliaSearch\RequestOptions;
 
 use Algolia\AlgoliaSearch\Configuration\Configuration;
-use Algolia\AlgoliaSearch\Support\UserAgent;
+use Algolia\AlgoliaSearch\Support\AlgoliaAgent;
 
 final class RequestOptionsFactory
 {
@@ -50,9 +50,9 @@ final class RequestOptionsFactory
             'headers' => [
                 'X-Algolia-Application-Id' => $this->config->getAppId(),
                 'X-Algolia-API-Key' => $this->config->getAlgoliaApiKey(),
-                'User-Agent' => $this->config->getUserAgent() !== null
-                        ? $this->config->getUserAgent()
-                        : UserAgent::get(),
+                'User-Agent' => $this->config->getAlgoliaAgent() !== null
+                        ? $this->config->getAlgoliaAgent()
+                        : AlgoliaAgent::get(),
                 'Content-Type' => 'application/json',
             ],
             'queryParameters' => [],

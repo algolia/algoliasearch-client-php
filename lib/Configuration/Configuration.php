@@ -30,7 +30,7 @@ abstract class Configuration
      *
      * @var string
      */
-    protected $userAgent = null;
+    protected $algoliaAgent = null;
 
     /**
      * Debug switch (default set to false)
@@ -257,19 +257,19 @@ abstract class Configuration
     /**
      * Sets the user agent of the api client
      *
-     * @param string $userAgent the user agent of the api client
+     * @param string $algoliaAgent the user agent of the api client
      *
      * @throws \InvalidArgumentException
      *
      * @return $this
      */
-    public function setUserAgent($userAgent)
+    public function setAlgoliaAgent($algoliaAgent)
     {
-        if (!is_string($userAgent)) {
+        if (!is_string($algoliaAgent)) {
             throw new \InvalidArgumentException('User-agent must be a string.');
         }
 
-        $this->userAgent = $userAgent;
+        $this->algoliaAgent = $algoliaAgent;
 
         return $this;
     }
@@ -279,8 +279,8 @@ abstract class Configuration
      *
      * @return string user agent
      */
-    public function getUserAgent()
+    public function getAlgoliaAgent()
     {
-        return $this->userAgent;
+        return $this->algoliaAgent;
     }
 }

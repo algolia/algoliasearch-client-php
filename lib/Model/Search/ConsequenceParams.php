@@ -792,7 +792,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query
      *
-     * @param string|null $query query string
+     * @param string|null $query the text to search in the index
      *
      * @return self
      */

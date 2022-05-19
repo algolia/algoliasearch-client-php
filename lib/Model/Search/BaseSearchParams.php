@@ -19,6 +19,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
+        'query' => 'string',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
@@ -60,6 +61,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
+        'query' => null,
         'similarQuery' => null,
         'filters' => null,
         'facetFilters' => null,
@@ -121,6 +123,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
+        'query' => 'setQuery',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
         'facetFilters' => 'setFacetFilters',
@@ -162,6 +165,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
+        'query' => 'getQuery',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
         'facetFilters' => 'getFacetFilters',
@@ -231,6 +235,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
         }
@@ -383,6 +390,30 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return string|null
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param string|null $query the text to search in the index
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
     }
 
     /**

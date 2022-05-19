@@ -3,19 +3,21 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleQueriesStrategy Class Doc Comment
+ * SearchType Class Doc Comment
  *
  * @category Class
+ * @description Perform a search query with &#x60;default&#x60;, will search for facet values if &#x60;facet&#x60; is given.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class MultipleQueriesStrategy
+class SearchType
 {
     /**
      * Possible values of this enum
      */
-    const NONE = 'none';
+    const _DEFAULT = 'default';
 
-    const STOP_IF_ENOUGH_MATCHES = 'stopIfEnoughMatches';
+    const FACET = 'facet';
 
     /**
      * Gets allowable values of the enum
@@ -24,6 +26,6 @@ class MultipleQueriesStrategy
      */
     public static function getAllowableEnumValues()
     {
-        return [self::NONE, self::STOP_IF_ENOUGH_MATCHES];
+        return [self::_DEFAULT, self::FACET];
     }
 }

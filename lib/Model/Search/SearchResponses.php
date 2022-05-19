@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Recommend;
+namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * RequiredSearchParams Class Doc Comment
+ * SearchResponses Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,7 +19,7 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => 'string',
+        'results' => '\Algolia\AlgoliaSearch\Model\Search\SearchResponse[]',
     ];
 
     /**
@@ -28,7 +28,7 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelFormats = [
-        'query' => null,
+        'results' => null,
     ];
 
     /**
@@ -57,7 +57,7 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
+        'results' => 'setResults',
     ];
 
     /**
@@ -66,7 +66,7 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
+        'results' => 'getResults',
     ];
 
     /**
@@ -103,8 +103,8 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
+        if (isset($data['results'])) {
+            $this->container['results'] = $data['results'];
         }
     }
 
@@ -116,13 +116,6 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['query']) ||
-            $this->container['query'] === null
-        ) {
-            $invalidProperties[] = "'query' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -139,25 +132,25 @@ class RequiredSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets query
+     * Gets results
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]|null
      */
-    public function getQuery()
+    public function getResults()
     {
-        return $this->container['query'] ?? null;
+        return $this->container['results'] ?? null;
     }
 
     /**
-     * Sets query
+     * Sets results
      *
-     * @param string $query the text to search in the index
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]|null $results results
      *
      * @return self
      */
-    public function setQuery($query)
+    public function setResults($results)
     {
-        $this->container['query'] = $query;
+        $this->container['results'] = $results;
 
         return $this;
     }

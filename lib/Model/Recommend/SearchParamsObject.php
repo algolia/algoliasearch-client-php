@@ -19,6 +19,7 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
+        'query' => 'string',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters',
@@ -52,7 +53,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableABTest' => 'bool',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
-        'query' => 'string',
         'searchableAttributes' => 'string[]',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
@@ -105,6 +105,7 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
+        'query' => null,
         'similarQuery' => null,
         'filters' => null,
         'facetFilters' => null,
@@ -138,7 +139,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableABTest' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
-        'query' => null,
         'searchableAttributes' => null,
         'attributesForFaceting' => null,
         'unretrievableAttributes' => null,
@@ -211,6 +211,7 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
+        'query' => 'setQuery',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
         'facetFilters' => 'setFacetFilters',
@@ -244,7 +245,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableABTest' => 'setEnableABTest',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
-        'query' => 'setQuery',
         'searchableAttributes' => 'setSearchableAttributes',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
@@ -297,6 +297,7 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
+        'query' => 'getQuery',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
         'facetFilters' => 'getFacetFilters',
@@ -330,7 +331,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableABTest' => 'getEnableABTest',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
-        'query' => 'getQuery',
         'searchableAttributes' => 'getSearchableAttributes',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
@@ -411,6 +411,9 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
         }
@@ -515,9 +518,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (isset($data['reRankingApplyFilter'])) {
             $this->container['reRankingApplyFilter'] =
                 $data['reRankingApplyFilter'];
-        }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
         }
         if (isset($data['searchableAttributes'])) {
             $this->container['searchableAttributes'] =
@@ -710,12 +710,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         }
 
         if (
-            !isset($this->container['query']) ||
-            $this->container['query'] === null
-        ) {
-            $invalidProperties[] = "'query' can't be null";
-        }
-        if (
             isset($this->container['distinct']) &&
             $this->container['distinct'] > 4
         ) {
@@ -767,6 +761,30 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return string|null
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param string|null $query the text to search in the index
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
     }
 
     /**
@@ -1574,30 +1592,6 @@ class SearchParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function setReRankingApplyFilter($reRankingApplyFilter)
     {
         $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
-
-        return $this;
-    }
-
-    /**
-     * Gets query
-     *
-     * @return string
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query
-     *
-     * @param string $query the text to search in the index
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
 
         return $this;
     }

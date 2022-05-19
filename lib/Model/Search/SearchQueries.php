@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleQueriesParams Class Doc Comment
+ * SearchQueries Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,8 +19,11 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueries[]',
-        'strategy' => '\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy',
+        'indexName' => 'string',
+        'query' => 'string',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\SearchType',
+        'facet' => 'string',
+        'params' => '\Algolia\AlgoliaSearch\Model\Search\SearchParams',
     ];
 
     /**
@@ -29,8 +32,11 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelFormats = [
-        'requests' => null,
-        'strategy' => null,
+        'indexName' => null,
+        'query' => null,
+        'type' => null,
+        'facet' => null,
+        'params' => null,
     ];
 
     /**
@@ -59,8 +65,11 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $setters = [
-        'requests' => 'setRequests',
-        'strategy' => 'setStrategy',
+        'indexName' => 'setIndexName',
+        'query' => 'setQuery',
+        'type' => 'setType',
+        'facet' => 'setFacet',
+        'params' => 'setParams',
     ];
 
     /**
@@ -69,8 +78,11 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $getters = [
-        'requests' => 'getRequests',
-        'strategy' => 'getStrategy',
+        'indexName' => 'getIndexName',
+        'query' => 'getQuery',
+        'type' => 'getType',
+        'facet' => 'getFacet',
+        'params' => 'getParams',
     ];
 
     /**
@@ -107,11 +119,20 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['requests'])) {
-            $this->container['requests'] = $data['requests'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
-        if (isset($data['strategy'])) {
-            $this->container['strategy'] = $data['strategy'];
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
+        }
+        if (isset($data['facet'])) {
+            $this->container['facet'] = $data['facet'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -125,10 +146,10 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         $invalidProperties = [];
 
         if (
-            !isset($this->container['requests']) ||
-            $this->container['requests'] === null
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
         ) {
-            $invalidProperties[] = "'requests' can't be null";
+            $invalidProperties[] = "'indexName' can't be null";
         }
 
         return $invalidProperties;
@@ -146,49 +167,121 @@ class MultipleQueriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets requests
+     * Gets indexName
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleQueries[]
+     * @return string
      */
-    public function getRequests()
+    public function getIndexName()
     {
-        return $this->container['requests'] ?? null;
+        return $this->container['indexName'] ?? null;
     }
 
     /**
-     * Sets requests
+     * Sets indexName
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleQueries[] $requests requests
+     * @param string $indexName the Algolia index name
      *
      * @return self
      */
-    public function setRequests($requests)
+    public function setIndexName($indexName)
     {
-        $this->container['requests'] = $requests;
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }
 
     /**
-     * Gets strategy
+     * Gets query
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy|null
+     * @return string|null
      */
-    public function getStrategy()
+    public function getQuery()
     {
-        return $this->container['strategy'] ?? null;
+        return $this->container['query'] ?? null;
     }
 
     /**
-     * Sets strategy
+     * Sets query
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleQueriesStrategy|null $strategy strategy
+     * @param string|null $query the text to search in the index
      *
      * @return self
      */
-    public function setStrategy($strategy)
+    public function setQuery($query)
     {
-        $this->container['strategy'] = $strategy;
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchType|null
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchType|null $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets facet
+     *
+     * @return string|null
+     */
+    public function getFacet()
+    {
+        return $this->container['facet'] ?? null;
+    }
+
+    /**
+     * Sets facet
+     *
+     * @param string|null $facet the `facet` name
+     *
+     * @return self
+     */
+    public function setFacet($facet)
+    {
+        $this->container['facet'] = $facet;
+
+        return $this;
+    }
+
+    /**
+     * Gets params
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchParams|null
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchParams|null $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

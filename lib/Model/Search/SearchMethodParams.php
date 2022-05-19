@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleQueriesResponse Class Doc Comment
+ * SearchMethodParams Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,7 +19,8 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Search\SearchResponse[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Search\SearchQueries[]',
+        'strategy' => '\Algolia\AlgoliaSearch\Model\Search\SearchStrategy',
     ];
 
     /**
@@ -28,7 +29,8 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $modelFormats = [
-        'results' => null,
+        'requests' => null,
+        'strategy' => null,
     ];
 
     /**
@@ -57,7 +59,8 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
+        'requests' => 'setRequests',
+        'strategy' => 'setStrategy',
     ];
 
     /**
@@ -66,7 +69,8 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
+        'requests' => 'getRequests',
+        'strategy' => 'getStrategy',
     ];
 
     /**
@@ -103,8 +107,11 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['results'])) {
-            $this->container['results'] = $data['results'];
+        if (isset($data['requests'])) {
+            $this->container['requests'] = $data['requests'];
+        }
+        if (isset($data['strategy'])) {
+            $this->container['strategy'] = $data['strategy'];
         }
     }
 
@@ -116,6 +123,13 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
+            $invalidProperties[] = "'requests' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -132,25 +146,49 @@ class MultipleQueriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     }
 
     /**
-     * Gets results
+     * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchQueries[]
      */
-    public function getResults()
+    public function getRequests()
     {
-        return $this->container['results'] ?? null;
+        return $this->container['requests'] ?? null;
     }
 
     /**
-     * Sets results
+     * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]|null $results results
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchQueries[] $requests requests
      *
      * @return self
      */
-    public function setResults($results)
+    public function setRequests($requests)
     {
-        $this->container['results'] = $results;
+        $this->container['requests'] = $requests;
+
+        return $this;
+    }
+
+    /**
+     * Gets strategy
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchStrategy|null
+     */
+    public function getStrategy()
+    {
+        return $this->container['strategy'] ?? null;
+    }
+
+    /**
+     * Sets strategy
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchStrategy|null $strategy strategy
+     *
+     * @return self
+     */
+    public function setStrategy($strategy)
+    {
+        $this->container['strategy'] = $strategy;
 
         return $this;
     }

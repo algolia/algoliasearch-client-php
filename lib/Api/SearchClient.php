@@ -2042,53 +2042,6 @@ class SearchClient
     }
 
     /**
-     * Search multiple indices.
-     *
-     * @param array $multipleQueriesParams multipleQueriesParams (required)
-     * - $multipleQueriesParams['requests'] => (array)  (required)
-     * - $multipleQueriesParams['strategy'] => (array)
-     *
-     * @see \Algolia\AlgoliaSearch\Model\Search\MultipleQueriesParams
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\MultipleQueriesResponse
-     */
-    public function multipleQueries(
-        $multipleQueriesParams,
-        $requestOptions = []
-    ) {
-        // verify the required parameter 'multipleQueriesParams' is set
-        if (
-            $multipleQueriesParams === null ||
-            (is_array($multipleQueriesParams) &&
-                count($multipleQueriesParams) === 0)
-        ) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $multipleQueriesParams when calling multipleQueries'
-            );
-        }
-
-        $resourcePath = '/1/indexes/*/queries';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = [];
-
-        if (isset($multipleQueriesParams)) {
-            $httpBody = $multipleQueriesParams;
-        }
-
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
-    }
-
-    /**
      * Copy/move index.
      *
      * @param string $indexName The index in which to perform the request. (required)
@@ -2792,54 +2745,37 @@ class SearchClient
     }
 
     /**
-     * Search in an index.
+     * Search multiple indices.
      *
-     * @param string $indexName The index in which to perform the request. (required)
-     * @param array $searchParams searchParams (required)
+     * @param array $searchMethodParams searchMethodParams (required)
+     * - $searchMethodParams['requests'] => (array)  (required)
+     * - $searchMethodParams['strategy'] => (array)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
+     * @see \Algolia\AlgoliaSearch\Model\Search\SearchMethodParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponse
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponses
      */
-    public function search($indexName, $searchParams, $requestOptions = [])
+    public function search($searchMethodParams, $requestOptions = [])
     {
-        // verify the required parameter 'indexName' is set
+        // verify the required parameter 'searchMethodParams' is set
         if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
+            $searchMethodParams === null ||
+            (is_array($searchMethodParams) && count($searchMethodParams) === 0)
         ) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling search'
-            );
-        }
-        // verify the required parameter 'searchParams' is set
-        if (
-            $searchParams === null ||
-            (is_array($searchParams) && count($searchParams) === 0)
-        ) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $searchParams when calling search'
+                'Missing the required parameter $searchMethodParams when calling search'
             );
         }
 
-        $resourcePath = '/1/indexes/{indexName}/query';
+        $resourcePath = '/1/indexes/*/queries';
         $queryParameters = [];
         $headers = [];
         $httpBody = [];
 
-        // path params
-        if ($indexName !== null) {
-            $resourcePath = str_replace(
-                '{indexName}',
-                ObjectSerializer::toPathValue($indexName),
-                $resourcePath
-            );
-        }
-
-        if (isset($searchParams)) {
-            $httpBody = $searchParams;
+        if (isset($searchMethodParams)) {
+            $httpBody = $searchMethodParams;
         }
 
         return $this->sendRequest(
@@ -3058,6 +2994,70 @@ class SearchClient
 
         if (isset($searchRulesParams)) {
             $httpBody = $searchRulesParams;
+        }
+
+        return $this->sendRequest(
+            'POST',
+            $resourcePath,
+            $headers,
+            $queryParameters,
+            $httpBody,
+            $requestOptions
+        );
+    }
+
+    /**
+     * Search in a single index.
+     *
+     * @param string $indexName The index in which to perform the request. (required)
+     * @param array $searchParams searchParams (required)
+     *
+     * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponse
+     */
+    public function searchSingleIndex(
+        $indexName,
+        $searchParams,
+        $requestOptions = []
+    ) {
+        // verify the required parameter 'indexName' is set
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $indexName when calling searchSingleIndex'
+            );
+        }
+        // verify the required parameter 'searchParams' is set
+        if (
+            $searchParams === null ||
+            (is_array($searchParams) && count($searchParams) === 0)
+        ) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $searchParams when calling searchSingleIndex'
+            );
+        }
+
+        $resourcePath = '/1/indexes/{indexName}/query';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = [];
+
+        // path params
+        if ($indexName !== null) {
+            $resourcePath = str_replace(
+                '{indexName}',
+                ObjectSerializer::toPathValue($indexName),
+                $resourcePath
+            );
+        }
+
+        if (isset($searchParams)) {
+            $httpBody = $searchParams;
         }
 
         return $this->sendRequest(

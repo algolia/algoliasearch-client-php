@@ -19,7 +19,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'items' => '\Algolia\AlgoliaSearch\Model\Search\Indice[]',
+        'items' => '\Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]',
         'nbPages' => 'int',
     ];
 
@@ -141,7 +141,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets items
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Indice[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]|null
      */
     public function getItems()
     {
@@ -151,7 +151,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets items
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Indice[]|null $items list of the fetched indices
+     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]|null $items list of the fetched indices
      *
      * @return self
      */

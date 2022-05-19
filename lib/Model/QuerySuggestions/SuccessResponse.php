@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Abtesting;
+namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * AbTestsVariantSearchParams Class Doc Comment
+ * SuccessResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,10 +19,8 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'index' => 'string',
-        'trafficPercentage' => 'int',
-        'description' => 'string',
-        'customSearchParameters' => 'object',
+        'status' => 'int',
+        'message' => 'string',
     ];
 
     /**
@@ -31,10 +29,8 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelFormats = [
-        'index' => null,
-        'trafficPercentage' => null,
-        'description' => null,
-        'customSearchParameters' => null,
+        'status' => null,
+        'message' => null,
     ];
 
     /**
@@ -63,10 +59,8 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
-        'index' => 'setIndex',
-        'trafficPercentage' => 'setTrafficPercentage',
-        'description' => 'setDescription',
-        'customSearchParameters' => 'setCustomSearchParameters',
+        'status' => 'setStatus',
+        'message' => 'setMessage',
     ];
 
     /**
@@ -75,10 +69,8 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
-        'index' => 'getIndex',
-        'trafficPercentage' => 'getTrafficPercentage',
-        'description' => 'getDescription',
-        'customSearchParameters' => 'getCustomSearchParameters',
+        'status' => 'getStatus',
+        'message' => 'getMessage',
     ];
 
     /**
@@ -115,18 +107,11 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['index'])) {
-            $this->container['index'] = $data['index'];
+        if (isset($data['status'])) {
+            $this->container['status'] = $data['status'];
         }
-        if (isset($data['trafficPercentage'])) {
-            $this->container['trafficPercentage'] = $data['trafficPercentage'];
-        }
-        if (isset($data['description'])) {
-            $this->container['description'] = $data['description'];
-        }
-        if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] =
-                $data['customSearchParameters'];
+        if (isset($data['message'])) {
+            $this->container['message'] = $data['message'];
         }
     }
 
@@ -140,22 +125,16 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         $invalidProperties = [];
 
         if (
-            !isset($this->container['index']) ||
-            $this->container['index'] === null
+            !isset($this->container['status']) ||
+            $this->container['status'] === null
         ) {
-            $invalidProperties[] = "'index' can't be null";
+            $invalidProperties[] = "'status' can't be null";
         }
         if (
-            !isset($this->container['trafficPercentage']) ||
-            $this->container['trafficPercentage'] === null
+            !isset($this->container['message']) ||
+            $this->container['message'] === null
         ) {
-            $invalidProperties[] = "'trafficPercentage' can't be null";
-        }
-        if (
-            !isset($this->container['customSearchParameters']) ||
-            $this->container['customSearchParameters'] === null
-        ) {
-            $invalidProperties[] = "'customSearchParameters' can't be null";
+            $invalidProperties[] = "'message' can't be null";
         }
 
         return $invalidProperties;
@@ -173,97 +152,49 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets index
-     *
-     * @return string
-     */
-    public function getIndex()
-    {
-        return $this->container['index'] ?? null;
-    }
-
-    /**
-     * Sets index
-     *
-     * @param string $index the index performing the A/B test
-     *
-     * @return self
-     */
-    public function setIndex($index)
-    {
-        $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets trafficPercentage
+     * Gets status
      *
      * @return int
      */
-    public function getTrafficPercentage()
+    public function getStatus()
     {
-        return $this->container['trafficPercentage'] ?? null;
+        return $this->container['status'] ?? null;
     }
 
     /**
-     * Sets trafficPercentage
+     * Sets status
      *
-     * @param int $trafficPercentage the traffic percentage for the A/B test
+     * @param int $status the status code
      *
      * @return self
      */
-    public function setTrafficPercentage($trafficPercentage)
+    public function setStatus($status)
     {
-        $this->container['trafficPercentage'] = $trafficPercentage;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets description
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getDescription()
+    public function getMessage()
     {
-        return $this->container['description'] ?? null;
+        return $this->container['message'] ?? null;
     }
 
     /**
-     * Sets description
+     * Sets message
      *
-     * @param string|null $description the A/B test description
+     * @param string $message message of the response
      *
      * @return self
      */
-    public function setDescription($description)
+    public function setMessage($message)
     {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets customSearchParameters
-     *
-     * @return object
-     */
-    public function getCustomSearchParameters()
-    {
-        return $this->container['customSearchParameters'] ?? null;
-    }
-
-    /**
-     * Sets customSearchParameters
-     *
-     * @param object $customSearchParameters customSearchParameters
-     *
-     * @return self
-     */
-    public function setCustomSearchParameters($customSearchParameters)
-    {
-        $this->container['customSearchParameters'] = $customSearchParameters;
+        $this->container['message'] = $message;
 
         return $this;
     }

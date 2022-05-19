@@ -330,7 +330,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets method
      *
-     * @param string $method HTTP method of the perfomed request
+     * @param string $method HTTP method of the performed request
      *
      * @return self
      */
@@ -450,7 +450,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets ip
      *
-     * @param string $ip IP of the client which perfomed the request
+     * @param string $ip IP of the client which performed the request
      *
      * @return self
      */

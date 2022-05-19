@@ -20,7 +20,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelTypes = [
         'indexName' => 'string',
-        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndiceWithReplicas[]',
+        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[]',
         'languages' => 'string[]',
         'exclude' => 'string[]',
     ];
@@ -204,7 +204,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets sourceIndices
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndiceWithReplicas[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[]
      */
     public function getSourceIndices()
     {
@@ -214,7 +214,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets sourceIndices
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndiceWithReplicas[] $sourceIndices list of source indices used to generate a Query Suggestions index
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[] $sourceIndices list of source indices used to generate a Query Suggestions index
      *
      * @return self
      */

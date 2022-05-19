@@ -195,7 +195,7 @@ class AbTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage the traffic perfecentage for the A/B test
+     * @param int $trafficPercentage the traffic percentage for the A/B test
      *
      * @return self
      */

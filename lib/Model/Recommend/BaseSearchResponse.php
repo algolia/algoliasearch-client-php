@@ -528,7 +528,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets exhaustiveTypo
      *
-     * @param bool $exhaustiveTypo indicate if the typo-tolerence search was exhaustive or approximate (only included when typo-tolerance is enabled)
+     * @param bool $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
      *
      * @return self
      */

@@ -58,12 +58,12 @@ abstract class Configuration
     {
         if (isset($config['apiKey'])) {
             $this->setAlgoliaApiKey($config['apiKey']);
-            $this->setApiKey('X-Algolia-API-Key', $config['apiKey']);
+            $this->setApiKey('x-algolia-api-key', $config['apiKey']);
         }
 
         if (isset($config['appId'])) {
             $this->setAppId($config['appId']);
-            $this->setApiKey('X-Algolia-Application-Id', $config['appId']);
+            $this->setApiKey('x-algolia-application-id', $config['appId']);
         }
 
         $config += $this->getDefaultConfiguration();

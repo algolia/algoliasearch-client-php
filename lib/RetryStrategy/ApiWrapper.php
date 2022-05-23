@@ -66,30 +66,24 @@ final class ApiWrapper implements ApiWrapperInterface
         }
     }
 
-    public function read($method, $path, $requestOptions = [])
-    {
-        if ('GET' === mb_strtoupper($method)) {
+    public function sendRequest(
+        $method,
+        $path,
+        $data = [],
+        $requestOptions = [],
+        $useReadTransporter = false
+    ) {
+        /**
+         * Some POST methods in the Algolia REST API uses the `read` transporter.
+         * This information is defined at the spec level.
+         */
+        $isRead = $useReadTransporter || 'GET' === mb_strtoupper($method);
+
+        if ($isRead) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess(
                 $requestOptions
             );
-        } else {
-            $requestOptions = $this->requestOptionsFactory->create(
-                $requestOptions
-            );
-        }
-
-        return $this->request(
-            $method,
-            $path,
-            $requestOptions,
-            $this->clusterHosts->read(),
-            $requestOptions->getReadTimeout()
-        );
-    }
-
-    public function write($method, $path, $data = [], $requestOptions = [])
-    {
-        if ('DELETE' === mb_strtoupper($method)) {
+        } elseif ('DELETE' === mb_strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess(
                 $requestOptions
             );
@@ -104,8 +98,12 @@ final class ApiWrapper implements ApiWrapperInterface
             $method,
             $path,
             $requestOptions,
-            $this->clusterHosts->write(),
-            $requestOptions->getWriteTimeout(),
+            $isRead
+                ? $this->clusterHosts->read()
+                : $this->clusterHosts->write(),
+            $isRead
+                ? $requestOptions->getReadTimeout()
+                : $requestOptions->getWriteTimeout(),
             $data
         );
     }

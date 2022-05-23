@@ -35,7 +35,6 @@ class InsightsClient
         InsightsConfig $config
     ) {
         $this->config = $config;
-
         $this->api = $apiWrapper;
     }
 
@@ -332,7 +331,8 @@ class InsightsClient
         $headers,
         $queryParameters,
         $httpBody,
-        $requestOptions
+        $requestOptions,
+        $useReadTransporter = false
     ) {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
@@ -349,26 +349,16 @@ class InsightsClient
             $queryParameters,
             $requestOptions['queryParameters']
         );
-
         $query = \GuzzleHttp\Psr7\Query::build(
             $requestOptions['queryParameters']
         );
 
-        if ($method === 'GET') {
-            $request = $this->api->read(
-                $method,
-                $resourcePath . ($query ? "?{$query}" : ''),
-                $requestOptions
-            );
-        } else {
-            $request = $this->api->write(
-                $method,
-                $resourcePath . ($query ? "?{$query}" : ''),
-                $httpBody,
-                $requestOptions
-            );
-        }
-
-        return $request;
+        return $this->api->sendRequest(
+            $method,
+            $resourcePath . ($query ? "?{$query}" : ''),
+            $httpBody,
+            $requestOptions,
+            $useReadTransporter
+        );
     }
 }

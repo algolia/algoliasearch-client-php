@@ -48,8 +48,8 @@ final class RequestOptionsFactory
     {
         $normalized = [
             'headers' => [
-                'X-Algolia-Application-Id' => $this->config->getAppId(),
-                'X-Algolia-API-Key' => $this->config->getAlgoliaApiKey(),
+                'x-algolia-application-id' => $this->config->getAppId(),
+                'x-algolia-api-key' => $this->config->getAlgoliaApiKey(),
                 'User-Agent' => $this->config->getAlgoliaAgent() !== null
                         ? $this->config->getAlgoliaAgent()
                         : AlgoliaAgent::get(),
@@ -61,18 +61,22 @@ final class RequestOptionsFactory
             'writeTimeout' => $this->config->getWriteTimeout(),
             'connectTimeout' => $this->config->getConnectTimeout(),
         ];
-
         foreach ($options as $optionName => $value) {
             if (is_array($value) && $optionName === 'headers') {
                 $headersToLowerCase = [];
-
                 foreach ($value as $key => $v) {
                     $headersToLowerCase[mb_strtolower($key)] = $v;
                 }
 
-                $normalized[$optionName] = $headersToLowerCase;
+                $normalized[$optionName] = array_merge(
+                    $normalized[$optionName],
+                    $headersToLowerCase
+                );
             } else {
-                $normalized[$optionName] = $value;
+                $normalized[$optionName] = array_merge(
+                    $normalized[$optionName],
+                    $value
+                );
             }
         }
 

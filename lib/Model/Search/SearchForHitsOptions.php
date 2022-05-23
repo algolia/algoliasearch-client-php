@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchResponses Class Doc Comment
+ * SearchForHitsOptions Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,7 +19,8 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Search\SearchResponse[]',
+        'indexName' => 'string',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault',
     ];
 
     /**
@@ -28,7 +29,8 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelFormats = [
-        'results' => null,
+        'indexName' => null,
+        'type' => null,
     ];
 
     /**
@@ -57,7 +59,8 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
+        'indexName' => 'setIndexName',
+        'type' => 'setType',
     ];
 
     /**
@@ -66,7 +69,8 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
+        'indexName' => 'getIndexName',
+        'type' => 'getType',
     ];
 
     /**
@@ -103,8 +107,11 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['results'])) {
-            $this->container['results'] = $data['results'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
         }
     }
 
@@ -118,10 +125,10 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         $invalidProperties = [];
 
         if (
-            !isset($this->container['results']) ||
-            $this->container['results'] === null
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
         ) {
-            $invalidProperties[] = "'results' can't be null";
+            $invalidProperties[] = "'indexName' can't be null";
         }
 
         return $invalidProperties;
@@ -139,25 +146,49 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets results
+     * Gets indexName
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]
+     * @return string
      */
-    public function getResults()
+    public function getIndexName()
     {
-        return $this->container['results'] ?? null;
+        return $this->container['indexName'] ?? null;
     }
 
     /**
-     * Sets results
+     * Sets indexName
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResponse[] $results results
+     * @param string $indexName the Algolia index name
      *
      * @return self
      */
-    public function setResults($results)
+    public function setIndexName($indexName)
     {
-        $this->container['results'] = $results;
+        $this->container['indexName'] = $indexName;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault|null
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault|null $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

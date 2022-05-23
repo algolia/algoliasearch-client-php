@@ -3,20 +3,18 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchType Class Doc Comment
+ * SearchTypeFacet Class Doc Comment
  *
  * @category Class
  * @description Perform a search query with &#x60;default&#x60;, will search for facet values if &#x60;facet&#x60; is given.
  *
  * @package Algolia\AlgoliaSearch
  */
-class SearchType
+class SearchTypeFacet
 {
     /**
      * Possible values of this enum
      */
-    const _DEFAULT = 'default';
-
     const FACET = 'facet';
 
     /**
@@ -26,6 +24,6 @@ class SearchType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::_DEFAULT, self::FACET];
+        return [self::FACET];
     }
 }

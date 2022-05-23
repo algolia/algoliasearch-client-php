@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchQueries Class Doc Comment
+ * SearchForFacetsOptions Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,11 +19,11 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelTypes = [
-        'indexName' => 'string',
-        'query' => 'string',
-        'type' => '\Algolia\AlgoliaSearch\Model\Search\SearchType',
         'facet' => 'string',
-        'params' => '\Algolia\AlgoliaSearch\Model\Search\SearchParams',
+        'indexName' => 'string',
+        'facetQuery' => 'string',
+        'maxFacetHits' => 'int',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet',
     ];
 
     /**
@@ -32,11 +32,11 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelFormats = [
-        'indexName' => null,
-        'query' => null,
-        'type' => null,
         'facet' => null,
-        'params' => null,
+        'indexName' => null,
+        'facetQuery' => null,
+        'maxFacetHits' => null,
+        'type' => null,
     ];
 
     /**
@@ -65,11 +65,11 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $setters = [
-        'indexName' => 'setIndexName',
-        'query' => 'setQuery',
-        'type' => 'setType',
         'facet' => 'setFacet',
-        'params' => 'setParams',
+        'indexName' => 'setIndexName',
+        'facetQuery' => 'setFacetQuery',
+        'maxFacetHits' => 'setMaxFacetHits',
+        'type' => 'setType',
     ];
 
     /**
@@ -78,11 +78,11 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $getters = [
-        'indexName' => 'getIndexName',
-        'query' => 'getQuery',
-        'type' => 'getType',
         'facet' => 'getFacet',
-        'params' => 'getParams',
+        'indexName' => 'getIndexName',
+        'facetQuery' => 'getFacetQuery',
+        'maxFacetHits' => 'getMaxFacetHits',
+        'type' => 'getType',
     ];
 
     /**
@@ -119,20 +119,20 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
-        }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
-        }
-        if (isset($data['type'])) {
-            $this->container['type'] = $data['type'];
-        }
         if (isset($data['facet'])) {
             $this->container['facet'] = $data['facet'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
+        }
+        if (isset($data['facetQuery'])) {
+            $this->container['facetQuery'] = $data['facetQuery'];
+        }
+        if (isset($data['maxFacetHits'])) {
+            $this->container['maxFacetHits'] = $data['maxFacetHits'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
         }
     }
 
@@ -146,10 +146,30 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         $invalidProperties = [];
 
         if (
+            !isset($this->container['facet']) ||
+            $this->container['facet'] === null
+        ) {
+            $invalidProperties[] = "'facet' can't be null";
+        }
+        if (
             !isset($this->container['indexName']) ||
             $this->container['indexName'] === null
         ) {
             $invalidProperties[] = "'indexName' can't be null";
+        }
+        if (
+            isset($this->container['maxFacetHits']) &&
+            $this->container['maxFacetHits'] > 100
+        ) {
+            $invalidProperties[] =
+                "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
+        }
+
+        if (
+            !isset($this->container['type']) ||
+            $this->container['type'] === null
+        ) {
+            $invalidProperties[] = "'type' can't be null";
         }
 
         return $invalidProperties;
@@ -164,6 +184,30 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets facet
+     *
+     * @return string
+     */
+    public function getFacet()
+    {
+        return $this->container['facet'] ?? null;
+    }
+
+    /**
+     * Sets facet
+     *
+     * @param string $facet the `facet` name
+     *
+     * @return self
+     */
+    public function setFacet($facet)
+    {
+        $this->container['facet'] = $facet;
+
+        return $this;
     }
 
     /**
@@ -191,25 +235,55 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets query
+     * Gets facetQuery
      *
      * @return string|null
      */
-    public function getQuery()
+    public function getFacetQuery()
     {
-        return $this->container['query'] ?? null;
+        return $this->container['facetQuery'] ?? null;
     }
 
     /**
-     * Sets query
+     * Sets facetQuery
      *
-     * @param string|null $query the text to search in the index
+     * @param string|null $facetQuery text to search inside the facet's values
      *
      * @return self
      */
-    public function setQuery($query)
+    public function setFacetQuery($facetQuery)
     {
-        $this->container['query'] = $query;
+        $this->container['facetQuery'] = $facetQuery;
+
+        return $this;
+    }
+
+    /**
+     * Gets maxFacetHits
+     *
+     * @return int|null
+     */
+    public function getMaxFacetHits()
+    {
+        return $this->container['maxFacetHits'] ?? null;
+    }
+
+    /**
+     * Sets maxFacetHits
+     *
+     * @param int|null $maxFacetHits Maximum number of facet hits to return during a search for facet values. For performance reasons, the maximum allowed number of returned values is 100.
+     *
+     * @return self
+     */
+    public function setMaxFacetHits($maxFacetHits)
+    {
+        if (!is_null($maxFacetHits) && $maxFacetHits > 100) {
+            throw new \InvalidArgumentException(
+                'invalid value for $maxFacetHits when calling SearchForFacetsOptions., must be smaller than or equal to 100.'
+            );
+        }
+
+        $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
     }
@@ -217,7 +291,7 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets type
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchType|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet
      */
     public function getType()
     {
@@ -227,61 +301,13 @@ class SearchQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets type
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchType|null $type type
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet $type type
      *
      * @return self
      */
     public function setType($type)
     {
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets facet
-     *
-     * @return string|null
-     */
-    public function getFacet()
-    {
-        return $this->container['facet'] ?? null;
-    }
-
-    /**
-     * Sets facet
-     *
-     * @param string|null $facet the `facet` name
-     *
-     * @return self
-     */
-    public function setFacet($facet)
-    {
-        $this->container['facet'] = $facet;
-
-        return $this;
-    }
-
-    /**
-     * Gets params
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchParams|null
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchParams|null $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\SearchQueries[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Search\SearchQuery[]',
         'strategy' => '\Algolia\AlgoliaSearch\Model\Search\SearchStrategy',
     ];
 
@@ -148,7 +148,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchQueries[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchQuery[]
      */
     public function getRequests()
     {
@@ -158,7 +158,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchQueries[] $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchQuery[] $requests requests
      *
      * @return self
      */

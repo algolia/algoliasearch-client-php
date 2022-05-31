@@ -384,11 +384,17 @@ class Uri implements UriInterface
         return $uri;
     }
 
+    /**
+     * @return string
+     */
     public function getScheme()
     {
         return $this->scheme;
     }
 
+    /**
+     * @return string
+     */
     public function getAuthority()
     {
         $authority = $this->host;
@@ -403,36 +409,57 @@ class Uri implements UriInterface
         return $authority;
     }
 
+    /**
+     * @return string
+     */
     public function getUserInfo()
     {
         return $this->userInfo;
     }
 
+    /**
+     * @return string
+     */
     public function getHost()
     {
         return $this->host;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPort()
     {
         return $this->port;
     }
 
+    /**
+     * @return string
+     */
     public function getPath()
     {
         return $this->path;
     }
 
+    /**
+     * @return string
+     */
     public function getQuery()
     {
         return $this->query;
     }
 
+    /**
+     * @return string
+     */
     public function getFragment()
     {
         return $this->fragment;
     }
 
+    /**
+     * @return Uri
+     */
     public function withScheme($scheme)
     {
         $scheme = $this->filterScheme($scheme);
@@ -449,6 +476,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withUserInfo($user, $password = null)
     {
         $info = $user;
@@ -467,6 +497,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withHost($host)
     {
         $host = $this->filterHost($host);
@@ -482,6 +515,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withPort($port)
     {
         $port = $this->filterPort($port);
@@ -498,6 +534,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withPath($path)
     {
         $path = $this->filterPath($path);
@@ -513,6 +552,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withQuery($query)
     {
         $query = $this->filterQueryAndFragment($query);
@@ -527,6 +569,9 @@ class Uri implements UriInterface
         return $new;
     }
 
+    /**
+     * @return Uri
+     */
     public function withFragment($fragment)
     {
         $fragment = $this->filterQueryAndFragment($fragment);

@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Support;
 
+use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
+
 final class Helpers
 {
     /**
@@ -71,5 +73,69 @@ final class Helpers
         }
 
         return $data;
+    }
+
+    /**
+     * Define timeout before retry
+     *
+     * @param int $defaultTimeout
+     * @param int $retries
+     *
+     * @return float|int
+     */
+    private static function linearTimeout($defaultTimeout, $retries)
+    {
+        // minimum between timeout and 200 milliseconds * number of retries
+        // Convert into microseconds for usleep (* 1000)
+        return min($defaultTimeout, $retries * 200) * 1000;
+    }
+
+    /**
+     * Generic helper which retries a function until some conditions are met
+     *
+     * @param object $object Object calling the function
+     * @param string $function Function to be called
+     * @param array $args Arguments to be passed to the function
+     * @param callable $validate Condition to be met to stop the retry
+     * @param int $maxRetries Max number of retries
+     * @param int $timeout Timeout
+     * @param string $timeoutCalculation name of the method to call to calculate the timeout
+     *
+     * @throws ExceededRetriesException
+     *
+     * @return void
+     */
+    public static function retryUntil(
+        $object,
+        $function,
+        array $args,
+        callable $validate,
+        $maxRetries,
+        $timeout,
+        $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout'
+    ) {
+        $retry = 0;
+
+        while ($retry < $maxRetries) {
+            try {
+                $res = call_user_func_array([$object, $function], $args);
+
+                if ($validate($res)) {
+                    return;
+                }
+            } catch (\Exception $e) {
+                // if the task is interrupted, just return
+                return;
+            }
+
+            $retry++;
+            usleep(
+                call_user_func_array($timeoutCalculation, [$timeout, $retry])
+            );
+        }
+
+        throw new ExceededRetriesException(
+            'Maximum number of retries (' . $maxRetries . ') exceeded.'
+        );
     }
 }

@@ -4,10 +4,12 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
+use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use Algolia\AlgoliaSearch\Support\Helpers;
 
 /**
  * SearchClient Class Doc Comment
@@ -1727,7 +1729,7 @@ class SearchClient
      * Check the status of a task.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
+     * @param int $taskID Unique identifier of an task. Numeric value (up to 64bits). (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetTaskResponse
@@ -3370,6 +3372,46 @@ class SearchClient
             $queryParameters,
             $httpBody,
             $requestOptions
+        );
+    }
+
+    /**
+     * Wait for a task to complete with `indexName` and `taskID`.
+     *
+     * @param string $indexName Index name
+     * @param int $taskId Task Id
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param int|null $maxRetries Maximum number of retries
+     * @param int|null $timeout Timeout
+     *
+     * @throws ExceededRetriesException
+     *
+     * @return void
+     */
+    public function waitForTask(
+        $indexName,
+        $taskId,
+        $requestOptions = [],
+        $maxRetries = null,
+        $timeout = null
+    ) {
+        if ($timeout === null) {
+            $timeout = $this->config->getWaitTaskTimeBeforeRetry();
+        }
+
+        if ($maxRetries === null) {
+            $maxRetries = $this->config->getDefaultMaxRetries();
+        }
+
+        Helpers::retryUntil(
+            $this,
+            'getTask',
+            [$indexName, $taskId, $requestOptions],
+            function ($res) {
+                return 'published' === $res['status'];
+            },
+            $maxRetries,
+            $timeout
         );
     }
 

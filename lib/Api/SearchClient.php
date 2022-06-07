@@ -519,76 +519,6 @@ class SearchClient
     }
 
     /**
-     * Batch Rules.
-     *
-     * @param string $indexName The index in which to perform the request. (required)
-     * @param array $rule rule (required)
-     * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
-     * @param bool $clearExistingRules When true, existing Rules are cleared before adding this batch. When false, existing Rules are kept. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
-     */
-    public function batchRules(
-        $indexName,
-        $rule,
-        $forwardToReplicas = null,
-        $clearExistingRules = null,
-        $requestOptions = []
-    ) {
-        // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling batchRules'
-            );
-        }
-        // verify the required parameter 'rule' is set
-        if ($rule === null || (is_array($rule) && count($rule) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $rule when calling batchRules'
-            );
-        }
-
-        $resourcePath = '/1/indexes/{indexName}/rules/batch';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = [];
-
-        if ($forwardToReplicas !== null) {
-            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-        }
-
-        if ($clearExistingRules !== null) {
-            $queryParameters['clearExistingRules'] = $clearExistingRules;
-        }
-
-        // path params
-        if ($indexName !== null) {
-            $resourcePath = str_replace(
-                '{indexName}',
-                ObjectSerializer::toPathValue($indexName),
-                $resourcePath
-            );
-        }
-
-        if (isset($rule)) {
-            $httpBody = $rule;
-        }
-
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
-    }
-
-    /**
      * Retrieve all index content.
      *
      * @param string $indexName The index in which to perform the request. (required)
@@ -2564,6 +2494,76 @@ class SearchClient
 
         return $this->sendRequest(
             'PUT',
+            $resourcePath,
+            $headers,
+            $queryParameters,
+            $httpBody,
+            $requestOptions
+        );
+    }
+
+    /**
+     * Save a batch of rules.
+     *
+     * @param string $indexName The index in which to perform the request. (required)
+     * @param array $rule rule (required)
+     * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
+     * @param bool $clearExistingRules When true, existing Rules are cleared before adding this batch. When false, existing Rules are kept. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
+     */
+    public function saveRules(
+        $indexName,
+        $rule,
+        $forwardToReplicas = null,
+        $clearExistingRules = null,
+        $requestOptions = []
+    ) {
+        // verify the required parameter 'indexName' is set
+        if (
+            $indexName === null ||
+            (is_array($indexName) && count($indexName) === 0)
+        ) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $indexName when calling saveRules'
+            );
+        }
+        // verify the required parameter 'rule' is set
+        if ($rule === null || (is_array($rule) && count($rule) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $rule when calling saveRules'
+            );
+        }
+
+        $resourcePath = '/1/indexes/{indexName}/rules/batch';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = [];
+
+        if ($forwardToReplicas !== null) {
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
+        }
+
+        if ($clearExistingRules !== null) {
+            $queryParameters['clearExistingRules'] = $clearExistingRules;
+        }
+
+        // path params
+        if ($indexName !== null) {
+            $resourcePath = str_replace(
+                '{indexName}',
+                ObjectSerializer::toPathValue($indexName),
+                $resourcePath
+            );
+        }
+
+        if (isset($rule)) {
+            $httpBody = $rule;
+        }
+
+        return $this->sendRequest(
+            'POST',
             $resourcePath,
             $headers,
             $queryParameters,

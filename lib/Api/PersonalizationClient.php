@@ -48,7 +48,7 @@ class PersonalizationClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu', 'us'];
+        $allowedRegions = self::getAllowedRegions();
         $config = PersonalizationConfig::create(
             $appId,
             $apiKey,
@@ -60,6 +60,14 @@ class PersonalizationClient
     }
 
     /**
+     * Returns the allowed regions for the config
+     */
+    public static function getAllowedRegions()
+    {
+        return ['eu', 'us'];
+    }
+
+    /**
      * Instantiate the client with configuration
      *
      * @param PersonalizationConfig $config Configuration
@@ -68,25 +76,40 @@ class PersonalizationClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param PersonalizationConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(PersonalizationConfig $config)
+    {
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = str_replace(
-                '{region}',
-                $config->getRegion(),
-                'personalization.{region}.algolia.com'
-            );
+            $url =
+                $config->getRegion() !== null && $config->getRegion() !== ''
+                    ? str_replace(
+                        '{region}',
+                        $config->getRegion(),
+                        'personalization.{region}.algolia.com'
+                    )
+                    : '';
             $clusterHosts = ClusterHosts::create($url);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -109,9 +132,9 @@ class PersonalizationClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -150,12 +173,9 @@ class PersonalizationClient
     public function deleteUserProfile($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
-        if (
-            $userToken === null ||
-            (is_array($userToken) && count($userToken) === 0)
-        ) {
+        if ($userToken === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userToken when calling deleteUserProfile'
+                'Parameter `userToken` is required when calling `deleteUserProfile`.'
             );
         }
 
@@ -195,9 +215,9 @@ class PersonalizationClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -260,12 +280,9 @@ class PersonalizationClient
     public function getUserTokenProfile($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
-        if (
-            $userToken === null ||
-            (is_array($userToken) && count($userToken) === 0)
-        ) {
+        if ($userToken === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userToken when calling getUserTokenProfile'
+                'Parameter `userToken` is required when calling `getUserTokenProfile`.'
             );
         }
 
@@ -310,9 +327,9 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -361,9 +378,9 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 
@@ -414,13 +431,9 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'personalizationStrategyParams' is set
-        if (
-            $personalizationStrategyParams === null ||
-            (is_array($personalizationStrategyParams) &&
-                count($personalizationStrategyParams) === 0)
-        ) {
+        if ($personalizationStrategyParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $personalizationStrategyParams when calling setPersonalizationStrategy'
+                'Parameter `personalizationStrategyParams` is required when calling `setPersonalizationStrategy`.'
             );
         }
 

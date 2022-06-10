@@ -48,7 +48,7 @@ class AnalyticsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de', 'us'];
+        $allowedRegions = self::getAllowedRegions();
         $config = AnalyticsConfig::create(
             $appId,
             $apiKey,
@@ -60,6 +60,14 @@ class AnalyticsClient
     }
 
     /**
+     * Returns the allowed regions for the config
+     */
+    public static function getAllowedRegions()
+    {
+        return ['de', 'us'];
+    }
+
+    /**
      * Instantiate the client with configuration
      *
      * @param AnalyticsConfig $config Configuration
@@ -68,25 +76,40 @@ class AnalyticsClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param AnalyticsConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(AnalyticsConfig $config)
+    {
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = str_replace(
-                '{region}',
-                $config->getRegion(),
-                'analytics.{region}.algolia.com'
-            );
+            $url =
+                $config->getRegion() !== null && $config->getRegion() !== ''
+                    ? str_replace(
+                        '{region}',
+                        $config->getRegion(),
+                        'analytics.{region}.algolia.com'
+                    )
+                    : 'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -109,9 +132,9 @@ class AnalyticsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -151,9 +174,9 @@ class AnalyticsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -200,9 +223,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getAverageClickPosition'
+                'Parameter `index` is required when calling `getAverageClickPosition`.'
             );
         }
         if (
@@ -279,9 +302,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getClickPositions'
+                'Parameter `index` is required when calling `getClickPositions`.'
             );
         }
         if (
@@ -358,9 +381,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getClickThroughRate'
+                'Parameter `index` is required when calling `getClickThroughRate`.'
             );
         }
         if (
@@ -437,9 +460,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getConversationRate'
+                'Parameter `index` is required when calling `getConversationRate`.'
             );
         }
         if (
@@ -516,9 +539,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getNoClickRate'
+                'Parameter `index` is required when calling `getNoClickRate`.'
             );
         }
         if (
@@ -595,9 +618,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getNoResultsRate'
+                'Parameter `index` is required when calling `getNoResultsRate`.'
             );
         }
         if (
@@ -674,9 +697,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getSearchesCount'
+                'Parameter `index` is required when calling `getSearchesCount`.'
             );
         }
         if (
@@ -757,9 +780,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getSearchesNoClicks'
+                'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
         }
         if (
@@ -848,9 +871,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getSearchesNoResults'
+                'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
         }
         if (
@@ -927,9 +950,9 @@ class AnalyticsClient
     public function getStatus($index, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getStatus'
+                'Parameter `index` is required when calling `getStatus`.'
             );
         }
 
@@ -975,9 +998,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopCountries'
+                'Parameter `index` is required when calling `getTopCountries`.'
             );
         }
         if (
@@ -1068,9 +1091,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopFilterAttributes'
+                'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
         }
         if (
@@ -1167,18 +1190,15 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'attribute' is set
-        if (
-            $attribute === null ||
-            (is_array($attribute) && count($attribute) === 0)
-        ) {
+        if ($attribute === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $attribute when calling getTopFilterForAttribute'
+                'Parameter `attribute` is required when calling `getTopFilterForAttribute`.'
             );
         }
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopFilterForAttribute'
+                'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
         }
         if (
@@ -1282,9 +1302,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopFiltersNoResults'
+                'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
         }
         if (
@@ -1381,9 +1401,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopHits'
+                'Parameter `index` is required when calling `getTopHits`.'
             );
         }
         if (
@@ -1486,9 +1506,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getTopSearches'
+                'Parameter `index` is required when calling `getTopSearches`.'
             );
         }
         if (
@@ -1585,9 +1605,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null || (is_array($index) && count($index) === 0)) {
+        if ($index === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $index when calling getUsersCount'
+                'Parameter `index` is required when calling `getUsersCount`.'
             );
         }
         if (
@@ -1662,9 +1682,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -1713,9 +1733,9 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 

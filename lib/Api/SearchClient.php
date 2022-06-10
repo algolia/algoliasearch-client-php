@@ -61,6 +61,24 @@ class SearchClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param SearchConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(SearchConfig $config)
+    {
         $cacheKey = sprintf(
             '%s-clusterHosts-%s',
             __CLASS__,
@@ -80,13 +98,7 @@ class SearchClient
             )->setCacheKey($cacheKey);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -119,9 +131,9 @@ class SearchClient
     public function addApiKey($apiKey, $requestOptions = [])
     {
         // verify the required parameter 'apiKey' is set
-        if ($apiKey === null || (is_array($apiKey) && count($apiKey) === 0)) {
+        if ($apiKey === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $apiKey when calling addApiKey'
+                'Parameter `apiKey` is required when calling `addApiKey`.'
             );
         }
 
@@ -161,27 +173,21 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling addOrUpdateObject'
+                'Parameter `indexName` is required when calling `addOrUpdateObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling addOrUpdateObject'
+                'Parameter `objectID` is required when calling `addOrUpdateObject`.'
             );
         }
         // verify the required parameter 'body' is set
-        if ($body === null || (is_array($body) && count($body) === 0)) {
+        if ($body === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $body when calling addOrUpdateObject'
+                'Parameter `body` is required when calling `addOrUpdateObject`.'
             );
         }
 
@@ -236,9 +242,9 @@ class SearchClient
     public function appendSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null || (is_array($source) && count($source) === 0)) {
+        if ($source === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $source when calling appendSource'
+                'Parameter `source` is required when calling `appendSource`.'
             );
         }
 
@@ -280,12 +286,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'xAlgoliaUserID' is set
-        if (
-            $xAlgoliaUserID === null ||
-            (is_array($xAlgoliaUserID) && count($xAlgoliaUserID) === 0)
-        ) {
+        if ($xAlgoliaUserID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $xAlgoliaUserID when calling assignUserId'
+                'Parameter `xAlgoliaUserID` is required when calling `assignUserId`.'
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
@@ -295,12 +298,9 @@ class SearchClient
         }
 
         // verify the required parameter 'assignUserIdParams' is set
-        if (
-            $assignUserIdParams === null ||
-            (is_array($assignUserIdParams) && count($assignUserIdParams) === 0)
-        ) {
+        if ($assignUserIdParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $assignUserIdParams when calling assignUserId'
+                'Parameter `assignUserIdParams` is required when calling `assignUserId`.'
             );
         }
 
@@ -340,21 +340,15 @@ class SearchClient
     public function batch($indexName, $batchWriteParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling batch'
+                'Parameter `indexName` is required when calling `batch`.'
             );
         }
         // verify the required parameter 'batchWriteParams' is set
-        if (
-            $batchWriteParams === null ||
-            (is_array($batchWriteParams) && count($batchWriteParams) === 0)
-        ) {
+        if ($batchWriteParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $batchWriteParams when calling batch'
+                'Parameter `batchWriteParams` is required when calling `batch`.'
             );
         }
 
@@ -406,12 +400,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'xAlgoliaUserID' is set
-        if (
-            $xAlgoliaUserID === null ||
-            (is_array($xAlgoliaUserID) && count($xAlgoliaUserID) === 0)
-        ) {
+        if ($xAlgoliaUserID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $xAlgoliaUserID when calling batchAssignUserIds'
+                'Parameter `xAlgoliaUserID` is required when calling `batchAssignUserIds`.'
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
@@ -421,13 +412,9 @@ class SearchClient
         }
 
         // verify the required parameter 'batchAssignUserIdsParams' is set
-        if (
-            $batchAssignUserIdsParams === null ||
-            (is_array($batchAssignUserIdsParams) &&
-                count($batchAssignUserIdsParams) === 0)
-        ) {
+        if ($batchAssignUserIdsParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $batchAssignUserIdsParams when calling batchAssignUserIds'
+                'Parameter `batchAssignUserIdsParams` is required when calling `batchAssignUserIds`.'
             );
         }
 
@@ -471,22 +458,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
-        if (
-            $dictionaryName === null ||
-            (is_array($dictionaryName) && count($dictionaryName) === 0)
-        ) {
+        if ($dictionaryName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $dictionaryName when calling batchDictionaryEntries'
+                'Parameter `dictionaryName` is required when calling `batchDictionaryEntries`.'
             );
         }
         // verify the required parameter 'batchDictionaryEntriesParams' is set
-        if (
-            $batchDictionaryEntriesParams === null ||
-            (is_array($batchDictionaryEntriesParams) &&
-                count($batchDictionaryEntriesParams) === 0)
-        ) {
+        if ($batchDictionaryEntriesParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $batchDictionaryEntriesParams when calling batchDictionaryEntries'
+                'Parameter `batchDictionaryEntriesParams` is required when calling `batchDictionaryEntries`.'
             );
         }
 
@@ -538,12 +518,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling browse'
+                'Parameter `indexName` is required when calling `browse`.'
             );
         }
 
@@ -590,12 +567,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling clearAllSynonyms'
+                'Parameter `indexName` is required when calling `clearAllSynonyms`.'
             );
         }
 
@@ -638,12 +612,9 @@ class SearchClient
     public function clearObjects($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling clearObjects'
+                'Parameter `indexName` is required when calling `clearObjects`.'
             );
         }
 
@@ -686,12 +657,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling clearRules'
+                'Parameter `indexName` is required when calling `clearRules`.'
             );
         }
 
@@ -735,9 +703,9 @@ class SearchClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -776,9 +744,9 @@ class SearchClient
     public function deleteApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
+        if ($key === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling deleteApiKey'
+                'Parameter `key` is required when calling `deleteApiKey`.'
             );
         }
 
@@ -821,21 +789,15 @@ class SearchClient
     public function deleteBy($indexName, $searchParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteBy'
+                'Parameter `indexName` is required when calling `deleteBy`.'
             );
         }
         // verify the required parameter 'searchParams' is set
-        if (
-            $searchParams === null ||
-            (is_array($searchParams) && count($searchParams) === 0)
-        ) {
+        if ($searchParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchParams when calling deleteBy'
+                'Parameter `searchParams` is required when calling `deleteBy`.'
             );
         }
 
@@ -878,12 +840,9 @@ class SearchClient
     public function deleteIndex($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteIndex'
+                'Parameter `indexName` is required when calling `deleteIndex`.'
             );
         }
 
@@ -923,21 +882,15 @@ class SearchClient
     public function deleteObject($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteObject'
+                'Parameter `indexName` is required when calling `deleteObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling deleteObject'
+                'Parameter `objectID` is required when calling `deleteObject`.'
             );
         }
 
@@ -991,21 +944,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteRule'
+                'Parameter `indexName` is required when calling `deleteRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling deleteRule'
+                'Parameter `objectID` is required when calling `deleteRule`.'
             );
         }
 
@@ -1057,9 +1004,9 @@ class SearchClient
     public function deleteSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null || (is_array($source) && count($source) === 0)) {
+        if ($source === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $source when calling deleteSource'
+                'Parameter `source` is required when calling `deleteSource`.'
             );
         }
 
@@ -1104,21 +1051,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteSynonym'
+                'Parameter `indexName` is required when calling `deleteSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling deleteSynonym'
+                'Parameter `objectID` is required when calling `deleteSynonym`.'
             );
         }
 
@@ -1171,9 +1112,9 @@ class SearchClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -1212,9 +1153,9 @@ class SearchClient
     public function getApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
+        if ($key === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling getApiKey'
+                'Parameter `key` is required when calling `getApiKey`.'
             );
         }
 
@@ -1362,21 +1303,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getObject'
+                'Parameter `indexName` is required when calling `getObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling getObject'
+                'Parameter `objectID` is required when calling `getObject`.'
             );
         }
 
@@ -1432,12 +1367,9 @@ class SearchClient
     public function getObjects($getObjectsParams, $requestOptions = [])
     {
         // verify the required parameter 'getObjectsParams' is set
-        if (
-            $getObjectsParams === null ||
-            (is_array($getObjectsParams) && count($getObjectsParams) === 0)
-        ) {
+        if ($getObjectsParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $getObjectsParams when calling getObjects'
+                'Parameter `getObjectsParams` is required when calling `getObjects`.'
             );
         }
 
@@ -1473,21 +1405,15 @@ class SearchClient
     public function getRule($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getRule'
+                'Parameter `indexName` is required when calling `getRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling getRule'
+                'Parameter `objectID` is required when calling `getRule`.'
             );
         }
 
@@ -1535,12 +1461,9 @@ class SearchClient
     public function getSettings($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getSettings'
+                'Parameter `indexName` is required when calling `getSettings`.'
             );
         }
 
@@ -1604,21 +1527,15 @@ class SearchClient
     public function getSynonym($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getSynonym'
+                'Parameter `indexName` is required when calling `getSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling getSynonym'
+                'Parameter `objectID` is required when calling `getSynonym`.'
             );
         }
 
@@ -1667,18 +1584,15 @@ class SearchClient
     public function getTask($indexName, $taskID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getTask'
+                'Parameter `indexName` is required when calling `getTask`.'
             );
         }
         // verify the required parameter 'taskID' is set
-        if ($taskID === null || (is_array($taskID) && count($taskID) === 0)) {
+        if ($taskID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $taskID when calling getTask'
+                'Parameter `taskID` is required when calling `getTask`.'
             );
         }
 
@@ -1750,9 +1664,9 @@ class SearchClient
     public function getUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
-        if ($userID === null || (is_array($userID) && count($userID) === 0)) {
+        if ($userID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userID when calling getUserId'
+                'Parameter `userID` is required when calling `getUserId`.'
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
@@ -1945,12 +1859,9 @@ class SearchClient
     public function multipleBatch($batchParams, $requestOptions = [])
     {
         // verify the required parameter 'batchParams' is set
-        if (
-            $batchParams === null ||
-            (is_array($batchParams) && count($batchParams) === 0)
-        ) {
+        if ($batchParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $batchParams when calling multipleBatch'
+                'Parameter `batchParams` is required when calling `multipleBatch`.'
             );
         }
 
@@ -1994,22 +1905,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling operationIndex'
+                'Parameter `indexName` is required when calling `operationIndex`.'
             );
         }
         // verify the required parameter 'operationIndexParams' is set
-        if (
-            $operationIndexParams === null ||
-            (is_array($operationIndexParams) &&
-                count($operationIndexParams) === 0)
-        ) {
+        if ($operationIndexParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $operationIndexParams when calling operationIndex'
+                'Parameter `operationIndexParams` is required when calling `operationIndex`.'
             );
         }
 
@@ -2060,31 +1964,21 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling partialUpdateObject'
+                'Parameter `indexName` is required when calling `partialUpdateObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling partialUpdateObject'
+                'Parameter `objectID` is required when calling `partialUpdateObject`.'
             );
         }
         // verify the required parameter 'attributeOrBuiltInOperation' is set
-        if (
-            $attributeOrBuiltInOperation === null ||
-            (is_array($attributeOrBuiltInOperation) &&
-                count($attributeOrBuiltInOperation) === 0)
-        ) {
+        if ($attributeOrBuiltInOperation === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $attributeOrBuiltInOperation when calling partialUpdateObject'
+                'Parameter `attributeOrBuiltInOperation` is required when calling `partialUpdateObject`.'
             );
         }
 
@@ -2146,9 +2040,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -2197,9 +2091,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 
@@ -2242,9 +2136,9 @@ class SearchClient
     public function removeUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
-        if ($userID === null || (is_array($userID) && count($userID) === 0)) {
+        if ($userID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $userID when calling removeUserId'
+                'Parameter `userID` is required when calling `removeUserId`.'
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
@@ -2288,9 +2182,9 @@ class SearchClient
     public function replaceSources($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null || (is_array($source) && count($source) === 0)) {
+        if ($source === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $source when calling replaceSources'
+                'Parameter `source` is required when calling `replaceSources`.'
             );
         }
 
@@ -2324,9 +2218,9 @@ class SearchClient
     public function restoreApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
+        if ($key === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling restoreApiKey'
+                'Parameter `key` is required when calling `restoreApiKey`.'
             );
         }
 
@@ -2366,18 +2260,15 @@ class SearchClient
     public function saveObject($indexName, $body, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling saveObject'
+                'Parameter `indexName` is required when calling `saveObject`.'
             );
         }
         // verify the required parameter 'body' is set
-        if ($body === null || (is_array($body) && count($body) === 0)) {
+        if ($body === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $body when calling saveObject'
+                'Parameter `body` is required when calling `saveObject`.'
             );
         }
 
@@ -2437,27 +2328,21 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling saveRule'
+                'Parameter `indexName` is required when calling `saveRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling saveRule'
+                'Parameter `objectID` is required when calling `saveRule`.'
             );
         }
         // verify the required parameter 'rule' is set
-        if ($rule === null || (is_array($rule) && count($rule) === 0)) {
+        if ($rule === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $rule when calling saveRule'
+                'Parameter `rule` is required when calling `saveRule`.'
             );
         }
 
@@ -2521,18 +2406,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling saveRules'
+                'Parameter `indexName` is required when calling `saveRules`.'
             );
         }
         // verify the required parameter 'rule' is set
-        if ($rule === null || (is_array($rule) && count($rule) === 0)) {
+        if ($rule === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $rule when calling saveRules'
+                'Parameter `rule` is required when calling `saveRules`.'
             );
         }
 
@@ -2603,30 +2485,21 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling saveSynonym'
+                'Parameter `indexName` is required when calling `saveSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if (
-            $objectID === null ||
-            (is_array($objectID) && count($objectID) === 0)
-        ) {
+        if ($objectID === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $objectID when calling saveSynonym'
+                'Parameter `objectID` is required when calling `saveSynonym`.'
             );
         }
         // verify the required parameter 'synonymHit' is set
-        if (
-            $synonymHit === null ||
-            (is_array($synonymHit) && count($synonymHit) === 0)
-        ) {
+        if ($synonymHit === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $synonymHit when calling saveSynonym'
+                'Parameter `synonymHit` is required when calling `saveSynonym`.'
             );
         }
 
@@ -2690,21 +2563,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling saveSynonyms'
+                'Parameter `indexName` is required when calling `saveSynonyms`.'
             );
         }
         // verify the required parameter 'synonymHit' is set
-        if (
-            $synonymHit === null ||
-            (is_array($synonymHit) && count($synonymHit) === 0)
-        ) {
+        if ($synonymHit === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $synonymHit when calling saveSynonyms'
+                'Parameter `synonymHit` is required when calling `saveSynonyms`.'
             );
         }
 
@@ -2762,12 +2629,9 @@ class SearchClient
     public function search($searchMethodParams, $requestOptions = [])
     {
         // verify the required parameter 'searchMethodParams' is set
-        if (
-            $searchMethodParams === null ||
-            (is_array($searchMethodParams) && count($searchMethodParams) === 0)
-        ) {
+        if ($searchMethodParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchMethodParams when calling search'
+                'Parameter `searchMethodParams` is required when calling `search`.'
             );
         }
 
@@ -2813,22 +2677,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
-        if (
-            $dictionaryName === null ||
-            (is_array($dictionaryName) && count($dictionaryName) === 0)
-        ) {
+        if ($dictionaryName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $dictionaryName when calling searchDictionaryEntries'
+                'Parameter `dictionaryName` is required when calling `searchDictionaryEntries`.'
             );
         }
         // verify the required parameter 'searchDictionaryEntriesParams' is set
-        if (
-            $searchDictionaryEntriesParams === null ||
-            (is_array($searchDictionaryEntriesParams) &&
-                count($searchDictionaryEntriesParams) === 0)
-        ) {
+        if ($searchDictionaryEntriesParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchDictionaryEntriesParams when calling searchDictionaryEntries'
+                'Parameter `searchDictionaryEntriesParams` is required when calling `searchDictionaryEntries`.'
             );
         }
 
@@ -2884,21 +2741,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling searchForFacetValues'
+                'Parameter `indexName` is required when calling `searchForFacetValues`.'
             );
         }
         // verify the required parameter 'facetName' is set
-        if (
-            $facetName === null ||
-            (is_array($facetName) && count($facetName) === 0)
-        ) {
+        if ($facetName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $facetName when calling searchForFacetValues'
+                'Parameter `facetName` is required when calling `searchForFacetValues`.'
             );
         }
 
@@ -2965,21 +2816,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling searchRules'
+                'Parameter `indexName` is required when calling `searchRules`.'
             );
         }
         // verify the required parameter 'searchRulesParams' is set
-        if (
-            $searchRulesParams === null ||
-            (is_array($searchRulesParams) && count($searchRulesParams) === 0)
-        ) {
+        if ($searchRulesParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchRulesParams when calling searchRules'
+                'Parameter `searchRulesParams` is required when calling `searchRules`.'
             );
         }
 
@@ -3030,21 +2875,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling searchSingleIndex'
+                'Parameter `indexName` is required when calling `searchSingleIndex`.'
             );
         }
         // verify the required parameter 'searchParams' is set
-        if (
-            $searchParams === null ||
-            (is_array($searchParams) && count($searchParams) === 0)
-        ) {
+        if ($searchParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchParams when calling searchSingleIndex'
+                'Parameter `searchParams` is required when calling `searchSingleIndex`.'
             );
         }
 
@@ -3098,12 +2937,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling searchSynonyms'
+                'Parameter `indexName` is required when calling `searchSynonyms`.'
             );
         }
 
@@ -3166,13 +3002,9 @@ class SearchClient
     public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {
         // verify the required parameter 'searchUserIdsParams' is set
-        if (
-            $searchUserIdsParams === null ||
-            (is_array($searchUserIdsParams) &&
-                count($searchUserIdsParams) === 0)
-        ) {
+        if ($searchUserIdsParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $searchUserIdsParams when calling searchUserIds'
+                'Parameter `searchUserIdsParams` is required when calling `searchUserIds`.'
             );
         }
 
@@ -3213,13 +3045,9 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionarySettingsParams' is set
-        if (
-            $dictionarySettingsParams === null ||
-            (is_array($dictionarySettingsParams) &&
-                count($dictionarySettingsParams) === 0)
-        ) {
+        if ($dictionarySettingsParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $dictionarySettingsParams when calling setDictionarySettings'
+                'Parameter `dictionarySettingsParams` is required when calling `setDictionarySettings`.'
             );
         }
 
@@ -3262,21 +3090,15 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling setSettings'
+                'Parameter `indexName` is required when calling `setSettings`.'
             );
         }
         // verify the required parameter 'indexSettings' is set
-        if (
-            $indexSettings === null ||
-            (is_array($indexSettings) && count($indexSettings) === 0)
-        ) {
+        if ($indexSettings === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexSettings when calling setSettings'
+                'Parameter `indexSettings` is required when calling `setSettings`.'
             );
         }
 
@@ -3335,15 +3157,15 @@ class SearchClient
     public function updateApiKey($key, $apiKey, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null || (is_array($key) && count($key) === 0)) {
+        if ($key === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $key when calling updateApiKey'
+                'Parameter `key` is required when calling `updateApiKey`.'
             );
         }
         // verify the required parameter 'apiKey' is set
-        if ($apiKey === null || (is_array($apiKey) && count($apiKey) === 0)) {
+        if ($apiKey === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $apiKey when calling updateApiKey'
+                'Parameter `apiKey` is required when calling `updateApiKey`.'
             );
         }
 

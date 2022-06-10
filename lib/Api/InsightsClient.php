@@ -47,7 +47,7 @@ class InsightsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de', 'us'];
+        $allowedRegions = self::getAllowedRegions();
         $config = InsightsConfig::create(
             $appId,
             $apiKey,
@@ -59,6 +59,14 @@ class InsightsClient
     }
 
     /**
+     * Returns the allowed regions for the config
+     */
+    public static function getAllowedRegions()
+    {
+        return ['de', 'us'];
+    }
+
+    /**
      * Instantiate the client with configuration
      *
      * @param InsightsConfig $config Configuration
@@ -67,25 +75,40 @@ class InsightsClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param InsightsConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(InsightsConfig $config)
+    {
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = str_replace(
-                '{region}',
-                $config->getRegion(),
-                'insights.{region}.algolia.io'
-            );
+            $url =
+                $config->getRegion() !== null && $config->getRegion() !== ''
+                    ? str_replace(
+                        '{region}',
+                        $config->getRegion(),
+                        'insights.{region}.algolia.io'
+                    )
+                    : 'insights.algolia.io';
             $clusterHosts = ClusterHosts::create($url);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -108,9 +131,9 @@ class InsightsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -150,9 +173,9 @@ class InsightsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -197,9 +220,9 @@ class InsightsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -246,12 +269,9 @@ class InsightsClient
     public function pushEvents($insightEvents, $requestOptions = [])
     {
         // verify the required parameter 'insightEvents' is set
-        if (
-            $insightEvents === null ||
-            (is_array($insightEvents) && count($insightEvents) === 0)
-        ) {
+        if ($insightEvents === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $insightEvents when calling pushEvents'
+                'Parameter `insightEvents` is required when calling `pushEvents`.'
             );
         }
 
@@ -291,9 +311,9 @@ class InsightsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 

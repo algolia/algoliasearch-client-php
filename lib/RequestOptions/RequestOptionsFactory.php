@@ -52,7 +52,7 @@ final class RequestOptionsFactory
                 'x-algolia-api-key' => $this->config->getAlgoliaApiKey(),
                 'User-Agent' => $this->config->getAlgoliaAgent() !== null
                         ? $this->config->getAlgoliaAgent()
-                        : AlgoliaAgent::get(),
+                        : AlgoliaAgent::get($this->config->getClientName()),
                 'Content-Type' => 'application/json',
             ],
             'queryParameters' => [],

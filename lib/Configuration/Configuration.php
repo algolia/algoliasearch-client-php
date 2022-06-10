@@ -2,6 +2,8 @@
 
 namespace Algolia\AlgoliaSearch\Configuration;
 
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
+
 /**
  * Configuration Class Doc Comment
  * PHP version 7.3
@@ -12,11 +14,11 @@ namespace Algolia\AlgoliaSearch\Configuration;
 abstract class Configuration
 {
     /**
-     * Associate array to store API key(s)
+     * Associate array to store auth(s)
      *
      * @var string[]
      */
-    protected $apiKeys = [];
+    protected $auths = [];
 
     /**
      * Access token for OAuth/Bearer authentication
@@ -54,17 +56,23 @@ abstract class Configuration
 
     protected $defaultConnectTimeout = 2;
 
+    protected $clientName;
+
     public function __construct(array $config = [])
     {
-        if (isset($config['apiKey'])) {
-            $this->setAlgoliaApiKey($config['apiKey']);
-            $this->setApiKey('x-algolia-api-key', $config['apiKey']);
+        if (!isset($config['appId']) || $config['appId'] === '') {
+            throw new AlgoliaException('`appId` is missing.');
         }
 
-        if (isset($config['appId'])) {
-            $this->setAppId($config['appId']);
-            $this->setApiKey('x-algolia-application-id', $config['appId']);
+        if (!isset($config['apiKey']) || $config['apiKey'] === '') {
+            throw new AlgoliaException('`apiKey` is missing.');
         }
+
+        $this->setAlgoliaApiKey($config['apiKey']);
+        $this->setAuth('x-algolia-api-key', $config['apiKey']);
+
+        $this->setAppId($config['appId']);
+        $this->setAuth('x-algolia-application-id', $config['appId']);
 
         $config += $this->getDefaultConfiguration();
         $this->config = $config;
@@ -81,31 +89,31 @@ abstract class Configuration
     }
 
     /**
-     * Sets API key
+     * Sets Auth
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
-     * @param string $key              API key or token
+     * @param string $authIdentifier API key identifier (authentication scheme)
+     * @param string $key            API key or token
      *
      * @return $this
      */
-    public function setApiKey($apiKeyIdentifier, $key)
+    public function setAuth($authIdentifier, $key)
     {
-        $this->apiKeys[$apiKeyIdentifier] = $key;
+        $this->auths[$authIdentifier] = $key;
 
         return $this;
     }
 
     /**
-     * Gets API key
+     * Gets Auth
      *
-     * @param string $apiKeyIdentifier API key identifier (authentication scheme)
+     * @param string $authIdentifier Auth identifier (authentication scheme)
      *
      * @return null|string API key or token
      */
-    public function getApiKey($apiKeyIdentifier)
+    public function getAuth($authIdentifier)
     {
-        return isset($this->apiKeys[$apiKeyIdentifier])
-            ? $this->apiKeys[$apiKeyIdentifier]
+        return isset($this->auths[$authIdentifier])
+            ? $this->auths[$authIdentifier]
             : null;
     }
 
@@ -282,5 +290,15 @@ abstract class Configuration
     public function getAlgoliaAgent()
     {
         return $this->algoliaAgent;
+    }
+
+    /**
+     * Gets the name of the client which the config belongs to
+     *
+     * @return string client name
+     */
+    public function getClientName()
+    {
+        return $this->clientName;
     }
 }

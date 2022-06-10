@@ -48,7 +48,7 @@ class AbtestingClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de', 'us'];
+        $allowedRegions = self::getAllowedRegions();
         $config = AbtestingConfig::create(
             $appId,
             $apiKey,
@@ -60,6 +60,14 @@ class AbtestingClient
     }
 
     /**
+     * Returns the allowed regions for the config
+     */
+    public static function getAllowedRegions()
+    {
+        return ['de', 'us'];
+    }
+
+    /**
      * Instantiate the client with configuration
      *
      * @param AbtestingConfig $config Configuration
@@ -68,25 +76,40 @@ class AbtestingClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param AbtestingConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(AbtestingConfig $config)
+    {
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = str_replace(
-                '{region}',
-                $config->getRegion(),
-                'analytics.{region}.algolia.com'
-            );
+            $url =
+                $config->getRegion() !== null && $config->getRegion() !== ''
+                    ? str_replace(
+                        '{region}',
+                        $config->getRegion(),
+                        'analytics.{region}.algolia.com'
+                    )
+                    : 'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -114,12 +137,9 @@ class AbtestingClient
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
         // verify the required parameter 'addABTestsRequest' is set
-        if (
-            $addABTestsRequest === null ||
-            (is_array($addABTestsRequest) && count($addABTestsRequest) === 0)
-        ) {
+        if ($addABTestsRequest === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $addABTestsRequest when calling addABTests'
+                'Parameter `addABTestsRequest` is required when calling `addABTests`.'
             );
         }
 
@@ -154,9 +174,9 @@ class AbtestingClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -195,9 +215,9 @@ class AbtestingClient
     public function deleteABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
+        if ($id === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling deleteABTest'
+                'Parameter `id` is required when calling `deleteABTest`.'
             );
         }
 
@@ -237,9 +257,9 @@ class AbtestingClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -278,9 +298,9 @@ class AbtestingClient
     public function getABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
+        if ($id === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getABTest'
+                'Parameter `id` is required when calling `getABTest`.'
             );
         }
 
@@ -362,9 +382,9 @@ class AbtestingClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -413,9 +433,9 @@ class AbtestingClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 
@@ -458,9 +478,9 @@ class AbtestingClient
     public function stopABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
+        if ($id === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling stopABTest'
+                'Parameter `id` is required when calling `stopABTest`.'
             );
         }
 

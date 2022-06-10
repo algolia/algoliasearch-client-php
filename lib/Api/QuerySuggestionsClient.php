@@ -48,7 +48,7 @@ class QuerySuggestionsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu', 'us'];
+        $allowedRegions = self::getAllowedRegions();
         $config = QuerySuggestionsConfig::create(
             $appId,
             $apiKey,
@@ -60,6 +60,14 @@ class QuerySuggestionsClient
     }
 
     /**
+     * Returns the allowed regions for the config
+     */
+    public static function getAllowedRegions()
+    {
+        return ['eu', 'us'];
+    }
+
+    /**
      * Instantiate the client with configuration
      *
      * @param QuerySuggestionsConfig $config Configuration
@@ -68,25 +76,40 @@ class QuerySuggestionsClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param QuerySuggestionsConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(QuerySuggestionsConfig $config)
+    {
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = str_replace(
-                '{region}',
-                $config->getRegion(),
-                'query-suggestions.{region}.algolia.com'
-            );
+            $url =
+                $config->getRegion() !== null && $config->getRegion() !== ''
+                    ? str_replace(
+                        '{region}',
+                        $config->getRegion(),
+                        'query-suggestions.{region}.algolia.com'
+                    )
+                    : '';
             $clusterHosts = ClusterHosts::create($url);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -113,13 +136,9 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'querySuggestionsIndexWithIndexParam' is set
-        if (
-            $querySuggestionsIndexWithIndexParam === null ||
-            (is_array($querySuggestionsIndexWithIndexParam) &&
-                count($querySuggestionsIndexWithIndexParam) === 0)
-        ) {
+        if ($querySuggestionsIndexWithIndexParam === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $querySuggestionsIndexWithIndexParam when calling createConfig'
+                'Parameter `querySuggestionsIndexWithIndexParam` is required when calling `createConfig`.'
             );
         }
 
@@ -154,9 +173,9 @@ class QuerySuggestionsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -195,12 +214,9 @@ class QuerySuggestionsClient
     public function deleteConfig($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling deleteConfig'
+                'Parameter `indexName` is required when calling `deleteConfig`.'
             );
         }
 
@@ -240,9 +256,9 @@ class QuerySuggestionsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -305,12 +321,9 @@ class QuerySuggestionsClient
     public function getConfig($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getConfig'
+                'Parameter `indexName` is required when calling `getConfig`.'
             );
         }
 
@@ -349,12 +362,9 @@ class QuerySuggestionsClient
     public function getConfigStatus($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getConfigStatus'
+                'Parameter `indexName` is required when calling `getConfigStatus`.'
             );
         }
 
@@ -393,12 +403,9 @@ class QuerySuggestionsClient
     public function getLogFile($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling getLogFile'
+                'Parameter `indexName` is required when calling `getLogFile`.'
             );
         }
 
@@ -443,9 +450,9 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -494,9 +501,9 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 
@@ -549,22 +556,15 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if (
-            $indexName === null ||
-            (is_array($indexName) && count($indexName) === 0)
-        ) {
+        if ($indexName === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $indexName when calling updateConfig'
+                'Parameter `indexName` is required when calling `updateConfig`.'
             );
         }
         // verify the required parameter 'querySuggestionsIndexParam' is set
-        if (
-            $querySuggestionsIndexParam === null ||
-            (is_array($querySuggestionsIndexParam) &&
-                count($querySuggestionsIndexParam) === 0)
-        ) {
+        if ($querySuggestionsIndexParam === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $querySuggestionsIndexParam when calling updateConfig'
+                'Parameter `querySuggestionsIndexParam` is required when calling `updateConfig`.'
             );
         }
 

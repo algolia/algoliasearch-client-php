@@ -12,14 +12,21 @@ abstract class ConfigWithRegion extends Configuration
         $region = null,
         $allowedRegions = null
     ) {
-        if ($region !== null && !in_array($region, $allowedRegions, true)) {
-            throw new AlgoliaException('Specified region is not allowed.');
+        if (
+            $region !== null &&
+            $allowedRegions !== null &&
+            !in_array($region, $allowedRegions, true)
+        ) {
+            throw new AlgoliaException(
+                '`region` must be one of the following: ' .
+                    implode(', ', $allowedRegions)
+            );
         }
 
         $config = [
             'appId' => $appId,
             'apiKey' => $apiKey,
-            'region' => null !== $region ? $region : 'us',
+            'region' => $region,
         ];
 
         return new static($config);

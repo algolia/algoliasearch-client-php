@@ -60,6 +60,24 @@ class RecommendClient
     {
         $config = clone $config;
 
+        $apiWrapper = new ApiWrapper(
+            Algolia::getHttpClient(),
+            $config,
+            self::getClusterHosts($config)
+        );
+
+        return new static($apiWrapper, $config);
+    }
+
+    /**
+     * Gets the cluster hosts depending on the config
+     *
+     * @param RecommendConfig $config
+     *
+     * @return ClusterHosts
+     */
+    public static function getClusterHosts(RecommendConfig $config)
+    {
         $cacheKey = sprintf(
             '%s-clusterHosts-%s',
             __CLASS__,
@@ -79,13 +97,7 @@ class RecommendClient
             )->setCacheKey($cacheKey);
         }
 
-        $apiWrapper = new ApiWrapper(
-            Algolia::getHttpClient(),
-            $config,
-            $clusterHosts
-        );
-
-        return new static($apiWrapper, $config);
+        return $clusterHosts;
     }
 
     /**
@@ -108,9 +120,9 @@ class RecommendClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling del'
+                'Parameter `path` is required when calling `del`.'
             );
         }
 
@@ -150,9 +162,9 @@ class RecommendClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling get'
+                'Parameter `path` is required when calling `get`.'
             );
         }
 
@@ -197,13 +209,9 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'getRecommendationsParams' is set
-        if (
-            $getRecommendationsParams === null ||
-            (is_array($getRecommendationsParams) &&
-                count($getRecommendationsParams) === 0)
-        ) {
+        if ($getRecommendationsParams === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $getRecommendationsParams when calling getRecommendations'
+                'Parameter `getRecommendationsParams` is required when calling `getRecommendations`.'
             );
         }
 
@@ -244,9 +252,9 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling post'
+                'Parameter `path` is required when calling `post`.'
             );
         }
 
@@ -295,9 +303,9 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null || (is_array($path) && count($path) === 0)) {
+        if ($path === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $path when calling put'
+                'Parameter `path` is required when calling `put`.'
             );
         }
 

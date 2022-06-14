@@ -32,7 +32,8 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.5.0",
-    "phpunit/phpunit": "^9.3"
+    "phpunit/phpunit": "^9.3",
+    "vlucas/phpdotenv": "^5.4"
   },
   "autoload": {
     "psr-4": {

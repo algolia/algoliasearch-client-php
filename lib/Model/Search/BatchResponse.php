@@ -124,6 +124,19 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
+            $invalidProperties[] = "'taskID' can't be null";
+        }
+        if (
+            !isset($this->container['objectIDs']) ||
+            $this->container['objectIDs'] === null
+        ) {
+            $invalidProperties[] = "'objectIDs' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -141,7 +154,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets taskID
      *
-     * @return int|null
+     * @return int
      */
     public function getTaskID()
     {
@@ -151,7 +164,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */
@@ -165,7 +178,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets objectIDs
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getObjectIDs()
     {
@@ -175,7 +188,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs list of objectID
+     * @param string[] $objectIDs list of objectID
      *
      * @return self
      */

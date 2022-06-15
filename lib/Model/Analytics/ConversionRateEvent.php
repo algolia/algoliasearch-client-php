@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchForFacetValuesResponseFacetHits Class Doc Comment
+ * ConversionRateEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,9 +19,10 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $modelTypes = [
-        'value' => 'string',
-        'highlighted' => 'string',
-        'count' => 'int',
+        'rate' => 'double',
+        'trackedSearchCount' => 'int',
+        'conversionCount' => 'int',
+        'date' => 'string',
     ];
 
     /**
@@ -30,9 +31,10 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $modelFormats = [
-        'value' => null,
-        'highlighted' => null,
-        'count' => null,
+        'rate' => 'double',
+        'trackedSearchCount' => null,
+        'conversionCount' => null,
+        'date' => null,
     ];
 
     /**
@@ -61,9 +63,10 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $setters = [
-        'value' => 'setValue',
-        'highlighted' => 'setHighlighted',
-        'count' => 'setCount',
+        'rate' => 'setRate',
+        'trackedSearchCount' => 'setTrackedSearchCount',
+        'conversionCount' => 'setConversionCount',
+        'date' => 'setDate',
     ];
 
     /**
@@ -72,9 +75,10 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $getters = [
-        'value' => 'getValue',
-        'highlighted' => 'getHighlighted',
-        'count' => 'getCount',
+        'rate' => 'getRate',
+        'trackedSearchCount' => 'getTrackedSearchCount',
+        'conversionCount' => 'getConversionCount',
+        'date' => 'getDate',
     ];
 
     /**
@@ -111,14 +115,18 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['value'])) {
-            $this->container['value'] = $data['value'];
+        if (isset($data['rate'])) {
+            $this->container['rate'] = $data['rate'];
         }
-        if (isset($data['highlighted'])) {
-            $this->container['highlighted'] = $data['highlighted'];
+        if (isset($data['trackedSearchCount'])) {
+            $this->container['trackedSearchCount'] =
+                $data['trackedSearchCount'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
+        if (isset($data['conversionCount'])) {
+            $this->container['conversionCount'] = $data['conversionCount'];
+        }
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
     }
 
@@ -132,22 +140,28 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
         $invalidProperties = [];
 
         if (
-            !isset($this->container['value']) ||
-            $this->container['value'] === null
+            !isset($this->container['rate']) ||
+            $this->container['rate'] === null
         ) {
-            $invalidProperties[] = "'value' can't be null";
+            $invalidProperties[] = "'rate' can't be null";
         }
         if (
-            !isset($this->container['highlighted']) ||
-            $this->container['highlighted'] === null
+            !isset($this->container['trackedSearchCount']) ||
+            $this->container['trackedSearchCount'] === null
         ) {
-            $invalidProperties[] = "'highlighted' can't be null";
+            $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
         if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
+            !isset($this->container['conversionCount']) ||
+            $this->container['conversionCount'] === null
         ) {
-            $invalidProperties[] = "'count' can't be null";
+            $invalidProperties[] = "'conversionCount' can't be null";
+        }
+        if (
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
+        ) {
+            $invalidProperties[] = "'date' can't be null";
         }
 
         return $invalidProperties;
@@ -165,73 +179,97 @@ class SearchForFacetValuesResponseFacetHits extends \Algolia\AlgoliaSearch\Model
     }
 
     /**
-     * Gets value
+     * Gets rate
      *
-     * @return string
+     * @return float
      */
-    public function getValue()
+    public function getRate()
     {
-        return $this->container['value'] ?? null;
+        return $this->container['rate'] ?? null;
     }
 
     /**
-     * Sets value
+     * Sets rate
      *
-     * @param string $value raw value of the facet
+     * @param float $rate the click-through rate
      *
      * @return self
      */
-    public function setValue($value)
+    public function setRate($rate)
     {
-        $this->container['value'] = $value;
+        $this->container['rate'] = $rate;
 
         return $this;
     }
 
     /**
-     * Gets highlighted
-     *
-     * @return string
-     */
-    public function getHighlighted()
-    {
-        return $this->container['highlighted'] ?? null;
-    }
-
-    /**
-     * Sets highlighted
-     *
-     * @param string $highlighted markup text with occurrences highlighted
-     *
-     * @return self
-     */
-    public function setHighlighted($highlighted)
-    {
-        $this->container['highlighted'] = $highlighted;
-
-        return $this;
-    }
-
-    /**
-     * Gets count
+     * Gets trackedSearchCount
      *
      * @return int
      */
-    public function getCount()
+    public function getTrackedSearchCount()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['trackedSearchCount'] ?? null;
     }
 
     /**
-     * Sets count
+     * Sets trackedSearchCount
      *
-     * @param int $count How many objects contain this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the counts may not be exhaustive.
+     * @param int $trackedSearchCount the number of tracked search click
      *
      * @return self
      */
-    public function setCount($count)
+    public function setTrackedSearchCount($trackedSearchCount)
     {
-        $this->container['count'] = $count;
+        $this->container['trackedSearchCount'] = $trackedSearchCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets conversionCount
+     *
+     * @return int
+     */
+    public function getConversionCount()
+    {
+        return $this->container['conversionCount'] ?? null;
+    }
+
+    /**
+     * Sets conversionCount
+     *
+     * @param int $conversionCount the number of converted clicks
+     *
+     * @return self
+     */
+    public function setConversionCount($conversionCount)
+    {
+        $this->container['conversionCount'] = $conversionCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets date
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->container['date'] ?? null;
+    }
+
+    /**
+     * Sets date
+     *
+     * @param string $date date of the event
+     *
+     * @return self
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

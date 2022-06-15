@@ -3,15 +3,15 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchUserIdsResponseHits Class Doc Comment
+ * UserHit Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchUserIdsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -24,7 +24,7 @@ class SearchUserIdsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractMod
         'nbRecords' => 'int',
         'dataSize' => 'int',
         'objectID' => 'string',
-        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHighlightResult',
+        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Search\UserHighlightResult',
     ];
 
     /**
@@ -229,7 +229,7 @@ class SearchUserIdsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
             throw new \InvalidArgumentException(
-                "invalid value for $userID when calling SearchUserIdsResponseHits., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
+                "invalid value for $userID when calling UserHit., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
             );
         }
 
@@ -337,7 +337,7 @@ class SearchUserIdsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets highlightResult
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHighlightResult
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult
      */
     public function getHighlightResult()
     {
@@ -347,7 +347,7 @@ class SearchUserIdsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets highlightResult
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHighlightResult $highlightResult highlightResult
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult $highlightResult highlightResult
      *
      * @return self
      */

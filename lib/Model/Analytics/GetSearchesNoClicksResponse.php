@@ -19,7 +19,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[]',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\SearchNoClickEvent[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets searches
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\SearchNoClickEvent[]
      */
     public function getSearches()
     {
@@ -151,7 +151,7 @@ class GetSearchesNoClicksResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponseSearches[] $searches a list of searches with no clicks and their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchNoClickEvent[] $searches a list of searches with no clicks and their count
      *
      * @return self
      */

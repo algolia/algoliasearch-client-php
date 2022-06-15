@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetNoClickRateResponseDates Class Doc Comment
+ * ClickPosition Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,10 +19,8 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
-        'count' => 'int',
-        'noClickCount' => 'int',
-        'date' => 'string',
+        'position' => 'int[]',
+        'clickCount' => 'int',
     ];
 
     /**
@@ -31,10 +29,8 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelFormats = [
-        'rate' => 'double',
-        'count' => null,
-        'noClickCount' => null,
-        'date' => null,
+        'position' => null,
+        'clickCount' => null,
     ];
 
     /**
@@ -63,10 +59,8 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'count' => 'setCount',
-        'noClickCount' => 'setNoClickCount',
-        'date' => 'setDate',
+        'position' => 'setPosition',
+        'clickCount' => 'setClickCount',
     ];
 
     /**
@@ -75,10 +69,8 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'count' => 'getCount',
-        'noClickCount' => 'getNoClickCount',
-        'date' => 'getDate',
+        'position' => 'getPosition',
+        'clickCount' => 'getClickCount',
     ];
 
     /**
@@ -115,17 +107,11 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['rate'])) {
-            $this->container['rate'] = $data['rate'];
+        if (isset($data['position'])) {
+            $this->container['position'] = $data['position'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
-        }
-        if (isset($data['noClickCount'])) {
-            $this->container['noClickCount'] = $data['noClickCount'];
-        }
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['clickCount'])) {
+            $this->container['clickCount'] = $data['clickCount'];
         }
     }
 
@@ -139,28 +125,16 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
         $invalidProperties = [];
 
         if (
-            !isset($this->container['rate']) ||
-            $this->container['rate'] === null
+            !isset($this->container['position']) ||
+            $this->container['position'] === null
         ) {
-            $invalidProperties[] = "'rate' can't be null";
+            $invalidProperties[] = "'position' can't be null";
         }
         if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
         ) {
-            $invalidProperties[] = "'count' can't be null";
-        }
-        if (
-            !isset($this->container['noClickCount']) ||
-            $this->container['noClickCount'] === null
-        ) {
-            $invalidProperties[] = "'noClickCount' can't be null";
-        }
-        if (
-            !isset($this->container['date']) ||
-            $this->container['date'] === null
-        ) {
-            $invalidProperties[] = "'date' can't be null";
+            $invalidProperties[] = "'clickCount' can't be null";
         }
 
         return $invalidProperties;
@@ -178,97 +152,49 @@ class GetNoClickRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets rate
+     * Gets position
      *
-     * @return float
+     * @return int[]
      */
-    public function getRate()
+    public function getPosition()
     {
-        return $this->container['rate'] ?? null;
+        return $this->container['position'] ?? null;
     }
 
     /**
-     * Sets rate
+     * Sets position
      *
-     * @param float $rate the click-through rate
+     * @param int[] $position Range of positions with the following pattern: - Positions from 1 to 10 included are displayed in separated groups. - Positions from 11 to 20 included are grouped together. - Positions from 21 and up are grouped together.
      *
      * @return self
      */
-    public function setRate($rate)
+    public function setPosition($position)
     {
-        $this->container['rate'] = $rate;
+        $this->container['position'] = $position;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets clickCount
      *
      * @return int
      */
-    public function getCount()
+    public function getClickCount()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['clickCount'] ?? null;
     }
 
     /**
-     * Sets count
+     * Sets clickCount
      *
-     * @param int $count the number of click event
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
-    public function setCount($count)
+    public function setClickCount($clickCount)
     {
-        $this->container['count'] = $count;
-
-        return $this;
-    }
-
-    /**
-     * Gets noClickCount
-     *
-     * @return int
-     */
-    public function getNoClickCount()
-    {
-        return $this->container['noClickCount'] ?? null;
-    }
-
-    /**
-     * Sets noClickCount
-     *
-     * @param int $noClickCount the number of click event
-     *
-     * @return self
-     */
-    public function setNoClickCount($noClickCount)
-    {
-        $this->container['noClickCount'] = $noClickCount;
-
-        return $this;
-    }
-
-    /**
-     * Gets date
-     *
-     * @return string
-     */
-    public function getDate()
-    {
-        return $this->container['date'] ?? null;
-    }
-
-    /**
-     * Sets date
-     *
-     * @param string $date date of the event
-     *
-     * @return self
-     */
-    public function setDate($date)
-    {
-        $this->container['date'] = $date;
+        $this->container['clickCount'] = $clickCount;
 
         return $this;
     }

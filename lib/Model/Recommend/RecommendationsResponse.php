@@ -27,7 +27,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,string>>',
-        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseFacetsStats>',
+        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>',
         'hitsPerPage' => 'int',
         'index' => 'string',
         'indexUsed' => 'string',
@@ -579,7 +579,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets facetsStats
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseFacetsStats>|null
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>|null
      */
     public function getFacetsStats()
     {
@@ -589,7 +589,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets facetsStats
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseFacetsStats>|null $facetsStats statistics for numerical facets
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>|null $facetsStats statistics for numerical facets
      *
      * @return self
      */

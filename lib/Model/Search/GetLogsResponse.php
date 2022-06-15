@@ -19,7 +19,7 @@ class GetLogsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'logs' => '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseLogs[]',
+        'logs' => '\Algolia\AlgoliaSearch\Model\Search\Log[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class GetLogsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets logs
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseLogs[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Log[]
      */
     public function getLogs()
     {
@@ -151,7 +151,7 @@ class GetLogsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets logs
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseLogs[] $logs logs
+     * @param \Algolia\AlgoliaSearch\Model\Search\Log[] $logs logs
      *
      * @return self
      */

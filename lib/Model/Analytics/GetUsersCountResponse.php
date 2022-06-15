@@ -20,7 +20,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelTypes = [
         'count' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[]',
     ];
 
     /**
@@ -178,7 +178,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets dates
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[]
      */
     public function getDates()
     {
@@ -188,7 +188,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponseDates[] $dates a list of users count with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[] $dates a list of users count with their date
      *
      * @return self
      */

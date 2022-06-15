@@ -21,7 +21,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' => '\Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Search\UserHit[]',
         'nbHits' => 'int',
         'page' => 'int',
         'hitsPerPage' => 'int',
@@ -195,7 +195,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets hits
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserHit[]
      */
     public function getHits()
     {
@@ -205,7 +205,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponseHits[] $hits list of user object matching the query
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits list of user object matching the query
      *
      * @return self
      */

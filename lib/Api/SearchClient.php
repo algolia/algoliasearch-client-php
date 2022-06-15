@@ -1355,7 +1355,7 @@ class SearchClient
     /**
      * Retrieve one or more objects.
      *
-     * @param array $getObjectsParams getObjectsParams (required)
+     * @param array $getObjectsParams The Algolia object. (required)
      * - $getObjectsParams['requests'] => (array)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\GetObjectsParams
@@ -2616,7 +2616,7 @@ class SearchClient
     /**
      * Search multiple indices.
      *
-     * @param array $searchMethodParams searchMethodParams (required)
+     * @param array $searchMethodParams The &#x60;search&#x60; requests and strategy. (required)
      * - $searchMethodParams['requests'] => (array)  (required)
      * - $searchMethodParams['strategy'] => (array)
      *

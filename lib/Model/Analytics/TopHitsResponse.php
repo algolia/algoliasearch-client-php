@@ -19,7 +19,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHit[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets hits
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopHit[]
      */
     public function getHits()
     {
@@ -151,7 +151,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitsResponseHits[] $hits a list of top hits with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHit[] $hits a list of top hits with their count
      *
      * @return self
      */

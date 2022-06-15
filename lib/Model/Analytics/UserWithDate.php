@@ -1,17 +1,17 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchForFacetValuesResponse Class Doc Comment
+ * UserWithDate Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,7 +19,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\FacetHits[]',
+        'date' => 'string',
+        'count' => 'int',
     ];
 
     /**
@@ -28,7 +29,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetHits' => null,
+        'date' => null,
+        'count' => null,
     ];
 
     /**
@@ -57,7 +59,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $setters = [
-        'facetHits' => 'setFacetHits',
+        'date' => 'setDate',
+        'count' => 'setCount',
     ];
 
     /**
@@ -66,7 +69,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $getters = [
-        'facetHits' => 'getFacetHits',
+        'date' => 'getDate',
+        'count' => 'getCount',
     ];
 
     /**
@@ -103,8 +107,11 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['facetHits'])) {
-            $this->container['facetHits'] = $data['facetHits'];
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
+        }
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
         }
     }
 
@@ -118,10 +125,16 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
         $invalidProperties = [];
 
         if (
-            !isset($this->container['facetHits']) ||
-            $this->container['facetHits'] === null
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
         ) {
-            $invalidProperties[] = "'facetHits' can't be null";
+            $invalidProperties[] = "'date' can't be null";
+        }
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
+            $invalidProperties[] = "'count' can't be null";
         }
 
         return $invalidProperties;
@@ -139,25 +152,49 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
-     * Gets facetHits
+     * Gets date
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
+     * @return string
      */
-    public function getFacetHits()
+    public function getDate()
     {
-        return $this->container['facetHits'] ?? null;
+        return $this->container['date'] ?? null;
     }
 
     /**
-     * Sets facetHits
+     * Sets date
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
+     * @param string $date date of the event
      *
      * @return self
      */
-    public function setFacetHits($facetHits)
+    public function setDate($date)
     {
-        $this->container['facetHits'] = $facetHits;
+        $this->container['date'] = $date;
+
+        return $this;
+    }
+
+    /**
+     * Gets count
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->container['count'] ?? null;
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int $count the number of occurrences
+     *
+     * @return self
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
 
         return $this;
     }

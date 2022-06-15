@@ -3,15 +3,15 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetAverageClickPositionResponseDates Class Doc Comment
+ * SearchEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class SearchEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,9 +19,8 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $modelTypes = [
-        'average' => 'double',
-        'clickCount' => 'int',
         'date' => 'string',
+        'count' => 'int',
     ];
 
     /**
@@ -30,9 +29,8 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $modelFormats = [
-        'average' => 'double',
-        'clickCount' => null,
         'date' => null,
+        'count' => null,
     ];
 
     /**
@@ -61,9 +59,8 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $setters = [
-        'average' => 'setAverage',
-        'clickCount' => 'setClickCount',
         'date' => 'setDate',
+        'count' => 'setCount',
     ];
 
     /**
@@ -72,9 +69,8 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $getters = [
-        'average' => 'getAverage',
-        'clickCount' => 'getClickCount',
         'date' => 'getDate',
+        'count' => 'getCount',
     ];
 
     /**
@@ -111,14 +107,11 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['average'])) {
-            $this->container['average'] = $data['average'];
-        }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
-        }
         if (isset($data['date'])) {
             $this->container['date'] = $data['date'];
+        }
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
         }
     }
 
@@ -132,22 +125,16 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
         $invalidProperties = [];
 
         if (
-            !isset($this->container['average']) ||
-            $this->container['average'] === null
-        ) {
-            $invalidProperties[] = "'average' can't be null";
-        }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
-            $invalidProperties[] = "'clickCount' can't be null";
-        }
-        if (
             !isset($this->container['date']) ||
             $this->container['date'] === null
         ) {
             $invalidProperties[] = "'date' can't be null";
+        }
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
+            $invalidProperties[] = "'count' can't be null";
         }
 
         return $invalidProperties;
@@ -162,54 +149,6 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
-    }
-
-    /**
-     * Gets average
-     *
-     * @return float
-     */
-    public function getAverage()
-    {
-        return $this->container['average'] ?? null;
-    }
-
-    /**
-     * Sets average
-     *
-     * @param float $average the average of all the click count event
-     *
-     * @return self
-     */
-    public function setAverage($average)
-    {
-        $this->container['average'] = $average;
-
-        return $this;
-    }
-
-    /**
-     * Gets clickCount
-     *
-     * @return int
-     */
-    public function getClickCount()
-    {
-        return $this->container['clickCount'] ?? null;
-    }
-
-    /**
-     * Sets clickCount
-     *
-     * @param int $clickCount the number of click event
-     *
-     * @return self
-     */
-    public function setClickCount($clickCount)
-    {
-        $this->container['clickCount'] = $clickCount;
-
-        return $this;
     }
 
     /**
@@ -232,6 +171,30 @@ class GetAverageClickPositionResponseDates extends \Algolia\AlgoliaSearch\Model\
     public function setDate($date)
     {
         $this->container['date'] = $date;
+
+        return $this;
+    }
+
+    /**
+     * Gets count
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->container['count'] ?? null;
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int $count the number of occurrences
+     *
+     * @return self
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
 
         return $this;
     }

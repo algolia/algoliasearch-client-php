@@ -1,17 +1,17 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Analytics;
+namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * TopHitsResponseHits Class Doc Comment
+ * FacetHits Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class FacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,7 +19,8 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'hit' => 'string',
+        'value' => 'string',
+        'highlighted' => 'string',
         'count' => 'int',
     ];
 
@@ -29,7 +30,8 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelFormats = [
-        'hit' => null,
+        'value' => null,
+        'highlighted' => null,
         'count' => null,
     ];
 
@@ -59,7 +61,8 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'hit' => 'setHit',
+        'value' => 'setValue',
+        'highlighted' => 'setHighlighted',
         'count' => 'setCount',
     ];
 
@@ -69,7 +72,8 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'hit' => 'getHit',
+        'value' => 'getValue',
+        'highlighted' => 'getHighlighted',
         'count' => 'getCount',
     ];
 
@@ -107,8 +111,11 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['hit'])) {
-            $this->container['hit'] = $data['hit'];
+        if (isset($data['value'])) {
+            $this->container['value'] = $data['value'];
+        }
+        if (isset($data['highlighted'])) {
+            $this->container['highlighted'] = $data['highlighted'];
         }
         if (isset($data['count'])) {
             $this->container['count'] = $data['count'];
@@ -125,10 +132,16 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         $invalidProperties = [];
 
         if (
-            !isset($this->container['hit']) ||
-            $this->container['hit'] === null
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
         ) {
-            $invalidProperties[] = "'hit' can't be null";
+            $invalidProperties[] = "'value' can't be null";
+        }
+        if (
+            !isset($this->container['highlighted']) ||
+            $this->container['highlighted'] === null
+        ) {
+            $invalidProperties[] = "'highlighted' can't be null";
         }
         if (
             !isset($this->container['count']) ||
@@ -152,25 +165,49 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets hit
+     * Gets value
      *
      * @return string
      */
-    public function getHit()
+    public function getValue()
     {
-        return $this->container['hit'] ?? null;
+        return $this->container['value'] ?? null;
     }
 
     /**
-     * Sets hit
+     * Sets value
      *
-     * @param string $hit the hit
+     * @param string $value raw value of the facet
      *
      * @return self
      */
-    public function setHit($hit)
+    public function setValue($value)
     {
-        $this->container['hit'] = $hit;
+        $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets highlighted
+     *
+     * @return string
+     */
+    public function getHighlighted()
+    {
+        return $this->container['highlighted'] ?? null;
+    }
+
+    /**
+     * Sets highlighted
+     *
+     * @param string $highlighted markup text with occurrences highlighted
+     *
+     * @return self
+     */
+    public function setHighlighted($highlighted)
+    {
+        $this->container['highlighted'] = $highlighted;
 
         return $this;
     }
@@ -188,7 +225,7 @@ class TopHitsResponseHits extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count How many objects contain this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the counts may not be exhaustive.
      *
      * @return self
      */

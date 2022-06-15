@@ -3,15 +3,15 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetClickPositionsResponsePositions Class Doc Comment
+ * TopHit Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class TopHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,8 +19,8 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
      * @var string[]
      */
     protected static $modelTypes = [
-        'position' => 'int[]',
-        'clickCount' => 'int',
+        'hit' => 'string',
+        'count' => 'int',
     ];
 
     /**
@@ -29,8 +29,8 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
      * @var string[]
      */
     protected static $modelFormats = [
-        'position' => null,
-        'clickCount' => null,
+        'hit' => null,
+        'count' => null,
     ];
 
     /**
@@ -59,8 +59,8 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
      * @var string[]
      */
     protected static $setters = [
-        'position' => 'setPosition',
-        'clickCount' => 'setClickCount',
+        'hit' => 'setHit',
+        'count' => 'setCount',
     ];
 
     /**
@@ -69,8 +69,8 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
      * @var string[]
      */
     protected static $getters = [
-        'position' => 'getPosition',
-        'clickCount' => 'getClickCount',
+        'hit' => 'getHit',
+        'count' => 'getCount',
     ];
 
     /**
@@ -107,11 +107,11 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['position'])) {
-            $this->container['position'] = $data['position'];
+        if (isset($data['hit'])) {
+            $this->container['hit'] = $data['hit'];
         }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
         }
     }
 
@@ -125,16 +125,16 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
         $invalidProperties = [];
 
         if (
-            !isset($this->container['position']) ||
-            $this->container['position'] === null
+            !isset($this->container['hit']) ||
+            $this->container['hit'] === null
         ) {
-            $invalidProperties[] = "'position' can't be null";
+            $invalidProperties[] = "'hit' can't be null";
         }
         if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
         ) {
-            $invalidProperties[] = "'clickCount' can't be null";
+            $invalidProperties[] = "'count' can't be null";
         }
 
         return $invalidProperties;
@@ -152,49 +152,49 @@ class GetClickPositionsResponsePositions extends \Algolia\AlgoliaSearch\Model\Ab
     }
 
     /**
-     * Gets position
+     * Gets hit
      *
-     * @return int[]
+     * @return string
      */
-    public function getPosition()
+    public function getHit()
     {
-        return $this->container['position'] ?? null;
+        return $this->container['hit'] ?? null;
     }
 
     /**
-     * Sets position
+     * Sets hit
      *
-     * @param int[] $position Range of positions with the following pattern: - Positions from 1 to 10 included are displayed in separated groups. - Positions from 11 to 20 included are grouped together. - Positions from 21 and up are grouped together.
+     * @param string $hit the hit
      *
      * @return self
      */
-    public function setPosition($position)
+    public function setHit($hit)
     {
-        $this->container['position'] = $position;
+        $this->container['hit'] = $hit;
 
         return $this;
     }
 
     /**
-     * Gets clickCount
+     * Gets count
      *
      * @return int
      */
-    public function getClickCount()
+    public function getCount()
     {
-        return $this->container['clickCount'] ?? null;
+        return $this->container['count'] ?? null;
     }
 
     /**
-     * Sets clickCount
+     * Sets count
      *
-     * @param int $clickCount the number of click event
+     * @param int $count the number of occurrences
      *
      * @return self
      */
-    public function setClickCount($clickCount)
+    public function setCount($count)
     {
-        $this->container['clickCount'] = $clickCount;
+        $this->container['count'] = $count;
 
         return $this;
     }

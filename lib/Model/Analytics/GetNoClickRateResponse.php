@@ -22,7 +22,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'rate' => 'double',
         'count' => 'int',
         'noClickCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]',
     ];
 
     /**
@@ -252,7 +252,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets dates
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponseDates[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]
      */
     public function getDates()
     {
@@ -262,7 +262,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponseDates[] $dates a list of searches without clicks with their date, rate and counts
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[] $dates a list of searches without clicks with their date, rate and counts
      *
      * @return self
      */

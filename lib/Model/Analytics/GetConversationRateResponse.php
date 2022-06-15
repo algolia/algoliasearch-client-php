@@ -22,7 +22,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         'rate' => 'double',
         'trackedSearchCount' => 'int',
         'conversionCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]',
     ];
 
     /**
@@ -253,7 +253,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets dates
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]
      */
     public function getDates()
     {
@@ -263,7 +263,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponseDates[] $dates a list of conversion events with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[] $dates a list of conversion events with their date
      *
      * @return self
      */

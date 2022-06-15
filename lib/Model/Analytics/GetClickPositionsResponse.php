@@ -19,7 +19,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[]',
+        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]',
     ];
 
     /**
@@ -150,7 +150,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets positions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
      */
     public function getPositions()
     {
@@ -160,7 +160,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets positions
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponsePositions[] $positions a list of the click positions with their click count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions a list of the click positions with their click count
      *
      * @return self
      */

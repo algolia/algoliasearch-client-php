@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchForFacetValuesResponse Class Doc Comment
+ * SearchNoResultEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,7 +19,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\FacetHits[]',
+        'search' => 'string',
+        'count' => 'int',
+        'nbHits' => 'int',
     ];
 
     /**
@@ -28,7 +30,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetHits' => null,
+        'search' => null,
+        'count' => null,
+        'nbHits' => null,
     ];
 
     /**
@@ -57,7 +61,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $setters = [
-        'facetHits' => 'setFacetHits',
+        'search' => 'setSearch',
+        'count' => 'setCount',
+        'nbHits' => 'setNbHits',
     ];
 
     /**
@@ -66,7 +72,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $getters = [
-        'facetHits' => 'getFacetHits',
+        'search' => 'getSearch',
+        'count' => 'getCount',
+        'nbHits' => 'getNbHits',
     ];
 
     /**
@@ -103,8 +111,14 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['facetHits'])) {
-            $this->container['facetHits'] = $data['facetHits'];
+        if (isset($data['search'])) {
+            $this->container['search'] = $data['search'];
+        }
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
+        }
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
         }
     }
 
@@ -118,10 +132,22 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
         $invalidProperties = [];
 
         if (
-            !isset($this->container['facetHits']) ||
-            $this->container['facetHits'] === null
+            !isset($this->container['search']) ||
+            $this->container['search'] === null
         ) {
-            $invalidProperties[] = "'facetHits' can't be null";
+            $invalidProperties[] = "'search' can't be null";
+        }
+        if (
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
+        ) {
+            $invalidProperties[] = "'count' can't be null";
+        }
+        if (
+            !isset($this->container['nbHits']) ||
+            $this->container['nbHits'] === null
+        ) {
+            $invalidProperties[] = "'nbHits' can't be null";
         }
 
         return $invalidProperties;
@@ -139,25 +165,73 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
-     * Gets facetHits
+     * Gets search
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
+     * @return string
      */
-    public function getFacetHits()
+    public function getSearch()
     {
-        return $this->container['facetHits'] ?? null;
+        return $this->container['search'] ?? null;
     }
 
     /**
-     * Sets facetHits
+     * Sets search
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
+     * @param string $search the search query
      *
      * @return self
      */
-    public function setFacetHits($facetHits)
+    public function setSearch($search)
     {
-        $this->container['facetHits'] = $facetHits;
+        $this->container['search'] = $search;
+
+        return $this;
+    }
+
+    /**
+     * Gets count
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->container['count'] ?? null;
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int $count the number of occurrences
+     *
+     * @return self
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbHits
+     *
+     * @return int
+     */
+    public function getNbHits()
+    {
+        return $this->container['nbHits'] ?? null;
+    }
+
+    /**
+     * Sets nbHits
+     *
+     * @param int $nbHits number of hits that the search query matched
+     *
+     * @return self
+     */
+    public function setNbHits($nbHits)
+    {
+        $this->container['nbHits'] = $nbHits;
 
         return $this;
     }

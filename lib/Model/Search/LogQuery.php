@@ -1,17 +1,17 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Analytics;
+namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * GetSearchesCountResponseDates Class Doc Comment
+ * LogQuery Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class LogQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,8 +19,9 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelTypes = [
-        'date' => 'string',
-        'count' => 'int',
+        'indexName' => 'string',
+        'userToken' => 'string',
+        'queryId' => 'string',
     ];
 
     /**
@@ -29,8 +30,9 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelFormats = [
-        'date' => null,
-        'count' => null,
+        'indexName' => null,
+        'userToken' => null,
+        'queryId' => null,
     ];
 
     /**
@@ -59,8 +61,9 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $setters = [
-        'date' => 'setDate',
-        'count' => 'setCount',
+        'indexName' => 'setIndexName',
+        'userToken' => 'setUserToken',
+        'queryId' => 'setQueryId',
     ];
 
     /**
@@ -69,8 +72,9 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $getters = [
-        'date' => 'getDate',
-        'count' => 'getCount',
+        'indexName' => 'getIndexName',
+        'userToken' => 'getUserToken',
+        'queryId' => 'getQueryId',
     ];
 
     /**
@@ -107,11 +111,14 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
+        if (isset($data['userToken'])) {
+            $this->container['userToken'] = $data['userToken'];
+        }
+        if (isset($data['queryId'])) {
+            $this->container['queryId'] = $data['queryId'];
         }
     }
 
@@ -123,19 +130,6 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['date']) ||
-            $this->container['date'] === null
-        ) {
-            $invalidProperties[] = "'date' can't be null";
-        }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
-            $invalidProperties[] = "'count' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -152,49 +146,73 @@ class GetSearchesCountResponseDates extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets date
+     * Gets indexName
      *
-     * @return string
+     * @return string|null
      */
-    public function getDate()
+    public function getIndexName()
     {
-        return $this->container['date'] ?? null;
+        return $this->container['indexName'] ?? null;
     }
 
     /**
-     * Sets date
+     * Sets indexName
      *
-     * @param string $date date of the event
+     * @param string|null $indexName index targeted by the query
      *
      * @return self
      */
-    public function setDate($date)
+    public function setIndexName($indexName)
     {
-        $this->container['date'] = $date;
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets userToken
      *
-     * @return int
+     * @return string|null
      */
-    public function getCount()
+    public function getUserToken()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['userToken'] ?? null;
     }
 
     /**
-     * Sets count
+     * Sets userToken
      *
-     * @param int $count the number of occurrences
+     * @param string|null $userToken user identifier
      *
      * @return self
      */
-    public function setCount($count)
+    public function setUserToken($userToken)
     {
-        $this->container['count'] = $count;
+        $this->container['userToken'] = $userToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets queryId
+     *
+     * @return string|null
+     */
+    public function getQueryId()
+    {
+        return $this->container['queryId'] ?? null;
+    }
+
+    /**
+     * Sets queryId
+     *
+     * @param string|null $queryId queryID for the given query
+     *
+     * @return self
+     */
+    public function setQueryId($queryId)
+    {
+        $this->container['queryId'] = $queryId;
 
         return $this;
     }

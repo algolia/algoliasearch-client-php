@@ -22,7 +22,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
         'rate' => 'double',
         'count' => 'int',
         'noResultCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponseDates[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[]',
     ];
 
     /**
@@ -252,7 +252,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets dates
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponseDates[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[]
      */
     public function getDates()
     {
@@ -262,7 +262,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponseDates[] $dates a list of searches without results with their date, rate and counts
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[] $dates a list of searches without results with their date, rate and counts
      *
      * @return self
      */

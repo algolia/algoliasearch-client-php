@@ -1,17 +1,17 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * GetLogsResponseInnerQueries Class Doc Comment
+ * FacetsStats Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,9 +19,10 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'indexName' => 'string',
-        'userToken' => 'string',
-        'queryId' => 'string',
+        'min' => 'int',
+        'max' => 'int',
+        'avg' => 'int',
+        'sum' => 'int',
     ];
 
     /**
@@ -30,9 +31,10 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelFormats = [
-        'indexName' => null,
-        'userToken' => null,
-        'queryId' => null,
+        'min' => null,
+        'max' => null,
+        'avg' => null,
+        'sum' => null,
     ];
 
     /**
@@ -61,9 +63,10 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $setters = [
-        'indexName' => 'setIndexName',
-        'userToken' => 'setUserToken',
-        'queryId' => 'setQueryId',
+        'min' => 'setMin',
+        'max' => 'setMax',
+        'avg' => 'setAvg',
+        'sum' => 'setSum',
     ];
 
     /**
@@ -72,9 +75,10 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $getters = [
-        'indexName' => 'getIndexName',
-        'userToken' => 'getUserToken',
-        'queryId' => 'getQueryId',
+        'min' => 'getMin',
+        'max' => 'getMax',
+        'avg' => 'getAvg',
+        'sum' => 'getSum',
     ];
 
     /**
@@ -111,14 +115,17 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
+        if (isset($data['min'])) {
+            $this->container['min'] = $data['min'];
         }
-        if (isset($data['userToken'])) {
-            $this->container['userToken'] = $data['userToken'];
+        if (isset($data['max'])) {
+            $this->container['max'] = $data['max'];
         }
-        if (isset($data['queryId'])) {
-            $this->container['queryId'] = $data['queryId'];
+        if (isset($data['avg'])) {
+            $this->container['avg'] = $data['avg'];
+        }
+        if (isset($data['sum'])) {
+            $this->container['sum'] = $data['sum'];
         }
     }
 
@@ -146,73 +153,97 @@ class GetLogsResponseInnerQueries extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets indexName
+     * Gets min
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getIndexName()
+    public function getMin()
     {
-        return $this->container['indexName'] ?? null;
+        return $this->container['min'] ?? null;
     }
 
     /**
-     * Sets indexName
+     * Sets min
      *
-     * @param string|null $indexName index targeted by the query
+     * @param int|null $min the minimum value in the result set
      *
      * @return self
      */
-    public function setIndexName($indexName)
+    public function setMin($min)
     {
-        $this->container['indexName'] = $indexName;
+        $this->container['min'] = $min;
 
         return $this;
     }
 
     /**
-     * Gets userToken
+     * Gets max
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getUserToken()
+    public function getMax()
     {
-        return $this->container['userToken'] ?? null;
+        return $this->container['max'] ?? null;
     }
 
     /**
-     * Sets userToken
+     * Sets max
      *
-     * @param string|null $userToken user identifier
+     * @param int|null $max the maximum value in the result set
      *
      * @return self
      */
-    public function setUserToken($userToken)
+    public function setMax($max)
     {
-        $this->container['userToken'] = $userToken;
+        $this->container['max'] = $max;
 
         return $this;
     }
 
     /**
-     * Gets queryId
+     * Gets avg
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getQueryId()
+    public function getAvg()
     {
-        return $this->container['queryId'] ?? null;
+        return $this->container['avg'] ?? null;
     }
 
     /**
-     * Sets queryId
+     * Sets avg
      *
-     * @param string|null $queryId queryID for the given query
+     * @param int|null $avg the average facet value in the result set
      *
      * @return self
      */
-    public function setQueryId($queryId)
+    public function setAvg($avg)
     {
-        $this->container['queryId'] = $queryId;
+        $this->container['avg'] = $avg;
+
+        return $this;
+    }
+
+    /**
+     * Gets sum
+     *
+     * @return int|null
+     */
+    public function getSum()
+    {
+        return $this->container['sum'] ?? null;
+    }
+
+    /**
+     * Sets sum
+     *
+     * @param int|null $sum the sum of all values in the result set
+     *
+     * @return self
+     */
+    public function setSum($sum)
+    {
+        $this->container['sum'] = $sum;
 
         return $this;
     }

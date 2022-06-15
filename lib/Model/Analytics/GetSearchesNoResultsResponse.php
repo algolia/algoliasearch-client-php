@@ -19,7 +19,7 @@ class GetSearchesNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\SearchNoResultEvent[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class GetSearchesNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets searches
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\SearchNoResultEvent[]
      */
     public function getSearches()
     {
@@ -151,7 +151,7 @@ class GetSearchesNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[] $searches a list of searches with no results and their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchNoResultEvent[] $searches a list of searches with no results and their count
      *
      * @return self
      */

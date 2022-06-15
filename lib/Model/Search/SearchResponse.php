@@ -27,7 +27,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,string>>',
-        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>',
+        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>',
         'hitsPerPage' => 'int',
         'index' => 'string',
         'indexUsed' => 'string',
@@ -579,7 +579,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets facetsStats
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>|null
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>|null
      */
     public function getFacetsStats()
     {
@@ -589,7 +589,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facetsStats
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseFacetsStats>|null $facetsStats statistics for numerical facets
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>|null $facetsStats statistics for numerical facets
      *
      * @return self
      */

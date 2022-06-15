@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Recommend;
+namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * BaseSearchResponseFacetsStats Class Doc Comment
+ * AverageClickEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class AverageClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,10 +19,9 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelTypes = [
-        'min' => 'int',
-        'max' => 'int',
-        'avg' => 'int',
-        'sum' => 'int',
+        'average' => 'double',
+        'clickCount' => 'int',
+        'date' => 'string',
     ];
 
     /**
@@ -31,10 +30,9 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelFormats = [
-        'min' => null,
-        'max' => null,
-        'avg' => null,
-        'sum' => null,
+        'average' => 'double',
+        'clickCount' => null,
+        'date' => null,
     ];
 
     /**
@@ -63,10 +61,9 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $setters = [
-        'min' => 'setMin',
-        'max' => 'setMax',
-        'avg' => 'setAvg',
-        'sum' => 'setSum',
+        'average' => 'setAverage',
+        'clickCount' => 'setClickCount',
+        'date' => 'setDate',
     ];
 
     /**
@@ -75,10 +72,9 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $getters = [
-        'min' => 'getMin',
-        'max' => 'getMax',
-        'avg' => 'getAvg',
-        'sum' => 'getSum',
+        'average' => 'getAverage',
+        'clickCount' => 'getClickCount',
+        'date' => 'getDate',
     ];
 
     /**
@@ -115,17 +111,14 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['min'])) {
-            $this->container['min'] = $data['min'];
+        if (isset($data['average'])) {
+            $this->container['average'] = $data['average'];
         }
-        if (isset($data['max'])) {
-            $this->container['max'] = $data['max'];
+        if (isset($data['clickCount'])) {
+            $this->container['clickCount'] = $data['clickCount'];
         }
-        if (isset($data['avg'])) {
-            $this->container['avg'] = $data['avg'];
-        }
-        if (isset($data['sum'])) {
-            $this->container['sum'] = $data['sum'];
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
     }
 
@@ -137,6 +130,25 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['average']) ||
+            $this->container['average'] === null
+        ) {
+            $invalidProperties[] = "'average' can't be null";
+        }
+        if (
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
+        ) {
+            $invalidProperties[] = "'clickCount' can't be null";
+        }
+        if (
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
+        ) {
+            $invalidProperties[] = "'date' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -153,97 +165,73 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets min
+     * Gets average
      *
-     * @return int|null
+     * @return float
      */
-    public function getMin()
+    public function getAverage()
     {
-        return $this->container['min'] ?? null;
+        return $this->container['average'] ?? null;
     }
 
     /**
-     * Sets min
+     * Sets average
      *
-     * @param int|null $min the minimum value in the result set
+     * @param float $average the average of all the click count event
      *
      * @return self
      */
-    public function setMin($min)
+    public function setAverage($average)
     {
-        $this->container['min'] = $min;
+        $this->container['average'] = $average;
 
         return $this;
     }
 
     /**
-     * Gets max
+     * Gets clickCount
      *
-     * @return int|null
+     * @return int
      */
-    public function getMax()
+    public function getClickCount()
     {
-        return $this->container['max'] ?? null;
+        return $this->container['clickCount'] ?? null;
     }
 
     /**
-     * Sets max
+     * Sets clickCount
      *
-     * @param int|null $max the maximum value in the result set
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
-    public function setMax($max)
+    public function setClickCount($clickCount)
     {
-        $this->container['max'] = $max;
+        $this->container['clickCount'] = $clickCount;
 
         return $this;
     }
 
     /**
-     * Gets avg
+     * Gets date
      *
-     * @return int|null
+     * @return string
      */
-    public function getAvg()
+    public function getDate()
     {
-        return $this->container['avg'] ?? null;
+        return $this->container['date'] ?? null;
     }
 
     /**
-     * Sets avg
+     * Sets date
      *
-     * @param int|null $avg the average facet value in the result set
+     * @param string $date date of the event
      *
      * @return self
      */
-    public function setAvg($avg)
+    public function setDate($date)
     {
-        $this->container['avg'] = $avg;
-
-        return $this;
-    }
-
-    /**
-     * Gets sum
-     *
-     * @return int|null
-     */
-    public function getSum()
-    {
-        return $this->container['sum'] ?? null;
-    }
-
-    /**
-     * Sets sum
-     *
-     * @param int|null $sum the sum of all values in the result set
-     *
-     * @return self
-     */
-    public function setSum($sum)
-    {
-        $this->container['sum'] = $sum;
+        $this->container['date'] = $date;
 
         return $this;
     }

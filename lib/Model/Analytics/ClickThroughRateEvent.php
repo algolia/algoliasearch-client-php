@@ -1,14 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchUserIdsResponseHighlightResult Class Doc Comment
+ * ClickThroughRateEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,8 +19,10 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $modelTypes = [
-        'userID' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
-        'clusterName' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
+        'rate' => 'double',
+        'clickCount' => 'int',
+        'trackedSearchCount' => 'int',
+        'date' => 'string',
     ];
 
     /**
@@ -29,8 +31,10 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $modelFormats = [
-        'userID' => null,
-        'clusterName' => null,
+        'rate' => 'double',
+        'clickCount' => null,
+        'trackedSearchCount' => null,
+        'date' => null,
     ];
 
     /**
@@ -59,8 +63,10 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $setters = [
-        'userID' => 'setUserID',
-        'clusterName' => 'setClusterName',
+        'rate' => 'setRate',
+        'clickCount' => 'setClickCount',
+        'trackedSearchCount' => 'setTrackedSearchCount',
+        'date' => 'setDate',
     ];
 
     /**
@@ -69,8 +75,10 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
      * @var string[]
      */
     protected static $getters = [
-        'userID' => 'getUserID',
-        'clusterName' => 'getClusterName',
+        'rate' => 'getRate',
+        'clickCount' => 'getClickCount',
+        'trackedSearchCount' => 'getTrackedSearchCount',
+        'date' => 'getDate',
     ];
 
     /**
@@ -107,11 +115,18 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['userID'])) {
-            $this->container['userID'] = $data['userID'];
+        if (isset($data['rate'])) {
+            $this->container['rate'] = $data['rate'];
         }
-        if (isset($data['clusterName'])) {
-            $this->container['clusterName'] = $data['clusterName'];
+        if (isset($data['clickCount'])) {
+            $this->container['clickCount'] = $data['clickCount'];
+        }
+        if (isset($data['trackedSearchCount'])) {
+            $this->container['trackedSearchCount'] =
+                $data['trackedSearchCount'];
+        }
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
     }
 
@@ -125,16 +140,28 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
         $invalidProperties = [];
 
         if (
-            !isset($this->container['userID']) ||
-            $this->container['userID'] === null
+            !isset($this->container['rate']) ||
+            $this->container['rate'] === null
         ) {
-            $invalidProperties[] = "'userID' can't be null";
+            $invalidProperties[] = "'rate' can't be null";
         }
         if (
-            !isset($this->container['clusterName']) ||
-            $this->container['clusterName'] === null
+            !isset($this->container['clickCount']) ||
+            $this->container['clickCount'] === null
         ) {
-            $invalidProperties[] = "'clusterName' can't be null";
+            $invalidProperties[] = "'clickCount' can't be null";
+        }
+        if (
+            !isset($this->container['trackedSearchCount']) ||
+            $this->container['trackedSearchCount'] === null
+        ) {
+            $invalidProperties[] = "'trackedSearchCount' can't be null";
+        }
+        if (
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
+        ) {
+            $invalidProperties[] = "'date' can't be null";
         }
 
         return $invalidProperties;
@@ -152,49 +179,97 @@ class SearchUserIdsResponseHighlightResult extends \Algolia\AlgoliaSearch\Model\
     }
 
     /**
-     * Gets userID
+     * Gets rate
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return float
      */
-    public function getUserID()
+    public function getRate()
     {
-        return $this->container['userID'] ?? null;
+        return $this->container['rate'] ?? null;
     }
 
     /**
-     * Sets userID
+     * Sets rate
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $userID userID
+     * @param float $rate the click-through rate
      *
      * @return self
      */
-    public function setUserID($userID)
+    public function setRate($rate)
     {
-        $this->container['userID'] = $userID;
+        $this->container['rate'] = $rate;
 
         return $this;
     }
 
     /**
-     * Gets clusterName
+     * Gets clickCount
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return int
      */
-    public function getClusterName()
+    public function getClickCount()
     {
-        return $this->container['clusterName'] ?? null;
+        return $this->container['clickCount'] ?? null;
     }
 
     /**
-     * Sets clusterName
+     * Sets clickCount
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $clusterName clusterName
+     * @param int $clickCount the number of click event
      *
      * @return self
      */
-    public function setClusterName($clusterName)
+    public function setClickCount($clickCount)
     {
-        $this->container['clusterName'] = $clusterName;
+        $this->container['clickCount'] = $clickCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets trackedSearchCount
+     *
+     * @return int
+     */
+    public function getTrackedSearchCount()
+    {
+        return $this->container['trackedSearchCount'] ?? null;
+    }
+
+    /**
+     * Sets trackedSearchCount
+     *
+     * @param int $trackedSearchCount the number of tracked search click
+     *
+     * @return self
+     */
+    public function setTrackedSearchCount($trackedSearchCount)
+    {
+        $this->container['trackedSearchCount'] = $trackedSearchCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets date
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->container['date'] ?? null;
+    }
+
+    /**
+     * Sets date
+     *
+     * @param string $date date of the event
+     *
+     * @return self
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

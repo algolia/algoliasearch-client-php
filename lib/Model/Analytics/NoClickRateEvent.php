@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetClickThroughRateResponseDates Class Doc Comment
+ * NoClickRateEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -20,8 +20,8 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      */
     protected static $modelTypes = [
         'rate' => 'double',
-        'clickCount' => 'int',
-        'trackedSearchCount' => 'int',
+        'count' => 'int',
+        'noClickCount' => 'int',
         'date' => 'string',
     ];
 
@@ -32,8 +32,8 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      */
     protected static $modelFormats = [
         'rate' => 'double',
-        'clickCount' => null,
-        'trackedSearchCount' => null,
+        'count' => null,
+        'noClickCount' => null,
         'date' => null,
     ];
 
@@ -64,8 +64,8 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      */
     protected static $setters = [
         'rate' => 'setRate',
-        'clickCount' => 'setClickCount',
-        'trackedSearchCount' => 'setTrackedSearchCount',
+        'count' => 'setCount',
+        'noClickCount' => 'setNoClickCount',
         'date' => 'setDate',
     ];
 
@@ -76,8 +76,8 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      */
     protected static $getters = [
         'rate' => 'getRate',
-        'clickCount' => 'getClickCount',
-        'trackedSearchCount' => 'getTrackedSearchCount',
+        'count' => 'getCount',
+        'noClickCount' => 'getNoClickCount',
         'date' => 'getDate',
     ];
 
@@ -118,12 +118,11 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
         if (isset($data['rate'])) {
             $this->container['rate'] = $data['rate'];
         }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
         }
-        if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+        if (isset($data['noClickCount'])) {
+            $this->container['noClickCount'] = $data['noClickCount'];
         }
         if (isset($data['date'])) {
             $this->container['date'] = $data['date'];
@@ -146,16 +145,16 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
             $invalidProperties[] = "'rate' can't be null";
         }
         if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
+            !isset($this->container['count']) ||
+            $this->container['count'] === null
         ) {
-            $invalidProperties[] = "'clickCount' can't be null";
+            $invalidProperties[] = "'count' can't be null";
         }
         if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
+            !isset($this->container['noClickCount']) ||
+            $this->container['noClickCount'] === null
         ) {
-            $invalidProperties[] = "'trackedSearchCount' can't be null";
+            $invalidProperties[] = "'noClickCount' can't be null";
         }
         if (
             !isset($this->container['date']) ||
@@ -203,49 +202,49 @@ class GetClickThroughRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
     }
 
     /**
-     * Gets clickCount
+     * Gets count
      *
      * @return int
      */
-    public function getClickCount()
+    public function getCount()
     {
-        return $this->container['clickCount'] ?? null;
+        return $this->container['count'] ?? null;
     }
 
     /**
-     * Sets clickCount
+     * Sets count
      *
-     * @param int $clickCount the number of click event
+     * @param int $count the number of click event
      *
      * @return self
      */
-    public function setClickCount($clickCount)
+    public function setCount($count)
     {
-        $this->container['clickCount'] = $clickCount;
+        $this->container['count'] = $count;
 
         return $this;
     }
 
     /**
-     * Gets trackedSearchCount
+     * Gets noClickCount
      *
      * @return int
      */
-    public function getTrackedSearchCount()
+    public function getNoClickCount()
     {
-        return $this->container['trackedSearchCount'] ?? null;
+        return $this->container['noClickCount'] ?? null;
     }
 
     /**
-     * Sets trackedSearchCount
+     * Sets noClickCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $noClickCount the number of click event
      *
      * @return self
      */
-    public function setTrackedSearchCount($trackedSearchCount)
+    public function setNoClickCount($noClickCount)
     {
-        $this->container['trackedSearchCount'] = $trackedSearchCount;
+        $this->container['noClickCount'] = $noClickCount;
 
         return $this;
     }

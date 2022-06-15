@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetTopCountriesResponseCountries Class Doc Comment
+ * NoResultsRateEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,8 +19,10 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelTypes = [
-        'country' => 'string',
+        'date' => 'string',
+        'noResultCount' => 'int',
         'count' => 'int',
+        'rate' => 'double',
     ];
 
     /**
@@ -29,8 +31,10 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelFormats = [
-        'country' => null,
+        'date' => null,
+        'noResultCount' => null,
         'count' => null,
+        'rate' => 'double',
     ];
 
     /**
@@ -59,8 +63,10 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $setters = [
-        'country' => 'setCountry',
+        'date' => 'setDate',
+        'noResultCount' => 'setNoResultCount',
         'count' => 'setCount',
+        'rate' => 'setRate',
     ];
 
     /**
@@ -69,8 +75,10 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $getters = [
-        'country' => 'getCountry',
+        'date' => 'getDate',
+        'noResultCount' => 'getNoResultCount',
         'count' => 'getCount',
+        'rate' => 'getRate',
     ];
 
     /**
@@ -107,11 +115,17 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['country'])) {
-            $this->container['country'] = $data['country'];
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
+        }
+        if (isset($data['noResultCount'])) {
+            $this->container['noResultCount'] = $data['noResultCount'];
         }
         if (isset($data['count'])) {
             $this->container['count'] = $data['count'];
+        }
+        if (isset($data['rate'])) {
+            $this->container['rate'] = $data['rate'];
         }
     }
 
@@ -125,16 +139,28 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
         $invalidProperties = [];
 
         if (
-            !isset($this->container['country']) ||
-            $this->container['country'] === null
+            !isset($this->container['date']) ||
+            $this->container['date'] === null
         ) {
-            $invalidProperties[] = "'country' can't be null";
+            $invalidProperties[] = "'date' can't be null";
+        }
+        if (
+            !isset($this->container['noResultCount']) ||
+            $this->container['noResultCount'] === null
+        ) {
+            $invalidProperties[] = "'noResultCount' can't be null";
         }
         if (
             !isset($this->container['count']) ||
             $this->container['count'] === null
         ) {
             $invalidProperties[] = "'count' can't be null";
+        }
+        if (
+            !isset($this->container['rate']) ||
+            $this->container['rate'] === null
+        ) {
+            $invalidProperties[] = "'rate' can't be null";
         }
 
         return $invalidProperties;
@@ -152,25 +178,49 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     }
 
     /**
-     * Gets country
+     * Gets date
      *
      * @return string
      */
-    public function getCountry()
+    public function getDate()
     {
-        return $this->container['country'] ?? null;
+        return $this->container['date'] ?? null;
     }
 
     /**
-     * Sets country
+     * Sets date
      *
-     * @param string $country the country
+     * @param string $date date of the event
      *
      * @return self
      */
-    public function setCountry($country)
+    public function setDate($date)
     {
-        $this->container['country'] = $country;
+        $this->container['date'] = $date;
+
+        return $this;
+    }
+
+    /**
+     * Gets noResultCount
+     *
+     * @return int
+     */
+    public function getNoResultCount()
+    {
+        return $this->container['noResultCount'] ?? null;
+    }
+
+    /**
+     * Sets noResultCount
+     *
+     * @param int $noResultCount the number of occurrences
+     *
+     * @return self
+     */
+    public function setNoResultCount($noResultCount)
+    {
+        $this->container['noResultCount'] = $noResultCount;
 
         return $this;
     }
@@ -195,6 +245,30 @@ class GetTopCountriesResponseCountries extends \Algolia\AlgoliaSearch\Model\Abst
     public function setCount($count)
     {
         $this->container['count'] = $count;
+
+        return $this;
+    }
+
+    /**
+     * Gets rate
+     *
+     * @return float
+     */
+    public function getRate()
+    {
+        return $this->container['rate'] ?? null;
+    }
+
+    /**
+     * Sets rate
+     *
+     * @param float $rate the click-through rate
+     *
+     * @return self
+     */
+    public function setRate($rate)
+    {
+        $this->container['rate'] = $rate;
 
         return $this;
     }

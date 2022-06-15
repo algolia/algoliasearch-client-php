@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * TopHitsResponseWithAnalyticsHits Class Doc Comment
+ * TopSearchWithAnalytics Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,13 +19,15 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelTypes = [
-        'hit' => 'string',
+        'search' => 'string',
         'count' => 'int',
         'clickThroughRate' => 'double',
+        'averageClickPosition' => 'int',
         'conversionRate' => 'double',
         'trackedSearchCount' => 'int',
         'clickCount' => 'int',
         'conversionCount' => 'int',
+        'nbHits' => 'int',
     ];
 
     /**
@@ -34,13 +36,15 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelFormats = [
-        'hit' => null,
+        'search' => null,
         'count' => null,
         'clickThroughRate' => 'double',
+        'averageClickPosition' => null,
         'conversionRate' => 'double',
         'trackedSearchCount' => null,
         'clickCount' => null,
         'conversionCount' => null,
+        'nbHits' => null,
     ];
 
     /**
@@ -69,13 +73,15 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $setters = [
-        'hit' => 'setHit',
+        'search' => 'setSearch',
         'count' => 'setCount',
         'clickThroughRate' => 'setClickThroughRate',
+        'averageClickPosition' => 'setAverageClickPosition',
         'conversionRate' => 'setConversionRate',
         'trackedSearchCount' => 'setTrackedSearchCount',
         'clickCount' => 'setClickCount',
         'conversionCount' => 'setConversionCount',
+        'nbHits' => 'setNbHits',
     ];
 
     /**
@@ -84,13 +90,15 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $getters = [
-        'hit' => 'getHit',
+        'search' => 'getSearch',
         'count' => 'getCount',
         'clickThroughRate' => 'getClickThroughRate',
+        'averageClickPosition' => 'getAverageClickPosition',
         'conversionRate' => 'getConversionRate',
         'trackedSearchCount' => 'getTrackedSearchCount',
         'clickCount' => 'getClickCount',
         'conversionCount' => 'getConversionCount',
+        'nbHits' => 'getNbHits',
     ];
 
     /**
@@ -127,14 +135,18 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['hit'])) {
-            $this->container['hit'] = $data['hit'];
+        if (isset($data['search'])) {
+            $this->container['search'] = $data['search'];
         }
         if (isset($data['count'])) {
             $this->container['count'] = $data['count'];
         }
         if (isset($data['clickThroughRate'])) {
             $this->container['clickThroughRate'] = $data['clickThroughRate'];
+        }
+        if (isset($data['averageClickPosition'])) {
+            $this->container['averageClickPosition'] =
+                $data['averageClickPosition'];
         }
         if (isset($data['conversionRate'])) {
             $this->container['conversionRate'] = $data['conversionRate'];
@@ -149,6 +161,9 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
         if (isset($data['conversionCount'])) {
             $this->container['conversionCount'] = $data['conversionCount'];
         }
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
+        }
     }
 
     /**
@@ -161,10 +176,10 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
         $invalidProperties = [];
 
         if (
-            !isset($this->container['hit']) ||
-            $this->container['hit'] === null
+            !isset($this->container['search']) ||
+            $this->container['search'] === null
         ) {
-            $invalidProperties[] = "'hit' can't be null";
+            $invalidProperties[] = "'search' can't be null";
         }
         if (
             !isset($this->container['count']) ||
@@ -177,6 +192,12 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
             $this->container['clickThroughRate'] === null
         ) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
+        }
+        if (
+            !isset($this->container['averageClickPosition']) ||
+            $this->container['averageClickPosition'] === null
+        ) {
+            $invalidProperties[] = "'averageClickPosition' can't be null";
         }
         if (
             !isset($this->container['conversionRate']) ||
@@ -202,6 +223,12 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
         ) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
+        if (
+            !isset($this->container['nbHits']) ||
+            $this->container['nbHits'] === null
+        ) {
+            $invalidProperties[] = "'nbHits' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -218,25 +245,25 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     }
 
     /**
-     * Gets hit
+     * Gets search
      *
      * @return string
      */
-    public function getHit()
+    public function getSearch()
     {
-        return $this->container['hit'] ?? null;
+        return $this->container['search'] ?? null;
     }
 
     /**
-     * Sets hit
+     * Sets search
      *
-     * @param string $hit the hit
+     * @param string $search the search query
      *
      * @return self
      */
-    public function setHit($hit)
+    public function setSearch($search)
     {
-        $this->container['hit'] = $hit;
+        $this->container['search'] = $search;
 
         return $this;
     }
@@ -285,6 +312,30 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     public function setClickThroughRate($clickThroughRate)
     {
         $this->container['clickThroughRate'] = $clickThroughRate;
+
+        return $this;
+    }
+
+    /**
+     * Gets averageClickPosition
+     *
+     * @return int
+     */
+    public function getAverageClickPosition()
+    {
+        return $this->container['averageClickPosition'] ?? null;
+    }
+
+    /**
+     * Sets averageClickPosition
+     *
+     * @param int $averageClickPosition the average position of all the click count event
+     *
+     * @return self
+     */
+    public function setAverageClickPosition($averageClickPosition)
+    {
+        $this->container['averageClickPosition'] = $averageClickPosition;
 
         return $this;
     }
@@ -381,6 +432,30 @@ class TopHitsResponseWithAnalyticsHits extends \Algolia\AlgoliaSearch\Model\Abst
     public function setConversionCount($conversionCount)
     {
         $this->container['conversionCount'] = $conversionCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbHits
+     *
+     * @return int
+     */
+    public function getNbHits()
+    {
+        return $this->container['nbHits'] ?? null;
+    }
+
+    /**
+     * Sets nbHits
+     *
+     * @param int $nbHits number of hits that the search query matched
+     *
+     * @return self
+     */
+    public function setNbHits($nbHits)
+    {
+        $this->container['nbHits'] = $nbHits;
 
         return $this;
     }

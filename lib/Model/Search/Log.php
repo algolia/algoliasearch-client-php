@@ -3,15 +3,15 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * GetLogsResponseLogs Class Doc Comment
+ * Log Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -33,7 +33,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'index' => 'string',
         'queryParams' => 'string',
         'queryNbHits' => 'string',
-        'innerQueries' => '\Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]',
+        'innerQueries' => '\Algolia\AlgoliaSearch\Model\Search\LogQuery[]',
     ];
 
     /**
@@ -632,7 +632,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets innerQueries
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null
      */
     public function getInnerQueries()
     {
@@ -642,7 +642,7 @@ class GetLogsResponseLogs extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets innerQueries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetLogsResponseInnerQueries[]|null $innerQueries array of all performed queries for the given request
+     * @param \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null $innerQueries array of all performed queries for the given request
      *
      * @return self
      */

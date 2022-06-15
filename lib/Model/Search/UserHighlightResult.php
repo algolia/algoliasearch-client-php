@@ -3,12 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BaseSearchResponseFacetsStats Class Doc Comment
+ * UserHighlightResult Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -19,10 +19,8 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelTypes = [
-        'min' => 'int',
-        'max' => 'int',
-        'avg' => 'int',
-        'sum' => 'int',
+        'userID' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
+        'clusterName' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
     ];
 
     /**
@@ -31,10 +29,8 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelFormats = [
-        'min' => null,
-        'max' => null,
-        'avg' => null,
-        'sum' => null,
+        'userID' => null,
+        'clusterName' => null,
     ];
 
     /**
@@ -63,10 +59,8 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $setters = [
-        'min' => 'setMin',
-        'max' => 'setMax',
-        'avg' => 'setAvg',
-        'sum' => 'setSum',
+        'userID' => 'setUserID',
+        'clusterName' => 'setClusterName',
     ];
 
     /**
@@ -75,10 +69,8 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $getters = [
-        'min' => 'getMin',
-        'max' => 'getMax',
-        'avg' => 'getAvg',
-        'sum' => 'getSum',
+        'userID' => 'getUserID',
+        'clusterName' => 'getClusterName',
     ];
 
     /**
@@ -115,17 +107,11 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['min'])) {
-            $this->container['min'] = $data['min'];
+        if (isset($data['userID'])) {
+            $this->container['userID'] = $data['userID'];
         }
-        if (isset($data['max'])) {
-            $this->container['max'] = $data['max'];
-        }
-        if (isset($data['avg'])) {
-            $this->container['avg'] = $data['avg'];
-        }
-        if (isset($data['sum'])) {
-            $this->container['sum'] = $data['sum'];
+        if (isset($data['clusterName'])) {
+            $this->container['clusterName'] = $data['clusterName'];
         }
     }
 
@@ -137,6 +123,19 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['userID']) ||
+            $this->container['userID'] === null
+        ) {
+            $invalidProperties[] = "'userID' can't be null";
+        }
+        if (
+            !isset($this->container['clusterName']) ||
+            $this->container['clusterName'] === null
+        ) {
+            $invalidProperties[] = "'clusterName' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -153,97 +152,49 @@ class BaseSearchResponseFacetsStats extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets min
+     * Gets userID
      *
-     * @return int|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
      */
-    public function getMin()
+    public function getUserID()
     {
-        return $this->container['min'] ?? null;
+        return $this->container['userID'] ?? null;
     }
 
     /**
-     * Sets min
+     * Sets userID
      *
-     * @param int|null $min the minimum value in the result set
+     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $userID userID
      *
      * @return self
      */
-    public function setMin($min)
+    public function setUserID($userID)
     {
-        $this->container['min'] = $min;
+        $this->container['userID'] = $userID;
 
         return $this;
     }
 
     /**
-     * Gets max
+     * Gets clusterName
      *
-     * @return int|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
      */
-    public function getMax()
+    public function getClusterName()
     {
-        return $this->container['max'] ?? null;
+        return $this->container['clusterName'] ?? null;
     }
 
     /**
-     * Sets max
+     * Sets clusterName
      *
-     * @param int|null $max the maximum value in the result set
+     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $clusterName clusterName
      *
      * @return self
      */
-    public function setMax($max)
+    public function setClusterName($clusterName)
     {
-        $this->container['max'] = $max;
-
-        return $this;
-    }
-
-    /**
-     * Gets avg
-     *
-     * @return int|null
-     */
-    public function getAvg()
-    {
-        return $this->container['avg'] ?? null;
-    }
-
-    /**
-     * Sets avg
-     *
-     * @param int|null $avg the average facet value in the result set
-     *
-     * @return self
-     */
-    public function setAvg($avg)
-    {
-        $this->container['avg'] = $avg;
-
-        return $this;
-    }
-
-    /**
-     * Gets sum
-     *
-     * @return int|null
-     */
-    public function getSum()
-    {
-        return $this->container['sum'] ?? null;
-    }
-
-    /**
-     * Sets sum
-     *
-     * @param int|null $sum the sum of all values in the result set
-     *
-     * @return self
-     */
-    public function setSum($sum)
-    {
-        $this->container['sum'] = $sum;
+        $this->container['clusterName'] = $clusterName;
 
         return $this;
     }

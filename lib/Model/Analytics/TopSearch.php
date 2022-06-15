@@ -3,15 +3,15 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetSearchesNoClicksResponseSearches Class Doc Comment
+ * TopSearch Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class TopSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -21,7 +21,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
-        'withFilterCount' => 'int',
+        'nbHits' => 'int',
     ];
 
     /**
@@ -32,7 +32,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
-        'withFilterCount' => null,
+        'nbHits' => null,
     ];
 
     /**
@@ -63,7 +63,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     protected static $setters = [
         'search' => 'setSearch',
         'count' => 'setCount',
-        'withFilterCount' => 'setWithFilterCount',
+        'nbHits' => 'setNbHits',
     ];
 
     /**
@@ -74,7 +74,7 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     protected static $getters = [
         'search' => 'getSearch',
         'count' => 'getCount',
-        'withFilterCount' => 'getWithFilterCount',
+        'nbHits' => 'getNbHits',
     ];
 
     /**
@@ -117,8 +117,8 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
         if (isset($data['count'])) {
             $this->container['count'] = $data['count'];
         }
-        if (isset($data['withFilterCount'])) {
-            $this->container['withFilterCount'] = $data['withFilterCount'];
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
         }
     }
 
@@ -144,10 +144,10 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
             $invalidProperties[] = "'count' can't be null";
         }
         if (
-            !isset($this->container['withFilterCount']) ||
-            $this->container['withFilterCount'] === null
+            !isset($this->container['nbHits']) ||
+            $this->container['nbHits'] === null
         ) {
-            $invalidProperties[] = "'withFilterCount' can't be null";
+            $invalidProperties[] = "'nbHits' can't be null";
         }
 
         return $invalidProperties;
@@ -213,25 +213,25 @@ class GetSearchesNoClicksResponseSearches extends \Algolia\AlgoliaSearch\Model\A
     }
 
     /**
-     * Gets withFilterCount
+     * Gets nbHits
      *
      * @return int
      */
-    public function getWithFilterCount()
+    public function getNbHits()
     {
-        return $this->container['withFilterCount'] ?? null;
+        return $this->container['nbHits'] ?? null;
     }
 
     /**
-     * Sets withFilterCount
+     * Sets nbHits
      *
-     * @param int $withFilterCount the number of occurrences
+     * @param int $nbHits number of hits that the search query matched
      *
      * @return self
      */
-    public function setWithFilterCount($withFilterCount)
+    public function setNbHits($nbHits)
     {
-        $this->container['withFilterCount'] = $withFilterCount;
+        $this->container['nbHits'] = $nbHits;
 
         return $this;
     }

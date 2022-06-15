@@ -1,17 +1,17 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Analytics;
+namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * GetConversationRateResponseDates Class Doc Comment
+ * FacetsStats Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -19,10 +19,10 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
-        'trackedSearchCount' => 'int',
-        'conversionCount' => 'int',
-        'date' => 'string',
+        'min' => 'int',
+        'max' => 'int',
+        'avg' => 'int',
+        'sum' => 'int',
     ];
 
     /**
@@ -31,10 +31,10 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $modelFormats = [
-        'rate' => 'double',
-        'trackedSearchCount' => null,
-        'conversionCount' => null,
-        'date' => null,
+        'min' => null,
+        'max' => null,
+        'avg' => null,
+        'sum' => null,
     ];
 
     /**
@@ -63,10 +63,10 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'trackedSearchCount' => 'setTrackedSearchCount',
-        'conversionCount' => 'setConversionCount',
-        'date' => 'setDate',
+        'min' => 'setMin',
+        'max' => 'setMax',
+        'avg' => 'setAvg',
+        'sum' => 'setSum',
     ];
 
     /**
@@ -75,10 +75,10 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'trackedSearchCount' => 'getTrackedSearchCount',
-        'conversionCount' => 'getConversionCount',
-        'date' => 'getDate',
+        'min' => 'getMin',
+        'max' => 'getMax',
+        'avg' => 'getAvg',
+        'sum' => 'getSum',
     ];
 
     /**
@@ -115,18 +115,17 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['rate'])) {
-            $this->container['rate'] = $data['rate'];
+        if (isset($data['min'])) {
+            $this->container['min'] = $data['min'];
         }
-        if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+        if (isset($data['max'])) {
+            $this->container['max'] = $data['max'];
         }
-        if (isset($data['conversionCount'])) {
-            $this->container['conversionCount'] = $data['conversionCount'];
+        if (isset($data['avg'])) {
+            $this->container['avg'] = $data['avg'];
         }
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['sum'])) {
+            $this->container['sum'] = $data['sum'];
         }
     }
 
@@ -138,31 +137,6 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['rate']) ||
-            $this->container['rate'] === null
-        ) {
-            $invalidProperties[] = "'rate' can't be null";
-        }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
-            $invalidProperties[] = "'trackedSearchCount' can't be null";
-        }
-        if (
-            !isset($this->container['conversionCount']) ||
-            $this->container['conversionCount'] === null
-        ) {
-            $invalidProperties[] = "'conversionCount' can't be null";
-        }
-        if (
-            !isset($this->container['date']) ||
-            $this->container['date'] === null
-        ) {
-            $invalidProperties[] = "'date' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -179,97 +153,97 @@ class GetConversationRateResponseDates extends \Algolia\AlgoliaSearch\Model\Abst
     }
 
     /**
-     * Gets rate
+     * Gets min
      *
-     * @return float
+     * @return int|null
      */
-    public function getRate()
+    public function getMin()
     {
-        return $this->container['rate'] ?? null;
+        return $this->container['min'] ?? null;
     }
 
     /**
-     * Sets rate
+     * Sets min
      *
-     * @param float $rate the click-through rate
+     * @param int|null $min the minimum value in the result set
      *
      * @return self
      */
-    public function setRate($rate)
+    public function setMin($min)
     {
-        $this->container['rate'] = $rate;
+        $this->container['min'] = $min;
 
         return $this;
     }
 
     /**
-     * Gets trackedSearchCount
+     * Gets max
      *
-     * @return int
+     * @return int|null
      */
-    public function getTrackedSearchCount()
+    public function getMax()
     {
-        return $this->container['trackedSearchCount'] ?? null;
+        return $this->container['max'] ?? null;
     }
 
     /**
-     * Sets trackedSearchCount
+     * Sets max
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int|null $max the maximum value in the result set
      *
      * @return self
      */
-    public function setTrackedSearchCount($trackedSearchCount)
+    public function setMax($max)
     {
-        $this->container['trackedSearchCount'] = $trackedSearchCount;
+        $this->container['max'] = $max;
 
         return $this;
     }
 
     /**
-     * Gets conversionCount
+     * Gets avg
      *
-     * @return int
+     * @return int|null
      */
-    public function getConversionCount()
+    public function getAvg()
     {
-        return $this->container['conversionCount'] ?? null;
+        return $this->container['avg'] ?? null;
     }
 
     /**
-     * Sets conversionCount
+     * Sets avg
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int|null $avg the average facet value in the result set
      *
      * @return self
      */
-    public function setConversionCount($conversionCount)
+    public function setAvg($avg)
     {
-        $this->container['conversionCount'] = $conversionCount;
+        $this->container['avg'] = $avg;
 
         return $this;
     }
 
     /**
-     * Gets date
+     * Gets sum
      *
-     * @return string
+     * @return int|null
      */
-    public function getDate()
+    public function getSum()
     {
-        return $this->container['date'] ?? null;
+        return $this->container['sum'] ?? null;
     }
 
     /**
-     * Sets date
+     * Sets sum
      *
-     * @param string $date date of the event
+     * @param int|null $sum the sum of all values in the result set
      *
      * @return self
      */
-    public function setDate($date)
+    public function setSum($sum)
     {
-        $this->container['date'] = $date;
+        $this->container['sum'] = $sum;
 
         return $this;
     }

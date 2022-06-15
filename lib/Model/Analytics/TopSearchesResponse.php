@@ -19,7 +19,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\TopSearch[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets searches
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearch[]
      */
     public function getSearches()
     {
@@ -151,7 +151,7 @@ class TopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets searches
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponseSearches[] $searches a list of top searches with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearch[] $searches a list of top searches with their count
      *
      * @return self
      */

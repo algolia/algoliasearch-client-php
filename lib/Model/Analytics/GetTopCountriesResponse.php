@@ -19,7 +19,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
      * @var string[]
      */
     protected static $modelTypes = [
-        'countries' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]',
+        'countries' => '\Algolia\AlgoliaSearch\Model\Analytics\TopCountry[]',
     ];
 
     /**
@@ -141,7 +141,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets countries
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[]
      */
     public function getCountries()
     {
@@ -151,7 +151,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets countries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponseCountries[] $countries a list of countries with their count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[] $countries a list of countries with their count
      *
      * @return self
      */

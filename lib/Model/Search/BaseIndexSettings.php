@@ -26,10 +26,11 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'camelCaseAttributes' => 'string[]',
         'decompoundedAttributes' => 'object',
         'indexLanguages' => 'string[]',
-        'filterPromotes' => 'bool',
         'disablePrefixOnAttributes' => 'string[]',
         'allowCompressionOfIntegerArray' => 'bool',
         'numericAttributesForFiltering' => 'string[]',
+        'separatorsToIndex' => 'string',
+        'searchableAttributes' => 'string[]',
         'userData' => 'object',
     ];
 
@@ -46,10 +47,11 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'camelCaseAttributes' => null,
         'decompoundedAttributes' => null,
         'indexLanguages' => null,
-        'filterPromotes' => null,
         'disablePrefixOnAttributes' => null,
         'allowCompressionOfIntegerArray' => null,
         'numericAttributesForFiltering' => null,
+        'separatorsToIndex' => null,
+        'searchableAttributes' => null,
         'userData' => null,
     ];
 
@@ -86,10 +88,11 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'camelCaseAttributes' => 'setCamelCaseAttributes',
         'decompoundedAttributes' => 'setDecompoundedAttributes',
         'indexLanguages' => 'setIndexLanguages',
-        'filterPromotes' => 'setFilterPromotes',
         'disablePrefixOnAttributes' => 'setDisablePrefixOnAttributes',
         'allowCompressionOfIntegerArray' => 'setAllowCompressionOfIntegerArray',
         'numericAttributesForFiltering' => 'setNumericAttributesForFiltering',
+        'separatorsToIndex' => 'setSeparatorsToIndex',
+        'searchableAttributes' => 'setSearchableAttributes',
         'userData' => 'setUserData',
     ];
 
@@ -106,10 +109,11 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'camelCaseAttributes' => 'getCamelCaseAttributes',
         'decompoundedAttributes' => 'getDecompoundedAttributes',
         'indexLanguages' => 'getIndexLanguages',
-        'filterPromotes' => 'getFilterPromotes',
         'disablePrefixOnAttributes' => 'getDisablePrefixOnAttributes',
         'allowCompressionOfIntegerArray' => 'getAllowCompressionOfIntegerArray',
         'numericAttributesForFiltering' => 'getNumericAttributesForFiltering',
+        'separatorsToIndex' => 'getSeparatorsToIndex',
+        'searchableAttributes' => 'getSearchableAttributes',
         'userData' => 'getUserData',
     ];
 
@@ -173,9 +177,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['indexLanguages'])) {
             $this->container['indexLanguages'] = $data['indexLanguages'];
         }
-        if (isset($data['filterPromotes'])) {
-            $this->container['filterPromotes'] = $data['filterPromotes'];
-        }
         if (isset($data['disablePrefixOnAttributes'])) {
             $this->container['disablePrefixOnAttributes'] =
                 $data['disablePrefixOnAttributes'];
@@ -187,6 +188,13 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['numericAttributesForFiltering'])) {
             $this->container['numericAttributesForFiltering'] =
                 $data['numericAttributesForFiltering'];
+        }
+        if (isset($data['separatorsToIndex'])) {
+            $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
+        }
+        if (isset($data['searchableAttributes'])) {
+            $this->container['searchableAttributes'] =
+                $data['searchableAttributes'];
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
@@ -389,30 +397,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets filterPromotes
-     *
-     * @return bool|null
-     */
-    public function getFilterPromotes()
-    {
-        return $this->container['filterPromotes'] ?? null;
-    }
-
-    /**
-     * Sets filterPromotes
-     *
-     * @param bool|null $filterPromotes whether promoted results should match the filters of the current search, except for geographic filters
-     *
-     * @return self
-     */
-    public function setFilterPromotes($filterPromotes)
-    {
-        $this->container['filterPromotes'] = $filterPromotes;
-
-        return $this;
-    }
-
-    /**
      * Gets disablePrefixOnAttributes
      *
      * @return string[]|null
@@ -488,6 +472,54 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         $this->container[
             'numericAttributesForFiltering'
         ] = $numericAttributesForFiltering;
+
+        return $this;
+    }
+
+    /**
+     * Gets separatorsToIndex
+     *
+     * @return string|null
+     */
+    public function getSeparatorsToIndex()
+    {
+        return $this->container['separatorsToIndex'] ?? null;
+    }
+
+    /**
+     * Sets separatorsToIndex
+     *
+     * @param string|null $separatorsToIndex control which separators are indexed
+     *
+     * @return self
+     */
+    public function setSeparatorsToIndex($separatorsToIndex)
+    {
+        $this->container['separatorsToIndex'] = $separatorsToIndex;
+
+        return $this;
+    }
+
+    /**
+     * Gets searchableAttributes
+     *
+     * @return string[]|null
+     */
+    public function getSearchableAttributes()
+    {
+        return $this->container['searchableAttributes'] ?? null;
+    }
+
+    /**
+     * Sets searchableAttributes
+     *
+     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
+     *
+     * @return self
+     */
+    public function setSearchableAttributes($searchableAttributes)
+    {
+        $this->container['searchableAttributes'] = $searchableAttributes;
 
         return $this;
     }

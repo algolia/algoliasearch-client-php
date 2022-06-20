@@ -40,8 +40,8 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Search\AroundRadius',
         'aroundPrecision' => 'int',
         'minimumAroundRadius' => 'int',
-        'insideBoundingBox' => 'float[]',
-        'insidePolygon' => 'float[]',
+        'insideBoundingBox' => 'double[]',
+        'insidePolygon' => 'double[]',
         'naturalLanguages' => 'string[]',
         'ruleContexts' => 'string[]',
         'personalizationImpact' => 'int',
@@ -54,7 +54,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'enableABTest' => 'bool',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
-        'searchableAttributes' => 'string[]',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
@@ -74,9 +73,8 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => '\Algolia\AlgoliaSearch\Model\Search\TypoTolerance',
         'allowTyposOnNumericTokens' => 'bool',
         'disableTypoToleranceOnAttributes' => 'string[]',
-        'separatorsToIndex' => 'string',
-        'ignorePlurals' => 'string',
-        'removeStopWords' => 'string',
+        'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals',
+        'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords',
         'keepDiacriticsOnCharacters' => 'string',
         'queryLanguages' => 'string[]',
         'decompoundQuery' => 'bool',
@@ -129,8 +127,8 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'aroundRadius' => null,
         'aroundPrecision' => null,
         'minimumAroundRadius' => null,
-        'insideBoundingBox' => null,
-        'insidePolygon' => null,
+        'insideBoundingBox' => 'double',
+        'insidePolygon' => 'double',
         'naturalLanguages' => null,
         'ruleContexts' => null,
         'personalizationImpact' => null,
@@ -143,7 +141,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'enableABTest' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
-        'searchableAttributes' => null,
         'attributesForFaceting' => null,
         'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
@@ -163,7 +160,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => null,
         'allowTyposOnNumericTokens' => null,
         'disableTypoToleranceOnAttributes' => null,
-        'separatorsToIndex' => null,
         'ignorePlurals' => null,
         'removeStopWords' => null,
         'keepDiacriticsOnCharacters' => null,
@@ -252,7 +248,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'enableABTest' => 'setEnableABTest',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
-        'searchableAttributes' => 'setSearchableAttributes',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
@@ -272,7 +267,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => 'setTypoTolerance',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'setSeparatorsToIndex',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
@@ -341,7 +335,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'enableABTest' => 'getEnableABTest',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
-        'searchableAttributes' => 'getSearchableAttributes',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
@@ -361,7 +354,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => 'getTypoTolerance',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'getSeparatorsToIndex',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
@@ -534,10 +526,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['reRankingApplyFilter'] =
                 $data['reRankingApplyFilter'];
         }
-        if (isset($data['searchableAttributes'])) {
-            $this->container['searchableAttributes'] =
-                $data['searchableAttributes'];
-        }
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
                 $data['attributesForFaceting'];
@@ -607,9 +595,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['disableTypoToleranceOnAttributes'])) {
             $this->container['disableTypoToleranceOnAttributes'] =
                 $data['disableTypoToleranceOnAttributes'];
-        }
-        if (isset($data['separatorsToIndex'])) {
-            $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
         }
         if (isset($data['ignorePlurals'])) {
             $this->container['ignorePlurals'] = $data['ignorePlurals'];
@@ -1649,30 +1634,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets searchableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getSearchableAttributes()
-    {
-        return $this->container['searchableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets searchableAttributes
-     *
-     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
-     *
-     * @return self
-     */
-    public function setSearchableAttributes($searchableAttributes)
-    {
-        $this->container['searchableAttributes'] = $searchableAttributes;
-
-        return $this;
-    }
-
-    /**
      * Gets attributesForFaceting
      *
      * @return string[]|null
@@ -2140,33 +2101,9 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets separatorsToIndex
-     *
-     * @return string|null
-     */
-    public function getSeparatorsToIndex()
-    {
-        return $this->container['separatorsToIndex'] ?? null;
-    }
-
-    /**
-     * Sets separatorsToIndex
-     *
-     * @param string|null $separatorsToIndex control which separators are indexed
-     *
-     * @return self
-     */
-    public function setSeparatorsToIndex($separatorsToIndex)
-    {
-        $this->container['separatorsToIndex'] = $separatorsToIndex;
-
-        return $this;
-    }
-
-    /**
      * Gets ignorePlurals
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null
      */
     public function getIgnorePlurals()
     {
@@ -2176,7 +2113,7 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets ignorePlurals
      *
-     * @param string|null $ignorePlurals treats singular, plurals, and other forms of declensions as matching terms
+     * @param \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -2190,7 +2127,7 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets removeStopWords
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null
      */
     public function getRemoveStopWords()
     {
@@ -2200,7 +2137,7 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets removeStopWords
      *
-     * @param string|null $removeStopWords removes stop (common) words from the query before executing it
+     * @param \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null $removeStopWords removeStopWords
      *
      * @return self
      */

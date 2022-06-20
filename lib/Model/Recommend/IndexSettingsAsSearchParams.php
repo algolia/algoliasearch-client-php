@@ -19,7 +19,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'searchableAttributes' => 'string[]',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
@@ -39,9 +38,8 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'typoTolerance' => '\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance',
         'allowTyposOnNumericTokens' => 'bool',
         'disableTypoToleranceOnAttributes' => 'string[]',
-        'separatorsToIndex' => 'string',
-        'ignorePlurals' => 'string',
-        'removeStopWords' => 'string',
+        'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals',
+        'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords',
         'keepDiacriticsOnCharacters' => 'string',
         'queryLanguages' => 'string[]',
         'decompoundQuery' => 'bool',
@@ -71,7 +69,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelFormats = [
-        'searchableAttributes' => null,
         'attributesForFaceting' => null,
         'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
@@ -91,7 +88,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'typoTolerance' => null,
         'allowTyposOnNumericTokens' => null,
         'disableTypoToleranceOnAttributes' => null,
-        'separatorsToIndex' => null,
         'ignorePlurals' => null,
         'removeStopWords' => null,
         'keepDiacriticsOnCharacters' => null,
@@ -143,7 +139,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $setters = [
-        'searchableAttributes' => 'setSearchableAttributes',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
@@ -163,7 +158,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'typoTolerance' => 'setTypoTolerance',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'setSeparatorsToIndex',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
@@ -195,7 +189,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $getters = [
-        'searchableAttributes' => 'getSearchableAttributes',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
@@ -215,7 +208,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'typoTolerance' => 'getTypoTolerance',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'getSeparatorsToIndex',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
@@ -275,10 +267,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['searchableAttributes'])) {
-            $this->container['searchableAttributes'] =
-                $data['searchableAttributes'];
-        }
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
                 $data['attributesForFaceting'];
@@ -348,9 +336,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (isset($data['disableTypoToleranceOnAttributes'])) {
             $this->container['disableTypoToleranceOnAttributes'] =
                 $data['disableTypoToleranceOnAttributes'];
-        }
-        if (isset($data['separatorsToIndex'])) {
-            $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
         }
         if (isset($data['ignorePlurals'])) {
             $this->container['ignorePlurals'] = $data['ignorePlurals'];
@@ -493,30 +478,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
-    }
-
-    /**
-     * Gets searchableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getSearchableAttributes()
-    {
-        return $this->container['searchableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets searchableAttributes
-     *
-     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
-     *
-     * @return self
-     */
-    public function setSearchableAttributes($searchableAttributes)
-    {
-        $this->container['searchableAttributes'] = $searchableAttributes;
-
-        return $this;
     }
 
     /**
@@ -987,33 +948,9 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets separatorsToIndex
-     *
-     * @return string|null
-     */
-    public function getSeparatorsToIndex()
-    {
-        return $this->container['separatorsToIndex'] ?? null;
-    }
-
-    /**
-     * Sets separatorsToIndex
-     *
-     * @param string|null $separatorsToIndex control which separators are indexed
-     *
-     * @return self
-     */
-    public function setSeparatorsToIndex($separatorsToIndex)
-    {
-        $this->container['separatorsToIndex'] = $separatorsToIndex;
-
-        return $this;
-    }
-
-    /**
      * Gets ignorePlurals
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals|null
      */
     public function getIgnorePlurals()
     {
@@ -1023,7 +960,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets ignorePlurals
      *
-     * @param string|null $ignorePlurals treats singular, plurals, and other forms of declensions as matching terms
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals|null $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -1037,7 +974,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets removeStopWords
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords|null
      */
     public function getRemoveStopWords()
     {
@@ -1047,7 +984,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets removeStopWords
      *
-     * @param string|null $removeStopWords removes stop (common) words from the query before executing it
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords|null $removeStopWords removeStopWords
      *
      * @return self
      */

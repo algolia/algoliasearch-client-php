@@ -28,12 +28,12 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'camelCaseAttributes' => 'string[]',
         'decompoundedAttributes' => 'object',
         'indexLanguages' => 'string[]',
-        'filterPromotes' => 'bool',
         'disablePrefixOnAttributes' => 'string[]',
         'allowCompressionOfIntegerArray' => 'bool',
         'numericAttributesForFiltering' => 'string[]',
-        'userData' => 'object',
+        'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
+        'userData' => 'object',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
@@ -53,9 +53,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => '\Algolia\AlgoliaSearch\Model\Search\TypoTolerance',
         'allowTyposOnNumericTokens' => 'bool',
         'disableTypoToleranceOnAttributes' => 'string[]',
-        'separatorsToIndex' => 'string',
-        'ignorePlurals' => 'string',
-        'removeStopWords' => 'string',
+        'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals',
+        'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords',
         'keepDiacriticsOnCharacters' => 'string',
         'queryLanguages' => 'string[]',
         'decompoundQuery' => 'bool',
@@ -92,12 +91,12 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'camelCaseAttributes' => null,
         'decompoundedAttributes' => null,
         'indexLanguages' => null,
-        'filterPromotes' => null,
         'disablePrefixOnAttributes' => null,
         'allowCompressionOfIntegerArray' => null,
         'numericAttributesForFiltering' => null,
-        'userData' => null,
+        'separatorsToIndex' => null,
         'searchableAttributes' => null,
+        'userData' => null,
         'attributesForFaceting' => null,
         'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
@@ -117,7 +116,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => null,
         'allowTyposOnNumericTokens' => null,
         'disableTypoToleranceOnAttributes' => null,
-        'separatorsToIndex' => null,
         'ignorePlurals' => null,
         'removeStopWords' => null,
         'keepDiacriticsOnCharacters' => null,
@@ -176,12 +174,12 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'camelCaseAttributes' => 'setCamelCaseAttributes',
         'decompoundedAttributes' => 'setDecompoundedAttributes',
         'indexLanguages' => 'setIndexLanguages',
-        'filterPromotes' => 'setFilterPromotes',
         'disablePrefixOnAttributes' => 'setDisablePrefixOnAttributes',
         'allowCompressionOfIntegerArray' => 'setAllowCompressionOfIntegerArray',
         'numericAttributesForFiltering' => 'setNumericAttributesForFiltering',
-        'userData' => 'setUserData',
+        'separatorsToIndex' => 'setSeparatorsToIndex',
         'searchableAttributes' => 'setSearchableAttributes',
+        'userData' => 'setUserData',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
@@ -201,7 +199,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => 'setTypoTolerance',
         'allowTyposOnNumericTokens' => 'setAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'setSeparatorsToIndex',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
@@ -240,12 +237,12 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'camelCaseAttributes' => 'getCamelCaseAttributes',
         'decompoundedAttributes' => 'getDecompoundedAttributes',
         'indexLanguages' => 'getIndexLanguages',
-        'filterPromotes' => 'getFilterPromotes',
         'disablePrefixOnAttributes' => 'getDisablePrefixOnAttributes',
         'allowCompressionOfIntegerArray' => 'getAllowCompressionOfIntegerArray',
         'numericAttributesForFiltering' => 'getNumericAttributesForFiltering',
-        'userData' => 'getUserData',
+        'separatorsToIndex' => 'getSeparatorsToIndex',
         'searchableAttributes' => 'getSearchableAttributes',
+        'userData' => 'getUserData',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
@@ -265,7 +262,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'typoTolerance' => 'getTypoTolerance',
         'allowTyposOnNumericTokens' => 'getAllowTyposOnNumericTokens',
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
-        'separatorsToIndex' => 'getSeparatorsToIndex',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
         'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
@@ -351,9 +347,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['indexLanguages'])) {
             $this->container['indexLanguages'] = $data['indexLanguages'];
         }
-        if (isset($data['filterPromotes'])) {
-            $this->container['filterPromotes'] = $data['filterPromotes'];
-        }
         if (isset($data['disablePrefixOnAttributes'])) {
             $this->container['disablePrefixOnAttributes'] =
                 $data['disablePrefixOnAttributes'];
@@ -366,12 +359,15 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['numericAttributesForFiltering'] =
                 $data['numericAttributesForFiltering'];
         }
-        if (isset($data['userData'])) {
-            $this->container['userData'] = $data['userData'];
+        if (isset($data['separatorsToIndex'])) {
+            $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
         }
         if (isset($data['searchableAttributes'])) {
             $this->container['searchableAttributes'] =
                 $data['searchableAttributes'];
+        }
+        if (isset($data['userData'])) {
+            $this->container['userData'] = $data['userData'];
         }
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
@@ -442,9 +438,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['disableTypoToleranceOnAttributes'])) {
             $this->container['disableTypoToleranceOnAttributes'] =
                 $data['disableTypoToleranceOnAttributes'];
-        }
-        if (isset($data['separatorsToIndex'])) {
-            $this->container['separatorsToIndex'] = $data['separatorsToIndex'];
         }
         if (isset($data['ignorePlurals'])) {
             $this->container['ignorePlurals'] = $data['ignorePlurals'];
@@ -762,30 +755,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets filterPromotes
-     *
-     * @return bool|null
-     */
-    public function getFilterPromotes()
-    {
-        return $this->container['filterPromotes'] ?? null;
-    }
-
-    /**
-     * Sets filterPromotes
-     *
-     * @param bool|null $filterPromotes whether promoted results should match the filters of the current search, except for geographic filters
-     *
-     * @return self
-     */
-    public function setFilterPromotes($filterPromotes)
-    {
-        $this->container['filterPromotes'] = $filterPromotes;
-
-        return $this;
-    }
-
-    /**
      * Gets disablePrefixOnAttributes
      *
      * @return string[]|null
@@ -866,25 +835,25 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets userData
+     * Gets separatorsToIndex
      *
-     * @return object|null
+     * @return string|null
      */
-    public function getUserData()
+    public function getSeparatorsToIndex()
     {
-        return $this->container['userData'] ?? null;
+        return $this->container['separatorsToIndex'] ?? null;
     }
 
     /**
-     * Sets userData
+     * Sets separatorsToIndex
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param string|null $separatorsToIndex control which separators are indexed
      *
      * @return self
      */
-    public function setUserData($userData)
+    public function setSeparatorsToIndex($separatorsToIndex)
     {
-        $this->container['userData'] = $userData;
+        $this->container['separatorsToIndex'] = $separatorsToIndex;
 
         return $this;
     }
@@ -909,6 +878,30 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setSearchableAttributes($searchableAttributes)
     {
         $this->container['searchableAttributes'] = $searchableAttributes;
+
+        return $this;
+    }
+
+    /**
+     * Gets userData
+     *
+     * @return object|null
+     */
+    public function getUserData()
+    {
+        return $this->container['userData'] ?? null;
+    }
+
+    /**
+     * Sets userData
+     *
+     * @param object|null $userData lets you store custom data in your indices
+     *
+     * @return self
+     */
+    public function setUserData($userData)
+    {
+        $this->container['userData'] = $userData;
 
         return $this;
     }
@@ -1381,33 +1374,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets separatorsToIndex
-     *
-     * @return string|null
-     */
-    public function getSeparatorsToIndex()
-    {
-        return $this->container['separatorsToIndex'] ?? null;
-    }
-
-    /**
-     * Sets separatorsToIndex
-     *
-     * @param string|null $separatorsToIndex control which separators are indexed
-     *
-     * @return self
-     */
-    public function setSeparatorsToIndex($separatorsToIndex)
-    {
-        $this->container['separatorsToIndex'] = $separatorsToIndex;
-
-        return $this;
-    }
-
-    /**
      * Gets ignorePlurals
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null
      */
     public function getIgnorePlurals()
     {
@@ -1417,7 +1386,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets ignorePlurals
      *
-     * @param string|null $ignorePlurals treats singular, plurals, and other forms of declensions as matching terms
+     * @param \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -1431,7 +1400,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets removeStopWords
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null
      */
     public function getRemoveStopWords()
     {
@@ -1441,7 +1410,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets removeStopWords
      *
-     * @param string|null $removeStopWords removes stop (common) words from the query before executing it
+     * @param \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null $removeStopWords removeStopWords
      *
      * @return self
      */

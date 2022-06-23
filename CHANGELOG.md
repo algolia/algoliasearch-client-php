@@ -1,3 +1,7 @@
+## [4.0.0-alpha.3](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.2...4.0.0-alpha.3)
+
+- ea6c1849 feat(php): Remove file cache driver for PHP (#733)
+
 ## [4.0.0-alpha.2](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.1...4.0.0-alpha.2)
 
 - 61343d52 fix(specs): correct type for `typoTolerance` (#722)

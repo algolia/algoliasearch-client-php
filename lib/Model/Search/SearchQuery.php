@@ -95,7 +95,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
         'attributeCriteriaComputedByMinProximity' => 'bool',
-        'renderingContent' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'indexName' => 'string',
         'type' => '\Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet',
         'facet' => 'string',
@@ -2695,7 +2695,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets renderingContent
      *
-     * @return object|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
      */
     public function getRenderingContent()
     {
@@ -2705,7 +2705,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets renderingContent
      *
-     * @param object|null $renderingContent Content defining how the search interface should be rendered. Can be set via the settings for a default value and can be overridden via rules.
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
      *
      * @return self
      */

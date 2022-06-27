@@ -95,7 +95,7 @@ class SearchForFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
         'attributeCriteriaComputedByMinProximity' => 'bool',
-        'renderingContent' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'facet' => 'string',
         'indexName' => 'string',
         'facetQuery' => 'string',
@@ -2695,7 +2695,7 @@ class SearchForFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets renderingContent
      *
-     * @return object|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
      */
     public function getRenderingContent()
     {
@@ -2705,7 +2705,7 @@ class SearchForFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets renderingContent
      *
-     * @param object|null $renderingContent Content defining how the search interface should be rendered. Can be set via the settings for a default value and can be overridden via rules.
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
      *
      * @return self
      */

@@ -3,14 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Params Class Doc Comment
+ * Edit Class Doc Comment
  *
  * @category Class
- * @description Additional search parameters. Any valid search parameter is allowed.
- *
  * @package Algolia\AlgoliaSearch
  */
-class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,10 +19,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => '\Algolia\AlgoliaSearch\Model\Search\SchemasQuery',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
-        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\EditType',
+        'delete' => 'string',
+        'insert' => 'string',
     ];
 
     /**
@@ -33,10 +30,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
-        'query' => null,
-        'automaticFacetFilters' => null,
-        'automaticOptionalFacetFilters' => null,
-        'renderingContent' => null,
+        'type' => null,
+        'delete' => null,
+        'insert' => null,
     ];
 
     /**
@@ -65,10 +61,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
-        'automaticFacetFilters' => 'setAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
-        'renderingContent' => 'setRenderingContent',
+        'type' => 'setType',
+        'delete' => 'setDelete',
+        'insert' => 'setInsert',
     ];
 
     /**
@@ -77,10 +72,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
-        'automaticFacetFilters' => 'getAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
-        'renderingContent' => 'getRenderingContent',
+        'type' => 'getType',
+        'delete' => 'getDelete',
+        'insert' => 'getInsert',
     ];
 
     /**
@@ -117,19 +111,14 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
         }
-        if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] =
-                $data['automaticFacetFilters'];
+        if (isset($data['delete'])) {
+            $this->container['delete'] = $data['delete'];
         }
-        if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] =
-                $data['automaticOptionalFacetFilters'];
-        }
-        if (isset($data['renderingContent'])) {
-            $this->container['renderingContent'] = $data['renderingContent'];
+        if (isset($data['insert'])) {
+            $this->container['insert'] = $data['insert'];
         }
     }
 
@@ -157,100 +146,73 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets query
+     * Gets type
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SchemasQuery|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\EditType|null
      */
-    public function getQuery()
+    public function getType()
     {
-        return $this->container['query'] ?? null;
+        return $this->container['type'] ?? null;
     }
 
     /**
-     * Sets query
+     * Sets type
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SchemasQuery|null $query query
+     * @param \Algolia\AlgoliaSearch\Model\Search\EditType|null $type type
      *
      * @return self
      */
-    public function setQuery($query)
+    public function setType($type)
     {
-        $this->container['query'] = $query;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets automaticFacetFilters
+     * Gets delete
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
+     * @return string|null
      */
-    public function getAutomaticFacetFilters()
+    public function getDelete()
     {
-        return $this->container['automaticFacetFilters'] ?? null;
+        return $this->container['delete'] ?? null;
     }
 
     /**
-     * Sets automaticFacetFilters
+     * Sets delete
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticFacetFilters automaticFacetFilters
+     * @param string|null $delete text or patterns to remove from the query string
      *
      * @return self
      */
-    public function setAutomaticFacetFilters($automaticFacetFilters)
+    public function setDelete($delete)
     {
-        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
+        $this->container['delete'] = $delete;
 
         return $this;
     }
 
     /**
-     * Gets automaticOptionalFacetFilters
+     * Gets insert
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
+     * @return string|null
      */
-    public function getAutomaticOptionalFacetFilters()
+    public function getInsert()
     {
-        return $this->container['automaticOptionalFacetFilters'] ?? null;
+        return $this->container['insert'] ?? null;
     }
 
     /**
-     * Sets automaticOptionalFacetFilters
+     * Sets insert
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     * @param string|null $insert text that should be inserted in place of the removed text inside the query string
      *
      * @return self
      */
-    public function setAutomaticOptionalFacetFilters(
-        $automaticOptionalFacetFilters
-    ) {
-        $this->container[
-            'automaticOptionalFacetFilters'
-        ] = $automaticOptionalFacetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets renderingContent
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
-     */
-    public function getRenderingContent()
+    public function setInsert($insert)
     {
-        return $this->container['renderingContent'] ?? null;
-    }
-
-    /**
-     * Sets renderingContent
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
-     *
-     * @return self
-     */
-    public function setRenderingContent($renderingContent)
-    {
-        $this->container['renderingContent'] = $renderingContent;
+        $this->container['insert'] = $insert;
 
         return $this;
     }

@@ -60,7 +60,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
         'attributeCriteriaComputedByMinProximity' => 'bool',
-        'renderingContent' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
     ];
 
     /**
@@ -1516,7 +1516,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets renderingContent
      *
-     * @return object|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null
      */
     public function getRenderingContent()
     {
@@ -1526,7 +1526,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets renderingContent
      *
-     * @param object|null $renderingContent Content defining how the search interface should be rendered. Can be set via the settings for a default value and can be overridden via rules.
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null $renderingContent renderingContent
      *
      * @return self
      */

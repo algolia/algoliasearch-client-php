@@ -20,8 +20,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $modelTypes = [
         'query' => 'string',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]',
+        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
+        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
@@ -96,7 +97,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
         'attributeCriteriaComputedByMinProximity' => 'bool',
-        'renderingContent' => 'object',
     ];
 
     /**
@@ -108,6 +108,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'query' => null,
         'automaticFacetFilters' => null,
         'automaticOptionalFacetFilters' => null,
+        'renderingContent' => null,
         'similarQuery' => null,
         'filters' => null,
         'facetFilters' => null,
@@ -182,7 +183,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => null,
         'maxFacetHits' => null,
         'attributeCriteriaComputedByMinProximity' => null,
-        'renderingContent' => null,
     ];
 
     /**
@@ -214,6 +214,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'query' => 'setQuery',
         'automaticFacetFilters' => 'setAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
+        'renderingContent' => 'setRenderingContent',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
         'facetFilters' => 'setFacetFilters',
@@ -288,7 +289,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
-        'renderingContent' => 'setRenderingContent',
     ];
 
     /**
@@ -300,6 +300,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'query' => 'getQuery',
         'automaticFacetFilters' => 'getAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
+        'renderingContent' => 'getRenderingContent',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
         'facetFilters' => 'getFacetFilters',
@@ -374,7 +375,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
-        'renderingContent' => 'getRenderingContent',
     ];
 
     /**
@@ -421,6 +421,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['automaticOptionalFacetFilters'])) {
             $this->container['automaticOptionalFacetFilters'] =
                 $data['automaticOptionalFacetFilters'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
         }
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
@@ -672,9 +675,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['attributeCriteriaComputedByMinProximity'] =
                 $data['attributeCriteriaComputedByMinProximity'];
         }
-        if (isset($data['renderingContent'])) {
-            $this->container['renderingContent'] = $data['renderingContent'];
-        }
     }
 
     /**
@@ -791,7 +791,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets automaticFacetFilters
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
      */
     public function getAutomaticFacetFilters()
     {
@@ -801,7 +801,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticFacetFilters names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticFacetFilters automaticFacetFilters
      *
      * @return self
      */
@@ -815,7 +815,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets automaticOptionalFacetFilters
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
      */
     public function getAutomaticOptionalFacetFilters()
     {
@@ -825,7 +825,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticOptionalFacetFilters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilter[]|null $automaticOptionalFacetFilters same syntax as automaticFacetFilters, but the engine treats the filters as optional
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticOptionalFacetFilters automaticOptionalFacetFilters
      *
      * @return self
      */
@@ -835,6 +835,30 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         $this->container[
             'automaticOptionalFacetFilters'
         ] = $automaticOptionalFacetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }
@@ -2677,30 +2701,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         $this->container[
             'attributeCriteriaComputedByMinProximity'
         ] = $attributeCriteriaComputedByMinProximity;
-
-        return $this;
-    }
-
-    /**
-     * Gets renderingContent
-     *
-     * @return object|null
-     */
-    public function getRenderingContent()
-    {
-        return $this->container['renderingContent'] ?? null;
-    }
-
-    /**
-     * Sets renderingContent
-     *
-     * @param object|null $renderingContent Content defining how the search interface should be rendered. Can be set via the settings for a default value and can be overridden via rules.
-     *
-     * @return self
-     */
-    public function setRenderingContent($renderingContent)
-    {
-        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

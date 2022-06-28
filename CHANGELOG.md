@@ -1,3 +1,7 @@
+## [4.0.0-alpha.4](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.3...4.0.0-alpha.4)
+
+- 7a858225 fix(specs): correct type for `renderingContent` and `consequenceParams` (#759)
+
 ## [4.0.0-alpha.3](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.2...4.0.0-alpha.3)
 
 - ea6c1849 feat(php): Remove file cache driver for PHP (#733)

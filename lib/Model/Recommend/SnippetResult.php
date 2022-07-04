@@ -124,6 +124,19 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
+        ) {
+            $invalidProperties[] = "'value' can't be null";
+        }
+        if (
+            !isset($this->container['matchLevel']) ||
+            $this->container['matchLevel'] === null
+        ) {
+            $invalidProperties[] = "'matchLevel' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -141,7 +154,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets value
      *
-     * @return string|null
+     * @return string
      */
     public function getValue()
     {
@@ -151,7 +164,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets value
      *
-     * @param string|null $value markup text with occurrences highlighted
+     * @param string $value markup text with occurrences highlighted
      *
      * @return self
      */
@@ -165,7 +178,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets matchLevel
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -175,7 +188,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets matchLevel
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel|null $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

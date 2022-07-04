@@ -1,14 +1,16 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * SnippetResult Class Doc Comment
+ * HighlightResultOption Class Doc Comment
  *
  * @category Class
+ * @description Show highlighted section and words matched on a query.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -20,7 +22,9 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     protected static $modelTypes = [
         'value' => 'string',
-        'matchLevel' => '\Algolia\AlgoliaSearch\Model\Search\MatchLevel',
+        'matchLevel' => '\Algolia\AlgoliaSearch\Model\Recommend\MatchLevel',
+        'matchedWords' => 'string[]',
+        'fullyHighlighted' => 'bool',
     ];
 
     /**
@@ -31,6 +35,8 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $modelFormats = [
         'value' => null,
         'matchLevel' => null,
+        'matchedWords' => null,
+        'fullyHighlighted' => null,
     ];
 
     /**
@@ -61,6 +67,8 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $setters = [
         'value' => 'setValue',
         'matchLevel' => 'setMatchLevel',
+        'matchedWords' => 'setMatchedWords',
+        'fullyHighlighted' => 'setFullyHighlighted',
     ];
 
     /**
@@ -71,6 +79,8 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $getters = [
         'value' => 'getValue',
         'matchLevel' => 'getMatchLevel',
+        'matchedWords' => 'getMatchedWords',
+        'fullyHighlighted' => 'getFullyHighlighted',
     ];
 
     /**
@@ -113,6 +123,12 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['matchLevel'])) {
             $this->container['matchLevel'] = $data['matchLevel'];
         }
+        if (isset($data['matchedWords'])) {
+            $this->container['matchedWords'] = $data['matchedWords'];
+        }
+        if (isset($data['fullyHighlighted'])) {
+            $this->container['fullyHighlighted'] = $data['fullyHighlighted'];
+        }
     }
 
     /**
@@ -135,6 +151,12 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['matchLevel'] === null
         ) {
             $invalidProperties[] = "'matchLevel' can't be null";
+        }
+        if (
+            !isset($this->container['matchedWords']) ||
+            $this->container['matchedWords'] === null
+        ) {
+            $invalidProperties[] = "'matchedWords' can't be null";
         }
 
         return $invalidProperties;
@@ -178,7 +200,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets matchLevel
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MatchLevel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -188,13 +210,61 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets matchLevel
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MatchLevel $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */
     public function setMatchLevel($matchLevel)
     {
         $this->container['matchLevel'] = $matchLevel;
+
+        return $this;
+    }
+
+    /**
+     * Gets matchedWords
+     *
+     * @return string[]
+     */
+    public function getMatchedWords()
+    {
+        return $this->container['matchedWords'] ?? null;
+    }
+
+    /**
+     * Sets matchedWords
+     *
+     * @param string[] $matchedWords list of words from the query that matched the object
+     *
+     * @return self
+     */
+    public function setMatchedWords($matchedWords)
+    {
+        $this->container['matchedWords'] = $matchedWords;
+
+        return $this;
+    }
+
+    /**
+     * Gets fullyHighlighted
+     *
+     * @return bool|null
+     */
+    public function getFullyHighlighted()
+    {
+        return $this->container['fullyHighlighted'] ?? null;
+    }
+
+    /**
+     * Sets fullyHighlighted
+     *
+     * @param bool|null $fullyHighlighted whether the entire attribute value is highlighted
+     *
+     * @return self
+     */
+    public function setFullyHighlighted($fullyHighlighted)
+    {
+        $this->container['fullyHighlighted'] = $fullyHighlighted;
 
         return $this;
     }

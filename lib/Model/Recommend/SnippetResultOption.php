@@ -1,14 +1,16 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * SnippetResult Class Doc Comment
+ * SnippetResultOption Class Doc Comment
  *
  * @category Class
+ * @description Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -20,7 +22,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     protected static $modelTypes = [
         'value' => 'string',
-        'matchLevel' => '\Algolia\AlgoliaSearch\Model\Search\MatchLevel',
+        'matchLevel' => '\Algolia\AlgoliaSearch\Model\Recommend\MatchLevel',
     ];
 
     /**
@@ -178,7 +180,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets matchLevel
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MatchLevel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -188,7 +190,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets matchLevel
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MatchLevel $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

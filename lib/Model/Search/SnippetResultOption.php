@@ -3,12 +3,14 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SnippetResult Class Doc Comment
+ * SnippetResultOption Class Doc Comment
  *
  * @category Class
+ * @description Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable

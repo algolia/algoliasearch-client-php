@@ -21,8 +21,8 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'type' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
-        'synonyms' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult[]',
+        'type' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
+        'synonyms' => 'array[]',
     ];
 
     /**
@@ -143,7 +143,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets type
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult|null
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>|null
      */
     public function getType()
     {
@@ -153,7 +153,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets type
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult|null $type type
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>|null $type show highlighted section and words matched on a query
      *
      * @return self
      */
@@ -167,7 +167,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets synonyms
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult[]|null
+     * @return array[]|null
      */
     public function getSynonyms()
     {
@@ -177,7 +177,7 @@ class SynonymHitHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets synonyms
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult[]|null $synonyms synonyms
+     * @param array[]|null $synonyms synonyms
      *
      * @return self
      */

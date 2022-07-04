@@ -6,8 +6,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * HighlightResult Class Doc Comment
  *
  * @category Class
- * @description Highlighted attributes.
- *
  * @package Algolia\AlgoliaSearch
  */
 class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -140,6 +138,25 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['value']) ||
+            $this->container['value'] === null
+        ) {
+            $invalidProperties[] = "'value' can't be null";
+        }
+        if (
+            !isset($this->container['matchLevel']) ||
+            $this->container['matchLevel'] === null
+        ) {
+            $invalidProperties[] = "'matchLevel' can't be null";
+        }
+        if (
+            !isset($this->container['matchedWords']) ||
+            $this->container['matchedWords'] === null
+        ) {
+            $invalidProperties[] = "'matchedWords' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -157,7 +174,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets value
      *
-     * @return string|null
+     * @return string
      */
     public function getValue()
     {
@@ -167,7 +184,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value
      *
-     * @param string|null $value markup text with occurrences highlighted
+     * @param string $value markup text with occurrences highlighted
      *
      * @return self
      */
@@ -181,7 +198,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets matchLevel
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MatchLevel|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -191,7 +208,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchLevel
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MatchLevel|null $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Search\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */
@@ -205,7 +222,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets matchedWords
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getMatchedWords()
     {
@@ -215,7 +232,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchedWords
      *
-     * @param string[]|null $matchedWords list of words from the query that matched the object
+     * @param string[] $matchedWords list of words from the query that matched the object
      *
      * @return self
      */

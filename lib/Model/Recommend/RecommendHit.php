@@ -22,8 +22,8 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     protected static $modelTypes = [
         'objectID' => 'string',
-        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult',
-        'snippetResult' => '\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult',
+        'highlightResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>',
+        'snippetResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo',
         'distinctSeqID' => 'int',
         'score' => 'double',
@@ -217,7 +217,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets highlightResult
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\HighlightResult|null
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>|null
      */
     public function getHighlightResult()
     {
@@ -227,7 +227,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets highlightResult
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\HighlightResult|null $highlightResult highlightResult
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>|null $highlightResult show highlighted section and words matched on a query
      *
      * @return self
      */
@@ -241,7 +241,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets snippetResult
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SnippetResult|null
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>|null
      */
     public function getSnippetResult()
     {
@@ -251,7 +251,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets snippetResult
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\SnippetResult|null $snippetResult snippetResult
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>|null $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
      *
      * @return self
      */

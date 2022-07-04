@@ -21,7 +21,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => '\Algolia\AlgoliaSearch\Model\Search\SchemasQuery',
+        'query' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery',
         'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
         'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
@@ -159,7 +159,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets query
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SchemasQuery|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery|null
      */
     public function getQuery()
     {
@@ -169,7 +169,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets query
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SchemasQuery|null $query query
+     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery|null $query query
      *
      * @return self
      */

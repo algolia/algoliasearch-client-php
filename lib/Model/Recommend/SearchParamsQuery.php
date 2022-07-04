@@ -1,16 +1,14 @@
 <?php
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ConsequenceQuery Class Doc Comment
+ * SearchParamsQuery Class Doc Comment
  *
  * @category Class
- * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
- *
  * @package Algolia\AlgoliaSearch
  */
-class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class SearchParamsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -21,8 +19,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Search\Edit[]',
+        'query' => 'string',
     ];
 
     /**
@@ -31,8 +28,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
+        'query' => null,
     ];
 
     /**
@@ -61,8 +57,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
+        'query' => 'setQuery',
     ];
 
     /**
@@ -71,8 +66,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
+        'query' => 'getQuery',
     ];
 
     /**
@@ -109,11 +103,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
-        }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
         }
     }
 
@@ -141,49 +132,25 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets remove
+     * Gets query
      *
-     * @return string[]|null
+     * @return string|null
      */
-    public function getRemove()
+    public function getQuery()
     {
-        return $this->container['remove'] ?? null;
+        return $this->container['query'] ?? null;
     }
 
     /**
-     * Sets remove
+     * Sets query
      *
-     * @param string[]|null $remove words to remove
+     * @param string|null $query the text to search in the index
      *
      * @return self
      */
-    public function setRemove($remove)
+    public function setQuery($query)
     {
-        $this->container['remove'] = $remove;
-
-        return $this;
-    }
-
-    /**
-     * Gets edits
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Edit[]|null
-     */
-    public function getEdits()
-    {
-        return $this->container['edits'] ?? null;
-    }
-
-    /**
-     * Sets edits
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Edit[]|null $edits edits to apply
-     *
-     * @return self
-     */
-    public function setEdits($edits)
-    {
-        $this->container['edits'] = $edits;
+        $this->container['query'] = $query;
 
         return $this;
     }

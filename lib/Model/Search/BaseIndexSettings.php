@@ -32,6 +32,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
         'userData' => 'object',
+        'customNormalization' => 'array<string,array<string,string>>',
     ];
 
     /**
@@ -53,6 +54,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'separatorsToIndex' => null,
         'searchableAttributes' => null,
         'userData' => null,
+        'customNormalization' => null,
     ];
 
     /**
@@ -94,6 +96,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'separatorsToIndex' => 'setSeparatorsToIndex',
         'searchableAttributes' => 'setSearchableAttributes',
         'userData' => 'setUserData',
+        'customNormalization' => 'setCustomNormalization',
     ];
 
     /**
@@ -115,6 +118,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'separatorsToIndex' => 'getSeparatorsToIndex',
         'searchableAttributes' => 'getSearchableAttributes',
         'userData' => 'getUserData',
+        'customNormalization' => 'getCustomNormalization',
     ];
 
     /**
@@ -198,6 +202,10 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['customNormalization'])) {
+            $this->container['customNormalization'] =
+                $data['customNormalization'];
         }
     }
 
@@ -311,7 +319,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToTransliterate
      *
-     * @param string[]|null $attributesToTransliterate specify on which attributes to apply transliteration
+     * @param string[]|null $attributesToTransliterate specify on which attributes in your index Algolia should apply Japanese transliteration to make words indexed in Katakana or Kanji searchable in Hiragana
      *
      * @return self
      */
@@ -544,6 +552,30 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets customNormalization
+     *
+     * @return array<string,array<string,string>>|null
+     */
+    public function getCustomNormalization()
+    {
+        return $this->container['customNormalization'] ?? null;
+    }
+
+    /**
+     * Sets customNormalization
+     *
+     * @param array<string,array<string,string>>|null $customNormalization overrides Algolia's default normalization
+     *
+     * @return self
+     */
+    public function setCustomNormalization($customNormalization)
+    {
+        $this->container['customNormalization'] = $customNormalization;
 
         return $this;
     }

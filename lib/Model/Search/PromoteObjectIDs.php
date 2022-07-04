@@ -3,14 +3,14 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ConsequenceQuery Class Doc Comment
+ * PromoteObjectIDs Class Doc Comment
  *
  * @category Class
- * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
+ * @description Multiple objectIDs to promote as hits.
  *
  * @package Algolia\AlgoliaSearch
  */
-class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -21,8 +21,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Search\Edit[]',
+        'objectIDs' => 'string[]',
+        'position' => 'int',
     ];
 
     /**
@@ -31,8 +31,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
+        'objectIDs' => null,
+        'position' => null,
     ];
 
     /**
@@ -61,8 +61,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
+        'objectIDs' => 'setObjectIDs',
+        'position' => 'setPosition',
     ];
 
     /**
@@ -71,8 +71,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
+        'objectIDs' => 'getObjectIDs',
+        'position' => 'getPosition',
     ];
 
     /**
@@ -109,11 +109,11 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
+        if (isset($data['objectIDs'])) {
+            $this->container['objectIDs'] = $data['objectIDs'];
         }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
+        if (isset($data['position'])) {
+            $this->container['position'] = $data['position'];
         }
     }
 
@@ -125,6 +125,19 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['objectIDs']) ||
+            $this->container['objectIDs'] === null
+        ) {
+            $invalidProperties[] = "'objectIDs' can't be null";
+        }
+        if (
+            !isset($this->container['position']) ||
+            $this->container['position'] === null
+        ) {
+            $invalidProperties[] = "'position' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -141,49 +154,49 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets remove
+     * Gets objectIDs
      *
-     * @return string[]|null
+     * @return string[]
      */
-    public function getRemove()
+    public function getObjectIDs()
     {
-        return $this->container['remove'] ?? null;
+        return $this->container['objectIDs'] ?? null;
     }
 
     /**
-     * Sets remove
+     * Sets objectIDs
      *
-     * @param string[]|null $remove words to remove
+     * @param string[] $objectIDs array of unique identifiers of the objects to promote
      *
      * @return self
      */
-    public function setRemove($remove)
+    public function setObjectIDs($objectIDs)
     {
-        $this->container['remove'] = $remove;
+        $this->container['objectIDs'] = $objectIDs;
 
         return $this;
     }
 
     /**
-     * Gets edits
+     * Gets position
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Edit[]|null
+     * @return int
      */
-    public function getEdits()
+    public function getPosition()
     {
-        return $this->container['edits'] ?? null;
+        return $this->container['position'] ?? null;
     }
 
     /**
-     * Sets edits
+     * Sets position
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Edit[]|null $edits edits to apply
+     * @param int $position The position to promote the objects to (zero-based). If you pass objectIDs, the objects are placed at this position as a group. For example, if you pass four objectIDs to position 0, the objects take the first four positions.
      *
      * @return self
      */
-    public function setEdits($edits)
+    public function setPosition($position)
     {
-        $this->container['edits'] = $edits;
+        $this->container['position'] = $position;
 
         return $this;
     }

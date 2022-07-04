@@ -19,10 +19,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => 'string',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
-        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
@@ -97,6 +93,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
         'attributeCriteriaComputedByMinProximity' => 'bool',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
+        'query' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery',
+        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
+        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
     ];
 
     /**
@@ -105,10 +105,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelFormats = [
-        'query' => null,
-        'automaticFacetFilters' => null,
-        'automaticOptionalFacetFilters' => null,
-        'renderingContent' => null,
         'similarQuery' => null,
         'filters' => null,
         'facetFilters' => null,
@@ -183,6 +179,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => null,
         'maxFacetHits' => null,
         'attributeCriteriaComputedByMinProximity' => null,
+        'renderingContent' => null,
+        'query' => null,
+        'automaticFacetFilters' => null,
+        'automaticOptionalFacetFilters' => null,
     ];
 
     /**
@@ -211,10 +211,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
-        'automaticFacetFilters' => 'setAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
-        'renderingContent' => 'setRenderingContent',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
         'facetFilters' => 'setFacetFilters',
@@ -289,6 +285,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
+        'renderingContent' => 'setRenderingContent',
+        'query' => 'setQuery',
+        'automaticFacetFilters' => 'setAutomaticFacetFilters',
+        'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
     ];
 
     /**
@@ -297,10 +297,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
-        'automaticFacetFilters' => 'getAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
-        'renderingContent' => 'getRenderingContent',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
         'facetFilters' => 'getFacetFilters',
@@ -375,6 +371,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
+        'renderingContent' => 'getRenderingContent',
+        'query' => 'getQuery',
+        'automaticFacetFilters' => 'getAutomaticFacetFilters',
+        'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
     ];
 
     /**
@@ -411,20 +411,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
-        }
-        if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] =
-                $data['automaticFacetFilters'];
-        }
-        if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] =
-                $data['automaticOptionalFacetFilters'];
-        }
-        if (isset($data['renderingContent'])) {
-            $this->container['renderingContent'] = $data['renderingContent'];
-        }
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
         }
@@ -675,6 +661,20 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['attributeCriteriaComputedByMinProximity'] =
                 $data['attributeCriteriaComputedByMinProximity'];
         }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
+        }
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['automaticFacetFilters'])) {
+            $this->container['automaticFacetFilters'] =
+                $data['automaticFacetFilters'];
+        }
+        if (isset($data['automaticOptionalFacetFilters'])) {
+            $this->container['automaticOptionalFacetFilters'] =
+                $data['automaticOptionalFacetFilters'];
+        }
     }
 
     /**
@@ -762,105 +762,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
-    }
-
-    /**
-     * Gets query
-     *
-     * @return string|null
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query
-     *
-     * @param string|null $query the text to search in the index
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
-
-        return $this;
-    }
-
-    /**
-     * Gets automaticFacetFilters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
-     */
-    public function getAutomaticFacetFilters()
-    {
-        return $this->container['automaticFacetFilters'] ?? null;
-    }
-
-    /**
-     * Sets automaticFacetFilters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticFacetFilters automaticFacetFilters
-     *
-     * @return self
-     */
-    public function setAutomaticFacetFilters($automaticFacetFilters)
-    {
-        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets automaticOptionalFacetFilters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
-     */
-    public function getAutomaticOptionalFacetFilters()
-    {
-        return $this->container['automaticOptionalFacetFilters'] ?? null;
-    }
-
-    /**
-     * Sets automaticOptionalFacetFilters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticOptionalFacetFilters automaticOptionalFacetFilters
-     *
-     * @return self
-     */
-    public function setAutomaticOptionalFacetFilters(
-        $automaticOptionalFacetFilters
-    ) {
-        $this->container[
-            'automaticOptionalFacetFilters'
-        ] = $automaticOptionalFacetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets renderingContent
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
-     */
-    public function getRenderingContent()
-    {
-        return $this->container['renderingContent'] ?? null;
-    }
-
-    /**
-     * Sets renderingContent
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
-     *
-     * @return self
-     */
-    public function setRenderingContent($renderingContent)
-    {
-        $this->container['renderingContent'] = $renderingContent;
-
-        return $this;
     }
 
     /**
@@ -2701,6 +2602,105 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         $this->container[
             'attributeCriteriaComputedByMinProximity'
         ] = $attributeCriteriaComputedByMinProximity;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
+
+        return $this;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery|null
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery|null $query query
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets automaticFacetFilters
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
+     */
+    public function getAutomaticFacetFilters()
+    {
+        return $this->container['automaticFacetFilters'] ?? null;
+    }
+
+    /**
+     * Sets automaticFacetFilters
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticFacetFilters automaticFacetFilters
+     *
+     * @return self
+     */
+    public function setAutomaticFacetFilters($automaticFacetFilters)
+    {
+        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets automaticOptionalFacetFilters
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null
+     */
+    public function getAutomaticOptionalFacetFilters()
+    {
+        return $this->container['automaticOptionalFacetFilters'] ?? null;
+    }
+
+    /**
+     * Sets automaticOptionalFacetFilters
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters|null $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     *
+     * @return self
+     */
+    public function setAutomaticOptionalFacetFilters(
+        $automaticOptionalFacetFilters
+    ) {
+        $this->container[
+            'automaticOptionalFacetFilters'
+        ] = $automaticOptionalFacetFilters;
 
         return $this;
     }

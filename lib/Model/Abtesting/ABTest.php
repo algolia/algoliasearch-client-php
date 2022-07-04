@@ -23,6 +23,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'clickSignificance' => 'double',
         'conversionSignificance' => 'double',
         'endAt' => 'string',
+        'updatedAt' => 'string',
         'createdAt' => 'string',
         'name' => 'string',
         'status' => 'string',
@@ -39,6 +40,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'clickSignificance' => 'double',
         'conversionSignificance' => 'double',
         'endAt' => null,
+        'updatedAt' => null,
         'createdAt' => null,
         'name' => null,
         'status' => null,
@@ -75,6 +77,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'clickSignificance' => 'setClickSignificance',
         'conversionSignificance' => 'setConversionSignificance',
         'endAt' => 'setEndAt',
+        'updatedAt' => 'setUpdatedAt',
         'createdAt' => 'setCreatedAt',
         'name' => 'setName',
         'status' => 'setStatus',
@@ -91,6 +94,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'clickSignificance' => 'getClickSignificance',
         'conversionSignificance' => 'getConversionSignificance',
         'endAt' => 'getEndAt',
+        'updatedAt' => 'getUpdatedAt',
         'createdAt' => 'getCreatedAt',
         'name' => 'getName',
         'status' => 'getStatus',
@@ -144,6 +148,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         if (isset($data['endAt'])) {
             $this->container['endAt'] = $data['endAt'];
         }
+        if (isset($data['updatedAt'])) {
+            $this->container['updatedAt'] = $data['updatedAt'];
+        }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
         }
@@ -190,6 +197,12 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['endAt'] === null
         ) {
             $invalidProperties[] = "'endAt' can't be null";
+        }
+        if (
+            !isset($this->container['updatedAt']) ||
+            $this->container['updatedAt'] === null
+        ) {
+            $invalidProperties[] = "'updatedAt' can't be null";
         }
         if (
             !isset($this->container['createdAt']) ||
@@ -327,6 +340,30 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Gets updatedAt
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updatedAt'] ?? null;
+    }
+
+    /**
+     * Sets updatedAt
+     *
+     * @param string $updatedAt update date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->container['updatedAt'] = $updatedAt;
+
+        return $this;
+    }
+
+    /**
      * Gets createdAt
      *
      * @return string
@@ -339,7 +376,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets createdAt
      *
-     * @param string $createdAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $createdAt creation date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
      *
      * @return self
      */

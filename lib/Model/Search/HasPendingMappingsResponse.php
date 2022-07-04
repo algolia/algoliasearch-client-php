@@ -3,14 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ConsequenceQuery Class Doc Comment
+ * HasPendingMappingsResponse Class Doc Comment
  *
  * @category Class
- * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
- *
  * @package Algolia\AlgoliaSearch
  */
-class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -21,8 +19,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Search\Edit[]',
+        'pending' => 'bool',
+        'clusters' => 'array<string,string[]>',
     ];
 
     /**
@@ -31,8 +29,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
+        'pending' => null,
+        'clusters' => null,
     ];
 
     /**
@@ -61,8 +59,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
+        'pending' => 'setPending',
+        'clusters' => 'setClusters',
     ];
 
     /**
@@ -71,8 +69,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
+        'pending' => 'getPending',
+        'clusters' => 'getClusters',
     ];
 
     /**
@@ -109,11 +107,11 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
+        if (isset($data['pending'])) {
+            $this->container['pending'] = $data['pending'];
         }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
+        if (isset($data['clusters'])) {
+            $this->container['clusters'] = $data['clusters'];
         }
     }
 
@@ -125,6 +123,13 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['pending']) ||
+            $this->container['pending'] === null
+        ) {
+            $invalidProperties[] = "'pending' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -141,49 +146,49 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets remove
+     * Gets pending
      *
-     * @return string[]|null
+     * @return bool
      */
-    public function getRemove()
+    public function getPending()
     {
-        return $this->container['remove'] ?? null;
+        return $this->container['pending'] ?? null;
     }
 
     /**
-     * Sets remove
+     * Sets pending
      *
-     * @param string[]|null $remove words to remove
+     * @param bool $pending if there is any clusters with pending mapping state
      *
      * @return self
      */
-    public function setRemove($remove)
+    public function setPending($pending)
     {
-        $this->container['remove'] = $remove;
+        $this->container['pending'] = $pending;
 
         return $this;
     }
 
     /**
-     * Gets edits
+     * Gets clusters
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Edit[]|null
+     * @return array<string,string[]>|null
      */
-    public function getEdits()
+    public function getClusters()
     {
-        return $this->container['edits'] ?? null;
+        return $this->container['clusters'] ?? null;
     }
 
     /**
-     * Sets edits
+     * Sets clusters
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Edit[]|null $edits edits to apply
+     * @param array<string,string[]>|null $clusters describe cluster pending (migrating, creating, deleting) mapping state
      *
      * @return self
      */
-    public function setEdits($edits)
+    public function setClusters($clusters)
     {
-        $this->container['edits'] = $edits;
+        $this->container['clusters'] = $clusters;
 
         return $this;
     }

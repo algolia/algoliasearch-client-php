@@ -34,6 +34,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
         'userData' => 'object',
+        'customNormalization' => 'array<string,array<string,string>>',
         'attributesForFaceting' => 'string[]',
         'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
@@ -97,6 +98,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'separatorsToIndex' => null,
         'searchableAttributes' => null,
         'userData' => null,
+        'customNormalization' => null,
         'attributesForFaceting' => null,
         'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
@@ -180,6 +182,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'separatorsToIndex' => 'setSeparatorsToIndex',
         'searchableAttributes' => 'setSearchableAttributes',
         'userData' => 'setUserData',
+        'customNormalization' => 'setCustomNormalization',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
@@ -243,6 +246,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'separatorsToIndex' => 'getSeparatorsToIndex',
         'searchableAttributes' => 'getSearchableAttributes',
         'userData' => 'getUserData',
+        'customNormalization' => 'getCustomNormalization',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
@@ -368,6 +372,10 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['customNormalization'])) {
+            $this->container['customNormalization'] =
+                $data['customNormalization'];
         }
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
@@ -669,7 +677,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets attributesToTransliterate
      *
-     * @param string[]|null $attributesToTransliterate specify on which attributes to apply transliteration
+     * @param string[]|null $attributesToTransliterate specify on which attributes in your index Algolia should apply Japanese transliteration to make words indexed in Katakana or Kanji searchable in Hiragana
      *
      * @return self
      */
@@ -902,6 +910,30 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets customNormalization
+     *
+     * @return array<string,array<string,string>>|null
+     */
+    public function getCustomNormalization()
+    {
+        return $this->container['customNormalization'] ?? null;
+    }
+
+    /**
+     * Sets customNormalization
+     *
+     * @param array<string,array<string,string>>|null $customNormalization overrides Algolia's default normalization
+     *
+     * @return self
+     */
+    public function setCustomNormalization($customNormalization)
+    {
+        $this->container['customNormalization'] = $customNormalization;
 
         return $this;
     }

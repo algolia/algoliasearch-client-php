@@ -6,8 +6,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Promote Class Doc Comment
  *
  * @category Class
- * @description Object to promote as hits.
- *
  * @package Algolia\AlgoliaSearch
  */
 class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
@@ -21,9 +19,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'objectID' => 'string',
         'objectIDs' => 'string[]',
         'position' => 'int',
+        'objectID' => 'string',
     ];
 
     /**
@@ -32,9 +30,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
-        'objectID' => null,
         'objectIDs' => null,
         'position' => null,
+        'objectID' => null,
     ];
 
     /**
@@ -63,9 +61,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $setters = [
-        'objectID' => 'setObjectID',
         'objectIDs' => 'setObjectIDs',
         'position' => 'setPosition',
+        'objectID' => 'setObjectID',
     ];
 
     /**
@@ -74,9 +72,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $getters = [
-        'objectID' => 'getObjectID',
         'objectIDs' => 'getObjectIDs',
         'position' => 'getPosition',
+        'objectID' => 'getObjectID',
     ];
 
     /**
@@ -113,14 +111,14 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['objectID'])) {
-            $this->container['objectID'] = $data['objectID'];
-        }
         if (isset($data['objectIDs'])) {
             $this->container['objectIDs'] = $data['objectIDs'];
         }
         if (isset($data['position'])) {
             $this->container['position'] = $data['position'];
+        }
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -134,10 +132,22 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         $invalidProperties = [];
 
         if (
+            !isset($this->container['objectIDs']) ||
+            $this->container['objectIDs'] === null
+        ) {
+            $invalidProperties[] = "'objectIDs' can't be null";
+        }
+        if (
             !isset($this->container['position']) ||
             $this->container['position'] === null
         ) {
             $invalidProperties[] = "'position' can't be null";
+        }
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
+            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -155,33 +165,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets objectID
-     *
-     * @return string|null
-     */
-    public function getObjectID()
-    {
-        return $this->container['objectID'] ?? null;
-    }
-
-    /**
-     * Sets objectID
-     *
-     * @param string|null $objectID unique identifier of the object to promote
-     *
-     * @return self
-     */
-    public function setObjectID($objectID)
-    {
-        $this->container['objectID'] = $objectID;
-
-        return $this;
-    }
-
-    /**
      * Gets objectIDs
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getObjectIDs()
     {
@@ -191,7 +177,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs array of unique identifiers of the objects to promote
+     * @param string[] $objectIDs array of unique identifiers of the objects to promote
      *
      * @return self
      */
@@ -222,6 +208,30 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function setPosition($position)
     {
         $this->container['position'] = $position;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectID
+     *
+     * @return string
+     */
+    public function getObjectID()
+    {
+        return $this->container['objectID'] ?? null;
+    }
+
+    /**
+     * Sets objectID
+     *
+     * @param string $objectID unique identifier of the object to promote
+     *
+     * @return self
+     */
+    public function setObjectID($objectID)
+    {
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }

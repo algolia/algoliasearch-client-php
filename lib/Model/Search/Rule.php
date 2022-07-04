@@ -160,12 +160,6 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['consequence']) ||
-            $this->container['consequence'] === null
-        ) {
-            $invalidProperties[] = "'consequence' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -232,7 +226,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets consequence
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Consequence
+     * @return \Algolia\AlgoliaSearch\Model\Search\Consequence|null
      */
     public function getConsequence()
     {
@@ -242,7 +236,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets consequence
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Consequence $consequence consequence
+     * @param \Algolia\AlgoliaSearch\Model\Search\Consequence|null $consequence consequence
      *
      * @return self
      */

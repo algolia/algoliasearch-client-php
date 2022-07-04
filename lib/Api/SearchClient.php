@@ -1702,10 +1702,10 @@ class SearchClient
     /**
      * Get migration status.
      *
-     * @param bool $getClusters Whether to get clusters or not. (optional)
+     * @param bool $getClusters If the clusters pending mapping state should be on the response. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse
      */
     public function hasPendingMappings(
         $getClusters = null,
@@ -2308,7 +2308,7 @@ class SearchClient
      * @param array $rule rule (required)
      * - $rule['objectID'] => (string) Unique identifier of the object. (required)
      * - $rule['conditions'] => (array) A list of conditions that should apply to activate a Rule. You can use up to 25 conditions per Rule.
-     * - $rule['consequence'] => (array)  (required)
+     * - $rule['consequence'] => (array)
      * - $rule['description'] => (string) This field is intended for Rule management purposes, in particular to ease searching for Rules and presenting them to human readers. It's not interpreted by the API.
      * - $rule['enabled'] => (bool) Whether the Rule is enabled. Disabled Rules remain in the index, but aren't applied at query time.
      * - $rule['validity'] => (array) By default, Rules are permanently valid. When validity periods are specified, the Rule applies only during those periods; it's ignored the rest of the time. The list must not be empty.

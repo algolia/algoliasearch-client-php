@@ -3,14 +3,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ConsequenceQuery Class Doc Comment
+ * MixedSearchFilters Class Doc Comment
  *
  * @category Class
- * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
- *
  * @package Algolia\AlgoliaSearch
  */
-class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class MixedSearchFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         ModelInterface,
         \ArrayAccess,
         \JsonSerializable
@@ -20,20 +18,14 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @var string[]
      */
-    protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Search\Edit[]',
-    ];
+    protected static $modelTypes = [];
 
     /**
      * Array of property to format mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
-    ];
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -60,20 +52,14 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @var string[]
      */
-    protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -109,12 +95,6 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
-        }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
-        }
     }
 
     /**
@@ -140,53 +120,6 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         return count($this->listInvalidProperties()) === 0;
     }
 
-    /**
-     * Gets remove
-     *
-     * @return string[]|null
-     */
-    public function getRemove()
-    {
-        return $this->container['remove'] ?? null;
-    }
-
-    /**
-     * Sets remove
-     *
-     * @param string[]|null $remove words to remove
-     *
-     * @return self
-     */
-    public function setRemove($remove)
-    {
-        $this->container['remove'] = $remove;
-
-        return $this;
-    }
-
-    /**
-     * Gets edits
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Edit[]|null
-     */
-    public function getEdits()
-    {
-        return $this->container['edits'] ?? null;
-    }
-
-    /**
-     * Sets edits
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Edit[]|null $edits edits to apply
-     *
-     * @return self
-     */
-    public function setEdits($edits)
-    {
-        $this->container['edits'] = $edits;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

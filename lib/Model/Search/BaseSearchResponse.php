@@ -43,6 +43,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
         'userData' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
     ];
 
     /**
@@ -75,6 +76,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'queryAfterRemoval' => null,
         'serverUsed' => null,
         'userData' => null,
+        'renderingContent' => null,
     ];
 
     /**
@@ -127,6 +129,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'queryAfterRemoval' => 'setQueryAfterRemoval',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
+        'renderingContent' => 'setRenderingContent',
     ];
 
     /**
@@ -159,6 +162,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'queryAfterRemoval' => 'getQueryAfterRemoval',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
+        'renderingContent' => 'getRenderingContent',
     ];
 
     /**
@@ -267,6 +271,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
         }
     }
 
@@ -943,6 +950,30 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

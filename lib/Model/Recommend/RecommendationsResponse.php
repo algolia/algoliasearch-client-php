@@ -43,6 +43,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
         'userData' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
     ];
 
@@ -76,6 +77,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'queryAfterRemoval' => null,
         'serverUsed' => null,
         'userData' => null,
+        'renderingContent' => null,
         'hits' => null,
     ];
 
@@ -129,6 +131,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'queryAfterRemoval' => 'setQueryAfterRemoval',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
+        'renderingContent' => 'setRenderingContent',
         'hits' => 'setHits',
     ];
 
@@ -162,6 +165,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'queryAfterRemoval' => 'getQueryAfterRemoval',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
+        'renderingContent' => 'getRenderingContent',
         'hits' => 'getHits',
     ];
 
@@ -271,6 +275,9 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
@@ -956,6 +963,30 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

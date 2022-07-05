@@ -43,6 +43,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
         'userData' => 'object',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
         'cursor' => 'string',
     ];
@@ -77,6 +78,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'queryAfterRemoval' => null,
         'serverUsed' => null,
         'userData' => null,
+        'renderingContent' => null,
         'hits' => null,
         'cursor' => null,
     ];
@@ -131,6 +133,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'queryAfterRemoval' => 'setQueryAfterRemoval',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
+        'renderingContent' => 'setRenderingContent',
         'hits' => 'setHits',
         'cursor' => 'setCursor',
     ];
@@ -165,6 +168,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'queryAfterRemoval' => 'getQueryAfterRemoval',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
+        'renderingContent' => 'getRenderingContent',
         'hits' => 'getHits',
         'cursor' => 'getCursor',
     ];
@@ -275,6 +279,9 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
@@ -969,6 +976,30 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

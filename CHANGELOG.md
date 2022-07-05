@@ -1,3 +1,9 @@
+## [4.0.0-alpha.5](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.4...4.0.0-alpha.5)
+
+- 23a72c39 fix(specs): correct type for highlightResult and snippetResult (#783)
+- a11e84da fix(specs): fix missing params and types (#772)
+- bc14a8c5 feat(specs): Add tags to the settings and search params (#768)
+
 ## [4.0.0-alpha.4](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.3...4.0.0-alpha.4)
 
 - 7a858225 fix(specs): correct type for `renderingContent` and `consequenceParams` (#759)

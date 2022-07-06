@@ -6,7 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.2...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.0.3...master)
+
+## [v3.3.0](https://github.com/algolia/algoliasearch-client-php/compare/3.2.0...3.3.0)
+
+### Changed
+- Use interface for constructor arguments ([#704](https://github.com/algolia/algoliasearch-client-php/pull/704))
+
+### Fixed
+- Corrected saveObjects call example ([#702](https://github.com/algolia/algoliasearch-client-php/pull/702))
+- Fixes deprecation alert when using symfony/error-handler ([#703](https://github.com/algolia/algoliasearch-client-php/pull/703))
 
 ## [v3.2.0](https://github.com/algolia/algoliasearch-client-php/compare/3.1.0...3.2.0)
 

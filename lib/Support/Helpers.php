@@ -2,7 +2,9 @@
 
 namespace Algolia\AlgoliaSearch\Support;
 
+use Algolia\AlgoliaSearch\Api\SearchClient;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 
 final class Helpers
 {
@@ -137,5 +139,86 @@ final class Helpers
         throw new ExceededRetriesException(
             'Maximum number of retries (' . $maxRetries . ') exceeded.'
         );
+    }
+
+    /**
+     * Helper for Api keys which retries a function until some conditions are met
+     *
+     * @param string $operation
+     * @param SearchClient $searchClient search client
+     * @param string $key
+     * @param array $apiKey
+     * @param int $maxRetries Max number of retries
+     * @param int $timeout Timeout
+     * @param string $timeoutCalculation name of the method to call to calculate the timeout
+     * @param array $requestOptions
+     *
+     * @throws ExceededRetriesException
+     *
+     * @return void
+     *
+     */
+    public static function retryForApiKeyUntil(
+        $operation,
+        $searchClient,
+        $key,
+        $apiKey,
+        $maxRetries,
+        $timeout,
+        $timeoutCalculation = 'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout',
+        $requestOptions = []
+    ) {
+        $retry = 0;
+
+        while ($retry < $maxRetries) {
+            try {
+                $response = $searchClient->getApiKey($key, $requestOptions);
+
+                // In case of an addition, if there was no error, the $key has been added as it should be
+                if ($operation === 'add') {
+                    return;
+                }
+
+                // In case of an update, check if the key has been updated as it should be
+                if ($operation === 'update') {
+                    if (self::isKeyUpdated($response, $apiKey)) {
+                        return;
+                    }
+                }
+
+                // Else try again ...
+            } catch (NotFoundException $e) {
+                // In case of a deletion, if there was an error, the $key has been deleted as it should be
+                if (
+                    $operation === 'delete' &&
+                    $e->getMessage() === 'Key does not exist'
+                ) {
+                    return;
+                }
+
+                // Else try again ...
+            }
+
+            $retry++;
+            usleep(
+                call_user_func_array($timeoutCalculation, [$timeout, $retry])
+            );
+        }
+
+        throw new ExceededRetriesException(
+            'Maximum number of retries (' . $maxRetries . ') exceeded.'
+        );
+    }
+
+    private static function isKeyUpdated($key, $keyParams)
+    {
+        $upToDate = true;
+        foreach ($keyParams as $param => $value) {
+            if (isset($key[$param])) {
+                $upToDate &= $key[$param] === $value;
+            }
+        }
+
+        return $upToDate;
     }
 }

@@ -3237,6 +3237,48 @@ class SearchClient
         );
     }
 
+    /**
+     * Wait for an API key to be added, updated or deleted based on a given `operation`.
+     *
+     * @param string $operation the `operation` that was done on a `key`
+     * @param string $key the `key` that has been added, deleted or updated
+     * @param array $apiKey necessary to know if an `update` operation has been processed, compare fields of the response with it
+     * @param int|null $maxRetries Maximum number of retries
+     * @param int|null $timeout Timeout
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @throws ExceededRetriesException
+     *
+     * @return void
+     */
+    public function waitForApiKey(
+        $operation,
+        $key,
+        $apiKey = null,
+        $maxRetries = null,
+        $timeout = null,
+        $requestOptions = []
+    ) {
+        if ($timeout === null) {
+            $timeout = $this->config->getWaitTaskTimeBeforeRetry();
+        }
+
+        if ($maxRetries === null) {
+            $maxRetries = $this->config->getDefaultMaxRetries();
+        }
+
+        Helpers::retryForApiKeyUntil(
+            $operation,
+            $this,
+            $key,
+            $apiKey,
+            $maxRetries,
+            $timeout,
+            null,
+            $requestOptions
+        );
+    }
+
     private function sendRequest(
         $method,
         $resourcePath,

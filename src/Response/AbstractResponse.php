@@ -21,6 +21,7 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
      * @return bool
      */
     #[\ReturnTypeWillChange]
@@ -31,6 +32,7 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]
@@ -41,6 +43,7 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
      * @return void
      */
     #[\ReturnTypeWillChange]
@@ -51,6 +54,7 @@ abstract class AbstractResponse implements \ArrayAccess
 
     /**
      * {@inheritdoc}
+     *
      * @return void
      */
     #[\ReturnTypeWillChange]

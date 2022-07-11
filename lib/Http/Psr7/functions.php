@@ -38,7 +38,7 @@ function stream_for($resource = '', array $options = [])
                 return stream_for((string) $resource, $options);
             }
 
-            break;
+        break;
         case 'NULL':
             return new Stream(fopen('php://temp', 'r+'), $options);
     }

@@ -267,7 +267,7 @@ class ObjectSerializer
 
             case 'simple':
             case 'csv':
-            // Deliberate fall through. CSV is default format.
+                // Deliberate fall through. CSV is default format.
             default:
                 return implode(',', $collection);
         }
@@ -402,10 +402,10 @@ class ObjectSerializer
         // If a discriminator is defined and points to a valid subclass, use it.
         $discriminator = $class::DISCRIMINATOR;
         if (
-                !empty($discriminator) &&
-                isset($data->{$discriminator}) &&
-                is_string($data->{$discriminator})
-            ) {
+            !empty($discriminator) &&
+            isset($data->{$discriminator}) &&
+            is_string($data->{$discriminator})
+        ) {
             $subclass =
                     '\Algolia\AlgoliaSearch\Model\\' . $data->{$discriminator};
             if (is_subclass_of($subclass, $class)) {
@@ -419,9 +419,9 @@ class ObjectSerializer
             $propertySetter = $instance::setters()[$property];
 
             if (
-                    !isset($propertySetter) ||
-                    !isset($data->{$instance::attributeMap()[$property]})
-                ) {
+                !isset($propertySetter) ||
+                !isset($data->{$instance::attributeMap()[$property]})
+            ) {
                 continue;
             }
 

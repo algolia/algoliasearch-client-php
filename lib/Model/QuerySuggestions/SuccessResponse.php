@@ -9,9 +9,9 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * @package Algolia\AlgoliaSearch
  */
 class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization

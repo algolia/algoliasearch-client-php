@@ -9,9 +9,9 @@ namespace Algolia\AlgoliaSearch\Model\Personalization;
  * @package Algolia\AlgoliaSearch
  */
 class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-        ModelInterface,
-        \ArrayAccess,
-        \JsonSerializable
+    ModelInterface,
+    \ArrayAccess,
+    \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization

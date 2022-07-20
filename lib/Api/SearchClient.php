@@ -2922,20 +2922,24 @@ class SearchClient
      * Search synonyms.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param string $query Search for specific synonyms matching this string. (optional, default to '')
      * @param array $type Only search for specific types of synonyms. (optional)
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional, default to 0)
      * @param int $hitsPerPage Maximum number of objects to retrieve. (optional, default to 100)
+     * @param array $searchSynonymsParams The body of the the &#x60;searchSynonyms&#x60; method. (optional)
+     * - $searchSynonymsParams['query'] => (string) The text to search in the index. (required)
+     *
+     * @see \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsParams
+     *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse
      */
     public function searchSynonyms(
         $indexName,
-        $query = null,
         $type = null,
         $page = null,
         $hitsPerPage = null,
+        $searchSynonymsParams = null,
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
@@ -2949,10 +2953,6 @@ class SearchClient
         $queryParameters = [];
         $headers = [];
         $httpBody = [];
-
-        if ($query !== null) {
-            $queryParameters['query'] = $query;
-        }
 
         if ($type !== null) {
             $queryParameters['type'] = $type;
@@ -2973,6 +2973,10 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
+        }
+
+        if (isset($searchSynonymsParams)) {
+            $httpBody = $searchSynonymsParams;
         }
 
         return $this->sendRequest(

@@ -79,15 +79,10 @@ final class ApiWrapper implements ApiWrapperInterface
          */
         $isRead = $useReadTransporter || 'GET' === mb_strtoupper($method);
 
-        if ($isRead) {
+        if ($isRead || 'DELETE' === mb_strtoupper($method)) {
             $requestOptions = $this->requestOptionsFactory->createBodyLess(
                 $requestOptions
             );
-        } elseif ('DELETE' === mb_strtoupper($method)) {
-            $requestOptions = $this->requestOptionsFactory->createBodyLess(
-                $requestOptions
-            );
-            $data = [];
         } else {
             $requestOptions = $this->requestOptionsFactory->create(
                 $requestOptions
@@ -139,7 +134,9 @@ final class ApiWrapper implements ApiWrapperInterface
             ->withQuery($requestOptions->getBuiltQueryParameters())
             ->withScheme('https');
 
-        $body = array_merge($data, $requestOptions->getBody());
+        $body = isset($data)
+            ? array_merge($data, $requestOptions->getBody())
+            : $data;
 
         $logParams = [
             'body' => $body,
@@ -277,10 +274,9 @@ final class ApiWrapper implements ApiWrapperInterface
         $protocolVersion = '1.1'
     ) {
         if (is_array($body)) {
-            // Send an empty body instead of "[]" in case there are
-            // no content/params to send
+            // Send an empty valid JSON object
             if (empty($body)) {
-                $body = '';
+                $body = '{}';
             } else {
                 $body = \json_encode($body, $this->jsonOptions);
                 if (JSON_ERROR_NONE !== json_last_error()) {

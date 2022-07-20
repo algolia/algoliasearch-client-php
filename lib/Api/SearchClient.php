@@ -133,7 +133,7 @@ class SearchClient
     public function addApiKey($apiKey, $requestOptions = [])
     {
         // verify the required parameter 'apiKey' is set
-        if ($apiKey === null) {
+        if (!isset($apiKey)) {
             throw new \InvalidArgumentException(
                 'Parameter `apiKey` is required when calling `addApiKey`.'
             );
@@ -142,11 +142,7 @@ class SearchClient
         $resourcePath = '/1/keys';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($apiKey)) {
-            $httpBody = $apiKey;
-        }
+        $httpBody = $apiKey;
 
         return $this->sendRequest(
             'POST',
@@ -175,19 +171,19 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `addOrUpdateObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `addOrUpdateObject`.'
             );
         }
         // verify the required parameter 'body' is set
-        if ($body === null) {
+        if (!isset($body)) {
             throw new \InvalidArgumentException(
                 'Parameter `body` is required when calling `addOrUpdateObject`.'
             );
@@ -196,7 +192,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $body;
 
         // path params
         if ($indexName !== null) {
@@ -214,10 +210,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($objectID),
                 $resourcePath
             );
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -244,7 +236,7 @@ class SearchClient
     public function appendSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null) {
+        if (!isset($source)) {
             throw new \InvalidArgumentException(
                 'Parameter `source` is required when calling `appendSource`.'
             );
@@ -253,11 +245,7 @@ class SearchClient
         $resourcePath = '/1/security/sources/append';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($source)) {
-            $httpBody = $source;
-        }
+        $httpBody = $source;
 
         return $this->sendRequest(
             'POST',
@@ -288,7 +276,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'xAlgoliaUserID' is set
-        if ($xAlgoliaUserID === null) {
+        if (!isset($xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
                 'Parameter `xAlgoliaUserID` is required when calling `assignUserId`.'
             );
@@ -300,7 +288,7 @@ class SearchClient
         }
 
         // verify the required parameter 'assignUserIdParams' is set
-        if ($assignUserIdParams === null) {
+        if (!isset($assignUserIdParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `assignUserIdParams` is required when calling `assignUserId`.'
             );
@@ -309,11 +297,8 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $assignUserIdParams;
 
-        if (isset($assignUserIdParams)) {
-            $httpBody = $assignUserIdParams;
-        }
         $headers['X-Algolia-User-ID'] = $xAlgoliaUserID;
 
         return $this->sendRequest(
@@ -342,13 +327,13 @@ class SearchClient
     public function batch($indexName, $batchWriteParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `batch`.'
             );
         }
         // verify the required parameter 'batchWriteParams' is set
-        if ($batchWriteParams === null) {
+        if (!isset($batchWriteParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `batchWriteParams` is required when calling `batch`.'
             );
@@ -357,7 +342,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $batchWriteParams;
 
         // path params
         if ($indexName !== null) {
@@ -366,10 +351,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($batchWriteParams)) {
-            $httpBody = $batchWriteParams;
         }
 
         return $this->sendRequest(
@@ -402,7 +383,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'xAlgoliaUserID' is set
-        if ($xAlgoliaUserID === null) {
+        if (!isset($xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
                 'Parameter `xAlgoliaUserID` is required when calling `batchAssignUserIds`.'
             );
@@ -414,7 +395,7 @@ class SearchClient
         }
 
         // verify the required parameter 'batchAssignUserIdsParams' is set
-        if ($batchAssignUserIdsParams === null) {
+        if (!isset($batchAssignUserIdsParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `batchAssignUserIdsParams` is required when calling `batchAssignUserIds`.'
             );
@@ -423,11 +404,8 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $batchAssignUserIdsParams;
 
-        if (isset($batchAssignUserIdsParams)) {
-            $httpBody = $batchAssignUserIdsParams;
-        }
         $headers['X-Algolia-User-ID'] = $xAlgoliaUserID;
 
         return $this->sendRequest(
@@ -460,13 +438,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
-        if ($dictionaryName === null) {
+        if (!isset($dictionaryName)) {
             throw new \InvalidArgumentException(
                 'Parameter `dictionaryName` is required when calling `batchDictionaryEntries`.'
             );
         }
         // verify the required parameter 'batchDictionaryEntriesParams' is set
-        if ($batchDictionaryEntriesParams === null) {
+        if (!isset($batchDictionaryEntriesParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `batchDictionaryEntriesParams` is required when calling `batchDictionaryEntries`.'
             );
@@ -475,7 +453,7 @@ class SearchClient
         $resourcePath = '/1/dictionaries/{dictionaryName}/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $batchDictionaryEntriesParams;
 
         // path params
         if ($dictionaryName !== null) {
@@ -484,10 +462,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($dictionaryName),
                 $resourcePath
             );
-        }
-
-        if (isset($batchDictionaryEntriesParams)) {
-            $httpBody = $batchDictionaryEntriesParams;
         }
 
         return $this->sendRequest(
@@ -520,7 +494,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `browse`.'
             );
@@ -529,7 +503,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/browse';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($browseRequest) ? $browseRequest : [];
 
         // path params
         if ($indexName !== null) {
@@ -538,10 +512,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($browseRequest)) {
-            $httpBody = $browseRequest;
         }
 
         return $this->sendRequest(
@@ -569,7 +539,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `clearAllSynonyms`.'
             );
@@ -578,7 +548,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/clear';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -614,7 +584,7 @@ class SearchClient
     public function clearObjects($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `clearObjects`.'
             );
@@ -623,7 +593,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/clear';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -659,7 +629,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `clearRules`.'
             );
@@ -668,7 +638,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/clear';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -705,7 +675,7 @@ class SearchClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -714,7 +684,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -746,7 +716,7 @@ class SearchClient
     public function deleteApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null) {
+        if (!isset($key)) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `deleteApiKey`.'
             );
@@ -755,7 +725,7 @@ class SearchClient
         $resourcePath = '/1/keys/{key}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($key !== null) {
@@ -791,13 +761,13 @@ class SearchClient
     public function deleteBy($indexName, $searchParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteBy`.'
             );
         }
         // verify the required parameter 'searchParams' is set
-        if ($searchParams === null) {
+        if (!isset($searchParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchParams` is required when calling `deleteBy`.'
             );
@@ -806,7 +776,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/deleteByQuery';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $searchParams;
 
         // path params
         if ($indexName !== null) {
@@ -815,10 +785,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchParams)) {
-            $httpBody = $searchParams;
         }
 
         return $this->sendRequest(
@@ -842,7 +808,7 @@ class SearchClient
     public function deleteIndex($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteIndex`.'
             );
@@ -851,7 +817,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -884,13 +850,13 @@ class SearchClient
     public function deleteObject($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteObject`.'
             );
@@ -899,7 +865,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -946,13 +912,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteRule`.'
             );
@@ -961,7 +927,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -1006,7 +972,7 @@ class SearchClient
     public function deleteSource($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null) {
+        if (!isset($source)) {
             throw new \InvalidArgumentException(
                 'Parameter `source` is required when calling `deleteSource`.'
             );
@@ -1015,7 +981,7 @@ class SearchClient
         $resourcePath = '/1/security/sources/{source}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($source !== null) {
@@ -1053,13 +1019,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `deleteSynonym`.'
             );
@@ -1068,7 +1034,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -1114,7 +1080,7 @@ class SearchClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -1123,7 +1089,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -1155,7 +1121,7 @@ class SearchClient
     public function getApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null) {
+        if (!isset($key)) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `getApiKey`.'
             );
@@ -1164,7 +1130,7 @@ class SearchClient
         $resourcePath = '/1/keys/{key}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($key !== null) {
@@ -1197,7 +1163,7 @@ class SearchClient
         $resourcePath = '/1/dictionaries/*/languages';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1221,7 +1187,7 @@ class SearchClient
         $resourcePath = '/1/dictionaries/*/settings';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1260,7 +1226,7 @@ class SearchClient
         $resourcePath = '/1/logs';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($offset !== null) {
             $queryParameters['offset'] = $offset;
@@ -1305,13 +1271,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getObject`.'
             );
@@ -1320,7 +1286,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($attributesToRetrieve !== null) {
             $queryParameters['attributesToRetrieve'] = $attributesToRetrieve;
@@ -1369,7 +1335,7 @@ class SearchClient
     public function getObjects($getObjectsParams, $requestOptions = [])
     {
         // verify the required parameter 'getObjectsParams' is set
-        if ($getObjectsParams === null) {
+        if (!isset($getObjectsParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `getObjectsParams` is required when calling `getObjects`.'
             );
@@ -1378,11 +1344,7 @@ class SearchClient
         $resourcePath = '/1/indexes/*/objects';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($getObjectsParams)) {
-            $httpBody = $getObjectsParams;
-        }
+        $httpBody = $getObjectsParams;
 
         return $this->sendRequest(
             'POST',
@@ -1407,13 +1369,13 @@ class SearchClient
     public function getRule($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getRule`.'
             );
@@ -1422,7 +1384,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -1463,7 +1425,7 @@ class SearchClient
     public function getSettings($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getSettings`.'
             );
@@ -1472,7 +1434,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/settings';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -1505,7 +1467,7 @@ class SearchClient
         $resourcePath = '/1/security/sources';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1529,13 +1491,13 @@ class SearchClient
     public function getSynonym($indexName, $objectID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `getSynonym`.'
             );
@@ -1544,7 +1506,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -1586,13 +1548,13 @@ class SearchClient
     public function getTask($indexName, $taskID, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getTask`.'
             );
         }
         // verify the required parameter 'taskID' is set
-        if ($taskID === null) {
+        if (!isset($taskID)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `getTask`.'
             );
@@ -1601,7 +1563,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/task/{taskID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -1643,7 +1605,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/top';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1666,7 +1628,7 @@ class SearchClient
     public function getUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
-        if ($userID === null) {
+        if (!isset($userID)) {
             throw new \InvalidArgumentException(
                 'Parameter `userID` is required when calling `getUserId`.'
             );
@@ -1680,7 +1642,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/{userID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($userID !== null) {
@@ -1716,7 +1678,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/pending';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($getClusters !== null) {
             $queryParameters['getClusters'] = $getClusters;
@@ -1744,7 +1706,7 @@ class SearchClient
         $resourcePath = '/1/keys';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1768,7 +1730,7 @@ class SearchClient
         $resourcePath = '/1/clusters';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -1793,7 +1755,7 @@ class SearchClient
         $resourcePath = '/1/indexes';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($page !== null) {
             $queryParameters['page'] = $page;
@@ -1826,7 +1788,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($page !== null) {
             $queryParameters['page'] = $page;
@@ -1861,7 +1823,7 @@ class SearchClient
     public function multipleBatch($batchParams, $requestOptions = [])
     {
         // verify the required parameter 'batchParams' is set
-        if ($batchParams === null) {
+        if (!isset($batchParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `batchParams` is required when calling `multipleBatch`.'
             );
@@ -1870,11 +1832,7 @@ class SearchClient
         $resourcePath = '/1/indexes/*/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($batchParams)) {
-            $httpBody = $batchParams;
-        }
+        $httpBody = $batchParams;
 
         return $this->sendRequest(
             'POST',
@@ -1907,13 +1865,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `operationIndex`.'
             );
         }
         // verify the required parameter 'operationIndexParams' is set
-        if ($operationIndexParams === null) {
+        if (!isset($operationIndexParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `operationIndexParams` is required when calling `operationIndex`.'
             );
@@ -1922,7 +1880,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/operation';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $operationIndexParams;
 
         // path params
         if ($indexName !== null) {
@@ -1931,10 +1889,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($operationIndexParams)) {
-            $httpBody = $operationIndexParams;
         }
 
         return $this->sendRequest(
@@ -1966,19 +1920,19 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `partialUpdateObject`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `partialUpdateObject`.'
             );
         }
         // verify the required parameter 'attributeOrBuiltInOperation' is set
-        if ($attributeOrBuiltInOperation === null) {
+        if (!isset($attributeOrBuiltInOperation)) {
             throw new \InvalidArgumentException(
                 'Parameter `attributeOrBuiltInOperation` is required when calling `partialUpdateObject`.'
             );
@@ -1987,7 +1941,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/{objectID}/partial';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $attributeOrBuiltInOperation;
 
         if ($createIfNotExists !== null) {
             $queryParameters['createIfNotExists'] = $createIfNotExists;
@@ -2009,10 +1963,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($objectID),
                 $resourcePath
             );
-        }
-
-        if (isset($attributeOrBuiltInOperation)) {
-            $httpBody = $attributeOrBuiltInOperation;
         }
 
         return $this->sendRequest(
@@ -2042,7 +1992,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -2051,7 +2001,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -2060,10 +2010,6 @@ class SearchClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -2093,7 +2039,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -2102,7 +2048,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -2111,10 +2057,6 @@ class SearchClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -2138,7 +2080,7 @@ class SearchClient
     public function removeUserId($userID, $requestOptions = [])
     {
         // verify the required parameter 'userID' is set
-        if ($userID === null) {
+        if (!isset($userID)) {
             throw new \InvalidArgumentException(
                 'Parameter `userID` is required when calling `removeUserId`.'
             );
@@ -2152,7 +2094,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/{userID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($userID !== null) {
@@ -2184,7 +2126,7 @@ class SearchClient
     public function replaceSources($source, $requestOptions = [])
     {
         // verify the required parameter 'source' is set
-        if ($source === null) {
+        if (!isset($source)) {
             throw new \InvalidArgumentException(
                 'Parameter `source` is required when calling `replaceSources`.'
             );
@@ -2193,11 +2135,7 @@ class SearchClient
         $resourcePath = '/1/security/sources';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($source)) {
-            $httpBody = $source;
-        }
+        $httpBody = $source;
 
         return $this->sendRequest(
             'PUT',
@@ -2220,7 +2158,7 @@ class SearchClient
     public function restoreApiKey($key, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null) {
+        if (!isset($key)) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `restoreApiKey`.'
             );
@@ -2229,7 +2167,7 @@ class SearchClient
         $resourcePath = '/1/keys/{key}/restore';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($key !== null) {
@@ -2262,13 +2200,13 @@ class SearchClient
     public function saveObject($indexName, $body, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveObject`.'
             );
         }
         // verify the required parameter 'body' is set
-        if ($body === null) {
+        if (!isset($body)) {
             throw new \InvalidArgumentException(
                 'Parameter `body` is required when calling `saveObject`.'
             );
@@ -2277,7 +2215,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $body;
 
         // path params
         if ($indexName !== null) {
@@ -2286,10 +2224,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -2330,19 +2264,19 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveRule`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `saveRule`.'
             );
         }
         // verify the required parameter 'rule' is set
-        if ($rule === null) {
+        if (!isset($rule)) {
             throw new \InvalidArgumentException(
                 'Parameter `rule` is required when calling `saveRule`.'
             );
@@ -2351,7 +2285,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $rule;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -2373,10 +2307,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($objectID),
                 $resourcePath
             );
-        }
-
-        if (isset($rule)) {
-            $httpBody = $rule;
         }
 
         return $this->sendRequest(
@@ -2408,13 +2338,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveRules`.'
             );
         }
         // verify the required parameter 'rule' is set
-        if ($rule === null) {
+        if (!isset($rule)) {
             throw new \InvalidArgumentException(
                 'Parameter `rule` is required when calling `saveRules`.'
             );
@@ -2423,7 +2353,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $rule;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -2440,10 +2370,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($rule)) {
-            $httpBody = $rule;
         }
 
         return $this->sendRequest(
@@ -2487,19 +2413,19 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveSynonym`.'
             );
         }
         // verify the required parameter 'objectID' is set
-        if ($objectID === null) {
+        if (!isset($objectID)) {
             throw new \InvalidArgumentException(
                 'Parameter `objectID` is required when calling `saveSynonym`.'
             );
         }
         // verify the required parameter 'synonymHit' is set
-        if ($synonymHit === null) {
+        if (!isset($synonymHit)) {
             throw new \InvalidArgumentException(
                 'Parameter `synonymHit` is required when calling `saveSynonym`.'
             );
@@ -2508,7 +2434,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/{objectID}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $synonymHit;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -2530,10 +2456,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($objectID),
                 $resourcePath
             );
-        }
-
-        if (isset($synonymHit)) {
-            $httpBody = $synonymHit;
         }
 
         return $this->sendRequest(
@@ -2565,13 +2487,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `saveSynonyms`.'
             );
         }
         // verify the required parameter 'synonymHit' is set
-        if ($synonymHit === null) {
+        if (!isset($synonymHit)) {
             throw new \InvalidArgumentException(
                 'Parameter `synonymHit` is required when calling `saveSynonyms`.'
             );
@@ -2580,7 +2502,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $synonymHit;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -2599,10 +2521,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($synonymHit)) {
-            $httpBody = $synonymHit;
         }
 
         return $this->sendRequest(
@@ -2631,7 +2549,7 @@ class SearchClient
     public function search($searchMethodParams, $requestOptions = [])
     {
         // verify the required parameter 'searchMethodParams' is set
-        if ($searchMethodParams === null) {
+        if (!isset($searchMethodParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchMethodParams` is required when calling `search`.'
             );
@@ -2640,11 +2558,7 @@ class SearchClient
         $resourcePath = '/1/indexes/*/queries';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($searchMethodParams)) {
-            $httpBody = $searchMethodParams;
-        }
+        $httpBody = $searchMethodParams;
 
         return $this->sendRequest(
             'POST',
@@ -2679,13 +2593,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionaryName' is set
-        if ($dictionaryName === null) {
+        if (!isset($dictionaryName)) {
             throw new \InvalidArgumentException(
                 'Parameter `dictionaryName` is required when calling `searchDictionaryEntries`.'
             );
         }
         // verify the required parameter 'searchDictionaryEntriesParams' is set
-        if ($searchDictionaryEntriesParams === null) {
+        if (!isset($searchDictionaryEntriesParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchDictionaryEntriesParams` is required when calling `searchDictionaryEntries`.'
             );
@@ -2694,7 +2608,7 @@ class SearchClient
         $resourcePath = '/1/dictionaries/{dictionaryName}/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $searchDictionaryEntriesParams;
 
         // path params
         if ($dictionaryName !== null) {
@@ -2703,10 +2617,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($dictionaryName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchDictionaryEntriesParams)) {
-            $httpBody = $searchDictionaryEntriesParams;
         }
 
         return $this->sendRequest(
@@ -2743,13 +2653,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchForFacetValues`.'
             );
         }
         // verify the required parameter 'facetName' is set
-        if ($facetName === null) {
+        if (!isset($facetName)) {
             throw new \InvalidArgumentException(
                 'Parameter `facetName` is required when calling `searchForFacetValues`.'
             );
@@ -2758,7 +2668,9 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/facets/{facetName}/query';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($searchForFacetValuesRequest)
+            ? $searchForFacetValuesRequest
+            : [];
 
         // path params
         if ($indexName !== null) {
@@ -2776,10 +2688,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($facetName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchForFacetValuesRequest)) {
-            $httpBody = $searchForFacetValuesRequest;
         }
 
         return $this->sendRequest(
@@ -2818,13 +2726,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchRules`.'
             );
         }
         // verify the required parameter 'searchRulesParams' is set
-        if ($searchRulesParams === null) {
+        if (!isset($searchRulesParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchRulesParams` is required when calling `searchRules`.'
             );
@@ -2833,7 +2741,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $searchRulesParams;
 
         // path params
         if ($indexName !== null) {
@@ -2842,10 +2750,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchRulesParams)) {
-            $httpBody = $searchRulesParams;
         }
 
         return $this->sendRequest(
@@ -2877,13 +2781,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchSingleIndex`.'
             );
         }
         // verify the required parameter 'searchParams' is set
-        if ($searchParams === null) {
+        if (!isset($searchParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchParams` is required when calling `searchSingleIndex`.'
             );
@@ -2892,7 +2796,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/query';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $searchParams;
 
         // path params
         if ($indexName !== null) {
@@ -2901,10 +2805,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchParams)) {
-            $httpBody = $searchParams;
         }
 
         return $this->sendRequest(
@@ -2943,7 +2843,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `searchSynonyms`.'
             );
@@ -2952,7 +2852,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($searchSynonymsParams) ? $searchSynonymsParams : [];
 
         if ($type !== null) {
             $queryParameters['type'] = $type;
@@ -2973,10 +2873,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($searchSynonymsParams)) {
-            $httpBody = $searchSynonymsParams;
         }
 
         return $this->sendRequest(
@@ -3008,7 +2904,7 @@ class SearchClient
     public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {
         // verify the required parameter 'searchUserIdsParams' is set
-        if ($searchUserIdsParams === null) {
+        if (!isset($searchUserIdsParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `searchUserIdsParams` is required when calling `searchUserIds`.'
             );
@@ -3017,11 +2913,7 @@ class SearchClient
         $resourcePath = '/1/clusters/mapping/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($searchUserIdsParams)) {
-            $httpBody = $searchUserIdsParams;
-        }
+        $httpBody = $searchUserIdsParams;
 
         return $this->sendRequest(
             'POST',
@@ -3051,7 +2943,7 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'dictionarySettingsParams' is set
-        if ($dictionarySettingsParams === null) {
+        if (!isset($dictionarySettingsParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `dictionarySettingsParams` is required when calling `setDictionarySettings`.'
             );
@@ -3060,11 +2952,7 @@ class SearchClient
         $resourcePath = '/1/dictionaries/*/settings';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($dictionarySettingsParams)) {
-            $httpBody = $dictionarySettingsParams;
-        }
+        $httpBody = $dictionarySettingsParams;
 
         return $this->sendRequest(
             'PUT',
@@ -3096,13 +2984,13 @@ class SearchClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `setSettings`.'
             );
         }
         // verify the required parameter 'indexSettings' is set
-        if ($indexSettings === null) {
+        if (!isset($indexSettings)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexSettings` is required when calling `setSettings`.'
             );
@@ -3111,7 +2999,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/settings';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $indexSettings;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;
@@ -3124,10 +3012,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($indexSettings)) {
-            $httpBody = $indexSettings;
         }
 
         return $this->sendRequest(
@@ -3163,13 +3047,13 @@ class SearchClient
     public function updateApiKey($key, $apiKey, $requestOptions = [])
     {
         // verify the required parameter 'key' is set
-        if ($key === null) {
+        if (!isset($key)) {
             throw new \InvalidArgumentException(
                 'Parameter `key` is required when calling `updateApiKey`.'
             );
         }
         // verify the required parameter 'apiKey' is set
-        if ($apiKey === null) {
+        if (!isset($apiKey)) {
             throw new \InvalidArgumentException(
                 'Parameter `apiKey` is required when calling `updateApiKey`.'
             );
@@ -3178,7 +3062,7 @@ class SearchClient
         $resourcePath = '/1/keys/{key}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $apiKey;
 
         // path params
         if ($key !== null) {
@@ -3187,10 +3071,6 @@ class SearchClient
                 ObjectSerializer::toPathValue($key),
                 $resourcePath
             );
-        }
-
-        if (isset($apiKey)) {
-            $httpBody = $apiKey;
         }
 
         return $this->sendRequest(

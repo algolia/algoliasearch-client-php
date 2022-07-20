@@ -134,7 +134,7 @@ class PersonalizationClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -143,7 +143,7 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -175,7 +175,7 @@ class PersonalizationClient
     public function deleteUserProfile($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
-        if ($userToken === null) {
+        if (!isset($userToken)) {
             throw new \InvalidArgumentException(
                 'Parameter `userToken` is required when calling `deleteUserProfile`.'
             );
@@ -184,7 +184,7 @@ class PersonalizationClient
         $resourcePath = '/1/profiles/{userToken}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($userToken !== null) {
@@ -217,7 +217,7 @@ class PersonalizationClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -226,7 +226,7 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -259,7 +259,7 @@ class PersonalizationClient
         $resourcePath = '/1/strategies/personalization';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -282,7 +282,7 @@ class PersonalizationClient
     public function getUserTokenProfile($userToken, $requestOptions = [])
     {
         // verify the required parameter 'userToken' is set
-        if ($userToken === null) {
+        if (!isset($userToken)) {
             throw new \InvalidArgumentException(
                 'Parameter `userToken` is required when calling `getUserTokenProfile`.'
             );
@@ -291,7 +291,7 @@ class PersonalizationClient
         $resourcePath = '/1/profiles/personalization/{userToken}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($userToken !== null) {
@@ -329,7 +329,7 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -338,7 +338,7 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -347,10 +347,6 @@ class PersonalizationClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -380,7 +376,7 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -389,7 +385,7 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -398,10 +394,6 @@ class PersonalizationClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -433,7 +425,7 @@ class PersonalizationClient
         $requestOptions = []
     ) {
         // verify the required parameter 'personalizationStrategyParams' is set
-        if ($personalizationStrategyParams === null) {
+        if (!isset($personalizationStrategyParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `personalizationStrategyParams` is required when calling `setPersonalizationStrategy`.'
             );
@@ -442,11 +434,7 @@ class PersonalizationClient
         $resourcePath = '/1/strategies/personalization';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($personalizationStrategyParams)) {
-            $httpBody = $personalizationStrategyParams;
-        }
+        $httpBody = $personalizationStrategyParams;
 
         return $this->sendRequest(
             'POST',

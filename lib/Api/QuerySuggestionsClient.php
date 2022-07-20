@@ -138,7 +138,7 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'querySuggestionsIndexWithIndexParam' is set
-        if ($querySuggestionsIndexWithIndexParam === null) {
+        if (!isset($querySuggestionsIndexWithIndexParam)) {
             throw new \InvalidArgumentException(
                 'Parameter `querySuggestionsIndexWithIndexParam` is required when calling `createConfig`.'
             );
@@ -147,11 +147,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($querySuggestionsIndexWithIndexParam)) {
-            $httpBody = $querySuggestionsIndexWithIndexParam;
-        }
+        $httpBody = $querySuggestionsIndexWithIndexParam;
 
         return $this->sendRequest(
             'POST',
@@ -175,7 +171,7 @@ class QuerySuggestionsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -184,7 +180,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -216,7 +212,7 @@ class QuerySuggestionsClient
     public function deleteConfig($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `deleteConfig`.'
             );
@@ -225,7 +221,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -258,7 +254,7 @@ class QuerySuggestionsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -267,7 +263,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -300,7 +296,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         return $this->sendRequest(
             'GET',
@@ -323,7 +319,7 @@ class QuerySuggestionsClient
     public function getConfig($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getConfig`.'
             );
@@ -332,7 +328,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -364,7 +360,7 @@ class QuerySuggestionsClient
     public function getConfigStatus($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getConfigStatus`.'
             );
@@ -373,7 +369,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs/{indexName}/status';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -405,7 +401,7 @@ class QuerySuggestionsClient
     public function getLogFile($indexName, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `getLogFile`.'
             );
@@ -414,7 +410,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/logs/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($indexName !== null) {
@@ -452,7 +448,7 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -461,7 +457,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -470,10 +466,6 @@ class QuerySuggestionsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -503,7 +495,7 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -512,7 +504,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -521,10 +513,6 @@ class QuerySuggestionsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -558,13 +546,13 @@ class QuerySuggestionsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
-        if ($indexName === null) {
+        if (!isset($indexName)) {
             throw new \InvalidArgumentException(
                 'Parameter `indexName` is required when calling `updateConfig`.'
             );
         }
         // verify the required parameter 'querySuggestionsIndexParam' is set
-        if ($querySuggestionsIndexParam === null) {
+        if (!isset($querySuggestionsIndexParam)) {
             throw new \InvalidArgumentException(
                 'Parameter `querySuggestionsIndexParam` is required when calling `updateConfig`.'
             );
@@ -573,7 +561,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = $querySuggestionsIndexParam;
 
         // path params
         if ($indexName !== null) {
@@ -582,10 +570,6 @@ class QuerySuggestionsClient
                 ObjectSerializer::toPathValue($indexName),
                 $resourcePath
             );
-        }
-
-        if (isset($querySuggestionsIndexParam)) {
-            $httpBody = $querySuggestionsIndexParam;
         }
 
         return $this->sendRequest(

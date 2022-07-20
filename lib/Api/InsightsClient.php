@@ -133,7 +133,7 @@ class InsightsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -142,7 +142,7 @@ class InsightsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -175,7 +175,7 @@ class InsightsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -184,7 +184,7 @@ class InsightsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -222,7 +222,7 @@ class InsightsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -231,7 +231,7 @@ class InsightsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -240,10 +240,6 @@ class InsightsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -271,7 +267,7 @@ class InsightsClient
     public function pushEvents($insightEvents, $requestOptions = [])
     {
         // verify the required parameter 'insightEvents' is set
-        if ($insightEvents === null) {
+        if (!isset($insightEvents)) {
             throw new \InvalidArgumentException(
                 'Parameter `insightEvents` is required when calling `pushEvents`.'
             );
@@ -280,11 +276,7 @@ class InsightsClient
         $resourcePath = '/1/events';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($insightEvents)) {
-            $httpBody = $insightEvents;
-        }
+        $httpBody = $insightEvents;
 
         return $this->sendRequest(
             'POST',
@@ -313,7 +305,7 @@ class InsightsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -322,7 +314,7 @@ class InsightsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -331,10 +323,6 @@ class InsightsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(

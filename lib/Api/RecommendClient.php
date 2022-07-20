@@ -122,7 +122,7 @@ class RecommendClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -131,7 +131,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -164,7 +164,7 @@ class RecommendClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -173,7 +173,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -211,7 +211,7 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'getRecommendationsParams' is set
-        if ($getRecommendationsParams === null) {
+        if (!isset($getRecommendationsParams)) {
             throw new \InvalidArgumentException(
                 'Parameter `getRecommendationsParams` is required when calling `getRecommendations`.'
             );
@@ -220,11 +220,7 @@ class RecommendClient
         $resourcePath = '/1/indexes/*/recommendations';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($getRecommendationsParams)) {
-            $httpBody = $getRecommendationsParams;
-        }
+        $httpBody = $getRecommendationsParams;
 
         return $this->sendRequest(
             'POST',
@@ -254,7 +250,7 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -263,7 +259,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -272,10 +268,6 @@ class RecommendClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -305,7 +297,7 @@ class RecommendClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -314,7 +306,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -323,10 +315,6 @@ class RecommendClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(

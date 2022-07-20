@@ -139,7 +139,7 @@ class AbtestingClient
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
         // verify the required parameter 'addABTestsRequest' is set
-        if ($addABTestsRequest === null) {
+        if (!isset($addABTestsRequest)) {
             throw new \InvalidArgumentException(
                 'Parameter `addABTestsRequest` is required when calling `addABTests`.'
             );
@@ -148,11 +148,7 @@ class AbtestingClient
         $resourcePath = '/2/abtests';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
-
-        if (isset($addABTestsRequest)) {
-            $httpBody = $addABTestsRequest;
-        }
+        $httpBody = $addABTestsRequest;
 
         return $this->sendRequest(
             'POST',
@@ -176,7 +172,7 @@ class AbtestingClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -185,7 +181,7 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -217,7 +213,7 @@ class AbtestingClient
     public function deleteABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null) {
+        if (!isset($id)) {
             throw new \InvalidArgumentException(
                 'Parameter `id` is required when calling `deleteABTest`.'
             );
@@ -226,7 +222,7 @@ class AbtestingClient
         $resourcePath = '/2/abtests/{id}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($id !== null) {
@@ -259,7 +255,7 @@ class AbtestingClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -268,7 +264,7 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -300,7 +296,7 @@ class AbtestingClient
     public function getABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null) {
+        if (!isset($id)) {
             throw new \InvalidArgumentException(
                 'Parameter `id` is required when calling `getABTest`.'
             );
@@ -309,7 +305,7 @@ class AbtestingClient
         $resourcePath = '/2/abtests/{id}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($id !== null) {
@@ -347,7 +343,7 @@ class AbtestingClient
         $resourcePath = '/2/abtests';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($offset !== null) {
             $queryParameters['offset'] = $offset;
@@ -384,7 +380,7 @@ class AbtestingClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -393,7 +389,7 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -402,10 +398,6 @@ class AbtestingClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -435,7 +427,7 @@ class AbtestingClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -444,7 +436,7 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -453,10 +445,6 @@ class AbtestingClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -480,7 +468,7 @@ class AbtestingClient
     public function stopABTest($id, $requestOptions = [])
     {
         // verify the required parameter 'id' is set
-        if ($id === null) {
+        if (!isset($id)) {
             throw new \InvalidArgumentException(
                 'Parameter `id` is required when calling `stopABTest`.'
             );
@@ -489,7 +477,7 @@ class AbtestingClient
         $resourcePath = '/2/abtests/{id}/stop';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         // path params
         if ($id !== null) {

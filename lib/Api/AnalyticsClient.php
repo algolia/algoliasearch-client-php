@@ -134,7 +134,7 @@ class AnalyticsClient
     public function del($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `del`.'
             );
@@ -143,7 +143,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -176,7 +176,7 @@ class AnalyticsClient
     public function get($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `get`.'
             );
@@ -185,7 +185,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -225,7 +225,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getAverageClickPosition`.'
             );
@@ -257,7 +257,7 @@ class AnalyticsClient
         $resourcePath = '/2/clicks/averageClickPosition';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -304,7 +304,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickPositions`.'
             );
@@ -336,7 +336,7 @@ class AnalyticsClient
         $resourcePath = '/2/clicks/positions';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -383,7 +383,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickThroughRate`.'
             );
@@ -415,7 +415,7 @@ class AnalyticsClient
         $resourcePath = '/2/clicks/clickThroughRate';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -462,7 +462,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getConversationRate`.'
             );
@@ -494,7 +494,7 @@ class AnalyticsClient
         $resourcePath = '/2/conversions/conversionRate';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -541,7 +541,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoClickRate`.'
             );
@@ -573,7 +573,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches/noClickRate';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -620,7 +620,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoResultsRate`.'
             );
@@ -652,7 +652,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches/noResultRate';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -699,7 +699,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesCount`.'
             );
@@ -731,7 +731,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches/count';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -782,7 +782,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
@@ -814,7 +814,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches/noClicks';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -873,7 +873,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
@@ -905,7 +905,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches/noResults';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -952,7 +952,7 @@ class AnalyticsClient
     public function getStatus($index, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getStatus`.'
             );
@@ -961,7 +961,7 @@ class AnalyticsClient
         $resourcePath = '/2/status';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1000,7 +1000,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopCountries`.'
             );
@@ -1032,7 +1032,7 @@ class AnalyticsClient
         $resourcePath = '/2/countries';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1093,7 +1093,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
@@ -1125,7 +1125,7 @@ class AnalyticsClient
         $resourcePath = '/2/filters';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1192,13 +1192,13 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'attribute' is set
-        if ($attribute === null) {
+        if (!isset($attribute)) {
             throw new \InvalidArgumentException(
                 'Parameter `attribute` is required when calling `getTopFilterForAttribute`.'
             );
         }
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
@@ -1230,7 +1230,7 @@ class AnalyticsClient
         $resourcePath = '/2/filters/{attribute}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1304,7 +1304,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
@@ -1336,7 +1336,7 @@ class AnalyticsClient
         $resourcePath = '/2/filters/noResults';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1403,7 +1403,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopHits`.'
             );
@@ -1435,7 +1435,7 @@ class AnalyticsClient
         $resourcePath = '/2/hits';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1508,7 +1508,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopSearches`.'
             );
@@ -1540,7 +1540,7 @@ class AnalyticsClient
         $resourcePath = '/2/searches';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1607,7 +1607,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'index' is set
-        if ($index === null) {
+        if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getUsersCount`.'
             );
@@ -1639,7 +1639,7 @@ class AnalyticsClient
         $resourcePath = '/2/users/count';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = null;
 
         if ($index !== null) {
             $queryParameters['index'] = $index;
@@ -1684,7 +1684,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `post`.'
             );
@@ -1693,7 +1693,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -1702,10 +1702,6 @@ class AnalyticsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(
@@ -1735,7 +1731,7 @@ class AnalyticsClient
         $requestOptions = []
     ) {
         // verify the required parameter 'path' is set
-        if ($path === null) {
+        if (!isset($path)) {
             throw new \InvalidArgumentException(
                 'Parameter `path` is required when calling `put`.'
             );
@@ -1744,7 +1740,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = [];
+        $httpBody = isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -1753,10 +1749,6 @@ class AnalyticsClient
         // path params
         if ($path !== null) {
             $resourcePath = str_replace('{path}', $path, $resourcePath);
-        }
-
-        if (isset($body)) {
-            $httpBody = $body;
         }
 
         return $this->sendRequest(

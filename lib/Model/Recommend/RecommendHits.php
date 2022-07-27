@@ -119,6 +119,13 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['hits']) ||
+            $this->container['hits'] === null
+        ) {
+            $invalidProperties[] = "'hits' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -136,7 +143,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets hits
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]
      */
     public function getHits()
     {
@@ -146,7 +153,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]|null $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[] $hits hits
      *
      * @return self
      */

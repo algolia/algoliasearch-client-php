@@ -119,6 +119,13 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['hits']) ||
+            $this->container['hits'] === null
+        ) {
+            $invalidProperties[] = "'hits' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -136,7 +143,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets hits
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
      */
     public function getHits()
     {
@@ -146,7 +153,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[]|null $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
      *
      * @return self
      */

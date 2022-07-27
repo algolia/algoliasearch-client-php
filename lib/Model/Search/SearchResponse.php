@@ -28,7 +28,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'exhaustiveFacetsCount' => 'bool',
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
-        'facets' => 'array<string,array<string,string>>',
+        'facets' => 'array<string,array<string,int>>',
         'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>',
         'hitsPerPage' => 'int',
         'index' => 'string',
@@ -418,7 +418,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestVariantID
      *
-     * @param int|null $abTestVariantID if a search encounters an index that is being A/B tested, abTestVariantID reports the variant ID of the index used
+     * @param int|null $abTestVariantID if a search encounters an index that is being A/B tested, abTestVariantID reports the variant ID of the index used (starting at 1)
      *
      * @return self
      */
@@ -564,7 +564,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets facets
      *
-     * @return array<string,array<string,string>>|null
+     * @return array<string,array<string,int>>|null
      */
     public function getFacets()
     {
@@ -574,7 +574,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facets
      *
-     * @param array<string,array<string,string>>|null $facets a mapping of each facet name to the corresponding facet counts
+     * @param array<string,array<string,int>>|null $facets a mapping of each facet name to the corresponding facet counts
      *
      * @return self
      */

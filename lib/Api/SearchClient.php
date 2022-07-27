@@ -2767,7 +2767,7 @@ class SearchClient
      * Search in a single index.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $searchParams searchParams (required)
+     * @param array $searchParams searchParams (optional)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
      *
@@ -2777,7 +2777,7 @@ class SearchClient
      */
     public function searchSingleIndex(
         $indexName,
-        $searchParams,
+        $searchParams = null,
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
@@ -2786,17 +2786,11 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchSingleIndex`.'
             );
         }
-        // verify the required parameter 'searchParams' is set
-        if (!isset($searchParams)) {
-            throw new \InvalidArgumentException(
-                'Parameter `searchParams` is required when calling `searchSingleIndex`.'
-            );
-        }
 
         $resourcePath = '/1/indexes/{indexName}/query';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $searchParams;
+        $httpBody = isset($searchParams) ? $searchParams : [];
 
         // path params
         if ($indexName !== null) {

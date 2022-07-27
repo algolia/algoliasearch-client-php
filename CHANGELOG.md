@@ -1,3 +1,7 @@
+## [4.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.6...4.0.0-alpha.7)
+
+- [6bdc94f5](https://github.com/algolia/api-clients-automation/commit/6bdc94f5) fix(specs): make `hits` required, `facets` count as an integer, `searchParams` as optional ([#868](https://github.com/algolia/api-clients-automation/pull/868)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.6](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.5...4.0.0-alpha.6)
 
 - [a4346a72](https://github.com/algolia/api-clients-automation/commit/a4346a72) fix(clients): make POST body related to the endpoint, assert body in tests ([#849](https://github.com/algolia/api-clients-automation/pull/849)) by [@shortcuts](https://github.com/shortcuts/)

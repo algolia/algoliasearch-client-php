@@ -1,3 +1,7 @@
+## [4.0.0-alpha.8](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.7...4.0.0-alpha.8)
+
+- [95ba0016](https://github.com/algolia/api-clients-automation/commit/95ba0016) fix(specs): `rules` and `objects` parameters/responses ([#876](https://github.com/algolia/api-clients-automation/pull/876)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.7](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.6...4.0.0-alpha.7)
 
 - [6bdc94f5](https://github.com/algolia/api-clients-automation/commit/6bdc94f5) fix(specs): make `hits` required, `facets` count as an integer, `searchParams` as optional ([#868](https://github.com/algolia/api-clients-automation/pull/868)) by [@shortcuts](https://github.com/shortcuts/)

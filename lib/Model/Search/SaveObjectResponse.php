@@ -133,6 +133,19 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
+        ) {
+            $invalidProperties[] = "'createdAt' can't be null";
+        }
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
+            $invalidProperties[] = "'taskID' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -150,7 +163,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets createdAt
      *
-     * @return string|null
+     * @return string
      */
     public function getCreatedAt()
     {
@@ -160,7 +173,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets createdAt
      *
-     * @param string|null $createdAt createdAt
+     * @param string $createdAt createdAt
      *
      * @return self
      */
@@ -174,7 +187,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets taskID
      *
-     * @return int|null
+     * @return int
      */
     public function getTaskID()
     {
@@ -184,7 +197,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int $taskID taskID of the task to wait for
      *
      * @return self
      */

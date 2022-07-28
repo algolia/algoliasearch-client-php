@@ -23,7 +23,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleBatchOperation[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]',
     ];
 
     /**
@@ -138,7 +138,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchOperation[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]|null
      */
     public function getRequests()
     {
@@ -148,7 +148,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchOperation[]|null $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]|null $requests requests
      *
      * @return self
      */

@@ -5,12 +5,14 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BatchOperation Class Doc Comment
+ * GetObjectsRequest Class Doc Comment
  *
  * @category Class
+ * @description getObjects operation on an index.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,8 +23,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * @var string[]
      */
     protected static $modelTypes = [
-        'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
-        'body' => 'object',
+        'attributesToRetrieve' => 'string[]',
+        'objectID' => 'string',
+        'indexName' => 'string',
     ];
 
     /**
@@ -31,8 +34,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * @var string[]
      */
     protected static $modelFormats = [
-        'action' => null,
-        'body' => null,
+        'attributesToRetrieve' => null,
+        'objectID' => null,
+        'indexName' => null,
     ];
 
     /**
@@ -61,8 +65,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * @var string[]
      */
     protected static $setters = [
-        'action' => 'setAction',
-        'body' => 'setBody',
+        'attributesToRetrieve' => 'setAttributesToRetrieve',
+        'objectID' => 'setObjectID',
+        'indexName' => 'setIndexName',
     ];
 
     /**
@@ -71,8 +76,9 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * @var string[]
      */
     protected static $getters = [
-        'action' => 'getAction',
-        'body' => 'getBody',
+        'attributesToRetrieve' => 'getAttributesToRetrieve',
+        'objectID' => 'getObjectID',
+        'indexName' => 'getIndexName',
     ];
 
     /**
@@ -109,11 +115,15 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['action'])) {
-            $this->container['action'] = $data['action'];
+        if (isset($data['attributesToRetrieve'])) {
+            $this->container['attributesToRetrieve'] =
+                $data['attributesToRetrieve'];
         }
-        if (isset($data['body'])) {
-            $this->container['body'] = $data['body'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
+        }
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
     }
 
@@ -125,6 +135,19 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (
+            !isset($this->container['objectID']) ||
+            $this->container['objectID'] === null
+        ) {
+            $invalidProperties[] = "'objectID' can't be null";
+        }
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
+            $invalidProperties[] = "'indexName' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -141,49 +164,73 @@ class BatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets action
+     * Gets attributesToRetrieve
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
+     * @return string[]|null
      */
-    public function getAction()
+    public function getAttributesToRetrieve()
     {
-        return $this->container['action'] ?? null;
+        return $this->container['attributesToRetrieve'] ?? null;
     }
 
     /**
-     * Sets action
+     * Sets attributesToRetrieve
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
+     * @param string[]|null $attributesToRetrieve List of attributes to retrieve. By default, all retrievable attributes are returned.
      *
      * @return self
      */
-    public function setAction($action)
+    public function setAttributesToRetrieve($attributesToRetrieve)
     {
-        $this->container['action'] = $action;
+        $this->container['attributesToRetrieve'] = $attributesToRetrieve;
 
         return $this;
     }
 
     /**
-     * Gets body
+     * Gets objectID
      *
-     * @return object|null
+     * @return string
      */
-    public function getBody()
+    public function getObjectID()
     {
-        return $this->container['body'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets body
+     * Sets objectID
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
+     * @param string $objectID ID of the object within that index
      *
      * @return self
      */
-    public function setBody($body)
+    public function setObjectID($objectID)
     {
-        $this->container['body'] = $body;
+        $this->container['objectID'] = $objectID;
+
+        return $this;
+    }
+
+    /**
+     * Gets indexName
+     *
+     * @return string
+     */
+    public function getIndexName()
+    {
+        return $this->container['indexName'] ?? null;
+    }
+
+    /**
+     * Sets indexName
+     *
+     * @param string $indexName name of the index containing the object
+     *
+     * @return self
+     */
+    public function setIndexName($indexName)
+    {
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }

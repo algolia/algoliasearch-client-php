@@ -5,12 +5,14 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleBatchOperation Class Doc Comment
+ * Distinct Class Doc Comment
  *
  * @category Class
+ * @description Enables de-duplication or grouping of results.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class Distinct extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -20,22 +22,14 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @var string[]
      */
-    protected static $modelTypes = [
-        'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
-        'body' => 'object',
-        'indexName' => 'string',
-    ];
+    protected static $modelTypes = [];
 
     /**
      * Array of property to format mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $modelFormats = [
-        'action' => null,
-        'body' => null,
-        'indexName' => null,
-    ];
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -62,22 +56,14 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @var string[]
      */
-    protected static $setters = [
-        'action' => 'setAction',
-        'body' => 'setBody',
-        'indexName' => 'setIndexName',
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-        'action' => 'getAction',
-        'body' => 'getBody',
-        'indexName' => 'getIndexName',
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -113,15 +99,6 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['action'])) {
-            $this->container['action'] = $data['action'];
-        }
-        if (isset($data['body'])) {
-            $this->container['body'] = $data['body'];
-        }
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
-        }
     }
 
     /**
@@ -147,77 +124,6 @@ class MultipleBatchOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         return count($this->listInvalidProperties()) === 0;
     }
 
-    /**
-     * Gets action
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
-     */
-    public function getAction()
-    {
-        return $this->container['action'] ?? null;
-    }
-
-    /**
-     * Sets action
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
-     *
-     * @return self
-     */
-    public function setAction($action)
-    {
-        $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets body
-     *
-     * @return object|null
-     */
-    public function getBody()
-    {
-        return $this->container['body'] ?? null;
-    }
-
-    /**
-     * Sets body
-     *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
-     *
-     * @return self
-     */
-    public function setBody($body)
-    {
-        $this->container['body'] = $body;
-
-        return $this;
-    }
-
-    /**
-     * Gets indexName
-     *
-     * @return string|null
-     */
-    public function getIndexName()
-    {
-        return $this->container['indexName'] ?? null;
-    }
-
-    /**
-     * Sets indexName
-     *
-     * @param string|null $indexName index to target for this operation
-     *
-     * @return self
-     */
-    public function setIndexName($indexName)
-    {
-        $this->container['indexName'] = $indexName;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

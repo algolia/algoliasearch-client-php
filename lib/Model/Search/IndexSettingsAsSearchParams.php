@@ -55,7 +55,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
-        'distinct' => 'int',
+        'distinct' => '\Algolia\AlgoliaSearch\Model\Search\Distinct',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
@@ -427,22 +427,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            isset($this->container['distinct']) &&
-            $this->container['distinct'] > 4
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'distinct', must be smaller than or equal to 4.";
-        }
-
-        if (
-            isset($this->container['distinct']) &&
-            $this->container['distinct'] < 0
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'distinct', must be bigger than or equal to 0.";
-        }
 
         if (
             isset($this->container['minProximity']) &&
@@ -1316,7 +1300,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets distinct
      *
-     * @return int|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Distinct|null
      */
     public function getDistinct()
     {
@@ -1326,23 +1310,12 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets distinct
      *
-     * @param int|null $distinct enables de-duplication or grouping of results
+     * @param \Algolia\AlgoliaSearch\Model\Search\Distinct|null $distinct distinct
      *
      * @return self
      */
     public function setDistinct($distinct)
     {
-        if (!is_null($distinct) && $distinct > 4) {
-            throw new \InvalidArgumentException(
-                'invalid value for $distinct when calling IndexSettingsAsSearchParams., must be smaller than or equal to 4.'
-            );
-        }
-        if (!is_null($distinct) && $distinct < 0) {
-            throw new \InvalidArgumentException(
-                'invalid value for $distinct when calling IndexSettingsAsSearchParams., must be bigger than or equal to 0.'
-            );
-        }
-
         $this->container['distinct'] = $distinct;
 
         return $this;

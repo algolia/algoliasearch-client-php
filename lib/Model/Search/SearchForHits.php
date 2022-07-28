@@ -90,7 +90,7 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
-        'distinct' => 'int',
+        'distinct' => '\Algolia\AlgoliaSearch\Model\Search\Distinct',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
@@ -715,22 +715,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         ) {
             $invalidProperties[] =
                 "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
-        }
-
-        if (
-            isset($this->container['distinct']) &&
-            $this->container['distinct'] > 4
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'distinct', must be smaller than or equal to 4.";
-        }
-
-        if (
-            isset($this->container['distinct']) &&
-            $this->container['distinct'] < 0
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'distinct', must be bigger than or equal to 0.";
         }
 
         if (
@@ -2469,7 +2453,7 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets distinct
      *
-     * @return int|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Distinct|null
      */
     public function getDistinct()
     {
@@ -2479,23 +2463,12 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets distinct
      *
-     * @param int|null $distinct enables de-duplication or grouping of results
+     * @param \Algolia\AlgoliaSearch\Model\Search\Distinct|null $distinct distinct
      *
      * @return self
      */
     public function setDistinct($distinct)
     {
-        if (!is_null($distinct) && $distinct > 4) {
-            throw new \InvalidArgumentException(
-                'invalid value for $distinct when calling SearchForHits., must be smaller than or equal to 4.'
-            );
-        }
-        if (!is_null($distinct) && $distinct < 0) {
-            throw new \InvalidArgumentException(
-                'invalid value for $distinct when calling SearchForHits., must be bigger than or equal to 0.'
-            );
-        }
-
         $this->container['distinct'] = $distinct;
 
         return $this;

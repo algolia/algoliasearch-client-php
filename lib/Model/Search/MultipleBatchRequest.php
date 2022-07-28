@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ListIndicesResponse Class Doc Comment
+ * MultipleBatchRequest Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,8 +21,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'items' => '\Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]',
-        'nbPages' => 'int',
+        'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
+        'body' => 'object',
+        'indexName' => 'string',
     ];
 
     /**
@@ -31,8 +32,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelFormats = [
-        'items' => null,
-        'nbPages' => null,
+        'action' => null,
+        'body' => null,
+        'indexName' => null,
     ];
 
     /**
@@ -61,8 +63,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'items' => 'setItems',
-        'nbPages' => 'setNbPages',
+        'action' => 'setAction',
+        'body' => 'setBody',
+        'indexName' => 'setIndexName',
     ];
 
     /**
@@ -71,8 +74,9 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'items' => 'getItems',
-        'nbPages' => 'getNbPages',
+        'action' => 'getAction',
+        'body' => 'getBody',
+        'indexName' => 'getIndexName',
     ];
 
     /**
@@ -109,11 +113,14 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['items'])) {
-            $this->container['items'] = $data['items'];
+        if (isset($data['action'])) {
+            $this->container['action'] = $data['action'];
         }
-        if (isset($data['nbPages'])) {
-            $this->container['nbPages'] = $data['nbPages'];
+        if (isset($data['body'])) {
+            $this->container['body'] = $data['body'];
+        }
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
     }
 
@@ -125,13 +132,6 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['items']) ||
-            $this->container['items'] === null
-        ) {
-            $invalidProperties[] = "'items' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -148,49 +148,73 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets items
+     * Gets action
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
      */
-    public function getItems()
+    public function getAction()
     {
-        return $this->container['items'] ?? null;
+        return $this->container['action'] ?? null;
     }
 
     /**
-     * Sets items
+     * Sets action
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items list of the fetched indices
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
      *
      * @return self
      */
-    public function setItems($items)
+    public function setAction($action)
     {
-        $this->container['items'] = $items;
+        $this->container['action'] = $action;
 
         return $this;
     }
 
     /**
-     * Gets nbPages
+     * Gets body
      *
-     * @return int|null
+     * @return object|null
      */
-    public function getNbPages()
+    public function getBody()
     {
-        return $this->container['nbPages'] ?? null;
+        return $this->container['body'] ?? null;
     }
 
     /**
-     * Sets nbPages
+     * Sets body
      *
-     * @param int|null $nbPages number of pages
+     * @param object|null $body arguments to the operation (depends on the type of the operation)
      *
      * @return self
      */
-    public function setNbPages($nbPages)
+    public function setBody($body)
     {
-        $this->container['nbPages'] = $nbPages;
+        $this->container['body'] = $body;
+
+        return $this;
+    }
+
+    /**
+     * Gets indexName
+     *
+     * @return string|null
+     */
+    public function getIndexName()
+    {
+        return $this->container['indexName'] ?? null;
+    }
+
+    /**
+     * Sets indexName
+     *
+     * @param string|null $indexName index to target for this operation
+     *
+     * @return self
+     */
+    public function setIndexName($indexName)
+    {
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }

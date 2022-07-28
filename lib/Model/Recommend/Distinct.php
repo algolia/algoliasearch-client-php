@@ -2,15 +2,17 @@
 
 // This file is generated, manual changes will be lost - read more on https://github.com/algolia/api-clients-automation.
 
-namespace Algolia\AlgoliaSearch\Model\Search;
+namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ListIndicesResponse Class Doc Comment
+ * Distinct Class Doc Comment
  *
  * @category Class
+ * @description Enables de-duplication or grouping of results.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class Distinct extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -20,20 +22,14 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @var string[]
      */
-    protected static $modelTypes = [
-        'items' => '\Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]',
-        'nbPages' => 'int',
-    ];
+    protected static $modelTypes = [];
 
     /**
      * Array of property to format mappings. Used for (de)serialization
      *
      * @var string[]
      */
-    protected static $modelFormats = [
-        'items' => null,
-        'nbPages' => null,
-    ];
+    protected static $modelFormats = [];
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -60,20 +56,14 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @var string[]
      */
-    protected static $setters = [
-        'items' => 'setItems',
-        'nbPages' => 'setNbPages',
-    ];
+    protected static $setters = [];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [
-        'items' => 'getItems',
-        'nbPages' => 'getNbPages',
-    ];
+    protected static $getters = [];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -109,12 +99,6 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['items'])) {
-            $this->container['items'] = $data['items'];
-        }
-        if (isset($data['nbPages'])) {
-            $this->container['nbPages'] = $data['nbPages'];
-        }
     }
 
     /**
@@ -125,13 +109,6 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['items']) ||
-            $this->container['items'] === null
-        ) {
-            $invalidProperties[] = "'items' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -147,53 +124,6 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         return count($this->listInvalidProperties()) === 0;
     }
 
-    /**
-     * Gets items
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]
-     */
-    public function getItems()
-    {
-        return $this->container['items'] ?? null;
-    }
-
-    /**
-     * Sets items
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items list of the fetched indices
-     *
-     * @return self
-     */
-    public function setItems($items)
-    {
-        $this->container['items'] = $items;
-
-        return $this;
-    }
-
-    /**
-     * Gets nbPages
-     *
-     * @return int|null
-     */
-    public function getNbPages()
-    {
-        return $this->container['nbPages'] ?? null;
-    }
-
-    /**
-     * Sets nbPages
-     *
-     * @param int|null $nbPages number of pages
-     *
-     * @return self
-     */
-    public function setNbPages($nbPages)
-    {
-        $this->container['nbPages'] = $nbPages;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

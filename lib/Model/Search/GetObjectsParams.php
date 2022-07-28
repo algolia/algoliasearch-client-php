@@ -23,7 +23,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Search\MultipleGetObjectsParams[]',
+        'requests' => '\Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]',
     ];
 
     /**
@@ -138,7 +138,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleGetObjectsParams[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]|null
      */
     public function getRequests()
     {
@@ -148,7 +148,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleGetObjectsParams[]|null $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]|null $requests requests
      *
      * @return self
      */

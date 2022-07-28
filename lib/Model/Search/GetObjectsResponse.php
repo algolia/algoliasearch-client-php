@@ -119,6 +119,13 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['results']) ||
+            $this->container['results'] === null
+        ) {
+            $invalidProperties[] = "'results' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -136,7 +143,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets results
      *
-     * @return object[]|null
+     * @return object[]
      */
     public function getResults()
     {
@@ -146,7 +153,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets results
      *
-     * @param object[]|null $results list of results fetched
+     * @param object[] $results list of results fetched
      *
      * @return self
      */

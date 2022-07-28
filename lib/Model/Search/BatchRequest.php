@@ -5,14 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleGetObjectsParams Class Doc Comment
+ * BatchRequest Class Doc Comment
  *
  * @category Class
- * @description getObjects operation on an index.
- *
  * @package Algolia\AlgoliaSearch
  */
-class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -23,9 +21,8 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributesToRetrieve' => 'string[]',
-        'objectID' => 'string',
-        'indexName' => 'string',
+        'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
+        'body' => 'object',
     ];
 
     /**
@@ -34,9 +31,8 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $modelFormats = [
-        'attributesToRetrieve' => null,
-        'objectID' => null,
-        'indexName' => null,
+        'action' => null,
+        'body' => null,
     ];
 
     /**
@@ -65,9 +61,8 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $setters = [
-        'attributesToRetrieve' => 'setAttributesToRetrieve',
-        'objectID' => 'setObjectID',
-        'indexName' => 'setIndexName',
+        'action' => 'setAction',
+        'body' => 'setBody',
     ];
 
     /**
@@ -76,9 +71,8 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $getters = [
-        'attributesToRetrieve' => 'getAttributesToRetrieve',
-        'objectID' => 'getObjectID',
-        'indexName' => 'getIndexName',
+        'action' => 'getAction',
+        'body' => 'getBody',
     ];
 
     /**
@@ -115,15 +109,11 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['attributesToRetrieve'])) {
-            $this->container['attributesToRetrieve'] =
-                $data['attributesToRetrieve'];
+        if (isset($data['action'])) {
+            $this->container['action'] = $data['action'];
         }
-        if (isset($data['objectID'])) {
-            $this->container['objectID'] = $data['objectID'];
-        }
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
+        if (isset($data['body'])) {
+            $this->container['body'] = $data['body'];
         }
     }
 
@@ -135,19 +125,6 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
-            $invalidProperties[] = "'objectID' can't be null";
-        }
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
-            $invalidProperties[] = "'indexName' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -164,73 +141,49 @@ class MultipleGetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     }
 
     /**
-     * Gets attributesToRetrieve
+     * Gets action
      *
-     * @return string[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
      */
-    public function getAttributesToRetrieve()
+    public function getAction()
     {
-        return $this->container['attributesToRetrieve'] ?? null;
+        return $this->container['action'] ?? null;
     }
 
     /**
-     * Sets attributesToRetrieve
+     * Sets action
      *
-     * @param string[]|null $attributesToRetrieve List of attributes to retrieve. By default, all retrievable attributes are returned.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
      *
      * @return self
      */
-    public function setAttributesToRetrieve($attributesToRetrieve)
+    public function setAction($action)
     {
-        $this->container['attributesToRetrieve'] = $attributesToRetrieve;
+        $this->container['action'] = $action;
 
         return $this;
     }
 
     /**
-     * Gets objectID
+     * Gets body
      *
-     * @return string
+     * @return object|null
      */
-    public function getObjectID()
+    public function getBody()
     {
-        return $this->container['objectID'] ?? null;
+        return $this->container['body'] ?? null;
     }
 
     /**
-     * Sets objectID
+     * Sets body
      *
-     * @param string $objectID ID of the object within that index
+     * @param object|null $body arguments to the operation (depends on the type of the operation)
      *
      * @return self
      */
-    public function setObjectID($objectID)
+    public function setBody($body)
     {
-        $this->container['objectID'] = $objectID;
-
-        return $this;
-    }
-
-    /**
-     * Gets indexName
-     *
-     * @return string
-     */
-    public function getIndexName()
-    {
-        return $this->container['indexName'] ?? null;
-    }
-
-    /**
-     * Sets indexName
-     *
-     * @param string $indexName name of the index containing the object
-     *
-     * @return self
-     */
-    public function setIndexName($indexName)
-    {
-        $this->container['indexName'] = $indexName;
+        $this->container['body'] = $body;
 
         return $this;
     }

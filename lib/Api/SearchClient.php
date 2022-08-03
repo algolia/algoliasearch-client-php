@@ -2705,7 +2705,7 @@ class SearchClient
      * Search for rules.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $searchRulesParams searchRulesParams (required)
+     * @param array $searchRulesParams searchRulesParams (optional)
      * - $searchRulesParams['query'] => (string) Full text query.
      * - $searchRulesParams['anchoring'] => (array)
      * - $searchRulesParams['context'] => (string) Restricts matches to contextual rules with a specific context (exact match).
@@ -2722,7 +2722,7 @@ class SearchClient
      */
     public function searchRules(
         $indexName,
-        $searchRulesParams,
+        $searchRulesParams = null,
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
@@ -2731,17 +2731,11 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchRules`.'
             );
         }
-        // verify the required parameter 'searchRulesParams' is set
-        if (!isset($searchRulesParams)) {
-            throw new \InvalidArgumentException(
-                'Parameter `searchRulesParams` is required when calling `searchRules`.'
-            );
-        }
 
         $resourcePath = '/1/indexes/{indexName}/rules/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $searchRulesParams;
+        $httpBody = isset($searchRulesParams) ? $searchRulesParams : [];
 
         // path params
         if ($indexName !== null) {

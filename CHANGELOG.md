@@ -1,3 +1,8 @@
+## [4.0.0-alpha.9](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.8...4.0.0-alpha.9)
+
+- [193fb73d](https://github.com/algolia/api-clients-automation/commit/193fb73d) fix(specs): `getApiKeyResponse`, `multipleBatch`, `partialUpdateObject` ([#889](https://github.com/algolia/api-clients-automation/pull/889)) by [@shortcuts](https://github.com/shortcuts/)
+- [22f75c4e](https://github.com/algolia/api-clients-automation/commit/22f75c4e) feat(php): Restore Guzzle as a suggestion ([#888](https://github.com/algolia/api-clients-automation/pull/888)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.8](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.7...4.0.0-alpha.8)
 
 - [95ba0016](https://github.com/algolia/api-clients-automation/commit/95ba0016) fix(specs): `rules` and `objects` parameters/responses ([#876](https://github.com/algolia/api-clients-automation/pull/876)) by [@shortcuts](https://github.com/shortcuts/)

@@ -21,7 +21,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'taskID' => 'object',
+        'taskID' => 'array<string,int>',
         'objectIDs' => 'string[]',
     ];
 
@@ -31,7 +31,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
+        'taskID' => 'int64',
         'objectIDs' => null,
     ];
 
@@ -126,6 +126,19 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['taskID']) ||
+            $this->container['taskID'] === null
+        ) {
+            $invalidProperties[] = "'taskID' can't be null";
+        }
+        if (
+            !isset($this->container['objectIDs']) ||
+            $this->container['objectIDs'] === null
+        ) {
+            $invalidProperties[] = "'objectIDs' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -143,7 +156,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets taskID
      *
-     * @return object|null
+     * @return array<string,int>
      */
     public function getTaskID()
     {
@@ -153,7 +166,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets taskID
      *
-     * @param object|null $taskID list of tasksIDs per index
+     * @param array<string,int> $taskID list of tasksIDs per index
      *
      * @return self
      */
@@ -167,7 +180,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets objectIDs
      *
-     * @return string[]|null
+     * @return string[]
      */
     public function getObjectIDs()
     {
@@ -177,7 +190,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets objectIDs
      *
-     * @param string[]|null $objectIDs list of objectID
+     * @param string[] $objectIDs list of objectID
      *
      * @return self
      */

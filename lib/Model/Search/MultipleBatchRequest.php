@@ -133,6 +133,25 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['action']) ||
+            $this->container['action'] === null
+        ) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if (
+            !isset($this->container['body']) ||
+            $this->container['body'] === null
+        ) {
+            $invalidProperties[] = "'body' can't be null";
+        }
+        if (
+            !isset($this->container['indexName']) ||
+            $this->container['indexName'] === null
+        ) {
+            $invalidProperties[] = "'indexName' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -150,7 +169,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets action
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action
      */
     public function getAction()
     {
@@ -160,7 +179,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets action
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
      *
      * @return self
      */
@@ -174,7 +193,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets body
      *
-     * @return object|null
+     * @return object
      */
     public function getBody()
     {
@@ -184,7 +203,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets body
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
+     * @param object $body arguments to the operation (depends on the type of the operation)
      *
      * @return self
      */
@@ -198,7 +217,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets indexName
      *
-     * @return string|null
+     * @return string
      */
     public function getIndexName()
     {
@@ -208,7 +227,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName
      *
-     * @param string|null $indexName index to target for this operation
+     * @param string $indexName index to target for this operation
      *
      * @return self
      */

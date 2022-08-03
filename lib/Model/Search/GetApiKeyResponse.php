@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Key Class Doc Comment
+ * GetApiKeyResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,6 +21,8 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
+        'value' => 'string',
+        'createdAt' => 'int',
         'acl' => '\Algolia\AlgoliaSearch\Model\Search\Acl[]',
         'description' => 'string',
         'indexes' => 'string[]',
@@ -29,7 +31,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'queryParameters' => 'string',
         'referers' => 'string[]',
         'validity' => 'int',
-        'createdAt' => 'string',
     ];
 
     /**
@@ -38,6 +39,8 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
+        'value' => null,
+        'createdAt' => 'int64',
         'acl' => null,
         'description' => null,
         'indexes' => null,
@@ -46,7 +49,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'queryParameters' => null,
         'referers' => null,
         'validity' => null,
-        'createdAt' => null,
     ];
 
     /**
@@ -75,6 +77,8 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $setters = [
+        'value' => 'setValue',
+        'createdAt' => 'setCreatedAt',
         'acl' => 'setAcl',
         'description' => 'setDescription',
         'indexes' => 'setIndexes',
@@ -83,7 +87,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'queryParameters' => 'setQueryParameters',
         'referers' => 'setReferers',
         'validity' => 'setValidity',
-        'createdAt' => 'setCreatedAt',
     ];
 
     /**
@@ -92,6 +95,8 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $getters = [
+        'value' => 'getValue',
+        'createdAt' => 'getCreatedAt',
         'acl' => 'getAcl',
         'description' => 'getDescription',
         'indexes' => 'getIndexes',
@@ -100,7 +105,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'queryParameters' => 'getQueryParameters',
         'referers' => 'getReferers',
         'validity' => 'getValidity',
-        'createdAt' => 'getCreatedAt',
     ];
 
     /**
@@ -137,6 +141,12 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['value'])) {
+            $this->container['value'] = $data['value'];
+        }
+        if (isset($data['createdAt'])) {
+            $this->container['createdAt'] = $data['createdAt'];
+        }
         if (isset($data['acl'])) {
             $this->container['acl'] = $data['acl'];
         }
@@ -162,9 +172,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         if (isset($data['validity'])) {
             $this->container['validity'] = $data['validity'];
         }
-        if (isset($data['createdAt'])) {
-            $this->container['createdAt'] = $data['createdAt'];
-        }
     }
 
     /**
@@ -177,16 +184,16 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         $invalidProperties = [];
 
         if (
-            !isset($this->container['acl']) ||
-            $this->container['acl'] === null
-        ) {
-            $invalidProperties[] = "'acl' can't be null";
-        }
-        if (
             !isset($this->container['createdAt']) ||
             $this->container['createdAt'] === null
         ) {
             $invalidProperties[] = "'createdAt' can't be null";
+        }
+        if (
+            !isset($this->container['acl']) ||
+            $this->container['acl'] === null
+        ) {
+            $invalidProperties[] = "'acl' can't be null";
         }
 
         return $invalidProperties;
@@ -201,6 +208,54 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets value
+     *
+     * @return string|null
+     */
+    public function getValue()
+    {
+        return $this->container['value'] ?? null;
+    }
+
+    /**
+     * Sets value
+     *
+     * @param string|null $value the API key
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets createdAt
+     *
+     * @return int
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['createdAt'] ?? null;
+    }
+
+    /**
+     * Sets createdAt
+     *
+     * @param int $createdAt time of the event expressed in milliseconds since the Unix epoch
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->container['createdAt'] = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -391,30 +446,6 @@ class Key extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function setValidity($validity)
     {
         $this->container['validity'] = $validity;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return string
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'] ?? null;
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param string $createdAt date of creation (ISO-8601 format)
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

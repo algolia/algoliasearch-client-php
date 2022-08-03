@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * AttributeOrBuiltInOperation Class Doc Comment
+ * BaseGetApiKeyResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class BaseGetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,8 +21,8 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
         'value' => 'string',
+        'createdAt' => 'int',
     ];
 
     /**
@@ -31,8 +31,8 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelFormats = [
-        'operation' => null,
         'value' => null,
+        'createdAt' => 'int64',
     ];
 
     /**
@@ -61,8 +61,8 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $setters = [
-        'operation' => 'setOperation',
         'value' => 'setValue',
+        'createdAt' => 'setCreatedAt',
     ];
 
     /**
@@ -71,8 +71,8 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $getters = [
-        'operation' => 'getOperation',
         'value' => 'getValue',
+        'createdAt' => 'getCreatedAt',
     ];
 
     /**
@@ -109,11 +109,11 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['operation'])) {
-            $this->container['operation'] = $data['operation'];
-        }
         if (isset($data['value'])) {
             $this->container['value'] = $data['value'];
+        }
+        if (isset($data['createdAt'])) {
+            $this->container['createdAt'] = $data['createdAt'];
         }
     }
 
@@ -127,16 +127,10 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
         $invalidProperties = [];
 
         if (
-            !isset($this->container['operation']) ||
-            $this->container['operation'] === null
+            !isset($this->container['createdAt']) ||
+            $this->container['createdAt'] === null
         ) {
-            $invalidProperties[] = "'operation' can't be null";
-        }
-        if (
-            !isset($this->container['value']) ||
-            $this->container['value'] === null
-        ) {
-            $invalidProperties[] = "'value' can't be null";
+            $invalidProperties[] = "'createdAt' can't be null";
         }
 
         return $invalidProperties;
@@ -154,33 +148,9 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets operation
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType
-     */
-    public function getOperation()
-    {
-        return $this->container['operation'] ?? null;
-    }
-
-    /**
-     * Sets operation
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType $operation operation
-     *
-     * @return self
-     */
-    public function setOperation($operation)
-    {
-        $this->container['operation'] = $operation;
-
-        return $this;
-    }
-
-    /**
      * Gets value
      *
-     * @return string
+     * @return string|null
      */
     public function getValue()
     {
@@ -190,13 +160,37 @@ class AttributeOrBuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets value
      *
-     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove
+     * @param string|null $value the API key
      *
      * @return self
      */
     public function setValue($value)
     {
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets createdAt
+     *
+     * @return int
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['createdAt'] ?? null;
+    }
+
+    /**
+     * Sets createdAt
+     *
+     * @param int $createdAt time of the event expressed in milliseconds since the Unix epoch
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->container['createdAt'] = $createdAt;
 
         return $this;
     }

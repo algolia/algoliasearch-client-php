@@ -1116,7 +1116,7 @@ class SearchClient
      * @param string $key API Key string. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\Key
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse
      */
     public function getApiKey($key, $requestOptions = [])
     {
@@ -1324,7 +1324,7 @@ class SearchClient
      * Retrieve one or more objects.
      *
      * @param array $getObjectsParams The Algolia object. (required)
-     * - $getObjectsParams['requests'] => (array)
+     * - $getObjectsParams['requests'] => (array)  (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\GetObjectsParams
      *
@@ -1812,7 +1812,7 @@ class SearchClient
      * Batch operations to many indices.
      *
      * @param array $batchParams batchParams (required)
-     * - $batchParams['requests'] => (array)
+     * - $batchParams['requests'] => (array)  (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchParams
      *
@@ -1906,7 +1906,7 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
-     * @param array $attributeOrBuiltInOperation List of attributes to update. (required)
+     * @param array $attributeToUpdate List of attributes to update. (required)
      * @param bool $createIfNotExists Creates the record if it does not exist yet. (optional, default to true)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1915,7 +1915,7 @@ class SearchClient
     public function partialUpdateObject(
         $indexName,
         $objectID,
-        $attributeOrBuiltInOperation,
+        $attributeToUpdate,
         $createIfNotExists = null,
         $requestOptions = []
     ) {
@@ -1931,17 +1931,17 @@ class SearchClient
                 'Parameter `objectID` is required when calling `partialUpdateObject`.'
             );
         }
-        // verify the required parameter 'attributeOrBuiltInOperation' is set
-        if (!isset($attributeOrBuiltInOperation)) {
+        // verify the required parameter 'attributeToUpdate' is set
+        if (!isset($attributeToUpdate)) {
             throw new \InvalidArgumentException(
-                'Parameter `attributeOrBuiltInOperation` is required when calling `partialUpdateObject`.'
+                'Parameter `attributeToUpdate` is required when calling `partialUpdateObject`.'
             );
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}/partial';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $attributeOrBuiltInOperation;
+        $httpBody = $attributeToUpdate;
 
         if ($createIfNotExists !== null) {
             $queryParameters['createIfNotExists'] = $createIfNotExists;

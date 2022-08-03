@@ -166,7 +166,7 @@ class UpdateApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets key
      *
-     * @param string $key key string
+     * @param string $key the API key
      *
      * @return self
      */

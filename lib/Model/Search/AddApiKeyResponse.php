@@ -166,7 +166,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets key
      *
-     * @param string $key key string
+     * @param string $key the API key
      *
      * @return self
      */

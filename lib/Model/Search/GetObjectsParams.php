@@ -121,6 +121,13 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
+            $invalidProperties[] = "'requests' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -138,7 +145,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]
      */
     public function getRequests()
     {
@@ -148,7 +155,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]|null $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[] $requests requests
      *
      * @return self
      */

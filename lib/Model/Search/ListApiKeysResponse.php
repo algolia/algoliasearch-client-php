@@ -21,7 +21,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'keys' => '\Algolia\AlgoliaSearch\Model\Search\Key[]',
+        'keys' => '\Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[]',
     ];
 
     /**
@@ -143,7 +143,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets keys
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Key[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[]
      */
     public function getKeys()
     {
@@ -153,7 +153,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets keys
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Key[] $keys list of api keys
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[] $keys list of api keys
      *
      * @return self
      */

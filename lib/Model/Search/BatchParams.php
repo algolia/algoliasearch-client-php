@@ -121,6 +121,13 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['requests']) ||
+            $this->container['requests'] === null
+        ) {
+            $invalidProperties[] = "'requests' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -138,7 +145,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets requests
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]
      */
     public function getRequests()
     {
@@ -148,7 +155,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]|null $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[] $requests requests
      *
      * @return self
      */

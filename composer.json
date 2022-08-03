@@ -24,7 +24,6 @@
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
-    "guzzlehttp/guzzle": "^7.3",
     "guzzlehttp/psr7": "^2.0",
     "psr/http-message": "^1.0",
     "psr/log": "^1.0 || ^2.0 || ^3.0",
@@ -47,5 +46,8 @@
     "psr-4": {
       "Algolia\\AlgoliaSearch\\Test\\": "test/"
     }
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
   }
 }

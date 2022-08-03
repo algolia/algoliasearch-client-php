@@ -86,10 +86,29 @@ final class Algolia
 
     public static function getHttpClient()
     {
+        $guzzleVersion = null;
+        if (interface_exists('\GuzzleHttp\ClientInterface')) {
+            if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+                $guzzleVersion = (int) mb_substr(
+                    \GuzzleHttp\Client::VERSION,
+                    0,
+                    1
+                );
+            } else {
+                $guzzleVersion = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            }
+        }
+
         if (null === self::$httpClient) {
-            self::setHttpClient(
-                new \Algolia\AlgoliaSearch\Http\GuzzleHttpClient()
-            );
+            if (class_exists('\GuzzleHttp\Client') && 6 <= $guzzleVersion) {
+                self::setHttpClient(
+                    new \Algolia\AlgoliaSearch\Http\GuzzleHttpClient()
+                );
+            } else {
+                self::setHttpClient(
+                    new \Algolia\AlgoliaSearch\Http\CurlHttpClient()
+                );
+            }
         }
 
         return self::$httpClient;

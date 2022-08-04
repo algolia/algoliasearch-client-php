@@ -1,3 +1,7 @@
+## [4.0.0-alpha.10](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.9...4.0.0-alpha.10)
+
+- [005f9ed3](https://github.com/algolia/api-clients-automation/commit/005f9ed3) fix(specs): wrong body parameter name ([#896](https://github.com/algolia/api-clients-automation/pull/896)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.9](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.8...4.0.0-alpha.9)
 
 - [193fb73d](https://github.com/algolia/api-clients-automation/commit/193fb73d) fix(specs): `getApiKeyResponse`, `multipleBatch`, `partialUpdateObject` ([#889](https://github.com/algolia/api-clients-automation/pull/889)) by [@shortcuts](https://github.com/shortcuts/)

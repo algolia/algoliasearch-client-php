@@ -1906,7 +1906,7 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param string $objectID Unique identifier of an object. (required)
-     * @param array $attributeToUpdate List of attributes to update. (required)
+     * @param array $attributesToUpdate Map of attribute(s) to update. (required)
      * @param bool $createIfNotExists Creates the record if it does not exist yet. (optional, default to true)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1915,7 +1915,7 @@ class SearchClient
     public function partialUpdateObject(
         $indexName,
         $objectID,
-        $attributeToUpdate,
+        $attributesToUpdate,
         $createIfNotExists = null,
         $requestOptions = []
     ) {
@@ -1931,17 +1931,17 @@ class SearchClient
                 'Parameter `objectID` is required when calling `partialUpdateObject`.'
             );
         }
-        // verify the required parameter 'attributeToUpdate' is set
-        if (!isset($attributeToUpdate)) {
+        // verify the required parameter 'attributesToUpdate' is set
+        if (!isset($attributesToUpdate)) {
             throw new \InvalidArgumentException(
-                'Parameter `attributeToUpdate` is required when calling `partialUpdateObject`.'
+                'Parameter `attributesToUpdate` is required when calling `partialUpdateObject`.'
             );
         }
 
         $resourcePath = '/1/indexes/{indexName}/{objectID}/partial';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $attributeToUpdate;
+        $httpBody = $attributesToUpdate;
 
         if ($createIfNotExists !== null) {
             $queryParameters['createIfNotExists'] = $createIfNotExists;
@@ -2323,7 +2323,7 @@ class SearchClient
      * Save a batch of rules.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $rule rule (required)
+     * @param array $rules rules (required)
      * @param bool $forwardToReplicas When true, changes are also propagated to replicas of the given indexName. (optional)
      * @param bool $clearExistingRules When true, existing Rules are cleared before adding this batch. When false, existing Rules are kept. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -2332,7 +2332,7 @@ class SearchClient
      */
     public function saveRules(
         $indexName,
-        $rule,
+        $rules,
         $forwardToReplicas = null,
         $clearExistingRules = null,
         $requestOptions = []
@@ -2343,17 +2343,17 @@ class SearchClient
                 'Parameter `indexName` is required when calling `saveRules`.'
             );
         }
-        // verify the required parameter 'rule' is set
-        if (!isset($rule)) {
+        // verify the required parameter 'rules' is set
+        if (!isset($rules)) {
             throw new \InvalidArgumentException(
-                'Parameter `rule` is required when calling `saveRules`.'
+                'Parameter `rules` is required when calling `saveRules`.'
             );
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/batch';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $rule;
+        $httpBody = $rules;
 
         if ($forwardToReplicas !== null) {
             $queryParameters['forwardToReplicas'] = $forwardToReplicas;

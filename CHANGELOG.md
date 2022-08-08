@@ -1,3 +1,8 @@
+## [4.0.0-alpha.11](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.10...4.0.0-alpha.11)
+
+- [07c169f5](https://github.com/algolia/api-clients-automation/commit/07c169f5) fix(specs): browseResponse, IndexSettings and searchResponse ([#900](https://github.com/algolia/api-clients-automation/pull/900)) by [@shortcuts](https://github.com/shortcuts/)
+- [eec85ae0](https://github.com/algolia/api-clients-automation/commit/eec85ae0) fix(php): test post empty body ([#909](https://github.com/algolia/api-clients-automation/pull/909)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.10](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.9...4.0.0-alpha.10)
 
 - [005f9ed3](https://github.com/algolia/api-clients-automation/commit/005f9ed3) fix(specs): wrong body parameter name ([#896](https://github.com/algolia/api-clients-automation/pull/896)) by [@shortcuts](https://github.com/shortcuts/)

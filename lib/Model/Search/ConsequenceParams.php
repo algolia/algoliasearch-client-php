@@ -89,6 +89,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Search\Distinct',
+        'attributeForDistinct' => 'string',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
@@ -175,6 +176,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
         'distinct' => null,
+        'attributeForDistinct' => null,
         'synonyms' => null,
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
@@ -281,6 +283,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
         'distinct' => 'setDistinct',
+        'attributeForDistinct' => 'setAttributeForDistinct',
         'synonyms' => 'setSynonyms',
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
@@ -367,6 +370,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
         'distinct' => 'getDistinct',
+        'attributeForDistinct' => 'getAttributeForDistinct',
         'synonyms' => 'getSynonyms',
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
@@ -642,6 +646,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
+        }
+        if (isset($data['attributeForDistinct'])) {
+            $this->container['attributeForDistinct'] =
+                $data['attributeForDistinct'];
         }
         if (isset($data['synonyms'])) {
             $this->container['synonyms'] = $data['synonyms'];
@@ -2410,6 +2418,30 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setDistinct($distinct)
     {
         $this->container['distinct'] = $distinct;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributeForDistinct
+     *
+     * @return string|null
+     */
+    public function getAttributeForDistinct()
+    {
+        return $this->container['attributeForDistinct'] ?? null;
+    }
+
+    /**
+     * Sets attributeForDistinct
+     *
+     * @param string|null $attributeForDistinct name of the de-duplication attribute to be used with the distinct feature
+     *
+     * @return self
+     */
+    public function setAttributeForDistinct($attributeForDistinct)
+    {
+        $this->container['attributeForDistinct'] = $attributeForDistinct;
 
         return $this;
     }

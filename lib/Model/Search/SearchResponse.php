@@ -313,12 +313,6 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
             $invalidProperties[] = "'exhaustiveNbHits' can't be null";
         }
         if (
-            !isset($this->container['exhaustiveTypo']) ||
-            $this->container['exhaustiveTypo'] === null
-        ) {
-            $invalidProperties[] = "'exhaustiveTypo' can't be null";
-        }
-        if (
             !isset($this->container['hitsPerPage']) ||
             $this->container['hitsPerPage'] === null
         ) {
@@ -540,7 +534,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets exhaustiveTypo
      *
-     * @return bool
+     * @return bool|null
      */
     public function getExhaustiveTypo()
     {
@@ -550,7 +544,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveTypo
      *
-     * @param bool $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
+     * @param bool|null $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
      *
      * @return self
      */

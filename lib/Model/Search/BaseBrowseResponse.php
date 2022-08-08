@@ -119,13 +119,6 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['cursor']) ||
-            $this->container['cursor'] === null
-        ) {
-            $invalidProperties[] = "'cursor' can't be null";
-        }
-
         return $invalidProperties;
     }
 
@@ -143,7 +136,7 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets cursor
      *
-     * @return string
+     * @return string|null
      */
     public function getCursor()
     {
@@ -153,7 +146,7 @@ class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets cursor
      *
-     * @param string $cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
+     * @param string|null $cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
      *
      * @return self
      */

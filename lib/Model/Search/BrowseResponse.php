@@ -320,12 +320,6 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
             $invalidProperties[] = "'exhaustiveNbHits' can't be null";
         }
         if (
-            !isset($this->container['exhaustiveTypo']) ||
-            $this->container['exhaustiveTypo'] === null
-        ) {
-            $invalidProperties[] = "'exhaustiveTypo' can't be null";
-        }
-        if (
             !isset($this->container['hitsPerPage']) ||
             $this->container['hitsPerPage'] === null
         ) {
@@ -372,12 +366,6 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
             $this->container['hits'] === null
         ) {
             $invalidProperties[] = "'hits' can't be null";
-        }
-        if (
-            !isset($this->container['cursor']) ||
-            $this->container['cursor'] === null
-        ) {
-            $invalidProperties[] = "'cursor' can't be null";
         }
 
         return $invalidProperties;
@@ -553,7 +541,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets exhaustiveTypo
      *
-     * @return bool
+     * @return bool|null
      */
     public function getExhaustiveTypo()
     {
@@ -563,7 +551,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveTypo
      *
-     * @param bool $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
+     * @param bool|null $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
      *
      * @return self
      */
@@ -1033,7 +1021,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets cursor
      *
-     * @return string
+     * @return string|null
      */
     public function getCursor()
     {
@@ -1043,7 +1031,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets cursor
      *
-     * @param string $cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
+     * @param string|null $cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
      *
      * @return self
      */

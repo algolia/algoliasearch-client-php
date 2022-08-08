@@ -56,6 +56,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Recommend\Distinct',
+        'attributeForDistinct' => 'string',
         'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
@@ -106,6 +107,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
         'distinct' => null,
+        'attributeForDistinct' => null,
         'synonyms' => null,
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
@@ -176,6 +178,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
         'distinct' => 'setDistinct',
+        'attributeForDistinct' => 'setAttributeForDistinct',
         'synonyms' => 'setSynonyms',
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
@@ -226,6 +229,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
         'distinct' => 'getDistinct',
+        'attributeForDistinct' => 'getAttributeForDistinct',
         'synonyms' => 'getSynonyms',
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
@@ -393,6 +397,10 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
+        }
+        if (isset($data['attributeForDistinct'])) {
+            $this->container['attributeForDistinct'] =
+                $data['attributeForDistinct'];
         }
         if (isset($data['synonyms'])) {
             $this->container['synonyms'] = $data['synonyms'];
@@ -1317,6 +1325,30 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function setDistinct($distinct)
     {
         $this->container['distinct'] = $distinct;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributeForDistinct
+     *
+     * @return string|null
+     */
+    public function getAttributeForDistinct()
+    {
+        return $this->container['attributeForDistinct'] ?? null;
+    }
+
+    /**
+     * Sets attributeForDistinct
+     *
+     * @param string|null $attributeForDistinct name of the de-duplication attribute to be used with the distinct feature
+     *
+     * @return self
+     */
+    public function setAttributeForDistinct($attributeForDistinct)
+    {
+        $this->container['attributeForDistinct'] = $attributeForDistinct;
 
         return $this;
     }

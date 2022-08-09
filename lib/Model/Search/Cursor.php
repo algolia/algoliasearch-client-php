@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BaseBrowseResponse Class Doc Comment
+ * Cursor Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseBrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class Cursor extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable

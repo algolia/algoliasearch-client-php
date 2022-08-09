@@ -478,11 +478,9 @@ class SearchClient
      * Retrieve all index content.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $browseRequest browseRequest (optional)
-     * - $browseRequest['params'] => (string) Search parameters as URL-encoded query string.
-     * - $browseRequest['cursor'] => (string) Cursor indicating the location to resume browsing from. Must match the value returned by the previous call.
+     * @param array $browseParams browseParams (optional)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Search\BrowseRequest
+     * @see \Algolia\AlgoliaSearch\Model\Search\BrowseParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -490,7 +488,7 @@ class SearchClient
      */
     public function browse(
         $indexName,
-        $browseRequest = null,
+        $browseParams = null,
         $requestOptions = []
     ) {
         // verify the required parameter 'indexName' is set
@@ -503,7 +501,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/browse';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($browseRequest) ? $browseRequest : [];
+        $httpBody = isset($browseParams) ? $browseParams : [];
 
         // path params
         if ($indexName !== null) {

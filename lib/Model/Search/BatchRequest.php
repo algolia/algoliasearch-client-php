@@ -126,6 +126,19 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
+        if (
+            !isset($this->container['action']) ||
+            $this->container['action'] === null
+        ) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if (
+            !isset($this->container['body']) ||
+            $this->container['body'] === null
+        ) {
+            $invalidProperties[] = "'body' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -143,7 +156,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets action
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action
      */
     public function getAction()
     {
@@ -153,7 +166,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets action
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action|null $action action
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
      *
      * @return self
      */
@@ -167,7 +180,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets body
      *
-     * @return object|null
+     * @return object
      */
     public function getBody()
     {
@@ -177,7 +190,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets body
      *
-     * @param object|null $body arguments to the operation (depends on the type of the operation)
+     * @param object $body arguments to the operation (depends on the type of the operation)
      *
      * @return self
      */

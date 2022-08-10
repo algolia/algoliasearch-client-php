@@ -50,23 +50,18 @@ class AnalyticsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = self::getAllowedRegions();
-        $config = AnalyticsConfig::create(
-            $appId,
-            $apiKey,
-            $region,
-            $allowedRegions
-        );
+        $allowedRegions = ['de', 'us'];
+
+        if ($region !== null && !in_array($region, $allowedRegions, true)) {
+            throw new AlgoliaException(
+                '`region` must be one of the following: ' .
+                    implode(', ', $allowedRegions)
+            );
+        }
+
+        $config = AnalyticsConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);
-    }
-
-    /**
-     * Returns the allowed regions for the config
-     */
-    public static function getAllowedRegions()
-    {
-        return ['de', 'us'];
     }
 
     /**

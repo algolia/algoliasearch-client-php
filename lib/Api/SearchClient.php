@@ -316,7 +316,7 @@ class SearchClient
      *
      * @param string $indexName The index in which to perform the request. (required)
      * @param array $batchWriteParams batchWriteParams (required)
-     * - $batchWriteParams['requests'] => (array)
+     * - $batchWriteParams['requests'] => (array)  (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\BatchWriteParams
      *

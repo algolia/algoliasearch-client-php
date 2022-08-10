@@ -1,3 +1,9 @@
+## [4.0.0-alpha.13](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.12...4.0.0-alpha.13)
+
+- [4c1596df](https://github.com/algolia/api-clients-automation/commit/4c1596df) fix(clients): list available regions when region is missing ([#916](https://github.com/algolia/api-clients-automation/pull/916)) by [@shortcuts](https://github.com/shortcuts/)
+- [be45fc4e](https://github.com/algolia/api-clients-automation/commit/be45fc4e) fix(specs): make `batch` body parameters required ([#917](https://github.com/algolia/api-clients-automation/pull/917)) by [@shortcuts](https://github.com/shortcuts/)
+- [f87ef6be](https://github.com/algolia/api-clients-automation/commit/f87ef6be) fix(php): composer dependency ([#915](https://github.com/algolia/api-clients-automation/pull/915)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.12](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.11...4.0.0-alpha.12)
 
 - [c2a054fa](https://github.com/algolia/api-clients-automation/commit/c2a054fa) fix(specs): allow `searchParams` in `browse` method ([#911](https://github.com/algolia/api-clients-automation/pull/911)) by [@shortcuts](https://github.com/shortcuts/)

@@ -125,16 +125,25 @@ class Response implements ResponseInterface
         $this->protocol = $version;
     }
 
+    /**
+     * @return int
+     */
     public function getStatusCode()
     {
         return $this->statusCode;
     }
 
+    /**
+     * @return string
+     */
     public function getReasonPhrase()
     {
         return $this->reasonPhrase;
     }
 
+    /**
+     * @return static
+     */
     public function withStatus($code, $reasonPhrase = '')
     {
         $new = clone $this;
@@ -147,11 +156,17 @@ class Response implements ResponseInterface
         return $new;
     }
 
+    /**
+     * @return string
+     */
     public function getProtocolVersion()
     {
         return $this->protocol;
     }
 
+    /**
+     * @return static
+     */
     public function withProtocolVersion($version)
     {
         if ($this->protocol === $version) {
@@ -164,16 +179,25 @@ class Response implements ResponseInterface
         return $new;
     }
 
+    /**
+     * @return array
+     */
     public function getHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * @return bool
+     */
     public function hasHeader($header)
     {
         return isset($this->headerNames[strtolower($header)]);
     }
 
+    /**
+     * @return array
+     */
     public function getHeader($header)
     {
         $header = strtolower($header);
@@ -187,11 +211,17 @@ class Response implements ResponseInterface
         return $this->headers[$header];
     }
 
+    /**
+     * @return string
+     */
     public function getHeaderLine($header)
     {
         return implode(', ', $this->getHeader($header));
     }
 
+    /**
+     * @return static
+     */
     public function withHeader($header, $value)
     {
         if (!is_array($value)) {
@@ -211,6 +241,9 @@ class Response implements ResponseInterface
         return $new;
     }
 
+    /**
+     * @return static
+     */
     public function withAddedHeader($header, $value)
     {
         if (!is_array($value)) {
@@ -232,6 +265,9 @@ class Response implements ResponseInterface
         return $new;
     }
 
+    /**
+     * @return static
+     */
     public function withoutHeader($header)
     {
         $normalized = strtolower($header);
@@ -248,6 +284,9 @@ class Response implements ResponseInterface
         return $new;
     }
 
+    /**
+     * @return \StreamInterface
+     */
     public function getBody()
     {
         if (!$this->stream) {
@@ -257,6 +296,9 @@ class Response implements ResponseInterface
         return $this->stream;
     }
 
+    /**
+     * @return static
+     */
     public function withBody(StreamInterface $body)
     {
         if ($body === $this->stream) {

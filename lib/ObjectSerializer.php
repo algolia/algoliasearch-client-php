@@ -409,7 +409,7 @@ class ObjectSerializer
             is_string($data->{$discriminator})
         ) {
             $subclass =
-                    '\Algolia\AlgoliaSearch\Model\\' . $data->{$discriminator};
+                '\Algolia\AlgoliaSearch\Model\\' . $data->{$discriminator};
             if (is_subclass_of($subclass, $class)) {
                 $class = $subclass;
             }
@@ -429,7 +429,7 @@ class ObjectSerializer
 
             if (isset($data->{$instance::attributeMap()[$property]})) {
                 $propertyValue =
-                        $data->{$instance::attributeMap()[$property]};
+                    $data->{$instance::attributeMap()[$property]};
                 $instance->$propertySetter(
                     self::deserialize($propertyValue, $type, null)
                 );

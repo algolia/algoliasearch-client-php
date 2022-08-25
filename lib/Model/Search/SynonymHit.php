@@ -31,7 +31,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'corrections' => 'string[]',
         'placeholder' => 'string',
         'replacements' => 'string[]',
-        'highlightResult' => '\Algolia\AlgoliaSearch\Model\Search\SynonymHitHighlightResult',
     ];
 
     /**
@@ -48,7 +47,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'corrections' => null,
         'placeholder' => null,
         'replacements' => null,
-        'highlightResult' => null,
     ];
 
     /**
@@ -85,7 +83,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'corrections' => 'setCorrections',
         'placeholder' => 'setPlaceholder',
         'replacements' => 'setReplacements',
-        'highlightResult' => 'setHighlightResult',
     ];
 
     /**
@@ -102,7 +99,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'corrections' => 'getCorrections',
         'placeholder' => 'getPlaceholder',
         'replacements' => 'getReplacements',
-        'highlightResult' => 'getHighlightResult',
     ];
 
     /**
@@ -162,9 +158,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         }
         if (isset($data['replacements'])) {
             $this->container['replacements'] = $data['replacements'];
-        }
-        if (isset($data['highlightResult'])) {
-            $this->container['highlightResult'] = $data['highlightResult'];
         }
     }
 
@@ -392,30 +385,6 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function setReplacements($replacements)
     {
         $this->container['replacements'] = $replacements;
-
-        return $this;
-    }
-
-    /**
-     * Gets highlightResult
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymHitHighlightResult|null
-     */
-    public function getHighlightResult()
-    {
-        return $this->container['highlightResult'] ?? null;
-    }
-
-    /**
-     * Sets highlightResult
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHitHighlightResult|null $highlightResult highlightResult
-     *
-     * @return self
-     */
-    public function setHighlightResult($highlightResult)
-    {
-        $this->container['highlightResult'] = $highlightResult;
 
         return $this;
     }

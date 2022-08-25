@@ -2397,7 +2397,6 @@ class SearchClient
      * - $synonymHit['corrections'] => (array) Words to be matched in records.
      * - $synonymHit['placeholder'] => (string) Token to be put inside records.
      * - $synonymHit['replacements'] => (array) List of query words that will match the token.
-     * - $synonymHit['_highlightResult'] => (array)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SynonymHit
      *

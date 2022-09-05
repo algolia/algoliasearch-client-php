@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Languages Class Doc Comment
  *
  * @category Class
+ *
  * @description A dictionary language.
  *
  * @package Algolia\AlgoliaSearch

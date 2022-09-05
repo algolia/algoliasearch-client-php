@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RecommendationModels Class Doc Comment
  *
  * @category Class
+ *
  * @description The recommendation model to use.
  *
  * @package Algolia\AlgoliaSearch

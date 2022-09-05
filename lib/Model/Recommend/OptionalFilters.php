@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * OptionalFilters Class Doc Comment
  *
  * @category Class
+ *
  * @description Create filters for ranking purposes, where records that match the filter are ranked higher, or lower in the case of a negative optional filter.
  *
  * @package Algolia\AlgoliaSearch

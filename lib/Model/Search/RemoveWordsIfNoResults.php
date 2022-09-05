@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RemoveWordsIfNoResults Class Doc Comment
  *
  * @category Class
+ *
  * @description Selects a strategy to remove words from the query when it doesn&#39;t match any hits.
  *
  * @package Algolia\AlgoliaSearch

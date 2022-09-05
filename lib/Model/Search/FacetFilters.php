@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * FacetFilters Class Doc Comment
  *
  * @category Class
+ *
  * @description Filter hits by facet value.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AroundRadius Class Doc Comment
  *
  * @category Class
+ *
  * @description Define the maximum radius for a geo search (in meters).
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * HighlightResultOption Class Doc Comment
  *
  * @category Class
+ *
  * @description Show highlighted section and words matched on a query.
  *
  * @package Algolia\AlgoliaSearch

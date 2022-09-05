@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SynonymHit Class Doc Comment
  *
  * @category Class
+ *
  * @description Synonym object.
  *
  * @package Algolia\AlgoliaSearch

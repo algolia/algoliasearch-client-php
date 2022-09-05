@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchTypeFacet Class Doc Comment
  *
  * @category Class
+ *
  * @description Perform a search query with &#x60;default&#x60;, will search for facet values if &#x60;facet&#x60; is given.
  *
  * @package Algolia\AlgoliaSearch

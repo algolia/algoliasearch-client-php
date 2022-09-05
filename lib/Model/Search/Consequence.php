@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Consequence Class Doc Comment
  *
  * @category Class
+ *
  * @description Consequence of the Rule.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchParams Class Doc Comment
  *
  * @category Class
+ *
  * @description The &#x60;multipleBatch&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch

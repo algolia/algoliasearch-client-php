@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * IgnorePlurals Class Doc Comment
  *
  * @category Class
+ *
  * @description Treats singular, plurals, and other forms of declensions as matching terms. ignorePlurals is used in conjunction with the queryLanguages setting. list: language ISO codes for which ignoring plurals should be enabled. This list will override any values that you may have set in queryLanguages. true: enables the ignore plurals functionality, where singulars and plurals are considered equivalent (foot &#x3D; feet). The languages supported here are either every language (this is the default, see list of languages below), or those set by queryLanguages. false: disables ignore plurals, where singulars and plurals are not considered the same for matching purposes (foot will not find feet).
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchDictionaryEntriesParams Class Doc Comment
  *
  * @category Class
+ *
  * @description The &#x60;batchDictionaryEntries&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * TagFilters Class Doc Comment
  *
  * @category Class
+ *
  * @description Filter hits by tags.
  *
  * @package Algolia\AlgoliaSearch

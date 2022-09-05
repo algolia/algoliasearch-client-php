@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * MatchLevel Class Doc Comment
  *
  * @category Class
+ *
  * @description Indicates how well the attribute matched the search query.
  *
  * @package Algolia\AlgoliaSearch

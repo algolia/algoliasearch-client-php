@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BuiltInOperation Class Doc Comment
  *
  * @category Class
+ *
  * @description To update an attribute without pushing the entire record, you can use these built-in operations.
  *
  * @package Algolia\AlgoliaSearch

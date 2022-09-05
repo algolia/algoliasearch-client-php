@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RecommendHit Class Doc Comment
  *
  * @category Class
+ *
  * @description A Recommend hit.
  *
  * @package Algolia\AlgoliaSearch

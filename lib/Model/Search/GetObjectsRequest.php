@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetObjectsRequest Class Doc Comment
  *
  * @category Class
+ *
  * @description getObjects operation on an index.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchDictionaryEntriesParams Class Doc Comment
  *
  * @category Class
+ *
  * @description The &#x60;searchDictionaryEntries&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch

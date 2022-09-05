@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DeletedAtResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description The response with a taskID and a deletedAt timestamp.
  *
  * @package Algolia\AlgoliaSearch

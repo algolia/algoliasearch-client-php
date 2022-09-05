@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionarySettingsParams Class Doc Comment
  *
  * @category Class
+ *
  * @description Disable the builtin Algolia entries for a type of dictionary per language.
  *
  * @package Algolia\AlgoliaSearch

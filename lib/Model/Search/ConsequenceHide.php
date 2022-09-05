@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ConsequenceHide Class Doc Comment
  *
  * @category Class
+ *
  * @description Unique identifier of the object to hide.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetObjectsParams Class Doc Comment
  *
  * @category Class
+ *
  * @description The &#x60;getObjects&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch

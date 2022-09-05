@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AutomaticFacetFilters Class Doc Comment
  *
  * @category Class
+ *
  * @description Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
  *
  * @package Algolia\AlgoliaSearch

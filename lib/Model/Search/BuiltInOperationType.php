@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BuiltInOperationType Class Doc Comment
  *
  * @category Class
+ *
  * @description The operation to apply on the attribute.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ListClustersResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description Array of clusters.
  *
  * @package Algolia\AlgoliaSearch

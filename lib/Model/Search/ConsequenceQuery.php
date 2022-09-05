@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ConsequenceQuery Class Doc Comment
  *
  * @category Class
+ *
  * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Source Class Doc Comment
  *
  * @category Class
+ *
  * @description The source.
  *
  * @package Algolia\AlgoliaSearch

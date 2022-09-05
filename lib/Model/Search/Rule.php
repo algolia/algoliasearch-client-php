@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Rule Class Doc Comment
  *
  * @category Class
+ *
  * @description Rule object.
  *
  * @package Algolia\AlgoliaSearch

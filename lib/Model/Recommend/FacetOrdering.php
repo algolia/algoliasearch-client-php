@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * FacetOrdering Class Doc Comment
  *
  * @category Class
+ *
  * @description Defining how facets should be ordered.
  *
  * @package Algolia\AlgoliaSearch

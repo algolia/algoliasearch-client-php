@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RenderingContent Class Doc Comment
  *
  * @category Class
+ *
  * @description Content defining how the search interface should be rendered. Can be set via the settings for a default value and can be overridden via rules.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * ErrorBase Class Doc Comment
  *
  * @category Class
+ *
  * @description Error.
  *
  * @package Algolia\AlgoliaSearch

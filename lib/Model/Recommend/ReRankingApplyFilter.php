@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * ReRankingApplyFilter Class Doc Comment
  *
  * @category Class
+ *
  * @description When Dynamic Re-Ranking is enabled, only records that match these filters will be impacted by Dynamic Re-Ranking.
  *
  * @package Algolia\AlgoliaSearch

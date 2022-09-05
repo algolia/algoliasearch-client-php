@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Distinct Class Doc Comment
  *
  * @category Class
+ *
  * @description Enables de-duplication or grouping of results.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * PromoteObjectID Class Doc Comment
  *
  * @category Class
+ *
  * @description Single objectID to promote as hits.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ExactOnSingleWordQuery Class Doc Comment
  *
  * @category Class
+ *
  * @description Controls how the exact ranking criterion is computed when the query contains only one word.
  *
  * @package Algolia\AlgoliaSearch

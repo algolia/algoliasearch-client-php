@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * SourceIndexWithReplicas Class Doc Comment
  *
  * @category Class
+ *
  * @description Source index with replicas used to generate a Query Suggestions index.
  *
  * @package Algolia\AlgoliaSearch

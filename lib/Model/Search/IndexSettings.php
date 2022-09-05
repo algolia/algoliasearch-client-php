@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * IndexSettings Class Doc Comment
  *
  * @category Class
+ *
  * @description The Algolia index settings.
  *
  * @package Algolia\AlgoliaSearch

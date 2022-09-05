@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * GetRecommendationsParams Class Doc Comment
  *
  * @category Class
+ *
  * @description The &#x60;getRecommendations&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch

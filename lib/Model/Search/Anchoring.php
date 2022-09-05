@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Anchoring Class Doc Comment
  *
  * @category Class
+ *
  * @description Whether the pattern parameter must match the beginning or the end of the query string, or both, or none.
  *
  * @package Algolia\AlgoliaSearch

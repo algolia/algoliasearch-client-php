@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * OperationType Class Doc Comment
  *
  * @category Class
+ *
  * @description Type of operation to perform (move or copy).
  *
  * @package Algolia\AlgoliaSearch

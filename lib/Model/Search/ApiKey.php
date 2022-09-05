@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ApiKey Class Doc Comment
  *
  * @category Class
+ *
  * @description Api Key object.
  *
  * @package Algolia\AlgoliaSearch

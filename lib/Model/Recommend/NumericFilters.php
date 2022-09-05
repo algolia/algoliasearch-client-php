@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * NumericFilters Class Doc Comment
  *
  * @category Class
+ *
  * @description Filter on numeric attributes.
  *
  * @package Algolia\AlgoliaSearch

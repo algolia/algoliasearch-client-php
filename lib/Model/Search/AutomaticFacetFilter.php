@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AutomaticFacetFilter Class Doc Comment
  *
  * @category Class
+ *
  * @description Automatic facet Filter.
  *
  * @package Algolia\AlgoliaSearch

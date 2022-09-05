@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * UpdatedAtResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description The response with a taskID and an updatedAt timestamp.
  *
  * @package Algolia\AlgoliaSearch

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchAssignUserIdsParams Class Doc Comment
  *
  * @category Class
+ *
  * @description Assign userID parameters.
  *
  * @package Algolia\AlgoliaSearch

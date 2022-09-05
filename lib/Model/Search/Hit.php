@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Hit Class Doc Comment
  *
  * @category Class
+ *
  * @description A single hit.
  *
  * @package Algolia\AlgoliaSearch

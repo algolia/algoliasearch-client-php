@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * InsightEvents Class Doc Comment
  *
  * @category Class
+ *
  * @description Object containing the events sent.
  *
  * @package Algolia\AlgoliaSearch

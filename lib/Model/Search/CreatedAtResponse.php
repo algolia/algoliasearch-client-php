@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * CreatedAtResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description The response with a createdAt timestamp.
  *
  * @package Algolia\AlgoliaSearch

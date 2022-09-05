@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SnippetResultOption Class Doc Comment
  *
  * @category Class
+ *
  * @description Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
  *
  * @package Algolia\AlgoliaSearch

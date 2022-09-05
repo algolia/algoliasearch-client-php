@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * QueryType Class Doc Comment
  *
  * @category Class
+ *
  * @description Controls if and how query words are interpreted as prefixes.
  *
  * @package Algolia\AlgoliaSearch

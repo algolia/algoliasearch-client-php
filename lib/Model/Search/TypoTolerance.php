@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * TypoTolerance Class Doc Comment
  *
  * @category Class
+ *
  * @description Controls whether typo tolerance is enabled and how it is applied.
  *
  * @package Algolia\AlgoliaSearch

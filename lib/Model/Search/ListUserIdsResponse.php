@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ListUserIdsResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description UserIDs data.
  *
  * @package Algolia\AlgoliaSearch

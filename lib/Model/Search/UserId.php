@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * UserId Class Doc Comment
  *
  * @category Class
+ *
  * @description A userID.
  *
  * @package Algolia\AlgoliaSearch

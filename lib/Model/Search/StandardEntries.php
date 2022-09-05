@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * StandardEntries Class Doc Comment
  *
  * @category Class
+ *
  * @description Map of language ISO code supported by the dictionary (e.g., \&quot;en\&quot; for English) to a boolean value.
  *
  * @package Algolia\AlgoliaSearch

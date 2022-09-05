@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetTopUserIdsResponse Class Doc Comment
  *
  * @category Class
+ *
  * @description Array of userIDs and clusters.
  *
  * @package Algolia\AlgoliaSearch

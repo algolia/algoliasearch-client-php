@@ -23,6 +23,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
+        'unretrievableAttributes' => 'string[]',
         'disableTypoToleranceOnWords' => 'string[]',
         'attributesToTransliterate' => 'string[]',
         'camelCaseAttributes' => 'string[]',
@@ -45,6 +46,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
+        'unretrievableAttributes' => null,
         'disableTypoToleranceOnWords' => null,
         'attributesToTransliterate' => null,
         'camelCaseAttributes' => null,
@@ -87,6 +89,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $setters = [
         'replicas' => 'setReplicas',
         'paginationLimitedTo' => 'setPaginationLimitedTo',
+        'unretrievableAttributes' => 'setUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'setDisableTypoToleranceOnWords',
         'attributesToTransliterate' => 'setAttributesToTransliterate',
         'camelCaseAttributes' => 'setCamelCaseAttributes',
@@ -109,6 +112,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $getters = [
         'replicas' => 'getReplicas',
         'paginationLimitedTo' => 'getPaginationLimitedTo',
+        'unretrievableAttributes' => 'getUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'getDisableTypoToleranceOnWords',
         'attributesToTransliterate' => 'getAttributesToTransliterate',
         'camelCaseAttributes' => 'getCamelCaseAttributes',
@@ -163,6 +167,10 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['paginationLimitedTo'])) {
             $this->container['paginationLimitedTo'] =
                 $data['paginationLimitedTo'];
+        }
+        if (isset($data['unretrievableAttributes'])) {
+            $this->container['unretrievableAttributes'] =
+                $data['unretrievableAttributes'];
         }
         if (isset($data['disableTypoToleranceOnWords'])) {
             $this->container['disableTypoToleranceOnWords'] =
@@ -278,6 +286,30 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setPaginationLimitedTo($paginationLimitedTo)
     {
         $this->container['paginationLimitedTo'] = $paginationLimitedTo;
+
+        return $this;
+    }
+
+    /**
+     * Gets unretrievableAttributes
+     *
+     * @return string[]|null
+     */
+    public function getUnretrievableAttributes()
+    {
+        return $this->container['unretrievableAttributes'] ?? null;
+    }
+
+    /**
+     * Sets unretrievableAttributes
+     *
+     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
+     *
+     * @return self
+     */
+    public function setUnretrievableAttributes($unretrievableAttributes)
+    {
+        $this->container['unretrievableAttributes'] = $unretrievableAttributes;
 
         return $this;
     }

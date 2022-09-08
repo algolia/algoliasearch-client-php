@@ -26,6 +26,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
+        'unretrievableAttributes' => 'string[]',
         'disableTypoToleranceOnWords' => 'string[]',
         'attributesToTransliterate' => 'string[]',
         'camelCaseAttributes' => 'string[]',
@@ -39,7 +40,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'userData' => 'object',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributesForFaceting' => 'string[]',
-        'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
         'restrictSearchableAttributes' => 'string[]',
         'ranking' => 'string[]',
@@ -91,6 +91,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
+        'unretrievableAttributes' => null,
         'disableTypoToleranceOnWords' => null,
         'attributesToTransliterate' => null,
         'camelCaseAttributes' => null,
@@ -104,7 +105,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'userData' => null,
         'customNormalization' => null,
         'attributesForFaceting' => null,
-        'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
         'restrictSearchableAttributes' => null,
         'ranking' => null,
@@ -176,6 +176,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $setters = [
         'replicas' => 'setReplicas',
         'paginationLimitedTo' => 'setPaginationLimitedTo',
+        'unretrievableAttributes' => 'setUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'setDisableTypoToleranceOnWords',
         'attributesToTransliterate' => 'setAttributesToTransliterate',
         'camelCaseAttributes' => 'setCamelCaseAttributes',
@@ -189,7 +190,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'userData' => 'setUserData',
         'customNormalization' => 'setCustomNormalization',
         'attributesForFaceting' => 'setAttributesForFaceting',
-        'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'restrictSearchableAttributes' => 'setRestrictSearchableAttributes',
         'ranking' => 'setRanking',
@@ -241,6 +241,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     protected static $getters = [
         'replicas' => 'getReplicas',
         'paginationLimitedTo' => 'getPaginationLimitedTo',
+        'unretrievableAttributes' => 'getUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'getDisableTypoToleranceOnWords',
         'attributesToTransliterate' => 'getAttributesToTransliterate',
         'camelCaseAttributes' => 'getCamelCaseAttributes',
@@ -254,7 +255,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'userData' => 'getUserData',
         'customNormalization' => 'getCustomNormalization',
         'attributesForFaceting' => 'getAttributesForFaceting',
-        'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'restrictSearchableAttributes' => 'getRestrictSearchableAttributes',
         'ranking' => 'getRanking',
@@ -339,6 +339,10 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $this->container['paginationLimitedTo'] =
                 $data['paginationLimitedTo'];
         }
+        if (isset($data['unretrievableAttributes'])) {
+            $this->container['unretrievableAttributes'] =
+                $data['unretrievableAttributes'];
+        }
         if (isset($data['disableTypoToleranceOnWords'])) {
             $this->container['disableTypoToleranceOnWords'] =
                 $data['disableTypoToleranceOnWords'];
@@ -387,10 +391,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
                 $data['attributesForFaceting'];
-        }
-        if (isset($data['unretrievableAttributes'])) {
-            $this->container['unretrievableAttributes'] =
-                $data['unretrievableAttributes'];
         }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] =
@@ -629,6 +629,30 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setPaginationLimitedTo($paginationLimitedTo)
     {
         $this->container['paginationLimitedTo'] = $paginationLimitedTo;
+
+        return $this;
+    }
+
+    /**
+     * Gets unretrievableAttributes
+     *
+     * @return string[]|null
+     */
+    public function getUnretrievableAttributes()
+    {
+        return $this->container['unretrievableAttributes'] ?? null;
+    }
+
+    /**
+     * Sets unretrievableAttributes
+     *
+     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
+     *
+     * @return self
+     */
+    public function setUnretrievableAttributes($unretrievableAttributes)
+    {
+        $this->container['unretrievableAttributes'] = $unretrievableAttributes;
 
         return $this;
     }
@@ -953,30 +977,6 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setAttributesForFaceting($attributesForFaceting)
     {
         $this->container['attributesForFaceting'] = $attributesForFaceting;
-
-        return $this;
-    }
-
-    /**
-     * Gets unretrievableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getUnretrievableAttributes()
-    {
-        return $this->container['unretrievableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets unretrievableAttributes
-     *
-     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
-     *
-     * @return self
-     */
-    public function setUnretrievableAttributes($unretrievableAttributes)
-    {
-        $this->container['unretrievableAttributes'] = $unretrievableAttributes;
 
         return $this;
     }

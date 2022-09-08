@@ -56,7 +56,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
         'attributesForFaceting' => 'string[]',
-        'unretrievableAttributes' => 'string[]',
         'attributesToRetrieve' => 'string[]',
         'restrictSearchableAttributes' => 'string[]',
         'ranking' => 'string[]',
@@ -142,7 +141,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
         'attributesForFaceting' => null,
-        'unretrievableAttributes' => null,
         'attributesToRetrieve' => null,
         'restrictSearchableAttributes' => null,
         'ranking' => null,
@@ -248,7 +246,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
         'attributesForFaceting' => 'setAttributesForFaceting',
-        'unretrievableAttributes' => 'setUnretrievableAttributes',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'restrictSearchableAttributes' => 'setRestrictSearchableAttributes',
         'ranking' => 'setRanking',
@@ -334,7 +331,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
         'attributesForFaceting' => 'getAttributesForFaceting',
-        'unretrievableAttributes' => 'getUnretrievableAttributes',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'restrictSearchableAttributes' => 'getRestrictSearchableAttributes',
         'ranking' => 'getRanking',
@@ -524,10 +520,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] =
                 $data['attributesForFaceting'];
-        }
-        if (isset($data['unretrievableAttributes'])) {
-            $this->container['unretrievableAttributes'] =
-                $data['unretrievableAttributes'];
         }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] =
@@ -1602,30 +1594,6 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function setAttributesForFaceting($attributesForFaceting)
     {
         $this->container['attributesForFaceting'] = $attributesForFaceting;
-
-        return $this;
-    }
-
-    /**
-     * Gets unretrievableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getUnretrievableAttributes()
-    {
-        return $this->container['unretrievableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets unretrievableAttributes
-     *
-     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
-     *
-     * @return self
-     */
-    public function setUnretrievableAttributes($unretrievableAttributes)
-    {
-        $this->container['unretrievableAttributes'] = $unretrievableAttributes;
 
         return $this;
     }

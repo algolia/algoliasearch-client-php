@@ -751,15 +751,23 @@ class SearchClient
      * Delete all records matching the query.
      *
      * @param string $indexName The index in which to perform the request. (required)
-     * @param array $searchParams searchParams (required)
+     * @param array $deleteByParams deleteByParams (required)
+     * - $deleteByParams['facetFilters'] => (array)
+     * - $deleteByParams['filters'] => (string) Filter the query with numeric, facet and/or tag filters.
+     * - $deleteByParams['numericFilters'] => (array)
+     * - $deleteByParams['tagFilters'] => (array)
+     * - $deleteByParams['aroundLatLng'] => (string) Search for entries around a central geolocation, enabling a geo search within a circular area.
+     * - $deleteByParams['aroundRadius'] => (array)
+     * - $deleteByParams['insideBoundingBox'] => (array) Search inside a rectangular area (in geo coordinates).
+     * - $deleteByParams['insidePolygon'] => (array) Search inside a polygon (in geo coordinates).
      *
-     * @see \Algolia\AlgoliaSearch\Model\Search\SearchParams
+     * @see \Algolia\AlgoliaSearch\Model\Search\DeleteByParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
-    public function deleteBy($indexName, $searchParams, $requestOptions = [])
+    public function deleteBy($indexName, $deleteByParams, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -767,17 +775,17 @@ class SearchClient
                 'Parameter `indexName` is required when calling `deleteBy`.'
             );
         }
-        // verify the required parameter 'searchParams' is set
-        if (!isset($searchParams)) {
+        // verify the required parameter 'deleteByParams' is set
+        if (!isset($deleteByParams)) {
             throw new \InvalidArgumentException(
-                'Parameter `searchParams` is required when calling `deleteBy`.'
+                'Parameter `deleteByParams` is required when calling `deleteBy`.'
             );
         }
 
         $resourcePath = '/1/indexes/{indexName}/deleteByQuery';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $searchParams;
+        $httpBody = $deleteByParams;
 
         // path params
         if ($indexName !== null) {

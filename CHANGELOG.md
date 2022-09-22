@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.3.1...master)
+## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...master)
+
+## [v3.3.2](https://github.com/algolia/algoliasearch-client-php/compare/3.3.1...3.3.2)
+
+### Fixed
+- Add phpdoc regarding return types ([#710](https://github.com/algolia/algoliasearch-client-php/pull/710))
 
 ## [v3.3.1](https://github.com/algolia/algoliasearch-client-php/compare/3.3.0...3.3.1)
 

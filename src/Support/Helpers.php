@@ -109,7 +109,15 @@ final class Helpers
     {
         $data = \json_decode($json, $assoc, $depth);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException('json_decode error: '.json_last_error_msg());
+            throw new \InvalidArgumentException(sprintf(
+                <<<'EXCEPTION'
+json_decode_error: %s
+input string: %s
+EXCEPTION
+            ,
+                json_last_error_msg(),
+                $json
+            ));
         }
 
         return $data;

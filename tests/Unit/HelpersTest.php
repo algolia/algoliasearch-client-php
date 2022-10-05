@@ -79,4 +79,12 @@ class HelpersTest extends TestCase
         $objects = [['name' => 'test'], ['primary' => 1, 'name' => 'cool']];
         Helpers::mapObjectIDs('primary', $objects);
     }
+
+    public function testItMentionsTheInputStringWhenItIsInvalid(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('this is not valid json');
+
+        Helpers::json_decode('this is not valid json');
+    }
 }

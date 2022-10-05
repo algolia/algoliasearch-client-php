@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...master)
 
+### Added
+
+- Include input string in message about invalid json ([#711](https://github.com/algolia/algoliasearch-client-php/pull/711))
+
 ## [v3.3.2](https://github.com/algolia/algoliasearch-client-php/compare/3.3.1...3.3.2)
 
 ### Fixed

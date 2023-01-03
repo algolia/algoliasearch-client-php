@@ -1,3 +1,7 @@
+## [4.0.0-alpha.30](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.29...4.0.0-alpha.30)
+
+- [dd4fdefd](https://github.com/algolia/api-clients-automation/commit/dd4fdefd) feat(specs): add source json to ingestion client ([#1200](https://github.com/algolia/api-clients-automation/pull/1200)) by [@morganleroi](https://github.com/morganleroi/)
+
 ## [4.0.0-alpha.29](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.28...4.0.0-alpha.29)
 
 - [ec370af5](https://github.com/algolia/api-clients-automation/commit/ec370af5) fix(specs): new CT source input ([#1190](https://github.com/algolia/api-clients-automation/pull/1190)) by [@shortcuts](https://github.com/shortcuts/)

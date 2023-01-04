@@ -28,7 +28,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'dataSize' => 'int',
         'fileSize' => 'int',
         'lastBuildTimeS' => 'int',
-        'numberOfPendingTask' => 'int',
+        'numberOfPendingTasks' => 'int',
         'pendingTask' => 'bool',
         'primary' => 'string',
         'replicas' => 'string[]',
@@ -47,7 +47,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'dataSize' => null,
         'fileSize' => null,
         'lastBuildTimeS' => null,
-        'numberOfPendingTask' => null,
+        'numberOfPendingTasks' => null,
         'pendingTask' => null,
         'primary' => null,
         'replicas' => null,
@@ -86,7 +86,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'dataSize' => 'setDataSize',
         'fileSize' => 'setFileSize',
         'lastBuildTimeS' => 'setLastBuildTimeS',
-        'numberOfPendingTask' => 'setNumberOfPendingTask',
+        'numberOfPendingTasks' => 'setNumberOfPendingTasks',
         'pendingTask' => 'setPendingTask',
         'primary' => 'setPrimary',
         'replicas' => 'setReplicas',
@@ -105,7 +105,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'dataSize' => 'getDataSize',
         'fileSize' => 'getFileSize',
         'lastBuildTimeS' => 'getLastBuildTimeS',
-        'numberOfPendingTask' => 'getNumberOfPendingTask',
+        'numberOfPendingTasks' => 'getNumberOfPendingTasks',
         'pendingTask' => 'getPendingTask',
         'primary' => 'getPrimary',
         'replicas' => 'getReplicas',
@@ -166,9 +166,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         if (isset($data['lastBuildTimeS'])) {
             $this->container['lastBuildTimeS'] = $data['lastBuildTimeS'];
         }
-        if (isset($data['numberOfPendingTask'])) {
-            $this->container['numberOfPendingTask'] =
-                $data['numberOfPendingTask'];
+        if (isset($data['numberOfPendingTasks'])) {
+            $this->container['numberOfPendingTasks'] =
+                $data['numberOfPendingTasks'];
         }
         if (isset($data['pendingTask'])) {
             $this->container['pendingTask'] = $data['pendingTask'];
@@ -231,6 +231,12 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['lastBuildTimeS'] === null
         ) {
             $invalidProperties[] = "'lastBuildTimeS' can't be null";
+        }
+        if (
+            !isset($this->container['numberOfPendingTasks']) ||
+            $this->container['numberOfPendingTasks'] === null
+        ) {
+            $invalidProperties[] = "'numberOfPendingTasks' can't be null";
         }
         if (
             !isset($this->container['pendingTask']) ||
@@ -422,25 +428,25 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets numberOfPendingTask
+     * Gets numberOfPendingTasks
      *
-     * @return int|null
+     * @return int
      */
-    public function getNumberOfPendingTask()
+    public function getNumberOfPendingTasks()
     {
-        return $this->container['numberOfPendingTask'] ?? null;
+        return $this->container['numberOfPendingTasks'] ?? null;
     }
 
     /**
-     * Sets numberOfPendingTask
+     * Sets numberOfPendingTasks
      *
-     * @param int|null $numberOfPendingTask Number of pending indexing operations. This value is deprecated and should not be used.
+     * @param int $numberOfPendingTasks Number of pending indexing operations. This value is deprecated and should not be used.
      *
      * @return self
      */
-    public function setNumberOfPendingTask($numberOfPendingTask)
+    public function setNumberOfPendingTasks($numberOfPendingTasks)
     {
-        $this->container['numberOfPendingTask'] = $numberOfPendingTask;
+        $this->container['numberOfPendingTasks'] = $numberOfPendingTasks;
 
         return $this;
     }

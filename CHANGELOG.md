@@ -1,3 +1,7 @@
+## [4.0.0-alpha.34](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.33...4.0.0-alpha.34)
+
+- [699fff2b](https://github.com/algolia/api-clients-automation/commit/699fff2b) fix(specs): fix method for task enable/disable status ([#1242](https://github.com/algolia/api-clients-automation/pull/1242)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.0.0-alpha.33](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.32...4.0.0-alpha.33)
 
 - [4b1f1fd3](https://github.com/algolia/api-clients-automation/commit/4b1f1fd3) feat(specs): add query params to task lists endpoint in Ingestion APIC ([#1233](https://github.com/algolia/api-clients-automation/pull/1233)) by [@Fluf22](https://github.com/Fluf22/)

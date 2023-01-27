@@ -38,6 +38,29 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'eventScoring' => 'eventScoring',
+        'facetScoring' => 'facetScoring',
+        'personalizationImpact' => 'personalizationImpact',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

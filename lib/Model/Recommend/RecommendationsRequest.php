@@ -50,6 +50,35 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'model' => 'model',
+        'facetName' => 'facetName',
+        'facetValue' => 'facetValue',
+        'indexName' => 'indexName',
+        'threshold' => 'threshold',
+        'maxRecommendations' => 'maxRecommendations',
+        'queryParameters' => 'queryParameters',
+        'fallbackParameters' => 'fallbackParameters',
+        'objectID' => 'objectID',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

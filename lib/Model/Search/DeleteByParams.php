@@ -48,6 +48,34 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'facetFilters' => 'facetFilters',
+        'filters' => 'filters',
+        'numericFilters' => 'numericFilters',
+        'tagFilters' => 'tagFilters',
+        'aroundLatLng' => 'aroundLatLng',
+        'aroundRadius' => 'aroundRadius',
+        'insideBoundingBox' => 'insideBoundingBox',
+        'insidePolygon' => 'insidePolygon',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

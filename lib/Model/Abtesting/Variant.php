@@ -56,6 +56,38 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'averageClickPosition' => 'averageClickPosition',
+        'clickCount' => 'clickCount',
+        'clickThroughRate' => 'clickThroughRate',
+        'conversionCount' => 'conversionCount',
+        'conversionRate' => 'conversionRate',
+        'description' => 'description',
+        'index' => 'index',
+        'noResultCount' => 'noResultCount',
+        'searchCount' => 'searchCount',
+        'trackedSearchCount' => 'trackedSearchCount',
+        'trafficPercentage' => 'trafficPercentage',
+        'userCount' => 'userCount',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

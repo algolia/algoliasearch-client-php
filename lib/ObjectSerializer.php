@@ -60,14 +60,14 @@ class ObjectSerializer
         if (is_object($data)) {
             $values = [];
             if ($data instanceof ModelInterface) {
-                $formats = $data::openAPIFormats();
-                foreach ($data::openAPITypes() as $property => $openAPIType) {
+                $formats = $data::modelFormats();
+                foreach ($data::modelTypes() as $property => $modelTypes) {
                     $getter = $data::getters()[$property];
                     $value = $data->$getter();
                     if (
                         $value !== null &&
                         !in_array(
-                            $openAPIType,
+                            $modelTypes,
                             [
                                 '\DateTime',
                                 '\SplFileObject',
@@ -88,7 +88,7 @@ class ObjectSerializer
                             true
                         )
                     ) {
-                        $callable = [$openAPIType, 'getAllowableEnumValues'];
+                        $callable = [$modelTypes, 'getAllowableEnumValues'];
                         if (is_callable($callable)) {
                             /** array $callable */
                             $allowedEnumTypes = $callable();
@@ -96,7 +96,7 @@ class ObjectSerializer
                                 $imploded = implode("', '", $allowedEnumTypes);
 
                                 throw new \InvalidArgumentException(
-                                    "Invalid value for enum '$openAPIType', must be one of: '$imploded'"
+                                    "Invalid value for enum '$modelTypes', must be one of: '$imploded'"
                                 );
                             }
                         }
@@ -106,7 +106,7 @@ class ObjectSerializer
                             $data::attributeMap()[$property]
                         ] = self::sanitizeForSerialization(
                             $value,
-                            $openAPIType,
+                            $modelTypes,
                             $formats[$property]
                         );
                     }
@@ -401,23 +401,10 @@ class ObjectSerializer
             return $data;
         }
         $data = is_string($data) ? json_decode($data) : $data;
-        // If a discriminator is defined and points to a valid subclass, use it.
-        $discriminator = $class::DISCRIMINATOR;
-        if (
-            !empty($discriminator) &&
-            isset($data->{$discriminator}) &&
-            is_string($data->{$discriminator})
-        ) {
-            $subclass =
-                '\Algolia\AlgoliaSearch\Model\\' . $data->{$discriminator};
-            if (is_subclass_of($subclass, $class)) {
-                $class = $subclass;
-            }
-        }
 
         /** @var ModelInterface $instance */
         $instance = new $class();
-        foreach ($instance::openAPITypes() as $property => $type) {
+        foreach ($instance::modelTypes() as $property => $type) {
             $propertySetter = $instance::setters()[$property];
 
             if (

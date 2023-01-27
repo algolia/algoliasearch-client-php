@@ -1,3 +1,7 @@
+## [4.0.0-alpha.36](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.35...4.0.0-alpha.36)
+
+- [a60e6790](https://github.com/algolia/api-clients-automation/commit/a60e6790) feat(specs): add sourceID query param to task list endpoint ([#1250](https://github.com/algolia/api-clients-automation/pull/1250)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.0.0-alpha.35](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.34...4.0.0-alpha.35)
 
 - [83330afe](https://github.com/algolia/api-clients-automation/commit/83330afe) chore(specs): change PlatformType naming to Platform ([#1246](https://github.com/algolia/api-clients-automation/pull/1246)) by [@Fluf22](https://github.com/Fluf22/)

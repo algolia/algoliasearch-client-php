@@ -58,6 +58,39 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'filters' => 'filters',
+        'firstMatchedWord' => 'firstMatchedWord',
+        'geoDistance' => 'geoDistance',
+        'geoPrecision' => 'geoPrecision',
+        'matchedGeoLocation' => 'matchedGeoLocation',
+        'personalization' => 'personalization',
+        'nbExactWords' => 'nbExactWords',
+        'nbTypos' => 'nbTypos',
+        'promoted' => 'promoted',
+        'proximityDistance' => 'proximityDistance',
+        'userScore' => 'userScore',
+        'words' => 'words',
+        'promotedByReRanking' => 'promotedByReRanking',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

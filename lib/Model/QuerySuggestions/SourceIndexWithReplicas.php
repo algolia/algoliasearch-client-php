@@ -51,6 +51,34 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'replicas' => 'replicas',
+        'indexName' => 'indexName',
+        'analyticsTags' => 'analyticsTags',
+        'facets' => 'facets',
+        'minHits' => 'minHits',
+        'minLetters' => 'minLetters',
+        'generate' => 'generate',
+        'external' => 'external',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

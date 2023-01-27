@@ -190,6 +190,105 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'params' => 'params',
+        'query' => 'query',
+        'similarQuery' => 'similarQuery',
+        'filters' => 'filters',
+        'facetFilters' => 'facetFilters',
+        'optionalFilters' => 'optionalFilters',
+        'numericFilters' => 'numericFilters',
+        'tagFilters' => 'tagFilters',
+        'sumOrFiltersScores' => 'sumOrFiltersScores',
+        'facets' => 'facets',
+        'maxValuesPerFacet' => 'maxValuesPerFacet',
+        'facetingAfterDistinct' => 'facetingAfterDistinct',
+        'sortFacetValuesBy' => 'sortFacetValuesBy',
+        'page' => 'page',
+        'offset' => 'offset',
+        'length' => 'length',
+        'aroundLatLng' => 'aroundLatLng',
+        'aroundLatLngViaIP' => 'aroundLatLngViaIP',
+        'aroundRadius' => 'aroundRadius',
+        'aroundPrecision' => 'aroundPrecision',
+        'minimumAroundRadius' => 'minimumAroundRadius',
+        'insideBoundingBox' => 'insideBoundingBox',
+        'insidePolygon' => 'insidePolygon',
+        'naturalLanguages' => 'naturalLanguages',
+        'ruleContexts' => 'ruleContexts',
+        'personalizationImpact' => 'personalizationImpact',
+        'userToken' => 'userToken',
+        'getRankingInfo' => 'getRankingInfo',
+        'clickAnalytics' => 'clickAnalytics',
+        'analytics' => 'analytics',
+        'analyticsTags' => 'analyticsTags',
+        'percentileComputation' => 'percentileComputation',
+        'enableABTest' => 'enableABTest',
+        'enableReRanking' => 'enableReRanking',
+        'reRankingApplyFilter' => 'reRankingApplyFilter',
+        'attributesForFaceting' => 'attributesForFaceting',
+        'attributesToRetrieve' => 'attributesToRetrieve',
+        'restrictSearchableAttributes' => 'restrictSearchableAttributes',
+        'ranking' => 'ranking',
+        'customRanking' => 'customRanking',
+        'relevancyStrictness' => 'relevancyStrictness',
+        'attributesToHighlight' => 'attributesToHighlight',
+        'attributesToSnippet' => 'attributesToSnippet',
+        'highlightPreTag' => 'highlightPreTag',
+        'highlightPostTag' => 'highlightPostTag',
+        'snippetEllipsisText' => 'snippetEllipsisText',
+        'restrictHighlightAndSnippetArrays' => 'restrictHighlightAndSnippetArrays',
+        'hitsPerPage' => 'hitsPerPage',
+        'minWordSizefor1Typo' => 'minWordSizefor1Typo',
+        'minWordSizefor2Typos' => 'minWordSizefor2Typos',
+        'typoTolerance' => 'typoTolerance',
+        'allowTyposOnNumericTokens' => 'allowTyposOnNumericTokens',
+        'disableTypoToleranceOnAttributes' => 'disableTypoToleranceOnAttributes',
+        'ignorePlurals' => 'ignorePlurals',
+        'removeStopWords' => 'removeStopWords',
+        'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
+        'queryLanguages' => 'queryLanguages',
+        'decompoundQuery' => 'decompoundQuery',
+        'enableRules' => 'enableRules',
+        'enablePersonalization' => 'enablePersonalization',
+        'queryType' => 'queryType',
+        'removeWordsIfNoResults' => 'removeWordsIfNoResults',
+        'advancedSyntax' => 'advancedSyntax',
+        'optionalWords' => 'optionalWords',
+        'disableExactOnAttributes' => 'disableExactOnAttributes',
+        'exactOnSingleWordQuery' => 'exactOnSingleWordQuery',
+        'alternativesAsExact' => 'alternativesAsExact',
+        'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
+        'distinct' => 'distinct',
+        'attributeForDistinct' => 'attributeForDistinct',
+        'synonyms' => 'synonyms',
+        'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
+        'minProximity' => 'minProximity',
+        'responseFields' => 'responseFields',
+        'maxFacetHits' => 'maxFacetHits',
+        'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
+        'renderingContent' => 'renderingContent',
+        'indexName' => 'indexName',
+        'type' => 'type',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

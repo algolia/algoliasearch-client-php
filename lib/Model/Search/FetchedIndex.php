@@ -54,6 +54,37 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'name' => 'name',
+        'createdAt' => 'createdAt',
+        'updatedAt' => 'updatedAt',
+        'entries' => 'entries',
+        'dataSize' => 'dataSize',
+        'fileSize' => 'fileSize',
+        'lastBuildTimeS' => 'lastBuildTimeS',
+        'numberOfPendingTasks' => 'numberOfPendingTasks',
+        'pendingTask' => 'pendingTask',
+        'primary' => 'primary',
+        'replicas' => 'replicas',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

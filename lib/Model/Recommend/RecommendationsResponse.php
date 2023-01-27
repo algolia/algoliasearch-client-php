@@ -84,6 +84,52 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'abTestID' => 'abTestID',
+        'abTestVariantID' => 'abTestVariantID',
+        'aroundLatLng' => 'aroundLatLng',
+        'automaticRadius' => 'automaticRadius',
+        'exhaustiveFacetsCount' => 'exhaustiveFacetsCount',
+        'exhaustiveNbHits' => 'exhaustiveNbHits',
+        'exhaustiveTypo' => 'exhaustiveTypo',
+        'facets' => 'facets',
+        'facetsStats' => 'facets_stats',
+        'hitsPerPage' => 'hitsPerPage',
+        'index' => 'index',
+        'indexUsed' => 'indexUsed',
+        'message' => 'message',
+        'nbHits' => 'nbHits',
+        'nbPages' => 'nbPages',
+        'nbSortedHits' => 'nbSortedHits',
+        'page' => 'page',
+        'params' => 'params',
+        'parsedQuery' => 'parsedQuery',
+        'processingTimeMS' => 'processingTimeMS',
+        'query' => 'query',
+        'queryAfterRemoval' => 'queryAfterRemoval',
+        'serverUsed' => 'serverUsed',
+        'userData' => 'userData',
+        'renderingContent' => 'renderingContent',
+        'hits' => 'hits',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

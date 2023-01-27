@@ -36,6 +36,28 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'userToken' => 'userToken',
+        'deletedUntil' => 'deletedUntil',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

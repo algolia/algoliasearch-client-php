@@ -46,6 +46,33 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'hit' => 'hit',
+        'count' => 'count',
+        'clickThroughRate' => 'clickThroughRate',
+        'conversionRate' => 'conversionRate',
+        'trackedSearchCount' => 'trackedSearchCount',
+        'clickCount' => 'clickCount',
+        'conversionCount' => 'conversionCount',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

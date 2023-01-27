@@ -116,6 +116,68 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'attributesForFaceting' => 'attributesForFaceting',
+        'attributesToRetrieve' => 'attributesToRetrieve',
+        'restrictSearchableAttributes' => 'restrictSearchableAttributes',
+        'ranking' => 'ranking',
+        'customRanking' => 'customRanking',
+        'relevancyStrictness' => 'relevancyStrictness',
+        'attributesToHighlight' => 'attributesToHighlight',
+        'attributesToSnippet' => 'attributesToSnippet',
+        'highlightPreTag' => 'highlightPreTag',
+        'highlightPostTag' => 'highlightPostTag',
+        'snippetEllipsisText' => 'snippetEllipsisText',
+        'restrictHighlightAndSnippetArrays' => 'restrictHighlightAndSnippetArrays',
+        'hitsPerPage' => 'hitsPerPage',
+        'minWordSizefor1Typo' => 'minWordSizefor1Typo',
+        'minWordSizefor2Typos' => 'minWordSizefor2Typos',
+        'typoTolerance' => 'typoTolerance',
+        'allowTyposOnNumericTokens' => 'allowTyposOnNumericTokens',
+        'disableTypoToleranceOnAttributes' => 'disableTypoToleranceOnAttributes',
+        'ignorePlurals' => 'ignorePlurals',
+        'removeStopWords' => 'removeStopWords',
+        'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
+        'queryLanguages' => 'queryLanguages',
+        'decompoundQuery' => 'decompoundQuery',
+        'enableRules' => 'enableRules',
+        'enablePersonalization' => 'enablePersonalization',
+        'queryType' => 'queryType',
+        'removeWordsIfNoResults' => 'removeWordsIfNoResults',
+        'advancedSyntax' => 'advancedSyntax',
+        'optionalWords' => 'optionalWords',
+        'disableExactOnAttributes' => 'disableExactOnAttributes',
+        'exactOnSingleWordQuery' => 'exactOnSingleWordQuery',
+        'alternativesAsExact' => 'alternativesAsExact',
+        'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
+        'distinct' => 'distinct',
+        'attributeForDistinct' => 'attributeForDistinct',
+        'synonyms' => 'synonyms',
+        'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
+        'minProximity' => 'minProximity',
+        'responseFields' => 'responseFields',
+        'maxFacetHits' => 'maxFacetHits',
+        'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
+        'renderingContent' => 'renderingContent',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

@@ -45,6 +45,31 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'objectID' => 'objectID',
+        'highlightResult' => '_highlightResult',
+        'snippetResult' => '_snippetResult',
+        'rankingInfo' => '_rankingInfo',
+        'distinctSeqID' => '_distinctSeqID',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

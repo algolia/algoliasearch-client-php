@@ -100,6 +100,60 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @var string[]
+     */
+    protected static $attributeMap = [
+        'query' => 'query',
+        'similarQuery' => 'similarQuery',
+        'filters' => 'filters',
+        'facetFilters' => 'facetFilters',
+        'optionalFilters' => 'optionalFilters',
+        'numericFilters' => 'numericFilters',
+        'tagFilters' => 'tagFilters',
+        'sumOrFiltersScores' => 'sumOrFiltersScores',
+        'facets' => 'facets',
+        'maxValuesPerFacet' => 'maxValuesPerFacet',
+        'facetingAfterDistinct' => 'facetingAfterDistinct',
+        'sortFacetValuesBy' => 'sortFacetValuesBy',
+        'page' => 'page',
+        'offset' => 'offset',
+        'length' => 'length',
+        'aroundLatLng' => 'aroundLatLng',
+        'aroundLatLngViaIP' => 'aroundLatLngViaIP',
+        'aroundRadius' => 'aroundRadius',
+        'aroundPrecision' => 'aroundPrecision',
+        'minimumAroundRadius' => 'minimumAroundRadius',
+        'insideBoundingBox' => 'insideBoundingBox',
+        'insidePolygon' => 'insidePolygon',
+        'naturalLanguages' => 'naturalLanguages',
+        'ruleContexts' => 'ruleContexts',
+        'personalizationImpact' => 'personalizationImpact',
+        'userToken' => 'userToken',
+        'getRankingInfo' => 'getRankingInfo',
+        'clickAnalytics' => 'clickAnalytics',
+        'analytics' => 'analytics',
+        'analyticsTags' => 'analyticsTags',
+        'percentileComputation' => 'percentileComputation',
+        'enableABTest' => 'enableABTest',
+        'enableReRanking' => 'enableReRanking',
+        'reRankingApplyFilter' => 'reRankingApplyFilter',
+    ];
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
      * Array of property to type mappings. Used for (de)serialization
      *
      * @return array

@@ -1,3 +1,9 @@
+## [4.0.0-alpha.38](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.37...4.0.0-alpha.38)
+
+- [aed20fe6](https://github.com/algolia/api-clients-automation/commit/aed20fe6) feat(specs): add more descriptions to the Ingestion API ([#1273](https://github.com/algolia/api-clients-automation/pull/1273)) by [@shortcuts](https://github.com/shortcuts/)
+- [3739451a](https://github.com/algolia/api-clients-automation/commit/3739451a) fix(specs): add query params for observability ([#1277](https://github.com/algolia/api-clients-automation/pull/1277)) by [@millotp](https://github.com/millotp/)
+- [859c0a97](https://github.com/algolia/api-clients-automation/commit/859c0a97) feat(specs): source update changes ([#1276](https://github.com/algolia/api-clients-automation/pull/1276)) by [@mehmetaligok](https://github.com/mehmetaligok/)
+
 ## [4.0.0-alpha.37](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.36...4.0.0-alpha.37)
 
 - [46c1e2e9](https://github.com/algolia/api-clients-automation/commit/46c1e2e9) feat(specs): add search endpoint to every item type ([#1274](https://github.com/algolia/api-clients-automation/pull/1274)) by [@Fluf22](https://github.com/Fluf22/)

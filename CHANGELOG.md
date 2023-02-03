@@ -1,3 +1,7 @@
+## [4.0.0-alpha.39](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.38...4.0.0-alpha.39)
+
+- [a1c7c245](https://github.com/algolia/api-clients-automation/commit/a1c7c245) fix(specs): correct types for Tasks trigger ([#1279](https://github.com/algolia/api-clients-automation/pull/1279)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.38](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.37...4.0.0-alpha.38)
 
 - [aed20fe6](https://github.com/algolia/api-clients-automation/commit/aed20fe6) feat(specs): add more descriptions to the Ingestion API ([#1273](https://github.com/algolia/api-clients-automation/pull/1273)) by [@shortcuts](https://github.com/shortcuts/)

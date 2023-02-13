@@ -1,3 +1,7 @@
+## [4.0.0-alpha.42](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.41...4.0.0-alpha.42)
+
+- [023d5572](https://github.com/algolia/api-clients-automation/commit/023d5572) feat(specs): add sort and order handling in query parameters ([#1304](https://github.com/algolia/api-clients-automation/pull/1304)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.0.0-alpha.41](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.40...4.0.0-alpha.41)
 
 - [b9b4ba35](https://github.com/algolia/api-clients-automation/commit/b9b4ba35) feat(specs): add CSV source ([#1301](https://github.com/algolia/api-clients-automation/pull/1301)) by [@morganleroi](https://github.com/morganleroi/)

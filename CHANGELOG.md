@@ -1,3 +1,7 @@
+## [4.0.0-alpha.45](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.44...4.0.0-alpha.45)
+
+- [2eca9b7b](https://github.com/algolia/api-clients-automation/commit/2eca9b7b) fix(specs): update Predict Segment operators to textual format ([#1316](https://github.com/algolia/api-clients-automation/pull/1316)) by [@francoischalifour](https://github.com/francoischalifour/)
+
 ## [4.0.0-alpha.44](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.43...4.0.0-alpha.44)
 
 - [f7f0fbe8](https://github.com/algolia/api-clients-automation/commit/f7f0fbe8) feat(specs): make DELETE endpoints return a 200 OK ([#1314](https://github.com/algolia/api-clients-automation/pull/1314)) by [@Fluf22](https://github.com/Fluf22/)

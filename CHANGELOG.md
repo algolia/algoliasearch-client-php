@@ -1,3 +1,7 @@
+## [4.0.0-alpha.46](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.45...4.0.0-alpha.46)
+
+- [e3aa6b2d](https://github.com/algolia/api-clients-automation/commit/e3aa6b2d) fix(specs): add `UniqueIDColumn` property to `SourceJSON` input ([#1333](https://github.com/algolia/api-clients-automation/pull/1333)) by [@mehmetaligok](https://github.com/mehmetaligok/)
+
 ## [4.0.0-alpha.45](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.44...4.0.0-alpha.45)
 
 - [2eca9b7b](https://github.com/algolia/api-clients-automation/commit/2eca9b7b) fix(specs): update Predict Segment operators to textual format ([#1316](https://github.com/algolia/api-clients-automation/pull/1316)) by [@francoischalifour](https://github.com/francoischalifour/)

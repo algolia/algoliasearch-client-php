@@ -1,3 +1,7 @@
+## [4.0.0-alpha.47](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.46...4.0.0-alpha.47)
+
+- [b4d183fe](https://github.com/algolia/api-clients-automation/commit/b4d183fe) fix(specs): add pagination to events ([#1337](https://github.com/algolia/api-clients-automation/pull/1337)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.46](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.45...4.0.0-alpha.46)
 
 - [e3aa6b2d](https://github.com/algolia/api-clients-automation/commit/e3aa6b2d) fix(specs): add `UniqueIDColumn` property to `SourceJSON` input ([#1333](https://github.com/algolia/api-clients-automation/pull/1333)) by [@mehmetaligok](https://github.com/mehmetaligok/)

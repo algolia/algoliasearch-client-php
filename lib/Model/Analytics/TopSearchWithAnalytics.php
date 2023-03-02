@@ -23,9 +23,9 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
-        'clickThroughRate' => 'double',
+        'clickThroughRate' => 'float',
         'averageClickPosition' => 'int',
-        'conversionRate' => 'double',
+        'conversionRate' => 'float',
         'trackedSearchCount' => 'int',
         'clickCount' => 'int',
         'conversionCount' => 'int',

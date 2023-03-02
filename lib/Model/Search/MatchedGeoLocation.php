@@ -21,8 +21,8 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'lat' => 'double',
-        'lng' => 'double',
+        'lat' => 'float',
+        'lng' => 'float',
         'distance' => 'int',
     ];
 

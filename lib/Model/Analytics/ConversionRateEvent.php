@@ -21,7 +21,7 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'trackedSearchCount' => 'int',
         'conversionCount' => 'int',
         'date' => 'string',

@@ -29,7 +29,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'snippetResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>',
         'rankingInfo' => '\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo',
         'distinctSeqID' => 'int',
-        'score' => 'double',
+        'score' => 'float',
     ];
 
     /**

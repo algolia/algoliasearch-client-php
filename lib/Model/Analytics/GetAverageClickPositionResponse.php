@@ -21,7 +21,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $modelTypes = [
-        'average' => 'double',
+        'average' => 'float',
         'clickCount' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\AverageClickEvent[]',
     ];

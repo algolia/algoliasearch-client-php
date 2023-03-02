@@ -24,7 +24,7 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'date' => 'string',
         'noResultCount' => 'int',
         'count' => 'int',
-        'rate' => 'double',
+        'rate' => 'float',
     ];
 
     /**

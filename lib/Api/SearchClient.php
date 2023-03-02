@@ -229,6 +229,8 @@ class SearchClient
      * Add a single source.
      *
      * @param array $source The source to add. (required)
+     * - $source['source'] => (string) The IP range of the source. (required)
+     * - $source['description'] => (string) The description of the source.
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\Source
      *
@@ -2398,7 +2400,7 @@ class SearchClient
      * @param string $objectID Unique identifier of an object. (required)
      * @param array $synonymHit synonymHit (required)
      * - $synonymHit['objectID'] => (string) Unique identifier of the synonym object to be created or updated. (required)
-     * - $synonymHit['type'] => (array)
+     * - $synonymHit['type'] => (array)  (required)
      * - $synonymHit['synonyms'] => (array) Words or phrases to be considered equivalent.
      * - $synonymHit['input'] => (string) Word or phrase to appear in query strings (for onewaysynonym).
      * - $synonymHit['word'] => (string) Word or phrase to appear in query strings (for altcorrection1 and altcorrection2).
@@ -2822,7 +2824,7 @@ class SearchClient
      * @param int $page Requested page (zero-based). When specified, will retrieve a specific page; the page size is implicitly set to 100. When null, will retrieve all indices (no pagination). (optional, default to 0)
      * @param int $hitsPerPage Maximum number of objects to retrieve. (optional, default to 100)
      * @param array $searchSynonymsParams The body of the the &#x60;searchSynonyms&#x60; method. (optional)
-     * - $searchSynonymsParams['query'] => (string) The text to search in the index. (required)
+     * - $searchSynonymsParams['query'] => (string) The text to search in the index.
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsParams
      *

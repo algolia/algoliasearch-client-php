@@ -23,9 +23,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     protected static $modelTypes = [
         'averageClickPosition' => 'int',
         'clickCount' => 'int',
-        'clickThroughRate' => 'double',
+        'clickThroughRate' => 'float',
         'conversionCount' => 'int',
-        'conversionRate' => 'double',
+        'conversionRate' => 'float',
         'description' => 'string',
         'index' => 'string',
         'noResultCount' => 'int',

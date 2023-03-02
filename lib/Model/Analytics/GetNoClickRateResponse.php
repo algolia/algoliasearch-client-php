@@ -21,7 +21,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'count' => 'int',
         'noClickCount' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]',

@@ -21,7 +21,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'count' => 'int',
         'noClickCount' => 'int',
         'date' => 'string',

@@ -27,8 +27,8 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Search\TagFilters',
         'aroundLatLng' => 'string',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Search\AroundRadius',
-        'insideBoundingBox' => 'double[]',
-        'insidePolygon' => 'double[]',
+        'insideBoundingBox' => 'float[]',
+        'insidePolygon' => 'float[]',
     ];
 
     /**

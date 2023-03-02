@@ -21,7 +21,7 @@ class AverageClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelTypes = [
-        'average' => 'double',
+        'average' => 'float',
         'clickCount' => 'int',
         'date' => 'string',
     ];

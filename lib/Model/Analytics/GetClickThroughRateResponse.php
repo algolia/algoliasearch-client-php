@@ -21,7 +21,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'clickCount' => 'int',
         'trackedSearchCount' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[]',

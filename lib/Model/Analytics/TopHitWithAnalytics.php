@@ -23,8 +23,8 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $modelTypes = [
         'hit' => 'string',
         'count' => 'int',
-        'clickThroughRate' => 'double',
-        'conversionRate' => 'double',
+        'clickThroughRate' => 'float',
+        'conversionRate' => 'float',
         'trackedSearchCount' => 'int',
         'clickCount' => 'int',
         'conversionCount' => 'int',

@@ -21,7 +21,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'count' => 'int',
         'noResultCount' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[]',

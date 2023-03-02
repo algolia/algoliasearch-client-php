@@ -21,7 +21,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'trackedSearchCount' => 'int',
         'conversionCount' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]',

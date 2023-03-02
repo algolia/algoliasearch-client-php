@@ -22,8 +22,8 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     protected static $modelTypes = [
         'abTestID' => 'int',
-        'clickSignificance' => 'double',
-        'conversionSignificance' => 'double',
+        'clickSignificance' => 'float',
+        'conversionSignificance' => 'float',
         'endAt' => 'string',
         'updatedAt' => 'string',
         'createdAt' => 'string',

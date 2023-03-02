@@ -21,7 +21,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'double',
+        'rate' => 'float',
         'clickCount' => 'int',
         'trackedSearchCount' => 'int',
         'date' => 'string',

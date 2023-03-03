@@ -1,3 +1,8 @@
+## [4.0.0-alpha.49](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.48...4.0.0-alpha.49)
+
+- [5a93964e](https://github.com/algolia/api-clients-automation/commit/5a93964e) fix(specs): add skipped runs ([#1359](https://github.com/algolia/api-clients-automation/pull/1359)) by [@millotp](https://github.com/millotp/)
+- [2a4fe7ea](https://github.com/algolia/api-clients-automation/commit/2a4fe7ea) feat(clients): upgrade to node 18 ([#1344](https://github.com/algolia/api-clients-automation/pull/1344)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.48](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.47...4.0.0-alpha.48)
 
 - [33700b8c](https://github.com/algolia/api-clients-automation/commit/33700b8c) feat(specs): add a reason string to the run object ([#1347](https://github.com/algolia/api-clients-automation/pull/1347)) by [@Fluf22](https://github.com/Fluf22/)

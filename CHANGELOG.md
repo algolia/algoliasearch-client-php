@@ -1,3 +1,7 @@
+## [4.0.0-alpha.50](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.49...4.0.0-alpha.50)
+
+- [9f967a45](https://github.com/algolia/api-clients-automation/commit/9f967a45) fix(specs): authenticationID not required in source and destination ([#1379](https://github.com/algolia/api-clients-automation/pull/1379)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.49](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.48...4.0.0-alpha.49)
 
 - [5a93964e](https://github.com/algolia/api-clients-automation/commit/5a93964e) fix(specs): add skipped runs ([#1359](https://github.com/algolia/api-clients-automation/pull/1359)) by [@millotp](https://github.com/millotp/)

@@ -1,3 +1,8 @@
+## [4.0.0-alpha.52](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.51...4.0.0-alpha.52)
+
+- [c49b6e6d](https://github.com/algolia/api-clients-automation/commit/c49b6e6d) fix(specs): add customRequest to ingestion and small fix ([#1418](https://github.com/algolia/api-clients-automation/pull/1418)) by [@millotp](https://github.com/millotp/)
+- [524347e3](https://github.com/algolia/api-clients-automation/commit/524347e3) fix(specs): update BigCommerce source payload ([#1416](https://github.com/algolia/api-clients-automation/pull/1416)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.51](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.50...4.0.0-alpha.51)
 
 - [e3fa5eb0](https://github.com/algolia/api-clients-automation/commit/e3fa5eb0) feat(specs): add new BigCommerce source fields ([#1387](https://github.com/algolia/api-clients-automation/pull/1387)) by [@shortcuts](https://github.com/shortcuts/)

@@ -120,6 +120,7 @@ class ObjectSerializer
         }
 
         return (string) $data;
+
     }
 
     /**
@@ -137,6 +138,7 @@ class ObjectSerializer
         }
 
         return $filename;
+
     }
 
     /**
@@ -169,6 +171,7 @@ class ObjectSerializer
         }
 
         return self::toString($object);
+
     }
 
     /**
@@ -206,6 +209,7 @@ class ObjectSerializer
         }
 
         return self::toString($value);
+
     }
 
     /**
@@ -228,6 +232,7 @@ class ObjectSerializer
         }
 
         return $value;
+
     }
 
     /**
@@ -422,5 +427,6 @@ class ObjectSerializer
         }
 
         return $instance;
+
     }
 }

@@ -1,3 +1,7 @@
+## [4.0.0-alpha.54](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.53...4.0.0-alpha.54)
+
+- [619e2ad7](https://github.com/algolia/api-clients-automation/commit/619e2ad7) feat(specs): add delimiter option for csv source ([#1445](https://github.com/algolia/api-clients-automation/pull/1445)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.53](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.52...4.0.0-alpha.53)
 
 - [33ec7bc7](https://github.com/algolia/api-clients-automation/commit/33ec7bc7) feat(specs): add `lastUpdatedAt` field to predict segments ([#1431](https://github.com/algolia/api-clients-automation/pull/1431)) by [@bengreenbank](https://github.com/bengreenbank/)

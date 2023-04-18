@@ -1,3 +1,10 @@
+## [4.0.0-alpha.56](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.55...4.0.0-alpha.56)
+
+- [9a65a533](https://github.com/algolia/api-clients-automation/commit/9a65a533) feat(specs): add `size` to predict segment response ([#1434](https://github.com/algolia/api-clients-automation/pull/1434)) by [@bengreenbank](https://github.com/bengreenbank/)
+- [0ed9eb22](https://github.com/algolia/api-clients-automation/commit/0ed9eb22) fix(specs): add `input` in GET tasks ([#1472](https://github.com/algolia/api-clients-automation/pull/1472)) by [@shortcuts](https://github.com/shortcuts/)
+- [692aa2d8](https://github.com/algolia/api-clients-automation/commit/692aa2d8) fix(specs): add transform event type ([#1470](https://github.com/algolia/api-clients-automation/pull/1470)) by [@millotp](https://github.com/millotp/)
+- [69aac53d](https://github.com/algolia/api-clients-automation/commit/69aac53d) fix(specs): task trigger guard import order ([#1459](https://github.com/algolia/api-clients-automation/pull/1459)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.0.0-alpha.55](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.54...4.0.0-alpha.55)
 
 - [a0d96721](https://github.com/algolia/api-clients-automation/commit/a0d96721) fix(specs): task trigger guard import ([#1458](https://github.com/algolia/api-clients-automation/pull/1458)) by [@Fluf22](https://github.com/Fluf22/)

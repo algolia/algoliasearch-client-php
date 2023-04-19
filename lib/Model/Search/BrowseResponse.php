@@ -39,6 +39,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbSortedHits' => 'int',
         'page' => 'int',
         'params' => 'string',
+        'redirect' => '\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
         'query' => 'string',
@@ -74,6 +75,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbSortedHits' => null,
         'page' => null,
         'params' => null,
+        'redirect' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
         'query' => null,
@@ -110,6 +112,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbSortedHits' => 'nbSortedHits',
         'page' => 'page',
         'params' => 'params',
+        'redirect' => 'redirect',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
         'query' => 'query',
@@ -176,6 +179,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbSortedHits' => 'setNbSortedHits',
         'page' => 'setPage',
         'params' => 'setParams',
+        'redirect' => 'setRedirect',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
         'query' => 'setQuery',
@@ -211,6 +215,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbSortedHits' => 'getNbSortedHits',
         'page' => 'getPage',
         'params' => 'getParams',
+        'redirect' => 'getRedirect',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
         'query' => 'getQuery',
@@ -310,6 +315,9 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         }
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
+        }
+        if (isset($data['redirect'])) {
+            $this->container['redirect'] = $data['redirect'];
         }
         if (isset($data['parsedQuery'])) {
             $this->container['parsedQuery'] = $data['parsedQuery'];
@@ -869,6 +877,30 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setParams($params)
     {
         $this->container['params'] = $params;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect|null
+     */
+    public function getRedirect()
+    {
+        return $this->container['redirect'] ?? null;
+    }
+
+    /**
+     * Sets redirect
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect|null $redirect redirect
+     *
+     * @return self
+     */
+    public function setRedirect($redirect)
+    {
+        $this->container['redirect'] = $redirect;
 
         return $this;
     }

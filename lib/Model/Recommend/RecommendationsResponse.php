@@ -39,6 +39,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'nbSortedHits' => 'int',
         'page' => 'int',
         'params' => 'string',
+        'redirect' => '\Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseRedirect',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
         'query' => 'string',
@@ -73,6 +74,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'nbSortedHits' => null,
         'page' => null,
         'params' => null,
+        'redirect' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
         'query' => null,
@@ -108,6 +110,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'nbSortedHits' => 'nbSortedHits',
         'page' => 'page',
         'params' => 'params',
+        'redirect' => 'redirect',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
         'query' => 'query',
@@ -173,6 +176,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'nbSortedHits' => 'setNbSortedHits',
         'page' => 'setPage',
         'params' => 'setParams',
+        'redirect' => 'setRedirect',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
         'query' => 'setQuery',
@@ -207,6 +211,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'nbSortedHits' => 'getNbSortedHits',
         'page' => 'getPage',
         'params' => 'getParams',
+        'redirect' => 'getRedirect',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
         'query' => 'getQuery',
@@ -305,6 +310,9 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         }
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
+        }
+        if (isset($data['redirect'])) {
+            $this->container['redirect'] = $data['redirect'];
         }
         if (isset($data['parsedQuery'])) {
             $this->container['parsedQuery'] = $data['parsedQuery'];
@@ -861,6 +869,30 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function setParams($params)
     {
         $this->container['params'] = $params;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseRedirect|null
+     */
+    public function getRedirect()
+    {
+        return $this->container['redirect'] ?? null;
+    }
+
+    /**
+     * Sets redirect
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseRedirect|null $redirect redirect
+     *
+     * @return self
+     */
+    public function setRedirect($redirect)
+    {
+        $this->container['redirect'] = $redirect;
 
         return $this;
     }

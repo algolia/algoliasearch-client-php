@@ -48,12 +48,15 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'enablePersonalization' => 'bool',
         'queryType' => '\Algolia\AlgoliaSearch\Model\Recommend\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults',
+        'mode' => '\Algolia\AlgoliaSearch\Model\Recommend\Mode',
+        'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch',
         'advancedSyntax' => 'bool',
         'optionalWords' => 'string[]',
         'disableExactOnAttributes' => 'string[]',
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]',
+        'explain' => 'string[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Recommend\Distinct',
         'attributeForDistinct' => 'string',
         'synonyms' => 'bool',
@@ -98,12 +101,15 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'enablePersonalization' => null,
         'queryType' => null,
         'removeWordsIfNoResults' => null,
+        'mode' => null,
+        'semanticSearch' => null,
         'advancedSyntax' => null,
         'optionalWords' => null,
         'disableExactOnAttributes' => null,
         'exactOnSingleWordQuery' => null,
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
+        'explain' => null,
         'distinct' => null,
         'attributeForDistinct' => null,
         'synonyms' => null,
@@ -149,12 +155,15 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'enablePersonalization' => 'enablePersonalization',
         'queryType' => 'queryType',
         'removeWordsIfNoResults' => 'removeWordsIfNoResults',
+        'mode' => 'mode',
+        'semanticSearch' => 'semanticSearch',
         'advancedSyntax' => 'advancedSyntax',
         'optionalWords' => 'optionalWords',
         'disableExactOnAttributes' => 'disableExactOnAttributes',
         'exactOnSingleWordQuery' => 'exactOnSingleWordQuery',
         'alternativesAsExact' => 'alternativesAsExact',
         'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
+        'explain' => 'explain',
         'distinct' => 'distinct',
         'attributeForDistinct' => 'attributeForDistinct',
         'synonyms' => 'synonyms',
@@ -230,12 +239,15 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'enablePersonalization' => 'setEnablePersonalization',
         'queryType' => 'setQueryType',
         'removeWordsIfNoResults' => 'setRemoveWordsIfNoResults',
+        'mode' => 'setMode',
+        'semanticSearch' => 'setSemanticSearch',
         'advancedSyntax' => 'setAdvancedSyntax',
         'optionalWords' => 'setOptionalWords',
         'disableExactOnAttributes' => 'setDisableExactOnAttributes',
         'exactOnSingleWordQuery' => 'setExactOnSingleWordQuery',
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
+        'explain' => 'setExplain',
         'distinct' => 'setDistinct',
         'attributeForDistinct' => 'setAttributeForDistinct',
         'synonyms' => 'setSynonyms',
@@ -280,12 +292,15 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'enablePersonalization' => 'getEnablePersonalization',
         'queryType' => 'getQueryType',
         'removeWordsIfNoResults' => 'getRemoveWordsIfNoResults',
+        'mode' => 'getMode',
+        'semanticSearch' => 'getSemanticSearch',
         'advancedSyntax' => 'getAdvancedSyntax',
         'optionalWords' => 'getOptionalWords',
         'disableExactOnAttributes' => 'getDisableExactOnAttributes',
         'exactOnSingleWordQuery' => 'getExactOnSingleWordQuery',
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
+        'explain' => 'getExplain',
         'distinct' => 'getDistinct',
         'attributeForDistinct' => 'getAttributeForDistinct',
         'synonyms' => 'getSynonyms',
@@ -427,6 +442,12 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
             $this->container['removeWordsIfNoResults'] =
                 $data['removeWordsIfNoResults'];
         }
+        if (isset($data['mode'])) {
+            $this->container['mode'] = $data['mode'];
+        }
+        if (isset($data['semanticSearch'])) {
+            $this->container['semanticSearch'] = $data['semanticSearch'];
+        }
         if (isset($data['advancedSyntax'])) {
             $this->container['advancedSyntax'] = $data['advancedSyntax'];
         }
@@ -448,6 +469,9 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (isset($data['advancedSyntaxFeatures'])) {
             $this->container['advancedSyntaxFeatures'] =
                 $data['advancedSyntaxFeatures'];
+        }
+        if (isset($data['explain'])) {
+            $this->container['explain'] = $data['explain'];
         }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
@@ -1190,6 +1214,54 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
+     * Gets mode
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\Mode|null
+     */
+    public function getMode()
+    {
+        return $this->container['mode'] ?? null;
+    }
+
+    /**
+     * Sets mode
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\Mode|null $mode mode
+     *
+     * @return self
+     */
+    public function setMode($mode)
+    {
+        $this->container['mode'] = $mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets semanticSearch
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch|null
+     */
+    public function getSemanticSearch()
+    {
+        return $this->container['semanticSearch'] ?? null;
+    }
+
+    /**
+     * Sets semanticSearch
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch|null $semanticSearch semanticSearch
+     *
+     * @return self
+     */
+    public function setSemanticSearch($semanticSearch)
+    {
+        $this->container['semanticSearch'] = $semanticSearch;
+
+        return $this;
+    }
+
+    /**
      * Gets advancedSyntax
      *
      * @return bool|null
@@ -1331,6 +1403,30 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function setAdvancedSyntaxFeatures($advancedSyntaxFeatures)
     {
         $this->container['advancedSyntaxFeatures'] = $advancedSyntaxFeatures;
+
+        return $this;
+    }
+
+    /**
+     * Gets explain
+     *
+     * @return string[]|null
+     */
+    public function getExplain()
+    {
+        return $this->container['explain'] ?? null;
+    }
+
+    /**
+     * Sets explain
+     *
+     * @param string[]|null $explain enriches the API’s response with meta-information as to how the query was processed
+     *
+     * @return self
+     */
+    public function setExplain($explain)
+    {
+        $this->container['explain'] = $explain;
 
         return $this;
     }

@@ -326,6 +326,8 @@ class AbtestingClient
      *
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $indexPrefix Filters the returned ab tests by any indices starting with the provided prefix that are assigned to either variant of an ab test. (optional)
+     * @param string $indexSuffix Filters the returned ab tests by any indices ending with the provided suffix that are assigned to either variant of an ab test. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse
@@ -333,6 +335,8 @@ class AbtestingClient
     public function listABTests(
         $offset = null,
         $limit = null,
+        $indexPrefix = null,
+        $indexSuffix = null,
         $requestOptions = []
     ) {
         $resourcePath = '/2/abtests';
@@ -346,6 +350,14 @@ class AbtestingClient
 
         if ($limit !== null) {
             $queryParameters['limit'] = $limit;
+        }
+
+        if ($indexPrefix !== null) {
+            $queryParameters['indexPrefix'] = $indexPrefix;
+        }
+
+        if ($indexSuffix !== null) {
+            $queryParameters['indexSuffix'] = $indexSuffix;
         }
 
         return $this->sendRequest(

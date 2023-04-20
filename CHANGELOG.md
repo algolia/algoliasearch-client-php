@@ -1,3 +1,8 @@
+## [4.0.0-alpha.57](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.56...4.0.0-alpha.57)
+
+- [ad21cc75](https://github.com/algolia/api-clients-automation/commit/ad21cc75) feat(specs): add predict segment size to responses [PRED-1277] ([#1478](https://github.com/algolia/api-clients-automation/pull/1478)) by [@bengreenbank](https://github.com/bengreenbank/)
+- [13e7d170](https://github.com/algolia/api-clients-automation/commit/13e7d170) feat(specs): add `neuralSearch` options ([#1474](https://github.com/algolia/api-clients-automation/pull/1474)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.56](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.55...4.0.0-alpha.56)
 
 - [9a65a533](https://github.com/algolia/api-clients-automation/commit/9a65a533) feat(specs): add `size` to predict segment response ([#1434](https://github.com/algolia/api-clients-automation/pull/1434)) by [@bengreenbank](https://github.com/bengreenbank/)

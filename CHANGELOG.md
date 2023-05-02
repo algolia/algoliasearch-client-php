@@ -1,3 +1,8 @@
+## [4.0.0-alpha.58](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.57...4.0.0-alpha.58)
+
+- [3af3eb49](https://github.com/algolia/api-clients-automation/commit/3af3eb49) fix(specs): update required for kotlin tests to pass ([#1492](https://github.com/algolia/api-clients-automation/pull/1492)) by [@aallam](https://github.com/aallam/)
+- [44962fa5](https://github.com/algolia/api-clients-automation/commit/44962fa5) feat(clients): add bigquery to sourceTypes enum ([#1490](https://github.com/algolia/api-clients-automation/pull/1490)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.57](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.56...4.0.0-alpha.57)
 
 - [ad21cc75](https://github.com/algolia/api-clients-automation/commit/ad21cc75) feat(specs): add predict segment size to responses [PRED-1277] ([#1478](https://github.com/algolia/api-clients-automation/pull/1478)) by [@bengreenbank](https://github.com/bengreenbank/)

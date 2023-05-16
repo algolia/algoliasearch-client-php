@@ -1,3 +1,7 @@
+## [4.0.0-alpha.61](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.60...4.0.0-alpha.61)
+
+- [49b4c00c](https://github.com/algolia/api-clients-automation/commit/49b4c00c) feat(specs): add property to BigQuery source input ([#1547](https://github.com/algolia/api-clients-automation/pull/1547)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.0.0-alpha.60](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.59...4.0.0-alpha.60)
 
 - [49b4c00c](https://github.com/algolia/api-clients-automation/commit/49b4c00c) feat(specs): add property to BigQuery source input ([#1547](https://github.com/algolia/api-clients-automation/pull/1547)) by [@Fluf22](https://github.com/Fluf22/)

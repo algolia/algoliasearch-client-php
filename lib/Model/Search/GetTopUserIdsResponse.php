@@ -177,7 +177,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets topUsers
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Mapping of cluster names to top users
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers mapping of cluster names to top users
      *
      * @return self
      */

@@ -1,3 +1,7 @@
+## [4.0.0-alpha.64](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.63...4.0.0-alpha.64)
+
+- [2a55abf5](https://github.com/algolia/api-clients-automation/commit/2a55abf5) feat(specs): add objectID to BQ source input ([#1575](https://github.com/algolia/api-clients-automation/pull/1575)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.63](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.62...4.0.0-alpha.63)
 
 - [635806cb](https://github.com/algolia/api-clients-automation/commit/635806cb) feat(specs): ingestion partial update method changed to patch ([#1564](https://github.com/algolia/api-clients-automation/pull/1564)) by [@mehmetaligok](https://github.com/mehmetaligok/)

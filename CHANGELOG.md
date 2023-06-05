@@ -1,3 +1,7 @@
+## [4.0.0-alpha.65](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.64...4.0.0-alpha.65)
+
+- [e1cb1c89](https://github.com/algolia/api-clients-automation/commit/e1cb1c89) fix(specs): add docker source input ([#1594](https://github.com/algolia/api-clients-automation/pull/1594)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.64](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.63...4.0.0-alpha.64)
 
 - [2a55abf5](https://github.com/algolia/api-clients-automation/commit/2a55abf5) feat(specs): add objectID to BQ source input ([#1575](https://github.com/algolia/api-clients-automation/pull/1575)) by [@damcou](https://github.com/damcou/)

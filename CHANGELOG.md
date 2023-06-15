@@ -1,3 +1,8 @@
+## [4.0.0-alpha.66](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.65...4.0.0-alpha.66)
+
+- [81401eed](https://github.com/algolia/api-clients-automation/commit/81401eed) feat(specs): add `startDate` and `endDate` parameters to Ingestion API ([#1614](https://github.com/algolia/api-clients-automation/pull/1614)) by [@shortcuts](https://github.com/shortcuts/)
+- [138a35b5](https://github.com/algolia/api-clients-automation/commit/138a35b5) fix(specs): add processing run outcome ([#1613](https://github.com/algolia/api-clients-automation/pull/1613)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.65](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.64...4.0.0-alpha.65)
 
 - [e1cb1c89](https://github.com/algolia/api-clients-automation/commit/e1cb1c89) fix(specs): add docker source input ([#1594](https://github.com/algolia/api-clients-automation/pull/1594)) by [@millotp](https://github.com/millotp/)

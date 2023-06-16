@@ -1,3 +1,7 @@
+## [4.0.0-alpha.68](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.67...4.0.0-alpha.68)
+
+- [308c7ccb](https://github.com/algolia/api-clients-automation/commit/308c7ccb) fix(specs): add blocking to reasonCode instead of outcome ([#1622](https://github.com/algolia/api-clients-automation/pull/1622)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.67](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.66...4.0.0-alpha.67)
 
 - [3cdb7495](https://github.com/algolia/api-clients-automation/commit/3cdb7495) fix(specs): add blocking run outcome ([#1619](https://github.com/algolia/api-clients-automation/pull/1619)) by [@damcou](https://github.com/damcou/)

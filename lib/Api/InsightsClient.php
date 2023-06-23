@@ -248,30 +248,30 @@ class InsightsClient
     }
 
     /**
-     * Push events.
+     * Send events.
      *
-     * @param array $insightEvents insightEvents (required)
-     * - $insightEvents['events'] => (array) Array of events sent. (required)
+     * @param array $insightsEvents insightsEvents (required)
+     * - $insightsEvents['events'] => (array) List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can't be declared at the same time.  **All** events must be valid, otherwise the API returns an error. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Insights\InsightEvents
+     * @see \Algolia\AlgoliaSearch\Model\Insights\InsightsEvents
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Insights\PushEventsResponse
+     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Insights\EventsResponse
      */
-    public function pushEvents($insightEvents, $requestOptions = [])
+    public function pushEvents($insightsEvents, $requestOptions = [])
     {
-        // verify the required parameter 'insightEvents' is set
-        if (!isset($insightEvents)) {
+        // verify the required parameter 'insightsEvents' is set
+        if (!isset($insightsEvents)) {
             throw new \InvalidArgumentException(
-                'Parameter `insightEvents` is required when calling `pushEvents`.'
+                'Parameter `insightsEvents` is required when calling `pushEvents`.'
             );
         }
 
         $resourcePath = '/1/events';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $insightEvents;
+        $httpBody = $insightsEvents;
 
         return $this->sendRequest(
             'POST',

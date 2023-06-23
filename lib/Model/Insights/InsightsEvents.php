@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * PushEventsResponse Class Doc Comment
+ * InsightsEvents Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class InsightsEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -21,7 +21,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'message' => 'string',
+        'events' => '\Algolia\AlgoliaSearch\Model\Insights\EventsItems[]',
     ];
 
     /**
@@ -30,7 +30,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
-        'message' => null,
+        'events' => null,
     ];
 
     /**
@@ -40,7 +40,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message',
+        'events' => 'events',
     ];
 
     /**
@@ -80,7 +80,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage',
+        'events' => 'setEvents',
     ];
 
     /**
@@ -89,7 +89,7 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage',
+        'events' => 'getEvents',
     ];
 
     /**
@@ -126,8 +126,8 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['message'])) {
-            $this->container['message'] = $data['message'];
+        if (isset($data['events'])) {
+            $this->container['events'] = $data['events'];
         }
     }
 
@@ -141,10 +141,19 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         $invalidProperties = [];
 
         if (
-            !isset($this->container['message']) ||
-            $this->container['message'] === null
+            !isset($this->container['events']) ||
+            $this->container['events'] === null
         ) {
-            $invalidProperties[] = "'message' can't be null";
+            $invalidProperties[] = "'events' can't be null";
+        }
+        if (count($this->container['events']) > 1000) {
+            $invalidProperties[] =
+                "invalid value for 'events', number of items must be less than or equal to 1000.";
+        }
+
+        if (count($this->container['events']) < 1) {
+            $invalidProperties[] =
+                "invalid value for 'events', number of items must be greater than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -162,25 +171,35 @@ class PushEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets message
+     * Gets events
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Insights\EventsItems[]
      */
-    public function getMessage()
+    public function getEvents()
     {
-        return $this->container['message'] ?? null;
+        return $this->container['events'] ?? null;
     }
 
     /**
-     * Sets message
+     * Sets events
      *
-     * @param string $message a message confirming the event push
+     * @param \Algolia\AlgoliaSearch\Model\Insights\EventsItems[] $events List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can't be declared at the same time.  **All** events must be valid, otherwise the API returns an error.
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setEvents($events)
     {
-        $this->container['message'] = $message;
+        if (count($events) > 1000) {
+            throw new \InvalidArgumentException(
+                'invalid value for $events when calling InsightsEvents., number of items must be less than or equal to 1000.'
+            );
+        }
+        if (count($events) < 1) {
+            throw new \InvalidArgumentException(
+                'invalid length for $events when calling InsightsEvents., number of items must be greater than or equal to 1.'
+            );
+        }
+        $this->container['events'] = $events;
 
         return $this;
     }

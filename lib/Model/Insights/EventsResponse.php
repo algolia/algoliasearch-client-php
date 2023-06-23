@@ -5,15 +5,15 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * InsightEvents Class Doc Comment
+ * EventsResponse Class Doc Comment
  *
  * @category Class
  *
- * @description Object containing the events sent.
+ * @description The response of the Insights API.
  *
  * @package Algolia\AlgoliaSearch
  */
-class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class EventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -24,7 +24,8 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelTypes = [
-        'events' => '\Algolia\AlgoliaSearch\Model\Insights\InsightEvent[]',
+        'message' => 'string',
+        'status' => 'int',
     ];
 
     /**
@@ -33,7 +34,8 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelFormats = [
-        'events' => null,
+        'message' => null,
+        'status' => null,
     ];
 
     /**
@@ -43,7 +45,8 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $attributeMap = [
-        'events' => 'events',
+        'message' => 'message',
+        'status' => 'status',
     ];
 
     /**
@@ -83,7 +86,8 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $setters = [
-        'events' => 'setEvents',
+        'message' => 'setMessage',
+        'status' => 'setStatus',
     ];
 
     /**
@@ -92,7 +96,8 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $getters = [
-        'events' => 'getEvents',
+        'message' => 'getMessage',
+        'status' => 'getStatus',
     ];
 
     /**
@@ -129,8 +134,11 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['events'])) {
-            $this->container['events'] = $data['events'];
+        if (isset($data['message'])) {
+            $this->container['message'] = $data['message'];
+        }
+        if (isset($data['status'])) {
+            $this->container['status'] = $data['status'];
         }
     }
 
@@ -142,13 +150,6 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (
-            !isset($this->container['events']) ||
-            $this->container['events'] === null
-        ) {
-            $invalidProperties[] = "'events' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -165,25 +166,49 @@ class InsightEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets events
+     * Gets message
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\InsightEvent[]
+     * @return string|null
      */
-    public function getEvents()
+    public function getMessage()
     {
-        return $this->container['events'] ?? null;
+        return $this->container['message'] ?? null;
     }
 
     /**
-     * Sets events
+     * Sets message
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\InsightEvent[] $events array of events sent
+     * @param string|null $message details about the response, such as error messages
      *
      * @return self
      */
-    public function setEvents($events)
+    public function setMessage($message)
     {
-        $this->container['events'] = $events;
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets status
+     *
+     * @return int|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'] ?? null;
+    }
+
+    /**
+     * Sets status
+     *
+     * @param int|null $status the HTTP status code of the response
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        $this->container['status'] = $status;
 
         return $this;
     }

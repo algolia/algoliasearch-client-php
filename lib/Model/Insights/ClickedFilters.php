@@ -5,15 +5,15 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * InsightEvent Class Doc Comment
+ * ClickedFilters Class Doc Comment
  *
  * @category Class
  *
- * @description Insights event.
+ * @description Use this event to track when users click facet filters in your user interface.
  *
  * @package Algolia\AlgoliaSearch
  */
-class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
+class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ModelInterface,
     \ArrayAccess,
     \JsonSerializable
@@ -24,15 +24,12 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\EventType',
         'eventName' => 'string',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ClickEvent',
         'index' => 'string',
+        'filters' => 'string[]',
         'userToken' => 'string',
         'timestamp' => 'int',
-        'queryID' => 'string',
-        'objectIDs' => 'string[]',
-        'filters' => 'string[]',
-        'positions' => 'int[]',
     ];
 
     /**
@@ -41,15 +38,12 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
-        'eventType' => null,
         'eventName' => null,
+        'eventType' => null,
         'index' => null,
+        'filters' => null,
         'userToken' => null,
         'timestamp' => 'int64',
-        'queryID' => null,
-        'objectIDs' => null,
-        'filters' => null,
-        'positions' => null,
     ];
 
     /**
@@ -59,15 +53,12 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $attributeMap = [
-        'eventType' => 'eventType',
         'eventName' => 'eventName',
+        'eventType' => 'eventType',
         'index' => 'index',
+        'filters' => 'filters',
         'userToken' => 'userToken',
         'timestamp' => 'timestamp',
-        'queryID' => 'queryID',
-        'objectIDs' => 'objectIDs',
-        'filters' => 'filters',
-        'positions' => 'positions',
     ];
 
     /**
@@ -107,15 +98,12 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $setters = [
-        'eventType' => 'setEventType',
         'eventName' => 'setEventName',
+        'eventType' => 'setEventType',
         'index' => 'setIndex',
+        'filters' => 'setFilters',
         'userToken' => 'setUserToken',
         'timestamp' => 'setTimestamp',
-        'queryID' => 'setQueryID',
-        'objectIDs' => 'setObjectIDs',
-        'filters' => 'setFilters',
-        'positions' => 'setPositions',
     ];
 
     /**
@@ -124,15 +112,12 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $getters = [
-        'eventType' => 'getEventType',
         'eventName' => 'getEventName',
+        'eventType' => 'getEventType',
         'index' => 'getIndex',
+        'filters' => 'getFilters',
         'userToken' => 'getUserToken',
         'timestamp' => 'getTimestamp',
-        'queryID' => 'getQueryID',
-        'objectIDs' => 'getObjectIDs',
-        'filters' => 'getFilters',
-        'positions' => 'getPositions',
     ];
 
     /**
@@ -169,32 +154,23 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['eventType'])) {
-            $this->container['eventType'] = $data['eventType'];
-        }
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
         }
+        if (isset($data['eventType'])) {
+            $this->container['eventType'] = $data['eventType'];
+        }
         if (isset($data['index'])) {
             $this->container['index'] = $data['index'];
+        }
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
         }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
         }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
-        }
-        if (isset($data['queryID'])) {
-            $this->container['queryID'] = $data['queryID'];
-        }
-        if (isset($data['objectIDs'])) {
-            $this->container['objectIDs'] = $data['objectIDs'];
-        }
-        if (isset($data['filters'])) {
-            $this->container['filters'] = $data['filters'];
-        }
-        if (isset($data['positions'])) {
-            $this->container['positions'] = $data['positions'];
         }
     }
 
@@ -208,16 +184,26 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         $invalidProperties = [];
 
         if (
-            !isset($this->container['eventType']) ||
-            $this->container['eventType'] === null
-        ) {
-            $invalidProperties[] = "'eventType' can't be null";
-        }
-        if (
             !isset($this->container['eventName']) ||
             $this->container['eventName'] === null
         ) {
             $invalidProperties[] = "'eventName' can't be null";
+        }
+        if (mb_strlen($this->container['eventName']) > 64) {
+            $invalidProperties[] =
+                "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
+        }
+
+        if (mb_strlen($this->container['eventName']) < 1) {
+            $invalidProperties[] =
+                "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
+        }
+
+        if (
+            !isset($this->container['eventType']) ||
+            $this->container['eventType'] === null
+        ) {
+            $invalidProperties[] = "'eventType' can't be null";
         }
         if (
             !isset($this->container['index']) ||
@@ -226,19 +212,45 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $invalidProperties[] = "'index' can't be null";
         }
         if (
+            !isset($this->container['filters']) ||
+            $this->container['filters'] === null
+        ) {
+            $invalidProperties[] = "'filters' can't be null";
+        }
+        if (count($this->container['filters']) > 20) {
+            $invalidProperties[] =
+                "invalid value for 'filters', number of items must be less than or equal to 20.";
+        }
+
+        if (count($this->container['filters']) < 1) {
+            $invalidProperties[] =
+                "invalid value for 'filters', number of items must be greater than or equal to 1.";
+        }
+
+        if (
             !isset($this->container['userToken']) ||
             $this->container['userToken'] === null
         ) {
             $invalidProperties[] = "'userToken' can't be null";
         }
+        if (mb_strlen($this->container['userToken']) > 128) {
+            $invalidProperties[] =
+                "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
+        }
+
+        if (mb_strlen($this->container['userToken']) < 1) {
+            $invalidProperties[] =
+                "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
+        }
+
         if (
             !preg_match(
-                '/[a-zA-Z0-9_-=\/+]{1,128}/',
+                '/[a-zA-Z0-9_=\/+-]{1,128}/',
                 $this->container['userToken']
             )
         ) {
             $invalidProperties[] =
-                "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_-=\/+]{1,128}/.";
+                "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
         }
 
         return $invalidProperties;
@@ -256,30 +268,6 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets eventType
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\EventType
-     */
-    public function getEventType()
-    {
-        return $this->container['eventType'] ?? null;
-    }
-
-    /**
-     * Sets eventType
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\EventType $eventType eventType
-     *
-     * @return self
-     */
-    public function setEventType($eventType)
-    {
-        $this->container['eventType'] = $eventType;
-
-        return $this;
-    }
-
-    /**
      * Gets eventName
      *
      * @return string
@@ -292,13 +280,48 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventName
      *
-     * @param string $eventName a user-defined string used to categorize events
+     * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
      * @return self
      */
     public function setEventName($eventName)
     {
+        if (mb_strlen($eventName) > 64) {
+            throw new \InvalidArgumentException(
+                'invalid length for $eventName when calling ClickedFilters., must be smaller than or equal to 64.'
+            );
+        }
+        if (mb_strlen($eventName) < 1) {
+            throw new \InvalidArgumentException(
+                'invalid length for $eventName when calling ClickedFilters., must be bigger than or equal to 1.'
+            );
+        }
+
         $this->container['eventName'] = $eventName;
+
+        return $this;
+    }
+
+    /**
+     * Gets eventType
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     */
+    public function getEventType()
+    {
+        return $this->container['eventType'] ?? null;
+    }
+
+    /**
+     * Sets eventType
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     *
+     * @return self
+     */
+    public function setEventType($eventType)
+    {
+        $this->container['eventType'] = $eventType;
 
         return $this;
     }
@@ -316,13 +339,47 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets index
      *
-     * @param string $index name of the targeted index
+     * @param string $index name of the Algolia index
      *
      * @return self
      */
     public function setIndex($index)
     {
         $this->container['index'] = $index;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters
+     *
+     * @return string[]
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'] ?? null;
+    }
+
+    /**
+     * Sets filters
+     *
+     * @param string[] $filters Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`.
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+        if (count($filters) > 20) {
+            throw new \InvalidArgumentException(
+                'invalid value for $filters when calling ClickedFilters., number of items must be less than or equal to 20.'
+            );
+        }
+        if (count($filters) < 1) {
+            throw new \InvalidArgumentException(
+                'invalid length for $filters when calling ClickedFilters., number of items must be greater than or equal to 1.'
+            );
+        }
+        $this->container['filters'] = $filters;
 
         return $this;
     }
@@ -340,15 +397,25 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets userToken
      *
-     * @param string $userToken A user identifier. Depending if the user is logged-in or not, several strategies can be used from a sessionId to a technical identifier. You should always send pseudonymous or anonymous userTokens.
+     * @param string $userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
     public function setUserToken($userToken)
     {
-        if (!preg_match('/[a-zA-Z0-9_-=\/+]{1,128}/', $userToken)) {
+        if (mb_strlen($userToken) > 128) {
             throw new \InvalidArgumentException(
-                "invalid value for $userToken when calling InsightEvent., must conform to the pattern /[a-zA-Z0-9_-=\/+]{1,128}/."
+                'invalid length for $userToken when calling ClickedFilters., must be smaller than or equal to 128.'
+            );
+        }
+        if (mb_strlen($userToken) < 1) {
+            throw new \InvalidArgumentException(
+                'invalid length for $userToken when calling ClickedFilters., must be bigger than or equal to 1.'
+            );
+        }
+        if (!preg_match('/[a-zA-Z0-9_=\/+-]{1,128}/', $userToken)) {
+            throw new \InvalidArgumentException(
+                "invalid value for $userToken when calling ClickedFilters., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/."
             );
         }
 
@@ -370,109 +437,13 @@ class InsightEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets timestamp
      *
-     * @param int|null $timestamp time of the event expressed in milliseconds since the Unix epoch
+     * @param int|null $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
      *
      * @return self
      */
     public function setTimestamp($timestamp)
     {
         $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
-     * Gets queryID
-     *
-     * @return string|null
-     */
-    public function getQueryID()
-    {
-        return $this->container['queryID'] ?? null;
-    }
-
-    /**
-     * Sets queryID
-     *
-     * @param string|null $queryID Algolia queryID. This is required when an event is tied to a search.
-     *
-     * @return self
-     */
-    public function setQueryID($queryID)
-    {
-        $this->container['queryID'] = $queryID;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectIDs
-     *
-     * @return string[]|null
-     */
-    public function getObjectIDs()
-    {
-        return $this->container['objectIDs'] ?? null;
-    }
-
-    /**
-     * Sets objectIDs
-     *
-     * @param string[]|null $objectIDs An array of index objectID. Limited to 20 objects. An event can’t have both objectIDs and filters at the same time.
-     *
-     * @return self
-     */
-    public function setObjectIDs($objectIDs)
-    {
-        $this->container['objectIDs'] = $objectIDs;
-
-        return $this;
-    }
-
-    /**
-     * Gets filters
-     *
-     * @return string[]|null
-     */
-    public function getFilters()
-    {
-        return $this->container['filters'] ?? null;
-    }
-
-    /**
-     * Sets filters
-     *
-     * @param string[]|null $filters An array of filters. Limited to 10 filters. An event can’t have both objectIDs and filters at the same time.
-     *
-     * @return self
-     */
-    public function setFilters($filters)
-    {
-        $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets positions
-     *
-     * @return int[]|null
-     */
-    public function getPositions()
-    {
-        return $this->container['positions'] ?? null;
-    }
-
-    /**
-     * Sets positions
-     *
-     * @param int[]|null $positions Position of the click in the list of Algolia search results. This field is required if a queryID is provided. One position must be provided for each objectID.
-     *
-     * @return self
-     */
-    public function setPositions($positions)
-    {
-        $this->container['positions'] = $positions;
 
         return $this;
     }

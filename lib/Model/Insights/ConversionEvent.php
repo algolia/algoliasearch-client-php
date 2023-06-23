@@ -5,21 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * EventType Class Doc Comment
+ * ConversionEvent Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class EventType
+class ConversionEvent
 {
     /**
      * Possible values of this enum
      */
-    const CLICK = 'click';
-
     const CONVERSION = 'conversion';
-
-    const VIEW = 'view';
 
     /**
      * Gets allowable values of the enum
@@ -28,6 +24,6 @@ class EventType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::CLICK, self::CONVERSION, self::VIEW];
+        return [self::CONVERSION];
     }
 }

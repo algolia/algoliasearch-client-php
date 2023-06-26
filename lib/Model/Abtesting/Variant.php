@@ -29,6 +29,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'description' => 'string',
         'index' => 'string',
         'noResultCount' => 'int',
+        'outlierTrackedSearchesCount' => 'int',
+        'outlierUsersCount' => 'int',
         'searchCount' => 'int',
         'trackedSearchCount' => 'int',
         'trafficPercentage' => 'int',
@@ -49,6 +51,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'description' => null,
         'index' => null,
         'noResultCount' => null,
+        'outlierTrackedSearchesCount' => null,
+        'outlierUsersCount' => null,
         'searchCount' => null,
         'trackedSearchCount' => null,
         'trafficPercentage' => null,
@@ -70,6 +74,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'description' => 'description',
         'index' => 'index',
         'noResultCount' => 'noResultCount',
+        'outlierTrackedSearchesCount' => 'outlierTrackedSearchesCount',
+        'outlierUsersCount' => 'outlierUsersCount',
         'searchCount' => 'searchCount',
         'trackedSearchCount' => 'trackedSearchCount',
         'trafficPercentage' => 'trafficPercentage',
@@ -121,6 +127,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'description' => 'setDescription',
         'index' => 'setIndex',
         'noResultCount' => 'setNoResultCount',
+        'outlierTrackedSearchesCount' => 'setOutlierTrackedSearchesCount',
+        'outlierUsersCount' => 'setOutlierUsersCount',
         'searchCount' => 'setSearchCount',
         'trackedSearchCount' => 'setTrackedSearchCount',
         'trafficPercentage' => 'setTrafficPercentage',
@@ -141,6 +149,8 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'description' => 'getDescription',
         'index' => 'getIndex',
         'noResultCount' => 'getNoResultCount',
+        'outlierTrackedSearchesCount' => 'getOutlierTrackedSearchesCount',
+        'outlierUsersCount' => 'getOutlierUsersCount',
         'searchCount' => 'getSearchCount',
         'trackedSearchCount' => 'getTrackedSearchCount',
         'trafficPercentage' => 'getTrafficPercentage',
@@ -205,6 +215,13 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         }
         if (isset($data['noResultCount'])) {
             $this->container['noResultCount'] = $data['noResultCount'];
+        }
+        if (isset($data['outlierTrackedSearchesCount'])) {
+            $this->container['outlierTrackedSearchesCount'] =
+                $data['outlierTrackedSearchesCount'];
+        }
+        if (isset($data['outlierUsersCount'])) {
+            $this->container['outlierUsersCount'] = $data['outlierUsersCount'];
         }
         if (isset($data['searchCount'])) {
             $this->container['searchCount'] = $data['searchCount'];
@@ -277,6 +294,19 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['noResultCount'] === null
         ) {
             $invalidProperties[] = "'noResultCount' can't be null";
+        }
+        if (
+            !isset($this->container['outlierTrackedSearchesCount']) ||
+            $this->container['outlierTrackedSearchesCount'] === null
+        ) {
+            $invalidProperties[] =
+                "'outlierTrackedSearchesCount' can't be null";
+        }
+        if (
+            !isset($this->container['outlierUsersCount']) ||
+            $this->container['outlierUsersCount'] === null
+        ) {
+            $invalidProperties[] = "'outlierUsersCount' can't be null";
         }
         if (
             !isset($this->container['searchCount']) ||
@@ -505,6 +535,56 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function setNoResultCount($noResultCount)
     {
         $this->container['noResultCount'] = $noResultCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets outlierTrackedSearchesCount
+     *
+     * @return int
+     */
+    public function getOutlierTrackedSearchesCount()
+    {
+        return $this->container['outlierTrackedSearchesCount'] ?? null;
+    }
+
+    /**
+     * Sets outlierTrackedSearchesCount
+     *
+     * @param int $outlierTrackedSearchesCount count of the tracked searches attributed to outlier traffic that were removed from the A/B test
+     *
+     * @return self
+     */
+    public function setOutlierTrackedSearchesCount($outlierTrackedSearchesCount)
+    {
+        $this->container[
+            'outlierTrackedSearchesCount'
+        ] = $outlierTrackedSearchesCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets outlierUsersCount
+     *
+     * @return int
+     */
+    public function getOutlierUsersCount()
+    {
+        return $this->container['outlierUsersCount'] ?? null;
+    }
+
+    /**
+     * Sets outlierUsersCount
+     *
+     * @param int $outlierUsersCount count of users attributed to outlier traffic that were removed from the A/B test
+     *
+     * @return self
+     */
+    public function setOutlierUsersCount($outlierUsersCount)
+    {
+        $this->container['outlierUsersCount'] = $outlierUsersCount;
 
         return $this;
     }

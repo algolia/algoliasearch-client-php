@@ -1,3 +1,9 @@
+## [4.0.0-alpha.71](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.70...4.0.0-alpha.71)
+
+- [15bc7618](https://github.com/algolia/api-clients-automation/commit/15bc7618) feat(specs): updated_at removed from Run response ([#1651](https://github.com/algolia/api-clients-automation/pull/1651)) by [@mehmetaligok](https://github.com/mehmetaligok/)
+- [b7c71def](https://github.com/algolia/api-clients-automation/commit/b7c71def) feat(specs): add new outlier count properties to variant payload ([#1656](https://github.com/algolia/api-clients-automation/pull/1656)) by [@febeck](https://github.com/febeck/)
+- [b703dea4](https://github.com/algolia/api-clients-automation/commit/b703dea4) docs(specs): review Insights API spec ([#1647](https://github.com/algolia/api-clients-automation/pull/1647)) by [@kai687](https://github.com/kai687/)
+
 ## [4.0.0-alpha.70](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.69...4.0.0-alpha.70)
 
 - [19e99bb9](https://github.com/algolia/api-clients-automation/commit/19e99bb9) fix(specs): change github container registry name ([#1641](https://github.com/algolia/api-clients-automation/pull/1641)) by [@morganleroi](https://github.com/morganleroi/)

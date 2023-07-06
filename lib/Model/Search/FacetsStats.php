@@ -21,10 +21,10 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'min' => 'int',
-        'max' => 'int',
-        'avg' => 'int',
-        'sum' => 'int',
+        'min' => 'float',
+        'max' => 'float',
+        'avg' => 'float',
+        'sum' => 'float',
     ];
 
     /**
@@ -33,10 +33,10 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
-        'min' => null,
-        'max' => null,
-        'avg' => null,
-        'sum' => null,
+        'min' => 'double',
+        'max' => 'double',
+        'avg' => 'double',
+        'sum' => 'double',
     ];
 
     /**
@@ -181,7 +181,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets min
      *
-     * @return int|null
+     * @return float|null
      */
     public function getMin()
     {
@@ -191,7 +191,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets min
      *
-     * @param int|null $min the minimum value in the result set
+     * @param float|null $min the minimum value in the result set
      *
      * @return self
      */
@@ -205,7 +205,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets max
      *
-     * @return int|null
+     * @return float|null
      */
     public function getMax()
     {
@@ -215,7 +215,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets max
      *
-     * @param int|null $max the maximum value in the result set
+     * @param float|null $max the maximum value in the result set
      *
      * @return self
      */
@@ -229,7 +229,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets avg
      *
-     * @return int|null
+     * @return float|null
      */
     public function getAvg()
     {
@@ -239,7 +239,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets avg
      *
-     * @param int|null $avg the average facet value in the result set
+     * @param float|null $avg the average facet value in the result set
      *
      * @return self
      */
@@ -253,7 +253,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets sum
      *
-     * @return int|null
+     * @return float|null
      */
     public function getSum()
     {
@@ -263,7 +263,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets sum
      *
-     * @param int|null $sum the sum of all values in the result set
+     * @param float|null $sum the sum of all values in the result set
      *
      * @return self
      */

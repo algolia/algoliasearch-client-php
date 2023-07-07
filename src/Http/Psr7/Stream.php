@@ -85,7 +85,7 @@ class Stream implements StreamInterface
         $this->close();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         try {
             $this->seek(0);
@@ -99,7 +99,7 @@ class Stream implements StreamInterface
     /**
      * @return string
      */
-    public function getContents()
+    public function getContents(): string
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -117,7 +117,7 @@ class Stream implements StreamInterface
     /**
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         if (isset($this->stream)) {
             if (is_resource($this->stream)) {
@@ -147,7 +147,7 @@ class Stream implements StreamInterface
     /**
      * @return mixed|null
      */
-    public function getSize()
+    public function getSize(): ?int
     {
         if (null !== $this->size) {
             return $this->size;
@@ -175,7 +175,7 @@ class Stream implements StreamInterface
     /**
      * @return bool
      */
-    public function isReadable()
+    public function isReadable(): bool
     {
         return $this->readable;
     }
@@ -183,7 +183,7 @@ class Stream implements StreamInterface
     /**
      * @return bool
      */
-    public function isWritable()
+    public function isWritable(): bool
     {
         return $this->writable;
     }
@@ -191,7 +191,7 @@ class Stream implements StreamInterface
     /**
      * @return bool|mixed
      */
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return $this->seekable;
     }
@@ -199,7 +199,7 @@ class Stream implements StreamInterface
     /**
      * @return bool
      */
-    public function eof()
+    public function eof(): bool
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -211,7 +211,7 @@ class Stream implements StreamInterface
     /**
      * @return int
      */
-    public function tell()
+    public function tell(): int
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -229,7 +229,7 @@ class Stream implements StreamInterface
     /**
      * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->seek(0);
     }
@@ -237,7 +237,7 @@ class Stream implements StreamInterface
     /**
      * @return void
      */
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek(int $offset, int $whence = SEEK_SET): void
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -253,7 +253,7 @@ class Stream implements StreamInterface
     /**
      * @return string
      */
-    public function read($length)
+    public function read(int $length): string
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -280,7 +280,7 @@ class Stream implements StreamInterface
     /**
      * @return int
      */
-    public function write($string)
+    public function write(string $string): int
     {
         if (!isset($this->stream)) {
             throw new \RuntimeException('Stream is detached');
@@ -303,7 +303,7 @@ class Stream implements StreamInterface
     /**
      * @return array|mixed|null
      */
-    public function getMetadata($key = null)
+    public function getMetadata(?string $key = null)
     {
         if (!isset($this->stream)) {
             return $key ? null : [];
@@ -315,6 +315,6 @@ class Stream implements StreamInterface
 
         $meta = stream_get_meta_data($this->stream);
 
-        return isset($meta[$key]) ? $meta[$key] : null;
+        return $meta[$key] ?? null;
     }
 }

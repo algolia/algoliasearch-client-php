@@ -27,6 +27,9 @@ class SearchTypeFacet
      */
     public static function getAllowableEnumValues()
     {
-        return [self::FACET];
+        return [
+            self::FACET,
+        ];
     }
 }
+

@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'query' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery',
         'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
@@ -31,10 +28,10 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'query' => null,
         'automaticFacetFilters' => null,
@@ -43,11 +40,11 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'query' => 'query',
         'automaticFacetFilters' => 'automaticFacetFilters',
@@ -56,11 +53,11 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,12 +145,10 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['query'] = $data['query'];
         }
         if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] =
-                $data['automaticFacetFilters'];
+            $this->container['automaticFacetFilters'] = $data['automaticFacetFilters'];
         }
         if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] =
-                $data['automaticOptionalFacetFilters'];
+            $this->container['automaticOptionalFacetFilters'] = $data['automaticOptionalFacetFilters'];
         }
         if (isset($data['renderingContent'])) {
             $this->container['renderingContent'] = $data['renderingContent'];
@@ -248,12 +243,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @return self
      */
-    public function setAutomaticOptionalFacetFilters(
-        $automaticOptionalFacetFilters
-    ) {
-        $this->container[
-            'automaticOptionalFacetFilters'
-        ] = $automaticOptionalFacetFilters;
+    public function setAutomaticOptionalFacetFilters($automaticOptionalFacetFilters)
+    {
+        $this->container['automaticOptionalFacetFilters'] = $automaticOptionalFacetFilters;
 
         return $this;
     }
@@ -334,3 +326,4 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

@@ -28,6 +28,11 @@ class DictionaryType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::PLURALS, self::STOPWORDS, self::COMPOUNDS];
+        return [
+            self::PLURALS,
+            self::STOPWORDS,
+            self::COMPOUNDS,
+        ];
     }
 }
+

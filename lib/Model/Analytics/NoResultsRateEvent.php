@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'date' => 'string',
         'noResultCount' => 'int',
@@ -28,10 +25,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'date' => null,
         'noResultCount' => null,
@@ -40,11 +37,11 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'date' => 'date',
         'noResultCount' => 'noResultCount',
@@ -53,11 +50,11 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -164,28 +161,16 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['date']) ||
-            $this->container['date'] === null
-        ) {
+        if (!isset($this->container['date']) || $this->container['date'] === null) {
             $invalidProperties[] = "'date' can't be null";
         }
-        if (
-            !isset($this->container['noResultCount']) ||
-            $this->container['noResultCount'] === null
-        ) {
+        if (!isset($this->container['noResultCount']) || $this->container['noResultCount'] === null) {
             $invalidProperties[] = "'noResultCount' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['rate']) ||
-            $this->container['rate'] === null
-        ) {
+        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
 
@@ -351,3 +336,4 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
+

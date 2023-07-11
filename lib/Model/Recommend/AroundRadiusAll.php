@@ -24,6 +24,9 @@ class AroundRadiusAll
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ALL];
+        return [
+            self::ALL,
+        ];
     }
 }
+

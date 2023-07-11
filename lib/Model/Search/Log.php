@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'timestamp' => 'string',
         'method' => 'string',
@@ -39,10 +36,10 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'timestamp' => null,
         'method' => null,
@@ -62,11 +59,11 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'timestamp' => 'timestamp',
         'method' => 'method',
@@ -86,11 +83,11 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -252,67 +249,37 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['timestamp']) ||
-            $this->container['timestamp'] === null
-        ) {
+        if (!isset($this->container['timestamp']) || $this->container['timestamp'] === null) {
             $invalidProperties[] = "'timestamp' can't be null";
         }
-        if (
-            !isset($this->container['method']) ||
-            $this->container['method'] === null
-        ) {
+        if (!isset($this->container['method']) || $this->container['method'] === null) {
             $invalidProperties[] = "'method' can't be null";
         }
-        if (
-            !isset($this->container['answerCode']) ||
-            $this->container['answerCode'] === null
-        ) {
+        if (!isset($this->container['answerCode']) || $this->container['answerCode'] === null) {
             $invalidProperties[] = "'answerCode' can't be null";
         }
-        if (
-            !isset($this->container['queryBody']) ||
-            $this->container['queryBody'] === null
-        ) {
+        if (!isset($this->container['queryBody']) || $this->container['queryBody'] === null) {
             $invalidProperties[] = "'queryBody' can't be null";
         }
-        if (
-            !isset($this->container['answer']) ||
-            $this->container['answer'] === null
-        ) {
+        if (!isset($this->container['answer']) || $this->container['answer'] === null) {
             $invalidProperties[] = "'answer' can't be null";
         }
-        if (
-            !isset($this->container['url']) ||
-            $this->container['url'] === null
-        ) {
+        if (!isset($this->container['url']) || $this->container['url'] === null) {
             $invalidProperties[] = "'url' can't be null";
         }
         if (!isset($this->container['ip']) || $this->container['ip'] === null) {
             $invalidProperties[] = "'ip' can't be null";
         }
-        if (
-            !isset($this->container['queryHeaders']) ||
-            $this->container['queryHeaders'] === null
-        ) {
+        if (!isset($this->container['queryHeaders']) || $this->container['queryHeaders'] === null) {
             $invalidProperties[] = "'queryHeaders' can't be null";
         }
-        if (
-            !isset($this->container['sha1']) ||
-            $this->container['sha1'] === null
-        ) {
+        if (!isset($this->container['sha1']) || $this->container['sha1'] === null) {
             $invalidProperties[] = "'sha1' can't be null";
         }
-        if (
-            !isset($this->container['nbApiCalls']) ||
-            $this->container['nbApiCalls'] === null
-        ) {
+        if (!isset($this->container['nbApiCalls']) || $this->container['nbApiCalls'] === null) {
             $invalidProperties[] = "'nbApiCalls' can't be null";
         }
-        if (
-            !isset($this->container['processingTimeMs']) ||
-            $this->container['processingTimeMs'] === null
-        ) {
+        if (!isset($this->container['processingTimeMs']) || $this->container['processingTimeMs'] === null) {
             $invalidProperties[] = "'processingTimeMs' can't be null";
         }
 
@@ -742,3 +709,4 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'rate' => 'float',
         'trackedSearchCount' => 'int',
@@ -28,10 +25,10 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'rate' => 'double',
         'trackedSearchCount' => null,
@@ -40,11 +37,11 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'rate' => 'rate',
         'trackedSearchCount' => 'trackedSearchCount',
@@ -53,11 +50,11 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -145,8 +142,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
             $this->container['rate'] = $data['rate'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
         if (isset($data['conversionCount'])) {
             $this->container['conversionCount'] = $data['conversionCount'];
@@ -165,28 +161,16 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['rate']) ||
-            $this->container['rate'] === null
-        ) {
+        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
+        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (
-            !isset($this->container['conversionCount']) ||
-            $this->container['conversionCount'] === null
-        ) {
+        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (
-            !isset($this->container['dates']) ||
-            $this->container['dates'] === null
-        ) {
+        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
             $invalidProperties[] = "'dates' can't be null";
         }
 
@@ -352,3 +336,4 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         unset($this->container[$offset]);
     }
 }
+

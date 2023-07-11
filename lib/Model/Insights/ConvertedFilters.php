@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'eventName' => 'string',
         'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
@@ -30,10 +27,10 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'eventName' => null,
         'eventType' => null,
@@ -44,11 +41,11 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'eventName' => 'eventName',
         'eventType' => 'eventType',
@@ -59,11 +56,11 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -180,74 +177,47 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['eventName']) ||
-            $this->container['eventName'] === null
-        ) {
+        if (!isset($this->container['eventName']) || $this->container['eventName'] === null) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if (mb_strlen($this->container['eventName']) > 64) {
-            $invalidProperties[] =
-                "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
+        if ((mb_strlen($this->container['eventName']) > 64)) {
+            $invalidProperties[] = "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
         }
 
-        if (mb_strlen($this->container['eventName']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['eventName']) < 1)) {
+            $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
         }
 
-        if (
-            !isset($this->container['eventType']) ||
-            $this->container['eventType'] === null
-        ) {
+        if (!isset($this->container['eventType']) || $this->container['eventType'] === null) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (
-            !isset($this->container['index']) ||
-            $this->container['index'] === null
-        ) {
+        if (!isset($this->container['index']) || $this->container['index'] === null) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (
-            !isset($this->container['filters']) ||
-            $this->container['filters'] === null
-        ) {
+        if (!isset($this->container['filters']) || $this->container['filters'] === null) {
             $invalidProperties[] = "'filters' can't be null";
         }
-        if (count($this->container['filters']) > 20) {
-            $invalidProperties[] =
-                "invalid value for 'filters', number of items must be less than or equal to 20.";
+        if ((count($this->container['filters']) > 20)) {
+            $invalidProperties[] = "invalid value for 'filters', number of items must be less than or equal to 20.";
         }
 
-        if (count($this->container['filters']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'filters', number of items must be greater than or equal to 1.";
+        if ((count($this->container['filters']) < 1)) {
+            $invalidProperties[] = "invalid value for 'filters', number of items must be greater than or equal to 1.";
         }
 
-        if (
-            !isset($this->container['userToken']) ||
-            $this->container['userToken'] === null
-        ) {
+        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (mb_strlen($this->container['userToken']) > 128) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
+        if ((mb_strlen($this->container['userToken']) > 128)) {
+            $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
         }
 
-        if (mb_strlen($this->container['userToken']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['userToken']) < 1)) {
+            $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
         }
 
-        if (
-            !preg_match(
-                '/[a-zA-Z0-9_=\/+-]{1,128}/',
-                $this->container['userToken']
-            )
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
+        if (!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $this->container['userToken'])) {
+            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
         }
 
         return $invalidProperties;
@@ -283,15 +253,11 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setEventName($eventName)
     {
-        if (mb_strlen($eventName) > 64) {
-            throw new \InvalidArgumentException(
-                'invalid length for $eventName when calling ConvertedFilters., must be smaller than or equal to 64.'
-            );
+        if ((mb_strlen($eventName) > 64)) {
+            throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedFilters., must be smaller than or equal to 64.');
         }
-        if (mb_strlen($eventName) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $eventName when calling ConvertedFilters., must be bigger than or equal to 1.'
-            );
+        if ((mb_strlen($eventName) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedFilters., must be bigger than or equal to 1.');
         }
 
         $this->container['eventName'] = $eventName;
@@ -366,15 +332,12 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setFilters($filters)
     {
-        if (count($filters) > 20) {
-            throw new \InvalidArgumentException(
-                'invalid value for $filters when calling ConvertedFilters., number of items must be less than or equal to 20.'
-            );
+
+        if ((count($filters) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $filters when calling ConvertedFilters., number of items must be less than or equal to 20.');
         }
-        if (count($filters) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $filters when calling ConvertedFilters., number of items must be greater than or equal to 1.'
-            );
+        if ((count($filters) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $filters when calling ConvertedFilters., number of items must be greater than or equal to 1.');
         }
         $this->container['filters'] = $filters;
 
@@ -400,20 +363,14 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setUserToken($userToken)
     {
-        if (mb_strlen($userToken) > 128) {
-            throw new \InvalidArgumentException(
-                'invalid length for $userToken when calling ConvertedFilters., must be smaller than or equal to 128.'
-            );
+        if ((mb_strlen($userToken) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedFilters., must be smaller than or equal to 128.');
         }
-        if (mb_strlen($userToken) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $userToken when calling ConvertedFilters., must be bigger than or equal to 1.'
-            );
+        if ((mb_strlen($userToken) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedFilters., must be bigger than or equal to 1.');
         }
-        if (!preg_match('/[a-zA-Z0-9_=\/+-]{1,128}/', $userToken)) {
-            throw new \InvalidArgumentException(
-                "invalid value for $userToken when calling ConvertedFilters., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/."
-            );
+        if ((!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $userToken))) {
+            throw new \InvalidArgumentException("invalid value for $userToken when calling ConvertedFilters., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.");
         }
 
         $this->container['userToken'] = $userToken;
@@ -497,3 +454,4 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         unset($this->container[$offset]);
     }
 }
+

@@ -24,6 +24,9 @@ class ServerStatus
      */
     public static function getAllowableEnumValues()
     {
-        return [self::PRODUCTION];
+        return [
+            self::PRODUCTION,
+        ];
     }
 }
+

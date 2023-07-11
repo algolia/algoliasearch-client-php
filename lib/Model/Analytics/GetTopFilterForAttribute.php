@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'attribute' => 'string',
         'operator' => 'string',
@@ -28,10 +25,10 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'attribute' => null,
         'operator' => null,
@@ -40,11 +37,11 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'attribute' => 'attribute',
         'operator' => 'operator',
@@ -53,11 +50,11 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -164,28 +161,16 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['attribute']) ||
-            $this->container['attribute'] === null
-        ) {
+        if (!isset($this->container['attribute']) || $this->container['attribute'] === null) {
             $invalidProperties[] = "'attribute' can't be null";
         }
-        if (
-            !isset($this->container['operator']) ||
-            $this->container['operator'] === null
-        ) {
+        if (!isset($this->container['operator']) || $this->container['operator'] === null) {
             $invalidProperties[] = "'operator' can't be null";
         }
-        if (
-            !isset($this->container['value']) ||
-            $this->container['value'] === null
-        ) {
+        if (!isset($this->container['value']) || $this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
 
@@ -351,3 +336,4 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
         unset($this->container[$offset]);
     }
 }
+

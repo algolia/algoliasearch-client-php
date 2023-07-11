@@ -29,6 +29,10 @@ class DictionaryAction
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ADD_ENTRY, self::DELETE_ENTRY];
+        return [
+            self::ADD_ENTRY,
+            self::DELETE_ENTRY,
+        ];
     }
 }
+

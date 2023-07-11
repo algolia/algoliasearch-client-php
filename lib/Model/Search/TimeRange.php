@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'from' => 'int',
         'until' => 'int',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'from' => null,
         'until' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'from' => 'from',
         'until' => 'until',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['from']) ||
-            $this->container['from'] === null
-        ) {
+        if (!isset($this->container['from']) || $this->container['from'] === null) {
             $invalidProperties[] = "'from' can't be null";
         }
-        if (
-            !isset($this->container['until']) ||
-            $this->container['until'] === null
-        ) {
+        if (!isset($this->container['until']) || $this->container['until'] === null) {
             $invalidProperties[] = "'until' can't be null";
         }
 
@@ -275,3 +266,4 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

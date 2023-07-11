@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
         'filters' => 'string',
@@ -32,10 +29,10 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'facetFilters' => null,
         'filters' => null,
@@ -48,11 +45,11 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'facetFilters' => 'facetFilters',
         'filters' => 'filters',
@@ -65,11 +62,11 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -454,3 +451,4 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
+

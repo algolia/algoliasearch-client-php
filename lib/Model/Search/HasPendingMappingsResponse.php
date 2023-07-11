@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'pending' => 'bool',
         'clusters' => 'array<string,string[]>',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'pending' => null,
         'clusters' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'pending' => 'pending',
         'clusters' => 'clusters',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,10 +145,7 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['pending']) ||
-            $this->container['pending'] === null
-        ) {
+        if (!isset($this->container['pending']) || $this->container['pending'] === null) {
             $invalidProperties[] = "'pending' can't be null";
         }
 
@@ -269,3 +263,4 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
         unset($this->container[$offset]);
     }
 }
+

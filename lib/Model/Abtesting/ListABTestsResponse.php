@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'abtests' => '\Algolia\AlgoliaSearch\Model\Abtesting\ABTest[]',
         'count' => 'int',
@@ -27,10 +24,10 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'abtests' => null,
         'count' => null,
@@ -38,11 +35,11 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'abtests' => 'abtests',
         'count' => 'count',
@@ -50,11 +47,11 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['abtests']) ||
-            $this->container['abtests'] === null
-        ) {
+        if (!isset($this->container['abtests']) || $this->container['abtests'] === null) {
             $invalidProperties[] = "'abtests' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['total']) ||
-            $this->container['total'] === null
-        ) {
+        if (!isset($this->container['total']) || $this->container['total'] === null) {
             $invalidProperties[] = "'total' can't be null";
         }
 
@@ -313,3 +301,4 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
+

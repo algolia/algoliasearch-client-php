@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'objectID' => 'string',
         'updatedAt' => 'string',
@@ -27,10 +24,10 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'objectID' => null,
         'updatedAt' => null,
@@ -38,11 +35,11 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'updatedAt' => 'updatedAt',
@@ -50,11 +47,11 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['updatedAt']) ||
-            $this->container['updatedAt'] === null
-        ) {
+        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (
-            !isset($this->container['taskID']) ||
-            $this->container['taskID'] === null
-        ) {
+        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
             $invalidProperties[] = "'taskID' can't be null";
         }
 
@@ -313,3 +301,4 @@ class UpdatedRuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
+

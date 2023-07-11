@@ -24,6 +24,9 @@ class ClickEvent
      */
     public static function getAllowableEnumValues()
     {
-        return [self::CLICK];
+        return [
+            self::CLICK,
+        ];
     }
 }
+

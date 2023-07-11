@@ -10,45 +10,42 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'attributes' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'attributes' => 'attributes',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -140,10 +137,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['attributes']) ||
-            $this->container['attributes'] === null
-        ) {
+        if (!isset($this->container['attributes']) || $this->container['attributes'] === null) {
             $invalidProperties[] = "'attributes' can't be null";
         }
 
@@ -237,3 +231,4 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
         unset($this->container[$offset]);
     }
 }
+

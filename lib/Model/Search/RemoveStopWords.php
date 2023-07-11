@@ -13,39 +13,42 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $modelTypes = [];
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $modelTypes = [
+
+    ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
-    protected static $modelFormats = [];
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
+    protected static $modelFormats = [
+
+    ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
-    protected static $attributeMap = [];
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
+    protected static $attributeMap = [
+
+    ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -76,14 +79,18 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @var string[]
      */
-    protected static $setters = [];
+    protected static $setters = [
+
+    ];
 
     /**
      * Array of attributes to getter functions (for serialization of requests)
      *
      * @var string[]
      */
-    protected static $getters = [];
+    protected static $getters = [
+
+    ];
 
     /**
      * Array of attributes to setter functions (for deserialization of responses)
@@ -197,3 +204,4 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
+

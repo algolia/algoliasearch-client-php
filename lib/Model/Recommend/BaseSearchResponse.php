@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'abTestID' => 'int',
         'abTestVariantID' => 'int',
@@ -50,10 +47,10 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'abTestID' => null,
         'abTestVariantID' => null,
@@ -84,11 +81,11 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'abTestID' => 'abTestID',
         'abTestVariantID' => 'abTestVariantID',
@@ -119,11 +116,11 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -264,8 +261,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
             $this->container['automaticRadius'] = $data['automaticRadius'];
         }
         if (isset($data['exhaustiveFacetsCount'])) {
-            $this->container['exhaustiveFacetsCount'] =
-                $data['exhaustiveFacetsCount'];
+            $this->container['exhaustiveFacetsCount'] = $data['exhaustiveFacetsCount'];
         }
         if (isset($data['exhaustiveNbHits'])) {
             $this->container['exhaustiveNbHits'] = $data['exhaustiveNbHits'];
@@ -341,63 +337,32 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (
-            isset($this->container['aroundLatLng']) &&
-            !preg_match(
-                '/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/',
-                $this->container['aroundLatLng']
-            )
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
+        if (isset($this->container['aroundLatLng']) && !preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $this->container['aroundLatLng'])) {
+            $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
 
-        if (
-            !isset($this->container['exhaustiveNbHits']) ||
-            $this->container['exhaustiveNbHits'] === null
-        ) {
+        if (!isset($this->container['exhaustiveNbHits']) || $this->container['exhaustiveNbHits'] === null) {
             $invalidProperties[] = "'exhaustiveNbHits' can't be null";
         }
-        if (
-            !isset($this->container['hitsPerPage']) ||
-            $this->container['hitsPerPage'] === null
-        ) {
+        if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
-        if (
-            !isset($this->container['nbHits']) ||
-            $this->container['nbHits'] === null
-        ) {
+        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (
-            !isset($this->container['nbPages']) ||
-            $this->container['nbPages'] === null
-        ) {
+        if (!isset($this->container['nbPages']) || $this->container['nbPages'] === null) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
-        if (
-            !isset($this->container['page']) ||
-            $this->container['page'] === null
-        ) {
+        if (!isset($this->container['page']) || $this->container['page'] === null) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (
-            !isset($this->container['params']) ||
-            $this->container['params'] === null
-        ) {
+        if (!isset($this->container['params']) || $this->container['params'] === null) {
             $invalidProperties[] = "'params' can't be null";
         }
-        if (
-            !isset($this->container['processingTimeMS']) ||
-            $this->container['processingTimeMS'] === null
-        ) {
+        if (!isset($this->container['processingTimeMS']) || $this->container['processingTimeMS'] === null) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
         }
-        if (
-            !isset($this->container['query']) ||
-            $this->container['query'] === null
-        ) {
+        if (!isset($this->container['query']) || $this->container['query'] === null) {
             $invalidProperties[] = "'query' can't be null";
         }
 
@@ -482,16 +447,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function setAroundLatLng($aroundLatLng)
     {
-        if (
-            !is_null($aroundLatLng) &&
-            !preg_match(
-                '/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/',
-                $aroundLatLng
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                "invalid value for $aroundLatLng when calling BaseSearchResponse., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/."
-            );
+
+        if (!is_null($aroundLatLng) && (!preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $aroundLatLng))) {
+            throw new \InvalidArgumentException("invalid value for $aroundLatLng when calling BaseSearchResponse., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
         }
 
         $this->container['aroundLatLng'] = $aroundLatLng;
@@ -1103,3 +1061,4 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
+

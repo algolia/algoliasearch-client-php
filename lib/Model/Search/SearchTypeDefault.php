@@ -27,6 +27,9 @@ class SearchTypeDefault
      */
     public static function getAllowableEnumValues()
     {
-        return [self::_DEFAULT];
+        return [
+            self::_DEFAULT,
+        ];
     }
 }
+

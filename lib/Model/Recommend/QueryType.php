@@ -31,6 +31,11 @@ class QueryType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::PREFIX_LAST, self::PREFIX_ALL, self::PREFIX_NONE];
+        return [
+            self::PREFIX_LAST,
+            self::PREFIX_ALL,
+            self::PREFIX_NONE,
+        ];
     }
 }
+

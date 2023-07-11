@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  *
  * @package Algolia\AlgoliaSearch
  */
-class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'replicas' => 'bool',
         'indexName' => 'string',
@@ -35,10 +32,10 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'replicas' => null,
         'indexName' => null,
@@ -51,11 +48,11 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'replicas' => 'replicas',
         'indexName' => 'indexName',
@@ -68,11 +65,11 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -199,52 +196,28 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['replicas']) ||
-            $this->container['replicas'] === null
-        ) {
+        if (!isset($this->container['replicas']) || $this->container['replicas'] === null) {
             $invalidProperties[] = "'replicas' can't be null";
         }
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (
-            !isset($this->container['analyticsTags']) ||
-            $this->container['analyticsTags'] === null
-        ) {
+        if (!isset($this->container['analyticsTags']) || $this->container['analyticsTags'] === null) {
             $invalidProperties[] = "'analyticsTags' can't be null";
         }
-        if (
-            !isset($this->container['facets']) ||
-            $this->container['facets'] === null
-        ) {
+        if (!isset($this->container['facets']) || $this->container['facets'] === null) {
             $invalidProperties[] = "'facets' can't be null";
         }
-        if (
-            !isset($this->container['minHits']) ||
-            $this->container['minHits'] === null
-        ) {
+        if (!isset($this->container['minHits']) || $this->container['minHits'] === null) {
             $invalidProperties[] = "'minHits' can't be null";
         }
-        if (
-            !isset($this->container['minLetters']) ||
-            $this->container['minLetters'] === null
-        ) {
+        if (!isset($this->container['minLetters']) || $this->container['minLetters'] === null) {
             $invalidProperties[] = "'minLetters' can't be null";
         }
-        if (
-            !isset($this->container['generate']) ||
-            $this->container['generate'] === null
-        ) {
+        if (!isset($this->container['generate']) || $this->container['generate'] === null) {
             $invalidProperties[] = "'generate' can't be null";
         }
-        if (
-            !isset($this->container['external']) ||
-            $this->container['external'] === null
-        ) {
+        if (!isset($this->container['external']) || $this->container['external'] === null) {
             $invalidProperties[] = "'external' can't be null";
         }
 
@@ -506,3 +479,4 @@ class SourceIndexWithReplicas extends \Algolia\AlgoliaSearch\Model\AbstractModel
         unset($this->container[$offset]);
     }
 }
+

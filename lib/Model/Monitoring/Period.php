@@ -32,6 +32,13 @@ class Period
      */
     public static function getAllowableEnumValues()
     {
-        return [self::MINUTE, self::HOUR, self::DAY, self::WEEK, self::MONTH];
+        return [
+            self::MINUTE,
+            self::HOUR,
+            self::DAY,
+            self::WEEK,
+            self::MONTH,
+        ];
     }
 }
+

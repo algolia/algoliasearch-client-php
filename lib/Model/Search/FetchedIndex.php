@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'name' => 'string',
         'createdAt' => 'string',
@@ -35,10 +32,10 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'name' => null,
         'createdAt' => null,
@@ -54,11 +51,11 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'name' => 'name',
         'createdAt' => 'createdAt',
@@ -74,11 +71,11 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -198,8 +195,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['lastBuildTimeS'] = $data['lastBuildTimeS'];
         }
         if (isset($data['numberOfPendingTasks'])) {
-            $this->container['numberOfPendingTasks'] =
-                $data['numberOfPendingTasks'];
+            $this->container['numberOfPendingTasks'] = $data['numberOfPendingTasks'];
         }
         if (isset($data['pendingTask'])) {
             $this->container['pendingTask'] = $data['pendingTask'];
@@ -221,58 +217,31 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['name']) ||
-            $this->container['name'] === null
-        ) {
+        if (!isset($this->container['name']) || $this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (
-            !isset($this->container['createdAt']) ||
-            $this->container['createdAt'] === null
-        ) {
+        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (
-            !isset($this->container['updatedAt']) ||
-            $this->container['updatedAt'] === null
-        ) {
+        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (
-            !isset($this->container['entries']) ||
-            $this->container['entries'] === null
-        ) {
+        if (!isset($this->container['entries']) || $this->container['entries'] === null) {
             $invalidProperties[] = "'entries' can't be null";
         }
-        if (
-            !isset($this->container['dataSize']) ||
-            $this->container['dataSize'] === null
-        ) {
+        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-        if (
-            !isset($this->container['fileSize']) ||
-            $this->container['fileSize'] === null
-        ) {
+        if (!isset($this->container['fileSize']) || $this->container['fileSize'] === null) {
             $invalidProperties[] = "'fileSize' can't be null";
         }
-        if (
-            !isset($this->container['lastBuildTimeS']) ||
-            $this->container['lastBuildTimeS'] === null
-        ) {
+        if (!isset($this->container['lastBuildTimeS']) || $this->container['lastBuildTimeS'] === null) {
             $invalidProperties[] = "'lastBuildTimeS' can't be null";
         }
-        if (
-            !isset($this->container['numberOfPendingTasks']) ||
-            $this->container['numberOfPendingTasks'] === null
-        ) {
+        if (!isset($this->container['numberOfPendingTasks']) || $this->container['numberOfPendingTasks'] === null) {
             $invalidProperties[] = "'numberOfPendingTasks' can't be null";
         }
-        if (
-            !isset($this->container['pendingTask']) ||
-            $this->container['pendingTask'] === null
-        ) {
+        if (!isset($this->container['pendingTask']) || $this->container['pendingTask'] === null) {
             $invalidProperties[] = "'pendingTask' can't be null";
         }
 
@@ -606,3 +575,4 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

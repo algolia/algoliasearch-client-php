@@ -26,6 +26,10 @@ class Direction
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ASC, self::DESC];
+        return [
+            self::ASC,
+            self::DESC,
+        ];
     }
 }
+

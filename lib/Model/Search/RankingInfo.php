@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'filters' => 'int',
         'firstMatchedWord' => 'int',
@@ -37,10 +34,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'filters' => null,
         'firstMatchedWord' => null,
@@ -58,11 +55,11 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'filters' => 'filters',
         'firstMatchedWord' => 'firstMatchedWord',
@@ -80,11 +77,11 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -199,8 +196,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['geoPrecision'] = $data['geoPrecision'];
         }
         if (isset($data['matchedGeoLocation'])) {
-            $this->container['matchedGeoLocation'] =
-                $data['matchedGeoLocation'];
+            $this->container['matchedGeoLocation'] = $data['matchedGeoLocation'];
         }
         if (isset($data['personalization'])) {
             $this->container['personalization'] = $data['personalization'];
@@ -224,8 +220,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['words'] = $data['words'];
         }
         if (isset($data['promotedByReRanking'])) {
-            $this->container['promotedByReRanking'] =
-                $data['promotedByReRanking'];
+            $this->container['promotedByReRanking'] = $data['promotedByReRanking'];
         }
     }
 
@@ -238,52 +233,28 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['filters']) ||
-            $this->container['filters'] === null
-        ) {
+        if (!isset($this->container['filters']) || $this->container['filters'] === null) {
             $invalidProperties[] = "'filters' can't be null";
         }
-        if (
-            !isset($this->container['firstMatchedWord']) ||
-            $this->container['firstMatchedWord'] === null
-        ) {
+        if (!isset($this->container['firstMatchedWord']) || $this->container['firstMatchedWord'] === null) {
             $invalidProperties[] = "'firstMatchedWord' can't be null";
         }
-        if (
-            !isset($this->container['geoDistance']) ||
-            $this->container['geoDistance'] === null
-        ) {
+        if (!isset($this->container['geoDistance']) || $this->container['geoDistance'] === null) {
             $invalidProperties[] = "'geoDistance' can't be null";
         }
-        if (
-            !isset($this->container['nbExactWords']) ||
-            $this->container['nbExactWords'] === null
-        ) {
+        if (!isset($this->container['nbExactWords']) || $this->container['nbExactWords'] === null) {
             $invalidProperties[] = "'nbExactWords' can't be null";
         }
-        if (
-            !isset($this->container['nbTypos']) ||
-            $this->container['nbTypos'] === null
-        ) {
+        if (!isset($this->container['nbTypos']) || $this->container['nbTypos'] === null) {
             $invalidProperties[] = "'nbTypos' can't be null";
         }
-        if (
-            !isset($this->container['promoted']) ||
-            $this->container['promoted'] === null
-        ) {
+        if (!isset($this->container['promoted']) || $this->container['promoted'] === null) {
             $invalidProperties[] = "'promoted' can't be null";
         }
-        if (
-            !isset($this->container['userScore']) ||
-            $this->container['userScore'] === null
-        ) {
+        if (!isset($this->container['userScore']) || $this->container['userScore'] === null) {
             $invalidProperties[] = "'userScore' can't be null";
         }
-        if (
-            !isset($this->container['words']) ||
-            $this->container['words'] === null
-        ) {
+        if (!isset($this->container['words']) || $this->container['words'] === null) {
             $invalidProperties[] = "'words' can't be null";
         }
 
@@ -665,3 +636,4 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

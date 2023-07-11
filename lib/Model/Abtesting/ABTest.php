@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'abTestID' => 'int',
         'clickSignificance' => 'float',
@@ -33,10 +30,10 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'abTestID' => null,
         'clickSignificance' => 'double',
@@ -50,11 +47,11 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'abTestID' => 'abTestID',
         'clickSignificance' => 'clickSignificance',
@@ -68,11 +65,11 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -173,8 +170,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['clickSignificance'] = $data['clickSignificance'];
         }
         if (isset($data['conversionSignificance'])) {
-            $this->container['conversionSignificance'] =
-                $data['conversionSignificance'];
+            $this->container['conversionSignificance'] = $data['conversionSignificance'];
         }
         if (isset($data['endAt'])) {
             $this->container['endAt'] = $data['endAt'];
@@ -205,58 +201,31 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['abTestID']) ||
-            $this->container['abTestID'] === null
-        ) {
+        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (
-            !isset($this->container['clickSignificance']) ||
-            $this->container['clickSignificance'] === null
-        ) {
+        if (!isset($this->container['clickSignificance']) || $this->container['clickSignificance'] === null) {
             $invalidProperties[] = "'clickSignificance' can't be null";
         }
-        if (
-            !isset($this->container['conversionSignificance']) ||
-            $this->container['conversionSignificance'] === null
-        ) {
+        if (!isset($this->container['conversionSignificance']) || $this->container['conversionSignificance'] === null) {
             $invalidProperties[] = "'conversionSignificance' can't be null";
         }
-        if (
-            !isset($this->container['endAt']) ||
-            $this->container['endAt'] === null
-        ) {
+        if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
             $invalidProperties[] = "'endAt' can't be null";
         }
-        if (
-            !isset($this->container['updatedAt']) ||
-            $this->container['updatedAt'] === null
-        ) {
+        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (
-            !isset($this->container['createdAt']) ||
-            $this->container['createdAt'] === null
-        ) {
+        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (
-            !isset($this->container['name']) ||
-            $this->container['name'] === null
-        ) {
+        if (!isset($this->container['name']) || $this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (
-            !isset($this->container['status']) ||
-            $this->container['status'] === null
-        ) {
+        if (!isset($this->container['status']) || $this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if (
-            !isset($this->container['variants']) ||
-            $this->container['variants'] === null
-        ) {
+        if (!isset($this->container['variants']) || $this->container['variants'] === null) {
             $invalidProperties[] = "'variants' can't be null";
         }
 
@@ -542,3 +511,4 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

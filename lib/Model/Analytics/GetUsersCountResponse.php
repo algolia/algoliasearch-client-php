@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'count' => 'int',
         'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[]',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'count' => null,
         'dates' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'count' => 'count',
         'dates' => 'dates',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['dates']) ||
-            $this->container['dates'] === null
-        ) {
+        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
             $invalidProperties[] = "'dates' can't be null";
         }
 
@@ -275,3 +266,4 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
+

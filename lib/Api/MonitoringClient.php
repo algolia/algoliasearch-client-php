@@ -33,10 +33,8 @@ class MonitoringClient
      * @param MonitoringConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(
-        ApiWrapperInterface $apiWrapper,
-        MonitoringConfig $config
-    ) {
+    public function __construct(ApiWrapperInterface $apiWrapper, MonitoringConfig $config)
+    {
         $this->config = $config;
         $this->api = $apiWrapper;
     }
@@ -49,9 +47,7 @@ class MonitoringClient
      */
     public static function create($appId = null, $apiKey = null)
     {
-        return static::createWithConfig(
-            MonitoringConfig::create($appId, $apiKey)
-        );
+        return static::createWithConfig(MonitoringConfig::create($appId, $apiKey));
     }
 
     /**
@@ -81,14 +77,14 @@ class MonitoringClient
      */
     public static function getClusterHosts(MonitoringConfig $config)
     {
+
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url =
-                $config->getRegion() !== null && $config->getRegion() !== ''
-                    ? str_replace('{region}', $config->getRegion(), '')
-                    : '';
+            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+                str_replace('{region}', $config->getRegion(), '') :
+                '';
             $clusterHosts = ClusterHosts::create($url);
         }
 
@@ -132,17 +128,14 @@ class MonitoringClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -174,17 +167,14 @@ class MonitoringClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -218,14 +208,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -259,14 +242,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -278,19 +254,13 @@ class MonitoringClient
      */
     public function getIncidents($requestOptions = [])
     {
+
         $resourcePath = '/1/incidents';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -324,14 +294,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -343,19 +306,13 @@ class MonitoringClient
      */
     public function getInventory($requestOptions = [])
     {
+
         $resourcePath = '/1/inventory/servers';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -389,14 +346,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -446,14 +396,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -487,14 +430,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -506,19 +442,13 @@ class MonitoringClient
      */
     public function getStatus($requestOptions = [])
     {
+
         $resourcePath = '/1/status';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -531,12 +461,8 @@ class MonitoringClient
      *
      * @return array<string, mixed>|object
      */
-    public function post(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function post($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -547,7 +473,7 @@ class MonitoringClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -555,17 +481,14 @@ class MonitoringClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -578,12 +501,8 @@ class MonitoringClient
      *
      * @return array<string, mixed>|object
      */
-    public function put(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function put($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -594,7 +513,7 @@ class MonitoringClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -602,28 +521,18 @@ class MonitoringClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
-    private function sendRequest(
-        $method,
-        $resourcePath,
-        $headers,
-        $queryParameters,
-        $httpBody,
-        $requestOptions,
-        $useReadTransporter = false
-    ) {
+    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
         }
@@ -631,17 +540,9 @@ class MonitoringClient
             $requestOptions['queryParameters'] = [];
         }
 
-        $requestOptions['headers'] = array_merge(
-            $headers,
-            $requestOptions['headers']
-        );
-        $requestOptions['queryParameters'] = array_merge(
-            $queryParameters,
-            $requestOptions['queryParameters']
-        );
-        $query = \GuzzleHttp\Psr7\Query::build(
-            $requestOptions['queryParameters']
-        );
+        $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
+        $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
+        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

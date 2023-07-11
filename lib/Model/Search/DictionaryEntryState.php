@@ -29,6 +29,10 @@ class DictionaryEntryState
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ENABLED, self::DISABLED];
+        return [
+            self::ENABLED,
+            self::DISABLED,
+        ];
     }
 }
+

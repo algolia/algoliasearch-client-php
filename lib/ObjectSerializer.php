@@ -34,19 +34,14 @@ class ObjectSerializer
      *
      * @return scalar|object|array|null serialized form of $data
      */
-    public static function sanitizeForSerialization(
-        $data,
-        $type = null,
-        $format = null
-    ) {
+    public static function sanitizeForSerialization($data, $type = null, $format = null)
+    {
         if (is_scalar($data) || null === $data) {
             return $data;
         }
 
         if ($data instanceof \DateTime) {
-            return $format === 'date'
-                ? $data->format('Y-m-d')
-                : $data->format(self::$dateTimeFormat);
+            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(self::$dateTimeFormat);
         }
 
         if (is_array($data)) {
@@ -64,29 +59,7 @@ class ObjectSerializer
                 foreach ($data::modelTypes() as $property => $modelTypes) {
                     $getter = $data::getters()[$property];
                     $value = $data->$getter();
-                    if (
-                        $value !== null &&
-                        !in_array(
-                            $modelTypes,
-                            [
-                                '\DateTime',
-                                '\SplFileObject',
-                                'array',
-                                'bool',
-                                'boolean',
-                                'byte',
-                                'float',
-                                'int',
-                                'integer',
-                                'mixed',
-                                'number',
-                                'object',
-                                'string',
-                                'void',
-                            ],
-                            true
-                        )
-                    ) {
+                    if ($value !== null && !in_array($modelTypes, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
                         $callable = [$modelTypes, 'getAllowableEnumValues'];
                         if (is_callable($callable)) {
                             /** array $callable */
@@ -94,24 +67,16 @@ class ObjectSerializer
                             if (!in_array($value, $allowedEnumTypes, true)) {
                                 $imploded = implode("', '", $allowedEnumTypes);
 
-                                throw new \InvalidArgumentException(
-                                    "Invalid value for enum '$modelTypes', must be one of: '$imploded'"
-                                );
+                                throw new \InvalidArgumentException("Invalid value for enum '$modelTypes', must be one of: '$imploded'");
                             }
                         }
                     }
                     if ($value !== null) {
-                        $values[
-                            $data::attributeMap()[$property]
-                        ] = self::sanitizeForSerialization(
-                            $value,
-                            $modelTypes,
-                            $formats[$property]
-                        );
+                        $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $modelTypes, $formats[$property]);
                     }
                 }
             } else {
-                foreach ($data as $property => $value) {
+                foreach($data as $property => $value) {
                     $values[$property] = self::sanitizeForSerialization($value);
                 }
             }
@@ -224,8 +189,7 @@ class ObjectSerializer
      */
     public static function toString($value)
     {
-        if ($value instanceof \DateTime) {
-            // datetime in ISO8601 format
+        if ($value instanceof \DateTime) { // datetime in ISO8601 format
             return $value->format(self::$dateTimeFormat);
         } elseif (is_bool($value)) {
             return $value ? 'true' : 'false';
@@ -245,19 +209,12 @@ class ObjectSerializer
      *
      * @return string
      */
-    public static function serializeCollection(
-        array $collection,
-        $style,
-        $allowCollectionFormatMulti = false
-    ) {
-        if ($allowCollectionFormatMulti && 'multi' === $style) {
+    public static function serializeCollection(array $collection, $style, $allowCollectionFormatMulti = false)
+    {
+        if ($allowCollectionFormatMulti && ('multi' === $style)) {
             // http_build_query() almost does the job for us. We just
             // need to fix the result of multidimensional arrays.
-            return preg_replace(
-                '/%5B[0-9]+%5D=/',
-                '=',
-                http_build_query($collection, '', '&')
-            );
+            return preg_replace('/%5B[0-9]+%5D=/', '=', http_build_query($collection, '', '&'));
         }
         switch ($style) {
             case 'pipeDelimited':
@@ -311,8 +268,7 @@ class ObjectSerializer
             return $values;
         }
 
-        if (preg_match('/^(array<|map\[)/', $class)) {
-            // for associative array e.g. array<string,int>
+        if (preg_match('/^(array<|map\[)/', $class)) { // for associative array e.g. array<string,int>
             $data = is_string($data) ? json_decode($data) : $data;
             settype($data, 'array');
             $inner = mb_substr($class, 4, -1);
@@ -321,11 +277,7 @@ class ObjectSerializer
                 $subClass_array = explode(',', $inner, 2);
                 $subClass = $subClass_array[1];
                 foreach ($data as $key => $value) {
-                    $deserialized[$key] = self::deserialize(
-                        $value,
-                        $subClass,
-                        null
-                    );
+                    $deserialized[$key] = self::deserialize($value, $subClass, null);
                 }
             }
 
@@ -365,28 +317,7 @@ class ObjectSerializer
         }
 
         /** @psalm-suppress ParadoxicalCondition */
-        if (
-            in_array(
-                $class,
-                [
-                    '\DateTime',
-                    '\SplFileObject',
-                    'array',
-                    'bool',
-                    'boolean',
-                    'byte',
-                    'float',
-                    'int',
-                    'integer',
-                    'mixed',
-                    'number',
-                    'object',
-                    'string',
-                    'void',
-                ],
-                true
-            )
-        ) {
+        if (in_array($class, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
             settype($data, $class);
 
             return $data;
@@ -396,9 +327,7 @@ class ObjectSerializer
             if (!in_array($data, $class::getAllowableEnumValues(), true)) {
                 $imploded = implode("', '", $class::getAllowableEnumValues());
 
-                throw new \InvalidArgumentException(
-                    "Invalid value for enum '$class', must be one of: '$imploded'"
-                );
+                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
             }
 
             return $data;
@@ -410,19 +339,13 @@ class ObjectSerializer
         foreach ($instance::modelTypes() as $property => $type) {
             $propertySetter = $instance::setters()[$property];
 
-            if (
-                !isset($propertySetter) ||
-                !isset($data->{$instance::attributeMap()[$property]})
-            ) {
+            if (!isset($propertySetter) || !isset($data->{$instance::attributeMap()[$property]})) {
                 continue;
             }
 
             if (isset($data->{$instance::attributeMap()[$property]})) {
-                $propertyValue =
-                    $data->{$instance::attributeMap()[$property]};
-                $instance->$propertySetter(
-                    self::deserialize($propertyValue, $type, null)
-                );
+                $propertyValue = $data->{$instance::attributeMap()[$property]};
+                $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
             }
         }
 

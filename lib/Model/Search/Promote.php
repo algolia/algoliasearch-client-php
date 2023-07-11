@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'objectIDs' => 'string[]',
         'position' => 'int',
@@ -27,10 +24,10 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'objectIDs' => null,
         'position' => null,
@@ -38,11 +35,11 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'objectIDs' => 'objectIDs',
         'position' => 'position',
@@ -50,11 +47,11 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['objectIDs']) ||
-            $this->container['objectIDs'] === null
-        ) {
+        if (!isset($this->container['objectIDs']) || $this->container['objectIDs'] === null) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if (
-            !isset($this->container['position']) ||
-            $this->container['position'] === null
-        ) {
+        if (!isset($this->container['position']) || $this->container['position'] === null) {
             $invalidProperties[] = "'position' can't be null";
         }
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
 
@@ -313,3 +301,4 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

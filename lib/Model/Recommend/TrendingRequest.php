@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingModels',
         'facetName' => 'string',
@@ -32,10 +29,10 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'model' => null,
         'facetName' => null,
@@ -48,11 +45,11 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'model' => 'model',
         'facetName' => 'facetName',
@@ -65,11 +62,11 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -177,15 +174,13 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
             $this->container['threshold'] = $data['threshold'];
         }
         if (isset($data['maxRecommendations'])) {
-            $this->container['maxRecommendations'] =
-                $data['maxRecommendations'];
+            $this->container['maxRecommendations'] = $data['maxRecommendations'];
         }
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
         }
         if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] =
-                $data['fallbackParameters'];
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -198,32 +193,21 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['model']) ||
-            $this->container['model'] === null
-        ) {
+        if (!isset($this->container['model']) || $this->container['model'] === null) {
             $invalidProperties[] = "'model' can't be null";
         }
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (
-            !isset($this->container['threshold']) ||
-            $this->container['threshold'] === null
-        ) {
+        if (!isset($this->container['threshold']) || $this->container['threshold'] === null) {
             $invalidProperties[] = "'threshold' can't be null";
         }
-        if ($this->container['threshold'] > 100) {
-            $invalidProperties[] =
-                "invalid value for 'threshold', must be smaller than or equal to 100.";
+        if (($this->container['threshold'] > 100)) {
+            $invalidProperties[] = "invalid value for 'threshold', must be smaller than or equal to 100.";
         }
 
-        if ($this->container['threshold'] < 0) {
-            $invalidProperties[] =
-                "invalid value for 'threshold', must be bigger than or equal to 0.";
+        if (($this->container['threshold'] < 0)) {
+            $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -355,15 +339,12 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function setThreshold($threshold)
     {
-        if ($threshold > 100) {
-            throw new \InvalidArgumentException(
-                'invalid value for $threshold when calling TrendingRequest., must be smaller than or equal to 100.'
-            );
+
+        if (($threshold > 100)) {
+            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingRequest., must be smaller than or equal to 100.');
         }
-        if ($threshold < 0) {
-            throw new \InvalidArgumentException(
-                'invalid value for $threshold when calling TrendingRequest., must be bigger than or equal to 0.'
-            );
+        if (($threshold < 0)) {
+            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingRequest., must be bigger than or equal to 0.');
         }
 
         $this->container['threshold'] = $threshold;
@@ -495,3 +476,4 @@ class TrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
         unset($this->container[$offset]);
     }
 }
+

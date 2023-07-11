@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Personalization;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'userToken' => 'string',
         'deletedUntil' => 'string',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'userToken' => null,
         'deletedUntil' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'userToken' => 'userToken',
         'deletedUntil' => 'deletedUntil',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['userToken']) ||
-            $this->container['userToken'] === null
-        ) {
+        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (
-            !isset($this->container['deletedUntil']) ||
-            $this->container['deletedUntil'] === null
-        ) {
+        if (!isset($this->container['deletedUntil']) || $this->container['deletedUntil'] === null) {
             $invalidProperties[] = "'deletedUntil' can't be null";
         }
 
@@ -275,3 +266,4 @@ class DeleteUserProfileResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
+

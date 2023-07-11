@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Rule[]',
         'nbHits' => 'int',
@@ -28,10 +25,10 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
@@ -40,11 +37,11 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'hits' => 'hits',
         'nbHits' => 'nbHits',
@@ -53,11 +50,11 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -164,28 +161,16 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['hits']) ||
-            $this->container['hits'] === null
-        ) {
+        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (
-            !isset($this->container['nbHits']) ||
-            $this->container['nbHits'] === null
-        ) {
+        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (
-            !isset($this->container['page']) ||
-            $this->container['page'] === null
-        ) {
+        if (!isset($this->container['page']) || $this->container['page'] === null) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (
-            !isset($this->container['nbPages']) ||
-            $this->container['nbPages'] === null
-        ) {
+        if (!isset($this->container['nbPages']) || $this->container['nbPages'] === null) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
 
@@ -351,3 +336,4 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
+

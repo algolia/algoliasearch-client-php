@@ -26,6 +26,10 @@ class TaskStatus
      */
     public static function getAllowableEnumValues()
     {
-        return [self::PUBLISHED, self::NOT_PUBLISHED];
+        return [
+            self::PUBLISHED,
+            self::NOT_PUBLISHED,
+        ];
     }
 }
+

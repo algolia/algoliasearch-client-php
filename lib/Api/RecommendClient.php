@@ -32,10 +32,8 @@ class RecommendClient
      * @param RecommendConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(
-        ApiWrapperInterface $apiWrapper,
-        RecommendConfig $config
-    ) {
+    public function __construct(ApiWrapperInterface $apiWrapper, RecommendConfig $config)
+    {
         $this->config = $config;
         $this->api = $apiWrapper;
     }
@@ -48,9 +46,7 @@ class RecommendClient
      */
     public static function create($appId = null, $apiKey = null)
     {
-        return static::createWithConfig(
-            RecommendConfig::create($appId, $apiKey)
-        );
+        return static::createWithConfig(RecommendConfig::create($appId, $apiKey));
     }
 
     /**
@@ -80,23 +76,16 @@ class RecommendClient
      */
     public static function getClusterHosts(RecommendConfig $config)
     {
-        $cacheKey = sprintf(
-            '%s-clusterHosts-%s',
-            __CLASS__,
-            $config->getAppId()
-        );
+        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
 
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
-        } elseif (
-            false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))
-        ) {
+        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
             // We'll try to restore the ClusterHost from cache, if we cannot
             // we create a new instance and set the cache key
-            $clusterHosts = ClusterHosts::createFromAppId(
-                $config->getAppId()
-            )->setCacheKey($cacheKey);
+            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
+                ->setCacheKey($cacheKey);
         }
 
         return $clusterHosts;
@@ -139,17 +128,14 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -181,17 +167,14 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -206,10 +189,8 @@ class RecommendClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse
      */
-    public function getRecommendations(
-        $getRecommendationsParams,
-        $requestOptions = []
-    ) {
+    public function getRecommendations($getRecommendationsParams, $requestOptions = [])
+    {
         // verify the required parameter 'getRecommendationsParams' is set
         if (!isset($getRecommendationsParams)) {
             throw new \InvalidArgumentException(
@@ -222,15 +203,7 @@ class RecommendClient
         $headers = [];
         $httpBody = $getRecommendationsParams;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -243,12 +216,8 @@ class RecommendClient
      *
      * @return array<string, mixed>|object
      */
-    public function post(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function post($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -259,7 +228,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -267,17 +236,14 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -290,12 +256,8 @@ class RecommendClient
      *
      * @return array<string, mixed>|object
      */
-    public function put(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function put($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -306,7 +268,7 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -314,28 +276,18 @@ class RecommendClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
-    private function sendRequest(
-        $method,
-        $resourcePath,
-        $headers,
-        $queryParameters,
-        $httpBody,
-        $requestOptions,
-        $useReadTransporter = false
-    ) {
+    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
         }
@@ -343,17 +295,9 @@ class RecommendClient
             $requestOptions['queryParameters'] = [];
         }
 
-        $requestOptions['headers'] = array_merge(
-            $headers,
-            $requestOptions['headers']
-        );
-        $requestOptions['queryParameters'] = array_merge(
-            $queryParameters,
-            $requestOptions['queryParameters']
-        );
-        $query = \GuzzleHttp\Psr7\Query::build(
-            $requestOptions['queryParameters']
-        );
+        $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
+        $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
+        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

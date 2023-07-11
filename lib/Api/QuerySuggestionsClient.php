@@ -33,10 +33,8 @@ class QuerySuggestionsClient
      * @param QuerySuggestionsConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(
-        ApiWrapperInterface $apiWrapper,
-        QuerySuggestionsConfig $config
-    ) {
+    public function __construct(ApiWrapperInterface $apiWrapper, QuerySuggestionsConfig $config)
+    {
         $this->config = $config;
         $this->api = $apiWrapper;
     }
@@ -50,7 +48,7 @@ class QuerySuggestionsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu', 'us'];
+        $allowedRegions = ['eu','us'];
 
         if (
             $region === null ||
@@ -94,18 +92,14 @@ class QuerySuggestionsClient
      */
     public static function getClusterHosts(QuerySuggestionsConfig $config)
     {
+
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url =
-                $config->getRegion() !== null && $config->getRegion() !== ''
-                    ? str_replace(
-                        '{region}',
-                        $config->getRegion(),
-                        'query-suggestions.{region}.algolia.com'
-                    )
-                    : '';
+            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+                str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com') :
+                '';
             $clusterHosts = ClusterHosts::create($url);
         }
 
@@ -131,10 +125,8 @@ class QuerySuggestionsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SuccessResponse
      */
-    public function createConfig(
-        $querySuggestionsIndexWithIndexParam,
-        $requestOptions = []
-    ) {
+    public function createConfig($querySuggestionsIndexWithIndexParam, $requestOptions = [])
+    {
         // verify the required parameter 'querySuggestionsIndexWithIndexParam' is set
         if (!isset($querySuggestionsIndexWithIndexParam)) {
             throw new \InvalidArgumentException(
@@ -147,14 +139,7 @@ class QuerySuggestionsClient
         $headers = [];
         $httpBody = $querySuggestionsIndexWithIndexParam;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -186,17 +171,14 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -230,14 +212,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -269,17 +244,14 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -291,19 +263,13 @@ class QuerySuggestionsClient
      */
     public function getAllConfigs($requestOptions = [])
     {
+
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -337,14 +303,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -378,14 +337,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -419,14 +371,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -439,12 +384,8 @@ class QuerySuggestionsClient
      *
      * @return array<string, mixed>|object
      */
-    public function post(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function post($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -455,7 +396,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -463,17 +404,14 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -486,12 +424,8 @@ class QuerySuggestionsClient
      *
      * @return array<string, mixed>|object
      */
-    public function put(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function put($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -502,7 +436,7 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -510,17 +444,14 @@ class QuerySuggestionsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -538,11 +469,8 @@ class QuerySuggestionsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SuccessResponse
      */
-    public function updateConfig(
-        $indexName,
-        $querySuggestionsIndexParam,
-        $requestOptions = []
-    ) {
+    public function updateConfig($indexName, $querySuggestionsIndexParam, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -570,25 +498,11 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
-    private function sendRequest(
-        $method,
-        $resourcePath,
-        $headers,
-        $queryParameters,
-        $httpBody,
-        $requestOptions,
-        $useReadTransporter = false
-    ) {
+    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
         }
@@ -596,17 +510,9 @@ class QuerySuggestionsClient
             $requestOptions['queryParameters'] = [];
         }
 
-        $requestOptions['headers'] = array_merge(
-            $headers,
-            $requestOptions['headers']
-        );
-        $requestOptions['queryParameters'] = array_merge(
-            $queryParameters,
-            $requestOptions['queryParameters']
-        );
-        $query = \GuzzleHttp\Psr7\Query::build(
-            $requestOptions['queryParameters']
-        );
+        $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
+        $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
+        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

@@ -33,10 +33,8 @@ class AnalyticsClient
      * @param AnalyticsConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(
-        ApiWrapperInterface $apiWrapper,
-        AnalyticsConfig $config
-    ) {
+    public function __construct(ApiWrapperInterface $apiWrapper, AnalyticsConfig $config)
+    {
         $this->config = $config;
         $this->api = $apiWrapper;
     }
@@ -50,9 +48,12 @@ class AnalyticsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de', 'us'];
+        $allowedRegions = ['de','us'];
 
-        if ($region !== null && !in_array($region, $allowedRegions, true)) {
+        if (
+
+            ($region !== null && !in_array($region, $allowedRegions, true))
+        ) {
             throw new AlgoliaException(
                 '`region` must be one of the following: ' .
                     implode(', ', $allowedRegions)
@@ -91,18 +92,14 @@ class AnalyticsClient
      */
     public static function getClusterHosts(AnalyticsConfig $config)
     {
+
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url =
-                $config->getRegion() !== null && $config->getRegion() !== ''
-                    ? str_replace(
-                        '{region}',
-                        $config->getRegion(),
-                        'analytics.{region}.algolia.com'
-                    )
-                    : 'analytics.algolia.com';
+            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+                str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com') :
+                'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
         }
 
@@ -146,17 +143,14 @@ class AnalyticsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -188,17 +182,14 @@ class AnalyticsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -212,41 +203,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse
      */
-    public function getAverageClickPosition(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getAverageClickPosition($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getAverageClickPosition`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/averageClickPosition';
@@ -270,14 +240,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -291,41 +254,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse
      */
-    public function getClickPositions(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getClickPositions($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickPositions`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/positions';
@@ -349,14 +291,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -370,41 +305,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse
      */
-    public function getClickThroughRate(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getClickThroughRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickThroughRate`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/clickThroughRate';
@@ -428,14 +342,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -449,41 +356,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponse
      */
-    public function getConversationRate(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getConversationRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getConversationRate`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/conversions/conversionRate';
@@ -507,14 +393,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -528,41 +407,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse
      */
-    public function getNoClickRate(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getNoClickRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoClickRate`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noClickRate';
@@ -586,14 +444,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -607,41 +458,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse
      */
-    public function getNoResultsRate(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getNoResultsRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoResultsRate`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noResultRate';
@@ -665,14 +495,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -686,41 +509,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse
      */
-    public function getSearchesCount(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getSearchesCount($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesCount`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/count';
@@ -744,14 +546,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -767,43 +562,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse
      */
-    public function getSearchesNoClicks(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getSearchesNoClicks($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noClicks';
@@ -835,14 +607,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -858,43 +623,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse
      */
-    public function getSearchesNoResults(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getSearchesNoResults($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noResults';
@@ -926,14 +668,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -962,14 +697,7 @@ class AnalyticsClient
             $queryParameters['index'] = $index;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -985,43 +713,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse
      */
-    public function getTopCountries(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopCountries($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopCountries`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/countries';
@@ -1053,14 +758,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1077,44 +775,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse
      */
-    public function getTopFilterAttributes(
-        $index,
-        $search = null,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopFilterAttributes($index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/filters';
@@ -1150,14 +824,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1175,17 +842,8 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse
      */
-    public function getTopFilterForAttribute(
-        $attribute,
-        $index,
-        $search = null,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopFilterForAttribute($attribute, $index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'attribute' is set
         if (!isset($attribute)) {
             throw new \InvalidArgumentException(
@@ -1198,28 +856,12 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/filters/{attribute}';
@@ -1264,14 +906,7 @@ class AnalyticsClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1288,44 +923,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse
      */
-    public function getTopFiltersNoResults(
-        $index,
-        $search = null,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopFiltersNoResults($index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/filters/noResults';
@@ -1361,14 +972,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1386,45 +990,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse
      */
-    public function getTopHits(
-        $index,
-        $search = null,
-        $clickAnalytics = null,
-        $startDate = null,
-        $endDate = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopHits($index, $search = null, $clickAnalytics = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopHits`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/hits';
@@ -1464,14 +1043,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1490,46 +1062,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse
      */
-    public function getTopSearches(
-        $index,
-        $clickAnalytics = null,
-        $startDate = null,
-        $endDate = null,
-        $orderBy = null,
-        $direction = null,
-        $limit = null,
-        $offset = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getTopSearches($index, $clickAnalytics = null, $startDate = null, $endDate = null, $orderBy = null, $direction = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopSearches`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches';
@@ -1573,14 +1119,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1594,41 +1133,20 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse
      */
-    public function getUsersCount(
-        $index,
-        $startDate = null,
-        $endDate = null,
-        $tags = null,
-        $requestOptions = []
-    ) {
+    public function getUsersCount($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getUsersCount`.'
             );
         }
-        if (
-            $startDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $startDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "startDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($startDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
+            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
-        if (
-            $endDate !== null &&
-            !preg_match(
-                '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/',
-                $endDate
-            )
-        ) {
-            throw new \InvalidArgumentException(
-                'invalid value for "endDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.'
-            );
+        if ($endDate !== null && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
+            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/users/count';
@@ -1652,14 +1170,7 @@ class AnalyticsClient
             $queryParameters['tags'] = $tags;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1672,12 +1183,8 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|object
      */
-    public function post(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function post($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -1688,7 +1195,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -1696,17 +1203,14 @@ class AnalyticsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1719,12 +1223,8 @@ class AnalyticsClient
      *
      * @return array<string, mixed>|object
      */
-    public function put(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function put($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -1735,7 +1235,7 @@ class AnalyticsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -1743,28 +1243,18 @@ class AnalyticsClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
-    private function sendRequest(
-        $method,
-        $resourcePath,
-        $headers,
-        $queryParameters,
-        $httpBody,
-        $requestOptions,
-        $useReadTransporter = false
-    ) {
+    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
         }
@@ -1772,17 +1262,9 @@ class AnalyticsClient
             $requestOptions['queryParameters'] = [];
         }
 
-        $requestOptions['headers'] = array_merge(
-            $headers,
-            $requestOptions['headers']
-        );
-        $requestOptions['queryParameters'] = array_merge(
-            $queryParameters,
-            $requestOptions['queryParameters']
-        );
-        $query = \GuzzleHttp\Psr7\Query::build(
-            $requestOptions['queryParameters']
-        );
+        $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
+        $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
+        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

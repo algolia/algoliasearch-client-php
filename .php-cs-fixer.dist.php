@@ -8,14 +8,14 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude('vendor')
     ->exclude('test')
-    ->exclude('tests');
+    ->exclude('tests')
+;
 
 $config = new PhpCsFixer\Config();
-return $config
-    ->setRules([
+return $config->setRules([
         '@PSR12' => true,
         'phpdoc_order' => true,
-        'array_syntax' => ['syntax' => 'short'],
+        'array_syntax' => [ 'syntax' => 'short' ],
         'strict_comparison' => true,
         'strict_param' => true,
         'no_trailing_whitespace' => false,
@@ -25,4 +25,5 @@ return $config
         'blank_line_after_namespace' => false,
         'no_leading_import_slash' => false,
     ])
-    ->setFinder($finder);
+    ->setFinder($finder)
+;

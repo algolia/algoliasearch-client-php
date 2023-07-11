@@ -24,6 +24,9 @@ class Type
      */
     public static function getAllowableEnumValues()
     {
-        return [self::CLUSTER];
+        return [
+            self::CLUSTER,
+        ];
     }
 }
+

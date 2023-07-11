@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
@@ -27,10 +24,10 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
@@ -38,11 +35,11 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'search' => 'search',
         'count' => 'count',
@@ -50,11 +47,11 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['search']) ||
-            $this->container['search'] === null
-        ) {
+        if (!isset($this->container['search']) || $this->container['search'] === null) {
             $invalidProperties[] = "'search' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['withFilterCount']) ||
-            $this->container['withFilterCount'] === null
-        ) {
+        if (!isset($this->container['withFilterCount']) || $this->container['withFilterCount'] === null) {
             $invalidProperties[] = "'withFilterCount' can't be null";
         }
 
@@ -313,3 +301,4 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
+

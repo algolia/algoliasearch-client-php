@@ -29,6 +29,10 @@ class Mode
      */
     public static function getAllowableEnumValues()
     {
-        return [self::NEURAL_SEARCH, self::KEYWORD_SEARCH];
+        return [
+            self::NEURAL_SEARCH,
+            self::KEYWORD_SEARCH,
+        ];
     }
 }
+

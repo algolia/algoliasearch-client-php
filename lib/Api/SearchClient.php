@@ -38,10 +38,8 @@ class SearchClient
      * @param SearchConfig $config
      * @param ApiWrapperInterface $apiWrapper
      */
-    public function __construct(
-        ApiWrapperInterface $apiWrapper,
-        SearchConfig $config
-    ) {
+    public function __construct(ApiWrapperInterface $apiWrapper, SearchConfig $config)
+    {
         $this->config = $config;
         $this->api = $apiWrapper;
     }
@@ -84,23 +82,16 @@ class SearchClient
      */
     public static function getClusterHosts(SearchConfig $config)
     {
-        $cacheKey = sprintf(
-            '%s-clusterHosts-%s',
-            __CLASS__,
-            $config->getAppId()
-        );
+        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
 
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
-        } elseif (
-            false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))
-        ) {
+        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
             // We'll try to restore the ClusterHost from cache, if we cannot
             // we create a new instance and set the cache key
-            $clusterHosts = ClusterHosts::createFromAppId(
-                $config->getAppId()
-            )->setCacheKey($cacheKey);
+            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
+                ->setCacheKey($cacheKey);
         }
 
         return $clusterHosts;
@@ -147,14 +138,7 @@ class SearchClient
         $headers = [];
         $httpBody = $apiKey;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -167,12 +151,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse
      */
-    public function addOrUpdateObject(
-        $indexName,
-        $objectID,
-        $body,
-        $requestOptions = []
-    ) {
+    public function addOrUpdateObject($indexName, $objectID, $body, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -215,14 +195,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -252,14 +225,7 @@ class SearchClient
         $headers = [];
         $httpBody = $source;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -275,11 +241,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
-    public function assignUserId(
-        $xAlgoliaUserID,
-        $assignUserIdParams,
-        $requestOptions = []
-    ) {
+    public function assignUserId($xAlgoliaUserID, $assignUserIdParams, $requestOptions = [])
+    {
         // verify the required parameter 'xAlgoliaUserID' is set
         if (!isset($xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
@@ -287,9 +250,7 @@ class SearchClient
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
-            throw new \InvalidArgumentException(
-                'invalid value for "xAlgoliaUserID" when calling SearchClient.assignUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
-            );
+            throw new \InvalidArgumentException('invalid value for "xAlgoliaUserID" when calling SearchClient.assignUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
         }
 
         // verify the required parameter 'assignUserIdParams' is set
@@ -306,14 +267,7 @@ class SearchClient
 
         $headers['X-Algolia-User-ID'] = $xAlgoliaUserID;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -358,14 +312,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -382,11 +329,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse
      */
-    public function batchAssignUserIds(
-        $xAlgoliaUserID,
-        $batchAssignUserIdsParams,
-        $requestOptions = []
-    ) {
+    public function batchAssignUserIds($xAlgoliaUserID, $batchAssignUserIdsParams, $requestOptions = [])
+    {
         // verify the required parameter 'xAlgoliaUserID' is set
         if (!isset($xAlgoliaUserID)) {
             throw new \InvalidArgumentException(
@@ -394,9 +338,7 @@ class SearchClient
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
-            throw new \InvalidArgumentException(
-                'invalid value for "xAlgoliaUserID" when calling SearchClient.batchAssignUserIds, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
-            );
+            throw new \InvalidArgumentException('invalid value for "xAlgoliaUserID" when calling SearchClient.batchAssignUserIds, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
         }
 
         // verify the required parameter 'batchAssignUserIdsParams' is set
@@ -413,14 +355,7 @@ class SearchClient
 
         $headers['X-Algolia-User-ID'] = $xAlgoliaUserID;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -437,11 +372,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function batchDictionaryEntries(
-        $dictionaryName,
-        $batchDictionaryEntriesParams,
-        $requestOptions = []
-    ) {
+    public function batchDictionaryEntries($dictionaryName, $batchDictionaryEntriesParams, $requestOptions = [])
+    {
         // verify the required parameter 'dictionaryName' is set
         if (!isset($dictionaryName)) {
             throw new \InvalidArgumentException(
@@ -469,14 +401,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -491,11 +416,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\BrowseResponse
      */
-    public function browse(
-        $indexName,
-        $browseParams = null,
-        $requestOptions = []
-    ) {
+    public function browse($indexName, $browseParams = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -506,7 +428,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/browse';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($browseParams) ? $browseParams : [];
+        $httpBody =  isset($browseParams) ? $browseParams : [];
 
         // path params
         if ($indexName !== null) {
@@ -517,14 +439,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -536,11 +451,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function clearAllSynonyms(
-        $indexName,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function clearAllSynonyms($indexName, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -566,14 +478,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -607,14 +512,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -626,11 +524,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function clearRules(
-        $indexName,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function clearRules($indexName, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -656,14 +551,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -695,17 +583,14 @@ class SearchClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -739,14 +624,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -798,14 +676,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -839,14 +710,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -896,14 +760,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -916,12 +773,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function deleteRule(
-        $indexName,
-        $objectID,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function deleteRule($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -962,14 +815,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1003,14 +849,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1023,12 +862,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse
      */
-    public function deleteSynonym(
-        $indexName,
-        $objectID,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function deleteSynonym($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -1069,14 +904,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1108,17 +936,14 @@ class SearchClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1152,14 +977,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1171,19 +989,13 @@ class SearchClient
      */
     public function getDictionaryLanguages($requestOptions = [])
     {
+
         $resourcePath = '/1/dictionaries/*/languages';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1195,19 +1007,13 @@ class SearchClient
      */
     public function getDictionarySettings($requestOptions = [])
     {
+
         $resourcePath = '/1/dictionaries/*/settings';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1221,17 +1027,10 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\GetLogsResponse
      */
-    public function getLogs(
-        $offset = null,
-        $length = null,
-        $indexName = null,
-        $type = null,
-        $requestOptions = []
-    ) {
+    public function getLogs($offset = null, $length = null, $indexName = null, $type = null, $requestOptions = [])
+    {
         if ($length !== null && $length > 1000) {
-            throw new \InvalidArgumentException(
-                'invalid value for "$length" when calling SearchClient.getLogs, must be smaller than or equal to 1000.'
-            );
+            throw new \InvalidArgumentException('invalid value for "$length" when calling SearchClient.getLogs, must be smaller than or equal to 1000.');
         }
 
         $resourcePath = '/1/logs';
@@ -1255,14 +1054,7 @@ class SearchClient
             $queryParameters['type'] = $type;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1275,12 +1067,8 @@ class SearchClient
      *
      * @return array<string, mixed>|array<string,string>
      */
-    public function getObject(
-        $indexName,
-        $objectID,
-        $attributesToRetrieve = null,
-        $requestOptions = []
-    ) {
+    public function getObject($indexName, $objectID, $attributesToRetrieve = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -1321,14 +1109,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1357,15 +1138,7 @@ class SearchClient
         $headers = [];
         $httpBody = $getObjectsParams;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -1415,14 +1188,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1456,14 +1222,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1475,19 +1234,13 @@ class SearchClient
      */
     public function getSources($requestOptions = [])
     {
+
         $resourcePath = '/1/security/sources';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1537,14 +1290,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1594,14 +1340,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1613,19 +1352,13 @@ class SearchClient
      */
     public function getTopUserIds($requestOptions = [])
     {
+
         $resourcePath = '/1/clusters/mapping/top';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1645,9 +1378,7 @@ class SearchClient
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException(
-                'invalid value for "userID" when calling SearchClient.getUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
-            );
+            throw new \InvalidArgumentException('invalid value for "userID" when calling SearchClient.getUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
         }
 
         $resourcePath = '/1/clusters/mapping/{userID}';
@@ -1664,14 +1395,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1682,10 +1406,9 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse
      */
-    public function hasPendingMappings(
-        $getClusters = null,
-        $requestOptions = []
-    ) {
+    public function hasPendingMappings($getClusters = null, $requestOptions = [])
+    {
+
         $resourcePath = '/1/clusters/mapping/pending';
         $queryParameters = [];
         $headers = [];
@@ -1695,14 +1418,7 @@ class SearchClient
             $queryParameters['getClusters'] = $getClusters;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1714,19 +1430,13 @@ class SearchClient
      */
     public function listApiKeys($requestOptions = [])
     {
+
         $resourcePath = '/1/keys';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1738,19 +1448,13 @@ class SearchClient
      */
     public function listClusters($requestOptions = [])
     {
+
         $resourcePath = '/1/clusters';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1763,6 +1467,7 @@ class SearchClient
      */
     public function listIndices($page = null, $requestOptions = [])
     {
+
         $resourcePath = '/1/indexes';
         $queryParameters = [];
         $headers = [];
@@ -1772,14 +1477,7 @@ class SearchClient
             $queryParameters['page'] = $page;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1791,11 +1489,9 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse
      */
-    public function listUserIds(
-        $page = null,
-        $hitsPerPage = null,
-        $requestOptions = []
-    ) {
+    public function listUserIds($page = null, $hitsPerPage = null, $requestOptions = [])
+    {
+
         $resourcePath = '/1/clusters/mapping';
         $queryParameters = [];
         $headers = [];
@@ -1809,14 +1505,7 @@ class SearchClient
             $queryParameters['hitsPerPage'] = $hitsPerPage;
         }
 
-        return $this->sendRequest(
-            'GET',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1845,14 +1534,7 @@ class SearchClient
         $headers = [];
         $httpBody = $batchParams;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1870,11 +1552,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function operationIndex(
-        $indexName,
-        $operationIndexParams,
-        $requestOptions = []
-    ) {
+    public function operationIndex($indexName, $operationIndexParams, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -1902,14 +1581,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1923,13 +1595,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse
      */
-    public function partialUpdateObject(
-        $indexName,
-        $objectID,
-        $attributesToUpdate,
-        $createIfNotExists = null,
-        $requestOptions = []
-    ) {
+    public function partialUpdateObject($indexName, $objectID, $attributesToUpdate, $createIfNotExists = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -1976,14 +1643,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -1996,12 +1656,8 @@ class SearchClient
      *
      * @return array<string, mixed>|object
      */
-    public function post(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function post($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -2012,7 +1668,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -2020,17 +1676,14 @@ class SearchClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2043,12 +1696,8 @@ class SearchClient
      *
      * @return array<string, mixed>|object
      */
-    public function put(
-        $path,
-        $parameters = null,
-        $body = null,
-        $requestOptions = []
-    ) {
+    public function put($path, $parameters = null, $body = null, $requestOptions = [])
+    {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
@@ -2059,7 +1708,7 @@ class SearchClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($body) ? $body : [];
+        $httpBody =  isset($body) ? $body : [];
 
         if ($parameters !== null) {
             $queryParameters = $parameters;
@@ -2067,17 +1716,14 @@ class SearchClient
 
         // path params
         if ($path !== null) {
-            $resourcePath = str_replace('{path}', $path, $resourcePath);
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2097,9 +1743,7 @@ class SearchClient
             );
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException(
-                'invalid value for "userID" when calling SearchClient.removeUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.'
-            );
+            throw new \InvalidArgumentException('invalid value for "userID" when calling SearchClient.removeUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
         }
 
         $resourcePath = '/1/clusters/mapping/{userID}';
@@ -2116,14 +1760,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'DELETE',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2148,14 +1785,7 @@ class SearchClient
         $headers = [];
         $httpBody = $source;
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2189,14 +1819,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2237,14 +1860,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2267,13 +1883,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedRuleResponse
      */
-    public function saveRule(
-        $indexName,
-        $objectID,
-        $rule,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function saveRule($indexName, $objectID, $rule, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2320,14 +1931,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2341,13 +1945,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function saveRules(
-        $indexName,
-        $rules,
-        $forwardToReplicas = null,
-        $clearExistingRules = null,
-        $requestOptions = []
-    ) {
+    public function saveRules($indexName, $rules, $forwardToReplicas = null, $clearExistingRules = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2383,14 +1982,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2415,13 +2007,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse
      */
-    public function saveSynonym(
-        $indexName,
-        $objectID,
-        $synonymHit,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function saveSynonym($indexName, $objectID, $synonymHit, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2468,14 +2055,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2489,13 +2069,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function saveSynonyms(
-        $indexName,
-        $synonymHit,
-        $forwardToReplicas = null,
-        $replaceExistingSynonyms = null,
-        $requestOptions = []
-    ) {
+    public function saveSynonyms($indexName, $synonymHit, $forwardToReplicas = null, $replaceExistingSynonyms = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2519,9 +2094,7 @@ class SearchClient
         }
 
         if ($replaceExistingSynonyms !== null) {
-            $queryParameters[
-                'replaceExistingSynonyms'
-            ] = $replaceExistingSynonyms;
+            $queryParameters['replaceExistingSynonyms'] = $replaceExistingSynonyms;
         }
 
         // path params
@@ -2533,14 +2106,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2570,15 +2136,7 @@ class SearchClient
         $headers = [];
         $httpBody = $searchMethodParams;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2597,11 +2155,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function searchDictionaryEntries(
-        $dictionaryName,
-        $searchDictionaryEntriesParams,
-        $requestOptions = []
-    ) {
+    public function searchDictionaryEntries($dictionaryName, $searchDictionaryEntriesParams, $requestOptions = [])
+    {
         // verify the required parameter 'dictionaryName' is set
         if (!isset($dictionaryName)) {
             throw new \InvalidArgumentException(
@@ -2629,15 +2184,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2656,12 +2203,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse
      */
-    public function searchForFacetValues(
-        $indexName,
-        $facetName,
-        $searchForFacetValuesRequest = null,
-        $requestOptions = []
-    ) {
+    public function searchForFacetValues($indexName, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2678,9 +2221,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/facets/{facetName}/query';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($searchForFacetValuesRequest)
-            ? $searchForFacetValuesRequest
-            : [];
+        $httpBody =  isset($searchForFacetValuesRequest) ? $searchForFacetValuesRequest : [];
 
         // path params
         if ($indexName !== null) {
@@ -2700,15 +2241,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2730,11 +2263,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse
      */
-    public function searchRules(
-        $indexName,
-        $searchRulesParams = null,
-        $requestOptions = []
-    ) {
+    public function searchRules($indexName, $searchRulesParams = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2745,7 +2275,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/rules/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($searchRulesParams) ? $searchRulesParams : [];
+        $httpBody =  isset($searchRulesParams) ? $searchRulesParams : [];
 
         // path params
         if ($indexName !== null) {
@@ -2756,15 +2286,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2779,11 +2301,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchResponse
      */
-    public function searchSingleIndex(
-        $indexName,
-        $searchParams = null,
-        $requestOptions = []
-    ) {
+    public function searchSingleIndex($indexName, $searchParams = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2794,7 +2313,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/query';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($searchParams) ? $searchParams : [];
+        $httpBody =  isset($searchParams) ? $searchParams : [];
 
         // path params
         if ($indexName !== null) {
@@ -2805,15 +2324,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2832,14 +2343,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse
      */
-    public function searchSynonyms(
-        $indexName,
-        $type = null,
-        $page = null,
-        $hitsPerPage = null,
-        $searchSynonymsParams = null,
-        $requestOptions = []
-    ) {
+    public function searchSynonyms($indexName, $type = null, $page = null, $hitsPerPage = null, $searchSynonymsParams = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -2850,7 +2355,7 @@ class SearchClient
         $resourcePath = '/1/indexes/{indexName}/synonyms/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody = isset($searchSynonymsParams) ? $searchSynonymsParams : [];
+        $httpBody =  isset($searchSynonymsParams) ? $searchSynonymsParams : [];
 
         if ($type !== null) {
             $queryParameters['type'] = $type;
@@ -2873,15 +2378,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2913,15 +2410,7 @@ class SearchClient
         $headers = [];
         $httpBody = $searchUserIdsParams;
 
-        return $this->sendRequest(
-            'POST',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions,
-            true
-        );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, true);
     }
 
     /**
@@ -2936,10 +2425,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function setDictionarySettings(
-        $dictionarySettingsParams,
-        $requestOptions = []
-    ) {
+    public function setDictionarySettings($dictionarySettingsParams, $requestOptions = [])
+    {
         // verify the required parameter 'dictionarySettingsParams' is set
         if (!isset($dictionarySettingsParams)) {
             throw new \InvalidArgumentException(
@@ -2952,14 +2439,7 @@ class SearchClient
         $headers = [];
         $httpBody = $dictionarySettingsParams;
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -2975,12 +2455,8 @@ class SearchClient
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
      */
-    public function setSettings(
-        $indexName,
-        $indexSettings,
-        $forwardToReplicas = null,
-        $requestOptions = []
-    ) {
+    public function setSettings($indexName, $indexSettings, $forwardToReplicas = null, $requestOptions = [])
+    {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
             throw new \InvalidArgumentException(
@@ -3012,14 +2488,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -3071,14 +2540,7 @@ class SearchClient
             );
         }
 
-        return $this->sendRequest(
-            'PUT',
-            $resourcePath,
-            $headers,
-            $queryParameters,
-            $httpBody,
-            $requestOptions
-        );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
     }
 
     /**
@@ -3094,13 +2556,8 @@ class SearchClient
      *
      * @return void
      */
-    public function waitForTask(
-        $indexName,
-        $taskId,
-        $requestOptions = [],
-        $maxRetries = null,
-        $timeout = null
-    ) {
+    public function waitForTask($indexName, $taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
+    {
         if ($timeout === null) {
             $timeout = $this->config->getWaitTaskTimeBeforeRetry();
         }
@@ -3113,9 +2570,7 @@ class SearchClient
             $this,
             'getTask',
             [$indexName, $taskId, $requestOptions],
-            function ($res) {
-                return 'published' === $res['status'];
-            },
+            function ($res) {return 'published' === $res['status']; },
             $maxRetries,
             $timeout
         );
@@ -3202,15 +2657,8 @@ class SearchClient
         return new SynonymIterator($indexName, $this, $requestOptions);
     }
 
-    private function sendRequest(
-        $method,
-        $resourcePath,
-        $headers,
-        $queryParameters,
-        $httpBody,
-        $requestOptions,
-        $useReadTransporter = false
-    ) {
+    private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
+    {
         if (!isset($requestOptions['headers'])) {
             $requestOptions['headers'] = [];
         }
@@ -3218,17 +2666,9 @@ class SearchClient
             $requestOptions['queryParameters'] = [];
         }
 
-        $requestOptions['headers'] = array_merge(
-            $headers,
-            $requestOptions['headers']
-        );
-        $requestOptions['queryParameters'] = array_merge(
-            $queryParameters,
-            $requestOptions['queryParameters']
-        );
-        $query = \GuzzleHttp\Psr7\Query::build(
-            $requestOptions['queryParameters']
-        );
+        $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
+        $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
+        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

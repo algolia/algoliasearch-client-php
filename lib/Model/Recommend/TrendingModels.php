@@ -29,6 +29,10 @@ class TrendingModels
      */
     public static function getAllowableEnumValues()
     {
-        return [self::FACETS, self::ITEMS];
+        return [
+            self::FACETS,
+            self::ITEMS,
+        ];
     }
 }
+

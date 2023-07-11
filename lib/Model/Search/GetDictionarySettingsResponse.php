@@ -10,45 +10,42 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'disableStandardEntries' => '\Algolia\AlgoliaSearch\Model\Search\StandardEntries',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'disableStandardEntries' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'disableStandardEntries' => 'disableStandardEntries',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -127,8 +124,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function __construct(array $data = null)
     {
         if (isset($data['disableStandardEntries'])) {
-            $this->container['disableStandardEntries'] =
-                $data['disableStandardEntries'];
+            $this->container['disableStandardEntries'] = $data['disableStandardEntries'];
         }
     }
 
@@ -141,10 +137,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['disableStandardEntries']) ||
-            $this->container['disableStandardEntries'] === null
-        ) {
+        if (!isset($this->container['disableStandardEntries']) || $this->container['disableStandardEntries'] === null) {
             $invalidProperties[] = "'disableStandardEntries' can't be null";
         }
 
@@ -238,3 +231,4 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
+

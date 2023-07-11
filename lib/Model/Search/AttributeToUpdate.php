@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
         'value' => 'string',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'operation' => null,
         'value' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'operation' => '_operation',
         'value' => 'value',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['operation']) ||
-            $this->container['operation'] === null
-        ) {
+        if (!isset($this->container['operation']) || $this->container['operation'] === null) {
             $invalidProperties[] = "'operation' can't be null";
         }
-        if (
-            !isset($this->container['value']) ||
-            $this->container['value'] === null
-        ) {
+        if (!isset($this->container['value']) || $this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
 
@@ -275,3 +266,4 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
+

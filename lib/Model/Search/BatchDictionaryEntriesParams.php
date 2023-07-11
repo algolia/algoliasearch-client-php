@@ -13,48 +13,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'clearExistingDictionaryEntries' => 'bool',
         'requests' => '\Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'clearExistingDictionaryEntries' => null,
         'requests' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'clearExistingDictionaryEntries' => 'clearExistingDictionaryEntries',
         'requests' => 'requests',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -135,8 +132,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     public function __construct(array $data = null)
     {
         if (isset($data['clearExistingDictionaryEntries'])) {
-            $this->container['clearExistingDictionaryEntries'] =
-                $data['clearExistingDictionaryEntries'];
+            $this->container['clearExistingDictionaryEntries'] = $data['clearExistingDictionaryEntries'];
         }
         if (isset($data['requests'])) {
             $this->container['requests'] = $data['requests'];
@@ -152,10 +148,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['requests']) ||
-            $this->container['requests'] === null
-        ) {
+        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
             $invalidProperties[] = "'requests' can't be null";
         }
 
@@ -190,12 +183,9 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
      *
      * @return self
      */
-    public function setClearExistingDictionaryEntries(
-        $clearExistingDictionaryEntries
-    ) {
-        $this->container[
-            'clearExistingDictionaryEntries'
-        ] = $clearExistingDictionaryEntries;
+    public function setClearExistingDictionaryEntries($clearExistingDictionaryEntries)
+    {
+        $this->container['clearExistingDictionaryEntries'] = $clearExistingDictionaryEntries;
 
         return $this;
     }
@@ -276,3 +266,4 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
         unset($this->container[$offset]);
     }
 }
+

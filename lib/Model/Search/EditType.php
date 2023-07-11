@@ -29,6 +29,10 @@ class EditType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::REMOVE, self::REPLACE];
+        return [
+            self::REMOVE,
+            self::REPLACE,
+        ];
     }
 }
+

@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'taskID' => 'int',
         'updatedAt' => 'string',
@@ -30,10 +27,10 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'taskID' => 'int64',
         'updatedAt' => null,
@@ -41,11 +38,11 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'taskID' => 'taskID',
         'updatedAt' => 'updatedAt',
@@ -53,11 +50,11 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -297,3 +294,4 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
+

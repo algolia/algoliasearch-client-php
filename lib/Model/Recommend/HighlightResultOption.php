@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @package Algolia\AlgoliaSearch
  */
-class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'value' => 'string',
         'matchLevel' => '\Algolia\AlgoliaSearch\Model\Recommend\MatchLevel',
@@ -31,10 +28,10 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'value' => null,
         'matchLevel' => null,
@@ -43,11 +40,11 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'value' => 'value',
         'matchLevel' => 'matchLevel',
@@ -56,11 +53,11 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -167,22 +164,13 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['value']) ||
-            $this->container['value'] === null
-        ) {
+        if (!isset($this->container['value']) || $this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
-        if (
-            !isset($this->container['matchLevel']) ||
-            $this->container['matchLevel'] === null
-        ) {
+        if (!isset($this->container['matchLevel']) || $this->container['matchLevel'] === null) {
             $invalidProperties[] = "'matchLevel' can't be null";
         }
-        if (
-            !isset($this->container['matchedWords']) ||
-            $this->container['matchedWords'] === null
-        ) {
+        if (!isset($this->container['matchedWords']) || $this->container['matchedWords'] === null) {
             $invalidProperties[] = "'matchedWords' can't be null";
         }
 
@@ -348,3 +336,4 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
+

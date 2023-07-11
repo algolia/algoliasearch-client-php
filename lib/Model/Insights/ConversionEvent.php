@@ -24,6 +24,9 @@ class ConversionEvent
      */
     public static function getAllowableEnumValues()
     {
-        return [self::CONVERSION];
+        return [
+            self::CONVERSION,
+        ];
     }
 }
+

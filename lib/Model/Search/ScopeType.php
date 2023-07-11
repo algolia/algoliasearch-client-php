@@ -28,6 +28,11 @@ class ScopeType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::SETTINGS, self::SYNONYMS, self::RULES];
+        return [
+            self::SETTINGS,
+            self::SYNONYMS,
+            self::RULES,
+        ];
     }
 }
+

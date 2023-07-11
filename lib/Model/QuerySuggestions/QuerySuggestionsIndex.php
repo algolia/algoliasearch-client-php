@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'indexName' => 'string',
         'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[]',
@@ -28,10 +25,10 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'indexName' => null,
         'sourceIndices' => null,
@@ -40,11 +37,11 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'indexName' => 'indexName',
         'sourceIndices' => 'sourceIndices',
@@ -53,11 +50,11 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -164,28 +161,16 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (
-            !isset($this->container['sourceIndices']) ||
-            $this->container['sourceIndices'] === null
-        ) {
+        if (!isset($this->container['sourceIndices']) || $this->container['sourceIndices'] === null) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
-        if (
-            !isset($this->container['languages']) ||
-            $this->container['languages'] === null
-        ) {
+        if (!isset($this->container['languages']) || $this->container['languages'] === null) {
             $invalidProperties[] = "'languages' can't be null";
         }
-        if (
-            !isset($this->container['exclude']) ||
-            $this->container['exclude'] === null
-        ) {
+        if (!isset($this->container['exclude']) || $this->container['exclude'] === null) {
             $invalidProperties[] = "'exclude' can't be null";
         }
 
@@ -351,3 +336,4 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
+

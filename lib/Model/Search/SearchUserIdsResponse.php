@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\UserHit[]',
         'nbHits' => 'int',
@@ -32,10 +29,10 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
@@ -45,11 +42,11 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'hits' => 'hits',
         'nbHits' => 'nbHits',
@@ -59,11 +56,11 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -175,34 +172,19 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['hits']) ||
-            $this->container['hits'] === null
-        ) {
+        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (
-            !isset($this->container['nbHits']) ||
-            $this->container['nbHits'] === null
-        ) {
+        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (
-            !isset($this->container['page']) ||
-            $this->container['page'] === null
-        ) {
+        if (!isset($this->container['page']) || $this->container['page'] === null) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (
-            !isset($this->container['hitsPerPage']) ||
-            $this->container['hitsPerPage'] === null
-        ) {
+        if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
-        if (
-            !isset($this->container['updatedAt']) ||
-            $this->container['updatedAt'] === null
-        ) {
+        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
 
@@ -392,3 +374,4 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
+

@@ -66,7 +66,7 @@ abstract class Configuration
             throw new AlgoliaException('`appId` is missing.');
         }
 
-        if (!isset($config['apiKey']) || $config['apiKey'] === '') {
+        if (!isset($config['apiKey'])  || $config['apiKey'] === '') {
             throw new AlgoliaException('`apiKey` is missing.');
         }
 
@@ -114,9 +114,7 @@ abstract class Configuration
      */
     public function getAuth($authIdentifier)
     {
-        return isset($this->auths[$authIdentifier])
-            ? $this->auths[$authIdentifier]
-            : null;
+        return isset($this->auths[$authIdentifier]) ? $this->auths[$authIdentifier] : null;
     }
 
     /**

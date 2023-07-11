@@ -29,6 +29,10 @@ class OperationType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::MOVE, self::COPY];
+        return [
+            self::MOVE,
+            self::COPY,
+        ];
     }
 }
+

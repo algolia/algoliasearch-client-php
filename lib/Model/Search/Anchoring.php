@@ -33,6 +33,12 @@ class Anchoring
      */
     public static function getAllowableEnumValues()
     {
-        return [self::IS, self::STARTS_WITH, self::ENDS_WITH, self::CONTAINS];
+        return [
+            self::IS,
+            self::STARTS_WITH,
+            self::ENDS_WITH,
+            self::CONTAINS,
+        ];
     }
 }
+

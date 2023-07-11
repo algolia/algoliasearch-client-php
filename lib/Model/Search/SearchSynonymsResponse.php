@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\SynonymHit[]',
         'nbHits' => 'int',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'hits' => 'hits',
         'nbHits' => 'nbHits',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['hits']) ||
-            $this->container['hits'] === null
-        ) {
+        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (
-            !isset($this->container['nbHits']) ||
-            $this->container['nbHits'] === null
-        ) {
+        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
 
@@ -275,3 +266,4 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         unset($this->container[$offset]);
     }
 }
+

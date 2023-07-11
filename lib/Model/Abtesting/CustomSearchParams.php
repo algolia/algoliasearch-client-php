@@ -10,45 +10,42 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'customSearchParameters' => 'object',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'customSearchParameters' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'customSearchParameters' => 'customSearchParameters',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -127,8 +124,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function __construct(array $data = null)
     {
         if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] =
-                $data['customSearchParameters'];
+            $this->container['customSearchParameters'] = $data['customSearchParameters'];
         }
     }
 
@@ -141,10 +137,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['customSearchParameters']) ||
-            $this->container['customSearchParameters'] === null
-        ) {
+        if (!isset($this->container['customSearchParameters']) || $this->container['customSearchParameters'] === null) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
 
@@ -238,3 +231,4 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         unset($this->container[$offset]);
     }
 }
+

@@ -31,6 +31,11 @@ class MatchLevel
      */
     public static function getAllowableEnumValues()
     {
-        return [self::NONE, self::PARTIAL, self::FULL];
+        return [
+            self::NONE,
+            self::PARTIAL,
+            self::FULL,
+        ];
     }
 }
+

@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'rate' => 'float',
         'clickCount' => 'int',
@@ -28,10 +25,10 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'rate' => 'double',
         'clickCount' => null,
@@ -40,11 +37,11 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'rate' => 'rate',
         'clickCount' => 'clickCount',
@@ -53,11 +50,11 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,8 +145,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
             $this->container['clickCount'] = $data['clickCount'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
         if (isset($data['date'])) {
             $this->container['date'] = $data['date'];
@@ -165,28 +161,16 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['rate']) ||
-            $this->container['rate'] === null
-        ) {
+        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
+        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
+        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (
-            !isset($this->container['date']) ||
-            $this->container['date'] === null
-        ) {
+        if (!isset($this->container['date']) || $this->container['date'] === null) {
             $invalidProperties[] = "'date' can't be null";
         }
 
@@ -352,3 +336,4 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         unset($this->container[$offset]);
     }
 }
+

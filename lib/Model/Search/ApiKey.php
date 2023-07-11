@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'acl' => '\Algolia\AlgoliaSearch\Model\Search\Acl[]',
         'description' => 'string',
@@ -35,10 +32,10 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'acl' => null,
         'description' => null,
@@ -51,11 +48,11 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'acl' => 'acl',
         'description' => 'description',
@@ -68,11 +65,11 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -177,8 +174,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['maxHitsPerQuery'] = $data['maxHitsPerQuery'];
         }
         if (isset($data['maxQueriesPerIPPerHour'])) {
-            $this->container['maxQueriesPerIPPerHour'] =
-                $data['maxQueriesPerIPPerHour'];
+            $this->container['maxQueriesPerIPPerHour'] = $data['maxQueriesPerIPPerHour'];
         }
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
@@ -200,10 +196,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['acl']) ||
-            $this->container['acl'] === null
-        ) {
+        if (!isset($this->container['acl']) || $this->container['acl'] === null) {
             $invalidProperties[] = "'acl' can't be null";
         }
 
@@ -465,3 +458,4 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

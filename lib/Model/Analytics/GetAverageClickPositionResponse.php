@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'average' => 'float',
         'clickCount' => 'int',
@@ -27,10 +24,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'average' => 'double',
         'clickCount' => null,
@@ -38,11 +35,11 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'average' => 'average',
         'clickCount' => 'clickCount',
@@ -50,11 +47,11 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['average']) ||
-            $this->container['average'] === null
-        ) {
+        if (!isset($this->container['average']) || $this->container['average'] === null) {
             $invalidProperties[] = "'average' can't be null";
         }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
+        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (
-            !isset($this->container['dates']) ||
-            $this->container['dates'] === null
-        ) {
+        if (!isset($this->container['dates']) || $this->container['dates'] === null) {
             $invalidProperties[] = "'dates' can't be null";
         }
 
@@ -313,3 +301,4 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
         unset($this->container[$offset]);
     }
 }
+

@@ -26,6 +26,10 @@ class TypoToleranceEnum
      */
     public static function getAllowableEnumValues()
     {
-        return [self::MIN, self::STRICT];
+        return [
+            self::MIN,
+            self::STRICT,
+        ];
     }
 }
+

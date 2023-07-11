@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'query' => 'string',
         'similarQuery' => 'string',
@@ -58,10 +55,10 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'query' => null,
         'similarQuery' => null,
@@ -100,11 +97,11 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'query' => 'query',
         'similarQuery' => 'similarQuery',
@@ -143,11 +140,11 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -313,8 +310,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['tagFilters'] = $data['tagFilters'];
         }
         if (isset($data['sumOrFiltersScores'])) {
-            $this->container['sumOrFiltersScores'] =
-                $data['sumOrFiltersScores'];
+            $this->container['sumOrFiltersScores'] = $data['sumOrFiltersScores'];
         }
         if (isset($data['facets'])) {
             $this->container['facets'] = $data['facets'];
@@ -323,8 +319,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
         }
         if (isset($data['facetingAfterDistinct'])) {
-            $this->container['facetingAfterDistinct'] =
-                $data['facetingAfterDistinct'];
+            $this->container['facetingAfterDistinct'] = $data['facetingAfterDistinct'];
         }
         if (isset($data['sortFacetValuesBy'])) {
             $this->container['sortFacetValuesBy'] = $data['sortFacetValuesBy'];
@@ -351,8 +346,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['aroundPrecision'] = $data['aroundPrecision'];
         }
         if (isset($data['minimumAroundRadius'])) {
-            $this->container['minimumAroundRadius'] =
-                $data['minimumAroundRadius'];
+            $this->container['minimumAroundRadius'] = $data['minimumAroundRadius'];
         }
         if (isset($data['insideBoundingBox'])) {
             $this->container['insideBoundingBox'] = $data['insideBoundingBox'];
@@ -367,8 +361,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['ruleContexts'] = $data['ruleContexts'];
         }
         if (isset($data['personalizationImpact'])) {
-            $this->container['personalizationImpact'] =
-                $data['personalizationImpact'];
+            $this->container['personalizationImpact'] = $data['personalizationImpact'];
         }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
@@ -386,8 +379,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['analyticsTags'] = $data['analyticsTags'];
         }
         if (isset($data['percentileComputation'])) {
-            $this->container['percentileComputation'] =
-                $data['percentileComputation'];
+            $this->container['percentileComputation'] = $data['percentileComputation'];
         }
         if (isset($data['enableABTest'])) {
             $this->container['enableABTest'] = $data['enableABTest'];
@@ -396,8 +388,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
             $this->container['enableReRanking'] = $data['enableReRanking'];
         }
         if (isset($data['reRankingApplyFilter'])) {
-            $this->container['reRankingApplyFilter'] =
-                $data['reRankingApplyFilter'];
+            $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
         }
     }
 
@@ -410,28 +401,16 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         $invalidProperties = [];
 
-        if (
-            isset($this->container['length']) &&
-            $this->container['length'] > 1000
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'length', must be smaller than or equal to 1000.";
+        if (isset($this->container['length']) && ($this->container['length'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'length', must be smaller than or equal to 1000.";
         }
 
-        if (
-            isset($this->container['length']) &&
-            $this->container['length'] < 1
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'length', must be bigger than or equal to 1.";
+        if (isset($this->container['length']) && ($this->container['length'] < 1)) {
+            $invalidProperties[] = "invalid value for 'length', must be bigger than or equal to 1.";
         }
 
-        if (
-            isset($this->container['minimumAroundRadius']) &&
-            $this->container['minimumAroundRadius'] < 1
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
+        if (isset($this->container['minimumAroundRadius']) && ($this->container['minimumAroundRadius'] < 1)) {
+            $invalidProperties[] = "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -803,15 +782,12 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setLength($length)
     {
-        if (!is_null($length) && $length > 1000) {
-            throw new \InvalidArgumentException(
-                'invalid value for $length when calling BaseSearchParams., must be smaller than or equal to 1000.'
-            );
+
+        if (!is_null($length) && ($length > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $length when calling BaseSearchParams., must be smaller than or equal to 1000.');
         }
-        if (!is_null($length) && $length < 1) {
-            throw new \InvalidArgumentException(
-                'invalid value for $length when calling BaseSearchParams., must be bigger than or equal to 1.'
-            );
+        if (!is_null($length) && ($length < 1)) {
+            throw new \InvalidArgumentException('invalid value for $length when calling BaseSearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['length'] = $length;
@@ -934,10 +910,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
-        if (!is_null($minimumAroundRadius) && $minimumAroundRadius < 1) {
-            throw new \InvalidArgumentException(
-                'invalid value for $minimumAroundRadius when calling BaseSearchParams., must be bigger than or equal to 1.'
-            );
+
+        if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
+            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling BaseSearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['minimumAroundRadius'] = $minimumAroundRadius;
@@ -1333,3 +1308,4 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         unset($this->container[$offset]);
     }
 }
+

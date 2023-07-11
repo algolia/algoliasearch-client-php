@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'index' => 'string',
         'abTestID' => 'int',
@@ -27,10 +24,10 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'index' => null,
         'abTestID' => null,
@@ -38,11 +35,11 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'index' => 'index',
         'abTestID' => 'abTestID',
@@ -50,11 +47,11 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,22 +153,13 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['index']) ||
-            $this->container['index'] === null
-        ) {
+        if (!isset($this->container['index']) || $this->container['index'] === null) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (
-            !isset($this->container['abTestID']) ||
-            $this->container['abTestID'] === null
-        ) {
+        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (
-            !isset($this->container['taskID']) ||
-            $this->container['taskID'] === null
-        ) {
+        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
             $invalidProperties[] = "'taskID' can't be null";
         }
 
@@ -313,3 +301,4 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         unset($this->container[$offset]);
     }
 }
+

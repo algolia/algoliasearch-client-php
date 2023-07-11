@@ -13,48 +13,45 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'taskID' => 'int',
         'updatedAt' => 'string',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'taskID' => 'int64',
         'updatedAt' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'taskID' => 'taskID',
         'updatedAt' => 'updatedAt',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -151,16 +148,10 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['taskID']) ||
-            $this->container['taskID'] === null
-        ) {
+        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
             $invalidProperties[] = "'taskID' can't be null";
         }
-        if (
-            !isset($this->container['updatedAt']) ||
-            $this->container['updatedAt'] === null
-        ) {
+        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
 
@@ -278,3 +269,4 @@ class UpdatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
+

@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'objectID' => 'string',
         'type' => '\Algolia\AlgoliaSearch\Model\Search\SynonymType',
@@ -35,10 +32,10 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'objectID' => null,
         'type' => null,
@@ -51,11 +48,11 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'type' => 'type',
@@ -68,11 +65,11 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -199,16 +196,10 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['type']) ||
-            $this->container['type'] === null
-        ) {
+        if (!isset($this->container['type']) || $this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
 
@@ -470,3 +461,4 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

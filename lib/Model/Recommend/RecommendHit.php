@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @package Algolia\AlgoliaSearch
  */
-class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'objectID' => 'string',
         'highlightResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>',
@@ -33,10 +30,10 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'objectID' => null,
         'highlightResult' => null,
@@ -47,11 +44,11 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'highlightResult' => '_highlightResult',
@@ -62,11 +59,11 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -183,26 +180,18 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['score']) ||
-            $this->container['score'] === null
-        ) {
+        if (!isset($this->container['score']) || $this->container['score'] === null) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if ($this->container['score'] > 100) {
-            $invalidProperties[] =
-                "invalid value for 'score', must be smaller than or equal to 100.";
+        if (($this->container['score'] > 100)) {
+            $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
         }
 
-        if ($this->container['score'] < 0) {
-            $invalidProperties[] =
-                "invalid value for 'score', must be bigger than or equal to 0.";
+        if (($this->container['score'] < 0)) {
+            $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -358,15 +347,12 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function setScore($score)
     {
-        if ($score > 100) {
-            throw new \InvalidArgumentException(
-                'invalid value for $score when calling RecommendHit., must be smaller than or equal to 100.'
-            );
+
+        if (($score > 100)) {
+            throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be smaller than or equal to 100.');
         }
-        if ($score < 0) {
-            throw new \InvalidArgumentException(
-                'invalid value for $score when calling RecommendHit., must be bigger than or equal to 0.'
-            );
+        if (($score < 0)) {
+            throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be bigger than or equal to 0.');
         }
 
         $this->container['score'] = $score;
@@ -426,3 +412,4 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

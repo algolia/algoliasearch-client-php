@@ -31,6 +31,11 @@ class ExactOnSingleWordQuery
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ATTRIBUTE, self::NONE, self::WORD];
+        return [
+            self::ATTRIBUTE,
+            self::NONE,
+            self::WORD,
+        ];
     }
 }
+

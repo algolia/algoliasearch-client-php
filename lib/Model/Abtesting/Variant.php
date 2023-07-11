@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'averageClickPosition' => 'int',
         'clickCount' => 'int',
@@ -38,10 +35,10 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'averageClickPosition' => null,
         'clickCount' => null,
@@ -60,11 +57,11 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'averageClickPosition' => 'averageClickPosition',
         'clickCount' => 'clickCount',
@@ -83,11 +80,11 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -192,8 +189,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function __construct(array $data = null)
     {
         if (isset($data['averageClickPosition'])) {
-            $this->container['averageClickPosition'] =
-                $data['averageClickPosition'];
+            $this->container['averageClickPosition'] = $data['averageClickPosition'];
         }
         if (isset($data['clickCount'])) {
             $this->container['clickCount'] = $data['clickCount'];
@@ -217,8 +213,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['noResultCount'] = $data['noResultCount'];
         }
         if (isset($data['outlierTrackedSearchesCount'])) {
-            $this->container['outlierTrackedSearchesCount'] =
-                $data['outlierTrackedSearchesCount'];
+            $this->container['outlierTrackedSearchesCount'] = $data['outlierTrackedSearchesCount'];
         }
         if (isset($data['outlierUsersCount'])) {
             $this->container['outlierUsersCount'] = $data['outlierUsersCount'];
@@ -227,8 +222,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $this->container['searchCount'] = $data['searchCount'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
         if (isset($data['trafficPercentage'])) {
             $this->container['trafficPercentage'] = $data['trafficPercentage'];
@@ -247,89 +241,46 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['averageClickPosition']) ||
-            $this->container['averageClickPosition'] === null
-        ) {
+        if (!isset($this->container['averageClickPosition']) || $this->container['averageClickPosition'] === null) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
+        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (
-            !isset($this->container['clickThroughRate']) ||
-            $this->container['clickThroughRate'] === null
-        ) {
+        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (
-            !isset($this->container['conversionCount']) ||
-            $this->container['conversionCount'] === null
-        ) {
+        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (
-            !isset($this->container['conversionRate']) ||
-            $this->container['conversionRate'] === null
-        ) {
+        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (
-            !isset($this->container['description']) ||
-            $this->container['description'] === null
-        ) {
+        if (!isset($this->container['description']) || $this->container['description'] === null) {
             $invalidProperties[] = "'description' can't be null";
         }
-        if (
-            !isset($this->container['index']) ||
-            $this->container['index'] === null
-        ) {
+        if (!isset($this->container['index']) || $this->container['index'] === null) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (
-            !isset($this->container['noResultCount']) ||
-            $this->container['noResultCount'] === null
-        ) {
+        if (!isset($this->container['noResultCount']) || $this->container['noResultCount'] === null) {
             $invalidProperties[] = "'noResultCount' can't be null";
         }
-        if (
-            !isset($this->container['outlierTrackedSearchesCount']) ||
-            $this->container['outlierTrackedSearchesCount'] === null
-        ) {
-            $invalidProperties[] =
-                "'outlierTrackedSearchesCount' can't be null";
+        if (!isset($this->container['outlierTrackedSearchesCount']) || $this->container['outlierTrackedSearchesCount'] === null) {
+            $invalidProperties[] = "'outlierTrackedSearchesCount' can't be null";
         }
-        if (
-            !isset($this->container['outlierUsersCount']) ||
-            $this->container['outlierUsersCount'] === null
-        ) {
+        if (!isset($this->container['outlierUsersCount']) || $this->container['outlierUsersCount'] === null) {
             $invalidProperties[] = "'outlierUsersCount' can't be null";
         }
-        if (
-            !isset($this->container['searchCount']) ||
-            $this->container['searchCount'] === null
-        ) {
+        if (!isset($this->container['searchCount']) || $this->container['searchCount'] === null) {
             $invalidProperties[] = "'searchCount' can't be null";
         }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
+        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (
-            !isset($this->container['trafficPercentage']) ||
-            $this->container['trafficPercentage'] === null
-        ) {
+        if (!isset($this->container['trafficPercentage']) || $this->container['trafficPercentage'] === null) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if (
-            !isset($this->container['userCount']) ||
-            $this->container['userCount'] === null
-        ) {
+        if (!isset($this->container['userCount']) || $this->container['userCount'] === null) {
             $invalidProperties[] = "'userCount' can't be null";
         }
 
@@ -558,9 +509,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function setOutlierTrackedSearchesCount($outlierTrackedSearchesCount)
     {
-        $this->container[
-            'outlierTrackedSearchesCount'
-        ] = $outlierTrackedSearchesCount;
+        $this->container['outlierTrackedSearchesCount'] = $outlierTrackedSearchesCount;
 
         return $this;
     }
@@ -737,3 +686,4 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

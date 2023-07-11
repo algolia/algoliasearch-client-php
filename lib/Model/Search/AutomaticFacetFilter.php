@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'facet' => 'string',
         'score' => 'int',
@@ -30,10 +27,10 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'facet' => null,
         'score' => null,
@@ -41,11 +38,11 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'facet' => 'facet',
         'score' => 'score',
@@ -53,11 +50,11 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -159,10 +156,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['facet']) ||
-            $this->container['facet'] === null
-        ) {
+        if (!isset($this->container['facet']) || $this->container['facet'] === null) {
             $invalidProperties[] = "'facet' can't be null";
         }
 
@@ -304,3 +298,4 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
+

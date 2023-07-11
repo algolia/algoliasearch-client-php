@@ -10,48 +10,45 @@ namespace Algolia\AlgoliaSearch\Model\Personalization;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'score' => 'int',
         'facetName' => 'string',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'score' => null,
         'facetName' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'score' => 'score',
         'facetName' => 'facetName',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -148,16 +145,10 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['score']) ||
-            $this->container['score'] === null
-        ) {
+        if (!isset($this->container['score']) || $this->container['score'] === null) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if (
-            !isset($this->container['facetName']) ||
-            $this->container['facetName'] === null
-        ) {
+        if (!isset($this->container['facetName']) || $this->container['facetName'] === null) {
             $invalidProperties[] = "'facetName' can't be null";
         }
 
@@ -275,3 +266,4 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

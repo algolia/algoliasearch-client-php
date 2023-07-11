@@ -29,6 +29,10 @@ class RecommendationModels
      */
     public static function getAllowableEnumValues()
     {
-        return [self::RELATED_PRODUCTS, self::BOUGHT_TOGETHER];
+        return [
+            self::RELATED_PRODUCTS,
+            self::BOUGHT_TOGETHER,
+        ];
     }
 }
+

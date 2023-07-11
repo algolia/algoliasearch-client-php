@@ -31,6 +31,11 @@ class LogLevel
      */
     public static function getAllowableEnumValues()
     {
-        return [self::INFO, self::SKIP, self::ERROR];
+        return [
+            self::INFO,
+            self::SKIP,
+            self::ERROR,
+        ];
     }
 }
+

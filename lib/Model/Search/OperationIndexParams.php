@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'operation' => '\Algolia\AlgoliaSearch\Model\Search\OperationType',
         'destination' => 'string',
@@ -27,10 +24,10 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'operation' => null,
         'destination' => null,
@@ -38,11 +35,11 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'operation' => 'operation',
         'destination' => 'destination',
@@ -50,11 +47,11 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -156,16 +153,10 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['operation']) ||
-            $this->container['operation'] === null
-        ) {
+        if (!isset($this->container['operation']) || $this->container['operation'] === null) {
             $invalidProperties[] = "'operation' can't be null";
         }
-        if (
-            !isset($this->container['destination']) ||
-            $this->container['destination'] === null
-        ) {
+        if (!isset($this->container['destination']) || $this->container['destination'] === null) {
             $invalidProperties[] = "'destination' can't be null";
         }
 
@@ -307,3 +298,4 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         unset($this->container[$offset]);
     }
 }
+

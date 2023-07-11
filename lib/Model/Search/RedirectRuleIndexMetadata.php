@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'source' => 'string',
         'dest' => 'string',
@@ -29,10 +26,10 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'source' => null,
         'dest' => null,
@@ -42,11 +39,11 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'source' => 'source',
         'dest' => 'dest',
@@ -56,11 +53,11 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -172,34 +169,19 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['source']) ||
-            $this->container['source'] === null
-        ) {
+        if (!isset($this->container['source']) || $this->container['source'] === null) {
             $invalidProperties[] = "'source' can't be null";
         }
-        if (
-            !isset($this->container['dest']) ||
-            $this->container['dest'] === null
-        ) {
+        if (!isset($this->container['dest']) || $this->container['dest'] === null) {
             $invalidProperties[] = "'dest' can't be null";
         }
-        if (
-            !isset($this->container['reason']) ||
-            $this->container['reason'] === null
-        ) {
+        if (!isset($this->container['reason']) || $this->container['reason'] === null) {
             $invalidProperties[] = "'reason' can't be null";
         }
-        if (
-            !isset($this->container['succeed']) ||
-            $this->container['succeed'] === null
-        ) {
+        if (!isset($this->container['succeed']) || $this->container['succeed'] === null) {
             $invalidProperties[] = "'succeed' can't be null";
         }
-        if (
-            !isset($this->container['data']) ||
-            $this->container['data'] === null
-        ) {
+        if (!isset($this->container['data']) || $this->container['data'] === null) {
             $invalidProperties[] = "'data' can't be null";
         }
 
@@ -389,3 +371,4 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
+

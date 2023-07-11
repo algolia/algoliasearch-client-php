@@ -24,6 +24,9 @@ class ViewEvent
      */
     public static function getAllowableEnumValues()
     {
-        return [self::VIEW];
+        return [
+            self::VIEW,
+        ];
     }
 }
+

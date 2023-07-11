@@ -10,45 +10,42 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]',
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'positions' => null,
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'positions' => 'positions',
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -140,20 +137,15 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['positions']) ||
-            $this->container['positions'] === null
-        ) {
+        if (!isset($this->container['positions']) || $this->container['positions'] === null) {
             $invalidProperties[] = "'positions' can't be null";
         }
-        if (count($this->container['positions']) > 2) {
-            $invalidProperties[] =
-                "invalid value for 'positions', number of items must be less than or equal to 2.";
+        if ((count($this->container['positions']) > 2)) {
+            $invalidProperties[] = "invalid value for 'positions', number of items must be less than or equal to 2.";
         }
 
-        if (count($this->container['positions']) < 2) {
-            $invalidProperties[] =
-                "invalid value for 'positions', number of items must be greater than or equal to 2.";
+        if ((count($this->container['positions']) < 2)) {
+            $invalidProperties[] = "invalid value for 'positions', number of items must be greater than or equal to 2.";
         }
 
         return $invalidProperties;
@@ -189,15 +181,12 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      */
     public function setPositions($positions)
     {
-        if (count($positions) > 2) {
-            throw new \InvalidArgumentException(
-                'invalid value for $positions when calling GetClickPositionsResponse., number of items must be less than or equal to 2.'
-            );
+
+        if ((count($positions) > 2)) {
+            throw new \InvalidArgumentException('invalid value for $positions when calling GetClickPositionsResponse., number of items must be less than or equal to 2.');
         }
-        if (count($positions) < 2) {
-            throw new \InvalidArgumentException(
-                'invalid length for $positions when calling GetClickPositionsResponse., number of items must be greater than or equal to 2.'
-            );
+        if ((count($positions) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $positions when calling GetClickPositionsResponse., number of items must be greater than or equal to 2.');
         }
         $this->container['positions'] = $positions;
 
@@ -256,3 +245,4 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
         unset($this->container[$offset]);
     }
 }
+

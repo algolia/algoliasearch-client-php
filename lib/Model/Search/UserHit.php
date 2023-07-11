@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'userID' => 'string',
         'clusterName' => 'string',
@@ -30,10 +27,10 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'userID' => null,
         'clusterName' => null,
@@ -44,11 +41,11 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'userID' => 'userID',
         'clusterName' => 'clusterName',
@@ -59,11 +56,11 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -180,45 +177,26 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['userID']) ||
-            $this->container['userID'] === null
-        ) {
+        if (!isset($this->container['userID']) || $this->container['userID'] === null) {
             $invalidProperties[] = "'userID' can't be null";
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $this->container['userID'])) {
-            $invalidProperties[] =
-                "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
+            $invalidProperties[] = "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
         }
 
-        if (
-            !isset($this->container['clusterName']) ||
-            $this->container['clusterName'] === null
-        ) {
+        if (!isset($this->container['clusterName']) || $this->container['clusterName'] === null) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
-        if (
-            !isset($this->container['nbRecords']) ||
-            $this->container['nbRecords'] === null
-        ) {
+        if (!isset($this->container['nbRecords']) || $this->container['nbRecords'] === null) {
             $invalidProperties[] = "'nbRecords' can't be null";
         }
-        if (
-            !isset($this->container['dataSize']) ||
-            $this->container['dataSize'] === null
-        ) {
+        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['highlightResult']) ||
-            $this->container['highlightResult'] === null
-        ) {
+        if (!isset($this->container['highlightResult']) || $this->container['highlightResult'] === null) {
             $invalidProperties[] = "'highlightResult' can't be null";
         }
 
@@ -255,10 +233,9 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function setUserID($userID)
     {
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException(
-                "invalid value for $userID when calling UserHit., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/."
-            );
+
+        if ((!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID))) {
+            throw new \InvalidArgumentException("invalid value for $userID when calling UserHit., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.");
         }
 
         $this->container['userID'] = $userID;
@@ -438,3 +415,4 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         unset($this->container[$offset]);
     }
 }
+

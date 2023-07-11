@@ -26,6 +26,10 @@ class AdvancedSyntaxFeatures
      */
     public static function getAllowableEnumValues()
     {
-        return [self::EXACT_PHRASE, self::EXCLUDE_WORDS];
+        return [
+            self::EXACT_PHRASE,
+            self::EXCLUDE_WORDS,
+        ];
     }
 }
+

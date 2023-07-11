@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @package Algolia\AlgoliaSearch
  */
-class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'attributesToRetrieve' => 'string[]',
         'objectID' => 'string',
@@ -30,10 +27,10 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'attributesToRetrieve' => null,
         'objectID' => null,
@@ -41,11 +38,11 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'attributesToRetrieve' => 'attributesToRetrieve',
         'objectID' => 'objectID',
@@ -53,11 +50,11 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -140,8 +137,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function __construct(array $data = null)
     {
         if (isset($data['attributesToRetrieve'])) {
-            $this->container['attributesToRetrieve'] =
-                $data['attributesToRetrieve'];
+            $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
         }
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -160,16 +156,10 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['objectID']) ||
-            $this->container['objectID'] === null
-        ) {
+        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
 
@@ -311,3 +301,4 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
+

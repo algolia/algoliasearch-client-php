@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Personalization;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'eventScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]',
         'facetScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]',
@@ -27,10 +24,10 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'eventScoring' => null,
         'facetScoring' => null,
@@ -38,11 +35,11 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'eventScoring' => 'eventScoring',
         'facetScoring' => 'facetScoring',
@@ -50,11 +47,11 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -143,8 +140,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
             $this->container['facetScoring'] = $data['facetScoring'];
         }
         if (isset($data['personalizationImpact'])) {
-            $this->container['personalizationImpact'] =
-                $data['personalizationImpact'];
+            $this->container['personalizationImpact'] = $data['personalizationImpact'];
         }
     }
 
@@ -157,22 +153,13 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['eventScoring']) ||
-            $this->container['eventScoring'] === null
-        ) {
+        if (!isset($this->container['eventScoring']) || $this->container['eventScoring'] === null) {
             $invalidProperties[] = "'eventScoring' can't be null";
         }
-        if (
-            !isset($this->container['facetScoring']) ||
-            $this->container['facetScoring'] === null
-        ) {
+        if (!isset($this->container['facetScoring']) || $this->container['facetScoring'] === null) {
             $invalidProperties[] = "'facetScoring' can't be null";
         }
-        if (
-            !isset($this->container['personalizationImpact']) ||
-            $this->container['personalizationImpact'] === null
-        ) {
+        if (!isset($this->container['personalizationImpact']) || $this->container['personalizationImpact'] === null) {
             $invalidProperties[] = "'personalizationImpact' can't be null";
         }
 
@@ -314,3 +301,4 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
+

@@ -31,6 +31,11 @@ class SortRemainingBy
      */
     public static function getAllowableEnumValues()
     {
-        return [self::COUNT, self::ALPHA, self::HIDDEN];
+        return [
+            self::COUNT,
+            self::ALPHA,
+            self::HIDDEN,
+        ];
     }
 }
+

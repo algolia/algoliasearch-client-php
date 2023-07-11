@@ -30,6 +30,12 @@ class LogType
      */
     public static function getAllowableEnumValues()
     {
-        return [self::ALL, self::QUERY, self::BUILD, self::ERROR];
+        return [
+            self::ALL,
+            self::QUERY,
+            self::BUILD,
+            self::ERROR,
+        ];
     }
 }
+

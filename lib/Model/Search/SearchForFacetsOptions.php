@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'facet' => 'string',
         'indexName' => 'string',
@@ -29,10 +26,10 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'facet' => null,
         'indexName' => null,
@@ -42,11 +39,11 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'facet' => 'facet',
         'indexName' => 'indexName',
@@ -56,11 +53,11 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -172,30 +169,17 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['facet']) ||
-            $this->container['facet'] === null
-        ) {
+        if (!isset($this->container['facet']) || $this->container['facet'] === null) {
             $invalidProperties[] = "'facet' can't be null";
         }
-        if (
-            !isset($this->container['indexName']) ||
-            $this->container['indexName'] === null
-        ) {
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (
-            isset($this->container['maxFacetHits']) &&
-            $this->container['maxFacetHits'] > 100
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
+        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
+            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
         }
 
-        if (
-            !isset($this->container['type']) ||
-            $this->container['type'] === null
-        ) {
+        if (!isset($this->container['type']) || $this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
 
@@ -304,10 +288,9 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && $maxFacetHits > 100) {
-            throw new \InvalidArgumentException(
-                'invalid value for $maxFacetHits when calling SearchForFacetsOptions., must be smaller than or equal to 100.'
-            );
+
+        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
+            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchForFacetsOptions., must be smaller than or equal to 100.');
         }
 
         $this->container['maxFacetHits'] = $maxFacetHits;
@@ -391,3 +374,4 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         unset($this->container[$offset]);
     }
 }
+

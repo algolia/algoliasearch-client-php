@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'hit' => 'string',
         'count' => 'int',
@@ -31,10 +28,10 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'hit' => null,
         'count' => null,
@@ -46,11 +43,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'hit' => 'hit',
         'count' => 'count',
@@ -62,11 +59,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -169,8 +166,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
             $this->container['conversionRate'] = $data['conversionRate'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
         if (isset($data['clickCount'])) {
             $this->container['clickCount'] = $data['clickCount'];
@@ -189,46 +185,25 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['hit']) ||
-            $this->container['hit'] === null
-        ) {
+        if (!isset($this->container['hit']) || $this->container['hit'] === null) {
             $invalidProperties[] = "'hit' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['clickThroughRate']) ||
-            $this->container['clickThroughRate'] === null
-        ) {
+        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (
-            !isset($this->container['conversionRate']) ||
-            $this->container['conversionRate'] === null
-        ) {
+        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
+        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
+        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (
-            !isset($this->container['conversionCount']) ||
-            $this->container['conversionCount'] === null
-        ) {
+        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
 
@@ -466,3 +441,4 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         unset($this->container[$offset]);
     }
 }
+

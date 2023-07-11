@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'value' => 'string',
         'createdAt' => 'int',
@@ -34,10 +31,10 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'value' => null,
         'createdAt' => 'int64',
@@ -52,11 +49,11 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'value' => 'value',
         'createdAt' => 'createdAt',
@@ -71,11 +68,11 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -190,8 +187,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
             $this->container['maxHitsPerQuery'] = $data['maxHitsPerQuery'];
         }
         if (isset($data['maxQueriesPerIPPerHour'])) {
-            $this->container['maxQueriesPerIPPerHour'] =
-                $data['maxQueriesPerIPPerHour'];
+            $this->container['maxQueriesPerIPPerHour'] = $data['maxQueriesPerIPPerHour'];
         }
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
@@ -213,16 +209,10 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['createdAt']) ||
-            $this->container['createdAt'] === null
-        ) {
+        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (
-            !isset($this->container['acl']) ||
-            $this->container['acl'] === null
-        ) {
+        if (!isset($this->container['acl']) || $this->container['acl'] === null) {
             $invalidProperties[] = "'acl' can't be null";
         }
 
@@ -532,3 +522,4 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         unset($this->container[$offset]);
     }
 }
+

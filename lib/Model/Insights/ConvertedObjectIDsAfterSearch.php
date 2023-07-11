@@ -13,16 +13,13 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  *
  * @package Algolia\AlgoliaSearch
  */
-class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'eventName' => 'string',
         'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
@@ -34,10 +31,10 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'eventName' => null,
         'eventType' => null,
@@ -49,11 +46,11 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'eventName' => 'eventName',
         'eventType' => 'eventType',
@@ -65,11 +62,11 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -191,95 +188,62 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['eventName']) ||
-            $this->container['eventName'] === null
-        ) {
+        if (!isset($this->container['eventName']) || $this->container['eventName'] === null) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if (mb_strlen($this->container['eventName']) > 64) {
-            $invalidProperties[] =
-                "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
+        if ((mb_strlen($this->container['eventName']) > 64)) {
+            $invalidProperties[] = "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
         }
 
-        if (mb_strlen($this->container['eventName']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['eventName']) < 1)) {
+            $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
         }
 
-        if (
-            !isset($this->container['eventType']) ||
-            $this->container['eventType'] === null
-        ) {
+        if (!isset($this->container['eventType']) || $this->container['eventType'] === null) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (
-            !isset($this->container['index']) ||
-            $this->container['index'] === null
-        ) {
+        if (!isset($this->container['index']) || $this->container['index'] === null) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (
-            !isset($this->container['objectIDs']) ||
-            $this->container['objectIDs'] === null
-        ) {
+        if (!isset($this->container['objectIDs']) || $this->container['objectIDs'] === null) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if (count($this->container['objectIDs']) > 20) {
-            $invalidProperties[] =
-                "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
+        if ((count($this->container['objectIDs']) > 20)) {
+            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
         }
 
-        if (count($this->container['objectIDs']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
+        if ((count($this->container['objectIDs']) < 1)) {
+            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
         }
 
-        if (
-            !isset($this->container['queryID']) ||
-            $this->container['queryID'] === null
-        ) {
+        if (!isset($this->container['queryID']) || $this->container['queryID'] === null) {
             $invalidProperties[] = "'queryID' can't be null";
         }
-        if (mb_strlen($this->container['queryID']) > 32) {
-            $invalidProperties[] =
-                "invalid value for 'queryID', the character length must be smaller than or equal to 32.";
+        if ((mb_strlen($this->container['queryID']) > 32)) {
+            $invalidProperties[] = "invalid value for 'queryID', the character length must be smaller than or equal to 32.";
         }
 
-        if (mb_strlen($this->container['queryID']) < 32) {
-            $invalidProperties[] =
-                "invalid value for 'queryID', the character length must be bigger than or equal to 32.";
+        if ((mb_strlen($this->container['queryID']) < 32)) {
+            $invalidProperties[] = "invalid value for 'queryID', the character length must be bigger than or equal to 32.";
         }
 
         if (!preg_match('/[0-9a-f]{32}/', $this->container['queryID'])) {
-            $invalidProperties[] =
-                "invalid value for 'queryID', must be conform to the pattern /[0-9a-f]{32}/.";
+            $invalidProperties[] = "invalid value for 'queryID', must be conform to the pattern /[0-9a-f]{32}/.";
         }
 
-        if (
-            !isset($this->container['userToken']) ||
-            $this->container['userToken'] === null
-        ) {
+        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (mb_strlen($this->container['userToken']) > 128) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
+        if ((mb_strlen($this->container['userToken']) > 128)) {
+            $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
         }
 
-        if (mb_strlen($this->container['userToken']) < 1) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['userToken']) < 1)) {
+            $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
         }
 
-        if (
-            !preg_match(
-                '/[a-zA-Z0-9_=\/+-]{1,128}/',
-                $this->container['userToken']
-            )
-        ) {
-            $invalidProperties[] =
-                "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
+        if (!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $this->container['userToken'])) {
+            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
         }
 
         return $invalidProperties;
@@ -315,15 +279,11 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function setEventName($eventName)
     {
-        if (mb_strlen($eventName) > 64) {
-            throw new \InvalidArgumentException(
-                'invalid length for $eventName when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 64.'
-            );
+        if ((mb_strlen($eventName) > 64)) {
+            throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 64.');
         }
-        if (mb_strlen($eventName) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $eventName when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 1.'
-            );
+        if ((mb_strlen($eventName) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 1.');
         }
 
         $this->container['eventName'] = $eventName;
@@ -398,15 +358,12 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function setObjectIDs($objectIDs)
     {
-        if (count($objectIDs) > 20) {
-            throw new \InvalidArgumentException(
-                'invalid value for $objectIDs when calling ConvertedObjectIDsAfterSearch., number of items must be less than or equal to 20.'
-            );
+
+        if ((count($objectIDs) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $objectIDs when calling ConvertedObjectIDsAfterSearch., number of items must be less than or equal to 20.');
         }
-        if (count($objectIDs) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $objectIDs when calling ConvertedObjectIDsAfterSearch., number of items must be greater than or equal to 1.'
-            );
+        if ((count($objectIDs) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $objectIDs when calling ConvertedObjectIDsAfterSearch., number of items must be greater than or equal to 1.');
         }
         $this->container['objectIDs'] = $objectIDs;
 
@@ -432,20 +389,14 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function setQueryID($queryID)
     {
-        if (mb_strlen($queryID) > 32) {
-            throw new \InvalidArgumentException(
-                'invalid length for $queryID when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 32.'
-            );
+        if ((mb_strlen($queryID) > 32)) {
+            throw new \InvalidArgumentException('invalid length for $queryID when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 32.');
         }
-        if (mb_strlen($queryID) < 32) {
-            throw new \InvalidArgumentException(
-                'invalid length for $queryID when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 32.'
-            );
+        if ((mb_strlen($queryID) < 32)) {
+            throw new \InvalidArgumentException('invalid length for $queryID when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 32.');
         }
-        if (!preg_match('/[0-9a-f]{32}/', $queryID)) {
-            throw new \InvalidArgumentException(
-                "invalid value for $queryID when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[0-9a-f]{32}/."
-            );
+        if ((!preg_match('/[0-9a-f]{32}/', $queryID))) {
+            throw new \InvalidArgumentException("invalid value for $queryID when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[0-9a-f]{32}/.");
         }
 
         $this->container['queryID'] = $queryID;
@@ -472,20 +423,14 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function setUserToken($userToken)
     {
-        if (mb_strlen($userToken) > 128) {
-            throw new \InvalidArgumentException(
-                'invalid length for $userToken when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 128.'
-            );
+        if ((mb_strlen($userToken) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedObjectIDsAfterSearch., must be smaller than or equal to 128.');
         }
-        if (mb_strlen($userToken) < 1) {
-            throw new \InvalidArgumentException(
-                'invalid length for $userToken when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 1.'
-            );
+        if ((mb_strlen($userToken) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 1.');
         }
-        if (!preg_match('/[a-zA-Z0-9_=\/+-]{1,128}/', $userToken)) {
-            throw new \InvalidArgumentException(
-                "invalid value for $userToken when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/."
-            );
+        if ((!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $userToken))) {
+            throw new \InvalidArgumentException("invalid value for $userToken when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.");
         }
 
         $this->container['userToken'] = $userToken;
@@ -569,3 +514,4 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         unset($this->container[$offset]);
     }
 }
+

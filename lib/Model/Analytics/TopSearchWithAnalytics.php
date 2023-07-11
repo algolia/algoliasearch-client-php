@@ -10,16 +10,13 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
-    ModelInterface,
-    \ArrayAccess,
-    \JsonSerializable
+class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to type mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
@@ -33,10 +30,10 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @var string[]
-     */
+      * Array of property to format mappings. Used for (de)serialization
+      *
+      * @var string[]
+      */
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
@@ -50,11 +47,11 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @var string[]
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @var string[]
+    */
     protected static $attributeMap = [
         'search' => 'search',
         'count' => 'count',
@@ -68,11 +65,11 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes where the key is the local name,
-     * and the value is the original name
-     *
-     * @return array
-     */
+      * Array of attributes where the key is the local name,
+      * and the value is the original name
+      *
+      * @return array
+      */
     public static function attributeMap()
     {
         return self::$attributeMap;
@@ -176,15 +173,13 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
             $this->container['clickThroughRate'] = $data['clickThroughRate'];
         }
         if (isset($data['averageClickPosition'])) {
-            $this->container['averageClickPosition'] =
-                $data['averageClickPosition'];
+            $this->container['averageClickPosition'] = $data['averageClickPosition'];
         }
         if (isset($data['conversionRate'])) {
             $this->container['conversionRate'] = $data['conversionRate'];
         }
         if (isset($data['trackedSearchCount'])) {
-            $this->container['trackedSearchCount'] =
-                $data['trackedSearchCount'];
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
         if (isset($data['clickCount'])) {
             $this->container['clickCount'] = $data['clickCount'];
@@ -206,58 +201,31 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (
-            !isset($this->container['search']) ||
-            $this->container['search'] === null
-        ) {
+        if (!isset($this->container['search']) || $this->container['search'] === null) {
             $invalidProperties[] = "'search' can't be null";
         }
-        if (
-            !isset($this->container['count']) ||
-            $this->container['count'] === null
-        ) {
+        if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (
-            !isset($this->container['clickThroughRate']) ||
-            $this->container['clickThroughRate'] === null
-        ) {
+        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (
-            !isset($this->container['averageClickPosition']) ||
-            $this->container['averageClickPosition'] === null
-        ) {
+        if (!isset($this->container['averageClickPosition']) || $this->container['averageClickPosition'] === null) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
-        if (
-            !isset($this->container['conversionRate']) ||
-            $this->container['conversionRate'] === null
-        ) {
+        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (
-            !isset($this->container['trackedSearchCount']) ||
-            $this->container['trackedSearchCount'] === null
-        ) {
+        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (
-            !isset($this->container['clickCount']) ||
-            $this->container['clickCount'] === null
-        ) {
+        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (
-            !isset($this->container['conversionCount']) ||
-            $this->container['conversionCount'] === null
-        ) {
+        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (
-            !isset($this->container['nbHits']) ||
-            $this->container['nbHits'] === null
-        ) {
+        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
 
@@ -543,3 +511,4 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         unset($this->container[$offset]);
     }
 }
+

@@ -56,7 +56,7 @@ jobs:
             then
                echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
             else
-              COMPOSER_MEMORY_LIMIT=-1 composer require <<parameters.http_client>>
+              COMPOSER_MEMORY_LIMIT=-1 composer require <<parameters.http_client>> -W
             fi
 
       - run:

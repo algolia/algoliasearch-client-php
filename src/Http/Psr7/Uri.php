@@ -384,17 +384,11 @@ class Uri implements UriInterface
         return $uri;
     }
 
-    /**
-     * @return string
-     */
     public function getScheme(): string
     {
         return $this->scheme;
     }
 
-    /**
-     * @return string
-     */
     public function getAuthority(): string
     {
         $authority = $this->host;
@@ -409,49 +403,31 @@ class Uri implements UriInterface
         return $authority;
     }
 
-    /**
-     * @return string
-     */
     public function getUserInfo(): string
     {
         return $this->userInfo;
     }
 
-    /**
-     * @return string
-     */
     public function getHost(): string
     {
         return $this->host;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPort(): ?int
     {
         return $this->port;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return string
-     */
     public function getQuery(): string
     {
         return $this->query;
     }
 
-    /**
-     * @return string
-     */
     public function getFragment(): string
     {
         return $this->fragment;

@@ -126,17 +126,11 @@ class Response implements ResponseInterface
         $this->protocol = $version;
     }
 
-    /**
-     * @return int
-     */
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    /**
-     * @return string
-     */
     public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
@@ -157,9 +151,6 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    /**
-     * @return string
-     */
     public function getProtocolVersion(): string
     {
         return $this->protocol;
@@ -180,25 +171,16 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    /**
-     * @return array
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @return bool
-     */
     public function hasHeader(string $name): bool
     {
         return isset($this->headerNames[strtolower($name)]);
     }
 
-    /**
-     * @return array
-     */
     public function getHeader(string $name): array
     {
         $name = strtolower($name);
@@ -212,9 +194,6 @@ class Response implements ResponseInterface
         return $this->headers[$name];
     }
 
-    /**
-     * @return string
-     */
     public function getHeaderLine(string $name): string
     {
         return implode(', ', $this->getHeader($name));
@@ -285,9 +264,6 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    /**
-     * @return StreamInterface
-     */
     public function getBody(): StreamInterface
     {
         if (!$this->stream) {

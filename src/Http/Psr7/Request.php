@@ -103,9 +103,6 @@ class Request implements RequestInterface
         return $new;
     }
 
-    /**
-     * @return string
-     */
     public function getMethod(): string
     {
         return $this->method;
@@ -175,9 +172,6 @@ class Request implements RequestInterface
         $this->headers = [$header => [$host]] + $this->headers;
     }
 
-    /**
-     * @return string
-     */
     public function getProtocolVersion(): string
     {
         return $this->protocol;
@@ -197,17 +191,11 @@ class Request implements RequestInterface
         return $new;
     }
 
-    /**
-     * @return array
-     */
     public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    /**
-     * @return bool
-     */
     public function hasHeader(string $name): bool
     {
         return isset($this->headerNames[strtolower($name)]);
@@ -227,17 +215,11 @@ class Request implements RequestInterface
         return $this->headers[$name];
     }
 
-    /**
-     * @return string
-     */
     public function getHeaderLine(string $name): string
     {
         return implode(', ', $this->getHeader($name));
     }
 
-    /**
-     * @inheritDoc
-     */
     public function withHeader(string $name, $value): MessageInterface
     {
         if (!is_array($value)) {

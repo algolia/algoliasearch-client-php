@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * LogFile Class Doc Comment
+ * QuerySuggestionsConfigurationResponseAllOf Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class QuerySuggestionsConfigurationResponseAllOf extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,10 +18,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
       * @var string[]
       */
     protected static $modelTypes = [
-        'timestamp' => 'string',
-        'level' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel',
-        'message' => 'string',
-        'contextLevel' => 'int',
+        'appId' => 'string',
+        'sourceIndicesAPIKey' => 'string',
+        'suggestionsIndicesAPIKey' => 'string',
+        'externalIndicesAPIKey' => 'string',
     ];
 
     /**
@@ -30,10 +30,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
       * @var string[]
       */
     protected static $modelFormats = [
-        'timestamp' => null,
-        'level' => null,
-        'message' => null,
-        'contextLevel' => null,
+        'appId' => null,
+        'sourceIndicesAPIKey' => null,
+        'suggestionsIndicesAPIKey' => null,
+        'externalIndicesAPIKey' => null,
     ];
 
     /**
@@ -43,10 +43,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
       * @var string[]
     */
     protected static $attributeMap = [
-        'timestamp' => 'timestamp',
-        'level' => 'level',
-        'message' => 'message',
-        'contextLevel' => 'contextLevel',
+        'appId' => 'appId',
+        'sourceIndicesAPIKey' => 'sourceIndicesAPIKey',
+        'suggestionsIndicesAPIKey' => 'suggestionsIndicesAPIKey',
+        'externalIndicesAPIKey' => 'externalIndicesAPIKey',
     ];
 
     /**
@@ -86,10 +86,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $setters = [
-        'timestamp' => 'setTimestamp',
-        'level' => 'setLevel',
-        'message' => 'setMessage',
-        'contextLevel' => 'setContextLevel',
+        'appId' => 'setAppId',
+        'sourceIndicesAPIKey' => 'setSourceIndicesAPIKey',
+        'suggestionsIndicesAPIKey' => 'setSuggestionsIndicesAPIKey',
+        'externalIndicesAPIKey' => 'setExternalIndicesAPIKey',
     ];
 
     /**
@@ -98,10 +98,10 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $getters = [
-        'timestamp' => 'getTimestamp',
-        'level' => 'getLevel',
-        'message' => 'getMessage',
-        'contextLevel' => 'getContextLevel',
+        'appId' => 'getAppId',
+        'sourceIndicesAPIKey' => 'getSourceIndicesAPIKey',
+        'suggestionsIndicesAPIKey' => 'getSuggestionsIndicesAPIKey',
+        'externalIndicesAPIKey' => 'getExternalIndicesAPIKey',
     ];
 
     /**
@@ -138,17 +138,17 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['timestamp'])) {
-            $this->container['timestamp'] = $data['timestamp'];
+        if (isset($data['appId'])) {
+            $this->container['appId'] = $data['appId'];
         }
-        if (isset($data['level'])) {
-            $this->container['level'] = $data['level'];
+        if (isset($data['sourceIndicesAPIKey'])) {
+            $this->container['sourceIndicesAPIKey'] = $data['sourceIndicesAPIKey'];
         }
-        if (isset($data['message'])) {
-            $this->container['message'] = $data['message'];
+        if (isset($data['suggestionsIndicesAPIKey'])) {
+            $this->container['suggestionsIndicesAPIKey'] = $data['suggestionsIndicesAPIKey'];
         }
-        if (isset($data['contextLevel'])) {
-            $this->container['contextLevel'] = $data['contextLevel'];
+        if (isset($data['externalIndicesAPIKey'])) {
+            $this->container['externalIndicesAPIKey'] = $data['externalIndicesAPIKey'];
         }
     }
 
@@ -160,19 +160,6 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!isset($this->container['timestamp']) || $this->container['timestamp'] === null) {
-            $invalidProperties[] = "'timestamp' can't be null";
-        }
-        if (!isset($this->container['level']) || $this->container['level'] === null) {
-            $invalidProperties[] = "'level' can't be null";
-        }
-        if (!isset($this->container['message']) || $this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
-        if (!isset($this->container['contextLevel']) || $this->container['contextLevel'] === null) {
-            $invalidProperties[] = "'contextLevel' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -189,97 +176,97 @@ class LogFile extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets timestamp
+     * Gets appId
      *
-     * @return string
+     * @return string|null
      */
-    public function getTimestamp()
+    public function getAppId()
     {
-        return $this->container['timestamp'] ?? null;
+        return $this->container['appId'] ?? null;
     }
 
     /**
-     * Sets timestamp
+     * Sets appId
      *
-     * @param string $timestamp date and time of creation of the record
+     * @param string|null $appId your Algolia application ID
      *
      * @return self
      */
-    public function setTimestamp($timestamp)
+    public function setAppId($appId)
     {
-        $this->container['timestamp'] = $timestamp;
+        $this->container['appId'] = $appId;
 
         return $this;
     }
 
     /**
-     * Gets level
+     * Gets sourceIndicesAPIKey
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel
+     * @return string|null
      */
-    public function getLevel()
+    public function getSourceIndicesAPIKey()
     {
-        return $this->container['level'] ?? null;
+        return $this->container['sourceIndicesAPIKey'] ?? null;
     }
 
     /**
-     * Sets level
+     * Sets sourceIndicesAPIKey
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel $level level
+     * @param string|null $sourceIndicesAPIKey API key used to read from your source index
      *
      * @return self
      */
-    public function setLevel($level)
+    public function setSourceIndicesAPIKey($sourceIndicesAPIKey)
     {
-        $this->container['level'] = $level;
+        $this->container['sourceIndicesAPIKey'] = $sourceIndicesAPIKey;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets suggestionsIndicesAPIKey
      *
-     * @return string
+     * @return string|null
      */
-    public function getMessage()
+    public function getSuggestionsIndicesAPIKey()
     {
-        return $this->container['message'] ?? null;
+        return $this->container['suggestionsIndicesAPIKey'] ?? null;
     }
 
     /**
-     * Sets message
+     * Sets suggestionsIndicesAPIKey
      *
-     * @param string $message detailed description of what happened
+     * @param string|null $suggestionsIndicesAPIKey API key used to write and configure your Query Suggestions index
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setSuggestionsIndicesAPIKey($suggestionsIndicesAPIKey)
     {
-        $this->container['message'] = $message;
+        $this->container['suggestionsIndicesAPIKey'] = $suggestionsIndicesAPIKey;
 
         return $this;
     }
 
     /**
-     * Gets contextLevel
+     * Gets externalIndicesAPIKey
      *
-     * @return int
+     * @return string|null
      */
-    public function getContextLevel()
+    public function getExternalIndicesAPIKey()
     {
-        return $this->container['contextLevel'] ?? null;
+        return $this->container['externalIndicesAPIKey'] ?? null;
     }
 
     /**
-     * Sets contextLevel
+     * Sets externalIndicesAPIKey
      *
-     * @param int $contextLevel indicates the hierarchy of the records. For example, a record with contextLevel=1 belongs to a preceding record with contextLevel=0.
+     * @param string|null $externalIndicesAPIKey API key used to read from external Algolia indices
      *
      * @return self
      */
-    public function setContextLevel($contextLevel)
+    public function setExternalIndicesAPIKey($externalIndicesAPIKey)
     {
-        $this->container['contextLevel'] = $contextLevel;
+        $this->container['externalIndicesAPIKey'] = $externalIndicesAPIKey;
 
         return $this;
     }

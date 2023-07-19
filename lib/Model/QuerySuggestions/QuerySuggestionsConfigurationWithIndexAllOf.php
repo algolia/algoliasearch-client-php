@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * QuerySuggestionsIndexParam Class Doc Comment
+ * QuerySuggestionsConfigurationWithIndexAllOf Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class QuerySuggestionsConfigurationWithIndexAllOf extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,9 +18,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
       * @var string[]
       */
     protected static $modelTypes = [
-        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
-        'languages' => 'string[]',
-        'exclude' => 'string[]',
+        'indexName' => 'string',
     ];
 
     /**
@@ -29,9 +27,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
       * @var string[]
       */
     protected static $modelFormats = [
-        'sourceIndices' => null,
-        'languages' => null,
-        'exclude' => null,
+        'indexName' => null,
     ];
 
     /**
@@ -41,9 +37,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
       * @var string[]
     */
     protected static $attributeMap = [
-        'sourceIndices' => 'sourceIndices',
-        'languages' => 'languages',
-        'exclude' => 'exclude',
+        'indexName' => 'indexName',
     ];
 
     /**
@@ -83,9 +77,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
-        'sourceIndices' => 'setSourceIndices',
-        'languages' => 'setLanguages',
-        'exclude' => 'setExclude',
+        'indexName' => 'setIndexName',
     ];
 
     /**
@@ -94,9 +86,7 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
-        'sourceIndices' => 'getSourceIndices',
-        'languages' => 'getLanguages',
-        'exclude' => 'getExclude',
+        'indexName' => 'getIndexName',
     ];
 
     /**
@@ -133,14 +123,8 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['sourceIndices'])) {
-            $this->container['sourceIndices'] = $data['sourceIndices'];
-        }
-        if (isset($data['languages'])) {
-            $this->container['languages'] = $data['languages'];
-        }
-        if (isset($data['exclude'])) {
-            $this->container['exclude'] = $data['exclude'];
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
     }
 
@@ -153,8 +137,8 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['sourceIndices']) || $this->container['sourceIndices'] === null) {
-            $invalidProperties[] = "'sourceIndices' can't be null";
+        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+            $invalidProperties[] = "'indexName' can't be null";
         }
 
         return $invalidProperties;
@@ -172,73 +156,25 @@ class QuerySuggestionsIndexParam extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets sourceIndices
+     * Gets indexName
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]
+     * @return string
      */
-    public function getSourceIndices()
+    public function getIndexName()
     {
-        return $this->container['sourceIndices'] ?? null;
+        return $this->container['indexName'] ?? null;
     }
 
     /**
-     * Sets sourceIndices
+     * Sets indexName
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices list of source indices used to generate a Query Suggestions index
+     * @param string $indexName query Suggestions index name
      *
      * @return self
      */
-    public function setSourceIndices($sourceIndices)
+    public function setIndexName($indexName)
     {
-        $this->container['sourceIndices'] = $sourceIndices;
-
-        return $this;
-    }
-
-    /**
-     * Gets languages
-     *
-     * @return string[]|null
-     */
-    public function getLanguages()
-    {
-        return $this->container['languages'] ?? null;
-    }
-
-    /**
-     * Sets languages
-     *
-     * @param string[]|null $languages De-duplicate singular and plural suggestions. For example, let's say your index contains English content, and that two suggestions “shoe” and “shoes” end up in your Query Suggestions index. If the English language is configured, only the most popular of those two suggestions would remain.
-     *
-     * @return self
-     */
-    public function setLanguages($languages)
-    {
-        $this->container['languages'] = $languages;
-
-        return $this;
-    }
-
-    /**
-     * Gets exclude
-     *
-     * @return string[]|null
-     */
-    public function getExclude()
-    {
-        return $this->container['exclude'] ?? null;
-    }
-
-    /**
-     * Sets exclude
-     *
-     * @param string[]|null $exclude list of words and patterns to exclude from the Query Suggestions index
-     *
-     * @return self
-     */
-    public function setExclude($exclude)
-    {
-        $this->container['exclude'] = $exclude;
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }

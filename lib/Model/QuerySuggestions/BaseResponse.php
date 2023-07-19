@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * Status Class Doc Comment
+ * BaseResponse Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,9 +18,8 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
       * @var string[]
       */
     protected static $modelTypes = [
-        'indexName' => 'string',
-        'isRunning' => 'bool',
-        'lastBuiltAt' => 'string',
+        'status' => 'int',
+        'message' => 'string',
     ];
 
     /**
@@ -29,9 +28,8 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
       * @var string[]
       */
     protected static $modelFormats = [
-        'indexName' => null,
-        'isRunning' => null,
-        'lastBuiltAt' => 'data-time',
+        'status' => null,
+        'message' => null,
     ];
 
     /**
@@ -41,9 +39,8 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
       * @var string[]
     */
     protected static $attributeMap = [
-        'indexName' => 'indexName',
-        'isRunning' => 'isRunning',
-        'lastBuiltAt' => 'lastBuiltAt',
+        'status' => 'status',
+        'message' => 'message',
     ];
 
     /**
@@ -83,9 +80,8 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $setters = [
-        'indexName' => 'setIndexName',
-        'isRunning' => 'setIsRunning',
-        'lastBuiltAt' => 'setLastBuiltAt',
+        'status' => 'setStatus',
+        'message' => 'setMessage',
     ];
 
     /**
@@ -94,9 +90,8 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $getters = [
-        'indexName' => 'getIndexName',
-        'isRunning' => 'getIsRunning',
-        'lastBuiltAt' => 'getLastBuiltAt',
+        'status' => 'getStatus',
+        'message' => 'getMessage',
     ];
 
     /**
@@ -133,14 +128,11 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
+        if (isset($data['status'])) {
+            $this->container['status'] = $data['status'];
         }
-        if (isset($data['isRunning'])) {
-            $this->container['isRunning'] = $data['isRunning'];
-        }
-        if (isset($data['lastBuiltAt'])) {
-            $this->container['lastBuiltAt'] = $data['lastBuiltAt'];
+        if (isset($data['message'])) {
+            $this->container['message'] = $data['message'];
         }
     }
 
@@ -152,16 +144,6 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
-            $invalidProperties[] = "'indexName' can't be null";
-        }
-        if (!isset($this->container['isRunning']) || $this->container['isRunning'] === null) {
-            $invalidProperties[] = "'isRunning' can't be null";
-        }
-        if (!isset($this->container['lastBuiltAt']) || $this->container['lastBuiltAt'] === null) {
-            $invalidProperties[] = "'lastBuiltAt' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -178,73 +160,49 @@ class Status extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets indexName
+     * Gets status
      *
-     * @return string
+     * @return int|null
      */
-    public function getIndexName()
+    public function getStatus()
     {
-        return $this->container['indexName'] ?? null;
+        return $this->container['status'] ?? null;
     }
 
     /**
-     * Sets indexName
+     * Sets status
      *
-     * @param string $indexName the targeted index name
+     * @param int|null $status HTTP status code
      *
      * @return self
      */
-    public function setIndexName($indexName)
+    public function setStatus($status)
     {
-        $this->container['indexName'] = $indexName;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets isRunning
+     * Gets message
      *
-     * @return bool
+     * @return string|null
      */
-    public function getIsRunning()
+    public function getMessage()
     {
-        return $this->container['isRunning'] ?? null;
+        return $this->container['message'] ?? null;
     }
 
     /**
-     * Sets isRunning
+     * Sets message
      *
-     * @param bool $isRunning true if the Query Suggestions index is running
+     * @param string|null $message details about the response, such as error messages
      *
      * @return self
      */
-    public function setIsRunning($isRunning)
+    public function setMessage($message)
     {
-        $this->container['isRunning'] = $isRunning;
-
-        return $this;
-    }
-
-    /**
-     * Gets lastBuiltAt
-     *
-     * @return string
-     */
-    public function getLastBuiltAt()
-    {
-        return $this->container['lastBuiltAt'] ?? null;
-    }
-
-    /**
-     * Sets lastBuiltAt
-     *
-     * @param string $lastBuiltAt date and time of the last build
-     *
-     * @return self
-     */
-    public function setLastBuiltAt($lastBuiltAt)
-    {
-        $this->container['lastBuiltAt'] = $lastBuiltAt;
+        $this->container['message'] = $message;
 
         return $this;
     }

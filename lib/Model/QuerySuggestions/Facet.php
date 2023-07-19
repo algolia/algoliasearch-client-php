@@ -5,12 +5,15 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * SourceIndexExternal Class Doc Comment
+ * Facet Class Doc Comment
  *
  * @category Class
+ *
+ * @description Facet to use as category.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,8 +21,8 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
       */
     protected static $modelTypes = [
-        'query' => 'string',
-        'count' => 'int',
+        'attribute' => 'string',
+        'amount' => 'int',
     ];
 
     /**
@@ -28,8 +31,8 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
       */
     protected static $modelFormats = [
-        'query' => null,
-        'count' => null,
+        'attribute' => null,
+        'amount' => null,
     ];
 
     /**
@@ -39,8 +42,8 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
     */
     protected static $attributeMap = [
-        'query' => 'query',
-        'count' => 'count',
+        'attribute' => 'attribute',
+        'amount' => 'amount',
     ];
 
     /**
@@ -80,8 +83,8 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
-        'count' => 'setCount',
+        'attribute' => 'setAttribute',
+        'amount' => 'setAmount',
     ];
 
     /**
@@ -90,8 +93,8 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
-        'count' => 'getCount',
+        'attribute' => 'getAttribute',
+        'amount' => 'getAmount',
     ];
 
     /**
@@ -128,11 +131,11 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
+        if (isset($data['attribute'])) {
+            $this->container['attribute'] = $data['attribute'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
+        if (isset($data['amount'])) {
+            $this->container['amount'] = $data['amount'];
         }
     }
 
@@ -144,13 +147,6 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
-            $invalidProperties[] = "'query' can't be null";
-        }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
-            $invalidProperties[] = "'count' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -167,49 +163,49 @@ class SourceIndexExternal extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets query
+     * Gets attribute
      *
-     * @return string
+     * @return string|null
      */
-    public function getQuery()
+    public function getAttribute()
     {
-        return $this->container['query'] ?? null;
+        return $this->container['attribute'] ?? null;
     }
 
     /**
-     * Sets query
+     * Sets attribute
      *
-     * @param string $query the suggestion you would like to add
+     * @param string|null $attribute facet name
      *
      * @return self
      */
-    public function setQuery($query)
+    public function setAttribute($attribute)
     {
-        $this->container['query'] = $query;
+        $this->container['attribute'] = $attribute;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets amount
      *
-     * @return int
+     * @return int|null
      */
-    public function getCount()
+    public function getAmount()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['amount'] ?? null;
     }
 
     /**
-     * Sets count
+     * Sets amount
      *
-     * @param int $count the measure of the suggestion relative popularity
+     * @param int|null $amount number of suggestions
      *
      * @return self
      */
-    public function setCount($count)
+    public function setAmount($amount)
     {
-        $this->container['count'] = $count;
+        $this->container['amount'] = $amount;
 
         return $this;
     }

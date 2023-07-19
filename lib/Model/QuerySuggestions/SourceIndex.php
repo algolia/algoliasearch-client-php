@@ -8,6 +8,9 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * SourceIndex Class Doc Comment
  *
  * @category Class
+ *
+ * @description Configuration of an Algolia index for Query Suggestions.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -19,12 +22,13 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
       */
     protected static $modelTypes = [
         'indexName' => 'string',
+        'replicas' => 'bool',
         'analyticsTags' => 'string[]',
-        'facets' => 'object[]',
+        'facets' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]',
         'minHits' => 'int',
         'minLetters' => 'int',
         'generate' => 'string[][]',
-        'external' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]',
+        'external' => 'string[]',
     ];
 
     /**
@@ -34,6 +38,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
       */
     protected static $modelFormats = [
         'indexName' => null,
+        'replicas' => null,
         'analyticsTags' => null,
         'facets' => null,
         'minHits' => null,
@@ -50,6 +55,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     */
     protected static $attributeMap = [
         'indexName' => 'indexName',
+        'replicas' => 'replicas',
         'analyticsTags' => 'analyticsTags',
         'facets' => 'facets',
         'minHits' => 'minHits',
@@ -96,6 +102,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     protected static $setters = [
         'indexName' => 'setIndexName',
+        'replicas' => 'setReplicas',
         'analyticsTags' => 'setAnalyticsTags',
         'facets' => 'setFacets',
         'minHits' => 'setMinHits',
@@ -111,6 +118,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     protected static $getters = [
         'indexName' => 'getIndexName',
+        'replicas' => 'getReplicas',
         'analyticsTags' => 'getAnalyticsTags',
         'facets' => 'getFacets',
         'minHits' => 'getMinHits',
@@ -156,6 +164,9 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
         }
+        if (isset($data['replicas'])) {
+            $this->container['replicas'] = $data['replicas'];
+        }
         if (isset($data['analyticsTags'])) {
             $this->container['analyticsTags'] = $data['analyticsTags'];
         }
@@ -188,6 +199,13 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
+        if (isset($this->container['minHits']) && ($this->container['minHits'] < 0)) {
+            $invalidProperties[] = "invalid value for 'minHits', must be bigger than or equal to 0.";
+        }
+
+        if (isset($this->container['minLetters']) && ($this->container['minLetters'] < 0)) {
+            $invalidProperties[] = "invalid value for 'minLetters', must be bigger than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -216,13 +234,37 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets indexName
      *
-     * @param string $indexName source index name
+     * @param string $indexName name of the Algolia index to use as source for query suggestions
      *
      * @return self
      */
     public function setIndexName($indexName)
     {
         $this->container['indexName'] = $indexName;
+
+        return $this;
+    }
+
+    /**
+     * Gets replicas
+     *
+     * @return bool|null
+     */
+    public function getReplicas()
+    {
+        return $this->container['replicas'] ?? null;
+    }
+
+    /**
+     * Sets replicas
+     *
+     * @param bool|null $replicas If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.
+     *
+     * @return self
+     */
+    public function setReplicas($replicas)
+    {
+        $this->container['replicas'] = $replicas;
 
         return $this;
     }
@@ -240,7 +282,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets analyticsTags
      *
-     * @param string[]|null $analyticsTags list of analytics tags to filter the popular searches per tag
+     * @param string[]|null $analyticsTags [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches.
      *
      * @return self
      */
@@ -254,7 +296,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets facets
      *
-     * @return object[]|null
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]|null
      */
     public function getFacets()
     {
@@ -264,7 +306,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets
      *
-     * @param object[]|null $facets list of facets to define as categories for the query suggestions
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]|null $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
      *
      * @return self
      */
@@ -288,12 +330,17 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minHits
      *
-     * @param int|null $minHits Minimum number of hits (e.g., matching records in the source index) to generate a suggestions.
+     * @param int|null $minHits Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index.
      *
      * @return self
      */
     public function setMinHits($minHits)
     {
+
+        if (!is_null($minHits) && ($minHits < 0)) {
+            throw new \InvalidArgumentException('invalid value for $minHits when calling SourceIndex., must be bigger than or equal to 0.');
+        }
+
         $this->container['minHits'] = $minHits;
 
         return $this;
@@ -312,12 +359,17 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minLetters
      *
-     * @param int|null $minLetters minimum number of required letters for a suggestion to remain
+     * @param int|null $minLetters Minimum letters required to be included as a suggestion.  A search query must be at least `minLetters` long to be included in the Query Suggestions index.
      *
      * @return self
      */
     public function setMinLetters($minLetters)
     {
+
+        if (!is_null($minLetters) && ($minLetters < 0)) {
+            throw new \InvalidArgumentException('invalid value for $minLetters when calling SourceIndex., must be bigger than or equal to 0.');
+        }
+
         $this->container['minLetters'] = $minLetters;
 
         return $this;
@@ -336,7 +388,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets generate
      *
-     * @param string[][]|null $generate List of facet attributes used to generate Query Suggestions. The resulting suggestions are every combination of the facets in the nested list (e.g., (facetA and facetB) and facetC).
+     * @param string[][]|null $generate generate
      *
      * @return self
      */
@@ -350,7 +402,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets external
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]|null
+     * @return string[]|null
      */
     public function getExternal()
     {
@@ -360,7 +412,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets external
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexExternal[]|null $external list of external indices to use to generate custom Query Suggestions
+     * @param string[]|null $external Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data.
      *
      * @return self
      */

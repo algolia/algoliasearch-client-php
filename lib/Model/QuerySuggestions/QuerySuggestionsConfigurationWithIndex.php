@@ -5,12 +5,15 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * QuerySuggestionsIndex Class Doc Comment
+ * QuerySuggestionsConfigurationWithIndex Class Doc Comment
  *
  * @category Class
+ *
+ * @description Query Suggestions configuration.
+ *
  * @package Algolia\AlgoliaSearch
  */
-class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -19,9 +22,11 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
       */
     protected static $modelTypes = [
         'indexName' => 'string',
-        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[]',
-        'languages' => 'string[]',
+        'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
+        'languages' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages',
         'exclude' => 'string[]',
+        'enablePersonalization' => 'bool',
+        'allowSpecialCharacters' => 'bool',
     ];
 
     /**
@@ -34,6 +39,8 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         'sourceIndices' => null,
         'languages' => null,
         'exclude' => null,
+        'enablePersonalization' => null,
+        'allowSpecialCharacters' => null,
     ];
 
     /**
@@ -47,6 +54,8 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         'sourceIndices' => 'sourceIndices',
         'languages' => 'languages',
         'exclude' => 'exclude',
+        'enablePersonalization' => 'enablePersonalization',
+        'allowSpecialCharacters' => 'allowSpecialCharacters',
     ];
 
     /**
@@ -90,6 +99,8 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         'sourceIndices' => 'setSourceIndices',
         'languages' => 'setLanguages',
         'exclude' => 'setExclude',
+        'enablePersonalization' => 'setEnablePersonalization',
+        'allowSpecialCharacters' => 'setAllowSpecialCharacters',
     ];
 
     /**
@@ -102,6 +113,8 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         'sourceIndices' => 'getSourceIndices',
         'languages' => 'getLanguages',
         'exclude' => 'getExclude',
+        'enablePersonalization' => 'getEnablePersonalization',
+        'allowSpecialCharacters' => 'getAllowSpecialCharacters',
     ];
 
     /**
@@ -150,6 +163,12 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (isset($data['exclude'])) {
             $this->container['exclude'] = $data['exclude'];
         }
+        if (isset($data['enablePersonalization'])) {
+            $this->container['enablePersonalization'] = $data['enablePersonalization'];
+        }
+        if (isset($data['allowSpecialCharacters'])) {
+            $this->container['allowSpecialCharacters'] = $data['allowSpecialCharacters'];
+        }
     }
 
     /**
@@ -167,11 +186,8 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (!isset($this->container['sourceIndices']) || $this->container['sourceIndices'] === null) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
-        if (!isset($this->container['languages']) || $this->container['languages'] === null) {
-            $invalidProperties[] = "'languages' can't be null";
-        }
-        if (!isset($this->container['exclude']) || $this->container['exclude'] === null) {
-            $invalidProperties[] = "'exclude' can't be null";
+        if ((count($this->container['sourceIndices']) < 1)) {
+            $invalidProperties[] = "invalid value for 'sourceIndices', number of items must be greater than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -201,7 +217,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets indexName
      *
-     * @param string $indexName index name to target
+     * @param string $indexName query Suggestions index name
      *
      * @return self
      */
@@ -215,7 +231,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets sourceIndices
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]
      */
     public function getSourceIndices()
     {
@@ -225,12 +241,16 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets sourceIndices
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndexWithReplicas[] $sourceIndices list of source indices used to generate a Query Suggestions index
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
      *
      * @return self
      */
     public function setSourceIndices($sourceIndices)
     {
+
+        if ((count($sourceIndices) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $sourceIndices when calling QuerySuggestionsConfigurationWithIndex., number of items must be greater than or equal to 1.');
+        }
         $this->container['sourceIndices'] = $sourceIndices;
 
         return $this;
@@ -239,7 +259,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets languages
      *
-     * @return string[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages|null
      */
     public function getLanguages()
     {
@@ -249,7 +269,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets languages
      *
-     * @param string[] $languages De-duplicate singular and plural suggestions. For example, let's say your index contains English content, and that two suggestions “shoe” and “shoes” end up in your Query Suggestions index. If the English language is configured, only the most popular of those two suggestions would remain.
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages|null $languages languages
      *
      * @return self
      */
@@ -263,7 +283,7 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets exclude
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getExclude()
     {
@@ -273,13 +293,61 @@ class QuerySuggestionsIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets exclude
      *
-     * @param string[] $exclude list of words and patterns to exclude from the Query Suggestions index
+     * @param string[]|null $exclude patterns to exclude from query suggestions
      *
      * @return self
      */
     public function setExclude($exclude)
     {
         $this->container['exclude'] = $exclude;
+
+        return $this;
+    }
+
+    /**
+     * Gets enablePersonalization
+     *
+     * @return bool|null
+     */
+    public function getEnablePersonalization()
+    {
+        return $this->container['enablePersonalization'] ?? null;
+    }
+
+    /**
+     * Sets enablePersonalization
+     *
+     * @param bool|null $enablePersonalization turn on personalized query suggestions
+     *
+     * @return self
+     */
+    public function setEnablePersonalization($enablePersonalization)
+    {
+        $this->container['enablePersonalization'] = $enablePersonalization;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowSpecialCharacters
+     *
+     * @return bool|null
+     */
+    public function getAllowSpecialCharacters()
+    {
+        return $this->container['allowSpecialCharacters'] ?? null;
+    }
+
+    /**
+     * Sets allowSpecialCharacters
+     *
+     * @param bool|null $allowSpecialCharacters allow suggestions with special characters
+     *
+     * @return self
+     */
+    public function setAllowSpecialCharacters($allowSpecialCharacters)
+    {
+        $this->container['allowSpecialCharacters'] = $allowSpecialCharacters;
 
         return $this;
     }

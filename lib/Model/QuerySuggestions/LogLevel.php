@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  *
  * @category Class
  *
- * @description type of the record, can be one of three values (INFO, SKIP or ERROR).
+ * @description The type of log entry.   - &#x60;SKIP&#x60;. A query is skipped because it doesn&#39;t match the conditions for successful inclusion. For example, when a query doesn&#39;t generate enough search results. - &#x60;INFO&#x60;. An informative log entry. - &#x60;ERROR&#x60;. The Query Suggestions process encountered an error.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -18,9 +18,9 @@ class LogLevel
     /**
      * Possible values of this enum
      */
-    const INFO = 'INFO';
-
     const SKIP = 'SKIP';
+
+    const INFO = 'INFO';
 
     const ERROR = 'ERROR';
 
@@ -32,8 +32,8 @@ class LogLevel
     public static function getAllowableEnumValues()
     {
         return [
-            self::INFO,
             self::SKIP,
+            self::INFO,
             self::ERROR,
         ];
     }

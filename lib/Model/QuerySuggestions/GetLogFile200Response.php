@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * SuccessResponse Class Doc Comment
+ * GetLogFile200Response Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,8 +18,10 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
       * @var string[]
       */
     protected static $modelTypes = [
-        'status' => 'int',
+        'timestamp' => 'string',
+        'level' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel',
         'message' => 'string',
+        'contextLevel' => 'int',
     ];
 
     /**
@@ -28,8 +30,10 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
       * @var string[]
       */
     protected static $modelFormats = [
-        'status' => null,
+        'timestamp' => null,
+        'level' => null,
         'message' => null,
+        'contextLevel' => null,
     ];
 
     /**
@@ -39,8 +43,10 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
       * @var string[]
     */
     protected static $attributeMap = [
-        'status' => 'status',
+        'timestamp' => 'timestamp',
+        'level' => 'level',
         'message' => 'message',
+        'contextLevel' => 'contextLevel',
     ];
 
     /**
@@ -80,8 +86,10 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
+        'timestamp' => 'setTimestamp',
+        'level' => 'setLevel',
         'message' => 'setMessage',
+        'contextLevel' => 'setContextLevel',
     ];
 
     /**
@@ -90,8 +98,10 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
+        'timestamp' => 'getTimestamp',
+        'level' => 'getLevel',
         'message' => 'getMessage',
+        'contextLevel' => 'getContextLevel',
     ];
 
     /**
@@ -128,11 +138,17 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['status'])) {
-            $this->container['status'] = $data['status'];
+        if (isset($data['timestamp'])) {
+            $this->container['timestamp'] = $data['timestamp'];
+        }
+        if (isset($data['level'])) {
+            $this->container['level'] = $data['level'];
         }
         if (isset($data['message'])) {
             $this->container['message'] = $data['message'];
+        }
+        if (isset($data['contextLevel'])) {
+            $this->container['contextLevel'] = $data['contextLevel'];
         }
     }
 
@@ -144,13 +160,6 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!isset($this->container['status']) || $this->container['status'] === null) {
-            $invalidProperties[] = "'status' can't be null";
-        }
-        if (!isset($this->container['message']) || $this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -167,25 +176,49 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets status
+     * Gets timestamp
      *
-     * @return int
+     * @return string|null
      */
-    public function getStatus()
+    public function getTimestamp()
     {
-        return $this->container['status'] ?? null;
+        return $this->container['timestamp'] ?? null;
     }
 
     /**
-     * Sets status
+     * Sets timestamp
      *
-     * @param int $status status code
+     * @param string|null $timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
-    public function setStatus($status)
+    public function setTimestamp($timestamp)
     {
-        $this->container['status'] = $status;
+        $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets level
+     *
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel|null
+     */
+    public function getLevel()
+    {
+        return $this->container['level'] ?? null;
+    }
+
+    /**
+     * Sets level
+     *
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel|null $level level
+     *
+     * @return self
+     */
+    public function setLevel($level)
+    {
+        $this->container['level'] = $level;
 
         return $this;
     }
@@ -193,7 +226,7 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets message
      *
-     * @return string
+     * @return string|null
      */
     public function getMessage()
     {
@@ -203,13 +236,37 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets message
      *
-     * @param string $message response message
+     * @param string|null $message details about this log entry
      *
      * @return self
      */
     public function setMessage($message)
     {
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets contextLevel
+     *
+     * @return int|null
+     */
+    public function getContextLevel()
+    {
+        return $this->container['contextLevel'] ?? null;
+    }
+
+    /**
+     * Sets contextLevel
+     *
+     * @param int|null $contextLevel Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
+     *
+     * @return self
+     */
+    public function setContextLevel($contextLevel)
+    {
+        $this->container['contextLevel'] = $contextLevel;
 
         return $this;
     }

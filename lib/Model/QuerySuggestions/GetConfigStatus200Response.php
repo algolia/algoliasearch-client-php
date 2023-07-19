@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * IndexName Class Doc Comment
+ * GetConfigStatus200Response Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -19,6 +19,10 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
       */
     protected static $modelTypes = [
         'indexName' => 'string',
+        'isRunning' => 'bool',
+        'lastBuiltAt' => 'string',
+        'lastSuccessfulBuiltAt' => 'string',
+        'lastSuccessfulBuildDuration' => 'string',
     ];
 
     /**
@@ -28,6 +32,10 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
       */
     protected static $modelFormats = [
         'indexName' => null,
+        'isRunning' => null,
+        'lastBuiltAt' => null,
+        'lastSuccessfulBuiltAt' => null,
+        'lastSuccessfulBuildDuration' => null,
     ];
 
     /**
@@ -38,6 +46,10 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     */
     protected static $attributeMap = [
         'indexName' => 'indexName',
+        'isRunning' => 'isRunning',
+        'lastBuiltAt' => 'lastBuiltAt',
+        'lastSuccessfulBuiltAt' => 'lastSuccessfulBuiltAt',
+        'lastSuccessfulBuildDuration' => 'lastSuccessfulBuildDuration',
     ];
 
     /**
@@ -78,6 +90,10 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     protected static $setters = [
         'indexName' => 'setIndexName',
+        'isRunning' => 'setIsRunning',
+        'lastBuiltAt' => 'setLastBuiltAt',
+        'lastSuccessfulBuiltAt' => 'setLastSuccessfulBuiltAt',
+        'lastSuccessfulBuildDuration' => 'setLastSuccessfulBuildDuration',
     ];
 
     /**
@@ -87,6 +103,10 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     protected static $getters = [
         'indexName' => 'getIndexName',
+        'isRunning' => 'getIsRunning',
+        'lastBuiltAt' => 'getLastBuiltAt',
+        'lastSuccessfulBuiltAt' => 'getLastSuccessfulBuiltAt',
+        'lastSuccessfulBuildDuration' => 'getLastSuccessfulBuildDuration',
     ];
 
     /**
@@ -126,6 +146,18 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
         }
+        if (isset($data['isRunning'])) {
+            $this->container['isRunning'] = $data['isRunning'];
+        }
+        if (isset($data['lastBuiltAt'])) {
+            $this->container['lastBuiltAt'] = $data['lastBuiltAt'];
+        }
+        if (isset($data['lastSuccessfulBuiltAt'])) {
+            $this->container['lastSuccessfulBuiltAt'] = $data['lastSuccessfulBuiltAt'];
+        }
+        if (isset($data['lastSuccessfulBuildDuration'])) {
+            $this->container['lastSuccessfulBuildDuration'] = $data['lastSuccessfulBuildDuration'];
+        }
     }
 
     /**
@@ -136,10 +168,6 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
-            $invalidProperties[] = "'indexName' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -158,7 +186,7 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets indexName
      *
-     * @return string
+     * @return string|null
      */
     public function getIndexName()
     {
@@ -168,13 +196,109 @@ class IndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets indexName
      *
-     * @param string $indexName index name to target
+     * @param string|null $indexName query Suggestions index name
      *
      * @return self
      */
     public function setIndexName($indexName)
     {
         $this->container['indexName'] = $indexName;
+
+        return $this;
+    }
+
+    /**
+     * Gets isRunning
+     *
+     * @return bool|null
+     */
+    public function getIsRunning()
+    {
+        return $this->container['isRunning'] ?? null;
+    }
+
+    /**
+     * Sets isRunning
+     *
+     * @param bool|null $isRunning indicates whether the creation or update of the Query Suggestions is in progress
+     *
+     * @return self
+     */
+    public function setIsRunning($isRunning)
+    {
+        $this->container['isRunning'] = $isRunning;
+
+        return $this;
+    }
+
+    /**
+     * Gets lastBuiltAt
+     *
+     * @return string|null
+     */
+    public function getLastBuiltAt()
+    {
+        return $this->container['lastBuiltAt'] ?? null;
+    }
+
+    /**
+     * Sets lastBuiltAt
+     *
+     * @param string|null $lastBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
+     *
+     * @return self
+     */
+    public function setLastBuiltAt($lastBuiltAt)
+    {
+        $this->container['lastBuiltAt'] = $lastBuiltAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets lastSuccessfulBuiltAt
+     *
+     * @return string|null
+     */
+    public function getLastSuccessfulBuiltAt()
+    {
+        return $this->container['lastSuccessfulBuiltAt'] ?? null;
+    }
+
+    /**
+     * Sets lastSuccessfulBuiltAt
+     *
+     * @param string|null $lastSuccessfulBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
+     *
+     * @return self
+     */
+    public function setLastSuccessfulBuiltAt($lastSuccessfulBuiltAt)
+    {
+        $this->container['lastSuccessfulBuiltAt'] = $lastSuccessfulBuiltAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets lastSuccessfulBuildDuration
+     *
+     * @return string|null
+     */
+    public function getLastSuccessfulBuildDuration()
+    {
+        return $this->container['lastSuccessfulBuildDuration'] ?? null;
+    }
+
+    /**
+     * Sets lastSuccessfulBuildDuration
+     *
+     * @param string|null $lastSuccessfulBuildDuration duration of the last successful build in seconds
+     *
+     * @return self
+     */
+    public function setLastSuccessfulBuildDuration($lastSuccessfulBuildDuration)
+    {
+        $this->container['lastSuccessfulBuildDuration'] = $lastSuccessfulBuildDuration;
 
         return $this;
     }

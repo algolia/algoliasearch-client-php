@@ -164,6 +164,14 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
+        if (($this->container['rate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['rate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
@@ -201,12 +209,20 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setRate($rate)
     {
+
+        if (($rate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling ClickThroughRateEvent., must be smaller than or equal to 1.');
+        }
+        if (($rate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling ClickThroughRateEvent., must be bigger than or equal to 0.');
+        }
+
         $this->container['rate'] = $rate;
 
         return $this;
@@ -225,7 +241,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */
@@ -249,7 +265,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -273,7 +289,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets date
      *
-     * @param string $date date of the event
+     * @param string $date date of the event in the format YYYY-MM-DD
      *
      * @return self
      */

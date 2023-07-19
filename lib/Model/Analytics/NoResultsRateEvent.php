@@ -173,6 +173,13 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
+        if (($this->container['rate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['rate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -201,7 +208,7 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets date
      *
-     * @param string $date date of the event
+     * @param string $date date of the event in the format YYYY-MM-DD
      *
      * @return self
      */
@@ -225,7 +232,7 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets noResultCount
      *
-     * @param int $noResultCount the number of occurrences
+     * @param int $noResultCount number of occurences
      *
      * @return self
      */
@@ -249,7 +256,7 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
      *
      * @return self
      */
@@ -273,12 +280,20 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setRate($rate)
     {
+
+        if (($rate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling NoResultsRateEvent., must be smaller than or equal to 1.');
+        }
+        if (($rate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling NoResultsRateEvent., must be bigger than or equal to 0.');
+        }
+
         $this->container['rate'] = $rate;
 
         return $this;

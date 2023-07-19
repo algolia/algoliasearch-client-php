@@ -175,7 +175,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets positions
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions a list of the click positions with their click count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions click positions
      *
      * @return self
      */

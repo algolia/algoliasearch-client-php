@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Disable the builtin Algolia entries for a type of dictionary per language.
+ * @description Enable or turn off the built-in Algolia stop words for a specific language.
  *
  * @package Algolia\AlgoliaSearch
  */

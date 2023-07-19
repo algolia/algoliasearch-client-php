@@ -164,6 +164,14 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
         if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
+        if (($this->container['rate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['rate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
@@ -201,12 +209,20 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setRate($rate)
     {
+
+        if (($rate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoResultsRateResponse., must be smaller than or equal to 1.');
+        }
+        if (($rate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoResultsRateResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['rate'] = $rate;
 
         return $this;
@@ -225,7 +241,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -249,7 +265,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets noResultCount
      *
-     * @param int $noResultCount the number of occurrences
+     * @param int $noResultCount number of occurrences
      *
      * @return self
      */
@@ -273,7 +289,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[] $dates a list of searches without results with their date, rate and counts
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[] $dates overall count of searches without results plus a daily breakdown
      *
      * @return self
      */

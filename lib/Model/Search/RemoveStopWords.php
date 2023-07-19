@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Removes stop (common) words from the query before executing it. removeStopWords is used in conjunction with the queryLanguages setting. list: language ISO codes for which ignoring plurals should be enabled. This list will override any values that you may have set in queryLanguages. true: enables the stop word functionality, ensuring that stop words are removed from consideration in a search. The languages supported here are either every language, or those set by queryLanguages. false: disables stop word functionality, allowing stop words to be taken into account in a search.
+ * @description Removes stop (common) words from the query before executing it. &#x60;removeStopWords&#x60; is used in conjunction with the &#x60;queryLanguages&#x60; setting. _list_: language ISO codes for which stop words should be enabled. This list will override any values that you may have set in &#x60;queryLanguages&#x60;. _true_: enables the stop words feature, ensuring that stop words are removed from consideration in a search. The languages supported here are either [every language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) (this is the default) or those set by &#x60;queryLanguages&#x60;. _false_: turns off the stop words feature, allowing stop words to be taken into account in a search.
  *
  * @package Algolia\AlgoliaSearch
  */

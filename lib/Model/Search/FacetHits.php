@@ -190,7 +190,7 @@ class FacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets value
      *
-     * @param string $value raw value of the facet
+     * @param string $value facet value
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class FacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets highlighted
      *
-     * @param string $highlighted markup text with occurrences highlighted
+     * @param string $highlighted markup text with `facetQuery` matches highlighted
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class FacetHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets count
      *
-     * @param int $count How many objects contain this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the counts may not be exhaustive.
+     * @param int $count Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
      *
      * @return self
      */

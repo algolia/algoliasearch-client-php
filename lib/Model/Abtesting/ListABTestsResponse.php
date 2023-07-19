@@ -190,7 +190,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets abtests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests list of A/B tests
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests A/B tests
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count number of A/B tests found for the app
+     * @param int $count number of A/B tests implemented
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets total
      *
-     * @param int $total number of A/B tests retrievable
+     * @param int $total number of retrievable A/B tests
      *
      * @return self
      */

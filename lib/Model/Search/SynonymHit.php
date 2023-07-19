@@ -230,7 +230,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the synonym object to be created or updated
+     * @param string $objectID unique identifier of a synonym object
      *
      * @return self
      */
@@ -278,7 +278,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets synonyms
      *
-     * @param string[]|null $synonyms words or phrases to be considered equivalent
+     * @param string[]|null $synonyms words or phrases considered equivalent
      *
      * @return self
      */
@@ -302,7 +302,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets input
      *
-     * @param string|null $input word or phrase to appear in query strings (for onewaysynonym)
+     * @param string|null $input Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
      *
      * @return self
      */
@@ -326,7 +326,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets word
      *
-     * @param string|null $word word or phrase to appear in query strings (for altcorrection1 and altcorrection2)
+     * @param string|null $word Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
      *
      * @return self
      */
@@ -374,7 +374,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets placeholder
      *
-     * @param string|null $placeholder token to be put inside records
+     * @param string|null $placeholder [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
      *
      * @return self
      */
@@ -398,7 +398,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets replacements
      *
-     * @param string[]|null $replacements list of query words that will match the token
+     * @param string[]|null $replacements Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
      *
      * @return self
      */

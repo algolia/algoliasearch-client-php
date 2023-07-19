@@ -184,6 +184,14 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
+        if (($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
+
         if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
@@ -215,7 +223,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits list of user object matching the query
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits user objects that match the query
      *
      * @return self
      */
@@ -239,7 +247,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits number of hits the search query matched
      *
      * @return self
      */
@@ -263,7 +271,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets page
      *
-     * @param int $page specify the page to retrieve
+     * @param int $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -287,12 +295,20 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets hitsPerPage
      *
-     * @param int $hitsPerPage Maximum number of hits in a page. Minimum is 1, maximum is 1000.
+     * @param int $hitsPerPage maximum number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be smaller than or equal to 1000.');
+        }
+        if (($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -311,7 +327,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

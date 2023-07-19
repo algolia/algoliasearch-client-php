@@ -206,7 +206,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value
      *
-     * @param string $value the right-hand side argument to the operation, for example, increment or decrement step, value to add or remove
+     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value
      *
      * @return self
      */

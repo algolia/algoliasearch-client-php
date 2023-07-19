@@ -198,7 +198,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index A/B test index
      *
      * @return self
      */
@@ -222,7 +222,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage the traffic percentage for the A/B test
+     * @param int $trafficPercentage A/B test traffic percentage
      *
      * @return self
      */
@@ -246,7 +246,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets description
      *
-     * @param string|null $description the A/B test description
+     * @param string|null $description A/B test description
      *
      * @return self
      */

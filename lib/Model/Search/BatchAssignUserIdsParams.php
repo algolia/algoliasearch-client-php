@@ -182,7 +182,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets cluster
      *
-     * @param string $cluster name of the cluster
+     * @param string $cluster cluster name
      *
      * @return self
      */
@@ -206,7 +206,7 @@ class BatchAssignUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets users
      *
-     * @param string[] $users userIDs to assign. Note you cannot move users with this method.
+     * @param string[] $users user IDs to assign
      *
      * @return self
      */

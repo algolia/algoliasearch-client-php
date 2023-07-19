@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Single objectID to promote as hits.
+ * @description Record to promote.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -182,7 +182,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object to promote
+     * @param string $objectID unique identifier of the record to promote
      *
      * @return self
      */
@@ -206,7 +206,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets position
      *
-     * @param int $position The position to promote the objects to (zero-based). If you pass objectIDs, the objects are placed at this position as a group. For example, if you pass four objectIDs to position 0, the objects take the first four positions.
+     * @param int $position The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
      *
      * @return self
      */

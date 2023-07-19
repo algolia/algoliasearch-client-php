@@ -203,7 +203,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique object identifier
      *
      * @return self
      */

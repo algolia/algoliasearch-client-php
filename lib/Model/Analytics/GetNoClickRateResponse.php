@@ -164,6 +164,14 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
+        if (($this->container['rate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['rate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['count']) || $this->container['count'] === null) {
             $invalidProperties[] = "'count' can't be null";
         }
@@ -201,12 +209,20 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setRate($rate)
     {
+
+        if (($rate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoClickRateResponse., must be smaller than or equal to 1.');
+        }
+        if (($rate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoClickRateResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['rate'] = $rate;
 
         return $this;
@@ -225,7 +241,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets count
      *
-     * @param int $count the number of click event
+     * @param int $count number of click events
      *
      * @return self
      */
@@ -249,7 +265,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets noClickCount
      *
-     * @param int $noClickCount the number of click event
+     * @param int $noClickCount number of click events
      *
      * @return self
      */
@@ -273,7 +289,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[] $dates a list of searches without clicks with their date, rate and counts
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[] $dates overall count of searches without clicks plus a daily breakdown
      *
      * @return self
      */

@@ -176,7 +176,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets items
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items list of the fetched indices
+     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items all indices in your Algolia application
      *
      * @return self
      */

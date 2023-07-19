@@ -276,7 +276,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets replicas
      *
-     * @param string[]|null $replicas creates replicas, exact copies of an index
+     * @param string[]|null $replicas Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
      *
      * @return self
      */
@@ -300,7 +300,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets paginationLimitedTo
      *
-     * @param int|null $paginationLimitedTo set the maximum number of hits accessible via pagination
+     * @param int|null $paginationLimitedTo maximum number of hits accessible through pagination
      *
      * @return self
      */
@@ -324,7 +324,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets unretrievableAttributes
      *
-     * @param string[]|null $unretrievableAttributes list of attributes that can't be retrieved at query time
+     * @param string[]|null $unretrievableAttributes attributes that can't be retrieved at query time
      *
      * @return self
      */
@@ -348,7 +348,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disableTypoToleranceOnWords
      *
-     * @param string[]|null $disableTypoToleranceOnWords a list of words for which you want to turn off typo tolerance
+     * @param string[]|null $disableTypoToleranceOnWords Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToTransliterate
      *
-     * @param string[]|null $attributesToTransliterate specify on which attributes in your index Algolia should apply Japanese transliteration to make words indexed in Katakana or Kanji searchable in Hiragana
+     * @param string[]|null $attributesToTransliterate Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
      *
      * @return self
      */
@@ -396,7 +396,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets camelCaseAttributes
      *
-     * @param string[]|null $camelCaseAttributes list of attributes on which to do a decomposition of camel case words
+     * @param string[]|null $camelCaseAttributes Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
      *
      * @return self
      */
@@ -420,7 +420,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets decompoundedAttributes
      *
-     * @param object|null $decompoundedAttributes specify on which attributes in your index Algolia should apply word segmentation, also known as decompounding
+     * @param object|null $decompoundedAttributes Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
      *
      * @return self
      */
@@ -444,7 +444,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets indexLanguages
      *
-     * @param string[]|null $indexLanguages sets the languages at the index level for language-specific processing such as tokenization and normalization
+     * @param string[]|null $indexLanguages Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -468,7 +468,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets disablePrefixOnAttributes
      *
-     * @param string[]|null $disablePrefixOnAttributes list of attributes on which you want to disable prefix matching
+     * @param string[]|null $disablePrefixOnAttributes Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
      *
      * @return self
      */
@@ -492,7 +492,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets allowCompressionOfIntegerArray
      *
-     * @param bool|null $allowCompressionOfIntegerArray enables compression of large integer arrays
+     * @param bool|null $allowCompressionOfIntegerArray Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.
      *
      * @return self
      */
@@ -516,7 +516,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets numericAttributesForFiltering
      *
-     * @param string[]|null $numericAttributesForFiltering list of numeric attributes that can be used as numerical filters
+     * @param string[]|null $numericAttributesForFiltering Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
      *
      * @return self
      */
@@ -540,7 +540,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets separatorsToIndex
      *
-     * @param string|null $separatorsToIndex control which separators are indexed
+     * @param string|null $separatorsToIndex Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
      *
      * @return self
      */
@@ -564,7 +564,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets searchableAttributes
      *
-     * @param string[]|null $searchableAttributes the complete list of attributes used for searching
+     * @param string[]|null $searchableAttributes [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position).
      *
      * @return self
      */
@@ -612,7 +612,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets customNormalization
      *
-     * @param array<string,array<string,string>>|null $customNormalization overrides Algolia's default normalization
+     * @param array<string,array<string,string>>|null $customNormalization A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */

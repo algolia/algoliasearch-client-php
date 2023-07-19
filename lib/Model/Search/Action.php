@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description type of operation.
+ * @description Type of batch operation.
  *
  * @package Algolia\AlgoliaSearch
  */

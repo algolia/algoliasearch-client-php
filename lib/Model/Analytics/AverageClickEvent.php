@@ -190,7 +190,7 @@ class AverageClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets average
      *
-     * @param float $average the average of all the click count event
+     * @param float $average average count of all click events
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class AverageClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class AverageClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets date
      *
-     * @param string $date date of the event
+     * @param string $date date of the event in the format YYYY-MM-DD
      *
      * @return self
      */

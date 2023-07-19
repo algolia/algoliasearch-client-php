@@ -179,7 +179,7 @@ class SearchEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets date
      *
-     * @param string $date date of the event
+     * @param string $date date of the event in the format YYYY-MM-DD
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class SearchEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */

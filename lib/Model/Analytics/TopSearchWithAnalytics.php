@@ -210,6 +210,14 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
+        if (($this->container['clickThroughRate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'clickThroughRate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['clickThroughRate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'clickThroughRate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['averageClickPosition']) || $this->container['averageClickPosition'] === null) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
@@ -256,7 +264,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets search
      *
-     * @param string $search the search query
+     * @param string $search user query
      *
      * @return self
      */
@@ -280,7 +288,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
      *
      * @return self
      */
@@ -304,12 +312,20 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets clickThroughRate
      *
-     * @param float $clickThroughRate the click-through rate
+     * @param float $clickThroughRate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setClickThroughRate($clickThroughRate)
     {
+
+        if (($clickThroughRate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be smaller than or equal to 1.');
+        }
+        if (($clickThroughRate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
+        }
+
         $this->container['clickThroughRate'] = $clickThroughRate;
 
         return $this;
@@ -328,7 +344,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets averageClickPosition
      *
-     * @param int $averageClickPosition the average position of all the click count event
+     * @param int $averageClickPosition Average [position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) of clicked search result.
      *
      * @return self
      */
@@ -352,7 +368,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets conversionRate
      *
-     * @param float $conversionRate the conversion rate
+     * @param float $conversionRate [Conversion rate (CR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
      *
      * @return self
      */
@@ -376,7 +392,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -400,7 +416,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */
@@ -424,7 +440,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int $conversionCount number of converted clicks
      *
      * @return self
      */
@@ -448,7 +464,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits number of hits the search query matched
      *
      * @return self
      */

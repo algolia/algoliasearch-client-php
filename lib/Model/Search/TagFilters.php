@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Filter hits by tags.
+ * @description [Filter hits by tags](https://www.algolia.com/doc/api-reference/api-parameters/tagFilters/).
  *
  * @package Algolia\AlgoliaSearch
  */

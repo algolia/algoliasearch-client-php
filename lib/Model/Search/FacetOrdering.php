@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Defining how facets should be ordered.
+ * @description Defines the ordering of facets (widgets).
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -199,7 +199,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets values
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\Value>|null $values the ordering of facet values, within an individual list
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\Value>|null $values ordering of facet values within an individual facet
      *
      * @return self
      */

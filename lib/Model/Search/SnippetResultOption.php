@@ -182,7 +182,7 @@ class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets value
      *
-     * @param string $value markup text with occurrences highlighted
+     * @param string $value markup text with `facetQuery` matches highlighted
      *
      * @return self
      */

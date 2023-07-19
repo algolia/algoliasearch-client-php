@@ -164,6 +164,14 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (!isset($this->container['rate']) || $this->container['rate'] === null) {
             $invalidProperties[] = "'rate' can't be null";
         }
+        if (($this->container['rate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['rate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
@@ -201,12 +209,20 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate
      *
-     * @param float $rate the click-through rate
+     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setRate($rate)
     {
+
+        if (($rate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversationRateResponse., must be smaller than or equal to 1.');
+        }
+        if (($rate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversationRateResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['rate'] = $rate;
 
         return $this;
@@ -225,7 +241,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -249,7 +265,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int $conversionCount number of converted clicks
      *
      * @return self
      */
@@ -273,7 +289,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[] $dates a list of conversion events with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[] $dates conversion events
      *
      * @return self
      */

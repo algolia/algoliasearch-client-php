@@ -179,7 +179,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchEvent[] $dates a list of search events with their date and count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchEvent[] $dates search events with their associated dates and hit counts
      *
      * @return self
      */

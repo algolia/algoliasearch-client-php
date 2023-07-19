@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description The search mode that the index will use to query for results.
+ * @description Search mode the index will use to query for results.
  *
  * @package Algolia\AlgoliaSearch
  */

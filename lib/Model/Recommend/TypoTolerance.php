@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Controls whether typo tolerance is enabled and how it is applied.
+ * @description Controls whether [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) is enabled and how it is applied.
  *
  * @package Algolia\AlgoliaSearch
  */

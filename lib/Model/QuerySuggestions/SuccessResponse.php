@@ -179,7 +179,7 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets status
      *
-     * @param int $status the status code
+     * @param int $status status code
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class SuccessResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets message
      *
-     * @param string $message message of the response
+     * @param string $message response message
      *
      * @return self
      */

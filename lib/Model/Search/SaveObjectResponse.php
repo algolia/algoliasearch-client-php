@@ -187,7 +187,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets createdAt
      *
-     * @param string $createdAt createdAt
+     * @param string $createdAt date of creation (ISO-8601 format)
      *
      * @return self
      */
@@ -211,7 +211,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
      * @return self
      */
@@ -235,7 +235,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets objectID
      *
-     * @param string|null $objectID unique identifier of the object
+     * @param string|null $objectID unique object identifier
      *
      * @return self
      */

@@ -179,7 +179,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets key
      *
-     * @param string $key the API key
+     * @param string $key API key
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt
      *
-     * @param string $createdAt date of creation (ISO-8601 format)
+     * @param string $createdAt Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

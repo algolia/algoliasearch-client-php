@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description getObjects operation on an index.
+ * @description Record retrieval operation.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -190,7 +190,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets attributesToRetrieve
      *
-     * @param string[]|null $attributesToRetrieve List of attributes to retrieve. By default, all retrievable attributes are returned.
+     * @param string[]|null $attributesToRetrieve Attributes to retrieve. If not specified, all retrievable attributes are returned.
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets objectID
      *
-     * @param string $objectID ID of the object within that index
+     * @param string $objectID record's objectID
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets indexName
      *
-     * @param string $indexName name of the index containing the object
+     * @param string $indexName name of the index containing the required records
      *
      * @return self
      */

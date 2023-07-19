@@ -179,7 +179,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[] $dates a list of users count with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[] $dates user count
      *
      * @return self
      */

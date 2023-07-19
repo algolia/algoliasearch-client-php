@@ -190,7 +190,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index A/B test index
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID
      *
-     * @param int $abTestID the A/B test ID
+     * @param int $abTestID unique A/B test ID
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
      * @return self
      */

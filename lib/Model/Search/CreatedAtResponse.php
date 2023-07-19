@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The response with a createdAt timestamp.
+ * @description Response and creation timestamp.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt
      *
-     * @param string $createdAt date of creation (ISO-8601 format)
+     * @param string $createdAt Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

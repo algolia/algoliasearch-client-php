@@ -203,7 +203,7 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique object identifier
      *
      * @return self
      */

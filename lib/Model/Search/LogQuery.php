@@ -228,7 +228,7 @@ class LogQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets queryId
      *
-     * @param string|null $queryId queryID for the given query
+     * @param string|null $queryId unique query identifier
      *
      * @return self
      */

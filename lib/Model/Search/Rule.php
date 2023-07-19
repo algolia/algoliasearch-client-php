@@ -211,7 +211,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique identifier for a rule object
      *
      * @return self
      */
@@ -235,7 +235,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets conditions
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Condition[]|null $conditions A list of conditions that should apply to activate a Rule. You can use up to 25 conditions per Rule.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Condition[]|null $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -283,7 +283,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets description
      *
-     * @param string|null $description This field is intended for Rule management purposes, in particular to ease searching for Rules and presenting them to human readers. It's not interpreted by the API.
+     * @param string|null $description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
      *
      * @return self
      */
@@ -307,7 +307,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets enabled
      *
-     * @param bool|null $enabled Whether the Rule is enabled. Disabled Rules remain in the index, but aren't applied at query time.
+     * @param bool|null $enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
      *
      * @return self
      */
@@ -331,7 +331,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets validity
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\TimeRange[]|null $validity By default, Rules are permanently valid. When validity periods are specified, the Rule applies only during those periods; it's ignored the rest of the time. The list must not be empty.
+     * @param \Algolia\AlgoliaSearch\Model\Search\TimeRange[]|null $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
      *
      * @return self
      */

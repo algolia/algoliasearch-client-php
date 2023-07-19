@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Data for the redirect rule.
+ * @description Redirect rule data.
  *
  * @package Algolia\AlgoliaSearch
  */

@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The ordering of facets (widgets).
+ * @description Ordering of facets (widgets).
  *
  * @package Algolia\AlgoliaSearch
  */

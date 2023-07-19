@@ -21,7 +21,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
       * @var string[]
       */
     protected static $modelTypes = [
-        'nbCustomEntires' => 'int',
+        'nbCustomEntries' => 'int',
     ];
 
     /**
@@ -30,7 +30,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
       * @var string[]
       */
     protected static $modelFormats = [
-        'nbCustomEntires' => null,
+        'nbCustomEntries' => null,
     ];
 
     /**
@@ -40,7 +40,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
       * @var string[]
     */
     protected static $attributeMap = [
-        'nbCustomEntires' => 'nbCustomEntires',
+        'nbCustomEntries' => 'nbCustomEntries',
     ];
 
     /**
@@ -80,7 +80,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'nbCustomEntires' => 'setNbCustomEntires',
+        'nbCustomEntries' => 'setNbCustomEntries',
     ];
 
     /**
@@ -89,7 +89,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'nbCustomEntires' => 'getNbCustomEntires',
+        'nbCustomEntries' => 'getNbCustomEntries',
     ];
 
     /**
@@ -126,8 +126,8 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['nbCustomEntires'])) {
-            $this->container['nbCustomEntires'] = $data['nbCustomEntires'];
+        if (isset($data['nbCustomEntries'])) {
+            $this->container['nbCustomEntries'] = $data['nbCustomEntries'];
         }
     }
 
@@ -155,25 +155,25 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets nbCustomEntires
+     * Gets nbCustomEntries
      *
      * @return int|null
      */
-    public function getNbCustomEntires()
+    public function getNbCustomEntries()
     {
-        return $this->container['nbCustomEntires'] ?? null;
+        return $this->container['nbCustomEntries'] ?? null;
     }
 
     /**
-     * Sets nbCustomEntires
+     * Sets nbCustomEntries
      *
-     * @param int|null $nbCustomEntires When nbCustomEntries is set to 0, the user didn't customize the dictionary. The dictionary is still supported with standard, Algolia-provided entries.
+     * @param int|null $nbCustomEntries If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language.
      *
      * @return self
      */
-    public function setNbCustomEntires($nbCustomEntires)
+    public function setNbCustomEntries($nbCustomEntries)
     {
-        $this->container['nbCustomEntires'] = $nbCustomEntires;
+        $this->container['nbCustomEntries'] = $nbCustomEntries;
 
         return $this;
     }

@@ -168,7 +168,7 @@ class GetTopFilterForAttributeResponse extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets values
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttribute[] $values a list of filters for the given attributes
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttribute[] $values filter values for an attribute
      *
      * @return self
      */

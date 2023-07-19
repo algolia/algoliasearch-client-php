@@ -164,7 +164,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets query
      *
-     * @param string|null $query the text to search in the index
+     * @param string|null $query text to search for in an index
      *
      * @return self
      */

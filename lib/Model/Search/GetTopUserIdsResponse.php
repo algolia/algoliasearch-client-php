@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Array of userIDs and clusters.
+ * @description User IDs and clusters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets topUsers
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers mapping of cluster names to top users
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
      *
      * @return self
      */

@@ -179,7 +179,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class BatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets objectIDs
      *
-     * @param string[] $objectIDs list of objectID
+     * @param string[] $objectIDs unique object (record) identifiers
      *
      * @return self
      */

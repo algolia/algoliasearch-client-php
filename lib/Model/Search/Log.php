@@ -310,7 +310,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets timestamp
      *
-     * @param string $timestamp timestamp in ISO-8601 format
+     * @param string $timestamp Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -382,7 +382,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets queryBody
      *
-     * @param string $queryBody Request body. Truncated after 1000 characters.
+     * @param string $queryBody Request body. Truncated after 1,000 characters.
      *
      * @return self
      */
@@ -406,7 +406,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets answer
      *
-     * @param string $answer Answer body. Truncated after 1000 characters.
+     * @param string $answer Answer body. Truncated after 1,000 characters.
      *
      * @return self
      */
@@ -454,7 +454,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets ip
      *
-     * @param string $ip IP of the client which performed the request
+     * @param string $ip IP address of the client that performed the request
      *
      * @return self
      */
@@ -478,7 +478,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets queryHeaders
      *
-     * @param string $queryHeaders request Headers (API Key is obfuscated)
+     * @param string $queryHeaders request headers (API key is obfuscated)
      *
      * @return self
      */
@@ -550,7 +550,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets processingTimeMs
      *
-     * @param string $processingTimeMs Processing time for the query. It doesn't include network time.
+     * @param string $processingTimeMs Processing time for the query. Doesn't include network time.
      *
      * @return self
      */
@@ -646,7 +646,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets innerQueries
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null $innerQueries array of all performed queries for the given request
+     * @param \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null $innerQueries performed queries for the given request
      *
      * @return self
      */

@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The &#x60;batchDictionaryEntries&#x60; parameters.
+ * @description &#x60;batchDictionaryEntries&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -179,7 +179,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets clearExistingDictionaryEntries
      *
-     * @param bool|null $clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries from the dictionary
+     * @param bool|null $clearExistingDictionaryEntries incidates whether to replace all custom entries in the dictionary with the ones sent with this request
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests List of operations to batch. Each operation is described by an `action` and a `body`.
+     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests operations to batch
      *
      * @return self
      */

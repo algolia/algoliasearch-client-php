@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The &#x60;getObjects&#x60; parameters.
+ * @description Request parameters.
  *
  * @package Algolia\AlgoliaSearch
  */

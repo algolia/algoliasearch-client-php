@@ -117,8 +117,8 @@ class AnalyticsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -156,8 +156,8 @@ class AnalyticsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -195,10 +195,10 @@ class AnalyticsClient
     /**
      * Get average click position.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse
@@ -244,12 +244,12 @@ class AnalyticsClient
     }
 
     /**
-     * Get clicks per positions.
+     * Get click positions.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse
@@ -297,10 +297,10 @@ class AnalyticsClient
     /**
      * Get click-through rate (CTR).
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse
@@ -348,10 +348,10 @@ class AnalyticsClient
     /**
      * Get conversion rate (CR).
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponse
@@ -399,10 +399,10 @@ class AnalyticsClient
     /**
      * Get no click rate.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse
@@ -450,10 +450,10 @@ class AnalyticsClient
     /**
      * Get no results rate.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse
@@ -499,12 +499,12 @@ class AnalyticsClient
     }
 
     /**
-     * Get searches count.
+     * Get number of searches.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse
@@ -552,12 +552,12 @@ class AnalyticsClient
     /**
      * Get top searches with no clicks.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse
@@ -613,12 +613,12 @@ class AnalyticsClient
     /**
      * Get top searches with no results.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse
@@ -674,7 +674,7 @@ class AnalyticsClient
     /**
      * Get Analytics API status.
      *
-     * @param string $index The index name to target. (required)
+     * @param string $index Index name to target. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse
@@ -703,12 +703,12 @@ class AnalyticsClient
     /**
      * Get top countries.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse
@@ -762,15 +762,15 @@ class AnalyticsClient
     }
 
     /**
-     * Get top filter attributes.
+     * Get top filterable attributes.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $search The query term to search for. Must match the exact user input. (optional)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $search User query. (optional)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse
@@ -828,16 +828,16 @@ class AnalyticsClient
     }
 
     /**
-     * Get top filters for the an attribute.
+     * Get top filter values for an attribute.
      *
-     * @param string $attribute The exact name of the attribute. (required)
-     * @param string $index The index name to target. (required)
-     * @param string $search The query term to search for. Must match the exact user input. (optional)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $attribute Attribute name. (required)
+     * @param string $index Index name to target. (required)
+     * @param string $search User query. (optional)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse
@@ -912,13 +912,13 @@ class AnalyticsClient
     /**
      * Get top filters for a no result search.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $search The query term to search for. Must match the exact user input. (optional)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $search User query. (optional)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse
@@ -978,14 +978,14 @@ class AnalyticsClient
     /**
      * Get top hits.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $search The query term to search for. Must match the exact user input. (optional)
-     * @param bool $clickAnalytics Whether to include the click-through and conversion rates for a search. (optional, default to false)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param string $index Index name to target. (required)
+     * @param string $search User query. (optional)
+     * @param bool $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse
@@ -1049,15 +1049,15 @@ class AnalyticsClient
     /**
      * Get top searches.
      *
-     * @param string $index The index name to target. (required)
-     * @param bool $clickAnalytics Whether to include the click-through and conversion rates for a search. (optional, default to false)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
+     * @param string $index Index name to target. (required)
+     * @param bool $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param array $orderBy Reorder the results. (optional)
-     * @param array $direction The sorting of the result. (optional)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
+     * @param array $direction Sorting direction of the results: ascending or descending. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse
@@ -1123,12 +1123,12 @@ class AnalyticsClient
     }
 
     /**
-     * Get users count.
+     * Get user count.
      *
-     * @param string $index The index name to target. (required)
-     * @param string $startDate The lower bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $endDate The upper bound timestamp (a date, a string like \&quot;2006-01-02\&quot;) of the period to analyze. (optional)
-     * @param string $tags Filter metrics on the provided tags. Each tag must correspond to an analyticsTags set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it should be URL encoded. (optional)
+     * @param string $index Index name to target. (required)
+     * @param string $startDate Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse
@@ -1176,9 +1176,9 @@ class AnalyticsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -1216,9 +1216,9 @@ class AnalyticsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object

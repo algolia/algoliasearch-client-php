@@ -168,7 +168,7 @@ class GetTopFiltersNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Sets values
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values a list of filters without results
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values filters with no results
      *
      * @return self
      */

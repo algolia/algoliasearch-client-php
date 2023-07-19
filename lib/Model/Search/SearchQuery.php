@@ -813,6 +813,14 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
             $invalidProperties[] = "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
         }
 
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
+
         if (isset($this->container['minProximity']) && ($this->container['minProximity'] > 7)) {
             $invalidProperties[] = "invalid value for 'minProximity', must be smaller than or equal to 7.";
         }
@@ -862,7 +870,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets params
      *
-     * @param string|null $params search parameters as URL-encoded query string
+     * @param string|null $params search parameters as a URL-encoded query string
      *
      * @return self
      */
@@ -886,7 +894,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets query
      *
-     * @param string|null $query the text to search in the index
+     * @param string|null $query text to search for in an index
      *
      * @return self
      */
@@ -910,7 +918,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets similarQuery
      *
-     * @param string|null $similarQuery overrides the query parameter and performs a more generic search that can be used to find \"similar\" results
+     * @param string|null $similarQuery overrides the query parameter and performs a more generic search
      *
      * @return self
      */
@@ -934,7 +942,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets filters
      *
-     * @param string|null $filters filter the query with numeric, facet and/or tag filters
+     * @param string|null $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
      *
      * @return self
      */
@@ -1054,7 +1062,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets sumOrFiltersScores
      *
-     * @param bool|null $sumOrFiltersScores determines how to calculate the total score for filtering
+     * @param bool|null $sumOrFiltersScores Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed.
      *
      * @return self
      */
@@ -1078,7 +1086,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets
      *
-     * @param string[]|null $facets retrieve facets and their facet values
+     * @param string[]|null $facets Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.
      *
      * @return self
      */
@@ -1102,7 +1110,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets maxValuesPerFacet
      *
-     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet during a regular search
+     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet
      *
      * @return self
      */
@@ -1126,7 +1134,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facetingAfterDistinct
      *
-     * @param bool|null $facetingAfterDistinct force faceting to be applied after de-duplication (via the Distinct setting)
+     * @param bool|null $facetingAfterDistinct Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control.
      *
      * @return self
      */
@@ -1174,7 +1182,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets page
      *
-     * @param int|null $page specify the page to retrieve
+     * @param int|null $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -1198,7 +1206,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets offset
      *
-     * @param int|null $offset specify the offset of the first hit to return
+     * @param int|null $offset Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
      *
      * @return self
      */
@@ -1222,7 +1230,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets length
      *
-     * @param int|null $length set the number of hits to retrieve (used only with offset)
+     * @param int|null $length Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
      *
      * @return self
      */
@@ -1254,7 +1262,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng search for entries around a central geolocation, enabling a geo search within a circular area
+     * @param string|null $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
      *
      * @return self
      */
@@ -1278,7 +1286,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets aroundLatLngViaIP
      *
-     * @param bool|null $aroundLatLngViaIP search for entries around a given location automatically computed from the requester's IP address
+     * @param bool|null $aroundLatLngViaIP Search for entries around a location. The location is automatically computed from the requester's IP address.
      *
      * @return self
      */
@@ -1326,7 +1334,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets aroundPrecision
      *
-     * @param int|null $aroundPrecision precision of geo search (in meters), to add grouping by geo location to the ranking formula
+     * @param int|null $aroundPrecision Precision of a geographical search (in meters), to [group results that are more or less the same distance from a central point](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/in-depth/geo-ranking-precision/).
      *
      * @return self
      */
@@ -1350,7 +1358,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minimumAroundRadius
      *
-     * @param int|null $minimumAroundRadius minimum radius (in meters) used for a geo search when aroundRadius is not set
+     * @param int|null $minimumAroundRadius minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set
      *
      * @return self
      */
@@ -1379,7 +1387,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets insideBoundingBox
      *
-     * @param float[]|null $insideBoundingBox search inside a rectangular area (in geo coordinates)
+     * @param float[]|null $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -1403,7 +1411,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets insidePolygon
      *
-     * @param float[]|null $insidePolygon search inside a polygon (in geo coordinates)
+     * @param float[]|null $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -1427,7 +1435,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets naturalLanguages
      *
-     * @param string[]|null $naturalLanguages This parameter changes the default values of certain parameters and settings that work best for a natural language query, such as ignorePlurals, removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts. These parameters and settings work well together when the query is formatted in natural language instead of keywords, for example when your user performs a voice search.
+     * @param string[]|null $naturalLanguages Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.
      *
      * @return self
      */
@@ -1451,7 +1459,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets ruleContexts
      *
-     * @param string[]|null $ruleContexts enables contextual rules
+     * @param string[]|null $ruleContexts Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.
      *
      * @return self
      */
@@ -1475,7 +1483,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets personalizationImpact
      *
-     * @param int|null $personalizationImpact define the impact of the Personalization feature
+     * @param int|null $personalizationImpact Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
      *
      * @return self
      */
@@ -1499,7 +1507,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets userToken
      *
-     * @param string|null $userToken associates a certain user token with the current search
+     * @param string|null $userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
      *
      * @return self
      */
@@ -1523,7 +1531,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets getRankingInfo
      *
-     * @param bool|null $getRankingInfo retrieve detailed ranking information
+     * @param bool|null $getRankingInfo Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
      *
      * @return self
      */
@@ -1547,7 +1555,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets clickAnalytics
      *
-     * @param bool|null $clickAnalytics enable the Click Analytics feature
+     * @param bool|null $clickAnalytics Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
      *
      * @return self
      */
@@ -1571,7 +1579,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets analytics
      *
-     * @param bool|null $analytics whether the current query will be taken into account in the Analytics
+     * @param bool|null $analytics Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
      *
      * @return self
      */
@@ -1595,7 +1603,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets analyticsTags
      *
-     * @param string[]|null $analyticsTags list of tags to apply to the query for analytics purposes
+     * @param string[]|null $analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
      *
      * @return self
      */
@@ -1643,7 +1651,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets enableABTest
      *
-     * @param bool|null $enableABTest whether this search should participate in running AB tests
+     * @param bool|null $enableABTest incidates whether this search will be considered in A/B testing
      *
      * @return self
      */
@@ -1667,7 +1675,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets enableReRanking
      *
-     * @param bool|null $enableReRanking whether this search should use AI Re-Ranking
+     * @param bool|null $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
      *
      * @return self
      */
@@ -1715,7 +1723,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributesForFaceting
      *
-     * @param string[]|null $attributesForFaceting the complete list of attributes that will be used for faceting
+     * @param string[]|null $attributesForFaceting Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: `filterOnly`, `searchable`, and `afterDistinct`.
      *
      * @return self
      */
@@ -1739,7 +1747,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributesToRetrieve
      *
-     * @param string[]|null $attributesToRetrieve this parameter controls which attributes to retrieve and which not to retrieve
+     * @param string[]|null $attributesToRetrieve Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes.
      *
      * @return self
      */
@@ -1763,7 +1771,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets restrictSearchableAttributes
      *
-     * @param string[]|null $restrictSearchableAttributes restricts a given query to look in only a subset of your searchable attributes
+     * @param string[]|null $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
      *
      * @return self
      */
@@ -1787,7 +1795,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets ranking
      *
-     * @param string[]|null $ranking controls how Algolia should sort your results
+     * @param string[]|null $ranking Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/).
      *
      * @return self
      */
@@ -1811,7 +1819,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets customRanking
      *
-     * @param string[]|null $customRanking specifies the custom ranking criterion
+     * @param string[]|null $customRanking Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the `asc` and `desc` modifiers to specify the ranking order: ascending or descending.
      *
      * @return self
      */
@@ -1835,7 +1843,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets relevancyStrictness
      *
-     * @param int|null $relevancyStrictness controls the relevancy threshold below which less relevant results aren't included in the results
+     * @param int|null $relevancyStrictness relevancy threshold below which less relevant results aren't included in the results
      *
      * @return self
      */
@@ -1859,7 +1867,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributesToHighlight
      *
-     * @param string[]|null $attributesToHighlight list of attributes to highlight
+     * @param string[]|null $attributesToHighlight Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (`highlightPreTag` and `highlightPostTag`).
      *
      * @return self
      */
@@ -1883,7 +1891,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributesToSnippet
      *
-     * @param string[]|null $attributesToSnippet list of attributes to snippet, with an optional maximum number of words to snippet
+     * @param string[]|null $attributesToSnippet Attributes to _snippet_. 'Snippeting' is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: `body:20`.
      *
      * @return self
      */
@@ -1907,7 +1915,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets highlightPreTag
      *
-     * @param string|null $highlightPreTag the HTML string to insert before the highlighted parts in all highlight and snippet results
+     * @param string|null $highlightPreTag HTML string to insert before the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -1931,7 +1939,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets highlightPostTag
      *
-     * @param string|null $highlightPostTag the HTML string to insert after the highlighted parts in all highlight and snippet results
+     * @param string|null $highlightPostTag HTML string to insert after the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -2003,12 +2011,20 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchQuery., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchQuery., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -2027,7 +2043,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minWordSizefor1Typo
      *
-     * @param int|null $minWordSizefor1Typo minimum number of characters a word in the query string must contain to accept matches with 1 typo
+     * @param int|null $minWordSizefor1Typo Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
      *
      * @return self
      */
@@ -2051,7 +2067,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minWordSizefor2Typos
      *
-     * @param int|null $minWordSizefor2Typos minimum number of characters a word in the query string must contain to accept matches with 2 typos
+     * @param int|null $minWordSizefor2Typos Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
      *
      * @return self
      */
@@ -2123,7 +2139,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets disableTypoToleranceOnAttributes
      *
-     * @param string[]|null $disableTypoToleranceOnAttributes list of attributes on which you want to disable typo tolerance
+     * @param string[]|null $disableTypoToleranceOnAttributes Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
      *
      * @return self
      */
@@ -2195,7 +2211,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets keepDiacriticsOnCharacters
      *
-     * @param string|null $keepDiacriticsOnCharacters list of characters that the engine shouldn't automatically normalize
+     * @param string|null $keepDiacriticsOnCharacters Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -2219,7 +2235,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets queryLanguages
      *
-     * @param string[]|null $queryLanguages sets the languages to be used by language-specific settings and functionalities such as ignorePlurals, removeStopWords, and CJK word-detection
+     * @param string[]|null $queryLanguages Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.
      *
      * @return self
      */
@@ -2243,7 +2259,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets decompoundQuery
      *
-     * @param bool|null $decompoundQuery splits compound words into their composing atoms in the query
+     * @param bool|null $decompoundQuery [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query.
      *
      * @return self
      */
@@ -2267,7 +2283,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets enableRules
      *
-     * @param bool|null $enableRules whether Rules should be globally enabled
+     * @param bool|null $enableRules Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
      *
      * @return self
      */
@@ -2291,7 +2307,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets enablePersonalization
      *
-     * @param bool|null $enablePersonalization enable the Personalization feature
+     * @param bool|null $enablePersonalization Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
      *
      * @return self
      */
@@ -2411,7 +2427,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets advancedSyntax
      *
-     * @param bool|null $advancedSyntax enables the advanced query syntax
+     * @param bool|null $advancedSyntax Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
      *
      * @return self
      */
@@ -2435,7 +2451,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets optionalWords
      *
-     * @param string[]|null $optionalWords a list of words that should be considered as optional when found in the query
+     * @param string[]|null $optionalWords Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.
      *
      * @return self
      */
@@ -2459,7 +2475,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets disableExactOnAttributes
      *
-     * @param string[]|null $disableExactOnAttributes list of attributes on which you want to disable the exact ranking criterion
+     * @param string[]|null $disableExactOnAttributes Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -2507,7 +2523,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets alternativesAsExact
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact list of alternatives that should be considered an exact match by the exact ranking criterion
+     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -2531,7 +2547,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets advancedSyntaxFeatures
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when ‘advancedSyntax' is enabled
+     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
      *
      * @return self
      */
@@ -2555,7 +2571,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets explain
      *
-     * @param string[]|null $explain enriches the API’s response with meta-information as to how the query was processed
+     * @param string[]|null $explain enriches the API's response with information about how the query was processed
      *
      * @return self
      */
@@ -2603,7 +2619,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributeForDistinct
      *
-     * @param string|null $attributeForDistinct name of the de-duplication attribute to be used with the distinct feature
+     * @param string|null $attributeForDistinct Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
      *
      * @return self
      */
@@ -2675,7 +2691,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minProximity
      *
-     * @param int|null $minProximity precision of the proximity ranking criterion
+     * @param int|null $minProximity Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).
      *
      * @return self
      */
@@ -2707,7 +2723,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets responseFields
      *
-     * @param string[]|null $responseFields Choose which fields to return in the API response. This parameters applies to search and browse queries.
+     * @param string[]|null $responseFields attributes to include in the API response for search and browse queries
      *
      * @return self
      */
@@ -2731,7 +2747,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets maxFacetHits
      *
-     * @param int|null $maxFacetHits Maximum number of facet hits to return during a search for facet values. For performance reasons, the maximum allowed number of returned values is 100.
+     * @param int|null $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */
@@ -2760,7 +2776,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets attributeCriteriaComputedByMinProximity
      *
-     * @param bool|null $attributeCriteriaComputedByMinProximity when attribute is ranked above proximity in your ranking formula, proximity is used to select which searchable attribute is matched in the attribute ranking stage
+     * @param bool|null $attributeCriteriaComputedByMinProximity When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
      *
      * @return self
      */
@@ -2808,7 +2824,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets indexName
      *
-     * @param string $indexName the Algolia index name
+     * @param string $indexName algolia index name
      *
      * @return self
      */
@@ -2856,7 +2872,7 @@ class SearchQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facet
      *
-     * @param string $facet the `facet` name
+     * @param string $facet facet name
      *
      * @return self
      */

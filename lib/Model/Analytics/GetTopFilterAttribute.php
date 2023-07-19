@@ -179,7 +179,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets attribute
      *
-     * @param string $attribute the attribute
+     * @param string $attribute attribute name
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class GetTopFilterAttribute extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */

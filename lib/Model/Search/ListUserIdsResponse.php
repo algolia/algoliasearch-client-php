@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description UserIDs data.
+ * @description User ID data.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userIDs
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UserId[] $userIDs list of userIDs
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserId[] $userIDs user IDs
      *
      * @return self
      */

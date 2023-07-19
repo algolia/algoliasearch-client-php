@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The operation to apply on the attribute.
+ * @description Operation to apply to the attribute.
  *
  * @package Algolia\AlgoliaSearch
  */

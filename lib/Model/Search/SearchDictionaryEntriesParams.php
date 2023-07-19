@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The &#x60;searchDictionaryEntries&#x60; parameters.
+ * @description &#x60;searchDictionaryEntries&#x60; parameters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -167,6 +167,13 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         if (!isset($this->container['query']) || $this->container['query'] === null) {
             $invalidProperties[] = "'query' can't be null";
         }
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
 
         return $invalidProperties;
     }
@@ -195,7 +202,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets query
      *
-     * @param string $query the text to search in the index
+     * @param string $query text to search for in an index
      *
      * @return self
      */
@@ -219,7 +226,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets page
      *
-     * @param int|null $page specify the page to retrieve
+     * @param int|null $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -243,12 +250,20 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchDictionaryEntriesParams., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchDictionaryEntriesParams., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -267,7 +282,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets language
      *
-     * @param string|null $language Language ISO code supported by the dictionary (e.g., \"en\" for English).
+     * @param string|null $language [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
      *
      * @return self
      */

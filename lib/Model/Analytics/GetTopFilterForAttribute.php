@@ -201,7 +201,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets attribute
      *
-     * @param string $attribute the attribute
+     * @param string $attribute attribute name
      *
      * @return self
      */
@@ -225,7 +225,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets operator
      *
-     * @param string $operator the operator
+     * @param string $operator operator
      *
      * @return self
      */
@@ -249,7 +249,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets value
      *
-     * @param string $value the value of the attribute
+     * @param string $value attribute value
      *
      * @return self
      */
@@ -273,7 +273,7 @@ class GetTopFilterForAttribute extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */

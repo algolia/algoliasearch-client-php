@@ -190,7 +190,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets attribute
      *
-     * @param string $attribute the attribute
+     * @param string $attribute attribute name
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets operator
      *
-     * @param string $operator the operator
+     * @param string $operator operator
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets value
      *
-     * @param string $value the value of the attribute
+     * @param string $value attribute value
      *
      * @return self
      */

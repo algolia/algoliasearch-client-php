@@ -179,7 +179,7 @@ class TopCountry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets country
      *
-     * @param string $country the country
+     * @param string $country country
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class TopCountry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */

@@ -284,7 +284,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets succeed
      *
-     * @param bool $succeed status for the redirect rule
+     * @param bool $succeed redirect rule status
      *
      * @return self
      */

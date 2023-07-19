@@ -171,7 +171,7 @@ class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets cluster
      *
-     * @param string $cluster name of the cluster
+     * @param string $cluster cluster name
      *
      * @return self
      */

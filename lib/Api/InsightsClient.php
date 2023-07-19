@@ -116,8 +116,8 @@ class InsightsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -155,8 +155,8 @@ class InsightsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -194,9 +194,9 @@ class InsightsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -263,9 +263,9 @@ class InsightsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object

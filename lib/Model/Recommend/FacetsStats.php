@@ -188,7 +188,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets min
      *
-     * @param float|null $min the minimum value in the result set
+     * @param float|null $min minimum value in the results
      *
      * @return self
      */
@@ -212,7 +212,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets max
      *
-     * @param float|null $max the maximum value in the result set
+     * @param float|null $max maximum value in the results
      *
      * @return self
      */
@@ -236,7 +236,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets avg
      *
-     * @param float|null $avg the average facet value in the result set
+     * @param float|null $avg average facet value in the results
      *
      * @return self
      */
@@ -260,7 +260,7 @@ class FacetsStats extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets sum
      *
-     * @param float|null $sum the sum of all values in the result set
+     * @param float|null $sum sum of all values in the results
      *
      * @return self
      */

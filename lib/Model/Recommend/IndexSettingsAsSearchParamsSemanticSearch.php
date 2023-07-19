@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description The settings relevant for configuration of the semantic search engine. These settings are only used when the mode is set to &#39;neuralSearch&#39;.
+ * @description Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is _neuralSearch_.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -167,7 +167,7 @@ class IndexSettingsAsSearchParamsSemanticSearch extends \Algolia\AlgoliaSearch\M
     /**
      * Sets eventSources
      *
-     * @param string[]|null $eventSources when null, the current index / replica group will be used as the event source
+     * @param string[]|null $eventSources Indices from which to collect click and conversion events. If null, the current index and replica group will be used as the event source.
      *
      * @return self
      */

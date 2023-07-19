@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Map of language ISO code supported by the dictionary (e.g., \&quot;en\&quot; for English) to a boolean value.
+ * @description Key-value pairs of [supported language ISO codes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and boolean values.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -183,7 +183,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets plurals
      *
-     * @param array<string,bool>|null $plurals language ISO code
+     * @param array<string,bool>|null $plurals key-value pair of a language ISO code and a boolean value
      *
      * @return self
      */
@@ -207,7 +207,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets stopwords
      *
-     * @param array<string,bool>|null $stopwords language ISO code
+     * @param array<string,bool>|null $stopwords key-value pair of a language ISO code and a boolean value
      *
      * @return self
      */
@@ -231,7 +231,7 @@ class StandardEntries extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets compounds
      *
-     * @param array<string,bool>|null $compounds language ISO code
+     * @param array<string,bool>|null $compounds key-value pair of a language ISO code and a boolean value
      *
      * @return self
      */

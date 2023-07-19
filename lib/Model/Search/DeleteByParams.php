@@ -244,7 +244,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets filters
      *
-     * @param string|null $filters filter the query with numeric, facet and/or tag filters
+     * @param string|null $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
      *
      * @return self
      */
@@ -316,7 +316,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng search for entries around a central geolocation, enabling a geo search within a circular area
+     * @param string|null $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
      *
      * @return self
      */
@@ -364,7 +364,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets insideBoundingBox
      *
-     * @param float[]|null $insideBoundingBox search inside a rectangular area (in geo coordinates)
+     * @param float[]|null $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -388,7 +388,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets insidePolygon
      *
-     * @param float[]|null $insidePolygon search inside a polygon (in geo coordinates)
+     * @param float[]|null $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */

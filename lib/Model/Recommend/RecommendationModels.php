@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description The recommendation model to use.
+ * @description Recommendation model.
  *
  * @package Algolia\AlgoliaSearch
  */

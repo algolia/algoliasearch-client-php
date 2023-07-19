@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Unique identifier of the object to hide.
+ * @description Unique identifier of the record to hide.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique object identifier
      *
      * @return self
      */

@@ -190,7 +190,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets taskID
      *
-     * @param int $taskID taskID of the task to wait for
+     * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt date of last update (ISO-8601 format)
+     * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets id
      *
-     * @param string $id objectID of the inserted object
+     * @param string $id unique identifier of a synonym object
      *
      * @return self
      */

@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description A Recommend hit.
+ * @description Recommend hit.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -221,7 +221,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique object identifier
      *
      * @return self
      */
@@ -341,7 +341,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score
      *
-     * @param float $score the recommendation score
+     * @param float $score recommendation score
      *
      * @return self
      */

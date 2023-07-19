@@ -208,7 +208,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetName
      *
-     * @param string|null $facetName the facet name to use for trending models
+     * @param string|null $facetName facet name for trending models
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetValue
      *
-     * @param string|null $facetValue the facet value to use for trending models
+     * @param string|null $facetValue facet value for trending models
      *
      * @return self
      */

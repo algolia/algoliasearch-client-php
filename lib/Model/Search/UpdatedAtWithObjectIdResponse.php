@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The response with a taskID, an objectID and an updatedAt timestamp.
+ * @description Response, taskID, unique object identifier, and an update timestamp.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -183,7 +183,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets taskID
      *
-     * @param int|null $taskID taskID of the task to wait for
+     * @param int|null $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
      * @return self
      */
@@ -207,7 +207,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets updatedAt
      *
-     * @param string|null $updatedAt date of last update (ISO-8601 format)
+     * @param string|null $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -231,7 +231,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectID
      *
-     * @param string|null $objectID unique identifier of the object
+     * @param string|null $objectID unique object identifier
      *
      * @return self
      */

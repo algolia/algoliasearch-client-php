@@ -19,7 +19,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
       */
     protected static $modelTypes = [
         'name' => 'string',
-        'variant' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
+        'variants' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
         'endAt' => 'string',
     ];
 
@@ -30,7 +30,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
       */
     protected static $modelFormats = [
         'name' => null,
-        'variant' => null,
+        'variants' => null,
         'endAt' => null,
     ];
 
@@ -42,7 +42,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     */
     protected static $attributeMap = [
         'name' => 'name',
-        'variant' => 'variant',
+        'variants' => 'variants',
         'endAt' => 'endAt',
     ];
 
@@ -84,7 +84,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $setters = [
         'name' => 'setName',
-        'variant' => 'setVariant',
+        'variants' => 'setVariants',
         'endAt' => 'setEndAt',
     ];
 
@@ -95,7 +95,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $getters = [
         'name' => 'getName',
-        'variant' => 'getVariant',
+        'variants' => 'getVariants',
         'endAt' => 'getEndAt',
     ];
 
@@ -136,8 +136,8 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
         }
-        if (isset($data['variant'])) {
-            $this->container['variant'] = $data['variant'];
+        if (isset($data['variants'])) {
+            $this->container['variants'] = $data['variants'];
         }
         if (isset($data['endAt'])) {
             $this->container['endAt'] = $data['endAt'];
@@ -156,15 +156,15 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (!isset($this->container['name']) || $this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['variant']) || $this->container['variant'] === null) {
-            $invalidProperties[] = "'variant' can't be null";
+        if (!isset($this->container['variants']) || $this->container['variants'] === null) {
+            $invalidProperties[] = "'variants' can't be null";
         }
-        if ((count($this->container['variant']) > 2)) {
-            $invalidProperties[] = "invalid value for 'variant', number of items must be less than or equal to 2.";
+        if ((count($this->container['variants']) > 2)) {
+            $invalidProperties[] = "invalid value for 'variants', number of items must be less than or equal to 2.";
         }
 
-        if ((count($this->container['variant']) < 2)) {
-            $invalidProperties[] = "invalid value for 'variant', number of items must be greater than or equal to 2.";
+        if ((count($this->container['variants']) < 2)) {
+            $invalidProperties[] = "invalid value for 'variants', number of items must be greater than or equal to 2.";
         }
 
         if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
@@ -210,32 +210,32 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets variant
+     * Gets variants
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]
      */
-    public function getVariant()
+    public function getVariants()
     {
-        return $this->container['variant'] ?? null;
+        return $this->container['variants'] ?? null;
     }
 
     /**
-     * Sets variant
+     * Sets variants
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variant list of 2 variants for the A/B test
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variants A/B test variants
      *
      * @return self
      */
-    public function setVariant($variant)
+    public function setVariants($variants)
     {
 
-        if ((count($variant) > 2)) {
-            throw new \InvalidArgumentException('invalid value for $variant when calling AddABTestsRequest., number of items must be less than or equal to 2.');
+        if ((count($variants) > 2)) {
+            throw new \InvalidArgumentException('invalid value for $variants when calling AddABTestsRequest., number of items must be less than or equal to 2.');
         }
-        if ((count($variant) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $variant when calling AddABTestsRequest., number of items must be greater than or equal to 2.');
+        if ((count($variants) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $variants when calling AddABTestsRequest., number of items must be greater than or equal to 2.');
         }
-        $this->container['variant'] = $variant;
+        $this->container['variants'] = $variants;
 
         return $this;
     }
@@ -253,7 +253,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets endAt
      *
-     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

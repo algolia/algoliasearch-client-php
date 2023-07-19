@@ -179,7 +179,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets hits
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits array of synonym objects
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits synonym objects
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits number of hits the search query matched
      *
      * @return self
      */

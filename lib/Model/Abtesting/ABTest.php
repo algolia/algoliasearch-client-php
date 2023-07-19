@@ -20,8 +20,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     protected static $modelTypes = [
         'abTestID' => 'int',
         'clickSignificance' => 'float',
-        'conversionSignificance' => 'float',
-        'endAt' => 'string',
+        'conversionSignificance' => 'string',
         'updatedAt' => 'string',
         'createdAt' => 'string',
         'name' => 'string',
@@ -37,8 +36,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     protected static $modelFormats = [
         'abTestID' => null,
         'clickSignificance' => 'double',
-        'conversionSignificance' => 'double',
-        'endAt' => null,
+        'conversionSignificance' => null,
         'updatedAt' => null,
         'createdAt' => null,
         'name' => null,
@@ -56,7 +54,6 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'abTestID',
         'clickSignificance' => 'clickSignificance',
         'conversionSignificance' => 'conversionSignificance',
-        'endAt' => 'endAt',
         'updatedAt' => 'updatedAt',
         'createdAt' => 'createdAt',
         'name' => 'name',
@@ -104,7 +101,6 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'setAbTestID',
         'clickSignificance' => 'setClickSignificance',
         'conversionSignificance' => 'setConversionSignificance',
-        'endAt' => 'setEndAt',
         'updatedAt' => 'setUpdatedAt',
         'createdAt' => 'setCreatedAt',
         'name' => 'setName',
@@ -121,7 +117,6 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'getAbTestID',
         'clickSignificance' => 'getClickSignificance',
         'conversionSignificance' => 'getConversionSignificance',
-        'endAt' => 'getEndAt',
         'updatedAt' => 'getUpdatedAt',
         'createdAt' => 'getCreatedAt',
         'name' => 'getName',
@@ -172,9 +167,6 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         if (isset($data['conversionSignificance'])) {
             $this->container['conversionSignificance'] = $data['conversionSignificance'];
         }
-        if (isset($data['endAt'])) {
-            $this->container['endAt'] = $data['endAt'];
-        }
         if (isset($data['updatedAt'])) {
             $this->container['updatedAt'] = $data['updatedAt'];
         }
@@ -209,9 +201,6 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         }
         if (!isset($this->container['conversionSignificance']) || $this->container['conversionSignificance'] === null) {
             $invalidProperties[] = "'conversionSignificance' can't be null";
-        }
-        if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
-            $invalidProperties[] = "'endAt' can't be null";
         }
         if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
             $invalidProperties[] = "'updatedAt' can't be null";
@@ -256,7 +245,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets abTestID
      *
-     * @param int $abTestID the A/B test ID
+     * @param int $abTestID unique A/B test ID
      *
      * @return self
      */
@@ -280,7 +269,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets clickSignificance
      *
-     * @param float $clickSignificance A/B test significance based on click data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param float $clickSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_.
      *
      * @return self
      */
@@ -294,7 +283,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets conversionSignificance
      *
-     * @return float
+     * @return string
      */
     public function getConversionSignificance()
     {
@@ -304,37 +293,13 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets conversionSignificance
      *
-     * @param float $conversionSignificance A/B test significance based on conversion data. Should be > 0.95 to be considered significant (no matter which variant is winning).
+     * @param string $conversionSignificance End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
     public function setConversionSignificance($conversionSignificance)
     {
         $this->container['conversionSignificance'] = $conversionSignificance;
-
-        return $this;
-    }
-
-    /**
-     * Gets endAt
-     *
-     * @return string
-     */
-    public function getEndAt()
-    {
-        return $this->container['endAt'] ?? null;
-    }
-
-    /**
-     * Sets endAt
-     *
-     * @param string $endAt end date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
-     *
-     * @return self
-     */
-    public function setEndAt($endAt)
-    {
-        $this->container['endAt'] = $endAt;
 
         return $this;
     }
@@ -352,7 +317,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets updatedAt
      *
-     * @param string $updatedAt update date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $updatedAt Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -376,7 +341,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets createdAt
      *
-     * @param string $createdAt creation date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ
+     * @param string $createdAt Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -424,7 +389,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status
      *
-     * @param string $status status of the A/B test
+     * @param string $status A/B test status
      *
      * @return self
      */
@@ -448,7 +413,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets variants
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants list of A/B test variant
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants
      *
      * @return self
      */

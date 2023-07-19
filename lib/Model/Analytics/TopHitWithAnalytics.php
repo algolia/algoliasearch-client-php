@@ -194,6 +194,14 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
+        if (($this->container['clickThroughRate'] > 1)) {
+            $invalidProperties[] = "invalid value for 'clickThroughRate', must be smaller than or equal to 1.";
+        }
+
+        if (($this->container['clickThroughRate'] < 0)) {
+            $invalidProperties[] = "invalid value for 'clickThroughRate', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
@@ -234,7 +242,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hit
      *
-     * @param string $hit the hit
+     * @param string $hit hit
      *
      * @return self
      */
@@ -258,7 +266,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -282,12 +290,20 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clickThroughRate
      *
-     * @param float $clickThroughRate the click-through rate
+     * @param float $clickThroughRate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
     public function setClickThroughRate($clickThroughRate)
     {
+
+        if (($clickThroughRate > 1)) {
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithAnalytics., must be smaller than or equal to 1.');
+        }
+        if (($clickThroughRate < 0)) {
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithAnalytics., must be bigger than or equal to 0.');
+        }
+
         $this->container['clickThroughRate'] = $clickThroughRate;
 
         return $this;
@@ -306,7 +322,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets conversionRate
      *
-     * @param float $conversionRate the conversion rate
+     * @param float $conversionRate [Conversion rate (CR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
      *
      * @return self
      */
@@ -330,7 +346,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -354,7 +370,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */
@@ -378,7 +394,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount the number of converted clicks
+     * @param int $conversionCount number of converted clicks
      *
      * @return self
      */

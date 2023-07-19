@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Type of operation to perform (move or copy).
+ * @description Operation to perform (_move_ or _copy_).
  *
  * @package Algolia\AlgoliaSearch
  */

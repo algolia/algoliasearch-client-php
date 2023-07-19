@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Array of clusters.
+ * @description Clusters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets topUsers
      *
-     * @param string[] $topUsers mapping of cluster names to top users
+     * @param string[] $topUsers key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
      *
      * @return self
      */

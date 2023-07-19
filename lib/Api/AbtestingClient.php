@@ -115,12 +115,12 @@ class AbtestingClient
     }
 
     /**
-     * Create a test.
+     * Create an A/B test.
      *
      * @param array $addABTestsRequest addABTestsRequest (required)
      * - $addABTestsRequest['name'] => (string) A/B test name. (required)
-     * - $addABTestsRequest['variant'] => (array) List of 2 variants for the A/B test. (required)
-     * - $addABTestsRequest['endAt'] => (string) End date for the A/B test expressed as YYYY-MM-DDThh:mm:ssZ. (required)
+     * - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
+     * - $addABTestsRequest['endAt'] => (string) End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
@@ -148,8 +148,8 @@ class AbtestingClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -185,9 +185,9 @@ class AbtestingClient
     }
 
     /**
-     * Delete a test.
+     * Delete an A/B test.
      *
-     * @param int $id The A/B test ID. (required)
+     * @param int $id Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
@@ -221,8 +221,8 @@ class AbtestingClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -258,9 +258,9 @@ class AbtestingClient
     }
 
     /**
-     * Get a test.
+     * Get A/B test details.
      *
-     * @param int $id The A/B test ID. (required)
+     * @param int $id Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTest
@@ -292,12 +292,12 @@ class AbtestingClient
     }
 
     /**
-     * List all tests.
+     * List all A/B tests.
      *
      * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param int $limit Number of records to return. Limit is the size of the page. (optional, default to 10)
-     * @param string $indexPrefix Filters the returned ab tests by any indices starting with the provided prefix that are assigned to either variant of an ab test. (optional)
-     * @param string $indexSuffix Filters the returned ab tests by any indices ending with the provided suffix that are assigned to either variant of an ab test. (optional)
+     * @param int $limit Number of records to return (page size). (optional, default to 10)
+     * @param string $indexPrefix Only return A/B tests for indices starting with this prefix. (optional)
+     * @param string $indexSuffix Only return A/B tests for indices ending with this suffix. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse
@@ -332,9 +332,9 @@ class AbtestingClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -372,9 +372,9 @@ class AbtestingClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -410,9 +410,9 @@ class AbtestingClient
     }
 
     /**
-     * Stop a test.
+     * Stop an A/B test.
      *
-     * @param int $id The A/B test ID. (required)
+     * @param int $id Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse

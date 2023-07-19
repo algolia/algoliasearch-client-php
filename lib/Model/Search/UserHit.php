@@ -256,7 +256,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clusterName
      *
-     * @param string $clusterName name of the cluster
+     * @param string $clusterName cluster name
      *
      * @return self
      */

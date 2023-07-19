@@ -190,7 +190,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets average
      *
-     * @param float $average the average of all the click count event
+     * @param float $average average count of all click events
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets dates
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\AverageClickEvent[] $dates a list of average click position with their date
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\AverageClickEvent[] $dates average click positions
      *
      * @return self
      */

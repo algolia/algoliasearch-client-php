@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Api Key object.
+ * @description API key object.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -227,7 +227,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets acl
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl set of permissions associated with the key
+     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
      * @return self
      */
@@ -251,7 +251,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets description
      *
-     * @param string|null $description A comment used to identify a key more easily in the dashboard. It is not interpreted by the API.
+     * @param string|null $description description of an API key for you and your team members
      *
      * @return self
      */
@@ -275,7 +275,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets indexes
      *
-     * @param string[]|null $indexes Restrict this new API key to a list of indices or index patterns. If the list is empty, all indices are allowed.
+     * @param string[]|null $indexes Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
      *
      * @return self
      */
@@ -299,7 +299,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets maxHitsPerQuery
      *
-     * @param int|null $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced.
+     * @param int|null $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced. > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -323,7 +323,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets maxQueriesPerIPPerHour
      *
-     * @param int|null $maxQueriesPerIPPerHour maximum number of API calls per hour allowed from a given IP address or a user token
+     * @param int|null $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). Each time an API call is performed with this key, a check is performed. If there were more than the specified number of calls within the last hour, the API returns an error with the status code `429` (Too Many Requests).  > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -347,7 +347,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets queryParameters
      *
-     * @param string|null $queryParameters URL-encoded query string. Force some query parameters to be applied for each query made with this API key.
+     * @param string|null $queryParameters Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string.
      *
      * @return self
      */
@@ -371,7 +371,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets referers
      *
-     * @param string[]|null $referers Restrict this new API key to specific referers. If empty or blank, defaults to all referers.
+     * @param string[]|null $referers Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\".
      *
      * @return self
      */
@@ -395,7 +395,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets validity
      *
-     * @param int|null $validity Validity limit for this key in seconds. The key will automatically be removed after this period of time.
+     * @param int|null $validity Validity duration of a key (in seconds).  The key will automatically be removed after this time has expired. The default value of 0 never expires. Short-lived API keys are useful to grant temporary access to your data. For example, in mobile apps, you can't [control when users update your app](https://www.algolia.com/doc/guides/security/security-best-practices/#use-secured-api-keys-in-mobile-apps). So instead of encoding keys into your app as you would for a web app, you should dynamically fetch them from your mobile app's backend.
      *
      * @return self
      */

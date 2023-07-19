@@ -176,7 +176,7 @@ class BaseGetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets value
      *
-     * @param string|null $value the API key
+     * @param string|null $value API key
      *
      * @return self
      */
@@ -200,7 +200,7 @@ class BaseGetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets createdAt
      *
-     * @param int $createdAt time of the event expressed in milliseconds since the Unix epoch
+     * @param int $createdAt Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
      *
      * @return self
      */

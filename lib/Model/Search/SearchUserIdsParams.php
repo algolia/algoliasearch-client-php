@@ -167,6 +167,13 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (!isset($this->container['query']) || $this->container['query'] === null) {
             $invalidProperties[] = "'query' can't be null";
         }
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
 
         return $invalidProperties;
     }
@@ -195,7 +202,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets query
      *
-     * @param string $query Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users.
+     * @param string $query Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
      *
      * @return self
      */
@@ -219,7 +226,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName
      *
-     * @param string|null $clusterName name of the cluster
+     * @param string|null $clusterName cluster name
      *
      * @return self
      */
@@ -243,7 +250,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page
      *
-     * @param int|null $page specify the page to retrieve
+     * @param int|null $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -267,12 +274,20 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage set the number of hits per page
+     * @param int|null $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsParams., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsParams., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;

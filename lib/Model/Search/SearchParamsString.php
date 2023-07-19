@@ -164,7 +164,7 @@ class SearchParamsString extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets params
      *
-     * @param string|null $params search parameters as URL-encoded query string
+     * @param string|null $params search parameters as a URL-encoded query string
      *
      * @return self
      */

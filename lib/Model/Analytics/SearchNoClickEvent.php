@@ -190,7 +190,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets search
      *
-     * @param string $search the search query
+     * @param string $search user query
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets withFilterCount
      *
-     * @param int $withFilterCount the number of occurrences
+     * @param int $withFilterCount number of occurrences
      *
      * @return self
      */

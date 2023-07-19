@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description The &#x60;getRecommendations&#x60; parameters.
+ * @description Recommend parameters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -171,7 +171,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets requests
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests the `getRecommendations` requests
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
      *
      * @return self
      */

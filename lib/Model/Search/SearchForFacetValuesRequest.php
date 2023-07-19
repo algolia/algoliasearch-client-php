@@ -184,7 +184,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets params
      *
-     * @param string|null $params search parameters as URL-encoded query string
+     * @param string|null $params search parameters as a URL-encoded query string
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets maxFacetHits
      *
-     * @param int|null $maxFacetHits Maximum number of facet hits to return during a search for facet values. For performance reasons, the maximum allowed number of returned values is 100.
+     * @param int|null $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */

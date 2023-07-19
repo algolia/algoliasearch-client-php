@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Filter hits by facet value.
+ * @description [Filter hits by facet value](https://www.algolia.com/doc/api-reference/api-parameters/facetFilters/).
  *
  * @package Algolia\AlgoliaSearch
  */

@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Enables de-duplication or grouping of results.
+ * @description Enables [deduplication or grouping of results (Algolia&#39;s _distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature)).
  *
  * @package Algolia\AlgoliaSearch
  */

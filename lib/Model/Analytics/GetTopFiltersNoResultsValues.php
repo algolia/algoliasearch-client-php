@@ -179,7 +179,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets values
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values a list of filters without results
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values filters with no results
      *
      * @return self
      */

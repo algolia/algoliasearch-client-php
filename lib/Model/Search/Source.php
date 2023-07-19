@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The source.
+ * @description Source.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -179,7 +179,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets source
      *
-     * @param string $source the IP range of the source
+     * @param string $source IP address range of the source
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets description
      *
-     * @param string|null $description the description of the source
+     * @param string|null $description source description
      *
      * @return self
      */

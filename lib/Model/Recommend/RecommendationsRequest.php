@@ -273,7 +273,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets facetName
      *
-     * @param string|null $facetName the facet name to use for trending models
+     * @param string|null $facetName facet name for trending models
      *
      * @return self
      */
@@ -297,7 +297,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets facetValue
      *
-     * @param string|null $facetValue the facet value to use for trending models
+     * @param string|null $facetValue facet value for trending models
      *
      * @return self
      */
@@ -321,7 +321,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexName
      *
-     * @param string $indexName the Algolia index name
+     * @param string $indexName algolia index name
      *
      * @return self
      */
@@ -345,7 +345,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets threshold
      *
-     * @param int $threshold the threshold to use when filtering recommendations by their score
+     * @param int $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
      *
      * @return self
      */
@@ -377,7 +377,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets maxRecommendations
      *
-     * @param int|null $maxRecommendations The max number of recommendations to retrieve. If it's set to 0, all the recommendations of the objectID may be returned.
+     * @param int|null $maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
      *
      * @return self
      */
@@ -449,7 +449,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique object identifier
      *
      * @return self
      */

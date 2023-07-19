@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description A dictionary entry.
+ * @description Dictionary entry.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -214,7 +214,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID
      *
-     * @param string $objectID unique identifier of the object
+     * @param string $objectID unique identifier for a dictionary object
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets language
      *
-     * @param string $language Language ISO code supported by the dictionary (e.g., \"en\" for English).
+     * @param string $language [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
      *
      * @return self
      */
@@ -262,7 +262,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets word
      *
-     * @param string|null $word the word of the dictionary entry
+     * @param string|null $word Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\".
      *
      * @return self
      */
@@ -286,7 +286,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets words
      *
-     * @param string[]|null $words the words of the dictionary entry
+     * @param string[]|null $words Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`.
      *
      * @return self
      */
@@ -310,7 +310,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets decomposition
      *
-     * @param string[]|null $decomposition a decomposition of the word of the dictionary entry
+     * @param string[]|null $decomposition for compound entries, governs the behavior of the `word` parameter
      *
      * @return self
      */

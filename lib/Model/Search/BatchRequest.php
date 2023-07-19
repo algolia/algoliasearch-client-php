@@ -203,7 +203,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets body
      *
-     * @param object $body arguments to the operation (depends on the type of the operation)
+     * @param object $body operation arguments (varies with specified `action`)
      *
      * @return self
      */

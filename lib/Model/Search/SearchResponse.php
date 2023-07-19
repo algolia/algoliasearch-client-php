@@ -345,6 +345,10 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     {
         $invalidProperties = [];
 
+        if (isset($this->container['abTestVariantID']) && ($this->container['abTestVariantID'] < 1)) {
+            $invalidProperties[] = "invalid value for 'abTestVariantID', must be bigger than or equal to 1.";
+        }
+
         if (isset($this->container['aroundLatLng']) && !preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $this->container['aroundLatLng'])) {
             $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
@@ -355,6 +359,14 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
+        if (($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
+
         if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
@@ -404,7 +416,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID
      *
-     * @param int|null $abTestID if a search encounters an index that is being A/B tested, abTestID reports the ongoing A/B test ID
+     * @param int|null $abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
      *
      * @return self
      */
@@ -428,12 +440,17 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestVariantID
      *
-     * @param int|null $abTestVariantID if a search encounters an index that is being A/B tested, abTestVariantID reports the variant ID of the index used (starting at 1)
+     * @param int|null $abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
      *
      * @return self
      */
     public function setAbTestVariantID($abTestVariantID)
     {
+
+        if (!is_null($abTestVariantID) && ($abTestVariantID < 1)) {
+            throw new \InvalidArgumentException('invalid value for $abTestVariantID when calling SearchResponse., must be bigger than or equal to 1.');
+        }
+
         $this->container['abTestVariantID'] = $abTestVariantID;
 
         return $this;
@@ -452,7 +469,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundLatLng
      *
-     * @param string|null $aroundLatLng the computed geo location
+     * @param string|null $aroundLatLng computed geographical location
      *
      * @return self
      */
@@ -481,7 +498,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets automaticRadius
      *
-     * @param string|null $automaticRadius The automatically computed radius. For legacy reasons, this parameter is a string and not an integer.
+     * @param string|null $automaticRadius automatically-computed radius
      *
      * @return self
      */
@@ -505,7 +522,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveFacetsCount
      *
-     * @param bool|null $exhaustiveFacetsCount whether the facet count is exhaustive or approximate
+     * @param bool|null $exhaustiveFacetsCount indicates whether the facet count is exhaustive (exact) or approximate
      *
      * @return self
      */
@@ -529,7 +546,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveNbHits
      *
-     * @param bool $exhaustiveNbHits indicate if the nbHits count was exhaustive or approximate
+     * @param bool $exhaustiveNbHits indicates whether the number of hits `nbHits` is exhaustive (exact) or approximate
      *
      * @return self
      */
@@ -553,7 +570,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveTypo
      *
-     * @param bool|null $exhaustiveTypo indicate if the typo-tolerance search was exhaustive or approximate (only included when typo-tolerance is enabled)
+     * @param bool|null $exhaustiveTypo indicates whether the search for typos was exhaustive (exact) or approximate
      *
      * @return self
      */
@@ -577,7 +594,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facets
      *
-     * @param array<string,array<string,int>>|null $facets a mapping of each facet name to the corresponding facet counts
+     * @param array<string,array<string,int>>|null $facets mapping of each facet name to the corresponding facet counts
      *
      * @return self
      */
@@ -625,12 +642,20 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets hitsPerPage
      *
-     * @param int $hitsPerPage set the number of hits per page
+     * @param int $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResponse., must be smaller than or equal to 1000.');
+        }
+        if (($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResponse., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -673,7 +698,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets indexUsed
      *
-     * @param string|null $indexUsed Index name used for the query. In the case of an A/B test, the targeted index isn't always the index used by the query.
+     * @param string|null $indexUsed Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
      *
      * @return self
      */
@@ -697,7 +722,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets message
      *
-     * @param string|null $message used to return warnings about the query
+     * @param string|null $message warnings about the query
      *
      * @return self
      */
@@ -721,7 +746,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits number of hits the search query matched
      *
      * @return self
      */
@@ -745,7 +770,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbPages
      *
-     * @param int $nbPages number of pages available for the current query
+     * @param int $nbPages number of pages of results for the current query
      *
      * @return self
      */
@@ -769,7 +794,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbSortedHits
      *
-     * @param int|null $nbSortedHits the number of hits selected and sorted by the relevant sort algorithm
+     * @param int|null $nbSortedHits number of hits selected and sorted by the relevant sort algorithm
      *
      * @return self
      */
@@ -793,7 +818,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets page
      *
-     * @param int $page specify the page to retrieve
+     * @param int $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -817,7 +842,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets params
      *
-     * @param string $params a url-encoded string of all search parameters
+     * @param string $params URL-encoded string of all search parameters
      *
      * @return self
      */
@@ -865,7 +890,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets parsedQuery
      *
-     * @param string|null $parsedQuery the query string that will be searched, after normalization
+     * @param string|null $parsedQuery Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
      *
      * @return self
      */
@@ -913,7 +938,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets query
      *
-     * @param string $query the text to search in the index
+     * @param string $query text to search for in an index
      *
      * @return self
      */
@@ -937,7 +962,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets queryAfterRemoval
      *
-     * @param string|null $queryAfterRemoval a markup text indicating which parts of the original query have been removed in order to retrieve a non-empty result set
+     * @param string|null $queryAfterRemoval markup text indicating which parts of the original query have been removed to retrieve a non-empty result set
      *
      * @return self
      */
@@ -961,7 +986,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets serverUsed
      *
-     * @param string|null $serverUsed actual host name of the server that processed the request
+     * @param string|null $serverUsed host name of the server that processed the request
      *
      * @return self
      */

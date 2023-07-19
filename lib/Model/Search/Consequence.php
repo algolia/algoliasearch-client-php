@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Consequence of the Rule.
+ * @description [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -223,7 +223,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promote
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote objects to promote as hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote records to promote
      *
      * @return self
      */
@@ -247,7 +247,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets filterPromotes
      *
-     * @param bool|null $filterPromotes Only use in combination with the promote consequence. When true, promoted results will be restricted to match the filters of the current search. When false, the promoted results will show up regardless of the filters.
+     * @param bool|null $filterPromotes Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
      *
      * @return self
      */
@@ -271,7 +271,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets hide
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]|null $hide Objects to hide from hits. Each object must contain an objectID field. By default, you can hide up to 50 items per rule.
+     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]|null $hide Records to hide. By default, you can hide up to 50 records per rule.
      *
      * @return self
      */

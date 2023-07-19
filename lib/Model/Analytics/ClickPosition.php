@@ -179,7 +179,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets position
      *
-     * @param int[] $position Range of positions with the following pattern: - Positions from 1 to 10 included are displayed in separated groups. - Positions from 11 to 20 included are grouped together. - Positions from 21 and up are grouped together.
+     * @param int[] $position range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets clickCount
      *
-     * @param int $clickCount the number of click event
+     * @param int $clickCount number of click events
      *
      * @return self
      */

@@ -190,7 +190,7 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets search
      *
-     * @param string $search the search query
+     * @param string $search user query
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbHits
      *
-     * @param int $nbHits number of hits that the search query matched
+     * @param int $nbHits number of hits the search query matched
      *
      * @return self
      */

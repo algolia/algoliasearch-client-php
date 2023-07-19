@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description The &#x60;batch&#x60; parameters.
+ * @description Batch parameters.
  *
  * @package Algolia\AlgoliaSearch
  */

@@ -145,8 +145,8 @@ class QuerySuggestionsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -184,7 +184,7 @@ class QuerySuggestionsClient
     /**
      * Delete a configuration.
      *
-     * @param string $indexName The index in which to perform the request. (required)
+     * @param string $indexName Index on which to perform the request. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\SuccessResponse
@@ -218,8 +218,8 @@ class QuerySuggestionsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -275,7 +275,7 @@ class QuerySuggestionsClient
     /**
      * Get a single configuration.
      *
-     * @param string $indexName The index in which to perform the request. (required)
+     * @param string $indexName Index on which to perform the request. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsIndex
@@ -309,7 +309,7 @@ class QuerySuggestionsClient
     /**
      * Get configuration status.
      *
-     * @param string $indexName The index in which to perform the request. (required)
+     * @param string $indexName Index on which to perform the request. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Status
@@ -343,7 +343,7 @@ class QuerySuggestionsClient
     /**
      * Get a log file.
      *
-     * @param string $indexName The index in which to perform the request. (required)
+     * @param string $indexName Index on which to perform the request. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile[]
@@ -377,9 +377,9 @@ class QuerySuggestionsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -417,9 +417,9 @@ class QuerySuggestionsClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path The path of the API endpoint to target, anything after the /1 needs to be specified. (required)
-     * @param array $parameters Query parameters to be applied to the current query. (optional)
-     * @param array $body The parameters to send with the custom request. (optional)
+     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array $parameters Query parameters to apply to the current query. (optional)
+     * @param array $body Parameters to send with the custom request. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -457,7 +457,7 @@ class QuerySuggestionsClient
     /**
      * Update a configuration.
      *
-     * @param string $indexName The index in which to perform the request. (required)
+     * @param string $indexName Index on which to perform the request. (required)
      * @param array $querySuggestionsIndexParam querySuggestionsIndexParam (required)
      * - $querySuggestionsIndexParam['sourceIndices'] => (array) List of source indices used to generate a Query Suggestions index. (required)
      * - $querySuggestionsIndexParam['languages'] => (array) De-duplicate singular and plural suggestions. For example, let's say your index contains English content, and that two suggestions “shoe” and “shoes” end up in your Query Suggestions index. If the English language is configured, only the most popular of those two suggestions would remain.

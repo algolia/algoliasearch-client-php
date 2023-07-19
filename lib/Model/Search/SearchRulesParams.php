@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Parameters for the search.
+ * @description Rules search parameters.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -188,6 +188,18 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
+        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -215,7 +227,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query
      *
-     * @param string|null $query full text query
+     * @param string|null $query rule object query
      *
      * @return self
      */
@@ -263,7 +275,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets context
      *
-     * @param string|null $context restricts matches to contextual rules with a specific context (exact match)
+     * @param string|null $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
      *
      * @return self
      */
@@ -287,12 +299,17 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets page
      *
-     * @param int|null $page requested page (zero-based)
+     * @param int|null $page requested page (the first page is page 0)
      *
      * @return self
      */
     public function setPage($page)
     {
+
+        if (!is_null($page) && ($page < 0)) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchRulesParams., must be bigger than or equal to 0.');
+        }
+
         $this->container['page'] = $page;
 
         return $this;
@@ -311,12 +328,20 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets hitsPerPage
      *
-     * @param int|null $hitsPerPage Maximum number of hits in a page. Minimum is 1, maximum is 1000.
+     * @param int|null $hitsPerPage maximum number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
+
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchRulesParams., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchRulesParams., must be bigger than or equal to 1.');
+        }
+
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -335,7 +360,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enabled
      *
-     * @param bool|null $enabled When specified, restricts matches to rules with a specific enabled status. When absent (default), all rules are retrieved, regardless of their enabled status.
+     * @param bool|null $enabled Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
      *
      * @return self
      */
@@ -359,7 +384,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets requestOptions
      *
-     * @param object[]|null $requestOptions a mapping of requestOptions to send along with the request
+     * @param object[]|null $requestOptions request options to send with the API call
      *
      * @return self
      */

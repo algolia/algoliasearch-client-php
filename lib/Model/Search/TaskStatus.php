@@ -8,6 +8,9 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * TaskStatus Class Doc Comment
  *
  * @category Class
+ *
+ * @description _published_ if the task has been processed, _notPublished_ otherwise.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class TaskStatus

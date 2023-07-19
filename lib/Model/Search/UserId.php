@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description A userID.
+ * @description Unique user ID.
  *
  * @package Algolia\AlgoliaSearch
  */
@@ -237,7 +237,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets clusterName
      *
-     * @param string $clusterName cluster on which the user is assigned
+     * @param string $clusterName cluster to which the user is assigned
      *
      * @return self
      */

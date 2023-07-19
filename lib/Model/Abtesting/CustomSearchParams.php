@@ -8,6 +8,9 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * CustomSearchParams Class Doc Comment
  *
  * @category Class
+ *
+ * @description Applies search parameters from [a restricted set of options](https://www.algolia.com/doc/api-reference/api-methods/add-ab-test/#method-param-customsearchparameters). Only use this parameter if the two variants use the same index.
+ *
  * @package Algolia\AlgoliaSearch
  */
 class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

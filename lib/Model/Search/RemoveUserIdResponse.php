@@ -168,7 +168,7 @@ class RemoveUserIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets deletedAt
      *
-     * @param string $deletedAt date of deletion (ISO-8601 format)
+     * @param string $deletedAt Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

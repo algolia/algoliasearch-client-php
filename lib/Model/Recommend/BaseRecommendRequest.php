@@ -210,7 +210,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName
      *
-     * @param string $indexName the Algolia index name
+     * @param string $indexName algolia index name
      *
      * @return self
      */
@@ -234,7 +234,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets threshold
      *
-     * @param int $threshold the threshold to use when filtering recommendations by their score
+     * @param int $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
      *
      * @return self
      */
@@ -266,7 +266,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets maxRecommendations
      *
-     * @param int|null $maxRecommendations The max number of recommendations to retrieve. If it's set to 0, all the recommendations of the objectID may be returned.
+     * @param int|null $maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
      *
      * @return self
      */

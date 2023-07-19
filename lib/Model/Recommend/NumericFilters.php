@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Filter on numeric attributes.
+ * @description [Filter on numeric attributes](https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/).
  *
  * @package Algolia\AlgoliaSearch
  */

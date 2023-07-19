@@ -311,7 +311,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets averageClickPosition
      *
-     * @param int $averageClickPosition average click position for the variant
+     * @param int $averageClickPosition Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
      *
      * @return self
      */
@@ -335,7 +335,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clickCount
      *
-     * @param int $clickCount distinct click count for the variant
+     * @param int $clickCount number of click events for this variant
      *
      * @return self
      */
@@ -359,7 +359,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clickThroughRate
      *
-     * @param float $clickThroughRate click through rate for the variant
+     * @param float $clickThroughRate Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
      * @return self
      */
@@ -383,7 +383,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets conversionCount
      *
-     * @param int $conversionCount distinct conversion count for the variant
+     * @param int $conversionCount number of click events for this variant
      *
      * @return self
      */
@@ -407,7 +407,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets conversionRate
      *
-     * @param float $conversionRate conversion rate for the variant
+     * @param float $conversionRate Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
      *
      * @return self
      */
@@ -431,7 +431,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets description
      *
-     * @param string $description the A/B test description
+     * @param string $description A/B test description
      *
      * @return self
      */
@@ -455,7 +455,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets index
      *
-     * @param string $index the index performing the A/B test
+     * @param string $index A/B test index
      *
      * @return self
      */
@@ -479,7 +479,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets noResultCount
      *
-     * @param int $noResultCount the number of occurrences
+     * @param int $noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
      *
      * @return self
      */
@@ -503,7 +503,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets outlierTrackedSearchesCount
      *
-     * @param int $outlierTrackedSearchesCount count of the tracked searches attributed to outlier traffic that were removed from the A/B test
+     * @param int $outlierTrackedSearchesCount Number of tracked searches attributed to [outlier traffic](https://www.algolia.com/doc/guides/ab-testing/how-to-read-your-a-b-test-results/#is-the-split-off) that were removed from the A/B test. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -527,7 +527,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets outlierUsersCount
      *
-     * @param int $outlierUsersCount count of users attributed to outlier traffic that were removed from the A/B test
+     * @param int $outlierUsersCount Number of users attributed to [outlier traffic](https://www.algolia.com/doc/guides/ab-testing/how-to-read-your-a-b-test-results/#is-the-split-off) that were removed from the A/B test.
      *
      * @return self
      */
@@ -551,7 +551,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets searchCount
      *
-     * @param int $searchCount the number of search during the A/B test
+     * @param int $searchCount number of searches carried out during the A/B test
      *
      * @return self
      */
@@ -575,7 +575,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trackedSearchCount
      *
-     * @param int $trackedSearchCount the number of tracked search click
+     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
      * @return self
      */
@@ -599,7 +599,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trafficPercentage
      *
-     * @param int $trafficPercentage the traffic percentage for the A/B test
+     * @param int $trafficPercentage A/B test traffic percentage
      *
      * @return self
      */
@@ -623,7 +623,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets userCount
      *
-     * @param int $userCount the number of user during the A/B test
+     * @param int $userCount number of users during the A/B test
      *
      * @return self
      */

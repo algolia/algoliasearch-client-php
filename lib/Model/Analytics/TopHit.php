@@ -179,7 +179,7 @@ class TopHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets hit
      *
-     * @param string $hit the hit
+     * @param string $hit hit
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class TopHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets count
      *
-     * @param int $count the number of occurrences
+     * @param int $count number of occurrences
      *
      * @return self
      */

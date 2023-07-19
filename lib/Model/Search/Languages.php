@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description A dictionary language.
+ * @description Dictionary language.
  *
  * @package Algolia\AlgoliaSearch
  */

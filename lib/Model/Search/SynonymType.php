@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Type of the synonym object.
+ * @description Synonym type.
  *
  * @package Algolia\AlgoliaSearch
  */

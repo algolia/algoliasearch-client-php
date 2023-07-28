@@ -18,7 +18,7 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
       * @var string[]
       */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Search\SearchResponse[]',
+        'results' => '\Algolia\AlgoliaSearch\Model\Search\SearchResult[]',
     ];
 
     /**
@@ -158,7 +158,7 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets results
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResult[]
      */
     public function getResults()
     {
@@ -168,7 +168,7 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets results
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResponse[] $results results
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResult[] $results results
      *
      * @return self
      */

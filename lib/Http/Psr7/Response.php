@@ -4,6 +4,7 @@ namespace Algolia\AlgoliaSearch\Http\Psr7;
 
 require_once 'functions.php';
 
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -127,17 +128,17 @@ class Response implements ResponseInterface
         $this->protocol = $version;
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    public function getReasonPhrase()
+    public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
     }
 
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus(int $code, string $reasonPhrase = ''): ResponseInterface
     {
         $new = clone $this;
         $new->statusCode = (int) $code;
@@ -149,12 +150,12 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return $this->protocol;
     }
 
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version): ResponseInterface
     {
         if ($this->protocol === $version) {
             return $this;
@@ -166,17 +167,17 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function hasHeader($header)
+    public function hasHeader(string $header): bool
     {
         return isset($this->headerNames[mb_strtolower($header)]);
     }
 
-    public function getHeader($header)
+    public function getHeader(string $header): array
     {
         $header = mb_strtolower($header);
 
@@ -189,12 +190,12 @@ class Response implements ResponseInterface
         return $this->headers[$header];
     }
 
-    public function getHeaderLine($header)
+    public function getHeaderLine(string $header): string
     {
         return implode(', ', $this->getHeader($header));
     }
 
-    public function withHeader($header, $value)
+    public function withHeader(string $header, $value): MessageInterface
     {
         if (!is_array($value)) {
             $value = [$value];
@@ -213,7 +214,7 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    public function withAddedHeader($header, $value)
+    public function withAddedHeader(string $header, $value): MessageInterface
     {
         if (!is_array($value)) {
             $value = [$value];
@@ -237,7 +238,7 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    public function withoutHeader($header)
+    public function withoutHeader(string $header): MessageInterface
     {
         $normalized = mb_strtolower($header);
 
@@ -253,7 +254,7 @@ class Response implements ResponseInterface
         return $new;
     }
 
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         if (!$this->stream) {
             $this->stream = stream_for('');
@@ -262,7 +263,7 @@ class Response implements ResponseInterface
         return $this->stream;
     }
 
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): MessageInterface
     {
         if ($body === $this->stream) {
             return $this;

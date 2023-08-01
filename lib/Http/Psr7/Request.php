@@ -5,6 +5,7 @@ namespace Algolia\AlgoliaSearch\Http\Psr7;
 require_once 'functions.php';
 
 use InvalidArgumentException;
+use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -69,7 +70,7 @@ class Request implements RequestInterface
         }
     }
 
-    public function getRequestTarget()
+    public function getRequestTarget(): string
     {
         if (null !== $this->requestTarget) {
             return $this->requestTarget;
@@ -86,7 +87,7 @@ class Request implements RequestInterface
         return $target;
     }
 
-    public function withRequestTarget($requestTarget)
+    public function withRequestTarget(string $requestTarget): RequestInterface
     {
         if (preg_match('#\s#', $requestTarget)) {
             throw new InvalidArgumentException(
@@ -100,12 +101,12 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function getMethod()
+    public function getMethod(): string
     {
         return $this->method;
     }
 
-    public function withMethod($method)
+    public function withMethod(string $method): RequestInterface
     {
         $new = clone $this;
         $new->method = mb_strtoupper($method);
@@ -113,12 +114,12 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function getUri()
+    public function getUri(): UriInterface
     {
         return $this->uri;
     }
 
-    public function withUri(UriInterface $uri, $preserveHost = false)
+    public function withUri(UriInterface $uri, $preserveHost = false): RequestInterface
     {
         if ($uri === $this->uri) {
             return $this;
@@ -157,12 +158,12 @@ class Request implements RequestInterface
         $this->headers = [$header => [$host]] + $this->headers;
     }
 
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return $this->protocol;
     }
 
-    public function withProtocolVersion($version)
+    public function withProtocolVersion(string $version): RequestInterface
     {
         if ($this->protocol === $version) {
             return $this;
@@ -173,33 +174,33 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function hasHeader($header)
+    public function hasHeader(string $name): bool
     {
-        return isset($this->headerNames[mb_strtolower($header)]);
+        return isset($this->headerNames[mb_strtolower($name)]);
     }
 
-    public function getHeader($header)
+    public function getHeader(string $name): array
     {
-        $header = mb_strtolower($header);
-        if (!isset($this->headerNames[$header])) {
+        $name = mb_strtolower($name);
+        if (!isset($this->headerNames[$name])) {
             return [];
         }
-        $header = $this->headerNames[$header];
+        $name = $this->headerNames[$name];
 
-        return $this->headers[$header];
+        return $this->headers[$name];
     }
 
-    public function getHeaderLine($header)
+    public function getHeaderLine(string $header): string
     {
         return implode(', ', $this->getHeader($header));
     }
 
-    public function withHeader($header, $value)
+    public function withHeader(string $header, $value): MessageInterface
     {
         if (!is_array($value)) {
             $value = [$value];
@@ -216,7 +217,7 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function withAddedHeader($header, $value)
+    public function withAddedHeader(string $header, $value): MessageInterface
     {
         if (!is_array($value)) {
             $value = [$value];
@@ -238,7 +239,7 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function withoutHeader($header)
+    public function withoutHeader(string $header): MessageInterface
     {
         $normalized = mb_strtolower($header);
         if (!isset($this->headerNames[$normalized])) {
@@ -251,7 +252,7 @@ class Request implements RequestInterface
         return $new;
     }
 
-    public function getBody()
+    public function getBody(): StreamInterface
     {
         if (!$this->stream) {
             $this->stream = stream_for('');
@@ -260,7 +261,7 @@ class Request implements RequestInterface
         return $this->stream;
     }
 
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): MessageInterface
     {
         if ($body === $this->stream) {
             return $this;

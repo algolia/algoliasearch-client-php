@@ -19,6 +19,8 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
       */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
+        'query' => 'string',
+        'params' => 'string',
     ];
 
     /**
@@ -28,6 +30,8 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
       */
     protected static $modelFormats = [
         'hits' => null,
+        'query' => null,
+        'params' => null,
     ];
 
     /**
@@ -38,6 +42,8 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     */
     protected static $attributeMap = [
         'hits' => 'hits',
+        'query' => 'query',
+        'params' => 'params',
     ];
 
     /**
@@ -78,6 +84,8 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     protected static $setters = [
         'hits' => 'setHits',
+        'query' => 'setQuery',
+        'params' => 'setParams',
     ];
 
     /**
@@ -87,6 +95,8 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     protected static $getters = [
         'hits' => 'getHits',
+        'query' => 'getQuery',
+        'params' => 'getParams',
     ];
 
     /**
@@ -125,6 +135,12 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
+        }
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -175,6 +191,54 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setHits($hits)
     {
         $this->container['hits'] = $hits;
+
+        return $this;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return string|null
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param string|null $query text to search for in an index
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets params
+     *
+     * @return string|null
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params
+     *
+     * @param string|null $params URL-encoded string of all search parameters
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

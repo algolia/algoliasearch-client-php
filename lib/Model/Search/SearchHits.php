@@ -19,6 +19,8 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
       */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
+        'query' => 'string',
+        'params' => 'string',
     ];
 
     /**
@@ -28,6 +30,8 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
       */
     protected static $modelFormats = [
         'hits' => null,
+        'query' => null,
+        'params' => null,
     ];
 
     /**
@@ -38,6 +42,8 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     */
     protected static $attributeMap = [
         'hits' => 'hits',
+        'query' => 'query',
+        'params' => 'params',
     ];
 
     /**
@@ -78,6 +84,8 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      */
     protected static $setters = [
         'hits' => 'setHits',
+        'query' => 'setQuery',
+        'params' => 'setParams',
     ];
 
     /**
@@ -87,6 +95,8 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      */
     protected static $getters = [
         'hits' => 'getHits',
+        'query' => 'getQuery',
+        'params' => 'getParams',
     ];
 
     /**
@@ -126,6 +136,12 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
         }
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
+        }
     }
 
     /**
@@ -139,6 +155,12 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
 
         if (!isset($this->container['hits']) || $this->container['hits'] === null) {
             $invalidProperties[] = "'hits' can't be null";
+        }
+        if (!isset($this->container['query']) || $this->container['query'] === null) {
+            $invalidProperties[] = "'query' can't be null";
+        }
+        if (!isset($this->container['params']) || $this->container['params'] === null) {
+            $invalidProperties[] = "'params' can't be null";
         }
 
         return $invalidProperties;
@@ -175,6 +197,54 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     public function setHits($hits)
     {
         $this->container['hits'] = $hits;
+
+        return $this;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param string $query text to search for in an index
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets params
+     *
+     * @return string
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params
+     *
+     * @param string $params URL-encoded string of all search parameters
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

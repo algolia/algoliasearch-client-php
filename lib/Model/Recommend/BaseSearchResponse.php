@@ -35,11 +35,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'nbPages' => 'int',
         'nbSortedHits' => 'int',
         'page' => 'int',
-        'params' => 'string',
         'redirect' => '\Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseRedirect',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
-        'query' => 'string',
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
         'userData' => 'object',
@@ -69,11 +67,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'nbPages' => null,
         'nbSortedHits' => null,
         'page' => null,
-        'params' => null,
         'redirect' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
-        'query' => null,
         'queryAfterRemoval' => null,
         'serverUsed' => null,
         'userData' => null,
@@ -104,11 +100,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'nbPages' => 'nbPages',
         'nbSortedHits' => 'nbSortedHits',
         'page' => 'page',
-        'params' => 'params',
         'redirect' => 'redirect',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
-        'query' => 'query',
         'queryAfterRemoval' => 'queryAfterRemoval',
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
@@ -169,11 +163,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'nbPages' => 'setNbPages',
         'nbSortedHits' => 'setNbSortedHits',
         'page' => 'setPage',
-        'params' => 'setParams',
         'redirect' => 'setRedirect',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
-        'query' => 'setQuery',
         'queryAfterRemoval' => 'setQueryAfterRemoval',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
@@ -203,11 +195,9 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'nbPages' => 'getNbPages',
         'nbSortedHits' => 'getNbSortedHits',
         'page' => 'getPage',
-        'params' => 'getParams',
         'redirect' => 'getRedirect',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
-        'query' => 'getQuery',
         'queryAfterRemoval' => 'getQueryAfterRemoval',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
@@ -299,9 +289,6 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['redirect'])) {
             $this->container['redirect'] = $data['redirect'];
         }
@@ -310,9 +297,6 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         }
         if (isset($data['processingTimeMS'])) {
             $this->container['processingTimeMS'] = $data['processingTimeMS'];
-        }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
         }
         if (isset($data['queryAfterRemoval'])) {
             $this->container['queryAfterRemoval'] = $data['queryAfterRemoval'];
@@ -368,14 +352,8 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (!isset($this->container['page']) || $this->container['page'] === null) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (!isset($this->container['params']) || $this->container['params'] === null) {
-            $invalidProperties[] = "'params' can't be null";
-        }
         if (!isset($this->container['processingTimeMS']) || $this->container['processingTimeMS'] === null) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
-        }
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
-            $invalidProperties[] = "'query' can't be null";
         }
 
         return $invalidProperties;
@@ -819,30 +797,6 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets params
-     *
-     * @return string
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params
-     *
-     * @param string $params URL-encoded string of all search parameters
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
      * Gets redirect
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\BaseSearchResponseRedirect|null
@@ -910,30 +864,6 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     public function setProcessingTimeMS($processingTimeMS)
     {
         $this->container['processingTimeMS'] = $processingTimeMS;
-
-        return $this;
-    }
-
-    /**
-     * Gets query
-     *
-     * @return string
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query
-     *
-     * @param string $query text to search for in an index
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
 
         return $this;
     }

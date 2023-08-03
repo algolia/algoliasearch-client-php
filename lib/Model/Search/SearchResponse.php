@@ -35,16 +35,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'int',
         'nbSortedHits' => 'int',
         'page' => 'int',
-        'params' => 'string',
         'redirect' => '\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
-        'query' => 'string',
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
         'userData' => 'object',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
+        'query' => 'string',
+        'params' => 'string',
     ];
 
     /**
@@ -70,16 +70,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => null,
         'nbSortedHits' => null,
         'page' => null,
-        'params' => null,
         'redirect' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
-        'query' => null,
         'queryAfterRemoval' => null,
         'serverUsed' => null,
         'userData' => null,
         'renderingContent' => null,
         'hits' => null,
+        'query' => null,
+        'params' => null,
     ];
 
     /**
@@ -106,16 +106,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'nbPages',
         'nbSortedHits' => 'nbSortedHits',
         'page' => 'page',
-        'params' => 'params',
         'redirect' => 'redirect',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
-        'query' => 'query',
         'queryAfterRemoval' => 'queryAfterRemoval',
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
         'renderingContent' => 'renderingContent',
         'hits' => 'hits',
+        'query' => 'query',
+        'params' => 'params',
     ];
 
     /**
@@ -172,16 +172,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'setNbPages',
         'nbSortedHits' => 'setNbSortedHits',
         'page' => 'setPage',
-        'params' => 'setParams',
         'redirect' => 'setRedirect',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
-        'query' => 'setQuery',
         'queryAfterRemoval' => 'setQueryAfterRemoval',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
         'renderingContent' => 'setRenderingContent',
         'hits' => 'setHits',
+        'query' => 'setQuery',
+        'params' => 'setParams',
     ];
 
     /**
@@ -207,16 +207,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'getNbPages',
         'nbSortedHits' => 'getNbSortedHits',
         'page' => 'getPage',
-        'params' => 'getParams',
         'redirect' => 'getRedirect',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
-        'query' => 'getQuery',
         'queryAfterRemoval' => 'getQueryAfterRemoval',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
         'renderingContent' => 'getRenderingContent',
         'hits' => 'getHits',
+        'query' => 'getQuery',
+        'params' => 'getParams',
     ];
 
     /**
@@ -304,9 +304,6 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
         }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
-        }
         if (isset($data['redirect'])) {
             $this->container['redirect'] = $data['redirect'];
         }
@@ -315,9 +312,6 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         }
         if (isset($data['processingTimeMS'])) {
             $this->container['processingTimeMS'] = $data['processingTimeMS'];
-        }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
         }
         if (isset($data['queryAfterRemoval'])) {
             $this->container['queryAfterRemoval'] = $data['queryAfterRemoval'];
@@ -333,6 +327,12 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
+        }
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -376,17 +376,17 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (!isset($this->container['page']) || $this->container['page'] === null) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (!isset($this->container['params']) || $this->container['params'] === null) {
-            $invalidProperties[] = "'params' can't be null";
-        }
         if (!isset($this->container['processingTimeMS']) || $this->container['processingTimeMS'] === null) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
+        }
+        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+            $invalidProperties[] = "'hits' can't be null";
         }
         if (!isset($this->container['query']) || $this->container['query'] === null) {
             $invalidProperties[] = "'query' can't be null";
         }
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
-            $invalidProperties[] = "'hits' can't be null";
+        if (!isset($this->container['params']) || $this->container['params'] === null) {
+            $invalidProperties[] = "'params' can't be null";
         }
 
         return $invalidProperties;
@@ -830,30 +830,6 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets params
-     *
-     * @return string
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params
-     *
-     * @param string $params URL-encoded string of all search parameters
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
      * Gets redirect
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect|null
@@ -921,30 +897,6 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setProcessingTimeMS($processingTimeMS)
     {
         $this->container['processingTimeMS'] = $processingTimeMS;
-
-        return $this;
-    }
-
-    /**
-     * Gets query
-     *
-     * @return string
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query
-     *
-     * @param string $query text to search for in an index
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
 
         return $this;
     }
@@ -1065,6 +1017,54 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setHits($hits)
     {
         $this->container['hits'] = $hits;
+
+        return $this;
+    }
+
+    /**
+     * Gets query
+     *
+     * @return string
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query
+     *
+     * @param string $query text to search for in an index
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets params
+     *
+     * @return string
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params
+     *
+     * @param string $params URL-encoded string of all search parameters
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

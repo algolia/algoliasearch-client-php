@@ -35,7 +35,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
         'aroundLatLng' => 'string',
         'aroundLatLngViaIP' => 'bool',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius',
-        'aroundPrecision' => 'int',
+        'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision',
         'minimumAroundRadius' => 'int',
         'insideBoundingBox' => 'float[]',
         'insidePolygon' => 'float[]',
@@ -838,7 +838,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets aroundPrecision
      *
-     * @return int|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision|null
      */
     public function getAroundPrecision()
     {
@@ -848,7 +848,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets aroundPrecision
      *
-     * @param int|null $aroundPrecision Precision of a geographical search (in meters), to [group results that are more or less the same distance from a central point](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/in-depth/geo-ranking-precision/).
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision|null $aroundPrecision aroundPrecision
      *
      * @return self
      */

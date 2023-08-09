@@ -56,7 +56,7 @@ jobs:
             then
                echo "Nothing to install, using default Algolia\AlgoliaSearch\Http\Php53HttpClient"
             else
-              COMPOSER_MEMORY_LIMIT=-1 composer require <<parameters.http_client>>
+              COMPOSER_MEMORY_LIMIT=-1 composer require <<parameters.http_client>> -W
             fi
 
       - run:
@@ -135,8 +135,8 @@ workflows:
           version: "7.4"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
-          name: 'Guzzle 6 - PHP 7.2'
-          version: "7.2"
+          name: 'Guzzle 6 - PHP 7.3'
+          version: "7.3"
           http_client: guzzlehttp/guzzle:"^6.0"
       - test:
           name: 'Legacy client - PHP 8.1'
@@ -151,6 +151,6 @@ workflows:
           version: "7.4"
           http_client: legacy
       - test:
-          name: 'Legacy client - PHP 7.2'
-          version: "7.2"
+          name: 'Legacy client - PHP 7.3'
+          version: "7.3"
           http_client: legacy

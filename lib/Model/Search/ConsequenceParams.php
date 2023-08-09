@@ -25,10 +25,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericFilters' => '\Algolia\AlgoliaSearch\Model\Search\NumericFilters',
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Search\TagFilters',
         'sumOrFiltersScores' => 'bool',
+        'restrictSearchableAttributes' => 'string[]',
         'facets' => 'string[]',
-        'maxValuesPerFacet' => 'int',
         'facetingAfterDistinct' => 'bool',
-        'sortFacetValuesBy' => 'string',
         'page' => 'int',
         'offset' => 'int',
         'length' => 'int',
@@ -44,16 +43,15 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'personalizationImpact' => 'int',
         'userToken' => 'string',
         'getRankingInfo' => 'bool',
+        'explain' => 'string[]',
+        'synonyms' => 'bool',
         'clickAnalytics' => 'bool',
         'analytics' => 'bool',
         'analyticsTags' => 'string[]',
         'percentileComputation' => 'bool',
         'enableABTest' => 'bool',
-        'enableReRanking' => 'bool',
-        'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
         'attributesForFaceting' => 'string[]',
         'attributesToRetrieve' => 'string[]',
-        'restrictSearchableAttributes' => 'string[]',
         'ranking' => 'string[]',
         'customRanking' => 'string[]',
         'relevancyStrictness' => 'int',
@@ -79,23 +77,25 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'queryType' => '\Algolia\AlgoliaSearch\Model\Search\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults',
         'mode' => '\Algolia\AlgoliaSearch\Model\Search\Mode',
-        'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Search\IndexSettingsAsSearchParamsSemanticSearch',
+        'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Search\SemanticSearch',
         'advancedSyntax' => 'bool',
         'optionalWords' => 'string[]',
         'disableExactOnAttributes' => 'string[]',
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
-        'explain' => 'string[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Search\Distinct',
         'attributeForDistinct' => 'string',
-        'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
+        'maxValuesPerFacet' => 'int',
+        'sortFacetValuesBy' => 'string',
         'attributeCriteriaComputedByMinProximity' => 'bool',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
+        'enableReRanking' => 'bool',
+        'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter',
         'query' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery',
         'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
         'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters',
@@ -114,10 +114,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericFilters' => null,
         'tagFilters' => null,
         'sumOrFiltersScores' => null,
+        'restrictSearchableAttributes' => null,
         'facets' => null,
-        'maxValuesPerFacet' => null,
         'facetingAfterDistinct' => null,
-        'sortFacetValuesBy' => null,
         'page' => null,
         'offset' => null,
         'length' => null,
@@ -133,16 +132,15 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'personalizationImpact' => null,
         'userToken' => null,
         'getRankingInfo' => null,
+        'explain' => null,
+        'synonyms' => null,
         'clickAnalytics' => null,
         'analytics' => null,
         'analyticsTags' => null,
         'percentileComputation' => null,
         'enableABTest' => null,
-        'enableReRanking' => null,
-        'reRankingApplyFilter' => null,
         'attributesForFaceting' => null,
         'attributesToRetrieve' => null,
-        'restrictSearchableAttributes' => null,
         'ranking' => null,
         'customRanking' => null,
         'relevancyStrictness' => null,
@@ -175,16 +173,18 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'exactOnSingleWordQuery' => null,
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
-        'explain' => null,
         'distinct' => null,
         'attributeForDistinct' => null,
-        'synonyms' => null,
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
         'responseFields' => null,
         'maxFacetHits' => null,
+        'maxValuesPerFacet' => null,
+        'sortFacetValuesBy' => null,
         'attributeCriteriaComputedByMinProximity' => null,
         'renderingContent' => null,
+        'enableReRanking' => null,
+        'reRankingApplyFilter' => null,
         'query' => null,
         'automaticFacetFilters' => null,
         'automaticOptionalFacetFilters' => null,
@@ -204,10 +204,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericFilters' => 'numericFilters',
         'tagFilters' => 'tagFilters',
         'sumOrFiltersScores' => 'sumOrFiltersScores',
+        'restrictSearchableAttributes' => 'restrictSearchableAttributes',
         'facets' => 'facets',
-        'maxValuesPerFacet' => 'maxValuesPerFacet',
         'facetingAfterDistinct' => 'facetingAfterDistinct',
-        'sortFacetValuesBy' => 'sortFacetValuesBy',
         'page' => 'page',
         'offset' => 'offset',
         'length' => 'length',
@@ -223,16 +222,15 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'personalizationImpact' => 'personalizationImpact',
         'userToken' => 'userToken',
         'getRankingInfo' => 'getRankingInfo',
+        'explain' => 'explain',
+        'synonyms' => 'synonyms',
         'clickAnalytics' => 'clickAnalytics',
         'analytics' => 'analytics',
         'analyticsTags' => 'analyticsTags',
         'percentileComputation' => 'percentileComputation',
         'enableABTest' => 'enableABTest',
-        'enableReRanking' => 'enableReRanking',
-        'reRankingApplyFilter' => 'reRankingApplyFilter',
         'attributesForFaceting' => 'attributesForFaceting',
         'attributesToRetrieve' => 'attributesToRetrieve',
-        'restrictSearchableAttributes' => 'restrictSearchableAttributes',
         'ranking' => 'ranking',
         'customRanking' => 'customRanking',
         'relevancyStrictness' => 'relevancyStrictness',
@@ -265,16 +263,18 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'exactOnSingleWordQuery' => 'exactOnSingleWordQuery',
         'alternativesAsExact' => 'alternativesAsExact',
         'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
-        'explain' => 'explain',
         'distinct' => 'distinct',
         'attributeForDistinct' => 'attributeForDistinct',
-        'synonyms' => 'synonyms',
         'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
         'minProximity' => 'minProximity',
         'responseFields' => 'responseFields',
         'maxFacetHits' => 'maxFacetHits',
+        'maxValuesPerFacet' => 'maxValuesPerFacet',
+        'sortFacetValuesBy' => 'sortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
         'renderingContent' => 'renderingContent',
+        'enableReRanking' => 'enableReRanking',
+        'reRankingApplyFilter' => 'reRankingApplyFilter',
         'query' => 'query',
         'automaticFacetFilters' => 'automaticFacetFilters',
         'automaticOptionalFacetFilters' => 'automaticOptionalFacetFilters',
@@ -324,10 +324,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericFilters' => 'setNumericFilters',
         'tagFilters' => 'setTagFilters',
         'sumOrFiltersScores' => 'setSumOrFiltersScores',
+        'restrictSearchableAttributes' => 'setRestrictSearchableAttributes',
         'facets' => 'setFacets',
-        'maxValuesPerFacet' => 'setMaxValuesPerFacet',
         'facetingAfterDistinct' => 'setFacetingAfterDistinct',
-        'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'page' => 'setPage',
         'offset' => 'setOffset',
         'length' => 'setLength',
@@ -343,16 +342,15 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'personalizationImpact' => 'setPersonalizationImpact',
         'userToken' => 'setUserToken',
         'getRankingInfo' => 'setGetRankingInfo',
+        'explain' => 'setExplain',
+        'synonyms' => 'setSynonyms',
         'clickAnalytics' => 'setClickAnalytics',
         'analytics' => 'setAnalytics',
         'analyticsTags' => 'setAnalyticsTags',
         'percentileComputation' => 'setPercentileComputation',
         'enableABTest' => 'setEnableABTest',
-        'enableReRanking' => 'setEnableReRanking',
-        'reRankingApplyFilter' => 'setReRankingApplyFilter',
         'attributesForFaceting' => 'setAttributesForFaceting',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
-        'restrictSearchableAttributes' => 'setRestrictSearchableAttributes',
         'ranking' => 'setRanking',
         'customRanking' => 'setCustomRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
@@ -385,16 +383,18 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'exactOnSingleWordQuery' => 'setExactOnSingleWordQuery',
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
-        'explain' => 'setExplain',
         'distinct' => 'setDistinct',
         'attributeForDistinct' => 'setAttributeForDistinct',
-        'synonyms' => 'setSynonyms',
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
+        'maxValuesPerFacet' => 'setMaxValuesPerFacet',
+        'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'setRenderingContent',
+        'enableReRanking' => 'setEnableReRanking',
+        'reRankingApplyFilter' => 'setReRankingApplyFilter',
         'query' => 'setQuery',
         'automaticFacetFilters' => 'setAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
@@ -413,10 +413,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericFilters' => 'getNumericFilters',
         'tagFilters' => 'getTagFilters',
         'sumOrFiltersScores' => 'getSumOrFiltersScores',
+        'restrictSearchableAttributes' => 'getRestrictSearchableAttributes',
         'facets' => 'getFacets',
-        'maxValuesPerFacet' => 'getMaxValuesPerFacet',
         'facetingAfterDistinct' => 'getFacetingAfterDistinct',
-        'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'page' => 'getPage',
         'offset' => 'getOffset',
         'length' => 'getLength',
@@ -432,16 +431,15 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'personalizationImpact' => 'getPersonalizationImpact',
         'userToken' => 'getUserToken',
         'getRankingInfo' => 'getGetRankingInfo',
+        'explain' => 'getExplain',
+        'synonyms' => 'getSynonyms',
         'clickAnalytics' => 'getClickAnalytics',
         'analytics' => 'getAnalytics',
         'analyticsTags' => 'getAnalyticsTags',
         'percentileComputation' => 'getPercentileComputation',
         'enableABTest' => 'getEnableABTest',
-        'enableReRanking' => 'getEnableReRanking',
-        'reRankingApplyFilter' => 'getReRankingApplyFilter',
         'attributesForFaceting' => 'getAttributesForFaceting',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
-        'restrictSearchableAttributes' => 'getRestrictSearchableAttributes',
         'ranking' => 'getRanking',
         'customRanking' => 'getCustomRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
@@ -474,16 +472,18 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'exactOnSingleWordQuery' => 'getExactOnSingleWordQuery',
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
-        'explain' => 'getExplain',
         'distinct' => 'getDistinct',
         'attributeForDistinct' => 'getAttributeForDistinct',
-        'synonyms' => 'getSynonyms',
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
+        'maxValuesPerFacet' => 'getMaxValuesPerFacet',
+        'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'getRenderingContent',
+        'enableReRanking' => 'getEnableReRanking',
+        'reRankingApplyFilter' => 'getReRankingApplyFilter',
         'query' => 'getQuery',
         'automaticFacetFilters' => 'getAutomaticFacetFilters',
         'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
@@ -544,17 +544,14 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['sumOrFiltersScores'])) {
             $this->container['sumOrFiltersScores'] = $data['sumOrFiltersScores'];
         }
+        if (isset($data['restrictSearchableAttributes'])) {
+            $this->container['restrictSearchableAttributes'] = $data['restrictSearchableAttributes'];
+        }
         if (isset($data['facets'])) {
             $this->container['facets'] = $data['facets'];
         }
-        if (isset($data['maxValuesPerFacet'])) {
-            $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
-        }
         if (isset($data['facetingAfterDistinct'])) {
             $this->container['facetingAfterDistinct'] = $data['facetingAfterDistinct'];
-        }
-        if (isset($data['sortFacetValuesBy'])) {
-            $this->container['sortFacetValuesBy'] = $data['sortFacetValuesBy'];
         }
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
@@ -601,6 +598,12 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['getRankingInfo'])) {
             $this->container['getRankingInfo'] = $data['getRankingInfo'];
         }
+        if (isset($data['explain'])) {
+            $this->container['explain'] = $data['explain'];
+        }
+        if (isset($data['synonyms'])) {
+            $this->container['synonyms'] = $data['synonyms'];
+        }
         if (isset($data['clickAnalytics'])) {
             $this->container['clickAnalytics'] = $data['clickAnalytics'];
         }
@@ -616,20 +619,11 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['enableABTest'])) {
             $this->container['enableABTest'] = $data['enableABTest'];
         }
-        if (isset($data['enableReRanking'])) {
-            $this->container['enableReRanking'] = $data['enableReRanking'];
-        }
-        if (isset($data['reRankingApplyFilter'])) {
-            $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
-        }
         if (isset($data['attributesForFaceting'])) {
             $this->container['attributesForFaceting'] = $data['attributesForFaceting'];
         }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
-        }
-        if (isset($data['restrictSearchableAttributes'])) {
-            $this->container['restrictSearchableAttributes'] = $data['restrictSearchableAttributes'];
         }
         if (isset($data['ranking'])) {
             $this->container['ranking'] = $data['ranking'];
@@ -727,17 +721,11 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['advancedSyntaxFeatures'])) {
             $this->container['advancedSyntaxFeatures'] = $data['advancedSyntaxFeatures'];
         }
-        if (isset($data['explain'])) {
-            $this->container['explain'] = $data['explain'];
-        }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
         }
         if (isset($data['attributeForDistinct'])) {
             $this->container['attributeForDistinct'] = $data['attributeForDistinct'];
-        }
-        if (isset($data['synonyms'])) {
-            $this->container['synonyms'] = $data['synonyms'];
         }
         if (isset($data['replaceSynonymsInHighlight'])) {
             $this->container['replaceSynonymsInHighlight'] = $data['replaceSynonymsInHighlight'];
@@ -751,11 +739,23 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['maxFacetHits'])) {
             $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
+        if (isset($data['maxValuesPerFacet'])) {
+            $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
+        }
+        if (isset($data['sortFacetValuesBy'])) {
+            $this->container['sortFacetValuesBy'] = $data['sortFacetValuesBy'];
+        }
         if (isset($data['attributeCriteriaComputedByMinProximity'])) {
             $this->container['attributeCriteriaComputedByMinProximity'] = $data['attributeCriteriaComputedByMinProximity'];
         }
         if (isset($data['renderingContent'])) {
             $this->container['renderingContent'] = $data['renderingContent'];
+        }
+        if (isset($data['enableReRanking'])) {
+            $this->container['enableReRanking'] = $data['enableReRanking'];
+        }
+        if (isset($data['reRankingApplyFilter'])) {
+            $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
         }
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -992,6 +992,30 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Gets restrictSearchableAttributes
+     *
+     * @return string[]|null
+     */
+    public function getRestrictSearchableAttributes()
+    {
+        return $this->container['restrictSearchableAttributes'] ?? null;
+    }
+
+    /**
+     * Sets restrictSearchableAttributes
+     *
+     * @param string[]|null $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
+     *
+     * @return self
+     */
+    public function setRestrictSearchableAttributes($restrictSearchableAttributes)
+    {
+        $this->container['restrictSearchableAttributes'] = $restrictSearchableAttributes;
+
+        return $this;
+    }
+
+    /**
      * Gets facets
      *
      * @return string[]|null
@@ -1016,30 +1040,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets maxValuesPerFacet
-     *
-     * @return int|null
-     */
-    public function getMaxValuesPerFacet()
-    {
-        return $this->container['maxValuesPerFacet'] ?? null;
-    }
-
-    /**
-     * Sets maxValuesPerFacet
-     *
-     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet
-     *
-     * @return self
-     */
-    public function setMaxValuesPerFacet($maxValuesPerFacet)
-    {
-        $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
-
-        return $this;
-    }
-
-    /**
      * Gets facetingAfterDistinct
      *
      * @return bool|null
@@ -1059,30 +1059,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setFacetingAfterDistinct($facetingAfterDistinct)
     {
         $this->container['facetingAfterDistinct'] = $facetingAfterDistinct;
-
-        return $this;
-    }
-
-    /**
-     * Gets sortFacetValuesBy
-     *
-     * @return string|null
-     */
-    public function getSortFacetValuesBy()
-    {
-        return $this->container['sortFacetValuesBy'] ?? null;
-    }
-
-    /**
-     * Sets sortFacetValuesBy
-     *
-     * @param string|null $sortFacetValuesBy controls how facet values are fetched
-     *
-     * @return self
-     */
-    public function setSortFacetValuesBy($sortFacetValuesBy)
-    {
-        $this->container['sortFacetValuesBy'] = $sortFacetValuesBy;
 
         return $this;
     }
@@ -1461,6 +1437,54 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Gets explain
+     *
+     * @return string[]|null
+     */
+    public function getExplain()
+    {
+        return $this->container['explain'] ?? null;
+    }
+
+    /**
+     * Sets explain
+     *
+     * @param string[]|null $explain enriches the API's response with information about how the query was processed
+     *
+     * @return self
+     */
+    public function setExplain($explain)
+    {
+        $this->container['explain'] = $explain;
+
+        return $this;
+    }
+
+    /**
+     * Gets synonyms
+     *
+     * @return bool|null
+     */
+    public function getSynonyms()
+    {
+        return $this->container['synonyms'] ?? null;
+    }
+
+    /**
+     * Sets synonyms
+     *
+     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
+     *
+     * @return self
+     */
+    public function setSynonyms($synonyms)
+    {
+        $this->container['synonyms'] = $synonyms;
+
+        return $this;
+    }
+
+    /**
      * Gets clickAnalytics
      *
      * @return bool|null
@@ -1581,54 +1605,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets enableReRanking
-     *
-     * @return bool|null
-     */
-    public function getEnableReRanking()
-    {
-        return $this->container['enableReRanking'] ?? null;
-    }
-
-    /**
-     * Sets enableReRanking
-     *
-     * @param bool|null $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
-     *
-     * @return self
-     */
-    public function setEnableReRanking($enableReRanking)
-    {
-        $this->container['enableReRanking'] = $enableReRanking;
-
-        return $this;
-    }
-
-    /**
-     * Gets reRankingApplyFilter
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null
-     */
-    public function getReRankingApplyFilter()
-    {
-        return $this->container['reRankingApplyFilter'] ?? null;
-    }
-
-    /**
-     * Sets reRankingApplyFilter
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null $reRankingApplyFilter reRankingApplyFilter
-     *
-     * @return self
-     */
-    public function setReRankingApplyFilter($reRankingApplyFilter)
-    {
-        $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
-
-        return $this;
-    }
-
-    /**
      * Gets attributesForFaceting
      *
      * @return string[]|null
@@ -1672,30 +1648,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setAttributesToRetrieve($attributesToRetrieve)
     {
         $this->container['attributesToRetrieve'] = $attributesToRetrieve;
-
-        return $this;
-    }
-
-    /**
-     * Gets restrictSearchableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getRestrictSearchableAttributes()
-    {
-        return $this->container['restrictSearchableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets restrictSearchableAttributes
-     *
-     * @param string[]|null $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
-     *
-     * @return self
-     */
-    public function setRestrictSearchableAttributes($restrictSearchableAttributes)
-    {
-        $this->container['restrictSearchableAttributes'] = $restrictSearchableAttributes;
 
         return $this;
     }
@@ -2311,7 +2263,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets semanticSearch
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\IndexSettingsAsSearchParamsSemanticSearch|null
+     * @return \Algolia\AlgoliaSearch\Model\Search\SemanticSearch|null
      */
     public function getSemanticSearch()
     {
@@ -2321,7 +2273,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets semanticSearch
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\IndexSettingsAsSearchParamsSemanticSearch|null $semanticSearch semanticSearch
+     * @param \Algolia\AlgoliaSearch\Model\Search\SemanticSearch|null $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -2477,30 +2429,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets explain
-     *
-     * @return string[]|null
-     */
-    public function getExplain()
-    {
-        return $this->container['explain'] ?? null;
-    }
-
-    /**
-     * Sets explain
-     *
-     * @param string[]|null $explain enriches the API's response with information about how the query was processed
-     *
-     * @return self
-     */
-    public function setExplain($explain)
-    {
-        $this->container['explain'] = $explain;
-
-        return $this;
-    }
-
-    /**
      * Gets distinct
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\Distinct|null
@@ -2544,30 +2472,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setAttributeForDistinct($attributeForDistinct)
     {
         $this->container['attributeForDistinct'] = $attributeForDistinct;
-
-        return $this;
-    }
-
-    /**
-     * Gets synonyms
-     *
-     * @return bool|null
-     */
-    public function getSynonyms()
-    {
-        return $this->container['synonyms'] ?? null;
-    }
-
-    /**
-     * Sets synonyms
-     *
-     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
-     *
-     * @return self
-     */
-    public function setSynonyms($synonyms)
-    {
-        $this->container['synonyms'] = $synonyms;
 
         return $this;
     }
@@ -2682,6 +2586,54 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Gets maxValuesPerFacet
+     *
+     * @return int|null
+     */
+    public function getMaxValuesPerFacet()
+    {
+        return $this->container['maxValuesPerFacet'] ?? null;
+    }
+
+    /**
+     * Sets maxValuesPerFacet
+     *
+     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet
+     *
+     * @return self
+     */
+    public function setMaxValuesPerFacet($maxValuesPerFacet)
+    {
+        $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortFacetValuesBy
+     *
+     * @return string|null
+     */
+    public function getSortFacetValuesBy()
+    {
+        return $this->container['sortFacetValuesBy'] ?? null;
+    }
+
+    /**
+     * Sets sortFacetValuesBy
+     *
+     * @param string|null $sortFacetValuesBy controls how facet values are fetched
+     *
+     * @return self
+     */
+    public function setSortFacetValuesBy($sortFacetValuesBy)
+    {
+        $this->container['sortFacetValuesBy'] = $sortFacetValuesBy;
+
+        return $this;
+    }
+
+    /**
      * Gets attributeCriteriaComputedByMinProximity
      *
      * @return bool|null
@@ -2725,6 +2677,54 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setRenderingContent($renderingContent)
     {
         $this->container['renderingContent'] = $renderingContent;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableReRanking
+     *
+     * @return bool|null
+     */
+    public function getEnableReRanking()
+    {
+        return $this->container['enableReRanking'] ?? null;
+    }
+
+    /**
+     * Sets enableReRanking
+     *
+     * @param bool|null $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
+     *
+     * @return self
+     */
+    public function setEnableReRanking($enableReRanking)
+    {
+        $this->container['enableReRanking'] = $enableReRanking;
+
+        return $this;
+    }
+
+    /**
+     * Gets reRankingApplyFilter
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null
+     */
+    public function getReRankingApplyFilter()
+    {
+        return $this->container['reRankingApplyFilter'] ?? null;
+    }
+
+    /**
+     * Sets reRankingApplyFilter
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null $reRankingApplyFilter reRankingApplyFilter
+     *
+     * @return self
+     */
+    public function setReRankingApplyFilter($reRankingApplyFilter)
+    {
+        $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
 
         return $this;
     }

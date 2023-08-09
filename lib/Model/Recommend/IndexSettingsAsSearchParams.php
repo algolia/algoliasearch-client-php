@@ -20,7 +20,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $modelTypes = [
         'attributesForFaceting' => 'string[]',
         'attributesToRetrieve' => 'string[]',
-        'restrictSearchableAttributes' => 'string[]',
         'ranking' => 'string[]',
         'customRanking' => 'string[]',
         'relevancyStrictness' => 'int',
@@ -46,23 +45,25 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'queryType' => '\Algolia\AlgoliaSearch\Model\Recommend\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults',
         'mode' => '\Algolia\AlgoliaSearch\Model\Recommend\Mode',
-        'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch',
+        'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch',
         'advancedSyntax' => 'bool',
         'optionalWords' => 'string[]',
         'disableExactOnAttributes' => 'string[]',
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]',
-        'explain' => 'string[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Recommend\Distinct',
         'attributeForDistinct' => 'string',
-        'synonyms' => 'bool',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
         'responseFields' => 'string[]',
         'maxFacetHits' => 'int',
+        'maxValuesPerFacet' => 'int',
+        'sortFacetValuesBy' => 'string',
         'attributeCriteriaComputedByMinProximity' => 'bool',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
+        'enableReRanking' => 'bool',
+        'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
     ];
 
     /**
@@ -73,7 +74,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $modelFormats = [
         'attributesForFaceting' => null,
         'attributesToRetrieve' => null,
-        'restrictSearchableAttributes' => null,
         'ranking' => null,
         'customRanking' => null,
         'relevancyStrictness' => null,
@@ -106,16 +106,18 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'exactOnSingleWordQuery' => null,
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
-        'explain' => null,
         'distinct' => null,
         'attributeForDistinct' => null,
-        'synonyms' => null,
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
         'responseFields' => null,
         'maxFacetHits' => null,
+        'maxValuesPerFacet' => null,
+        'sortFacetValuesBy' => null,
         'attributeCriteriaComputedByMinProximity' => null,
         'renderingContent' => null,
+        'enableReRanking' => null,
+        'reRankingApplyFilter' => null,
     ];
 
     /**
@@ -127,7 +129,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $attributeMap = [
         'attributesForFaceting' => 'attributesForFaceting',
         'attributesToRetrieve' => 'attributesToRetrieve',
-        'restrictSearchableAttributes' => 'restrictSearchableAttributes',
         'ranking' => 'ranking',
         'customRanking' => 'customRanking',
         'relevancyStrictness' => 'relevancyStrictness',
@@ -160,16 +161,18 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'exactOnSingleWordQuery' => 'exactOnSingleWordQuery',
         'alternativesAsExact' => 'alternativesAsExact',
         'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
-        'explain' => 'explain',
         'distinct' => 'distinct',
         'attributeForDistinct' => 'attributeForDistinct',
-        'synonyms' => 'synonyms',
         'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
         'minProximity' => 'minProximity',
         'responseFields' => 'responseFields',
         'maxFacetHits' => 'maxFacetHits',
+        'maxValuesPerFacet' => 'maxValuesPerFacet',
+        'sortFacetValuesBy' => 'sortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
         'renderingContent' => 'renderingContent',
+        'enableReRanking' => 'enableReRanking',
+        'reRankingApplyFilter' => 'reRankingApplyFilter',
     ];
 
     /**
@@ -211,7 +214,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $setters = [
         'attributesForFaceting' => 'setAttributesForFaceting',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
-        'restrictSearchableAttributes' => 'setRestrictSearchableAttributes',
         'ranking' => 'setRanking',
         'customRanking' => 'setCustomRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
@@ -244,16 +246,18 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'exactOnSingleWordQuery' => 'setExactOnSingleWordQuery',
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
-        'explain' => 'setExplain',
         'distinct' => 'setDistinct',
         'attributeForDistinct' => 'setAttributeForDistinct',
-        'synonyms' => 'setSynonyms',
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
         'maxFacetHits' => 'setMaxFacetHits',
+        'maxValuesPerFacet' => 'setMaxValuesPerFacet',
+        'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'setRenderingContent',
+        'enableReRanking' => 'setEnableReRanking',
+        'reRankingApplyFilter' => 'setReRankingApplyFilter',
     ];
 
     /**
@@ -264,7 +268,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $getters = [
         'attributesForFaceting' => 'getAttributesForFaceting',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
-        'restrictSearchableAttributes' => 'getRestrictSearchableAttributes',
         'ranking' => 'getRanking',
         'customRanking' => 'getCustomRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
@@ -297,16 +300,18 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         'exactOnSingleWordQuery' => 'getExactOnSingleWordQuery',
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
-        'explain' => 'getExplain',
         'distinct' => 'getDistinct',
         'attributeForDistinct' => 'getAttributeForDistinct',
-        'synonyms' => 'getSynonyms',
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
         'maxFacetHits' => 'getMaxFacetHits',
+        'maxValuesPerFacet' => 'getMaxValuesPerFacet',
+        'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
         'renderingContent' => 'getRenderingContent',
+        'enableReRanking' => 'getEnableReRanking',
+        'reRankingApplyFilter' => 'getReRankingApplyFilter',
     ];
 
     /**
@@ -348,9 +353,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
-        }
-        if (isset($data['restrictSearchableAttributes'])) {
-            $this->container['restrictSearchableAttributes'] = $data['restrictSearchableAttributes'];
         }
         if (isset($data['ranking'])) {
             $this->container['ranking'] = $data['ranking'];
@@ -448,17 +450,11 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (isset($data['advancedSyntaxFeatures'])) {
             $this->container['advancedSyntaxFeatures'] = $data['advancedSyntaxFeatures'];
         }
-        if (isset($data['explain'])) {
-            $this->container['explain'] = $data['explain'];
-        }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
         }
         if (isset($data['attributeForDistinct'])) {
             $this->container['attributeForDistinct'] = $data['attributeForDistinct'];
-        }
-        if (isset($data['synonyms'])) {
-            $this->container['synonyms'] = $data['synonyms'];
         }
         if (isset($data['replaceSynonymsInHighlight'])) {
             $this->container['replaceSynonymsInHighlight'] = $data['replaceSynonymsInHighlight'];
@@ -472,11 +468,23 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (isset($data['maxFacetHits'])) {
             $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
+        if (isset($data['maxValuesPerFacet'])) {
+            $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
+        }
+        if (isset($data['sortFacetValuesBy'])) {
+            $this->container['sortFacetValuesBy'] = $data['sortFacetValuesBy'];
+        }
         if (isset($data['attributeCriteriaComputedByMinProximity'])) {
             $this->container['attributeCriteriaComputedByMinProximity'] = $data['attributeCriteriaComputedByMinProximity'];
         }
         if (isset($data['renderingContent'])) {
             $this->container['renderingContent'] = $data['renderingContent'];
+        }
+        if (isset($data['enableReRanking'])) {
+            $this->container['enableReRanking'] = $data['enableReRanking'];
+        }
+        if (isset($data['reRankingApplyFilter'])) {
+            $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
         }
     }
 
@@ -567,30 +575,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function setAttributesToRetrieve($attributesToRetrieve)
     {
         $this->container['attributesToRetrieve'] = $attributesToRetrieve;
-
-        return $this;
-    }
-
-    /**
-     * Gets restrictSearchableAttributes
-     *
-     * @return string[]|null
-     */
-    public function getRestrictSearchableAttributes()
-    {
-        return $this->container['restrictSearchableAttributes'] ?? null;
-    }
-
-    /**
-     * Sets restrictSearchableAttributes
-     *
-     * @param string[]|null $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
-     *
-     * @return self
-     */
-    public function setRestrictSearchableAttributes($restrictSearchableAttributes)
-    {
-        $this->container['restrictSearchableAttributes'] = $restrictSearchableAttributes;
 
         return $this;
     }
@@ -1206,7 +1190,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets semanticSearch
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch|null
      */
     public function getSemanticSearch()
     {
@@ -1216,7 +1200,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets semanticSearch
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\IndexSettingsAsSearchParamsSemanticSearch|null $semanticSearch semanticSearch
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch|null $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -1372,30 +1356,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets explain
-     *
-     * @return string[]|null
-     */
-    public function getExplain()
-    {
-        return $this->container['explain'] ?? null;
-    }
-
-    /**
-     * Sets explain
-     *
-     * @param string[]|null $explain enriches the API's response with information about how the query was processed
-     *
-     * @return self
-     */
-    public function setExplain($explain)
-    {
-        $this->container['explain'] = $explain;
-
-        return $this;
-    }
-
-    /**
      * Gets distinct
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\Distinct|null
@@ -1439,30 +1399,6 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function setAttributeForDistinct($attributeForDistinct)
     {
         $this->container['attributeForDistinct'] = $attributeForDistinct;
-
-        return $this;
-    }
-
-    /**
-     * Gets synonyms
-     *
-     * @return bool|null
-     */
-    public function getSynonyms()
-    {
-        return $this->container['synonyms'] ?? null;
-    }
-
-    /**
-     * Sets synonyms
-     *
-     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
-     *
-     * @return self
-     */
-    public function setSynonyms($synonyms)
-    {
-        $this->container['synonyms'] = $synonyms;
 
         return $this;
     }
@@ -1577,6 +1513,54 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
+     * Gets maxValuesPerFacet
+     *
+     * @return int|null
+     */
+    public function getMaxValuesPerFacet()
+    {
+        return $this->container['maxValuesPerFacet'] ?? null;
+    }
+
+    /**
+     * Sets maxValuesPerFacet
+     *
+     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet
+     *
+     * @return self
+     */
+    public function setMaxValuesPerFacet($maxValuesPerFacet)
+    {
+        $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
+
+        return $this;
+    }
+
+    /**
+     * Gets sortFacetValuesBy
+     *
+     * @return string|null
+     */
+    public function getSortFacetValuesBy()
+    {
+        return $this->container['sortFacetValuesBy'] ?? null;
+    }
+
+    /**
+     * Sets sortFacetValuesBy
+     *
+     * @param string|null $sortFacetValuesBy controls how facet values are fetched
+     *
+     * @return self
+     */
+    public function setSortFacetValuesBy($sortFacetValuesBy)
+    {
+        $this->container['sortFacetValuesBy'] = $sortFacetValuesBy;
+
+        return $this;
+    }
+
+    /**
      * Gets attributeCriteriaComputedByMinProximity
      *
      * @return bool|null
@@ -1620,6 +1604,54 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     public function setRenderingContent($renderingContent)
     {
         $this->container['renderingContent'] = $renderingContent;
+
+        return $this;
+    }
+
+    /**
+     * Gets enableReRanking
+     *
+     * @return bool|null
+     */
+    public function getEnableReRanking()
+    {
+        return $this->container['enableReRanking'] ?? null;
+    }
+
+    /**
+     * Sets enableReRanking
+     *
+     * @param bool|null $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
+     *
+     * @return self
+     */
+    public function setEnableReRanking($enableReRanking)
+    {
+        $this->container['enableReRanking'] = $enableReRanking;
+
+        return $this;
+    }
+
+    /**
+     * Gets reRankingApplyFilter
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter|null
+     */
+    public function getReRankingApplyFilter()
+    {
+        return $this->container['reRankingApplyFilter'] ?? null;
+    }
+
+    /**
+     * Sets reRankingApplyFilter
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter|null $reRankingApplyFilter reRankingApplyFilter
+     *
+     * @return self
+     */
+    public function setReRankingApplyFilter($reRankingApplyFilter)
+    {
+        $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
 
         return $this;
     }

@@ -6,11 +6,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [Unreleased](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...master)
+## [v3.4.0](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...master)
+
+### Changed
+
+- Drop support for PHP 7.2
+- Update DOCKER_README.MD ([#716](https://github.com/algolia/algoliasearch-client-php/pull/716)) (by @matthewbond)
 
 ### Added
 
-- Include input string in message about invalid json ([#711](https://github.com/algolia/algoliasearch-client-php/pull/711))
+- Include input string in message about invalid json ([#711](https://github.com/algolia/algoliasearch-client-php/pull/711)) (by @greg0ire)
+- Add support for psr/http-message ^2.0 ([#719](https://github.com/algolia/algoliasearch-client-php/pull/719)) (by @Stoux)
 
 ## [v3.3.2](https://github.com/algolia/algoliasearch-client-php/compare/3.3.1...3.3.2)
 

@@ -5,22 +5,20 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingModels Class Doc Comment
+ * TrendingItemsModel Class Doc Comment
  *
  * @category Class
  *
- * @description Trending model.
+ * @description Trending items model.
  *
  * @package Algolia\AlgoliaSearch
  */
-class TrendingModels
+class TrendingItemsModel
 {
     /**
      * Possible values of this enum
      */
-    const FACETS = 'trending-facets';
-
-    const ITEMS = 'trending-items';
+    const TRENDING_ITEMS = 'trending-items';
 
     /**
      * Gets allowable values of the enum
@@ -30,8 +28,7 @@ class TrendingModels
     public static function getAllowableEnumValues()
     {
         return [
-            self::FACETS,
-            self::ITEMS,
+            self::TRENDING_ITEMS,
         ];
     }
 }

@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * BaseTrendingRequest Class Doc Comment
+ * BaseTrendingFacetsQuery Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseTrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -18,9 +18,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
       */
     protected static $modelTypes = [
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingModels',
         'facetName' => 'string',
-        'facetValue' => 'string',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
     ];
 
     /**
@@ -29,9 +28,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
       */
     protected static $modelFormats = [
-        'model' => null,
         'facetName' => null,
-        'facetValue' => null,
+        'model' => null,
     ];
 
     /**
@@ -41,9 +39,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
       * @var string[]
     */
     protected static $attributeMap = [
-        'model' => 'model',
         'facetName' => 'facetName',
-        'facetValue' => 'facetValue',
+        'model' => 'model',
     ];
 
     /**
@@ -83,9 +80,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'model' => 'setModel',
         'facetName' => 'setFacetName',
-        'facetValue' => 'setFacetValue',
+        'model' => 'setModel',
     ];
 
     /**
@@ -94,9 +90,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'model' => 'getModel',
         'facetName' => 'getFacetName',
-        'facetValue' => 'getFacetValue',
+        'model' => 'getModel',
     ];
 
     /**
@@ -133,14 +128,11 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['model'])) {
-            $this->container['model'] = $data['model'];
-        }
         if (isset($data['facetName'])) {
             $this->container['facetName'] = $data['facetName'];
         }
-        if (isset($data['facetValue'])) {
-            $this->container['facetValue'] = $data['facetValue'];
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
         }
     }
 
@@ -153,8 +145,8 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['model']) || $this->container['model'] === null) {
-            $invalidProperties[] = "'model' can't be null";
+        if (!isset($this->container['facetName']) || $this->container['facetName'] === null) {
+            $invalidProperties[] = "'facetName' can't be null";
         }
 
         return $invalidProperties;
@@ -172,33 +164,9 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets model
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingModels
-     */
-    public function getModel()
-    {
-        return $this->container['model'] ?? null;
-    }
-
-    /**
-     * Sets model
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingModels $model model
-     *
-     * @return self
-     */
-    public function setModel($model)
-    {
-        $this->container['model'] = $model;
-
-        return $this;
-    }
-
-    /**
      * Gets facetName
      *
-     * @return string|null
+     * @return string
      */
     public function getFacetName()
     {
@@ -208,7 +176,7 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetName
      *
-     * @param string|null $facetName facet name for trending models
+     * @param string $facetName facet name for trending models
      *
      * @return self
      */
@@ -220,25 +188,25 @@ class BaseTrendingRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets facetValue
+     * Gets model
      *
-     * @return string|null
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null
      */
-    public function getFacetValue()
+    public function getModel()
     {
-        return $this->container['facetValue'] ?? null;
+        return $this->container['model'] ?? null;
     }
 
     /**
-     * Sets facetValue
+     * Sets model
      *
-     * @param string|null $facetValue facet value for trending models
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null $model model
      *
      * @return self
      */
-    public function setFacetValue($facetValue)
+    public function setModel($model)
     {
-        $this->container['facetValue'] = $facetValue;
+        $this->container['model'] = $model;
 
         return $this;
     }

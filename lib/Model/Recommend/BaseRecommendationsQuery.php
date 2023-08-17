@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * BaseRecommendationRequest Class Doc Comment
+ * BaseRecommendationsQuery Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseRecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -20,6 +20,8 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelTypes = [
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
         'objectID' => 'string',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
     ];
 
     /**
@@ -30,6 +32,8 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelFormats = [
         'model' => null,
         'objectID' => null,
+        'queryParameters' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -41,6 +45,8 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $attributeMap = [
         'model' => 'model',
         'objectID' => 'objectID',
+        'queryParameters' => 'queryParameters',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -82,6 +88,8 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $setters = [
         'model' => 'setModel',
         'objectID' => 'setObjectID',
+        'queryParameters' => 'setQueryParameters',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -92,6 +100,8 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $getters = [
         'model' => 'getModel',
         'objectID' => 'getObjectID',
+        'queryParameters' => 'getQueryParameters',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -133,6 +143,12 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
         }
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
+        }
+        if (isset($data['queryParameters'])) {
+            $this->container['queryParameters'] = $data['queryParameters'];
+        }
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -210,6 +226,54 @@ class BaseRecommendationRequest extends \Algolia\AlgoliaSearch\Model\AbstractMod
     public function setObjectID($objectID)
     {
         $this->container['objectID'] = $objectID;
+
+        return $this;
+    }
+
+    /**
+     * Gets queryParameters
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
+     */
+    public function getQueryParameters()
+    {
+        return $this->container['queryParameters'] ?? null;
+    }
+
+    /**
+     * Sets queryParameters
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $queryParameters queryParameters
+     *
+     * @return self
+     */
+    public function setQueryParameters($queryParameters)
+    {
+        $this->container['queryParameters'] = $queryParameters;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackParameters
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
+     */
+    public function getFallbackParameters()
+    {
+        return $this->container['fallbackParameters'] ?? null;
+    }
+
+    /**
+     * Sets fallbackParameters
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $fallbackParameters fallbackParameters
+     *
+     * @return self
+     */
+    public function setFallbackParameters($fallbackParameters)
+    {
+        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

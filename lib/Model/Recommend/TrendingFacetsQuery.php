@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendationsRequest Class Doc Comment
+ * TrendingFacetsQuery Class Doc Comment
  *
  * @category Class
  * @package Algolia\AlgoliaSearch
  */
-class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -19,14 +19,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
       */
     protected static $modelTypes = [
         'facetName' => 'string',
-        'facetValue' => 'string',
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
         'indexName' => 'string',
         'threshold' => 'int',
         'maxRecommendations' => 'int',
-        'objectID' => 'string',
     ];
 
     /**
@@ -36,14 +32,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
       */
     protected static $modelFormats = [
         'facetName' => null,
-        'facetValue' => null,
         'model' => null,
-        'queryParameters' => null,
-        'fallbackParameters' => null,
         'indexName' => null,
         'threshold' => null,
         'maxRecommendations' => null,
-        'objectID' => null,
     ];
 
     /**
@@ -54,14 +46,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     */
     protected static $attributeMap = [
         'facetName' => 'facetName',
-        'facetValue' => 'facetValue',
         'model' => 'model',
-        'queryParameters' => 'queryParameters',
-        'fallbackParameters' => 'fallbackParameters',
         'indexName' => 'indexName',
         'threshold' => 'threshold',
         'maxRecommendations' => 'maxRecommendations',
-        'objectID' => 'objectID',
     ];
 
     /**
@@ -102,14 +90,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     protected static $setters = [
         'facetName' => 'setFacetName',
-        'facetValue' => 'setFacetValue',
         'model' => 'setModel',
-        'queryParameters' => 'setQueryParameters',
-        'fallbackParameters' => 'setFallbackParameters',
         'indexName' => 'setIndexName',
         'threshold' => 'setThreshold',
         'maxRecommendations' => 'setMaxRecommendations',
-        'objectID' => 'setObjectID',
     ];
 
     /**
@@ -119,14 +103,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     protected static $getters = [
         'facetName' => 'getFacetName',
-        'facetValue' => 'getFacetValue',
         'model' => 'getModel',
-        'queryParameters' => 'getQueryParameters',
-        'fallbackParameters' => 'getFallbackParameters',
         'indexName' => 'getIndexName',
         'threshold' => 'getThreshold',
         'maxRecommendations' => 'getMaxRecommendations',
-        'objectID' => 'getObjectID',
     ];
 
     /**
@@ -166,17 +146,8 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         if (isset($data['facetName'])) {
             $this->container['facetName'] = $data['facetName'];
         }
-        if (isset($data['facetValue'])) {
-            $this->container['facetValue'] = $data['facetValue'];
-        }
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
-        }
-        if (isset($data['queryParameters'])) {
-            $this->container['queryParameters'] = $data['queryParameters'];
-        }
-        if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -186,9 +157,6 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         }
         if (isset($data['maxRecommendations'])) {
             $this->container['maxRecommendations'] = $data['maxRecommendations'];
-        }
-        if (isset($data['objectID'])) {
-            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -204,9 +172,6 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         if (!isset($this->container['facetName']) || $this->container['facetName'] === null) {
             $invalidProperties[] = "'facetName' can't be null";
         }
-        if (!isset($this->container['model']) || $this->container['model'] === null) {
-            $invalidProperties[] = "'model' can't be null";
-        }
         if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -216,10 +181,6 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
         if (isset($this->container['threshold']) && ($this->container['threshold'] < 0)) {
             $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
-        }
-
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
-            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -261,33 +222,9 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets facetValue
-     *
-     * @return string|null
-     */
-    public function getFacetValue()
-    {
-        return $this->container['facetValue'] ?? null;
-    }
-
-    /**
-     * Sets facetValue
-     *
-     * @param string|null $facetValue facet value for trending models
-     *
-     * @return self
-     */
-    public function setFacetValue($facetValue)
-    {
-        $this->container['facetValue'] = $facetValue;
-
-        return $this;
-    }
-
-    /**
      * Gets model
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null
      */
     public function getModel()
     {
@@ -297,61 +234,13 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets model
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels $model model
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null $model model
      *
      * @return self
      */
     public function setModel($model)
     {
         $this->container['model'] = $model;
-
-        return $this;
-    }
-
-    /**
-     * Gets queryParameters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
-     */
-    public function getQueryParameters()
-    {
-        return $this->container['queryParameters'] ?? null;
-    }
-
-    /**
-     * Sets queryParameters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $queryParameters queryParameters
-     *
-     * @return self
-     */
-    public function setQueryParameters($queryParameters)
-    {
-        $this->container['queryParameters'] = $queryParameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets fallbackParameters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
-     */
-    public function getFallbackParameters()
-    {
-        return $this->container['fallbackParameters'] ?? null;
-    }
-
-    /**
-     * Sets fallbackParameters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $fallbackParameters fallbackParameters
-     *
-     * @return self
-     */
-    public function setFallbackParameters($fallbackParameters)
-    {
-        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }
@@ -401,10 +290,10 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
 
         if (!is_null($threshold) && ($threshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling RecommendationsRequest., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingFacetsQuery., must be smaller than or equal to 100.');
         }
         if (!is_null($threshold) && ($threshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling RecommendationsRequest., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingFacetsQuery., must be bigger than or equal to 0.');
         }
 
         $this->container['threshold'] = $threshold;
@@ -432,30 +321,6 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     public function setMaxRecommendations($maxRecommendations)
     {
         $this->container['maxRecommendations'] = $maxRecommendations;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectID
-     *
-     * @return string
-     */
-    public function getObjectID()
-    {
-        return $this->container['objectID'] ?? null;
-    }
-
-    /**
-     * Sets objectID
-     *
-     * @param string $objectID unique object identifier
-     *
-     * @return self
-     */
-    public function setObjectID($objectID)
-    {
-        $this->container['objectID'] = $objectID;
 
         return $this;
     }

@@ -21,8 +21,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'indexName' => 'string',
         'threshold' => 'int',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
     ];
 
     /**
@@ -34,8 +32,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'indexName' => null,
         'threshold' => null,
         'maxRecommendations' => null,
-        'queryParameters' => null,
-        'fallbackParameters' => null,
     ];
 
     /**
@@ -48,8 +44,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'indexName' => 'indexName',
         'threshold' => 'threshold',
         'maxRecommendations' => 'maxRecommendations',
-        'queryParameters' => 'queryParameters',
-        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -92,8 +86,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'indexName' => 'setIndexName',
         'threshold' => 'setThreshold',
         'maxRecommendations' => 'setMaxRecommendations',
-        'queryParameters' => 'setQueryParameters',
-        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -105,8 +97,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'indexName' => 'getIndexName',
         'threshold' => 'getThreshold',
         'maxRecommendations' => 'getMaxRecommendations',
-        'queryParameters' => 'getQueryParameters',
-        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -152,12 +142,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         if (isset($data['maxRecommendations'])) {
             $this->container['maxRecommendations'] = $data['maxRecommendations'];
         }
-        if (isset($data['queryParameters'])) {
-            $this->container['queryParameters'] = $data['queryParameters'];
-        }
-        if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] = $data['fallbackParameters'];
-        }
     }
 
     /**
@@ -172,14 +156,11 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (!isset($this->container['threshold']) || $this->container['threshold'] === null) {
-            $invalidProperties[] = "'threshold' can't be null";
-        }
-        if (($this->container['threshold'] > 100)) {
+        if (isset($this->container['threshold']) && ($this->container['threshold'] > 100)) {
             $invalidProperties[] = "invalid value for 'threshold', must be smaller than or equal to 100.";
         }
 
-        if (($this->container['threshold'] < 0)) {
+        if (isset($this->container['threshold']) && ($this->container['threshold'] < 0)) {
             $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
         }
 
@@ -224,7 +205,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets threshold
      *
-     * @return int
+     * @return int|null
      */
     public function getThreshold()
     {
@@ -234,17 +215,17 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets threshold
      *
-     * @param int $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
+     * @param int|null $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
      *
      * @return self
      */
     public function setThreshold($threshold)
     {
 
-        if (($threshold > 100)) {
+        if (!is_null($threshold) && ($threshold > 100)) {
             throw new \InvalidArgumentException('invalid value for $threshold when calling BaseRecommendRequest., must be smaller than or equal to 100.');
         }
-        if (($threshold < 0)) {
+        if (!is_null($threshold) && ($threshold < 0)) {
             throw new \InvalidArgumentException('invalid value for $threshold when calling BaseRecommendRequest., must be bigger than or equal to 0.');
         }
 
@@ -273,54 +254,6 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     public function setMaxRecommendations($maxRecommendations)
     {
         $this->container['maxRecommendations'] = $maxRecommendations;
-
-        return $this;
-    }
-
-    /**
-     * Gets queryParameters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
-     */
-    public function getQueryParameters()
-    {
-        return $this->container['queryParameters'] ?? null;
-    }
-
-    /**
-     * Sets queryParameters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $queryParameters queryParameters
-     *
-     * @return self
-     */
-    public function setQueryParameters($queryParameters)
-    {
-        $this->container['queryParameters'] = $queryParameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets fallbackParameters
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null
-     */
-    public function getFallbackParameters()
-    {
-        return $this->container['fallbackParameters'] ?? null;
-    }
-
-    /**
-     * Sets fallbackParameters
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject|null $fallbackParameters fallbackParameters
-     *
-     * @return self
-     */
-    public function setFallbackParameters($fallbackParameters)
-    {
-        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

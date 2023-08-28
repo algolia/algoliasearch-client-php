@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [v3.4.0](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...master)
+## [v3.4.1](https://github.com/algolia/algoliasearch-client-php/compare/3.4.0...master)
+
+### Fixed
+
+- Fix compatibility for psr/http-message ^1.1
+
+## [v3.4.0](https://github.com/algolia/algoliasearch-client-php/compare/3.3.2...3.4.0)
 
 ### Changed
 

@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchUserIdsResponse Class Doc Comment
+ * SearchUserIdsResponse Class Doc Comment.
  *
  * @category Class
  *
  * @description userIDs data.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\UserHit[]',
         'nbHits' => 'int',
@@ -29,10 +27,10 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'hits' => null,
         'nbHits' => null,
@@ -42,11 +40,11 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'hits' => 'hits',
         'nbHits' => 'nbHits',
@@ -56,38 +54,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -100,7 +67,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -113,34 +80,14 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -164,6 +111,57 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -172,27 +170,27 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+        if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (!isset($this->container['page']) || $this->container['page'] === null) {
+        if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
+        if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
-        if (($this->container['hitsPerPage'] > 1000)) {
+        if ($this->container['hitsPerPage'] > 1000) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
 
-        if (($this->container['hitsPerPage'] < 1)) {
+        if ($this->container['hitsPerPage'] < 1) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
 
@@ -201,17 +199,17 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets hits
+     * Gets hits.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\UserHit[]
      */
@@ -221,7 +219,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets hits
+     * Sets hits.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits user objects that match the query
      *
@@ -235,7 +233,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets nbHits
+     * Gets nbHits.
      *
      * @return int
      */
@@ -245,7 +243,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets nbHits
+     * Sets nbHits.
      *
      * @param int $nbHits number of hits the search query matched
      *
@@ -259,7 +257,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
      * @return int
      */
@@ -269,7 +267,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
      * @param int $page page to retrieve (the first page is `0`, not `1`)
      *
@@ -283,7 +281,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
      * @return int
      */
@@ -293,7 +291,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
      * @param int $hitsPerPage maximum number of hits per page
      *
@@ -301,11 +299,10 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
-        if (($hitsPerPage > 1000)) {
+        if ($hitsPerPage > 1000) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be smaller than or equal to 1000.');
         }
-        if (($hitsPerPage < 1)) {
+        if ($hitsPerPage < 1) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be bigger than or equal to 1.');
         }
 
@@ -315,7 +312,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets updatedAt
+     * Gets updatedAt.
      *
      * @return string
      */
@@ -325,7 +322,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets updatedAt
+     * Sets updatedAt.
      *
      * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -337,6 +334,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -354,7 +352,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -364,10 +362,8 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -382,12 +378,9 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchUserIdsParams Class Doc Comment
+ * SearchUserIdsParams Class Doc Comment.
  *
  * @category Class
  *
  * @description OK
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'clusterName' => 'string',
@@ -28,10 +26,10 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'clusterName' => null,
@@ -40,11 +38,11 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'query' => 'query',
         'clusterName' => 'clusterName',
@@ -53,38 +51,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -96,7 +63,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -108,34 +75,14 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -156,6 +103,57 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -164,7 +162,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
+        if (!isset($this->container['query']) || null === $this->container['query']) {
             $invalidProperties[] = "'query' can't be null";
         }
         if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
@@ -180,17 +178,17 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
      * @return string
      */
@@ -200,7 +198,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
      * @param string $query Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
      *
@@ -214,9 +212,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets clusterName
+     * Gets clusterName.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getClusterName()
     {
@@ -224,9 +222,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets clusterName
+     * Sets clusterName.
      *
-     * @param string|null $clusterName cluster name
+     * @param null|string $clusterName cluster name
      *
      * @return self
      */
@@ -238,9 +236,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPage()
     {
@@ -248,9 +246,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
-     * @param int|null $page page to retrieve (the first page is `0`, not `1`)
+     * @param null|int $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -262,9 +260,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -272,15 +270,14 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
-     * @param int|null $hitsPerPage number of hits per page
+     * @param null|int $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsParams., must be smaller than or equal to 1000.');
         }
@@ -292,6 +289,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -309,7 +307,7 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -319,10 +317,8 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -337,12 +333,9 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

@@ -34,7 +34,7 @@ final class CurlHttpClient implements HttpClientInterface
 
         $curlHeaders = [];
         foreach ($request->getHeaders() as $key => $values) {
-            $curlHeaders[] = $key . ': ' . implode(',', $values);
+            $curlHeaders[] = $key.': '.implode(',', $values);
         }
 
         curl_setopt($curlHandle, CURLOPT_HTTPHEADER, $curlHeaders);
@@ -44,7 +44,7 @@ final class CurlHttpClient implements HttpClientInterface
             CURLOPT_USERAGENT,
             implode(',', $request->getHeader('User-Agent'))
         );
-        //Return the output instead of printing it
+        // Return the output instead of printing it
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandle, CURLOPT_FAILONERROR, true);
         curl_setopt($curlHandle, CURLOPT_ENCODING, '');
@@ -56,8 +56,8 @@ final class CurlHttpClient implements HttpClientInterface
         curl_setopt($curlHandle, CURLOPT_URL, (string) $request->getUri());
         $version = curl_version();
         if (
-            version_compare($version['version'], '7.16.2', '>=') &&
-            $connectTimeout < 1
+            version_compare($version['version'], '7.16.2', '>=')
+            && $connectTimeout < 1
         ) {
             curl_setopt(
                 $curlHandle,
@@ -140,12 +140,6 @@ final class CurlHttpClient implements HttpClientInterface
 
     private function invalidOptions(array $curlOptions = [], $errorMsg = '')
     {
-        throw new \OutOfBoundsException(
-            sprintf(
-                'AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s',
-                json_encode($curlOptions),
-                $errorMsg
-            )
-        );
+        throw new \OutOfBoundsException(sprintf('AlgoliaSearch curloptions options keys are invalid. %s given. error message : %s', json_encode($curlOptions), $errorMsg));
     }
 }

@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchResult Class Doc Comment
+ * SearchResult Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'abTestID' => 'int',
         'abTestVariantID' => 'int',
@@ -49,10 +48,10 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'abTestID' => null,
         'abTestVariantID' => null,
@@ -85,11 +84,11 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'abTestID' => 'abTestID',
         'abTestVariantID' => 'abTestVariantID',
@@ -122,38 +121,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -189,7 +157,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -225,34 +193,14 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -345,6 +293,57 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -361,42 +360,42 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
 
-        if (!isset($this->container['exhaustiveNbHits']) || $this->container['exhaustiveNbHits'] === null) {
+        if (!isset($this->container['exhaustiveNbHits']) || null === $this->container['exhaustiveNbHits']) {
             $invalidProperties[] = "'exhaustiveNbHits' can't be null";
         }
-        if (!isset($this->container['hitsPerPage']) || $this->container['hitsPerPage'] === null) {
+        if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
-        if (($this->container['hitsPerPage'] > 1000)) {
+        if ($this->container['hitsPerPage'] > 1000) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
 
-        if (($this->container['hitsPerPage'] < 1)) {
+        if ($this->container['hitsPerPage'] < 1) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
-        if (!isset($this->container['nbPages']) || $this->container['nbPages'] === null) {
+        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
-        if (!isset($this->container['page']) || $this->container['page'] === null) {
+        if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if (!isset($this->container['processingTimeMS']) || $this->container['processingTimeMS'] === null) {
+        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
         }
-        if (!isset($this->container['hits']) || $this->container['hits'] === null) {
+        if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
-        if (!isset($this->container['query']) || $this->container['query'] === null) {
+        if (!isset($this->container['query']) || null === $this->container['query']) {
             $invalidProperties[] = "'query' can't be null";
         }
-        if (!isset($this->container['params']) || $this->container['params'] === null) {
+        if (!isset($this->container['params']) || null === $this->container['params']) {
             $invalidProperties[] = "'params' can't be null";
         }
-        if (!isset($this->container['facetHits']) || $this->container['facetHits'] === null) {
+        if (!isset($this->container['facetHits']) || null === $this->container['facetHits']) {
             $invalidProperties[] = "'facetHits' can't be null";
         }
 
@@ -405,19 +404,19 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets abTestID
+     * Gets abTestID.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getAbTestID()
     {
@@ -425,9 +424,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets abTestID
+     * Sets abTestID.
      *
-     * @param int|null $abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
+     * @param null|int $abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
      *
      * @return self
      */
@@ -439,9 +438,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets abTestVariantID
+     * Gets abTestVariantID.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getAbTestVariantID()
     {
@@ -449,15 +448,14 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets abTestVariantID
+     * Sets abTestVariantID.
      *
-     * @param int|null $abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
+     * @param null|int $abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
      *
      * @return self
      */
     public function setAbTestVariantID($abTestVariantID)
     {
-
         if (!is_null($abTestVariantID) && ($abTestVariantID < 1)) {
             throw new \InvalidArgumentException('invalid value for $abTestVariantID when calling SearchResult., must be bigger than or equal to 1.');
         }
@@ -468,9 +466,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets aroundLatLng
+     * Gets aroundLatLng.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAroundLatLng()
     {
@@ -478,17 +476,16 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets aroundLatLng
+     * Sets aroundLatLng.
      *
-     * @param string|null $aroundLatLng computed geographical location
+     * @param null|string $aroundLatLng computed geographical location
      *
      * @return self
      */
     public function setAroundLatLng($aroundLatLng)
     {
-
         if (!is_null($aroundLatLng) && (!preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $aroundLatLng))) {
-            throw new \InvalidArgumentException("invalid value for $aroundLatLng when calling SearchResult., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
+            throw new \InvalidArgumentException("invalid value for {$aroundLatLng} when calling SearchResult., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
         }
 
         $this->container['aroundLatLng'] = $aroundLatLng;
@@ -497,9 +494,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets automaticRadius
+     * Gets automaticRadius.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAutomaticRadius()
     {
@@ -507,9 +504,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets automaticRadius
+     * Sets automaticRadius.
      *
-     * @param string|null $automaticRadius automatically-computed radius
+     * @param null|string $automaticRadius automatically-computed radius
      *
      * @return self
      */
@@ -521,9 +518,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets exhaustiveFacetsCount
+     * Gets exhaustiveFacetsCount.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getExhaustiveFacetsCount()
     {
@@ -531,9 +528,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets exhaustiveFacetsCount
+     * Sets exhaustiveFacetsCount.
      *
-     * @param bool|null $exhaustiveFacetsCount indicates whether the facet count is exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveFacetsCount indicates whether the facet count is exhaustive (exact) or approximate
      *
      * @return self
      */
@@ -545,7 +542,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets exhaustiveNbHits
+     * Gets exhaustiveNbHits.
      *
      * @return bool
      */
@@ -555,7 +552,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets exhaustiveNbHits
+     * Sets exhaustiveNbHits.
      *
      * @param bool $exhaustiveNbHits indicates whether the number of hits `nbHits` is exhaustive (exact) or approximate
      *
@@ -569,9 +566,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets exhaustiveTypo
+     * Gets exhaustiveTypo.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getExhaustiveTypo()
     {
@@ -579,9 +576,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets exhaustiveTypo
+     * Sets exhaustiveTypo.
      *
-     * @param bool|null $exhaustiveTypo indicates whether the search for typos was exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveTypo indicates whether the search for typos was exhaustive (exact) or approximate
      *
      * @return self
      */
@@ -593,9 +590,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets facets
+     * Gets facets.
      *
-     * @return array<string,array<string,int>>|null
+     * @return null|array<string,array<string,int>>
      */
     public function getFacets()
     {
@@ -603,9 +600,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets facets
+     * Sets facets.
      *
-     * @param array<string,array<string,int>>|null $facets mapping of each facet name to the corresponding facet counts
+     * @param null|array<string,array<string,int>> $facets mapping of each facet name to the corresponding facet counts
      *
      * @return self
      */
@@ -617,9 +614,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets facetsStats
+     * Gets facetsStats.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>|null
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>
      */
     public function getFacetsStats()
     {
@@ -627,9 +624,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets facetsStats
+     * Sets facetsStats.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>|null $facetsStats statistics for numerical facets
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -641,7 +638,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
      * @return int
      */
@@ -651,7 +648,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
      * @param int $hitsPerPage number of hits per page
      *
@@ -659,11 +656,10 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
-        if (($hitsPerPage > 1000)) {
+        if ($hitsPerPage > 1000) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResult., must be smaller than or equal to 1000.');
         }
-        if (($hitsPerPage < 1)) {
+        if ($hitsPerPage < 1) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResult., must be bigger than or equal to 1.');
         }
 
@@ -673,9 +669,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets index
+     * Gets index.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getIndex()
     {
@@ -683,9 +679,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets index
+     * Sets index.
      *
-     * @param string|null $index index name used for the query
+     * @param null|string $index index name used for the query
      *
      * @return self
      */
@@ -697,9 +693,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets indexUsed
+     * Gets indexUsed.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getIndexUsed()
     {
@@ -707,9 +703,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets indexUsed
+     * Sets indexUsed.
      *
-     * @param string|null $indexUsed Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
+     * @param null|string $indexUsed Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
      *
      * @return self
      */
@@ -721,9 +717,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets message
+     * Gets message.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMessage()
     {
@@ -731,9 +727,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets message
+     * Sets message.
      *
-     * @param string|null $message warnings about the query
+     * @param null|string $message warnings about the query
      *
      * @return self
      */
@@ -745,7 +741,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets nbHits
+     * Gets nbHits.
      *
      * @return int
      */
@@ -755,7 +751,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets nbHits
+     * Sets nbHits.
      *
      * @param int $nbHits number of hits the search query matched
      *
@@ -769,7 +765,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets nbPages
+     * Gets nbPages.
      *
      * @return int
      */
@@ -779,7 +775,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets nbPages
+     * Sets nbPages.
      *
      * @param int $nbPages number of pages of results for the current query
      *
@@ -793,9 +789,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets nbSortedHits
+     * Gets nbSortedHits.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getNbSortedHits()
     {
@@ -803,9 +799,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets nbSortedHits
+     * Sets nbSortedHits.
      *
-     * @param int|null $nbSortedHits number of hits selected and sorted by the relevant sort algorithm
+     * @param null|int $nbSortedHits number of hits selected and sorted by the relevant sort algorithm
      *
      * @return self
      */
@@ -817,7 +813,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
      * @return int
      */
@@ -827,7 +823,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
      * @param int $page page to retrieve (the first page is `0`, not `1`)
      *
@@ -841,9 +837,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets redirect
+     * Gets redirect.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect
      */
     public function getRedirect()
     {
@@ -851,9 +847,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets redirect
+     * Sets redirect.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect|null $redirect redirect
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect $redirect redirect
      *
      * @return self
      */
@@ -865,9 +861,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets parsedQuery
+     * Gets parsedQuery.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getParsedQuery()
     {
@@ -875,9 +871,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets parsedQuery
+     * Sets parsedQuery.
      *
-     * @param string|null $parsedQuery Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
+     * @param null|string $parsedQuery Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
      *
      * @return self
      */
@@ -889,7 +885,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets processingTimeMS
+     * Gets processingTimeMS.
      *
      * @return int
      */
@@ -899,7 +895,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets processingTimeMS
+     * Sets processingTimeMS.
      *
      * @param int $processingTimeMS time the server took to process the request, in milliseconds
      *
@@ -913,9 +909,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets queryAfterRemoval
+     * Gets queryAfterRemoval.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQueryAfterRemoval()
     {
@@ -923,9 +919,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets queryAfterRemoval
+     * Sets queryAfterRemoval.
      *
-     * @param string|null $queryAfterRemoval markup text indicating which parts of the original query have been removed to retrieve a non-empty result set
+     * @param null|string $queryAfterRemoval markup text indicating which parts of the original query have been removed to retrieve a non-empty result set
      *
      * @return self
      */
@@ -937,9 +933,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets serverUsed
+     * Gets serverUsed.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getServerUsed()
     {
@@ -947,9 +943,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets serverUsed
+     * Sets serverUsed.
      *
-     * @param string|null $serverUsed host name of the server that processed the request
+     * @param null|string $serverUsed host name of the server that processed the request
      *
      * @return self
      */
@@ -961,9 +957,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets userData
+     * Gets userData.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getUserData()
     {
@@ -971,9 +967,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets userData
+     * Sets userData.
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */
@@ -985,9 +981,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets renderingContent
+     * Gets renderingContent.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -995,9 +991,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets renderingContent
+     * Sets renderingContent.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1009,7 +1005,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets hits
+     * Gets hits.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
      */
@@ -1019,7 +1015,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets hits
+     * Sets hits.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
      *
@@ -1033,7 +1029,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
      * @return string
      */
@@ -1043,7 +1039,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
      * @param string $query text to search for in an index
      *
@@ -1057,7 +1053,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets params
+     * Gets params.
      *
      * @return string
      */
@@ -1067,7 +1063,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets params
+     * Sets params.
      *
      * @param string $params URL-encoded string of all search parameters
      *
@@ -1081,7 +1077,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets facetHits
+     * Gets facetHits.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
      */
@@ -1091,7 +1087,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets facetHits
+     * Sets facetHits.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
      *
@@ -1103,6 +1099,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -1120,7 +1117,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -1130,10 +1127,8 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -1148,12 +1143,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

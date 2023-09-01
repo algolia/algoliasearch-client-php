@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * ABTestResponse Class Doc Comment
+ * ABTestResponse Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'index' => 'string',
         'abTestID' => 'int',
@@ -24,10 +23,10 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'index' => null,
         'abTestID' => null,
@@ -35,11 +34,11 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'index' => 'index',
         'abTestID' => 'abTestID',
@@ -47,38 +46,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,13 +152,13 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (!isset($this->container['index']) || null === $this->container['index']) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
+        if (!isset($this->container['abTestID']) || null === $this->container['abTestID']) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
+        if (!isset($this->container['taskID']) || null === $this->container['taskID']) {
             $invalidProperties[] = "'taskID' can't be null";
         }
 
@@ -168,17 +167,17 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets index
+     * Gets index.
      *
      * @return string
      */
@@ -188,7 +187,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets index
+     * Sets index.
      *
      * @param string $index A/B test index
      *
@@ -202,7 +201,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets abTestID
+     * Gets abTestID.
      *
      * @return int
      */
@@ -212,7 +211,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets abTestID
+     * Sets abTestID.
      *
      * @param int $abTestID unique A/B test ID
      *
@@ -226,7 +225,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets taskID
+     * Gets taskID.
      *
      * @return int
      */
@@ -236,7 +235,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets taskID
+     * Sets taskID.
      *
      * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
@@ -248,6 +247,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -265,7 +265,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -275,10 +275,8 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -293,12 +291,9 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

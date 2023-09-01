@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SynonymHit Class Doc Comment
+ * SynonymHit Class Doc Comment.
  *
  * @category Class
  *
  * @description Synonym object.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'type' => '\Algolia\AlgoliaSearch\Model\Search\SynonymType',
@@ -32,10 +30,10 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'type' => null,
@@ -48,11 +46,11 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'type' => 'type',
@@ -65,38 +63,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -112,7 +79,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -128,34 +95,14 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -188,6 +135,57 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -196,10 +194,10 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['type']) || $this->container['type'] === null) {
+        if (!isset($this->container['type']) || null === $this->container['type']) {
             $invalidProperties[] = "'type' can't be null";
         }
 
@@ -208,17 +206,17 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -228,7 +226,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID unique identifier of a synonym object
      *
@@ -242,7 +240,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets type
+     * Gets type.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\SynonymType
      */
@@ -252,7 +250,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets type
+     * Sets type.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
      *
@@ -266,9 +264,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets synonyms
+     * Gets synonyms.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getSynonyms()
     {
@@ -276,9 +274,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets synonyms
+     * Sets synonyms.
      *
-     * @param string[]|null $synonyms words or phrases considered equivalent
+     * @param null|string[] $synonyms words or phrases considered equivalent
      *
      * @return self
      */
@@ -290,9 +288,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets input
+     * Gets input.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getInput()
     {
@@ -300,9 +298,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets input
+     * Sets input.
      *
-     * @param string|null $input Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
+     * @param null|string $input Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
      *
      * @return self
      */
@@ -314,9 +312,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets word
+     * Gets word.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getWord()
     {
@@ -324,9 +322,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets word
+     * Sets word.
      *
-     * @param string|null $word Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
+     * @param null|string $word Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
      *
      * @return self
      */
@@ -338,9 +336,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets corrections
+     * Gets corrections.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getCorrections()
     {
@@ -348,9 +346,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets corrections
+     * Sets corrections.
      *
-     * @param string[]|null $corrections words to be matched in records
+     * @param null|string[] $corrections words to be matched in records
      *
      * @return self
      */
@@ -362,9 +360,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets placeholder
+     * Gets placeholder.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getPlaceholder()
     {
@@ -372,9 +370,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets placeholder
+     * Sets placeholder.
      *
-     * @param string|null $placeholder [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
+     * @param null|string $placeholder [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
      *
      * @return self
      */
@@ -386,9 +384,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Gets replacements
+     * Gets replacements.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReplacements()
     {
@@ -396,9 +394,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     }
 
     /**
-     * Sets replacements
+     * Sets replacements.
      *
-     * @param string[]|null $replacements Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
+     * @param null|string[] $replacements Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
      *
      * @return self
      */
@@ -408,6 +406,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -425,7 +424,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -435,10 +434,8 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -453,12 +450,9 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

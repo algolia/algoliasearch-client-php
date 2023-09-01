@@ -5,31 +5,29 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SynonymType Class Doc Comment
+ * SynonymType Class Doc Comment.
  *
  * @category Class
  *
  * @description Synonym type.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SynonymType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const SYNONYM = 'synonym';
+    public const SYNONYM = 'synonym';
 
-    const ONEWAYSYNONYM = 'onewaysynonym';
+    public const ONEWAYSYNONYM = 'onewaysynonym';
 
-    const ALTCORRECTION1 = 'altcorrection1';
+    public const ALTCORRECTION1 = 'altcorrection1';
 
-    const ALTCORRECTION2 = 'altcorrection2';
+    public const ALTCORRECTION2 = 'altcorrection2';
 
-    const PLACEHOLDER = 'placeholder';
+    public const PLACEHOLDER = 'placeholder';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -44,4 +42,3 @@ class SynonymType
         ];
     }
 }
-

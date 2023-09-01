@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * DictionaryEntryState Class Doc Comment
+ * DictionaryEntryState Class Doc Comment.
  *
  * @category Class
  *
  * @description Indicates whether a dictionary entry is active (&#x60;enabled&#x60;) or inactive (&#x60;disabled&#x60;).
- *
- * @package Algolia\AlgoliaSearch
  */
 class DictionaryEntryState
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ENABLED = 'enabled';
+    public const ENABLED = 'enabled';
 
-    const DISABLED = 'disabled';
+    public const DISABLED = 'disabled';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class DictionaryEntryState
         ];
     }
 }
-

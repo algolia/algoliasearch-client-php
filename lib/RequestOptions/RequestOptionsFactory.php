@@ -16,7 +16,6 @@ final class RequestOptionsFactory
 
     /**
      * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $options
-     * @param array                                                      $defaults
      *
      * @return \Algolia\AlgoliaSearch\RequestOptions\RequestOptions
      */
@@ -29,9 +28,7 @@ final class RequestOptionsFactory
         } elseif ($options instanceof RequestOptions) {
             $options = $this->create($options);
         } else {
-            throw new \InvalidArgumentException(
-                'RequestOptions can only be created from array or from RequestOptions object'
-            );
+            throw new \InvalidArgumentException('RequestOptions can only be created from array or from RequestOptions object');
         }
 
         return $options->addDefaultHeaders($this->config->getDefaultHeaders());
@@ -50,7 +47,7 @@ final class RequestOptionsFactory
             'headers' => [
                 'x-algolia-application-id' => $this->config->getAppId(),
                 'x-algolia-api-key' => $this->config->getAlgoliaApiKey(),
-                'User-Agent' => $this->config->getAlgoliaAgent() !== null
+                'User-Agent' => null !== $this->config->getAlgoliaAgent()
                         ? $this->config->getAlgoliaAgent()
                         : AlgoliaAgent::get($this->config->getClientName()),
                 'Content-Type' => 'application/json',
@@ -62,7 +59,7 @@ final class RequestOptionsFactory
             'connectTimeout' => $this->config->getConnectTimeout(),
         ];
         foreach ($options as $optionName => $value) {
-            if (is_array($value) && $optionName === 'headers') {
+            if (is_array($value) && 'headers' === $optionName) {
                 $headersToLowerCase = [];
                 foreach ($value as $key => $v) {
                     $headersToLowerCase[mb_strtolower($key)] = $v;

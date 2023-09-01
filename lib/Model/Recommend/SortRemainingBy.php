@@ -5,27 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * SortRemainingBy Class Doc Comment
+ * SortRemainingBy Class Doc Comment.
  *
  * @category Class
  *
  * @description How to display the remaining items:    - &#x60;count&#x60;: facet count (descending).   - &#x60;alpha&#x60;: alphabetical (ascending).   - &#x60;hidden&#x60;: show only pinned values.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SortRemainingBy
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const COUNT = 'count';
+    public const COUNT = 'count';
 
-    const ALPHA = 'alpha';
+    public const ALPHA = 'alpha';
 
-    const HIDDEN = 'hidden';
+    public const HIDDEN = 'hidden';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +36,3 @@ class SortRemainingBy
         ];
     }
 }
-

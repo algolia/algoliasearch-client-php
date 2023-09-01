@@ -12,13 +12,14 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 /**
- * AbtestingClient Class Doc Comment
+ * AbtestingClient Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class AbtestingClient
 {
+    public const VERSION = '4.0.0-alpha.78';
+
     /**
      * @var ApiWrapperInterface
      */
@@ -29,10 +30,6 @@ class AbtestingClient
      */
     protected $config;
 
-    /**
-     * @param AbtestingConfig $config
-     * @param ApiWrapperInterface $apiWrapper
-     */
     public function __construct(ApiWrapperInterface $apiWrapper, AbtestingConfig $config)
     {
         $this->config = $config;
@@ -40,7 +37,7 @@ class AbtestingClient
     }
 
     /**
-     * Instantiate the client with basic credentials and region
+     * Instantiate the client with basic credentials and region.
      *
      * @param string $appId  Application ID
      * @param string $apiKey Algolia API Key
@@ -48,14 +45,13 @@ class AbtestingClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de','us'];
+        $allowedRegions = ['de', 'us'];
 
         if (
-
-            ($region !== null && !in_array($region, $allowedRegions, true))
+            null !== $region && !in_array($region, $allowedRegions, true)
         ) {
             throw new AlgoliaException(
-                '`region` must be one of the following: ' .
+                '`region` must be one of the following: '.
                     implode(', ', $allowedRegions)
             );
         }
@@ -66,7 +62,7 @@ class AbtestingClient
     }
 
     /**
-     * Instantiate the client with configuration
+     * Instantiate the client with configuration.
      *
      * @param AbtestingConfig $config Configuration
      */
@@ -84,20 +80,17 @@ class AbtestingClient
     }
 
     /**
-     * Gets the cluster hosts depending on the config
-     *
-     * @param AbtestingConfig $config
+     * Gets the cluster hosts depending on the config.
      *
      * @return ClusterHosts
      */
     public static function getClusterHosts(AbtestingConfig $config)
     {
-
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
                 str_replace('{region}', $config->getRegion(), 'analytics.{region}.algolia.com') :
                 'analytics.algolia.com';
             $clusterHosts = ClusterHosts::create($url);
@@ -118,15 +111,15 @@ class AbtestingClient
      * Create an A/B test.
      *
      * @param array $addABTestsRequest addABTestsRequest (required)
-     * - $addABTestsRequest['name'] => (string) A/B test name. (required)
-     * - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
-     * - $addABTestsRequest['endAt'] => (string) End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required)
+     *                                 - $addABTestsRequest['name'] => (string) A/B test name. (required)
+     *                                 - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
+     *                                 - $addABTestsRequest['endAt'] => (string) End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
      */
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
@@ -142,15 +135,15 @@ class AbtestingClient
         $headers = [];
         $httpBody = $addABTestsRequest;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -168,12 +161,12 @@ class AbtestingClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -181,16 +174,16 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Delete an A/B test.
      *
-     * @param int $id Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
      */
     public function deleteABTest($id, $requestOptions = [])
     {
@@ -207,7 +200,7 @@ class AbtestingClient
         $httpBody = null;
 
         // path params
-        if ($id !== null) {
+        if (null !== $id) {
             $resourcePath = str_replace(
                 '{id}',
                 ObjectSerializer::toPathValue($id),
@@ -215,15 +208,15 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -241,12 +234,12 @@ class AbtestingClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -254,16 +247,16 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get A/B test details.
      *
-     * @param int $id Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTest
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest|array<string, mixed>
      */
     public function getABTest($id, $requestOptions = [])
     {
@@ -280,7 +273,7 @@ class AbtestingClient
         $httpBody = null;
 
         // path params
-        if ($id !== null) {
+        if (null !== $id) {
             $resourcePath = str_replace(
                 '{id}',
                 ObjectSerializer::toPathValue($id),
@@ -288,54 +281,53 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * List all A/B tests.
      *
-     * @param int $offset Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param int $limit Number of records to return (page size). (optional, default to 10)
-     * @param string $indexPrefix Only return A/B tests for indices starting with this prefix. (optional)
-     * @param string $indexSuffix Only return A/B tests for indices ending with this suffix. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
+     * @param string $indexPrefix    Only return A/B tests for indices starting with this prefix. (optional)
+     * @param string $indexSuffix    Only return A/B tests for indices ending with this suffix. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse|array<string, mixed>
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
-
         $resourcePath = '/2/abtests';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        if ($offset !== null) {
+        if (null !== $offset) {
             $queryParameters['offset'] = $offset;
         }
 
-        if ($limit !== null) {
+        if (null !== $limit) {
             $queryParameters['limit'] = $limit;
         }
 
-        if ($indexPrefix !== null) {
+        if (null !== $indexPrefix) {
             $queryParameters['indexPrefix'] = $indexPrefix;
         }
 
-        if ($indexSuffix !== null) {
+        if (null !== $indexSuffix) {
             $queryParameters['indexSuffix'] = $indexSuffix;
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -351,14 +343,14 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -366,16 +358,16 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -391,14 +383,14 @@ class AbtestingClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -406,16 +398,16 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Stop an A/B test.
      *
-     * @param int $id Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
      */
     public function stopABTest($id, $requestOptions = [])
     {
@@ -432,7 +424,7 @@ class AbtestingClient
         $httpBody = null;
 
         // path params
-        if ($id !== null) {
+        if (null !== $id) {
             $resourcePath = str_replace(
                 '{id}',
                 ObjectSerializer::toPathValue($id),
@@ -440,7 +432,7 @@ class AbtestingClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
@@ -458,7 +450,7 @@ class AbtestingClient
 
         return $this->api->sendRequest(
             $method,
-            $resourcePath . ($query ? "?{$query}" : ''),
+            $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
             $useReadTransporter

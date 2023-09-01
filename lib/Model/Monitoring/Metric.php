@@ -5,30 +5,29 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Metric Class Doc Comment
+ * Metric Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Metric
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const AVG_BUILD_TIME = 'avg_build_time';
+    public const AVG_BUILD_TIME = 'avg_build_time';
 
-    const SSD_USAGE = 'ssd_usage';
+    public const SSD_USAGE = 'ssd_usage';
 
-    const RAM_SEARCH_USAGE = 'ram_search_usage';
+    public const RAM_SEARCH_USAGE = 'ram_search_usage';
 
-    const RAM_INDEXING_USAGE = 'ram_indexing_usage';
+    public const RAM_INDEXING_USAGE = 'ram_indexing_usage';
 
-    const CPU_USAGE = 'cpu_usage';
+    public const CPU_USAGE = 'cpu_usage';
 
-    const STAR = '*';
+    public const STAR = '*';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -44,4 +43,3 @@ class Metric
         ];
     }
 }
-

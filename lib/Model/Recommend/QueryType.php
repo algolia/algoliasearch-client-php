@@ -5,27 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * QueryType Class Doc Comment
+ * QueryType Class Doc Comment.
  *
  * @category Class
  *
  * @description Determines how query words are [interpreted as prefixes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/prefix-searching/).
- *
- * @package Algolia\AlgoliaSearch
  */
 class QueryType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const PREFIX_LAST = 'prefixLast';
+    public const PREFIX_LAST = 'prefixLast';
 
-    const PREFIX_ALL = 'prefixAll';
+    public const PREFIX_ALL = 'prefixAll';
 
-    const PREFIX_NONE = 'prefixNone';
+    public const PREFIX_NONE = 'prefixNone';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +36,3 @@ class QueryType
         ];
     }
 }
-

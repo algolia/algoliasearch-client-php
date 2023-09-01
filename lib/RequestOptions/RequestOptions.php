@@ -57,7 +57,7 @@ final class RequestOptions
     }
 
     /**
-     * @param $headers
+     * @param mixed $headers
      *
      * @return $this
      */
@@ -150,7 +150,7 @@ final class RequestOptions
      * Add a list of query parameters name/value pairs.
      * If a value already exists for a name, it will be overwritten.
      *
-     * @param $parameters
+     * @param mixed $parameters
      *
      * @return $this
      */
@@ -286,7 +286,7 @@ final class RequestOptions
     /**
      * Replace all existing body parameters with the given name/value pairs.
      *
-     * @param $body
+     * @param mixed $body
      *
      * @return $this
      */

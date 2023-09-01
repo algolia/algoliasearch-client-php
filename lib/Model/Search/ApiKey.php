@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ApiKey Class Doc Comment
+ * ApiKey Class Doc Comment.
  *
  * @category Class
  *
  * @description API key object.
- *
- * @package Algolia\AlgoliaSearch
  */
 class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'acl' => '\Algolia\AlgoliaSearch\Model\Search\Acl[]',
         'description' => 'string',
@@ -32,10 +30,10 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'acl' => null,
         'description' => null,
@@ -48,11 +46,11 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'acl' => 'acl',
         'description' => 'description',
@@ -65,38 +63,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -112,7 +79,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -128,34 +95,14 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -188,6 +135,57 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -196,7 +194,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['acl']) || $this->container['acl'] === null) {
+        if (!isset($this->container['acl']) || null === $this->container['acl']) {
             $invalidProperties[] = "'acl' can't be null";
         }
 
@@ -205,17 +203,17 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets acl
+     * Gets acl.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
      */
@@ -225,7 +223,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets acl
+     * Sets acl.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
@@ -239,9 +237,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets description
+     * Gets description.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDescription()
     {
@@ -249,9 +247,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets description
+     * Sets description.
      *
-     * @param string|null $description description of an API key for you and your team members
+     * @param null|string $description description of an API key for you and your team members
      *
      * @return self
      */
@@ -263,9 +261,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets indexes
+     * Gets indexes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getIndexes()
     {
@@ -273,9 +271,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets indexes
+     * Sets indexes.
      *
-     * @param string[]|null $indexes Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
+     * @param null|string[] $indexes Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
      *
      * @return self
      */
@@ -287,9 +285,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets maxHitsPerQuery
+     * Gets maxHitsPerQuery.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxHitsPerQuery()
     {
@@ -297,9 +295,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets maxHitsPerQuery
+     * Sets maxHitsPerQuery.
      *
-     * @param int|null $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced. > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
+     * @param null|int $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced. > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -311,9 +309,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets maxQueriesPerIPPerHour
+     * Gets maxQueriesPerIPPerHour.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxQueriesPerIPPerHour()
     {
@@ -321,9 +319,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets maxQueriesPerIPPerHour
+     * Sets maxQueriesPerIPPerHour.
      *
-     * @param int|null $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). Each time an API call is performed with this key, a check is performed. If there were more than the specified number of calls within the last hour, the API returns an error with the status code `429` (Too Many Requests).  > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
+     * @param null|int $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). Each time an API call is performed with this key, a check is performed. If there were more than the specified number of calls within the last hour, the API returns an error with the status code `429` (Too Many Requests).  > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -335,9 +333,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets queryParameters
+     * Gets queryParameters.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQueryParameters()
     {
@@ -345,9 +343,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets queryParameters
+     * Sets queryParameters.
      *
-     * @param string|null $queryParameters Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string.
+     * @param null|string $queryParameters Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string.
      *
      * @return self
      */
@@ -359,9 +357,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets referers
+     * Gets referers.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReferers()
     {
@@ -369,9 +367,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets referers
+     * Sets referers.
      *
-     * @param string[]|null $referers Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\".
+     * @param null|string[] $referers Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\".
      *
      * @return self
      */
@@ -383,9 +381,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets validity
+     * Gets validity.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getValidity()
     {
@@ -393,9 +391,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets validity
+     * Sets validity.
      *
-     * @param int|null $validity Validity duration of a key (in seconds).  The key will automatically be removed after this time has expired. The default value of 0 never expires. Short-lived API keys are useful to grant temporary access to your data. For example, in mobile apps, you can't [control when users update your app](https://www.algolia.com/doc/guides/security/security-best-practices/#use-secured-api-keys-in-mobile-apps). So instead of encoding keys into your app as you would for a web app, you should dynamically fetch them from your mobile app's backend.
+     * @param null|int $validity Validity duration of a key (in seconds).  The key will automatically be removed after this time has expired. The default value of 0 never expires. Short-lived API keys are useful to grant temporary access to your data. For example, in mobile apps, you can't [control when users update your app](https://www.algolia.com/doc/guides/security/security-best-practices/#use-secured-api-keys-in-mobile-apps). So instead of encoding keys into your app as you would for a web app, you should dynamically fetch them from your mobile app's backend.
      *
      * @return self
      */
@@ -405,6 +403,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -422,7 +421,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -432,10 +431,8 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -450,12 +447,9 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingFacetsQuery Class Doc Comment
+ * TrendingFacetsQuery Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'facetName' => 'string',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
@@ -26,10 +25,10 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facetName' => null,
         'model' => null,
@@ -39,11 +38,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'facetName' => 'facetName',
         'model' => 'model',
@@ -53,38 +52,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -97,7 +65,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -110,34 +78,14 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -161,6 +109,57 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -169,10 +168,10 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facetName']) || $this->container['facetName'] === null) {
+        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
             $invalidProperties[] = "'facetName' can't be null";
         }
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
         if (isset($this->container['threshold']) && ($this->container['threshold'] > 100)) {
@@ -188,17 +187,17 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets facetName
+     * Gets facetName.
      *
      * @return string
      */
@@ -208,7 +207,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets facetName
+     * Sets facetName.
      *
      * @param string $facetName facet name for trending models
      *
@@ -222,9 +221,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets model
+     * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
      */
     public function getModel()
     {
@@ -232,9 +231,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets model
+     * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel|null $model model
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
      *
      * @return self
      */
@@ -246,7 +245,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets indexName
+     * Gets indexName.
      *
      * @return string
      */
@@ -256,7 +255,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets indexName
+     * Sets indexName.
      *
      * @param string $indexName algolia index name
      *
@@ -270,9 +269,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets threshold
+     * Gets threshold.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getThreshold()
     {
@@ -280,15 +279,14 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets threshold
+     * Sets threshold.
      *
-     * @param int|null $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
+     * @param null|int $threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
      *
      * @return self
      */
     public function setThreshold($threshold)
     {
-
         if (!is_null($threshold) && ($threshold > 100)) {
             throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingFacetsQuery., must be smaller than or equal to 100.');
         }
@@ -302,9 +300,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets maxRecommendations
+     * Gets maxRecommendations.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxRecommendations()
     {
@@ -312,9 +310,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets maxRecommendations
+     * Sets maxRecommendations.
      *
-     * @param int|null $maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+     * @param null|int $maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
      *
      * @return self
      */
@@ -324,6 +322,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -341,7 +340,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -351,10 +350,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -369,12 +366,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

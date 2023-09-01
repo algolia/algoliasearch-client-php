@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Type Class Doc Comment
+ * Type Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Type
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const CLUSTER = 'cluster';
+    public const CLUSTER = 'cluster';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class Type
         ];
     }
 }
-

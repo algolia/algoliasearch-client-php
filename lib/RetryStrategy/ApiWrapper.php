@@ -132,7 +132,8 @@ final class ApiWrapper implements ApiWrapperInterface
     ) {
         $uri = $this->createUri($path)
             ->withQuery($requestOptions->getBuiltQueryParameters())
-            ->withScheme('https');
+            ->withScheme('https')
+        ;
 
         $body = isset($data)
             ? array_merge($data, $requestOptions->getBody())
@@ -198,7 +199,7 @@ final class ApiWrapper implements ApiWrapperInterface
                 throw $e;
             }
 
-            $retry++;
+            ++$retry;
         }
 
         throw new UnreachableException();
@@ -212,15 +213,15 @@ final class ApiWrapper implements ApiWrapperInterface
         $statusCode = $response->getStatusCode();
 
         if (
-            0 === $statusCode ||
-            ($statusCode >= 100 && $statusCode < 200) ||
-            $statusCode >= 500
+            0 === $statusCode
+            || ($statusCode >= 100 && $statusCode < 200)
+            || $statusCode >= 500
         ) {
             $reason = $response->getReasonPhrase();
 
             if (
-                null === $response->getReasonPhrase() ||
-                '' === $response->getReasonPhrase()
+                null === $response->getReasonPhrase()
+                || '' === $response->getReasonPhrase()
             ) {
                 $reason =
                     $statusCode >= 500
@@ -228,26 +229,19 @@ final class ApiWrapper implements ApiWrapperInterface
                         : 'Unreachable Host';
             }
 
-            throw new RetriableException(
-                'Retriable failure on ' .
-                    $request->getUri()->getHost() .
-                    ': ' .
-                    $reason,
-                $statusCode
-            );
+            throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode);
         }
 
         $responseArray = Helpers::json_decode($body, true);
 
         if (404 === $statusCode) {
             throw new NotFoundException($responseArray['message'], $statusCode);
-        } elseif ($statusCode >= 400) {
-            throw new BadRequestException(
-                $responseArray['message'],
-                $statusCode
-            );
-        } elseif (2 !== (int) ($statusCode / 100)) {
-            throw new AlgoliaException($statusCode . ': ' . $body, $statusCode);
+        }
+        if ($statusCode >= 400) {
+            throw new BadRequestException($responseArray['message'], $statusCode);
+        }
+        if (2 !== (int) ($statusCode / 100)) {
+            throw new AlgoliaException($statusCode.': '.$body, $statusCode);
         }
 
         return $responseArray;
@@ -257,13 +251,12 @@ final class ApiWrapper implements ApiWrapperInterface
     {
         if ($uri instanceof UriInterface) {
             return $uri;
-        } elseif (is_string($uri)) {
+        }
+        if (is_string($uri)) {
             return new Uri($uri);
         }
 
-        throw new \InvalidArgumentException(
-            'URI must be a string or UriInterface'
-        );
+        throw new \InvalidArgumentException('URI must be a string or UriInterface');
     }
 
     private function createRequest(
@@ -280,9 +273,7 @@ final class ApiWrapper implements ApiWrapperInterface
             } else {
                 $body = \json_encode($body, $this->jsonOptions);
                 if (JSON_ERROR_NONE !== json_last_error()) {
-                    throw new \InvalidArgumentException(
-                        'json_encode error: ' . json_last_error_msg()
-                    );
+                    throw new \InvalidArgumentException('json_encode error: '.json_last_error_msg());
                 }
             }
         }
@@ -296,6 +287,6 @@ final class ApiWrapper implements ApiWrapperInterface
      */
     private function log($level, $message, array $context = [])
     {
-        $this->logger->log($level, 'Algolia API client: ' . $message, $context);
+        $this->logger->log($level, 'Algolia API client: '.$message, $context);
     }
 }

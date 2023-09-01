@@ -12,13 +12,14 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 /**
- * QuerySuggestionsClient Class Doc Comment
+ * QuerySuggestionsClient Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class QuerySuggestionsClient
 {
+    public const VERSION = '4.0.0-alpha.78';
+
     /**
      * @var ApiWrapperInterface
      */
@@ -29,10 +30,6 @@ class QuerySuggestionsClient
      */
     protected $config;
 
-    /**
-     * @param QuerySuggestionsConfig $config
-     * @param ApiWrapperInterface $apiWrapper
-     */
     public function __construct(ApiWrapperInterface $apiWrapper, QuerySuggestionsConfig $config)
     {
         $this->config = $config;
@@ -40,7 +37,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Instantiate the client with basic credentials and region
+     * Instantiate the client with basic credentials and region.
      *
      * @param string $appId  Application ID
      * @param string $apiKey Algolia API Key
@@ -48,14 +45,14 @@ class QuerySuggestionsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu','us'];
+        $allowedRegions = ['eu', 'us'];
 
         if (
-            $region === null ||
-            ($region !== null && !in_array($region, $allowedRegions, true))
+            null === $region
+            || (null !== $region && !in_array($region, $allowedRegions, true))
         ) {
             throw new AlgoliaException(
-                '`region` is required and must be one of the following: ' .
+                '`region` is required and must be one of the following: '.
                     implode(', ', $allowedRegions)
             );
         }
@@ -66,7 +63,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Instantiate the client with configuration
+     * Instantiate the client with configuration.
      *
      * @param QuerySuggestionsConfig $config Configuration
      */
@@ -84,20 +81,17 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Gets the cluster hosts depending on the config
-     *
-     * @param QuerySuggestionsConfig $config
+     * Gets the cluster hosts depending on the config.
      *
      * @return ClusterHosts
      */
     public static function getClusterHosts(QuerySuggestionsConfig $config)
     {
-
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
                 str_replace('{region}', $config->getRegion(), 'query-suggestions.{region}.algolia.com') :
                 '';
             $clusterHosts = ClusterHosts::create($url);
@@ -123,7 +117,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
      */
     public function createConfig($querySuggestionsConfigurationWithIndex, $requestOptions = [])
     {
@@ -139,15 +133,15 @@ class QuerySuggestionsClient
         $headers = [];
         $httpBody = $querySuggestionsConfigurationWithIndex;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -165,12 +159,12 @@ class QuerySuggestionsClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -178,16 +172,16 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Delete a configuration.
      *
-     * @param string $indexName Query Suggestions index name. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
      */
     public function deleteConfig($indexName, $requestOptions = [])
     {
@@ -204,7 +198,7 @@ class QuerySuggestionsClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -212,15 +206,15 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -238,12 +232,12 @@ class QuerySuggestionsClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -251,7 +245,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -259,26 +253,25 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse[]|array<string, mixed>
      */
     public function getAllConfigs($requestOptions = [])
     {
-
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get a configuration.
      *
-     * @param string $indexName Query Suggestions index name. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse|array<string, mixed>
      */
     public function getConfig($indexName, $requestOptions = [])
     {
@@ -295,7 +288,7 @@ class QuerySuggestionsClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -303,16 +296,16 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get configuration status.
      *
-     * @param string $indexName Query Suggestions index name. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\GetConfigStatus200Response
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\GetConfigStatus200Response|array<string, mixed>
      */
     public function getConfigStatus($indexName, $requestOptions = [])
     {
@@ -329,7 +322,7 @@ class QuerySuggestionsClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -337,16 +330,16 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get logs.
      *
-     * @param string $indexName Query Suggestions index name. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Query Suggestions index name. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\GetLogFile200Response
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\GetLogFile200Response|array<string, mixed>
      */
     public function getLogFile($indexName, $requestOptions = [])
     {
@@ -363,7 +356,7 @@ class QuerySuggestionsClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -371,16 +364,16 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -396,14 +389,14 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -411,16 +404,16 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -436,14 +429,14 @@ class QuerySuggestionsClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -451,25 +444,25 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Update a configuration.
      *
-     * @param string $indexName Query Suggestions index name. (required)
-     * @param array $querySuggestionsConfiguration querySuggestionsConfiguration (required)
-     * - $querySuggestionsConfiguration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
-     * - $querySuggestionsConfiguration['languages'] => (array)
-     * - $querySuggestionsConfiguration['exclude'] => (array) Patterns to exclude from query suggestions.
-     * - $querySuggestionsConfiguration['enablePersonalization'] => (bool) Turn on personalized query suggestions.
-     * - $querySuggestionsConfiguration['allowSpecialCharacters'] => (bool) Allow suggestions with special characters.
+     * @param string $indexName                     Query Suggestions index name. (required)
+     * @param array  $querySuggestionsConfiguration querySuggestionsConfiguration (required)
+     *                                              - $querySuggestionsConfiguration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
+     *                                              - $querySuggestionsConfiguration['languages'] => (array)
+     *                                              - $querySuggestionsConfiguration['exclude'] => (array) Patterns to exclude from query suggestions.
+     *                                              - $querySuggestionsConfiguration['enablePersonalization'] => (bool) Turn on personalized query suggestions.
+     *                                              - $querySuggestionsConfiguration['allowSpecialCharacters'] => (bool) Allow suggestions with special characters.
      *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfiguration
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
      */
     public function updateConfig($indexName, $querySuggestionsConfiguration, $requestOptions = [])
     {
@@ -492,7 +485,7 @@ class QuerySuggestionsClient
         $httpBody = $querySuggestionsConfiguration;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -500,7 +493,7 @@ class QuerySuggestionsClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
@@ -518,7 +511,7 @@ class QuerySuggestionsClient
 
         return $this->api->sendRequest(
             $method,
-            $resourcePath . ($query ? "?{$query}" : ''),
+            $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
             $useReadTransporter

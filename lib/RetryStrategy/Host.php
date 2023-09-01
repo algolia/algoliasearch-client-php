@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\RetryStrategy;
  */
 final class Host
 {
+    public const TTL = 300; // 5 minutes
     private $url;
 
     private $priority;
@@ -14,8 +15,6 @@ final class Host
     private $up = true;
 
     private $lastCheck;
-
-    const TTL = 300; // 5 minutes
 
     public function __construct($url, $priority = 0)
     {

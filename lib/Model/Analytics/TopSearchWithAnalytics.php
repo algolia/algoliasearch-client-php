@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * TopSearchWithAnalytics Class Doc Comment
+ * TopSearchWithAnalytics Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
@@ -30,10 +29,10 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
@@ -47,11 +46,11 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'search' => 'search',
         'count' => 'count',
@@ -65,38 +64,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -113,7 +81,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -130,34 +98,14 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -193,6 +141,57 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -201,39 +200,39 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || $this->container['search'] === null) {
+        if (!isset($this->container['search']) || null === $this->container['search']) {
             $invalidProperties[] = "'search' can't be null";
         }
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (!isset($this->container['count']) || null === $this->container['count']) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['clickThroughRate']) || $this->container['clickThroughRate'] === null) {
+        if (!isset($this->container['clickThroughRate']) || null === $this->container['clickThroughRate']) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if (($this->container['clickThroughRate'] > 1)) {
+        if ($this->container['clickThroughRate'] > 1) {
             $invalidProperties[] = "invalid value for 'clickThroughRate', must be smaller than or equal to 1.";
         }
 
-        if (($this->container['clickThroughRate'] < 0)) {
+        if ($this->container['clickThroughRate'] < 0) {
             $invalidProperties[] = "invalid value for 'clickThroughRate', must be bigger than or equal to 0.";
         }
 
-        if (!isset($this->container['averageClickPosition']) || $this->container['averageClickPosition'] === null) {
+        if (!isset($this->container['averageClickPosition']) || null === $this->container['averageClickPosition']) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
-        if (!isset($this->container['conversionRate']) || $this->container['conversionRate'] === null) {
+        if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if (!isset($this->container['trackedSearchCount']) || $this->container['trackedSearchCount'] === null) {
+        if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['clickCount']) || $this->container['clickCount'] === null) {
+        if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || $this->container['conversionCount'] === null) {
+        if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (!isset($this->container['nbHits']) || $this->container['nbHits'] === null) {
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
 
@@ -242,17 +241,17 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets search
+     * Gets search.
      *
      * @return string
      */
@@ -262,7 +261,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets search
+     * Sets search.
      *
      * @param string $search user query
      *
@@ -276,7 +275,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets count
+     * Gets count.
      *
      * @return int
      */
@@ -286,7 +285,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets count
+     * Sets count.
      *
      * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
      *
@@ -300,7 +299,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets clickThroughRate
+     * Gets clickThroughRate.
      *
      * @return float
      */
@@ -310,7 +309,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets clickThroughRate
+     * Sets clickThroughRate.
      *
      * @param float $clickThroughRate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
@@ -318,11 +317,10 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function setClickThroughRate($clickThroughRate)
     {
-
-        if (($clickThroughRate > 1)) {
+        if ($clickThroughRate > 1) {
             throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be smaller than or equal to 1.');
         }
-        if (($clickThroughRate < 0)) {
+        if ($clickThroughRate < 0) {
             throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
         }
 
@@ -332,7 +330,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets averageClickPosition
+     * Gets averageClickPosition.
      *
      * @return int
      */
@@ -342,7 +340,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets averageClickPosition
+     * Sets averageClickPosition.
      *
      * @param int $averageClickPosition Average [position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) of clicked search result.
      *
@@ -356,7 +354,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets conversionRate
+     * Gets conversionRate.
      *
      * @return float
      */
@@ -366,7 +364,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets conversionRate
+     * Sets conversionRate.
      *
      * @param float $conversionRate [Conversion rate (CR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
      *
@@ -380,7 +378,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets trackedSearchCount
+     * Gets trackedSearchCount.
      *
      * @return int
      */
@@ -390,7 +388,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets trackedSearchCount
+     * Sets trackedSearchCount.
      *
      * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
      *
@@ -404,7 +402,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets clickCount
+     * Gets clickCount.
      *
      * @return int
      */
@@ -414,7 +412,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets clickCount
+     * Sets clickCount.
      *
      * @param int $clickCount number of click events
      *
@@ -428,7 +426,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets conversionCount
+     * Gets conversionCount.
      *
      * @return int
      */
@@ -438,7 +436,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets conversionCount
+     * Sets conversionCount.
      *
      * @param int $conversionCount number of converted clicks
      *
@@ -452,7 +450,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets nbHits
+     * Gets nbHits.
      *
      * @return int
      */
@@ -462,7 +460,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets nbHits
+     * Sets nbHits.
      *
      * @param int $nbHits number of hits the search query matched
      *
@@ -474,6 +472,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -491,7 +490,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -501,10 +500,8 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -519,12 +516,9 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

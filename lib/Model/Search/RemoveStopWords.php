@@ -5,57 +5,84 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * RemoveStopWords Class Doc Comment
+ * RemoveStopWords Class Doc Comment.
  *
  * @category Class
  *
  * @description Removes stop (common) words from the query before executing it. &#x60;removeStopWords&#x60; is used in conjunction with the &#x60;queryLanguages&#x60; setting. _list_: language ISO codes for which stop words should be enabled. This list will override any values that you may have set in &#x60;queryLanguages&#x60;. _true_: enables the stop words feature, ensuring that stop words are removed from consideration in a search. The languages supported here are either [every language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) (this is the default) or those set by &#x60;queryLanguages&#x60;. _false_: turns off the stop words feature, allowing stop words to be taken into account in a search.
- *
- * @package Algolia\AlgoliaSearch
  */
 class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
-
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
-
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
-
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @var string[]
+     */
+    protected static $setters = [
+    ];
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @var string[]
+     */
+    protected static $getters = [
+    ];
+
+    /**
+     * Associative array for storing property values.
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
+
+    /**
+     * Constructor.
+     *
+     * @param mixed[] $data Associated array of property values
+     */
+    public function __construct(array $data = null)
+    {
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
     public static function attributeMap()
     {
         return self::$attributeMap;
     }
 
     /**
-     * Array of property to type mappings. Used for (de)serialization
+     * Array of property to type mappings. Used for (de)serialization.
      *
      * @return array
      */
@@ -65,7 +92,7 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
+     * Array of property to format mappings. Used for (de)serialization.
      *
      * @return array
      */
@@ -75,25 +102,7 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @var string[]
-     */
-    protected static $setters = [
-
-    ];
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @var string[]
-     */
-    protected static $getters = [
-
-    ];
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @return array
      */
@@ -103,7 +112,7 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @return array
      */
@@ -113,42 +122,24 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
-
-    /**
-     * Constructor
-     *
-     * @param mixed[] $data Associated array of property values
-     */
-    public function __construct(array $data = null)
-    {
-    }
-
-    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
@@ -168,7 +159,7 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -178,10 +169,8 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -196,12 +185,9 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

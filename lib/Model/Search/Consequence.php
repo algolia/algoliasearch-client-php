@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Consequence Class Doc Comment
+ * Consequence Class Doc Comment.
  *
  * @category Class
  *
  * @description [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'params' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams',
         'promote' => '\Algolia\AlgoliaSearch\Model\Search\Promote[]',
@@ -29,10 +27,10 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'params' => null,
         'promote' => null,
@@ -42,11 +40,11 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'params' => 'params',
         'promote' => 'promote',
@@ -56,38 +54,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -100,7 +67,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -113,34 +80,14 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -164,32 +111,81 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets params
+     * Gets params.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ConsequenceParams|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams
      */
     public function getParams()
     {
@@ -197,9 +193,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets params
+     * Sets params.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceParams|null $params params
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams $params params
      *
      * @return self
      */
@@ -211,9 +207,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets promote
+     * Gets promote.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Promote[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Promote[]
      */
     public function getPromote()
     {
@@ -221,9 +217,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets promote
+     * Sets promote.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Promote[]|null $promote records to promote
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Promote[] $promote records to promote
      *
      * @return self
      */
@@ -235,9 +231,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets filterPromotes
+     * Gets filterPromotes.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getFilterPromotes()
     {
@@ -245,9 +241,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets filterPromotes
+     * Sets filterPromotes.
      *
-     * @param bool|null $filterPromotes Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
+     * @param null|bool $filterPromotes Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
      *
      * @return self
      */
@@ -259,9 +255,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets hide
+     * Gets hide.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]
      */
     public function getHide()
     {
@@ -269,9 +265,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets hide
+     * Sets hide.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]|null $hide Records to hide. By default, you can hide up to 50 records per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[] $hide Records to hide. By default, you can hide up to 50 records per rule.
      *
      * @return self
      */
@@ -283,9 +279,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets userData
+     * Gets userData.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getUserData()
     {
@@ -293,9 +289,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets userData
+     * Sets userData.
      *
-     * @param object|null $userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
+     * @param null|object $userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
      *
      * @return self
      */
@@ -305,6 +301,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -322,7 +319,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -332,10 +329,8 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -350,12 +345,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

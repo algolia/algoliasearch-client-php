@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * UserHit Class Doc Comment
+ * UserHit Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userID' => 'string',
         'clusterName' => 'string',
@@ -27,10 +26,10 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userID' => null,
         'clusterName' => null,
@@ -41,11 +40,11 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'userID' => 'userID',
         'clusterName' => 'clusterName',
@@ -56,38 +55,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -101,7 +69,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -115,34 +83,14 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -169,6 +117,57 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -177,26 +176,26 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userID']) || $this->container['userID'] === null) {
+        if (!isset($this->container['userID']) || null === $this->container['userID']) {
             $invalidProperties[] = "'userID' can't be null";
         }
         if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $this->container['userID'])) {
             $invalidProperties[] = "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
         }
 
-        if (!isset($this->container['clusterName']) || $this->container['clusterName'] === null) {
+        if (!isset($this->container['clusterName']) || null === $this->container['clusterName']) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
-        if (!isset($this->container['nbRecords']) || $this->container['nbRecords'] === null) {
+        if (!isset($this->container['nbRecords']) || null === $this->container['nbRecords']) {
             $invalidProperties[] = "'nbRecords' can't be null";
         }
-        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
+        if (!isset($this->container['dataSize']) || null === $this->container['dataSize']) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['highlightResult']) || $this->container['highlightResult'] === null) {
+        if (!isset($this->container['highlightResult']) || null === $this->container['highlightResult']) {
             $invalidProperties[] = "'highlightResult' can't be null";
         }
 
@@ -205,17 +204,17 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets userID
+     * Gets userID.
      *
      * @return string
      */
@@ -225,7 +224,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets userID
+     * Sets userID.
      *
      * @param string $userID userID of the user
      *
@@ -233,9 +232,8 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      */
     public function setUserID($userID)
     {
-
-        if ((!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID))) {
-            throw new \InvalidArgumentException("invalid value for $userID when calling UserHit., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.");
+        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
+            throw new \InvalidArgumentException("invalid value for {$userID} when calling UserHit., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.");
         }
 
         $this->container['userID'] = $userID;
@@ -244,7 +242,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets clusterName
+     * Gets clusterName.
      *
      * @return string
      */
@@ -254,7 +252,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets clusterName
+     * Sets clusterName.
      *
      * @param string $clusterName cluster name
      *
@@ -268,7 +266,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets nbRecords
+     * Gets nbRecords.
      *
      * @return int
      */
@@ -278,7 +276,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets nbRecords
+     * Sets nbRecords.
      *
      * @param int $nbRecords number of records in the cluster
      *
@@ -292,7 +290,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets dataSize
+     * Gets dataSize.
      *
      * @return int
      */
@@ -302,7 +300,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets dataSize
+     * Sets dataSize.
      *
      * @param int $dataSize data size taken by all the users assigned to the cluster
      *
@@ -316,7 +314,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -326,7 +324,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID userID of the requested user. Same as userID.
      *
@@ -340,7 +338,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets highlightResult
+     * Gets highlightResult.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult
      */
@@ -350,7 +348,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Sets highlightResult
+     * Sets highlightResult.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult $highlightResult highlightResult
      *
@@ -362,6 +360,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -379,7 +378,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -389,10 +388,8 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -407,12 +404,9 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

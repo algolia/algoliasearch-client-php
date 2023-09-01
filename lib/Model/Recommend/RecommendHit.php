@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendHit Class Doc Comment
+ * RecommendHit Class Doc Comment.
  *
  * @category Class
  *
  * @description Recommend hit.
- *
- * @package Algolia\AlgoliaSearch
  */
 class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'highlightResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>',
@@ -30,10 +28,10 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'highlightResult' => null,
@@ -44,11 +42,11 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'highlightResult' => '_highlightResult',
@@ -59,38 +57,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -104,7 +71,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -118,34 +85,14 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -172,6 +119,57 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -180,17 +178,17 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['score']) || $this->container['score'] === null) {
+        if (!isset($this->container['score']) || null === $this->container['score']) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if (($this->container['score'] > 100)) {
+        if ($this->container['score'] > 100) {
             $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
         }
 
-        if (($this->container['score'] < 0)) {
+        if ($this->container['score'] < 0) {
             $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
         }
 
@@ -199,17 +197,17 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -219,7 +217,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID unique object identifier
      *
@@ -233,9 +231,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets highlightResult
+     * Gets highlightResult.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>|null
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>
      */
     public function getHighlightResult()
     {
@@ -243,9 +241,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets highlightResult
+     * Sets highlightResult.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>|null $highlightResult show highlighted section and words matched on a query
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult> $highlightResult show highlighted section and words matched on a query
      *
      * @return self
      */
@@ -257,9 +255,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets snippetResult
+     * Gets snippetResult.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>|null
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>
      */
     public function getSnippetResult()
     {
@@ -267,9 +265,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets snippetResult
+     * Sets snippetResult.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>|null $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult> $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
      *
      * @return self
      */
@@ -281,9 +279,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets rankingInfo
+     * Gets rankingInfo.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RankingInfo|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo
      */
     public function getRankingInfo()
     {
@@ -291,9 +289,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets rankingInfo
+     * Sets rankingInfo.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RankingInfo|null $rankingInfo rankingInfo
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */
@@ -305,9 +303,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets distinctSeqID
+     * Gets distinctSeqID.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getDistinctSeqID()
     {
@@ -315,9 +313,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets distinctSeqID
+     * Sets distinctSeqID.
      *
-     * @param int|null $distinctSeqID distinctSeqID
+     * @param null|int $distinctSeqID distinctSeqID
      *
      * @return self
      */
@@ -329,7 +327,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets score
+     * Gets score.
      *
      * @return float
      */
@@ -339,7 +337,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets score
+     * Sets score.
      *
      * @param float $score recommendation score
      *
@@ -347,11 +345,10 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function setScore($score)
     {
-
-        if (($score > 100)) {
+        if ($score > 100) {
             throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be smaller than or equal to 100.');
         }
-        if (($score < 0)) {
+        if ($score < 0) {
             throw new \InvalidArgumentException('invalid value for $score when calling RecommendHit., must be bigger than or equal to 0.');
         }
 
@@ -359,6 +356,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -376,7 +374,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -386,10 +384,8 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -404,12 +400,9 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

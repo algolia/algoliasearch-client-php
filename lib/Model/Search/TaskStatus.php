@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * TaskStatus Class Doc Comment
+ * TaskStatus Class Doc Comment.
  *
  * @category Class
  *
  * @description _published_ if the task has been processed, _notPublished_ otherwise.
- *
- * @package Algolia\AlgoliaSearch
  */
 class TaskStatus
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const PUBLISHED = 'published';
+    public const PUBLISHED = 'published';
 
-    const NOT_PUBLISHED = 'notPublished';
+    public const NOT_PUBLISHED = 'notPublished';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class TaskStatus
         ];
     }
 }
-

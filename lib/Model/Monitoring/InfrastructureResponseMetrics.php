@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * InfrastructureResponseMetrics Class Doc Comment
+ * InfrastructureResponseMetrics Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'cpuUsage' => 'array<string,array>',
         'ramIndexingUsage' => 'array<string,array>',
@@ -26,10 +25,10 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'cpuUsage' => null,
         'ramIndexingUsage' => null,
@@ -39,11 +38,11 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'cpuUsage' => 'cpu_usage',
         'ramIndexingUsage' => 'ram_indexing_usage',
@@ -53,38 +52,7 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -97,7 +65,7 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -110,34 +78,14 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -161,32 +109,81 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets cpuUsage
+     * Gets cpuUsage.
      *
-     * @return array<string,array>|null
+     * @return null|array<string,array>
      */
     public function getCpuUsage()
     {
@@ -194,9 +191,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets cpuUsage
+     * Sets cpuUsage.
      *
-     * @param array<string,array>|null $cpuUsage CPU idleness in %
+     * @param null|array<string,array> $cpuUsage CPU idleness in %
      *
      * @return self
      */
@@ -208,9 +205,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets ramIndexingUsage
+     * Gets ramIndexingUsage.
      *
-     * @return array<string,array>|null
+     * @return null|array<string,array>
      */
     public function getRamIndexingUsage()
     {
@@ -218,9 +215,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets ramIndexingUsage
+     * Sets ramIndexingUsage.
      *
-     * @param array<string,array>|null $ramIndexingUsage RAM used for indexing in MB
+     * @param null|array<string,array> $ramIndexingUsage RAM used for indexing in MB
      *
      * @return self
      */
@@ -232,9 +229,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets ramSearchUsage
+     * Gets ramSearchUsage.
      *
-     * @return array<string,array>|null
+     * @return null|array<string,array>
      */
     public function getRamSearchUsage()
     {
@@ -242,9 +239,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets ramSearchUsage
+     * Sets ramSearchUsage.
      *
-     * @param array<string,array>|null $ramSearchUsage RAM used for search in MB
+     * @param null|array<string,array> $ramSearchUsage RAM used for search in MB
      *
      * @return self
      */
@@ -256,9 +253,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets ssdUsage
+     * Gets ssdUsage.
      *
-     * @return array<string,array>|null
+     * @return null|array<string,array>
      */
     public function getSsdUsage()
     {
@@ -266,9 +263,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets ssdUsage
+     * Sets ssdUsage.
      *
-     * @param array<string,array>|null $ssdUsage Solid-state disk (SSD) usage expressed as % of RAM.  0% means no SSD usage. A value of 50% indicates 32&nbsp;GB SSD usage for a machine with 64&nbsp;RAM.
+     * @param null|array<string,array> $ssdUsage Solid-state disk (SSD) usage expressed as % of RAM.  0% means no SSD usage. A value of 50% indicates 32&nbsp;GB SSD usage for a machine with 64&nbsp;RAM.
      *
      * @return self
      */
@@ -280,9 +277,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets avgBuildTime
+     * Gets avgBuildTime.
      *
-     * @return array<string,array>|null
+     * @return null|array<string,array>
      */
     public function getAvgBuildTime()
     {
@@ -290,9 +287,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets avgBuildTime
+     * Sets avgBuildTime.
      *
-     * @param array<string,array>|null $avgBuildTime average build time of the indices in seconds
+     * @param null|array<string,array> $avgBuildTime average build time of the indices in seconds
      *
      * @return self
      */
@@ -302,6 +299,7 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -319,7 +317,7 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -329,10 +327,8 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -347,12 +343,9 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchRulesParams Class Doc Comment
+ * SearchRulesParams Class Doc Comment.
  *
  * @category Class
  *
  * @description Rules search parameters.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Search\Anchoring',
@@ -31,10 +29,10 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'anchoring' => null,
@@ -46,11 +44,11 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'query' => 'query',
         'anchoring' => 'anchoring',
@@ -62,38 +60,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -108,7 +75,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -123,34 +90,14 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -180,6 +127,57 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -205,19 +203,19 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQuery()
     {
@@ -225,9 +223,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
-     * @param string|null $query rule object query
+     * @param null|string $query rule object query
      *
      * @return self
      */
@@ -239,9 +237,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets anchoring
+     * Gets anchoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Anchoring|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
      */
     public function getAnchoring()
     {
@@ -249,9 +247,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets anchoring
+     * Sets anchoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Anchoring|null $anchoring anchoring
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
      *
      * @return self
      */
@@ -263,9 +261,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets context
+     * Gets context.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getContext()
     {
@@ -273,9 +271,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets context
+     * Sets context.
      *
-     * @param string|null $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     * @param null|string $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
      *
      * @return self
      */
@@ -287,9 +285,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPage()
     {
@@ -297,15 +295,14 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
-     * @param int|null $page requested page (the first page is page 0)
+     * @param null|int $page requested page (the first page is page 0)
      *
      * @return self
      */
     public function setPage($page)
     {
-
         if (!is_null($page) && ($page < 0)) {
             throw new \InvalidArgumentException('invalid value for $page when calling SearchRulesParams., must be bigger than or equal to 0.');
         }
@@ -316,9 +313,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -326,15 +323,14 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
-     * @param int|null $hitsPerPage maximum number of hits per page
+     * @param null|int $hitsPerPage maximum number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchRulesParams., must be smaller than or equal to 1000.');
         }
@@ -348,9 +344,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets enabled
+     * Gets enabled.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnabled()
     {
@@ -358,9 +354,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets enabled
+     * Sets enabled.
      *
-     * @param bool|null $enabled Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
+     * @param null|bool $enabled Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
      *
      * @return self
      */
@@ -372,9 +368,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets requestOptions
+     * Gets requestOptions.
      *
-     * @return object[]|null
+     * @return null|object[]
      */
     public function getRequestOptions()
     {
@@ -382,9 +378,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets requestOptions
+     * Sets requestOptions.
      *
-     * @param object[]|null $requestOptions request options to send with the API call
+     * @param null|object[] $requestOptions request options to send with the API call
      *
      * @return self
      */
@@ -394,6 +390,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -411,7 +408,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -421,10 +418,8 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -439,12 +434,9 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

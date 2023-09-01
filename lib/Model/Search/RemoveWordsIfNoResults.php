@@ -5,29 +5,27 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * RemoveWordsIfNoResults Class Doc Comment
+ * RemoveWordsIfNoResults Class Doc Comment.
  *
  * @category Class
  *
  * @description Strategy to [remove words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/in-depth/why-use-remove-words-if-no-results/) from the query when it doesn&#39;t match any hits.
- *
- * @package Algolia\AlgoliaSearch
  */
 class RemoveWordsIfNoResults
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const NONE = 'none';
+    public const NONE = 'none';
 
-    const LAST_WORDS = 'lastWords';
+    public const LAST_WORDS = 'lastWords';
 
-    const FIRST_WORDS = 'firstWords';
+    public const FIRST_WORDS = 'firstWords';
 
-    const ALL_OPTIONAL = 'allOptional';
+    public const ALL_OPTIONAL = 'allOptional';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -41,4 +39,3 @@ class RemoveWordsIfNoResults
         ];
     }
 }
-

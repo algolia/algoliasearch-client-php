@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * OperationIndexParams Class Doc Comment
+ * OperationIndexParams Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'operation' => '\Algolia\AlgoliaSearch\Model\Search\OperationType',
         'destination' => 'string',
@@ -24,10 +23,10 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'operation' => null,
         'destination' => null,
@@ -35,11 +34,11 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'operation' => 'operation',
         'destination' => 'destination',
@@ -47,38 +46,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,10 +152,10 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['operation']) || $this->container['operation'] === null) {
+        if (!isset($this->container['operation']) || null === $this->container['operation']) {
             $invalidProperties[] = "'operation' can't be null";
         }
-        if (!isset($this->container['destination']) || $this->container['destination'] === null) {
+        if (!isset($this->container['destination']) || null === $this->container['destination']) {
             $invalidProperties[] = "'destination' can't be null";
         }
 
@@ -165,17 +164,17 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets operation
+     * Gets operation.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\OperationType
      */
@@ -185,7 +184,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets operation
+     * Sets operation.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\OperationType $operation operation
      *
@@ -199,7 +198,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets destination
+     * Gets destination.
      *
      * @return string
      */
@@ -209,7 +208,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets destination
+     * Sets destination.
      *
      * @param string $destination algolia index name
      *
@@ -223,9 +222,9 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets scope
+     * Gets scope.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ScopeType[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[]
      */
     public function getScope()
     {
@@ -233,9 +232,9 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets scope
+     * Sets scope.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ScopeType[]|null $scope **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[] $scope **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
      *
      * @return self
      */
@@ -245,6 +244,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -262,7 +262,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -272,10 +272,8 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -290,12 +288,9 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

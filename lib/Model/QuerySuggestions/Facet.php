@@ -5,80 +5,47 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * Facet Class Doc Comment
+ * Facet Class Doc Comment.
  *
  * @category Class
  *
  * @description Facet to use as category.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'attribute' => 'string',
         'amount' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'attribute' => null,
         'amount' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'attribute' => 'attribute',
         'amount' => 'amount',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -88,7 +55,7 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -98,34 +65,14 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -140,32 +87,81 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets attribute
+     * Gets attribute.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAttribute()
     {
@@ -173,9 +169,9 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     }
 
     /**
-     * Sets attribute
+     * Sets attribute.
      *
-     * @param string|null $attribute facet name
+     * @param null|string $attribute facet name
      *
      * @return self
      */
@@ -187,9 +183,9 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     }
 
     /**
-     * Gets amount
+     * Gets amount.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getAmount()
     {
@@ -197,9 +193,9 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     }
 
     /**
-     * Sets amount
+     * Sets amount.
      *
-     * @param int|null $amount number of suggestions
+     * @param null|int $amount number of suggestions
      *
      * @return self
      */
@@ -209,6 +205,7 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -226,7 +223,7 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -236,10 +233,8 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -254,12 +249,9 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

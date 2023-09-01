@@ -5,77 +5,45 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * UserHighlightResult Class Doc Comment
+ * UserHighlightResult Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'userID' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
         'clusterName' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'userID' => null,
         'clusterName' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'userID' => 'userID',
         'clusterName' => 'clusterName',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -85,7 +53,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -95,34 +63,14 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -137,6 +85,57 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -145,10 +144,10 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['userID']) || $this->container['userID'] === null) {
+        if (!isset($this->container['userID']) || null === $this->container['userID']) {
             $invalidProperties[] = "'userID' can't be null";
         }
-        if (!isset($this->container['clusterName']) || $this->container['clusterName'] === null) {
+        if (!isset($this->container['clusterName']) || null === $this->container['clusterName']) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
 
@@ -157,17 +156,17 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets userID
+     * Gets userID.
      *
      * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
      */
@@ -177,7 +176,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets userID
+     * Sets userID.
      *
      * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $userID show highlighted section and words matched on a query
      *
@@ -191,7 +190,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets clusterName
+     * Gets clusterName.
      *
      * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
      */
@@ -201,7 +200,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Sets clusterName
+     * Sets clusterName.
      *
      * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $clusterName show highlighted section and words matched on a query
      *
@@ -213,6 +212,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -230,7 +230,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -240,10 +240,8 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -258,12 +256,9 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

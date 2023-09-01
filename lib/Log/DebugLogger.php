@@ -35,9 +35,6 @@ final class DebugLogger extends AbstractLogger
         self::$isEnabled = true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function log($level, $message, array $context = []): void
     {
         if (self::$isEnabled) {

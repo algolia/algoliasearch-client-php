@@ -5,35 +5,33 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BuiltInOperationType Class Doc Comment
+ * BuiltInOperationType Class Doc Comment.
  *
  * @category Class
  *
  * @description Operation to apply to the attribute.
- *
- * @package Algolia\AlgoliaSearch
  */
 class BuiltInOperationType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const INCREMENT = 'Increment';
+    public const INCREMENT = 'Increment';
 
-    const DECREMENT = 'Decrement';
+    public const DECREMENT = 'Decrement';
 
-    const ADD = 'Add';
+    public const ADD = 'Add';
 
-    const REMOVE = 'Remove';
+    public const REMOVE = 'Remove';
 
-    const ADD_UNIQUE = 'AddUnique';
+    public const ADD_UNIQUE = 'AddUnique';
 
-    const INCREMENT_FROM = 'IncrementFrom';
+    public const INCREMENT_FROM = 'IncrementFrom';
 
-    const INCREMENT_SET = 'IncrementSet';
+    public const INCREMENT_SET = 'IncrementSet';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -50,4 +48,3 @@ class BuiltInOperationType
         ];
     }
 }
-

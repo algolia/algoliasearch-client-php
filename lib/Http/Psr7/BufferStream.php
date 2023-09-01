@@ -92,13 +92,13 @@ class BufferStream implements StreamInterface
 
     public function tell()
     {
-        throw new \RuntimeException(
-            'Cannot determine the position of a BufferStream'
-        );
+        throw new \RuntimeException('Cannot determine the position of a BufferStream');
     }
 
     /**
      * Reads data from the buffer.
+     *
+     * @param mixed $length
      */
     public function read($length)
     {
@@ -119,6 +119,8 @@ class BufferStream implements StreamInterface
 
     /**
      * Writes data to the buffer.
+     *
+     * @param mixed $string
      */
     public function write($string)
     {

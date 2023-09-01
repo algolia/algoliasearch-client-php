@@ -14,8 +14,8 @@ final class SynonymIterator extends AbstractAlgoliaIterator
     protected function fetchNextPage()
     {
         if (
-            is_array($this->response) &&
-            $this->key >= $this->response['nbHits']
+            is_array($this->response)
+            && $this->key >= $this->response['nbHits']
         ) {
             return;
         }
@@ -29,6 +29,6 @@ final class SynonymIterator extends AbstractAlgoliaIterator
         );
 
         $this->batchKey = 0;
-        $this->page++;
+        ++$this->page;
     }
 }

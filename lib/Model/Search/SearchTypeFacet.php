@@ -5,23 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchTypeFacet Class Doc Comment
+ * SearchTypeFacet Class Doc Comment.
  *
  * @category Class
  *
  * @description - &#x60;default&#x60;: perform a search query - &#x60;facet&#x60; [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchTypeFacet
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const FACET = 'facet';
+    public const FACET = 'facet';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +30,3 @@ class SearchTypeFacet
         ];
     }
 }
-

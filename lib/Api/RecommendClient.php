@@ -12,13 +12,14 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 /**
- * RecommendClient Class Doc Comment
+ * RecommendClient Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class RecommendClient
 {
+    public const VERSION = '4.0.0-alpha.78';
+
     /**
      * @var ApiWrapperInterface
      */
@@ -29,10 +30,6 @@ class RecommendClient
      */
     protected $config;
 
-    /**
-     * @param RecommendConfig $config
-     * @param ApiWrapperInterface $apiWrapper
-     */
     public function __construct(ApiWrapperInterface $apiWrapper, RecommendConfig $config)
     {
         $this->config = $config;
@@ -40,7 +37,7 @@ class RecommendClient
     }
 
     /**
-     * Instantiate the client with basic credentials
+     * Instantiate the client with basic credentials.
      *
      * @param string $appId  Application ID
      * @param string $apiKey Algolia API Key
@@ -51,7 +48,7 @@ class RecommendClient
     }
 
     /**
-     * Instantiate the client with configuration
+     * Instantiate the client with configuration.
      *
      * @param RecommendConfig $config Configuration
      */
@@ -69,9 +66,7 @@ class RecommendClient
     }
 
     /**
-     * Gets the cluster hosts depending on the config
-     *
-     * @param RecommendConfig $config
+     * Gets the cluster hosts depending on the config.
      *
      * @return ClusterHosts
      */
@@ -86,7 +81,8 @@ class RecommendClient
             // We'll try to restore the ClusterHost from cache, if we cannot
             // we create a new instance and set the cache key
             $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
-                ->setCacheKey($cacheKey);
+                ->setCacheKey($cacheKey)
+            ;
         }
 
         return $clusterHosts;
@@ -103,9 +99,9 @@ class RecommendClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -123,12 +119,12 @@ class RecommendClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -136,18 +132,18 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Delete a Recommend rule.
      *
-     * @param string $indexName Index on which to perform the request. (required)
-     * @param array $model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param string $objectID Unique record (object) identifier. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Index on which to perform the request. (required)
+     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param string $objectID       Unique record (object) identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse|array<string, mixed>
      */
     public function deleteRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -176,7 +172,7 @@ class RecommendClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -185,7 +181,7 @@ class RecommendClient
         }
 
         // path params
-        if ($model !== null) {
+        if (null !== $model) {
             $resourcePath = str_replace(
                 '{model}',
                 ObjectSerializer::toPathValue($model),
@@ -194,7 +190,7 @@ class RecommendClient
         }
 
         // path params
-        if ($objectID !== null) {
+        if (null !== $objectID) {
             $resourcePath = str_replace(
                 '{objectID}',
                 ObjectSerializer::toPathValue($objectID),
@@ -202,15 +198,15 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -228,12 +224,12 @@ class RecommendClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -241,18 +237,18 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get a Recommend rule.
      *
-     * @param string $indexName Index on which to perform the request. (required)
-     * @param array $model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param string $objectID Unique record (object) identifier. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Index on which to perform the request. (required)
+     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param string $objectID       Unique record (object) identifier. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponse
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RuleResponse|array<string, mixed>
      */
     public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -281,7 +277,7 @@ class RecommendClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -290,7 +286,7 @@ class RecommendClient
         }
 
         // path params
-        if ($model !== null) {
+        if (null !== $model) {
             $resourcePath = str_replace(
                 '{model}',
                 ObjectSerializer::toPathValue($model),
@@ -299,7 +295,7 @@ class RecommendClient
         }
 
         // path params
-        if ($objectID !== null) {
+        if (null !== $objectID) {
             $resourcePath = str_replace(
                 '{objectID}',
                 ObjectSerializer::toPathValue($objectID),
@@ -307,18 +303,18 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get a Recommend task&#39;s status.
      *
-     * @param string $indexName Index on which to perform the request. (required)
-     * @param array $model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param int $taskID Unique identifier of a task. Numeric value (up to 64bits). (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $indexName      Index on which to perform the request. (required)
+     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param int    $taskID         Unique identifier of a task. Numeric value (up to 64bits). (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse|array<string, mixed>
      */
     public function getRecommendStatus($indexName, $model, $taskID, $requestOptions = [])
     {
@@ -347,7 +343,7 @@ class RecommendClient
         $httpBody = null;
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -356,7 +352,7 @@ class RecommendClient
         }
 
         // path params
-        if ($model !== null) {
+        if (null !== $model) {
             $resourcePath = str_replace(
                 '{model}',
                 ObjectSerializer::toPathValue($model),
@@ -365,7 +361,7 @@ class RecommendClient
         }
 
         // path params
-        if ($taskID !== null) {
+        if (null !== $taskID) {
             $resourcePath = str_replace(
                 '{taskID}',
                 ObjectSerializer::toPathValue($taskID),
@@ -373,20 +369,20 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get recommendations and trending items.
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
-     * - $getRecommendationsParams['requests'] => (array) Request parameters depend on the model (recommendations or trending). (required)
+     *                                        - $getRecommendationsParams['requests'] => (array) Request parameters depend on the model (recommendations or trending). (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse|array<string, mixed>
      */
     public function getRecommendations($getRecommendationsParams, $requestOptions = [])
     {
@@ -408,10 +404,10 @@ class RecommendClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -427,14 +423,14 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -442,16 +438,16 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -467,14 +463,14 @@ class RecommendClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -482,27 +478,27 @@ class RecommendClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * List Recommend rules.
      *
-     * @param string $indexName Index on which to perform the request. (required)
-     * @param array $model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param array $searchRecommendRulesParams searchRecommendRulesParams (optional)
-     * - $searchRecommendRulesParams['query'] => (string) Full-text query.
-     * - $searchRecommendRulesParams['context'] => (string) Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
-     * - $searchRecommendRulesParams['page'] => (int) Requested page (the first page is page 0).
-     * - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.
-     * - $searchRecommendRulesParams['enabled'] => (bool) Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
-     * - $searchRecommendRulesParams['requestOptions'] => (array) Request options to send with the API call.
+     * @param string $indexName                  Index on which to perform the request. (required)
+     * @param array  $model                      [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $searchRecommendRulesParams searchRecommendRulesParams (optional)
+     *                                           - $searchRecommendRulesParams['query'] => (string) Full-text query.
+     *                                           - $searchRecommendRulesParams['context'] => (string) Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     *                                           - $searchRecommendRulesParams['page'] => (int) Requested page (the first page is page 0).
+     *                                           - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.
+     *                                           - $searchRecommendRulesParams['enabled'] => (bool) Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+     *                                           - $searchRecommendRulesParams['requestOptions'] => (array) Request options to send with the API call.
      *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse|array<string, mixed>
      */
     public function searchRecommendRules($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
     {
@@ -522,10 +518,10 @@ class RecommendClient
         $resourcePath = '/1/indexes/{indexName}/{model}/recommend/rules/search';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($searchRecommendRulesParams) ? $searchRecommendRulesParams : [];
+        $httpBody = isset($searchRecommendRulesParams) ? $searchRecommendRulesParams : [];
 
         // path params
-        if ($indexName !== null) {
+        if (null !== $indexName) {
             $resourcePath = str_replace(
                 '{indexName}',
                 ObjectSerializer::toPathValue($indexName),
@@ -534,7 +530,7 @@ class RecommendClient
         }
 
         // path params
-        if ($model !== null) {
+        if (null !== $model) {
             $resourcePath = str_replace(
                 '{model}',
                 ObjectSerializer::toPathValue($model),
@@ -560,7 +556,7 @@ class RecommendClient
 
         return $this->api->sendRequest(
             $method,
-            $resourcePath . ($query ? "?{$query}" : ''),
+            $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
             $useReadTransporter

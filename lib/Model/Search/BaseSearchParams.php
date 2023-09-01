@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BaseSearchParams Class Doc Comment
+ * BaseSearchParams Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'similarQuery' => 'string',
@@ -54,10 +53,10 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'similarQuery' => null,
@@ -95,11 +94,11 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'query' => 'query',
         'similarQuery' => 'similarQuery',
@@ -137,38 +136,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -209,7 +177,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -250,34 +218,14 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -385,6 +333,57 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -410,19 +409,19 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQuery()
     {
@@ -430,9 +429,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
-     * @param string|null $query text to search for in an index
+     * @param null|string $query text to search for in an index
      *
      * @return self
      */
@@ -444,9 +443,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets similarQuery
+     * Gets similarQuery.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getSimilarQuery()
     {
@@ -454,9 +453,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets similarQuery
+     * Sets similarQuery.
      *
-     * @param string|null $similarQuery overrides the query parameter and performs a more generic search
+     * @param null|string $similarQuery overrides the query parameter and performs a more generic search
      *
      * @return self
      */
@@ -468,9 +467,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets filters
+     * Gets filters.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getFilters()
     {
@@ -478,9 +477,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets filters
+     * Sets filters.
      *
-     * @param string|null $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
+     * @param null|string $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
      *
      * @return self
      */
@@ -492,9 +491,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets facetFilters
+     * Gets facetFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
      */
     public function getFacetFilters()
     {
@@ -502,9 +501,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets facetFilters
+     * Sets facetFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetFilters|null $facetFilters facetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -516,9 +515,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets optionalFilters
+     * Gets optionalFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\OptionalFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -526,9 +525,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets optionalFilters
+     * Sets optionalFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\OptionalFilters|null $optionalFilters optionalFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -540,9 +539,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets numericFilters
+     * Gets numericFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\NumericFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
      */
     public function getNumericFilters()
     {
@@ -550,9 +549,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets numericFilters
+     * Sets numericFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\NumericFilters|null $numericFilters numericFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -564,9 +563,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets tagFilters
+     * Gets tagFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\TagFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
      */
     public function getTagFilters()
     {
@@ -574,9 +573,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets tagFilters
+     * Sets tagFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\TagFilters|null $tagFilters tagFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -588,9 +587,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets sumOrFiltersScores
+     * Gets sumOrFiltersScores.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getSumOrFiltersScores()
     {
@@ -598,9 +597,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets sumOrFiltersScores
+     * Sets sumOrFiltersScores.
      *
-     * @param bool|null $sumOrFiltersScores Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed.
+     * @param null|bool $sumOrFiltersScores Determines how to calculate [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores). If `false`, maximum score is kept. If `true`, score is summed.
      *
      * @return self
      */
@@ -612,9 +611,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets restrictSearchableAttributes
+     * Gets restrictSearchableAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getRestrictSearchableAttributes()
     {
@@ -622,9 +621,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets restrictSearchableAttributes
+     * Sets restrictSearchableAttributes.
      *
-     * @param string[]|null $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
+     * @param null|string[] $restrictSearchableAttributes Restricts a query to only look at a subset of your [searchable attributes](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/).
      *
      * @return self
      */
@@ -636,9 +635,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets facets
+     * Gets facets.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getFacets()
     {
@@ -646,9 +645,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets facets
+     * Sets facets.
      *
-     * @param string[]|null $facets Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.
+     * @param null|string[] $facets Returns [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts), their facet values, and the number of matching facet values.
      *
      * @return self
      */
@@ -660,9 +659,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets facetingAfterDistinct
+     * Gets facetingAfterDistinct.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getFacetingAfterDistinct()
     {
@@ -670,9 +669,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets facetingAfterDistinct
+     * Sets facetingAfterDistinct.
      *
-     * @param bool|null $facetingAfterDistinct Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control.
+     * @param null|bool $facetingAfterDistinct Forces faceting to be applied after [de-duplication](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/) (with the distinct feature). Alternatively, the `afterDistinct` [modifier](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) of `attributesForFaceting` allows for more granular control.
      *
      * @return self
      */
@@ -684,9 +683,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPage()
     {
@@ -694,9 +693,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
-     * @param int|null $page page to retrieve (the first page is `0`, not `1`)
+     * @param null|int $page page to retrieve (the first page is `0`, not `1`)
      *
      * @return self
      */
@@ -708,9 +707,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets offset
+     * Gets offset.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getOffset()
     {
@@ -718,9 +717,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets offset
+     * Sets offset.
      *
-     * @param int|null $offset Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
+     * @param null|int $offset Specifies the offset of the first hit to return. > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
      *
      * @return self
      */
@@ -732,9 +731,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets length
+     * Gets length.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getLength()
     {
@@ -742,15 +741,14 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets length
+     * Sets length.
      *
-     * @param int|null $length Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
+     * @param null|int $length Sets the number of hits to retrieve (for use with `offset`). > **Note**: Using `page` and `hitsPerPage` is the recommended method for [paging results](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/). However, you can use `offset` and `length` to implement [an alternative approach to paging](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/#retrieving-a-subset-of-records-with-offset-and-length).
      *
      * @return self
      */
     public function setLength($length)
     {
-
         if (!is_null($length) && ($length > 1000)) {
             throw new \InvalidArgumentException('invalid value for $length when calling BaseSearchParams., must be smaller than or equal to 1000.');
         }
@@ -764,9 +762,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets aroundLatLng
+     * Gets aroundLatLng.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAroundLatLng()
     {
@@ -774,9 +772,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets aroundLatLng
+     * Sets aroundLatLng.
      *
-     * @param string|null $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
+     * @param null|string $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
      *
      * @return self
      */
@@ -788,9 +786,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets aroundLatLngViaIP
+     * Gets aroundLatLngViaIP.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAroundLatLngViaIP()
     {
@@ -798,9 +796,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets aroundLatLngViaIP
+     * Sets aroundLatLngViaIP.
      *
-     * @param bool|null $aroundLatLngViaIP Search for entries around a location. The location is automatically computed from the requester's IP address.
+     * @param null|bool $aroundLatLngViaIP Search for entries around a location. The location is automatically computed from the requester's IP address.
      *
      * @return self
      */
@@ -812,9 +810,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets aroundRadius
+     * Gets aroundRadius.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AroundRadius|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
      */
     public function getAroundRadius()
     {
@@ -822,9 +820,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets aroundRadius
+     * Sets aroundRadius.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AroundRadius|null $aroundRadius aroundRadius
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -836,9 +834,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets aroundPrecision
+     * Gets aroundPrecision.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AroundPrecision|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -846,9 +844,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets aroundPrecision
+     * Sets aroundPrecision.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AroundPrecision|null $aroundPrecision aroundPrecision
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */
@@ -860,9 +858,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets minimumAroundRadius
+     * Gets minimumAroundRadius.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMinimumAroundRadius()
     {
@@ -870,15 +868,14 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets minimumAroundRadius
+     * Sets minimumAroundRadius.
      *
-     * @param int|null $minimumAroundRadius minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set
+     * @param null|int $minimumAroundRadius minimum radius (in meters) used for a geographical search when `aroundRadius` isn't set
      *
      * @return self
      */
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
-
         if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
             throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling BaseSearchParams., must be bigger than or equal to 1.');
         }
@@ -889,9 +886,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets insideBoundingBox
+     * Gets insideBoundingBox.
      *
-     * @return float[]|null
+     * @return null|float[]
      */
     public function getInsideBoundingBox()
     {
@@ -899,9 +896,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets insideBoundingBox
+     * Sets insideBoundingBox.
      *
-     * @param float[]|null $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -913,9 +910,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets insidePolygon
+     * Gets insidePolygon.
      *
-     * @return float[]|null
+     * @return null|float[]
      */
     public function getInsidePolygon()
     {
@@ -923,9 +920,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets insidePolygon
+     * Sets insidePolygon.
      *
-     * @param float[]|null $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -937,9 +934,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets naturalLanguages
+     * Gets naturalLanguages.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getNaturalLanguages()
     {
@@ -947,9 +944,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets naturalLanguages
+     * Sets naturalLanguages.
      *
-     * @param string[]|null $naturalLanguages Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.
+     * @param null|string[] $naturalLanguages Changes the default values of parameters that work best for a natural language query, such as `ignorePlurals`, `removeStopWords`, `removeWordsIfNoResults`, `analyticsTags`, and `ruleContexts`. These parameters work well together when the query consists of fuller natural language strings instead of keywords, for example when processing voice search queries.
      *
      * @return self
      */
@@ -961,9 +958,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets ruleContexts
+     * Gets ruleContexts.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getRuleContexts()
     {
@@ -971,9 +968,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets ruleContexts
+     * Sets ruleContexts.
      *
-     * @param string[]|null $ruleContexts Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.
+     * @param null|string[] $ruleContexts Assigns [rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) to search queries.
      *
      * @return self
      */
@@ -985,9 +982,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets personalizationImpact
+     * Gets personalizationImpact.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPersonalizationImpact()
     {
@@ -995,9 +992,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets personalizationImpact
+     * Sets personalizationImpact.
      *
-     * @param int|null $personalizationImpact Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
+     * @param null|int $personalizationImpact Defines how much [Personalization affects results](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
      *
      * @return self
      */
@@ -1009,9 +1006,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets userToken
+     * Gets userToken.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getUserToken()
     {
@@ -1019,9 +1016,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets userToken
+     * Sets userToken.
      *
-     * @param string|null $userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
+     * @param null|string $userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
      *
      * @return self
      */
@@ -1033,9 +1030,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets getRankingInfo
+     * Gets getRankingInfo.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getGetRankingInfo()
     {
@@ -1043,9 +1040,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets getRankingInfo
+     * Sets getRankingInfo.
      *
-     * @param bool|null $getRankingInfo Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
+     * @param null|bool $getRankingInfo Incidates whether the search response includes [detailed ranking information](https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/in-depth/understanding-the-api-response/#ranking-information).
      *
      * @return self
      */
@@ -1057,9 +1054,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets explain
+     * Gets explain.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getExplain()
     {
@@ -1067,9 +1064,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets explain
+     * Sets explain.
      *
-     * @param string[]|null $explain enriches the API's response with information about how the query was processed
+     * @param null|string[] $explain enriches the API's response with information about how the query was processed
      *
      * @return self
      */
@@ -1081,9 +1078,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets synonyms
+     * Gets synonyms.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getSynonyms()
     {
@@ -1091,9 +1088,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets synonyms
+     * Sets synonyms.
      *
-     * @param bool|null $synonyms whether to take into account an index's synonyms for a particular search
+     * @param null|bool $synonyms whether to take into account an index's synonyms for a particular search
      *
      * @return self
      */
@@ -1105,9 +1102,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets clickAnalytics
+     * Gets clickAnalytics.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getClickAnalytics()
     {
@@ -1115,9 +1112,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets clickAnalytics
+     * Sets clickAnalytics.
      *
-     * @param bool|null $clickAnalytics Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
+     * @param null|bool $clickAnalytics Indicates whether a query ID parameter is included in the search response. This is required for [tracking click and conversion events](https://www.algolia.com/doc/guides/sending-events/concepts/event-types/#events-related-to-algolia-requests).
      *
      * @return self
      */
@@ -1129,9 +1126,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets analytics
+     * Gets analytics.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAnalytics()
     {
@@ -1139,9 +1136,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets analytics
+     * Sets analytics.
      *
-     * @param bool|null $analytics Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
+     * @param null|bool $analytics Indicates whether this query will be included in [analytics](https://www.algolia.com/doc/guides/search-analytics/guides/exclude-queries/).
      *
      * @return self
      */
@@ -1153,9 +1150,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets analyticsTags
+     * Gets analyticsTags.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAnalyticsTags()
     {
@@ -1163,9 +1160,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets analyticsTags
+     * Sets analyticsTags.
      *
-     * @param string[]|null $analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
+     * @param null|string[] $analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
      *
      * @return self
      */
@@ -1177,9 +1174,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets percentileComputation
+     * Gets percentileComputation.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getPercentileComputation()
     {
@@ -1187,9 +1184,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets percentileComputation
+     * Sets percentileComputation.
      *
-     * @param bool|null $percentileComputation whether to include or exclude a query from the processing-time percentile computation
+     * @param null|bool $percentileComputation whether to include or exclude a query from the processing-time percentile computation
      *
      * @return self
      */
@@ -1201,9 +1198,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets enableABTest
+     * Gets enableABTest.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnableABTest()
     {
@@ -1211,9 +1208,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets enableABTest
+     * Sets enableABTest.
      *
-     * @param bool|null $enableABTest incidates whether this search will be considered in A/B testing
+     * @param null|bool $enableABTest incidates whether this search will be considered in A/B testing
      *
      * @return self
      */
@@ -1223,6 +1220,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -1240,7 +1238,7 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -1250,10 +1248,8 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -1268,12 +1264,9 @@ class BaseSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

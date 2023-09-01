@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchStrategy Class Doc Comment
+ * SearchStrategy Class Doc Comment.
  *
  * @category Class
  *
  * @description - &#x60;none&#x60;: executes all queries. - &#x60;stopIfEnoughMatches&#x60;: executes queries one by one, stopping further query execution as soon as a query matches at least the &#x60;hitsPerPage&#x60; number of results.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchStrategy
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const NONE = 'none';
+    public const NONE = 'none';
 
-    const STOP_IF_ENOUGH_MATCHES = 'stopIfEnoughMatches';
+    public const STOP_IF_ENOUGH_MATCHES = 'stopIfEnoughMatches';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class SearchStrategy
         ];
     }
 }
-

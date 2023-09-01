@@ -39,19 +39,6 @@ abstract class AbstractAlgoliaIterator implements \Iterator
      */
     protected $response;
 
-    /**
-     * Call Algolia' API to get new result batch.
-     */
-    abstract protected function fetchNextPage();
-
-    /**
-     * Sometimes the Iterator is using search internally, this method
-     * is used to clean the results, like remove the highlight.
-     *
-     * @return array formatted synonym array
-     */
-    abstract protected function formatHit(array $hit);
-
     public function __construct(
         $indexName,
         SearchClient $searchClient,
@@ -85,8 +72,8 @@ abstract class AbstractAlgoliaIterator implements \Iterator
     #[\ReturnTypeWillChange]
     public function next()
     {
-        $this->key++;
-        $this->batchKey++;
+        ++$this->key;
+        ++$this->batchKey;
         if ($this->valid()) {
             return;
         }
@@ -133,4 +120,17 @@ abstract class AbstractAlgoliaIterator implements \Iterator
             $this->fetchNextPage();
         }
     }
+
+    /**
+     * Call Algolia' API to get new result batch.
+     */
+    abstract protected function fetchNextPage();
+
+    /**
+     * Sometimes the Iterator is using search internally, this method
+     * is used to clean the results, like remove the highlight.
+     *
+     * @return array formatted synonym array
+     */
+    abstract protected function formatHit(array $hit);
 }

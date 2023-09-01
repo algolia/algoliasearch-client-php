@@ -5,51 +5,49 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Region Class Doc Comment
+ * Region Class Doc Comment.
  *
  * @category Class
  *
  * @description The region where the cluster is located.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Region
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const AU = 'au';
+    public const AU = 'au';
 
-    const BR = 'br';
+    public const BR = 'br';
 
-    const CA = 'ca';
+    public const CA = 'ca';
 
-    const DE = 'de';
+    public const DE = 'de';
 
-    const EU = 'eu';
+    public const EU = 'eu';
 
-    const HK = 'hk';
+    public const HK = 'hk';
 
-    const IN = 'in';
+    public const IN = 'in';
 
-    const JP = 'jp';
+    public const JP = 'jp';
 
-    const SG = 'sg';
+    public const SG = 'sg';
 
-    const UAE = 'uae';
+    public const UAE = 'uae';
 
-    const UK = 'uk';
+    public const UK = 'uk';
 
-    const USC = 'usc';
+    public const USC = 'usc';
 
-    const _USE = 'use';
+    public const _USE = 'use';
 
-    const USW = 'usw';
+    public const USW = 'usw';
 
-    const ZA = 'za';
+    public const ZA = 'za';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -74,4 +72,3 @@ class Region
         ];
     }
 }
-

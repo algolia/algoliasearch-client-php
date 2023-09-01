@@ -5,22 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * Direction Class Doc Comment
+ * Direction Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Direction
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ASC = 'asc';
+    public const ASC = 'asc';
 
-    const DESC = 'desc';
+    public const DESC = 'desc';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +31,3 @@ class Direction
         ];
     }
 }
-

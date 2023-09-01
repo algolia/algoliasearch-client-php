@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SearchForFacetsOptions Class Doc Comment
+ * SearchForFacetsOptions Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'facet' => 'string',
         'indexName' => 'string',
@@ -26,10 +25,10 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facet' => null,
         'indexName' => null,
@@ -39,11 +38,11 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'facet' => 'facet',
         'indexName' => 'indexName',
@@ -53,38 +52,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -97,7 +65,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -110,34 +78,14 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -161,6 +109,57 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -169,17 +168,17 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facet']) || $this->container['facet'] === null) {
+        if (!isset($this->container['facet']) || null === $this->container['facet']) {
             $invalidProperties[] = "'facet' can't be null";
         }
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
         if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
             $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
         }
 
-        if (!isset($this->container['type']) || $this->container['type'] === null) {
+        if (!isset($this->container['type']) || null === $this->container['type']) {
             $invalidProperties[] = "'type' can't be null";
         }
 
@@ -188,17 +187,17 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets facet
+     * Gets facet.
      *
      * @return string
      */
@@ -208,7 +207,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets facet
+     * Sets facet.
      *
      * @param string $facet facet name
      *
@@ -222,7 +221,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets indexName
+     * Gets indexName.
      *
      * @return string
      */
@@ -232,7 +231,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets indexName
+     * Sets indexName.
      *
      * @param string $indexName algolia index name
      *
@@ -246,9 +245,9 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets facetQuery
+     * Gets facetQuery.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getFacetQuery()
     {
@@ -256,9 +255,9 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets facetQuery
+     * Sets facetQuery.
      *
-     * @param string|null $facetQuery text to search inside the facet's values
+     * @param null|string $facetQuery text to search inside the facet's values
      *
      * @return self
      */
@@ -270,9 +269,9 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets maxFacetHits
+     * Gets maxFacetHits.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxFacetHits()
     {
@@ -280,15 +279,14 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets maxFacetHits
+     * Sets maxFacetHits.
      *
-     * @param int|null $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param null|int $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-
         if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
             throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchForFacetsOptions., must be smaller than or equal to 100.');
         }
@@ -299,7 +297,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets type
+     * Gets type.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet
      */
@@ -309,7 +307,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets type
+     * Sets type.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet $type type
      *
@@ -321,6 +319,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -338,7 +337,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -348,10 +347,8 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -366,12 +363,9 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

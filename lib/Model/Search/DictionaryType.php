@@ -5,24 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * DictionaryType Class Doc Comment
+ * DictionaryType Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class DictionaryType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const PLURALS = 'plurals';
+    public const PLURALS = 'plurals';
 
-    const STOPWORDS = 'stopwords';
+    public const STOPWORDS = 'stopwords';
 
-    const COMPOUNDS = 'compounds';
+    public const COMPOUNDS = 'compounds';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +34,3 @@ class DictionaryType
         ];
     }
 }
-

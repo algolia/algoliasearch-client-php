@@ -5,27 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MatchLevel Class Doc Comment
+ * MatchLevel Class Doc Comment.
  *
  * @category Class
  *
  * @description Indicates how well the attribute matched the search query.
- *
- * @package Algolia\AlgoliaSearch
  */
 class MatchLevel
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const NONE = 'none';
+    public const NONE = 'none';
 
-    const PARTIAL = 'partial';
+    public const PARTIAL = 'partial';
 
-    const FULL = 'full';
+    public const FULL = 'full';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +36,3 @@ class MatchLevel
         ];
     }
 }
-

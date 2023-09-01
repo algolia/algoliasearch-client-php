@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BaseIndexSettings Class Doc Comment
+ * BaseIndexSettings Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
@@ -36,10 +35,10 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
@@ -59,11 +58,11 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'replicas' => 'replicas',
         'paginationLimitedTo' => 'paginationLimitedTo',
@@ -83,38 +82,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -137,7 +105,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -160,34 +128,14 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -241,32 +189,81 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets replicas
+     * Gets replicas.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReplicas()
     {
@@ -274,9 +271,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets replicas
+     * Sets replicas.
      *
-     * @param string[]|null $replicas Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
+     * @param null|string[] $replicas Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
      *
      * @return self
      */
@@ -288,9 +285,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets paginationLimitedTo
+     * Gets paginationLimitedTo.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPaginationLimitedTo()
     {
@@ -298,9 +295,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets paginationLimitedTo
+     * Sets paginationLimitedTo.
      *
-     * @param int|null $paginationLimitedTo maximum number of hits accessible through pagination
+     * @param null|int $paginationLimitedTo maximum number of hits accessible through pagination
      *
      * @return self
      */
@@ -312,9 +309,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets unretrievableAttributes
+     * Gets unretrievableAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getUnretrievableAttributes()
     {
@@ -322,9 +319,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets unretrievableAttributes
+     * Sets unretrievableAttributes.
      *
-     * @param string[]|null $unretrievableAttributes attributes that can't be retrieved at query time
+     * @param null|string[] $unretrievableAttributes attributes that can't be retrieved at query time
      *
      * @return self
      */
@@ -336,9 +333,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets disableTypoToleranceOnWords
+     * Gets disableTypoToleranceOnWords.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisableTypoToleranceOnWords()
     {
@@ -346,9 +343,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets disableTypoToleranceOnWords
+     * Sets disableTypoToleranceOnWords.
      *
-     * @param string[]|null $disableTypoToleranceOnWords Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
+     * @param null|string[] $disableTypoToleranceOnWords Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
      *
      * @return self
      */
@@ -360,9 +357,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets attributesToTransliterate
+     * Gets attributesToTransliterate.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesToTransliterate()
     {
@@ -370,9 +367,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets attributesToTransliterate
+     * Sets attributesToTransliterate.
      *
-     * @param string[]|null $attributesToTransliterate Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
+     * @param null|string[] $attributesToTransliterate Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
      *
      * @return self
      */
@@ -384,9 +381,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets camelCaseAttributes
+     * Gets camelCaseAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getCamelCaseAttributes()
     {
@@ -394,9 +391,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets camelCaseAttributes
+     * Sets camelCaseAttributes.
      *
-     * @param string[]|null $camelCaseAttributes Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
+     * @param null|string[] $camelCaseAttributes Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
      *
      * @return self
      */
@@ -408,9 +405,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets decompoundedAttributes
+     * Gets decompoundedAttributes.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getDecompoundedAttributes()
     {
@@ -418,9 +415,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets decompoundedAttributes
+     * Sets decompoundedAttributes.
      *
-     * @param object|null $decompoundedAttributes Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
+     * @param null|object $decompoundedAttributes Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
      *
      * @return self
      */
@@ -432,9 +429,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets indexLanguages
+     * Gets indexLanguages.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getIndexLanguages()
     {
@@ -442,9 +439,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets indexLanguages
+     * Sets indexLanguages.
      *
-     * @param string[]|null $indexLanguages Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+     * @param null|string[] $indexLanguages Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -456,9 +453,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets disablePrefixOnAttributes
+     * Gets disablePrefixOnAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisablePrefixOnAttributes()
     {
@@ -466,9 +463,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets disablePrefixOnAttributes
+     * Sets disablePrefixOnAttributes.
      *
-     * @param string[]|null $disablePrefixOnAttributes Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
+     * @param null|string[] $disablePrefixOnAttributes Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
      *
      * @return self
      */
@@ -480,9 +477,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets allowCompressionOfIntegerArray
+     * Gets allowCompressionOfIntegerArray.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAllowCompressionOfIntegerArray()
     {
@@ -490,9 +487,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets allowCompressionOfIntegerArray
+     * Sets allowCompressionOfIntegerArray.
      *
-     * @param bool|null $allowCompressionOfIntegerArray Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.
+     * @param null|bool $allowCompressionOfIntegerArray Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.
      *
      * @return self
      */
@@ -504,9 +501,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets numericAttributesForFiltering
+     * Gets numericAttributesForFiltering.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getNumericAttributesForFiltering()
     {
@@ -514,9 +511,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets numericAttributesForFiltering
+     * Sets numericAttributesForFiltering.
      *
-     * @param string[]|null $numericAttributesForFiltering Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
+     * @param null|string[] $numericAttributesForFiltering Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
      *
      * @return self
      */
@@ -528,9 +525,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets separatorsToIndex
+     * Gets separatorsToIndex.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getSeparatorsToIndex()
     {
@@ -538,9 +535,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets separatorsToIndex
+     * Sets separatorsToIndex.
      *
-     * @param string|null $separatorsToIndex Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
+     * @param null|string $separatorsToIndex Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
      *
      * @return self
      */
@@ -552,9 +549,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets searchableAttributes
+     * Gets searchableAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getSearchableAttributes()
     {
@@ -562,9 +559,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets searchableAttributes
+     * Sets searchableAttributes.
      *
-     * @param string[]|null $searchableAttributes [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position).
+     * @param null|string[] $searchableAttributes [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position).
      *
      * @return self
      */
@@ -576,9 +573,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets userData
+     * Gets userData.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getUserData()
     {
@@ -586,9 +583,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets userData
+     * Sets userData.
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */
@@ -600,9 +597,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets customNormalization
+     * Gets customNormalization.
      *
-     * @return array<string,array<string,string>>|null
+     * @return null|array<string,array<string,string>>
      */
     public function getCustomNormalization()
     {
@@ -610,9 +607,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets customNormalization
+     * Sets customNormalization.
      *
-     * @param array<string,array<string,string>>|null $customNormalization A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+     * @param null|array<string,array<string,string>> $customNormalization A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -622,6 +619,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -639,7 +637,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -649,10 +647,8 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -667,12 +663,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

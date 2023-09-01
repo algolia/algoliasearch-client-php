@@ -47,7 +47,7 @@ final class ClusterHosts
             $write = array_fill_keys($write, 0);
         }
 
-        return new static(
+        return new self(
             HostCollection::create($read),
             HostCollection::create($write)
         );
@@ -56,15 +56,15 @@ final class ClusterHosts
     public static function createFromAppId($applicationId)
     {
         $read = $write = [
-            $applicationId . '-1.algolianet.com' => 0,
-            $applicationId . '-2.algolianet.com' => 0,
-            $applicationId . '-3.algolianet.com' => 0,
+            $applicationId.'-1.algolianet.com' => 0,
+            $applicationId.'-2.algolianet.com' => 0,
+            $applicationId.'-3.algolianet.com' => 0,
         ];
 
-        $read[$applicationId . '-dsn.algolia.net'] = 10;
-        $write[$applicationId . '.algolia.net'] = 10;
+        $read[$applicationId.'-dsn.algolia.net'] = 10;
+        $write[$applicationId.'.algolia.net'] = 10;
 
-        return static::create($read, $write);
+        return self::create($read, $write);
     }
 
     public static function createFromCache($cacheKey)
@@ -133,7 +133,7 @@ final class ClusterHosts
     private function getUrls($type)
     {
         $urls = $this->{$type}->getUrls();
-        $lashHashName = 'last' . ucfirst($type) . 'Hash';
+        $lashHashName = 'last'.ucfirst($type).'Hash';
 
         if (Algolia::isCacheEnabled()) {
             $hash = sha1(implode('-', $urls));

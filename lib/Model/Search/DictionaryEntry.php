@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * DictionaryEntry Class Doc Comment
+ * DictionaryEntry Class Doc Comment.
  *
  * @category Class
  *
  * @description Dictionary entry.
- *
- * @package Algolia\AlgoliaSearch
  */
 class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'language' => 'string',
@@ -30,10 +28,10 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'language' => null,
@@ -44,11 +42,11 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'language' => 'language',
@@ -59,38 +57,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -104,7 +71,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -118,34 +85,14 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -172,6 +119,57 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -180,10 +178,10 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['language']) || $this->container['language'] === null) {
+        if (!isset($this->container['language']) || null === $this->container['language']) {
             $invalidProperties[] = "'language' can't be null";
         }
 
@@ -192,17 +190,17 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -212,7 +210,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID unique identifier for a dictionary object
      *
@@ -226,7 +224,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets language
+     * Gets language.
      *
      * @return string
      */
@@ -236,7 +234,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets language
+     * Sets language.
      *
      * @param string $language [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
      *
@@ -250,9 +248,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets word
+     * Gets word.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getWord()
     {
@@ -260,9 +258,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets word
+     * Sets word.
      *
-     * @param string|null $word Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\".
+     * @param null|string $word Dictionary entry word. Usage depends on the type of dictionary entry. **`stopwordEntry`** The stop word you want to add or update. If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`. **`compoundEntry`** When `decomposition` is empty: adds `word` as a compound atom. For example, atom “kino” decomposes the query “kopfkino” into \"kopf\" and \"kino\". When `decomposition` isn't empty: creates a decomposition exception. For example, when decomposition is set to the [\"hund\", \"hutte\"] exception, \"hundehutte\" decomposes into “hund” and “hutte”, discarding the linking \"e\".
      *
      * @return self
      */
@@ -274,9 +272,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets words
+     * Gets words.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getWords()
     {
@@ -284,9 +282,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets words
+     * Sets words.
      *
-     * @param string[]|null $words Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`.
+     * @param null|string[] $words Compound dictionary [word declensions](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/). If the entry already exists in Algolia's standard dictionary, you can override its behavior by adding it to the custom dictionary and setting its `state` to `disabled`.
      *
      * @return self
      */
@@ -298,9 +296,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets decomposition
+     * Gets decomposition.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDecomposition()
     {
@@ -308,9 +306,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets decomposition
+     * Sets decomposition.
      *
-     * @param string[]|null $decomposition for compound entries, governs the behavior of the `word` parameter
+     * @param null|string[] $decomposition for compound entries, governs the behavior of the `word` parameter
      *
      * @return self
      */
@@ -322,9 +320,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets state
+     * Gets state.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState
      */
     public function getState()
     {
@@ -332,9 +330,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets state
+     * Sets state.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState|null $state state
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState $state state
      *
      * @return self
      */
@@ -344,6 +342,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -361,7 +360,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -371,10 +370,8 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -389,12 +386,9 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

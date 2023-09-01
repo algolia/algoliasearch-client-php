@@ -5,80 +5,47 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Source Class Doc Comment
+ * Source Class Doc Comment.
  *
  * @category Class
  *
  * @description Source.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'source' => 'string',
         'description' => 'string',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'source' => null,
         'description' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'source' => 'source',
         'description' => 'description',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -88,7 +55,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -98,34 +65,14 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -140,6 +87,57 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -148,7 +146,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['source']) || $this->container['source'] === null) {
+        if (!isset($this->container['source']) || null === $this->container['source']) {
             $invalidProperties[] = "'source' can't be null";
         }
 
@@ -157,17 +155,17 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets source
+     * Gets source.
      *
      * @return string
      */
@@ -177,7 +175,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets source
+     * Sets source.
      *
      * @param string $source IP address range of the source
      *
@@ -191,9 +189,9 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets description
+     * Gets description.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDescription()
     {
@@ -201,9 +199,9 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets description
+     * Sets description.
      *
-     * @param string|null $description source description
+     * @param null|string $description source description
      *
      * @return self
      */
@@ -213,6 +211,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -230,7 +229,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -240,10 +239,8 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -258,12 +255,9 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

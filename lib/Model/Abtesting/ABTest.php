@@ -5,18 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * ABTest Class Doc Comment
+ * ABTest Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
+ *
+ * @internal
+ *
+ * @coversNothing
  */
 class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'abTestID' => 'int',
         'clickSignificance' => 'float',
@@ -29,10 +32,10 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'abTestID' => null,
         'clickSignificance' => 'double',
@@ -45,11 +48,11 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'abTestID' => 'abTestID',
         'clickSignificance' => 'clickSignificance',
@@ -62,38 +65,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -109,7 +81,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -125,34 +97,14 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -185,6 +137,57 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -193,28 +196,28 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['abTestID']) || $this->container['abTestID'] === null) {
+        if (!isset($this->container['abTestID']) || null === $this->container['abTestID']) {
             $invalidProperties[] = "'abTestID' can't be null";
         }
-        if (!isset($this->container['clickSignificance']) || $this->container['clickSignificance'] === null) {
+        if (!isset($this->container['clickSignificance']) || null === $this->container['clickSignificance']) {
             $invalidProperties[] = "'clickSignificance' can't be null";
         }
-        if (!isset($this->container['conversionSignificance']) || $this->container['conversionSignificance'] === null) {
+        if (!isset($this->container['conversionSignificance']) || null === $this->container['conversionSignificance']) {
             $invalidProperties[] = "'conversionSignificance' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['status']) || $this->container['status'] === null) {
+        if (!isset($this->container['status']) || null === $this->container['status']) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if (!isset($this->container['variants']) || $this->container['variants'] === null) {
+        if (!isset($this->container['variants']) || null === $this->container['variants']) {
             $invalidProperties[] = "'variants' can't be null";
         }
 
@@ -223,17 +226,17 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets abTestID
+     * Gets abTestID.
      *
      * @return int
      */
@@ -243,7 +246,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets abTestID
+     * Sets abTestID.
      *
      * @param int $abTestID unique A/B test ID
      *
@@ -257,7 +260,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets clickSignificance
+     * Gets clickSignificance.
      *
      * @return float
      */
@@ -267,7 +270,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets clickSignificance
+     * Sets clickSignificance.
      *
      * @param float $clickSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_.
      *
@@ -281,7 +284,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets conversionSignificance
+     * Gets conversionSignificance.
      *
      * @return string
      */
@@ -291,7 +294,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets conversionSignificance
+     * Sets conversionSignificance.
      *
      * @param string $conversionSignificance End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -305,7 +308,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets updatedAt
+     * Gets updatedAt.
      *
      * @return string
      */
@@ -315,7 +318,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets updatedAt
+     * Sets updatedAt.
      *
      * @param string $updatedAt Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -329,7 +332,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets createdAt
+     * Gets createdAt.
      *
      * @return string
      */
@@ -339,7 +342,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets createdAt
+     * Sets createdAt.
      *
      * @param string $createdAt Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -353,7 +356,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
      * @return string
      */
@@ -363,7 +366,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
      * @param string $name A/B test name
      *
@@ -377,7 +380,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets status
+     * Gets status.
      *
      * @return string
      */
@@ -387,7 +390,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets status
+     * Sets status.
      *
      * @param string $status A/B test status
      *
@@ -401,7 +404,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets variants
+     * Gets variants.
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\Variant[]
      */
@@ -411,7 +414,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets variants
+     * Sets variants.
      *
      * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants
      *
@@ -423,6 +426,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -440,7 +444,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -450,10 +454,8 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -468,12 +470,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

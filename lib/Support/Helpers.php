@@ -38,7 +38,8 @@ final class Helpers
 
                 // We then return the array as a string comma separated
                 return implode(',', $values);
-            } elseif (is_bool($value)) {
+            }
+            if (is_bool($value)) {
                 return $value ? 'true' : 'false';
             }
 
@@ -61,51 +62,30 @@ final class Helpers
      *
      * @throws \InvalidArgumentException if the JSON cannot be decoded
      *
-     * @return mixed
-     *
      * @see http://www.php.net/manual/en/function.json-decode.php
      */
     public static function json_decode($json, $assoc = false, $depth = 512)
     {
         $data = \json_decode($json, $assoc, $depth);
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \InvalidArgumentException(
-                'json_decode error: ' . json_last_error_msg()
-            );
+            throw new \InvalidArgumentException('json_decode error: '.json_last_error_msg());
         }
 
         return $data;
     }
 
     /**
-     * Define timeout before retry
+     * Generic helper which retries a function until some conditions are met.
      *
-     * @param int $defaultTimeout
-     * @param int $retries
-     *
-     * @return float|int
-     */
-    private static function linearTimeout($defaultTimeout, $retries)
-    {
-        // minimum between timeout and 200 milliseconds * number of retries
-        // Convert into microseconds for usleep (* 1000)
-        return min($defaultTimeout, $retries * 200) * 1000;
-    }
-
-    /**
-     * Generic helper which retries a function until some conditions are met
-     *
-     * @param object $object Object calling the function
-     * @param string $function Function to be called
-     * @param array $args Arguments to be passed to the function
-     * @param callable $validate Condition to be met to stop the retry
-     * @param int $maxRetries Max number of retries
-     * @param int $timeout Timeout
-     * @param string $timeoutCalculation name of the method to call to calculate the timeout
+     * @param object   $object             Object calling the function
+     * @param string   $function           Function to be called
+     * @param array    $args               Arguments to be passed to the function
+     * @param callable $validate           Condition to be met to stop the retry
+     * @param int      $maxRetries         Max number of retries
+     * @param int      $timeout            Timeout
+     * @param string   $timeoutCalculation name of the method to call to calculate the timeout
      *
      * @throws ExceededRetriesException
-     *
-     * @return void
      */
     public static function retryUntil(
         $object,
@@ -130,33 +110,28 @@ final class Helpers
                 return;
             }
 
-            $retry++;
+            ++$retry;
             usleep(
                 call_user_func_array($timeoutCalculation, [$timeout, $retry])
             );
         }
 
-        throw new ExceededRetriesException(
-            'Maximum number of retries (' . $maxRetries . ') exceeded.'
-        );
+        throw new ExceededRetriesException('Maximum number of retries ('.$maxRetries.') exceeded.');
     }
 
     /**
-     * Helper for Api keys which retries a function until some conditions are met
+     * Helper for Api keys which retries a function until some conditions are met.
      *
-     * @param string $operation
-     * @param SearchClient $searchClient search client
-     * @param string $key
-     * @param array $apiKey
-     * @param int $maxRetries Max number of retries
-     * @param int $timeout Timeout
-     * @param string $timeoutCalculation name of the method to call to calculate the timeout
-     * @param array $requestOptions
+     * @param string       $operation
+     * @param SearchClient $searchClient       search client
+     * @param string       $key
+     * @param array        $apiKey
+     * @param int          $maxRetries         Max number of retries
+     * @param int          $timeout            Timeout
+     * @param string       $timeoutCalculation name of the method to call to calculate the timeout
+     * @param array        $requestOptions
      *
      * @throws ExceededRetriesException
-     *
-     * @return void
-     *
      */
     public static function retryForApiKeyUntil(
         $operation,
@@ -175,12 +150,12 @@ final class Helpers
                 $response = $searchClient->getApiKey($key, $requestOptions);
 
                 // In case of an addition, if there was no error, the $key has been added as it should be
-                if ($operation === 'add') {
+                if ('add' === $operation) {
                     return;
                 }
 
                 // In case of an update, check if the key has been updated as it should be
-                if ($operation === 'update') {
+                if ('update' === $operation) {
                     if (self::isKeyUpdated($response, $apiKey)) {
                         return;
                     }
@@ -190,8 +165,8 @@ final class Helpers
             } catch (NotFoundException $e) {
                 // In case of a deletion, if there was an error, the $key has been deleted as it should be
                 if (
-                    $operation === 'delete' &&
-                    $e->getMessage() === 'Key does not exist'
+                    'delete' === $operation
+                    && 'Key does not exist' === $e->getMessage()
                 ) {
                     return;
                 }
@@ -199,15 +174,28 @@ final class Helpers
                 // Else try again ...
             }
 
-            $retry++;
+            ++$retry;
             usleep(
                 call_user_func_array($timeoutCalculation, [$timeout, $retry])
             );
         }
 
-        throw new ExceededRetriesException(
-            'Maximum number of retries (' . $maxRetries . ') exceeded.'
-        );
+        throw new ExceededRetriesException('Maximum number of retries ('.$maxRetries.') exceeded.');
+    }
+
+    /**
+     * Define timeout before retry.
+     *
+     * @param int $defaultTimeout
+     * @param int $retries
+     *
+     * @return float|int
+     */
+    private static function linearTimeout($defaultTimeout, $retries)
+    {
+        // minimum between timeout and 200 milliseconds * number of retries
+        // Convert into microseconds for usleep (* 1000)
+        return min($defaultTimeout, $retries * 200) * 1000;
     }
 
     private static function isKeyUpdated($key, $keyParams)

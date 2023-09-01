@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Hit Class Doc Comment
+ * Hit Class Doc Comment.
  *
  * @category Class
  *
  * @description A single hit.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'objectID' => 'string',
         'highlightResult' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
@@ -29,10 +27,10 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'objectID' => null,
         'highlightResult' => null,
@@ -42,11 +40,11 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'objectID' => 'objectID',
         'highlightResult' => '_highlightResult',
@@ -56,38 +54,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -100,7 +67,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -113,34 +80,14 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -164,6 +111,57 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -172,7 +170,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
 
@@ -181,17 +179,17 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -201,7 +199,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID unique object identifier
      *
@@ -215,9 +213,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets highlightResult
+     * Gets highlightResult.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>|null
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
      */
     public function getHighlightResult()
     {
@@ -225,9 +223,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets highlightResult
+     * Sets highlightResult.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>|null $highlightResult show highlighted section and words matched on a query
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $highlightResult show highlighted section and words matched on a query
      *
      * @return self
      */
@@ -239,9 +237,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets snippetResult
+     * Gets snippetResult.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult>|null
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult>
      */
     public function getSnippetResult()
     {
@@ -249,9 +247,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets snippetResult
+     * Sets snippetResult.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult>|null $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult> $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
      *
      * @return self
      */
@@ -263,9 +261,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets rankingInfo
+     * Gets rankingInfo.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RankingInfo|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo
      */
     public function getRankingInfo()
     {
@@ -273,9 +271,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets rankingInfo
+     * Sets rankingInfo.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RankingInfo|null $rankingInfo rankingInfo
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */
@@ -287,9 +285,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets distinctSeqID
+     * Gets distinctSeqID.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getDistinctSeqID()
     {
@@ -297,9 +295,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets distinctSeqID
+     * Sets distinctSeqID.
      *
-     * @param int|null $distinctSeqID distinctSeqID
+     * @param null|int $distinctSeqID distinctSeqID
      *
      * @return self
      */
@@ -309,6 +307,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -326,7 +325,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -336,10 +335,8 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -354,12 +351,9 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

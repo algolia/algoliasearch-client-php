@@ -5,29 +5,27 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Status Class Doc Comment
+ * Status Class Doc Comment.
  *
  * @category Class
  *
  * @description Status of the cluster.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Status
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const OPERATIONAL = 'operational';
+    public const OPERATIONAL = 'operational';
 
-    const DEGRADED_PERFORMANCE = 'degraded_performance';
+    public const DEGRADED_PERFORMANCE = 'degraded_performance';
 
-    const PARTIAL_OUTAGE = 'partial_outage';
+    public const PARTIAL_OUTAGE = 'partial_outage';
 
-    const MAJOR_OUTAGE = 'major_outage';
+    public const MAJOR_OUTAGE = 'major_outage';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -41,4 +39,3 @@ class Status
         ];
     }
 }
-

@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ConversionEvent Class Doc Comment
+ * ConversionEvent Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ConversionEvent
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const CONVERSION = 'conversion';
+    public const CONVERSION = 'conversion';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class ConversionEvent
         ];
     }
 }
-

@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RankingInfo Class Doc Comment
+ * RankingInfo Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'filters' => 'int',
         'firstMatchedWord' => 'int',
@@ -34,10 +33,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'filters' => null,
         'firstMatchedWord' => null,
@@ -55,11 +54,11 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'filters' => 'filters',
         'firstMatchedWord' => 'firstMatchedWord',
@@ -77,38 +76,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -129,7 +97,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -150,34 +118,14 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -225,6 +173,57 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -233,28 +232,28 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['filters']) || $this->container['filters'] === null) {
+        if (!isset($this->container['filters']) || null === $this->container['filters']) {
             $invalidProperties[] = "'filters' can't be null";
         }
-        if (!isset($this->container['firstMatchedWord']) || $this->container['firstMatchedWord'] === null) {
+        if (!isset($this->container['firstMatchedWord']) || null === $this->container['firstMatchedWord']) {
             $invalidProperties[] = "'firstMatchedWord' can't be null";
         }
-        if (!isset($this->container['geoDistance']) || $this->container['geoDistance'] === null) {
+        if (!isset($this->container['geoDistance']) || null === $this->container['geoDistance']) {
             $invalidProperties[] = "'geoDistance' can't be null";
         }
-        if (!isset($this->container['nbExactWords']) || $this->container['nbExactWords'] === null) {
+        if (!isset($this->container['nbExactWords']) || null === $this->container['nbExactWords']) {
             $invalidProperties[] = "'nbExactWords' can't be null";
         }
-        if (!isset($this->container['nbTypos']) || $this->container['nbTypos'] === null) {
+        if (!isset($this->container['nbTypos']) || null === $this->container['nbTypos']) {
             $invalidProperties[] = "'nbTypos' can't be null";
         }
-        if (!isset($this->container['promoted']) || $this->container['promoted'] === null) {
+        if (!isset($this->container['promoted']) || null === $this->container['promoted']) {
             $invalidProperties[] = "'promoted' can't be null";
         }
-        if (!isset($this->container['userScore']) || $this->container['userScore'] === null) {
+        if (!isset($this->container['userScore']) || null === $this->container['userScore']) {
             $invalidProperties[] = "'userScore' can't be null";
         }
-        if (!isset($this->container['words']) || $this->container['words'] === null) {
+        if (!isset($this->container['words']) || null === $this->container['words']) {
             $invalidProperties[] = "'words' can't be null";
         }
 
@@ -263,17 +262,17 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets filters
+     * Gets filters.
      *
      * @return int
      */
@@ -283,7 +282,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets filters
+     * Sets filters.
      *
      * @param int $filters this field is reserved for advanced usage
      *
@@ -297,7 +296,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets firstMatchedWord
+     * Gets firstMatchedWord.
      *
      * @return int
      */
@@ -307,7 +306,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets firstMatchedWord
+     * Sets firstMatchedWord.
      *
      * @param int $firstMatchedWord position of the most important matched attribute in the attributes to index list
      *
@@ -321,7 +320,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets geoDistance
+     * Gets geoDistance.
      *
      * @return int
      */
@@ -331,7 +330,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets geoDistance
+     * Sets geoDistance.
      *
      * @param int $geoDistance distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters)
      *
@@ -345,9 +344,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets geoPrecision
+     * Gets geoPrecision.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getGeoPrecision()
     {
@@ -355,9 +354,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets geoPrecision
+     * Sets geoPrecision.
      *
-     * @param int|null $geoPrecision precision used when computing the geo distance, in meters
+     * @param null|int $geoPrecision precision used when computing the geo distance, in meters
      *
      * @return self
      */
@@ -369,9 +368,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets matchedGeoLocation
+     * Gets matchedGeoLocation.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation
      */
     public function getMatchedGeoLocation()
     {
@@ -379,9 +378,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets matchedGeoLocation
+     * Sets matchedGeoLocation.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation|null $matchedGeoLocation matchedGeoLocation
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation $matchedGeoLocation matchedGeoLocation
      *
      * @return self
      */
@@ -393,9 +392,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets personalization
+     * Gets personalization.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\Personalization|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Personalization
      */
     public function getPersonalization()
     {
@@ -403,9 +402,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets personalization
+     * Sets personalization.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\Personalization|null $personalization personalization
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Personalization $personalization personalization
      *
      * @return self
      */
@@ -417,7 +416,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets nbExactWords
+     * Gets nbExactWords.
      *
      * @return int
      */
@@ -427,7 +426,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets nbExactWords
+     * Sets nbExactWords.
      *
      * @param int $nbExactWords number of exactly matched words
      *
@@ -441,7 +440,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets nbTypos
+     * Gets nbTypos.
      *
      * @return int
      */
@@ -451,7 +450,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets nbTypos
+     * Sets nbTypos.
      *
      * @param int $nbTypos number of typos encountered when matching the record
      *
@@ -465,7 +464,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets promoted
+     * Gets promoted.
      *
      * @return bool
      */
@@ -475,7 +474,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets promoted
+     * Sets promoted.
      *
      * @param bool $promoted present and set to true if a Rule promoted the hit
      *
@@ -489,9 +488,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets proximityDistance
+     * Gets proximityDistance.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getProximityDistance()
     {
@@ -499,9 +498,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets proximityDistance
+     * Sets proximityDistance.
      *
-     * @param int|null $proximityDistance when the query contains more than one word, the sum of the distances between matched words (in meters)
+     * @param null|int $proximityDistance when the query contains more than one word, the sum of the distances between matched words (in meters)
      *
      * @return self
      */
@@ -513,7 +512,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets userScore
+     * Gets userScore.
      *
      * @return int
      */
@@ -523,7 +522,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets userScore
+     * Sets userScore.
      *
      * @param int $userScore custom ranking for the object, expressed as a single integer value
      *
@@ -537,7 +536,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets words
+     * Gets words.
      *
      * @return int
      */
@@ -547,7 +546,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets words
+     * Sets words.
      *
      * @param int $words number of matched words, including prefixes and typos
      *
@@ -561,9 +560,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets promotedByReRanking
+     * Gets promotedByReRanking.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getPromotedByReRanking()
     {
@@ -571,9 +570,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Sets promotedByReRanking
+     * Sets promotedByReRanking.
      *
-     * @param bool|null $promotedByReRanking wether the record are promoted by the re-ranking strategy
+     * @param null|bool $promotedByReRanking wether the record are promoted by the re-ranking strategy
      *
      * @return self
      */
@@ -583,6 +582,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -600,7 +600,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -610,10 +610,8 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -628,12 +626,9 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

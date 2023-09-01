@@ -5,22 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * TypoToleranceEnum Class Doc Comment
+ * TypoToleranceEnum Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class TypoToleranceEnum
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const MIN = 'min';
+    public const MIN = 'min';
 
-    const STRICT = 'strict';
+    public const STRICT = 'strict';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +31,3 @@ class TypoToleranceEnum
         ];
     }
 }
-

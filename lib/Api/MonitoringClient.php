@@ -12,13 +12,14 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 /**
- * MonitoringClient Class Doc Comment
+ * MonitoringClient Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class MonitoringClient
 {
+    public const VERSION = '4.0.0-alpha.78';
+
     /**
      * @var ApiWrapperInterface
      */
@@ -29,10 +30,6 @@ class MonitoringClient
      */
     protected $config;
 
-    /**
-     * @param MonitoringConfig $config
-     * @param ApiWrapperInterface $apiWrapper
-     */
     public function __construct(ApiWrapperInterface $apiWrapper, MonitoringConfig $config)
     {
         $this->config = $config;
@@ -40,7 +37,7 @@ class MonitoringClient
     }
 
     /**
-     * Instantiate the client with basic credentials
+     * Instantiate the client with basic credentials.
      *
      * @param string $appId  Application ID
      * @param string $apiKey Algolia API Key
@@ -51,7 +48,7 @@ class MonitoringClient
     }
 
     /**
-     * Instantiate the client with configuration
+     * Instantiate the client with configuration.
      *
      * @param MonitoringConfig $config Configuration
      */
@@ -69,20 +66,17 @@ class MonitoringClient
     }
 
     /**
-     * Gets the cluster hosts depending on the config
-     *
-     * @param MonitoringConfig $config
+     * Gets the cluster hosts depending on the config.
      *
      * @return ClusterHosts
      */
     public static function getClusterHosts(MonitoringConfig $config)
     {
-
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
                 str_replace('{region}', $config->getRegion(), '') :
                 '';
             $clusterHosts = ClusterHosts::create($url);
@@ -102,9 +96,9 @@ class MonitoringClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -122,12 +116,12 @@ class MonitoringClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -135,15 +129,15 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -161,12 +155,12 @@ class MonitoringClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -174,16 +168,16 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * List incidents for selected clusters.
      *
-     * @param string $clusters Subset of clusters, separated by comma. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse|array<string, mixed>
      */
     public function getClusterIncidents($clusters, $requestOptions = [])
     {
@@ -200,7 +194,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($clusters !== null) {
+        if (null !== $clusters) {
             $resourcePath = str_replace(
                 '{clusters}',
                 ObjectSerializer::toPathValue($clusters),
@@ -208,16 +202,16 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * List statuses of selected clusters.
      *
-     * @param string $clusters Subset of clusters, separated by comma. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse|array<string, mixed>
      */
     public function getClusterStatus($clusters, $requestOptions = [])
     {
@@ -234,7 +228,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($clusters !== null) {
+        if (null !== $clusters) {
             $resourcePath = str_replace(
                 '{clusters}',
                 ObjectSerializer::toPathValue($clusters),
@@ -242,7 +236,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -250,26 +244,25 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse|array<string, mixed>
      */
     public function getIncidents($requestOptions = [])
     {
-
         $resourcePath = '/1/incidents';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get indexing times.
      *
-     * @param string $clusters Subset of clusters, separated by comma. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponse|array<string, mixed>
      */
     public function getIndexingTime($clusters, $requestOptions = [])
     {
@@ -286,7 +279,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($clusters !== null) {
+        if (null !== $clusters) {
             $resourcePath = str_replace(
                 '{clusters}',
                 ObjectSerializer::toPathValue($clusters),
@@ -294,7 +287,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -302,26 +295,25 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse|array<string, mixed>
      */
     public function getInventory($requestOptions = [])
     {
-
         $resourcePath = '/1/inventory/servers';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get search latency times.
      *
-     * @param string $clusters Subset of clusters, separated by comma. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse|array<string, mixed>
      */
     public function getLatency($clusters, $requestOptions = [])
     {
@@ -338,7 +330,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($clusters !== null) {
+        if (null !== $clusters) {
             $resourcePath = str_replace(
                 '{clusters}',
                 ObjectSerializer::toPathValue($clusters),
@@ -346,17 +338,17 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get metrics for a given period.
      *
-     * @param array $metric Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. (required)
-     * @param array $period Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. (required)
+     * @param array $metric         Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. (required)
+     * @param array $period         Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponse|array<string, mixed>
      */
     public function getMetrics($metric, $period, $requestOptions = [])
     {
@@ -379,7 +371,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($metric !== null) {
+        if (null !== $metric) {
             $resourcePath = str_replace(
                 '{metric}',
                 ObjectSerializer::toPathValue($metric),
@@ -388,7 +380,7 @@ class MonitoringClient
         }
 
         // path params
-        if ($period !== null) {
+        if (null !== $period) {
             $resourcePath = str_replace(
                 '{period}',
                 ObjectSerializer::toPathValue($period),
@@ -396,14 +388,14 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Test the reachability of clusters.
      *
-     * @param string $clusters Subset of clusters, separated by comma. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|array<string,array>
      */
@@ -422,7 +414,7 @@ class MonitoringClient
         $httpBody = null;
 
         // path params
-        if ($clusters !== null) {
+        if (null !== $clusters) {
             $resourcePath = str_replace(
                 '{clusters}',
                 ObjectSerializer::toPathValue($clusters),
@@ -430,7 +422,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -438,26 +430,25 @@ class MonitoringClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse|array<string, mixed>
      */
     public function getStatus($requestOptions = [])
     {
-
         $resourcePath = '/1/status';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -473,14 +464,14 @@ class MonitoringClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -488,16 +479,16 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -513,14 +504,14 @@ class MonitoringClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -528,7 +519,7 @@ class MonitoringClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
@@ -546,7 +537,7 @@ class MonitoringClient
 
         return $this->api->sendRequest(
             $method,
-            $resourcePath . ($query ? "?{$query}" : ''),
+            $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
             $useReadTransporter

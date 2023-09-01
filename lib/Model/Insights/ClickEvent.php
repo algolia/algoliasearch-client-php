@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ClickEvent Class Doc Comment
+ * ClickEvent Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ClickEvent
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const CLICK = 'click';
+    public const CLICK = 'click';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class ClickEvent
         ];
     }
 }
-

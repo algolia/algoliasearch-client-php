@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * SearchRecommendRulesParams Class Doc Comment
+ * SearchRecommendRulesParams Class Doc Comment.
  *
  * @category Class
  *
  * @description Recommend rules search parameters.
- *
- * @package Algolia\AlgoliaSearch
  */
 class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => 'string',
         'context' => 'string',
@@ -30,10 +28,10 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'context' => null,
@@ -44,11 +42,11 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'query' => 'query',
         'context' => 'context',
@@ -59,38 +57,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -104,7 +71,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -118,34 +85,14 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -169,6 +116,57 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         if (isset($data['requestOptions'])) {
             $this->container['requestOptions'] = $data['requestOptions'];
         }
+    }
+
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
     }
 
     /**
@@ -197,19 +195,19 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQuery()
     {
@@ -217,9 +215,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
-     * @param string|null $query full-text query
+     * @param null|string $query full-text query
      *
      * @return self
      */
@@ -231,9 +229,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets context
+     * Gets context.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getContext()
     {
@@ -241,9 +239,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets context
+     * Sets context.
      *
-     * @param string|null $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     * @param null|string $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
      *
      * @return self
      */
@@ -255,9 +253,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets page
+     * Gets page.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPage()
     {
@@ -265,15 +263,14 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets page
+     * Sets page.
      *
-     * @param int|null $page requested page (the first page is page 0)
+     * @param null|int $page requested page (the first page is page 0)
      *
      * @return self
      */
     public function setPage($page)
     {
-
         if (!is_null($page) && ($page < 0)) {
             throw new \InvalidArgumentException('invalid value for $page when calling SearchRecommendRulesParams., must be bigger than or equal to 0.');
         }
@@ -284,9 +281,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -294,15 +291,14 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
-     * @param int|null $hitsPerPage maximum number of hits per page
+     * @param null|int $hitsPerPage maximum number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchRecommendRulesParams., must be smaller than or equal to 1000.');
         }
@@ -316,9 +312,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets enabled
+     * Gets enabled.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnabled()
     {
@@ -326,9 +322,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets enabled
+     * Sets enabled.
      *
-     * @param bool|null $enabled Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+     * @param null|bool $enabled Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
      *
      * @return self
      */
@@ -340,9 +336,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets requestOptions
+     * Gets requestOptions.
      *
-     * @return object[]|null
+     * @return null|object[]
      */
     public function getRequestOptions()
     {
@@ -350,9 +346,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets requestOptions
+     * Sets requestOptions.
      *
-     * @param object[]|null $requestOptions request options to send with the API call
+     * @param null|object[] $requestOptions request options to send with the API call
      *
      * @return self
      */
@@ -362,6 +358,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -379,7 +376,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -389,10 +386,8 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -407,12 +402,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

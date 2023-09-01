@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Condition Class Doc Comment
+ * Condition Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'pattern' => 'string',
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Search\Anchoring',
@@ -25,10 +24,10 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'pattern' => null,
         'anchoring' => null,
@@ -37,11 +36,11 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'pattern' => 'pattern',
         'anchoring' => 'anchoring',
@@ -50,38 +49,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -93,7 +61,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -105,34 +73,14 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -153,32 +101,81 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets pattern
+     * Gets pattern.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getPattern()
     {
@@ -186,9 +183,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets pattern
+     * Sets pattern.
      *
-     * @param string|null $pattern query pattern syntax
+     * @param null|string $pattern query pattern syntax
      *
      * @return self
      */
@@ -200,9 +197,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets anchoring
+     * Gets anchoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Anchoring|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
      */
     public function getAnchoring()
     {
@@ -210,9 +207,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets anchoring
+     * Sets anchoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Anchoring|null $anchoring anchoring
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
      *
      * @return self
      */
@@ -224,9 +221,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets alternatives
+     * Gets alternatives.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAlternatives()
     {
@@ -234,9 +231,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets alternatives
+     * Sets alternatives.
      *
-     * @param bool|null $alternatives whether the pattern matches on plurals, synonyms, and typos
+     * @param null|bool $alternatives whether the pattern matches on plurals, synonyms, and typos
      *
      * @return self
      */
@@ -248,9 +245,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets context
+     * Gets context.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getContext()
     {
@@ -258,9 +255,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets context
+     * Sets context.
      *
-     * @param string|null $context rule context format: [A-Za-z0-9_-]+)
+     * @param null|string $context rule context format: [A-Za-z0-9_-]+)
      *
      * @return self
      */
@@ -270,6 +267,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -287,7 +285,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -297,10 +295,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -315,12 +311,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

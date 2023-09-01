@@ -5,10 +5,9 @@
 namespace Algolia\AlgoliaSearch;
 
 /**
- * ObjectSerializer Class Doc Comment
+ * ObjectSerializer Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class ObjectSerializer
 {
@@ -16,9 +15,9 @@ class ObjectSerializer
     private static $dateTimeFormat = \DateTime::ATOM;
 
     /**
-     * Change the date format
+     * Change the date format.
      *
-     * @param string $format   the new date format to use
+     * @param string $format the new date format to use
      */
     public static function setDateTimeFormat($format)
     {
@@ -26,13 +25,13 @@ class ObjectSerializer
     }
 
     /**
-     * Serialize data
+     * Serialize data.
      *
      * @param mixed  $data   the data to serialize
      * @param string $type   the OpenAPIToolsType of the data
      * @param string $format the format of the OpenAPITools type of the data
      *
-     * @return scalar|object|array|null serialized form of $data
+     * @return null|array|object|scalar serialized form of $data
      */
     public static function sanitizeForSerialization($data, $type = null, $format = null)
     {
@@ -41,7 +40,7 @@ class ObjectSerializer
         }
 
         if ($data instanceof \DateTime) {
-            return ($format === 'date') ? $data->format('Y-m-d') : $data->format(self::$dateTimeFormat);
+            return ('date' === $format) ? $data->format('Y-m-d') : $data->format(self::$dateTimeFormat);
         }
 
         if (is_array($data)) {
@@ -58,8 +57,8 @@ class ObjectSerializer
                 $formats = $data::modelFormats();
                 foreach ($data::modelTypes() as $property => $modelTypes) {
                     $getter = $data::getters()[$property];
-                    $value = $data->$getter();
-                    if ($value !== null && !in_array($modelTypes, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
+                    $value = $data->{$getter}();
+                    if (null !== $value && !in_array($modelTypes, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
                         $callable = [$modelTypes, 'getAllowableEnumValues'];
                         if (is_callable($callable)) {
                             /** array $callable */
@@ -67,16 +66,16 @@ class ObjectSerializer
                             if (!in_array($value, $allowedEnumTypes, true)) {
                                 $imploded = implode("', '", $allowedEnumTypes);
 
-                                throw new \InvalidArgumentException("Invalid value for enum '$modelTypes', must be one of: '$imploded'");
+                                throw new \InvalidArgumentException("Invalid value for enum '{$modelTypes}', must be one of: '{$imploded}'");
                             }
                         }
                     }
-                    if ($value !== null) {
+                    if (null !== $value) {
                         $values[$data::attributeMap()[$property]] = self::sanitizeForSerialization($value, $modelTypes, $formats[$property]);
                     }
                 }
             } else {
-                foreach($data as $property => $value) {
+                foreach ($data as $property => $value) {
                     $values[$property] = self::sanitizeForSerialization($value);
                 }
             }
@@ -85,12 +84,11 @@ class ObjectSerializer
         }
 
         return (string) $data;
-
     }
 
     /**
      * Sanitize filename by removing path.
-     * e.g. ../../sun.gif becomes sun.gif
+     * e.g. ../../sun.gif becomes sun.gif.
      *
      * @param string $filename filename to be sanitized
      *
@@ -98,12 +96,11 @@ class ObjectSerializer
      */
     public static function sanitizeFilename($filename)
     {
-        if (preg_match("/.*[\/\\\\](.*)$/", $filename, $match)) {
+        if (preg_match('/.*[\\/\\\\](.*)$/', $filename, $match)) {
             return $match[1];
         }
 
         return $filename;
-
     }
 
     /**
@@ -125,7 +122,7 @@ class ObjectSerializer
      * If it's a string, pass through unchanged. It will be url-encoded
      * later.
      *
-     * @param string[]|string|\DateTime $object an object to be serialized to a string
+     * @param \DateTime|string|string[] $object an object to be serialized to a string
      *
      * @return string the serialized object
      */
@@ -136,13 +133,12 @@ class ObjectSerializer
         }
 
         return self::toString($object);
-
     }
 
     /**
      * Take value and turn it into a string suitable for inclusion in
      * the header. If it's a string, pass through unchanged
-     * If it's a datetime object, format it in ISO8601
+     * If it's a datetime object, format it in ISO8601.
      *
      * @param string $value a string which will be part of the header
      *
@@ -161,9 +157,9 @@ class ObjectSerializer
     /**
      * Take value and turn it into a string suitable for inclusion in
      * the http body (form parameter). If it's a string, pass through unchanged
-     * If it's a datetime object, format it in ISO8601
+     * If it's a datetime object, format it in ISO8601.
      *
-     * @param string|\SplFileObject $value the value of the form parameter
+     * @param \SplFileObject|string $value the value of the form parameter
      *
      * @return string the form string
      */
@@ -174,7 +170,6 @@ class ObjectSerializer
         }
 
         return self::toString($value);
-
     }
 
     /**
@@ -183,7 +178,7 @@ class ObjectSerializer
      * If it's a datetime object, format it in ISO8601
      * If it's a boolean, convert it to "true" or "false".
      *
-     * @param string|bool|\DateTime $value the value of the parameter
+     * @param bool|\DateTime|string $value the value of the parameter
      *
      * @return string the header string
      */
@@ -191,12 +186,12 @@ class ObjectSerializer
     {
         if ($value instanceof \DateTime) { // datetime in ISO8601 format
             return $value->format(self::$dateTimeFormat);
-        } elseif (is_bool($value)) {
+        }
+        if (is_bool($value)) {
             return $value ? 'true' : 'false';
         }
 
         return $value;
-
     }
 
     /**
@@ -204,7 +199,7 @@ class ObjectSerializer
      *
      * @param array  $collection                 collection to serialize to a string
      * @param string $style                      the format use for serialization (csv,
-     * ssv, tsv, pipes, multi)
+     *                                           ssv, tsv, pipes, multi)
      * @param bool   $allowCollectionFormatMulti allow collection format to be a multidimensional array
      *
      * @return string
@@ -216,6 +211,7 @@ class ObjectSerializer
             // need to fix the result of multidimensional arrays.
             return preg_replace('/%5B[0-9]+%5D=/', '=', http_build_query($collection, '', '&'));
         }
+
         switch ($style) {
             case 'pipeDelimited':
             case 'pipes':
@@ -237,14 +233,13 @@ class ObjectSerializer
     }
 
     /**
-     * Deserialize a JSON string into an object
+     * Deserialize a JSON string into an object.
      *
-     * @param mixed    $data          object or primitive to be deserialized
-     * @param string   $class         class name is passed as a string
-     * @param string[] $httpHeaders   HTTP headers
-     * @param string   $discriminator discriminator if polymorphism is used
+     * @param mixed    $data        object or primitive to be deserialized
+     * @param string   $class       class name is passed as a string
+     * @param string[] $httpHeaders HTTP headers
      *
-     * @return object|array|null a single or an array of $class instances
+     * @return null|array|object a single or an array of $class instances
      */
     public static function deserialize($data, $class, $httpHeaders = null)
     {
@@ -252,14 +247,14 @@ class ObjectSerializer
             return null;
         }
 
-        if (strcasecmp(mb_substr($class, -2), '[]') === 0) {
+        if (0 === strcasecmp(substr($class, -2), '[]')) {
             $data = is_string($data) ? json_decode($data) : $data;
 
             if (!is_array($data)) {
-                throw new \InvalidArgumentException("Invalid array '$class'");
+                throw new \InvalidArgumentException("Invalid array '{$class}'");
             }
 
-            $subClass = mb_substr($class, 0, -2);
+            $subClass = substr($class, 0, -2);
             $values = [];
             foreach ($data as $key => $value) {
                 $values[] = self::deserialize($value, $subClass, null);
@@ -271,9 +266,9 @@ class ObjectSerializer
         if (preg_match('/^(array<|map\[)/', $class)) { // for associative array e.g. array<string,int>
             $data = is_string($data) ? json_decode($data) : $data;
             settype($data, 'array');
-            $inner = mb_substr($class, 4, -1);
+            $inner = substr($class, 4, -1);
             $deserialized = [];
-            if (mb_strrpos($inner, ',') !== false) {
+            if (false !== strrpos($inner, ',')) {
                 $subClass_array = explode(',', $inner, 2);
                 $subClass = $subClass_array[1];
                 foreach ($data as $key => $value) {
@@ -284,17 +279,18 @@ class ObjectSerializer
             return $deserialized;
         }
 
-        if ($class === 'object') {
+        if ('object' === $class) {
             settype($data, 'array');
 
             return $data;
-        } elseif ($class === 'mixed') {
+        }
+        if ('mixed' === $class) {
             settype($data, gettype($data));
 
             return $data;
         }
 
-        if ($class === '\DateTime') {
+        if ('\DateTime' === $class) {
             // Some API's return an invalid, empty string as a
             // date-time property. DateTime::__construct() will return
             // the current time for empty input which is probably not
@@ -316,7 +312,7 @@ class ObjectSerializer
             }
         }
 
-        /** @psalm-suppress ParadoxicalCondition */
+        // @psalm-suppress ParadoxicalCondition
         if (in_array($class, ['\DateTime', '\SplFileObject', 'array', 'bool', 'boolean', 'byte', 'float', 'int', 'integer', 'mixed', 'number', 'object', 'string', 'void'], true)) {
             settype($data, $class);
 
@@ -327,7 +323,7 @@ class ObjectSerializer
             if (!in_array($data, $class::getAllowableEnumValues(), true)) {
                 $imploded = implode("', '", $class::getAllowableEnumValues());
 
-                throw new \InvalidArgumentException("Invalid value for enum '$class', must be one of: '$imploded'");
+                throw new \InvalidArgumentException("Invalid value for enum '{$class}', must be one of: '{$imploded}'");
             }
 
             return $data;
@@ -345,11 +341,10 @@ class ObjectSerializer
 
             if (isset($data->{$instance::attributeMap()[$property]})) {
                 $propertyValue = $data->{$instance::attributeMap()[$property]};
-                $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
+                $instance->{$propertySetter}(self::deserialize($propertyValue, $type, null));
             }
         }
 
         return $instance;
-
     }
 }

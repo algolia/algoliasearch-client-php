@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * DeleteByParams Class Doc Comment
+ * DeleteByParams Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Search\FacetFilters',
         'filters' => 'string',
@@ -29,10 +28,10 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facetFilters' => null,
         'filters' => null,
@@ -45,11 +44,11 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'facetFilters' => 'facetFilters',
         'filters' => 'filters',
@@ -62,38 +61,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -109,7 +77,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -125,34 +93,14 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -185,32 +133,81 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets facetFilters
+     * Gets facetFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
      */
     public function getFacetFilters()
     {
@@ -218,9 +215,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets facetFilters
+     * Sets facetFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetFilters|null $facetFilters facetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -232,9 +229,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets filters
+     * Gets filters.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getFilters()
     {
@@ -242,9 +239,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets filters
+     * Sets filters.
      *
-     * @param string|null $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
+     * @param null|string $filters [Filter](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) the query with numeric, facet, or tag filters.
      *
      * @return self
      */
@@ -256,9 +253,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets numericFilters
+     * Gets numericFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\NumericFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
      */
     public function getNumericFilters()
     {
@@ -266,9 +263,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets numericFilters
+     * Sets numericFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\NumericFilters|null $numericFilters numericFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -280,9 +277,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets tagFilters
+     * Gets tagFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\TagFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
      */
     public function getTagFilters()
     {
@@ -290,9 +287,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets tagFilters
+     * Sets tagFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\TagFilters|null $tagFilters tagFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -304,9 +301,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets aroundLatLng
+     * Gets aroundLatLng.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAroundLatLng()
     {
@@ -314,9 +311,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets aroundLatLng
+     * Sets aroundLatLng.
      *
-     * @param string|null $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
+     * @param null|string $aroundLatLng Search for entries [around a central location](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filter-around-a-central-point), enabling a geographical search within a circular area.
      *
      * @return self
      */
@@ -328,9 +325,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets aroundRadius
+     * Gets aroundRadius.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AroundRadius|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
      */
     public function getAroundRadius()
     {
@@ -338,9 +335,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets aroundRadius
+     * Sets aroundRadius.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AroundRadius|null $aroundRadius aroundRadius
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -352,9 +349,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets insideBoundingBox
+     * Gets insideBoundingBox.
      *
-     * @return float[]|null
+     * @return null|float[]
      */
     public function getInsideBoundingBox()
     {
@@ -362,9 +359,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets insideBoundingBox
+     * Sets insideBoundingBox.
      *
-     * @param float[]|null $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -376,9 +373,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets insidePolygon
+     * Gets insidePolygon.
      *
-     * @return float[]|null
+     * @return null|float[]
      */
     public function getInsidePolygon()
     {
@@ -386,9 +383,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Sets insidePolygon
+     * Sets insidePolygon.
      *
-     * @param float[]|null $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -398,6 +395,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -415,7 +413,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -425,10 +423,8 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -443,12 +439,9 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

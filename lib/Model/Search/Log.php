@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Log Class Doc Comment
+ * Log Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'timestamp' => 'string',
         'method' => 'string',
@@ -36,10 +35,10 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'timestamp' => null,
         'method' => null,
@@ -59,11 +58,11 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'timestamp' => 'timestamp',
         'method' => 'method',
@@ -83,38 +82,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -137,7 +105,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -160,34 +128,14 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -241,6 +189,57 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -249,37 +248,37 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timestamp']) || $this->container['timestamp'] === null) {
+        if (!isset($this->container['timestamp']) || null === $this->container['timestamp']) {
             $invalidProperties[] = "'timestamp' can't be null";
         }
-        if (!isset($this->container['method']) || $this->container['method'] === null) {
+        if (!isset($this->container['method']) || null === $this->container['method']) {
             $invalidProperties[] = "'method' can't be null";
         }
-        if (!isset($this->container['answerCode']) || $this->container['answerCode'] === null) {
+        if (!isset($this->container['answerCode']) || null === $this->container['answerCode']) {
             $invalidProperties[] = "'answerCode' can't be null";
         }
-        if (!isset($this->container['queryBody']) || $this->container['queryBody'] === null) {
+        if (!isset($this->container['queryBody']) || null === $this->container['queryBody']) {
             $invalidProperties[] = "'queryBody' can't be null";
         }
-        if (!isset($this->container['answer']) || $this->container['answer'] === null) {
+        if (!isset($this->container['answer']) || null === $this->container['answer']) {
             $invalidProperties[] = "'answer' can't be null";
         }
-        if (!isset($this->container['url']) || $this->container['url'] === null) {
+        if (!isset($this->container['url']) || null === $this->container['url']) {
             $invalidProperties[] = "'url' can't be null";
         }
-        if (!isset($this->container['ip']) || $this->container['ip'] === null) {
+        if (!isset($this->container['ip']) || null === $this->container['ip']) {
             $invalidProperties[] = "'ip' can't be null";
         }
-        if (!isset($this->container['queryHeaders']) || $this->container['queryHeaders'] === null) {
+        if (!isset($this->container['queryHeaders']) || null === $this->container['queryHeaders']) {
             $invalidProperties[] = "'queryHeaders' can't be null";
         }
-        if (!isset($this->container['sha1']) || $this->container['sha1'] === null) {
+        if (!isset($this->container['sha1']) || null === $this->container['sha1']) {
             $invalidProperties[] = "'sha1' can't be null";
         }
-        if (!isset($this->container['nbApiCalls']) || $this->container['nbApiCalls'] === null) {
+        if (!isset($this->container['nbApiCalls']) || null === $this->container['nbApiCalls']) {
             $invalidProperties[] = "'nbApiCalls' can't be null";
         }
-        if (!isset($this->container['processingTimeMs']) || $this->container['processingTimeMs'] === null) {
+        if (!isset($this->container['processingTimeMs']) || null === $this->container['processingTimeMs']) {
             $invalidProperties[] = "'processingTimeMs' can't be null";
         }
 
@@ -288,17 +287,17 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets timestamp
+     * Gets timestamp.
      *
      * @return string
      */
@@ -308,7 +307,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets timestamp
+     * Sets timestamp.
      *
      * @param string $timestamp Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -322,7 +321,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets method
+     * Gets method.
      *
      * @return string
      */
@@ -332,7 +331,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets method
+     * Sets method.
      *
      * @param string $method HTTP method of the performed request
      *
@@ -346,7 +345,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets answerCode
+     * Gets answerCode.
      *
      * @return string
      */
@@ -356,7 +355,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets answerCode
+     * Sets answerCode.
      *
      * @param string $answerCode HTTP response code
      *
@@ -370,7 +369,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets queryBody
+     * Gets queryBody.
      *
      * @return string
      */
@@ -380,7 +379,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets queryBody
+     * Sets queryBody.
      *
      * @param string $queryBody Request body. Truncated after 1,000 characters.
      *
@@ -394,7 +393,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets answer
+     * Gets answer.
      *
      * @return string
      */
@@ -404,7 +403,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets answer
+     * Sets answer.
      *
      * @param string $answer Answer body. Truncated after 1,000 characters.
      *
@@ -418,7 +417,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets url
+     * Gets url.
      *
      * @return string
      */
@@ -428,7 +427,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets url
+     * Sets url.
      *
      * @param string $url request URL
      *
@@ -442,7 +441,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets ip
+     * Gets ip.
      *
      * @return string
      */
@@ -452,7 +451,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets ip
+     * Sets ip.
      *
      * @param string $ip IP address of the client that performed the request
      *
@@ -466,7 +465,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets queryHeaders
+     * Gets queryHeaders.
      *
      * @return string
      */
@@ -476,7 +475,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets queryHeaders
+     * Sets queryHeaders.
      *
      * @param string $queryHeaders request headers (API key is obfuscated)
      *
@@ -490,7 +489,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets sha1
+     * Gets sha1.
      *
      * @return string
      */
@@ -500,7 +499,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets sha1
+     * Sets sha1.
      *
      * @param string $sha1 SHA1 signature of the log entry
      *
@@ -514,7 +513,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets nbApiCalls
+     * Gets nbApiCalls.
      *
      * @return string
      */
@@ -524,7 +523,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets nbApiCalls
+     * Sets nbApiCalls.
      *
      * @param string $nbApiCalls number of API calls
      *
@@ -538,7 +537,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets processingTimeMs
+     * Gets processingTimeMs.
      *
      * @return string
      */
@@ -548,7 +547,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets processingTimeMs
+     * Sets processingTimeMs.
      *
      * @param string $processingTimeMs Processing time for the query. Doesn't include network time.
      *
@@ -562,9 +561,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets index
+     * Gets index.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getIndex()
     {
@@ -572,9 +571,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets index
+     * Sets index.
      *
-     * @param string|null $index index targeted by the query
+     * @param null|string $index index targeted by the query
      *
      * @return self
      */
@@ -586,9 +585,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets queryParams
+     * Gets queryParams.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQueryParams()
     {
@@ -596,9 +595,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets queryParams
+     * Sets queryParams.
      *
-     * @param string|null $queryParams query parameters sent with the request
+     * @param null|string $queryParams query parameters sent with the request
      *
      * @return self
      */
@@ -610,9 +609,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets queryNbHits
+     * Gets queryNbHits.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQueryNbHits()
     {
@@ -620,9 +619,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets queryNbHits
+     * Sets queryNbHits.
      *
-     * @param string|null $queryNbHits number of hits returned for the query
+     * @param null|string $queryNbHits number of hits returned for the query
      *
      * @return self
      */
@@ -634,9 +633,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Gets innerQueries
+     * Gets innerQueries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[]
      */
     public function getInnerQueries()
     {
@@ -644,9 +643,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     }
 
     /**
-     * Sets innerQueries
+     * Sets innerQueries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\LogQuery[]|null $innerQueries performed queries for the given request
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries performed queries for the given request
      *
      * @return self
      */
@@ -656,6 +655,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -673,7 +673,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -683,10 +683,8 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -701,12 +699,9 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

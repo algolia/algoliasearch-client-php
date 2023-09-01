@@ -12,13 +12,14 @@ use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
 
 /**
- * PersonalizationClient Class Doc Comment
+ * PersonalizationClient Class Doc Comment.
  *
  * @category Class
- * @package  Algolia\AlgoliaSearch
  */
 class PersonalizationClient
 {
+    public const VERSION = '4.0.0-alpha.78';
+
     /**
      * @var ApiWrapperInterface
      */
@@ -29,10 +30,6 @@ class PersonalizationClient
      */
     protected $config;
 
-    /**
-     * @param PersonalizationConfig $config
-     * @param ApiWrapperInterface $apiWrapper
-     */
     public function __construct(ApiWrapperInterface $apiWrapper, PersonalizationConfig $config)
     {
         $this->config = $config;
@@ -40,7 +37,7 @@ class PersonalizationClient
     }
 
     /**
-     * Instantiate the client with basic credentials and region
+     * Instantiate the client with basic credentials and region.
      *
      * @param string $appId  Application ID
      * @param string $apiKey Algolia API Key
@@ -48,14 +45,14 @@ class PersonalizationClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu','us'];
+        $allowedRegions = ['eu', 'us'];
 
         if (
-            $region === null ||
-            ($region !== null && !in_array($region, $allowedRegions, true))
+            null === $region
+            || (null !== $region && !in_array($region, $allowedRegions, true))
         ) {
             throw new AlgoliaException(
-                '`region` is required and must be one of the following: ' .
+                '`region` is required and must be one of the following: '.
                     implode(', ', $allowedRegions)
             );
         }
@@ -66,7 +63,7 @@ class PersonalizationClient
     }
 
     /**
-     * Instantiate the client with configuration
+     * Instantiate the client with configuration.
      *
      * @param PersonalizationConfig $config Configuration
      */
@@ -84,20 +81,17 @@ class PersonalizationClient
     }
 
     /**
-     * Gets the cluster hosts depending on the config
-     *
-     * @param PersonalizationConfig $config
+     * Gets the cluster hosts depending on the config.
      *
      * @return ClusterHosts
      */
     public static function getClusterHosts(PersonalizationConfig $config)
     {
-
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = $config->getRegion() !== null && $config->getRegion() !== '' ?
+            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
                 str_replace('{region}', $config->getRegion(), 'personalization.{region}.algolia.com') :
                 '';
             $clusterHosts = ClusterHosts::create($url);
@@ -117,9 +111,9 @@ class PersonalizationClient
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -137,12 +131,12 @@ class PersonalizationClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -150,16 +144,16 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Delete a user profile.
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $userToken      userToken representing the user for which to fetch the Personalization profile. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\DeleteUserProfileResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\DeleteUserProfileResponse|array<string, mixed>
      */
     public function deleteUserProfile($userToken, $requestOptions = [])
     {
@@ -176,7 +170,7 @@ class PersonalizationClient
         $httpBody = null;
 
         // path params
-        if ($userToken !== null) {
+        if (null !== $userToken) {
             $resourcePath = str_replace(
                 '{userToken}',
                 ObjectSerializer::toPathValue($userToken),
@@ -184,15 +178,15 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -210,12 +204,12 @@ class PersonalizationClient
         $headers = [];
         $httpBody = null;
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -223,7 +217,7 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -231,26 +225,25 @@ class PersonalizationClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams|array<string, mixed>
      */
     public function getPersonalizationStrategy($requestOptions = [])
     {
-
         $resourcePath = '/1/strategies/personalization';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Get a user profile.
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile. (required)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $userToken      userToken representing the user for which to fetch the Personalization profile. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse|array<string, mixed>
      */
     public function getUserTokenProfile($userToken, $requestOptions = [])
     {
@@ -267,7 +260,7 @@ class PersonalizationClient
         $httpBody = null;
 
         // path params
-        if ($userToken !== null) {
+        if (null !== $userToken) {
             $resourcePath = str_replace(
                 '{userToken}',
                 ObjectSerializer::toPathValue($userToken),
@@ -275,16 +268,16 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -300,14 +293,14 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -315,16 +308,16 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Send requests to the Algolia REST API.
      *
-     * @param string $path Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array $parameters Query parameters to apply to the current query. (optional)
-     * @param array $body Parameters to send with the custom request. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
      */
@@ -340,14 +333,14 @@ class PersonalizationClient
         $resourcePath = '/1{path}';
         $queryParameters = [];
         $headers = [];
-        $httpBody =  isset($body) ? $body : [];
+        $httpBody = isset($body) ? $body : [];
 
-        if ($parameters !== null) {
+        if (null !== $parameters) {
             $queryParameters = $parameters;
         }
 
         // path params
-        if ($path !== null) {
+        if (null !== $path) {
             $resourcePath = str_replace(
                 '{path}',
                 $path,
@@ -355,22 +348,22 @@ class PersonalizationClient
             );
         }
 
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
      * Set a new strategy.
      *
      * @param array $personalizationStrategyParams personalizationStrategyParams (required)
-     * - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)
-     * - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with the facets. (required)
-     * - $personalizationStrategyParams['personalizationImpact'] => (int) The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required)
+     *                                             - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)
+     *                                             - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with the facets. (required)
+     *                                             - $personalizationStrategyParams['personalizationImpact'] => (int) The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|\Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\SetPersonalizationStrategyResponse|array<string, mixed>
      */
     public function setPersonalizationStrategy($personalizationStrategyParams, $requestOptions = [])
     {
@@ -386,7 +379,7 @@ class PersonalizationClient
         $headers = [];
         $httpBody = $personalizationStrategyParams;
 
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, );
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
@@ -404,7 +397,7 @@ class PersonalizationClient
 
         return $this->api->sendRequest(
             $method,
-            $resourcePath . ($query ? "?{$query}" : ''),
+            $resourcePath.($query ? "?{$query}" : ''),
             $httpBody,
             $requestOptions,
             $useReadTransporter

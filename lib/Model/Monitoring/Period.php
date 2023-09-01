@@ -5,28 +5,27 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Period Class Doc Comment
+ * Period Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Period
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const MINUTE = 'minute';
+    public const MINUTE = 'minute';
 
-    const HOUR = 'hour';
+    public const HOUR = 'hour';
 
-    const DAY = 'day';
+    public const DAY = 'day';
 
-    const WEEK = 'week';
+    public const WEEK = 'week';
 
-    const MONTH = 'month';
+    public const MONTH = 'month';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -41,4 +40,3 @@ class Period
         ];
     }
 }
-

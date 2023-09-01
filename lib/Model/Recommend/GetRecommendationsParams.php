@@ -5,77 +5,44 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * GetRecommendationsParams Class Doc Comment
+ * GetRecommendationsParams Class Doc Comment.
  *
  * @category Class
  *
  * @description Recommend parameters.
- *
- * @package Algolia\AlgoliaSearch
  */
 class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'requests' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'requests' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'requests' => 'requests',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -84,7 +51,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -93,34 +60,14 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -132,6 +79,57 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -140,7 +138,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
+        if (!isset($this->container['requests']) || null === $this->container['requests']) {
             $invalidProperties[] = "'requests' can't be null";
         }
 
@@ -149,17 +147,17 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets requests
+     * Gets requests.
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]
      */
@@ -169,7 +167,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     }
 
     /**
-     * Sets requests
+     * Sets requests.
      *
      * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
      *
@@ -181,6 +179,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -198,7 +197,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -208,10 +207,8 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -226,12 +223,9 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

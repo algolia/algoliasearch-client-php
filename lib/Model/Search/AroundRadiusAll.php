@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * AroundRadiusAll Class Doc Comment
+ * AroundRadiusAll Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class AroundRadiusAll
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ALL = 'all';
+    public const ALL = 'all';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class AroundRadiusAll
         ];
     }
 }
-

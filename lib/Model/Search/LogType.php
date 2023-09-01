@@ -5,26 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * LogType Class Doc Comment
+ * LogType Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class LogType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ALL = 'all';
+    public const ALL = 'all';
 
-    const QUERY = 'query';
+    public const QUERY = 'query';
 
-    const BUILD = 'build';
+    public const BUILD = 'build';
 
-    const ERROR = 'error';
+    public const ERROR = 'error';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +37,3 @@ class LogType
         ];
     }
 }
-

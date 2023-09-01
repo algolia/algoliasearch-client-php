@@ -101,9 +101,9 @@ class Response implements ResponseInterface
     /**
      * @param int                                  $status  Status code
      * @param array                                $headers Response headers
-     * @param string|resource|StreamInterface|null $body    Response body
+     * @param null|resource|StreamInterface|string $body    Response body
      * @param string                               $version Protocol version
-     * @param string|null                          $reason  Reason phrase (when empty a default will be used based on the status code)
+     * @param null|string                          $reason  Reason phrase (when empty a default will be used based on the status code)
      */
     public function __construct(
         $status = 200,

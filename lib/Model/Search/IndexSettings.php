@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * IndexSettings Class Doc Comment
+ * IndexSettings Class Doc Comment.
  *
  * @category Class
  *
  * @description Algolia index settings.
- *
- * @package Algolia\AlgoliaSearch
  */
 class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'replicas' => 'string[]',
         'paginationLimitedTo' => 'int',
@@ -85,10 +83,10 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'replicas' => null,
         'paginationLimitedTo' => null,
@@ -154,11 +152,11 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'replicas' => 'replicas',
         'paginationLimitedTo' => 'paginationLimitedTo',
@@ -224,38 +222,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -324,7 +291,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -393,34 +360,14 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -612,6 +559,57 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -645,19 +643,19 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets replicas
+     * Gets replicas.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReplicas()
     {
@@ -665,9 +663,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets replicas
+     * Sets replicas.
      *
-     * @param string[]|null $replicas Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
+     * @param null|string[] $replicas Creates [replicas](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/), which are copies of a primary index with the same records but different settings.
      *
      * @return self
      */
@@ -679,9 +677,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets paginationLimitedTo
+     * Gets paginationLimitedTo.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getPaginationLimitedTo()
     {
@@ -689,9 +687,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets paginationLimitedTo
+     * Sets paginationLimitedTo.
      *
-     * @param int|null $paginationLimitedTo maximum number of hits accessible through pagination
+     * @param null|int $paginationLimitedTo maximum number of hits accessible through pagination
      *
      * @return self
      */
@@ -703,9 +701,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets unretrievableAttributes
+     * Gets unretrievableAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getUnretrievableAttributes()
     {
@@ -713,9 +711,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets unretrievableAttributes
+     * Sets unretrievableAttributes.
      *
-     * @param string[]|null $unretrievableAttributes attributes that can't be retrieved at query time
+     * @param null|string[] $unretrievableAttributes attributes that can't be retrieved at query time
      *
      * @return self
      */
@@ -727,9 +725,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets disableTypoToleranceOnWords
+     * Gets disableTypoToleranceOnWords.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisableTypoToleranceOnWords()
     {
@@ -737,9 +735,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets disableTypoToleranceOnWords
+     * Sets disableTypoToleranceOnWords.
      *
-     * @param string[]|null $disableTypoToleranceOnWords Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
+     * @param null|string[] $disableTypoToleranceOnWords Words for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
      *
      * @return self
      */
@@ -751,9 +749,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributesToTransliterate
+     * Gets attributesToTransliterate.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesToTransliterate()
     {
@@ -761,9 +759,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributesToTransliterate
+     * Sets attributesToTransliterate.
      *
-     * @param string[]|null $attributesToTransliterate Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
+     * @param null|string[] $attributesToTransliterate Attributes in your index to which [Japanese transliteration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#japanese-transliteration-and-type-ahead) applies. This will ensure that words indexed in Katakana or Kanji can also be searched in Hiragana.
      *
      * @return self
      */
@@ -775,9 +773,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets camelCaseAttributes
+     * Gets camelCaseAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getCamelCaseAttributes()
     {
@@ -785,9 +783,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets camelCaseAttributes
+     * Sets camelCaseAttributes.
      *
-     * @param string[]|null $camelCaseAttributes Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
+     * @param null|string[] $camelCaseAttributes Attributes on which to split [camel case](https://wikipedia.org/wiki/Camel_case) words.
      *
      * @return self
      */
@@ -799,9 +797,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets decompoundedAttributes
+     * Gets decompoundedAttributes.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getDecompoundedAttributes()
     {
@@ -809,9 +807,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets decompoundedAttributes
+     * Sets decompoundedAttributes.
      *
-     * @param object|null $decompoundedAttributes Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
+     * @param null|object $decompoundedAttributes Attributes in your index to which [word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) (decompounding) applies.
      *
      * @return self
      */
@@ -823,9 +821,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets indexLanguages
+     * Gets indexLanguages.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getIndexLanguages()
     {
@@ -833,9 +831,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets indexLanguages
+     * Sets indexLanguages.
      *
-     * @param string[]|null $indexLanguages Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+     * @param null|string[] $indexLanguages Set the languages of your index, for language-specific processing steps such as [tokenization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/tokenization/) and [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -847,9 +845,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets disablePrefixOnAttributes
+     * Gets disablePrefixOnAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisablePrefixOnAttributes()
     {
@@ -857,9 +855,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets disablePrefixOnAttributes
+     * Sets disablePrefixOnAttributes.
      *
-     * @param string[]|null $disablePrefixOnAttributes Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
+     * @param null|string[] $disablePrefixOnAttributes Attributes for which you want to turn off [prefix matching](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#adjusting-prefix-search).
      *
      * @return self
      */
@@ -871,9 +869,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets allowCompressionOfIntegerArray
+     * Gets allowCompressionOfIntegerArray.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAllowCompressionOfIntegerArray()
     {
@@ -881,9 +879,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets allowCompressionOfIntegerArray
+     * Sets allowCompressionOfIntegerArray.
      *
-     * @param bool|null $allowCompressionOfIntegerArray Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.
+     * @param null|bool $allowCompressionOfIntegerArray Incidates whether the engine compresses arrays with exclusively non-negative integers. When enabled, the compressed arrays may be reordered.
      *
      * @return self
      */
@@ -895,9 +893,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets numericAttributesForFiltering
+     * Gets numericAttributesForFiltering.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getNumericAttributesForFiltering()
     {
@@ -905,9 +903,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets numericAttributesForFiltering
+     * Sets numericAttributesForFiltering.
      *
-     * @param string[]|null $numericAttributesForFiltering Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
+     * @param null|string[] $numericAttributesForFiltering Numeric attributes that can be used as [numerical filters](https://www.algolia.com/doc/guides/managing-results/rules/detecting-intent/how-to/applying-a-custom-filter-for-a-specific-query/#numerical-filters).
      *
      * @return self
      */
@@ -919,9 +917,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets separatorsToIndex
+     * Gets separatorsToIndex.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getSeparatorsToIndex()
     {
@@ -929,9 +927,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets separatorsToIndex
+     * Sets separatorsToIndex.
      *
-     * @param string|null $separatorsToIndex Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
+     * @param null|string $separatorsToIndex Controls which separators are added to an Algolia index as part of [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean). Separators are all non-letter characters except spaces and currency characters, such as $€£¥.
      *
      * @return self
      */
@@ -943,9 +941,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets searchableAttributes
+     * Gets searchableAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getSearchableAttributes()
     {
@@ -953,9 +951,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets searchableAttributes
+     * Sets searchableAttributes.
      *
-     * @param string[]|null $searchableAttributes [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position).
+     * @param null|string[] $searchableAttributes [Attributes used for searching](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/), including determining [if matches at the beginning of a word are important (ordered) or not (unordered)](https://www.algolia.com/doc/guides/managing-results/must-do/searchable-attributes/how-to/configuring-searchable-attributes-the-right-way/#understanding-word-position).
      *
      * @return self
      */
@@ -967,9 +965,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets userData
+     * Gets userData.
      *
-     * @return object|null
+     * @return null|object
      */
     public function getUserData()
     {
@@ -977,9 +975,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets userData
+     * Sets userData.
      *
-     * @param object|null $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */
@@ -991,9 +989,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets customNormalization
+     * Gets customNormalization.
      *
-     * @return array<string,array<string,string>>|null
+     * @return null|array<string,array<string,string>>
      */
     public function getCustomNormalization()
     {
@@ -1001,9 +999,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets customNormalization
+     * Sets customNormalization.
      *
-     * @param array<string,array<string,string>>|null $customNormalization A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+     * @param null|array<string,array<string,string>> $customNormalization A list of characters and their normalized replacements to override Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -1015,9 +1013,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributesForFaceting
+     * Gets attributesForFaceting.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesForFaceting()
     {
@@ -1025,9 +1023,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributesForFaceting
+     * Sets attributesForFaceting.
      *
-     * @param string[]|null $attributesForFaceting Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: `filterOnly`, `searchable`, and `afterDistinct`.
+     * @param null|string[] $attributesForFaceting Attributes used for [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/) and the [modifiers](https://www.algolia.com/doc/api-reference/api-parameters/attributesForFaceting/#modifiers) that can be applied: `filterOnly`, `searchable`, and `afterDistinct`.
      *
      * @return self
      */
@@ -1039,9 +1037,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributesToRetrieve
+     * Gets attributesToRetrieve.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesToRetrieve()
     {
@@ -1049,9 +1047,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributesToRetrieve
+     * Sets attributesToRetrieve.
      *
-     * @param string[]|null $attributesToRetrieve Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes.
+     * @param null|string[] $attributesToRetrieve Attributes to include in the API response. To reduce the size of your response, you can retrieve only some of the attributes. By default, the response includes all attributes.
      *
      * @return self
      */
@@ -1063,9 +1061,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets ranking
+     * Gets ranking.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getRanking()
     {
@@ -1073,9 +1071,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets ranking
+     * Sets ranking.
      *
-     * @param string[]|null $ranking Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/).
+     * @param null|string[] $ranking Determines the order in which Algolia [returns your results](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/).
      *
      * @return self
      */
@@ -1087,9 +1085,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets customRanking
+     * Gets customRanking.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getCustomRanking()
     {
@@ -1097,9 +1095,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets customRanking
+     * Sets customRanking.
      *
-     * @param string[]|null $customRanking Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the `asc` and `desc` modifiers to specify the ranking order: ascending or descending.
+     * @param null|string[] $customRanking Specifies the [Custom ranking criterion](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Use the `asc` and `desc` modifiers to specify the ranking order: ascending or descending.
      *
      * @return self
      */
@@ -1111,9 +1109,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets relevancyStrictness
+     * Gets relevancyStrictness.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getRelevancyStrictness()
     {
@@ -1121,9 +1119,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets relevancyStrictness
+     * Sets relevancyStrictness.
      *
-     * @param int|null $relevancyStrictness relevancy threshold below which less relevant results aren't included in the results
+     * @param null|int $relevancyStrictness relevancy threshold below which less relevant results aren't included in the results
      *
      * @return self
      */
@@ -1135,9 +1133,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributesToHighlight
+     * Gets attributesToHighlight.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesToHighlight()
     {
@@ -1145,9 +1143,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributesToHighlight
+     * Sets attributesToHighlight.
      *
-     * @param string[]|null $attributesToHighlight Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (`highlightPreTag` and `highlightPostTag`).
+     * @param null|string[] $attributesToHighlight Attributes to highlight. Strings that match the search query in the attributes are highlighted by surrounding them with HTML tags (`highlightPreTag` and `highlightPostTag`).
      *
      * @return self
      */
@@ -1159,9 +1157,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributesToSnippet
+     * Gets attributesToSnippet.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getAttributesToSnippet()
     {
@@ -1169,9 +1167,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributesToSnippet
+     * Sets attributesToSnippet.
      *
-     * @param string[]|null $attributesToSnippet Attributes to _snippet_. 'Snippeting' is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: `body:20`.
+     * @param null|string[] $attributesToSnippet Attributes to _snippet_. 'Snippeting' is shortening the attribute to a certain number of words. If not specified, the attribute is shortened to the 10 words around the matching string but you can specify the number. For example: `body:20`.
      *
      * @return self
      */
@@ -1183,9 +1181,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets highlightPreTag
+     * Gets highlightPreTag.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getHighlightPreTag()
     {
@@ -1193,9 +1191,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets highlightPreTag
+     * Sets highlightPreTag.
      *
-     * @param string|null $highlightPreTag HTML string to insert before the highlighted parts in all highlight and snippet results
+     * @param null|string $highlightPreTag HTML string to insert before the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -1207,9 +1205,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets highlightPostTag
+     * Gets highlightPostTag.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getHighlightPostTag()
     {
@@ -1217,9 +1215,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets highlightPostTag
+     * Sets highlightPostTag.
      *
-     * @param string|null $highlightPostTag HTML string to insert after the highlighted parts in all highlight and snippet results
+     * @param null|string $highlightPostTag HTML string to insert after the highlighted parts in all highlight and snippet results
      *
      * @return self
      */
@@ -1231,9 +1229,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets snippetEllipsisText
+     * Gets snippetEllipsisText.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getSnippetEllipsisText()
     {
@@ -1241,9 +1239,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets snippetEllipsisText
+     * Sets snippetEllipsisText.
      *
-     * @param string|null $snippetEllipsisText string used as an ellipsis indicator when a snippet is truncated
+     * @param null|string $snippetEllipsisText string used as an ellipsis indicator when a snippet is truncated
      *
      * @return self
      */
@@ -1255,9 +1253,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets restrictHighlightAndSnippetArrays
+     * Gets restrictHighlightAndSnippetArrays.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getRestrictHighlightAndSnippetArrays()
     {
@@ -1265,9 +1263,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets restrictHighlightAndSnippetArrays
+     * Sets restrictHighlightAndSnippetArrays.
      *
-     * @param bool|null $restrictHighlightAndSnippetArrays restrict highlighting and snippeting to items that matched the query
+     * @param null|bool $restrictHighlightAndSnippetArrays restrict highlighting and snippeting to items that matched the query
      *
      * @return self
      */
@@ -1279,9 +1277,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets hitsPerPage
+     * Gets hitsPerPage.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -1289,15 +1287,14 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets hitsPerPage
+     * Sets hitsPerPage.
      *
-     * @param int|null $hitsPerPage number of hits per page
+     * @param null|int $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
-
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling IndexSettings., must be smaller than or equal to 1000.');
         }
@@ -1311,9 +1308,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets minWordSizefor1Typo
+     * Gets minWordSizefor1Typo.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMinWordSizefor1Typo()
     {
@@ -1321,9 +1318,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets minWordSizefor1Typo
+     * Sets minWordSizefor1Typo.
      *
-     * @param int|null $minWordSizefor1Typo Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor1Typo Minimum number of characters a word in the query string must contain to accept matches with [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
      *
      * @return self
      */
@@ -1335,9 +1332,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets minWordSizefor2Typos
+     * Gets minWordSizefor2Typos.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMinWordSizefor2Typos()
     {
@@ -1345,9 +1342,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets minWordSizefor2Typos
+     * Sets minWordSizefor2Typos.
      *
-     * @param int|null $minWordSizefor2Typos Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+     * @param null|int $minWordSizefor2Typos Minimum number of characters a word in the query string must contain to accept matches with [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
      *
      * @return self
      */
@@ -1359,9 +1356,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets typoTolerance
+     * Gets typoTolerance.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\TypoTolerance|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -1369,9 +1366,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets typoTolerance
+     * Sets typoTolerance.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\TypoTolerance|null $typoTolerance typoTolerance
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -1383,9 +1380,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets allowTyposOnNumericTokens
+     * Gets allowTyposOnNumericTokens.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAllowTyposOnNumericTokens()
     {
@@ -1393,9 +1390,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets allowTyposOnNumericTokens
+     * Sets allowTyposOnNumericTokens.
      *
-     * @param bool|null $allowTyposOnNumericTokens whether to allow typos on numbers (\"numeric tokens\") in the query string
+     * @param null|bool $allowTyposOnNumericTokens whether to allow typos on numbers (\"numeric tokens\") in the query string
      *
      * @return self
      */
@@ -1407,9 +1404,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets disableTypoToleranceOnAttributes
+     * Gets disableTypoToleranceOnAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisableTypoToleranceOnAttributes()
     {
@@ -1417,9 +1414,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets disableTypoToleranceOnAttributes
+     * Sets disableTypoToleranceOnAttributes.
      *
-     * @param string[]|null $disableTypoToleranceOnAttributes Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
+     * @param null|string[] $disableTypoToleranceOnAttributes Attributes for which you want to turn off [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/).
      *
      * @return self
      */
@@ -1431,9 +1428,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets ignorePlurals
+     * Gets ignorePlurals.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -1441,9 +1438,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets ignorePlurals
+     * Sets ignorePlurals.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\IgnorePlurals|null $ignorePlurals ignorePlurals
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -1455,9 +1452,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets removeStopWords
+     * Gets removeStopWords.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -1465,9 +1462,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets removeStopWords
+     * Sets removeStopWords.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RemoveStopWords|null $removeStopWords removeStopWords
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -1479,9 +1476,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets keepDiacriticsOnCharacters
+     * Gets keepDiacriticsOnCharacters.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getKeepDiacriticsOnCharacters()
     {
@@ -1489,9 +1486,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets keepDiacriticsOnCharacters
+     * Sets keepDiacriticsOnCharacters.
      *
-     * @param string|null $keepDiacriticsOnCharacters Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
+     * @param null|string $keepDiacriticsOnCharacters Characters that the engine shouldn't automatically [normalize](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).
      *
      * @return self
      */
@@ -1503,9 +1500,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets queryLanguages
+     * Gets queryLanguages.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getQueryLanguages()
     {
@@ -1513,9 +1510,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets queryLanguages
+     * Sets queryLanguages.
      *
-     * @param string[]|null $queryLanguages Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.
+     * @param null|string[] $queryLanguages Sets your user's search language. This adjusts language-specific settings and features such as `ignorePlurals`, `removeStopWords`, and [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) word detection.
      *
      * @return self
      */
@@ -1527,9 +1524,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets decompoundQuery
+     * Gets decompoundQuery.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getDecompoundQuery()
     {
@@ -1537,9 +1534,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets decompoundQuery
+     * Sets decompoundQuery.
      *
-     * @param bool|null $decompoundQuery [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query.
+     * @param null|bool $decompoundQuery [Splits compound words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words) into their component word parts in the query.
      *
      * @return self
      */
@@ -1551,9 +1548,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets enableRules
+     * Gets enableRules.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnableRules()
     {
@@ -1561,9 +1558,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets enableRules
+     * Sets enableRules.
      *
-     * @param bool|null $enableRules Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
+     * @param null|bool $enableRules Incidates whether [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/) are enabled.
      *
      * @return self
      */
@@ -1575,9 +1572,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets enablePersonalization
+     * Gets enablePersonalization.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnablePersonalization()
     {
@@ -1585,9 +1582,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets enablePersonalization
+     * Sets enablePersonalization.
      *
-     * @param bool|null $enablePersonalization Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
+     * @param null|bool $enablePersonalization Incidates whether [Personalization](https://www.algolia.com/doc/guides/personalization/what-is-personalization/) is enabled.
      *
      * @return self
      */
@@ -1599,9 +1596,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets queryType
+     * Gets queryType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\QueryType|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\QueryType
      */
     public function getQueryType()
     {
@@ -1609,9 +1606,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets queryType
+     * Sets queryType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\QueryType|null $queryType queryType
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\QueryType $queryType queryType
      *
      * @return self
      */
@@ -1623,9 +1620,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets removeWordsIfNoResults
+     * Gets removeWordsIfNoResults.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -1633,9 +1630,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets removeWordsIfNoResults
+     * Sets removeWordsIfNoResults.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults|null $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -1647,9 +1644,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets mode
+     * Gets mode.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Mode|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Mode
      */
     public function getMode()
     {
@@ -1657,9 +1654,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets mode
+     * Sets mode.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Mode|null $mode mode
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Mode $mode mode
      *
      * @return self
      */
@@ -1671,9 +1668,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets semanticSearch
+     * Gets semanticSearch.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SemanticSearch|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -1681,9 +1678,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets semanticSearch
+     * Sets semanticSearch.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SemanticSearch|null $semanticSearch semanticSearch
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -1695,9 +1692,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets advancedSyntax
+     * Gets advancedSyntax.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAdvancedSyntax()
     {
@@ -1705,9 +1702,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets advancedSyntax
+     * Sets advancedSyntax.
      *
-     * @param bool|null $advancedSyntax Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
+     * @param null|bool $advancedSyntax Enables the [advanced query syntax](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/#advanced-syntax).
      *
      * @return self
      */
@@ -1719,9 +1716,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets optionalWords
+     * Gets optionalWords.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getOptionalWords()
     {
@@ -1729,9 +1726,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets optionalWords
+     * Sets optionalWords.
      *
-     * @param string[]|null $optionalWords Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.
+     * @param null|string[] $optionalWords Words which should be considered [optional](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words) when found in a query.
      *
      * @return self
      */
@@ -1743,9 +1740,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets disableExactOnAttributes
+     * Gets disableExactOnAttributes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getDisableExactOnAttributes()
     {
@@ -1753,9 +1750,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets disableExactOnAttributes
+     * Sets disableExactOnAttributes.
      *
-     * @param string[]|null $disableExactOnAttributes Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+     * @param null|string[] $disableExactOnAttributes Attributes for which you want to [turn off the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -1767,9 +1764,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets exactOnSingleWordQuery
+     * Gets exactOnSingleWordQuery.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -1777,9 +1774,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets exactOnSingleWordQuery
+     * Sets exactOnSingleWordQuery.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery|null $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -1791,9 +1788,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets alternativesAsExact
+     * Gets alternativesAsExact.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -1801,9 +1798,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets alternativesAsExact
+     * Sets alternativesAsExact.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]|null $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -1815,9 +1812,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets advancedSyntaxFeatures
+     * Gets advancedSyntaxFeatures.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -1825,9 +1822,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets advancedSyntaxFeatures
+     * Sets advancedSyntaxFeatures.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]|null $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
      *
      * @return self
      */
@@ -1839,9 +1836,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets distinct
+     * Gets distinct.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Distinct|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Distinct
      */
     public function getDistinct()
     {
@@ -1849,9 +1846,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets distinct
+     * Sets distinct.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Distinct|null $distinct distinct
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Distinct $distinct distinct
      *
      * @return self
      */
@@ -1863,9 +1860,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributeForDistinct
+     * Gets attributeForDistinct.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getAttributeForDistinct()
     {
@@ -1873,9 +1870,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributeForDistinct
+     * Sets attributeForDistinct.
      *
-     * @param string|null $attributeForDistinct Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
+     * @param null|string $attributeForDistinct Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
      *
      * @return self
      */
@@ -1887,9 +1884,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets replaceSynonymsInHighlight
+     * Gets replaceSynonymsInHighlight.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getReplaceSynonymsInHighlight()
     {
@@ -1897,9 +1894,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets replaceSynonymsInHighlight
+     * Sets replaceSynonymsInHighlight.
      *
-     * @param bool|null $replaceSynonymsInHighlight whether to highlight and snippet the original word that matches the synonym or the synonym itself
+     * @param null|bool $replaceSynonymsInHighlight whether to highlight and snippet the original word that matches the synonym or the synonym itself
      *
      * @return self
      */
@@ -1911,9 +1908,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets minProximity
+     * Gets minProximity.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMinProximity()
     {
@@ -1921,15 +1918,14 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets minProximity
+     * Sets minProximity.
      *
-     * @param int|null $minProximity Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).
+     * @param null|int $minProximity Precision of the [proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity).
      *
      * @return self
      */
     public function setMinProximity($minProximity)
     {
-
         if (!is_null($minProximity) && ($minProximity > 7)) {
             throw new \InvalidArgumentException('invalid value for $minProximity when calling IndexSettings., must be smaller than or equal to 7.');
         }
@@ -1943,9 +1939,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets responseFields
+     * Gets responseFields.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getResponseFields()
     {
@@ -1953,9 +1949,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets responseFields
+     * Sets responseFields.
      *
-     * @param string[]|null $responseFields attributes to include in the API response for search and browse queries
+     * @param null|string[] $responseFields attributes to include in the API response for search and browse queries
      *
      * @return self
      */
@@ -1967,9 +1963,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets maxFacetHits
+     * Gets maxFacetHits.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxFacetHits()
     {
@@ -1977,15 +1973,14 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets maxFacetHits
+     * Sets maxFacetHits.
      *
-     * @param int|null $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param null|int $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-
         if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
             throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling IndexSettings., must be smaller than or equal to 100.');
         }
@@ -1996,9 +1991,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets maxValuesPerFacet
+     * Gets maxValuesPerFacet.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxValuesPerFacet()
     {
@@ -2006,9 +2001,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets maxValuesPerFacet
+     * Sets maxValuesPerFacet.
      *
-     * @param int|null $maxValuesPerFacet maximum number of facet values to return for each facet
+     * @param null|int $maxValuesPerFacet maximum number of facet values to return for each facet
      *
      * @return self
      */
@@ -2020,9 +2015,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets sortFacetValuesBy
+     * Gets sortFacetValuesBy.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getSortFacetValuesBy()
     {
@@ -2030,9 +2025,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets sortFacetValuesBy
+     * Sets sortFacetValuesBy.
      *
-     * @param string|null $sortFacetValuesBy controls how facet values are fetched
+     * @param null|string $sortFacetValuesBy controls how facet values are fetched
      *
      * @return self
      */
@@ -2044,9 +2039,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets attributeCriteriaComputedByMinProximity
+     * Gets attributeCriteriaComputedByMinProximity.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getAttributeCriteriaComputedByMinProximity()
     {
@@ -2054,9 +2049,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets attributeCriteriaComputedByMinProximity
+     * Sets attributeCriteriaComputedByMinProximity.
      *
-     * @param bool|null $attributeCriteriaComputedByMinProximity When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
+     * @param null|bool $attributeCriteriaComputedByMinProximity When the [Attribute criterion is ranked above Proximity](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#attribute-and-proximity-combinations) in your ranking formula, Proximity is used to select which searchable attribute is matched in the Attribute ranking stage.
      *
      * @return self
      */
@@ -2068,9 +2063,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets renderingContent
+     * Gets renderingContent.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -2078,9 +2073,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets renderingContent
+     * Sets renderingContent.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RenderingContent|null $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -2092,9 +2087,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets enableReRanking
+     * Gets enableReRanking.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnableReRanking()
     {
@@ -2102,9 +2097,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets enableReRanking
+     * Sets enableReRanking.
      *
-     * @param bool|null $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
+     * @param null|bool $enableReRanking Indicates whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/).
      *
      * @return self
      */
@@ -2116,9 +2111,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets reRankingApplyFilter
+     * Gets reRankingApplyFilter.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -2126,9 +2121,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Sets reRankingApplyFilter
+     * Sets reRankingApplyFilter.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter|null $reRankingApplyFilter reRankingApplyFilter
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */
@@ -2138,6 +2133,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -2155,7 +2151,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -2165,10 +2161,8 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -2183,12 +2177,9 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

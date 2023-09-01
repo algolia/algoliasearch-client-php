@@ -23,7 +23,7 @@ final class HostCollection
             $hosts[] = new Host($url, $priority);
         }
 
-        return new static($hosts);
+        return new self($hosts);
     }
 
     public function get()

@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * FetchedIndex Class Doc Comment
+ * FetchedIndex Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'name' => 'string',
         'createdAt' => 'string',
@@ -32,10 +31,10 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'name' => null,
         'createdAt' => null,
@@ -51,11 +50,11 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'name' => 'name',
         'createdAt' => 'createdAt',
@@ -71,38 +70,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -121,7 +89,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -140,34 +108,14 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -209,6 +157,57 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -217,31 +216,31 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['updatedAt']) || $this->container['updatedAt'] === null) {
+        if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
-        if (!isset($this->container['entries']) || $this->container['entries'] === null) {
+        if (!isset($this->container['entries']) || null === $this->container['entries']) {
             $invalidProperties[] = "'entries' can't be null";
         }
-        if (!isset($this->container['dataSize']) || $this->container['dataSize'] === null) {
+        if (!isset($this->container['dataSize']) || null === $this->container['dataSize']) {
             $invalidProperties[] = "'dataSize' can't be null";
         }
-        if (!isset($this->container['fileSize']) || $this->container['fileSize'] === null) {
+        if (!isset($this->container['fileSize']) || null === $this->container['fileSize']) {
             $invalidProperties[] = "'fileSize' can't be null";
         }
-        if (!isset($this->container['lastBuildTimeS']) || $this->container['lastBuildTimeS'] === null) {
+        if (!isset($this->container['lastBuildTimeS']) || null === $this->container['lastBuildTimeS']) {
             $invalidProperties[] = "'lastBuildTimeS' can't be null";
         }
-        if (!isset($this->container['numberOfPendingTasks']) || $this->container['numberOfPendingTasks'] === null) {
+        if (!isset($this->container['numberOfPendingTasks']) || null === $this->container['numberOfPendingTasks']) {
             $invalidProperties[] = "'numberOfPendingTasks' can't be null";
         }
-        if (!isset($this->container['pendingTask']) || $this->container['pendingTask'] === null) {
+        if (!isset($this->container['pendingTask']) || null === $this->container['pendingTask']) {
             $invalidProperties[] = "'pendingTask' can't be null";
         }
 
@@ -250,17 +249,17 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
      * @return string
      */
@@ -270,7 +269,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
      * @param string $name index name
      *
@@ -284,7 +283,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets createdAt
+     * Gets createdAt.
      *
      * @return string
      */
@@ -294,7 +293,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets createdAt
+     * Sets createdAt.
      *
      * @param string $createdAt Index creation date. An empty string means that the index has no records.
      *
@@ -308,7 +307,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets updatedAt
+     * Gets updatedAt.
      *
      * @return string
      */
@@ -318,7 +317,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets updatedAt
+     * Sets updatedAt.
      *
      * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -332,7 +331,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets entries
+     * Gets entries.
      *
      * @return int
      */
@@ -342,7 +341,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets entries
+     * Sets entries.
      *
      * @param int $entries number of records contained in the index
      *
@@ -356,7 +355,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets dataSize
+     * Gets dataSize.
      *
      * @return int
      */
@@ -366,7 +365,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets dataSize
+     * Sets dataSize.
      *
      * @param int $dataSize number of bytes of the index in minified format
      *
@@ -380,7 +379,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets fileSize
+     * Gets fileSize.
      *
      * @return int
      */
@@ -390,7 +389,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets fileSize
+     * Sets fileSize.
      *
      * @param int $fileSize number of bytes of the index binary file
      *
@@ -404,7 +403,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets lastBuildTimeS
+     * Gets lastBuildTimeS.
      *
      * @return int
      */
@@ -414,7 +413,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets lastBuildTimeS
+     * Sets lastBuildTimeS.
      *
      * @param int $lastBuildTimeS last build time
      *
@@ -428,7 +427,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets numberOfPendingTasks
+     * Gets numberOfPendingTasks.
      *
      * @return int
      */
@@ -438,7 +437,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets numberOfPendingTasks
+     * Sets numberOfPendingTasks.
      *
      * @param int $numberOfPendingTasks Number of pending indexing operations. This value is deprecated and should not be used.
      *
@@ -452,7 +451,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets pendingTask
+     * Gets pendingTask.
      *
      * @return bool
      */
@@ -462,7 +461,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets pendingTask
+     * Sets pendingTask.
      *
      * @param bool $pendingTask A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.
      *
@@ -476,9 +475,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets primary
+     * Gets primary.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getPrimary()
     {
@@ -486,9 +485,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets primary
+     * Sets primary.
      *
-     * @param string|null $primary Only present if the index is a replica. Contains the name of the related primary index.
+     * @param null|string $primary Only present if the index is a replica. Contains the name of the related primary index.
      *
      * @return self
      */
@@ -500,9 +499,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets replicas
+     * Gets replicas.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReplicas()
     {
@@ -510,9 +509,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets replicas
+     * Sets replicas.
      *
-     * @param string[]|null $replicas Only present if the index is a primary index with replicas. Contains the names of all linked replicas.
+     * @param null|string[] $replicas Only present if the index is a primary index with replicas. Contains the names of all linked replicas.
      *
      * @return self
      */
@@ -522,6 +521,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -539,7 +539,7 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -549,10 +549,8 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -567,12 +565,9 @@ class FetchedIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

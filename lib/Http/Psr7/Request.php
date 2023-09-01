@@ -4,7 +4,6 @@ namespace Algolia\AlgoliaSearch\Http\Psr7;
 
 require_once 'functions.php';
 
-use InvalidArgumentException;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -20,7 +19,7 @@ class Request implements RequestInterface
     /** @var string */
     private $method;
 
-    /** @var string|null */
+    /** @var null|string */
     private $requestTarget;
 
     /** @var UriInterface */
@@ -42,7 +41,7 @@ class Request implements RequestInterface
      * @param string                               $method  HTTP method
      * @param string|UriInterface                  $uri     URI
      * @param array                                $headers Request headers
-     * @param string|resource|StreamInterface|null $body    Request body
+     * @param null|resource|StreamInterface|string $body    Request body
      * @param string                               $version Protocol version
      */
     public function __construct(
@@ -52,7 +51,7 @@ class Request implements RequestInterface
         $body = null,
         $version = '1.1'
     ) {
-        if (!($uri instanceof UriInterface)) {
+        if (!$uri instanceof UriInterface) {
             $uri = new Uri($uri);
         }
 
@@ -81,7 +80,7 @@ class Request implements RequestInterface
             $target = '/';
         }
         if ('' !== $this->uri->getQuery()) {
-            $target .= '?' . $this->uri->getQuery();
+            $target .= '?'.$this->uri->getQuery();
         }
 
         return $target;
@@ -90,9 +89,7 @@ class Request implements RequestInterface
     public function withRequestTarget(string $requestTarget): RequestInterface
     {
         if (preg_match('#\s#', $requestTarget)) {
-            throw new InvalidArgumentException(
-                'Invalid request target provided; cannot contain whitespace'
-            );
+            throw new \InvalidArgumentException('Invalid request target provided; cannot contain whitespace');
         }
 
         $new = clone $this;
@@ -133,29 +130,6 @@ class Request implements RequestInterface
         }
 
         return $new;
-    }
-
-    private function updateHostFromUri()
-    {
-        $host = $this->uri->getHost();
-
-        if ('' === $host) {
-            return;
-        }
-
-        if (null !== ($port = $this->uri->getPort())) {
-            $host .= ':' . $port;
-        }
-
-        if (isset($this->headerNames['host'])) {
-            $header = $this->headerNames['host'];
-        } else {
-            $header = 'Host';
-            $this->headerNames['host'] = 'Host';
-        }
-        // Ensure Host is the first header.
-        // See: http://tools.ietf.org/html/rfc7230#section-5.4
-        $this->headers = [$header => [$host]] + $this->headers;
     }
 
     public function getProtocolVersion(): string
@@ -270,6 +244,29 @@ class Request implements RequestInterface
         $new->stream = $body;
 
         return $new;
+    }
+
+    private function updateHostFromUri()
+    {
+        $host = $this->uri->getHost();
+
+        if ('' === $host) {
+            return;
+        }
+
+        if (null !== ($port = $this->uri->getPort())) {
+            $host .= ':'.$port;
+        }
+
+        if (isset($this->headerNames['host'])) {
+            $header = $this->headerNames['host'];
+        } else {
+            $header = 'Host';
+            $this->headerNames['host'] = 'Host';
+        }
+        // Ensure Host is the first header.
+        // See: http://tools.ietf.org/html/rfc7230#section-5.4
+        $this->headers = [$header => [$host]] + $this->headers;
     }
 
     private function setHeaders(array $headers)

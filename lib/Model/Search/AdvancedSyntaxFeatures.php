@@ -5,22 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * AdvancedSyntaxFeatures Class Doc Comment
+ * AdvancedSyntaxFeatures Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class AdvancedSyntaxFeatures
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const EXACT_PHRASE = 'exactPhrase';
+    public const EXACT_PHRASE = 'exactPhrase';
 
-    const EXCLUDE_WORDS = 'excludeWords';
+    public const EXCLUDE_WORDS = 'excludeWords';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +31,3 @@ class AdvancedSyntaxFeatures
         ];
     }
 }
-

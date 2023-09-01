@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * AddABTestsRequest Class Doc Comment
+ * AddABTestsRequest Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'name' => 'string',
         'variants' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
@@ -24,10 +23,10 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'name' => null,
         'variants' => null,
@@ -35,11 +34,11 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'name' => 'name',
         'variants' => 'variants',
@@ -47,38 +46,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,21 +152,21 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['name']) || $this->container['name'] === null) {
+        if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['variants']) || $this->container['variants'] === null) {
+        if (!isset($this->container['variants']) || null === $this->container['variants']) {
             $invalidProperties[] = "'variants' can't be null";
         }
-        if ((count($this->container['variants']) > 2)) {
+        if (count($this->container['variants']) > 2) {
             $invalidProperties[] = "invalid value for 'variants', number of items must be less than or equal to 2.";
         }
 
-        if ((count($this->container['variants']) < 2)) {
+        if (count($this->container['variants']) < 2) {
             $invalidProperties[] = "invalid value for 'variants', number of items must be greater than or equal to 2.";
         }
 
-        if (!isset($this->container['endAt']) || $this->container['endAt'] === null) {
+        if (!isset($this->container['endAt']) || null === $this->container['endAt']) {
             $invalidProperties[] = "'endAt' can't be null";
         }
 
@@ -176,17 +175,17 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
      * @return string
      */
@@ -196,7 +195,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
      * @param string $name A/B test name
      *
@@ -210,7 +209,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets variants
+     * Gets variants.
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]
      */
@@ -220,7 +219,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets variants
+     * Sets variants.
      *
      * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variants A/B test variants
      *
@@ -228,11 +227,10 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     public function setVariants($variants)
     {
-
-        if ((count($variants) > 2)) {
+        if (count($variants) > 2) {
             throw new \InvalidArgumentException('invalid value for $variants when calling AddABTestsRequest., number of items must be less than or equal to 2.');
         }
-        if ((count($variants) < 2)) {
+        if (count($variants) < 2) {
             throw new \InvalidArgumentException('invalid length for $variants when calling AddABTestsRequest., number of items must be greater than or equal to 2.');
         }
         $this->container['variants'] = $variants;
@@ -241,7 +239,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets endAt
+     * Gets endAt.
      *
      * @return string
      */
@@ -251,7 +249,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets endAt
+     * Sets endAt.
      *
      * @param string $endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
@@ -263,6 +261,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -280,7 +279,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -290,10 +289,8 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -308,12 +305,9 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

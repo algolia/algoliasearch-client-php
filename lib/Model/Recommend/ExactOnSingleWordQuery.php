@@ -5,27 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ExactOnSingleWordQuery Class Doc Comment
+ * ExactOnSingleWordQuery Class Doc Comment.
  *
  * @category Class
  *
  * @description Determines how the [Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes) is computed when the query contains only one word.
- *
- * @package Algolia\AlgoliaSearch
  */
 class ExactOnSingleWordQuery
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ATTRIBUTE = 'attribute';
+    public const ATTRIBUTE = 'attribute';
 
-    const NONE = 'none';
+    public const NONE = 'none';
 
-    const WORD = 'word';
+    public const WORD = 'word';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +36,3 @@ class ExactOnSingleWordQuery
         ];
     }
 }
-

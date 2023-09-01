@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * GetConfigStatus200Response Class Doc Comment
+ * GetConfigStatus200Response Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'indexName' => 'string',
         'isRunning' => 'bool',
@@ -26,10 +25,10 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'indexName' => null,
         'isRunning' => null,
@@ -39,11 +38,11 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'indexName' => 'indexName',
         'isRunning' => 'isRunning',
@@ -53,38 +52,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -97,7 +65,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -110,34 +78,14 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -161,32 +109,81 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets indexName
+     * Gets indexName.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getIndexName()
     {
@@ -194,9 +191,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets indexName
+     * Sets indexName.
      *
-     * @param string|null $indexName query Suggestions index name
+     * @param null|string $indexName query Suggestions index name
      *
      * @return self
      */
@@ -208,9 +205,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets isRunning
+     * Gets isRunning.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getIsRunning()
     {
@@ -218,9 +215,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets isRunning
+     * Sets isRunning.
      *
-     * @param bool|null $isRunning indicates whether the creation or update of the Query Suggestions is in progress
+     * @param null|bool $isRunning indicates whether the creation or update of the Query Suggestions is in progress
      *
      * @return self
      */
@@ -232,9 +229,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets lastBuiltAt
+     * Gets lastBuiltAt.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getLastBuiltAt()
     {
@@ -242,9 +239,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets lastBuiltAt
+     * Sets lastBuiltAt.
      *
-     * @param string|null $lastBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
+     * @param null|string $lastBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
      *
      * @return self
      */
@@ -256,9 +253,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets lastSuccessfulBuiltAt
+     * Gets lastSuccessfulBuiltAt.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getLastSuccessfulBuiltAt()
     {
@@ -266,9 +263,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets lastSuccessfulBuiltAt
+     * Sets lastSuccessfulBuiltAt.
      *
-     * @param string|null $lastSuccessfulBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
+     * @param null|string $lastSuccessfulBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
      *
      * @return self
      */
@@ -280,9 +277,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets lastSuccessfulBuildDuration
+     * Gets lastSuccessfulBuildDuration.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getLastSuccessfulBuildDuration()
     {
@@ -290,9 +287,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets lastSuccessfulBuildDuration
+     * Sets lastSuccessfulBuildDuration.
      *
-     * @param string|null $lastSuccessfulBuildDuration duration of the last successful build in seconds
+     * @param null|string $lastSuccessfulBuildDuration duration of the last successful build in seconds
      *
      * @return self
      */
@@ -302,6 +299,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -319,7 +317,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -329,10 +327,8 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -347,12 +343,9 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

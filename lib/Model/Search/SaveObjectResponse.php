@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SaveObjectResponse Class Doc Comment
+ * SaveObjectResponse Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'createdAt' => 'string',
         'taskID' => 'int',
@@ -24,10 +23,10 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'createdAt' => null,
         'taskID' => 'int64',
@@ -35,11 +34,11 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'createdAt' => 'createdAt',
         'taskID' => 'taskID',
@@ -47,38 +46,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,10 +152,10 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['taskID']) || $this->container['taskID'] === null) {
+        if (!isset($this->container['taskID']) || null === $this->container['taskID']) {
             $invalidProperties[] = "'taskID' can't be null";
         }
 
@@ -165,17 +164,17 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets createdAt
+     * Gets createdAt.
      *
      * @return string
      */
@@ -185,7 +184,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets createdAt
+     * Sets createdAt.
      *
      * @param string $createdAt date of creation (ISO-8601 format)
      *
@@ -199,7 +198,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets taskID
+     * Gets taskID.
      *
      * @return int
      */
@@ -209,7 +208,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets taskID
+     * Sets taskID.
      *
      * @param int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
      *
@@ -223,9 +222,9 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getObjectID()
     {
@@ -233,9 +232,9 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
-     * @param string|null $objectID unique object identifier
+     * @param null|string $objectID unique object identifier
      *
      * @return self
      */
@@ -245,6 +244,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -262,7 +262,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -272,10 +272,8 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -290,12 +288,9 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

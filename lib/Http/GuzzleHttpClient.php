@@ -16,7 +16,7 @@ final class GuzzleHttpClient implements HttpClientInterface
 
     public function __construct(GuzzleClient $client = null)
     {
-        $this->client = $client ?: static::buildClient();
+        $this->client = $client ?: self::buildClient();
     }
 
     public function sendRequest(

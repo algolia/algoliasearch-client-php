@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RuleResponse Class Doc Comment
+ * RuleResponse Class Doc Comment.
  *
  * @category Class
  *
  * @description Rule object.
- *
- * @package Algolia\AlgoliaSearch
  */
 class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'metadata' => '\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata',
         'objectID' => 'string',
@@ -30,10 +28,10 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'metadata' => null,
         'objectID' => null,
@@ -44,11 +42,11 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'metadata' => '_metadata',
         'objectID' => 'objectID',
@@ -59,38 +57,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -104,7 +71,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -118,34 +85,14 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -172,6 +119,57 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -180,7 +178,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectID']) || $this->container['objectID'] === null) {
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
 
@@ -189,19 +187,19 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets metadata
+     * Gets metadata.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata
      */
     public function getMetadata()
     {
@@ -209,9 +207,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets metadata
+     * Sets metadata.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata|null $metadata metadata
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata $metadata metadata
      *
      * @return self
      */
@@ -223,7 +221,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets objectID
+     * Gets objectID.
      *
      * @return string
      */
@@ -233,7 +231,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets objectID
+     * Sets objectID.
      *
      * @param string $objectID unique identifier for a rule object
      *
@@ -247,9 +245,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets conditions
+     * Gets conditions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\Condition[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[]
      */
     public function getConditions()
     {
@@ -257,9 +255,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets conditions
+     * Sets conditions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\Condition[]|null $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -271,9 +269,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets consequence
+     * Gets consequence.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\Consequence|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence
      */
     public function getConsequence()
     {
@@ -281,9 +279,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets consequence
+     * Sets consequence.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\Consequence|null $consequence consequence
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence $consequence consequence
      *
      * @return self
      */
@@ -295,9 +293,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets description
+     * Gets description.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDescription()
     {
@@ -305,9 +303,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets description
+     * Sets description.
      *
-     * @param string|null $description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
+     * @param null|string $description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
      *
      * @return self
      */
@@ -319,9 +317,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Gets enabled
+     * Gets enabled.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getEnabled()
     {
@@ -329,9 +327,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
-     * Sets enabled
+     * Sets enabled.
      *
-     * @param bool|null $enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
+     * @param null|bool $enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
      *
      * @return self
      */
@@ -341,6 +339,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -358,7 +357,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -368,10 +367,8 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -386,12 +383,9 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

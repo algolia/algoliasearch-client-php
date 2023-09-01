@@ -5,29 +5,27 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * OrderBy Class Doc Comment
+ * OrderBy Class Doc Comment.
  *
  * @category Class
  *
  * @description Method for ordering results. &#x60;clickThroughRate&#x60;, &#x60;conversionRate&#x60; and &#x60;averageClickPosition&#x60; are only available if the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.
- *
- * @package Algolia\AlgoliaSearch
  */
 class OrderBy
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const SEARCH_COUNT = 'searchCount';
+    public const SEARCH_COUNT = 'searchCount';
 
-    const CLICK_THROUGH_RATE = 'clickThroughRate';
+    public const CLICK_THROUGH_RATE = 'clickThroughRate';
 
-    const CONVERSION_RATE = 'conversionRate';
+    public const CONVERSION_RATE = 'conversionRate';
 
-    const AVERAGE_CLICK_POSITION = 'averageClickPosition';
+    public const AVERAGE_CLICK_POSITION = 'averageClickPosition';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -41,4 +39,3 @@ class OrderBy
         ];
     }
 }
-

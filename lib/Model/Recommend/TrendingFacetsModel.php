@@ -5,23 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingFacetsModel Class Doc Comment
+ * TrendingFacetsModel Class Doc Comment.
  *
  * @category Class
  *
  * @description Trending facets model.
- *
- * @package Algolia\AlgoliaSearch
  */
 class TrendingFacetsModel
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const TRENDING_FACETS = 'trending-facets';
+    public const TRENDING_FACETS = 'trending-facets';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +30,3 @@ class TrendingFacetsModel
         ];
     }
 }
-

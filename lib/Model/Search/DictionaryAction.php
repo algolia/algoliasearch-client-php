@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * DictionaryAction Class Doc Comment
+ * DictionaryAction Class Doc Comment.
  *
  * @category Class
  *
  * @description Actions to perform.
- *
- * @package Algolia\AlgoliaSearch
  */
 class DictionaryAction
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const ADD_ENTRY = 'addEntry';
+    public const ADD_ENTRY = 'addEntry';
 
-    const DELETE_ENTRY = 'deleteEntry';
+    public const DELETE_ENTRY = 'deleteEntry';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class DictionaryAction
         ];
     }
 }
-

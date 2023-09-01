@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ConvertedObjectIDs Class Doc Comment
+ * ConvertedObjectIDs Class Doc Comment.
  *
  * @category Class
  *
  * @description Use this event to track when users convert on items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track conversion events related to Algolia requests, use the \&quot;Converted object IDs after search\&quot; event.
- *
- * @package Algolia\AlgoliaSearch
  */
 class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'eventName' => 'string',
         'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
@@ -30,10 +28,10 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'eventName' => null,
         'eventType' => null,
@@ -44,11 +42,11 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'eventName' => 'eventName',
         'eventType' => 'eventType',
@@ -59,38 +57,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -104,7 +71,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -118,34 +85,14 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -172,6 +119,57 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -180,47 +178,47 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['eventName']) || $this->container['eventName'] === null) {
+        if (!isset($this->container['eventName']) || null === $this->container['eventName']) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if ((mb_strlen($this->container['eventName']) > 64)) {
+        if (mb_strlen($this->container['eventName']) > 64) {
             $invalidProperties[] = "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
         }
 
-        if ((mb_strlen($this->container['eventName']) < 1)) {
+        if (mb_strlen($this->container['eventName']) < 1) {
             $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['eventType']) || $this->container['eventType'] === null) {
+        if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (!isset($this->container['index']) || null === $this->container['index']) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['objectIDs']) || $this->container['objectIDs'] === null) {
+        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if ((count($this->container['objectIDs']) > 20)) {
+        if (count($this->container['objectIDs']) > 20) {
             $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
         }
 
-        if ((count($this->container['objectIDs']) < 1)) {
+        if (count($this->container['objectIDs']) < 1) {
             $invalidProperties[] = "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
         }
 
-        if (!isset($this->container['userToken']) || $this->container['userToken'] === null) {
+        if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if ((mb_strlen($this->container['userToken']) > 128)) {
+        if (mb_strlen($this->container['userToken']) > 128) {
             $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
         }
 
-        if ((mb_strlen($this->container['userToken']) < 1)) {
+        if (mb_strlen($this->container['userToken']) < 1) {
             $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
         }
 
-        if (!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $this->container['userToken'])) {
-            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.";
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $this->container['userToken'])) {
+            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.";
         }
 
         return $invalidProperties;
@@ -228,17 +226,17 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets eventName
+     * Gets eventName.
      *
      * @return string
      */
@@ -248,7 +246,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets eventName
+     * Sets eventName.
      *
      * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
@@ -256,10 +254,10 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function setEventName($eventName)
     {
-        if ((mb_strlen($eventName) > 64)) {
+        if (mb_strlen($eventName) > 64) {
             throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedObjectIDs., must be smaller than or equal to 64.');
         }
-        if ((mb_strlen($eventName) < 1)) {
+        if (mb_strlen($eventName) < 1) {
             throw new \InvalidArgumentException('invalid length for $eventName when calling ConvertedObjectIDs., must be bigger than or equal to 1.');
         }
 
@@ -269,7 +267,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets eventType
+     * Gets eventType.
      *
      * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
@@ -279,7 +277,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets eventType
+     * Sets eventType.
      *
      * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
@@ -293,7 +291,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets index
+     * Gets index.
      *
      * @return string
      */
@@ -303,7 +301,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets index
+     * Sets index.
      *
      * @param string $index name of the Algolia index
      *
@@ -317,7 +315,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets objectIDs
+     * Gets objectIDs.
      *
      * @return string[]
      */
@@ -327,7 +325,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets objectIDs
+     * Sets objectIDs.
      *
      * @param string[] $objectIDs list of object identifiers for items of an Algolia index
      *
@@ -335,11 +333,10 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function setObjectIDs($objectIDs)
     {
-
-        if ((count($objectIDs) > 20)) {
+        if (count($objectIDs) > 20) {
             throw new \InvalidArgumentException('invalid value for $objectIDs when calling ConvertedObjectIDs., number of items must be less than or equal to 20.');
         }
-        if ((count($objectIDs) < 1)) {
+        if (count($objectIDs) < 1) {
             throw new \InvalidArgumentException('invalid length for $objectIDs when calling ConvertedObjectIDs., number of items must be greater than or equal to 1.');
         }
         $this->container['objectIDs'] = $objectIDs;
@@ -348,7 +345,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets userToken
+     * Gets userToken.
      *
      * @return string
      */
@@ -358,7 +355,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets userToken
+     * Sets userToken.
      *
      * @param string $userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
      *
@@ -366,14 +363,14 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function setUserToken($userToken)
     {
-        if ((mb_strlen($userToken) > 128)) {
+        if (mb_strlen($userToken) > 128) {
             throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedObjectIDs., must be smaller than or equal to 128.');
         }
-        if ((mb_strlen($userToken) < 1)) {
+        if (mb_strlen($userToken) < 1) {
             throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedObjectIDs., must be bigger than or equal to 1.');
         }
-        if ((!preg_match("/[a-zA-Z0-9_=\/+-]{1,128}/", $userToken))) {
-            throw new \InvalidArgumentException("invalid value for $userToken when calling ConvertedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\/+-]{1,128}/.");
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $userToken)) {
+            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ConvertedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.");
         }
 
         $this->container['userToken'] = $userToken;
@@ -382,9 +379,9 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets timestamp
+     * Gets timestamp.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getTimestamp()
     {
@@ -392,9 +389,9 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Sets timestamp
+     * Sets timestamp.
      *
-     * @param int|null $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     * @param null|int $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
      *
      * @return self
      */
@@ -404,6 +401,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -421,7 +419,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -431,10 +429,8 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -449,12 +445,9 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

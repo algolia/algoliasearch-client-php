@@ -5,77 +5,44 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * RenderingContent Class Doc Comment
+ * RenderingContent Class Doc Comment.
  *
  * @category Class
  *
  * @description Extra content for the search UI, for example, to control the [ordering and display of facets](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/merchandising-facets/#merchandise-facets-and-their-values-in-the-manual-editor). You can set a default value and dynamically override it with [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/).
- *
- * @package Algolia\AlgoliaSearch
  */
 class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'facetOrdering' => '\Algolia\AlgoliaSearch\Model\Search\FacetOrdering',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'facetOrdering' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'facetOrdering' => 'facetOrdering',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -84,7 +51,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -93,34 +60,14 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -132,32 +79,81 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets facetOrdering
+     * Gets facetOrdering.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetOrdering|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetOrdering
      */
     public function getFacetOrdering()
     {
@@ -165,9 +161,9 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets facetOrdering
+     * Sets facetOrdering.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetOrdering|null $facetOrdering facetOrdering
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetOrdering $facetOrdering facetOrdering
      *
      * @return self
      */
@@ -177,6 +173,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -194,7 +191,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -204,10 +201,8 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -222,12 +217,9 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

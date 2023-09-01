@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * GetApiKeyResponse Class Doc Comment
+ * GetApiKeyResponse Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'value' => 'string',
         'createdAt' => 'int',
@@ -31,10 +30,10 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'value' => null,
         'createdAt' => 'int64',
@@ -49,11 +48,11 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'value' => 'value',
         'createdAt' => 'createdAt',
@@ -68,38 +67,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -117,7 +85,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -135,34 +103,14 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -201,6 +149,57 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -209,10 +208,10 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['createdAt']) || $this->container['createdAt'] === null) {
+        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
-        if (!isset($this->container['acl']) || $this->container['acl'] === null) {
+        if (!isset($this->container['acl']) || null === $this->container['acl']) {
             $invalidProperties[] = "'acl' can't be null";
         }
 
@@ -221,19 +220,19 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets value
+     * Gets value.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getValue()
     {
@@ -241,9 +240,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets value
+     * Sets value.
      *
-     * @param string|null $value API key
+     * @param null|string $value API key
      *
      * @return self
      */
@@ -255,7 +254,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets createdAt
+     * Gets createdAt.
      *
      * @return int
      */
@@ -265,7 +264,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets createdAt
+     * Sets createdAt.
      *
      * @param int $createdAt Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
      *
@@ -279,7 +278,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets acl
+     * Gets acl.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
      */
@@ -289,7 +288,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets acl
+     * Sets acl.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
@@ -303,9 +302,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets description
+     * Gets description.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDescription()
     {
@@ -313,9 +312,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets description
+     * Sets description.
      *
-     * @param string|null $description description of an API key for you and your team members
+     * @param null|string $description description of an API key for you and your team members
      *
      * @return self
      */
@@ -327,9 +326,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets indexes
+     * Gets indexes.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getIndexes()
     {
@@ -337,9 +336,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets indexes
+     * Sets indexes.
      *
-     * @param string[]|null $indexes Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
+     * @param null|string[] $indexes Restricts this API key to a list of indices or index patterns. If the list is empty, all indices are allowed. Specify either an exact index name or a pattern with a leading or trailing wildcard character (or both). For example: - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
      *
      * @return self
      */
@@ -351,9 +350,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets maxHitsPerQuery
+     * Gets maxHitsPerQuery.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxHitsPerQuery()
     {
@@ -361,9 +360,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets maxHitsPerQuery
+     * Sets maxHitsPerQuery.
      *
-     * @param int|null $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced. > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
+     * @param null|int $maxHitsPerQuery Maximum number of hits this API key can retrieve in one query. If zero, no limit is enforced. > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -375,9 +374,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets maxQueriesPerIPPerHour
+     * Gets maxQueriesPerIPPerHour.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getMaxQueriesPerIPPerHour()
     {
@@ -385,9 +384,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets maxQueriesPerIPPerHour
+     * Sets maxQueriesPerIPPerHour.
      *
-     * @param int|null $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). Each time an API call is performed with this key, a check is performed. If there were more than the specified number of calls within the last hour, the API returns an error with the status code `429` (Too Many Requests).  > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
+     * @param null|int $maxQueriesPerIPPerHour Maximum number of API calls per hour allowed from a given IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/). Each time an API call is performed with this key, a check is performed. If there were more than the specified number of calls within the last hour, the API returns an error with the status code `429` (Too Many Requests).  > **Note**: Use this parameter to protect you from third-party attempts to retrieve your entire content by massively querying the index.
      *
      * @return self
      */
@@ -399,9 +398,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets queryParameters
+     * Gets queryParameters.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getQueryParameters()
     {
@@ -409,9 +408,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets queryParameters
+     * Sets queryParameters.
      *
-     * @param string|null $queryParameters Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string.
+     * @param null|string $queryParameters Force some [query parameters](https://www.algolia.com/doc/api-reference/api-parameters/) to be applied for each query made with this API key. It's a URL-encoded query string.
      *
      * @return self
      */
@@ -423,9 +422,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets referers
+     * Gets referers.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getReferers()
     {
@@ -433,9 +432,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets referers
+     * Sets referers.
      *
-     * @param string[]|null $referers Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\".
+     * @param null|string[] $referers Restrict this API key to specific [referrers](https://www.algolia.com/doc/guides/security/api-keys/in-depth/api-key-restrictions/#http-referrers). If empty, all referrers are allowed. For example: - `https://algolia.com/_*` matches all referrers starting with \"https://algolia.com/\" - `*.algolia.com` matches all referrers ending with \".algolia.com\" - `*algolia.com*` allows everything in the domain \"algolia.com\".
      *
      * @return self
      */
@@ -447,9 +446,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets validity
+     * Gets validity.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getValidity()
     {
@@ -457,9 +456,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Sets validity
+     * Sets validity.
      *
-     * @param int|null $validity Validity duration of a key (in seconds).  The key will automatically be removed after this time has expired. The default value of 0 never expires. Short-lived API keys are useful to grant temporary access to your data. For example, in mobile apps, you can't [control when users update your app](https://www.algolia.com/doc/guides/security/security-best-practices/#use-secured-api-keys-in-mobile-apps). So instead of encoding keys into your app as you would for a web app, you should dynamically fetch them from your mobile app's backend.
+     * @param null|int $validity Validity duration of a key (in seconds).  The key will automatically be removed after this time has expired. The default value of 0 never expires. Short-lived API keys are useful to grant temporary access to your data. For example, in mobile apps, you can't [control when users update your app](https://www.algolia.com/doc/guides/security/security-best-practices/#use-secured-api-keys-in-mobile-apps). So instead of encoding keys into your app as you would for a web app, you should dynamically fetch them from your mobile app's backend.
      *
      * @return self
      */
@@ -469,6 +468,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -486,7 +486,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -496,10 +496,8 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -514,12 +512,9 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

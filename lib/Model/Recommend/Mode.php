@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * Mode Class Doc Comment
+ * Mode Class Doc Comment.
  *
  * @category Class
  *
  * @description Search mode the index will use to query for results.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Mode
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const NEURAL_SEARCH = 'neuralSearch';
+    public const NEURAL_SEARCH = 'neuralSearch';
 
-    const KEYWORD_SEARCH = 'keywordSearch';
+    public const KEYWORD_SEARCH = 'keywordSearch';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class Mode
         ];
     }
 }
-

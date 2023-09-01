@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ViewEvent Class Doc Comment
+ * ViewEvent Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ViewEvent
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const VIEW = 'view';
+    public const VIEW = 'view';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class ViewEvent
         ];
     }
 }
-

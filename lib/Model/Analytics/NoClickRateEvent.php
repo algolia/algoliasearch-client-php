@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * NoClickRateEvent Class Doc Comment
+ * NoClickRateEvent Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'rate' => 'float',
         'count' => 'int',
@@ -25,10 +24,10 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'rate' => 'double',
         'count' => null,
@@ -37,11 +36,11 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'rate' => 'rate',
         'count' => 'count',
@@ -50,38 +49,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -93,7 +61,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -105,34 +73,14 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -153,6 +101,57 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -161,24 +160,24 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['rate']) || $this->container['rate'] === null) {
+        if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if (($this->container['rate'] > 1)) {
+        if ($this->container['rate'] > 1) {
             $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
         }
 
-        if (($this->container['rate'] < 0)) {
+        if ($this->container['rate'] < 0) {
             $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
         }
 
-        if (!isset($this->container['count']) || $this->container['count'] === null) {
+        if (!isset($this->container['count']) || null === $this->container['count']) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['noClickCount']) || $this->container['noClickCount'] === null) {
+        if (!isset($this->container['noClickCount']) || null === $this->container['noClickCount']) {
             $invalidProperties[] = "'noClickCount' can't be null";
         }
-        if (!isset($this->container['date']) || $this->container['date'] === null) {
+        if (!isset($this->container['date']) || null === $this->container['date']) {
             $invalidProperties[] = "'date' can't be null";
         }
 
@@ -187,17 +186,17 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets rate
+     * Gets rate.
      *
      * @return float
      */
@@ -207,7 +206,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets rate
+     * Sets rate.
      *
      * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
      *
@@ -215,11 +214,10 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function setRate($rate)
     {
-
-        if (($rate > 1)) {
+        if ($rate > 1) {
             throw new \InvalidArgumentException('invalid value for $rate when calling NoClickRateEvent., must be smaller than or equal to 1.');
         }
-        if (($rate < 0)) {
+        if ($rate < 0) {
             throw new \InvalidArgumentException('invalid value for $rate when calling NoClickRateEvent., must be bigger than or equal to 0.');
         }
 
@@ -229,7 +227,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets count
+     * Gets count.
      *
      * @return int
      */
@@ -239,7 +237,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets count
+     * Sets count.
      *
      * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
      *
@@ -253,7 +251,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets noClickCount
+     * Gets noClickCount.
      *
      * @return int
      */
@@ -263,7 +261,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets noClickCount
+     * Sets noClickCount.
      *
      * @param int $noClickCount number of click events
      *
@@ -277,7 +275,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets date
+     * Gets date.
      *
      * @return string
      */
@@ -287,7 +285,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Sets date
+     * Sets date.
      *
      * @param string $date date of the event in the format YYYY-MM-DD
      *
@@ -299,6 +297,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -316,7 +315,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -326,10 +325,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -344,12 +341,9 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

@@ -34,7 +34,7 @@ final class AlgoliaAgent
         );
 
         foreach ($segments as $segment => $version) {
-            $ua[] = $segment . ' (' . $version . ')';
+            $ua[] = $segment.' ('.$version.')';
         }
 
         return implode('; ', $ua);

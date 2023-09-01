@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * GetLogFile200Response Class Doc Comment
+ * GetLogFile200Response Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'timestamp' => 'string',
         'level' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel',
@@ -25,10 +24,10 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'timestamp' => null,
         'level' => null,
@@ -37,11 +36,11 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'timestamp' => 'timestamp',
         'level' => 'level',
@@ -50,38 +49,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -93,7 +61,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -105,34 +73,14 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -153,32 +101,81 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets timestamp
+     * Gets timestamp.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getTimestamp()
     {
@@ -186,9 +183,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets timestamp
+     * Sets timestamp.
      *
-     * @param string|null $timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param null|string $timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */
@@ -200,9 +197,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets level
+     * Gets level.
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel|null
+     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel
      */
     public function getLevel()
     {
@@ -210,9 +207,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets level
+     * Sets level.
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel|null $level level
+     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel $level level
      *
      * @return self
      */
@@ -224,9 +221,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets message
+     * Gets message.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getMessage()
     {
@@ -234,9 +231,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets message
+     * Sets message.
      *
-     * @param string|null $message details about this log entry
+     * @param null|string $message details about this log entry
      *
      * @return self
      */
@@ -248,9 +245,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets contextLevel
+     * Gets contextLevel.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getContextLevel()
     {
@@ -258,9 +255,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Sets contextLevel
+     * Sets contextLevel.
      *
-     * @param int|null $contextLevel Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
+     * @param null|int $contextLevel Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
      *
      * @return self
      */
@@ -270,6 +267,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -287,7 +285,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -297,10 +295,8 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -315,12 +311,9 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

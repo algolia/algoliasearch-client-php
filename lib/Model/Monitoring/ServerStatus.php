@@ -5,20 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * ServerStatus Class Doc Comment
+ * ServerStatus Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ServerStatus
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const PRODUCTION = 'PRODUCTION';
+    public const PRODUCTION = 'PRODUCTION';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -29,4 +28,3 @@ class ServerStatus
         ];
     }
 }
-

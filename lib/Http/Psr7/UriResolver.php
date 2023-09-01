@@ -15,6 +15,11 @@ use Psr\Http\Message\UriInterface;
  */
 final class UriResolver
 {
+    private function __construct()
+    {
+        // cannot be instantiated
+    }
+
     /**
      * Removes dot segments from a path and returns the new path.
      *
@@ -45,7 +50,7 @@ final class UriResolver
 
         if ('/' === $path[0] && (!isset($newPath[0]) || '/' !== $newPath[0])) {
             // Re-add the leading slash if necessary for cases like "/.."
-            $newPath = '/' . $newPath;
+            $newPath = '/'.$newPath;
         } elseif ('' !== $newPath && ('.' === $segment || '..' === $segment)) {
             // Add the trailing slash if necessary
             // If newPath is not empty, then $segment must be set and is the last segment from the foreach
@@ -94,7 +99,7 @@ final class UriResolver
                     $targetPath = $rel->getPath();
                 } else {
                     if ('' !== $targetAuthority && '' === $base->getPath()) {
-                        $targetPath = '/' . $rel->getPath();
+                        $targetPath = '/'.$rel->getPath();
                     } else {
                         $lastSlashPos = mb_strrpos($base->getPath(), '/');
                         if (false === $lastSlashPos) {
@@ -105,7 +110,7 @@ final class UriResolver
                                     $base->getPath(),
                                     0,
                                     $lastSlashPos + 1
-                                ) . $rel->getPath();
+                                ).$rel->getPath();
                         }
                     }
                 }
@@ -154,10 +159,10 @@ final class UriResolver
     public static function relativize(UriInterface $base, UriInterface $target)
     {
         if (
-            '' !== $target->getScheme() &&
-            ($base->getScheme() !== $target->getScheme() ||
-                ('' === $target->getAuthority() &&
-                    '' !== $base->getAuthority()))
+            '' !== $target->getScheme()
+            && ($base->getScheme() !== $target->getScheme()
+                || ('' === $target->getAuthority()
+                    && '' !== $base->getAuthority()))
         ) {
             return $target;
         }
@@ -170,8 +175,8 @@ final class UriResolver
         }
 
         if (
-            '' !== $target->getAuthority() &&
-            $base->getAuthority() !== $target->getAuthority()
+            '' !== $target->getAuthority()
+            && $base->getAuthority() !== $target->getAuthority()
         ) {
             return $target->withScheme('');
         }
@@ -184,7 +189,8 @@ final class UriResolver
             ->withPath('')
             ->withUserInfo('')
             ->withPort(null)
-            ->withHost('');
+            ->withHost('')
+        ;
 
         if ($base->getPath() !== $target->getPath()) {
             return $emptyPathUri->withPath(
@@ -221,8 +227,8 @@ final class UriResolver
         $targetLastSegment = array_pop($targetSegments);
         foreach ($sourceSegments as $i => $segment) {
             if (
-                isset($targetSegments[$i]) &&
-                $segment === $targetSegments[$i]
+                isset($targetSegments[$i])
+                && $segment === $targetSegments[$i]
             ) {
                 unset($sourceSegments[$i], $targetSegments[$i]);
             } else {
@@ -231,7 +237,7 @@ final class UriResolver
         }
         $targetSegments[] = $targetLastSegment;
         $relativePath =
-            str_repeat('../', count($sourceSegments)) .
+            str_repeat('../', count($sourceSegments)).
             implode('/', $targetSegments);
 
         // A reference to am empty last segment or an empty first sub-segment must be prefixed with "./".
@@ -239,21 +245,16 @@ final class UriResolver
         // as the first segment of a relative-path reference, as it would be mistaken for a scheme name.
         $pathParts = explode('/', $relativePath, 2);
         if ('' === $relativePath || false !== mb_strpos($pathParts[0], ':')) {
-            $relativePath = "./$relativePath";
+            $relativePath = "./{$relativePath}";
         } elseif ('/' === $relativePath[0]) {
             if ('' !== $base->getAuthority() && '' === $base->getPath()) {
                 // In this case an extra slash is added by resolve() automatically. So we must not add one here.
-                $relativePath = ".$relativePath";
+                $relativePath = ".{$relativePath}";
             } else {
-                $relativePath = "./$relativePath";
+                $relativePath = "./{$relativePath}";
             }
         }
 
         return $relativePath;
-    }
-
-    private function __construct()
-    {
-        // cannot be instantiated
     }
 }

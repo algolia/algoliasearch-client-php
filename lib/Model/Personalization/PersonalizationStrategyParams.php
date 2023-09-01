@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
 /**
- * PersonalizationStrategyParams Class Doc Comment
+ * PersonalizationStrategyParams Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'eventScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]',
         'facetScoring' => '\Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]',
@@ -24,10 +23,10 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'eventScoring' => null,
         'facetScoring' => null,
@@ -35,11 +34,11 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'eventScoring' => 'eventScoring',
         'facetScoring' => 'facetScoring',
@@ -47,38 +46,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,13 +152,13 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['eventScoring']) || $this->container['eventScoring'] === null) {
+        if (!isset($this->container['eventScoring']) || null === $this->container['eventScoring']) {
             $invalidProperties[] = "'eventScoring' can't be null";
         }
-        if (!isset($this->container['facetScoring']) || $this->container['facetScoring'] === null) {
+        if (!isset($this->container['facetScoring']) || null === $this->container['facetScoring']) {
             $invalidProperties[] = "'facetScoring' can't be null";
         }
-        if (!isset($this->container['personalizationImpact']) || $this->container['personalizationImpact'] === null) {
+        if (!isset($this->container['personalizationImpact']) || null === $this->container['personalizationImpact']) {
             $invalidProperties[] = "'personalizationImpact' can't be null";
         }
 
@@ -168,17 +167,17 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets eventScoring
+     * Gets eventScoring.
      *
      * @return \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]
      */
@@ -188,7 +187,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets eventScoring
+     * Sets eventScoring.
      *
      * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring scores associated with the events
      *
@@ -202,7 +201,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets facetScoring
+     * Gets facetScoring.
      *
      * @return \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]
      */
@@ -212,7 +211,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets facetScoring
+     * Sets facetScoring.
      *
      * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring scores associated with the facets
      *
@@ -226,7 +225,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Gets personalizationImpact
+     * Gets personalizationImpact.
      *
      * @return int
      */
@@ -236,7 +235,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     }
 
     /**
-     * Sets personalizationImpact
+     * Sets personalizationImpact.
      *
      * @param int $personalizationImpact the impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled)
      *
@@ -248,6 +247,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -265,7 +265,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -275,10 +275,8 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -293,12 +291,9 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

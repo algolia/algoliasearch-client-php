@@ -5,23 +5,21 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingItemsModel Class Doc Comment
+ * TrendingItemsModel Class Doc Comment.
  *
  * @category Class
  *
  * @description Trending items model.
- *
- * @package Algolia\AlgoliaSearch
  */
 class TrendingItemsModel
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const TRENDING_ITEMS = 'trending-items';
+    public const TRENDING_ITEMS = 'trending-items';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -32,4 +30,3 @@ class TrendingItemsModel
         ];
     }
 }
-

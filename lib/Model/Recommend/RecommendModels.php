@@ -5,26 +5,25 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendModels Class Doc Comment
+ * RecommendModels Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class RecommendModels
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const RELATED_PRODUCTS = 'related-products';
+    public const RELATED_PRODUCTS = 'related-products';
 
-    const BOUGHT_TOGETHER = 'bought-together';
+    public const BOUGHT_TOGETHER = 'bought-together';
 
-    const TRENDING_FACETS = 'trending-facets';
+    public const TRENDING_FACETS = 'trending-facets';
 
-    const TRENDING_ITEMS = 'trending-items';
+    public const TRENDING_ITEMS = 'trending-items';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -38,4 +37,3 @@ class RecommendModels
         ];
     }
 }
-

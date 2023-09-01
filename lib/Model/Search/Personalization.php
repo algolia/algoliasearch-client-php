@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * Personalization Class Doc Comment
+ * Personalization Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'filtersScore' => 'int',
         'rankingScore' => 'int',
@@ -24,10 +23,10 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'filtersScore' => null,
         'rankingScore' => null,
@@ -35,11 +34,11 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'filtersScore' => 'filtersScore',
         'rankingScore' => 'rankingScore',
@@ -47,38 +46,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,32 +93,81 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets filtersScore
+     * Gets filtersScore.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getFiltersScore()
     {
@@ -178,9 +175,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets filtersScore
+     * Sets filtersScore.
      *
-     * @param int|null $filtersScore the score of the filters
+     * @param null|int $filtersScore the score of the filters
      *
      * @return self
      */
@@ -192,9 +189,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets rankingScore
+     * Gets rankingScore.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getRankingScore()
     {
@@ -202,9 +199,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets rankingScore
+     * Sets rankingScore.
      *
-     * @param int|null $rankingScore the score of the ranking
+     * @param null|int $rankingScore the score of the ranking
      *
      * @return self
      */
@@ -216,9 +213,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets score
+     * Gets score.
      *
-     * @return int|null
+     * @return null|int
      */
     public function getScore()
     {
@@ -226,9 +223,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Sets score
+     * Sets score.
      *
-     * @param int|null $score the score of the event
+     * @param null|int $score the score of the event
      *
      * @return self
      */
@@ -238,6 +235,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -255,7 +253,7 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -265,10 +263,8 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -283,12 +279,9 @@ class Personalization extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

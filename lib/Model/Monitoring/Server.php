@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * Server Class Doc Comment
+ * Server Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'name' => 'string',
         'region' => '\Algolia\AlgoliaSearch\Model\Monitoring\Region',
@@ -28,10 +27,10 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'name' => null,
         'region' => null,
@@ -43,11 +42,11 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'name' => 'name',
         'region' => 'region',
@@ -59,38 +58,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -105,7 +73,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -120,34 +88,14 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -177,32 +125,81 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets name
+     * Gets name.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getName()
     {
@@ -210,9 +207,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets name
+     * Sets name.
      *
-     * @param string|null $name server name
+     * @param null|string $name server name
      *
      * @return self
      */
@@ -224,9 +221,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets region
+     * Gets region.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Monitoring\Region|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Region
      */
     public function getRegion()
     {
@@ -234,9 +231,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets region
+     * Sets region.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Monitoring\Region|null $region region
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Region $region region
      *
      * @return self
      */
@@ -248,9 +245,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets isSlave
+     * Gets isSlave.
      *
-     * @return bool|null
+     * @return null|bool
      *
      * @deprecated
      */
@@ -260,9 +257,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets isSlave
+     * Sets isSlave.
      *
-     * @param bool|null $isSlave Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead.
+     * @param null|bool $isSlave Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead.
      *
      * @return self
      *
@@ -276,9 +273,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets isReplica
+     * Gets isReplica.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getIsReplica()
     {
@@ -286,9 +283,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets isReplica
+     * Sets isReplica.
      *
-     * @param bool|null $isReplica indicates whether this server is a replica of another server
+     * @param null|bool $isReplica indicates whether this server is a replica of another server
      *
      * @return self
      */
@@ -300,9 +297,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets cluster
+     * Gets cluster.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getCluster()
     {
@@ -310,9 +307,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets cluster
+     * Sets cluster.
      *
-     * @param string|null $cluster name of the cluster to which this server belongs
+     * @param null|string $cluster name of the cluster to which this server belongs
      *
      * @return self
      */
@@ -324,9 +321,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets status
+     * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus
      */
     public function getStatus()
     {
@@ -334,9 +331,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets status
+     * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus|null $status status
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus $status status
      *
      * @return self
      */
@@ -348,9 +345,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets type
+     * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Monitoring\Type|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Type
      */
     public function getType()
     {
@@ -358,9 +355,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets type
+     * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Monitoring\Type|null $type type
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Type $type type
      *
      * @return self
      */
@@ -370,6 +367,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -387,7 +385,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -397,10 +395,8 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -415,12 +411,9 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

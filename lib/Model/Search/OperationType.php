@@ -5,25 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * OperationType Class Doc Comment
+ * OperationType Class Doc Comment.
  *
  * @category Class
  *
  * @description Operation to perform (_move_ or _copy_).
- *
- * @package Algolia\AlgoliaSearch
  */
 class OperationType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const MOVE = 'move';
+    public const MOVE = 'move';
 
-    const COPY = 'copy';
+    public const COPY = 'copy';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +33,3 @@ class OperationType
         ];
     }
 }
-

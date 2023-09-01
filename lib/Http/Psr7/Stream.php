@@ -238,12 +238,7 @@ class Stream implements StreamInterface
             throw new \RuntimeException('Stream is not seekable');
         }
         if (-1 === fseek($this->stream, $offset, $whence)) {
-            throw new \RuntimeException(
-                'Unable to seek to stream position ' .
-                    $offset .
-                    ' with whence ' .
-                    var_export($whence, true)
-            );
+            throw new \RuntimeException('Unable to seek to stream position '.$offset.' with whence '.var_export($whence, true));
         }
     }
 
@@ -277,9 +272,7 @@ class Stream implements StreamInterface
             throw new \RuntimeException('Stream is detached');
         }
         if (!$this->writable) {
-            throw new \RuntimeException(
-                'Cannot write to a non-writable stream'
-            );
+            throw new \RuntimeException('Cannot write to a non-writable stream');
         }
 
         // We can't know the size after writing anything
@@ -297,9 +290,11 @@ class Stream implements StreamInterface
     {
         if (!isset($this->stream)) {
             return $key ? null : [];
-        } elseif (!$key) {
+        }
+        if (!$key) {
             return $this->customMetadata + stream_get_meta_data($this->stream);
-        } elseif (isset($this->customMetadata[$key])) {
+        }
+        if (isset($this->customMetadata[$key])) {
             return $this->customMetadata[$key];
         }
 

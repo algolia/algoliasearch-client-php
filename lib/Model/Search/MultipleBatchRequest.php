@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * MultipleBatchRequest Class Doc Comment
+ * MultipleBatchRequest Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'action' => '\Algolia\AlgoliaSearch\Model\Search\Action',
         'body' => 'object',
@@ -24,10 +23,10 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'action' => null,
         'body' => null,
@@ -35,11 +34,11 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'action' => 'action',
         'body' => 'body',
@@ -47,38 +46,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -89,7 +57,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -100,34 +68,14 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -145,6 +93,57 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -153,13 +152,13 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['action']) || $this->container['action'] === null) {
+        if (!isset($this->container['action']) || null === $this->container['action']) {
             $invalidProperties[] = "'action' can't be null";
         }
-        if (!isset($this->container['body']) || $this->container['body'] === null) {
+        if (!isset($this->container['body']) || null === $this->container['body']) {
             $invalidProperties[] = "'body' can't be null";
         }
-        if (!isset($this->container['indexName']) || $this->container['indexName'] === null) {
+        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
 
@@ -168,17 +167,17 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets action
+     * Gets action.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\Action
      */
@@ -188,7 +187,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets action
+     * Sets action.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
      *
@@ -202,7 +201,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets body
+     * Gets body.
      *
      * @return object
      */
@@ -212,7 +211,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets body
+     * Sets body.
      *
      * @param object $body operation arguments (varies with specified `action`)
      *
@@ -226,7 +225,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets indexName
+     * Gets indexName.
      *
      * @return string
      */
@@ -236,7 +235,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Sets indexName
+     * Sets indexName.
      *
      * @param string $indexName index to target for this operation
      *
@@ -248,6 +247,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -265,7 +265,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -275,10 +275,8 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -293,12 +291,9 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

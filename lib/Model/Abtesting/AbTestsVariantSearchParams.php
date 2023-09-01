@@ -5,18 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * AbTestsVariantSearchParams Class Doc Comment
+ * AbTestsVariantSearchParams Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'index' => 'string',
         'trafficPercentage' => 'int',
@@ -25,10 +24,10 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'index' => null,
         'trafficPercentage' => null,
@@ -37,11 +36,11 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'index' => 'index',
         'trafficPercentage' => 'trafficPercentage',
@@ -50,38 +49,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -93,7 +61,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -105,34 +73,14 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -153,6 +101,57 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -161,13 +160,13 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['index']) || $this->container['index'] === null) {
+        if (!isset($this->container['index']) || null === $this->container['index']) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['trafficPercentage']) || $this->container['trafficPercentage'] === null) {
+        if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if (!isset($this->container['customSearchParameters']) || $this->container['customSearchParameters'] === null) {
+        if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
 
@@ -176,17 +175,17 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets index
+     * Gets index.
      *
      * @return string
      */
@@ -196,7 +195,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets index
+     * Sets index.
      *
      * @param string $index A/B test index
      *
@@ -210,7 +209,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets trafficPercentage
+     * Gets trafficPercentage.
      *
      * @return int
      */
@@ -220,7 +219,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets trafficPercentage
+     * Sets trafficPercentage.
      *
      * @param int $trafficPercentage A/B test traffic percentage
      *
@@ -234,9 +233,9 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets description
+     * Gets description.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getDescription()
     {
@@ -244,9 +243,9 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets description
+     * Sets description.
      *
-     * @param string|null $description A/B test description
+     * @param null|string $description A/B test description
      *
      * @return self
      */
@@ -258,7 +257,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets customSearchParameters
+     * Gets customSearchParameters.
      *
      * @return object
      */
@@ -268,7 +267,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Sets customSearchParameters
+     * Sets customSearchParameters.
      *
      * @param object $customSearchParameters customSearchParameters
      *
@@ -280,6 +279,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -297,7 +297,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -307,10 +307,8 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -325,12 +323,9 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

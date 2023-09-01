@@ -6,34 +6,32 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
  * Interface abstracting model access.
- *
- * @package Algolia\AlgoliaSearch\Model\Monitoring
  */
 interface ModelInterface
 {
     /**
-     * Array of property to type mappings. Used for (de)serialization
+     * Array of property to type mappings. Used for (de)serialization.
      *
      * @return array
      */
     public static function modelTypes();
 
     /**
-     * Array of property to format mappings. Used for (de)serialization
+     * Array of property to format mappings. Used for (de)serialization.
      *
      * @return array
      */
     public static function modelFormats();
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @return array
      */
     public static function setters();
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @return array
      */
@@ -48,7 +46,7 @@ interface ModelInterface
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool
      */

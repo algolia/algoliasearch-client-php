@@ -5,24 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ScopeType Class Doc Comment
+ * ScopeType Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ScopeType
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const SETTINGS = 'settings';
+    public const SETTINGS = 'settings';
 
-    const SYNONYMS = 'synonyms';
+    public const SYNONYMS = 'synonyms';
 
-    const RULES = 'rules';
+    public const RULES = 'rules';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +34,3 @@ class ScopeType
         ];
     }
 }
-

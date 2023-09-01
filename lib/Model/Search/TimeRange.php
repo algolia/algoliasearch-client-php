@@ -5,77 +5,45 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * TimeRange Class Doc Comment
+ * TimeRange Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'from' => 'int',
         'until' => 'int',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'from' => null,
         'until' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'from' => 'from',
         'until' => 'until',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -85,7 +53,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -95,34 +63,14 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -137,6 +85,57 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -145,10 +144,10 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['from']) || $this->container['from'] === null) {
+        if (!isset($this->container['from']) || null === $this->container['from']) {
             $invalidProperties[] = "'from' can't be null";
         }
-        if (!isset($this->container['until']) || $this->container['until'] === null) {
+        if (!isset($this->container['until']) || null === $this->container['until']) {
             $invalidProperties[] = "'until' can't be null";
         }
 
@@ -157,17 +156,17 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets from
+     * Gets from.
      *
      * @return int
      */
@@ -177,7 +176,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets from
+     * Sets from.
      *
      * @param int $from lower bound of the time range (Unix timestamp)
      *
@@ -191,7 +190,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets until
+     * Gets until.
      *
      * @return int
      */
@@ -201,7 +200,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Sets until
+     * Sets until.
      *
      * @param int $until upper bound of the time range (Unix timestamp)
      *
@@ -213,6 +212,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -230,7 +230,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -240,10 +240,8 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -258,12 +256,9 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

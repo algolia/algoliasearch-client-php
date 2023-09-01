@@ -5,24 +5,23 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * AlternativesAsExact Class Doc Comment
+ * AlternativesAsExact Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class AlternativesAsExact
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const IGNORE_PLURALS = 'ignorePlurals';
+    public const IGNORE_PLURALS = 'ignorePlurals';
 
-    const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
+    public const SINGLE_WORD_SYNONYM = 'singleWordSynonym';
 
-    const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
+    public const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -35,4 +34,3 @@ class AlternativesAsExact
         ];
     }
 }
-

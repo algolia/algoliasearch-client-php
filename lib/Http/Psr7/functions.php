@@ -6,6 +6,8 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * @internal
+ *
+ * @param mixed $resource
  */
 function stream_for($resource = '', array $options = [])
 {
@@ -18,13 +20,16 @@ function stream_for($resource = '', array $options = [])
 
         return new Stream($stream, $options);
     }
+
     switch (gettype($resource)) {
         case 'resource':
             return new Stream($resource, $options);
+
         case 'object':
             if ($resource instanceof StreamInterface) {
                 return $resource;
-            } elseif ($resource instanceof \Iterator) {
+            }
+            if ($resource instanceof \Iterator) {
                 return new PumpStream(function () use ($resource) {
                     if (!$resource->valid()) {
                         return false;
@@ -39,6 +44,7 @@ function stream_for($resource = '', array $options = [])
             }
 
             break;
+
         case 'NULL':
             return new Stream(fopen('php://temp', 'r+'), $options);
     }
@@ -46,13 +52,13 @@ function stream_for($resource = '', array $options = [])
         return new PumpStream($resource, $options);
     }
 
-    throw new \InvalidArgumentException(
-        'Invalid resource type: ' . gettype($resource)
-    );
+    throw new \InvalidArgumentException('Invalid resource type: '.gettype($resource));
 }
 
 /**
  * @internal
+ *
+ * @param mixed $maxLen
  */
 function copy_to_string(StreamInterface $stream, $maxLen = -1)
 {

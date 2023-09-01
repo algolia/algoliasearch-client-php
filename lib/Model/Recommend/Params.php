@@ -5,21 +5,19 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * Params Class Doc Comment
+ * Params Class Doc Comment.
  *
  * @category Class
  *
  * @description Additional search parameters.
- *
- * @package Algolia\AlgoliaSearch
  */
 class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'query' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery',
         'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters',
@@ -28,10 +26,10 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'query' => null,
         'automaticFacetFilters' => null,
@@ -40,11 +38,11 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'query' => 'query',
         'automaticFacetFilters' => 'automaticFacetFilters',
@@ -53,38 +51,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -96,7 +63,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -108,34 +75,14 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -156,32 +103,81 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets query
+     * Gets query.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery
      */
     public function getQuery()
     {
@@ -189,9 +185,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets query
+     * Sets query.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery|null $query query
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery $query query
      *
      * @return self
      */
@@ -203,9 +199,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets automaticFacetFilters
+     * Gets automaticFacetFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
      */
     public function getAutomaticFacetFilters()
     {
@@ -213,9 +209,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets automaticFacetFilters
+     * Sets automaticFacetFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters|null $automaticFacetFilters automaticFacetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
      *
      * @return self
      */
@@ -227,9 +223,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets automaticOptionalFacetFilters
+     * Gets automaticOptionalFacetFilters.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
      */
     public function getAutomaticOptionalFacetFilters()
     {
@@ -237,9 +233,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets automaticOptionalFacetFilters
+     * Sets automaticOptionalFacetFilters.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters|null $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
      *
      * @return self
      */
@@ -251,9 +247,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets renderingContent
+     * Gets renderingContent.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -261,9 +257,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Sets renderingContent
+     * Sets renderingContent.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RenderingContent|null $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -273,6 +269,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -290,7 +287,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -300,10 +297,8 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -318,12 +313,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

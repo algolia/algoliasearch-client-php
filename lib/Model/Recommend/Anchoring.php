@@ -5,29 +5,27 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * Anchoring Class Doc Comment
+ * Anchoring Class Doc Comment.
  *
  * @category Class
  *
  * @description Whether the pattern parameter matches the beginning (&#x60;startsWith&#x60;) or end (&#x60;endsWith&#x60;) of the query string, is an exact match (&#x60;is&#x60;), or a partial match (&#x60;contains&#x60;).
- *
- * @package Algolia\AlgoliaSearch
  */
 class Anchoring
 {
     /**
-     * Possible values of this enum
+     * Possible values of this enum.
      */
-    const IS = 'is';
+    public const IS = 'is';
 
-    const STARTS_WITH = 'startsWith';
+    public const STARTS_WITH = 'startsWith';
 
-    const ENDS_WITH = 'endsWith';
+    public const ENDS_WITH = 'endsWith';
 
-    const CONTAINS = 'contains';
+    public const CONTAINS = 'contains';
 
     /**
-     * Gets allowable values of the enum
+     * Gets allowable values of the enum.
      *
      * @return string[]
      */
@@ -41,4 +39,3 @@ class Anchoring
         ];
     }
 }
-

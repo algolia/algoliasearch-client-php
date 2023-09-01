@@ -5,77 +5,45 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * ConsequenceQueryObject Class Doc Comment
+ * ConsequenceQueryObject Class Doc Comment.
  *
  * @category Class
- * @package Algolia\AlgoliaSearch
  */
 class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'remove' => 'string[]',
         'edits' => '\Algolia\AlgoliaSearch\Model\Search\Edit[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'remove' => null,
         'edits' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'remove' => 'remove',
         'edits' => 'edits',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -85,7 +53,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -95,34 +63,14 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -137,32 +85,81 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets remove
+     * Gets remove.
      *
-     * @return string[]|null
+     * @return null|string[]
      */
     public function getRemove()
     {
@@ -170,9 +167,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets remove
+     * Sets remove.
      *
-     * @param string[]|null $remove words to remove
+     * @param null|string[] $remove words to remove
      *
      * @return self
      */
@@ -184,9 +181,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets edits
+     * Gets edits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Edit[]|null
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Edit[]
      */
     public function getEdits()
     {
@@ -194,9 +191,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Sets edits
+     * Sets edits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Edit[]|null $edits edits to apply
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Edit[] $edits edits to apply
      *
      * @return self
      */
@@ -206,6 +203,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -223,7 +221,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -233,10 +231,8 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -251,12 +247,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

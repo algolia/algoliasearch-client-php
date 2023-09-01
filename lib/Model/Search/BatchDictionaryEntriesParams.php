@@ -5,80 +5,47 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BatchDictionaryEntriesParams Class Doc Comment
+ * BatchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
  *
  * @description &#x60;batchDictionaryEntries&#x60; parameters.
- *
- * @package Algolia\AlgoliaSearch
  */
 class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelTypes = [
         'clearExistingDictionaryEntries' => 'bool',
         'requests' => '\Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]',
     ];
 
     /**
-      * Array of property to format mappings. Used for (de)serialization
-      *
-      * @var string[]
-      */
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @var string[]
+     */
     protected static $modelFormats = [
         'clearExistingDictionaryEntries' => null,
         'requests' => null,
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @var string[]
-    */
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @var string[]
+     */
     protected static $attributeMap = [
         'clearExistingDictionaryEntries' => 'clearExistingDictionaryEntries',
         'requests' => 'requests',
     ];
 
     /**
-      * Array of attributes where the key is the local name,
-      * and the value is the original name
-      *
-      * @return array
-      */
-    public static function attributeMap()
-    {
-        return self::$attributeMap;
-    }
-
-    /**
-     * Array of property to type mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelTypes()
-    {
-        return self::$modelTypes;
-    }
-
-    /**
-     * Array of property to format mappings. Used for (de)serialization
-     *
-     * @return array
-     */
-    public static function modelFormats()
-    {
-        return self::$modelFormats;
-    }
-
-    /**
-     * Array of attributes to setter functions (for deserialization of responses)
+     * Array of attributes to setter functions (for deserialization of responses).
      *
      * @var string[]
      */
@@ -88,7 +55,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     ];
 
     /**
-     * Array of attributes to getter functions (for serialization of requests)
+     * Array of attributes to getter functions (for serialization of requests).
      *
      * @var string[]
      */
@@ -98,34 +65,14 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     ];
 
     /**
-     * Array of attributes to setter functions (for deserialization of responses)
-     *
-     * @return array
-     */
-    public static function setters()
-    {
-        return self::$setters;
-    }
-
-    /**
-     * Array of attributes to getter functions (for serialization of requests)
-     *
-     * @return array
-     */
-    public static function getters()
-    {
-        return self::$getters;
-    }
-
-    /**
-     * Associative array for storing property values
+     * Associative array for storing property values.
      *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed[] $data Associated array of property values
      */
@@ -140,6 +87,57 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name.
+     *
+     * @return array
+     */
+    public static function attributeMap()
+    {
+        return self::$attributeMap;
+    }
+
+    /**
+     * Array of property to type mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelTypes()
+    {
+        return self::$modelTypes;
+    }
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization.
+     *
+     * @return array
+     */
+    public static function modelFormats()
+    {
+        return self::$modelFormats;
+    }
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses).
+     *
+     * @return array
+     */
+    public static function setters()
+    {
+        return self::$setters;
+    }
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests).
+     *
+     * @return array
+     */
+    public static function getters()
+    {
+        return self::$getters;
+    }
+
+    /**
      * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
@@ -148,7 +146,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || $this->container['requests'] === null) {
+        if (!isset($this->container['requests']) || null === $this->container['requests']) {
             $invalidProperties[] = "'requests' can't be null";
         }
 
@@ -157,19 +155,19 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
 
     /**
      * Validate all the properties in the model
-     * return true if all passed
+     * return true if all passed.
      *
      * @return bool True if all properties are valid
      */
     public function valid()
     {
-        return count($this->listInvalidProperties()) === 0;
+        return 0 === count($this->listInvalidProperties());
     }
 
     /**
-     * Gets clearExistingDictionaryEntries
+     * Gets clearExistingDictionaryEntries.
      *
-     * @return bool|null
+     * @return null|bool
      */
     public function getClearExistingDictionaryEntries()
     {
@@ -177,9 +175,9 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
-     * Sets clearExistingDictionaryEntries
+     * Sets clearExistingDictionaryEntries.
      *
-     * @param bool|null $clearExistingDictionaryEntries incidates whether to replace all custom entries in the dictionary with the ones sent with this request
+     * @param null|bool $clearExistingDictionaryEntries incidates whether to replace all custom entries in the dictionary with the ones sent with this request
      *
      * @return self
      */
@@ -191,7 +189,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
-     * Gets requests
+     * Gets requests.
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]
      */
@@ -201,7 +199,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     }
 
     /**
-     * Sets requests
+     * Sets requests.
      *
      * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests operations to batch
      *
@@ -213,6 +211,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
 
         return $this;
     }
+
     /**
      * Returns true if offset exists. False otherwise.
      *
@@ -230,7 +229,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
      *
      * @param int $offset Offset
      *
-     * @return mixed|null
+     * @return null|mixed
      */
     public function offsetGet($offset)
     {
@@ -240,10 +239,8 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets value based on offset.
      *
-     * @param int|null $offset Offset
+     * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
-     *
-     * @return void
      */
     public function offsetSet($offset, $value)
     {
@@ -258,12 +255,9 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
      * Unsets offset.
      *
      * @param int $offset Offset
-     *
-     * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 }
-

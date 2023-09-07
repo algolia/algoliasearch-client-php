@@ -18,7 +18,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class PersonalizationClient
 {
-    public const VERSION = '4.0.0-alpha.78';
+    public const VERSION = '4.0.0-alpha.79';
 
     /**
      * @var ApiWrapperInterface

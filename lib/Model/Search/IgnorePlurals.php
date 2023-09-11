@@ -66,9 +66,7 @@ class IgnorePlurals extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

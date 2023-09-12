@@ -240,8 +240,8 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
             $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
         }
 
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $this->container['userToken'])) {
-            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.";
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['userToken'])) {
+            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
         return $invalidProperties;
@@ -426,8 +426,8 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         if (mb_strlen($userToken) < 1) {
             throw new \InvalidArgumentException('invalid length for $userToken when calling ConvertedObjectIDsAfterSearch., must be bigger than or equal to 1.');
         }
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $userToken)) {
-            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.");
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
+            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ConvertedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
         }
 
         $this->container['userToken'] = $userToken;

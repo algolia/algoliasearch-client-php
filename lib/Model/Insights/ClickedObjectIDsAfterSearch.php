@@ -259,8 +259,8 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
             $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
         }
 
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $this->container['userToken'])) {
-            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.";
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['userToken'])) {
+            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
         return $invalidProperties;
@@ -475,8 +475,8 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (mb_strlen($userToken) < 1) {
             throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedObjectIDsAfterSearch., must be bigger than or equal to 1.');
         }
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,128}/', $userToken)) {
-            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ClickedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,128}/.");
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
+            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ClickedObjectIDsAfterSearch., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
         }
 
         $this->container['userToken'] = $userToken;

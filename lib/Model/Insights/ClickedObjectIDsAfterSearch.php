@@ -251,8 +251,8 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
             $invalidProperties[] = "'userToken' can't be null";
         }
-        if (mb_strlen($this->container['userToken']) > 128) {
-            $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 128.";
+        if (mb_strlen($this->container['userToken']) > 129) {
+            $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 129.";
         }
 
         if (mb_strlen($this->container['userToken']) < 1) {
@@ -469,8 +469,8 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     public function setUserToken($userToken)
     {
-        if (mb_strlen($userToken) > 128) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedObjectIDsAfterSearch., must be smaller than or equal to 128.');
+        if (mb_strlen($userToken) > 129) {
+            throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedObjectIDsAfterSearch., must be smaller than or equal to 129.');
         }
         if (mb_strlen($userToken) < 1) {
             throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedObjectIDsAfterSearch., must be bigger than or equal to 1.');

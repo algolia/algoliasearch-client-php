@@ -1,3 +1,11 @@
+## [4.0.0-alpha.80](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.79...4.0.0-alpha.80)
+
+- [265518125](https://github.com/algolia/api-clients-automation/commit/265518125) fix(specs): `exhaustiveNbHits` as optional ([#2007](https://github.com/algolia/api-clients-automation/pull/2007)) by [@aallam](https://github.com/aallam/)
+- [e73b9cf52](https://github.com/algolia/api-clients-automation/commit/e73b9cf52) fix(specs): introduced SourceUpdateDocker ([#2005](https://github.com/algolia/api-clients-automation/pull/2005)) by [@Fluf22](https://github.com/Fluf22/)
+- [02ca9f694](https://github.com/algolia/api-clients-automation/commit/02ca9f694) fix(specs): add 'critical' event status to enum ([#2006](https://github.com/algolia/api-clients-automation/pull/2006)) by [@Fluf22](https://github.com/Fluf22/)
+- [48b23af07](https://github.com/algolia/api-clients-automation/commit/48b23af07) fix(clients): userToken max length ([#2004](https://github.com/algolia/api-clients-automation/pull/2004)) by [@kai687](https://github.com/kai687/)
+- [964962605](https://github.com/algolia/api-clients-automation/commit/964962605) fix(clients): user token character limit ([#2003](https://github.com/algolia/api-clients-automation/pull/2003)) by [@kai687](https://github.com/kai687/)
+
 ## [4.0.0-alpha.79](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.78...4.0.0-alpha.79)
 
 - [24affb264](https://github.com/algolia/api-clients-automation/commit/24affb264) feat(specs): add `recordType` and `fallbackIsInStockValue` in inputs ([#1988](https://github.com/algolia/api-clients-automation/pull/1988)) by [@damcou](https://github.com/damcou/)

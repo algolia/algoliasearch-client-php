@@ -352,9 +352,6 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
             $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
 
-        if (!isset($this->container['exhaustiveNbHits']) || null === $this->container['exhaustiveNbHits']) {
-            $invalidProperties[] = "'exhaustiveNbHits' can't be null";
-        }
         if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
@@ -527,7 +524,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets exhaustiveNbHits.
      *
-     * @return bool
+     * @return null|bool
      */
     public function getExhaustiveNbHits()
     {
@@ -537,7 +534,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets exhaustiveNbHits.
      *
-     * @param bool $exhaustiveNbHits indicates whether the number of hits `nbHits` is exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveNbHits indicates whether the number of hits `nbHits` is exhaustive (exact) or approximate
      *
      * @return self
      */

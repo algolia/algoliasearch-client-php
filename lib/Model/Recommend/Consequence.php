@@ -23,7 +23,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'promote' => '\Algolia\AlgoliaSearch\Model\Recommend\Promote[]',
         'filterPromotes' => 'bool',
         'hide' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[]',
-        'userData' => 'object',
+        'userData' => 'mixed',
     ];
 
     /**
@@ -281,7 +281,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -291,7 +291,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets userData.
      *
-     * @param null|object $userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
+     * @param null|mixed $userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
      *
      * @return self
      */

@@ -39,7 +39,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'processingTimeMS' => 'int',
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
     ];
 
@@ -912,7 +912,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -922,7 +922,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets userData.
      *
-     * @param null|object $userData lets you store custom data in your indices
+     * @param null|mixed $userData lets you store custom data in your indices
      *
      * @return self
      */

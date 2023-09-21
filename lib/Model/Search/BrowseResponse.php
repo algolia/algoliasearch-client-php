@@ -39,7 +39,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'processingTimeMS' => 'int',
         'queryAfterRemoval' => 'string',
         'serverUsed' => 'string',
-        'userData' => 'object',
+        'userData' => 'mixed',
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
         'query' => 'string',
@@ -953,7 +953,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets userData.
      *
-     * @return null|object
+     * @return null|mixed
      */
     public function getUserData()
     {
@@ -963,7 +963,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets userData.
      *
-     * @param null|object $userData lets you store custom data in your indices
+     * @param null|mixed $userData lets you store custom data in your indices
      *
      * @return self
      */

@@ -1,3 +1,8 @@
+## [4.0.0-alpha.81](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.80...4.0.0-alpha.81)
+
+- [2260e903f](https://github.com/algolia/api-clients-automation/commit/2260e903f) feat(specs): add `attributesToExclude` for Ingestion ([#2053](https://github.com/algolia/api-clients-automation/pull/2053)) by [@shortcuts](https://github.com/shortcuts/)
+- [b7b6565ab](https://github.com/algolia/api-clients-automation/commit/b7b6565ab) fix(specs): `userData` type as 'any' ([#2033](https://github.com/algolia/api-clients-automation/pull/2033)) by [@aallam](https://github.com/aallam/)
+
 ## [4.0.0-alpha.80](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.79...4.0.0-alpha.80)
 
 - [265518125](https://github.com/algolia/api-clients-automation/commit/265518125) fix(specs): `exhaustiveNbHits` as optional ([#2007](https://github.com/algolia/api-clients-automation/pull/2007)) by [@aallam](https://github.com/aallam/)

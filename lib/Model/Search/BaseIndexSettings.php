@@ -32,6 +32,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'searchableAttributes' => 'string[]',
         'userData' => 'mixed',
         'customNormalization' => 'array<string,array<string,string>>',
+        'attributeForDistinct' => 'string',
     ];
 
     /**
@@ -55,6 +56,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'searchableAttributes' => null,
         'userData' => null,
         'customNormalization' => null,
+        'attributeForDistinct' => null,
     ];
 
     /**
@@ -79,6 +81,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'searchableAttributes' => 'searchableAttributes',
         'userData' => 'userData',
         'customNormalization' => 'customNormalization',
+        'attributeForDistinct' => 'attributeForDistinct',
     ];
 
     /**
@@ -102,6 +105,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'searchableAttributes' => 'setSearchableAttributes',
         'userData' => 'setUserData',
         'customNormalization' => 'setCustomNormalization',
+        'attributeForDistinct' => 'setAttributeForDistinct',
     ];
 
     /**
@@ -125,6 +129,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'searchableAttributes' => 'getSearchableAttributes',
         'userData' => 'getUserData',
         'customNormalization' => 'getCustomNormalization',
+        'attributeForDistinct' => 'getAttributeForDistinct',
     ];
 
     /**
@@ -185,6 +190,9 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['customNormalization'])) {
             $this->container['customNormalization'] = $data['customNormalization'];
+        }
+        if (isset($data['attributeForDistinct'])) {
+            $this->container['attributeForDistinct'] = $data['attributeForDistinct'];
         }
     }
 
@@ -616,6 +624,30 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setCustomNormalization($customNormalization)
     {
         $this->container['customNormalization'] = $customNormalization;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributeForDistinct.
+     *
+     * @return null|string
+     */
+    public function getAttributeForDistinct()
+    {
+        return $this->container['attributeForDistinct'] ?? null;
+    }
+
+    /**
+     * Sets attributeForDistinct.
+     *
+     * @param null|string $attributeForDistinct Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
+     *
+     * @return self
+     */
+    public function setAttributeForDistinct($attributeForDistinct)
+    {
+        $this->container['attributeForDistinct'] = $attributeForDistinct;
 
         return $this;
     }

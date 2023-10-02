@@ -86,7 +86,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
         'advancedSyntaxFeatures' => '\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]',
         'distinct' => '\Algolia\AlgoliaSearch\Model\Search\Distinct',
-        'attributeForDistinct' => 'string',
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
         'responseFields' => 'string[]',
@@ -176,7 +175,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'alternativesAsExact' => null,
         'advancedSyntaxFeatures' => null,
         'distinct' => null,
-        'attributeForDistinct' => null,
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
         'responseFields' => null,
@@ -267,7 +265,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'alternativesAsExact' => 'alternativesAsExact',
         'advancedSyntaxFeatures' => 'advancedSyntaxFeatures',
         'distinct' => 'distinct',
-        'attributeForDistinct' => 'attributeForDistinct',
         'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
         'minProximity' => 'minProximity',
         'responseFields' => 'responseFields',
@@ -357,7 +354,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'alternativesAsExact' => 'setAlternativesAsExact',
         'advancedSyntaxFeatures' => 'setAdvancedSyntaxFeatures',
         'distinct' => 'setDistinct',
-        'attributeForDistinct' => 'setAttributeForDistinct',
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
@@ -447,7 +443,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'alternativesAsExact' => 'getAlternativesAsExact',
         'advancedSyntaxFeatures' => 'getAdvancedSyntaxFeatures',
         'distinct' => 'getDistinct',
-        'attributeForDistinct' => 'getAttributeForDistinct',
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
@@ -682,9 +677,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         }
         if (isset($data['distinct'])) {
             $this->container['distinct'] = $data['distinct'];
-        }
-        if (isset($data['attributeForDistinct'])) {
-            $this->container['attributeForDistinct'] = $data['attributeForDistinct'];
         }
         if (isset($data['replaceSynonymsInHighlight'])) {
             $this->container['replaceSynonymsInHighlight'] = $data['replaceSynonymsInHighlight'];
@@ -2504,30 +2496,6 @@ class SearchForHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     public function setDistinct($distinct)
     {
         $this->container['distinct'] = $distinct;
-
-        return $this;
-    }
-
-    /**
-     * Gets attributeForDistinct.
-     *
-     * @return null|string
-     */
-    public function getAttributeForDistinct()
-    {
-        return $this->container['attributeForDistinct'] ?? null;
-    }
-
-    /**
-     * Sets attributeForDistinct.
-     *
-     * @param null|string $attributeForDistinct Name of the deduplication attribute to be used with Algolia's [_distinct_ feature](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).
-     *
-     * @return self
-     */
-    public function setAttributeForDistinct($attributeForDistinct)
-    {
-        $this->container['attributeForDistinct'] = $attributeForDistinct;
 
         return $this;
     }

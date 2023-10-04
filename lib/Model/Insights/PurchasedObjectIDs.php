@@ -5,13 +5,13 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ClickedFilters Class Doc Comment.
+ * PurchasedObjectIDs Class Doc Comment.
  *
  * @category Class
  *
- * @description Use this event to track when users click facet filters in your user interface.
+ * @description Use this event to track when users make a purchase unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track purchase events related to Algolia requests, use the \&quot;Purchased object IDs after search\&quot; event.
  */
-class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -20,9 +20,12 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ClickEvent',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
+        'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent',
         'index' => 'string',
-        'filters' => 'string[]',
+        'objectIDs' => 'string[]',
+        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]',
+        'currency' => 'string',
         'userToken' => 'string',
         'timestamp' => 'int',
     ];
@@ -35,8 +38,11 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     protected static $modelFormats = [
         'eventName' => null,
         'eventType' => null,
+        'eventSubtype' => null,
         'index' => null,
-        'filters' => null,
+        'objectIDs' => null,
+        'objectData' => null,
+        'currency' => null,
         'userToken' => null,
         'timestamp' => 'int64',
     ];
@@ -50,8 +56,11 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     protected static $attributeMap = [
         'eventName' => 'eventName',
         'eventType' => 'eventType',
+        'eventSubtype' => 'eventSubtype',
         'index' => 'index',
-        'filters' => 'filters',
+        'objectIDs' => 'objectIDs',
+        'objectData' => 'objectData',
+        'currency' => 'currency',
         'userToken' => 'userToken',
         'timestamp' => 'timestamp',
     ];
@@ -64,8 +73,11 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     protected static $setters = [
         'eventName' => 'setEventName',
         'eventType' => 'setEventType',
+        'eventSubtype' => 'setEventSubtype',
         'index' => 'setIndex',
-        'filters' => 'setFilters',
+        'objectIDs' => 'setObjectIDs',
+        'objectData' => 'setObjectData',
+        'currency' => 'setCurrency',
         'userToken' => 'setUserToken',
         'timestamp' => 'setTimestamp',
     ];
@@ -78,8 +90,11 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     protected static $getters = [
         'eventName' => 'getEventName',
         'eventType' => 'getEventType',
+        'eventSubtype' => 'getEventSubtype',
         'index' => 'getIndex',
-        'filters' => 'getFilters',
+        'objectIDs' => 'getObjectIDs',
+        'objectData' => 'getObjectData',
+        'currency' => 'getCurrency',
         'userToken' => 'getUserToken',
         'timestamp' => 'getTimestamp',
     ];
@@ -104,11 +119,20 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (isset($data['eventType'])) {
             $this->container['eventType'] = $data['eventType'];
         }
+        if (isset($data['eventSubtype'])) {
+            $this->container['eventSubtype'] = $data['eventSubtype'];
+        }
         if (isset($data['index'])) {
             $this->container['index'] = $data['index'];
         }
-        if (isset($data['filters'])) {
-            $this->container['filters'] = $data['filters'];
+        if (isset($data['objectIDs'])) {
+            $this->container['objectIDs'] = $data['objectIDs'];
+        }
+        if (isset($data['objectData'])) {
+            $this->container['objectData'] = $data['objectData'];
+        }
+        if (isset($data['currency'])) {
+            $this->container['currency'] = $data['currency'];
         }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
@@ -196,18 +220,21 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
+        if (!isset($this->container['eventSubtype']) || null === $this->container['eventSubtype']) {
+            $invalidProperties[] = "'eventSubtype' can't be null";
+        }
         if (!isset($this->container['index']) || null === $this->container['index']) {
             $invalidProperties[] = "'index' can't be null";
         }
-        if (!isset($this->container['filters']) || null === $this->container['filters']) {
-            $invalidProperties[] = "'filters' can't be null";
+        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
+            $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if (count($this->container['filters']) > 20) {
-            $invalidProperties[] = "invalid value for 'filters', number of items must be less than or equal to 20.";
+        if (count($this->container['objectIDs']) > 20) {
+            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
         }
 
-        if (count($this->container['filters']) < 1) {
-            $invalidProperties[] = "invalid value for 'filters', number of items must be greater than or equal to 1.";
+        if (count($this->container['objectIDs']) < 1) {
+            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
         }
 
         if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
@@ -259,13 +286,13 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setEventName($eventName)
     {
         if (mb_strlen($eventName) > 64) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ClickedFilters., must be smaller than or equal to 64.');
+            throw new \InvalidArgumentException('invalid length for $eventName when calling PurchasedObjectIDs., must be smaller than or equal to 64.');
         }
         if (mb_strlen($eventName) < 1) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ClickedFilters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $eventName when calling PurchasedObjectIDs., must be bigger than or equal to 1.');
         }
         if (!preg_match('/[\\x20-\\x7E]{1,64}/', $eventName)) {
-            throw new \InvalidArgumentException("invalid value for {$eventName} when calling ClickedFilters., must conform to the pattern /[\\x20-\\x7E]{1,64}/.");
+            throw new \InvalidArgumentException("invalid value for {$eventName} when calling PurchasedObjectIDs., must conform to the pattern /[\\x20-\\x7E]{1,64}/.");
         }
 
         $this->container['eventName'] = $eventName;
@@ -276,7 +303,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -286,13 +313,37 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */
     public function setEventType($eventType)
     {
         $this->container['eventType'] = $eventType;
+
+        return $this;
+    }
+
+    /**
+     * Gets eventSubtype.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent
+     */
+    public function getEventSubtype()
+    {
+        return $this->container['eventSubtype'] ?? null;
+    }
+
+    /**
+     * Sets eventSubtype.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent $eventSubtype eventSubtype
+     *
+     * @return self
+     */
+    public function setEventSubtype($eventSubtype)
+    {
+        $this->container['eventSubtype'] = $eventSubtype;
 
         return $this;
     }
@@ -322,31 +373,79 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets filters.
+     * Gets objectIDs.
      *
      * @return string[]
      */
-    public function getFilters()
+    public function getObjectIDs()
     {
-        return $this->container['filters'] ?? null;
+        return $this->container['objectIDs'] ?? null;
     }
 
     /**
-     * Sets filters.
+     * Sets objectIDs.
      *
-     * @param string[] $filters Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`.
+     * @param string[] $objectIDs list of object identifiers for items of an Algolia index
      *
      * @return self
      */
-    public function setFilters($filters)
+    public function setObjectIDs($objectIDs)
     {
-        if (count($filters) > 20) {
-            throw new \InvalidArgumentException('invalid value for $filters when calling ClickedFilters., number of items must be less than or equal to 20.');
+        if (count($objectIDs) > 20) {
+            throw new \InvalidArgumentException('invalid value for $objectIDs when calling PurchasedObjectIDs., number of items must be less than or equal to 20.');
         }
-        if (count($filters) < 1) {
-            throw new \InvalidArgumentException('invalid length for $filters when calling ClickedFilters., number of items must be greater than or equal to 1.');
+        if (count($objectIDs) < 1) {
+            throw new \InvalidArgumentException('invalid length for $objectIDs when calling PurchasedObjectIDs., number of items must be greater than or equal to 1.');
         }
-        $this->container['filters'] = $filters;
+        $this->container['objectIDs'] = $objectIDs;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectData.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
+     */
+    public function getObjectData()
+    {
+        return $this->container['objectData'] ?? null;
+    }
+
+    /**
+     * Sets objectData.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
+     *
+     * @return self
+     */
+    public function setObjectData($objectData)
+    {
+        $this->container['objectData'] = $objectData;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency.
+     *
+     * @return null|string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'] ?? null;
+    }
+
+    /**
+     * Sets currency.
+     *
+     * @param null|string $currency if you include pricing information in the `objectData` parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
 
         return $this;
     }
@@ -371,13 +470,13 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setUserToken($userToken)
     {
         if (mb_strlen($userToken) > 129) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedFilters., must be smaller than or equal to 129.');
+            throw new \InvalidArgumentException('invalid length for $userToken when calling PurchasedObjectIDs., must be smaller than or equal to 129.');
         }
         if (mb_strlen($userToken) < 1) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ClickedFilters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $userToken when calling PurchasedObjectIDs., must be bigger than or equal to 1.');
         }
         if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
-            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ClickedFilters., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
+            throw new \InvalidArgumentException("invalid value for {$userToken} when calling PurchasedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
         }
 
         $this->container['userToken'] = $userToken;

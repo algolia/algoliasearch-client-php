@@ -189,6 +189,10 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
         }
 
+        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $this->container['eventName'])) {
+            $invalidProperties[] = "invalid value for 'eventName', must be conform to the pattern /[\\x20-\\x7E]{1,64}/.";
+        }
+
         if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
@@ -259,6 +263,9 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         }
         if (mb_strlen($eventName) < 1) {
             throw new \InvalidArgumentException('invalid length for $eventName when calling ViewedFilters., must be bigger than or equal to 1.');
+        }
+        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $eventName)) {
+            throw new \InvalidArgumentException("invalid value for {$eventName} when calling ViewedFilters., must conform to the pattern /[\\x20-\\x7E]{1,64}/.");
         }
 
         $this->container['eventName'] = $eventName;

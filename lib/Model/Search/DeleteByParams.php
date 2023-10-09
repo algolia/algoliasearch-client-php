@@ -23,8 +23,8 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Search\TagFilters',
         'aroundLatLng' => 'string',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Search\AroundRadius',
-        'insideBoundingBox' => 'float[]',
-        'insidePolygon' => 'float[]',
+        'insideBoundingBox' => 'float[][]',
+        'insidePolygon' => 'float[][]',
     ];
 
     /**
@@ -351,7 +351,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets insideBoundingBox.
      *
-     * @return null|float[]
+     * @return null|float[][]
      */
     public function getInsideBoundingBox()
     {
@@ -361,7 +361,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets insideBoundingBox.
      *
-     * @param null|float[] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[][] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -375,7 +375,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets insidePolygon.
      *
-     * @return null|float[]
+     * @return null|float[][]
      */
     public function getInsidePolygon()
     {
@@ -385,7 +385,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets insidePolygon.
      *
-     * @param null|float[] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[][] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */

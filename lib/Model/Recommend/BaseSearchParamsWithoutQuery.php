@@ -35,8 +35,8 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius',
         'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision',
         'minimumAroundRadius' => 'int',
-        'insideBoundingBox' => 'float[]',
-        'insidePolygon' => 'float[]',
+        'insideBoundingBox' => 'float[][]',
+        'insidePolygon' => 'float[][]',
         'naturalLanguages' => 'string[]',
         'ruleContexts' => 'string[]',
         'personalizationImpact' => 'int',
@@ -856,7 +856,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets insideBoundingBox.
      *
-     * @return null|float[]
+     * @return null|float[][]
      */
     public function getInsideBoundingBox()
     {
@@ -866,7 +866,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets insideBoundingBox.
      *
-     * @param null|float[] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[][] $insideBoundingBox Search inside a [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */
@@ -880,7 +880,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets insidePolygon.
      *
-     * @return null|float[]
+     * @return null|float[][]
      */
     public function getInsidePolygon()
     {
@@ -890,7 +890,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets insidePolygon.
      *
-     * @param null|float[] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
+     * @param null|float[][] $insidePolygon Search inside a [polygon](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas) (in geographical coordinates).
      *
      * @return self
      */

@@ -23,9 +23,13 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     protected static $modelTypes = [
         'abTestID' => 'int',
         'clickSignificance' => 'float',
-        'conversionSignificance' => 'string',
+        'conversionSignificance' => 'float',
+        'addToCartSignificance' => 'float',
+        'purchaseSignificance' => 'float',
+        'revenueSignificance' => 'array<string,float>',
         'updatedAt' => 'string',
         'createdAt' => 'string',
+        'endAt' => 'string',
         'name' => 'string',
         'status' => 'string',
         'variants' => '\Algolia\AlgoliaSearch\Model\Abtesting\Variant[]',
@@ -39,9 +43,13 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     protected static $modelFormats = [
         'abTestID' => null,
         'clickSignificance' => 'double',
-        'conversionSignificance' => null,
+        'conversionSignificance' => 'double',
+        'addToCartSignificance' => 'double',
+        'purchaseSignificance' => 'double',
+        'revenueSignificance' => 'double',
         'updatedAt' => null,
         'createdAt' => null,
+        'endAt' => null,
         'name' => null,
         'status' => null,
         'variants' => null,
@@ -57,8 +65,12 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'abTestID',
         'clickSignificance' => 'clickSignificance',
         'conversionSignificance' => 'conversionSignificance',
+        'addToCartSignificance' => 'addToCartSignificance',
+        'purchaseSignificance' => 'purchaseSignificance',
+        'revenueSignificance' => 'revenueSignificance',
         'updatedAt' => 'updatedAt',
         'createdAt' => 'createdAt',
+        'endAt' => 'endAt',
         'name' => 'name',
         'status' => 'status',
         'variants' => 'variants',
@@ -73,8 +85,12 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'setAbTestID',
         'clickSignificance' => 'setClickSignificance',
         'conversionSignificance' => 'setConversionSignificance',
+        'addToCartSignificance' => 'setAddToCartSignificance',
+        'purchaseSignificance' => 'setPurchaseSignificance',
+        'revenueSignificance' => 'setRevenueSignificance',
         'updatedAt' => 'setUpdatedAt',
         'createdAt' => 'setCreatedAt',
+        'endAt' => 'setEndAt',
         'name' => 'setName',
         'status' => 'setStatus',
         'variants' => 'setVariants',
@@ -89,8 +105,12 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'abTestID' => 'getAbTestID',
         'clickSignificance' => 'getClickSignificance',
         'conversionSignificance' => 'getConversionSignificance',
+        'addToCartSignificance' => 'getAddToCartSignificance',
+        'purchaseSignificance' => 'getPurchaseSignificance',
+        'revenueSignificance' => 'getRevenueSignificance',
         'updatedAt' => 'getUpdatedAt',
         'createdAt' => 'getCreatedAt',
+        'endAt' => 'getEndAt',
         'name' => 'getName',
         'status' => 'getStatus',
         'variants' => 'getVariants',
@@ -119,11 +139,23 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         if (isset($data['conversionSignificance'])) {
             $this->container['conversionSignificance'] = $data['conversionSignificance'];
         }
+        if (isset($data['addToCartSignificance'])) {
+            $this->container['addToCartSignificance'] = $data['addToCartSignificance'];
+        }
+        if (isset($data['purchaseSignificance'])) {
+            $this->container['purchaseSignificance'] = $data['purchaseSignificance'];
+        }
+        if (isset($data['revenueSignificance'])) {
+            $this->container['revenueSignificance'] = $data['revenueSignificance'];
+        }
         if (isset($data['updatedAt'])) {
             $this->container['updatedAt'] = $data['updatedAt'];
         }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
+        }
+        if (isset($data['endAt'])) {
+            $this->container['endAt'] = $data['endAt'];
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
@@ -205,11 +237,23 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         if (!isset($this->container['conversionSignificance']) || null === $this->container['conversionSignificance']) {
             $invalidProperties[] = "'conversionSignificance' can't be null";
         }
+        if (!isset($this->container['addToCartSignificance']) || null === $this->container['addToCartSignificance']) {
+            $invalidProperties[] = "'addToCartSignificance' can't be null";
+        }
+        if (!isset($this->container['purchaseSignificance']) || null === $this->container['purchaseSignificance']) {
+            $invalidProperties[] = "'purchaseSignificance' can't be null";
+        }
+        if (!isset($this->container['revenueSignificance']) || null === $this->container['revenueSignificance']) {
+            $invalidProperties[] = "'revenueSignificance' can't be null";
+        }
         if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
+        }
+        if (!isset($this->container['endAt']) || null === $this->container['endAt']) {
+            $invalidProperties[] = "'endAt' can't be null";
         }
         if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
@@ -286,7 +330,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets conversionSignificance.
      *
-     * @return string
+     * @return float
      */
     public function getConversionSignificance()
     {
@@ -296,13 +340,85 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets conversionSignificance.
      *
-     * @param string $conversionSignificance End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param float $conversionSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_.
      *
      * @return self
      */
     public function setConversionSignificance($conversionSignificance)
     {
         $this->container['conversionSignificance'] = $conversionSignificance;
+
+        return $this;
+    }
+
+    /**
+     * Gets addToCartSignificance.
+     *
+     * @return float
+     */
+    public function getAddToCartSignificance()
+    {
+        return $this->container['addToCartSignificance'] ?? null;
+    }
+
+    /**
+     * Sets addToCartSignificance.
+     *
+     * @param float $addToCartSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_.
+     *
+     * @return self
+     */
+    public function setAddToCartSignificance($addToCartSignificance)
+    {
+        $this->container['addToCartSignificance'] = $addToCartSignificance;
+
+        return $this;
+    }
+
+    /**
+     * Gets purchaseSignificance.
+     *
+     * @return float
+     */
+    public function getPurchaseSignificance()
+    {
+        return $this->container['purchaseSignificance'] ?? null;
+    }
+
+    /**
+     * Sets purchaseSignificance.
+     *
+     * @param float $purchaseSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_.
+     *
+     * @return self
+     */
+    public function setPurchaseSignificance($purchaseSignificance)
+    {
+        $this->container['purchaseSignificance'] = $purchaseSignificance;
+
+        return $this;
+    }
+
+    /**
+     * Gets revenueSignificance.
+     *
+     * @return array<string,float>
+     */
+    public function getRevenueSignificance()
+    {
+        return $this->container['revenueSignificance'] ?? null;
+    }
+
+    /**
+     * Sets revenueSignificance.
+     *
+     * @param array<string,float> $revenueSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_.
+     *
+     * @return self
+     */
+    public function setRevenueSignificance($revenueSignificance)
+    {
+        $this->container['revenueSignificance'] = $revenueSignificance;
 
         return $this;
     }
@@ -351,6 +467,30 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     public function setCreatedAt($createdAt)
     {
         $this->container['createdAt'] = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets endAt.
+     *
+     * @return string
+     */
+    public function getEndAt()
+    {
+        return $this->container['endAt'] ?? null;
+    }
+
+    /**
+     * Sets endAt.
+     *
+     * @param string $endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     *
+     * @return self
+     */
+    public function setEndAt($endAt)
+    {
+        $this->container['endAt'] = $endAt;
 
         return $this;
     }

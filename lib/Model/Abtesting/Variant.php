@@ -17,16 +17,20 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $modelTypes = [
+        'addToCartCount' => 'int',
+        'addToCartRate' => 'float',
         'averageClickPosition' => 'int',
         'clickCount' => 'int',
         'clickThroughRate' => 'float',
         'conversionCount' => 'int',
         'conversionRate' => 'float',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>',
         'description' => 'string',
+        'filterEffects' => '\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects',
         'index' => 'string',
         'noResultCount' => 'int',
-        'outlierTrackedSearchesCount' => 'int',
-        'outlierUsersCount' => 'int',
+        'purchaseCount' => 'int',
+        'purchaseRate' => 'float',
         'searchCount' => 'int',
         'trackedSearchCount' => 'int',
         'trafficPercentage' => 'int',
@@ -39,16 +43,20 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $modelFormats = [
+        'addToCartCount' => null,
+        'addToCartRate' => 'double',
         'averageClickPosition' => null,
         'clickCount' => null,
         'clickThroughRate' => 'double',
         'conversionCount' => null,
         'conversionRate' => 'double',
+        'currencies' => null,
         'description' => null,
+        'filterEffects' => null,
         'index' => null,
         'noResultCount' => null,
-        'outlierTrackedSearchesCount' => null,
-        'outlierUsersCount' => null,
+        'purchaseCount' => null,
+        'purchaseRate' => 'double',
         'searchCount' => null,
         'trackedSearchCount' => null,
         'trafficPercentage' => null,
@@ -62,16 +70,20 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $attributeMap = [
+        'addToCartCount' => 'addToCartCount',
+        'addToCartRate' => 'addToCartRate',
         'averageClickPosition' => 'averageClickPosition',
         'clickCount' => 'clickCount',
         'clickThroughRate' => 'clickThroughRate',
         'conversionCount' => 'conversionCount',
         'conversionRate' => 'conversionRate',
+        'currencies' => 'currencies',
         'description' => 'description',
+        'filterEffects' => 'filterEffects',
         'index' => 'index',
         'noResultCount' => 'noResultCount',
-        'outlierTrackedSearchesCount' => 'outlierTrackedSearchesCount',
-        'outlierUsersCount' => 'outlierUsersCount',
+        'purchaseCount' => 'purchaseCount',
+        'purchaseRate' => 'purchaseRate',
         'searchCount' => 'searchCount',
         'trackedSearchCount' => 'trackedSearchCount',
         'trafficPercentage' => 'trafficPercentage',
@@ -84,16 +96,20 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $setters = [
+        'addToCartCount' => 'setAddToCartCount',
+        'addToCartRate' => 'setAddToCartRate',
         'averageClickPosition' => 'setAverageClickPosition',
         'clickCount' => 'setClickCount',
         'clickThroughRate' => 'setClickThroughRate',
         'conversionCount' => 'setConversionCount',
         'conversionRate' => 'setConversionRate',
+        'currencies' => 'setCurrencies',
         'description' => 'setDescription',
+        'filterEffects' => 'setFilterEffects',
         'index' => 'setIndex',
         'noResultCount' => 'setNoResultCount',
-        'outlierTrackedSearchesCount' => 'setOutlierTrackedSearchesCount',
-        'outlierUsersCount' => 'setOutlierUsersCount',
+        'purchaseCount' => 'setPurchaseCount',
+        'purchaseRate' => 'setPurchaseRate',
         'searchCount' => 'setSearchCount',
         'trackedSearchCount' => 'setTrackedSearchCount',
         'trafficPercentage' => 'setTrafficPercentage',
@@ -106,16 +122,20 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $getters = [
+        'addToCartCount' => 'getAddToCartCount',
+        'addToCartRate' => 'getAddToCartRate',
         'averageClickPosition' => 'getAverageClickPosition',
         'clickCount' => 'getClickCount',
         'clickThroughRate' => 'getClickThroughRate',
         'conversionCount' => 'getConversionCount',
         'conversionRate' => 'getConversionRate',
+        'currencies' => 'getCurrencies',
         'description' => 'getDescription',
+        'filterEffects' => 'getFilterEffects',
         'index' => 'getIndex',
         'noResultCount' => 'getNoResultCount',
-        'outlierTrackedSearchesCount' => 'getOutlierTrackedSearchesCount',
-        'outlierUsersCount' => 'getOutlierUsersCount',
+        'purchaseCount' => 'getPurchaseCount',
+        'purchaseRate' => 'getPurchaseRate',
         'searchCount' => 'getSearchCount',
         'trackedSearchCount' => 'getTrackedSearchCount',
         'trafficPercentage' => 'getTrafficPercentage',
@@ -136,6 +156,12 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['addToCartCount'])) {
+            $this->container['addToCartCount'] = $data['addToCartCount'];
+        }
+        if (isset($data['addToCartRate'])) {
+            $this->container['addToCartRate'] = $data['addToCartRate'];
+        }
         if (isset($data['averageClickPosition'])) {
             $this->container['averageClickPosition'] = $data['averageClickPosition'];
         }
@@ -151,8 +177,14 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (isset($data['conversionRate'])) {
             $this->container['conversionRate'] = $data['conversionRate'];
         }
+        if (isset($data['currencies'])) {
+            $this->container['currencies'] = $data['currencies'];
+        }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
+        }
+        if (isset($data['filterEffects'])) {
+            $this->container['filterEffects'] = $data['filterEffects'];
         }
         if (isset($data['index'])) {
             $this->container['index'] = $data['index'];
@@ -160,11 +192,11 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (isset($data['noResultCount'])) {
             $this->container['noResultCount'] = $data['noResultCount'];
         }
-        if (isset($data['outlierTrackedSearchesCount'])) {
-            $this->container['outlierTrackedSearchesCount'] = $data['outlierTrackedSearchesCount'];
+        if (isset($data['purchaseCount'])) {
+            $this->container['purchaseCount'] = $data['purchaseCount'];
         }
-        if (isset($data['outlierUsersCount'])) {
-            $this->container['outlierUsersCount'] = $data['outlierUsersCount'];
+        if (isset($data['purchaseRate'])) {
+            $this->container['purchaseRate'] = $data['purchaseRate'];
         }
         if (isset($data['searchCount'])) {
             $this->container['searchCount'] = $data['searchCount'];
@@ -240,6 +272,12 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
+            $invalidProperties[] = "'addToCartCount' can't be null";
+        }
+        if (!isset($this->container['addToCartRate']) || null === $this->container['addToCartRate']) {
+            $invalidProperties[] = "'addToCartRate' can't be null";
+        }
         if (!isset($this->container['averageClickPosition']) || null === $this->container['averageClickPosition']) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
@@ -255,6 +293,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
+        if (!isset($this->container['currencies']) || null === $this->container['currencies']) {
+            $invalidProperties[] = "'currencies' can't be null";
+        }
         if (!isset($this->container['description']) || null === $this->container['description']) {
             $invalidProperties[] = "'description' can't be null";
         }
@@ -264,11 +305,11 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (!isset($this->container['noResultCount']) || null === $this->container['noResultCount']) {
             $invalidProperties[] = "'noResultCount' can't be null";
         }
-        if (!isset($this->container['outlierTrackedSearchesCount']) || null === $this->container['outlierTrackedSearchesCount']) {
-            $invalidProperties[] = "'outlierTrackedSearchesCount' can't be null";
+        if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
+            $invalidProperties[] = "'purchaseCount' can't be null";
         }
-        if (!isset($this->container['outlierUsersCount']) || null === $this->container['outlierUsersCount']) {
-            $invalidProperties[] = "'outlierUsersCount' can't be null";
+        if (!isset($this->container['purchaseRate']) || null === $this->container['purchaseRate']) {
+            $invalidProperties[] = "'purchaseRate' can't be null";
         }
         if (!isset($this->container['searchCount']) || null === $this->container['searchCount']) {
             $invalidProperties[] = "'searchCount' can't be null";
@@ -295,6 +336,54 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets addToCartCount.
+     *
+     * @return int
+     */
+    public function getAddToCartCount()
+    {
+        return $this->container['addToCartCount'] ?? null;
+    }
+
+    /**
+     * Sets addToCartCount.
+     *
+     * @param int $addToCartCount number of add-to-cart events for this variant
+     *
+     * @return self
+     */
+    public function setAddToCartCount($addToCartCount)
+    {
+        $this->container['addToCartCount'] = $addToCartCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets addToCartRate.
+     *
+     * @return float
+     */
+    public function getAddToCartRate()
+    {
+        return $this->container['addToCartRate'] ?? null;
+    }
+
+    /**
+     * Sets addToCartRate.
+     *
+     * @param float $addToCartRate Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).
+     *
+     * @return self
+     */
+    public function setAddToCartRate($addToCartRate)
+    {
+        $this->container['addToCartRate'] = $addToCartRate;
+
+        return $this;
     }
 
     /**
@@ -418,6 +507,30 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
+     * Gets currencies.
+     *
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>
+     */
+    public function getCurrencies()
+    {
+        return $this->container['currencies'] ?? null;
+    }
+
+    /**
+     * Sets currencies.
+     *
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue> $currencies A/B test currencies
+     *
+     * @return self
+     */
+    public function setCurrencies($currencies)
+    {
+        $this->container['currencies'] = $currencies;
+
+        return $this;
+    }
+
+    /**
      * Gets description.
      *
      * @return string
@@ -437,6 +550,30 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets filterEffects.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects
+     */
+    public function getFilterEffects()
+    {
+        return $this->container['filterEffects'] ?? null;
+    }
+
+    /**
+     * Sets filterEffects.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects $filterEffects filterEffects
+     *
+     * @return self
+     */
+    public function setFilterEffects($filterEffects)
+    {
+        $this->container['filterEffects'] = $filterEffects;
 
         return $this;
     }
@@ -490,49 +627,49 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets outlierTrackedSearchesCount.
+     * Gets purchaseCount.
      *
      * @return int
      */
-    public function getOutlierTrackedSearchesCount()
+    public function getPurchaseCount()
     {
-        return $this->container['outlierTrackedSearchesCount'] ?? null;
+        return $this->container['purchaseCount'] ?? null;
     }
 
     /**
-     * Sets outlierTrackedSearchesCount.
+     * Sets purchaseCount.
      *
-     * @param int $outlierTrackedSearchesCount Number of tracked searches attributed to [outlier traffic](https://www.algolia.com/doc/guides/ab-testing/how-to-read-your-a-b-test-results/#is-the-split-off) that were removed from the A/B test. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.
+     * @param int $purchaseCount number of purchase events for this variant
      *
      * @return self
      */
-    public function setOutlierTrackedSearchesCount($outlierTrackedSearchesCount)
+    public function setPurchaseCount($purchaseCount)
     {
-        $this->container['outlierTrackedSearchesCount'] = $outlierTrackedSearchesCount;
+        $this->container['purchaseCount'] = $purchaseCount;
 
         return $this;
     }
 
     /**
-     * Gets outlierUsersCount.
+     * Gets purchaseRate.
      *
-     * @return int
+     * @return float
      */
-    public function getOutlierUsersCount()
+    public function getPurchaseRate()
     {
-        return $this->container['outlierUsersCount'] ?? null;
+        return $this->container['purchaseRate'] ?? null;
     }
 
     /**
-     * Sets outlierUsersCount.
+     * Sets purchaseRate.
      *
-     * @param int $outlierUsersCount Number of users attributed to [outlier traffic](https://www.algolia.com/doc/guides/ab-testing/how-to-read-your-a-b-test-results/#is-the-split-off) that were removed from the A/B test.
+     * @param float $purchaseRate Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
      *
      * @return self
      */
-    public function setOutlierUsersCount($outlierUsersCount)
+    public function setPurchaseRate($purchaseRate)
     {
-        $this->container['outlierUsersCount'] = $outlierUsersCount;
+        $this->container['purchaseRate'] = $purchaseRate;
 
         return $this;
     }

@@ -18,13 +18,14 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent',
         'index' => 'string',
         'objectIDs' => 'string[]',
         'positions' => 'int[]',
         'queryID' => 'string',
         'userToken' => 'string',
         'timestamp' => 'int',
+        'authenticatedUserToken' => 'string',
         'filters' => 'string[]',
         'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent',
         'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]',
@@ -45,6 +46,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'queryID' => null,
         'userToken' => null,
         'timestamp' => 'int64',
+        'authenticatedUserToken' => null,
         'filters' => null,
         'eventSubtype' => null,
         'objectData' => null,
@@ -66,6 +68,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'queryID' => 'queryID',
         'userToken' => 'userToken',
         'timestamp' => 'timestamp',
+        'authenticatedUserToken' => 'authenticatedUserToken',
         'filters' => 'filters',
         'eventSubtype' => 'eventSubtype',
         'objectData' => 'objectData',
@@ -86,6 +89,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'queryID' => 'setQueryID',
         'userToken' => 'setUserToken',
         'timestamp' => 'setTimestamp',
+        'authenticatedUserToken' => 'setAuthenticatedUserToken',
         'filters' => 'setFilters',
         'eventSubtype' => 'setEventSubtype',
         'objectData' => 'setObjectData',
@@ -106,6 +110,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'queryID' => 'getQueryID',
         'userToken' => 'getUserToken',
         'timestamp' => 'getTimestamp',
+        'authenticatedUserToken' => 'getAuthenticatedUserToken',
         'filters' => 'getFilters',
         'eventSubtype' => 'getEventSubtype',
         'objectData' => 'getObjectData',
@@ -149,6 +154,9 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
+        }
+        if (isset($data['authenticatedUserToken'])) {
+            $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
         }
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
@@ -297,6 +305,9 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
+        if (!isset($this->container['authenticatedUserToken']) || null === $this->container['authenticatedUserToken']) {
+            $invalidProperties[] = "'authenticatedUserToken' can't be null";
+        }
         if (!isset($this->container['filters']) || null === $this->container['filters']) {
             $invalidProperties[] = "'filters' can't be null";
         }
@@ -363,7 +374,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent
      */
     public function getEventType()
     {
@@ -373,7 +384,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent $eventType eventType
      *
      * @return self
      */
@@ -556,6 +567,30 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     public function setTimestamp($timestamp)
     {
         $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets authenticatedUserToken.
+     *
+     * @return string
+     */
+    public function getAuthenticatedUserToken()
+    {
+        return $this->container['authenticatedUserToken'] ?? null;
+    }
+
+    /**
+     * Sets authenticatedUserToken.
+     *
+     * @param string $authenticatedUserToken user token for authenticated users
+     *
+     * @return self
+     */
+    public function setAuthenticatedUserToken($authenticatedUserToken)
+    {
+        $this->container['authenticatedUserToken'] = $authenticatedUserToken;
 
         return $this;
     }

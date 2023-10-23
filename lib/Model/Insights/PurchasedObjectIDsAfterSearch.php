@@ -29,6 +29,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         'currency' => 'string',
         'userToken' => 'string',
         'timestamp' => 'int',
+        'authenticatedUserToken' => 'string',
     ];
 
     /**
@@ -47,6 +48,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         'currency' => null,
         'userToken' => null,
         'timestamp' => 'int64',
+        'authenticatedUserToken' => null,
     ];
 
     /**
@@ -66,6 +68,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         'currency' => 'currency',
         'userToken' => 'userToken',
         'timestamp' => 'timestamp',
+        'authenticatedUserToken' => 'authenticatedUserToken',
     ];
 
     /**
@@ -84,6 +87,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         'currency' => 'setCurrency',
         'userToken' => 'setUserToken',
         'timestamp' => 'setTimestamp',
+        'authenticatedUserToken' => 'setAuthenticatedUserToken',
     ];
 
     /**
@@ -102,6 +106,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         'currency' => 'getCurrency',
         'userToken' => 'getUserToken',
         'timestamp' => 'getTimestamp',
+        'authenticatedUserToken' => 'getAuthenticatedUserToken',
     ];
 
     /**
@@ -147,6 +152,9 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
         }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
+        }
+        if (isset($data['authenticatedUserToken'])) {
+            $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
         }
     }
 
@@ -561,6 +569,30 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function setTimestamp($timestamp)
     {
         $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets authenticatedUserToken.
+     *
+     * @return null|string
+     */
+    public function getAuthenticatedUserToken()
+    {
+        return $this->container['authenticatedUserToken'] ?? null;
+    }
+
+    /**
+     * Sets authenticatedUserToken.
+     *
+     * @param null|string $authenticatedUserToken user token for authenticated users
+     *
+     * @return self
+     */
+    public function setAuthenticatedUserToken($authenticatedUserToken)
+    {
+        $this->container['authenticatedUserToken'] = $authenticatedUserToken;
 
         return $this;
     }

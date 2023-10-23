@@ -5,13 +5,13 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ViewedObjectIDs Class Doc Comment.
+ * Identify Class Doc Comment.
  *
  * @category Class
  *
- * @description Use this event to track when users viewed items in the search results.
+ * @description The identify event is a signal for Insights to process all events coming from &#39;userToken&#39; as if they were from &#39;authenticatedUserToken&#39;.
  */
-class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Identify extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,12 +19,8 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ViewEvent',
-        'index' => 'string',
-        'objectIDs' => 'string[]',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent',
         'userToken' => 'string',
-        'timestamp' => 'int',
         'authenticatedUserToken' => 'string',
     ];
 
@@ -34,12 +30,8 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelFormats = [
-        'eventName' => null,
         'eventType' => null,
-        'index' => null,
-        'objectIDs' => null,
         'userToken' => null,
-        'timestamp' => 'int64',
         'authenticatedUserToken' => null,
     ];
 
@@ -50,12 +42,8 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $attributeMap = [
-        'eventName' => 'eventName',
         'eventType' => 'eventType',
-        'index' => 'index',
-        'objectIDs' => 'objectIDs',
         'userToken' => 'userToken',
-        'timestamp' => 'timestamp',
         'authenticatedUserToken' => 'authenticatedUserToken',
     ];
 
@@ -65,12 +53,8 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $setters = [
-        'eventName' => 'setEventName',
         'eventType' => 'setEventType',
-        'index' => 'setIndex',
-        'objectIDs' => 'setObjectIDs',
         'userToken' => 'setUserToken',
-        'timestamp' => 'setTimestamp',
         'authenticatedUserToken' => 'setAuthenticatedUserToken',
     ];
 
@@ -80,12 +64,8 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $getters = [
-        'eventName' => 'getEventName',
         'eventType' => 'getEventType',
-        'index' => 'getIndex',
-        'objectIDs' => 'getObjectIDs',
         'userToken' => 'getUserToken',
-        'timestamp' => 'getTimestamp',
         'authenticatedUserToken' => 'getAuthenticatedUserToken',
     ];
 
@@ -103,23 +83,11 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['eventName'])) {
-            $this->container['eventName'] = $data['eventName'];
-        }
         if (isset($data['eventType'])) {
             $this->container['eventType'] = $data['eventType'];
         }
-        if (isset($data['index'])) {
-            $this->container['index'] = $data['index'];
-        }
-        if (isset($data['objectIDs'])) {
-            $this->container['objectIDs'] = $data['objectIDs'];
-        }
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
-        }
-        if (isset($data['timestamp'])) {
-            $this->container['timestamp'] = $data['timestamp'];
         }
         if (isset($data['authenticatedUserToken'])) {
             $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
@@ -186,38 +154,9 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['eventName']) || null === $this->container['eventName']) {
-            $invalidProperties[] = "'eventName' can't be null";
-        }
-        if (mb_strlen($this->container['eventName']) > 64) {
-            $invalidProperties[] = "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
-        }
-
-        if (mb_strlen($this->container['eventName']) < 1) {
-            $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $this->container['eventName'])) {
-            $invalidProperties[] = "invalid value for 'eventName', must be conform to the pattern /[\\x20-\\x7E]{1,64}/.";
-        }
-
         if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
-        if (!isset($this->container['index']) || null === $this->container['index']) {
-            $invalidProperties[] = "'index' can't be null";
-        }
-        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
-            $invalidProperties[] = "'objectIDs' can't be null";
-        }
-        if (count($this->container['objectIDs']) > 20) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
-        }
-
-        if (count($this->container['objectIDs']) < 1) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
-        }
-
         if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
             $invalidProperties[] = "'userToken' can't be null";
         }
@@ -231,6 +170,10 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
 
         if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['userToken'])) {
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
+        }
+
+        if (!isset($this->container['authenticatedUserToken']) || null === $this->container['authenticatedUserToken']) {
+            $invalidProperties[] = "'authenticatedUserToken' can't be null";
         }
 
         return $invalidProperties;
@@ -248,43 +191,9 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets eventName.
-     *
-     * @return string
-     */
-    public function getEventName()
-    {
-        return $this->container['eventName'] ?? null;
-    }
-
-    /**
-     * Sets eventName.
-     *
-     * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
-     *
-     * @return self
-     */
-    public function setEventName($eventName)
-    {
-        if (mb_strlen($eventName) > 64) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ViewedObjectIDs., must be smaller than or equal to 64.');
-        }
-        if (mb_strlen($eventName) < 1) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ViewedObjectIDs., must be bigger than or equal to 1.');
-        }
-        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $eventName)) {
-            throw new \InvalidArgumentException("invalid value for {$eventName} when calling ViewedObjectIDs., must conform to the pattern /[\\x20-\\x7E]{1,64}/.");
-        }
-
-        $this->container['eventName'] = $eventName;
-
-        return $this;
-    }
-
-    /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent
      */
     public function getEventType()
     {
@@ -294,67 +203,13 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent $eventType eventType
      *
      * @return self
      */
     public function setEventType($eventType)
     {
         $this->container['eventType'] = $eventType;
-
-        return $this;
-    }
-
-    /**
-     * Gets index.
-     *
-     * @return string
-     */
-    public function getIndex()
-    {
-        return $this->container['index'] ?? null;
-    }
-
-    /**
-     * Sets index.
-     *
-     * @param string $index name of the Algolia index
-     *
-     * @return self
-     */
-    public function setIndex($index)
-    {
-        $this->container['index'] = $index;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectIDs.
-     *
-     * @return string[]
-     */
-    public function getObjectIDs()
-    {
-        return $this->container['objectIDs'] ?? null;
-    }
-
-    /**
-     * Sets objectIDs.
-     *
-     * @param string[] $objectIDs list of object identifiers for items of an Algolia index
-     *
-     * @return self
-     */
-    public function setObjectIDs($objectIDs)
-    {
-        if (count($objectIDs) > 20) {
-            throw new \InvalidArgumentException('invalid value for $objectIDs when calling ViewedObjectIDs., number of items must be less than or equal to 20.');
-        }
-        if (count($objectIDs) < 1) {
-            throw new \InvalidArgumentException('invalid length for $objectIDs when calling ViewedObjectIDs., number of items must be greater than or equal to 1.');
-        }
-        $this->container['objectIDs'] = $objectIDs;
 
         return $this;
     }
@@ -379,13 +234,13 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     public function setUserToken($userToken)
     {
         if (mb_strlen($userToken) > 129) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ViewedObjectIDs., must be smaller than or equal to 129.');
+            throw new \InvalidArgumentException('invalid length for $userToken when calling Identify., must be smaller than or equal to 129.');
         }
         if (mb_strlen($userToken) < 1) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ViewedObjectIDs., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $userToken when calling Identify., must be bigger than or equal to 1.');
         }
         if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
-            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ViewedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
+            throw new \InvalidArgumentException("invalid value for {$userToken} when calling Identify., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
         }
 
         $this->container['userToken'] = $userToken;
@@ -394,33 +249,9 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets timestamp.
-     *
-     * @return null|int
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'] ?? null;
-    }
-
-    /**
-     * Sets timestamp.
-     *
-     * @param null|int $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
      * Gets authenticatedUserToken.
      *
-     * @return null|string
+     * @return string
      */
     public function getAuthenticatedUserToken()
     {
@@ -430,7 +261,7 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets authenticatedUserToken.
      *
-     * @param null|string $authenticatedUserToken user token for authenticated users
+     * @param string $authenticatedUserToken user token for authenticated users
      *
      * @return self
      */

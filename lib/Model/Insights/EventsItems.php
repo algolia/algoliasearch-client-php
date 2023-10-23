@@ -18,7 +18,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
         'index' => 'string',
         'objectIDs' => 'string[]',
         'positions' => 'int[]',
@@ -305,9 +305,6 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
-        if (!isset($this->container['authenticatedUserToken']) || null === $this->container['authenticatedUserToken']) {
-            $invalidProperties[] = "'authenticatedUserToken' can't be null";
-        }
         if (!isset($this->container['filters']) || null === $this->container['filters']) {
             $invalidProperties[] = "'filters' can't be null";
         }
@@ -374,7 +371,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -384,7 +381,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\IdentifyEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */
@@ -574,7 +571,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets authenticatedUserToken.
      *
-     * @return string
+     * @return null|string
      */
     public function getAuthenticatedUserToken()
     {
@@ -584,7 +581,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets authenticatedUserToken.
      *
-     * @param string $authenticatedUserToken user token for authenticated users
+     * @param null|string $authenticatedUserToken user token for authenticated users
      *
      * @return self
      */

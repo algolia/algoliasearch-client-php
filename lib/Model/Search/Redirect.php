@@ -5,13 +5,13 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * BaseSearchResponseRedirect Class Doc Comment.
+ * Redirect Class Doc Comment.
  *
  * @category Class
  *
  * @description [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/).
  */
-class BaseSearchResponseRedirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

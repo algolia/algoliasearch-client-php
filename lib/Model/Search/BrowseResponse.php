@@ -21,6 +21,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'abTestVariantID' => 'int',
         'aroundLatLng' => 'string',
         'automaticRadius' => 'string',
+        'exhaustive' => '\Algolia\AlgoliaSearch\Model\Search\Exhaustive',
         'exhaustiveFacetsCount' => 'bool',
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
@@ -34,13 +35,15 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'int',
         'nbSortedHits' => 'int',
         'page' => 'int',
-        'redirect' => '\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
+        'processingTimingsMS' => 'object',
         'queryAfterRemoval' => 'string',
+        'redirect' => '\Algolia\AlgoliaSearch\Model\Search\Redirect',
+        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
+        'serverTimeMS' => 'int',
         'serverUsed' => 'string',
         'userData' => 'mixed',
-        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
         'query' => 'string',
         'params' => 'string',
@@ -57,6 +60,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'abTestVariantID' => null,
         'aroundLatLng' => null,
         'automaticRadius' => null,
+        'exhaustive' => null,
         'exhaustiveFacetsCount' => null,
         'exhaustiveNbHits' => null,
         'exhaustiveTypo' => null,
@@ -70,13 +74,15 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => null,
         'nbSortedHits' => null,
         'page' => null,
-        'redirect' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
+        'processingTimingsMS' => null,
         'queryAfterRemoval' => null,
+        'redirect' => null,
+        'renderingContent' => null,
+        'serverTimeMS' => null,
         'serverUsed' => null,
         'userData' => null,
-        'renderingContent' => null,
         'hits' => null,
         'query' => null,
         'params' => null,
@@ -94,6 +100,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'abTestVariantID' => 'abTestVariantID',
         'aroundLatLng' => 'aroundLatLng',
         'automaticRadius' => 'automaticRadius',
+        'exhaustive' => 'exhaustive',
         'exhaustiveFacetsCount' => 'exhaustiveFacetsCount',
         'exhaustiveNbHits' => 'exhaustiveNbHits',
         'exhaustiveTypo' => 'exhaustiveTypo',
@@ -107,13 +114,15 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'nbPages',
         'nbSortedHits' => 'nbSortedHits',
         'page' => 'page',
-        'redirect' => 'redirect',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
+        'processingTimingsMS' => 'processingTimingsMS',
         'queryAfterRemoval' => 'queryAfterRemoval',
+        'redirect' => 'redirect',
+        'renderingContent' => 'renderingContent',
+        'serverTimeMS' => 'serverTimeMS',
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
-        'renderingContent' => 'renderingContent',
         'hits' => 'hits',
         'query' => 'query',
         'params' => 'params',
@@ -130,6 +139,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'abTestVariantID' => 'setAbTestVariantID',
         'aroundLatLng' => 'setAroundLatLng',
         'automaticRadius' => 'setAutomaticRadius',
+        'exhaustive' => 'setExhaustive',
         'exhaustiveFacetsCount' => 'setExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'setExhaustiveNbHits',
         'exhaustiveTypo' => 'setExhaustiveTypo',
@@ -143,13 +153,15 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'setNbPages',
         'nbSortedHits' => 'setNbSortedHits',
         'page' => 'setPage',
-        'redirect' => 'setRedirect',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
+        'processingTimingsMS' => 'setProcessingTimingsMS',
         'queryAfterRemoval' => 'setQueryAfterRemoval',
+        'redirect' => 'setRedirect',
+        'renderingContent' => 'setRenderingContent',
+        'serverTimeMS' => 'setServerTimeMS',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
-        'renderingContent' => 'setRenderingContent',
         'hits' => 'setHits',
         'query' => 'setQuery',
         'params' => 'setParams',
@@ -166,6 +178,7 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'abTestVariantID' => 'getAbTestVariantID',
         'aroundLatLng' => 'getAroundLatLng',
         'automaticRadius' => 'getAutomaticRadius',
+        'exhaustive' => 'getExhaustive',
         'exhaustiveFacetsCount' => 'getExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'getExhaustiveNbHits',
         'exhaustiveTypo' => 'getExhaustiveTypo',
@@ -179,13 +192,15 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'nbPages' => 'getNbPages',
         'nbSortedHits' => 'getNbSortedHits',
         'page' => 'getPage',
-        'redirect' => 'getRedirect',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
+        'processingTimingsMS' => 'getProcessingTimingsMS',
         'queryAfterRemoval' => 'getQueryAfterRemoval',
+        'redirect' => 'getRedirect',
+        'renderingContent' => 'getRenderingContent',
+        'serverTimeMS' => 'getServerTimeMS',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
-        'renderingContent' => 'getRenderingContent',
         'hits' => 'getHits',
         'query' => 'getQuery',
         'params' => 'getParams',
@@ -217,6 +232,9 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         }
         if (isset($data['automaticRadius'])) {
             $this->container['automaticRadius'] = $data['automaticRadius'];
+        }
+        if (isset($data['exhaustive'])) {
+            $this->container['exhaustive'] = $data['exhaustive'];
         }
         if (isset($data['exhaustiveFacetsCount'])) {
             $this->container['exhaustiveFacetsCount'] = $data['exhaustiveFacetsCount'];
@@ -257,26 +275,32 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
         }
-        if (isset($data['redirect'])) {
-            $this->container['redirect'] = $data['redirect'];
-        }
         if (isset($data['parsedQuery'])) {
             $this->container['parsedQuery'] = $data['parsedQuery'];
         }
         if (isset($data['processingTimeMS'])) {
             $this->container['processingTimeMS'] = $data['processingTimeMS'];
         }
+        if (isset($data['processingTimingsMS'])) {
+            $this->container['processingTimingsMS'] = $data['processingTimingsMS'];
+        }
         if (isset($data['queryAfterRemoval'])) {
             $this->container['queryAfterRemoval'] = $data['queryAfterRemoval'];
+        }
+        if (isset($data['redirect'])) {
+            $this->container['redirect'] = $data['redirect'];
+        }
+        if (isset($data['renderingContent'])) {
+            $this->container['renderingContent'] = $data['renderingContent'];
+        }
+        if (isset($data['serverTimeMS'])) {
+            $this->container['serverTimeMS'] = $data['serverTimeMS'];
         }
         if (isset($data['serverUsed'])) {
             $this->container['serverUsed'] = $data['serverUsed'];
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
-        }
-        if (isset($data['renderingContent'])) {
-            $this->container['renderingContent'] = $data['renderingContent'];
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
@@ -512,9 +536,35 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
+     * Gets exhaustive.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive
+     */
+    public function getExhaustive()
+    {
+        return $this->container['exhaustive'] ?? null;
+    }
+
+    /**
+     * Sets exhaustive.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive $exhaustive exhaustive
+     *
+     * @return self
+     */
+    public function setExhaustive($exhaustive)
+    {
+        $this->container['exhaustive'] = $exhaustive;
+
+        return $this;
+    }
+
+    /**
      * Gets exhaustiveFacetsCount.
      *
      * @return null|bool
+     *
+     * @deprecated
      */
     public function getExhaustiveFacetsCount()
     {
@@ -524,9 +574,11 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveFacetsCount.
      *
-     * @param null|bool $exhaustiveFacetsCount indicates whether the facet count is exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
      *
      * @return self
+     *
+     * @deprecated
      */
     public function setExhaustiveFacetsCount($exhaustiveFacetsCount)
     {
@@ -539,6 +591,8 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * Gets exhaustiveNbHits.
      *
      * @return null|bool
+     *
+     * @deprecated
      */
     public function getExhaustiveNbHits()
     {
@@ -548,9 +602,11 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveNbHits.
      *
-     * @param null|bool $exhaustiveNbHits indicates whether the number of hits `nbHits` is exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveNbHits see the `nbHits` field of the `exhaustive` object in the response
      *
      * @return self
+     *
+     * @deprecated
      */
     public function setExhaustiveNbHits($exhaustiveNbHits)
     {
@@ -563,6 +619,8 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      * Gets exhaustiveTypo.
      *
      * @return null|bool
+     *
+     * @deprecated
      */
     public function getExhaustiveTypo()
     {
@@ -572,9 +630,11 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustiveTypo.
      *
-     * @param null|bool $exhaustiveTypo indicates whether the search for typos was exhaustive (exact) or approximate
+     * @param null|bool $exhaustiveTypo see the `typo` field of the `exhaustive` object in the response
      *
      * @return self
+     *
+     * @deprecated
      */
     public function setExhaustiveTypo($exhaustiveTypo)
     {
@@ -831,30 +891,6 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
-     * Gets redirect.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect
-     */
-    public function getRedirect()
-    {
-        return $this->container['redirect'] ?? null;
-    }
-
-    /**
-     * Sets redirect.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\BaseSearchResponseRedirect $redirect redirect
-     *
-     * @return self
-     */
-    public function setRedirect($redirect)
-    {
-        $this->container['redirect'] = $redirect;
-
-        return $this;
-    }
-
-    /**
      * Gets parsedQuery.
      *
      * @return null|string
@@ -903,6 +939,30 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     }
 
     /**
+     * Gets processingTimingsMS.
+     *
+     * @return null|object
+     */
+    public function getProcessingTimingsMS()
+    {
+        return $this->container['processingTimingsMS'] ?? null;
+    }
+
+    /**
+     * Sets processingTimingsMS.
+     *
+     * @param null|object $processingTimingsMS Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
+     *
+     * @return self
+     */
+    public function setProcessingTimingsMS($processingTimingsMS)
+    {
+        $this->container['processingTimingsMS'] = $processingTimingsMS;
+
+        return $this;
+    }
+
+    /**
      * Gets queryAfterRemoval.
      *
      * @return null|string
@@ -922,6 +982,78 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setQueryAfterRemoval($queryAfterRemoval)
     {
         $this->container['queryAfterRemoval'] = $queryAfterRemoval;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Redirect
+     */
+    public function getRedirect()
+    {
+        return $this->container['redirect'] ?? null;
+    }
+
+    /**
+     * Sets redirect.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Redirect $redirect redirect
+     *
+     * @return self
+     */
+    public function setRedirect($redirect)
+    {
+        $this->container['redirect'] = $redirect;
+
+        return $this;
+    }
+
+    /**
+     * Gets renderingContent.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     */
+    public function getRenderingContent()
+    {
+        return $this->container['renderingContent'] ?? null;
+    }
+
+    /**
+     * Sets renderingContent.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     *
+     * @return self
+     */
+    public function setRenderingContent($renderingContent)
+    {
+        $this->container['renderingContent'] = $renderingContent;
+
+        return $this;
+    }
+
+    /**
+     * Gets serverTimeMS.
+     *
+     * @return null|int
+     */
+    public function getServerTimeMS()
+    {
+        return $this->container['serverTimeMS'] ?? null;
+    }
+
+    /**
+     * Sets serverTimeMS.
+     *
+     * @param null|int $serverTimeMS time the server took to process the request, in milliseconds
+     *
+     * @return self
+     */
+    public function setServerTimeMS($serverTimeMS)
+    {
+        $this->container['serverTimeMS'] = $serverTimeMS;
 
         return $this;
     }
@@ -970,30 +1102,6 @@ class BrowseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
-
-        return $this;
-    }
-
-    /**
-     * Gets renderingContent.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
-     */
-    public function getRenderingContent()
-    {
-        return $this->container['renderingContent'] ?? null;
-    }
-
-    /**
-     * Sets renderingContent.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
-     *
-     * @return self
-     */
-    public function setRenderingContent($renderingContent)
-    {
-        $this->container['renderingContent'] = $renderingContent;
 
         return $this;
     }

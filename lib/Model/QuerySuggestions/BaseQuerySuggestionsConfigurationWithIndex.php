@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * QuerySuggestionsConfigurationWithIndexAllOf Class Doc Comment.
+ * BaseQuerySuggestionsConfigurationWithIndex Class Doc Comment.
  *
  * @category Class
  */
-class QuerySuggestionsConfigurationWithIndexAllOf extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseQuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

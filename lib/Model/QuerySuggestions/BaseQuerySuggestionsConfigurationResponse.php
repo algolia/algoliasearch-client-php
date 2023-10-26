@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * QuerySuggestionsConfigurationResponseAllOf Class Doc Comment.
+ * BaseQuerySuggestionsConfigurationResponse Class Doc Comment.
  *
  * @category Class
  */
-class QuerySuggestionsConfigurationResponseAllOf extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

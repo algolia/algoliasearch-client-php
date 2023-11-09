@@ -18,7 +18,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class MonitoringClient
 {
-    public const VERSION = '4.0.0-alpha.86';
+    public const VERSION = '4.0.0-alpha.87';
 
     /**
      * @var ApiWrapperInterface

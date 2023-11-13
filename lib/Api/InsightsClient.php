@@ -17,7 +17,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class InsightsClient
 {
-    public const VERSION = '4.0.0-alpha.87';
+    public const VERSION = '4.0.0-alpha.88';
 
     /**
      * @var ApiWrapperInterface

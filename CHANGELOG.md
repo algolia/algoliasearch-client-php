@@ -1,3 +1,10 @@
+## [4.0.0-alpha.87](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.86...4.0.0-alpha.87)
+
+- [4f5c33108](https://github.com/algolia/api-clients-automation/commit/4f5c33108) feat(php): change PHP version for generated client ([#2263](https://github.com/algolia/api-clients-automation/pull/2263)) by [@damcou](https://github.com/damcou/)
+- [5a7a8aeb4](https://github.com/algolia/api-clients-automation/commit/5a7a8aeb4) chore(specs): publish docs specs ([#2255](https://github.com/algolia/api-clients-automation/pull/2255)) by [@shortcuts](https://github.com/shortcuts/)
+- [c2e9fb52c](https://github.com/algolia/api-clients-automation/commit/c2e9fb52c) feat(specs): add `startDate` and `endDate` query parameter to list events ([#2229](https://github.com/algolia/api-clients-automation/pull/2229)) by [@shortcuts](https://github.com/shortcuts/)
+- [472dc87c4](https://github.com/algolia/api-clients-automation/commit/472dc87c4) fix(specs): require `window` in list runs ([#2226](https://github.com/algolia/api-clients-automation/pull/2226)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.86](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.85...4.0.0-alpha.86)
 
 - [15b81fe64](https://github.com/algolia/api-clients-automation/commit/15b81fe64) feat(specs): add `window` parameter to observability responses ([#2223](https://github.com/algolia/api-clients-automation/pull/2223)) by [@shortcuts](https://github.com/shortcuts/)

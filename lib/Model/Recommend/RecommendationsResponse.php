@@ -43,7 +43,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
         'query' => 'string',
         'params' => 'string',
@@ -1071,7 +1071,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -1081,7 +1081,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */

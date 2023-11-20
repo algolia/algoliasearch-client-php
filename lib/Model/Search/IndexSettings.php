@@ -32,7 +32,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'numericAttributesForFiltering' => 'string[]',
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
         'attributesForFaceting' => 'string[]',
@@ -967,7 +967,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -977,7 +977,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */

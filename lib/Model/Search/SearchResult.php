@@ -43,7 +43,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Search\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
         'query' => 'string',
         'params' => 'string',
@@ -1088,7 +1088,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -1098,7 +1098,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData lets you store custom data in your indices
+     * @param null|object $userData lets you store custom data in your indices
      *
      * @return self
      */

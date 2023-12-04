@@ -17,8 +17,8 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'userID' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
-        'clusterName' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>',
+        'userID' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
+        'clusterName' => '\Algolia\AlgoliaSearch\Model\Search\HighlightResult',
     ];
 
     /**
@@ -168,7 +168,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets userID.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
+     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
      */
     public function getUserID()
     {
@@ -178,7 +178,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userID.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $userID show highlighted section and words matched on a query
+     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $userID userID
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets clusterName.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
+     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
      */
     public function getClusterName()
     {
@@ -202,7 +202,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $clusterName show highlighted section and words matched on a query
+     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $clusterName clusterName
      *
      * @return self
      */

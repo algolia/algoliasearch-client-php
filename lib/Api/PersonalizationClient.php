@@ -117,12 +117,12 @@ class PersonalizationClient
      *
      * @return array<string, mixed>|object
      */
-    public function del($path, $parameters = null, $requestOptions = [])
+    public function customDelete($path, $parameters = null, $requestOptions = [])
     {
         // verify the required parameter 'path' is set
         if (!isset($path)) {
             throw new \InvalidArgumentException(
-                'Parameter `path` is required when calling `del`.'
+                'Parameter `path` is required when calling `customDelete`.'
             );
         }
 
@@ -145,6 +145,125 @@ class PersonalizationClient
         }
 
         return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customGet($path, $parameters = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customGet`.'
+            );
+        }
+
+        $resourcePath = '/1{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPost($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPost`.'
+            );
+        }
+
+        $resourcePath = '/1{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($body) ? $body : [];
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Send requests to the Algolia REST API.
+     *
+     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param array  $parameters     Query parameters to apply to the current query. (optional)
+     * @param array  $body           Parameters to send with the custom request. (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return array<string, mixed>|object
+     */
+    public function customPut($path, $parameters = null, $body = null, $requestOptions = [])
+    {
+        // verify the required parameter 'path' is set
+        if (!isset($path)) {
+            throw new \InvalidArgumentException(
+                'Parameter `path` is required when calling `customPut`.'
+            );
+        }
+
+        $resourcePath = '/1{path}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($body) ? $body : [];
+
+        if (null !== $parameters) {
+            $queryParameters = $parameters;
+        }
+
+        // path params
+        if (null !== $path) {
+            $resourcePath = str_replace(
+                '{path}',
+                $path,
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -179,45 +298,6 @@ class PersonalizationClient
         }
 
         return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Send requests to the Algolia REST API.
-     *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|object
-     */
-    public function get($path, $parameters = null, $requestOptions = [])
-    {
-        // verify the required parameter 'path' is set
-        if (!isset($path)) {
-            throw new \InvalidArgumentException(
-                'Parameter `path` is required when calling `get`.'
-            );
-        }
-
-        $resourcePath = '/1{path}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        if (null !== $parameters) {
-            $queryParameters = $parameters;
-        }
-
-        // path params
-        if (null !== $path) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -269,86 +349,6 @@ class PersonalizationClient
         }
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Send requests to the Algolia REST API.
-     *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|object
-     */
-    public function post($path, $parameters = null, $body = null, $requestOptions = [])
-    {
-        // verify the required parameter 'path' is set
-        if (!isset($path)) {
-            throw new \InvalidArgumentException(
-                'Parameter `path` is required when calling `post`.'
-            );
-        }
-
-        $resourcePath = '/1{path}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = isset($body) ? $body : [];
-
-        if (null !== $parameters) {
-            $queryParameters = $parameters;
-        }
-
-        // path params
-        if (null !== $path) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Send requests to the Algolia REST API.
-     *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
-     * @param array  $parameters     Query parameters to apply to the current query. (optional)
-     * @param array  $body           Parameters to send with the custom request. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return array<string, mixed>|object
-     */
-    public function put($path, $parameters = null, $body = null, $requestOptions = [])
-    {
-        // verify the required parameter 'path' is set
-        if (!isset($path)) {
-            throw new \InvalidArgumentException(
-                'Parameter `path` is required when calling `put`.'
-            );
-        }
-
-        $resourcePath = '/1{path}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = isset($body) ? $body : [];
-
-        if (null !== $parameters) {
-            $queryParameters = $parameters;
-        }
-
-        // path params
-        if (null !== $path) {
-            $resourcePath = str_replace(
-                '{path}',
-                $path,
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

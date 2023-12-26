@@ -157,7 +157,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets disableStandardEntries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\StandardEntries
+     * @return StandardEntries
      */
     public function getDisableStandardEntries()
     {
@@ -167,7 +167,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets disableStandardEntries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\StandardEntries $disableStandardEntries disableStandardEntries
+     * @param StandardEntries $disableStandardEntries disableStandardEntries
      *
      * @return self
      */

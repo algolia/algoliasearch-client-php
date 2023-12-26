@@ -153,7 +153,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets facetOrdering.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering
+     * @return null|FacetOrdering
      */
     public function getFacetOrdering()
     {
@@ -163,7 +163,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets facetOrdering.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering $facetOrdering facetOrdering
+     * @param null|FacetOrdering $facetOrdering facetOrdering
      *
      * @return self
      */

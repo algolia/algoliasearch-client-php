@@ -192,7 +192,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\SearchEvent[]
+     * @return SearchEvent[]
      */
     public function getDates()
     {
@@ -202,7 +202,7 @@ class GetSearchesCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchEvent[] $dates search events with their associated dates and hit counts
+     * @param SearchEvent[] $dates search events with their associated dates and hit counts
      *
      * @return self
      */

@@ -276,7 +276,7 @@ class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     * @return ClickEvent
      */
     public function getEventType()
     {
@@ -286,7 +286,7 @@ class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     * @param ClickEvent $eventType eventType
      *
      * @return self
      */

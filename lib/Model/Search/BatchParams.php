@@ -159,7 +159,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]
+     * @return MultipleBatchRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +169,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[] $requests requests
+     * @param MultipleBatchRequest[] $requests requests
      *
      * @return self
      */

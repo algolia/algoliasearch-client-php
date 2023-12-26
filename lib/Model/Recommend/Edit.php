@@ -167,7 +167,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\EditType
+     * @return null|EditType
      */
     public function getType()
     {
@@ -177,7 +177,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\EditType $type type
+     * @param null|EditType $type type
      *
      * @return self
      */

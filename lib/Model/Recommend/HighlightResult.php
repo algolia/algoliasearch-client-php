@@ -211,7 +211,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets matchLevel.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
+     * @return MatchLevel
      */
     public function getMatchLevel()
     {
@@ -221,7 +221,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchLevel.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
+     * @param MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

@@ -29,7 +29,7 @@ final class ApiWrapper implements ApiWrapperInterface
     private $http;
 
     /**
-     * @var \Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts
+     * @var ClusterHosts
      */
     private $clusterHosts;
 

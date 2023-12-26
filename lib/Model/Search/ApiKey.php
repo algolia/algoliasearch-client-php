@@ -215,7 +215,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets acl.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
+     * @return Acl[]
      */
     public function getAcl()
     {
@@ -225,7 +225,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets acl.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
+     * @param Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
      * @return self
      */

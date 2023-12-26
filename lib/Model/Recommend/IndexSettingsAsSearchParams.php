@@ -868,7 +868,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets typoTolerance.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance
+     * @return null|TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -878,7 +878,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets typoTolerance.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance $typoTolerance typoTolerance
+     * @param null|TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -940,7 +940,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets ignorePlurals.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals
+     * @return null|IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -950,7 +950,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets ignorePlurals.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -964,7 +964,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets removeStopWords.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords
+     * @return null|RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -974,7 +974,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets removeStopWords.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords $removeStopWords removeStopWords
+     * @param null|RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -1108,7 +1108,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets queryType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType
+     * @return null|QueryType
      */
     public function getQueryType()
     {
@@ -1118,7 +1118,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets queryType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType $queryType queryType
+     * @param null|QueryType $queryType queryType
      *
      * @return self
      */
@@ -1132,7 +1132,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults
+     * @return null|RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -1142,7 +1142,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -1156,7 +1156,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets mode.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Mode
+     * @return null|Mode
      */
     public function getMode()
     {
@@ -1166,7 +1166,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets mode.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Mode $mode mode
+     * @param null|Mode $mode mode
      *
      * @return self
      */
@@ -1180,7 +1180,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets semanticSearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch
+     * @return null|SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -1190,7 +1190,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets semanticSearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch $semanticSearch semanticSearch
+     * @param null|SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -1276,7 +1276,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery
+     * @return null|ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -1286,7 +1286,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -1300,7 +1300,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets alternativesAsExact.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]
+     * @return null|AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -1310,7 +1310,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets alternativesAsExact.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+     * @param null|AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -1324,7 +1324,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets advancedSyntaxFeatures.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]
+     * @return null|AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -1334,7 +1334,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets advancedSyntaxFeatures.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
+     * @param null|AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
      *
      * @return self
      */
@@ -1348,7 +1348,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets distinct.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct
+     * @return null|Distinct
      */
     public function getDistinct()
     {
@@ -1358,7 +1358,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets distinct.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct $distinct distinct
+     * @param null|Distinct $distinct distinct
      *
      * @return self
      */
@@ -1551,7 +1551,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1561,7 +1561,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1599,7 +1599,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter
+     * @return null|ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -1609,7 +1609,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */

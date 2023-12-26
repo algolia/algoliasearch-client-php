@@ -183,7 +183,7 @@ class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets v.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Incident
+     * @return null|Incident
      */
     public function getV()
     {
@@ -193,7 +193,7 @@ class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets v.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Incident $v v
+     * @param null|Incident $v v
      *
      * @return self
      */

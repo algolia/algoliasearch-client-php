@@ -199,7 +199,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets level.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel
+     * @return null|LogLevel
      */
     public function getLevel()
     {
@@ -209,7 +209,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets level.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel $level level
+     * @param null|LogLevel $level level
      *
      * @return self
      */

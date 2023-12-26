@@ -173,7 +173,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]
+     * @return RecommendHit[]
      */
     public function getHits()
     {
@@ -183,7 +183,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[] $hits hits
+     * @param RecommendHit[] $hits hits
      *
      * @return self
      */

@@ -189,7 +189,7 @@ class BaseTrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets model.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
+     * @return null|TrendingFacetsModel
      */
     public function getModel()
     {
@@ -199,7 +199,7 @@ class BaseTrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets model.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
+     * @param null|TrendingFacetsModel $model model
      *
      * @return self
      */

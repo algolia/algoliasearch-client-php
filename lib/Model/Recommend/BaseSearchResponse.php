@@ -497,7 +497,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets exhaustive.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive
+     * @return null|Exhaustive
      */
     public function getExhaustive()
     {
@@ -507,7 +507,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets exhaustive.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive $exhaustive exhaustive
+     * @param null|Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -948,7 +948,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect
+     * @return null|Redirect
      */
     public function getRedirect()
     {
@@ -958,7 +958,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect $redirect redirect
+     * @param null|Redirect $redirect redirect
      *
      * @return self
      */
@@ -972,7 +972,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -982,7 +982,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */

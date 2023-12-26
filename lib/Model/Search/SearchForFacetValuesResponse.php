@@ -157,7 +157,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets facetHits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
+     * @return FacetHits[]
      */
     public function getFacetHits()
     {
@@ -167,7 +167,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets facetHits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
+     * @param FacetHits[] $facetHits facetHits
      *
      * @return self
      */

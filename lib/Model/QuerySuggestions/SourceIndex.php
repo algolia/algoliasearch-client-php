@@ -294,7 +294,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets facets.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]
+     * @return null|Facet[]
      */
     public function getFacets()
     {
@@ -304,7 +304,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[] $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
+     * @param null|Facet[] $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
      *
      * @return self
      */

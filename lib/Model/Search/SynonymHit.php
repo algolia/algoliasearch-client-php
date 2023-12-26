@@ -242,7 +242,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymType
+     * @return SynonymType
      */
     public function getType()
     {
@@ -252,7 +252,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
+     * @param SynonymType $type type
      *
      * @return self
      */

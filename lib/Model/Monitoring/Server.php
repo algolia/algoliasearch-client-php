@@ -223,7 +223,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets region.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Region
+     * @return null|Region
      */
     public function getRegion()
     {
@@ -233,7 +233,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets region.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Region $region region
+     * @param null|Region $region region
      *
      * @return self
      */
@@ -323,7 +323,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets status.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus
+     * @return null|ServerStatus
      */
     public function getStatus()
     {
@@ -333,7 +333,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus $status status
+     * @param null|ServerStatus $status status
      *
      * @return self
      */
@@ -347,7 +347,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Type
+     * @return null|Type
      */
     public function getType()
     {
@@ -357,7 +357,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Type $type type
+     * @param null|Type $type type
      *
      * @return self
      */

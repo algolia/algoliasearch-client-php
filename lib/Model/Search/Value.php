@@ -183,7 +183,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets sortRemainingBy.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SortRemainingBy
+     * @return null|SortRemainingBy
      */
     public function getSortRemainingBy()
     {
@@ -193,7 +193,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets sortRemainingBy.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SortRemainingBy $sortRemainingBy sortRemainingBy
+     * @param null|SortRemainingBy $sortRemainingBy sortRemainingBy
      *
      * @return self
      */

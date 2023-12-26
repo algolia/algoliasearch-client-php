@@ -284,7 +284,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
+     * @return ConversionEvent
      */
     public function getEventType()
     {
@@ -294,7 +294,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
+     * @param ConversionEvent $eventType eventType
      *
      * @return self
      */

@@ -530,7 +530,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets exhaustive.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive
+     * @return null|Exhaustive
      */
     public function getExhaustive()
     {
@@ -540,7 +540,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exhaustive.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive $exhaustive exhaustive
+     * @param null|Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -981,7 +981,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Redirect
+     * @return null|Redirect
      */
     public function getRedirect()
     {
@@ -991,7 +991,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Redirect $redirect redirect
+     * @param null|Redirect $redirect redirect
      *
      * @return self
      */
@@ -1005,7 +1005,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1015,7 +1015,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1101,7 +1101,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
+     * @return Hit[]
      */
     public function getHits()
     {
@@ -1111,7 +1111,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
+     * @param Hit[] $hits hits
      *
      * @return self
      */

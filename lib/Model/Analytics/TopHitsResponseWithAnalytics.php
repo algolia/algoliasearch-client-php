@@ -157,7 +157,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithAnalytics[]
+     * @return TopHitWithAnalytics[]
      */
     public function getHits()
     {
@@ -167,7 +167,7 @@ class TopHitsResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithAnalytics[] $hits top hits
+     * @param TopHitWithAnalytics[] $hits top hits
      *
      * @return self
      */

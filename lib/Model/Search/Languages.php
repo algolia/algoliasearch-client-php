@@ -181,7 +181,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets plurals.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getPlurals()
     {
@@ -191,7 +191,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets plurals.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $plurals plurals
+     * @param DictionaryLanguage $plurals plurals
      *
      * @return self
      */
@@ -205,7 +205,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets stopwords.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getStopwords()
     {
@@ -215,7 +215,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets stopwords.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $stopwords stopwords
+     * @param DictionaryLanguage $stopwords stopwords
      *
      * @return self
      */
@@ -229,7 +229,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets compounds.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getCompounds()
     {
@@ -239,7 +239,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets compounds.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $compounds compounds
+     * @param DictionaryLanguage $compounds compounds
      *
      * @return self
      */

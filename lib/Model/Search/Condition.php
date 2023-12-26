@@ -199,7 +199,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets anchoring.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
+     * @return null|Anchoring
      */
     public function getAnchoring()
     {
@@ -209,7 +209,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets anchoring.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
+     * @param null|Anchoring $anchoring anchoring
      *
      * @return self
      */

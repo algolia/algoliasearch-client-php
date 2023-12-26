@@ -284,7 +284,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
+     * @return ViewEvent
      */
     public function getEventType()
     {
@@ -294,7 +294,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
+     * @param ViewEvent $eventType eventType
      *
      * @return self
      */

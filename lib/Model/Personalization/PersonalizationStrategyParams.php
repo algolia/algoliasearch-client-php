@@ -179,7 +179,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets eventScoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[]
+     * @return EventScoring[]
      */
     public function getEventScoring()
     {
@@ -189,7 +189,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring scores associated with the events
+     * @param EventScoring[] $eventScoring scores associated with the events
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets facetScoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[]
+     * @return FacetScoring[]
      */
     public function getFacetScoring()
     {
@@ -213,7 +213,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets facetScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring scores associated with the facets
+     * @param FacetScoring[] $facetScoring scores associated with the facets
      *
      * @return self
      */

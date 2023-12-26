@@ -239,7 +239,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets anchoring.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
+     * @return null|Anchoring
      */
     public function getAnchoring()
     {
@@ -249,7 +249,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets anchoring.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
+     * @param null|Anchoring $anchoring anchoring
      *
      * @return self
      */

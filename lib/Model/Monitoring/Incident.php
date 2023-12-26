@@ -185,7 +185,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Gets status.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Status
+     * @return null|Status
      */
     public function getStatus()
     {
@@ -195,7 +195,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets status.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Status $status status
+     * @param null|Status $status status
      *
      * @return self
      */

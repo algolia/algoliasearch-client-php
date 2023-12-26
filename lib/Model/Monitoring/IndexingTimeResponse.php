@@ -151,7 +151,7 @@ class IndexingTimeResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets metrics.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponseMetrics
+     * @return null|IndexingTimeResponseMetrics
      */
     public function getMetrics()
     {
@@ -161,7 +161,7 @@ class IndexingTimeResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets metrics.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponseMetrics $metrics metrics
+     * @param null|IndexingTimeResponseMetrics $metrics metrics
      *
      * @return self
      */

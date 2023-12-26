@@ -280,7 +280,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets acl.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
+     * @return Acl[]
      */
     public function getAcl()
     {
@@ -290,7 +290,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets acl.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
+     * @param Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
      * @return self
      */

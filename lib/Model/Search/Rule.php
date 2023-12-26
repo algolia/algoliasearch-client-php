@@ -223,7 +223,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets conditions.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Condition[]
+     * @return null|Condition[]
      */
     public function getConditions()
     {
@@ -233,7 +233,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets conditions.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -247,7 +247,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets consequence.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Consequence
+     * @return null|Consequence
      */
     public function getConsequence()
     {
@@ -257,7 +257,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets consequence.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Consequence $consequence consequence
+     * @param null|Consequence $consequence consequence
      *
      * @return self
      */
@@ -319,7 +319,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets validity.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[]
+     * @return null|TimeRange[]
      */
     public function getValidity()
     {
@@ -329,7 +329,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets validity.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[] $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
+     * @param null|TimeRange[] $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
      *
      * @return self
      */

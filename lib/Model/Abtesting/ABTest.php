@@ -546,7 +546,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets variants.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Variant[]
+     * @return Variant[]
      */
     public function getVariants()
     {
@@ -556,7 +556,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets variants.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants
+     * @param Variant[] $variants A/B test variants
      *
      * @return self
      */

@@ -168,7 +168,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryAction
+     * @return DictionaryAction
      */
     public function getAction()
     {
@@ -178,7 +178,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryAction $action action
+     * @param DictionaryAction $action action
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets body.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry
+     * @return DictionaryEntry
      */
     public function getBody()
     {
@@ -202,7 +202,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets body.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry $body body
+     * @param DictionaryEntry $body body
      *
      * @return self
      */

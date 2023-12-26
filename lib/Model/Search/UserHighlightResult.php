@@ -168,7 +168,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets userID.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return HighlightResult
      */
     public function getUserID()
     {
@@ -178,7 +178,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userID.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $userID userID
+     * @param HighlightResult $userID userID
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets clusterName.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return HighlightResult
      */
     public function getClusterName()
     {
@@ -202,7 +202,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $clusterName clusterName
+     * @param HighlightResult $clusterName clusterName
      *
      * @return self
      */

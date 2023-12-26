@@ -192,7 +192,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets values.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[]
+     * @return GetTopFiltersNoResultsValue[]
      */
     public function getValues()
     {
@@ -202,7 +202,7 @@ class GetTopFiltersNoResultsValues extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets values.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values filters with no results
+     * @param GetTopFiltersNoResultsValue[] $values filters with no results
      *
      * @return self
      */

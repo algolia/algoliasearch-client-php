@@ -183,7 +183,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets edits.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[]
+     * @return null|Edit[]
      */
     public function getEdits()
     {
@@ -193,7 +193,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets edits.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[] $edits edits to apply
+     * @param null|Edit[] $edits edits to apply
      *
      * @return self
      */

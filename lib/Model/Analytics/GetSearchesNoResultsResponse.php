@@ -157,7 +157,7 @@ class GetSearchesNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets searches.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\SearchNoResultEvent[]
+     * @return SearchNoResultEvent[]
      */
     public function getSearches()
     {
@@ -167,7 +167,7 @@ class GetSearchesNoResultsResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets searches.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\SearchNoResultEvent[] $searches searches with no results
+     * @param SearchNoResultEvent[] $searches searches with no results
      *
      * @return self
      */

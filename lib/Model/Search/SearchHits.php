@@ -179,7 +179,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
+     * @return Hit[]
      */
     public function getHits()
     {
@@ -189,7 +189,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
+     * @param Hit[] $hits hits
      *
      * @return self
      */

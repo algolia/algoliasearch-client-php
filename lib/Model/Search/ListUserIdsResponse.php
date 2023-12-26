@@ -159,7 +159,7 @@ class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets userIDs.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UserId[]
+     * @return UserId[]
      */
     public function getUserIDs()
     {
@@ -169,7 +169,7 @@ class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userIDs.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UserId[] $userIDs user IDs
+     * @param UserId[] $userIDs user IDs
      *
      * @return self
      */

@@ -157,7 +157,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Gets attributes.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return GetTopFilterAttribute[]
      */
     public function getAttributes()
     {
@@ -167,7 +167,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     /**
      * Sets attributes.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes filterable attributes
+     * @param GetTopFilterAttribute[] $attributes filterable attributes
      *
      * @return self
      */

@@ -157,7 +157,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets countries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[]
+     * @return TopCountry[]
      */
     public function getCountries()
     {
@@ -167,7 +167,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets countries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[] $countries Countries
+     * @param TopCountry[] $countries Countries
      *
      * @return self
      */

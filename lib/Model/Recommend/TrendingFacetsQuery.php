@@ -223,7 +223,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets model.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
+     * @return null|TrendingFacetsModel
      */
     public function getModel()
     {
@@ -233,7 +233,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets model.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
+     * @param null|TrendingFacetsModel $model model
      *
      * @return self
      */

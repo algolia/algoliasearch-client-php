@@ -263,7 +263,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets rankingInfo.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo
+     * @return null|RankingInfo
      */
     public function getRankingInfo()
     {
@@ -273,7 +273,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets rankingInfo.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo $rankingInfo rankingInfo
+     * @param null|RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

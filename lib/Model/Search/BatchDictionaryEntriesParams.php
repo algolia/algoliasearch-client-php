@@ -191,7 +191,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]
+     * @return BatchDictionaryEntriesRequest[]
      */
     public function getRequests()
     {
@@ -201,7 +201,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests operations to batch
+     * @param BatchDictionaryEntriesRequest[] $requests operations to batch
      *
      * @return self
      */

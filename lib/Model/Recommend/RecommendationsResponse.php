@@ -524,7 +524,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets exhaustive.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive
+     * @return null|Exhaustive
      */
     public function getExhaustive()
     {
@@ -534,7 +534,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets exhaustive.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive $exhaustive exhaustive
+     * @param null|Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -975,7 +975,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect
+     * @return null|Redirect
      */
     public function getRedirect()
     {
@@ -985,7 +985,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect $redirect redirect
+     * @param null|Redirect $redirect redirect
      *
      * @return self
      */
@@ -999,7 +999,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1009,7 +1009,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1095,7 +1095,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]
+     * @return RecommendHit[]
      */
     public function getHits()
     {
@@ -1105,7 +1105,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[] $hits hits
+     * @param RecommendHit[] $hits hits
      *
      * @return self
      */

@@ -268,7 +268,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets model.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel
+     * @return null|TrendingItemsModel
      */
     public function getModel()
     {
@@ -278,7 +278,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets model.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel $model model
+     * @param null|TrendingItemsModel $model model
      *
      * @return self
      */
@@ -292,7 +292,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets queryParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
+     * @return null|SearchParamsObject
      */
     public function getQueryParameters()
     {
@@ -302,7 +302,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets queryParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $queryParameters queryParameters
+     * @param null|SearchParamsObject $queryParameters queryParameters
      *
      * @return self
      */
@@ -316,7 +316,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
+     * @return null|SearchParamsObject
      */
     public function getFallbackParameters()
     {
@@ -326,7 +326,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $fallbackParameters fallbackParameters
+     * @param null|SearchParamsObject $fallbackParameters fallbackParameters
      *
      * @return self
      */

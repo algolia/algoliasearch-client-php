@@ -213,7 +213,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets matchLevel.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
+     * @return MatchLevel
      */
     public function getMatchLevel()
     {
@@ -223,7 +223,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets matchLevel.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
+     * @param MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

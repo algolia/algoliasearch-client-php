@@ -153,7 +153,7 @@ class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Gets index.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexMetadata[]
+     * @return null|RedirectRuleIndexMetadata[]
      */
     public function getIndex()
     {
@@ -163,7 +163,7 @@ class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets index.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexMetadata[] $index index
+     * @param null|RedirectRuleIndexMetadata[] $index index
      *
      * @return self
      */

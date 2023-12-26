@@ -355,7 +355,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets sourceIndices.
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]
+     * @return SourceIndex[]
      */
     public function getSourceIndices()
     {
@@ -365,7 +365,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets sourceIndices.
      *
-     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
+     * @param SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
      *
      * @return self
      */
@@ -382,7 +382,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets languages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
+     * @return null|Languages
      */
     public function getLanguages()
     {
@@ -392,7 +392,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets languages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
+     * @param null|Languages $languages languages
      *
      * @return self
      */

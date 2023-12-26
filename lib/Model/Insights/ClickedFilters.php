@@ -284,7 +284,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     * @return ClickEvent
      */
     public function getEventType()
     {
@@ -294,7 +294,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     * @param ClickEvent $eventType eventType
      *
      * @return self
      */

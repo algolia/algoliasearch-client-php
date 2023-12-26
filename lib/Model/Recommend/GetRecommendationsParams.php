@@ -159,7 +159,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]
+     * @return RecommendationsRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +169,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
+     * @param RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
      *
      * @return self
      */

@@ -311,7 +311,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
+     * @return ConversionEvent
      */
     public function getEventType()
     {
@@ -321,7 +321,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
+     * @param ConversionEvent $eventType eventType
      *
      * @return self
      */
@@ -335,7 +335,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets eventSubtype.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent
+     * @return PurchaseEvent
      */
     public function getEventSubtype()
     {
@@ -345,7 +345,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets eventSubtype.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent $eventSubtype eventSubtype
+     * @param PurchaseEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -413,7 +413,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets objectData.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
+     * @return null|ObjectData[]
      */
     public function getObjectData()
     {
@@ -423,7 +423,7 @@ class PurchasedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets objectData.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
+     * @param null|ObjectData[] $objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
      *
      * @return self
      */

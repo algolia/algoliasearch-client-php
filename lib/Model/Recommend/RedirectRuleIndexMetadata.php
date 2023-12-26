@@ -297,7 +297,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets data.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexMetadataData
+     * @return RedirectRuleIndexMetadataData
      */
     public function getData()
     {
@@ -307,7 +307,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets data.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexMetadataData $data data
+     * @param RedirectRuleIndexMetadataData $data data
      *
      * @return self
      */

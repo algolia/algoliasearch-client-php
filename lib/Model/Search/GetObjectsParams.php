@@ -159,7 +159,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]
+     * @return GetObjectsRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +169,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[] $requests requests
+     * @param GetObjectsRequest[] $requests requests
      *
      * @return self
      */

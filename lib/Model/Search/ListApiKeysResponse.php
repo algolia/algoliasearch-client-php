@@ -157,7 +157,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets keys.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[]
+     * @return GetApiKeyResponse[]
      */
     public function getKeys()
     {
@@ -167,7 +167,7 @@ class ListApiKeysResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets keys.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[] $keys API keys
+     * @param GetApiKeyResponse[] $keys API keys
      *
      * @return self
      */

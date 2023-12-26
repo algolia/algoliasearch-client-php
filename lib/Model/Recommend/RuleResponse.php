@@ -199,7 +199,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets metadata.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata
+     * @return null|RuleResponseMetadata
      */
     public function getMetadata()
     {
@@ -209,7 +209,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets metadata.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata $metadata metadata
+     * @param null|RuleResponseMetadata $metadata metadata
      *
      * @return self
      */
@@ -247,7 +247,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets conditions.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[]
+     * @return null|Condition[]
      */
     public function getConditions()
     {
@@ -257,7 +257,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets conditions.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -271,7 +271,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets consequence.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence
+     * @return null|Consequence
      */
     public function getConsequence()
     {
@@ -281,7 +281,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets consequence.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence $consequence consequence
+     * @param null|Consequence $consequence consequence
      *
      * @return self
      */

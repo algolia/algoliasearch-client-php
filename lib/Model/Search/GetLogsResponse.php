@@ -157,7 +157,7 @@ class GetLogsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets logs.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Log[]
+     * @return Log[]
      */
     public function getLogs()
     {
@@ -167,7 +167,7 @@ class GetLogsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets logs.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Log[] $logs logs
+     * @param Log[] $logs logs
      *
      * @return self
      */

@@ -322,7 +322,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets state.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState
+     * @return null|DictionaryEntryState
      */
     public function getState()
     {
@@ -332,7 +332,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets state.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState $state state
+     * @param null|DictionaryEntryState $state state
      *
      * @return self
      */

@@ -227,7 +227,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\AverageClickEvent[]
+     * @return AverageClickEvent[]
      */
     public function getDates()
     {
@@ -237,7 +237,7 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\AverageClickEvent[] $dates average click positions
+     * @param AverageClickEvent[] $dates average click positions
      *
      * @return self
      */

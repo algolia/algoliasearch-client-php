@@ -15,9 +15,9 @@ final class RequestOptionsFactory
     }
 
     /**
-     * @param \Algolia\AlgoliaSearch\RequestOptions\RequestOptions|array $options
+     * @param array|RequestOptions $options
      *
-     * @return \Algolia\AlgoliaSearch\RequestOptions\RequestOptions
+     * @return RequestOptions
      */
     public function create($options)
     {

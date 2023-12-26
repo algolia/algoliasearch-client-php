@@ -161,7 +161,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets outliers.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers
+     * @return null|FilterEffectsOutliers
      */
     public function getOutliers()
     {
@@ -171,7 +171,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets outliers.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers $outliers outliers
+     * @param null|FilterEffectsOutliers $outliers outliers
      *
      * @return self
      */
@@ -185,7 +185,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets emptySearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch
+     * @return null|FilterEffectsEmptySearch
      */
     public function getEmptySearch()
     {
@@ -195,7 +195,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets emptySearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch $emptySearch emptySearch
+     * @param null|FilterEffectsEmptySearch $emptySearch emptySearch
      *
      * @return self
      */

@@ -161,7 +161,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets facets.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Facets
+     * @return null|Facets
      */
     public function getFacets()
     {
@@ -171,7 +171,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets facets.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Facets $facets facets
+     * @param null|Facets $facets facets
      *
      * @return self
      */

@@ -170,7 +170,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets operation.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType
+     * @return BuiltInOperationType
      */
     public function getOperation()
     {
@@ -180,7 +180,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets operation.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType $operation operation
+     * @param BuiltInOperationType $operation operation
      *
      * @return self
      */

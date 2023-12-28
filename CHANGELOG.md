@@ -1,3 +1,8 @@
+## [4.0.0-alpha.88](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.87...4.0.0-alpha.88)
+
+- [8d71c2b69](https://github.com/algolia/api-clients-automation/commit/8d71c2b69) fix(specs): provide non clashing names for custom methods ([#2369](https://github.com/algolia/api-clients-automation/pull/2369)) by [@shortcuts](https://github.com/shortcuts/)
+- [205519c6f](https://github.com/algolia/api-clients-automation/commit/205519c6f) fix(specs): highlight result map definition ([#2312](https://github.com/algolia/api-clients-automation/pull/2312)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.87](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.86...4.0.0-alpha.87)
 
 - [4f5c33108](https://github.com/algolia/api-clients-automation/commit/4f5c33108) feat(php): change PHP version for generated client ([#2263](https://github.com/algolia/api-clients-automation/pull/2263)) by [@damcou](https://github.com/damcou/)

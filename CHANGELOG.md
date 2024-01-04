@@ -1,3 +1,7 @@
+## [4.0.0-alpha.89](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.88...4.0.0-alpha.89)
+
+- [ae6adfbf7](https://github.com/algolia/api-clients-automation/commit/ae6adfbf7) fix(specs): port recommend changes ([#2476](https://github.com/algolia/api-clients-automation/pull/2476)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.88](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.87...4.0.0-alpha.88)
 
 - [8d71c2b69](https://github.com/algolia/api-clients-automation/commit/8d71c2b69) fix(specs): provide non clashing names for custom methods ([#2369](https://github.com/algolia/api-clients-automation/pull/2369)) by [@shortcuts](https://github.com/shortcuts/)

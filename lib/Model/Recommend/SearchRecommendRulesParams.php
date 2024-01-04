@@ -24,7 +24,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'int',
         'hitsPerPage' => 'int',
         'enabled' => 'bool',
-        'requestOptions' => 'object[]',
     ];
 
     /**
@@ -38,7 +37,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => null,
         'hitsPerPage' => null,
         'enabled' => null,
-        'requestOptions' => null,
     ];
 
     /**
@@ -53,7 +51,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'page',
         'hitsPerPage' => 'hitsPerPage',
         'enabled' => 'enabled',
-        'requestOptions' => 'requestOptions',
     ];
 
     /**
@@ -67,7 +64,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'setPage',
         'hitsPerPage' => 'setHitsPerPage',
         'enabled' => 'setEnabled',
-        'requestOptions' => 'setRequestOptions',
     ];
 
     /**
@@ -81,7 +77,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'getPage',
         'hitsPerPage' => 'getHitsPerPage',
         'enabled' => 'getEnabled',
-        'requestOptions' => 'getRequestOptions',
     ];
 
     /**
@@ -112,9 +107,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
-        }
-        if (isset($data['requestOptions'])) {
-            $this->container['requestOptions'] = $data['requestOptions'];
         }
     }
 
@@ -331,30 +323,6 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     public function setEnabled($enabled)
     {
         $this->container['enabled'] = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Gets requestOptions.
-     *
-     * @return null|object[]
-     */
-    public function getRequestOptions()
-    {
-        return $this->container['requestOptions'] ?? null;
-    }
-
-    /**
-     * Sets requestOptions.
-     *
-     * @param null|object[] $requestOptions request options to send with the API call
-     *
-     * @return self
-     */
-    public function setRequestOptions($requestOptions)
-    {
-        $this->container['requestOptions'] = $requestOptions;
 
         return $this;
     }

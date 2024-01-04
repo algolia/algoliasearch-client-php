@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * GetRecommendationsResponse Class Doc Comment.
+ * BaseRecommendedForYouQueryParameters Class Doc Comment.
  *
  * @category Class
  */
-class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseRecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +17,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[]',
+        'userToken' => 'string',
     ];
 
     /**
@@ -26,7 +26,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelFormats = [
-        'results' => null,
+        'userToken' => null,
     ];
 
     /**
@@ -36,7 +36,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $attributeMap = [
-        'results' => 'results',
+        'userToken' => 'userToken',
     ];
 
     /**
@@ -45,7 +45,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
+        'userToken' => 'setUserToken',
     ];
 
     /**
@@ -54,7 +54,7 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
+        'userToken' => 'getUserToken',
     ];
 
     /**
@@ -71,8 +71,8 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['results'])) {
-            $this->container['results'] = $data['results'];
+        if (isset($data['userToken'])) {
+            $this->container['userToken'] = $data['userToken'];
         }
     }
 
@@ -134,7 +134,13 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
+            $invalidProperties[] = "'userToken' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -149,25 +155,25 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets results.
+     * Gets userToken.
      *
-     * @return null|RecommendationsResults[]
+     * @return string
      */
-    public function getResults()
+    public function getUserToken()
     {
-        return $this->container['results'] ?? null;
+        return $this->container['userToken'] ?? null;
     }
 
     /**
-     * Sets results.
+     * Sets userToken.
      *
-     * @param null|RecommendationsResults[] $results results
+     * @param string $userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setUserToken($userToken)
     {
-        $this->container['results'] = $results;
+        $this->container['userToken'] = $userToken;
 
         return $this;
     }

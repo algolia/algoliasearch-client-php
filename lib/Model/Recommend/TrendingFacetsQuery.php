@@ -17,11 +17,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetName' => 'string',
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
         'indexName' => 'string',
         'threshold' => 'int',
         'maxRecommendations' => 'int',
+        'facetName' => 'string',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
     ];
 
     /**
@@ -30,11 +30,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetName' => null,
-        'model' => null,
         'indexName' => null,
         'threshold' => null,
         'maxRecommendations' => null,
+        'facetName' => null,
+        'model' => null,
     ];
 
     /**
@@ -44,11 +44,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $attributeMap = [
-        'facetName' => 'facetName',
-        'model' => 'model',
         'indexName' => 'indexName',
         'threshold' => 'threshold',
         'maxRecommendations' => 'maxRecommendations',
+        'facetName' => 'facetName',
+        'model' => 'model',
     ];
 
     /**
@@ -57,11 +57,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'facetName' => 'setFacetName',
-        'model' => 'setModel',
         'indexName' => 'setIndexName',
         'threshold' => 'setThreshold',
         'maxRecommendations' => 'setMaxRecommendations',
+        'facetName' => 'setFacetName',
+        'model' => 'setModel',
     ];
 
     /**
@@ -70,11 +70,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'facetName' => 'getFacetName',
-        'model' => 'getModel',
         'indexName' => 'getIndexName',
         'threshold' => 'getThreshold',
         'maxRecommendations' => 'getMaxRecommendations',
+        'facetName' => 'getFacetName',
+        'model' => 'getModel',
     ];
 
     /**
@@ -91,12 +91,6 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['facetName'])) {
-            $this->container['facetName'] = $data['facetName'];
-        }
-        if (isset($data['model'])) {
-            $this->container['model'] = $data['model'];
-        }
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
         }
@@ -105,6 +99,12 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         }
         if (isset($data['maxRecommendations'])) {
             $this->container['maxRecommendations'] = $data['maxRecommendations'];
+        }
+        if (isset($data['facetName'])) {
+            $this->container['facetName'] = $data['facetName'];
+        }
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
         }
     }
 
@@ -168,9 +168,6 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
-            $invalidProperties[] = "'facetName' can't be null";
-        }
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -180,6 +177,10 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
 
         if (isset($this->container['threshold']) && ($this->container['threshold'] < 0)) {
             $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
+            $invalidProperties[] = "'facetName' can't be null";
         }
 
         return $invalidProperties;
@@ -194,54 +195,6 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets facetName.
-     *
-     * @return string
-     */
-    public function getFacetName()
-    {
-        return $this->container['facetName'] ?? null;
-    }
-
-    /**
-     * Sets facetName.
-     *
-     * @param string $facetName facet name for trending models
-     *
-     * @return self
-     */
-    public function setFacetName($facetName)
-    {
-        $this->container['facetName'] = $facetName;
-
-        return $this;
-    }
-
-    /**
-     * Gets model.
-     *
-     * @return null|TrendingFacetsModel
-     */
-    public function getModel()
-    {
-        return $this->container['model'] ?? null;
-    }
-
-    /**
-     * Sets model.
-     *
-     * @param null|TrendingFacetsModel $model model
-     *
-     * @return self
-     */
-    public function setModel($model)
-    {
-        $this->container['model'] = $model;
-
-        return $this;
     }
 
     /**
@@ -319,6 +272,54 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setMaxRecommendations($maxRecommendations)
     {
         $this->container['maxRecommendations'] = $maxRecommendations;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetName.
+     *
+     * @return string
+     */
+    public function getFacetName()
+    {
+        return $this->container['facetName'] ?? null;
+    }
+
+    /**
+     * Sets facetName.
+     *
+     * @param string $facetName facet name for trending models
+     *
+     * @return self
+     */
+    public function setFacetName($facetName)
+    {
+        $this->container['facetName'] = $facetName;
+
+        return $this;
+    }
+
+    /**
+     * Gets model.
+     *
+     * @return null|TrendingFacetsModel
+     */
+    public function getModel()
+    {
+        return $this->container['model'] ?? null;
+    }
+
+    /**
+     * Sets model.
+     *
+     * @param null|TrendingFacetsModel $model model
+     *
+     * @return self
+     */
+    public function setModel($model)
+    {
+        $this->container['model'] = $model;
 
         return $this;
     }

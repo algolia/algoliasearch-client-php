@@ -5,11 +5,13 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * GetRecommendationsResponse Class Doc Comment.
+ * TrendingFacetHit Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Trending facet hit.
  */
-class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingFacetHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +19,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'results' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[]',
+        'score' => 'float',
+        'facetName' => 'string',
+        'facetValue' => 'string',
     ];
 
     /**
@@ -26,7 +30,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelFormats = [
-        'results' => null,
+        'score' => 'double',
+        'facetName' => null,
+        'facetValue' => null,
     ];
 
     /**
@@ -36,7 +42,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $attributeMap = [
-        'results' => 'results',
+        'score' => '_score',
+        'facetName' => 'facetName',
+        'facetValue' => 'facetValue',
     ];
 
     /**
@@ -45,7 +53,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
-        'results' => 'setResults',
+        'score' => 'setScore',
+        'facetName' => 'setFacetName',
+        'facetValue' => 'setFacetValue',
     ];
 
     /**
@@ -54,7 +64,9 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
-        'results' => 'getResults',
+        'score' => 'getScore',
+        'facetName' => 'getFacetName',
+        'facetValue' => 'getFacetValue',
     ];
 
     /**
@@ -71,8 +83,14 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['results'])) {
-            $this->container['results'] = $data['results'];
+        if (isset($data['score'])) {
+            $this->container['score'] = $data['score'];
+        }
+        if (isset($data['facetName'])) {
+            $this->container['facetName'] = $data['facetName'];
+        }
+        if (isset($data['facetValue'])) {
+            $this->container['facetValue'] = $data['facetValue'];
         }
     }
 
@@ -134,7 +152,27 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['score']) || null === $this->container['score']) {
+            $invalidProperties[] = "'score' can't be null";
+        }
+        if ($this->container['score'] > 100) {
+            $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['score'] < 0) {
+            $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
+            $invalidProperties[] = "'facetName' can't be null";
+        }
+        if (!isset($this->container['facetValue']) || null === $this->container['facetValue']) {
+            $invalidProperties[] = "'facetValue' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -149,25 +187,80 @@ class GetRecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets results.
+     * Gets score.
      *
-     * @return null|RecommendationsResults[]
+     * @return float
      */
-    public function getResults()
+    public function getScore()
     {
-        return $this->container['results'] ?? null;
+        return $this->container['score'] ?? null;
     }
 
     /**
-     * Sets results.
+     * Sets score.
      *
-     * @param null|RecommendationsResults[] $results results
+     * @param float $score recommendation score
      *
      * @return self
      */
-    public function setResults($results)
+    public function setScore($score)
     {
-        $this->container['results'] = $results;
+        if ($score > 100) {
+            throw new \InvalidArgumentException('invalid value for $score when calling TrendingFacetHit., must be smaller than or equal to 100.');
+        }
+        if ($score < 0) {
+            throw new \InvalidArgumentException('invalid value for $score when calling TrendingFacetHit., must be bigger than or equal to 0.');
+        }
+
+        $this->container['score'] = $score;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetName.
+     *
+     * @return string
+     */
+    public function getFacetName()
+    {
+        return $this->container['facetName'] ?? null;
+    }
+
+    /**
+     * Sets facetName.
+     *
+     * @param string $facetName facet name for trending models
+     *
+     * @return self
+     */
+    public function setFacetName($facetName)
+    {
+        $this->container['facetName'] = $facetName;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetValue.
+     *
+     * @return string
+     */
+    public function getFacetValue()
+    {
+        return $this->container['facetValue'] ?? null;
+    }
+
+    /**
+     * Sets facetValue.
+     *
+     * @param string $facetValue facet value for trending models
+     *
+     * @return self
+     */
+    public function setFacetValue($facetValue)
+    {
+        $this->container['facetValue'] = $facetValue;
 
         return $this;
     }

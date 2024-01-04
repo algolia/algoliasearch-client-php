@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendHits Class Doc Comment.
+ * RecommendationsHits Class Doc Comment.
  *
  * @category Class
  */
-class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendationsHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +17,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[]',
         'query' => 'string',
         'params' => 'string',
     ];
@@ -173,7 +173,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets hits.
      *
-     * @return RecommendHit[]
+     * @return RecommendationsHit[]
      */
     public function getHits()
     {
@@ -183,7 +183,7 @@ class RecommendHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets hits.
      *
-     * @param RecommendHit[] $hits hits
+     * @param RecommendationsHit[] $hits hits
      *
      * @return self
      */

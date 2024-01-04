@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendationsResponse Class Doc Comment.
+ * RecommendationsResults Class Doc Comment.
  *
  * @category Class
  */
-class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -44,7 +44,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
         'userData' => 'object',
-        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendHit[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[]',
         'query' => 'string',
         'params' => 'string',
     ];
@@ -461,7 +461,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function setAbTestVariantID($abTestVariantID)
     {
         if (!is_null($abTestVariantID) && ($abTestVariantID < 1)) {
-            throw new \InvalidArgumentException('invalid value for $abTestVariantID when calling RecommendationsResponse., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $abTestVariantID when calling RecommendationsResults., must be bigger than or equal to 1.');
         }
 
         $this->container['abTestVariantID'] = $abTestVariantID;
@@ -489,7 +489,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function setAroundLatLng($aroundLatLng)
     {
         if (!is_null($aroundLatLng) && (!preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $aroundLatLng))) {
-            throw new \InvalidArgumentException("invalid value for {$aroundLatLng} when calling RecommendationsResponse., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
+            throw new \InvalidArgumentException("invalid value for {$aroundLatLng} when calling RecommendationsResults., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
         }
 
         $this->container['aroundLatLng'] = $aroundLatLng;
@@ -697,10 +697,10 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     public function setHitsPerPage($hitsPerPage)
     {
         if ($hitsPerPage > 1000) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResponse., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be smaller than or equal to 1000.');
         }
         if ($hitsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResponse., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be bigger than or equal to 1.');
         }
 
         $this->container['hitsPerPage'] = $hitsPerPage;
@@ -1095,7 +1095,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets hits.
      *
-     * @return RecommendHit[]
+     * @return RecommendationsHit[]
      */
     public function getHits()
     {
@@ -1105,7 +1105,7 @@ class RecommendationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets hits.
      *
-     * @param RecommendHit[] $hits hits
+     * @param RecommendationsHit[] $hits hits
      *
      * @return self
      */

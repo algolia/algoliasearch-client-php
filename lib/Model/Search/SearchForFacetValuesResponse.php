@@ -18,6 +18,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $modelTypes = [
         'facetHits' => '\Algolia\AlgoliaSearch\Model\Search\FacetHits[]',
+        'exhaustiveFacetsCount' => 'bool',
+        'processingTimeMS' => 'int',
     ];
 
     /**
@@ -27,6 +29,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $modelFormats = [
         'facetHits' => null,
+        'exhaustiveFacetsCount' => null,
+        'processingTimeMS' => null,
     ];
 
     /**
@@ -37,6 +41,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $attributeMap = [
         'facetHits' => 'facetHits',
+        'exhaustiveFacetsCount' => 'exhaustiveFacetsCount',
+        'processingTimeMS' => 'processingTimeMS',
     ];
 
     /**
@@ -46,6 +52,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $setters = [
         'facetHits' => 'setFacetHits',
+        'exhaustiveFacetsCount' => 'setExhaustiveFacetsCount',
+        'processingTimeMS' => 'setProcessingTimeMS',
     ];
 
     /**
@@ -55,6 +63,8 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      */
     protected static $getters = [
         'facetHits' => 'getFacetHits',
+        'exhaustiveFacetsCount' => 'getExhaustiveFacetsCount',
+        'processingTimeMS' => 'getProcessingTimeMS',
     ];
 
     /**
@@ -73,6 +83,12 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     {
         if (isset($data['facetHits'])) {
             $this->container['facetHits'] = $data['facetHits'];
+        }
+        if (isset($data['exhaustiveFacetsCount'])) {
+            $this->container['exhaustiveFacetsCount'] = $data['exhaustiveFacetsCount'];
+        }
+        if (isset($data['processingTimeMS'])) {
+            $this->container['processingTimeMS'] = $data['processingTimeMS'];
         }
     }
 
@@ -139,6 +155,9 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
         if (!isset($this->container['facetHits']) || null === $this->container['facetHits']) {
             $invalidProperties[] = "'facetHits' can't be null";
         }
+        if (!isset($this->container['exhaustiveFacetsCount']) || null === $this->container['exhaustiveFacetsCount']) {
+            $invalidProperties[] = "'exhaustiveFacetsCount' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -174,6 +193,58 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     public function setFacetHits($facetHits)
     {
         $this->container['facetHits'] = $facetHits;
+
+        return $this;
+    }
+
+    /**
+     * Gets exhaustiveFacetsCount.
+     *
+     * @return bool
+     *
+     * @deprecated
+     */
+    public function getExhaustiveFacetsCount()
+    {
+        return $this->container['exhaustiveFacetsCount'] ?? null;
+    }
+
+    /**
+     * Sets exhaustiveFacetsCount.
+     *
+     * @param bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
+     *
+     * @return self
+     *
+     * @deprecated
+     */
+    public function setExhaustiveFacetsCount($exhaustiveFacetsCount)
+    {
+        $this->container['exhaustiveFacetsCount'] = $exhaustiveFacetsCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets processingTimeMS.
+     *
+     * @return null|int
+     */
+    public function getProcessingTimeMS()
+    {
+        return $this->container['processingTimeMS'] ?? null;
+    }
+
+    /**
+     * Sets processingTimeMS.
+     *
+     * @param null|int $processingTimeMS time the server took to process the request, in milliseconds
+     *
+     * @return self
+     */
+    public function setProcessingTimeMS($processingTimeMS)
+    {
+        $this->container['processingTimeMS'] = $processingTimeMS;
 
         return $this;
     }

@@ -384,6 +384,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
             $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
 
+        if (!isset($this->container['exhaustiveFacetsCount']) || null === $this->container['exhaustiveFacetsCount']) {
+            $invalidProperties[] = "'exhaustiveFacetsCount' can't be null";
+        }
         if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
@@ -565,7 +568,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets exhaustiveFacetsCount.
      *
-     * @return null|bool
+     * @return bool
      *
      * @deprecated
      */
@@ -577,7 +580,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets exhaustiveFacetsCount.
      *
-     * @param null|bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
+     * @param bool $exhaustiveFacetsCount see the `facetsCount` field of the `exhaustive` object in the response
      *
      * @return self
      *

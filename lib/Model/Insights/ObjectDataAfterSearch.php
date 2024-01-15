@@ -158,7 +158,21 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (isset($this->container['queryID']) && (mb_strlen($this->container['queryID']) > 32)) {
+            $invalidProperties[] = "invalid value for 'queryID', the character length must be smaller than or equal to 32.";
+        }
+
+        if (isset($this->container['queryID']) && (mb_strlen($this->container['queryID']) < 32)) {
+            $invalidProperties[] = "invalid value for 'queryID', the character length must be bigger than or equal to 32.";
+        }
+
+        if (isset($this->container['queryID']) && !preg_match('/[0-9a-f]{32}/', $this->container['queryID'])) {
+            $invalidProperties[] = "invalid value for 'queryID', must be conform to the pattern /[0-9a-f]{32}/.";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -185,12 +199,22 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets queryID.
      *
-     * @param null|string $queryID ID of the query that this specific record is attributable to. Used to track purchase events with multiple items originating from different searches.
+     * @param null|string $queryID unique identifier for a search query, used to track purchase events with multiple records that originate from different searches
      *
      * @return self
      */
     public function setQueryID($queryID)
     {
+        if (!is_null($queryID) && (mb_strlen($queryID) > 32)) {
+            throw new \InvalidArgumentException('invalid length for $queryID when calling ObjectDataAfterSearch., must be smaller than or equal to 32.');
+        }
+        if (!is_null($queryID) && (mb_strlen($queryID) < 32)) {
+            throw new \InvalidArgumentException('invalid length for $queryID when calling ObjectDataAfterSearch., must be bigger than or equal to 32.');
+        }
+        if (!is_null($queryID) && (!preg_match('/[0-9a-f]{32}/', $queryID))) {
+            throw new \InvalidArgumentException("invalid value for {$queryID} when calling ObjectDataAfterSearch., must conform to the pattern /[0-9a-f]{32}/.");
+        }
+
         $this->container['queryID'] = $queryID;
 
         return $this;
@@ -233,7 +257,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets quantity.
      *
-     * @param null|int $quantity The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
+     * @param null|int $quantity The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
      *
      * @return self
      */

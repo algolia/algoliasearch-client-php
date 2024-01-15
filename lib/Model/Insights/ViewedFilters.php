@@ -24,8 +24,8 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'index' => 'string',
         'filters' => 'string[]',
         'userToken' => 'string',
-        'timestamp' => 'int',
         'authenticatedUserToken' => 'string',
+        'timestamp' => 'int',
     ];
 
     /**
@@ -39,8 +39,8 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'index' => null,
         'filters' => null,
         'userToken' => null,
-        'timestamp' => 'int64',
         'authenticatedUserToken' => null,
+        'timestamp' => 'int64',
     ];
 
     /**
@@ -55,8 +55,8 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'index' => 'index',
         'filters' => 'filters',
         'userToken' => 'userToken',
-        'timestamp' => 'timestamp',
         'authenticatedUserToken' => 'authenticatedUserToken',
+        'timestamp' => 'timestamp',
     ];
 
     /**
@@ -70,8 +70,8 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'index' => 'setIndex',
         'filters' => 'setFilters',
         'userToken' => 'setUserToken',
-        'timestamp' => 'setTimestamp',
         'authenticatedUserToken' => 'setAuthenticatedUserToken',
+        'timestamp' => 'setTimestamp',
     ];
 
     /**
@@ -85,8 +85,8 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         'index' => 'getIndex',
         'filters' => 'getFilters',
         'userToken' => 'getUserToken',
-        'timestamp' => 'getTimestamp',
         'authenticatedUserToken' => 'getAuthenticatedUserToken',
+        'timestamp' => 'getTimestamp',
     ];
 
     /**
@@ -118,11 +118,11 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
         }
-        if (isset($data['timestamp'])) {
-            $this->container['timestamp'] = $data['timestamp'];
-        }
         if (isset($data['authenticatedUserToken'])) {
             $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
+        }
+        if (isset($data['timestamp'])) {
+            $this->container['timestamp'] = $data['timestamp'];
         }
     }
 
@@ -233,6 +233,18 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) > 129)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be smaller than or equal to 129.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) < 1)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be bigger than or equal to 1.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && !preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['authenticatedUserToken'])) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
+        }
+
         return $invalidProperties;
     }
 
@@ -260,7 +272,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets eventName.
      *
-     * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+     * @param string $eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
      * @return self
      */
@@ -318,7 +330,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets index.
      *
-     * @param string $index name of the Algolia index
+     * @param string $index the name of an Algolia index
      *
      * @return self
      */
@@ -372,7 +384,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets userToken.
      *
-     * @param string $userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
+     * @param string $userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
@@ -394,30 +406,6 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets timestamp.
-     *
-     * @return null|int
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'] ?? null;
-    }
-
-    /**
-     * Sets timestamp.
-     *
-     * @param null|int $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
      * Gets authenticatedUserToken.
      *
      * @return null|string
@@ -430,13 +418,47 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets authenticatedUserToken.
      *
-     * @param null|string $authenticatedUserToken user token for authenticated users
+     * @param null|string $authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
     public function setAuthenticatedUserToken($authenticatedUserToken)
     {
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) > 129)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling ViewedFilters., must be smaller than or equal to 129.');
+        }
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling ViewedFilters., must be bigger than or equal to 1.');
+        }
+        if (!is_null($authenticatedUserToken) && (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $authenticatedUserToken))) {
+            throw new \InvalidArgumentException("invalid value for {$authenticatedUserToken} when calling ViewedFilters., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
+        }
+
         $this->container['authenticatedUserToken'] = $authenticatedUserToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp.
+     *
+     * @return null|int
+     */
+    public function getTimestamp()
+    {
+        return $this->container['timestamp'] ?? null;
+    }
+
+    /**
+     * Sets timestamp.
+     *
+     * @param null|int $timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     *
+     * @return self
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->container['timestamp'] = $timestamp;
 
         return $this;
     }

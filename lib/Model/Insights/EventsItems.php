@@ -18,18 +18,19 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     protected static $modelTypes = [
         'eventName' => 'string',
-        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ConversionEvent',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Insights\ViewEvent',
         'index' => 'string',
         'objectIDs' => 'string[]',
         'positions' => 'int[]',
         'queryID' => 'string',
         'userToken' => 'string',
-        'timestamp' => 'int',
         'authenticatedUserToken' => 'string',
-        'filters' => 'string[]',
-        'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent',
-        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]',
+        'timestamp' => 'int',
+        'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent',
         'currency' => 'string',
+        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]',
+        'value' => '\Algolia\AlgoliaSearch\Model\Insights\Value',
+        'filters' => 'string[]',
     ];
 
     /**
@@ -45,12 +46,13 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'positions' => null,
         'queryID' => null,
         'userToken' => null,
-        'timestamp' => 'int64',
         'authenticatedUserToken' => null,
-        'filters' => null,
+        'timestamp' => 'int64',
         'eventSubtype' => null,
+        'currency' => 'ISO 4217',
         'objectData' => null,
-        'currency' => null,
+        'value' => null,
+        'filters' => null,
     ];
 
     /**
@@ -67,12 +69,13 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'positions' => 'positions',
         'queryID' => 'queryID',
         'userToken' => 'userToken',
-        'timestamp' => 'timestamp',
         'authenticatedUserToken' => 'authenticatedUserToken',
-        'filters' => 'filters',
+        'timestamp' => 'timestamp',
         'eventSubtype' => 'eventSubtype',
-        'objectData' => 'objectData',
         'currency' => 'currency',
+        'objectData' => 'objectData',
+        'value' => 'value',
+        'filters' => 'filters',
     ];
 
     /**
@@ -88,12 +91,13 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'positions' => 'setPositions',
         'queryID' => 'setQueryID',
         'userToken' => 'setUserToken',
-        'timestamp' => 'setTimestamp',
         'authenticatedUserToken' => 'setAuthenticatedUserToken',
-        'filters' => 'setFilters',
+        'timestamp' => 'setTimestamp',
         'eventSubtype' => 'setEventSubtype',
-        'objectData' => 'setObjectData',
         'currency' => 'setCurrency',
+        'objectData' => 'setObjectData',
+        'value' => 'setValue',
+        'filters' => 'setFilters',
     ];
 
     /**
@@ -109,12 +113,13 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'positions' => 'getPositions',
         'queryID' => 'getQueryID',
         'userToken' => 'getUserToken',
-        'timestamp' => 'getTimestamp',
         'authenticatedUserToken' => 'getAuthenticatedUserToken',
-        'filters' => 'getFilters',
+        'timestamp' => 'getTimestamp',
         'eventSubtype' => 'getEventSubtype',
-        'objectData' => 'getObjectData',
         'currency' => 'getCurrency',
+        'objectData' => 'getObjectData',
+        'value' => 'getValue',
+        'filters' => 'getFilters',
     ];
 
     /**
@@ -152,23 +157,26 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (isset($data['userToken'])) {
             $this->container['userToken'] = $data['userToken'];
         }
-        if (isset($data['timestamp'])) {
-            $this->container['timestamp'] = $data['timestamp'];
-        }
         if (isset($data['authenticatedUserToken'])) {
             $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
         }
-        if (isset($data['filters'])) {
-            $this->container['filters'] = $data['filters'];
+        if (isset($data['timestamp'])) {
+            $this->container['timestamp'] = $data['timestamp'];
         }
         if (isset($data['eventSubtype'])) {
             $this->container['eventSubtype'] = $data['eventSubtype'];
         }
+        if (isset($data['currency'])) {
+            $this->container['currency'] = $data['currency'];
+        }
         if (isset($data['objectData'])) {
             $this->container['objectData'] = $data['objectData'];
         }
-        if (isset($data['currency'])) {
-            $this->container['currency'] = $data['currency'];
+        if (isset($data['value'])) {
+            $this->container['value'] = $data['value'];
+        }
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
         }
     }
 
@@ -305,6 +313,29 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) > 129)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be smaller than or equal to 129.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) < 1)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be bigger than or equal to 1.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && !preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['authenticatedUserToken'])) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
+        }
+
+        if (!isset($this->container['eventSubtype']) || null === $this->container['eventSubtype']) {
+            $invalidProperties[] = "'eventSubtype' can't be null";
+        }
+        if (isset($this->container['objectData']) && (count($this->container['objectData']) > 20)) {
+            $invalidProperties[] = "invalid value for 'objectData', number of items must be less than or equal to 20.";
+        }
+
+        if (isset($this->container['objectData']) && (count($this->container['objectData']) < 1)) {
+            $invalidProperties[] = "invalid value for 'objectData', number of items must be greater than or equal to 1.";
+        }
+
         if (!isset($this->container['filters']) || null === $this->container['filters']) {
             $invalidProperties[] = "'filters' can't be null";
         }
@@ -314,10 +345,6 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
 
         if (count($this->container['filters']) < 1) {
             $invalidProperties[] = "invalid value for 'filters', number of items must be greater than or equal to 1.";
-        }
-
-        if (!isset($this->container['eventSubtype']) || null === $this->container['eventSubtype']) {
-            $invalidProperties[] = "'eventSubtype' can't be null";
         }
 
         return $invalidProperties;
@@ -347,7 +374,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventName.
      *
-     * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+     * @param string $eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
      * @return self
      */
@@ -371,7 +398,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return ViewEvent
      */
     public function getEventType()
     {
@@ -381,7 +408,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param ViewEvent $eventType eventType
      *
      * @return self
      */
@@ -405,7 +432,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets index.
      *
-     * @param string $index name of the Algolia index
+     * @param string $index the name of an Algolia index
      *
      * @return self
      */
@@ -429,7 +456,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets objectIDs.
      *
-     * @param string[] $objectIDs list of object identifiers for items of an Algolia index
+     * @param string[] $objectIDs the object IDs of the records that are part of the event
      *
      * @return self
      */
@@ -459,7 +486,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets positions.
      *
-     * @param int[] $positions Position of the clicked objects in the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.
+     * @param int[] $positions The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.
      *
      * @return self
      */
@@ -523,7 +550,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets userToken.
      *
-     * @param string $userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
+     * @param string $userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
@@ -545,30 +572,6 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets timestamp.
-     *
-     * @return null|int
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'] ?? null;
-    }
-
-    /**
-     * Sets timestamp.
-     *
-     * @param null|int $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
      * Gets authenticatedUserToken.
      *
      * @return null|string
@@ -581,13 +584,149 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets authenticatedUserToken.
      *
-     * @param null|string $authenticatedUserToken user token for authenticated users
+     * @param null|string $authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
     public function setAuthenticatedUserToken($authenticatedUserToken)
     {
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) > 129)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling EventsItems., must be smaller than or equal to 129.');
+        }
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling EventsItems., must be bigger than or equal to 1.');
+        }
+        if (!is_null($authenticatedUserToken) && (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $authenticatedUserToken))) {
+            throw new \InvalidArgumentException("invalid value for {$authenticatedUserToken} when calling EventsItems., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
+        }
+
         $this->container['authenticatedUserToken'] = $authenticatedUserToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp.
+     *
+     * @return null|int
+     */
+    public function getTimestamp()
+    {
+        return $this->container['timestamp'] ?? null;
+    }
+
+    /**
+     * Sets timestamp.
+     *
+     * @param null|int $timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     *
+     * @return self
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets eventSubtype.
+     *
+     * @return AddToCartEvent
+     */
+    public function getEventSubtype()
+    {
+        return $this->container['eventSubtype'] ?? null;
+    }
+
+    /**
+     * Sets eventSubtype.
+     *
+     * @param AddToCartEvent $eventSubtype eventSubtype
+     *
+     * @return self
+     */
+    public function setEventSubtype($eventSubtype)
+    {
+        $this->container['eventSubtype'] = $eventSubtype;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency.
+     *
+     * @return null|string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'] ?? null;
+    }
+
+    /**
+     * Sets currency.
+     *
+     * @param null|string $currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectData.
+     *
+     * @return null|ObjectData[]
+     */
+    public function getObjectData()
+    {
+        return $this->container['objectData'] ?? null;
+    }
+
+    /**
+     * Sets objectData.
+     *
+     * @param null|ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
+     *
+     * @return self
+     */
+    public function setObjectData($objectData)
+    {
+        if (!is_null($objectData) && (count($objectData) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $objectData when calling EventsItems., number of items must be less than or equal to 20.');
+        }
+        if (!is_null($objectData) && (count($objectData) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $objectData when calling EventsItems., number of items must be greater than or equal to 1.');
+        }
+        $this->container['objectData'] = $objectData;
+
+        return $this;
+    }
+
+    /**
+     * Gets value.
+     *
+     * @return null|Value
+     */
+    public function getValue()
+    {
+        return $this->container['value'] ?? null;
+    }
+
+    /**
+     * Sets value.
+     *
+     * @param null|Value $value value
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        $this->container['value'] = $value;
 
         return $this;
     }
@@ -618,78 +757,6 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
             throw new \InvalidArgumentException('invalid length for $filters when calling EventsItems., number of items must be greater than or equal to 1.');
         }
         $this->container['filters'] = $filters;
-
-        return $this;
-    }
-
-    /**
-     * Gets eventSubtype.
-     *
-     * @return PurchaseEvent
-     */
-    public function getEventSubtype()
-    {
-        return $this->container['eventSubtype'] ?? null;
-    }
-
-    /**
-     * Sets eventSubtype.
-     *
-     * @param PurchaseEvent $eventSubtype eventSubtype
-     *
-     * @return self
-     */
-    public function setEventSubtype($eventSubtype)
-    {
-        $this->container['eventSubtype'] = $eventSubtype;
-
-        return $this;
-    }
-
-    /**
-     * Gets objectData.
-     *
-     * @return null|ObjectDataAfterSearch[]
-     */
-    public function getObjectData()
-    {
-        return $this->container['objectData'] ?? null;
-    }
-
-    /**
-     * Sets objectData.
-     *
-     * @param null|ObjectDataAfterSearch[] $objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
-     *
-     * @return self
-     */
-    public function setObjectData($objectData)
-    {
-        $this->container['objectData'] = $objectData;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency.
-     *
-     * @return null|string
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'] ?? null;
-    }
-
-    /**
-     * Sets currency.
-     *
-     * @param null|string $currency if you include pricing information in the `objectData` parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        $this->container['currency'] = $currency;
 
         return $this;
     }

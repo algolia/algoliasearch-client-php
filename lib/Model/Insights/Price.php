@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  *
  * @category Class
  *
- * @description The price of the item. This should be the final price, inclusive of any discounts in effect.
+ * @description The total price of a product, including any discounts, in units of &#x60;currency&#x60;.
  */
 class Price extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

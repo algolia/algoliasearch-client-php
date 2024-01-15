@@ -24,11 +24,12 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'eventSubtype' => '\Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent',
         'index' => 'string',
         'objectIDs' => 'string[]',
-        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]',
-        'currency' => 'string',
         'userToken' => 'string',
-        'timestamp' => 'int',
         'authenticatedUserToken' => 'string',
+        'currency' => 'string',
+        'objectData' => '\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]',
+        'timestamp' => 'int',
+        'value' => '\Algolia\AlgoliaSearch\Model\Insights\Value',
     ];
 
     /**
@@ -42,11 +43,12 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'eventSubtype' => null,
         'index' => null,
         'objectIDs' => null,
-        'objectData' => null,
-        'currency' => null,
         'userToken' => null,
-        'timestamp' => 'int64',
         'authenticatedUserToken' => null,
+        'currency' => 'ISO 4217',
+        'objectData' => null,
+        'timestamp' => 'int64',
+        'value' => null,
     ];
 
     /**
@@ -61,11 +63,12 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'eventSubtype' => 'eventSubtype',
         'index' => 'index',
         'objectIDs' => 'objectIDs',
-        'objectData' => 'objectData',
-        'currency' => 'currency',
         'userToken' => 'userToken',
-        'timestamp' => 'timestamp',
         'authenticatedUserToken' => 'authenticatedUserToken',
+        'currency' => 'currency',
+        'objectData' => 'objectData',
+        'timestamp' => 'timestamp',
+        'value' => 'value',
     ];
 
     /**
@@ -79,11 +82,12 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'eventSubtype' => 'setEventSubtype',
         'index' => 'setIndex',
         'objectIDs' => 'setObjectIDs',
-        'objectData' => 'setObjectData',
-        'currency' => 'setCurrency',
         'userToken' => 'setUserToken',
-        'timestamp' => 'setTimestamp',
         'authenticatedUserToken' => 'setAuthenticatedUserToken',
+        'currency' => 'setCurrency',
+        'objectData' => 'setObjectData',
+        'timestamp' => 'setTimestamp',
+        'value' => 'setValue',
     ];
 
     /**
@@ -97,11 +101,12 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         'eventSubtype' => 'getEventSubtype',
         'index' => 'getIndex',
         'objectIDs' => 'getObjectIDs',
-        'objectData' => 'getObjectData',
-        'currency' => 'getCurrency',
         'userToken' => 'getUserToken',
-        'timestamp' => 'getTimestamp',
         'authenticatedUserToken' => 'getAuthenticatedUserToken',
+        'currency' => 'getCurrency',
+        'objectData' => 'getObjectData',
+        'timestamp' => 'getTimestamp',
+        'value' => 'getValue',
     ];
 
     /**
@@ -133,20 +138,23 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         if (isset($data['objectIDs'])) {
             $this->container['objectIDs'] = $data['objectIDs'];
         }
-        if (isset($data['objectData'])) {
-            $this->container['objectData'] = $data['objectData'];
+        if (isset($data['userToken'])) {
+            $this->container['userToken'] = $data['userToken'];
+        }
+        if (isset($data['authenticatedUserToken'])) {
+            $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
         }
         if (isset($data['currency'])) {
             $this->container['currency'] = $data['currency'];
         }
-        if (isset($data['userToken'])) {
-            $this->container['userToken'] = $data['userToken'];
+        if (isset($data['objectData'])) {
+            $this->container['objectData'] = $data['objectData'];
         }
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
         }
-        if (isset($data['authenticatedUserToken'])) {
-            $this->container['authenticatedUserToken'] = $data['authenticatedUserToken'];
+        if (isset($data['value'])) {
+            $this->container['value'] = $data['value'];
         }
     }
 
@@ -260,6 +268,26 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
             $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) > 129)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be smaller than or equal to 129.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) < 1)) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be bigger than or equal to 1.";
+        }
+
+        if (isset($this->container['authenticatedUserToken']) && !preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['authenticatedUserToken'])) {
+            $invalidProperties[] = "invalid value for 'authenticatedUserToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
+        }
+
+        if (isset($this->container['objectData']) && (count($this->container['objectData']) > 20)) {
+            $invalidProperties[] = "invalid value for 'objectData', number of items must be less than or equal to 20.";
+        }
+
+        if (isset($this->container['objectData']) && (count($this->container['objectData']) < 1)) {
+            $invalidProperties[] = "invalid value for 'objectData', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -287,7 +315,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets eventName.
      *
-     * @param string $eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+     * @param string $eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
      * @return self
      */
@@ -369,7 +397,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets index.
      *
-     * @param string $index name of the Algolia index
+     * @param string $index the name of an Algolia index
      *
      * @return self
      */
@@ -393,7 +421,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets objectIDs.
      *
-     * @param string[] $objectIDs list of object identifiers for items of an Algolia index
+     * @param string[] $objectIDs the object IDs of the records that are part of the event
      *
      * @return self
      */
@@ -411,54 +439,6 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets objectData.
-     *
-     * @return null|ObjectData[]
-     */
-    public function getObjectData()
-    {
-        return $this->container['objectData'] ?? null;
-    }
-
-    /**
-     * Sets objectData.
-     *
-     * @param null|ObjectData[] $objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
-     *
-     * @return self
-     */
-    public function setObjectData($objectData)
-    {
-        $this->container['objectData'] = $objectData;
-
-        return $this;
-    }
-
-    /**
-     * Gets currency.
-     *
-     * @return null|string
-     */
-    public function getCurrency()
-    {
-        return $this->container['currency'] ?? null;
-    }
-
-    /**
-     * Sets currency.
-     *
-     * @param null|string $currency if you include pricing information in the `objectData` parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR
-     *
-     * @return self
-     */
-    public function setCurrency($currency)
-    {
-        $this->container['currency'] = $currency;
-
-        return $this;
-    }
-
-    /**
      * Gets userToken.
      *
      * @return string
@@ -471,7 +451,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets userToken.
      *
-     * @param string $userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
+     * @param string $userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
@@ -493,30 +473,6 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets timestamp.
-     *
-     * @return null|int
-     */
-    public function getTimestamp()
-    {
-        return $this->container['timestamp'] ?? null;
-    }
-
-    /**
-     * Sets timestamp.
-     *
-     * @param null|int $timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
-     *
-     * @return self
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->container['timestamp'] = $timestamp;
-
-        return $this;
-    }
-
-    /**
      * Gets authenticatedUserToken.
      *
      * @return null|string
@@ -529,13 +485,125 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets authenticatedUserToken.
      *
-     * @param null|string $authenticatedUserToken user token for authenticated users
+     * @param null|string $authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
      *
      * @return self
      */
     public function setAuthenticatedUserToken($authenticatedUserToken)
     {
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) > 129)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling AddedToCartObjectIDs., must be smaller than or equal to 129.');
+        }
+        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling AddedToCartObjectIDs., must be bigger than or equal to 1.');
+        }
+        if (!is_null($authenticatedUserToken) && (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $authenticatedUserToken))) {
+            throw new \InvalidArgumentException("invalid value for {$authenticatedUserToken} when calling AddedToCartObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
+        }
+
         $this->container['authenticatedUserToken'] = $authenticatedUserToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets currency.
+     *
+     * @return null|string
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'] ?? null;
+    }
+
+    /**
+     * Sets currency.
+     *
+     * @param null|string $currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
+     *
+     * @return self
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectData.
+     *
+     * @return null|ObjectData[]
+     */
+    public function getObjectData()
+    {
+        return $this->container['objectData'] ?? null;
+    }
+
+    /**
+     * Sets objectData.
+     *
+     * @param null|ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
+     *
+     * @return self
+     */
+    public function setObjectData($objectData)
+    {
+        if (!is_null($objectData) && (count($objectData) > 20)) {
+            throw new \InvalidArgumentException('invalid value for $objectData when calling AddedToCartObjectIDs., number of items must be less than or equal to 20.');
+        }
+        if (!is_null($objectData) && (count($objectData) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $objectData when calling AddedToCartObjectIDs., number of items must be greater than or equal to 1.');
+        }
+        $this->container['objectData'] = $objectData;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp.
+     *
+     * @return null|int
+     */
+    public function getTimestamp()
+    {
+        return $this->container['timestamp'] ?? null;
+    }
+
+    /**
+     * Sets timestamp.
+     *
+     * @param null|int $timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     *
+     * @return self
+     */
+    public function setTimestamp($timestamp)
+    {
+        $this->container['timestamp'] = $timestamp;
+
+        return $this;
+    }
+
+    /**
+     * Gets value.
+     *
+     * @return null|Value
+     */
+    public function getValue()
+    {
+        return $this->container['value'] ?? null;
+    }
+
+    /**
+     * Sets value.
+     *
+     * @param null|Value $value value
+     *
+     * @return self
+     */
+    public function setValue($value)
+    {
+        $this->container['value'] = $value;
 
         return $this;
     }

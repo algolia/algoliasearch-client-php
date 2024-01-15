@@ -5,11 +5,13 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 /**
- * ObjectData Class Doc Comment.
+ * Value Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Total monetary value of this event in units of &#x60;currency&#x60;.
  */
-class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +19,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * @var string[]
      */
     protected static $modelTypes = [
-        'price' => '\Algolia\AlgoliaSearch\Model\Insights\Price',
-        'quantity' => 'int',
-        'discount' => '\Algolia\AlgoliaSearch\Model\Insights\Discount',
     ];
 
     /**
@@ -28,9 +27,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * @var string[]
      */
     protected static $modelFormats = [
-        'price' => null,
-        'quantity' => 'int32',
-        'discount' => null,
     ];
 
     /**
@@ -40,9 +36,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * @var string[]
      */
     protected static $attributeMap = [
-        'price' => 'price',
-        'quantity' => 'quantity',
-        'discount' => 'discount',
     ];
 
     /**
@@ -51,9 +44,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * @var string[]
      */
     protected static $setters = [
-        'price' => 'setPrice',
-        'quantity' => 'setQuantity',
-        'discount' => 'setDiscount',
     ];
 
     /**
@@ -62,9 +52,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      * @var string[]
      */
     protected static $getters = [
-        'price' => 'getPrice',
-        'quantity' => 'getQuantity',
-        'discount' => 'getDiscount',
     ];
 
     /**
@@ -79,18 +66,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-        if (isset($data['price'])) {
-            $this->container['price'] = $data['price'];
-        }
-        if (isset($data['quantity'])) {
-            $this->container['quantity'] = $data['quantity'];
-        }
-        if (isset($data['discount'])) {
-            $this->container['discount'] = $data['discount'];
-        }
-    }
+    public function __construct(array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,
@@ -162,78 +138,6 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets price.
-     *
-     * @return null|Price
-     */
-    public function getPrice()
-    {
-        return $this->container['price'] ?? null;
-    }
-
-    /**
-     * Sets price.
-     *
-     * @param null|Price $price price
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-        $this->container['price'] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Gets quantity.
-     *
-     * @return null|int
-     */
-    public function getQuantity()
-    {
-        return $this->container['quantity'] ?? null;
-    }
-
-    /**
-     * Sets quantity.
-     *
-     * @param null|int $quantity The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
-     *
-     * @return self
-     */
-    public function setQuantity($quantity)
-    {
-        $this->container['quantity'] = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Gets discount.
-     *
-     * @return null|Discount
-     */
-    public function getDiscount()
-    {
-        return $this->container['discount'] ?? null;
-    }
-
-    /**
-     * Sets discount.
-     *
-     * @param null|Discount $discount discount
-     *
-     * @return self
-     */
-    public function setDiscount($discount)
-    {
-        $this->container['discount'] = $discount;
-
-        return $this;
     }
 
     /**

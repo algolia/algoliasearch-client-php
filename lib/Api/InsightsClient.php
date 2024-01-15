@@ -6,6 +6,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\InsightsConfig;
+use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
@@ -265,10 +266,51 @@ class InsightsClient
     }
 
     /**
+     * Delete user token.
+     *
+     * @param string $userToken      The user token for which to delete all associated events. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     */
+    public function deleteUserToken($userToken, $requestOptions = [])
+    {
+        // verify the required parameter 'userToken' is set
+        if (!isset($userToken)) {
+            throw new \InvalidArgumentException(
+                'Parameter `userToken` is required when calling `deleteUserToken`.'
+            );
+        }
+        if (strlen($userToken) > 129) {
+            throw new \InvalidArgumentException('invalid length for "$userToken" when calling InsightsClient.deleteUserToken, must be smaller than or equal to 129.');
+        }
+        if (strlen($userToken) < 1) {
+            throw new \InvalidArgumentException('invalid length for "$userToken" when calling InsightsClient.deleteUserToken, must be bigger than or equal to 1.');
+        }
+        if (!preg_match('/[a-zA-Z0-9_=\\/+]{1,129}/', $userToken)) {
+            throw new \InvalidArgumentException('invalid value for "userToken" when calling InsightsClient.deleteUserToken, must conform to the pattern /[a-zA-Z0-9_=\\/+]{1,129}/.');
+        }
+
+        $resourcePath = '/1/usertokens/{userToken}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $userToken) {
+            $resourcePath = str_replace(
+                '{userToken}',
+                ObjectSerializer::toPathValue($userToken),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Send events.
      *
      * @param array $insightsEvents insightsEvents (required)
-     *                              - $insightsEvents['events'] => (array) List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token. Some attributes require other attributes to be declared, and some attributes can't be declared at the same time.  **All** events must be valid, otherwise the API returns an error. (required)
+     *                              - $insightsEvents['events'] => (array) List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Insights\InsightsEvents
      *

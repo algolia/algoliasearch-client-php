@@ -439,45 +439,6 @@ class SearchClient
     }
 
     /**
-     * Delete all synonyms.
-     *
-     * @param string $indexName         Index on which to perform the request. (required)
-     * @param bool   $forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices. (optional)
-     * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
-     */
-    public function clearAllSynonyms($indexName, $forwardToReplicas = null, $requestOptions = [])
-    {
-        // verify the required parameter 'indexName' is set
-        if (!isset($indexName)) {
-            throw new \InvalidArgumentException(
-                'Parameter `indexName` is required when calling `clearAllSynonyms`.'
-            );
-        }
-
-        $resourcePath = '/1/indexes/{indexName}/synonyms/clear';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        if (null !== $forwardToReplicas) {
-            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
-        }
-
-        // path params
-        if (null !== $indexName) {
-            $resourcePath = str_replace(
-                '{indexName}',
-                ObjectSerializer::toPathValue($indexName),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Delete all records from an index.
      *
      * @param string $indexName      Index on which to perform the request. (required)
@@ -530,6 +491,45 @@ class SearchClient
         }
 
         $resourcePath = '/1/indexes/{indexName}/rules/clear';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $forwardToReplicas) {
+            $queryParameters['forwardToReplicas'] = $forwardToReplicas;
+        }
+
+        // path params
+        if (null !== $indexName) {
+            $resourcePath = str_replace(
+                '{indexName}',
+                ObjectSerializer::toPathValue($indexName),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Delete all synonyms.
+     *
+     * @param string $indexName         Index on which to perform the request. (required)
+     * @param bool   $forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices. (optional)
+     * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     */
+    public function clearSynonyms($indexName, $forwardToReplicas = null, $requestOptions = [])
+    {
+        // verify the required parameter 'indexName' is set
+        if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `clearSynonyms`.'
+            );
+        }
+
+        $resourcePath = '/1/indexes/{indexName}/synonyms/clear';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;

@@ -76,10 +76,7 @@ class MonitoringClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $url = null !== $config->getRegion() && '' !== $config->getRegion() ?
-                str_replace('{region}', $config->getRegion(), '') :
-                '';
-            $clusterHosts = ClusterHosts::create($url);
+            $clusterHosts = ClusterHosts::create('status.algolia.com');
         }
 
         return $clusterHosts;

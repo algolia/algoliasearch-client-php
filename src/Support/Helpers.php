@@ -31,7 +31,7 @@ final class Helpers
         }
         array_unshift($arguments, $pathFormat);
 
-        return call_user_func_array('sprintf', $arguments);
+        return sprintf(...$arguments);
     }
 
     /**

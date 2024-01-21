@@ -70,6 +70,9 @@ final class RequestOptionsFactory
                 'X-Algolia-API-Key' => $this->config->getApiKey(),
                 'User-Agent' => UserAgent::get(),
                 'Content-Type' => 'application/json',
+                // For Algolia API restriction, add referer.
+                // See: https://discourse.algolia.com/t/api-key-referrer-restrictions-do-not-work/6574/3
+                'referer' => $_SERVER['HTTP_HOST'],                
             ],
             'query' => [],
             'body' => [],

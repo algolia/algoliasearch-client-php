@@ -35,6 +35,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'trackedSearchCount' => 'int',
         'trafficPercentage' => 'int',
         'userCount' => 'int',
+        'trackedUserCount' => 'int',
     ];
 
     /**
@@ -61,6 +62,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'trackedSearchCount' => null,
         'trafficPercentage' => null,
         'userCount' => null,
+        'trackedUserCount' => null,
     ];
 
     /**
@@ -88,6 +90,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'trackedSearchCount' => 'trackedSearchCount',
         'trafficPercentage' => 'trafficPercentage',
         'userCount' => 'userCount',
+        'trackedUserCount' => 'trackedUserCount',
     ];
 
     /**
@@ -114,6 +117,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'trackedSearchCount' => 'setTrackedSearchCount',
         'trafficPercentage' => 'setTrafficPercentage',
         'userCount' => 'setUserCount',
+        'trackedUserCount' => 'setTrackedUserCount',
     ];
 
     /**
@@ -140,6 +144,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'trackedSearchCount' => 'getTrackedSearchCount',
         'trafficPercentage' => 'getTrafficPercentage',
         'userCount' => 'getUserCount',
+        'trackedUserCount' => 'getTrackedUserCount',
     ];
 
     /**
@@ -209,6 +214,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         }
         if (isset($data['userCount'])) {
             $this->container['userCount'] = $data['userCount'];
+        }
+        if (isset($data['trackedUserCount'])) {
+            $this->container['trackedUserCount'] = $data['trackedUserCount'];
         }
     }
 
@@ -322,6 +330,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         }
         if (!isset($this->container['userCount']) || null === $this->container['userCount']) {
             $invalidProperties[] = "'userCount' can't be null";
+        }
+        if (!isset($this->container['trackedUserCount']) || null === $this->container['trackedUserCount']) {
+            $invalidProperties[] = "'trackedUserCount' can't be null";
         }
 
         return $invalidProperties;
@@ -766,6 +777,30 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function setUserCount($userCount)
     {
         $this->container['userCount'] = $userCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets trackedUserCount.
+     *
+     * @return int
+     */
+    public function getTrackedUserCount()
+    {
+        return $this->container['trackedUserCount'] ?? null;
+    }
+
+    /**
+     * Sets trackedUserCount.
+     *
+     * @param int $trackedUserCount number of users that performed a tracked search during the A/B test
+     *
+     * @return self
+     */
+    public function setTrackedUserCount($trackedUserCount)
+    {
+        $this->container['trackedUserCount'] = $trackedUserCount;
 
         return $this;
     }

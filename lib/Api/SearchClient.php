@@ -23,7 +23,7 @@ use Algolia\AlgoliaSearch\Support\Helpers;
  */
 class SearchClient
 {
-    public const VERSION = '4.0.0-alpha.92';
+    public const VERSION = '4.0.0-alpha.93';
 
     /**
      * @var ApiWrapperInterface

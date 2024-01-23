@@ -18,6 +18,9 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $modelTypes = [
         'query' => 'string',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\SynonymType',
+        'page' => 'int',
+        'hitsPerPage' => 'int',
     ];
 
     /**
@@ -27,6 +30,9 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $modelFormats = [
         'query' => null,
+        'type' => null,
+        'page' => null,
+        'hitsPerPage' => null,
     ];
 
     /**
@@ -37,6 +43,9 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $attributeMap = [
         'query' => 'query',
+        'type' => 'type',
+        'page' => 'page',
+        'hitsPerPage' => 'hitsPerPage',
     ];
 
     /**
@@ -46,6 +55,9 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $setters = [
         'query' => 'setQuery',
+        'type' => 'setType',
+        'page' => 'setPage',
+        'hitsPerPage' => 'setHitsPerPage',
     ];
 
     /**
@@ -55,6 +67,9 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $getters = [
         'query' => 'getQuery',
+        'type' => 'getType',
+        'page' => 'getPage',
+        'hitsPerPage' => 'getHitsPerPage',
     ];
 
     /**
@@ -73,6 +88,15 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
+        }
+        if (isset($data['page'])) {
+            $this->container['page'] = $data['page'];
+        }
+        if (isset($data['hitsPerPage'])) {
+            $this->container['hitsPerPage'] = $data['hitsPerPage'];
         }
     }
 
@@ -134,7 +158,17 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
+            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -168,6 +202,85 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     public function setQuery($query)
     {
         $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
+     * Gets type.
+     *
+     * @return null|SynonymType
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param null|SynonymType $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets page.
+     *
+     * @return null|int
+     */
+    public function getPage()
+    {
+        return $this->container['page'] ?? null;
+    }
+
+    /**
+     * Sets page.
+     *
+     * @param null|int $page page to retrieve (the first page is `0`, not `1`)
+     *
+     * @return self
+     */
+    public function setPage($page)
+    {
+        $this->container['page'] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Gets hitsPerPage.
+     *
+     * @return null|int
+     */
+    public function getHitsPerPage()
+    {
+        return $this->container['hitsPerPage'] ?? null;
+    }
+
+    /**
+     * Sets hitsPerPage.
+     *
+     * @param null|int $hitsPerPage number of hits per page
+     *
+     * @return self
+     */
+    public function setHitsPerPage($hitsPerPage)
+    {
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchSynonymsParams., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchSynonymsParams., must be bigger than or equal to 1.');
+        }
+
+        $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
     }

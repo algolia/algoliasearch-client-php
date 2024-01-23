@@ -2331,11 +2331,11 @@ class SearchClient
      * Search for synonyms.
      *
      * @param string $indexName            Index on which to perform the request. (required)
-     * @param array  $type                 Search for specific [types of synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms). (optional)
-     * @param int    $page                 Returns the requested page number (the first page is 0). Page size is set by &#x60;hitsPerPage&#x60;. When null, there&#39;s no pagination. (optional, default to 0)
-     * @param int    $hitsPerPage          Maximum number of hits per page. (optional, default to 100)
      * @param array  $searchSynonymsParams Body of the &#x60;searchSynonyms&#x60; operation. (optional)
      *                                     - $searchSynonymsParams['query'] => (string) Text to search for in an index.
+     *                                     - $searchSynonymsParams['type'] => (array)
+     *                                     - $searchSynonymsParams['page'] => (int) Page to retrieve (the first page is `0`, not `1`).
+     *                                     - $searchSynonymsParams['hitsPerPage'] => (int) Number of hits per page.
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsParams
      *
@@ -2343,7 +2343,7 @@ class SearchClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse|array<string, mixed>
      */
-    public function searchSynonyms($indexName, $type = null, $page = null, $hitsPerPage = null, $searchSynonymsParams = null, $requestOptions = [])
+    public function searchSynonyms($indexName, $searchSynonymsParams = null, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -2351,26 +2351,11 @@ class SearchClient
                 'Parameter `indexName` is required when calling `searchSynonyms`.'
             );
         }
-        if (null !== $page && $page < 0) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling SearchClient.searchSynonyms, must be bigger than or equal to 0.');
-        }
 
         $resourcePath = '/1/indexes/{indexName}/synonyms/search';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($searchSynonymsParams) ? $searchSynonymsParams : [];
-
-        if (null !== $type) {
-            $queryParameters['type'] = $type;
-        }
-
-        if (null !== $page) {
-            $queryParameters['page'] = $page;
-        }
-
-        if (null !== $hitsPerPage) {
-            $queryParameters['hitsPerPage'] = $hitsPerPage;
-        }
 
         // path params
         if (null !== $indexName) {

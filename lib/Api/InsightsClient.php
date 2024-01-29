@@ -108,7 +108,7 @@ class InsightsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -147,7 +147,7 @@ class InsightsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -186,7 +186,7 @@ class InsightsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -226,7 +226,7 @@ class InsightsClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -266,7 +266,7 @@ class InsightsClient
     }
 
     /**
-     * Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).
+     * Delete user token.
      *
      * @param string $userToken      The user token for which to delete all associated events. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -307,7 +307,7 @@ class InsightsClient
     }
 
     /**
-     * Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
+     * Send events.
      *
      * @param array $insightsEvents insightsEvents (required)
      *                              - $insightsEvents['events'] => (array) List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. (required)

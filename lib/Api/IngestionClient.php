@@ -111,11 +111,6 @@ class IngestionClient
     /**
      * Create a authentication.
      *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
      * @param array $authenticationCreate (required)
      *                                    - $authenticationCreate['type'] => (array)  (required)
      *                                    - $authenticationCreate['name'] => (string) An human readable name describing the object. (required)
@@ -148,11 +143,6 @@ class IngestionClient
     /**
      * Create a destination.
      *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
      * @param array $destinationCreate (required)
      *                                 - $destinationCreate['type'] => (array)  (required)
      *                                 - $destinationCreate['name'] => (string) An human readable name describing the object. (required)
@@ -184,11 +174,6 @@ class IngestionClient
 
     /**
      * Create a source.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
      *
      * @param array $sourceCreate (required)
      *                            - $sourceCreate['type'] => (array)  (required)
@@ -255,7 +240,7 @@ class IngestionClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -294,7 +279,7 @@ class IngestionClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -333,7 +318,7 @@ class IngestionClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -373,7 +358,7 @@ class IngestionClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -413,12 +398,7 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the authentication of the given authenticationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Delete a authentication.
      *
      * @param string $authenticationID The authentication UUID. (required)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -452,12 +432,7 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the destination of the given destinationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Delete a destination.
      *
      * @param string $destinationID  The destination UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -491,12 +466,7 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the source of the given sourceID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Delete a source.
      *
      * @param string $sourceID       The source UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -530,7 +500,7 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the task of the given taskID.
+     * Delete a task.
      *
      * @param string $taskID         The task UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -564,12 +534,7 @@ class IngestionClient
     }
 
     /**
-     * Disable the task of the given taskID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Disable a task.
      *
      * @param string $taskID         The task UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -603,12 +568,7 @@ class IngestionClient
     }
 
     /**
-     * Enable the task of the given taskID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Enable a task.
      *
      * @param string $taskID         The task UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -642,12 +602,7 @@ class IngestionClient
     }
 
     /**
-     * Get the authentication of the given authenticationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a authentication.
      *
      * @param string $authenticationID The authentication UUID. (required)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -681,12 +636,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of authentications for the given query parameters, with pagination details.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of authentications.
      *
      * @param int   $itemsPerPage   The number of items per page to return. (optional)
      * @param int   $page           The page number to fetch, starting at 1. (optional)
@@ -739,12 +689,7 @@ class IngestionClient
     }
 
     /**
-     * Get the destination of the given destinationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a destination.
      *
      * @param string $destinationID  The destination UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -778,12 +723,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of destinations for the given query parameters, with pagination details.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of destinations.
      *
      * @param int   $itemsPerPage     The number of items per page to return. (optional)
      * @param int   $page             The page number to fetch, starting at 1. (optional)
@@ -836,12 +776,7 @@ class IngestionClient
     }
 
     /**
-     * Retrieve a stream listing for a given Singer specification compatible docker type source ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Retrieve a stream listing.
      *
      * @param string $sourceID       The source UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -875,12 +810,7 @@ class IngestionClient
     }
 
     /**
-     * Get a single event for a specific runID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get an event.
      *
      * @param string $runID          The run UUID. (required)
      * @param string $eventID        The event UUID. (required)
@@ -930,12 +860,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of events associated to the given runID, for the given query parameters.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of events.
      *
      * @param string $runID          The run UUID. (required)
      * @param int    $itemsPerPage   The number of items per page to return. (optional)
@@ -1009,12 +934,7 @@ class IngestionClient
     }
 
     /**
-     * Get a single run for the given ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a run.
      *
      * @param string $runID          The run UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1048,12 +968,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of runs for the given query parameters, with pagination details.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of runs.
      *
      * @param int    $itemsPerPage   The number of items per page to return. (optional)
      * @param int    $page           The page number to fetch, starting at 1. (optional)
@@ -1110,12 +1025,7 @@ class IngestionClient
     }
 
     /**
-     * Get the source of the given sourceID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a source.
      *
      * @param string $sourceID       The source UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1149,12 +1059,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of sources for the given query parameters, with pagination details.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of sources.
      *
      * @param int   $itemsPerPage     The number of items per page to return. (optional)
      * @param int   $page             The page number to fetch, starting at 1. (optional)
@@ -1207,12 +1112,7 @@ class IngestionClient
     }
 
     /**
-     * Get the task of the given taskID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a task.
      *
      * @param string $taskID         The task UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1246,12 +1146,7 @@ class IngestionClient
     }
 
     /**
-     * Get a list of tasks for the given query parameters, with pagination details.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Get a list of tasks.
      *
      * @param int   $itemsPerPage   The number of items per page to return. (optional)
      * @param int   $page           The page number to fetch, starting at 1. (optional)
@@ -1325,12 +1220,7 @@ class IngestionClient
     }
 
     /**
-     * Run the task of the given taskID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Run a task.
      *
      * @param string $taskID         The task UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1364,12 +1254,7 @@ class IngestionClient
     }
 
     /**
-     * Search among authentications with a defined set of parameters.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Search among authentications.
      *
      * @param array $authenticationSearch authenticationSearch (required)
      *                                    - $authenticationSearch['authenticationIDs'] => (array)  (required)
@@ -1398,12 +1283,7 @@ class IngestionClient
     }
 
     /**
-     * Search among destinations with a defined set of parameters.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Search among destinations.
      *
      * @param array $destinationSearch destinationSearch (required)
      *                                 - $destinationSearch['destinationIDs'] => (array)  (required)
@@ -1432,12 +1312,7 @@ class IngestionClient
     }
 
     /**
-     * Search among sources with a defined set of parameters.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Search among sources.
      *
      * @param array $sourceSearch sourceSearch (required)
      *                            - $sourceSearch['sourceIDs'] => (array)  (required)
@@ -1466,12 +1341,7 @@ class IngestionClient
     }
 
     /**
-     * Search among tasks with a defined set of parameters.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Search among tasks.
      *
      * @param array $taskSearch taskSearch (required)
      *                          - $taskSearch['taskIDs'] => (array)  (required)
@@ -1500,12 +1370,7 @@ class IngestionClient
     }
 
     /**
-     * Trigger a stream listing request for a Singer specification compatible docker type source.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Trigger a stream listing request.
      *
      * @param string $sourceID       The source UUID. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1539,12 +1404,7 @@ class IngestionClient
     }
 
     /**
-     * Update the authentication of the given authenticationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Update a authentication.
      *
      * @param string $authenticationID     The authentication UUID. (required)
      * @param array  $authenticationUpdate authenticationUpdate (required)
@@ -1592,12 +1452,7 @@ class IngestionClient
     }
 
     /**
-     * Update the destination of the given destinationID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Update a destination.
      *
      * @param string $destinationID     The destination UUID. (required)
      * @param array  $destinationUpdate destinationUpdate (required)
@@ -1645,12 +1500,7 @@ class IngestionClient
     }
 
     /**
-     * Update the source of the given sourceID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
+     * Update a source.
      *
      * @param string $sourceID     The source UUID. (required)
      * @param array  $sourceUpdate sourceUpdate (required)
@@ -1697,7 +1547,7 @@ class IngestionClient
     }
 
     /**
-     * Update the task of the given taskID.
+     * Update a task.
      *
      * @param string $taskID     The task UUID. (required)
      * @param array  $taskUpdate taskUpdate (required)

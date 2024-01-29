@@ -108,10 +108,7 @@ class AbtestingClient
     }
 
     /**
-     * Creates an A/B test.
-     *
-     * Required API Key ACLs:
-     *  - editSettings
+     * Create an A/B test.
      *
      * @param array $addABTestsRequest addABTestsRequest (required)
      *                                 - $addABTestsRequest['name'] => (string) A/B test name. (required)
@@ -142,7 +139,7 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -181,7 +178,7 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -220,7 +217,7 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -260,7 +257,7 @@ class AbtestingClient
     }
 
     /**
-     * This method allow you to send requests to the Algolia REST API.
+     * Send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -300,10 +297,7 @@ class AbtestingClient
     }
 
     /**
-     * Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
-     *
-     * Required API Key ACLs:
-     *  - editSettings
+     * Delete an A/B test.
      *
      * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -337,10 +331,7 @@ class AbtestingClient
     }
 
     /**
-     * Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
-     *
-     * Required API Key ACLs:
-     *  - analytics
+     * Get A/B test details.
      *
      * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -375,9 +366,6 @@ class AbtestingClient
 
     /**
      * List all A/B tests.
-     *
-     * Required API Key ACLs:
-     *  - analytics
      *
      * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
      * @param int    $limit          Number of records to return (page size). (optional, default to 10)
@@ -414,10 +402,7 @@ class AbtestingClient
     }
 
     /**
-     * If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
-     *
-     * Required API Key ACLs:
-     *  - editSettings
+     * Stop an A/B test.
      *
      * @param int   $id             Unique A/B test ID. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions

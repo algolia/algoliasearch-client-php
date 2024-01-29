@@ -109,7 +109,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Create a configuration.
+     * Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
      *
      * @param array $querySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex (required)
      *
@@ -137,7 +140,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -176,7 +179,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -215,7 +218,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -255,7 +258,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -295,7 +298,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Delete a configuration.
+     * Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
      *
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -329,7 +335,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * List configurations.
+     * List all Query Suggestions configurations of your Algolia application.
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -346,7 +355,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get a configuration.
+     * Get a single Query Suggestions configuration.
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -380,7 +392,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get configuration status.
+     * Report the status of a Query Suggestions index.
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -414,7 +429,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get logs.
+     * Get the logs for a single Query Suggestions index.
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -448,7 +466,10 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Update a configuration.
+     * Update a QuerySuggestions configuration.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
      *
      * @param string $indexName                     Query Suggestions index name. (required)
      * @param array  $querySuggestionsConfiguration querySuggestionsConfiguration (required)

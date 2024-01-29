@@ -97,7 +97,7 @@ class RecommendClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -136,7 +136,7 @@ class RecommendClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -175,7 +175,7 @@ class RecommendClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -215,7 +215,7 @@ class RecommendClient
     }
 
     /**
-     * Send requests to the Algolia REST API.
+     * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
@@ -255,7 +255,10 @@ class RecommendClient
     }
 
     /**
-     * Delete a Recommend rule.
+     * Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     *
+     * Required API Key ACLs:
+     *  - editSettings
      *
      * @param string $indexName      Index on which to perform the request. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
@@ -321,7 +324,10 @@ class RecommendClient
     }
 
     /**
-     * Get a Recommend rule.
+     * Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param string $indexName      Index on which to perform the request. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
@@ -387,7 +393,10 @@ class RecommendClient
     }
 
     /**
-     * Get a Recommend task&#39;s status.
+     * Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
      *
      * @param string $indexName      Index on which to perform the request. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
@@ -453,7 +462,10 @@ class RecommendClient
     }
 
     /**
-     * Get recommendations and trending items.
+     * Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).
+     *
+     * Required API Key ACLs:
+     *  - search
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
      *                                        - $getRecommendationsParams['requests'] => (array) Request parameters depend on the model (recommendations or trending). (required)
@@ -482,7 +494,10 @@ class RecommendClient
     }
 
     /**
-     * List Recommend rules.
+     * List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     *
+     * Required API Key ACLs:
+     *  - settings
      *
      * @param string $indexName                  Index on which to perform the request. (required)
      * @param array  $model                      [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)

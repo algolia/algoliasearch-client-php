@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetObjectsRequest Class Doc Comment.
  *
  * @category Class
- *
  * @description Record retrieval operation.
  */
 class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RecommendHit Class Doc Comment.
  *
  * @category Class
- *
  * @description Recommend hit.
  */
 class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -281,7 +280,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets rankingInfo.
      *
-     * @return null|RankingInfo
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo
      */
     public function getRankingInfo()
     {
@@ -291,7 +290,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets rankingInfo.
      *
-     * @param null|RankingInfo $rankingInfo rankingInfo
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

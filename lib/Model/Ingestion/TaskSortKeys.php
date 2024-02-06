@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskSortKeys Class Doc Comment.
  *
  * @category Class
- *
  * @description Used to sort the Task list endpoint.
  */
 class TaskSortKeys

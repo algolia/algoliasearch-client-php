@@ -151,7 +151,7 @@ class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets metrics.
      *
-     * @return null|LatencyResponseMetrics
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponseMetrics
      */
     public function getMetrics()
     {
@@ -161,7 +161,7 @@ class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets metrics.
      *
-     * @param null|LatencyResponseMetrics $metrics metrics
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponseMetrics $metrics metrics
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AroundPrecision Class Doc Comment.
  *
  * @category Class
- *
  * @description Precision of a geographical search (in meters), to [group results that are more or less the same distance from a central point](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/in-depth/geo-ranking-precision/).
  */
 class AroundPrecision extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class AroundPrecision extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

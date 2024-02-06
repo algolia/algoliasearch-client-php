@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandDateUtilsInput Class Doc Comment.
  *
  * @category Class
- *
  * @description The input for an &#x60;onDemand&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
  */
 class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RenderingContent Class Doc Comment.
  *
  * @category Class
- *
  * @description Extra content for the search UI, for example, to control the [ordering and display of facets](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/merchandising-facets/#merchandise-facets-and-their-values-in-the-manual-editor). You can set a default value and dynamically override it with [Rules](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/).
  */
 class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -153,7 +152,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets facetOrdering.
      *
-     * @return null|FacetOrdering
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetOrdering
      */
     public function getFacetOrdering()
     {
@@ -163,7 +162,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets facetOrdering.
      *
-     * @param null|FacetOrdering $facetOrdering facetOrdering
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetOrdering $facetOrdering facetOrdering
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RedirectRuleIndexMetadataData Class Doc Comment.
  *
  * @category Class
- *
  * @description Redirect rule data.
  */
 class RedirectRuleIndexMetadataData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

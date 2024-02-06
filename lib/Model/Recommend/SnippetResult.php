@@ -192,7 +192,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets matchLevel.
      *
-     * @return MatchLevel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -202,7 +202,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets matchLevel.
      *
-     * @param MatchLevel $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

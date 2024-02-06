@@ -522,7 +522,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets channel.
      *
-     * @return null|BigCommerceChannel
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel
      */
     public function getChannel()
     {
@@ -532,7 +532,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets channel.
      *
-     * @param null|BigCommerceChannel $channel channel
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel $channel channel
      *
      * @return self
      */
@@ -570,7 +570,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets productMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getProductMetafields()
     {
@@ -580,7 +580,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets productMetafields.
      *
-     * @param null|BigCommerceMetafield[] $productMetafields productMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $productMetafields productMetafields
      *
      * @return self
      */
@@ -594,7 +594,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets variantMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getVariantMetafields()
     {
@@ -604,7 +604,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets variantMetafields.
      *
-     * @param null|BigCommerceMetafield[] $variantMetafields variantMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $variantMetafields variantMetafields
      *
      * @return self
      */
@@ -642,7 +642,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets method.
      *
-     * @return null|MethodType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
      */
     public function getMethod()
     {
@@ -652,7 +652,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets method.
      *
-     * @param null|MethodType $method method
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
      *
      * @return self
      */
@@ -769,7 +769,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets dataType.
      *
-     * @return null|BigQueryDataType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
      */
     public function getDataType()
     {
@@ -779,7 +779,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets dataType.
      *
-     * @param null|BigQueryDataType $dataType dataType
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
      *
      * @return self
      */
@@ -865,7 +865,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets imageType.
      *
-     * @return DockerImageType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType
      */
     public function getImageType()
     {
@@ -875,7 +875,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets imageType.
      *
-     * @param DockerImageType $imageType imageType
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType $imageType imageType
      *
      * @return self
      */
@@ -889,7 +889,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets registry.
      *
-     * @return DockerRegistry
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
      */
     public function getRegistry()
     {
@@ -899,7 +899,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets registry.
      *
-     * @param DockerRegistry $registry registry
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * EditType Class Doc Comment.
  *
  * @category Class
- *
  * @description Type of edit.
  */
 class EditType

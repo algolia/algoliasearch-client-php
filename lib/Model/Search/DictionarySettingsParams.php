@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionarySettingsParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Enable or turn off the built-in Algolia stop words for a specific language.
  */
 class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets disableStandardEntries.
      *
-     * @return StandardEntries
+     * @return \Algolia\AlgoliaSearch\Model\Search\StandardEntries
      */
     public function getDisableStandardEntries()
     {
@@ -169,7 +168,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets disableStandardEntries.
      *
-     * @param StandardEntries $disableStandardEntries disableStandardEntries
+     * @param \Algolia\AlgoliaSearch\Model\Search\StandardEntries $disableStandardEntries disableStandardEntries
      *
      * @return self
      */

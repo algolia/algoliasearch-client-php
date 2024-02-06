@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * ViewedFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description Use this method to capture active filters. For example, when browsing a category page, users see content filtered on that specific category.
  */
 class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -296,7 +295,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets eventType.
      *
-     * @return ViewEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
      */
     public function getEventType()
     {
@@ -306,7 +305,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets eventType.
      *
-     * @param ViewEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
      *
      * @return self
      */

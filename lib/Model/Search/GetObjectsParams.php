@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetObjectsParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Request parameters.
  */
 class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets requests.
      *
-     * @return GetObjectsRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +168,7 @@ class GetObjectsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets requests.
      *
-     * @param GetObjectsRequest[] $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[] $requests requests
      *
      * @return self
      */

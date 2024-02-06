@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AssignUserIdParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Assign userID parameters.
  */
 class AssignUserIdParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

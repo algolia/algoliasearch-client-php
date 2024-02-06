@@ -384,9 +384,9 @@ class Uri implements UriInterface
     /**
      * Creates a URI from a hash of `parse_url` components.
      *
-     * @return UriInterface
-     *
      * @throws \InvalidArgumentException if the components do not form a valid URI
+     *
+     * @return UriInterface
      *
      * @see http://php.net/manual/en/function.parse-url.php
      */
@@ -592,9 +592,9 @@ class Uri implements UriInterface
     /**
      * @param string $scheme
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException if the scheme is invalid
+     *
+     * @return string
      */
     private function filterScheme($scheme)
     {
@@ -608,9 +608,9 @@ class Uri implements UriInterface
     /**
      * @param string $host
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException if the host is invalid
+     *
+     * @return string
      */
     private function filterHost($host)
     {
@@ -624,9 +624,9 @@ class Uri implements UriInterface
     /**
      * @param null|int $port
      *
-     * @return null|int
-     *
      * @throws \InvalidArgumentException if the port is invalid
+     *
+     * @return null|int
      */
     private function filterPort($port)
     {
@@ -654,9 +654,9 @@ class Uri implements UriInterface
      *
      * @param string $path
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException if the path is invalid
+     *
+     * @return string
      */
     private function filterPath($path)
     {
@@ -679,9 +679,9 @@ class Uri implements UriInterface
      *
      * @param string $str
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException if the query or fragment is invalid
+     *
+     * @return string
      */
     private function filterQueryAndFragment($str)
     {

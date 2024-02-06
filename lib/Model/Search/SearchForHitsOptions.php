@@ -189,7 +189,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return null|SearchTypeDefault
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault
      */
     public function getType()
     {
@@ -199,7 +199,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param null|SearchTypeDefault $type type
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault $type type
      *
      * @return self
      */

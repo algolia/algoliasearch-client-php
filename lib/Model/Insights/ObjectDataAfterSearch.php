@@ -223,7 +223,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets price.
      *
-     * @return null|Price
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Price
      */
     public function getPrice()
     {
@@ -233,7 +233,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets price.
      *
-     * @param null|Price $price price
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Price $price price
      *
      * @return self
      */
@@ -271,7 +271,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets discount.
      *
-     * @return null|Discount
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Discount
      */
     public function getDiscount()
     {
@@ -281,7 +281,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets discount.
      *
-     * @param null|Discount $discount discount
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Discount $discount discount
      *
      * @return self
      */

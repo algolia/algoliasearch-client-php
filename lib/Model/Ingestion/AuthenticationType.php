@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationType Class Doc Comment.
  *
  * @category Class
- *
  * @description Type of the Authentication, defines what kind of object is stored in the input.
  */
 class AuthenticationType

@@ -198,7 +198,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets imageType.
      *
-     * @return DockerImageType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType
      */
     public function getImageType()
     {
@@ -208,7 +208,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets imageType.
      *
-     * @param DockerImageType $imageType imageType
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType $imageType imageType
      *
      * @return self
      */
@@ -222,7 +222,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets registry.
      *
-     * @return DockerRegistry
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
      */
     public function getRegistry()
     {
@@ -232,7 +232,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets registry.
      *
-     * @param DockerRegistry $registry registry
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
      *
      * @return self
      */

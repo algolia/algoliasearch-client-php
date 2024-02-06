@@ -187,7 +187,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets type.
      *
-     * @return SourceType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceType
      */
     public function getType()
     {
@@ -197,7 +197,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets type.
      *
-     * @param SourceType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SourceType $type type
      *
      * @return self
      */
@@ -235,7 +235,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets input.
      *
-     * @return SourceInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceInput
      */
     public function getInput()
     {
@@ -245,7 +245,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets input.
      *
-     * @param SourceInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SourceInput $input input
      *
      * @return self
      */

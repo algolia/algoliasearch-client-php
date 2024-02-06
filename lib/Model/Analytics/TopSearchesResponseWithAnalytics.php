@@ -157,7 +157,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets searches.
      *
-     * @return TopSearchWithAnalytics[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[]
      */
     public function getSearches()
     {
@@ -167,7 +167,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets searches.
      *
-     * @param TopSearchWithAnalytics[] $searches top searches with their hits count and analytics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[] $searches top searches with their hits count and analytics
      *
      * @return self
      */

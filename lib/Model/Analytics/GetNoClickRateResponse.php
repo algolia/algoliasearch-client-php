@@ -277,7 +277,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets dates.
      *
-     * @return NoClickRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]
      */
     public function getDates()
     {
@@ -287,7 +287,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets dates.
      *
-     * @param NoClickRateEvent[] $dates overall count of searches without clicks plus a daily breakdown
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[] $dates overall count of searches without clicks plus a daily breakdown
      *
      * @return self
      */

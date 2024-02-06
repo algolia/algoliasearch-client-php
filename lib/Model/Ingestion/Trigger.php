@@ -187,7 +187,7 @@ class Trigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets type.
      *
-     * @return SubscriptionTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType
      */
     public function getType()
     {
@@ -197,7 +197,7 @@ class Trigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets type.
      *
-     * @param SubscriptionTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType $type type
      *
      * @return self
      */

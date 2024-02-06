@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * Languages Class Doc Comment.
  *
  * @category Class
- *
  * @description Set the language for deduplicating singular and plural suggestions. If specified, only the more popular form is included.
  */
 class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

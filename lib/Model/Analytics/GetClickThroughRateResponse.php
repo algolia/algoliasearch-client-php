@@ -277,7 +277,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets dates.
      *
-     * @return ClickThroughRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[]
      */
     public function getDates()
     {
@@ -287,7 +287,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates.
      *
-     * @param ClickThroughRateEvent[] $dates click-through rate events
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[] $dates click-through rate events
      *
      * @return self
      */

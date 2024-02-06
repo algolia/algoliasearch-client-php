@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * QueryType Class Doc Comment.
  *
  * @category Class
- *
  * @description Determines how query words are [interpreted as prefixes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/prefix-searching/).
  */
 class QueryType

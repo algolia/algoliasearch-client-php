@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * UpdatedAtWithObjectIdResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Response, taskID, unique object identifier, and an update timestamp.
  */
 class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Languages Class Doc Comment.
  *
  * @category Class
- *
  * @description Dictionary language.
  */
 class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -181,7 +180,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets plurals.
      *
-     * @return DictionaryLanguage
+     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
      */
     public function getPlurals()
     {
@@ -191,7 +190,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets plurals.
      *
-     * @param DictionaryLanguage $plurals plurals
+     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $plurals plurals
      *
      * @return self
      */
@@ -205,7 +204,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets stopwords.
      *
-     * @return DictionaryLanguage
+     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
      */
     public function getStopwords()
     {
@@ -215,7 +214,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets stopwords.
      *
-     * @param DictionaryLanguage $stopwords stopwords
+     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $stopwords stopwords
      *
      * @return self
      */
@@ -229,7 +228,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets compounds.
      *
-     * @return DictionaryLanguage
+     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
      */
     public function getCompounds()
     {
@@ -239,7 +238,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets compounds.
      *
-     * @param DictionaryLanguage $compounds compounds
+     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $compounds compounds
      *
      * @return self
      */

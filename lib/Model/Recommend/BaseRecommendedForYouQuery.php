@@ -173,7 +173,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets model.
      *
-     * @return RecommendedForYouModel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel
      */
     public function getModel()
     {
@@ -183,7 +183,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets model.
      *
-     * @param RecommendedForYouModel $model model
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel $model model
      *
      * @return self
      */
@@ -197,7 +197,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets queryParameters.
      *
-     * @return null|RecommendedForYouQueryParameters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters
      */
     public function getQueryParameters()
     {
@@ -207,7 +207,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets queryParameters.
      *
-     * @param null|RecommendedForYouQueryParameters $queryParameters queryParameters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters $queryParameters queryParameters
      *
      * @return self
      */
@@ -221,7 +221,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Gets fallbackParameters.
      *
-     * @return null|RecommendedForYouQueryParameters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters
      */
     public function getFallbackParameters()
     {
@@ -231,7 +231,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets fallbackParameters.
      *
-     * @param null|RecommendedForYouQueryParameters $fallbackParameters fallbackParameters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters $fallbackParameters fallbackParameters
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
- *
  * @description &#x60;batchDictionaryEntries&#x60; parameters.
  */
 class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -191,7 +190,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets requests.
      *
-     * @return BatchDictionaryEntriesRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[]
      */
     public function getRequests()
     {
@@ -201,7 +200,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets requests.
      *
-     * @param BatchDictionaryEntriesRequest[] $requests operations to batch
+     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests operations to batch
      *
      * @return self
      */

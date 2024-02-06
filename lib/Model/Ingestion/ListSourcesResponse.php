@@ -168,7 +168,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets sources.
      *
-     * @return Source[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Source[]
      */
     public function getSources()
     {
@@ -178,7 +178,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets sources.
      *
-     * @param Source[] $sources sources
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Source[] $sources sources
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -202,7 +202,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */

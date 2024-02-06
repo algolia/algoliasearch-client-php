@@ -164,7 +164,7 @@ class InsightsEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets events.
      *
-     * @return EventsItems[]
+     * @return \Algolia\AlgoliaSearch\Model\Insights\EventsItems[]
      */
     public function getEvents()
     {
@@ -174,7 +174,7 @@ class InsightsEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets events.
      *
-     * @param EventsItems[] $events List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error.
+     * @param \Algolia\AlgoliaSearch\Model\Insights\EventsItems[] $events List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error.
      *
      * @return self
      */

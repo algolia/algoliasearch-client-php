@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * DeletedAtResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Response, taskID, and deletion timestamp.
  */
 class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

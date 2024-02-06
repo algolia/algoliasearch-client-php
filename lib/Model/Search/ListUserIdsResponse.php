@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ListUserIdsResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description User ID data.
  */
 class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets userIDs.
      *
-     * @return UserId[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserId[]
      */
     public function getUserIDs()
     {
@@ -169,7 +168,7 @@ class ListUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userIDs.
      *
-     * @param UserId[] $userIDs user IDs
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserId[] $userIDs user IDs
      *
      * @return self
      */

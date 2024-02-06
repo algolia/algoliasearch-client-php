@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * ConvertedObjectIDsAfterSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Use this event to track when users convert after a previous Algolia request. For example, a user clicks on an item in the search results to view the product detail page. Then, the user adds the item to their shopping cart.  If you&#39;re building your category pages with Algolia, you&#39;ll also use this event.
  */
 class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -319,7 +318,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -329,7 +328,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * OptionalFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description Create filters to boost or demote records.   Records that match the filter are ranked higher for positive and lower for negative optional filters. In contrast to regular filters, records that don&#39;t match the optional filter are still included in the results, only their ranking is affected.
  */
 class OptionalFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class OptionalFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

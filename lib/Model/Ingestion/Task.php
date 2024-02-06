@@ -327,7 +327,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets trigger.
      *
-     * @return Trigger
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Trigger
      */
     public function getTrigger()
     {
@@ -337,7 +337,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets trigger.
      *
-     * @param Trigger $trigger trigger
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Trigger $trigger trigger
      *
      * @return self
      */
@@ -351,7 +351,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets input.
      *
-     * @return null|TaskInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
      */
     public function getInput()
     {
@@ -361,7 +361,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets input.
      *
-     * @param null|TaskInput $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
      *
      * @return self
      */
@@ -430,7 +430,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets action.
      *
-     * @return ActionType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ActionType
      */
     public function getAction()
     {
@@ -440,7 +440,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets action.
      *
-     * @param ActionType $action action
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ActionType $action action
      *
      * @return self
      */

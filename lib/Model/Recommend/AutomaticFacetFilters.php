@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * AutomaticFacetFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
  */
 class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * PurchasedObjectIDsAfterSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Use this event to track when users make a purchase after a previous Algolia request. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event.
  */
 class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -339,7 +338,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -349,7 +348,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */
@@ -363,7 +362,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets eventSubtype.
      *
-     * @return PurchaseEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent
      */
     public function getEventSubtype()
     {
@@ -373,7 +372,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventSubtype.
      *
-     * @param PurchaseEvent $eventSubtype eventSubtype
+     * @param \Algolia\AlgoliaSearch\Model\Insights\PurchaseEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -533,7 +532,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets objectData.
      *
-     * @return null|ObjectDataAfterSearch[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
      */
     public function getObjectData()
     {
@@ -543,7 +542,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectData.
      *
-     * @param null|ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
      *
      * @return self
      */
@@ -587,7 +586,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets value.
      *
-     * @return null|Value
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Value
      */
     public function getValue()
     {
@@ -597,7 +596,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets value.
      *
-     * @param null|Value $value value
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Value $value value
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthGoogleServiceAccountPartial Class Doc Comment.
  *
  * @category Class
- *
  * @description Authentication input to connect to a Google service (e.g. BigQuery).
  */
 class AuthGoogleServiceAccountPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -179,7 +179,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets events.
      *
-     * @return Event[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Event[]
      */
     public function getEvents()
     {
@@ -189,7 +189,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets events.
      *
-     * @param Event[] $events events
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Event[] $events events
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -213,7 +213,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */
@@ -227,7 +227,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets window.
      *
-     * @return Window
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Window
      */
     public function getWindow()
     {
@@ -237,7 +237,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets window.
      *
-     * @param Window $window window
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Window $window window
      *
      * @return self
      */

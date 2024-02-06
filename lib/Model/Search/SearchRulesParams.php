@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchRulesParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Rules search parameters.
  */
 class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -239,7 +238,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets anchoring.
      *
-     * @return null|Anchoring
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
      */
     public function getAnchoring()
     {
@@ -249,7 +248,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets anchoring.
      *
-     * @param null|Anchoring $anchoring anchoring
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
      *
      * @return self
      */

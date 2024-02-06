@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * FacetFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description [Filter hits by facet value](https://www.algolia.com/doc/api-reference/api-parameters/facetFilters/).
  */
 class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class FacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

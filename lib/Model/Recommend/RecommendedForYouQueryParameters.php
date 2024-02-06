@@ -876,7 +876,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets facetFilters.
      *
-     * @return null|FacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters
      */
     public function getFacetFilters()
     {
@@ -886,7 +886,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets facetFilters.
      *
-     * @param null|FacetFilters $facetFilters facetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -900,7 +900,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets optionalFilters.
      *
-     * @return null|OptionalFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -910,7 +910,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets optionalFilters.
      *
-     * @param null|OptionalFilters $optionalFilters optionalFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -924,7 +924,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets numericFilters.
      *
-     * @return null|NumericFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters
      */
     public function getNumericFilters()
     {
@@ -934,7 +934,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets numericFilters.
      *
-     * @param null|NumericFilters $numericFilters numericFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -948,7 +948,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets tagFilters.
      *
-     * @return null|TagFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters
      */
     public function getTagFilters()
     {
@@ -958,7 +958,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets tagFilters.
      *
-     * @param null|TagFilters $tagFilters tagFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -1195,7 +1195,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets aroundRadius.
      *
-     * @return null|AroundRadius
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius
      */
     public function getAroundRadius()
     {
@@ -1205,7 +1205,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets aroundRadius.
      *
-     * @param null|AroundRadius $aroundRadius aroundRadius
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -1219,7 +1219,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets aroundPrecision.
      *
-     * @return null|AroundPrecision
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -1229,7 +1229,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets aroundPrecision.
      *
-     * @param null|AroundPrecision $aroundPrecision aroundPrecision
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */
@@ -1950,7 +1950,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets typoTolerance.
      *
-     * @return null|TypoTolerance
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -1960,7 +1960,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets typoTolerance.
      *
-     * @param null|TypoTolerance $typoTolerance typoTolerance
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -2022,7 +2022,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets ignorePlurals.
      *
-     * @return null|IgnorePlurals
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -2032,7 +2032,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets ignorePlurals.
      *
-     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -2046,7 +2046,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets removeStopWords.
      *
-     * @return null|RemoveStopWords
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -2056,7 +2056,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets removeStopWords.
      *
-     * @param null|RemoveStopWords $removeStopWords removeStopWords
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -2190,7 +2190,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets queryType.
      *
-     * @return null|QueryType
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType
      */
     public function getQueryType()
     {
@@ -2200,7 +2200,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets queryType.
      *
-     * @param null|QueryType $queryType queryType
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType $queryType queryType
      *
      * @return self
      */
@@ -2214,7 +2214,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|RemoveWordsIfNoResults
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -2224,7 +2224,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -2238,7 +2238,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets mode.
      *
-     * @return null|Mode
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Mode
      */
     public function getMode()
     {
@@ -2248,7 +2248,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets mode.
      *
-     * @param null|Mode $mode mode
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Mode $mode mode
      *
      * @return self
      */
@@ -2262,7 +2262,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets semanticSearch.
      *
-     * @return null|SemanticSearch
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -2272,7 +2272,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets semanticSearch.
      *
-     * @param null|SemanticSearch $semanticSearch semanticSearch
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -2358,7 +2358,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|ExactOnSingleWordQuery
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -2368,7 +2368,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -2382,7 +2382,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets alternativesAsExact.
      *
-     * @return null|AlternativesAsExact[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -2392,7 +2392,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets alternativesAsExact.
      *
-     * @param null|AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -2406,7 +2406,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets advancedSyntaxFeatures.
      *
-     * @return null|AdvancedSyntaxFeatures[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -2416,7 +2416,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets advancedSyntaxFeatures.
      *
-     * @param null|AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
      *
      * @return self
      */
@@ -2430,7 +2430,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets distinct.
      *
-     * @return null|Distinct
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct
      */
     public function getDistinct()
     {
@@ -2440,7 +2440,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets distinct.
      *
-     * @param null|Distinct $distinct distinct
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct $distinct distinct
      *
      * @return self
      */
@@ -2633,7 +2633,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets renderingContent.
      *
-     * @return null|RenderingContent
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -2643,7 +2643,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets renderingContent.
      *
-     * @param null|RenderingContent $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -2681,7 +2681,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|ReRankingApplyFilter
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -2691,7 +2691,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationUpdate Class Doc Comment.
  *
  * @category Class
- *
  * @description Payload to partially update a Destination.
  */
 class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -177,7 +176,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets type.
      *
-     * @return null|DestinationType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationType
      */
     public function getType()
     {
@@ -187,7 +186,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets type.
      *
-     * @param null|DestinationType $type type
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationType $type type
      *
      * @return self
      */
@@ -225,7 +224,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets input.
      *
-     * @return null|DestinationInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput
      */
     public function getInput()
     {
@@ -235,7 +234,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets input.
      *
-     * @param null|DestinationInput $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput $input input
      *
      * @return self
      */

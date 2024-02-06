@@ -865,7 +865,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets facetFilters.
      *
-     * @return null|FacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters
      */
     public function getFacetFilters()
     {
@@ -875,7 +875,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets facetFilters.
      *
-     * @param null|FacetFilters $facetFilters facetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -889,7 +889,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets optionalFilters.
      *
-     * @return null|OptionalFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -899,7 +899,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets optionalFilters.
      *
-     * @param null|OptionalFilters $optionalFilters optionalFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -913,7 +913,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets numericFilters.
      *
-     * @return null|NumericFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters
      */
     public function getNumericFilters()
     {
@@ -923,7 +923,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets numericFilters.
      *
-     * @param null|NumericFilters $numericFilters numericFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -937,7 +937,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets tagFilters.
      *
-     * @return null|TagFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters
      */
     public function getTagFilters()
     {
@@ -947,7 +947,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets tagFilters.
      *
-     * @param null|TagFilters $tagFilters tagFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -1184,7 +1184,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets aroundRadius.
      *
-     * @return null|AroundRadius
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius
      */
     public function getAroundRadius()
     {
@@ -1194,7 +1194,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets aroundRadius.
      *
-     * @param null|AroundRadius $aroundRadius aroundRadius
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -1208,7 +1208,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets aroundPrecision.
      *
-     * @return null|AroundPrecision
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -1218,7 +1218,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets aroundPrecision.
      *
-     * @param null|AroundPrecision $aroundPrecision aroundPrecision
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */
@@ -1939,7 +1939,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets typoTolerance.
      *
-     * @return null|TypoTolerance
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -1949,7 +1949,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets typoTolerance.
      *
-     * @param null|TypoTolerance $typoTolerance typoTolerance
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -2011,7 +2011,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets ignorePlurals.
      *
-     * @return null|IgnorePlurals
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -2021,7 +2021,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets ignorePlurals.
      *
-     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -2035,7 +2035,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets removeStopWords.
      *
-     * @return null|RemoveStopWords
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -2045,7 +2045,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets removeStopWords.
      *
-     * @param null|RemoveStopWords $removeStopWords removeStopWords
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -2179,7 +2179,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets queryType.
      *
-     * @return null|QueryType
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType
      */
     public function getQueryType()
     {
@@ -2189,7 +2189,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets queryType.
      *
-     * @param null|QueryType $queryType queryType
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType $queryType queryType
      *
      * @return self
      */
@@ -2203,7 +2203,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|RemoveWordsIfNoResults
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -2213,7 +2213,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -2227,7 +2227,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets mode.
      *
-     * @return null|Mode
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Mode
      */
     public function getMode()
     {
@@ -2237,7 +2237,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets mode.
      *
-     * @param null|Mode $mode mode
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Mode $mode mode
      *
      * @return self
      */
@@ -2251,7 +2251,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets semanticSearch.
      *
-     * @return null|SemanticSearch
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -2261,7 +2261,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets semanticSearch.
      *
-     * @param null|SemanticSearch $semanticSearch semanticSearch
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -2347,7 +2347,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|ExactOnSingleWordQuery
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -2357,7 +2357,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -2371,7 +2371,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets alternativesAsExact.
      *
-     * @return null|AlternativesAsExact[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -2381,7 +2381,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets alternativesAsExact.
      *
-     * @param null|AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[] $alternativesAsExact Alternatives that should be considered an exact match by [the exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
      *
      * @return self
      */
@@ -2395,7 +2395,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets advancedSyntaxFeatures.
      *
-     * @return null|AdvancedSyntaxFeatures[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -2405,7 +2405,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets advancedSyntaxFeatures.
      *
-     * @param null|AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures allows you to specify which advanced syntax features are active when `advancedSyntax` is enabled
      *
      * @return self
      */
@@ -2419,7 +2419,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets distinct.
      *
-     * @return null|Distinct
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct
      */
     public function getDistinct()
     {
@@ -2429,7 +2429,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets distinct.
      *
-     * @param null|Distinct $distinct distinct
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct $distinct distinct
      *
      * @return self
      */
@@ -2622,7 +2622,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets renderingContent.
      *
-     * @return null|RenderingContent
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -2632,7 +2632,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets renderingContent.
      *
-     * @param null|RenderingContent $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -2670,7 +2670,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|ReRankingApplyFilter
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -2680,7 +2680,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */
@@ -2694,7 +2694,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets query.
      *
-     * @return null|ConsequenceQuery
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery
      */
     public function getQuery()
     {
@@ -2704,7 +2704,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query.
      *
-     * @param null|ConsequenceQuery $query query
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery $query query
      *
      * @return self
      */
@@ -2718,7 +2718,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets automaticFacetFilters.
      *
-     * @return null|AutomaticFacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
      */
     public function getAutomaticFacetFilters()
     {
@@ -2728,7 +2728,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticFacetFilters.
      *
-     * @param null|AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
      *
      * @return self
      */
@@ -2742,7 +2742,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets automaticOptionalFacetFilters.
      *
-     * @return null|AutomaticFacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
      */
     public function getAutomaticOptionalFacetFilters()
     {
@@ -2752,7 +2752,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets automaticOptionalFacetFilters.
      *
-     * @param null|AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
      *
      * @return self
      */

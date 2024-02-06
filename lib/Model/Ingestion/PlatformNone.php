@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * PlatformNone Class Doc Comment.
  *
  * @category Class
- *
  * @description Used to filter Authentication without platform property.
  */
 class PlatformNone

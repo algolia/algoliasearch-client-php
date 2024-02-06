@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
  * Region Class Doc Comment.
  *
  * @category Class
- *
  * @description The region where the cluster is located.
  */
 class Region

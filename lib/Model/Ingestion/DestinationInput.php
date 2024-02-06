@@ -232,7 +232,7 @@ class DestinationInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets recordType.
      *
-     * @return null|RecordType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType
      */
     public function getRecordType()
     {
@@ -242,7 +242,7 @@ class DestinationInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets recordType.
      *
-     * @param null|RecordType $recordType recordType
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType $recordType recordType
      *
      * @return self
      */

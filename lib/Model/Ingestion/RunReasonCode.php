@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunReasonCode Class Doc Comment.
  *
  * @category Class
- *
  * @description An identifier that pairs with the outcome reason.
  */
 class RunReasonCode

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * FacetOrdering Class Doc Comment.
  *
  * @category Class
- *
  * @description Defines the ordering of facets (widgets).
  */
 class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -161,7 +160,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets facets.
      *
-     * @return null|Facets
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Facets
      */
     public function getFacets()
     {
@@ -171,7 +170,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets facets.
      *
-     * @param null|Facets $facets facets
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Facets $facets facets
      *
      * @return self
      */

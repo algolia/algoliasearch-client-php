@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RuleResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Rule object.
  */
 class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -199,7 +198,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets metadata.
      *
-     * @return null|RuleResponseMetadata
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata
      */
     public function getMetadata()
     {
@@ -209,7 +208,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets metadata.
      *
-     * @param null|RuleResponseMetadata $metadata metadata
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RuleResponseMetadata $metadata metadata
      *
      * @return self
      */
@@ -247,7 +246,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets conditions.
      *
-     * @return null|Condition[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[]
      */
     public function getConditions()
     {
@@ -257,7 +256,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets conditions.
      *
-     * @param null|Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -271,7 +270,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets consequence.
      *
-     * @return null|Consequence
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence
      */
     public function getConsequence()
     {
@@ -281,7 +280,7 @@ class RuleResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets consequence.
      *
-     * @param null|Consequence $consequence consequence
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence $consequence consequence
      *
      * @return self
      */

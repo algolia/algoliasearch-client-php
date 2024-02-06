@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * AddedToCartObjectIDsAfterSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Use this event to track when users add items to their shopping cart after a previous Algolia request. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event.
  */
 class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -362,7 +361,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -372,7 +371,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */
@@ -386,7 +385,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets eventSubtype.
      *
-     * @return AddToCartEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent
      */
     public function getEventSubtype()
     {
@@ -396,7 +395,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets eventSubtype.
      *
-     * @param AddToCartEvent $eventSubtype eventSubtype
+     * @param \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -590,7 +589,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets objectData.
      *
-     * @return null|ObjectDataAfterSearch[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
      */
     public function getObjectData()
     {
@@ -600,7 +599,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets objectData.
      *
-     * @param null|ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
      *
      * @return self
      */
@@ -644,7 +643,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Gets value.
      *
-     * @return null|Value
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Value
      */
     public function getValue()
     {
@@ -654,7 +653,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets value.
      *
-     * @param null|Value $value value
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Value $value value
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Exhaustive Class Doc Comment.
  *
  * @category Class
- *
  * @description Whether certain properties of the search response are calculated exhaustive (exact) or approximated.
  */
 class Exhaustive extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

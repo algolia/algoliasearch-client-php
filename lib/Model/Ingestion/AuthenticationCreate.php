@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationCreate Class Doc Comment.
  *
  * @category Class
- *
  * @description The payload when creating an authentication.
  */
 class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -189,7 +188,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return AuthenticationType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType
      */
     public function getType()
     {
@@ -199,7 +198,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param AuthenticationType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType $type type
      *
      * @return self
      */
@@ -237,7 +236,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets platform.
      *
-     * @return null|Platform
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform
      */
     public function getPlatform()
     {
@@ -247,7 +246,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets platform.
      *
-     * @param null|Platform $platform platform
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform $platform platform
      *
      * @return self
      */
@@ -261,7 +260,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets input.
      *
-     * @return AuthInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput
      */
     public function getInput()
     {
@@ -271,7 +270,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets input.
      *
-     * @param AuthInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput $input input
      *
      * @return self
      */

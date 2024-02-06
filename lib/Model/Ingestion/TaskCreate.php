@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskCreate Class Doc Comment.
  *
  * @category Class
- *
  * @description The payload for a task creation.
  */
 class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -271,7 +270,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets trigger.
      *
-     * @return TaskCreateTrigger
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger
      */
     public function getTrigger()
     {
@@ -281,7 +280,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets trigger.
      *
-     * @param TaskCreateTrigger $trigger trigger
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger $trigger trigger
      *
      * @return self
      */
@@ -295,7 +294,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets action.
      *
-     * @return ActionType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ActionType
      */
     public function getAction()
     {
@@ -305,7 +304,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets action.
      *
-     * @param ActionType $action action
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ActionType $action action
      *
      * @return self
      */
@@ -374,7 +373,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets input.
      *
-     * @return null|TaskInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
      */
     public function getInput()
     {
@@ -384,7 +383,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets input.
      *
-     * @param null|TaskInput $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
      *
      * @return self
      */

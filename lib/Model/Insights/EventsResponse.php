@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * EventsResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description The response of the Insights API.
  */
 class EventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

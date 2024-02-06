@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * NumericFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description [Filter on numeric attributes](https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/).
  */
 class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * PromoteObjectIDs Class Doc Comment.
  *
  * @category Class
- *
  * @description Records to promote.
  */
 class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

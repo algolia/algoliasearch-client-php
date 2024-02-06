@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Mode Class Doc Comment.
  *
  * @category Class
- *
  * @description Search mode the index will use to query for results.
  */
 class Mode

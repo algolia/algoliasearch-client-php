@@ -168,7 +168,7 @@ class ListAuthenticationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets authentications.
      *
-     * @return Authentication[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Authentication[]
      */
     public function getAuthentications()
     {
@@ -178,7 +178,7 @@ class ListAuthenticationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets authentications.
      *
-     * @param Authentication[] $authentications authentications
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Authentication[] $authentications authentications
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class ListAuthenticationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -202,7 +202,7 @@ class ListAuthenticationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */

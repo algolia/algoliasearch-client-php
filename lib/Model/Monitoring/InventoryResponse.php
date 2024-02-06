@@ -151,7 +151,7 @@ class InventoryResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets inventory.
      *
-     * @return null|Server[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Server[]
      */
     public function getInventory()
     {
@@ -161,7 +161,7 @@ class InventoryResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets inventory.
      *
-     * @param null|Server[] $inventory inventory
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Server[] $inventory inventory
      *
      * @return self
      */

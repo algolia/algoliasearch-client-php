@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
- *
  * @description &#x60;searchDictionaryEntries&#x60; parameters.
  */
 class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

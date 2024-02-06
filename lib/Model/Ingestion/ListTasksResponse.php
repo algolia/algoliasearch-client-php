@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ListTasksResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description A list of tasks with pagination details.
  */
 class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -170,7 +169,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets tasks.
      *
-     * @return Task[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Task[]
      */
     public function getTasks()
     {
@@ -180,7 +179,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets tasks.
      *
-     * @param Task[] $tasks tasks
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Task[] $tasks tasks
      *
      * @return self
      */
@@ -194,7 +193,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -204,7 +203,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */

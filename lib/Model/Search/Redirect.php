@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Redirect Class Doc Comment.
  *
  * @category Class
- *
  * @description [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/).
  */
 class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -153,7 +152,7 @@ class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Gets index.
      *
-     * @return null|RedirectRuleIndexMetadata[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadata[]
      */
     public function getIndex()
     {
@@ -163,7 +162,7 @@ class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets index.
      *
-     * @param null|RedirectRuleIndexMetadata[] $index index
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadata[] $index index
      *
      * @return self
      */

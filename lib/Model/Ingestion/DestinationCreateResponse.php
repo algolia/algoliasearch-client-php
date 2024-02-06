@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationCreateResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Response from the API when the Destination is successfully created.
  */
 class DestinationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

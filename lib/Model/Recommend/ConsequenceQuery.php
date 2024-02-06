@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * ConsequenceQuery Class Doc Comment.
  *
  * @category Class
- *
  * @description When providing a string, it replaces the entire query string. When providing an object, it describes incremental edits to be made to the query string (but you can&#39;t do both).
  */
 class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -185,7 +184,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets edits.
      *
-     * @return null|Edit[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[]
      */
     public function getEdits()
     {
@@ -195,7 +194,7 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets edits.
      *
-     * @param null|Edit[] $edits edits to apply
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[] $edits edits to apply
      *
      * @return self
      */

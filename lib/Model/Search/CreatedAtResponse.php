@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * CreatedAtResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Response and creation timestamp.
  */
 class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

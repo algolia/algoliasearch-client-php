@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionaryEntry Class Doc Comment.
  *
  * @category Class
- *
  * @description Dictionary entry.
  */
 class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -322,7 +321,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets state.
      *
-     * @return null|DictionaryEntryState
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState
      */
     public function getState()
     {
@@ -332,7 +331,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets state.
      *
-     * @param null|DictionaryEntryState $state state
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState $state state
      *
      * @return self
      */

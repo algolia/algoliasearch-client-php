@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ScheduleTriggerType Class Doc Comment.
  *
  * @category Class
- *
  * @description A task which is triggered by a schedule (cron expression).
  */
 class ScheduleTriggerType

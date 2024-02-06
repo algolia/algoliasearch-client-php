@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ApiKey Class Doc Comment.
  *
  * @category Class
- *
  * @description API key object.
  */
 class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -215,7 +214,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets acl.
      *
-     * @return Acl[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
      */
     public function getAcl()
     {
@@ -225,7 +224,7 @@ class ApiKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets acl.
      *
-     * @param Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
+     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl [Permissions](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl) associated with the key.
      *
      * @return self
      */

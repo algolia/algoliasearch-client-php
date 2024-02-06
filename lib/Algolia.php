@@ -27,7 +27,7 @@ final class Algolia
     private static $logger;
 
     /**
-     * @var HttpClientInterface
+     * @var \Algolia\AlgoliaSearch\Http\HttpClientInterface
      */
     private static $httpClient;
 
@@ -43,7 +43,7 @@ final class Algolia
     /**
      * Gets the cache instance.
      *
-     * @return CacheInterface
+     * @return \Psr\SimpleCache\CacheInterface
      */
     public static function getCache()
     {
@@ -65,7 +65,7 @@ final class Algolia
     /**
      * Gets the logger instance.
      *
-     * @return LoggerInterface
+     * @return \Psr\Log\LoggerInterface
      */
     public static function getLogger()
     {

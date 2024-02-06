@@ -157,7 +157,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets status.
      *
-     * @return TaskStatus
+     * @return \Algolia\AlgoliaSearch\Model\Search\TaskStatus
      */
     public function getStatus()
     {
@@ -167,7 +167,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets status.
      *
-     * @param TaskStatus $status status
+     * @param \Algolia\AlgoliaSearch\Model\Search\TaskStatus $status status
      *
      * @return self
      */

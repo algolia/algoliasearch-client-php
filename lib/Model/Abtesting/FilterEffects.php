@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * FilterEffects Class Doc Comment.
  *
  * @category Class
- *
  * @description A/B test filter effects resulting from configuration settings.
  */
 class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -161,7 +160,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets outliers.
      *
-     * @return null|FilterEffectsOutliers
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers
      */
     public function getOutliers()
     {
@@ -171,7 +170,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets outliers.
      *
-     * @param null|FilterEffectsOutliers $outliers outliers
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers $outliers outliers
      *
      * @return self
      */
@@ -185,7 +184,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets emptySearch.
      *
-     * @return null|FilterEffectsEmptySearch
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch
      */
     public function getEmptySearch()
     {
@@ -195,7 +194,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets emptySearch.
      *
-     * @param null|FilterEffectsEmptySearch $emptySearch emptySearch
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch $emptySearch emptySearch
      *
      * @return self
      */

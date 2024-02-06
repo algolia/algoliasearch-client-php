@@ -298,7 +298,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets model.
      *
-     * @return RecommendationModels
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels
      */
     public function getModel()
     {
@@ -308,7 +308,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets model.
      *
-     * @param RecommendationModels $model model
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationModels $model model
      *
      * @return self
      */
@@ -346,7 +346,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets queryParameters.
      *
-     * @return null|SearchParamsObject
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
      */
     public function getQueryParameters()
     {
@@ -356,7 +356,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets queryParameters.
      *
-     * @param null|SearchParamsObject $queryParameters queryParameters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $queryParameters queryParameters
      *
      * @return self
      */
@@ -370,7 +370,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets fallbackParameters.
      *
-     * @return null|SearchParamsObject
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
      */
     public function getFallbackParameters()
     {
@@ -380,7 +380,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets fallbackParameters.
      *
-     * @param null|SearchParamsObject $fallbackParameters fallbackParameters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $fallbackParameters fallbackParameters
      *
      * @return self
      */

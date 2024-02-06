@@ -176,7 +176,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets operation.
      *
-     * @return OperationType
+     * @return \Algolia\AlgoliaSearch\Model\Search\OperationType
      */
     public function getOperation()
     {
@@ -186,7 +186,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets operation.
      *
-     * @param OperationType $operation operation
+     * @param \Algolia\AlgoliaSearch\Model\Search\OperationType $operation operation
      *
      * @return self
      */
@@ -224,7 +224,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets scope.
      *
-     * @return null|ScopeType[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[]
      */
     public function getScope()
     {
@@ -234,7 +234,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets scope.
      *
-     * @param null|ScopeType[] $scope **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[] $scope **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
      *
      * @return self
      */

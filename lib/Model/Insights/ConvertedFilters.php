@@ -294,7 +294,7 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets eventType.
      *
-     * @return ConversionEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
      */
     public function getEventType()
     {
@@ -304,7 +304,7 @@ class ConvertedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets eventType.
      *
-     * @param ConversionEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
      *
      * @return self
      */

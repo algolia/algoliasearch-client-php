@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandTrigger Class Doc Comment.
  *
  * @category Class
- *
  * @description The trigger information of a task of type &#x60;onDemand&#x60;.
  */
 class OnDemandTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -167,7 +166,7 @@ class OnDemandTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets type.
      *
-     * @return OnDemandTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\OnDemandTriggerType
      */
     public function getType()
     {
@@ -177,7 +176,7 @@ class OnDemandTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets type.
      *
-     * @param OnDemandTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\OnDemandTriggerType $type type
      *
      * @return self
      */

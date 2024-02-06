@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * GetRecommendationsParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Recommend parameters.
  */
 class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets requests.
      *
-     * @return RecommendationsRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +168,7 @@ class GetRecommendationsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets requests.
      *
-     * @param RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests request parameters depend on the model (recommendations or trending)
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchUserIdsResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description userIDs data.
  */
 class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -211,7 +210,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets hits.
      *
-     * @return UserHit[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserHit[]
      */
     public function getHits()
     {
@@ -221,7 +220,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets hits.
      *
-     * @param UserHit[] $hits user objects that match the query
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits user objects that match the query
      *
      * @return self
      */

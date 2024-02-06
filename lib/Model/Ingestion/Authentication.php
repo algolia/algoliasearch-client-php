@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Authentication Class Doc Comment.
  *
  * @category Class
- *
  * @description An authentication is used to login into a Source or a Destination.
  */
 class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -243,7 +242,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets type.
      *
-     * @return AuthenticationType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType
      */
     public function getType()
     {
@@ -253,7 +252,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets type.
      *
-     * @param AuthenticationType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType $type type
      *
      * @return self
      */
@@ -291,7 +290,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets platform.
      *
-     * @return null|Platform
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform
      */
     public function getPlatform()
     {
@@ -301,7 +300,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets platform.
      *
-     * @param null|Platform $platform platform
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform $platform platform
      *
      * @return self
      */
@@ -315,7 +314,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets input.
      *
-     * @return AuthInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput
      */
     public function getInput()
     {
@@ -325,7 +324,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets input.
      *
-     * @param AuthInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput $input input
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * HighlightResultOption Class Doc Comment.
  *
  * @category Class
- *
  * @description Show highlighted section and words matched on a query.
  */
 class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -213,7 +212,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets matchLevel.
      *
-     * @return MatchLevel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -223,7 +222,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets matchLevel.
      *
-     * @param MatchLevel $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

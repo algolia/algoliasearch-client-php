@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * ErrorBase Class Doc Comment.
  *
  * @category Class
- *
  * @description Error.
  */
 class ErrorBase extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

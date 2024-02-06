@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Source Class Doc Comment.
  *
  * @category Class
- *
  * @description Source.
  */
 class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

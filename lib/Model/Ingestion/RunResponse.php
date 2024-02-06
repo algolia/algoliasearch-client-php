@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description The response from the run task API, containing an Observability Run ID and the time it was created at.
  */
 class RunResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

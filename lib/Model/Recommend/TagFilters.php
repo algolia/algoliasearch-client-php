@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TagFilters Class Doc Comment.
  *
  * @category Class
- *
  * @description [Filter hits by tags](https://www.algolia.com/doc/api-reference/api-parameters/tagFilters/).
  */
 class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

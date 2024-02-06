@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationCreate Class Doc Comment.
  *
  * @category Class
- *
  * @description The payload when creating a destination.
  */
 class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -189,7 +188,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets type.
      *
-     * @return DestinationType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType
      */
     public function getType()
     {
@@ -199,7 +198,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets type.
      *
-     * @param DestinationType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType $type type
      *
      * @return self
      */
@@ -237,7 +236,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets input.
      *
-     * @return DestinationInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput
      */
     public function getInput()
     {
@@ -247,7 +246,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets input.
      *
-     * @param DestinationInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput $input input
      *
      * @return self
      */

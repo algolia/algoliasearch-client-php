@@ -190,7 +190,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets hits.
      *
-     * @return Rule[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Rule[]
      */
     public function getHits()
     {
@@ -200,7 +200,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hits.
      *
-     * @param Rule[] $hits fetched rules
+     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits fetched rules
      *
      * @return self
      */

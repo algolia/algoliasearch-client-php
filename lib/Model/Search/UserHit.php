@@ -340,7 +340,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets highlightResult.
      *
-     * @return UserHighlightResult
+     * @return \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult
      */
     public function getHighlightResult()
     {
@@ -350,7 +350,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets highlightResult.
      *
-     * @param UserHighlightResult $highlightResult highlightResult
+     * @param \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult $highlightResult highlightResult
      *
      * @return self
      */

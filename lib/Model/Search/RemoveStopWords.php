@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RemoveStopWords Class Doc Comment.
  *
  * @category Class
- *
  * @description Removes stop (common) words from the query before executing it. &#x60;removeStopWords&#x60; is used in conjunction with the &#x60;queryLanguages&#x60; setting. _list_: language ISO codes for which stop words should be enabled. This list will override any values that you may have set in &#x60;queryLanguages&#x60;. _true_: enables the stop words feature, ensuring that stop words are removed from consideration in a search. The languages supported here are either [every language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) (this is the default) or those set by &#x60;queryLanguages&#x60;. _false_: turns off the stop words feature, allowing stop words to be taken into account in a search.
  */
 class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class RemoveStopWords extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

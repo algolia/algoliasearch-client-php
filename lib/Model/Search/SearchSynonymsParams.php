@@ -209,7 +209,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return null|SynonymType
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\SynonymType
      */
     public function getType()
     {
@@ -219,7 +219,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param null|SynonymType $type type
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
      *
      * @return self
      */

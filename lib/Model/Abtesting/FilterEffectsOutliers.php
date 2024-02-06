@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * FilterEffectsOutliers Class Doc Comment.
  *
  * @category Class
- *
  * @description Outliers removed from the A/B test as a result of configuration settings.
  */
 class FilterEffectsOutliers extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchUserIdsParams Class Doc Comment.
  *
  * @category Class
- *
  * @description OK
  */
 class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

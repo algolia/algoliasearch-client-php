@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TrendingFacetHit Class Doc Comment.
  *
  * @category Class
- *
  * @description Trending facet hit.
  */
 class TrendingFacetHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

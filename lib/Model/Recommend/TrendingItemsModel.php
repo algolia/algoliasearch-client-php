@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TrendingItemsModel Class Doc Comment.
  *
  * @category Class
- *
  * @description Trending items model.
  */
 class TrendingItemsModel

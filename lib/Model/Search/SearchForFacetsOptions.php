@@ -299,7 +299,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets type.
      *
-     * @return SearchTypeFacet
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet
      */
     public function getType()
     {
@@ -309,7 +309,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets type.
      *
-     * @param SearchTypeFacet $type type
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet $type type
      *
      * @return self
      */

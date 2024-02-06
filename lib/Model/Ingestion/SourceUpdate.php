@@ -191,7 +191,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets input.
      *
-     * @return null|SourceUpdateInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdateInput
      */
     public function getInput()
     {
@@ -201,7 +201,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets input.
      *
-     * @param null|SourceUpdateInput $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdateInput $input input
      *
      * @return self
      */

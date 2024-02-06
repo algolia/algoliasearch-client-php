@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationUpdateResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Response from the API when the Authentication is successfully updated.
  */
 class AuthenticationUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -398,7 +398,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets method.
      *
-     * @return null|MethodType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
      */
     public function getMethod()
     {
@@ -408,7 +408,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets method.
      *
-     * @param null|MethodType $method method
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
      *
      * @return self
      */
@@ -525,7 +525,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets dataType.
      *
-     * @return null|BigQueryDataType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
      */
     public function getDataType()
     {
@@ -535,7 +535,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets dataType.
      *
-     * @param null|BigQueryDataType $dataType dataType
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
      *
      * @return self
      */
@@ -621,7 +621,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets registry.
      *
-     * @return null|DockerRegistry
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
      */
     public function getRegistry()
     {
@@ -631,7 +631,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets registry.
      *
-     * @param null|DockerRegistry $registry registry
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
      *
      * @return self
      */

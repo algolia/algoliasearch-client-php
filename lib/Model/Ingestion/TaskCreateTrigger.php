@@ -168,7 +168,7 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets type.
      *
-     * @return SubscriptionTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType
      */
     public function getType()
     {
@@ -178,7 +178,7 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets type.
      *
-     * @param SubscriptionTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType $type type
      *
      * @return self
      */

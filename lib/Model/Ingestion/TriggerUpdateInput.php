@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TriggerUpdateInput Class Doc Comment.
  *
  * @category Class
- *
  * @description The trigger input for a task update.
  */
 class TriggerUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationUpdate Class Doc Comment.
  *
  * @category Class
- *
  * @description Payload to partially update an Authentication.
  */
 class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -177,7 +176,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return null|AuthenticationType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType
      */
     public function getType()
     {
@@ -187,7 +186,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param null|AuthenticationType $type type
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType $type type
      *
      * @return self
      */
@@ -225,7 +224,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets platform.
      *
-     * @return null|Platform
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform
      */
     public function getPlatform()
     {
@@ -235,7 +234,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets platform.
      *
-     * @param null|Platform $platform platform
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform $platform platform
      *
      * @return self
      */
@@ -249,7 +248,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets input.
      *
-     * @return null|AuthInputPartial
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial
      */
     public function getInput()
     {
@@ -259,7 +258,7 @@ class AuthenticationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets input.
      *
-     * @param null|AuthInputPartial $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial $input input
      *
      * @return self
      */

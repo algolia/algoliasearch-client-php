@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthOAuthPartial Class Doc Comment.
  *
  * @category Class
- *
  * @description Authentication input for OAuth login.
  */
 class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

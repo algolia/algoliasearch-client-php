@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ListClustersResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description Clusters.
  */
 class ListClustersResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

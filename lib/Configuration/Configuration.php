@@ -266,9 +266,9 @@ abstract class Configuration
      *
      * @param string $algoliaAgent the user agent of the api client
      *
-     * @return $this
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return $this
      */
     public function setAlgoliaAgent($algoliaAgent)
     {

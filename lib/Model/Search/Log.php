@@ -635,7 +635,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets innerQueries.
      *
-     * @return null|LogQuery[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[]
      */
     public function getInnerQueries()
     {
@@ -645,7 +645,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets innerQueries.
      *
-     * @param null|LogQuery[] $innerQueries performed queries for the given request
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries performed queries for the given request
      *
      * @return self
      */

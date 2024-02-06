@@ -179,7 +179,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets abtests.
      *
-     * @return ABTest[]
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[]
      */
     public function getAbtests()
     {
@@ -189,7 +189,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets abtests.
      *
-     * @param ABTest[] $abtests A/B tests
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests A/B tests
      *
      * @return self
      */

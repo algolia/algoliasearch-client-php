@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * ViewedObjectIDs Class Doc Comment.
  *
  * @category Class
- *
  * @description Use this event to track when users viewed items in the search results.
  */
 class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -296,7 +295,7 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets eventType.
      *
-     * @return ViewEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
      */
     public function getEventType()
     {
@@ -306,7 +305,7 @@ class ViewedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets eventType.
      *
-     * @param ViewEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
      *
      * @return self
      */

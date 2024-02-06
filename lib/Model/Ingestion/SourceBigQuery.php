@@ -256,7 +256,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets dataType.
      *
-     * @return null|BigQueryDataType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
      */
     public function getDataType()
     {
@@ -266,7 +266,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets dataType.
      *
-     * @param null|BigQueryDataType $dataType dataType
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
      *
      * @return self
      */

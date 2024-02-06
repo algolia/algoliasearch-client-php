@@ -221,7 +221,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets method.
      *
-     * @return null|MethodType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
      */
     public function getMethod()
     {
@@ -231,7 +231,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets method.
      *
-     * @param null|MethodType $method method
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
      *
      * @return self
      */

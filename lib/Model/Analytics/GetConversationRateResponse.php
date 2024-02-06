@@ -277,7 +277,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets dates.
      *
-     * @return ConversionRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]
      */
     public function getDates()
     {
@@ -287,7 +287,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates.
      *
-     * @param ConversionRateEvent[] $dates conversion events
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[] $dates conversion events
      *
      * @return self
      */

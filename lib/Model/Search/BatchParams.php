@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Batch parameters.
  */
 class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets requests.
      *
-     * @return MultipleBatchRequest[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[]
      */
     public function getRequests()
     {
@@ -169,7 +168,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets requests.
      *
-     * @param MultipleBatchRequest[] $requests requests
+     * @param \Algolia\AlgoliaSearch\Model\Search\MultipleBatchRequest[] $requests requests
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Platform Class Doc Comment.
  *
  * @category Class
- *
  * @description Describe which platform the Authentication is used for.
  */
 class Platform

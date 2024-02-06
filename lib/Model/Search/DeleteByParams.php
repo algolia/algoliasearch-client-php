@@ -207,7 +207,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets facetFilters.
      *
-     * @return null|FacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
      */
     public function getFacetFilters()
     {
@@ -217,7 +217,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facetFilters.
      *
-     * @param null|FacetFilters $facetFilters facetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -255,7 +255,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets numericFilters.
      *
-     * @return null|NumericFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
      */
     public function getNumericFilters()
     {
@@ -265,7 +265,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets numericFilters.
      *
-     * @param null|NumericFilters $numericFilters numericFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -279,7 +279,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets tagFilters.
      *
-     * @return null|TagFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
      */
     public function getTagFilters()
     {
@@ -289,7 +289,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets tagFilters.
      *
-     * @param null|TagFilters $tagFilters tagFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -327,7 +327,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets aroundRadius.
      *
-     * @return null|AroundRadius
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
      */
     public function getAroundRadius()
     {
@@ -337,7 +337,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundRadius.
      *
-     * @param null|AroundRadius $aroundRadius aroundRadius
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */

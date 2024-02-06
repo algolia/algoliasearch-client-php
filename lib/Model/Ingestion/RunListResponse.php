@@ -179,7 +179,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets runs.
      *
-     * @return Run[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Run[]
      */
     public function getRuns()
     {
@@ -189,7 +189,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets runs.
      *
-     * @param Run[] $runs runs
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Run[] $runs runs
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -213,7 +213,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */
@@ -227,7 +227,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets window.
      *
-     * @return Window
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Window
      */
     public function getWindow()
     {
@@ -237,7 +237,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets window.
      *
-     * @param Window $window window
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Window $window window
      *
      * @return self
      */

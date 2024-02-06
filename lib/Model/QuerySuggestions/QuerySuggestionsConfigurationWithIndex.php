@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * QuerySuggestionsConfigurationWithIndex Class Doc Comment.
  *
  * @category Class
- *
  * @description Query Suggestions configuration.
  */
 class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -229,7 +228,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Gets sourceIndices.
      *
-     * @return SourceIndex[]
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]
      */
     public function getSourceIndices()
     {
@@ -239,7 +238,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets sourceIndices.
      *
-     * @param SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[] $sourceIndices algolia indices from which to get the popular searches for query suggestions
      *
      * @return self
      */
@@ -256,7 +255,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Gets languages.
      *
-     * @return null|Languages
+     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
      */
     public function getLanguages()
     {
@@ -266,7 +265,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets languages.
      *
-     * @param null|Languages $languages languages
+     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
      *
      * @return self
      */

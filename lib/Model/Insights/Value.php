@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * Value Class Doc Comment.
  *
  * @category Class
- *
  * @description Total monetary value of this event in units of &#x60;currency&#x60;.
  */
 class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

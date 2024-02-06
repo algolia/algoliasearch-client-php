@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskCreateResponse Class Doc Comment.
  *
  * @category Class
- *
  * @description The response from the API after a task creation.
  */
 class TaskCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

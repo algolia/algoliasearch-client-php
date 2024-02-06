@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RemoveWordsIfNoResults Class Doc Comment.
  *
  * @category Class
- *
  * @description Strategy to [remove words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/in-depth/why-use-remove-words-if-no-results/) from the query when it doesn&#39;t match any hits.
  */
 class RemoveWordsIfNoResults

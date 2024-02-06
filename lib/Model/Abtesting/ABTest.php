@@ -10,7 +10,6 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * @category Class
  *
  * @internal
- *
  * @coversNothing
  */
 class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -546,7 +545,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets variants.
      *
-     * @return Variant[]
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Variant[]
      */
     public function getVariants()
     {
@@ -556,7 +555,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets variants.
      *
-     * @param Variant[] $variants A/B test variants
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants
      *
      * @return self
      */

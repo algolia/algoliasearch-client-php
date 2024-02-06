@@ -207,7 +207,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets channel.
      *
-     * @return null|BigCommerceChannel
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel
      */
     public function getChannel()
     {
@@ -217,7 +217,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets channel.
      *
-     * @param null|BigCommerceChannel $channel channel
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel $channel channel
      *
      * @return self
      */
@@ -255,7 +255,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets productMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getProductMetafields()
     {
@@ -265,7 +265,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets productMetafields.
      *
-     * @param null|BigCommerceMetafield[] $productMetafields productMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $productMetafields productMetafields
      *
      * @return self
      */
@@ -279,7 +279,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets variantMetafields.
      *
-     * @return null|BigCommerceMetafield[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
      */
     public function getVariantMetafields()
     {
@@ -289,7 +289,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets variantMetafields.
      *
-     * @param null|BigCommerceMetafield[] $variantMetafields variantMetafields
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $variantMetafields variantMetafields
      *
      * @return self
      */

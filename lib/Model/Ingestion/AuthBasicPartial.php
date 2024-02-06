@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthBasicPartial Class Doc Comment.
  *
  * @category Class
- *
  * @description Authentication input for Basic login with username and password.
  */
 class AuthBasicPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

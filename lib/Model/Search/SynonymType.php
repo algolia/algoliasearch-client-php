@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SynonymType Class Doc Comment.
  *
  * @category Class
- *
  * @description Synonym type.
  */
 class SynonymType

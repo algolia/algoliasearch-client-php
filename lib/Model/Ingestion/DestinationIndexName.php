@@ -197,7 +197,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets recordType.
      *
-     * @return null|RecordType
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType
      */
     public function getRecordType()
     {
@@ -207,7 +207,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets recordType.
      *
-     * @param null|RecordType $recordType recordType
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType $recordType recordType
      *
      * @return self
      */

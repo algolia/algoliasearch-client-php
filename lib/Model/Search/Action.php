@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Action Class Doc Comment.
  *
  * @category Class
- *
  * @description Type of batch operation.
  */
 class Action

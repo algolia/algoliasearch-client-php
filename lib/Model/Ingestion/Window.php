@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Window Class Doc Comment.
  *
  * @category Class
- *
  * @description The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
  */
 class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

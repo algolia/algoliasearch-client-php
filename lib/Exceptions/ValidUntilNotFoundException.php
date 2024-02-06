@@ -2,4 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-final class ValidUntilNotFoundException extends AlgoliaException {}
+final class ValidUntilNotFoundException extends AlgoliaException
+{
+}

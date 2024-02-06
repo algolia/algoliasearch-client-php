@@ -151,7 +151,7 @@ class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets metrics.
      *
-     * @return null|InfrastructureResponseMetrics
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponseMetrics
      */
     public function getMetrics()
     {
@@ -161,7 +161,7 @@ class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets metrics.
      *
-     * @param null|InfrastructureResponseMetrics $metrics metrics
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponseMetrics $metrics metrics
      *
      * @return self
      */

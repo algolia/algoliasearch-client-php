@@ -165,7 +165,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets items.
      *
-     * @return FetchedIndex[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[]
      */
     public function getItems()
     {
@@ -175,7 +175,7 @@ class ListIndicesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets items.
      *
-     * @param FetchedIndex[] $items all indices in your Algolia application
+     * @param \Algolia\AlgoliaSearch\Model\Search\FetchedIndex[] $items all indices in your Algolia application
      *
      * @return self
      */

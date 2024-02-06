@@ -370,7 +370,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets matchedGeoLocation.
      *
-     * @return null|MatchedGeoLocation
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation
      */
     public function getMatchedGeoLocation()
     {
@@ -380,7 +380,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets matchedGeoLocation.
      *
-     * @param null|MatchedGeoLocation $matchedGeoLocation matchedGeoLocation
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\MatchedGeoLocation $matchedGeoLocation matchedGeoLocation
      *
      * @return self
      */
@@ -394,7 +394,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets personalization.
      *
-     * @return null|Personalization
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Personalization
      */
     public function getPersonalization()
     {
@@ -404,7 +404,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets personalization.
      *
-     * @param null|Personalization $personalization personalization
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Personalization $personalization personalization
      *
      * @return self
      */

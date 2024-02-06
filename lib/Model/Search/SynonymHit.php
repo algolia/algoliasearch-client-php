@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SynonymHit Class Doc Comment.
  *
  * @category Class
- *
  * @description Synonym object.
  */
 class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -242,7 +241,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets type.
      *
-     * @return SynonymType
+     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymType
      */
     public function getType()
     {
@@ -252,7 +251,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets type.
      *
-     * @param SynonymType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
      *
      * @return self
      */

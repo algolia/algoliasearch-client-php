@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * SubscriptionTriggerType Class Doc Comment.
  *
  * @category Class
- *
  * @description A task which is triggered by an external subscription (e.g. Webhook).
  */
 class SubscriptionTriggerType

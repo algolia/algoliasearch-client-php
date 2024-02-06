@@ -168,7 +168,7 @@ class ListDestinationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets destinations.
      *
-     * @return Destination[]
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Destination[]
      */
     public function getDestinations()
     {
@@ -178,7 +178,7 @@ class ListDestinationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets destinations.
      *
-     * @param Destination[] $destinations destinations
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Destination[] $destinations destinations
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class ListDestinationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets pagination.
      *
-     * @return Pagination
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
      */
     public function getPagination()
     {
@@ -202,7 +202,7 @@ class ListDestinationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets pagination.
      *
-     * @param Pagination $pagination pagination
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
      *
      * @return self
      */

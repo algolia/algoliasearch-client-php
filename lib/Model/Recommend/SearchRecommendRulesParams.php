@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * SearchRecommendRulesParams Class Doc Comment.
  *
  * @category Class
- *
  * @description Recommend rules search parameters.
  */
 class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

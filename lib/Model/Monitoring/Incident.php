@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
  * Incident Class Doc Comment.
  *
  * @category Class
- *
  * @description Incident details.
  */
 class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -185,7 +184,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Gets status.
      *
-     * @return null|Status
+     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Status
      */
     public function getStatus()
     {
@@ -195,7 +194,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets status.
      *
-     * @param null|Status $status status
+     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Status $status status
      *
      * @return self
      */

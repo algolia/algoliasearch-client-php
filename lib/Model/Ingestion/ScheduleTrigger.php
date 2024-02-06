@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ScheduleTrigger Class Doc Comment.
  *
  * @category Class
- *
  * @description The trigger information for a task of type &#39;schedule&#39;.
  */
 class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -189,7 +188,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets type.
      *
-     * @return ScheduleTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ScheduleTriggerType
      */
     public function getType()
     {
@@ -199,7 +198,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets type.
      *
-     * @param ScheduleTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ScheduleTriggerType $type type
      *
      * @return self
      */

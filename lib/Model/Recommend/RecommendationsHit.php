@@ -302,7 +302,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets rankingInfo.
      *
-     * @return null|RankingInfo
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo
      */
     public function getRankingInfo()
     {
@@ -312,7 +312,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets rankingInfo.
      *
-     * @param null|RankingInfo $rankingInfo rankingInfo
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

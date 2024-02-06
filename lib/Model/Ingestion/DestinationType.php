@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationType Class Doc Comment.
  *
  * @category Class
- *
  * @description Type of the Destination, defines in which Algolia product the data will be stored.
  */
 class DestinationType

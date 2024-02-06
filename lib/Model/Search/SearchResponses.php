@@ -157,7 +157,7 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets results.
      *
-     * @return SearchResult[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResult[]
      */
     public function getResults()
     {
@@ -167,7 +167,7 @@ class SearchResponses extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets results.
      *
-     * @param SearchResult[] $results results
+     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResult[] $results results
      *
      * @return self
      */

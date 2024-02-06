@@ -164,7 +164,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets positions.
      *
-     * @return ClickPosition[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
      */
     public function getPositions()
     {
@@ -174,7 +174,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets positions.
      *
-     * @param ClickPosition[] $positions click positions
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions click positions
      *
      * @return self
      */

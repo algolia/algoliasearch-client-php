@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * ClickedObjectIDsAfterSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Click event after an Algolia request.  Use this event to track when users click items in the search results. If you&#39;re building your category pages with Algolia, you&#39;ll also use this event.
  */
 class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -338,7 +337,7 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets eventType.
      *
-     * @return ClickEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
      */
     public function getEventType()
     {
@@ -348,7 +347,7 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets eventType.
      *
-     * @param ClickEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
      *
      * @return self
      */

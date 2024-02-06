@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Hit Class Doc Comment.
  *
  * @category Class
- *
  * @description A single hit.
  */
 class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -263,7 +262,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets rankingInfo.
      *
-     * @return null|RankingInfo
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo
      */
     public function getRankingInfo()
     {
@@ -273,7 +272,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets rankingInfo.
      *
-     * @param null|RankingInfo $rankingInfo rankingInfo
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

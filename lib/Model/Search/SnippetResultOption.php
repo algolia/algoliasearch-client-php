@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SnippetResultOption Class Doc Comment.
  *
  * @category Class
- *
  * @description Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
  */
 class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -194,7 +193,7 @@ class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets matchLevel.
      *
-     * @return MatchLevel
+     * @return \Algolia\AlgoliaSearch\Model\Search\MatchLevel
      */
     public function getMatchLevel()
     {
@@ -204,7 +203,7 @@ class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets matchLevel.
      *
-     * @param MatchLevel $matchLevel matchLevel
+     * @param \Algolia\AlgoliaSearch\Model\Search\MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

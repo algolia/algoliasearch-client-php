@@ -157,7 +157,7 @@ class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets status.
      *
-     * @return TaskStatus
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\TaskStatus
      */
     public function getStatus()
     {
@@ -167,7 +167,7 @@ class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets status.
      *
-     * @param TaskStatus $status status
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\TaskStatus $status status
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Consequence Class Doc Comment.
  *
  * @category Class
- *
  * @description [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule.
  */
 class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -185,7 +184,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets params.
      *
-     * @return null|ConsequenceParams
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceParams
      */
     public function getParams()
     {
@@ -195,7 +194,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets params.
      *
-     * @param null|ConsequenceParams $params params
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceParams $params params
      *
      * @return self
      */
@@ -209,7 +208,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets promote.
      *
-     * @return null|Promote[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Promote[]
      */
     public function getPromote()
     {
@@ -219,7 +218,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promote.
      *
-     * @param null|Promote[] $promote records to promote
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Promote[] $promote records to promote
      *
      * @return self
      */
@@ -257,7 +256,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets hide.
      *
-     * @return null|ConsequenceHide[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[]
      */
     public function getHide()
     {
@@ -267,7 +266,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets hide.
      *
-     * @param null|ConsequenceHide[] $hide Records to hide. By default, you can hide up to 50 records per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[] $hide Records to hide. By default, you can hide up to 50 records per rule.
      *
      * @return self
      */

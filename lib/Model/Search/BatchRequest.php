@@ -168,7 +168,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets action.
      *
-     * @return Action
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action
      */
     public function getAction()
     {
@@ -178,7 +178,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets action.
      *
-     * @param Action $action action
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
      *
      * @return self
      */

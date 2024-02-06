@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Event Class Doc Comment.
  *
  * @category Class
- *
  * @description An event describe a step of the task execution flow..
  */
 class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -306,7 +305,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets status.
      *
-     * @return EventStatus
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\EventStatus
      */
     public function getStatus()
     {
@@ -316,7 +315,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets status.
      *
-     * @param EventStatus $status status
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\EventStatus $status status
      *
      * @return self
      */
@@ -330,7 +329,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets type.
      *
-     * @return EventType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\EventType
      */
     public function getType()
     {
@@ -340,7 +339,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets type.
      *
-     * @param EventType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\EventType $type type
      *
      * @return self
      */

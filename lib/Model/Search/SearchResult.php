@@ -544,7 +544,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets exhaustive.
      *
-     * @return null|Exhaustive
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive
      */
     public function getExhaustive()
     {
@@ -554,7 +554,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets exhaustive.
      *
-     * @param null|Exhaustive $exhaustive exhaustive
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -995,7 +995,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets redirect.
      *
-     * @return null|Redirect
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Redirect
      */
     public function getRedirect()
     {
@@ -1005,7 +1005,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets redirect.
      *
-     * @param null|Redirect $redirect redirect
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Redirect $redirect redirect
      *
      * @return self
      */
@@ -1019,7 +1019,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets renderingContent.
      *
-     * @return null|RenderingContent
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1029,7 +1029,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets renderingContent.
      *
-     * @param null|RenderingContent $renderingContent renderingContent
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1115,7 +1115,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets hits.
      *
-     * @return Hit[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
      */
     public function getHits()
     {
@@ -1125,7 +1125,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets hits.
      *
-     * @param Hit[] $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
      *
      * @return self
      */
@@ -1187,7 +1187,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets facetHits.
      *
-     * @return FacetHits[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\FacetHits[]
      */
     public function getFacetHits()
     {
@@ -1197,7 +1197,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets facetHits.
      *
-     * @param FacetHits[] $facetHits facetHits
+     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * TypoTolerance Class Doc Comment.
  *
  * @category Class
- *
  * @description Controls whether [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) is enabled and how it is applied.
  */
 class TypoTolerance extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -66,7 +65,9 @@ class TypoTolerance extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null) {}
+    public function __construct(array $data = null)
+    {
+    }
 
     /**
      * Array of attributes where the key is the local name,

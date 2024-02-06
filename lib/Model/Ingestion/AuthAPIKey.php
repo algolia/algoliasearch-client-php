@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthAPIKey Class Doc Comment.
  *
  * @category Class
- *
  * @description Authentication input used for token credentials.
  */
 class AuthAPIKey extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Payload to search for multiple authentications, based on the given &#x60;authenticationIDs&#x60;.
  */
 class AuthenticationSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

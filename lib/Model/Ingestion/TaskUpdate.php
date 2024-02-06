@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskUpdate Class Doc Comment.
  *
  * @category Class
- *
  * @description The payload for a task update.
  */
 class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -219,7 +218,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets trigger.
      *
-     * @return null|TriggerUpdateInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TriggerUpdateInput
      */
     public function getTrigger()
     {
@@ -229,7 +228,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets trigger.
      *
-     * @param null|TriggerUpdateInput $trigger trigger
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TriggerUpdateInput $trigger trigger
      *
      * @return self
      */
@@ -243,7 +242,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets input.
      *
-     * @return null|TaskInput
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
      */
     public function getInput()
     {
@@ -253,7 +252,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets input.
      *
-     * @param null|TaskInput $input input
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
      *
      * @return self
      */

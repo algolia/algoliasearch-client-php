@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * SourceIndex Class Doc Comment.
  *
  * @category Class
- *
  * @description Configuration of an Algolia index for Query Suggestions.
  */
 class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -294,7 +293,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets facets.
      *
-     * @return null|Facet[]
+     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[]
      */
     public function getFacets()
     {
@@ -304,7 +303,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets.
      *
-     * @param null|Facet[] $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
+     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[] $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
      *
      * @return self
      */

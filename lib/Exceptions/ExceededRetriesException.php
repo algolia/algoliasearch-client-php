@@ -2,4 +2,6 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-final class ExceededRetriesException extends RequestException {}
+final class ExceededRetriesException extends RequestException
+{
+}

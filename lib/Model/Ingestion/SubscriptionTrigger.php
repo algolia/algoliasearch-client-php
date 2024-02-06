@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * SubscriptionTrigger Class Doc Comment.
  *
  * @category Class
- *
  * @description The trigger input for a task of type &#39;subscription&#39;.
  */
 class SubscriptionTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -159,7 +158,7 @@ class SubscriptionTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets type.
      *
-     * @return SubscriptionTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType
      */
     public function getType()
     {
@@ -169,7 +168,7 @@ class SubscriptionTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets type.
      *
-     * @param SubscriptionTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType $type type
      *
      * @return self
      */

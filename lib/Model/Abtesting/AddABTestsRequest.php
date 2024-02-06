@@ -211,7 +211,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets variants.
      *
-     * @return AddABTestsVariant[]
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]
      */
     public function getVariants()
     {
@@ -221,7 +221,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets variants.
      *
-     * @param AddABTestsVariant[] $variants A/B test variants
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variants A/B test variants
      *
      * @return self
      */

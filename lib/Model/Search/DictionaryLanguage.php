@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionaryLanguage Class Doc Comment.
  *
  * @category Class
- *
  * @description Custom entries for a dictionary.
  */
 class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

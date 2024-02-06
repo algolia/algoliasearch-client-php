@@ -168,7 +168,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets hits.
      *
-     * @return SynonymHit[]
+     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymHit[]
      */
     public function getHits()
     {
@@ -178,7 +178,7 @@ class SearchSynonymsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets hits.
      *
-     * @param SynonymHit[] $hits synonym objects
+     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymHit[] $hits synonym objects
      *
      * @return self
      */

@@ -235,9 +235,10 @@ class ObjectSerializer
     /**
      * Deserialize a JSON string into an object.
      *
-     * @param mixed    $data        object or primitive to be deserialized
-     * @param string   $class       class name is passed as a string
-     * @param string[] $httpHeaders HTTP headers
+     * @param mixed    $data          object or primitive to be deserialized
+     * @param string   $class         class name is passed as a string
+     * @param string[] $httpHeaders   HTTP headers
+     * @param string   $discriminator discriminator if polymorphism is used
      *
      * @return null|array|object a single or an array of $class instances
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SemanticSearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is _neuralSearch_.
  */
 class SemanticSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

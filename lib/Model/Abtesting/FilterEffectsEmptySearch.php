@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * FilterEffectsEmptySearch Class Doc Comment.
  *
  * @category Class
- *
  * @description Empty searches removed from the A/B test as a result of configuration settings.
  */
 class FilterEffectsEmptySearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

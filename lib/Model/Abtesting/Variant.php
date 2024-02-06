@@ -568,7 +568,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets filterEffects.
      *
-     * @return null|FilterEffects
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects
      */
     public function getFilterEffects()
     {
@@ -578,7 +578,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets filterEffects.
      *
-     * @param null|FilterEffects $filterEffects filterEffects
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects $filterEffects filterEffects
      *
      * @return self
      */

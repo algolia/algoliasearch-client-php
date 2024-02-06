@@ -181,7 +181,7 @@ class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets registry.
      *
-     * @return null|DockerRegistry
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
      */
     public function getRegistry()
     {
@@ -191,7 +191,7 @@ class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets registry.
      *
-     * @param null|DockerRegistry $registry registry
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
      *
      * @return self
      */

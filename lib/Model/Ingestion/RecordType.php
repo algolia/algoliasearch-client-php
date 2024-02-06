@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RecordType Class Doc Comment.
  *
  * @category Class
- *
  * @description Determines the indexing strategy to use for a given e-commerce source.
  */
 class RecordType

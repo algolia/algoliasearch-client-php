@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunSortKeys Class Doc Comment.
  *
  * @category Class
- *
  * @description Used to sort the Run list endpoint.
  */
 class RunSortKeys

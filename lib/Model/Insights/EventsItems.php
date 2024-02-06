@@ -398,7 +398,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventType.
      *
-     * @return ViewEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
      */
     public function getEventType()
     {
@@ -408,7 +408,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventType.
      *
-     * @param ViewEvent $eventType eventType
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
      *
      * @return self
      */
@@ -632,7 +632,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventSubtype.
      *
-     * @return AddToCartEvent
+     * @return \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent
      */
     public function getEventSubtype()
     {
@@ -642,7 +642,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventSubtype.
      *
-     * @param AddToCartEvent $eventSubtype eventSubtype
+     * @param \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -680,7 +680,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets objectData.
      *
-     * @return null|ObjectData[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
      */
     public function getObjectData()
     {
@@ -690,7 +690,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets objectData.
      *
-     * @param null|ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
      *
      * @return self
      */
@@ -710,7 +710,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets value.
      *
-     * @return null|Value
+     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Value
      */
     public function getValue()
     {
@@ -720,7 +720,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets value.
      *
-     * @param null|Value $value value
+     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Value $value value
      *
      * @return self
      */

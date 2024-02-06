@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationSortKeys Class Doc Comment.
  *
  * @category Class
- *
  * @description Used to sort the Destination list endpoint.
  */
 class DestinationSortKeys

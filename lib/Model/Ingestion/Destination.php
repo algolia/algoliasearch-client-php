@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Destination Class Doc Comment.
  *
  * @category Class
- *
  * @description A destination describe how the data is indexed on the Algolia side.
  */
 class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -243,7 +242,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets type.
      *
-     * @return DestinationType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType
      */
     public function getType()
     {
@@ -253,7 +252,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets type.
      *
-     * @param DestinationType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType $type type
      *
      * @return self
      */
@@ -291,7 +290,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets input.
      *
-     * @return DestinationInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput
      */
     public function getInput()
     {
@@ -301,7 +300,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets input.
      *
-     * @param DestinationInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput $input input
      *
      * @return self
      */

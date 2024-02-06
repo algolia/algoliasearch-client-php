@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Rule Class Doc Comment.
  *
  * @category Class
- *
  * @description Rule object.
  */
 class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
@@ -223,7 +222,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets conditions.
      *
-     * @return null|Condition[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Condition[]
      */
     public function getConditions()
     {
@@ -233,7 +232,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets conditions.
      *
-     * @param null|Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
      *
      * @return self
      */
@@ -247,7 +246,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets consequence.
      *
-     * @return null|Consequence
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\Consequence
      */
     public function getConsequence()
     {
@@ -257,7 +256,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets consequence.
      *
-     * @param null|Consequence $consequence consequence
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Consequence $consequence consequence
      *
      * @return self
      */
@@ -319,7 +318,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets validity.
      *
-     * @return null|TimeRange[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[]
      */
     public function getValidity()
     {
@@ -329,7 +328,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets validity.
      *
-     * @param null|TimeRange[] $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[] $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
      *
      * @return self
      */

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AutomaticFacetFilter Class Doc Comment.
  *
  * @category Class
- *
  * @description Automatic facet Filter.
  */
 class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Facets Class Doc Comment.
  *
  * @category Class
- *
  * @description Ordering of facets (widgets).
  */
 class Facets extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

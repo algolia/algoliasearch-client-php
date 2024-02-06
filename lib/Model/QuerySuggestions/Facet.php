@@ -8,7 +8,6 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * Facet Class Doc Comment.
  *
  * @category Class
- *
  * @description Facet to use as category.
  */
 class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable

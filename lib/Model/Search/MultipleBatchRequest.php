@@ -179,7 +179,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets action.
      *
-     * @return Action
+     * @return \Algolia\AlgoliaSearch\Model\Search\Action
      */
     public function getAction()
     {
@@ -189,7 +189,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets action.
      *
-     * @param Action $action action
+     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
      *
      * @return self
      */

@@ -168,7 +168,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets operation.
      *
-     * @return BuiltInOperationType
+     * @return \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType
      */
     public function getOperation()
     {
@@ -178,7 +178,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets operation.
      *
-     * @param BuiltInOperationType $operation operation
+     * @param \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType $operation operation
      *
      * @return self
      */

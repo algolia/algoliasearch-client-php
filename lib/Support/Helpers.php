@@ -46,7 +46,7 @@ final class Helpers
             return $value;
         }, $args);
 
-        return http_build_query($args);
+        return http_build_query($args, encoding_type: PHP_QUERY_RFC3986);
     }
 
     /**

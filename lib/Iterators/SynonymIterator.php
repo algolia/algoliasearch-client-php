@@ -22,10 +22,7 @@ final class SynonymIterator extends AbstractAlgoliaIterator
 
         $this->response = $this->searchClient->searchSynonyms(
             $this->indexName,
-            null,
-            $this->page,
-            $this->requestOptions['hitsPerPage'],
-            $this->requestOptions
+            array_merge($this->requestOptions, ['page' => $this->page])
         );
 
         $this->batchKey = 0;

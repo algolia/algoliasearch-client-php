@@ -2803,6 +2803,78 @@ class SearchClient
         return new SynonymIterator($indexName, $this, $requestOptions);
     }
 
+    /**
+     * Helper: Replace all objects in an index using a temporary one.
+     *
+     * @param string $indexName      Index name
+     * @param array  $objects        Objects to index
+     * @param array  $requestOptions Request options
+     */
+    public function replaceAllObjects($indexName, $objects, $requestOptions = [])
+    {
+        $tmpIndex = $indexName.'_tmp_'.uniqid('php_', true);
+
+        // Copy all index resources from production index
+        $copyResponse = $this->operationIndex(
+            $indexName,
+            [
+                'operation' => 'copy',
+                'destination' => $tmpIndex,
+                'scope' => ['settings', 'synonyms', 'rules'],
+            ],
+            $requestOptions
+        );
+
+        $this->waitForTask($indexName, $copyResponse['taskID']);
+
+        // Send records (batched)
+        $requests = [];
+
+        foreach ($objects as $record) {
+            $requests[] = [
+                'action' => 'addObject',
+                'body' => $record,
+            ];
+        }
+
+        $batchResponse = $this->batch(
+            $tmpIndex,
+            ['requests' => $requests],
+            $requestOptions
+        );
+
+        $this->waitForTask($tmpIndex, $batchResponse['taskID']);
+
+        // Move temporary index to production
+        $moveResponse = $this->operationIndex(
+            $tmpIndex,
+            [
+                'operation' => 'move',
+                'destination' => $indexName,
+            ],
+            $requestOptions
+        );
+
+        $this->waitForTask($tmpIndex, $moveResponse['taskID']);
+    }
+
+    /**
+     * Helper: Generate a secured API Key.
+     *
+     * @param string $parentApiKey Parent API Key
+     * @param array  $restrictions API Key's restrictions
+     *
+     * @return string
+     */
+    public static function generateSecuredApiKey($parentApiKey, $restrictions)
+    {
+        $urlEncodedRestrictions = Helpers::buildQuery($restrictions);
+
+        $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
+
+        return base64_encode($content);
+    }
+
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {

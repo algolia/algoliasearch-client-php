@@ -26,6 +26,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'conversionRate' => 'float',
         'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>',
         'description' => 'string',
+        'estimatedSampleSize' => 'int',
         'filterEffects' => '\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects',
         'index' => 'string',
         'noResultCount' => 'int',
@@ -53,6 +54,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'conversionRate' => 'double',
         'currencies' => null,
         'description' => null,
+        'estimatedSampleSize' => null,
         'filterEffects' => null,
         'index' => null,
         'noResultCount' => null,
@@ -81,6 +83,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'conversionRate' => 'conversionRate',
         'currencies' => 'currencies',
         'description' => 'description',
+        'estimatedSampleSize' => 'estimatedSampleSize',
         'filterEffects' => 'filterEffects',
         'index' => 'index',
         'noResultCount' => 'noResultCount',
@@ -108,6 +111,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'conversionRate' => 'setConversionRate',
         'currencies' => 'setCurrencies',
         'description' => 'setDescription',
+        'estimatedSampleSize' => 'setEstimatedSampleSize',
         'filterEffects' => 'setFilterEffects',
         'index' => 'setIndex',
         'noResultCount' => 'setNoResultCount',
@@ -135,6 +139,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'conversionRate' => 'getConversionRate',
         'currencies' => 'getCurrencies',
         'description' => 'getDescription',
+        'estimatedSampleSize' => 'getEstimatedSampleSize',
         'filterEffects' => 'getFilterEffects',
         'index' => 'getIndex',
         'noResultCount' => 'getNoResultCount',
@@ -187,6 +192,9 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
+        }
+        if (isset($data['estimatedSampleSize'])) {
+            $this->container['estimatedSampleSize'] = $data['estimatedSampleSize'];
         }
         if (isset($data['filterEffects'])) {
             $this->container['filterEffects'] = $data['filterEffects'];
@@ -300,9 +308,6 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         }
         if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
             $invalidProperties[] = "'conversionRate' can't be null";
-        }
-        if (!isset($this->container['currencies']) || null === $this->container['currencies']) {
-            $invalidProperties[] = "'currencies' can't be null";
         }
         if (!isset($this->container['description']) || null === $this->container['description']) {
             $invalidProperties[] = "'description' can't be null";
@@ -520,7 +525,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>
      */
     public function getCurrencies()
     {
@@ -530,7 +535,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue> $currencies A/B test currencies
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue> $currencies A/B test currencies
      *
      * @return self
      */
@@ -561,6 +566,30 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets estimatedSampleSize.
+     *
+     * @return null|int
+     */
+    public function getEstimatedSampleSize()
+    {
+        return $this->container['estimatedSampleSize'] ?? null;
+    }
+
+    /**
+     * Sets estimatedSampleSize.
+     *
+     * @param null|int $estimatedSampleSize The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
+     *
+     * @return self
+     */
+    public function setEstimatedSampleSize($estimatedSampleSize)
+    {
+        $this->container['estimatedSampleSize'] = $estimatedSampleSize;
 
         return $this;
     }

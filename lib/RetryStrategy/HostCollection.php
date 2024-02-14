@@ -12,8 +12,6 @@ final class HostCollection
     public function __construct(array $hosts)
     {
         $this->hosts = $hosts;
-
-        $this->shuffle();
     }
 
     public static function create(array $urlsWithPriority)

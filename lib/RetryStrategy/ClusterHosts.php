@@ -64,7 +64,7 @@ final class ClusterHosts
         $read[$applicationId.'-dsn.algolia.net'] = 10;
         $write[$applicationId.'.algolia.net'] = 10;
 
-        return self::create($read, $write);
+        return self::create($read, $write)->shuffle();
     }
 
     public static function createFromCache($cacheKey)

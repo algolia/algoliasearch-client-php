@@ -26,6 +26,7 @@ class SearchConfig extends Configuration
             'appId' => '',
             'apiKey' => '',
             'hosts' => null,
+            'hasFullHosts' => false,
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,

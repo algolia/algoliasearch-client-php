@@ -170,6 +170,7 @@ abstract class Configuration
             'appId' => '',
             'apiKey' => '',
             'hosts' => null,
+            'hasFullHosts' => false,
             'readTimeout' => $this->defaultReadTimeout,
             'writeTimeout' => $this->defaultWriteTimeout,
             'connectTimeout' => $this->defaultConnectTimeout,
@@ -211,6 +212,18 @@ abstract class Configuration
         $this->config['hosts'] = $hosts;
 
         return $this;
+    }
+
+    public function setFullHosts($hosts)
+    {
+        $this->config['hasFullHosts'] = true;
+
+        return $this->setHosts($hosts);
+    }
+
+    public function getHasFullHosts()
+    {
+        return $this->config['hasFullHosts'];
     }
 
     public function getReadTimeout()

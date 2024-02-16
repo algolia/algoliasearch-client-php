@@ -17,7 +17,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $modelTypes = [
-        'appId' => 'string',
         'sourceIndicesAPIKey' => 'string',
         'suggestionsIndicesAPIKey' => 'string',
         'externalIndicesAPIKey' => 'string',
@@ -29,7 +28,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $modelFormats = [
-        'appId' => null,
         'sourceIndicesAPIKey' => null,
         'suggestionsIndicesAPIKey' => null,
         'externalIndicesAPIKey' => null,
@@ -42,7 +40,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $attributeMap = [
-        'appId' => 'appId',
         'sourceIndicesAPIKey' => 'sourceIndicesAPIKey',
         'suggestionsIndicesAPIKey' => 'suggestionsIndicesAPIKey',
         'externalIndicesAPIKey' => 'externalIndicesAPIKey',
@@ -54,7 +51,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $setters = [
-        'appId' => 'setAppId',
         'sourceIndicesAPIKey' => 'setSourceIndicesAPIKey',
         'suggestionsIndicesAPIKey' => 'setSuggestionsIndicesAPIKey',
         'externalIndicesAPIKey' => 'setExternalIndicesAPIKey',
@@ -66,7 +62,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $getters = [
-        'appId' => 'getAppId',
         'sourceIndicesAPIKey' => 'getSourceIndicesAPIKey',
         'suggestionsIndicesAPIKey' => 'getSuggestionsIndicesAPIKey',
         'externalIndicesAPIKey' => 'getExternalIndicesAPIKey',
@@ -86,9 +81,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['appId'])) {
-            $this->container['appId'] = $data['appId'];
-        }
         if (isset($data['sourceIndicesAPIKey'])) {
             $this->container['sourceIndicesAPIKey'] = $data['sourceIndicesAPIKey'];
         }
@@ -170,30 +162,6 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets appId.
-     *
-     * @return null|string
-     */
-    public function getAppId()
-    {
-        return $this->container['appId'] ?? null;
-    }
-
-    /**
-     * Sets appId.
-     *
-     * @param null|string $appId your Algolia application ID
-     *
-     * @return self
-     */
-    public function setAppId($appId)
-    {
-        $this->container['appId'] = $appId;
-
-        return $this;
     }
 
     /**

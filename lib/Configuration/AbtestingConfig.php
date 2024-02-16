@@ -4,7 +4,25 @@
 
 namespace Algolia\AlgoliaSearch\Configuration;
 
+use Algolia\AlgoliaSearch\Exceptions\AlgoliaException;
+
 class AbtestingConfig extends ConfigWithRegion
 {
     protected $clientName = 'Abtesting';
+
+    public static function create($appId, $apiKey, $region = null)
+    {
+        $allowedRegions = ['de', 'us'];
+
+        if (
+            null !== $region && !in_array($region, $allowedRegions, true)
+        ) {
+            throw new AlgoliaException(
+                '`region` must be one of the following: '.
+                    implode(', ', $allowedRegions)
+            );
+        }
+
+        return parent::create($appId, $apiKey, $region);
+    }
 }

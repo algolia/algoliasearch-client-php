@@ -45,18 +45,6 @@ class IngestionClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['eu', 'us'];
-
-        if (
-            null === $region
-            || (null !== $region && !in_array($region, $allowedRegions, true))
-        ) {
-            throw new AlgoliaException(
-                '`region` is required and must be one of the following: '.
-                    implode(', ', $allowedRegions)
-            );
-        }
-
         $config = IngestionConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);

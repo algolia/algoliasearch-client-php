@@ -45,17 +45,6 @@ class InsightsClient
      */
     public static function create($appId = null, $apiKey = null, $region = null)
     {
-        $allowedRegions = ['de', 'us'];
-
-        if (
-            null !== $region && !in_array($region, $allowedRegions, true)
-        ) {
-            throw new AlgoliaException(
-                '`region` must be one of the following: '.
-                    implode(', ', $allowedRegions)
-            );
-        }
-
         $config = InsightsConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);

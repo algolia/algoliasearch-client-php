@@ -1,3 +1,8 @@
+## [4.0.0-alpha.96](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.95...4.0.0-alpha.96)
+
+- [6624759e1](https://github.com/algolia/api-clients-automation/commit/6624759e1) feat(specs): add CustomFields to CT Source Input ([#2742](https://github.com/algolia/api-clients-automation/pull/2742)) by [@damcou](https://github.com/damcou/)
+- [ef37e65b7](https://github.com/algolia/api-clients-automation/commit/ef37e65b7) fix(clients): add e2e tests for analytics API ([#2737](https://github.com/algolia/api-clients-automation/pull/2737)) by [@millotp](https://github.com/millotp/)
+
 ## [4.0.0-alpha.95](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.94...4.0.0-alpha.95)
 
 - [4383a6919](https://github.com/algolia/api-clients-automation/commit/4383a6919) fix(php): revert restriction for psr/http-message dependency ([#2714](https://github.com/algolia/api-clients-automation/pull/2714)) by [@damcou](https://github.com/damcou/)

@@ -1,6 +1,6 @@
 {
     "name": "algolia/algoliasearch-client-php",
-    "version": "4.0.0-alpha.95",
+    "version": "4.0.0-alpha.96",
     "description": "API powering the features of Algolia.",
     "keywords": [
         "openapitools",

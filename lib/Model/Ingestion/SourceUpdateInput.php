@@ -19,6 +19,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelTypes = [
         'storeKeys' => 'string[]',
         'locales' => 'string[]',
+        'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'url' => 'string',
         'uniqueIDColumn' => 'string',
         'method' => '\Algolia\AlgoliaSearch\Model\Ingestion\MethodType',
@@ -44,6 +45,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelFormats = [
         'storeKeys' => null,
         'locales' => null,
+        'customFields' => null,
         'url' => null,
         'uniqueIDColumn' => null,
         'method' => null,
@@ -70,6 +72,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $attributeMap = [
         'storeKeys' => 'storeKeys',
         'locales' => 'locales',
+        'customFields' => 'customFields',
         'url' => 'url',
         'uniqueIDColumn' => 'uniqueIDColumn',
         'method' => 'method',
@@ -95,6 +98,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $setters = [
         'storeKeys' => 'setStoreKeys',
         'locales' => 'setLocales',
+        'customFields' => 'setCustomFields',
         'url' => 'setUrl',
         'uniqueIDColumn' => 'setUniqueIDColumn',
         'method' => 'setMethod',
@@ -120,6 +124,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $getters = [
         'storeKeys' => 'getStoreKeys',
         'locales' => 'getLocales',
+        'customFields' => 'getCustomFields',
         'url' => 'getUrl',
         'uniqueIDColumn' => 'getUniqueIDColumn',
         'method' => 'getMethod',
@@ -156,6 +161,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['locales'])) {
             $this->container['locales'] = $data['locales'];
+        }
+        if (isset($data['customFields'])) {
+            $this->container['customFields'] = $data['customFields'];
         }
         if (isset($data['url'])) {
             $this->container['url'] = $data['url'];
@@ -343,6 +351,30 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setLocales($locales)
     {
         $this->container['locales'] = $locales;
+
+        return $this;
+    }
+
+    /**
+     * Gets customFields.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     */
+    public function getCustomFields()
+    {
+        return $this->container['customFields'] ?? null;
+    }
+
+    /**
+     * Sets customFields.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     *
+     * @return self
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->container['customFields'] = $customFields;
 
         return $this;
     }

@@ -22,6 +22,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'url' => 'string',
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
     /**
@@ -35,6 +36,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'url' => null,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
+        'customFields' => null,
     ];
 
     /**
@@ -49,6 +51,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'url' => 'url',
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'customFields' => 'customFields',
     ];
 
     /**
@@ -62,6 +65,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'url' => 'setUrl',
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'customFields' => 'setCustomFields',
     ];
 
     /**
@@ -75,6 +79,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'url' => 'getUrl',
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'customFields' => 'getCustomFields',
     ];
 
     /**
@@ -105,6 +110,9 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         }
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['customFields'])) {
+            $this->container['customFields'] = $data['customFields'];
         }
     }
 
@@ -305,6 +313,30 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setFallbackIsInStockValue($fallbackIsInStockValue)
     {
         $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets customFields.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     */
+    public function getCustomFields()
+    {
+        return $this->container['customFields'] ?? null;
+    }
+
+    /**
+     * Sets customFields.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     *
+     * @return self
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->container['customFields'] = $customFields;
 
         return $this;
     }

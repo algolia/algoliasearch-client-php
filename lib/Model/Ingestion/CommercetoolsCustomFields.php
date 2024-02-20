@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * SourceUpdateCommercetools Class Doc Comment.
+ * CommercetoolsCustomFields Class Doc Comment.
  *
  * @category Class
+ * @description Custom fields from Commercetools to index in the records (see https://docs.commercetools.com/tutorials/custom-types).
  */
-class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CommercetoolsCustomFields extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +18,9 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'storeKeys' => 'string[]',
-        'locales' => 'string[]',
-        'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
+        'inventory' => 'string[]',
+        'price' => 'string[]',
+        'category' => 'string[]',
     ];
 
     /**
@@ -28,9 +29,9 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelFormats = [
-        'storeKeys' => null,
-        'locales' => null,
-        'customFields' => null,
+        'inventory' => null,
+        'price' => null,
+        'category' => null,
     ];
 
     /**
@@ -40,9 +41,9 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $attributeMap = [
-        'storeKeys' => 'storeKeys',
-        'locales' => 'locales',
-        'customFields' => 'customFields',
+        'inventory' => 'inventory',
+        'price' => 'price',
+        'category' => 'category',
     ];
 
     /**
@@ -51,9 +52,9 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $setters = [
-        'storeKeys' => 'setStoreKeys',
-        'locales' => 'setLocales',
-        'customFields' => 'setCustomFields',
+        'inventory' => 'setInventory',
+        'price' => 'setPrice',
+        'category' => 'setCategory',
     ];
 
     /**
@@ -62,9 +63,9 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $getters = [
-        'storeKeys' => 'getStoreKeys',
-        'locales' => 'getLocales',
-        'customFields' => 'getCustomFields',
+        'inventory' => 'getInventory',
+        'price' => 'getPrice',
+        'category' => 'getCategory',
     ];
 
     /**
@@ -81,14 +82,14 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['storeKeys'])) {
-            $this->container['storeKeys'] = $data['storeKeys'];
+        if (isset($data['inventory'])) {
+            $this->container['inventory'] = $data['inventory'];
         }
-        if (isset($data['locales'])) {
-            $this->container['locales'] = $data['locales'];
+        if (isset($data['price'])) {
+            $this->container['price'] = $data['price'];
         }
-        if (isset($data['customFields'])) {
-            $this->container['customFields'] = $data['customFields'];
+        if (isset($data['category'])) {
+            $this->container['category'] = $data['category'];
         }
     }
 
@@ -165,73 +166,73 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     }
 
     /**
-     * Gets storeKeys.
+     * Gets inventory.
      *
      * @return null|string[]
      */
-    public function getStoreKeys()
+    public function getInventory()
     {
-        return $this->container['storeKeys'] ?? null;
+        return $this->container['inventory'] ?? null;
     }
 
     /**
-     * Sets storeKeys.
+     * Sets inventory.
      *
-     * @param null|string[] $storeKeys unique and immutable key of the referenced Store
+     * @param null|string[] $inventory inventory custom fields
      *
      * @return self
      */
-    public function setStoreKeys($storeKeys)
+    public function setInventory($inventory)
     {
-        $this->container['storeKeys'] = $storeKeys;
+        $this->container['inventory'] = $inventory;
 
         return $this;
     }
 
     /**
-     * Gets locales.
+     * Gets price.
      *
      * @return null|string[]
      */
-    public function getLocales()
+    public function getPrice()
     {
-        return $this->container['locales'] ?? null;
+        return $this->container['price'] ?? null;
     }
 
     /**
-     * Sets locales.
+     * Sets price.
      *
-     * @param null|string[] $locales Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].
+     * @param null|string[] $price price custom fields
      *
      * @return self
      */
-    public function setLocales($locales)
+    public function setPrice($price)
     {
-        $this->container['locales'] = $locales;
+        $this->container['price'] = $price;
 
         return $this;
     }
 
     /**
-     * Gets customFields.
+     * Gets category.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     * @return null|string[]
      */
-    public function getCustomFields()
+    public function getCategory()
     {
-        return $this->container['customFields'] ?? null;
+        return $this->container['category'] ?? null;
     }
 
     /**
-     * Sets customFields.
+     * Sets category.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     * @param null|string[] $category category custom fields
      *
      * @return self
      */
-    public function setCustomFields($customFields)
+    public function setCategory($category)
     {
-        $this->container['customFields'] = $customFields;
+        $this->container['category'] = $category;
 
         return $this;
     }

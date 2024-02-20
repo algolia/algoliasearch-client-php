@@ -22,9 +22,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'url' => 'string',
         'projectKey' => 'string',
         'fallbackIsInStockValue' => 'bool',
+        'customFields' => 'string[]',
         'storeHash' => 'string',
         'channel' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel',
-        'customFields' => 'string[]',
         'productMetafields' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]',
         'variantMetafields' => '\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]',
         'uniqueIDColumn' => 'string',
@@ -55,9 +55,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'url' => null,
         'projectKey' => null,
         'fallbackIsInStockValue' => null,
+        'customFields' => null,
         'storeHash' => null,
         'channel' => null,
-        'customFields' => null,
         'productMetafields' => null,
         'variantMetafields' => null,
         'uniqueIDColumn' => null,
@@ -89,9 +89,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'url' => 'url',
         'projectKey' => 'projectKey',
         'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'customFields' => 'customFields',
         'storeHash' => 'storeHash',
         'channel' => 'channel',
-        'customFields' => 'customFields',
         'productMetafields' => 'productMetafields',
         'variantMetafields' => 'variantMetafields',
         'uniqueIDColumn' => 'uniqueIDColumn',
@@ -122,9 +122,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'url' => 'setUrl',
         'projectKey' => 'setProjectKey',
         'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'customFields' => 'setCustomFields',
         'storeHash' => 'setStoreHash',
         'channel' => 'setChannel',
-        'customFields' => 'setCustomFields',
         'productMetafields' => 'setProductMetafields',
         'variantMetafields' => 'setVariantMetafields',
         'uniqueIDColumn' => 'setUniqueIDColumn',
@@ -155,9 +155,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         'url' => 'getUrl',
         'projectKey' => 'getProjectKey',
         'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'customFields' => 'getCustomFields',
         'storeHash' => 'getStoreHash',
         'channel' => 'getChannel',
-        'customFields' => 'getCustomFields',
         'productMetafields' => 'getProductMetafields',
         'variantMetafields' => 'getVariantMetafields',
         'uniqueIDColumn' => 'getUniqueIDColumn',
@@ -206,14 +206,14 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (isset($data['fallbackIsInStockValue'])) {
             $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
         }
+        if (isset($data['customFields'])) {
+            $this->container['customFields'] = $data['customFields'];
+        }
         if (isset($data['storeHash'])) {
             $this->container['storeHash'] = $data['storeHash'];
         }
         if (isset($data['channel'])) {
             $this->container['channel'] = $data['channel'];
-        }
-        if (isset($data['customFields'])) {
-            $this->container['customFields'] = $data['customFields'];
         }
         if (isset($data['productMetafields'])) {
             $this->container['productMetafields'] = $data['productMetafields'];
@@ -499,6 +499,30 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
+     * Gets customFields.
+     *
+     * @return null|string[]
+     */
+    public function getCustomFields()
+    {
+        return $this->container['customFields'] ?? null;
+    }
+
+    /**
+     * Sets customFields.
+     *
+     * @param null|string[] $customFields customFields
+     *
+     * @return self
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->container['customFields'] = $customFields;
+
+        return $this;
+    }
+
+    /**
      * Gets storeHash.
      *
      * @return string
@@ -542,30 +566,6 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     public function setChannel($channel)
     {
         $this->container['channel'] = $channel;
-
-        return $this;
-    }
-
-    /**
-     * Gets customFields.
-     *
-     * @return null|string[]
-     */
-    public function getCustomFields()
-    {
-        return $this->container['customFields'] ?? null;
-    }
-
-    /**
-     * Sets customFields.
-     *
-     * @param null|string[] $customFields customFields
-     *
-     * @return self
-     */
-    public function setCustomFields($customFields)
-    {
-        $this->container['customFields'] = $customFields;
 
         return $this;
     }

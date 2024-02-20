@@ -334,6 +334,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (!isset($this->container['projectKey']) || null === $this->container['projectKey']) {
             $invalidProperties[] = "'projectKey' can't be null";
         }
+        if (!isset($this->container['storeHash']) || null === $this->container['storeHash']) {
+            $invalidProperties[] = "'storeHash' can't be null";
+        }
         if (isset($this->container['delimiter']) && (mb_strlen($this->container['delimiter']) > 1)) {
             $invalidProperties[] = "invalid value for 'delimiter', the character length must be smaller than or equal to 1.";
         }
@@ -498,7 +501,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets storeHash.
      *
-     * @return null|string
+     * @return string
      */
     public function getStoreHash()
     {
@@ -508,7 +511,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets storeHash.
      *
-     * @param null|string $storeHash the store hash identifying the store the shopper is signing in to
+     * @param string $storeHash the store hash identifying the store the shopper is signing in to
      *
      * @return self
      */

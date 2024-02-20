@@ -258,7 +258,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID authenticationID
+     * @param null|string $authenticationID the authentication UUID
      *
      * @return self
      */

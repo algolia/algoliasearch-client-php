@@ -372,7 +372,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID authenticationID
+     * @param null|string $authenticationID the authentication UUID
      *
      * @return self
      */

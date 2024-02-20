@@ -166,7 +166,13 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['storeHash']) || null === $this->container['storeHash']) {
+            $invalidProperties[] = "'storeHash' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -183,7 +189,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets storeHash.
      *
-     * @return null|string
+     * @return string
      */
     public function getStoreHash()
     {
@@ -193,7 +199,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets storeHash.
      *
-     * @param null|string $storeHash the store hash identifying the store the shopper is signing in to
+     * @param string $storeHash the store hash identifying the store the shopper is signing in to
      *
      * @return self
      */

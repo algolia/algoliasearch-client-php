@@ -1592,7 +1592,7 @@ class IngestionClient
      *                                  - $destinationUpdate['type'] => (array)
      *                                  - $destinationUpdate['name'] => (string) An human readable name describing the object.
      *                                  - $destinationUpdate['input'] => (array)
-     *                                  - $destinationUpdate['authenticationID'] => (string)
+     *                                  - $destinationUpdate['authenticationID'] => (string) The authentication UUID.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate
      *

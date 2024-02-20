@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Authentication Class Doc Comment.
  *
  * @category Class
- * @description An authentication is used to login into a Source or a Destination.
+ * @description An authentication is used to login into a Source or a Destination, with obfuscated input.
  */
 class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -22,7 +22,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType',
         'name' => 'string',
         'platform' => '\Algolia\AlgoliaSearch\Model\Ingestion\Platform',
-        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthInput',
+        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial',
         'createdAt' => 'string',
         'updatedAt' => 'string',
     ];
@@ -314,7 +314,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets input.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial
      */
     public function getInput()
     {
@@ -324,7 +324,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets input.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput $input input
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial $input input
      *
      * @return self
      */

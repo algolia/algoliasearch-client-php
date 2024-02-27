@@ -13,6 +13,7 @@ lib/Model/Search/AdvancedSyntaxFeatures.php
 lib/Model/Search/AlternativesAsExact.php
 lib/Model/Search/Anchoring.php
 lib/Model/Search/ApiKey.php
+lib/Model/Search/ApiKeyOperation.php
 lib/Model/Search/AroundPrecision.php
 lib/Model/Search/AroundPrecisionFromValueInner.php
 lib/Model/Search/AroundRadius.php
@@ -148,6 +149,7 @@ lib/Model/Search/SearchTypeDefault.php
 lib/Model/Search/SearchTypeFacet.php
 lib/Model/Search/SearchUserIdsParams.php
 lib/Model/Search/SearchUserIdsResponse.php
+lib/Model/Search/SecuredAPIKeyRestrictions.php
 lib/Model/Search/SemanticSearch.php
 lib/Model/Search/SnippetResult.php
 lib/Model/Search/SnippetResultOption.php

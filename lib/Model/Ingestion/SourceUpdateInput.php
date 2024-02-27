@@ -19,8 +19,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelTypes = [
         'storeKeys' => 'string[]',
         'locales' => 'string[]',
-        'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'url' => 'string',
+        'fallbackIsInStockValue' => 'bool',
+        'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
         'uniqueIDColumn' => 'string',
         'method' => '\Algolia\AlgoliaSearch\Model\Ingestion\MethodType',
         'mapping' => 'array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV>',
@@ -45,8 +46,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelFormats = [
         'storeKeys' => null,
         'locales' => null,
-        'customFields' => null,
         'url' => null,
+        'fallbackIsInStockValue' => null,
+        'customFields' => null,
         'uniqueIDColumn' => null,
         'method' => null,
         'mapping' => null,
@@ -72,8 +74,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $attributeMap = [
         'storeKeys' => 'storeKeys',
         'locales' => 'locales',
-        'customFields' => 'customFields',
         'url' => 'url',
+        'fallbackIsInStockValue' => 'fallbackIsInStockValue',
+        'customFields' => 'customFields',
         'uniqueIDColumn' => 'uniqueIDColumn',
         'method' => 'method',
         'mapping' => 'mapping',
@@ -98,8 +101,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $setters = [
         'storeKeys' => 'setStoreKeys',
         'locales' => 'setLocales',
-        'customFields' => 'setCustomFields',
         'url' => 'setUrl',
+        'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
+        'customFields' => 'setCustomFields',
         'uniqueIDColumn' => 'setUniqueIDColumn',
         'method' => 'setMethod',
         'mapping' => 'setMapping',
@@ -124,8 +128,9 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $getters = [
         'storeKeys' => 'getStoreKeys',
         'locales' => 'getLocales',
-        'customFields' => 'getCustomFields',
         'url' => 'getUrl',
+        'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
+        'customFields' => 'getCustomFields',
         'uniqueIDColumn' => 'getUniqueIDColumn',
         'method' => 'getMethod',
         'mapping' => 'getMapping',
@@ -162,11 +167,14 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['locales'])) {
             $this->container['locales'] = $data['locales'];
         }
-        if (isset($data['customFields'])) {
-            $this->container['customFields'] = $data['customFields'];
-        }
         if (isset($data['url'])) {
             $this->container['url'] = $data['url'];
+        }
+        if (isset($data['fallbackIsInStockValue'])) {
+            $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
+        }
+        if (isset($data['customFields'])) {
+            $this->container['customFields'] = $data['customFields'];
         }
         if (isset($data['uniqueIDColumn'])) {
             $this->container['uniqueIDColumn'] = $data['uniqueIDColumn'];
@@ -356,30 +364,6 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
-     * Gets customFields.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
-     */
-    public function getCustomFields()
-    {
-        return $this->container['customFields'] ?? null;
-    }
-
-    /**
-     * Sets customFields.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
-     *
-     * @return self
-     */
-    public function setCustomFields($customFields)
-    {
-        $this->container['customFields'] = $customFields;
-
-        return $this;
-    }
-
-    /**
      * Gets url.
      *
      * @return string
@@ -399,6 +383,54 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setUrl($url)
     {
         $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackIsInStockValue.
+     *
+     * @return null|bool
+     */
+    public function getFallbackIsInStockValue()
+    {
+        return $this->container['fallbackIsInStockValue'] ?? null;
+    }
+
+    /**
+     * Sets fallbackIsInStockValue.
+     *
+     * @param null|bool $fallbackIsInStockValue determines the value that will be stored in the Algolia record if there's no inventory information on the product
+     *
+     * @return self
+     */
+    public function setFallbackIsInStockValue($fallbackIsInStockValue)
+    {
+        $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
+
+        return $this;
+    }
+
+    /**
+     * Gets customFields.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     */
+    public function getCustomFields()
+    {
+        return $this->container['customFields'] ?? null;
+    }
+
+    /**
+     * Sets customFields.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     *
+     * @return self
+     */
+    public function setCustomFields($customFields)
+    {
+        $this->container['customFields'] = $customFields;
 
         return $this;
     }

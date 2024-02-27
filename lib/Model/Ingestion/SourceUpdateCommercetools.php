@@ -19,6 +19,8 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelTypes = [
         'storeKeys' => 'string[]',
         'locales' => 'string[]',
+        'url' => 'string',
+        'fallbackIsInStockValue' => 'bool',
         'customFields' => '\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields',
     ];
 
@@ -30,6 +32,8 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelFormats = [
         'storeKeys' => null,
         'locales' => null,
+        'url' => null,
+        'fallbackIsInStockValue' => null,
         'customFields' => null,
     ];
 
@@ -42,6 +46,8 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $attributeMap = [
         'storeKeys' => 'storeKeys',
         'locales' => 'locales',
+        'url' => 'url',
+        'fallbackIsInStockValue' => 'fallbackIsInStockValue',
         'customFields' => 'customFields',
     ];
 
@@ -53,6 +59,8 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $setters = [
         'storeKeys' => 'setStoreKeys',
         'locales' => 'setLocales',
+        'url' => 'setUrl',
+        'fallbackIsInStockValue' => 'setFallbackIsInStockValue',
         'customFields' => 'setCustomFields',
     ];
 
@@ -64,6 +72,8 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $getters = [
         'storeKeys' => 'getStoreKeys',
         'locales' => 'getLocales',
+        'url' => 'getUrl',
+        'fallbackIsInStockValue' => 'getFallbackIsInStockValue',
         'customFields' => 'getCustomFields',
     ];
 
@@ -86,6 +96,12 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
         }
         if (isset($data['locales'])) {
             $this->container['locales'] = $data['locales'];
+        }
+        if (isset($data['url'])) {
+            $this->container['url'] = $data['url'];
+        }
+        if (isset($data['fallbackIsInStockValue'])) {
+            $this->container['fallbackIsInStockValue'] = $data['fallbackIsInStockValue'];
         }
         if (isset($data['customFields'])) {
             $this->container['customFields'] = $data['customFields'];
@@ -208,6 +224,54 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     public function setLocales($locales)
     {
         $this->container['locales'] = $locales;
+
+        return $this;
+    }
+
+    /**
+     * Gets url.
+     *
+     * @return null|string
+     */
+    public function getUrl()
+    {
+        return $this->container['url'] ?? null;
+    }
+
+    /**
+     * Sets url.
+     *
+     * @param null|string $url url
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        $this->container['url'] = $url;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackIsInStockValue.
+     *
+     * @return null|bool
+     */
+    public function getFallbackIsInStockValue()
+    {
+        return $this->container['fallbackIsInStockValue'] ?? null;
+    }
+
+    /**
+     * Sets fallbackIsInStockValue.
+     *
+     * @param null|bool $fallbackIsInStockValue determines the value that will be stored in the Algolia record if there's no inventory information on the product
+     *
+     * @return self
+     */
+    public function setFallbackIsInStockValue($fallbackIsInStockValue)
+    {
+        $this->container['fallbackIsInStockValue'] = $fallbackIsInStockValue;
 
         return $this;
     }

@@ -1,3 +1,9 @@
+## [4.0.0-alpha.97](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.96...4.0.0-alpha.97)
+
+- [d48e2f624](https://github.com/algolia/api-clients-automation/commit/d48e2f624) fix(specs): add missing attributes for CT Source update ([#2792](https://github.com/algolia/api-clients-automation/pull/2792)) by [@damcou](https://github.com/damcou/)
+- [f3e894002](https://github.com/algolia/api-clients-automation/commit/f3e894002) fix(clients): replace all objects ([#2762](https://github.com/algolia/api-clients-automation/pull/2762)) by [@shortcuts](https://github.com/shortcuts/)
+- [92cd1c793](https://github.com/algolia/api-clients-automation/commit/92cd1c793) fix(clients): browse synonyms page not in response ([#2757](https://github.com/algolia/api-clients-automation/pull/2757)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.96](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.95...4.0.0-alpha.96)
 
 - [6624759e1](https://github.com/algolia/api-clients-automation/commit/6624759e1) feat(specs): add CustomFields to CT Source Input ([#2742](https://github.com/algolia/api-clients-automation/pull/2742)) by [@damcou](https://github.com/damcou/)

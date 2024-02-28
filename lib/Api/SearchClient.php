@@ -2806,11 +2806,12 @@ class SearchClient
     /**
      * Helper: Replace all objects in an index using a temporary one.
      *
-     * @param string $indexName      Index name
-     * @param array  $objects        Objects to index
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions Request options
      */
-    public function replaceAllObjects($indexName, $objects, $requestOptions = [])
+    public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [])
     {
         $tmpIndex = $indexName.'_tmp_'.uniqid('php_', true);
 
@@ -2827,23 +2828,8 @@ class SearchClient
 
         $this->waitForTask($indexName, $copyResponse['taskID']);
 
-        // Send records (batched)
-        $requests = [];
-
-        foreach ($objects as $record) {
-            $requests[] = [
-                'action' => 'addObject',
-                'body' => $record,
-            ];
-        }
-
-        $batchResponse = $this->batch(
-            $tmpIndex,
-            ['requests' => $requests],
-            $requestOptions
-        );
-
-        $this->waitForTask($tmpIndex, $batchResponse['taskID']);
+        // Index objects in chunks
+        $this->chunkedBatch($tmpIndex, $objects, 'addObject', true, $batchSize, $requestOptions);
 
         // Move temporary index to production
         $moveResponse = $this->operationIndex(
@@ -2856,6 +2842,53 @@ class SearchClient
         );
 
         $this->waitForTask($tmpIndex, $moveResponse['taskID']);
+    }
+
+    /**
+     * Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $action         the `batch` `action` to perform on the given array of `objects`, defaults to `addObject`
+     * @param array  $waitForTasks   whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
+     * @param array  $requestOptions Request options
+     */
+    public function chunkedBatch(
+        $indexName,
+        $objects,
+        $action = 'addObject',
+        $waitForTasks = true,
+        $batchSize = 1000,
+        $requestOptions = []
+    ) {
+        $responses = [];
+        $requests = [];
+        $count = 0;
+
+        foreach ($objects as $object) {
+            $requests[] = [
+                'action' => $action,
+                'body' => $object,
+            ];
+            ++$count;
+
+            if ($count === $batchSize) {
+                $responses[] = $this->batch($indexName, ['requests' => $requests], $requestOptions);
+                $requests = [];
+                $count = 0;
+            }
+        }
+
+        if (!empty($requests)) {
+            $responses[] = $this->batch($indexName, ['requests' => $requests], $requestOptions);
+        }
+
+        if ($waitForTasks && !empty($responses)) {
+            foreach ($responses as $response) {
+                $this->waitForTask($indexName, $response['taskID']);
+            }
+        }
     }
 
     /**

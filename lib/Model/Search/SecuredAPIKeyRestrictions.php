@@ -19,7 +19,7 @@ class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelTypes = [
         'searchParams' => '\Algolia\AlgoliaSearch\Model\Search\SearchParamsObject',
         'filters' => 'string',
-        'validUntil' => 'float',
+        'validUntil' => 'int',
         'restrictIndices' => 'string[]',
         'restrictSources' => 'string',
         'userToken' => 'string',
@@ -33,7 +33,7 @@ class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     protected static $modelFormats = [
         'searchParams' => null,
         'filters' => null,
-        'validUntil' => 'duration',
+        'validUntil' => 'int64',
         'restrictIndices' => null,
         'restrictSources' => null,
         'userToken' => null,
@@ -239,7 +239,7 @@ class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets validUntil.
      *
-     * @return null|float
+     * @return null|int
      */
     public function getValidUntil()
     {
@@ -249,7 +249,7 @@ class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets validUntil.
      *
-     * @param null|float $validUntil unix timestamp used to set the expiration date of the API key
+     * @param null|int $validUntil unix timestamp used to set the expiration date of the API key
      *
      * @return self
      */

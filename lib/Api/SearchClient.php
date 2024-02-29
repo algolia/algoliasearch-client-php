@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
+use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
@@ -2906,6 +2907,30 @@ class SearchClient
         $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
 
         return base64_encode($content);
+    }
+
+    /**
+     * Helper: Returns the time the given securedAPIKey remains valid in seconds.
+     *
+     * @param string $securedAPIKey the key to check
+     *
+     * @throws ValidUntilNotFoundException
+     *
+     * @return int remaining validity in seconds
+     */
+    public static function getSecuredApiKeyRemainingValidity($securedAPIKey)
+    {
+        $decodedKey = base64_decode($securedAPIKey);
+        $regex = '/validUntil=(\d+)/';
+        preg_match($regex, $decodedKey, $matches);
+
+        if (0 === count($matches)) {
+            throw new ValidUntilNotFoundException('validUntil not found in given secured api key.');
+        }
+
+        $validUntil = (int) $matches[1];
+
+        return $validUntil - time();
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

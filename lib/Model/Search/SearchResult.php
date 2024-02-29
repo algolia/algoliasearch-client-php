@@ -44,6 +44,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
         'userData' => 'object',
+        'queryID' => 'string',
         'hits' => '\Algolia\AlgoliaSearch\Model\Search\Hit[]',
         'query' => 'string',
         'params' => 'string',
@@ -83,6 +84,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'serverTimeMS' => null,
         'serverUsed' => null,
         'userData' => null,
+        'queryID' => null,
         'hits' => null,
         'query' => null,
         'params' => null,
@@ -123,6 +125,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'serverTimeMS' => 'serverTimeMS',
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
+        'queryID' => 'queryID',
         'hits' => 'hits',
         'query' => 'query',
         'params' => 'params',
@@ -162,6 +165,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'serverTimeMS' => 'setServerTimeMS',
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
+        'queryID' => 'setQueryID',
         'hits' => 'setHits',
         'query' => 'setQuery',
         'params' => 'setParams',
@@ -201,6 +205,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         'serverTimeMS' => 'getServerTimeMS',
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
+        'queryID' => 'getQueryID',
         'hits' => 'getHits',
         'query' => 'getQuery',
         'params' => 'getParams',
@@ -301,6 +306,9 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
         }
         if (isset($data['userData'])) {
             $this->container['userData'] = $data['userData'];
+        }
+        if (isset($data['queryID'])) {
+            $this->container['queryID'] = $data['queryID'];
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
@@ -1108,6 +1116,30 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     public function setUserData($userData)
     {
         $this->container['userData'] = $userData;
+
+        return $this;
+    }
+
+    /**
+     * Gets queryID.
+     *
+     * @return null|string
+     */
+    public function getQueryID()
+    {
+        return $this->container['queryID'] ?? null;
+    }
+
+    /**
+     * Sets queryID.
+     *
+     * @param null|string $queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+     *
+     * @return self
+     */
+    public function setQueryID($queryID)
+    {
+        $this->container['queryID'] = $queryID;
 
         return $this;
     }

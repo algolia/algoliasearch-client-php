@@ -1,3 +1,9 @@
+## [4.0.0-alpha.98](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.97...4.0.0-alpha.98)
+
+- [a138c2fef](https://github.com/algolia/api-clients-automation/commit/a138c2fef) fix(specs): add `queryID` to search response ([#2801](https://github.com/algolia/api-clients-automation/pull/2801)) by [@aallam](https://github.com/aallam/)
+- [608fd298f](https://github.com/algolia/api-clients-automation/commit/608fd298f) feat(php): add `chunkedBatch` method ([#2796](https://github.com/algolia/api-clients-automation/pull/2796)) by [@damcou](https://github.com/damcou/)
+- [6f0b00ead](https://github.com/algolia/api-clients-automation/commit/6f0b00ead) chore(specs): remove JSON specs and new worlds logic ([#2794](https://github.com/algolia/api-clients-automation/pull/2794)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.0.0-alpha.97](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.96...4.0.0-alpha.97)
 
 - [d48e2f624](https://github.com/algolia/api-clients-automation/commit/d48e2f624) fix(specs): add missing attributes for CT Source update ([#2792](https://github.com/algolia/api-clients-automation/pull/2792)) by [@damcou](https://github.com/damcou/)

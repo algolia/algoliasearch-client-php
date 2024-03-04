@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * ScheduleDateUtilsInput Class Doc Comment.
+ * MappingInput Class Doc Comment.
  *
  * @category Class
- * @description The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
+ * @description Transformations to apply to source, serialized as a JSON string.
  */
-class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +18,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'timeframe' => 'int',
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
+        'format' => 'string',
+        'actions' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[]',
     ];
 
     /**
@@ -28,8 +28,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelFormats = [
-        'timeframe' => null,
-        'mapping' => null,
+        'format' => null,
+        'actions' => null,
     ];
 
     /**
@@ -39,8 +39,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $attributeMap = [
-        'timeframe' => 'timeframe',
-        'mapping' => 'mapping',
+        'format' => 'format',
+        'actions' => 'actions',
     ];
 
     /**
@@ -49,8 +49,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $setters = [
-        'timeframe' => 'setTimeframe',
-        'mapping' => 'setMapping',
+        'format' => 'setFormat',
+        'actions' => 'setActions',
     ];
 
     /**
@@ -59,8 +59,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $getters = [
-        'timeframe' => 'getTimeframe',
-        'mapping' => 'getMapping',
+        'format' => 'getFormat',
+        'actions' => 'getActions',
     ];
 
     /**
@@ -77,11 +77,11 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
+        if (isset($data['format'])) {
+            $this->container['format'] = $data['format'];
         }
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
+        if (isset($data['actions'])) {
+            $this->container['actions'] = $data['actions'];
         }
     }
 
@@ -145,15 +145,11 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
+        if (!isset($this->container['format']) || null === $this->container['format']) {
+            $invalidProperties[] = "'format' can't be null";
         }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
+        if (!isset($this->container['actions']) || null === $this->container['actions']) {
+            $invalidProperties[] = "'actions' can't be null";
         }
 
         return $invalidProperties;
@@ -171,56 +167,49 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets timeframe.
+     * Gets format.
      *
-     * @return int
+     * @return string
      */
-    public function getTimeframe()
+    public function getFormat()
     {
-        return $this->container['timeframe'] ?? null;
+        return $this->container['format'] ?? null;
     }
 
     /**
-     * Sets timeframe.
+     * Sets format.
      *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
+     * @param string $format name of the mapping format schema, `mappingkit/v1` is currently the only supported format
      *
      * @return self
      */
-    public function setTimeframe($timeframe)
+    public function setFormat($format)
     {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
+        $this->container['format'] = $format;
 
         return $this;
     }
 
     /**
-     * Gets mapping.
+     * Gets actions.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[]
      */
-    public function getMapping()
+    public function getActions()
     {
-        return $this->container['mapping'] ?? null;
+        return $this->container['actions'] ?? null;
     }
 
     /**
-     * Sets mapping.
+     * Sets actions.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[] $actions actions
      *
      * @return self
      */
-    public function setMapping($mapping)
+    public function setActions($actions)
     {
-        $this->container['mapping'] = $mapping;
+        $this->container['actions'] = $actions;
 
         return $this;
     }

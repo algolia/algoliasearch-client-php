@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * ScheduleDateUtilsInput Class Doc Comment.
+ * MappingFieldDirective Class Doc Comment.
  *
  * @category Class
- * @description The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
+ * @description Describes how a field should be resolved by applying a set of directives.
  */
-class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MappingFieldDirective extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +18,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'timeframe' => 'int',
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
+        'fieldKey' => 'string',
+        'value' => 'array<string,mixed>',
     ];
 
     /**
@@ -28,8 +28,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelFormats = [
-        'timeframe' => null,
-        'mapping' => null,
+        'fieldKey' => null,
+        'value' => null,
     ];
 
     /**
@@ -39,8 +39,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $attributeMap = [
-        'timeframe' => 'timeframe',
-        'mapping' => 'mapping',
+        'fieldKey' => 'fieldKey',
+        'value' => 'value',
     ];
 
     /**
@@ -49,8 +49,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $setters = [
-        'timeframe' => 'setTimeframe',
-        'mapping' => 'setMapping',
+        'fieldKey' => 'setFieldKey',
+        'value' => 'setValue',
     ];
 
     /**
@@ -59,8 +59,8 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $getters = [
-        'timeframe' => 'getTimeframe',
-        'mapping' => 'getMapping',
+        'fieldKey' => 'getFieldKey',
+        'value' => 'getValue',
     ];
 
     /**
@@ -77,11 +77,11 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
+        if (isset($data['fieldKey'])) {
+            $this->container['fieldKey'] = $data['fieldKey'];
         }
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
+        if (isset($data['value'])) {
+            $this->container['value'] = $data['value'];
         }
     }
 
@@ -145,15 +145,11 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
+        if (!isset($this->container['fieldKey']) || null === $this->container['fieldKey']) {
+            $invalidProperties[] = "'fieldKey' can't be null";
         }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
+        if (!isset($this->container['value']) || null === $this->container['value']) {
+            $invalidProperties[] = "'value' can't be null";
         }
 
         return $invalidProperties;
@@ -171,56 +167,49 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets timeframe.
+     * Gets fieldKey.
      *
-     * @return int
+     * @return string
      */
-    public function getTimeframe()
+    public function getFieldKey()
     {
-        return $this->container['timeframe'] ?? null;
+        return $this->container['fieldKey'] ?? null;
     }
 
     /**
-     * Sets timeframe.
+     * Sets fieldKey.
      *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
+     * @param string $fieldKey destination field key
      *
      * @return self
      */
-    public function setTimeframe($timeframe)
+    public function setFieldKey($fieldKey)
     {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
+        $this->container['fieldKey'] = $fieldKey;
 
         return $this;
     }
 
     /**
-     * Gets mapping.
+     * Gets value.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return array<string,mixed>
      */
-    public function getMapping()
+    public function getValue()
     {
-        return $this->container['mapping'] ?? null;
+        return $this->container['value'] ?? null;
     }
 
     /**
-     * Sets mapping.
+     * Sets value.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param array<string,mixed> $value how the destination field should be resolved from the source
      *
      * @return self
      */
-    public function setMapping($mapping)
+    public function setValue($value)
     {
-        $this->container['mapping'] = $mapping;
+        $this->container['value'] = $value;
 
         return $this;
     }

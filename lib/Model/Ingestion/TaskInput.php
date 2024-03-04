@@ -19,6 +19,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     protected static $modelTypes = [
         'startDate' => 'string',
         'endDate' => 'string',
+        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
         'timeframe' => 'int',
     ];
 
@@ -30,6 +31,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     protected static $modelFormats = [
         'startDate' => null,
         'endDate' => null,
+        'mapping' => null,
         'timeframe' => null,
     ];
 
@@ -42,6 +44,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     protected static $attributeMap = [
         'startDate' => 'startDate',
         'endDate' => 'endDate',
+        'mapping' => 'mapping',
         'timeframe' => 'timeframe',
     ];
 
@@ -53,6 +56,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     protected static $setters = [
         'startDate' => 'setStartDate',
         'endDate' => 'setEndDate',
+        'mapping' => 'setMapping',
         'timeframe' => 'setTimeframe',
     ];
 
@@ -64,6 +68,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     protected static $getters = [
         'startDate' => 'getStartDate',
         'endDate' => 'getEndDate',
+        'mapping' => 'getMapping',
         'timeframe' => 'getTimeframe',
     ];
 
@@ -86,6 +91,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         }
         if (isset($data['endDate'])) {
             $this->container['endDate'] = $data['endDate'];
+        }
+        if (isset($data['mapping'])) {
+            $this->container['mapping'] = $data['mapping'];
         }
         if (isset($data['timeframe'])) {
             $this->container['timeframe'] = $data['timeframe'];
@@ -227,6 +235,30 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     public function setEndDate($endDate)
     {
         $this->container['endDate'] = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets mapping.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     */
+    public function getMapping()
+    {
+        return $this->container['mapping'] ?? null;
+    }
+
+    /**
+     * Sets mapping.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     *
+     * @return self
+     */
+    public function setMapping($mapping)
+    {
+        $this->container['mapping'] = $mapping;
 
         return $this;
     }

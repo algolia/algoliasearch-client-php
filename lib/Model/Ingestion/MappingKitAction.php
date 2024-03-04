@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * ScheduleDateUtilsInput Class Doc Comment.
+ * MappingKitAction Class Doc Comment.
  *
  * @category Class
- * @description The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
+ * @description Describes how a destination object should be resolved by means of applying a set of directives.
  */
-class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MappingKitAction extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +18,10 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'timeframe' => 'int',
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
+        'id' => 'string',
+        'enabled' => 'bool',
+        'trigger' => 'string',
+        'fieldDirectives' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingFieldDirective[]',
     ];
 
     /**
@@ -28,8 +30,10 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelFormats = [
-        'timeframe' => null,
-        'mapping' => null,
+        'id' => null,
+        'enabled' => null,
+        'trigger' => null,
+        'fieldDirectives' => null,
     ];
 
     /**
@@ -39,8 +43,10 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $attributeMap = [
-        'timeframe' => 'timeframe',
-        'mapping' => 'mapping',
+        'id' => 'id',
+        'enabled' => 'enabled',
+        'trigger' => 'trigger',
+        'fieldDirectives' => 'fieldDirectives',
     ];
 
     /**
@@ -49,8 +55,10 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $setters = [
-        'timeframe' => 'setTimeframe',
-        'mapping' => 'setMapping',
+        'id' => 'setId',
+        'enabled' => 'setEnabled',
+        'trigger' => 'setTrigger',
+        'fieldDirectives' => 'setFieldDirectives',
     ];
 
     /**
@@ -59,8 +67,10 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $getters = [
-        'timeframe' => 'getTimeframe',
-        'mapping' => 'getMapping',
+        'id' => 'getId',
+        'enabled' => 'getEnabled',
+        'trigger' => 'getTrigger',
+        'fieldDirectives' => 'getFieldDirectives',
     ];
 
     /**
@@ -77,11 +87,17 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
+        if (isset($data['id'])) {
+            $this->container['id'] = $data['id'];
         }
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
+        if (isset($data['enabled'])) {
+            $this->container['enabled'] = $data['enabled'];
+        }
+        if (isset($data['trigger'])) {
+            $this->container['trigger'] = $data['trigger'];
+        }
+        if (isset($data['fieldDirectives'])) {
+            $this->container['fieldDirectives'] = $data['fieldDirectives'];
         }
     }
 
@@ -145,15 +161,14 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
+        if (!isset($this->container['enabled']) || null === $this->container['enabled']) {
+            $invalidProperties[] = "'enabled' can't be null";
         }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
+        if (!isset($this->container['trigger']) || null === $this->container['trigger']) {
+            $invalidProperties[] = "'trigger' can't be null";
         }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
+        if (!isset($this->container['fieldDirectives']) || null === $this->container['fieldDirectives']) {
+            $invalidProperties[] = "'fieldDirectives' can't be null";
         }
 
         return $invalidProperties;
@@ -171,56 +186,97 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets timeframe.
+     * Gets id.
      *
-     * @return int
+     * @return null|string
      */
-    public function getTimeframe()
+    public function getId()
     {
-        return $this->container['timeframe'] ?? null;
+        return $this->container['id'] ?? null;
     }
 
     /**
-     * Sets timeframe.
+     * Sets id.
      *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
+     * @param null|string $id ID to uniquely identify this action
      *
      * @return self
      */
-    public function setTimeframe($timeframe)
+    public function setId($id)
     {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets mapping.
+     * Gets enabled.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return bool
      */
-    public function getMapping()
+    public function getEnabled()
     {
-        return $this->container['mapping'] ?? null;
+        return $this->container['enabled'] ?? null;
     }
 
     /**
-     * Sets mapping.
+     * Sets enabled.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param bool $enabled whether this action has any effect
      *
      * @return self
      */
-    public function setMapping($mapping)
+    public function setEnabled($enabled)
     {
-        $this->container['mapping'] = $mapping;
+        $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets trigger.
+     *
+     * @return string
+     */
+    public function getTrigger()
+    {
+        return $this->container['trigger'] ?? null;
+    }
+
+    /**
+     * Sets trigger.
+     *
+     * @param string $trigger Condition which must be satisfied to apply the action. If this evaluates to false, the action is not applied, and the process attempts to apply the next action, if any.
+     *
+     * @return self
+     */
+    public function setTrigger($trigger)
+    {
+        $this->container['trigger'] = $trigger;
+
+        return $this;
+    }
+
+    /**
+     * Gets fieldDirectives.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingFieldDirective[]
+     */
+    public function getFieldDirectives()
+    {
+        return $this->container['fieldDirectives'] ?? null;
+    }
+
+    /**
+     * Sets fieldDirectives.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingFieldDirective[] $fieldDirectives fieldDirectives
+     *
+     * @return self
+     */
+    public function setFieldDirectives($fieldDirectives)
+    {
+        $this->container['fieldDirectives'] = $fieldDirectives;
 
         return $this;
     }

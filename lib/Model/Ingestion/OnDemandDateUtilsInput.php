@@ -20,6 +20,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $modelTypes = [
         'startDate' => 'string',
         'endDate' => 'string',
+        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
     ];
 
     /**
@@ -30,6 +31,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $modelFormats = [
         'startDate' => null,
         'endDate' => null,
+        'mapping' => null,
     ];
 
     /**
@@ -41,6 +43,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $attributeMap = [
         'startDate' => 'startDate',
         'endDate' => 'endDate',
+        'mapping' => 'mapping',
     ];
 
     /**
@@ -51,6 +54,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $setters = [
         'startDate' => 'setStartDate',
         'endDate' => 'setEndDate',
+        'mapping' => 'setMapping',
     ];
 
     /**
@@ -61,6 +65,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     protected static $getters = [
         'startDate' => 'getStartDate',
         'endDate' => 'getEndDate',
+        'mapping' => 'getMapping',
     ];
 
     /**
@@ -82,6 +87,9 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         }
         if (isset($data['endDate'])) {
             $this->container['endDate'] = $data['endDate'];
+        }
+        if (isset($data['mapping'])) {
+            $this->container['mapping'] = $data['mapping'];
         }
     }
 
@@ -210,6 +218,30 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     public function setEndDate($endDate)
     {
         $this->container['endDate'] = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets mapping.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     */
+    public function getMapping()
+    {
+        return $this->container['mapping'] ?? null;
+    }
+
+    /**
+     * Sets mapping.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     *
+     * @return self
+     */
+    public function setMapping($mapping)
+    {
+        $this->container['mapping'] = $mapping;
 
         return $this;
     }

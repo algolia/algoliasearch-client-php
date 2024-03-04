@@ -1,3 +1,7 @@
+## [4.0.0-alpha.99](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.98...4.0.0-alpha.99)
+
+- [39b65d645](https://github.com/algolia/api-clients-automation/commit/39b65d645) feat(php): add getSecuredApiKeyRemainingValidity helper ([#2805](https://github.com/algolia/api-clients-automation/pull/2805)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.98](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.97...4.0.0-alpha.98)
 
 - [a138c2fef](https://github.com/algolia/api-clients-automation/commit/a138c2fef) fix(specs): add `queryID` to search response ([#2801](https://github.com/algolia/api-clients-automation/pull/2801)) by [@aallam](https://github.com/aallam/)

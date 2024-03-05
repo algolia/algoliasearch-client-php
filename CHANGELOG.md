@@ -1,3 +1,7 @@
+## [4.0.0-alpha.100](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.99...4.0.0-alpha.100)
+
+- [234427491](https://github.com/algolia/api-clients-automation/commit/234427491) feat(specs): Add MappingInput to Task Inputs ([#2787](https://github.com/algolia/api-clients-automation/pull/2787)) by [@jsok](https://github.com/jsok/)
+
 ## [4.0.0-alpha.99](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.98...4.0.0-alpha.99)
 
 - [39b65d645](https://github.com/algolia/api-clients-automation/commit/39b65d645) feat(php): add getSecuredApiKeyRemainingValidity helper ([#2805](https://github.com/algolia/api-clients-automation/pull/2805)) by [@damcou](https://github.com/damcou/)

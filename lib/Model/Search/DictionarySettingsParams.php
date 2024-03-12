@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionarySettingsParams Class Doc Comment.
  *
  * @category Class
- * @description Enable or turn off the built-in Algolia stop words for a specific language.
+ * @description Turn on or off the built-in Algolia stop words for a specific language.
  */
 class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * AroundRadiusAll Class Doc Comment.
  *
  * @category Class
+ * @description Return all records with a valid &#x60;_geoloc&#x60; attribute. Don&#39;t filter by distance.
  */
 class AroundRadiusAll
 {

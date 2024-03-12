@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * HasPendingMappingsResponse Class Doc Comment.
+ * SearchDictionaryEntriesResponse Class Doc Comment.
  *
  * @category Class
  */
-class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchDictionaryEntriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,8 +17,10 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'pending' => 'bool',
-        'clusters' => 'array<string,string[]>',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryEntry[]',
+        'page' => 'int',
+        'nbHits' => 'int',
+        'nbPages' => 'int',
     ];
 
     /**
@@ -27,8 +29,10 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelFormats = [
-        'pending' => null,
-        'clusters' => null,
+        'hits' => null,
+        'page' => null,
+        'nbHits' => null,
+        'nbPages' => null,
     ];
 
     /**
@@ -38,8 +42,10 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $attributeMap = [
-        'pending' => 'pending',
-        'clusters' => 'clusters',
+        'hits' => 'hits',
+        'page' => 'page',
+        'nbHits' => 'nbHits',
+        'nbPages' => 'nbPages',
     ];
 
     /**
@@ -48,8 +54,10 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
-        'pending' => 'setPending',
-        'clusters' => 'setClusters',
+        'hits' => 'setHits',
+        'page' => 'setPage',
+        'nbHits' => 'setNbHits',
+        'nbPages' => 'setNbPages',
     ];
 
     /**
@@ -58,8 +66,10 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
-        'pending' => 'getPending',
-        'clusters' => 'getClusters',
+        'hits' => 'getHits',
+        'page' => 'getPage',
+        'nbHits' => 'getNbHits',
+        'nbPages' => 'getNbPages',
     ];
 
     /**
@@ -76,11 +86,17 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['pending'])) {
-            $this->container['pending'] = $data['pending'];
+        if (isset($data['hits'])) {
+            $this->container['hits'] = $data['hits'];
         }
-        if (isset($data['clusters'])) {
-            $this->container['clusters'] = $data['clusters'];
+        if (isset($data['page'])) {
+            $this->container['page'] = $data['page'];
+        }
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
+        }
+        if (isset($data['nbPages'])) {
+            $this->container['nbPages'] = $data['nbPages'];
         }
     }
 
@@ -144,8 +160,21 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['pending']) || null === $this->container['pending']) {
-            $invalidProperties[] = "'pending' can't be null";
+        if (!isset($this->container['hits']) || null === $this->container['hits']) {
+            $invalidProperties[] = "'hits' can't be null";
+        }
+        if (!isset($this->container['page']) || null === $this->container['page']) {
+            $invalidProperties[] = "'page' can't be null";
+        }
+        if ($this->container['page'] < 0) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
+            $invalidProperties[] = "'nbHits' can't be null";
+        }
+        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
+            $invalidProperties[] = "'nbPages' can't be null";
         }
 
         return $invalidProperties;
@@ -163,49 +192,101 @@ class HasPendingMappingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets pending.
+     * Gets hits.
      *
-     * @return bool
+     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry[]
      */
-    public function getPending()
+    public function getHits()
     {
-        return $this->container['pending'] ?? null;
+        return $this->container['hits'] ?? null;
     }
 
     /**
-     * Sets pending.
+     * Sets hits.
      *
-     * @param bool $pending whether there are clusters undergoing migration, creation, or deletion
+     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry[] $hits dictionary entries matching the search criteria
      *
      * @return self
      */
-    public function setPending($pending)
+    public function setHits($hits)
     {
-        $this->container['pending'] = $pending;
+        $this->container['hits'] = $hits;
 
         return $this;
     }
 
     /**
-     * Gets clusters.
+     * Gets page.
      *
-     * @return null|array<string,string[]>
+     * @return int
      */
-    public function getClusters()
+    public function getPage()
     {
-        return $this->container['clusters'] ?? null;
+        return $this->container['page'] ?? null;
     }
 
     /**
-     * Sets clusters.
+     * Sets page.
      *
-     * @param null|array<string,string[]> $clusters cluster pending mapping state: migrating, creating, deleting
+     * @param int $page requested page of the API response
      *
      * @return self
      */
-    public function setClusters($clusters)
+    public function setPage($page)
     {
-        $this->container['clusters'] = $clusters;
+        if ($page < 0) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchDictionaryEntriesResponse., must be bigger than or equal to 0.');
+        }
+
+        $this->container['page'] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbHits.
+     *
+     * @return int
+     */
+    public function getNbHits()
+    {
+        return $this->container['nbHits'] ?? null;
+    }
+
+    /**
+     * Sets nbHits.
+     *
+     * @param int $nbHits number of results (hits)
+     *
+     * @return self
+     */
+    public function setNbHits($nbHits)
+    {
+        $this->container['nbHits'] = $nbHits;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbPages.
+     *
+     * @return int
+     */
+    public function getNbPages()
+    {
+        return $this->container['nbPages'] ?? null;
+    }
+
+    /**
+     * Sets nbPages.
+     *
+     * @param int $nbPages number of pages of results
+     *
+     * @return self
+     */
+    public function setNbPages($nbPages)
+    {
+        $this->container['nbPages'] = $nbPages;
 
         return $this;
     }

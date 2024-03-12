@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * RankingInfo Class Doc Comment.
  *
  * @category Class
+ * @description Object with detailed information about the record&#39;s ranking.
  */
 class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -235,26 +236,57 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (!isset($this->container['filters']) || null === $this->container['filters']) {
             $invalidProperties[] = "'filters' can't be null";
         }
+        if ($this->container['filters'] < 0) {
+            $invalidProperties[] = "invalid value for 'filters', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['firstMatchedWord']) || null === $this->container['firstMatchedWord']) {
             $invalidProperties[] = "'firstMatchedWord' can't be null";
         }
+        if ($this->container['firstMatchedWord'] < 0) {
+            $invalidProperties[] = "invalid value for 'firstMatchedWord', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['geoDistance']) || null === $this->container['geoDistance']) {
             $invalidProperties[] = "'geoDistance' can't be null";
         }
+        if ($this->container['geoDistance'] < 0) {
+            $invalidProperties[] = "invalid value for 'geoDistance', must be bigger than or equal to 0.";
+        }
+
+        if (isset($this->container['geoPrecision']) && ($this->container['geoPrecision'] < 1)) {
+            $invalidProperties[] = "invalid value for 'geoPrecision', must be bigger than or equal to 1.";
+        }
+
         if (!isset($this->container['nbExactWords']) || null === $this->container['nbExactWords']) {
             $invalidProperties[] = "'nbExactWords' can't be null";
         }
+        if ($this->container['nbExactWords'] < 0) {
+            $invalidProperties[] = "invalid value for 'nbExactWords', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['nbTypos']) || null === $this->container['nbTypos']) {
             $invalidProperties[] = "'nbTypos' can't be null";
         }
+        if ($this->container['nbTypos'] < 0) {
+            $invalidProperties[] = "invalid value for 'nbTypos', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['promoted']) || null === $this->container['promoted']) {
             $invalidProperties[] = "'promoted' can't be null";
         }
+        if (isset($this->container['proximityDistance']) && ($this->container['proximityDistance'] < 0)) {
+            $invalidProperties[] = "invalid value for 'proximityDistance', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['userScore']) || null === $this->container['userScore']) {
             $invalidProperties[] = "'userScore' can't be null";
         }
         if (!isset($this->container['words']) || null === $this->container['words']) {
             $invalidProperties[] = "'words' can't be null";
+        }
+        if ($this->container['words'] < 1) {
+            $invalidProperties[] = "invalid value for 'words', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -284,12 +316,16 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets filters.
      *
-     * @param int $filters this field is reserved for advanced usage
+     * @param int $filters whether a filter matched the query
      *
      * @return self
      */
     public function setFilters($filters)
     {
+        if ($filters < 0) {
+            throw new \InvalidArgumentException('invalid value for $filters when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['filters'] = $filters;
 
         return $this;
@@ -308,12 +344,16 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets firstMatchedWord.
      *
-     * @param int $firstMatchedWord position of the most important matched attribute in the attributes to index list
+     * @param int $firstMatchedWord position of the first matched word in the best matching attribute of the record
      *
      * @return self
      */
     public function setFirstMatchedWord($firstMatchedWord)
     {
+        if ($firstMatchedWord < 0) {
+            throw new \InvalidArgumentException('invalid value for $firstMatchedWord when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['firstMatchedWord'] = $firstMatchedWord;
 
         return $this;
@@ -338,6 +378,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function setGeoDistance($geoDistance)
     {
+        if ($geoDistance < 0) {
+            throw new \InvalidArgumentException('invalid value for $geoDistance when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['geoDistance'] = $geoDistance;
 
         return $this;
@@ -362,6 +406,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function setGeoPrecision($geoPrecision)
     {
+        if (!is_null($geoPrecision) && ($geoPrecision < 1)) {
+            throw new \InvalidArgumentException('invalid value for $geoPrecision when calling RankingInfo., must be bigger than or equal to 1.');
+        }
+
         $this->container['geoPrecision'] = $geoPrecision;
 
         return $this;
@@ -434,6 +482,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function setNbExactWords($nbExactWords)
     {
+        if ($nbExactWords < 0) {
+            throw new \InvalidArgumentException('invalid value for $nbExactWords when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['nbExactWords'] = $nbExactWords;
 
         return $this;
@@ -458,6 +510,10 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function setNbTypos($nbTypos)
     {
+        if ($nbTypos < 0) {
+            throw new \InvalidArgumentException('invalid value for $nbTypos when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['nbTypos'] = $nbTypos;
 
         return $this;
@@ -476,7 +532,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promoted.
      *
-     * @param bool $promoted present and set to true if a Rule promoted the hit
+     * @param bool $promoted whether the record was promoted by a rule
      *
      * @return self
      */
@@ -500,12 +556,16 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets proximityDistance.
      *
-     * @param null|int $proximityDistance when the query contains more than one word, the sum of the distances between matched words (in meters)
+     * @param null|int $proximityDistance Number of words between multiple matches in the query plus 1. For single word queries, `proximityDistance` is 0.
      *
      * @return self
      */
     public function setProximityDistance($proximityDistance)
     {
+        if (!is_null($proximityDistance) && ($proximityDistance < 0)) {
+            throw new \InvalidArgumentException('invalid value for $proximityDistance when calling RankingInfo., must be bigger than or equal to 0.');
+        }
+
         $this->container['proximityDistance'] = $proximityDistance;
 
         return $this;
@@ -524,7 +584,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets userScore.
      *
-     * @param int $userScore custom ranking for the object, expressed as a single integer value
+     * @param int $userScore Overall ranking of the record, expressed as a single integer. This attribute is internal.
      *
      * @return self
      */
@@ -548,12 +608,16 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets words.
      *
-     * @param int $words number of matched words, including prefixes and typos
+     * @param int $words number of matched words
      *
      * @return self
      */
     public function setWords($words)
     {
+        if ($words < 1) {
+            throw new \InvalidArgumentException('invalid value for $words when calling RankingInfo., must be bigger than or equal to 1.');
+        }
+
         $this->container['words'] = $words;
 
         return $this;
@@ -572,7 +636,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promotedByReRanking.
      *
-     * @param null|bool $promotedByReRanking wether the record are promoted by the re-ranking strategy
+     * @param null|bool $promotedByReRanking whether the record is re-ranked
      *
      * @return self
      */

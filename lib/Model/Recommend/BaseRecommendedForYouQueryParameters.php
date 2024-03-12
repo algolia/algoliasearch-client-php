@@ -167,7 +167,7 @@ class BaseRecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\
     /**
      * Sets userToken.
      *
-     * @param string $userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
+     * @param string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
      *
      * @return self
      */

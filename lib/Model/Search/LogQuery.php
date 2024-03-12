@@ -201,7 +201,7 @@ class LogQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets userToken.
      *
-     * @param null|string $userToken user identifier
+     * @param null|string $userToken a user identifier
      *
      * @return self
      */

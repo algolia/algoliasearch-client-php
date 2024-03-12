@@ -237,7 +237,7 @@ class TopSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of hits the search query matched
+     * @param int $nbHits number of results (hits)
      *
      * @return self
      */

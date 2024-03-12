@@ -161,7 +161,7 @@ class SearchParamsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query.
      *
-     * @param null|string $query text to search for in an index
+     * @param null|string $query search query
      *
      * @return self
      */

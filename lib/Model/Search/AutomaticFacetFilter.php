@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AutomaticFacetFilter Class Doc Comment.
  *
  * @category Class
- * @description Automatic facet Filter.
+ * @description Filter or optional filter to be applied to the search.
  */
 class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -184,7 +184,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets facet.
      *
-     * @param string $facet Attribute to filter on. This must match a facet placeholder in the Rule's pattern.
+     * @param string $facet Facet name to be applied as filter. The name must match placeholders in the `pattern` parameter. For example, with `pattern: {facet:genre}`, `automaticFacetFilters` must be `genre`.
      *
      * @return self
      */
@@ -208,7 +208,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets score.
      *
-     * @param null|int $score Score for the filter. Typically used for optional or disjunctive filters.
+     * @param null|int $score filter scores to give different weights to individual filters
      *
      * @return self
      */
@@ -232,7 +232,7 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets disjunctive.
      *
-     * @param null|bool $disjunctive whether the filter is disjunctive (true) or conjunctive (false)
+     * @param null|bool $disjunctive Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation.
      *
      * @return self
      */

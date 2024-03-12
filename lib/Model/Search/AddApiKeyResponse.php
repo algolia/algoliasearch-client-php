@@ -202,7 +202,7 @@ class AddApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $createdAt Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
      *
      * @return self
      */

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * ConsequenceHide Class Doc Comment.
  *
  * @category Class
- * @description Unique identifier of the record to hide.
+ * @description Object ID of the record to hide.
  */
 class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -168,7 +168,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */

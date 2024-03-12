@@ -233,7 +233,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */
@@ -281,7 +281,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets maxFacetHits.
      *
-     * @param null|int $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */

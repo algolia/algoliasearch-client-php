@@ -202,7 +202,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets value.
      *
-     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value
+     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value
      *
      * @return self
      */

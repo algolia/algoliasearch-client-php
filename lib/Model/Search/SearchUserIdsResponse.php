@@ -178,6 +178,10 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
+        if ($this->container['page'] < 0) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
@@ -244,7 +248,7 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of hits the search query matched
+     * @param int $nbHits number of results (hits)
      *
      * @return self
      */
@@ -268,12 +272,16 @@ class SearchUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets page.
      *
-     * @param int $page page to retrieve (the first page is `0`, not `1`)
+     * @param int $page page of search results to retrieve
      *
      * @return self
      */
     public function setPage($page)
     {
+        if ($page < 0) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchUserIdsResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['page'] = $page;
 
         return $this;

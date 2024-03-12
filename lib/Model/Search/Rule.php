@@ -180,6 +180,13 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
+        if (isset($this->container['conditions']) && (count($this->container['conditions']) > 25)) {
+            $invalidProperties[] = "invalid value for 'conditions', number of items must be less than or equal to 25.";
+        }
+
+        if (isset($this->container['conditions']) && (count($this->container['conditions']) < 0)) {
+            $invalidProperties[] = "invalid value for 'conditions', number of items must be greater than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -208,7 +215,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique identifier for a rule object
+     * @param string $objectID unique identifier of a rule object
      *
      * @return self
      */
@@ -232,12 +239,18 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets conditions.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Condition[] $conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Condition[] $conditions Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
      *
      * @return self
      */
     public function setConditions($conditions)
     {
+        if (!is_null($conditions) && (count($conditions) > 25)) {
+            throw new \InvalidArgumentException('invalid value for $conditions when calling Rule., number of items must be less than or equal to 25.');
+        }
+        if (!is_null($conditions) && (count($conditions) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $conditions when calling Rule., number of items must be greater than or equal to 0.');
+        }
         $this->container['conditions'] = $conditions;
 
         return $this;
@@ -280,7 +293,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets description.
      *
-     * @param null|string $description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
+     * @param null|string $description description of the rule's purpose to help you distinguish between different rules
      *
      * @return self
      */
@@ -304,7 +317,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets enabled.
      *
-     * @param null|bool $enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
+     * @param null|bool $enabled whether the rule is active
      *
      * @return self
      */
@@ -328,7 +341,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets validity.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[] $validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[] $validity time periods when the rule is active
      *
      * @return self
      */

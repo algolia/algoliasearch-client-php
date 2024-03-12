@@ -178,7 +178,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets from.
      *
-     * @param int $from lower bound of the time range (Unix timestamp)
+     * @param int $from when the rule should start to be active, in Unix epoch time
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class TimeRange extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets until.
      *
-     * @param int $until upper bound of the time range (Unix timestamp)
+     * @param int $until when the rule should stop to be active, in Unix epoch time
      *
      * @return self
      */

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Hit Class Doc Comment.
  *
  * @category Class
- * @description A single hit.
+ * @description Search result.  A hit is a record from your index, augmented with special attributes for highlighting, snippeting, and ranking.
  */
 class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -200,7 +200,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
@@ -224,7 +224,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets highlightResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $highlightResult show highlighted section and words matched on a query
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
      *
      * @return self
      */
@@ -248,7 +248,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets snippetResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult> $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult> $snippetResult snippets that show the context around a matching search query
      *
      * @return self
      */

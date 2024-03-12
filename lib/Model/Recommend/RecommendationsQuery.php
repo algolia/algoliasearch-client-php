@@ -229,7 +229,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */
@@ -332,7 +332,7 @@ class RecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */

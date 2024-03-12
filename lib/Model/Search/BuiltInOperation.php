@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BuiltInOperation Class Doc Comment.
  *
  * @category Class
- * @description To update an attribute without pushing the entire record, you can use these built-in operations.
+ * @description Update to perform on the attribute.
  */
 class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -203,7 +203,7 @@ class BuiltInOperation extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets value.
      *
-     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, `Add` or `Remove` value
+     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value
      *
      * @return self
      */

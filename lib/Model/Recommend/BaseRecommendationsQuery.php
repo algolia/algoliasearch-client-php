@@ -218,7 +218,7 @@ class BaseRecommendationsQuery extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */

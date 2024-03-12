@@ -226,7 +226,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets userID.
      *
-     * @param string $userID userID of the user
+     * @param string $userID user ID
      *
      * @return self
      */

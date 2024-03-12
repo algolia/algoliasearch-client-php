@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * AroundRadius Class Doc Comment.
  *
  * @category Class
- * @description [Maximum radius](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#increase-the-search-radius) for a geographical search (in meters).
+ * @description Maximum radius for a search around a central location.  This parameter works in combination with the &#x60;aroundLatLng&#x60; and &#x60;aroundLatLngViaIP&#x60; parameters. By default, the search radius is determined automatically from the density of hits around the central location. The search radius is small if there are many hits close to the central coordinates.
  */
 class AroundRadius extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

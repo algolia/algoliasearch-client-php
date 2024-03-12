@@ -175,7 +175,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */

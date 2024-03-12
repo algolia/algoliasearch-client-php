@@ -260,9 +260,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -275,13 +275,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getAverageClickPosition`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getAverageClickPosition, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/averageClickPosition';
@@ -314,9 +307,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -329,13 +322,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickPositions`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getClickPositions, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/positions';
@@ -368,9 +354,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -383,13 +369,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getClickThroughRate`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getClickThroughRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/clicks/clickThroughRate';
@@ -422,9 +401,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -437,13 +416,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getConversationRate`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getConversationRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/conversions/conversionRate';
@@ -476,9 +448,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -491,13 +463,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoClickRate`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getNoClickRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noClickRate';
@@ -530,9 +495,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -545,13 +510,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getNoResultsRate`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getNoResultsRate, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/noResultRate';
@@ -584,9 +542,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -599,13 +557,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesCount`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/searches/count';
@@ -638,11 +589,11 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -656,12 +607,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesNoClicks, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoClicks, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/searches/noClicks';
@@ -702,11 +649,11 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -720,12 +667,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getSearchesNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoResults, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/searches/noResults';
@@ -766,7 +709,7 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse|array<string, mixed>
@@ -798,11 +741,11 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -816,12 +759,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopCountries`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopCountries, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopCountries, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/countries';
@@ -862,12 +801,12 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param string $search         User query. (optional)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -881,12 +820,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFilterAttributes, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterAttributes, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/filters';
@@ -932,12 +867,12 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $attribute      Attribute name. (required)
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param string $search         User query. (optional)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -957,12 +892,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFilterForAttribute, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterForAttribute, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/filters/{attribute}';
@@ -1016,12 +947,12 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param string $search         User query. (optional)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1035,12 +966,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopFiltersNoResults, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFiltersNoResults, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/filters/noResults';
@@ -1085,13 +1012,13 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param string $search         User query. (optional)
      * @param bool   $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1105,12 +1032,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopHits`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopHits, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopHits, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/hits';
@@ -1159,14 +1082,14 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
+     * @param string $index          Index name. (required)
      * @param bool   $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param array  $orderBy        Reorder the results. (optional)
      * @param array  $direction      Sorting direction of the results: ascending or descending. (optional)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1180,12 +1103,8 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopSearches`.'
             );
         }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getTopSearches, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopSearches, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/searches';
@@ -1238,9 +1157,9 @@ class AnalyticsClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name to target. (required)
-     * @param string $startDate      Start date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (a string in the format &#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $index          Index name. (required)
+     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1253,13 +1172,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getUsersCount`.'
             );
-        }
-        if (null !== $startDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $startDate)) {
-            throw new \InvalidArgumentException('invalid value for "startDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
-        }
-
-        if (null !== $endDate && !preg_match('/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/', $endDate)) {
-            throw new \InvalidArgumentException('invalid value for "endDate" when calling AnalyticsClient.getUsersCount, must conform to the pattern /^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/.');
         }
 
         $resourcePath = '/2/users/count';

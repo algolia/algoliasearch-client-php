@@ -164,6 +164,10 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (!isset($this->container['query']) || null === $this->container['query']) {
             $invalidProperties[] = "'query' can't be null";
         }
+        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
         if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
@@ -247,12 +251,16 @@ class SearchUserIdsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets page.
      *
-     * @param null|int $page page to retrieve (the first page is `0`, not `1`)
+     * @param null|int $page page of search results to retrieve
      *
      * @return self
      */
     public function setPage($page)
     {
+        if (!is_null($page) && ($page < 0)) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchUserIdsParams., must be bigger than or equal to 0.');
+        }
+
         $this->container['page'] = $page;
 
         return $this;

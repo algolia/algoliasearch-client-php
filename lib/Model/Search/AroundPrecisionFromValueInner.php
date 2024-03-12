@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AroundPrecisionFromValueInner Class Doc Comment.
  *
  * @category Class
+ * @description Range object with lower and upper values in meters to define custom ranges.
  */
 class AroundPrecisionFromValueInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -169,7 +170,7 @@ class AroundPrecisionFromValueInner extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets from.
      *
-     * @param null|int $from from
+     * @param null|int $from Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
      *
      * @return self
      */
@@ -193,7 +194,7 @@ class AroundPrecisionFromValueInner extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets value.
      *
-     * @param null|int $value value
+     * @param null|int $value Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
      *
      * @return self
      */

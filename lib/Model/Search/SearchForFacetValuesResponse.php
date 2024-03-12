@@ -186,7 +186,7 @@ class SearchForFacetValuesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets facetHits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits facetHits
+     * @param \Algolia\AlgoliaSearch\Model\Search\FacetHits[] $facetHits matching facet values
      *
      * @return self
      */

@@ -167,7 +167,7 @@ class GetObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets results.
      *
-     * @param object[] $results retrieved results
+     * @param object[] $results retrieved records
      *
      * @return self
      */

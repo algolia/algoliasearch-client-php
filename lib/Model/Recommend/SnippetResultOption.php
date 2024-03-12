@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * SnippetResultOption Class Doc Comment.
  *
  * @category Class
- * @description Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+ * @description Snippets that show the context around a matching search query.
  */
 class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -179,7 +179,7 @@ class SnippetResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets value.
      *
-     * @param string $value markup text with `facetQuery` matches highlighted
+     * @param string $value highlighted attribute value, including HTML tags
      *
      * @return self
      */

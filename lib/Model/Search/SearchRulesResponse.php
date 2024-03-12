@@ -200,7 +200,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits fetched rules
+     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits rules that matched the search criteria
      *
      * @return self
      */
@@ -224,7 +224,7 @@ class SearchRulesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of fetched rules
+     * @param int $nbHits number of rules that matched the search criteria
      *
      * @return self
      */

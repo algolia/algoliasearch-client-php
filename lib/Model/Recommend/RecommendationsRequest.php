@@ -248,7 +248,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */
@@ -447,7 +447,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */

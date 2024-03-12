@@ -178,7 +178,7 @@ class SnippetResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets value.
      *
-     * @param string $value markup text with `facetQuery` matches highlighted
+     * @param string $value highlighted attribute value, including HTML tags
      *
      * @return self
      */

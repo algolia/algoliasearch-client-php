@@ -124,6 +124,7 @@ lib/Model/Search/SaveObjectResponse.php
 lib/Model/Search/SaveSynonymResponse.php
 lib/Model/Search/ScopeType.php
 lib/Model/Search/SearchDictionaryEntriesParams.php
+lib/Model/Search/SearchDictionaryEntriesResponse.php
 lib/Model/Search/SearchForFacetValuesRequest.php
 lib/Model/Search/SearchForFacetValuesResponse.php
 lib/Model/Search/SearchForFacets.php

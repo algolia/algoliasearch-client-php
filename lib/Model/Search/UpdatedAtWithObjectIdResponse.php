@@ -178,7 +178,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets taskID.
      *
-     * @param null|int $taskID Unique identifier of a task. A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the `task` operation and this `taskID`.
+     * @param null|int $taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
      *
      * @return self
      */
@@ -226,7 +226,7 @@ class UpdatedAtWithObjectIdResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectID.
      *
-     * @param null|string $objectID unique object identifier
+     * @param null|string $objectID unique record identifier
      *
      * @return self
      */

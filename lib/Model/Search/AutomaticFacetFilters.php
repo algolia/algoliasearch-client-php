@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * AutomaticFacetFilters Class Doc Comment.
  *
  * @category Class
- * @description Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value placeholder in the query pattern.
+ * @description Filter to be applied to the search.  You can use this to respond to search queries that match a facet value. For example, if users search for \&quot;comedy\&quot;, which matches a facet value of the \&quot;genre\&quot; facet, you can filter the results to show the top-ranked comedy movies.
  */
 class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

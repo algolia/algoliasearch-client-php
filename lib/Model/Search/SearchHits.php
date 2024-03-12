@@ -189,7 +189,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class SearchHits extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets query.
      *
-     * @param string $query text to search for in an index
+     * @param string $query search query
      *
      * @return self
      */

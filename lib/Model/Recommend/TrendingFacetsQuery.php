@@ -210,7 +210,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */

@@ -210,7 +210,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets destination.
      *
-     * @param string $destination algolia index name
+     * @param string $destination index name
      *
      * @return self
      */
@@ -234,7 +234,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets scope.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[] $scope **This only applies to the _copy_ operation.**  If you omit `scope`, the copy command copies all records, settings, synonyms, and rules.  If you specify `scope`, only the specified scopes are copied.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[] $scope **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
      *
      * @return self
      */

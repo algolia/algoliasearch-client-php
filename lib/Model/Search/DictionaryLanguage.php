@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionaryLanguage Class Doc Comment.
  *
  * @category Class
- * @description Custom entries for a dictionary.
+ * @description Dictionary type. If &#x60;null&#x60;, this dictionary type isn&#39;t supported for the language.
  */
 class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -162,7 +162,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets nbCustomEntries.
      *
-     * @param null|int $nbCustomEntries If `0`, the dictionary hasn't been customized and only contains standard entries provided by Algolia. If `null`, that feature isn't available or isn't supported for that language.
+     * @param null|int $nbCustomEntries number of custom dictionary entries
      *
      * @return self
      */

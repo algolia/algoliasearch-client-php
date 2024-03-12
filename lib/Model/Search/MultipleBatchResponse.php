@@ -178,7 +178,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets taskID.
      *
-     * @param array<string,int> $taskID taskIDs per index
+     * @param array<string,int> $taskID Task IDs. One for each index.
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class MultipleBatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets objectIDs.
      *
-     * @param string[] $objectIDs unique object (record) identifiers
+     * @param string[] $objectIDs unique record identifiers
      *
      * @return self
      */

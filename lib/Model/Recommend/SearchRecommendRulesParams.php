@@ -208,7 +208,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets query.
      *
-     * @param null|string $query full-text query
+     * @param null|string $query search query
      *
      * @return self
      */
@@ -256,7 +256,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets page.
      *
-     * @param null|int $page requested page (the first page is page 0)
+     * @param null|int $page requested page of the API response
      *
      * @return self
      */

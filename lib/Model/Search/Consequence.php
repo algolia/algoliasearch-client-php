@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Consequence Class Doc Comment.
  *
  * @category Class
- * @description [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule.
+ * @description Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences).
  */
 class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -167,7 +167,17 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (isset($this->container['promote']) && (count($this->container['promote']) > 300)) {
+            $invalidProperties[] = "invalid value for 'promote', number of items must be less than or equal to 300.";
+        }
+
+        if (isset($this->container['hide']) && (count($this->container['hide']) > 50)) {
+            $invalidProperties[] = "invalid value for 'hide', number of items must be less than or equal to 50.";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -218,12 +228,15 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets promote.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Promote[] $promote records to promote
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
      *
      * @return self
      */
     public function setPromote($promote)
     {
+        if (!is_null($promote) && (count($promote) > 300)) {
+            throw new \InvalidArgumentException('invalid value for $promote when calling Consequence., number of items must be less than or equal to 300.');
+        }
         $this->container['promote'] = $promote;
 
         return $this;
@@ -242,7 +255,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets filterPromotes.
      *
-     * @param null|bool $filterPromotes Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
+     * @param null|bool $filterPromotes Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown.
      *
      * @return self
      */
@@ -266,12 +279,15 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets hide.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[] $hide Records to hide. By default, you can hide up to 50 records per rule.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[] $hide records you want to hide from the search results
      *
      * @return self
      */
     public function setHide($hide)
     {
+        if (!is_null($hide) && (count($hide) > 50)) {
+            throw new \InvalidArgumentException('invalid value for $hide when calling Consequence., number of items must be less than or equal to 50.');
+        }
         $this->container['hide'] = $hide;
 
         return $this;
@@ -290,7 +306,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
+     * @param null|mixed $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
      *
      * @return self
      */

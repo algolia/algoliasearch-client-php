@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * HighlightResultOption Class Doc Comment.
  *
  * @category Class
- * @description Show highlighted section and words matched on a query.
+ * @description Surround words that match the query with HTML tags for highlighting.
  */
 class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -198,7 +198,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets value.
      *
-     * @param string $value markup text with `facetQuery` matches highlighted
+     * @param string $value highlighted attribute value, including HTML tags
      *
      * @return self
      */
@@ -246,7 +246,7 @@ class HighlightResultOption extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets matchedWords.
      *
-     * @param string[] $matchedWords list of words from the query that matched the object
+     * @param string[] $matchedWords list of matched words from the search query
      *
      * @return self
      */

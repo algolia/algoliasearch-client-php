@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TagFilters Class Doc Comment.
  *
  * @category Class
- * @description [Filter hits by tags](https://www.algolia.com/doc/api-reference/api-parameters/tagFilters/).
+ * @description Filter the search by values of the special &#x60;_tags&#x60; attribute.  **Prefer using the &#x60;filters&#x60; parameter, which supports all filter types and combinations with boolean operators.**  Different from regular facets, &#x60;_tags&#x60; can only be used for filtering (including or excluding records). You won&#39;t get a facet count. The same combination and escaping rules apply as for &#x60;facetFilters&#x60;.
  */
 class TagFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

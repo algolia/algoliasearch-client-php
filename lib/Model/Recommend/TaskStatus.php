@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TaskStatus Class Doc Comment.
  *
  * @category Class
- * @description _published_ if the task has been processed, _notPublished_ otherwise.
+ * @description Task status, &#x60;published&#x60; if the task is completed, &#x60;notPublished&#x60; otherwise.
  */
 class TaskStatus
 {

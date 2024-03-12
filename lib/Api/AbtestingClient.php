@@ -368,8 +368,8 @@ class AbtestingClient
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param int    $offset         Position of the starting record. Used for paging. 0 is the first record. (optional, default to 0)
-     * @param int    $limit          Number of records to return (page size). (optional, default to 10)
+     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param string $indexPrefix    Only return A/B tests for indices starting with this prefix. (optional)
      * @param string $indexSuffix    Only return A/B tests for indices ending with this suffix. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -378,6 +378,10 @@ class AbtestingClient
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
+        if (null !== $offset && $offset < 0) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AbtestingClient.listABTests, must be bigger than or equal to 0.');
+        }
+
         $resourcePath = '/2/abtests';
         $queryParameters = [];
         $headers = [];

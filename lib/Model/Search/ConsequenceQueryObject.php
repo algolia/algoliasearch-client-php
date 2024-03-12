@@ -169,7 +169,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets remove.
      *
-     * @param null|string[] $remove words to remove
+     * @param null|string[] $remove words to remove from the search query
      *
      * @return self
      */
@@ -193,7 +193,7 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets edits.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Edit[] $edits edits to apply
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\Edit[] $edits changes to make to the search query
      *
      * @return self
      */

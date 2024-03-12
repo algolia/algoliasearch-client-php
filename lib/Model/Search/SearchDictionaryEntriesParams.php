@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
- * @description &#x60;searchDictionaryEntries&#x60; parameters.
+ * @description Search parameter.
  */
 class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -164,6 +164,10 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         if (!isset($this->container['query']) || null === $this->container['query']) {
             $invalidProperties[] = "'query' can't be null";
         }
+        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
         if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
@@ -199,7 +203,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets query.
      *
-     * @param string $query text to search for in an index
+     * @param string $query search query
      *
      * @return self
      */
@@ -223,12 +227,16 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets page.
      *
-     * @param null|int $page page to retrieve (the first page is `0`, not `1`)
+     * @param null|int $page page of search results to retrieve
      *
      * @return self
      */
     public function setPage($page)
     {
+        if (!is_null($page) && ($page < 0)) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchDictionaryEntriesParams., must be bigger than or equal to 0.');
+        }
+
         $this->container['page'] = $page;
 
         return $this;
@@ -278,7 +286,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets language.
      *
-     * @param null|string $language [Supported language ISO code](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+     * @param null|string $language ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
      *
      * @return self
      */

@@ -24,7 +24,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'page' => 'int',
         'hitsPerPage' => 'int',
         'enabled' => 'bool',
-        'requestOptions' => 'object[]',
     ];
 
     /**
@@ -39,7 +38,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'page' => null,
         'hitsPerPage' => null,
         'enabled' => null,
-        'requestOptions' => null,
     ];
 
     /**
@@ -55,7 +53,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'page' => 'page',
         'hitsPerPage' => 'hitsPerPage',
         'enabled' => 'enabled',
-        'requestOptions' => 'requestOptions',
     ];
 
     /**
@@ -70,7 +67,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'page' => 'setPage',
         'hitsPerPage' => 'setHitsPerPage',
         'enabled' => 'setEnabled',
-        'requestOptions' => 'setRequestOptions',
     ];
 
     /**
@@ -85,7 +81,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'page' => 'getPage',
         'hitsPerPage' => 'getHitsPerPage',
         'enabled' => 'getEnabled',
-        'requestOptions' => 'getRequestOptions',
     ];
 
     /**
@@ -119,9 +114,6 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
-        }
-        if (isset($data['requestOptions'])) {
-            $this->container['requestOptions'] = $data['requestOptions'];
         }
     }
 
@@ -224,7 +216,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets query.
      *
-     * @param null|string $query rule object query
+     * @param null|string $query search query for rules
      *
      * @return self
      */
@@ -272,7 +264,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets context.
      *
-     * @param null|string $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     * @param null|string $context only return rules that match the context (exact match)
      *
      * @return self
      */
@@ -296,7 +288,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets page.
      *
-     * @param null|int $page requested page (the first page is page 0)
+     * @param null|int $page requested page of the API response
      *
      * @return self
      */
@@ -355,37 +347,13 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets enabled.
      *
-     * @param null|bool $enabled Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
+     * @param null|bool $enabled If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
      *
      * @return self
      */
     public function setEnabled($enabled)
     {
         $this->container['enabled'] = $enabled;
-
-        return $this;
-    }
-
-    /**
-     * Gets requestOptions.
-     *
-     * @return null|object[]
-     */
-    public function getRequestOptions()
-    {
-        return $this->container['requestOptions'] ?? null;
-    }
-
-    /**
-     * Sets requestOptions.
-     *
-     * @param null|object[] $requestOptions request options to send with the API call
-     *
-     * @return self
-     */
-    public function setRequestOptions($requestOptions)
-    {
-        $this->container['requestOptions'] = $requestOptions;
 
         return $this;
     }

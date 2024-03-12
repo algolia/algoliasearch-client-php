@@ -231,7 +231,7 @@ class SearchForFacetValuesRequest extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets maxFacetHits.
      *
-     * @param null|int $maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @return self
      */

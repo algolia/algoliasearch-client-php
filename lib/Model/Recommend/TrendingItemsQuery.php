@@ -230,7 +230,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName index name
      *
      * @return self
      */

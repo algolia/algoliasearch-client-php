@@ -45,8 +45,8 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
         'answerCode' => null,
         'queryBody' => null,
         'answer' => null,
-        'url' => null,
-        'ip' => null,
+        'url' => 'uri',
+        'ip' => 'ipv4',
         'queryHeaders' => null,
         'sha1' => null,
         'nbApiCalls' => null,
@@ -260,9 +260,17 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
         if (!isset($this->container['queryBody']) || null === $this->container['queryBody']) {
             $invalidProperties[] = "'queryBody' can't be null";
         }
+        if (mb_strlen($this->container['queryBody']) > 1000) {
+            $invalidProperties[] = "invalid value for 'queryBody', the character length must be smaller than or equal to 1000.";
+        }
+
         if (!isset($this->container['answer']) || null === $this->container['answer']) {
             $invalidProperties[] = "'answer' can't be null";
         }
+        if (mb_strlen($this->container['answer']) > 1000) {
+            $invalidProperties[] = "invalid value for 'answer', the character length must be smaller than or equal to 1000.";
+        }
+
         if (!isset($this->container['url']) || null === $this->container['url']) {
             $invalidProperties[] = "'url' can't be null";
         }
@@ -309,7 +317,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets timestamp.
      *
-     * @param string $timestamp Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $timestamp timestamp of the API request in ISO 8601 format
      *
      * @return self
      */
@@ -333,7 +341,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets method.
      *
-     * @param string $method HTTP method of the performed request
+     * @param string $method HTTP method of the request
      *
      * @return self
      */
@@ -357,7 +365,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets answerCode.
      *
-     * @param string $answerCode HTTP response code
+     * @param string $answerCode HTTP status code of the response
      *
      * @return self
      */
@@ -381,12 +389,16 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets queryBody.
      *
-     * @param string $queryBody Request body. Truncated after 1,000 characters.
+     * @param string $queryBody request body
      *
      * @return self
      */
     public function setQueryBody($queryBody)
     {
+        if (mb_strlen($queryBody) > 1000) {
+            throw new \InvalidArgumentException('invalid length for $queryBody when calling Log., must be smaller than or equal to 1000.');
+        }
+
         $this->container['queryBody'] = $queryBody;
 
         return $this;
@@ -405,12 +417,16 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets answer.
      *
-     * @param string $answer Answer body. Truncated after 1,000 characters.
+     * @param string $answer response body
      *
      * @return self
      */
     public function setAnswer($answer)
     {
+        if (mb_strlen($answer) > 1000) {
+            throw new \InvalidArgumentException('invalid length for $answer when calling Log., must be smaller than or equal to 1000.');
+        }
+
         $this->container['answer'] = $answer;
 
         return $this;
@@ -429,7 +445,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets url.
      *
-     * @param string $url request URL
+     * @param string $url URL of the API endpoint
      *
      * @return self
      */
@@ -477,7 +493,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets queryHeaders.
      *
-     * @param string $queryHeaders request headers (API key is obfuscated)
+     * @param string $queryHeaders request headers (API keys are obfuscated)
      *
      * @return self
      */
@@ -525,7 +541,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets nbApiCalls.
      *
-     * @param string $nbApiCalls number of API calls
+     * @param string $nbApiCalls number of API requests
      *
      * @return self
      */
@@ -549,7 +565,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets processingTimeMs.
      *
-     * @param string $processingTimeMs Processing time for the query. Doesn't include network time.
+     * @param string $processingTimeMs Processing time for the query in milliseconds. This doesn't include latency due to the network.
      *
      * @return self
      */
@@ -621,7 +637,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets queryNbHits.
      *
-     * @param null|string $queryNbHits number of hits returned for the query
+     * @param null|string $queryNbHits number of search results (hits) returned for the query
      *
      * @return self
      */
@@ -645,7 +661,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets innerQueries.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries performed queries for the given request
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries queries performed for the given request
      *
      * @return self
      */

@@ -404,6 +404,10 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
+        if ($this->container['page'] < 0) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
         }
@@ -524,7 +528,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets automaticRadius.
      *
-     * @param null|string $automaticRadius automatically-computed radius
+     * @param null|string $automaticRadius distance from a central coordinate provided by `aroundLatLng`
      *
      * @return self
      */
@@ -656,7 +660,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facets.
      *
-     * @param null|array<string,array<string,int>> $facets mapping of each facet name to the corresponding facet counts
+     * @param null|array<string,array<string,int>> $facets facet counts
      *
      * @return self
      */
@@ -807,7 +811,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of hits the search query matched
+     * @param int $nbHits number of results (hits)
      *
      * @return self
      */
@@ -831,7 +835,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets nbPages.
      *
-     * @param int $nbPages number of pages of results for the current query
+     * @param int $nbPages number of pages of results
      *
      * @return self
      */
@@ -879,12 +883,16 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets page.
      *
-     * @param int $page page to retrieve (the first page is `0`, not `1`)
+     * @param int $page page of search results to retrieve
      *
      * @return self
      */
     public function setPage($page)
     {
+        if ($page < 0) {
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['page'] = $page;
 
         return $this;
@@ -1095,7 +1103,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets userData.
      *
-     * @param null|object $userData lets you store custom data in your indices
+     * @param null|object $userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
      *
      * @return self
      */
@@ -1143,7 +1151,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits hits
+     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -1167,7 +1175,7 @@ class SearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets query.
      *
-     * @param string $query text to search for in an index
+     * @param string $query search query
      *
      * @return self
      */

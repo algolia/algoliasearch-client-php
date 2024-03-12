@@ -155,6 +155,10 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
+        if (count($this->container['objectIDs']) > 100) {
+            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 100.";
+        }
+
         if (!isset($this->container['position']) || null === $this->container['position']) {
             $invalidProperties[] = "'position' can't be null";
         }
@@ -189,12 +193,15 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets objectIDs.
      *
-     * @param string[] $objectIDs unique identifiers of the records to promote
+     * @param string[] $objectIDs Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.
      *
      * @return self
      */
     public function setObjectIDs($objectIDs)
     {
+        if (count($objectIDs) > 100) {
+            throw new \InvalidArgumentException('invalid value for $objectIDs when calling Promote., number of items must be less than or equal to 100.');
+        }
         $this->container['objectIDs'] = $objectIDs;
 
         return $this;
@@ -213,7 +220,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets position.
      *
-     * @param int $position The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
+     * @param int $position position in the search results where you want to show the promoted records
      *
      * @return self
      */
@@ -237,7 +244,7 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique identifier of the record to promote
+     * @param string $objectID unique record identifier
      *
      * @return self
      */

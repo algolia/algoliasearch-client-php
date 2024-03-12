@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Anchoring Class Doc Comment.
  *
  * @category Class
- * @description Whether the pattern parameter matches the beginning (&#x60;startsWith&#x60;) or end (&#x60;endsWith&#x60;) of the query string, is an exact match (&#x60;is&#x60;), or a partial match (&#x60;contains&#x60;).
+ * @description Which part of the search query the pattern should match:  - &#x60;startsWith&#x60;. The pattern must match the begginning of the query. - &#x60;endsWith&#x60;. The pattern must match the end of the query. - &#x60;is&#x60;. The pattern must match the query exactly. - &#x60;contains&#x60;. The pattern must match anywhere in the query.  Empty queries are only allowed as pattern with &#x60;anchoring: is&#x60;.
  */
 class Anchoring
 {

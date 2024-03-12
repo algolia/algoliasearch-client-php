@@ -179,7 +179,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique identifier of the record to promote
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets position.
      *
-     * @param int $position The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
+     * @param int $position position in the search results where you want to show the promoted records
      *
      * @return self
      */

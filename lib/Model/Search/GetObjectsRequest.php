@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * GetObjectsRequest Class Doc Comment.
  *
  * @category Class
- * @description Record retrieval operation.
+ * @description Request body for retrieving records.
  */
 class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -211,7 +211,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets objectID.
      *
-     * @param string $objectID record's objectID
+     * @param string $objectID object ID for the record to retrieve
      *
      * @return self
      */
@@ -235,7 +235,7 @@ class GetObjectsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets indexName.
      *
-     * @param string $indexName name of the index containing the required records
+     * @param string $indexName index from which to retrieve the records
      *
      * @return self
      */

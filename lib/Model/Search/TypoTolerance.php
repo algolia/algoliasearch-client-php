@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * TypoTolerance Class Doc Comment.
  *
  * @category Class
- * @description Controls whether [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) is enabled and how it is applied.
+ * @description Whether [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) is enabled and how it is applied.  If typo tolerance is true, &#x60;min&#x60;, or &#x60;strict&#x60;, [word splitting and concetenation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/splitting-and-concatenation/) is also active.
  */
 class TypoTolerance extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

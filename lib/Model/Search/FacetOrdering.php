@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * FacetOrdering Class Doc Comment.
  *
  * @category Class
- * @description Defines the ordering of facets (widgets).
+ * @description Order of facet names and facet values in your UI.
  */
 class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -194,7 +194,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets values.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\Value> $values ordering of facet values within an individual facet
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\Value> $values Order of facet values. One object for each facet.
      *
      * @return self
      */

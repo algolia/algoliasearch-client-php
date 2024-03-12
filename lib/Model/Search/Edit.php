@@ -225,7 +225,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets insert.
      *
-     * @param null|string $insert text that should be inserted in place of the removed text inside the query string
+     * @param null|string $insert text to be added in place of the deleted text inside the query string
      *
      * @return self
      */

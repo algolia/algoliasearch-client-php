@@ -462,7 +462,7 @@ class TopSearchWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of hits the search query matched
+     * @param int $nbHits number of results (hits)
      *
      * @return self
      */

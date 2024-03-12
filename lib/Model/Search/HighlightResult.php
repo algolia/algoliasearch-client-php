@@ -197,7 +197,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets value.
      *
-     * @param string $value markup text with `facetQuery` matches highlighted
+     * @param string $value highlighted attribute value, including HTML tags
      *
      * @return self
      */
@@ -245,7 +245,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchedWords.
      *
-     * @param string[] $matchedWords list of words from the query that matched the object
+     * @param string[] $matchedWords list of matched words from the search query
      *
      * @return self
      */

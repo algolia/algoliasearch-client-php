@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * MatchLevel Class Doc Comment.
  *
  * @category Class
- * @description Indicates how well the attribute matched the search query.
+ * @description Whether the whole query string matches or only a part.
  */
 class MatchLevel
 {

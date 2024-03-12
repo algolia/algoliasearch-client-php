@@ -161,7 +161,7 @@ class Cursor extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets cursor.
      *
-     * @param null|string $cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response.
+     * @param null|string $cursor Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute.
      *
      * @return self
      */

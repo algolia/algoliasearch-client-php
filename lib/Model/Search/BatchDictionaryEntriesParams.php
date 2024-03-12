@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BatchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
- * @description &#x60;batchDictionaryEntries&#x60; parameters.
+ * @description Request body for updating dictionary entries.
  */
 class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -176,7 +176,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets clearExistingDictionaryEntries.
      *
-     * @param null|bool $clearExistingDictionaryEntries incidates whether to replace all custom entries in the dictionary with the ones sent with this request
+     * @param null|bool $clearExistingDictionaryEntries whether to replace all custom entries in the dictionary with the ones sent with this request
      *
      * @return self
      */
@@ -200,7 +200,7 @@ class BatchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests operations to batch
+     * @param \Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesRequest[] $requests list of additions and deletions to your dictionaries
      *
      * @return self
      */

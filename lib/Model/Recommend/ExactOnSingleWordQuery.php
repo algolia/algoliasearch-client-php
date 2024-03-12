@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * ExactOnSingleWordQuery Class Doc Comment.
  *
  * @category Class
- * @description Determines how the [Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes) is computed when the query contains only one word.
+ * @description Determines how the [Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes) is computed when the search query has only one word.  &lt;dl&gt; &lt;dt&gt;&lt;code&gt;attribute&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt; The Exact ranking criterion is 1 if the query word and attribute value are the same. For example, a search for \&quot;road\&quot; will match the value \&quot;road\&quot;, but not \&quot;road trip\&quot;. &lt;/dd&gt; &lt;dt&gt;&lt;code&gt;none&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt; The Exact ranking criterion is ignored on single-word searches. &lt;/dd&gt; &lt;dt&gt;&lt;code&gt;word&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt; The Exact ranking criterion is 1 if the query word is found in the attribute value. The query word must have at least 3 characters and must not be a stop word. &lt;/dd&gt; &lt;/dl&gt;  If &#x60;exactOnSingleWordQuery&#x60; is &#x60;word&#x60;, only exact matches will be highlighted, partial and prefix matches won&#39;t.
  */
 class ExactOnSingleWordQuery
 {

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Mode Class Doc Comment.
  *
  * @category Class
- * @description Search mode the index will use to query for results.
+ * @description Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you.
  */
 class Mode
 {

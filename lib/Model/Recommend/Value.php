@@ -169,7 +169,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets order.
      *
-     * @param null|string[] $order pinned order of facet lists
+     * @param null|string[] $order Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
      *
      * @return self
      */

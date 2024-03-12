@@ -260,9 +260,9 @@ class RecommendClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName      Index on which to perform the request. (required)
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param string $objectID       Unique record (object) identifier. (required)
+     * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse|array<string, mixed>
@@ -329,9 +329,9 @@ class RecommendClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName      Index on which to perform the request. (required)
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param string $objectID       Unique record (object) identifier. (required)
+     * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\RuleResponse|array<string, mixed>
@@ -398,7 +398,7 @@ class RecommendClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName      Index on which to perform the request. (required)
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param int    $taskID         Unique identifier of a task. Numeric value (up to 64bits). (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -499,12 +499,12 @@ class RecommendClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName                  Index on which to perform the request. (required)
+     * @param string $indexName                  Name of the index on which to perform the operation. (required)
      * @param array  $model                      [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param array  $searchRecommendRulesParams searchRecommendRulesParams (optional)
-     *                                           - $searchRecommendRulesParams['query'] => (string) Full-text query.
+     *                                           - $searchRecommendRulesParams['query'] => (string) Search query.
      *                                           - $searchRecommendRulesParams['context'] => (string) Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
-     *                                           - $searchRecommendRulesParams['page'] => (int) Requested page (the first page is page 0).
+     *                                           - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.
      *                                           - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.
      *                                           - $searchRecommendRulesParams['enabled'] => (bool) Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
      *

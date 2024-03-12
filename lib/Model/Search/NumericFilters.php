@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * NumericFilters Class Doc Comment.
  *
  * @category Class
- * @description [Filter on numeric attributes](https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/).
+ * @description Filter by numeric facets.  **Prefer using the &#x60;filters&#x60; parameter, which supports all filter types and combinations with boolean operators.**  You can use numeric comparison operators: &#x60;&lt;&#x60;, &#x60;&lt;&#x3D;&#x60;, &#x60;&#x3D;&#x60;, &#x60;!&#x3D;&#x60;, &#x60;&gt;&#x60;, &#x60;&gt;&#x3D;&#x60;. Comparsions are precise up to 3 decimals. You can also provide ranges: &#x60;facet:&lt;lower&gt; TO &lt;upper&gt;&#x60;. The range includes the lower and upper boundaries. The same combination rules apply as for &#x60;facetFilters&#x60;.
  */
 class NumericFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

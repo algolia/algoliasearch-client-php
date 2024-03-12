@@ -218,7 +218,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique object identifier
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
@@ -242,7 +242,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets highlightResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult> $highlightResult show highlighted section and words matched on a query
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
      *
      * @return self
      */
@@ -266,7 +266,7 @@ class RecommendHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets snippetResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult> $snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult> $snippetResult snippets that show the context around a matching search query
      *
      * @return self
      */

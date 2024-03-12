@@ -21,6 +21,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'anchoring' => '\Algolia\AlgoliaSearch\Model\Search\Anchoring',
         'alternatives' => 'bool',
         'context' => 'string',
+        'filters' => 'string',
     ];
 
     /**
@@ -33,6 +34,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'anchoring' => null,
         'alternatives' => null,
         'context' => null,
+        'filters' => null,
     ];
 
     /**
@@ -46,6 +48,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'anchoring' => 'anchoring',
         'alternatives' => 'alternatives',
         'context' => 'context',
+        'filters' => 'filters',
     ];
 
     /**
@@ -58,6 +61,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'anchoring' => 'setAnchoring',
         'alternatives' => 'setAlternatives',
         'context' => 'setContext',
+        'filters' => 'setFilters',
     ];
 
     /**
@@ -70,6 +74,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'anchoring' => 'getAnchoring',
         'alternatives' => 'getAlternatives',
         'context' => 'getContext',
+        'filters' => 'getFilters',
     ];
 
     /**
@@ -97,6 +102,9 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         }
         if (isset($data['context'])) {
             $this->container['context'] = $data['context'];
+        }
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
         }
     }
 
@@ -158,7 +166,13 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (isset($this->container['context']) && !preg_match('/[A-Za-z0-9_-]+/', $this->container['context'])) {
+            $invalidProperties[] = "invalid value for 'context', must be conform to the pattern /[A-Za-z0-9_-]+/.";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -185,7 +199,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets pattern.
      *
-     * @param null|string $pattern query pattern syntax
+     * @param null|string $pattern Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\".
      *
      * @return self
      */
@@ -233,7 +247,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets alternatives.
      *
-     * @param null|bool $alternatives whether the pattern matches on plurals, synonyms, and typos
+     * @param null|bool $alternatives whether the pattern should match plurals, synonyms, and typos
      *
      * @return self
      */
@@ -257,13 +271,41 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets context.
      *
-     * @param null|string $context rule context format: [A-Za-z0-9_-]+)
+     * @param null|string $context An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters.
      *
      * @return self
      */
     public function setContext($context)
     {
+        if (!is_null($context) && (!preg_match('/[A-Za-z0-9_-]+/', $context))) {
+            throw new \InvalidArgumentException("invalid value for {$context} when calling Condition., must conform to the pattern /[A-Za-z0-9_-]+/.");
+        }
+
         $this->container['context'] = $context;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters.
+     *
+     * @return null|string
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'] ?? null;
+    }
+
+    /**
+     * Sets filters.
+     *
+     * @param null|string $filters Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter.
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+        $this->container['filters'] = $filters;
 
         return $this;
     }

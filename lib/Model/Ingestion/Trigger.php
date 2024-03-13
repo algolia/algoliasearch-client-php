@@ -17,7 +17,7 @@ class Trigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $modelTypes = [
-        'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType',
+        'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType',
         'lastRun' => 'string',
         'cron' => 'string',
         'nextRun' => 'string',
@@ -187,7 +187,7 @@ class Trigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType
      */
     public function getType()
     {
@@ -197,7 +197,7 @@ class Trigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SubscriptionTriggerType $type type
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType $type type
      *
      * @return self
      */

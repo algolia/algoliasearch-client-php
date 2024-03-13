@@ -26,6 +26,8 @@ class SourceType
 
     public const DOCKER = 'docker';
 
+    public const GA4_BIGQUERY_EXPORT = 'ga4BigqueryExport';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -40,6 +42,7 @@ class SourceType
             self::CSV,
             self::BIGQUERY,
             self::DOCKER,
+            self::GA4_BIGQUERY_EXPORT,
         ];
     }
 }

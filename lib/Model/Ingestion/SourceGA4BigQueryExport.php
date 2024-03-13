@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * TaskInput Class Doc Comment.
+ * SourceGA4BigQueryExport Class Doc Comment.
  *
  * @category Class
  */
-class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceGA4BigQueryExport extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,10 +17,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelTypes = [
-        'startDate' => 'string',
-        'endDate' => 'string',
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
-        'timeframe' => 'int',
+        'projectID' => 'string',
+        'datasetID' => 'string',
+        'tablePrefix' => 'string',
     ];
 
     /**
@@ -29,10 +28,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelFormats = [
-        'startDate' => null,
-        'endDate' => null,
-        'mapping' => null,
-        'timeframe' => null,
+        'projectID' => null,
+        'datasetID' => null,
+        'tablePrefix' => null,
     ];
 
     /**
@@ -42,10 +40,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $attributeMap = [
-        'startDate' => 'startDate',
-        'endDate' => 'endDate',
-        'mapping' => 'mapping',
-        'timeframe' => 'timeframe',
+        'projectID' => 'projectID',
+        'datasetID' => 'datasetID',
+        'tablePrefix' => 'tablePrefix',
     ];
 
     /**
@@ -54,10 +51,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $setters = [
-        'startDate' => 'setStartDate',
-        'endDate' => 'setEndDate',
-        'mapping' => 'setMapping',
-        'timeframe' => 'setTimeframe',
+        'projectID' => 'setProjectID',
+        'datasetID' => 'setDatasetID',
+        'tablePrefix' => 'setTablePrefix',
     ];
 
     /**
@@ -66,10 +62,9 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $getters = [
-        'startDate' => 'getStartDate',
-        'endDate' => 'getEndDate',
-        'mapping' => 'getMapping',
-        'timeframe' => 'getTimeframe',
+        'projectID' => 'getProjectID',
+        'datasetID' => 'getDatasetID',
+        'tablePrefix' => 'getTablePrefix',
     ];
 
     /**
@@ -86,17 +81,14 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['startDate'])) {
-            $this->container['startDate'] = $data['startDate'];
+        if (isset($data['projectID'])) {
+            $this->container['projectID'] = $data['projectID'];
         }
-        if (isset($data['endDate'])) {
-            $this->container['endDate'] = $data['endDate'];
+        if (isset($data['datasetID'])) {
+            $this->container['datasetID'] = $data['datasetID'];
         }
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
-        }
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
+        if (isset($data['tablePrefix'])) {
+            $this->container['tablePrefix'] = $data['tablePrefix'];
         }
     }
 
@@ -160,24 +152,14 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['startDate']) || null === $this->container['startDate']) {
-            $invalidProperties[] = "'startDate' can't be null";
+        if (!isset($this->container['projectID']) || null === $this->container['projectID']) {
+            $invalidProperties[] = "'projectID' can't be null";
         }
-        if (!isset($this->container['endDate']) || null === $this->container['endDate']) {
-            $invalidProperties[] = "'endDate' can't be null";
+        if (!isset($this->container['datasetID']) || null === $this->container['datasetID']) {
+            $invalidProperties[] = "'datasetID' can't be null";
         }
-        if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
-            $invalidProperties[] = "'mapping' can't be null";
-        }
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
-        }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
+        if (!isset($this->container['tablePrefix']) || null === $this->container['tablePrefix']) {
+            $invalidProperties[] = "'tablePrefix' can't be null";
         }
 
         return $invalidProperties;
@@ -195,104 +177,73 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets startDate.
+     * Gets projectID.
      *
      * @return string
      */
-    public function getStartDate()
+    public function getProjectID()
     {
-        return $this->container['startDate'] ?? null;
+        return $this->container['projectID'] ?? null;
     }
 
     /**
-     * Sets startDate.
+     * Sets projectID.
      *
-     * @param string $startDate the start date of the extraction (RFC3339 format)
+     * @param string $projectID GCP project ID that the BigQuery Export writes to
      *
      * @return self
      */
-    public function setStartDate($startDate)
+    public function setProjectID($projectID)
     {
-        $this->container['startDate'] = $startDate;
+        $this->container['projectID'] = $projectID;
 
         return $this;
     }
 
     /**
-     * Gets endDate.
+     * Gets datasetID.
      *
      * @return string
      */
-    public function getEndDate()
+    public function getDatasetID()
     {
-        return $this->container['endDate'] ?? null;
+        return $this->container['datasetID'] ?? null;
     }
 
     /**
-     * Sets endDate.
+     * Sets datasetID.
      *
-     * @param string $endDate the end date of the extraction (RFC3339 format)
+     * @param string $datasetID bigQuery dataset ID that the BigQuery Export writes to
      *
      * @return self
      */
-    public function setEndDate($endDate)
+    public function setDatasetID($datasetID)
     {
-        $this->container['endDate'] = $endDate;
+        $this->container['datasetID'] = $datasetID;
 
         return $this;
     }
 
     /**
-     * Gets mapping.
+     * Gets tablePrefix.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return string
      */
-    public function getMapping()
+    public function getTablePrefix()
     {
-        return $this->container['mapping'] ?? null;
+        return $this->container['tablePrefix'] ?? null;
     }
 
     /**
-     * Sets mapping.
+     * Sets tablePrefix.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param string $tablePrefix Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
      *
      * @return self
      */
-    public function setMapping($mapping)
+    public function setTablePrefix($tablePrefix)
     {
-        $this->container['mapping'] = $mapping;
-
-        return $this;
-    }
-
-    /**
-     * Gets timeframe.
-     *
-     * @return int
-     */
-    public function getTimeframe()
-    {
-        return $this->container['timeframe'] ?? null;
-    }
-
-    /**
-     * Sets timeframe.
-     *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
-     *
-     * @return self
-     */
-    public function setTimeframe($timeframe)
-    {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
+        $this->container['tablePrefix'] = $tablePrefix;
 
         return $this;
     }

@@ -5,23 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * ActionType Class Doc Comment.
+ * StreamingTriggerType Class Doc Comment.
  *
  * @category Class
- * @description The action to perform on the Algolia index.
+ * @description A task that runs continuously.
  */
-class ActionType
+class StreamingTriggerType
 {
     /**
      * Possible values of this enum.
      */
-    public const REPLACE = 'replace';
-
-    public const SAVE = 'save';
-
-    public const PARTIAL = 'partial';
-
-    public const APPEND = 'append';
+    public const STREAMING = 'streaming';
 
     /**
      * Gets allowable values of the enum.
@@ -31,10 +25,7 @@ class ActionType
     public static function getAllowableEnumValues()
     {
         return [
-            self::REPLACE,
-            self::SAVE,
-            self::PARTIAL,
-            self::APPEND,
+            self::STREAMING,
         ];
     }
 }

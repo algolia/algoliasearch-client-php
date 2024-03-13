@@ -351,6 +351,9 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (!isset($this->container['datasetID']) || null === $this->container['datasetID']) {
             $invalidProperties[] = "'datasetID' can't be null";
         }
+        if (!isset($this->container['tablePrefix']) || null === $this->container['tablePrefix']) {
+            $invalidProperties[] = "'tablePrefix' can't be null";
+        }
         if (!isset($this->container['imageType']) || null === $this->container['imageType']) {
             $invalidProperties[] = "'imageType' can't be null";
         }
@@ -734,7 +737,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets projectID.
      *
-     * @param string $projectID project ID of the BigQuery Source
+     * @param string $projectID GCP project ID that the BigQuery Export writes to
      *
      * @return self
      */
@@ -758,7 +761,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets datasetID.
      *
-     * @param string $datasetID dataset ID of the BigQuery Source
+     * @param string $datasetID bigQuery dataset ID that the BigQuery Export writes to
      *
      * @return self
      */
@@ -820,7 +823,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets tablePrefix.
      *
-     * @return null|string
+     * @return string
      */
     public function getTablePrefix()
     {
@@ -830,7 +833,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets tablePrefix.
      *
-     * @param null|string $tablePrefix table prefix (for Google Analytics)
+     * @param string $tablePrefix Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
      *
      * @return self
      */

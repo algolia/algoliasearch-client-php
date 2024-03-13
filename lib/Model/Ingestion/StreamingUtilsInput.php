@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * TaskInput Class Doc Comment.
+ * StreamingUtilsInput Class Doc Comment.
  *
  * @category Class
+ * @description The input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
  */
-class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,10 +18,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelTypes = [
-        'startDate' => 'string',
-        'endDate' => 'string',
         'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
-        'timeframe' => 'int',
     ];
 
     /**
@@ -29,10 +27,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelFormats = [
-        'startDate' => null,
-        'endDate' => null,
         'mapping' => null,
-        'timeframe' => null,
     ];
 
     /**
@@ -42,10 +37,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $attributeMap = [
-        'startDate' => 'startDate',
-        'endDate' => 'endDate',
         'mapping' => 'mapping',
-        'timeframe' => 'timeframe',
     ];
 
     /**
@@ -54,10 +46,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $setters = [
-        'startDate' => 'setStartDate',
-        'endDate' => 'setEndDate',
         'mapping' => 'setMapping',
-        'timeframe' => 'setTimeframe',
     ];
 
     /**
@@ -66,10 +55,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $getters = [
-        'startDate' => 'getStartDate',
-        'endDate' => 'getEndDate',
         'mapping' => 'getMapping',
-        'timeframe' => 'getTimeframe',
     ];
 
     /**
@@ -86,17 +72,8 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['startDate'])) {
-            $this->container['startDate'] = $data['startDate'];
-        }
-        if (isset($data['endDate'])) {
-            $this->container['endDate'] = $data['endDate'];
-        }
         if (isset($data['mapping'])) {
             $this->container['mapping'] = $data['mapping'];
-        }
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
         }
     }
 
@@ -160,24 +137,8 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['startDate']) || null === $this->container['startDate']) {
-            $invalidProperties[] = "'startDate' can't be null";
-        }
-        if (!isset($this->container['endDate']) || null === $this->container['endDate']) {
-            $invalidProperties[] = "'endDate' can't be null";
-        }
         if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
             $invalidProperties[] = "'mapping' can't be null";
-        }
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
-        }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -192,54 +153,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets startDate.
-     *
-     * @return string
-     */
-    public function getStartDate()
-    {
-        return $this->container['startDate'] ?? null;
-    }
-
-    /**
-     * Sets startDate.
-     *
-     * @param string $startDate the start date of the extraction (RFC3339 format)
-     *
-     * @return self
-     */
-    public function setStartDate($startDate)
-    {
-        $this->container['startDate'] = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Gets endDate.
-     *
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->container['endDate'] ?? null;
-    }
-
-    /**
-     * Sets endDate.
-     *
-     * @param string $endDate the end date of the extraction (RFC3339 format)
-     *
-     * @return self
-     */
-    public function setEndDate($endDate)
-    {
-        $this->container['endDate'] = $endDate;
-
-        return $this;
     }
 
     /**
@@ -262,37 +175,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     public function setMapping($mapping)
     {
         $this->container['mapping'] = $mapping;
-
-        return $this;
-    }
-
-    /**
-     * Gets timeframe.
-     *
-     * @return int
-     */
-    public function getTimeframe()
-    {
-        return $this->container['timeframe'] ?? null;
-    }
-
-    /**
-     * Sets timeframe.
-     *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
-     *
-     * @return self
-     */
-    public function setTimeframe($timeframe)
-    {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
 
         return $this;
     }

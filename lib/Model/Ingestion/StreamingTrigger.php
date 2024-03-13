@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * TaskCreateTrigger Class Doc Comment.
+ * StreamingTrigger Class Doc Comment.
  *
  * @category Class
+ * @description The trigger input for a task of type &#39;streaming&#39;.
  */
-class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +19,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $modelTypes = [
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType',
-        'cron' => 'string',
     ];
 
     /**
@@ -28,7 +28,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $modelFormats = [
         'type' => null,
-        'cron' => null,
     ];
 
     /**
@@ -39,7 +38,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $attributeMap = [
         'type' => 'type',
-        'cron' => 'cron',
     ];
 
     /**
@@ -49,7 +47,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $setters = [
         'type' => 'setType',
-        'cron' => 'setCron',
     ];
 
     /**
@@ -59,7 +56,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     protected static $getters = [
         'type' => 'getType',
-        'cron' => 'getCron',
     ];
 
     /**
@@ -78,9 +74,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
-        }
-        if (isset($data['cron'])) {
-            $this->container['cron'] = $data['cron'];
         }
     }
 
@@ -147,9 +140,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (!isset($this->container['type']) || null === $this->container['type']) {
             $invalidProperties[] = "'type' can't be null";
         }
-        if (!isset($this->container['cron']) || null === $this->container['cron']) {
-            $invalidProperties[] = "'cron' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -185,30 +175,6 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setType($type)
     {
         $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets cron.
-     *
-     * @return string
-     */
-    public function getCron()
-    {
-        return $this->container['cron'] ?? null;
-    }
-
-    /**
-     * Sets cron.
-     *
-     * @param string $cron a cron expression that represent at which regularity the task should run
-     *
-     * @return self
-     */
-    public function setCron($cron)
-    {
-        $this->container['cron'] = $cron;
 
         return $this;
     }

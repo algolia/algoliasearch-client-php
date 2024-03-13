@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TriggerType Class Doc Comment.
  *
  * @category Class
- * @description The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).
+ * @description The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).   - streaming: a task that runs continuously.
  */
 class TriggerType
 {
@@ -21,6 +21,8 @@ class TriggerType
 
     public const SUBSCRIPTION = 'subscription';
 
+    public const STREAMING = 'streaming';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -32,6 +34,7 @@ class TriggerType
             self::ON_DEMAND,
             self::SCHEDULE,
             self::SUBSCRIPTION,
+            self::STREAMING,
         ];
     }
 }

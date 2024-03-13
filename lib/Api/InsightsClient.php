@@ -255,9 +255,9 @@ class InsightsClient
     }
 
     /**
-     * Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).
+     * Deletes all events related to the specified user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](/specs/personalization#tag/profiles/operation/deleteUserProfile).
      *
-     * @param string $userToken      The user token for which to delete all associated events. (required)
+     * @param string $userToken      User token for which to delete all associated events. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      */
     public function deleteUserToken($userToken, $requestOptions = [])
@@ -274,8 +274,8 @@ class InsightsClient
         if (strlen($userToken) < 1) {
             throw new \InvalidArgumentException('invalid length for "$userToken" when calling InsightsClient.deleteUserToken, must be bigger than or equal to 1.');
         }
-        if (!preg_match('/[a-zA-Z0-9_=\\/+]{1,129}/', $userToken)) {
-            throw new \InvalidArgumentException('invalid value for "userToken" when calling InsightsClient.deleteUserToken, must conform to the pattern /[a-zA-Z0-9_=\\/+]{1,129}/.');
+        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
+            throw new \InvalidArgumentException('invalid value for "userToken" when calling InsightsClient.deleteUserToken, must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.');
         }
 
         $resourcePath = '/1/usertokens/{userToken}';
@@ -296,10 +296,10 @@ class InsightsClient
     }
 
     /**
-     * Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
+     * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
      *
      * @param array $insightsEvents insightsEvents (required)
-     *                              - $insightsEvents['events'] => (array) List of click and conversion events.  An event is an object representing a user interaction. Events have attributes that describe the interaction, such as an event name, a type, or a user token.  **All** events must be valid, otherwise the API returns an error. (required)
+     *                              - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Insights\InsightsEvents
      *

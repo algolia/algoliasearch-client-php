@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * Discount Class Doc Comment.
  *
  * @category Class
- * @description The absolute value of the discount for this product, in units of &#x60;currency&#x60;.
+ * @description Absolute value of the discount for this product, in units of &#x60;currency&#x60;.
  */
 class Discount extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

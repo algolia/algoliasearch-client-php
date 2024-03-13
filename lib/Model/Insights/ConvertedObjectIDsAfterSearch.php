@@ -294,7 +294,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventName.
      *
-     * @param string $eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+     * @param string $eventName Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
      *
      * @return self
      */
@@ -352,7 +352,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets index.
      *
-     * @param string $index the name of an Algolia index
+     * @param string $index index name to which the event's items belong
      *
      * @return self
      */
@@ -376,7 +376,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectIDs.
      *
-     * @param string[] $objectIDs the object IDs of the records that are part of the event
+     * @param string[] $objectIDs object IDs of the records that are part of the event
      *
      * @return self
      */
@@ -440,7 +440,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets userToken.
      *
-     * @param string $userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
+     * @param string $userToken Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
      *
      * @return self
      */
@@ -474,7 +474,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets authenticatedUserToken.
      *
-     * @param null|string $authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
+     * @param null|string $authenticatedUserToken Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
      *
      * @return self
      */
@@ -508,7 +508,7 @@ class ConvertedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets timestamp.
      *
-     * @param null|int $timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     * @param null|int $timestamp Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
      *
      * @return self
      */

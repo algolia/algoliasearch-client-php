@@ -257,7 +257,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets quantity.
      *
-     * @param null|int $quantity The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
+     * @param null|int $quantity Quantity of a product that has been purchased or added to the cart. The total purchase value is the sum of `quantity` multiplied with the `price` for each purchased item.
      *
      * @return self
      */

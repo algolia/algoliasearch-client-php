@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Insights;
  * Price Class Doc Comment.
  *
  * @category Class
- * @description The total price of a product, including any discounts, in units of &#x60;currency&#x60;.
+ * @description Total price of a product, including any discounts, in units of &#x60;currency&#x60;.
  */
 class Price extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

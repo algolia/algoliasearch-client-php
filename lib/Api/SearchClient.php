@@ -2286,7 +2286,7 @@ class SearchClient
      *                                             - $searchDictionaryEntriesParams['query'] => (string) Search query. (required)
      *                                             - $searchDictionaryEntriesParams['page'] => (int) Page of search results to retrieve.
      *                                             - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Number of hits per page.
-     *                                             - $searchDictionaryEntriesParams['language'] => (string) ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+     *                                             - $searchDictionaryEntriesParams['language'] => (array)
      *
      * @see \Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesParams
      *

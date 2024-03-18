@@ -157,6 +157,7 @@ lib/Model/Search/SnippetResultOption.php
 lib/Model/Search/SortRemainingBy.php
 lib/Model/Search/Source.php
 lib/Model/Search/StandardEntries.php
+lib/Model/Search/SupportedLanguage.php
 lib/Model/Search/SynonymHit.php
 lib/Model/Search/SynonymType.php
 lib/Model/Search/TagFilters.php

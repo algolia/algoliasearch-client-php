@@ -19,7 +19,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     protected static $modelTypes = [
         'objectID' => 'string',
-        'language' => 'string',
+        'language' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage',
         'word' => 'string',
         'words' => 'string[]',
         'decomposition' => 'string[]',
@@ -225,7 +225,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets language.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Search\SupportedLanguage
      */
     public function getLanguage()
     {
@@ -235,7 +235,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets language.
      *
-     * @param string $language ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+     * @param \Algolia\AlgoliaSearch\Model\Search\SupportedLanguage $language language
      *
      * @return self
      */

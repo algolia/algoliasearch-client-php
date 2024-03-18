@@ -21,7 +21,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         'query' => 'string',
         'page' => 'int',
         'hitsPerPage' => 'int',
-        'language' => 'string',
+        'language' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage',
     ];
 
     /**
@@ -276,7 +276,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets language.
      *
-     * @return null|string
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage
      */
     public function getLanguage()
     {
@@ -286,7 +286,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets language.
      *
-     * @param null|string $language ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage $language language
      *
      * @return self
      */

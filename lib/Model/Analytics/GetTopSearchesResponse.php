@@ -17,7 +17,7 @@ class GetTopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[]',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[]',
     ];
 
     /**
@@ -157,7 +157,7 @@ class GetTopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets searches.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[]
      */
     public function getSearches()
     {
@@ -167,7 +167,7 @@ class GetTopSearchesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets searches.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[] $searches top searches with their hits count and analytics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[] $searches most popular searches, including their click and revenue metrics
      *
      * @return self
      */

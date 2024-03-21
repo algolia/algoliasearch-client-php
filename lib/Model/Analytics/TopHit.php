@@ -178,7 +178,7 @@ class TopHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets hit.
      *
-     * @param string $hit hit
+     * @param string $hit object ID of a record that's returned as a search result
      *
      * @return self
      */

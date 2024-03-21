@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetTopFilterAttributesResponse Class Doc Comment.
+ * TopHitsResponseWithRevenueAnalytics Class Doc Comment.
  *
  * @category Class
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopHitsResponseWithRevenueAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +17,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Analytics\TopHitWithRevenueAnalytics[]',
     ];
 
     /**
@@ -26,7 +26,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelFormats = [
-        'attributes' => null,
+        'hits' => null,
     ];
 
     /**
@@ -36,7 +36,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $attributeMap = [
-        'attributes' => 'attributes',
+        'hits' => 'hits',
     ];
 
     /**
@@ -45,7 +45,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $setters = [
-        'attributes' => 'setAttributes',
+        'hits' => 'setHits',
     ];
 
     /**
@@ -54,7 +54,7 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $getters = [
-        'attributes' => 'getAttributes',
+        'hits' => 'getHits',
     ];
 
     /**
@@ -71,8 +71,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['attributes'])) {
-            $this->container['attributes'] = $data['attributes'];
+        if (isset($data['hits'])) {
+            $this->container['hits'] = $data['hits'];
         }
     }
 
@@ -136,8 +136,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attributes']) || null === $this->container['attributes']) {
-            $invalidProperties[] = "'attributes' can't be null";
+        if (!isset($this->container['hits']) || null === $this->container['hits']) {
+            $invalidProperties[] = "'hits' can't be null";
         }
 
         return $invalidProperties;
@@ -155,25 +155,25 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     }
 
     /**
-     * Gets attributes.
+     * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithRevenueAnalytics[]
      */
-    public function getAttributes()
+    public function getHits()
     {
-        return $this->container['attributes'] ?? null;
+        return $this->container['hits'] ?? null;
     }
 
     /**
-     * Sets attributes.
+     * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes most frequent filters
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHitWithRevenueAnalytics[] $hits most frequent search results with click, conversion, and revenue metrics
      *
      * @return self
      */
-    public function setAttributes($attributes)
+    public function setHits($hits)
     {
-        $this->container['attributes'] = $attributes;
+        $this->container['hits'] = $hits;
 
         return $this;
     }

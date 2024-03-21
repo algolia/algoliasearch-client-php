@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchNoClickEvent Class Doc Comment.
+ * DailySearchesNoClicks Class Doc Comment.
  *
  * @category Class
  */
-class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailySearchesNoClicks extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,7 +19,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     protected static $modelTypes = [
         'search' => 'string',
         'count' => 'int',
-        'withFilterCount' => 'int',
+        'nbHits' => 'int',
     ];
 
     /**
@@ -30,7 +30,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     protected static $modelFormats = [
         'search' => null,
         'count' => null,
-        'withFilterCount' => null,
+        'nbHits' => null,
     ];
 
     /**
@@ -42,7 +42,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     protected static $attributeMap = [
         'search' => 'search',
         'count' => 'count',
-        'withFilterCount' => 'withFilterCount',
+        'nbHits' => 'nbHits',
     ];
 
     /**
@@ -53,7 +53,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     protected static $setters = [
         'search' => 'setSearch',
         'count' => 'setCount',
-        'withFilterCount' => 'setWithFilterCount',
+        'nbHits' => 'setNbHits',
     ];
 
     /**
@@ -64,7 +64,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     protected static $getters = [
         'search' => 'getSearch',
         'count' => 'getCount',
-        'withFilterCount' => 'getWithFilterCount',
+        'nbHits' => 'getNbHits',
     ];
 
     /**
@@ -87,8 +87,8 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (isset($data['count'])) {
             $this->container['count'] = $data['count'];
         }
-        if (isset($data['withFilterCount'])) {
-            $this->container['withFilterCount'] = $data['withFilterCount'];
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
         }
     }
 
@@ -158,8 +158,12 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         if (!isset($this->container['count']) || null === $this->container['count']) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if (!isset($this->container['withFilterCount']) || null === $this->container['withFilterCount']) {
-            $invalidProperties[] = "'withFilterCount' can't be null";
+        if ($this->container['count'] < 1) {
+            $invalidProperties[] = "invalid value for 'count', must be bigger than or equal to 1.";
+        }
+
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
+            $invalidProperties[] = "'nbHits' can't be null";
         }
 
         return $invalidProperties;
@@ -189,7 +193,7 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets search.
      *
-     * @param string $search user query
+     * @param string $search search query
      *
      * @return self
      */
@@ -213,37 +217,41 @@ class SearchNoClickEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets count.
      *
-     * @param int $count number of occurrences
+     * @param int $count number of tracked searches
      *
      * @return self
      */
     public function setCount($count)
     {
+        if ($count < 1) {
+            throw new \InvalidArgumentException('invalid value for $count when calling DailySearchesNoClicks., must be bigger than or equal to 1.');
+        }
+
         $this->container['count'] = $count;
 
         return $this;
     }
 
     /**
-     * Gets withFilterCount.
+     * Gets nbHits.
      *
      * @return int
      */
-    public function getWithFilterCount()
+    public function getNbHits()
     {
-        return $this->container['withFilterCount'] ?? null;
+        return $this->container['nbHits'] ?? null;
     }
 
     /**
-     * Sets withFilterCount.
+     * Sets nbHits.
      *
-     * @param int $withFilterCount number of occurrences
+     * @param int $nbHits number of results (hits)
      *
      * @return self
      */
-    public function setWithFilterCount($withFilterCount)
+    public function setNbHits($nbHits)
     {
-        $this->container['withFilterCount'] = $withFilterCount;
+        $this->container['nbHits'] = $nbHits;
 
         return $this;
     }

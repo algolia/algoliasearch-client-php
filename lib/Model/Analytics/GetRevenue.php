@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * SearchNoResultEvent Class Doc Comment.
+ * GetRevenue Class Doc Comment.
  *
  * @category Class
  */
-class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetRevenue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +17,8 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelTypes = [
-        'search' => 'string',
-        'count' => 'int',
-        'nbHits' => 'int',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyRevenue[]',
     ];
 
     /**
@@ -28,9 +27,8 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $modelFormats = [
-        'search' => null,
-        'count' => null,
-        'nbHits' => null,
+        'currencies' => null,
+        'dates' => null,
     ];
 
     /**
@@ -40,9 +38,8 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $attributeMap = [
-        'search' => 'search',
-        'count' => 'count',
-        'nbHits' => 'nbHits',
+        'currencies' => 'currencies',
+        'dates' => 'dates',
     ];
 
     /**
@@ -51,9 +48,8 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $setters = [
-        'search' => 'setSearch',
-        'count' => 'setCount',
-        'nbHits' => 'setNbHits',
+        'currencies' => 'setCurrencies',
+        'dates' => 'setDates',
     ];
 
     /**
@@ -62,9 +58,8 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      * @var string[]
      */
     protected static $getters = [
-        'search' => 'getSearch',
-        'count' => 'getCount',
-        'nbHits' => 'getNbHits',
+        'currencies' => 'getCurrencies',
+        'dates' => 'getDates',
     ];
 
     /**
@@ -81,14 +76,11 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['search'])) {
-            $this->container['search'] = $data['search'];
+        if (isset($data['currencies'])) {
+            $this->container['currencies'] = $data['currencies'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
-        }
-        if (isset($data['nbHits'])) {
-            $this->container['nbHits'] = $data['nbHits'];
+        if (isset($data['dates'])) {
+            $this->container['dates'] = $data['dates'];
         }
     }
 
@@ -152,14 +144,11 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['search']) || null === $this->container['search']) {
-            $invalidProperties[] = "'search' can't be null";
+        if (!isset($this->container['currencies']) || null === $this->container['currencies']) {
+            $invalidProperties[] = "'currencies' can't be null";
         }
-        if (!isset($this->container['count']) || null === $this->container['count']) {
-            $invalidProperties[] = "'count' can't be null";
-        }
-        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
-            $invalidProperties[] = "'nbHits' can't be null";
+        if (!isset($this->container['dates']) || null === $this->container['dates']) {
+            $invalidProperties[] = "'dates' can't be null";
         }
 
         return $invalidProperties;
@@ -177,73 +166,49 @@ class SearchNoResultEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets search.
+     * Gets currencies.
      *
-     * @return string
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>
      */
-    public function getSearch()
+    public function getCurrencies()
     {
-        return $this->container['search'] ?? null;
+        return $this->container['currencies'] ?? null;
     }
 
     /**
-     * Sets search.
+     * Sets currencies.
      *
-     * @param string $search user query
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue> $currencies revenue associated with this search, broken-down by currencies
      *
      * @return self
      */
-    public function setSearch($search)
+    public function setCurrencies($currencies)
     {
-        $this->container['search'] = $search;
+        $this->container['currencies'] = $currencies;
 
         return $this;
     }
 
     /**
-     * Gets count.
+     * Gets dates.
      *
-     * @return int
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyRevenue[]
      */
-    public function getCount()
+    public function getDates()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['dates'] ?? null;
     }
 
     /**
-     * Sets count.
+     * Sets dates.
      *
-     * @param int $count number of occurrences
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyRevenue[] $dates daily revenue
      *
      * @return self
      */
-    public function setCount($count)
+    public function setDates($dates)
     {
-        $this->container['count'] = $count;
-
-        return $this;
-    }
-
-    /**
-     * Gets nbHits.
-     *
-     * @return int
-     */
-    public function getNbHits()
-    {
-        return $this->container['nbHits'] ?? null;
-    }
-
-    /**
-     * Sets nbHits.
-     *
-     * @param int $nbHits number of results (hits)
-     *
-     * @return self
-     */
-    public function setNbHits($nbHits)
-    {
-        $this->container['nbHits'] = $nbHits;
+        $this->container['dates'] = $dates;
 
         return $this;
     }

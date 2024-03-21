@@ -189,7 +189,7 @@ class TopSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets search.
      *
-     * @param string $search user query
+     * @param string $search search query
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class TopSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets count.
      *
-     * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
+     * @param int $count number of searches
      *
      * @return self
      */

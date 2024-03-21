@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  * OrderBy Class Doc Comment.
  *
  * @category Class
- * @description Method for ordering results. &#x60;clickThroughRate&#x60;, &#x60;conversionRate&#x60; and &#x60;averageClickPosition&#x60; are only available if the &#x60;clickAnalytics&#x60; parameter is &#x60;true&#x60;.
+ * @description Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.
  */
 class OrderBy
 {

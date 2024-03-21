@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetTopFilterAttributesResponse Class Doc Comment.
+ * DailyRevenue Class Doc Comment.
  *
  * @category Class
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailyRevenue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +17,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>',
+        'date' => 'string',
     ];
 
     /**
@@ -26,7 +27,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelFormats = [
-        'attributes' => null,
+        'currencies' => null,
+        'date' => null,
     ];
 
     /**
@@ -36,7 +38,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $attributeMap = [
-        'attributes' => 'attributes',
+        'currencies' => 'currencies',
+        'date' => 'date',
     ];
 
     /**
@@ -45,7 +48,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $setters = [
-        'attributes' => 'setAttributes',
+        'currencies' => 'setCurrencies',
+        'date' => 'setDate',
     ];
 
     /**
@@ -54,7 +58,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $getters = [
-        'attributes' => 'getAttributes',
+        'currencies' => 'getCurrencies',
+        'date' => 'getDate',
     ];
 
     /**
@@ -71,8 +76,11 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['attributes'])) {
-            $this->container['attributes'] = $data['attributes'];
+        if (isset($data['currencies'])) {
+            $this->container['currencies'] = $data['currencies'];
+        }
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
     }
 
@@ -136,8 +144,11 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attributes']) || null === $this->container['attributes']) {
-            $invalidProperties[] = "'attributes' can't be null";
+        if (!isset($this->container['currencies']) || null === $this->container['currencies']) {
+            $invalidProperties[] = "'currencies' can't be null";
+        }
+        if (!isset($this->container['date']) || null === $this->container['date']) {
+            $invalidProperties[] = "'date' can't be null";
         }
 
         return $invalidProperties;
@@ -155,25 +166,49 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     }
 
     /**
-     * Gets attributes.
+     * Gets currencies.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>
      */
-    public function getAttributes()
+    public function getCurrencies()
     {
-        return $this->container['attributes'] ?? null;
+        return $this->container['currencies'] ?? null;
     }
 
     /**
-     * Sets attributes.
+     * Sets currencies.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes most frequent filters
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue> $currencies revenue associated with this search, broken-down by currencies
      *
      * @return self
      */
-    public function setAttributes($attributes)
+    public function setCurrencies($currencies)
     {
-        $this->container['attributes'] = $attributes;
+        $this->container['currencies'] = $currencies;
+
+        return $this;
+    }
+
+    /**
+     * Gets date.
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->container['date'] ?? null;
+    }
+
+    /**
+     * Sets date.
+     *
+     * @param string $date date in the format YYYY-MM-DD
+     *
+     * @return self
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

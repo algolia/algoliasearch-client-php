@@ -20,7 +20,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
         'rate' => 'float',
         'count' => 'int',
         'noResultCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyNoResultsRates[]',
     ];
 
     /**
@@ -208,7 +208,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate no results rate, calculated as number of searches with zero results divided by the total number of searches
      *
      * @return self
      */
@@ -239,7 +239,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets count.
      *
-     * @param int $count number of occurrences
+     * @param int $count number of searches
      *
      * @return self
      */
@@ -263,7 +263,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets noResultCount.
      *
-     * @param int $noResultCount number of occurrences
+     * @param int $noResultCount number of searches without any results
      *
      * @return self
      */
@@ -277,7 +277,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyNoResultsRates[]
      */
     public function getDates()
     {
@@ -287,7 +287,7 @@ class GetNoResultsRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoResultsRateEvent[] $dates overall count of searches without results plus a daily breakdown
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyNoResultsRates[] $dates daily no results rates
      *
      * @return self
      */

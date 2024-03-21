@@ -167,7 +167,7 @@ class TopHitsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHit[] $hits top hits
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopHit[] $hits most frequent search results
      *
      * @return self
      */

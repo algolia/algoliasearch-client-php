@@ -255,15 +255,62 @@ class AnalyticsClient
     }
 
     /**
-     * Return the average click position for the complete time range and for individual days. > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.
+     * Retrieves the add-to-cart rate for all of your searches with at least one add-to-cart event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetAddToCartRateResponse|array<string, mixed>
+     */
+    public function getAddToCartRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
+        // verify the required parameter 'index' is set
+        if (!isset($index)) {
+            throw new \InvalidArgumentException(
+                'Parameter `index` is required when calling `getAddToCartRate`.'
+            );
+        }
+
+        $resourcePath = '/2/conversions/addToCartRate';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        if (null !== $startDate) {
+            $queryParameters['startDate'] = $startDate;
+        }
+
+        if (null !== $endDate) {
+            $queryParameters['endDate'] = $endDate;
+        }
+
+        if (null !== $tags) {
+            $queryParameters['tags'] = $tags;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves the average click position of your search results, including a daily breakdown.  The average click position is the average of all clicked search results' positions. For example, if users only ever click on the first result for any search, the average click position is 1. By default, the analyzed period includes the last eight days including the current day.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param string $index          Index name. (required)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse|array<string, mixed>
@@ -302,15 +349,15 @@ class AnalyticsClient
     }
 
     /**
-     * Show the number of clicks events and their associated position in the search results.  > **Note**: If all `positions` have a `clickCount` of `0` or `null`, it means Algolia didn't receive any click events for tracked searches. A _tracked_ search is a search request where the `clickAnalytics` parameter is `true`.
+     * Retrieves the positions in the search results and their associated number of clicks.  This lets you check how many clicks the first, second, or tenth search results receive.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse|array<string, mixed>
@@ -349,15 +396,15 @@ class AnalyticsClient
     }
 
     /**
-     * Returns a [click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * Retrieves the click-through rate for all of your searches with at least one click event, including a daily breakdown  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse|array<string, mixed>
@@ -396,25 +443,25 @@ class AnalyticsClient
     }
 
     /**
-     * Return a [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
+     * Retrieves the conversion rate for all of your searches with at least one conversion event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetConversationRateResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetConversionRateResponse|array<string, mixed>
      */
-    public function getConversationRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    public function getConversionRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
             throw new \InvalidArgumentException(
-                'Parameter `index` is required when calling `getConversationRate`.'
+                'Parameter `index` is required when calling `getConversionRate`.'
             );
         }
 
@@ -443,15 +490,15 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the rate at which searches don't lead to any clicks. The endpoint returns a value for the complete given time range, as well as a value per day. It also returns the count of searches and searches without clicks.
+     * Retrieves the fraction of searches that didn't lead to any click within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse|array<string, mixed>
@@ -490,15 +537,15 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the rate at which searches didn't return any results.
+     * Retrieves the fraction of searches that didn't return any results within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse|array<string, mixed>
@@ -537,15 +584,109 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the number of searches within a time range.
+     * Retrieves the purchase rate for all of your searches with at least one purchase event, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetPurchaseRateResponse|array<string, mixed>
+     */
+    public function getPurchaseRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
+        // verify the required parameter 'index' is set
+        if (!isset($index)) {
+            throw new \InvalidArgumentException(
+                'Parameter `index` is required when calling `getPurchaseRate`.'
+            );
+        }
+
+        $resourcePath = '/2/conversions/purchaseRate';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        if (null !== $startDate) {
+            $queryParameters['startDate'] = $startDate;
+        }
+
+        if (null !== $endDate) {
+            $queryParameters['endDate'] = $endDate;
+        }
+
+        if (null !== $tags) {
+            $queryParameters['tags'] = $tags;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves revenue-related metrics, such as the total revenue or the average order value.  To retrieve revenue-related metrics, sent purchase events. By default, the analyzed period includes the last eight days including the current day.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param string $index          Index name. (required)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetRevenue|array<string, mixed>
+     */
+    public function getRevenue($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
+    {
+        // verify the required parameter 'index' is set
+        if (!isset($index)) {
+            throw new \InvalidArgumentException(
+                'Parameter `index` is required when calling `getRevenue`.'
+            );
+        }
+
+        $resourcePath = '/2/conversions/revenue';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $index) {
+            $queryParameters['index'] = $index;
+        }
+
+        if (null !== $startDate) {
+            $queryParameters['startDate'] = $startDate;
+        }
+
+        if (null !== $endDate) {
+            $queryParameters['endDate'] = $endDate;
+        }
+
+        if (null !== $tags) {
+            $queryParameters['tags'] = $tags;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves the number of searches within a time range, including a daily breakdown.  By default, the analyzed period includes the last eight days including the current day.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param string $index          Index name. (required)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse|array<string, mixed>
@@ -584,17 +725,17 @@ class AnalyticsClient
     }
 
     /**
-     * Return the most popular of the last 1,000 searches that didn't lead to any clicks.
+     * Retrieves the most popular searches that didn't lead to any clicks, from the 1,000 most frequent searches.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse|array<string, mixed>
@@ -644,17 +785,17 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the most popular of the latest 1,000 searches that didn't return any results.
+     * Retrieves the most popular searches that didn't return any results.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse|array<string, mixed>
@@ -704,7 +845,7 @@ class AnalyticsClient
     }
 
     /**
-     * Return the latest update time of the Analytics API for an index. If the index has been recently created or no search has been performed yet, `updatedAt` will be `null`. > **Note**: The Analytics API is updated every 5&nbsp;minutes.
+     * Retrieves the time when the Analytics data for the specified index was last updated.  The Analytics data is updated every 5 minutes.
      *
      * Required API Key ACLs:
      *  - analytics
@@ -736,17 +877,17 @@ class AnalyticsClient
     }
 
     /**
-     * Returns top countries. Limited to the 1,000 most frequent ones.
+     * Retrieves the countries with the most searches to your index.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse|array<string, mixed>
@@ -796,18 +937,18 @@ class AnalyticsClient
     }
 
     /**
-     * Return the most popular [filterable attributes](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/) in the 1,000 most recently used filters.
+     * Retrieves the most frequently used filter attributes.  These are attributes of your records that you included in the `attributesForFaceting` setting.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $search         User query. (optional)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $search         Search query. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse|array<string, mixed>
@@ -861,19 +1002,19 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the most popular filter values for an attribute in the 1,000 most recently used filters.
+     * Retrieves the most frequent filter (facet) values for a filter attribute.  These are attributes of your records that you included in the `attributesForFaceting` setting.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $attribute      Attribute name. (required)
      * @param string $index          Index name. (required)
-     * @param string $search         User query. (optional)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $search         Search query. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse|array<string, mixed>
@@ -942,18 +1083,18 @@ class AnalyticsClient
     }
 
     /**
-     * Returns top filters for filter-enabled searches that don't return results. Limited to the 1,000 most recently used filters.
+     * Retrieves the most frequently used filters for a search that didn't return any results.  To get the most frequent searches without results, use the [Retrieve searches without results](#tag/search/operation/getSearchesNoResults) operation.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $search         User query. (optional)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $search         Search query. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse|array<string, mixed>
@@ -1007,24 +1148,25 @@ class AnalyticsClient
     }
 
     /**
-     * Return the most popular clicked results in the last 1,000 searches.
+     * Retrieves the object IDs of the most frequent search results.
      *
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name. (required)
-     * @param string $search         User query. (optional)
-     * @param bool   $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $index            Index name. (required)
+     * @param string $search           Search query. (optional)
+     * @param bool   $clickAnalytics   Whether to include metrics related to click and conversion events in the response. (optional, default to false)
+     * @param bool   $revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response. (optional, default to false)
+     * @param string $startDate        Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate          End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param int    $limit            Number of items to return. (optional, default to 10)
+     * @param int    $offset           Position of the first item to return. (optional, default to 0)
+     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse|array<string, mixed>
      */
-    public function getTopHits($index, $search = null, $clickAnalytics = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    public function getTopHits($index, $search = null, $clickAnalytics = null, $revenueAnalytics = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
@@ -1053,6 +1195,10 @@ class AnalyticsClient
             $queryParameters['clickAnalytics'] = $clickAnalytics;
         }
 
+        if (null !== $revenueAnalytics) {
+            $queryParameters['revenueAnalytics'] = $revenueAnalytics;
+        }
+
         if (null !== $startDate) {
             $queryParameters['startDate'] = $startDate;
         }
@@ -1077,25 +1223,26 @@ class AnalyticsClient
     }
 
     /**
-     * Returns the most popular of the latest 1,000 searches. For each search, also returns the number of hits.
+     * Returns the most popular search terms.
      *
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param string $index          Index name. (required)
-     * @param bool   $clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (optional, default to false)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $orderBy        Reorder the results. (optional)
-     * @param array  $direction      Sorting direction of the results: ascending or descending. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param string $index            Index name. (required)
+     * @param bool   $clickAnalytics   Whether to include metrics related to click and conversion events in the response. (optional, default to false)
+     * @param bool   $revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response. (optional, default to false)
+     * @param string $startDate        Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate          End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param array  $orderBy          Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available. (optional)
+     * @param array  $direction        Sorting direction of the results: ascending or descending. (optional)
+     * @param int    $limit            Number of items to return. (optional, default to 10)
+     * @param int    $offset           Position of the first item to return. (optional, default to 0)
+     * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse|array<string, mixed>
      */
-    public function getTopSearches($index, $clickAnalytics = null, $startDate = null, $endDate = null, $orderBy = null, $direction = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
+    public function getTopSearches($index, $clickAnalytics = null, $revenueAnalytics = null, $startDate = null, $endDate = null, $orderBy = null, $direction = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
         // verify the required parameter 'index' is set
         if (!isset($index)) {
@@ -1118,6 +1265,10 @@ class AnalyticsClient
 
         if (null !== $clickAnalytics) {
             $queryParameters['clickAnalytics'] = $clickAnalytics;
+        }
+
+        if (null !== $revenueAnalytics) {
+            $queryParameters['revenueAnalytics'] = $revenueAnalytics;
         }
 
         if (null !== $startDate) {
@@ -1152,15 +1303,15 @@ class AnalyticsClient
     }
 
     /**
-     * Return the count of unique users.
+     * Retrieves the number of unique users within a time range, including a daily breakdown.  Since this endpoint returns the number of unique users, the sum of the daily values might be different from the total number.  By default, Algolia distinguishes search users by their IP address, _unless_ you include a pseudonymous user identifier in your search requests with the `userToken` API parameter or `x-algolia-usertoken` request header. By default, the analyzed period includes the last eight days including the current day.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param array  $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param array  $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $tags           Filter analytics on the [&#x60;analyticsTags&#x60;](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded. (optional)
+     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse|array<string, mixed>

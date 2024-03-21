@@ -18,7 +18,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelTypes = [
         'count' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyUsers[]',
     ];
 
     /**
@@ -178,7 +178,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets count.
      *
-     * @param int $count number of occurrences
+     * @param int $count number of unique users
      *
      * @return self
      */
@@ -192,7 +192,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyUsers[]
      */
     public function getDates()
     {
@@ -202,7 +202,7 @@ class GetUsersCountResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\UserWithDate[] $dates user count
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyUsers[] $dates daily number of unique users
      *
      * @return self
      */

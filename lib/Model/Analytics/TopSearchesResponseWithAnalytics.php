@@ -167,7 +167,7 @@ class TopSearchesResponseWithAnalytics extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets searches.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[] $searches top searches with their hits count and analytics
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithAnalytics[] $searches most popular searches and their associated click and conversion metrics
      *
      * @return self
      */

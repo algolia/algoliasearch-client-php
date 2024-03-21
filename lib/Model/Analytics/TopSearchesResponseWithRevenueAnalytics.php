@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * ClickPosition Class Doc Comment.
+ * TopSearchesResponseWithRevenueAnalytics Class Doc Comment.
  *
  * @category Class
  */
-class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopSearchesResponseWithRevenueAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,8 +17,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelTypes = [
-        'position' => 'int[]',
-        'clickCount' => 'int',
+        'searches' => '\Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[]',
     ];
 
     /**
@@ -27,8 +26,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $modelFormats = [
-        'position' => null,
-        'clickCount' => null,
+        'searches' => null,
     ];
 
     /**
@@ -38,8 +36,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $attributeMap = [
-        'position' => 'position',
-        'clickCount' => 'clickCount',
+        'searches' => 'searches',
     ];
 
     /**
@@ -48,8 +45,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $setters = [
-        'position' => 'setPosition',
-        'clickCount' => 'setClickCount',
+        'searches' => 'setSearches',
     ];
 
     /**
@@ -58,8 +54,7 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      * @var string[]
      */
     protected static $getters = [
-        'position' => 'getPosition',
-        'clickCount' => 'getClickCount',
+        'searches' => 'getSearches',
     ];
 
     /**
@@ -76,11 +71,8 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['position'])) {
-            $this->container['position'] = $data['position'];
-        }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
+        if (isset($data['searches'])) {
+            $this->container['searches'] = $data['searches'];
         }
     }
 
@@ -144,11 +136,8 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['position']) || null === $this->container['position']) {
-            $invalidProperties[] = "'position' can't be null";
-        }
-        if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
-            $invalidProperties[] = "'clickCount' can't be null";
+        if (!isset($this->container['searches']) || null === $this->container['searches']) {
+            $invalidProperties[] = "'searches' can't be null";
         }
 
         return $invalidProperties;
@@ -166,49 +155,25 @@ class ClickPosition extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     }
 
     /**
-     * Gets position.
+     * Gets searches.
      *
-     * @return int[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[]
      */
-    public function getPosition()
+    public function getSearches()
     {
-        return $this->container['position'] ?? null;
+        return $this->container['searches'] ?? null;
     }
 
     /**
-     * Sets position.
+     * Sets searches.
      *
-     * @param int[] $position range of positions with the following pattern: - For positions 1 to 10, the number of click events are shown for each position - For positions 11 to 20, all click events are grouped - For positions 21 and up, all click events are grouped
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[] $searches most popular searches, including their click and revenue metrics
      *
      * @return self
      */
-    public function setPosition($position)
+    public function setSearches($searches)
     {
-        $this->container['position'] = $position;
-
-        return $this;
-    }
-
-    /**
-     * Gets clickCount.
-     *
-     * @return int
-     */
-    public function getClickCount()
-    {
-        return $this->container['clickCount'] ?? null;
-    }
-
-    /**
-     * Sets clickCount.
-     *
-     * @param int $clickCount number of click events
-     *
-     * @return self
-     */
-    public function setClickCount($clickCount)
-    {
-        $this->container['clickCount'] = $clickCount;
+        $this->container['searches'] = $searches;
 
         return $this;
     }

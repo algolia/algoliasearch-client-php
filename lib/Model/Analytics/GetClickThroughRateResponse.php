@@ -20,7 +20,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         'rate' => 'float',
         'clickCount' => 'int',
         'trackedSearchCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[]',
     ];
 
     /**
@@ -174,6 +174,10 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
+        if ($this->container['clickCount'] < 0) {
+            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
@@ -208,7 +212,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -239,12 +243,16 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets clickCount.
      *
-     * @param int $clickCount number of click events
+     * @param int $clickCount number of clicks associated with this search
      *
      * @return self
      */
     public function setClickCount($clickCount)
     {
+        if ($clickCount < 0) {
+            throw new \InvalidArgumentException('invalid value for $clickCount when calling GetClickThroughRateResponse., must be bigger than or equal to 0.');
+        }
+
         $this->container['clickCount'] = $clickCount;
 
         return $this;
@@ -263,7 +271,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets trackedSearchCount.
      *
-     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */
@@ -277,7 +285,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[]
      */
     public function getDates()
     {
@@ -287,7 +295,7 @@ class GetClickThroughRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickThroughRateEvent[] $dates click-through rate events
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[] $dates daily click-through rates
      *
      * @return self
      */

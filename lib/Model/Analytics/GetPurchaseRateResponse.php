@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetConversationRateResponse Class Doc Comment.
+ * GetPurchaseRateResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetPurchaseRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,8 +19,8 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $modelTypes = [
         'rate' => 'float',
         'trackedSearchCount' => 'int',
-        'conversionCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]',
+        'purchaseCount' => 'int',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[]',
     ];
 
     /**
@@ -31,7 +31,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $modelFormats = [
         'rate' => 'double',
         'trackedSearchCount' => null,
-        'conversionCount' => null,
+        'purchaseCount' => null,
         'dates' => null,
     ];
 
@@ -44,7 +44,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $attributeMap = [
         'rate' => 'rate',
         'trackedSearchCount' => 'trackedSearchCount',
-        'conversionCount' => 'conversionCount',
+        'purchaseCount' => 'purchaseCount',
         'dates' => 'dates',
     ];
 
@@ -56,7 +56,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $setters = [
         'rate' => 'setRate',
         'trackedSearchCount' => 'setTrackedSearchCount',
-        'conversionCount' => 'setConversionCount',
+        'purchaseCount' => 'setPurchaseCount',
         'dates' => 'setDates',
     ];
 
@@ -68,7 +68,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     protected static $getters = [
         'rate' => 'getRate',
         'trackedSearchCount' => 'getTrackedSearchCount',
-        'conversionCount' => 'getConversionCount',
+        'purchaseCount' => 'getPurchaseCount',
         'dates' => 'getDates',
     ];
 
@@ -92,8 +92,8 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (isset($data['trackedSearchCount'])) {
             $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
-        if (isset($data['conversionCount'])) {
-            $this->container['conversionCount'] = $data['conversionCount'];
+        if (isset($data['purchaseCount'])) {
+            $this->container['purchaseCount'] = $data['purchaseCount'];
         }
         if (isset($data['dates'])) {
             $this->container['dates'] = $data['dates'];
@@ -174,8 +174,8 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
-            $invalidProperties[] = "'conversionCount' can't be null";
+        if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
+            $invalidProperties[] = "'purchaseCount' can't be null";
         }
         if (!isset($this->container['dates']) || null === $this->container['dates']) {
             $invalidProperties[] = "'dates' can't be null";
@@ -208,17 +208,17 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
     public function setRate($rate)
     {
         if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversationRateResponse., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetPurchaseRateResponse., must be smaller than or equal to 1.');
         }
         if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversationRateResponse., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetPurchaseRateResponse., must be bigger than or equal to 0.');
         }
 
         $this->container['rate'] = $rate;
@@ -239,7 +239,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets trackedSearchCount.
      *
-     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */
@@ -251,25 +251,25 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     }
 
     /**
-     * Gets conversionCount.
+     * Gets purchaseCount.
      *
      * @return int
      */
-    public function getConversionCount()
+    public function getPurchaseCount()
     {
-        return $this->container['conversionCount'] ?? null;
+        return $this->container['purchaseCount'] ?? null;
     }
 
     /**
-     * Sets conversionCount.
+     * Sets purchaseCount.
      *
-     * @param int $conversionCount number of converted clicks
+     * @param int $purchaseCount number of purchase events from this search
      *
      * @return self
      */
-    public function setConversionCount($conversionCount)
+    public function setPurchaseCount($purchaseCount)
     {
-        $this->container['conversionCount'] = $conversionCount;
+        $this->container['purchaseCount'] = $purchaseCount;
 
         return $this;
     }
@@ -277,7 +277,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[]
      */
     public function getDates()
     {
@@ -287,7 +287,7 @@ class GetConversationRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ConversionRateEvent[] $dates conversion events
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[] $dates daily purchase rates
      *
      * @return self
      */

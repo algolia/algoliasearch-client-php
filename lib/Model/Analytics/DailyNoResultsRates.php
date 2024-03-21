@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetAverageClickPositionResponse Class Doc Comment.
+ * DailyNoResultsRates Class Doc Comment.
  *
  * @category Class
  */
-class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailyNoResultsRates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +17,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $modelTypes = [
-        'average' => 'float',
-        'clickCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyAverageClicks[]',
+        'date' => 'string',
+        'noResultCount' => 'int',
+        'count' => 'int',
+        'rate' => 'float',
     ];
 
     /**
@@ -28,9 +29,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $modelFormats = [
-        'average' => 'double',
-        'clickCount' => null,
-        'dates' => null,
+        'date' => null,
+        'noResultCount' => null,
+        'count' => null,
+        'rate' => 'double',
     ];
 
     /**
@@ -40,9 +42,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $attributeMap = [
-        'average' => 'average',
-        'clickCount' => 'clickCount',
-        'dates' => 'dates',
+        'date' => 'date',
+        'noResultCount' => 'noResultCount',
+        'count' => 'count',
+        'rate' => 'rate',
     ];
 
     /**
@@ -51,9 +54,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $setters = [
-        'average' => 'setAverage',
-        'clickCount' => 'setClickCount',
-        'dates' => 'setDates',
+        'date' => 'setDate',
+        'noResultCount' => 'setNoResultCount',
+        'count' => 'setCount',
+        'rate' => 'setRate',
     ];
 
     /**
@@ -62,9 +66,10 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      * @var string[]
      */
     protected static $getters = [
-        'average' => 'getAverage',
-        'clickCount' => 'getClickCount',
-        'dates' => 'getDates',
+        'date' => 'getDate',
+        'noResultCount' => 'getNoResultCount',
+        'count' => 'getCount',
+        'rate' => 'getRate',
     ];
 
     /**
@@ -81,14 +86,17 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['average'])) {
-            $this->container['average'] = $data['average'];
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
+        if (isset($data['noResultCount'])) {
+            $this->container['noResultCount'] = $data['noResultCount'];
         }
-        if (isset($data['dates'])) {
-            $this->container['dates'] = $data['dates'];
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
+        }
+        if (isset($data['rate'])) {
+            $this->container['rate'] = $data['rate'];
         }
     }
 
@@ -152,22 +160,24 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['average']) || null === $this->container['average']) {
-            $invalidProperties[] = "'average' can't be null";
+        if (!isset($this->container['date']) || null === $this->container['date']) {
+            $invalidProperties[] = "'date' can't be null";
         }
-        if ($this->container['average'] < 1) {
-            $invalidProperties[] = "invalid value for 'average', must be bigger than or equal to 1.";
+        if (!isset($this->container['noResultCount']) || null === $this->container['noResultCount']) {
+            $invalidProperties[] = "'noResultCount' can't be null";
+        }
+        if (!isset($this->container['count']) || null === $this->container['count']) {
+            $invalidProperties[] = "'count' can't be null";
+        }
+        if (!isset($this->container['rate']) || null === $this->container['rate']) {
+            $invalidProperties[] = "'rate' can't be null";
+        }
+        if ($this->container['rate'] > 1) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
         }
 
-        if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
-            $invalidProperties[] = "'clickCount' can't be null";
-        }
-        if ($this->container['clickCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
-        if (!isset($this->container['dates']) || null === $this->container['dates']) {
-            $invalidProperties[] = "'dates' can't be null";
+        if ($this->container['rate'] < 0) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -185,81 +195,104 @@ class GetAverageClickPositionResponse extends \Algolia\AlgoliaSearch\Model\Abstr
     }
 
     /**
-     * Gets average.
+     * Gets date.
      *
-     * @return float
+     * @return string
      */
-    public function getAverage()
+    public function getDate()
     {
-        return $this->container['average'] ?? null;
+        return $this->container['date'] ?? null;
     }
 
     /**
-     * Sets average.
+     * Sets date.
      *
-     * @param float $average Average position of a clicked search result in the list of search results. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param string $date date in the format YYYY-MM-DD
      *
      * @return self
      */
-    public function setAverage($average)
+    public function setDate($date)
     {
-        if ($average < 1) {
-            throw new \InvalidArgumentException('invalid value for $average when calling GetAverageClickPositionResponse., must be bigger than or equal to 1.');
-        }
-
-        $this->container['average'] = $average;
+        $this->container['date'] = $date;
 
         return $this;
     }
 
     /**
-     * Gets clickCount.
+     * Gets noResultCount.
      *
      * @return int
      */
-    public function getClickCount()
+    public function getNoResultCount()
     {
-        return $this->container['clickCount'] ?? null;
+        return $this->container['noResultCount'] ?? null;
     }
 
     /**
-     * Sets clickCount.
+     * Sets noResultCount.
      *
-     * @param int $clickCount number of clicks associated with this search
+     * @param int $noResultCount number of searches without any results
      *
      * @return self
      */
-    public function setClickCount($clickCount)
+    public function setNoResultCount($noResultCount)
     {
-        if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling GetAverageClickPositionResponse., must be bigger than or equal to 0.');
-        }
-
-        $this->container['clickCount'] = $clickCount;
+        $this->container['noResultCount'] = $noResultCount;
 
         return $this;
     }
 
     /**
-     * Gets dates.
+     * Gets count.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyAverageClicks[]
+     * @return int
      */
-    public function getDates()
+    public function getCount()
     {
-        return $this->container['dates'] ?? null;
+        return $this->container['count'] ?? null;
     }
 
     /**
-     * Sets dates.
+     * Sets count.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyAverageClicks[] $dates daily average click positions
+     * @param int $count number of searches
      *
      * @return self
      */
-    public function setDates($dates)
+    public function setCount($count)
     {
-        $this->container['dates'] = $dates;
+        $this->container['count'] = $count;
+
+        return $this;
+    }
+
+    /**
+     * Gets rate.
+     *
+     * @return float
+     */
+    public function getRate()
+    {
+        return $this->container['rate'] ?? null;
+    }
+
+    /**
+     * Sets rate.
+     *
+     * @param float $rate no results rate, calculated as number of searches with zero results divided by the total number of searches
+     *
+     * @return self
+     */
+    public function setRate($rate)
+    {
+        if ($rate > 1) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyNoResultsRates., must be smaller than or equal to 1.');
+        }
+        if ($rate < 0) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyNoResultsRates., must be bigger than or equal to 0.');
+        }
+
+        $this->container['rate'] = $rate;
 
         return $this;
     }

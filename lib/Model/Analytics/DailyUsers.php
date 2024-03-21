@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetTopFilterAttributesResponse Class Doc Comment.
+ * DailyUsers Class Doc Comment.
  *
  * @category Class
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailyUsers extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +17,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'date' => 'string',
+        'count' => 'int',
     ];
 
     /**
@@ -26,7 +27,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelFormats = [
-        'attributes' => null,
+        'date' => null,
+        'count' => null,
     ];
 
     /**
@@ -36,7 +38,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $attributeMap = [
-        'attributes' => 'attributes',
+        'date' => 'date',
+        'count' => 'count',
     ];
 
     /**
@@ -45,7 +48,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $setters = [
-        'attributes' => 'setAttributes',
+        'date' => 'setDate',
+        'count' => 'setCount',
     ];
 
     /**
@@ -54,7 +58,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $getters = [
-        'attributes' => 'getAttributes',
+        'date' => 'getDate',
+        'count' => 'getCount',
     ];
 
     /**
@@ -71,8 +76,11 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['attributes'])) {
-            $this->container['attributes'] = $data['attributes'];
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
+        }
+        if (isset($data['count'])) {
+            $this->container['count'] = $data['count'];
         }
     }
 
@@ -136,8 +144,11 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attributes']) || null === $this->container['attributes']) {
-            $invalidProperties[] = "'attributes' can't be null";
+        if (!isset($this->container['date']) || null === $this->container['date']) {
+            $invalidProperties[] = "'date' can't be null";
+        }
+        if (!isset($this->container['count']) || null === $this->container['count']) {
+            $invalidProperties[] = "'count' can't be null";
         }
 
         return $invalidProperties;
@@ -155,25 +166,49 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     }
 
     /**
-     * Gets attributes.
+     * Gets date.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return string
      */
-    public function getAttributes()
+    public function getDate()
     {
-        return $this->container['attributes'] ?? null;
+        return $this->container['date'] ?? null;
     }
 
     /**
-     * Sets attributes.
+     * Sets date.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes most frequent filters
+     * @param string $date date in the format YYYY-MM-DD
      *
      * @return self
      */
-    public function setAttributes($attributes)
+    public function setDate($date)
     {
-        $this->container['attributes'] = $attributes;
+        $this->container['date'] = $date;
+
+        return $this;
+    }
+
+    /**
+     * Gets count.
+     *
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->container['count'] ?? null;
+    }
+
+    /**
+     * Sets count.
+     *
+     * @param int $count number of unique users
+     *
+     * @return self
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
 
         return $this;
     }

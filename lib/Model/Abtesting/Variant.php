@@ -24,7 +24,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         'clickThroughRate' => 'float',
         'conversionCount' => 'int',
         'conversionRate' => 'float',
-        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Abtesting\Currency>',
         'description' => 'string',
         'estimatedSampleSize' => 'int',
         'filterEffects' => '\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects',
@@ -327,9 +327,6 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (!isset($this->container['searchCount']) || null === $this->container['searchCount']) {
             $invalidProperties[] = "'searchCount' can't be null";
         }
-        if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
-            $invalidProperties[] = "'trackedSearchCount' can't be null";
-        }
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
@@ -525,7 +522,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets currencies.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\Currency>
      */
     public function getCurrencies()
     {
@@ -535,7 +532,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets currencies.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\CurrenciesValue> $currencies A/B test currencies
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\Currency> $currencies A/B test currencies
      *
      * @return self
      */
@@ -741,7 +738,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets trackedSearchCount.
      *
-     * @return int
+     * @return null|int
      */
     public function getTrackedSearchCount()
     {
@@ -751,7 +748,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trackedSearchCount.
      *
-     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+     * @param null|int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */

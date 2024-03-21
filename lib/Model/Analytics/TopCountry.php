@@ -178,7 +178,7 @@ class TopCountry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets country.
      *
-     * @param string $country country
+     * @param string $country country code
      *
      * @return self
      */

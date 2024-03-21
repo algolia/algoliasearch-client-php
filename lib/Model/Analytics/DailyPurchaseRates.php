@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * NoResultsRateEvent Class Doc Comment.
+ * DailyPurchaseRates Class Doc Comment.
  *
  * @category Class
  */
-class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailyPurchaseRates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,10 +17,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'date' => 'string',
-        'noResultCount' => 'int',
-        'count' => 'int',
         'rate' => 'float',
+        'trackedSearchCount' => 'int',
+        'purchaseCount' => 'int',
+        'date' => 'string',
     ];
 
     /**
@@ -29,10 +29,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
-        'date' => null,
-        'noResultCount' => null,
-        'count' => null,
         'rate' => 'double',
+        'trackedSearchCount' => null,
+        'purchaseCount' => null,
+        'date' => null,
     ];
 
     /**
@@ -42,10 +42,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $attributeMap = [
-        'date' => 'date',
-        'noResultCount' => 'noResultCount',
-        'count' => 'count',
         'rate' => 'rate',
+        'trackedSearchCount' => 'trackedSearchCount',
+        'purchaseCount' => 'purchaseCount',
+        'date' => 'date',
     ];
 
     /**
@@ -54,10 +54,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'date' => 'setDate',
-        'noResultCount' => 'setNoResultCount',
-        'count' => 'setCount',
         'rate' => 'setRate',
+        'trackedSearchCount' => 'setTrackedSearchCount',
+        'purchaseCount' => 'setPurchaseCount',
+        'date' => 'setDate',
     ];
 
     /**
@@ -66,10 +66,10 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'date' => 'getDate',
-        'noResultCount' => 'getNoResultCount',
-        'count' => 'getCount',
         'rate' => 'getRate',
+        'trackedSearchCount' => 'getTrackedSearchCount',
+        'purchaseCount' => 'getPurchaseCount',
+        'date' => 'getDate',
     ];
 
     /**
@@ -86,17 +86,17 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
-        }
-        if (isset($data['noResultCount'])) {
-            $this->container['noResultCount'] = $data['noResultCount'];
-        }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
-        }
         if (isset($data['rate'])) {
             $this->container['rate'] = $data['rate'];
+        }
+        if (isset($data['trackedSearchCount'])) {
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
+        }
+        if (isset($data['purchaseCount'])) {
+            $this->container['purchaseCount'] = $data['purchaseCount'];
+        }
+        if (isset($data['date'])) {
+            $this->container['date'] = $data['date'];
         }
     }
 
@@ -160,15 +160,6 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['date']) || null === $this->container['date']) {
-            $invalidProperties[] = "'date' can't be null";
-        }
-        if (!isset($this->container['noResultCount']) || null === $this->container['noResultCount']) {
-            $invalidProperties[] = "'noResultCount' can't be null";
-        }
-        if (!isset($this->container['count']) || null === $this->container['count']) {
-            $invalidProperties[] = "'count' can't be null";
-        }
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
@@ -178,6 +169,16 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
 
         if ($this->container['rate'] < 0) {
             $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
+            $invalidProperties[] = "'trackedSearchCount' can't be null";
+        }
+        if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
+            $invalidProperties[] = "'purchaseCount' can't be null";
+        }
+        if (!isset($this->container['date']) || null === $this->container['date']) {
+            $invalidProperties[] = "'date' can't be null";
         }
 
         return $invalidProperties;
@@ -195,78 +196,6 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets date.
-     *
-     * @return string
-     */
-    public function getDate()
-    {
-        return $this->container['date'] ?? null;
-    }
-
-    /**
-     * Sets date.
-     *
-     * @param string $date date of the event in the format YYYY-MM-DD
-     *
-     * @return self
-     */
-    public function setDate($date)
-    {
-        $this->container['date'] = $date;
-
-        return $this;
-    }
-
-    /**
-     * Gets noResultCount.
-     *
-     * @return int
-     */
-    public function getNoResultCount()
-    {
-        return $this->container['noResultCount'] ?? null;
-    }
-
-    /**
-     * Sets noResultCount.
-     *
-     * @param int $noResultCount number of occurences
-     *
-     * @return self
-     */
-    public function setNoResultCount($noResultCount)
-    {
-        $this->container['noResultCount'] = $noResultCount;
-
-        return $this;
-    }
-
-    /**
-     * Gets count.
-     *
-     * @return int
-     */
-    public function getCount()
-    {
-        return $this->container['count'] ?? null;
-    }
-
-    /**
-     * Sets count.
-     *
-     * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
-     *
-     * @return self
-     */
-    public function setCount($count)
-    {
-        $this->container['count'] = $count;
-
-        return $this;
-    }
-
-    /**
      * Gets rate.
      *
      * @return float
@@ -279,20 +208,92 @@ class NoResultsRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
     public function setRate($rate)
     {
         if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling NoResultsRateEvent., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyPurchaseRates., must be smaller than or equal to 1.');
         }
         if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling NoResultsRateEvent., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyPurchaseRates., must be bigger than or equal to 0.');
         }
 
         $this->container['rate'] = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets trackedSearchCount.
+     *
+     * @return int
+     */
+    public function getTrackedSearchCount()
+    {
+        return $this->container['trackedSearchCount'] ?? null;
+    }
+
+    /**
+     * Sets trackedSearchCount.
+     *
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
+     *
+     * @return self
+     */
+    public function setTrackedSearchCount($trackedSearchCount)
+    {
+        $this->container['trackedSearchCount'] = $trackedSearchCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets purchaseCount.
+     *
+     * @return int
+     */
+    public function getPurchaseCount()
+    {
+        return $this->container['purchaseCount'] ?? null;
+    }
+
+    /**
+     * Sets purchaseCount.
+     *
+     * @param int $purchaseCount number of purchase events from this search
+     *
+     * @return self
+     */
+    public function setPurchaseCount($purchaseCount)
+    {
+        $this->container['purchaseCount'] = $purchaseCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets date.
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->container['date'] ?? null;
+    }
+
+    /**
+     * Sets date.
+     *
+     * @param string $date date in the format YYYY-MM-DD
+     *
+     * @return self
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

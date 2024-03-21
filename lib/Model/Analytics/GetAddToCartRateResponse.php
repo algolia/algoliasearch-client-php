@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * ConversionRateEvent Class Doc Comment.
+ * GetAddToCartRateResponse Class Doc Comment.
  *
  * @category Class
  */
-class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetAddToCartRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,8 +19,8 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $modelTypes = [
         'rate' => 'float',
         'trackedSearchCount' => 'int',
-        'conversionCount' => 'int',
-        'date' => 'string',
+        'addToCartCount' => 'int',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[]',
     ];
 
     /**
@@ -31,8 +31,8 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $modelFormats = [
         'rate' => 'double',
         'trackedSearchCount' => null,
-        'conversionCount' => null,
-        'date' => null,
+        'addToCartCount' => null,
+        'dates' => null,
     ];
 
     /**
@@ -44,8 +44,8 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $attributeMap = [
         'rate' => 'rate',
         'trackedSearchCount' => 'trackedSearchCount',
-        'conversionCount' => 'conversionCount',
-        'date' => 'date',
+        'addToCartCount' => 'addToCartCount',
+        'dates' => 'dates',
     ];
 
     /**
@@ -56,8 +56,8 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $setters = [
         'rate' => 'setRate',
         'trackedSearchCount' => 'setTrackedSearchCount',
-        'conversionCount' => 'setConversionCount',
-        'date' => 'setDate',
+        'addToCartCount' => 'setAddToCartCount',
+        'dates' => 'setDates',
     ];
 
     /**
@@ -68,8 +68,8 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     protected static $getters = [
         'rate' => 'getRate',
         'trackedSearchCount' => 'getTrackedSearchCount',
-        'conversionCount' => 'getConversionCount',
-        'date' => 'getDate',
+        'addToCartCount' => 'getAddToCartCount',
+        'dates' => 'getDates',
     ];
 
     /**
@@ -92,11 +92,11 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (isset($data['trackedSearchCount'])) {
             $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
-        if (isset($data['conversionCount'])) {
-            $this->container['conversionCount'] = $data['conversionCount'];
+        if (isset($data['addToCartCount'])) {
+            $this->container['addToCartCount'] = $data['addToCartCount'];
         }
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['dates'])) {
+            $this->container['dates'] = $data['dates'];
         }
     }
 
@@ -174,11 +174,15 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
-            $invalidProperties[] = "'conversionCount' can't be null";
+        if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
+            $invalidProperties[] = "'addToCartCount' can't be null";
         }
-        if (!isset($this->container['date']) || null === $this->container['date']) {
-            $invalidProperties[] = "'date' can't be null";
+        if ($this->container['addToCartCount'] < 0) {
+            $invalidProperties[] = "invalid value for 'addToCartCount', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['dates']) || null === $this->container['dates']) {
+            $invalidProperties[] = "'dates' can't be null";
         }
 
         return $invalidProperties;
@@ -208,17 +212,17 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
     public function setRate($rate)
     {
         if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling ConversionRateEvent., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetAddToCartRateResponse., must be smaller than or equal to 1.');
         }
         if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling ConversionRateEvent., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetAddToCartRateResponse., must be bigger than or equal to 0.');
         }
 
         $this->container['rate'] = $rate;
@@ -239,7 +243,7 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets trackedSearchCount.
      *
-     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */
@@ -251,49 +255,53 @@ class ConversionRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets conversionCount.
+     * Gets addToCartCount.
      *
      * @return int
      */
-    public function getConversionCount()
+    public function getAddToCartCount()
     {
-        return $this->container['conversionCount'] ?? null;
+        return $this->container['addToCartCount'] ?? null;
     }
 
     /**
-     * Sets conversionCount.
+     * Sets addToCartCount.
      *
-     * @param int $conversionCount number of converted clicks
+     * @param int $addToCartCount number of add-to-cart events from this search
      *
      * @return self
      */
-    public function setConversionCount($conversionCount)
+    public function setAddToCartCount($addToCartCount)
     {
-        $this->container['conversionCount'] = $conversionCount;
+        if ($addToCartCount < 0) {
+            throw new \InvalidArgumentException('invalid value for $addToCartCount when calling GetAddToCartRateResponse., must be bigger than or equal to 0.');
+        }
+
+        $this->container['addToCartCount'] = $addToCartCount;
 
         return $this;
     }
 
     /**
-     * Gets date.
+     * Gets dates.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[]
      */
-    public function getDate()
+    public function getDates()
     {
-        return $this->container['date'] ?? null;
+        return $this->container['dates'] ?? null;
     }
 
     /**
-     * Sets date.
+     * Sets dates.
      *
-     * @param string $date date of the event in the format YYYY-MM-DD
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[] $dates daily add-to-cart rates
      *
      * @return self
      */
-    public function setDate($date)
+    public function setDates($dates)
     {
-        $this->container['date'] = $date;
+        $this->container['dates'] = $dates;
 
         return $this;
     }

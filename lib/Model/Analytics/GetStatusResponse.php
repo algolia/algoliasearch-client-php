@@ -167,7 +167,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet.
      *
      * @return self
      */

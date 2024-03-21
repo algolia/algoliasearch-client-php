@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * TopHitWithAnalytics Class Doc Comment.
+ * TopHitWithRevenueAnalytics Class Doc Comment.
  *
  * @category Class
  */
-class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopHitWithRevenueAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -24,6 +24,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'trackedHitCount' => 'int',
         'clickCount' => 'int',
         'conversionCount' => 'int',
+        'addToCartRate' => 'float',
+        'addToCartCount' => 'int',
+        'purchaseRate' => 'float',
+        'purchaseCount' => 'int',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>',
     ];
 
     /**
@@ -39,6 +44,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'trackedHitCount' => null,
         'clickCount' => null,
         'conversionCount' => null,
+        'addToCartRate' => 'double',
+        'addToCartCount' => null,
+        'purchaseRate' => 'double',
+        'purchaseCount' => null,
+        'currencies' => null,
     ];
 
     /**
@@ -55,6 +65,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'trackedHitCount' => 'trackedHitCount',
         'clickCount' => 'clickCount',
         'conversionCount' => 'conversionCount',
+        'addToCartRate' => 'addToCartRate',
+        'addToCartCount' => 'addToCartCount',
+        'purchaseRate' => 'purchaseRate',
+        'purchaseCount' => 'purchaseCount',
+        'currencies' => 'currencies',
     ];
 
     /**
@@ -70,6 +85,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'trackedHitCount' => 'setTrackedHitCount',
         'clickCount' => 'setClickCount',
         'conversionCount' => 'setConversionCount',
+        'addToCartRate' => 'setAddToCartRate',
+        'addToCartCount' => 'setAddToCartCount',
+        'purchaseRate' => 'setPurchaseRate',
+        'purchaseCount' => 'setPurchaseCount',
+        'currencies' => 'setCurrencies',
     ];
 
     /**
@@ -85,6 +105,11 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'trackedHitCount' => 'getTrackedHitCount',
         'clickCount' => 'getClickCount',
         'conversionCount' => 'getConversionCount',
+        'addToCartRate' => 'getAddToCartRate',
+        'addToCartCount' => 'getAddToCartCount',
+        'purchaseRate' => 'getPurchaseRate',
+        'purchaseCount' => 'getPurchaseCount',
+        'currencies' => 'getCurrencies',
     ];
 
     /**
@@ -121,6 +146,21 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         }
         if (isset($data['conversionCount'])) {
             $this->container['conversionCount'] = $data['conversionCount'];
+        }
+        if (isset($data['addToCartRate'])) {
+            $this->container['addToCartRate'] = $data['addToCartRate'];
+        }
+        if (isset($data['addToCartCount'])) {
+            $this->container['addToCartCount'] = $data['addToCartCount'];
+        }
+        if (isset($data['purchaseRate'])) {
+            $this->container['purchaseRate'] = $data['purchaseRate'];
+        }
+        if (isset($data['purchaseCount'])) {
+            $this->container['purchaseCount'] = $data['purchaseCount'];
+        }
+        if (isset($data['currencies'])) {
+            $this->container['currencies'] = $data['currencies'];
         }
     }
 
@@ -229,6 +269,42 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
             $invalidProperties[] = "invalid value for 'conversionCount', must be bigger than or equal to 0.";
         }
 
+        if (!isset($this->container['addToCartRate']) || null === $this->container['addToCartRate']) {
+            $invalidProperties[] = "'addToCartRate' can't be null";
+        }
+        if ($this->container['addToCartRate'] > 1) {
+            $invalidProperties[] = "invalid value for 'addToCartRate', must be smaller than or equal to 1.";
+        }
+
+        if ($this->container['addToCartRate'] < 0) {
+            $invalidProperties[] = "invalid value for 'addToCartRate', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
+            $invalidProperties[] = "'addToCartCount' can't be null";
+        }
+        if ($this->container['addToCartCount'] < 0) {
+            $invalidProperties[] = "invalid value for 'addToCartCount', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['purchaseRate']) || null === $this->container['purchaseRate']) {
+            $invalidProperties[] = "'purchaseRate' can't be null";
+        }
+        if ($this->container['purchaseRate'] > 1) {
+            $invalidProperties[] = "invalid value for 'purchaseRate', must be smaller than or equal to 1.";
+        }
+
+        if ($this->container['purchaseRate'] < 0) {
+            $invalidProperties[] = "invalid value for 'purchaseRate', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
+            $invalidProperties[] = "'purchaseCount' can't be null";
+        }
+        if (!isset($this->container['currencies']) || null === $this->container['currencies']) {
+            $invalidProperties[] = "'currencies' can't be null";
+        }
+
         return $invalidProperties;
     }
 
@@ -311,10 +387,10 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setClickThroughRate($clickThroughRate)
     {
         if ($clickThroughRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithAnalytics., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
         }
         if ($clickThroughRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithAnalytics., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
         }
 
         $this->container['clickThroughRate'] = $clickThroughRate;
@@ -342,10 +418,10 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setConversionRate($conversionRate)
     {
         if ($conversionRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithAnalytics., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
         }
         if ($conversionRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithAnalytics., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
         }
 
         $this->container['conversionRate'] = $conversionRate;
@@ -397,7 +473,7 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setClickCount($clickCount)
     {
         if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling TopHitWithAnalytics., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $clickCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
         }
 
         $this->container['clickCount'] = $clickCount;
@@ -425,10 +501,148 @@ class TopHitWithAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setConversionCount($conversionCount)
     {
         if ($conversionCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionCount when calling TopHitWithAnalytics., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $conversionCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
         }
 
         $this->container['conversionCount'] = $conversionCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets addToCartRate.
+     *
+     * @return float
+     */
+    public function getAddToCartRate()
+    {
+        return $this->container['addToCartRate'] ?? null;
+    }
+
+    /**
+     * Sets addToCartRate.
+     *
+     * @param float $addToCartRate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     *
+     * @return self
+     */
+    public function setAddToCartRate($addToCartRate)
+    {
+        if ($addToCartRate > 1) {
+            throw new \InvalidArgumentException('invalid value for $addToCartRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
+        }
+        if ($addToCartRate < 0) {
+            throw new \InvalidArgumentException('invalid value for $addToCartRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
+        }
+
+        $this->container['addToCartRate'] = $addToCartRate;
+
+        return $this;
+    }
+
+    /**
+     * Gets addToCartCount.
+     *
+     * @return int
+     */
+    public function getAddToCartCount()
+    {
+        return $this->container['addToCartCount'] ?? null;
+    }
+
+    /**
+     * Sets addToCartCount.
+     *
+     * @param int $addToCartCount number of add-to-cart events from this search
+     *
+     * @return self
+     */
+    public function setAddToCartCount($addToCartCount)
+    {
+        if ($addToCartCount < 0) {
+            throw new \InvalidArgumentException('invalid value for $addToCartCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
+        }
+
+        $this->container['addToCartCount'] = $addToCartCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets purchaseRate.
+     *
+     * @return float
+     */
+    public function getPurchaseRate()
+    {
+        return $this->container['purchaseRate'] ?? null;
+    }
+
+    /**
+     * Sets purchaseRate.
+     *
+     * @param float $purchaseRate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     *
+     * @return self
+     */
+    public function setPurchaseRate($purchaseRate)
+    {
+        if ($purchaseRate > 1) {
+            throw new \InvalidArgumentException('invalid value for $purchaseRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
+        }
+        if ($purchaseRate < 0) {
+            throw new \InvalidArgumentException('invalid value for $purchaseRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
+        }
+
+        $this->container['purchaseRate'] = $purchaseRate;
+
+        return $this;
+    }
+
+    /**
+     * Gets purchaseCount.
+     *
+     * @return int
+     */
+    public function getPurchaseCount()
+    {
+        return $this->container['purchaseCount'] ?? null;
+    }
+
+    /**
+     * Sets purchaseCount.
+     *
+     * @param int $purchaseCount number of purchase events from this search
+     *
+     * @return self
+     */
+    public function setPurchaseCount($purchaseCount)
+    {
+        $this->container['purchaseCount'] = $purchaseCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets currencies.
+     *
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>
+     */
+    public function getCurrencies()
+    {
+        return $this->container['currencies'] ?? null;
+    }
+
+    /**
+     * Sets currencies.
+     *
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue> $currencies revenue associated with this search, broken-down by currencies
+     *
+     * @return self
+     */
+    public function setCurrencies($currencies)
+    {
+        $this->container['currencies'] = $currencies;
 
         return $this;
     }

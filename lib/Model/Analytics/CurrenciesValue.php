@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * NoClickRateEvent Class Doc Comment.
+ * CurrenciesValue Class Doc Comment.
  *
  * @category Class
+ * @description Currency code.
  */
-class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CurrenciesValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,10 +18,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'rate' => 'float',
-        'count' => 'int',
-        'noClickCount' => 'int',
-        'date' => 'string',
+        'currency' => 'string',
+        'revenue' => 'float',
     ];
 
     /**
@@ -29,10 +28,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'rate' => 'double',
-        'count' => null,
-        'noClickCount' => null,
-        'date' => null,
+        'currency' => null,
+        'revenue' => 'float',
     ];
 
     /**
@@ -42,10 +39,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $attributeMap = [
-        'rate' => 'rate',
-        'count' => 'count',
-        'noClickCount' => 'noClickCount',
-        'date' => 'date',
+        'currency' => 'currency',
+        'revenue' => 'revenue',
     ];
 
     /**
@@ -54,10 +49,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'rate' => 'setRate',
-        'count' => 'setCount',
-        'noClickCount' => 'setNoClickCount',
-        'date' => 'setDate',
+        'currency' => 'setCurrency',
+        'revenue' => 'setRevenue',
     ];
 
     /**
@@ -66,10 +59,8 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'rate' => 'getRate',
-        'count' => 'getCount',
-        'noClickCount' => 'getNoClickCount',
-        'date' => 'getDate',
+        'currency' => 'getCurrency',
+        'revenue' => 'getRevenue',
     ];
 
     /**
@@ -86,17 +77,11 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['rate'])) {
-            $this->container['rate'] = $data['rate'];
+        if (isset($data['currency'])) {
+            $this->container['currency'] = $data['currency'];
         }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
-        }
-        if (isset($data['noClickCount'])) {
-            $this->container['noClickCount'] = $data['noClickCount'];
-        }
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['revenue'])) {
+            $this->container['revenue'] = $data['revenue'];
         }
     }
 
@@ -158,30 +143,7 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['rate']) || null === $this->container['rate']) {
-            $invalidProperties[] = "'rate' can't be null";
-        }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
-
-        if (!isset($this->container['count']) || null === $this->container['count']) {
-            $invalidProperties[] = "'count' can't be null";
-        }
-        if (!isset($this->container['noClickCount']) || null === $this->container['noClickCount']) {
-            $invalidProperties[] = "'noClickCount' can't be null";
-        }
-        if (!isset($this->container['date']) || null === $this->container['date']) {
-            $invalidProperties[] = "'date' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -196,104 +158,49 @@ class NoClickRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets rate.
+     * Gets currency.
      *
-     * @return float
+     * @return null|string
      */
-    public function getRate()
+    public function getCurrency()
     {
-        return $this->container['rate'] ?? null;
+        return $this->container['currency'] ?? null;
     }
 
     /**
-     * Sets rate.
+     * Sets currency.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param null|string $currency currency code
      *
      * @return self
      */
-    public function setRate($rate)
+    public function setCurrency($currency)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling NoClickRateEvent., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling NoClickRateEvent., must be bigger than or equal to 0.');
-        }
-
-        $this->container['rate'] = $rate;
+        $this->container['currency'] = $currency;
 
         return $this;
     }
 
     /**
-     * Gets count.
+     * Gets revenue.
      *
-     * @return int
+     * @return null|float
      */
-    public function getCount()
+    public function getRevenue()
     {
-        return $this->container['count'] ?? null;
+        return $this->container['revenue'] ?? null;
     }
 
     /**
-     * Sets count.
+     * Sets revenue.
      *
-     * @param int $count number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`)
+     * @param null|float $revenue revenue associated with this search in this currency
      *
      * @return self
      */
-    public function setCount($count)
+    public function setRevenue($revenue)
     {
-        $this->container['count'] = $count;
-
-        return $this;
-    }
-
-    /**
-     * Gets noClickCount.
-     *
-     * @return int
-     */
-    public function getNoClickCount()
-    {
-        return $this->container['noClickCount'] ?? null;
-    }
-
-    /**
-     * Sets noClickCount.
-     *
-     * @param int $noClickCount number of click events
-     *
-     * @return self
-     */
-    public function setNoClickCount($noClickCount)
-    {
-        $this->container['noClickCount'] = $noClickCount;
-
-        return $this;
-    }
-
-    /**
-     * Gets date.
-     *
-     * @return string
-     */
-    public function getDate()
-    {
-        return $this->container['date'] ?? null;
-    }
-
-    /**
-     * Sets date.
-     *
-     * @param string $date date of the event in the format YYYY-MM-DD
-     *
-     * @return self
-     */
-    public function setDate($date)
-    {
-        $this->container['date'] = $date;
+        $this->container['revenue'] = $revenue;
 
         return $this;
     }

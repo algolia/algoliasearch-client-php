@@ -18,7 +18,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
      */
     protected static $modelTypes = [
         'attribute' => 'string',
-        'operator' => 'string',
+        'operator' => '\Algolia\AlgoliaSearch\Model\Analytics\Operator',
         'value' => 'string',
     ];
 
@@ -203,7 +203,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets operator.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\Operator
      */
     public function getOperator()
     {
@@ -213,7 +213,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets operator.
      *
-     * @param string $operator operator
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\Operator $operator operator
      *
      * @return self
      */

@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * GetTopFilterAttributesResponse Class Doc Comment.
+ * ClickPositionsInner Class Doc Comment.
  *
  * @category Class
+ * @description Click position.
  */
-class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ClickPositionsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +18,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelTypes = [
-        'attributes' => '\Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]',
+        'position' => 'int[]',
+        'clickCount' => 'int',
     ];
 
     /**
@@ -26,7 +28,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $modelFormats = [
-        'attributes' => null,
+        'position' => null,
+        'clickCount' => null,
     ];
 
     /**
@@ -36,7 +39,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $attributeMap = [
-        'attributes' => 'attributes',
+        'position' => 'position',
+        'clickCount' => 'clickCount',
     ];
 
     /**
@@ -45,7 +49,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $setters = [
-        'attributes' => 'setAttributes',
+        'position' => 'setPosition',
+        'clickCount' => 'setClickCount',
     ];
 
     /**
@@ -54,7 +59,8 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      * @var string[]
      */
     protected static $getters = [
-        'attributes' => 'getAttributes',
+        'position' => 'getPosition',
+        'clickCount' => 'getClickCount',
     ];
 
     /**
@@ -71,8 +77,11 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['attributes'])) {
-            $this->container['attributes'] = $data['attributes'];
+        if (isset($data['position'])) {
+            $this->container['position'] = $data['position'];
+        }
+        if (isset($data['clickCount'])) {
+            $this->container['clickCount'] = $data['clickCount'];
         }
     }
 
@@ -136,8 +145,16 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['attributes']) || null === $this->container['attributes']) {
-            $invalidProperties[] = "'attributes' can't be null";
+        if (isset($this->container['position']) && (count($this->container['position']) > 2)) {
+            $invalidProperties[] = "invalid value for 'position', number of items must be less than or equal to 2.";
+        }
+
+        if (isset($this->container['position']) && (count($this->container['position']) < 2)) {
+            $invalidProperties[] = "invalid value for 'position', number of items must be greater than or equal to 2.";
+        }
+
+        if (isset($this->container['clickCount']) && ($this->container['clickCount'] < 0)) {
+            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -155,25 +172,59 @@ class GetTopFilterAttributesResponse extends \Algolia\AlgoliaSearch\Model\Abstra
     }
 
     /**
-     * Gets attributes.
+     * Gets position.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return null|int[]
      */
-    public function getAttributes()
+    public function getPosition()
     {
-        return $this->container['attributes'] ?? null;
+        return $this->container['position'] ?? null;
     }
 
     /**
-     * Sets attributes.
+     * Sets position.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes most frequent filters
+     * @param null|int[] $position Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results.
      *
      * @return self
      */
-    public function setAttributes($attributes)
+    public function setPosition($position)
     {
-        $this->container['attributes'] = $attributes;
+        if (!is_null($position) && (count($position) > 2)) {
+            throw new \InvalidArgumentException('invalid value for $position when calling ClickPositionsInner., number of items must be less than or equal to 2.');
+        }
+        if (!is_null($position) && (count($position) < 2)) {
+            throw new \InvalidArgumentException('invalid length for $position when calling ClickPositionsInner., number of items must be greater than or equal to 2.');
+        }
+        $this->container['position'] = $position;
+
+        return $this;
+    }
+
+    /**
+     * Gets clickCount.
+     *
+     * @return null|int
+     */
+    public function getClickCount()
+    {
+        return $this->container['clickCount'] ?? null;
+    }
+
+    /**
+     * Sets clickCount.
+     *
+     * @param null|int $clickCount number of times this search has been clicked at that position
+     *
+     * @return self
+     */
+    public function setClickCount($clickCount)
+    {
+        if (!is_null($clickCount) && ($clickCount < 0)) {
+            throw new \InvalidArgumentException('invalid value for $clickCount when calling ClickPositionsInner., must be bigger than or equal to 0.');
+        }
+
+        $this->container['clickCount'] = $clickCount;
 
         return $this;
     }

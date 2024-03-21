@@ -167,7 +167,7 @@ class GetTopCountriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets countries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[] $countries Countries
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[] $countries countries and number of searches
      *
      * @return self
      */

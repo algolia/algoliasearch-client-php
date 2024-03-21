@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * UserWithDate Class Doc Comment.
+ * DailyAddToCartRates Class Doc Comment.
  *
  * @category Class
  */
-class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DailyAddToCartRates extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,8 +17,10 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
+        'rate' => 'float',
+        'trackedSearchCount' => 'int',
+        'addToCartCount' => 'int',
         'date' => 'string',
-        'count' => 'int',
     ];
 
     /**
@@ -27,8 +29,10 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelFormats = [
+        'rate' => 'double',
+        'trackedSearchCount' => null,
+        'addToCartCount' => null,
         'date' => null,
-        'count' => null,
     ];
 
     /**
@@ -38,8 +42,10 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $attributeMap = [
+        'rate' => 'rate',
+        'trackedSearchCount' => 'trackedSearchCount',
+        'addToCartCount' => 'addToCartCount',
         'date' => 'date',
-        'count' => 'count',
     ];
 
     /**
@@ -48,8 +54,10 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $setters = [
+        'rate' => 'setRate',
+        'trackedSearchCount' => 'setTrackedSearchCount',
+        'addToCartCount' => 'setAddToCartCount',
         'date' => 'setDate',
-        'count' => 'setCount',
     ];
 
     /**
@@ -58,8 +66,10 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $getters = [
+        'rate' => 'getRate',
+        'trackedSearchCount' => 'getTrackedSearchCount',
+        'addToCartCount' => 'getAddToCartCount',
         'date' => 'getDate',
-        'count' => 'getCount',
     ];
 
     /**
@@ -76,11 +86,17 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['rate'])) {
+            $this->container['rate'] = $data['rate'];
+        }
+        if (isset($data['trackedSearchCount'])) {
+            $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
+        }
+        if (isset($data['addToCartCount'])) {
+            $this->container['addToCartCount'] = $data['addToCartCount'];
+        }
         if (isset($data['date'])) {
             $this->container['date'] = $data['date'];
-        }
-        if (isset($data['count'])) {
-            $this->container['count'] = $data['count'];
         }
     }
 
@@ -144,11 +160,29 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['rate']) || null === $this->container['rate']) {
+            $invalidProperties[] = "'rate' can't be null";
+        }
+        if ($this->container['rate'] > 1) {
+            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
+        }
+
+        if ($this->container['rate'] < 0) {
+            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
+            $invalidProperties[] = "'trackedSearchCount' can't be null";
+        }
+        if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
+            $invalidProperties[] = "'addToCartCount' can't be null";
+        }
+        if ($this->container['addToCartCount'] < 0) {
+            $invalidProperties[] = "invalid value for 'addToCartCount', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['date']) || null === $this->container['date']) {
             $invalidProperties[] = "'date' can't be null";
-        }
-        if (!isset($this->container['count']) || null === $this->container['count']) {
-            $invalidProperties[] = "'count' can't be null";
         }
 
         return $invalidProperties;
@@ -166,6 +200,89 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     }
 
     /**
+     * Gets rate.
+     *
+     * @return float
+     */
+    public function getRate()
+    {
+        return $this->container['rate'] ?? null;
+    }
+
+    /**
+     * Sets rate.
+     *
+     * @param float $rate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     *
+     * @return self
+     */
+    public function setRate($rate)
+    {
+        if ($rate > 1) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyAddToCartRates., must be smaller than or equal to 1.');
+        }
+        if ($rate < 0) {
+            throw new \InvalidArgumentException('invalid value for $rate when calling DailyAddToCartRates., must be bigger than or equal to 0.');
+        }
+
+        $this->container['rate'] = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Gets trackedSearchCount.
+     *
+     * @return int
+     */
+    public function getTrackedSearchCount()
+    {
+        return $this->container['trackedSearchCount'] ?? null;
+    }
+
+    /**
+     * Sets trackedSearchCount.
+     *
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
+     *
+     * @return self
+     */
+    public function setTrackedSearchCount($trackedSearchCount)
+    {
+        $this->container['trackedSearchCount'] = $trackedSearchCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets addToCartCount.
+     *
+     * @return int
+     */
+    public function getAddToCartCount()
+    {
+        return $this->container['addToCartCount'] ?? null;
+    }
+
+    /**
+     * Sets addToCartCount.
+     *
+     * @param int $addToCartCount number of add-to-cart events from this search
+     *
+     * @return self
+     */
+    public function setAddToCartCount($addToCartCount)
+    {
+        if ($addToCartCount < 0) {
+            throw new \InvalidArgumentException('invalid value for $addToCartCount when calling DailyAddToCartRates., must be bigger than or equal to 0.');
+        }
+
+        $this->container['addToCartCount'] = $addToCartCount;
+
+        return $this;
+    }
+
+    /**
      * Gets date.
      *
      * @return string
@@ -178,37 +295,13 @@ class UserWithDate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets date.
      *
-     * @param string $date date of the event in the format YYYY-MM-DD
+     * @param string $date date in the format YYYY-MM-DD
      *
      * @return self
      */
     public function setDate($date)
     {
         $this->container['date'] = $date;
-
-        return $this;
-    }
-
-    /**
-     * Gets count.
-     *
-     * @return int
-     */
-    public function getCount()
-    {
-        return $this->container['count'] ?? null;
-    }
-
-    /**
-     * Sets count.
-     *
-     * @param int $count number of occurrences
-     *
-     * @return self
-     */
-    public function setCount($count)
-    {
-        $this->container['count'] = $count;
 
         return $this;
     }

@@ -17,7 +17,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      * @var string[]
      */
     protected static $modelTypes = [
-        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]',
+        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]',
     ];
 
     /**
@@ -139,12 +139,12 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
         if (!isset($this->container['positions']) || null === $this->container['positions']) {
             $invalidProperties[] = "'positions' can't be null";
         }
-        if (count($this->container['positions']) > 2) {
-            $invalidProperties[] = "invalid value for 'positions', number of items must be less than or equal to 2.";
+        if (count($this->container['positions']) > 12) {
+            $invalidProperties[] = "invalid value for 'positions', number of items must be less than or equal to 12.";
         }
 
-        if (count($this->container['positions']) < 2) {
-            $invalidProperties[] = "invalid value for 'positions', number of items must be greater than or equal to 2.";
+        if (count($this->container['positions']) < 12) {
+            $invalidProperties[] = "invalid value for 'positions', number of items must be greater than or equal to 12.";
         }
 
         return $invalidProperties;
@@ -164,7 +164,7 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets positions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]
      */
     public function getPositions()
     {
@@ -174,17 +174,17 @@ class GetClickPositionsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets positions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions click positions
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[] $positions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */
     public function setPositions($positions)
     {
-        if (count($positions) > 2) {
-            throw new \InvalidArgumentException('invalid value for $positions when calling GetClickPositionsResponse., number of items must be less than or equal to 2.');
+        if (count($positions) > 12) {
+            throw new \InvalidArgumentException('invalid value for $positions when calling GetClickPositionsResponse., number of items must be less than or equal to 12.');
         }
-        if (count($positions) < 2) {
-            throw new \InvalidArgumentException('invalid length for $positions when calling GetClickPositionsResponse., number of items must be greater than or equal to 2.');
+        if (count($positions) < 12) {
+            throw new \InvalidArgumentException('invalid length for $positions when calling GetClickPositionsResponse., number of items must be greater than or equal to 12.');
         }
         $this->container['positions'] = $positions;
 

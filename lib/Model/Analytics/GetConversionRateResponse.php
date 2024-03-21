@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 /**
- * ClickThroughRateEvent Class Doc Comment.
+ * GetConversionRateResponse Class Doc Comment.
  *
  * @category Class
  */
-class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetConversionRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,9 +18,9 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelTypes = [
         'rate' => 'float',
-        'clickCount' => 'int',
         'trackedSearchCount' => 'int',
-        'date' => 'string',
+        'conversionCount' => 'int',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[]',
     ];
 
     /**
@@ -30,9 +30,9 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $modelFormats = [
         'rate' => 'double',
-        'clickCount' => null,
         'trackedSearchCount' => null,
-        'date' => null,
+        'conversionCount' => null,
+        'dates' => null,
     ];
 
     /**
@@ -43,9 +43,9 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $attributeMap = [
         'rate' => 'rate',
-        'clickCount' => 'clickCount',
         'trackedSearchCount' => 'trackedSearchCount',
-        'date' => 'date',
+        'conversionCount' => 'conversionCount',
+        'dates' => 'dates',
     ];
 
     /**
@@ -55,9 +55,9 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $setters = [
         'rate' => 'setRate',
-        'clickCount' => 'setClickCount',
         'trackedSearchCount' => 'setTrackedSearchCount',
-        'date' => 'setDate',
+        'conversionCount' => 'setConversionCount',
+        'dates' => 'setDates',
     ];
 
     /**
@@ -67,9 +67,9 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     protected static $getters = [
         'rate' => 'getRate',
-        'clickCount' => 'getClickCount',
         'trackedSearchCount' => 'getTrackedSearchCount',
-        'date' => 'getDate',
+        'conversionCount' => 'getConversionCount',
+        'dates' => 'getDates',
     ];
 
     /**
@@ -89,14 +89,14 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
         if (isset($data['rate'])) {
             $this->container['rate'] = $data['rate'];
         }
-        if (isset($data['clickCount'])) {
-            $this->container['clickCount'] = $data['clickCount'];
-        }
         if (isset($data['trackedSearchCount'])) {
             $this->container['trackedSearchCount'] = $data['trackedSearchCount'];
         }
-        if (isset($data['date'])) {
-            $this->container['date'] = $data['date'];
+        if (isset($data['conversionCount'])) {
+            $this->container['conversionCount'] = $data['conversionCount'];
+        }
+        if (isset($data['dates'])) {
+            $this->container['dates'] = $data['dates'];
         }
     }
 
@@ -171,14 +171,18 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
             $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
         }
 
-        if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
-            $invalidProperties[] = "'clickCount' can't be null";
-        }
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
-        if (!isset($this->container['date']) || null === $this->container['date']) {
-            $invalidProperties[] = "'date' can't be null";
+        if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
+            $invalidProperties[] = "'conversionCount' can't be null";
+        }
+        if ($this->container['conversionCount'] < 0) {
+            $invalidProperties[] = "invalid value for 'conversionCount', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['dates']) || null === $this->container['dates']) {
+            $invalidProperties[] = "'dates' can't be null";
         }
 
         return $invalidProperties;
@@ -208,44 +212,20 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
     public function setRate($rate)
     {
         if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling ClickThroughRateEvent., must be smaller than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversionRateResponse., must be smaller than or equal to 1.');
         }
         if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling ClickThroughRateEvent., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversionRateResponse., must be bigger than or equal to 0.');
         }
 
         $this->container['rate'] = $rate;
-
-        return $this;
-    }
-
-    /**
-     * Gets clickCount.
-     *
-     * @return int
-     */
-    public function getClickCount()
-    {
-        return $this->container['clickCount'] ?? null;
-    }
-
-    /**
-     * Sets clickCount.
-     *
-     * @param int $clickCount number of click events
-     *
-     * @return self
-     */
-    public function setClickCount($clickCount)
-    {
-        $this->container['clickCount'] = $clickCount;
 
         return $this;
     }
@@ -263,7 +243,7 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets trackedSearchCount.
      *
-     * @param int $trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
+     * @param int $trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */
@@ -275,25 +255,53 @@ class ClickThroughRateEvent extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     }
 
     /**
-     * Gets date.
+     * Gets conversionCount.
      *
-     * @return string
+     * @return int
      */
-    public function getDate()
+    public function getConversionCount()
     {
-        return $this->container['date'] ?? null;
+        return $this->container['conversionCount'] ?? null;
     }
 
     /**
-     * Sets date.
+     * Sets conversionCount.
      *
-     * @param string $date date of the event in the format YYYY-MM-DD
+     * @param int $conversionCount number of conversions from this search
      *
      * @return self
      */
-    public function setDate($date)
+    public function setConversionCount($conversionCount)
     {
-        $this->container['date'] = $date;
+        if ($conversionCount < 0) {
+            throw new \InvalidArgumentException('invalid value for $conversionCount when calling GetConversionRateResponse., must be bigger than or equal to 0.');
+        }
+
+        $this->container['conversionCount'] = $conversionCount;
+
+        return $this;
+    }
+
+    /**
+     * Gets dates.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[]
+     */
+    public function getDates()
+    {
+        return $this->container['dates'] ?? null;
+    }
+
+    /**
+     * Sets dates.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[] $dates daily conversion rates
+     *
+     * @return self
+     */
+    public function setDates($dates)
+    {
+        $this->container['dates'] = $dates;
 
         return $this;
     }

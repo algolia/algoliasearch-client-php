@@ -20,7 +20,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'rate' => 'float',
         'count' => 'int',
         'noClickCount' => 'int',
-        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]',
+        'dates' => '\Algolia\AlgoliaSearch\Model\Analytics\DailyNoClickRates[]',
     ];
 
     /**
@@ -177,6 +177,10 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         if (!isset($this->container['noClickCount']) || null === $this->container['noClickCount']) {
             $invalidProperties[] = "'noClickCount' can't be null";
         }
+        if ($this->container['noClickCount'] < 1) {
+            $invalidProperties[] = "invalid value for 'noClickCount', must be bigger than or equal to 1.";
+        }
+
         if (!isset($this->container['dates']) || null === $this->container['dates']) {
             $invalidProperties[] = "'dates' can't be null";
         }
@@ -208,7 +212,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets rate.
      *
-     * @param float $rate [Click-through rate (CTR)](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $rate no click rate, calculated as number of tracked searches without any click divided by the number of tracked searches
      *
      * @return self
      */
@@ -239,7 +243,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets count.
      *
-     * @param int $count number of click events
+     * @param int $count Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
      *
      * @return self
      */
@@ -263,12 +267,16 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets noClickCount.
      *
-     * @param int $noClickCount number of click events
+     * @param int $noClickCount number of times this search was returned as a result without any click
      *
      * @return self
      */
     public function setNoClickCount($noClickCount)
     {
+        if ($noClickCount < 1) {
+            throw new \InvalidArgumentException('invalid value for $noClickCount when calling GetNoClickRateResponse., must be bigger than or equal to 1.');
+        }
+
         $this->container['noClickCount'] = $noClickCount;
 
         return $this;
@@ -277,7 +285,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyNoClickRates[]
      */
     public function getDates()
     {
@@ -287,7 +295,7 @@ class GetNoClickRateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\NoClickRateEvent[] $dates overall count of searches without clicks plus a daily breakdown
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyNoClickRates[] $dates daily no click rates
      *
      * @return self
      */

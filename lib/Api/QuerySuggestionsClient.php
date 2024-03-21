@@ -145,7 +145,7 @@ class QuerySuggestionsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -184,7 +184,7 @@ class QuerySuggestionsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -224,7 +224,7 @@ class QuerySuggestionsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];
@@ -264,7 +264,7 @@ class QuerySuggestionsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];

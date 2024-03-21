@@ -148,7 +148,7 @@ class AbtestingClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -187,7 +187,7 @@ class AbtestingClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -227,7 +227,7 @@ class AbtestingClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];
@@ -267,7 +267,7 @@ class AbtestingClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];

@@ -114,7 +114,7 @@ class InsightsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -153,7 +153,7 @@ class InsightsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -193,7 +193,7 @@ class InsightsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];
@@ -233,7 +233,7 @@ class InsightsClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];

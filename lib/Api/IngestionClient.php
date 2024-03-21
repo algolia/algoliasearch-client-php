@@ -260,7 +260,7 @@ class IngestionClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -299,7 +299,7 @@ class IngestionClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
@@ -339,7 +339,7 @@ class IngestionClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];
@@ -379,7 +379,7 @@ class IngestionClient
             );
         }
 
-        $resourcePath = '/1{path}';
+        $resourcePath = '/{path}';
         $queryParameters = [];
         $headers = [];
         $httpBody = isset($body) ? $body : [];

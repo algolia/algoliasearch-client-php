@@ -1,3 +1,8 @@
+## [4.0.0-alpha.103](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.102...4.0.0-alpha.103)
+
+- [179c57a28](https://github.com/algolia/api-clients-automation/commit/179c57a28) docs(php): Added an entry for php migration guide ([#2894](https://github.com/algolia/api-clients-automation/pull/2894)) by [@damcou](https://github.com/damcou/)
+- [10c9339c8](https://github.com/algolia/api-clients-automation/commit/10c9339c8) fix(specs): more flexible custom methods ([#2889](https://github.com/algolia/api-clients-automation/pull/2889)) by [@damcou](https://github.com/damcou/)
+
 ## [4.0.0-alpha.102](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.101...4.0.0-alpha.102)
 
 - [7dc719cbe](https://github.com/algolia/api-clients-automation/commit/7dc719cbe) fix(specs): make languages an enum ([#2865](https://github.com/algolia/api-clients-automation/pull/2865)) by [@kai687](https://github.com/kai687/)

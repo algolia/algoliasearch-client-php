@@ -249,7 +249,7 @@ class MonitoringClient
     }
 
     /**
-     * List known incidents for selected clusters.
+     * Retrieves known incidents for the selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by comma. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -283,7 +283,7 @@ class MonitoringClient
     }
 
     /**
-     * Report whether a cluster is operational.
+     * Retrieves the status of selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by comma. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -317,7 +317,7 @@ class MonitoringClient
     }
 
     /**
-     * List known incidents for all clusters.
+     * Retrieves known incidents for all clusters.
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -334,7 +334,7 @@ class MonitoringClient
     }
 
     /**
-     * List the average times for indexing operations for selected clusters.
+     * Retrieves average times for indexing operations for selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by comma. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -368,24 +368,7 @@ class MonitoringClient
     }
 
     /**
-     * List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse|array<string, mixed>
-     */
-    public function getInventory($requestOptions = [])
-    {
-        $resourcePath = '/1/inventory/servers';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * List the average latency for search requests for selected clusters.
+     * Retrieves the average latency for search requests for selected clusters.
      *
      * @param string $clusters       Subset of clusters, separated by comma. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -419,9 +402,9 @@ class MonitoringClient
     }
 
     /**
-     * Report the aggregate value of a metric for a selected period of time.
+     * Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).
      *
-     * @param array $metric         Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use &#x60;*&#x60; as the parameter. (required)
+     * @param array $metric         Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. (required)
      * @param array $period         Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -503,7 +486,24 @@ class MonitoringClient
     }
 
     /**
-     * Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters.
+     * Retrieves the servers that belong to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Monitoring\InventoryResponse|array<string, mixed>
+     */
+    public function getServers($requestOptions = [])
+    {
+        $resourcePath = '/1/inventory/servers';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves the status of all Algolia clusters and instances.
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *

@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 /**
- * GetInventory403Response Class Doc Comment.
+ * GetServers403Response Class Doc Comment.
  *
  * @category Class
  */
-class GetInventory403Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetServers403Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

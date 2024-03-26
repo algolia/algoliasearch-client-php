@@ -259,7 +259,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets isSlave.
      *
-     * @param null|bool $isSlave Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead.
+     * @param null|bool $isSlave Included to support legacy applications. Use `is_replica` instead.
      *
      * @return self
      *
@@ -285,7 +285,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets isReplica.
      *
-     * @param null|bool $isReplica indicates whether this server is a replica of another server
+     * @param null|bool $isReplica whether this server is a replica of another server
      *
      * @return self
      */

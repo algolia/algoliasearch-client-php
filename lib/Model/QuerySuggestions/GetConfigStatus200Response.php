@@ -193,7 +193,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets indexName.
      *
-     * @param null|string $indexName query Suggestions index name
+     * @param null|string $indexName name of the Query Suggestions index
      *
      * @return self
      */
@@ -217,7 +217,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets isRunning.
      *
-     * @param null|bool $isRunning indicates whether the creation or update of the Query Suggestions is in progress
+     * @param null|bool $isRunning whether the creation or update of the Query Suggestions index is in progress
      *
      * @return self
      */

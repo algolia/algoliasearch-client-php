@@ -254,7 +254,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets exclude.
      *
-     * @param null|string[] $exclude patterns to exclude from query suggestions
+     * @param null|string[] $exclude exclude
      *
      * @return self
      */
@@ -278,7 +278,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets enablePersonalization.
      *
-     * @param null|bool $enablePersonalization turn on personalized query suggestions
+     * @param null|bool $enablePersonalization whether to turn on personalized query suggestions
      *
      * @return self
      */
@@ -302,7 +302,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets allowSpecialCharacters.
      *
-     * @param null|bool $allowSpecialCharacters allow suggestions with special characters
+     * @param null|bool $allowSpecialCharacters whether to include suggestions with special characters
      *
      * @return self
      */

@@ -97,7 +97,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
+     * Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -286,7 +286,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted.
+     * Deletes a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. To delete the Query Suggestions index itself, use the Search API and the [Delete an index](/specs/search#tag/Indices/operation/deleteIndex) operation.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -323,7 +323,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * List all Query Suggestions configurations of your Algolia application.
+     * Retrieves all Query Suggestions configurations of your Algolia application.
      *
      * Required API Key ACLs:
      *  - settings
@@ -343,7 +343,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get a single Query Suggestions configuration.
+     * Retrieves a single Query Suggestions configuration by its index name.
      *
      * Required API Key ACLs:
      *  - settings
@@ -380,7 +380,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Report the status of a Query Suggestions index.
+     * Reports the status of a Query Suggestions index.
      *
      * Required API Key ACLs:
      *  - settings
@@ -417,7 +417,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Get the logs for a single Query Suggestions index.
+     * Retrieves the logs for a single Query Suggestions index.
      *
      * Required API Key ACLs:
      *  - settings
@@ -454,7 +454,7 @@ class QuerySuggestionsClient
     }
 
     /**
-     * Update a QuerySuggestions configuration.
+     * Updates a QuerySuggestions configuration.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -463,9 +463,9 @@ class QuerySuggestionsClient
      * @param array  $querySuggestionsConfiguration querySuggestionsConfiguration (required)
      *                                              - $querySuggestionsConfiguration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
      *                                              - $querySuggestionsConfiguration['languages'] => (array)
-     *                                              - $querySuggestionsConfiguration['exclude'] => (array) Patterns to exclude from query suggestions.
-     *                                              - $querySuggestionsConfiguration['enablePersonalization'] => (bool) Turn on personalized query suggestions.
-     *                                              - $querySuggestionsConfiguration['allowSpecialCharacters'] => (bool) Allow suggestions with special characters.
+     *                                              - $querySuggestionsConfiguration['exclude'] => (array)
+     *                                              - $querySuggestionsConfiguration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
+     *                                              - $querySuggestionsConfiguration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *
      * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfiguration
      *

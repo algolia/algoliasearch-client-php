@@ -257,7 +257,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets contextLevel.
      *
-     * @param null|int $contextLevel Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
+     * @param null|int $contextLevel Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
      *
      * @return self
      */

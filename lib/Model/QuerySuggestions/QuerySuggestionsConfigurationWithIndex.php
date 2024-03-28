@@ -18,12 +18,12 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      * @var string[]
      */
     protected static $modelTypes = [
-        'indexName' => 'string',
         'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
         'languages' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages',
         'exclude' => 'string[]',
         'enablePersonalization' => 'bool',
         'allowSpecialCharacters' => 'bool',
+        'indexName' => 'string',
     ];
 
     /**
@@ -32,12 +32,12 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      * @var string[]
      */
     protected static $modelFormats = [
-        'indexName' => null,
         'sourceIndices' => null,
         'languages' => null,
         'exclude' => null,
         'enablePersonalization' => null,
         'allowSpecialCharacters' => null,
+        'indexName' => null,
     ];
 
     /**
@@ -47,12 +47,12 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      * @var string[]
      */
     protected static $attributeMap = [
-        'indexName' => 'indexName',
         'sourceIndices' => 'sourceIndices',
         'languages' => 'languages',
         'exclude' => 'exclude',
         'enablePersonalization' => 'enablePersonalization',
         'allowSpecialCharacters' => 'allowSpecialCharacters',
+        'indexName' => 'indexName',
     ];
 
     /**
@@ -61,12 +61,12 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      * @var string[]
      */
     protected static $setters = [
-        'indexName' => 'setIndexName',
         'sourceIndices' => 'setSourceIndices',
         'languages' => 'setLanguages',
         'exclude' => 'setExclude',
         'enablePersonalization' => 'setEnablePersonalization',
         'allowSpecialCharacters' => 'setAllowSpecialCharacters',
+        'indexName' => 'setIndexName',
     ];
 
     /**
@@ -75,12 +75,12 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      * @var string[]
      */
     protected static $getters = [
-        'indexName' => 'getIndexName',
         'sourceIndices' => 'getSourceIndices',
         'languages' => 'getLanguages',
         'exclude' => 'getExclude',
         'enablePersonalization' => 'getEnablePersonalization',
         'allowSpecialCharacters' => 'getAllowSpecialCharacters',
+        'indexName' => 'getIndexName',
     ];
 
     /**
@@ -97,9 +97,6 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['indexName'])) {
-            $this->container['indexName'] = $data['indexName'];
-        }
         if (isset($data['sourceIndices'])) {
             $this->container['sourceIndices'] = $data['sourceIndices'];
         }
@@ -114,6 +111,9 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
         }
         if (isset($data['allowSpecialCharacters'])) {
             $this->container['allowSpecialCharacters'] = $data['allowSpecialCharacters'];
+        }
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
         }
     }
 
@@ -177,14 +177,15 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
-            $invalidProperties[] = "'indexName' can't be null";
-        }
         if (!isset($this->container['sourceIndices']) || null === $this->container['sourceIndices']) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
         if (count($this->container['sourceIndices']) < 1) {
             $invalidProperties[] = "invalid value for 'sourceIndices', number of items must be greater than or equal to 1.";
+        }
+
+        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
+            $invalidProperties[] = "'indexName' can't be null";
         }
 
         return $invalidProperties;
@@ -199,30 +200,6 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets indexName.
-     *
-     * @return string
-     */
-    public function getIndexName()
-    {
-        return $this->container['indexName'] ?? null;
-    }
-
-    /**
-     * Sets indexName.
-     *
-     * @param string $indexName query Suggestions index name
-     *
-     * @return self
-     */
-    public function setIndexName($indexName)
-    {
-        $this->container['indexName'] = $indexName;
-
-        return $this;
     }
 
     /**
@@ -289,7 +266,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets exclude.
      *
-     * @param null|string[] $exclude patterns to exclude from query suggestions
+     * @param null|string[] $exclude exclude
      *
      * @return self
      */
@@ -313,7 +290,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets enablePersonalization.
      *
-     * @param null|bool $enablePersonalization turn on personalized query suggestions
+     * @param null|bool $enablePersonalization whether to turn on personalized query suggestions
      *
      * @return self
      */
@@ -337,13 +314,37 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets allowSpecialCharacters.
      *
-     * @param null|bool $allowSpecialCharacters allow suggestions with special characters
+     * @param null|bool $allowSpecialCharacters whether to include suggestions with special characters
      *
      * @return self
      */
     public function setAllowSpecialCharacters($allowSpecialCharacters)
     {
         $this->container['allowSpecialCharacters'] = $allowSpecialCharacters;
+
+        return $this;
+    }
+
+    /**
+     * Gets indexName.
+     *
+     * @return string
+     */
+    public function getIndexName()
+    {
+        return $this->container['indexName'] ?? null;
+    }
+
+    /**
+     * Sets indexName.
+     *
+     * @param string $indexName name of the Query Suggestions index
+     *
+     * @return self
+     */
+    public function setIndexName($indexName)
+    {
+        $this->container['indexName'] = $indexName;
 
         return $this;
     }

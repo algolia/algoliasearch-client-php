@@ -255,7 +255,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets replicas.
      *
-     * @param null|bool $replicas If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.
+     * @param null|bool $replicas If true, Query Suggestions uses all replica indices to find popular searches. If false, only the primary index is used.
      *
      * @return self
      */
@@ -279,7 +279,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets analyticsTags.
      *
-     * @param null|string[] $analyticsTags [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches.
+     * @param null|string[] $analyticsTags analyticsTags
      *
      * @return self
      */
@@ -303,7 +303,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets facets.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[] $facets Facets to use as top categories with your suggestions.  If provided, Query Suggestions adds the top facet values to each suggestion.
+     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Facet[] $facets facets
      *
      * @return self
      */
@@ -327,7 +327,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets minHits.
      *
-     * @param null|int $minHits Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` hits to be included in the Query Suggestions index.
+     * @param null|int $minHits Minimum number of hits required to be included as a suggestion.  A search query must at least generate `minHits` search results to be included in the Query Suggestions index.
      *
      * @return self
      */
@@ -407,7 +407,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets external.
      *
-     * @param null|string[] $external Algolia indices with popular searches to use as query suggestions.  Records of these indices must have these attributes:    - `query`: search query which will be added as a suggestion   - `count`: measure of popularity of that search query  For example, you can export popular searches from an external analytics tool, such as Google Analytics or Adobe Analytics, and feed this data into an external Algolia index. You can use this external index to generate query suggestions until your Algolia analytics has collected enough data.
+     * @param null|string[] $external external
      *
      * @return self
      */

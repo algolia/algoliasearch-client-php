@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * Languages Class Doc Comment.
  *
  * @category Class
- * @description Set the language for deduplicating singular and plural suggestions. If specified, only the more popular form is included.
+ * @description Languages for deduplicating singular and plural suggestions. If specified, only the more popular form is included.
  */
 class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

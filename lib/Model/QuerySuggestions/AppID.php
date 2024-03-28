@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * BaseQuerySuggestionsConfigurationResponse Class Doc Comment.
+ * AppID Class Doc Comment.
  *
  * @category Class
  */
-class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AppID extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +17,7 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $modelTypes = [
-        'sourceIndicesAPIKey' => 'string',
-        'suggestionsIndicesAPIKey' => 'string',
-        'externalIndicesAPIKey' => 'string',
+        'appID' => 'string',
     ];
 
     /**
@@ -28,9 +26,7 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $modelFormats = [
-        'sourceIndicesAPIKey' => null,
-        'suggestionsIndicesAPIKey' => null,
-        'externalIndicesAPIKey' => null,
+        'appID' => null,
     ];
 
     /**
@@ -40,9 +36,7 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $attributeMap = [
-        'sourceIndicesAPIKey' => 'sourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'suggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'externalIndicesAPIKey',
+        'appID' => 'appID',
     ];
 
     /**
@@ -51,9 +45,7 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $setters = [
-        'sourceIndicesAPIKey' => 'setSourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'setSuggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'setExternalIndicesAPIKey',
+        'appID' => 'setAppID',
     ];
 
     /**
@@ -62,9 +54,7 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      * @var string[]
      */
     protected static $getters = [
-        'sourceIndicesAPIKey' => 'getSourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'getSuggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'getExternalIndicesAPIKey',
+        'appID' => 'getAppID',
     ];
 
     /**
@@ -81,14 +71,8 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['sourceIndicesAPIKey'])) {
-            $this->container['sourceIndicesAPIKey'] = $data['sourceIndicesAPIKey'];
-        }
-        if (isset($data['suggestionsIndicesAPIKey'])) {
-            $this->container['suggestionsIndicesAPIKey'] = $data['suggestionsIndicesAPIKey'];
-        }
-        if (isset($data['externalIndicesAPIKey'])) {
-            $this->container['externalIndicesAPIKey'] = $data['externalIndicesAPIKey'];
+        if (isset($data['appID'])) {
+            $this->container['appID'] = $data['appID'];
         }
     }
 
@@ -165,73 +149,25 @@ class BaseQuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\M
     }
 
     /**
-     * Gets sourceIndicesAPIKey.
+     * Gets appID.
      *
      * @return null|string
      */
-    public function getSourceIndicesAPIKey()
+    public function getAppID()
     {
-        return $this->container['sourceIndicesAPIKey'] ?? null;
+        return $this->container['appID'] ?? null;
     }
 
     /**
-     * Sets sourceIndicesAPIKey.
+     * Sets appID.
      *
-     * @param null|string $sourceIndicesAPIKey API key used to read from your source index
+     * @param null|string $appID algolia application ID to which this Query Suggestions configuration belongs
      *
      * @return self
      */
-    public function setSourceIndicesAPIKey($sourceIndicesAPIKey)
+    public function setAppID($appID)
     {
-        $this->container['sourceIndicesAPIKey'] = $sourceIndicesAPIKey;
-
-        return $this;
-    }
-
-    /**
-     * Gets suggestionsIndicesAPIKey.
-     *
-     * @return null|string
-     */
-    public function getSuggestionsIndicesAPIKey()
-    {
-        return $this->container['suggestionsIndicesAPIKey'] ?? null;
-    }
-
-    /**
-     * Sets suggestionsIndicesAPIKey.
-     *
-     * @param null|string $suggestionsIndicesAPIKey API key used to write and configure your Query Suggestions index
-     *
-     * @return self
-     */
-    public function setSuggestionsIndicesAPIKey($suggestionsIndicesAPIKey)
-    {
-        $this->container['suggestionsIndicesAPIKey'] = $suggestionsIndicesAPIKey;
-
-        return $this;
-    }
-
-    /**
-     * Gets externalIndicesAPIKey.
-     *
-     * @return null|string
-     */
-    public function getExternalIndicesAPIKey()
-    {
-        return $this->container['externalIndicesAPIKey'] ?? null;
-    }
-
-    /**
-     * Sets externalIndicesAPIKey.
-     *
-     * @param null|string $externalIndicesAPIKey API key used to read from external Algolia indices
-     *
-     * @return self
-     */
-    public function setExternalIndicesAPIKey($externalIndicesAPIKey)
-    {
-        $this->container['externalIndicesAPIKey'] = $externalIndicesAPIKey;
+        $this->container['appID'] = $appID;
 
         return $this;
     }

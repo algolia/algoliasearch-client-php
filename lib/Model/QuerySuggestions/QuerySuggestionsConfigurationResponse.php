@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  * QuerySuggestionsConfigurationResponse Class Doc Comment.
  *
  * @category Class
+ * @description API response for retrieving Query Suggestions configurations.
  */
 class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -17,9 +18,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $modelTypes = [
-        'sourceIndicesAPIKey' => 'string',
-        'suggestionsIndicesAPIKey' => 'string',
-        'externalIndicesAPIKey' => 'string',
+        'appID' => 'string',
         'indexName' => 'string',
         'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
         'languages' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages',
@@ -34,9 +33,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $modelFormats = [
-        'sourceIndicesAPIKey' => null,
-        'suggestionsIndicesAPIKey' => null,
-        'externalIndicesAPIKey' => null,
+        'appID' => null,
         'indexName' => null,
         'sourceIndices' => null,
         'languages' => null,
@@ -52,9 +49,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $attributeMap = [
-        'sourceIndicesAPIKey' => 'sourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'suggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'externalIndicesAPIKey',
+        'appID' => 'appID',
         'indexName' => 'indexName',
         'sourceIndices' => 'sourceIndices',
         'languages' => 'languages',
@@ -69,9 +64,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $setters = [
-        'sourceIndicesAPIKey' => 'setSourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'setSuggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'setExternalIndicesAPIKey',
+        'appID' => 'setAppID',
         'indexName' => 'setIndexName',
         'sourceIndices' => 'setSourceIndices',
         'languages' => 'setLanguages',
@@ -86,9 +79,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      * @var string[]
      */
     protected static $getters = [
-        'sourceIndicesAPIKey' => 'getSourceIndicesAPIKey',
-        'suggestionsIndicesAPIKey' => 'getSuggestionsIndicesAPIKey',
-        'externalIndicesAPIKey' => 'getExternalIndicesAPIKey',
+        'appID' => 'getAppID',
         'indexName' => 'getIndexName',
         'sourceIndices' => 'getSourceIndices',
         'languages' => 'getLanguages',
@@ -111,14 +102,8 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['sourceIndicesAPIKey'])) {
-            $this->container['sourceIndicesAPIKey'] = $data['sourceIndicesAPIKey'];
-        }
-        if (isset($data['suggestionsIndicesAPIKey'])) {
-            $this->container['suggestionsIndicesAPIKey'] = $data['suggestionsIndicesAPIKey'];
-        }
-        if (isset($data['externalIndicesAPIKey'])) {
-            $this->container['externalIndicesAPIKey'] = $data['externalIndicesAPIKey'];
+        if (isset($data['appID'])) {
+            $this->container['appID'] = $data['appID'];
         }
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -200,6 +185,9 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['appID']) || null === $this->container['appID']) {
+            $invalidProperties[] = "'appID' can't be null";
+        }
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -208,6 +196,19 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
         }
         if (count($this->container['sourceIndices']) < 1) {
             $invalidProperties[] = "invalid value for 'sourceIndices', number of items must be greater than or equal to 1.";
+        }
+
+        if (!isset($this->container['languages']) || null === $this->container['languages']) {
+            $invalidProperties[] = "'languages' can't be null";
+        }
+        if (!isset($this->container['exclude']) || null === $this->container['exclude']) {
+            $invalidProperties[] = "'exclude' can't be null";
+        }
+        if (!isset($this->container['enablePersonalization']) || null === $this->container['enablePersonalization']) {
+            $invalidProperties[] = "'enablePersonalization' can't be null";
+        }
+        if (!isset($this->container['allowSpecialCharacters']) || null === $this->container['allowSpecialCharacters']) {
+            $invalidProperties[] = "'allowSpecialCharacters' can't be null";
         }
 
         return $invalidProperties;
@@ -225,73 +226,25 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     }
 
     /**
-     * Gets sourceIndicesAPIKey.
+     * Gets appID.
      *
-     * @return null|string
+     * @return string
      */
-    public function getSourceIndicesAPIKey()
+    public function getAppID()
     {
-        return $this->container['sourceIndicesAPIKey'] ?? null;
+        return $this->container['appID'] ?? null;
     }
 
     /**
-     * Sets sourceIndicesAPIKey.
+     * Sets appID.
      *
-     * @param null|string $sourceIndicesAPIKey API key used to read from your source index
+     * @param string $appID algolia application ID to which this Query Suggestions configuration belongs
      *
      * @return self
      */
-    public function setSourceIndicesAPIKey($sourceIndicesAPIKey)
+    public function setAppID($appID)
     {
-        $this->container['sourceIndicesAPIKey'] = $sourceIndicesAPIKey;
-
-        return $this;
-    }
-
-    /**
-     * Gets suggestionsIndicesAPIKey.
-     *
-     * @return null|string
-     */
-    public function getSuggestionsIndicesAPIKey()
-    {
-        return $this->container['suggestionsIndicesAPIKey'] ?? null;
-    }
-
-    /**
-     * Sets suggestionsIndicesAPIKey.
-     *
-     * @param null|string $suggestionsIndicesAPIKey API key used to write and configure your Query Suggestions index
-     *
-     * @return self
-     */
-    public function setSuggestionsIndicesAPIKey($suggestionsIndicesAPIKey)
-    {
-        $this->container['suggestionsIndicesAPIKey'] = $suggestionsIndicesAPIKey;
-
-        return $this;
-    }
-
-    /**
-     * Gets externalIndicesAPIKey.
-     *
-     * @return null|string
-     */
-    public function getExternalIndicesAPIKey()
-    {
-        return $this->container['externalIndicesAPIKey'] ?? null;
-    }
-
-    /**
-     * Sets externalIndicesAPIKey.
-     *
-     * @param null|string $externalIndicesAPIKey API key used to read from external Algolia indices
-     *
-     * @return self
-     */
-    public function setExternalIndicesAPIKey($externalIndicesAPIKey)
-    {
-        $this->container['externalIndicesAPIKey'] = $externalIndicesAPIKey;
+        $this->container['appID'] = $appID;
 
         return $this;
     }
@@ -309,7 +262,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets indexName.
      *
-     * @param string $indexName query Suggestions index name
+     * @param string $indexName name of the Query Suggestions index
      *
      * @return self
      */
@@ -350,7 +303,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets languages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
      */
     public function getLanguages()
     {
@@ -360,7 +313,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets languages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
      *
      * @return self
      */
@@ -374,7 +327,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets exclude.
      *
-     * @return null|string[]
+     * @return string[]
      */
     public function getExclude()
     {
@@ -384,7 +337,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets exclude.
      *
-     * @param null|string[] $exclude patterns to exclude from query suggestions
+     * @param string[] $exclude exclude
      *
      * @return self
      */
@@ -398,7 +351,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets enablePersonalization.
      *
-     * @return null|bool
+     * @return bool
      */
     public function getEnablePersonalization()
     {
@@ -408,7 +361,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets enablePersonalization.
      *
-     * @param null|bool $enablePersonalization turn on personalized query suggestions
+     * @param bool $enablePersonalization whether to turn on personalized query suggestions
      *
      * @return self
      */
@@ -422,7 +375,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Gets allowSpecialCharacters.
      *
-     * @return null|bool
+     * @return bool
      */
     public function getAllowSpecialCharacters()
     {
@@ -432,7 +385,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets allowSpecialCharacters.
      *
-     * @param null|bool $allowSpecialCharacters allow suggestions with special characters
+     * @param bool $allowSpecialCharacters whether to include suggestions with special characters
      *
      * @return self
      */

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthGoogleServiceAccount Class Doc Comment.
  *
  * @category Class
- * @description Authentication input to connect to a Google service (e.g. BigQuery).
+ * @description Credentials for authenticating with a Google service account, such as BigQuery.
  */
 class AuthGoogleServiceAccount extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -179,7 +179,7 @@ class AuthGoogleServiceAccount extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets clientEmail.
      *
-     * @param string $clientEmail email address of the Service Account
+     * @param string $clientEmail email address of the Google service account
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class AuthGoogleServiceAccount extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets privateKey.
      *
-     * @param string $privateKey private key of the Service Account
+     * @param string $privateKey Private key of the Google service account. This field is `null` in the API response.
      *
      * @return self
      */

@@ -189,7 +189,7 @@ class SourceUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets sourceID.
      *
-     * @param string $sourceID the source UUID
+     * @param string $sourceID universally uniqud identifier (UUID) of a source
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class SourceUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets name.
      *
-     * @param string $name name
+     * @param string $name descriptive name of the source
      *
      * @return self
      */
@@ -237,7 +237,7 @@ class SourceUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update (RFC3339 format)
+     * @param string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

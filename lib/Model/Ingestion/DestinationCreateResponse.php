@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationCreateResponse Class Doc Comment.
  *
  * @category Class
- * @description Response from the API when the Destination is successfully created.
+ * @description API response for creating a new destination.
  */
 class DestinationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -190,7 +190,7 @@ class DestinationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets destinationID.
      *
-     * @param string $destinationID the destination UUID
+     * @param string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class DestinationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class DestinationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */

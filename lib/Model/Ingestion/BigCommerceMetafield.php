@@ -178,7 +178,7 @@ class BigCommerceMetafield extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets namespace.
      *
-     * @param string $namespace the namespace of the metafield
+     * @param string $namespace namespace of the metafield
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class BigCommerceMetafield extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets key.
      *
-     * @param string $key the key identifier of the metafield
+     * @param string $key key identifier of the metafield
      *
      * @return self
      */

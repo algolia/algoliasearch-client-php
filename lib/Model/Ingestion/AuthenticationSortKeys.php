@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationSortKeys Class Doc Comment.
  *
  * @category Class
- * @description Used to sort the Authentication list endpoint.
+ * @description Property by which to sort the list of authentication resources.
  */
 class AuthenticationSortKeys
 {

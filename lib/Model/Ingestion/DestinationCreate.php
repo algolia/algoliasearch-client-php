@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationCreate Class Doc Comment.
  *
  * @category Class
- * @description The payload when creating a destination.
+ * @description API request body for creating a new destination.
  */
 class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -222,7 +222,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -270,7 +270,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */

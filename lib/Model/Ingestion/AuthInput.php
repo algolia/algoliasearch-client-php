@@ -25,6 +25,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'string',
         'clientId' => 'string',
         'clientSecret' => 'string',
+        'scope' => 'string',
         'appID' => 'string',
         'apiKey' => 'string',
     ];
@@ -43,6 +44,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => null,
         'clientId' => null,
         'clientSecret' => null,
+        'scope' => null,
         'appID' => null,
         'apiKey' => null,
     ];
@@ -62,6 +64,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'url',
         'clientId' => 'client_id',
         'clientSecret' => 'client_secret',
+        'scope' => 'scope',
         'appID' => 'appID',
         'apiKey' => 'apiKey',
     ];
@@ -80,6 +83,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'setUrl',
         'clientId' => 'setClientId',
         'clientSecret' => 'setClientSecret',
+        'scope' => 'setScope',
         'appID' => 'setAppID',
         'apiKey' => 'setApiKey',
     ];
@@ -98,6 +102,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'getUrl',
         'clientId' => 'getClientId',
         'clientSecret' => 'getClientSecret',
+        'scope' => 'getScope',
         'appID' => 'getAppID',
         'apiKey' => 'getApiKey',
     ];
@@ -139,6 +144,9 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         }
         if (isset($data['clientSecret'])) {
             $this->container['clientSecret'] = $data['clientSecret'];
+        }
+        if (isset($data['scope'])) {
+            $this->container['scope'] = $data['scope'];
         }
         if (isset($data['appID'])) {
             $this->container['appID'] = $data['appID'];
@@ -266,7 +274,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets clientEmail.
      *
-     * @param string $clientEmail email address of the Service Account
+     * @param string $clientEmail email address of the Google service account
      *
      * @return self
      */
@@ -290,7 +298,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets privateKey.
      *
-     * @param string $privateKey private key of the Service Account
+     * @param string $privateKey Private key of the Google service account. This field is `null` in the API response.
      *
      * @return self
      */
@@ -338,7 +346,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets password.
      *
-     * @param string $password password
+     * @param string $password Password. This field is `null` in the API response.
      *
      * @return self
      */
@@ -362,7 +370,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets key.
      *
-     * @param string $key key
+     * @param string $key API key. This field is `null` in the API response.
      *
      * @return self
      */
@@ -386,7 +394,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets url.
      *
-     * @param string $url the OAuth endpoint URL
+     * @param string $url URL for the OAuth endpoint
      *
      * @return self
      */
@@ -410,7 +418,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets clientId.
      *
-     * @param string $clientId the clientID
+     * @param string $clientId client ID
      *
      * @return self
      */
@@ -434,13 +442,37 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets clientSecret.
      *
-     * @param string $clientSecret the secret
+     * @param string $clientSecret Client secret. This field is `null` in the API response.
      *
      * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->container['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope.
+     *
+     * @return null|string
+     */
+    public function getScope()
+    {
+        return $this->container['scope'] ?? null;
+    }
+
+    /**
+     * Sets scope.
+     *
+     * @param null|string $scope OAuth scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
         return $this;
     }
@@ -458,7 +490,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets appID.
      *
-     * @param string $appID algolia Application ID
+     * @param string $appID algolia application ID
      *
      * @return self
      */
@@ -482,7 +514,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets apiKey.
      *
-     * @param string $apiKey algolia API Key, with the correct rights to push to an index and change settings
+     * @param string $apiKey Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.
      *
      * @return self
      */

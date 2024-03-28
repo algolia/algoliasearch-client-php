@@ -265,7 +265,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets taskID.
      *
-     * @param string $taskID the task UUID
+     * @param string $taskID universally unique identifier (UUID) of a task
      *
      * @return self
      */
@@ -289,7 +289,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets sourceID.
      *
-     * @param string $sourceID the source UUID
+     * @param string $sourceID universally uniqud identifier (UUID) of a source
      *
      * @return self
      */
@@ -313,7 +313,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets destinationID.
      *
-     * @param string $destinationID the destination UUID
+     * @param string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -385,7 +385,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets enabled.
      *
-     * @param bool $enabled whether the task is enabled or not
+     * @param bool $enabled whether the task is enabled
      *
      * @return self
      */
@@ -409,7 +409,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets failureThreshold.
      *
-     * @param null|int $failureThreshold a percentage representing the accepted failure threshold to determine if a `run` succeeded or not
+     * @param null|int $failureThreshold maximum accepted percentage of failures for a task run to finish successfully
      *
      * @return self
      */
@@ -464,7 +464,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */
@@ -488,7 +488,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update (RFC3339 format)
+     * @param null|string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

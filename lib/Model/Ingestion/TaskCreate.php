@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskCreate Class Doc Comment.
  *
  * @category Class
- * @description The payload for a task creation.
+ * @description API request body for creating a task.
  */
 class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -232,7 +232,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets sourceID.
      *
-     * @param string $sourceID the source UUID
+     * @param string $sourceID universally uniqud identifier (UUID) of a source
      *
      * @return self
      */
@@ -256,7 +256,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets destinationID.
      *
-     * @param string $destinationID the destination UUID
+     * @param string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -328,7 +328,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets enabled.
      *
-     * @param null|bool $enabled whether the task is enabled or not
+     * @param null|bool $enabled whether the task is enabled
      *
      * @return self
      */
@@ -352,7 +352,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets failureThreshold.
      *
-     * @param null|int $failureThreshold a percentage representing the accepted failure threshold to determine if a `run` succeeded or not
+     * @param null|int $failureThreshold maximum accepted percentage of failures for a task run to finish successfully
      *
      * @return self
      */

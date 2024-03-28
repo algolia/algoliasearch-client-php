@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ScheduleDateUtilsInput Class Doc Comment.
  *
  * @category Class
- * @description The input for a &#x60;schedule&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
+ * @description Input for scheduled tasks whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
  */
 class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -183,7 +183,7 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets timeframe.
      *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
+     * @param int $timeframe number of days in the past until the current day for which to extract Big Query data
      *
      * @return self
      */

@@ -218,7 +218,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets projectID.
      *
-     * @param string $projectID project ID of the BigQuery Source
+     * @param string $projectID project ID of the BigQuery source
      *
      * @return self
      */
@@ -242,7 +242,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets datasetID.
      *
-     * @param string $datasetID dataset ID of the BigQuery Source
+     * @param string $datasetID dataset ID of the BigQuery source
      *
      * @return self
      */
@@ -290,7 +290,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets table.
      *
-     * @param null|string $table table name (for default BQ)
+     * @param null|string $table table name for the BigQuery export
      *
      * @return self
      */
@@ -314,7 +314,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets tablePrefix.
      *
-     * @param null|string $tablePrefix table prefix (for Google Analytics)
+     * @param null|string $tablePrefix table prefix for a Google Analytics 4 data export to BigQuery
      *
      * @return self
      */
@@ -362,7 +362,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets uniqueIDColumn.
      *
-     * @param null|string $uniqueIDColumn the name of the column that contains the unique ID, used as `objectID` in Algolia
+     * @param null|string $uniqueIDColumn name of a column that contains a unique ID which will be used as `objectID` in Algolia
      *
      * @return self
      */

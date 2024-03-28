@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Destination Class Doc Comment.
  *
  * @category Class
- * @description A destination describe how the data is indexed on the Algolia side.
+ * @description Destinations are Algolia resources like indices or event streams.
  */
 class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -228,7 +228,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets destinationID.
      *
-     * @param string $destinationID the destination UUID
+     * @param string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -276,7 +276,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -324,7 +324,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */
@@ -348,7 +348,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update (RFC3339 format)
+     * @param null|string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class Destination extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */

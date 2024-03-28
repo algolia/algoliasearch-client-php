@@ -243,7 +243,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets eventID.
      *
-     * @param string $eventID the event UUID
+     * @param string $eventID universally unique identifier (UUID) of an event
      *
      * @return self
      */
@@ -267,7 +267,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets runID.
      *
-     * @param string $runID the run UUID
+     * @param string $runID universally unique identifier (UUID) of a task run
      *
      * @return self
      */
@@ -415,7 +415,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets publishedAt.
      *
-     * @param string $publishedAt date of publish (RFC3339 format)
+     * @param string $publishedAt date of publish RFC3339 format
      *
      * @return self
      */

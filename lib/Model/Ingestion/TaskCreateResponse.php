@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskCreateResponse Class Doc Comment.
  *
  * @category Class
- * @description The response from the API after a task creation.
+ * @description API response for creating a task.
  */
 class TaskCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -179,7 +179,7 @@ class TaskCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets taskID.
      *
-     * @param string $taskID the task UUID
+     * @param string $taskID universally unique identifier (UUID) of a task
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class TaskCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */

@@ -178,7 +178,7 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets runID.
      *
-     * @param string $runID the run UUID
+     * @param string $runID universally unique identifier (UUID) of a task run
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */

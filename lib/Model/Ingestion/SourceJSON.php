@@ -183,7 +183,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets url.
      *
-     * @param string $url the URL of the file
+     * @param string $url URL of the file
      *
      * @return self
      */
@@ -207,7 +207,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets uniqueIDColumn.
      *
-     * @param null|string $uniqueIDColumn the name of the column that contains the unique ID, used as `objectID` in Algolia
+     * @param null|string $uniqueIDColumn name of a column that contains a unique ID which will be used as `objectID` in Algolia
      *
      * @return self
      */

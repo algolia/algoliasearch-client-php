@@ -177,7 +177,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets name.
      *
-     * @param null|string $name name
+     * @param null|string $name descriptive name of the source
      *
      * @return self
      */
@@ -225,7 +225,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */

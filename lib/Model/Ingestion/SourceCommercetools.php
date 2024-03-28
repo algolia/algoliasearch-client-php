@@ -234,7 +234,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets locales.
      *
-     * @param null|string[] $locales Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].
+     * @param null|string[] $locales locales for your commercetools stores
      *
      * @return self
      */
@@ -306,7 +306,7 @@ class SourceCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets fallbackIsInStockValue.
      *
-     * @param null|bool $fallbackIsInStockValue determines the value that will be stored in the Algolia record if there's no inventory information on the product
+     * @param null|bool $fallbackIsInStockValue whether a fallback value is stored in the Algolia record if there's no inventory information about the product
      *
      * @return self
      */

@@ -221,7 +221,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets name.
      *
-     * @param string $name name
+     * @param string $name descriptive name of the source
      *
      * @return self
      */
@@ -269,7 +269,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */

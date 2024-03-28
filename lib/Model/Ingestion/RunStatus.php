@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunStatus Class Doc Comment.
  *
  * @category Class
+ * @description Task run status.
  */
 class RunStatus
 {

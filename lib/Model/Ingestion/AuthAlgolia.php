@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthAlgolia Class Doc Comment.
  *
  * @category Class
+ * @description Credentials for authenticating with Algolia.
  */
 class AuthAlgolia extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -178,7 +179,7 @@ class AuthAlgolia extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets appID.
      *
-     * @param string $appID algolia Application ID
+     * @param string $appID algolia application ID
      *
      * @return self
      */
@@ -202,7 +203,7 @@ class AuthAlgolia extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets apiKey.
      *
-     * @param string $apiKey algolia API Key, with the correct rights to push to an index and change settings
+     * @param string $apiKey Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.
      *
      * @return self
      */

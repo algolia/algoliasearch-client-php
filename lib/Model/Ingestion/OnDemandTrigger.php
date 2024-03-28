@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandTrigger Class Doc Comment.
  *
  * @category Class
- * @description The trigger information of a task of type &#x60;onDemand&#x60;.
+ * @description Trigger information for manually-triggered tasks.
  */
 class OnDemandTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -200,7 +200,7 @@ class OnDemandTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets lastRun.
      *
-     * @param null|string $lastRun the last time the scheduled task ran (RFC3339 format)
+     * @param null|string $lastRun the last time the scheduled task ran in RFC3339 format
      *
      * @return self
      */

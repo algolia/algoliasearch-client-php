@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * MethodType Class Doc Comment.
  *
  * @category Class
+ * @description HTTP method to be used for retrieving your data.
  */
 class MethodType
 {

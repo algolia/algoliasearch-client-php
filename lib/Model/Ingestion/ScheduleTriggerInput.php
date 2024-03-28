@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ScheduleTriggerInput Class Doc Comment.
  *
  * @category Class
- * @description The trigger input for a task of type &#39;schedule&#39;.
+ * @description Trigger input for scheduled tasks.
  */
 class ScheduleTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -203,7 +203,7 @@ class ScheduleTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets cron.
      *
-     * @param string $cron a cron expression that represent at which regularity the task should run
+     * @param string $cron cron expression for the task's schedule
      *
      * @return self
      */

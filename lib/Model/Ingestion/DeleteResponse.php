@@ -167,7 +167,7 @@ class DeleteResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets deletedAt.
      *
-     * @param string $deletedAt date of deletion (RFC3339 format)
+     * @param string $deletedAt date of deletion in RFC3339 format
      *
      * @return self
      */

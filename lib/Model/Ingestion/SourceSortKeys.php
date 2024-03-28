@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * SourceSortKeys Class Doc Comment.
  *
  * @category Class
- * @description Used to sort the Source list endpoint.
+ * @description Property by which to sort the list of sources.
  */
 class SourceSortKeys
 {

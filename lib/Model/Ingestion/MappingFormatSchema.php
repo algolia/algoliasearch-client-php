@@ -5,17 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * StreamingTriggerType Class Doc Comment.
+ * MappingFormatSchema Class Doc Comment.
  *
  * @category Class
- * @description Task runs continuously.
+ * @description Mapping format schema.
  */
-class StreamingTriggerType
+class MappingFormatSchema
 {
     /**
      * Possible values of this enum.
      */
-    public const STREAMING = 'streaming';
+    public const MAPPINGKIT_V1 = 'mappingkit/v1';
 
     /**
      * Gets allowable values of the enum.
@@ -25,7 +25,7 @@ class StreamingTriggerType
     public static function getAllowableEnumValues()
     {
         return [
-            self::STREAMING,
+            self::MAPPINGKIT_V1,
         ];
     }
 }

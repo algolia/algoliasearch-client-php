@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthAPIKeyPartial Class Doc Comment.
  *
  * @category Class
- * @description Authentication input used for token credentials.
+ * @description Credentials for authenticating with an API key.
  */
 class AuthAPIKeyPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -162,7 +162,7 @@ class AuthAPIKeyPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets key.
      *
-     * @param null|string $key key
+     * @param null|string $key API key. This field is `null` in the API response.
      *
      * @return self
      */

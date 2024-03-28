@@ -167,7 +167,7 @@ class DestinationIndexPrefix extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexPrefix.
      *
-     * @param string $indexPrefix the prefix of the final index name
+     * @param string $indexPrefix string added to the beginning of all indices created by this destination
      *
      * @return self
      */

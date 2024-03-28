@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskInput Class Doc Comment.
  *
  * @category Class
+ * @description Configuration of the task, depending on its type.
  */
 class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -207,7 +208,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets startDate.
      *
-     * @param string $startDate the start date of the extraction (RFC3339 format)
+     * @param string $startDate earliest date in RFC3339 format of the extracted data from Big Query
      *
      * @return self
      */
@@ -231,7 +232,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets endDate.
      *
-     * @param string $endDate the end date of the extraction (RFC3339 format)
+     * @param string $endDate latest date in RFC3339 format of the extracted data from Big Query
      *
      * @return self
      */
@@ -279,7 +280,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets timeframe.
      *
-     * @param int $timeframe the timeframe of the extraction, in number of days from today
+     * @param int $timeframe number of days in the past until the current day for which to extract Big Query data
      *
      * @return self
      */

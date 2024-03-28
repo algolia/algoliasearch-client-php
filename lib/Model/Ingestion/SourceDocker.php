@@ -256,7 +256,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets image.
      *
-     * @param string $image the name of the image to pull
+     * @param string $image docker image name
      *
      * @return self
      */
@@ -280,7 +280,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets version.
      *
-     * @param null|string $version the version of the image, defaults to `latest`
+     * @param null|string $version docker image version
      *
      * @return self
      */
@@ -304,7 +304,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets configuration.
      *
-     * @param object $configuration the configuration of the spec
+     * @param object $configuration configuration of the spec
      *
      * @return self
      */

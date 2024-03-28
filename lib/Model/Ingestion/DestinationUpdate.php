@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationUpdate Class Doc Comment.
  *
  * @category Class
- * @description Payload to partially update a Destination.
+ * @description API request body for updating a destination.
  */
 class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -210,7 +210,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets name.
      *
-     * @param null|string $name an human readable name describing the object
+     * @param null|string $name descriptive name for the resource
      *
      * @return self
      */
@@ -258,7 +258,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */

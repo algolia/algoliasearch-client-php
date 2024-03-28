@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunType Class Doc Comment.
  *
  * @category Class
+ * @description Task run type.
  */
 class RunType
 {

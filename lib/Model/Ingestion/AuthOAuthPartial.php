@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthOAuthPartial Class Doc Comment.
  *
  * @category Class
- * @description Authentication input for OAuth login.
+ * @description Credentials for authenticating with OAuth 2.0.
  */
 class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -21,6 +21,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'url' => 'string',
         'clientId' => 'string',
         'clientSecret' => 'string',
+        'scope' => 'string',
     ];
 
     /**
@@ -32,6 +33,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'url' => null,
         'clientId' => null,
         'clientSecret' => null,
+        'scope' => null,
     ];
 
     /**
@@ -44,6 +46,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'url' => 'url',
         'clientId' => 'client_id',
         'clientSecret' => 'client_secret',
+        'scope' => 'scope',
     ];
 
     /**
@@ -55,6 +58,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'url' => 'setUrl',
         'clientId' => 'setClientId',
         'clientSecret' => 'setClientSecret',
+        'scope' => 'setScope',
     ];
 
     /**
@@ -66,6 +70,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         'url' => 'getUrl',
         'clientId' => 'getClientId',
         'clientSecret' => 'getClientSecret',
+        'scope' => 'getScope',
     ];
 
     /**
@@ -90,6 +95,9 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
         }
         if (isset($data['clientSecret'])) {
             $this->container['clientSecret'] = $data['clientSecret'];
+        }
+        if (isset($data['scope'])) {
+            $this->container['scope'] = $data['scope'];
         }
     }
 
@@ -178,7 +186,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets url.
      *
-     * @param null|string $url the OAuth endpoint URL
+     * @param null|string $url URL for the OAuth endpoint
      *
      * @return self
      */
@@ -202,7 +210,7 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets clientId.
      *
-     * @param null|string $clientId the clientID
+     * @param null|string $clientId client ID
      *
      * @return self
      */
@@ -226,13 +234,37 @@ class AuthOAuthPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets clientSecret.
      *
-     * @param null|string $clientSecret the secret
+     * @param null|string $clientSecret Client secret. This field is `null` in the API response.
      *
      * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->container['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope.
+     *
+     * @return null|string
+     */
+    public function getScope()
+    {
+        return $this->container['scope'] ?? null;
+    }
+
+    /**
+     * Sets scope.
+     *
+     * @param null|string $scope OAuth scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
         return $this;
     }

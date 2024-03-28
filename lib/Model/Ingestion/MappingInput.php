@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * MappingInput Class Doc Comment.
  *
  * @category Class
- * @description Transformations to apply to source, serialized as a JSON string.
+ * @description Transformations to apply to the source, serialized as a JSON string.
  */
 class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -18,7 +18,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      * @var string[]
      */
     protected static $modelTypes = [
-        'format' => 'string',
+        'format' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingFormatSchema',
         'actions' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[]',
     ];
 
@@ -169,7 +169,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets format.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingFormatSchema
      */
     public function getFormat()
     {
@@ -179,7 +179,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets format.
      *
-     * @param string $format name of the mapping format schema, `mappingkit/v1` is currently the only supported format
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingFormatSchema $format format
      *
      * @return self
      */

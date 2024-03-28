@@ -227,7 +227,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets sourceID.
      *
-     * @param string $sourceID the source UUID
+     * @param string $sourceID universally uniqud identifier (UUID) of a source
      *
      * @return self
      */
@@ -323,7 +323,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets authenticationID.
      *
-     * @param null|string $authenticationID the authentication UUID
+     * @param null|string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */
@@ -347,7 +347,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */
@@ -371,7 +371,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update (RFC3339 format)
+     * @param null|string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

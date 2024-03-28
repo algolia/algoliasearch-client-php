@@ -189,7 +189,7 @@ class SourceGA4BigQueryExport extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets projectID.
      *
-     * @param string $projectID GCP project ID that the BigQuery Export writes to
+     * @param string $projectID GCP project ID that the BigQuery export writes to
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class SourceGA4BigQueryExport extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets datasetID.
      *
-     * @param string $datasetID bigQuery dataset ID that the BigQuery Export writes to
+     * @param string $datasetID bigQuery dataset ID that the BigQuery export writes to
      *
      * @return self
      */
@@ -237,7 +237,7 @@ class SourceGA4BigQueryExport extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets tablePrefix.
      *
-     * @param string $tablePrefix Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
+     * @param string $tablePrefix prefix of the tables that the BigQuery Export writes to
      *
      * @return self
      */

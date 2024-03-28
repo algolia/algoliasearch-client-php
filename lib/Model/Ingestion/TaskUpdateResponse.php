@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskUpdateResponse Class Doc Comment.
  *
  * @category Class
- * @description The response from the API after a task update.
+ * @description API response for updating a task.
  */
 class TaskUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -179,7 +179,7 @@ class TaskUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets taskID.
      *
-     * @param string $taskID the task UUID
+     * @param string $taskID universally unique identifier (UUID) of a task
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class TaskUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update (RFC3339 format)
+     * @param string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

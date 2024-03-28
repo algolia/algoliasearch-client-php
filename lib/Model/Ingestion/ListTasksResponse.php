@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ListTasksResponse Class Doc Comment.
  *
  * @category Class
- * @description A list of tasks with pagination details.
+ * @description Configured tasks and pagination information.
  */
 class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

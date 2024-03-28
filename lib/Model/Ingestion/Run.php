@@ -286,7 +286,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets runID.
      *
-     * @param string $runID the run UUID
+     * @param string $runID universally unique identifier (UUID) of a task run
      *
      * @return self
      */
@@ -334,7 +334,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets taskID.
      *
-     * @param string $taskID the task UUID
+     * @param string $taskID universally unique identifier (UUID) of a task
      *
      * @return self
      */
@@ -430,7 +430,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets failureThreshold.
      *
-     * @param null|int $failureThreshold a percentage representing the accepted failure threshold to determine if a `run` succeeded or not
+     * @param null|int $failureThreshold maximum accepted percentage of failures for a task run to finish successfully
      *
      * @return self
      */
@@ -461,7 +461,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets reason.
      *
-     * @param null|string $reason explains the result of outcome
+     * @param null|string $reason more information about the task run's outcome
      *
      * @return self
      */
@@ -533,7 +533,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */
@@ -557,7 +557,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets startedAt.
      *
-     * @param null|string $startedAt date of start (RFC3339 format)
+     * @param null|string $startedAt date of start in RFC3339 format
      *
      * @return self
      */
@@ -581,7 +581,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets finishedAt.
      *
-     * @param null|string $finishedAt date of finish (RFC3339 format)
+     * @param null|string $finishedAt date of finish in RFC3339 format
      *
      * @return self
      */

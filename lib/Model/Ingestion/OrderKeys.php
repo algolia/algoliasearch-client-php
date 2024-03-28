@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OrderKeys Class Doc Comment.
  *
  * @category Class
- * @description Used to order a sorted request.
+ * @description Ascending or descending sort order.
  */
 class OrderKeys
 {

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunOutcome Class Doc Comment.
  *
  * @category Class
+ * @description Task run outcome.
  */
 class RunOutcome
 {

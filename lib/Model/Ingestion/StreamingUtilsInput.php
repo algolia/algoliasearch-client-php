@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * StreamingUtilsInput Class Doc Comment.
  *
  * @category Class
- * @description The input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
+ * @description Input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
  */
 class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

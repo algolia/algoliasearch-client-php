@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Authentication Class Doc Comment.
  *
  * @category Class
- * @description An authentication is used to login into a Source or a Destination, with obfuscated input.
+ * @description Resource representing the information required to authenticate with a source or a destination.
  */
 class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -228,7 +228,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets authenticationID.
      *
-     * @param string $authenticationID the authentication UUID
+     * @param string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */
@@ -276,7 +276,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -348,7 +348,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update (RFC3339 format)
+     * @param null|string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

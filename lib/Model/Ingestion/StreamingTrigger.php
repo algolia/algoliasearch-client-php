@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * StreamingTrigger Class Doc Comment.
  *
  * @category Class
- * @description The trigger input for a task of type &#39;streaming&#39;.
+ * @description Trigger input for continuously running tasks.
  */
 class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

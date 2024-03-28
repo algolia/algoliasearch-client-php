@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationSearch Class Doc Comment.
  *
  * @category Class
- * @description Payload to search for multiple destinations, based on the given &#x60;destinationIDs&#x60;.
+ * @description API request body for searching destinations.
  */
 class DestinationSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

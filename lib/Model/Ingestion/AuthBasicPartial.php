@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthBasicPartial Class Doc Comment.
  *
  * @category Class
- * @description Authentication input for Basic login with username and password.
+ * @description Credentials for authenticating with user name and password.
  */
 class AuthBasicPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -194,7 +194,7 @@ class AuthBasicPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets password.
      *
-     * @param null|string $password password
+     * @param null|string $password Password. This field is `null` in the API response.
      *
      * @return self
      */

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Window Class Doc Comment.
  *
  * @category Class
- * @description The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
+ * @description Time window by which to filter the observability data.
  */
 class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -179,7 +179,7 @@ class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets startDate.
      *
-     * @param string $startDate a date in format RFC3339 representing the oldest possible data in query window
+     * @param string $startDate date in RFC3339 format representing the oldest data in the time window
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets endDate.
      *
-     * @param string $endDate a date in format RFC3339 representing the newest possible data in query window
+     * @param string $endDate date in RFC3339 format representing the newest data in the time window
      *
      * @return self
      */

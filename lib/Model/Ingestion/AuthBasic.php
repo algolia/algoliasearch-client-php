@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthBasic Class Doc Comment.
  *
  * @category Class
- * @description Authentication input for Basic login with username and password.
+ * @description Credentials for authenticating with user name and password.
  */
 class AuthBasic extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -203,7 +203,7 @@ class AuthBasic extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets password.
      *
-     * @param string $password password
+     * @param string $password Password. This field is `null` in the API response.
      *
      * @return self
      */

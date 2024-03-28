@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * EventSortKeys Class Doc Comment.
  *
  * @category Class
- * @description Used to sort the Event list endpoint.
+ * @description Property by which to sort the list of task run events.
  */
 class EventSortKeys
 {

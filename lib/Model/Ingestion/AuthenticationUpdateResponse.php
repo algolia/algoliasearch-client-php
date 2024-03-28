@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationUpdateResponse Class Doc Comment.
  *
  * @category Class
- * @description Response from the API when the Authentication is successfully updated.
+ * @description API response for a successful update of an authentication resource.
  */
 class AuthenticationUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -190,7 +190,7 @@ class AuthenticationUpdateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets authenticationID.
      *
-     * @param string $authenticationID the authentication UUID
+     * @param string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class AuthenticationUpdateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class AuthenticationUpdateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update (RFC3339 format)
+     * @param string $updatedAt date of last update in RFC3339 format
      *
      * @return self
      */

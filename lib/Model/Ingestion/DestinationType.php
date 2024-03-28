@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationType Class Doc Comment.
  *
  * @category Class
- * @description Type of the Destination, defines in which Algolia product the data will be stored.
+ * @description Destination type.  &lt;dl&gt; &lt;dt&gt;&lt;code&gt;search&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;Data is stored in an Algolia index.&lt;/dd&gt; &lt;dt&gt;&lt;code&gt;insights&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;Data is recorded as user events in the Insights API.&lt;/dd&gt; &lt;/dl&gt;.
  */
 class DestinationType
 {
@@ -18,8 +18,6 @@ class DestinationType
     public const SEARCH = 'search';
 
     public const INSIGHTS = 'insights';
-
-    public const FLOW = 'flow';
 
     /**
      * Gets allowable values of the enum.
@@ -31,7 +29,6 @@ class DestinationType
         return [
             self::SEARCH,
             self::INSIGHTS,
-            self::FLOW,
         ];
     }
 }

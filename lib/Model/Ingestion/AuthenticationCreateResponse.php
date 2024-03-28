@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationCreateResponse Class Doc Comment.
  *
  * @category Class
- * @description Response from the API when the Authentication is successfully created.
+ * @description API response for the successful creation of an authentication resource.
  */
 class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -190,7 +190,7 @@ class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets authenticationID.
      *
-     * @param string $authenticationID the authentication UUID
+     * @param string $authenticationID universally unique identifier (UUID) of an authentication resource
      *
      * @return self
      */
@@ -214,7 +214,7 @@ class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */
@@ -238,7 +238,7 @@ class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation (RFC3339 format)
+     * @param string $createdAt date of creation in RFC3339 format
      *
      * @return self
      */

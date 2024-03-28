@@ -16,17 +16,21 @@ class SourceType
      */
     public const BIGCOMMERCE = 'bigcommerce';
 
+    public const BIGQUERY = 'bigquery';
+
     public const COMMERCETOOLS = 'commercetools';
 
-    public const JSON = 'json';
-
     public const CSV = 'csv';
-
-    public const BIGQUERY = 'bigquery';
 
     public const DOCKER = 'docker';
 
     public const GA4_BIGQUERY_EXPORT = 'ga4BigqueryExport';
+
+    public const JSON = 'json';
+
+    public const SHOPIFY = 'shopify';
+
+    public const SFCC = 'sfcc';
 
     /**
      * Gets allowable values of the enum.
@@ -37,12 +41,14 @@ class SourceType
     {
         return [
             self::BIGCOMMERCE,
-            self::COMMERCETOOLS,
-            self::JSON,
-            self::CSV,
             self::BIGQUERY,
+            self::COMMERCETOOLS,
+            self::CSV,
             self::DOCKER,
             self::GA4_BIGQUERY_EXPORT,
+            self::JSON,
+            self::SHOPIFY,
+            self::SFCC,
         ];
     }
 }

@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskUpdate Class Doc Comment.
  *
  * @category Class
- * @description The payload for a task update.
+ * @description API request body for updating a task.
  */
 class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -204,7 +204,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets destinationID.
      *
-     * @param null|string $destinationID the destination UUID
+     * @param null|string $destinationID universally unique identifier (UUID) of a destination resource
      *
      * @return self
      */
@@ -276,7 +276,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets enabled.
      *
-     * @param null|bool $enabled whether the task is enabled or not
+     * @param null|bool $enabled whether the task is enabled
      *
      * @return self
      */
@@ -300,7 +300,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets failureThreshold.
      *
-     * @param null|int $failureThreshold a percentage representing the accepted failure threshold to determine if a `run` succeeded or not
+     * @param null|int $failureThreshold maximum accepted percentage of failures for a task run to finish successfully
      *
      * @return self
      */

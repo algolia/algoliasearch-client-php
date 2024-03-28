@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthenticationCreate Class Doc Comment.
  *
  * @category Class
- * @description The payload when creating an authentication.
+ * @description Request body for creating a new authentication resource.
  */
 class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -222,7 +222,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets name.
      *
-     * @param string $name an human readable name describing the object
+     * @param string $name descriptive name for the resource
      *
      * @return self
      */

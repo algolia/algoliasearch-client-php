@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandTriggerInput Class Doc Comment.
  *
  * @category Class
- * @description The trigger information of a task of type &#x60;onDemand&#x60;.
+ * @description Trigger information for manually-triggered tasks.
  */
 class OnDemandTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

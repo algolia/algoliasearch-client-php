@@ -331,7 +331,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets storeKeys.
      *
-     * @param null|string[] $storeKeys unique and immutable key of the referenced Store
+     * @param null|string[] $storeKeys storeKeys
      *
      * @return self
      */
@@ -355,7 +355,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets locales.
      *
-     * @param null|string[] $locales Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].
+     * @param null|string[] $locales locales for your commercetools stores
      *
      * @return self
      */
@@ -379,7 +379,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets url.
      *
-     * @param string $url the URL of the file
+     * @param string $url URL of the file
      *
      * @return self
      */
@@ -403,7 +403,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets fallbackIsInStockValue.
      *
-     * @param null|bool $fallbackIsInStockValue determines the value that will be stored in the Algolia record if there's no inventory information on the product
+     * @param null|bool $fallbackIsInStockValue whether a fallback value is stored in the Algolia record if there's no inventory information about the product
      *
      * @return self
      */
@@ -451,7 +451,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets uniqueIDColumn.
      *
-     * @param null|string $uniqueIDColumn the name of the column that contains the unique ID, used as `objectID` in Algolia
+     * @param null|string $uniqueIDColumn name of a column that contains a unique ID which will be used as `objectID` in Algolia
      *
      * @return self
      */
@@ -499,7 +499,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets mapping.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping Mapping of type for every column. For example {\"myColumn\": \"boolean\", \"myOtherColumn\": \"json\"}.
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping key-value pairs of column names and their expected types
      *
      * @return self
      */
@@ -554,7 +554,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets projectID.
      *
-     * @param string $projectID GCP project ID that the BigQuery Export writes to
+     * @param string $projectID GCP project ID that the BigQuery export writes to
      *
      * @return self
      */
@@ -578,7 +578,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets datasetID.
      *
-     * @param string $datasetID bigQuery dataset ID that the BigQuery Export writes to
+     * @param string $datasetID bigQuery dataset ID that the BigQuery export writes to
      *
      * @return self
      */
@@ -626,7 +626,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets table.
      *
-     * @param null|string $table table name (for default BQ)
+     * @param null|string $table table name for the BigQuery export
      *
      * @return self
      */
@@ -650,7 +650,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets tablePrefix.
      *
-     * @param string $tablePrefix Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
+     * @param string $tablePrefix prefix of the tables that the BigQuery Export writes to
      *
      * @return self
      */
@@ -722,7 +722,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets image.
      *
-     * @param null|string $image the name of the image to pull
+     * @param null|string $image docker image name
      *
      * @return self
      */
@@ -746,7 +746,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets version.
      *
-     * @param null|string $version the version of the image, defaults to `latest`
+     * @param null|string $version docker image version
      *
      * @return self
      */
@@ -770,7 +770,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets configuration.
      *
-     * @param object $configuration the configuration of the spec
+     * @param object $configuration configuration of the spec
      *
      * @return self
      */

@@ -97,7 +97,7 @@ class IngestionClient
     }
 
     /**
-     * Create a authentication.
+     * Creates a new authentication resource.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -106,7 +106,7 @@ class IngestionClient
      *
      * @param array $authenticationCreate (required)
      *                                    - $authenticationCreate['type'] => (array)  (required)
-     *                                    - $authenticationCreate['name'] => (string) An human readable name describing the object. (required)
+     *                                    - $authenticationCreate['name'] => (string) Descriptive name for the resource. (required)
      *                                    - $authenticationCreate['platform'] => (array)
      *                                    - $authenticationCreate['input'] => (array)  (required)
      *
@@ -134,7 +134,7 @@ class IngestionClient
     }
 
     /**
-     * Create a destination.
+     * Creates a new destination.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -143,9 +143,9 @@ class IngestionClient
      *
      * @param array $destinationCreate (required)
      *                                 - $destinationCreate['type'] => (array)  (required)
-     *                                 - $destinationCreate['name'] => (string) An human readable name describing the object. (required)
+     *                                 - $destinationCreate['name'] => (string) Descriptive name for the resource. (required)
      *                                 - $destinationCreate['input'] => (array)  (required)
-     *                                 - $destinationCreate['authenticationID'] => (string) The authentication UUID.
+     *                                 - $destinationCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate
      *
@@ -171,7 +171,7 @@ class IngestionClient
     }
 
     /**
-     * Create a source.
+     * Creates a new source.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -180,9 +180,9 @@ class IngestionClient
      *
      * @param array $sourceCreate (required)
      *                            - $sourceCreate['type'] => (array)  (required)
-     *                            - $sourceCreate['name'] => (string)  (required)
+     *                            - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
      *                            - $sourceCreate['input'] => (array)  (required)
-     *                            - $sourceCreate['authenticationID'] => (string) The authentication UUID
+     *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate
      *
@@ -208,15 +208,15 @@ class IngestionClient
     }
 
     /**
-     * Create a task.
+     * Creates a new task.
      *
-     * @param array $taskCreate (required)
-     *                          - $taskCreate['sourceID'] => (string) The source UUID. (required)
-     *                          - $taskCreate['destinationID'] => (string) The destination UUID. (required)
+     * @param array $taskCreate Request body for creating a task. (required)
+     *                          - $taskCreate['sourceID'] => (string) Universally uniqud identifier (UUID) of a source. (required)
+     *                          - $taskCreate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
      *                          - $taskCreate['trigger'] => (array)  (required)
      *                          - $taskCreate['action'] => (array)  (required)
-     *                          - $taskCreate['enabled'] => (bool) Whether the task is enabled or not.
-     *                          - $taskCreate['failureThreshold'] => (int) A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+     *                          - $taskCreate['enabled'] => (bool) Whether the task is enabled.
+     *                          - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                          - $taskCreate['input'] => (array)
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate
@@ -401,14 +401,14 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the authentication of the given authenticationID.
+     * Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $authenticationID The authentication UUID. (required)
+     * @param string $authenticationID Unique identifier of an authentication resource. (required)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
@@ -440,14 +440,14 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the destination of the given destinationID.
+     * Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $destinationID  The destination UUID. (required)
+     * @param string $destinationID  Unique identifier of a destination. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
@@ -479,14 +479,14 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the source of the given sourceID.
+     * Deletes a source by its ID. You can't delete sources that are referenced in tasks.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $sourceID       The source UUID. (required)
+     * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
@@ -518,9 +518,9 @@ class IngestionClient
     }
 
     /**
-     * Soft delete the task of the given taskID.
+     * Deletes a task by its ID.
      *
-     * @param string $taskID         The task UUID. (required)
+     * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
@@ -552,14 +552,14 @@ class IngestionClient
     }
 
     /**
-     * Disable the task of the given taskID.
+     * Disables a task.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         The task UUID. (required)
+     * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
@@ -591,14 +591,14 @@ class IngestionClient
     }
 
     /**
-     * Enable the task of the given taskID.
+     * Enables a task.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         The task UUID. (required)
+     * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
@@ -630,14 +630,14 @@ class IngestionClient
     }
 
     /**
-     * Get the authentication of the given authenticationID.
+     * Retrieves an authentication resource by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $authenticationID The authentication UUID. (required)
+     * @param string $authenticationID Unique identifier of an authentication resource. (required)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Authentication|array<string, mixed>
@@ -669,25 +669,36 @@ class IngestionClient
     }
 
     /**
-     * Get a list of authentications for the given query parameters, with pagination details.
+     * Retrieves a list of all authentication resources.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   The number of items per page to return. (optional)
-     * @param int   $page           The page number to fetch, starting at 1. (optional)
-     * @param array $type           The type of the authentications to retrieve. (optional)
-     * @param array $platform       The platform of the authentications to retrieve. (optional)
-     * @param array $sort           The key by which the list should be sorted. (optional)
-     * @param array $order          The order of the returned list. (optional)
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $type           Type of authentication resource to retrieve. (optional)
+     * @param array $platform       Ecommerce platform for which to retrieve authentication resources. (optional)
+     * @param array $sort           Property by which to sort the list of authentication resources. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListAuthenticationsResponse|array<string, mixed>
      */
     public function getAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getAuthentications, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getAuthentications, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getAuthentications, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/authentications';
         $queryParameters = [];
         $headers = [];
@@ -727,14 +738,14 @@ class IngestionClient
     }
 
     /**
-     * Get the destination of the given destinationID.
+     * Retrieves a destination by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $destinationID  The destination UUID. (required)
+     * @param string $destinationID  Unique identifier of a destination. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Destination|array<string, mixed>
@@ -766,25 +777,36 @@ class IngestionClient
     }
 
     /**
-     * Get a list of destinations for the given query parameters, with pagination details.
+     * Retrieves a list of destinations.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage     The number of items per page to return. (optional)
-     * @param int   $page             The page number to fetch, starting at 1. (optional)
-     * @param array $type             The type of the destinations to retrive. (optional)
-     * @param array $authenticationID The authenticationIDs of the destinations to retrive. (optional)
-     * @param array $sort             The key by which the list should be sorted. (optional)
-     * @param array $order            The order of the returned list. (optional)
+     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int   $page             Page number of the paginated API response. (optional)
+     * @param array $type             Destination type. (optional)
+     * @param array $authenticationID Authentication ID used by destinations. (optional)
+     * @param array $sort             Property by which to sort the destinations. (optional)
+     * @param array $order            Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListDestinationsResponse|array<string, mixed>
      */
     public function getDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getDestinations, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getDestinations, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getDestinations, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/destinations';
         $queryParameters = [];
         $headers = [];
@@ -824,14 +846,14 @@ class IngestionClient
     }
 
     /**
-     * Retrieve a stream listing for a given Singer specification compatible docker type source ID.
+     * Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $sourceID       The source UUID. (required)
+     * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerSourceStreams|array<string, mixed>
@@ -863,15 +885,15 @@ class IngestionClient
     }
 
     /**
-     * Get a single event for a specific runID.
+     * Retrieves a single task run event by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $runID          The run UUID. (required)
-     * @param string $eventID        The event UUID. (required)
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param string $eventID        Unique identifier of an event. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Event|array<string, mixed>
@@ -918,22 +940,22 @@ class IngestionClient
     }
 
     /**
-     * Get a list of events associated to the given runID, for the given query parameters.
+     * Retrieves a list of events for a task run, identified by it's ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $runID          The run UUID. (required)
-     * @param int    $itemsPerPage   The number of items per page to return. (optional)
-     * @param int    $page           The page number to fetch, starting at 1. (optional)
-     * @param array  $status         Filter the status of the events. (optional)
-     * @param array  $type           Filter the type of the events. (optional)
-     * @param array  $sort           The key by which the list should be sorted. (optional)
-     * @param array  $order          The order of the returned list. (optional)
-     * @param string $startDate      The start date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39;-3 hours if omitted. (optional)
-     * @param string $endDate        The end date (in RFC3339 format) of the events fetching window. Defaults to &#39;now&#39; days if omitted. (optional)
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $page           Page number of the paginated API response. (optional)
+     * @param array  $status         Event status for filtering the list of task runs. (optional)
+     * @param array  $type           Event type for filtering the list of task runs. (optional)
+     * @param array  $sort           Property by which to sort the list of task run events. (optional)
+     * @param array  $order          Sort order of the response, ascending or descending. (optional)
+     * @param string $startDate      Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)
+     * @param string $endDate        Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListEventsResponse|array<string, mixed>
@@ -945,6 +967,16 @@ class IngestionClient
             throw new \InvalidArgumentException(
                 'Parameter `runID` is required when calling `getEvents`.'
             );
+        }
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getEvents, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getEvents, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getEvents, must be bigger than or equal to 1.');
         }
 
         $resourcePath = '/1/runs/{runID}/events';
@@ -997,14 +1029,14 @@ class IngestionClient
     }
 
     /**
-     * Get a single run for the given ID.
+     * Retrieve a single task run by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $runID          The run UUID. (required)
+     * @param string $runID          Unique identifier of a task run. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Run|array<string, mixed>
@@ -1036,27 +1068,38 @@ class IngestionClient
     }
 
     /**
-     * Get a list of runs for the given query parameters, with pagination details.
+     * Retrieve a list of task runs.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int    $itemsPerPage   The number of items per page to return. (optional)
-     * @param int    $page           The page number to fetch, starting at 1. (optional)
-     * @param array  $status         Filter the status of the runs. (optional)
-     * @param string $taskID         Filter by taskID. (optional)
-     * @param array  $sort           The key by which the list should be sorted. (optional)
-     * @param array  $order          The order of the returned list. (optional)
-     * @param string $startDate      The start date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39;-7 days if omitted. (optional)
-     * @param string $endDate        The end date (in RFC3339 format) of the runs fetching window. Defaults to &#39;now&#39; days if omitted. (optional)
+     * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int    $page           Page number of the paginated API response. (optional)
+     * @param array  $status         Run status for filtering the list of task runs. (optional)
+     * @param string $taskID         Task ID for filtering the list of task runs. (optional)
+     * @param array  $sort           Property by which to sort the list of task runs. (optional)
+     * @param array  $order          Sort order of the response, ascending or descending. (optional)
+     * @param string $startDate      Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
+     * @param string $endDate        Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunListResponse|array<string, mixed>
      */
     public function getRuns($itemsPerPage = null, $page = null, $status = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getRuns, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getRuns, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getRuns, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/runs';
         $queryParameters = [];
         $headers = [];
@@ -1098,14 +1141,14 @@ class IngestionClient
     }
 
     /**
-     * Get the source of the given sourceID.
+     * Retrieve a source by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $sourceID       The source UUID. (required)
+     * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Source|array<string, mixed>
@@ -1137,25 +1180,36 @@ class IngestionClient
     }
 
     /**
-     * Get a list of sources for the given query parameters, with pagination details.
+     * Retrieves a list of sources.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage     The number of items per page to return. (optional)
-     * @param int   $page             The page number to fetch, starting at 1. (optional)
-     * @param array $type             The type of the sources to retrieve. (optional)
-     * @param array $authenticationID The authenticationIDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication. (optional)
-     * @param array $sort             The key by which the list should be sorted. (optional)
-     * @param array $order            The order of the returned list. (optional)
+     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int   $page             Page number of the paginated API response. (optional)
+     * @param array $type             Source type. Some sources require authentication. (optional)
+     * @param array $authenticationID Authentication IDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication resource. (optional)
+     * @param array $sort             Property by which to sort the list of sources. (optional)
+     * @param array $order            Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListSourcesResponse|array<string, mixed>
      */
     public function getSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getSources, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getSources, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getSources, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/sources';
         $queryParameters = [];
         $headers = [];
@@ -1195,14 +1249,14 @@ class IngestionClient
     }
 
     /**
-     * Get the task of the given taskID.
+     * Retrieves a task by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         The task UUID. (required)
+     * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\Task|array<string, mixed>
@@ -1234,28 +1288,39 @@ class IngestionClient
     }
 
     /**
-     * Get a list of tasks for the given query parameters, with pagination details.
+     * Retrieves a list of tasks.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   The number of items per page to return. (optional)
-     * @param int   $page           The page number to fetch, starting at 1. (optional)
-     * @param array $action         The action of the tasks to retrieve. (optional)
-     * @param bool  $enabled        Whether the task is enabled or not. (optional)
-     * @param array $sourceID       The sourceIDs of the tasks to retrieve. (optional)
-     * @param array $destinationID  The destinationIDs of the tasks to retrieve. (optional)
-     * @param array $triggerType    The trigger type of the task. (optional)
-     * @param array $sort           The key by which the list should be sorted. (optional)
-     * @param array $order          The order of the returned list. (optional)
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $action         Actions for filtering the list of tasks. (optional)
+     * @param bool  $enabled        Whether to filter the list of tasks by the &#x60;enabled&#x60; status. (optional)
+     * @param array $sourceID       Source IDs for filtering the list of tasks. (optional)
+     * @param array $destinationID  Destination IDs for filtering the list of tasks. (optional)
+     * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
+     * @param array $sort           Property by which to sort the list of tasks. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponse|array<string, mixed>
      */
     public function getTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getTasks, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getTasks, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getTasks, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/tasks';
         $queryParameters = [];
         $headers = [];
@@ -1313,14 +1378,14 @@ class IngestionClient
     }
 
     /**
-     * Run the task of the given taskID.
+     * Runs a task. You can check the status of task runs with the observability endpoints.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID         The task UUID. (required)
+     * @param string $taskID         Unique identifier of a task. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
@@ -1352,7 +1417,7 @@ class IngestionClient
     }
 
     /**
-     * Search among authentications with a defined set of parameters.
+     * Searches for authentication resources.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1386,7 +1451,7 @@ class IngestionClient
     }
 
     /**
-     * Search among destinations with a defined set of parameters.
+     * Searches for destinations.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1420,7 +1485,7 @@ class IngestionClient
     }
 
     /**
-     * Search among sources with a defined set of parameters.
+     * Searches for sources.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1454,7 +1519,7 @@ class IngestionClient
     }
 
     /**
-     * Search among tasks with a defined set of parameters.
+     * Searches for tasks.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -1488,14 +1553,14 @@ class IngestionClient
     }
 
     /**
-     * Trigger a stream listing request for a Singer specification compatible docker type source.
+     * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $sourceID       The source UUID. (required)
+     * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerSourceDiscover|array<string, mixed>
@@ -1527,17 +1592,17 @@ class IngestionClient
     }
 
     /**
-     * Update the authentication of the given authenticationID.
+     * Updates an authentication resource.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $authenticationID     The authentication UUID. (required)
+     * @param string $authenticationID     Unique identifier of an authentication resource. (required)
      * @param array  $authenticationUpdate authenticationUpdate (required)
      *                                     - $authenticationUpdate['type'] => (array)
-     *                                     - $authenticationUpdate['name'] => (string) An human readable name describing the object.
+     *                                     - $authenticationUpdate['name'] => (string) Descriptive name for the resource.
      *                                     - $authenticationUpdate['platform'] => (array)
      *                                     - $authenticationUpdate['input'] => (array)
      *
@@ -1580,19 +1645,19 @@ class IngestionClient
     }
 
     /**
-     * Update the destination of the given destinationID.
+     * Updates the destination by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $destinationID     The destination UUID. (required)
+     * @param string $destinationID     Unique identifier of a destination. (required)
      * @param array  $destinationUpdate destinationUpdate (required)
      *                                  - $destinationUpdate['type'] => (array)
-     *                                  - $destinationUpdate['name'] => (string) An human readable name describing the object.
+     *                                  - $destinationUpdate['name'] => (string) Descriptive name for the resource.
      *                                  - $destinationUpdate['input'] => (array)
-     *                                  - $destinationUpdate['authenticationID'] => (string) The authentication UUID.
+     *                                  - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate
      *
@@ -1633,18 +1698,18 @@ class IngestionClient
     }
 
     /**
-     * Update the source of the given sourceID.
+     * Updates a source by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $sourceID     The source UUID. (required)
+     * @param string $sourceID     Unique identifier of a source. (required)
      * @param array  $sourceUpdate sourceUpdate (required)
-     *                             - $sourceUpdate['name'] => (string)
+     *                             - $sourceUpdate['name'] => (string) Descriptive name of the source.
      *                             - $sourceUpdate['input'] => (array)
-     *                             - $sourceUpdate['authenticationID'] => (string) The authentication UUID
+     *                             - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate
      *
@@ -1685,15 +1750,15 @@ class IngestionClient
     }
 
     /**
-     * Update the task of the given taskID.
+     * Updates a task by its ID.
      *
-     * @param string $taskID     The task UUID. (required)
+     * @param string $taskID     Unique identifier of a task. (required)
      * @param array  $taskUpdate taskUpdate (required)
-     *                           - $taskUpdate['destinationID'] => (string) The destination UUID.
+     *                           - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
      *                           - $taskUpdate['trigger'] => (array)
      *                           - $taskUpdate['input'] => (array)
-     *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled or not.
-     *                           - $taskUpdate['failureThreshold'] => (int) A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+     *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
+     *                           - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdate
      *

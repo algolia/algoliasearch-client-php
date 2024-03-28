@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ScheduleTrigger Class Doc Comment.
  *
  * @category Class
- * @description The trigger information for a task of type &#39;schedule&#39;.
+ * @description Trigger information for scheduled tasks.
  */
 class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -222,7 +222,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets cron.
      *
-     * @param string $cron a cron expression that represent at which regularity the task should run
+     * @param string $cron cron expression for the task's schedule
      *
      * @return self
      */
@@ -246,7 +246,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets lastRun.
      *
-     * @param null|string $lastRun the last time the scheduled task ran (RFC3339 format)
+     * @param null|string $lastRun the last time the scheduled task ran in RFC3339 format
      *
      * @return self
      */
@@ -270,7 +270,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets nextRun.
      *
-     * @param string $nextRun the next scheduled run of the task (RFC3339 format)
+     * @param string $nextRun the next scheduled run of the task in RFC3339 format
      *
      * @return self
      */

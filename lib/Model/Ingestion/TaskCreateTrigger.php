@@ -202,7 +202,7 @@ class TaskCreateTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets cron.
      *
-     * @param string $cron a cron expression that represent at which regularity the task should run
+     * @param string $cron cron expression for the task's schedule
      *
      * @return self
      */

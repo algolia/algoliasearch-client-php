@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * SubscriptionTrigger Class Doc Comment.
  *
  * @category Class
- * @description The trigger input for a task of type &#39;subscription&#39;.
+ * @description Trigger input for subscription tasks.
  */
 class SubscriptionTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

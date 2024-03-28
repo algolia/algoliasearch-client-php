@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TriggerUpdateInput Class Doc Comment.
  *
  * @category Class
- * @description The trigger input for a task update.
+ * @description Trigger for a task update.
  */
 class TriggerUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -168,7 +168,7 @@ class TriggerUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets cron.
      *
-     * @param string $cron a cron expression that represent at which regularity the task should run
+     * @param string $cron cron expression for the task's schedule
      *
      * @return self
      */

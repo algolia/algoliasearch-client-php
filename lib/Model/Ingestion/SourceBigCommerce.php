@@ -199,7 +199,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets storeHash.
      *
-     * @param string $storeHash the store hash identifying the store the shopper is signing in to
+     * @param string $storeHash store hash identifying your BigCommerce store
      *
      * @return self
      */

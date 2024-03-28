@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Platform Class Doc Comment.
  *
  * @category Class
- * @description Describe which platform the Authentication is used for.
+ * @description Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select.
  */
 class Platform
 {
@@ -18,6 +18,8 @@ class Platform
     public const BIGCOMMERCE = 'bigcommerce';
 
     public const COMMERCETOOLS = 'commercetools';
+
+    public const SHOPIFY = 'shopify';
 
     /**
      * Gets allowable values of the enum.
@@ -29,6 +31,7 @@ class Platform
         return [
             self::BIGCOMMERCE,
             self::COMMERCETOOLS,
+            self::SHOPIFY,
         ];
     }
 }

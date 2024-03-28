@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandDateUtilsInput Class Doc Comment.
  *
  * @category Class
- * @description The input for an &#x60;onDemand&#x60; task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
+ * @description Input for a manually-triggered task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
  */
 class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -187,7 +187,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets startDate.
      *
-     * @param string $startDate the start date of the extraction (RFC3339 format)
+     * @param string $startDate earliest date in RFC3339 format of the extracted data from Big Query
      *
      * @return self
      */
@@ -211,7 +211,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets endDate.
      *
-     * @param string $endDate the end date of the extraction (RFC3339 format)
+     * @param string $endDate latest date in RFC3339 format of the extracted data from Big Query
      *
      * @return self
      */

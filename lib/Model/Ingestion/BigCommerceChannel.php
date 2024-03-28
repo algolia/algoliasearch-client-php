@@ -175,7 +175,7 @@ class BigCommerceChannel extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets id.
      *
-     * @param int $id the ID of the bigcommerce channel
+     * @param int $id ID of the BigCommerce channel
      *
      * @return self
      */
@@ -199,7 +199,7 @@ class BigCommerceChannel extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets currencies.
      *
-     * @param null|string[] $currencies an array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code
+     * @param null|string[] $currencies currencies for the given channel
      *
      * @return self
      */

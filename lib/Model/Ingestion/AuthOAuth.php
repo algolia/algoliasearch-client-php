@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * AuthOAuth Class Doc Comment.
  *
  * @category Class
- * @description Authentication input for OAuth login.
+ * @description Credentials for authenticating with OAuth 2.0.
  */
 class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -21,6 +21,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'string',
         'clientId' => 'string',
         'clientSecret' => 'string',
+        'scope' => 'string',
     ];
 
     /**
@@ -32,6 +33,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => null,
         'clientId' => null,
         'clientSecret' => null,
+        'scope' => null,
     ];
 
     /**
@@ -44,6 +46,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'url',
         'clientId' => 'client_id',
         'clientSecret' => 'client_secret',
+        'scope' => 'scope',
     ];
 
     /**
@@ -55,6 +58,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'setUrl',
         'clientId' => 'setClientId',
         'clientSecret' => 'setClientSecret',
+        'scope' => 'setScope',
     ];
 
     /**
@@ -66,6 +70,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         'url' => 'getUrl',
         'clientId' => 'getClientId',
         'clientSecret' => 'getClientSecret',
+        'scope' => 'getScope',
     ];
 
     /**
@@ -90,6 +95,9 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         }
         if (isset($data['clientSecret'])) {
             $this->container['clientSecret'] = $data['clientSecret'];
+        }
+        if (isset($data['scope'])) {
+            $this->container['scope'] = $data['scope'];
         }
     }
 
@@ -190,7 +198,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets url.
      *
-     * @param string $url the OAuth endpoint URL
+     * @param string $url URL for the OAuth endpoint
      *
      * @return self
      */
@@ -214,7 +222,7 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets clientId.
      *
-     * @param string $clientId the clientID
+     * @param string $clientId client ID
      *
      * @return self
      */
@@ -238,13 +246,37 @@ class AuthOAuth extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets clientSecret.
      *
-     * @param string $clientSecret the secret
+     * @param string $clientSecret Client secret. This field is `null` in the API response.
      *
      * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->container['clientSecret'] = $clientSecret;
+
+        return $this;
+    }
+
+    /**
+     * Gets scope.
+     *
+     * @return null|string
+     */
+    public function getScope()
+    {
+        return $this->container['scope'] ?? null;
+    }
+
+    /**
+     * Sets scope.
+     *
+     * @param null|string $scope OAuth scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        $this->container['scope'] = $scope;
 
         return $this;
     }

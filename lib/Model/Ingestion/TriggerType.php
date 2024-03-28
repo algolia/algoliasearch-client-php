@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TriggerType Class Doc Comment.
  *
  * @category Class
- * @description The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).   - streaming: a task that runs continuously.
+ * @description Task trigger, describing when a task should run.  &lt;dl&gt; &lt;dt&gt;&lt;code&gt;onDemand&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;  Manually trigger the task with the &#x60;/run&#x60; endpoint.  &lt;/dd&gt; &lt;dt&gt;&lt;code&gt;schedule&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;  Regularly trigger the task on a &#x60;cron&#x60; schedule.  &lt;/dd&gt;  &lt;dt&gt;&lt;code&gt;subscription&lt;/code&gt;&lt;/dt&gt;  &lt;dd&gt;  Trigger the task after an event is received, such as, a webhook.  &lt;/dd&gt;  &lt;dt&gt;&lt;code&gt;streaming&lt;/code&gt;&lt;/dt&gt;  &lt;dd&gt;  Run the task continuously.  &lt;/dd&gt; &lt;/dl&gt;.
  */
 class TriggerType
 {

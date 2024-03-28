@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * CommercetoolsCustomFields Class Doc Comment.
  *
  * @category Class
- * @description Custom fields from Commercetools to index in the records (see https://docs.commercetools.com/tutorials/custom-types).
+ * @description Custom fields from commercetools to add to the records.  For more information, see [Using Custom Types and Custom Fields](https://docs.commercetools.com/tutorials/custom-types).
  */
 class CommercetoolsCustomFields extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

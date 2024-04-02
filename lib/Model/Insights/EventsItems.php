@@ -328,11 +328,14 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
         if (!isset($this->container['eventSubtype']) || null === $this->container['eventSubtype']) {
             $invalidProperties[] = "'eventSubtype' can't be null";
         }
-        if (isset($this->container['objectData']) && (count($this->container['objectData']) > 20)) {
+        if (!isset($this->container['objectData']) || null === $this->container['objectData']) {
+            $invalidProperties[] = "'objectData' can't be null";
+        }
+        if (count($this->container['objectData']) > 20) {
             $invalidProperties[] = "invalid value for 'objectData', number of items must be less than or equal to 20.";
         }
 
-        if (isset($this->container['objectData']) && (count($this->container['objectData']) < 1)) {
+        if (count($this->container['objectData']) < 1) {
             $invalidProperties[] = "invalid value for 'objectData', number of items must be greater than or equal to 1.";
         }
 
@@ -680,7 +683,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets objectData.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
      */
     public function getObjectData()
     {
@@ -690,16 +693,16 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets objectData.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
      *
      * @return self
      */
     public function setObjectData($objectData)
     {
-        if (!is_null($objectData) && (count($objectData) > 20)) {
+        if (count($objectData) > 20) {
             throw new \InvalidArgumentException('invalid value for $objectData when calling EventsItems., number of items must be less than or equal to 20.');
         }
-        if (!is_null($objectData) && (count($objectData) < 1)) {
+        if (count($objectData) < 1) {
             throw new \InvalidArgumentException('invalid length for $objectData when calling EventsItems., number of items must be greater than or equal to 1.');
         }
         $this->container['objectData'] = $objectData;

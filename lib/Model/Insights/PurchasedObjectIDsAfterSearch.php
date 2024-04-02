@@ -279,11 +279,14 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
             $invalidProperties[] = "invalid value for 'authenticatedUserToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
-        if (isset($this->container['objectData']) && (count($this->container['objectData']) > 20)) {
+        if (!isset($this->container['objectData']) || null === $this->container['objectData']) {
+            $invalidProperties[] = "'objectData' can't be null";
+        }
+        if (count($this->container['objectData']) > 20) {
             $invalidProperties[] = "invalid value for 'objectData', number of items must be less than or equal to 20.";
         }
 
-        if (isset($this->container['objectData']) && (count($this->container['objectData']) < 1)) {
+        if (count($this->container['objectData']) < 1) {
             $invalidProperties[] = "invalid value for 'objectData', number of items must be greater than or equal to 1.";
         }
 
@@ -532,7 +535,7 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets objectData.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
+     * @return \Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
      */
     public function getObjectData()
     {
@@ -542,16 +545,16 @@ class PurchasedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets objectData.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+     * @param \Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
      *
      * @return self
      */
     public function setObjectData($objectData)
     {
-        if (!is_null($objectData) && (count($objectData) > 20)) {
+        if (count($objectData) > 20) {
             throw new \InvalidArgumentException('invalid value for $objectData when calling PurchasedObjectIDsAfterSearch., number of items must be less than or equal to 20.');
         }
-        if (!is_null($objectData) && (count($objectData) < 1)) {
+        if (count($objectData) < 1) {
             throw new \InvalidArgumentException('invalid length for $objectData when calling PurchasedObjectIDsAfterSearch., number of items must be greater than or equal to 1.');
         }
         $this->container['objectData'] = $objectData;

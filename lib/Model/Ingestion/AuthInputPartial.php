@@ -481,7 +481,7 @@ class AuthInputPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets apiKey.
      *
-     * @param null|string $apiKey Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.
+     * @param null|string $apiKey Algolia API key with the ACL: `search`. This field is `null` in the API response.
      *
      * @return self
      */

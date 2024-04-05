@@ -514,7 +514,7 @@ class AuthInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets apiKey.
      *
-     * @param string $apiKey Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.
+     * @param string $apiKey Algolia API key with the ACL: `search`. This field is `null` in the API response.
      *
      * @return self
      */

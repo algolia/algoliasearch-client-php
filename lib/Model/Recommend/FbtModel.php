@@ -5,19 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * EditType Class Doc Comment.
+ * FbtModel Class Doc Comment.
  *
  * @category Class
- * @description Type of edit.
+ * @description Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID &#x60;objectID&#x60;.
  */
-class EditType
+class FbtModel
 {
     /**
      * Possible values of this enum.
      */
-    public const REMOVE = 'remove';
-
-    public const REPLACE = 'replace';
+    public const BOUGHT_TOGETHER = 'bought-together';
 
     /**
      * Gets allowable values of the enum.
@@ -27,8 +25,7 @@ class EditType
     public static function getAllowableEnumValues()
     {
         return [
-            self::REMOVE,
-            self::REPLACE,
+            self::BOUGHT_TOGETHER,
         ];
     }
 }

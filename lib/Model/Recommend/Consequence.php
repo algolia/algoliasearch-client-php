@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Consequence Class Doc Comment.
  *
  * @category Class
- * @description Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences).
+ * @description Effect of the rule.
  */
 class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -18,11 +18,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * @var string[]
      */
     protected static $modelTypes = [
-        'params' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceParams',
-        'promote' => '\Algolia\AlgoliaSearch\Model\Recommend\Promote[]',
-        'filterPromotes' => 'bool',
-        'hide' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[]',
-        'userData' => 'mixed',
+        'hide' => '\Algolia\AlgoliaSearch\Model\Recommend\HideConsequenceObject[]',
+        'promote' => '\Algolia\AlgoliaSearch\Model\Recommend\PromoteConsequenceObject[]',
+        'params' => '\Algolia\AlgoliaSearch\Model\Recommend\ParamsConsequence',
     ];
 
     /**
@@ -31,11 +29,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * @var string[]
      */
     protected static $modelFormats = [
-        'params' => null,
-        'promote' => null,
-        'filterPromotes' => null,
         'hide' => null,
-        'userData' => null,
+        'promote' => null,
+        'params' => null,
     ];
 
     /**
@@ -45,11 +41,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * @var string[]
      */
     protected static $attributeMap = [
-        'params' => 'params',
-        'promote' => 'promote',
-        'filterPromotes' => 'filterPromotes',
         'hide' => 'hide',
-        'userData' => 'userData',
+        'promote' => 'promote',
+        'params' => 'params',
     ];
 
     /**
@@ -58,11 +52,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * @var string[]
      */
     protected static $setters = [
-        'params' => 'setParams',
-        'promote' => 'setPromote',
-        'filterPromotes' => 'setFilterPromotes',
         'hide' => 'setHide',
-        'userData' => 'setUserData',
+        'promote' => 'setPromote',
+        'params' => 'setParams',
     ];
 
     /**
@@ -71,11 +63,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      * @var string[]
      */
     protected static $getters = [
-        'params' => 'getParams',
-        'promote' => 'getPromote',
-        'filterPromotes' => 'getFilterPromotes',
         'hide' => 'getHide',
-        'userData' => 'getUserData',
+        'promote' => 'getPromote',
+        'params' => 'getParams',
     ];
 
     /**
@@ -92,20 +82,14 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
+        if (isset($data['hide'])) {
+            $this->container['hide'] = $data['hide'];
         }
         if (isset($data['promote'])) {
             $this->container['promote'] = $data['promote'];
         }
-        if (isset($data['filterPromotes'])) {
-            $this->container['filterPromotes'] = $data['filterPromotes'];
-        }
-        if (isset($data['hide'])) {
-            $this->container['hide'] = $data['hide'];
-        }
-        if (isset($data['userData'])) {
-            $this->container['userData'] = $data['userData'];
+        if (isset($data['params'])) {
+            $this->container['params'] = $data['params'];
         }
     }
 
@@ -169,12 +153,12 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     {
         $invalidProperties = [];
 
-        if (isset($this->container['promote']) && (count($this->container['promote']) > 300)) {
-            $invalidProperties[] = "invalid value for 'promote', number of items must be less than or equal to 300.";
+        if (isset($this->container['hide']) && (count($this->container['hide']) < 1)) {
+            $invalidProperties[] = "invalid value for 'hide', number of items must be greater than or equal to 1.";
         }
 
-        if (isset($this->container['hide']) && (count($this->container['hide']) > 50)) {
-            $invalidProperties[] = "invalid value for 'hide', number of items must be less than or equal to 50.";
+        if (isset($this->container['promote']) && (count($this->container['promote']) < 1)) {
+            $invalidProperties[] = "invalid value for 'promote', number of items must be greater than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -192,84 +176,9 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets params.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceParams
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceParams $params params
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
-
-        return $this;
-    }
-
-    /**
-     * Gets promote.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Promote[]
-     */
-    public function getPromote()
-    {
-        return $this->container['promote'] ?? null;
-    }
-
-    /**
-     * Sets promote.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
-     *
-     * @return self
-     */
-    public function setPromote($promote)
-    {
-        if (!is_null($promote) && (count($promote) > 300)) {
-            throw new \InvalidArgumentException('invalid value for $promote when calling Consequence., number of items must be less than or equal to 300.');
-        }
-        $this->container['promote'] = $promote;
-
-        return $this;
-    }
-
-    /**
-     * Gets filterPromotes.
-     *
-     * @return null|bool
-     */
-    public function getFilterPromotes()
-    {
-        return $this->container['filterPromotes'] ?? null;
-    }
-
-    /**
-     * Sets filterPromotes.
-     *
-     * @param null|bool $filterPromotes Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown.
-     *
-     * @return self
-     */
-    public function setFilterPromotes($filterPromotes)
-    {
-        $this->container['filterPromotes'] = $filterPromotes;
-
-        return $this;
-    }
-
-    /**
      * Gets hide.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\HideConsequenceObject[]
      */
     public function getHide()
     {
@@ -279,14 +188,14 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets hide.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceHide[] $hide records you want to hide from the search results
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\HideConsequenceObject[] $hide exclude items from recommendations
      *
      * @return self
      */
     public function setHide($hide)
     {
-        if (!is_null($hide) && (count($hide) > 50)) {
-            throw new \InvalidArgumentException('invalid value for $hide when calling Consequence., number of items must be less than or equal to 50.');
+        if (!is_null($hide) && (count($hide) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $hide when calling Consequence., number of items must be greater than or equal to 1.');
         }
         $this->container['hide'] = $hide;
 
@@ -294,25 +203,52 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     }
 
     /**
-     * Gets userData.
+     * Gets promote.
      *
-     * @return null|mixed
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\PromoteConsequenceObject[]
      */
-    public function getUserData()
+    public function getPromote()
     {
-        return $this->container['userData'] ?? null;
+        return $this->container['promote'] ?? null;
     }
 
     /**
-     * Sets userData.
+     * Sets promote.
      *
-     * @param null|mixed $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\PromoteConsequenceObject[] $promote place items at specific positions in the list of recommendations
      *
      * @return self
      */
-    public function setUserData($userData)
+    public function setPromote($promote)
     {
-        $this->container['userData'] = $userData;
+        if (!is_null($promote) && (count($promote) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $promote when calling Consequence., number of items must be greater than or equal to 1.');
+        }
+        $this->container['promote'] = $promote;
+
+        return $this;
+    }
+
+    /**
+     * Gets params.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ParamsConsequence
+     */
+    public function getParams()
+    {
+        return $this->container['params'] ?? null;
+    }
+
+    /**
+     * Sets params.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ParamsConsequence $params params
+     *
+     * @return self
+     */
+    public function setParams($params)
+    {
+        $this->container['params'] = $params;
 
         return $this;
     }

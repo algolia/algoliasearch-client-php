@@ -5,19 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendationModels Class Doc Comment.
+ * LookingSimilarModel Class Doc Comment.
  *
  * @category Class
- * @description Recommendation model.
+ * @description Looking similar model.  This model recommends items that look similar to the item with the ID &#x60;objectID&#x60; based on image attributes in your index.
  */
-class RecommendationModels
+class LookingSimilarModel
 {
     /**
      * Possible values of this enum.
      */
-    public const RELATED_PRODUCTS = 'related-products';
-
-    public const BOUGHT_TOGETHER = 'bought-together';
+    public const LOOKING_SIMILAR = 'looking-similar';
 
     /**
      * Gets allowable values of the enum.
@@ -27,8 +25,7 @@ class RecommendationModels
     public static function getAllowableEnumValues()
     {
         return [
-            self::RELATED_PRODUCTS,
-            self::BOUGHT_TOGETHER,
+            self::LOOKING_SIMILAR,
         ];
     }
 }

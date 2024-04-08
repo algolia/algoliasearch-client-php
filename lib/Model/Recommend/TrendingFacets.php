@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ConsequenceQueryObject Class Doc Comment.
+ * TrendingFacets Class Doc Comment.
  *
  * @category Class
  */
-class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,8 +17,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Recommend\Edit[]',
+        'facetName' => 'mixed',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -27,8 +28,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
+        'facetName' => null,
+        'model' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -38,8 +40,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $attributeMap = [
-        'remove' => 'remove',
-        'edits' => 'edits',
+        'facetName' => 'facetName',
+        'model' => 'model',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -48,8 +51,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
+        'facetName' => 'setFacetName',
+        'model' => 'setModel',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -58,8 +62,9 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
+        'facetName' => 'getFacetName',
+        'model' => 'getModel',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -76,11 +81,14 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
+        if (isset($data['facetName'])) {
+            $this->container['facetName'] = $data['facetName'];
         }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
+        }
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -142,7 +150,16 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
+            $invalidProperties[] = "'facetName' can't be null";
+        }
+        if (!isset($this->container['model']) || null === $this->container['model']) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -157,49 +174,73 @@ class ConsequenceQueryObject extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets remove.
+     * Gets facetName.
      *
-     * @return null|string[]
+     * @return mixed
      */
-    public function getRemove()
+    public function getFacetName()
     {
-        return $this->container['remove'] ?? null;
+        return $this->container['facetName'] ?? null;
     }
 
     /**
-     * Sets remove.
+     * Sets facetName.
      *
-     * @param null|string[] $remove words to remove from the search query
+     * @param mixed $facetName facet attribute for which to retrieve trending facet values
      *
      * @return self
      */
-    public function setRemove($remove)
+    public function setFacetName($facetName)
     {
-        $this->container['remove'] = $remove;
+        $this->container['facetName'] = $facetName;
 
         return $this;
     }
 
     /**
-     * Gets edits.
+     * Gets model.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
      */
-    public function getEdits()
+    public function getModel()
     {
-        return $this->container['edits'] ?? null;
+        return $this->container['model'] ?? null;
     }
 
     /**
-     * Sets edits.
+     * Sets model.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[] $edits changes to make to the search query
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
      *
      * @return self
      */
-    public function setEdits($edits)
+    public function setModel($model)
     {
-        $this->container['edits'] = $edits;
+        $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackParameters.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     */
+    public function getFallbackParameters()
+    {
+        return $this->container['fallbackParameters'] ?? null;
+    }
+
+    /**
+     * Sets fallbackParameters.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     *
+     * @return self
+     */
+    public function setFallbackParameters($fallbackParameters)
+    {
+        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

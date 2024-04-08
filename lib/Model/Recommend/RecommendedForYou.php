@@ -5,12 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * AutomaticFacetFilters Class Doc Comment.
+ * RecommendedForYou Class Doc Comment.
  *
  * @category Class
- * @description Filter to be applied to the search.  You can use this to respond to search queries that match a facet value. For example, if users search for \&quot;comedy\&quot;, which matches a facet value of the \&quot;genre\&quot; facet, you can filter the results to show the top-ranked comedy movies.
  */
-class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,6 +17,8 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelTypes = [
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -26,6 +27,8 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $modelFormats = [
+        'model' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -35,6 +38,8 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $attributeMap = [
+        'model' => 'model',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -43,6 +48,8 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $setters = [
+        'model' => 'setModel',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -51,6 +58,8 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      * @var string[]
      */
     protected static $getters = [
+        'model' => 'getModel',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -67,6 +76,12 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
+        }
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
+        }
     }
 
     /**
@@ -127,7 +142,13 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['model']) || null === $this->container['model']) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -139,6 +160,54 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets model.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel
+     */
+    public function getModel()
+    {
+        return $this->container['model'] ?? null;
+    }
+
+    /**
+     * Sets model.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel $model model
+     *
+     * @return self
+     */
+    public function setModel($model)
+    {
+        $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets fallbackParameters.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     */
+    public function getFallbackParameters()
+    {
+        return $this->container['fallbackParameters'] ?? null;
+    }
+
+    /**
+     * Sets fallbackParameters.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     *
+     * @return self
+     */
+    public function setFallbackParameters($fallbackParameters)
+    {
+        $this->container['fallbackParameters'] = $fallbackParameters;
+
+        return $this;
     }
 
     /**

@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ConsequenceParams Class Doc Comment.
+ * FallbackParams Class Doc Comment.
  *
  * @category Class
  */
-class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,6 +17,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelTypes = [
+        'query' => 'string',
         'similarQuery' => 'string',
         'filters' => 'string',
         'facetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters',
@@ -92,9 +93,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'enableReRanking' => 'bool',
         'reRankingApplyFilter' => '\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter',
-        'query' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters',
     ];
 
     /**
@@ -103,6 +101,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $modelFormats = [
+        'query' => null,
         'similarQuery' => null,
         'filters' => null,
         'facetFilters' => null,
@@ -178,9 +177,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'renderingContent' => null,
         'enableReRanking' => null,
         'reRankingApplyFilter' => null,
-        'query' => null,
-        'automaticFacetFilters' => null,
-        'automaticOptionalFacetFilters' => null,
     ];
 
     /**
@@ -190,6 +186,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $attributeMap = [
+        'query' => 'query',
         'similarQuery' => 'similarQuery',
         'filters' => 'filters',
         'facetFilters' => 'facetFilters',
@@ -265,9 +262,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'renderingContent' => 'renderingContent',
         'enableReRanking' => 'enableReRanking',
         'reRankingApplyFilter' => 'reRankingApplyFilter',
-        'query' => 'query',
-        'automaticFacetFilters' => 'automaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'automaticOptionalFacetFilters',
     ];
 
     /**
@@ -276,6 +270,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $setters = [
+        'query' => 'setQuery',
         'similarQuery' => 'setSimilarQuery',
         'filters' => 'setFilters',
         'facetFilters' => 'setFacetFilters',
@@ -351,9 +346,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'renderingContent' => 'setRenderingContent',
         'enableReRanking' => 'setEnableReRanking',
         'reRankingApplyFilter' => 'setReRankingApplyFilter',
-        'query' => 'setQuery',
-        'automaticFacetFilters' => 'setAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
     ];
 
     /**
@@ -362,6 +354,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      * @var string[]
      */
     protected static $getters = [
+        'query' => 'getQuery',
         'similarQuery' => 'getSimilarQuery',
         'filters' => 'getFilters',
         'facetFilters' => 'getFacetFilters',
@@ -437,9 +430,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'renderingContent' => 'getRenderingContent',
         'enableReRanking' => 'getEnableReRanking',
         'reRankingApplyFilter' => 'getReRankingApplyFilter',
-        'query' => 'getQuery',
-        'automaticFacetFilters' => 'getAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
     ];
 
     /**
@@ -456,6 +446,9 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['query'])) {
+            $this->container['query'] = $data['query'];
+        }
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
         }
@@ -681,15 +674,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (isset($data['reRankingApplyFilter'])) {
             $this->container['reRankingApplyFilter'] = $data['reRankingApplyFilter'];
         }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
-        }
-        if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] = $data['automaticFacetFilters'];
-        }
-        if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] = $data['automaticOptionalFacetFilters'];
-        }
     }
 
     /**
@@ -815,6 +799,30 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     }
 
     /**
+     * Gets query.
+     *
+     * @return null|string
+     */
+    public function getQuery()
+    {
+        return $this->container['query'] ?? null;
+    }
+
+    /**
+     * Sets query.
+     *
+     * @param null|string $query search query
+     *
+     * @return self
+     */
+    public function setQuery($query)
+    {
+        $this->container['query'] = $query;
+
+        return $this;
+    }
+
+    /**
      * Gets similarQuery.
      *
      * @return null|string
@@ -851,7 +859,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets filters.
      *
-     * @param null|string $filters Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
+     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
      *
      * @return self
      */
@@ -1074,7 +1082,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setPage($page)
     {
         if (!is_null($page) && ($page < 0)) {
-            throw new \InvalidArgumentException('invalid value for $page when calling ConsequenceParams., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $page when calling FallbackParams., must be bigger than or equal to 0.');
         }
 
         $this->container['page'] = $page;
@@ -1126,10 +1134,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setLength($length)
     {
         if (!is_null($length) && ($length > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling ConsequenceParams., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $length when calling FallbackParams., must be smaller than or equal to 1000.');
         }
         if (!is_null($length) && ($length < 1)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling ConsequenceParams., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $length when calling FallbackParams., must be bigger than or equal to 1.');
         }
 
         $this->container['length'] = $length;
@@ -1253,7 +1261,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
         if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling ConsequenceParams., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling FallbackParams., must be bigger than or equal to 1.');
         }
 
         $this->container['minimumAroundRadius'] = $minimumAroundRadius;
@@ -1377,10 +1385,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setPersonalizationImpact($personalizationImpact)
     {
         if (!is_null($personalizationImpact) && ($personalizationImpact > 100)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling ConsequenceParams., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling FallbackParams., must be smaller than or equal to 100.');
         }
         if (!is_null($personalizationImpact) && ($personalizationImpact < 0)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling ConsequenceParams., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling FallbackParams., must be bigger than or equal to 0.');
         }
 
         $this->container['personalizationImpact'] = $personalizationImpact;
@@ -1840,10 +1848,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setHitsPerPage($hitsPerPage)
     {
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling ConsequenceParams., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling FallbackParams., must be smaller than or equal to 1000.');
         }
         if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling ConsequenceParams., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling FallbackParams., must be bigger than or equal to 1.');
         }
 
         $this->container['hitsPerPage'] = $hitsPerPage;
@@ -2447,10 +2455,10 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setMinProximity($minProximity)
     {
         if (!is_null($minProximity) && ($minProximity > 7)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling ConsequenceParams., must be smaller than or equal to 7.');
+            throw new \InvalidArgumentException('invalid value for $minProximity when calling FallbackParams., must be smaller than or equal to 7.');
         }
         if (!is_null($minProximity) && ($minProximity < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling ConsequenceParams., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $minProximity when calling FallbackParams., must be bigger than or equal to 1.');
         }
 
         $this->container['minProximity'] = $minProximity;
@@ -2502,7 +2510,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setMaxFacetHits($maxFacetHits)
     {
         if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling ConsequenceParams., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling FallbackParams., must be smaller than or equal to 100.');
         }
 
         $this->container['maxFacetHits'] = $maxFacetHits;
@@ -2530,7 +2538,7 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setMaxValuesPerFacet($maxValuesPerFacet)
     {
         if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling ConsequenceParams., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling FallbackParams., must be smaller than or equal to 1000.');
         }
 
         $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
@@ -2654,78 +2662,6 @@ class ConsequenceParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setReRankingApplyFilter($reRankingApplyFilter)
     {
         $this->container['reRankingApplyFilter'] = $reRankingApplyFilter;
-
-        return $this;
-    }
-
-    /**
-     * Gets query.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery $query query
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
-
-        return $this;
-    }
-
-    /**
-     * Gets automaticFacetFilters.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
-     */
-    public function getAutomaticFacetFilters()
-    {
-        return $this->container['automaticFacetFilters'] ?? null;
-    }
-
-    /**
-     * Sets automaticFacetFilters.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
-     *
-     * @return self
-     */
-    public function setAutomaticFacetFilters($automaticFacetFilters)
-    {
-        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets automaticOptionalFacetFilters.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
-     */
-    public function getAutomaticOptionalFacetFilters()
-    {
-        return $this->container['automaticOptionalFacetFilters'] ?? null;
-    }
-
-    /**
-     * Sets automaticOptionalFacetFilters.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
-     *
-     * @return self
-     */
-    public function setAutomaticOptionalFacetFilters($automaticOptionalFacetFilters)
-    {
-        $this->container['automaticOptionalFacetFilters'] = $automaticOptionalFacetFilters;
 
         return $this;
     }

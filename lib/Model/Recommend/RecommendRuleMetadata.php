@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ConsequenceHide Class Doc Comment.
+ * RecommendRuleMetadata Class Doc Comment.
  *
  * @category Class
- * @description Object ID of the record to hide.
+ * @description Rule metadata.
  */
-class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendRuleMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +18,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
-        'objectID' => 'string',
+        'lastUpdate' => 'string',
     ];
 
     /**
@@ -27,7 +27,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelFormats = [
-        'objectID' => null,
+        'lastUpdate' => null,
     ];
 
     /**
@@ -37,7 +37,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $attributeMap = [
-        'objectID' => 'objectID',
+        'lastUpdate' => 'lastUpdate',
     ];
 
     /**
@@ -46,7 +46,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $setters = [
-        'objectID' => 'setObjectID',
+        'lastUpdate' => 'setLastUpdate',
     ];
 
     /**
@@ -55,7 +55,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $getters = [
-        'objectID' => 'getObjectID',
+        'lastUpdate' => 'getLastUpdate',
     ];
 
     /**
@@ -72,8 +72,8 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['objectID'])) {
-            $this->container['objectID'] = $data['objectID'];
+        if (isset($data['lastUpdate'])) {
+            $this->container['lastUpdate'] = $data['lastUpdate'];
         }
     }
 
@@ -135,13 +135,7 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
-            $invalidProperties[] = "'objectID' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -156,25 +150,25 @@ class ConsequenceHide extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets objectID.
+     * Gets lastUpdate.
      *
-     * @return string
+     * @return null|string
      */
-    public function getObjectID()
+    public function getLastUpdate()
     {
-        return $this->container['objectID'] ?? null;
+        return $this->container['lastUpdate'] ?? null;
     }
 
     /**
-     * Sets objectID.
+     * Sets lastUpdate.
      *
-     * @param string $objectID unique record identifier
+     * @param null|string $lastUpdate date and time when the object was updated, in RFC 3339 format
      *
      * @return self
      */
-    public function setObjectID($objectID)
+    public function setLastUpdate($lastUpdate)
     {
-        $this->container['objectID'] = $objectID;
+        $this->container['lastUpdate'] = $lastUpdate;
 
         return $this;
     }

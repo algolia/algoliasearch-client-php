@@ -5,12 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * PromoteObjectIDs Class Doc Comment.
+ * FrequentlyBoughtTogether Class Doc Comment.
  *
  * @category Class
- * @description Records to promote.
  */
-class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FrequentlyBoughtTogether extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +17,8 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'objectIDs' => 'string[]',
-        'position' => 'int',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\FbtModel',
+        'objectID' => 'string',
     ];
 
     /**
@@ -28,8 +27,8 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'objectIDs' => null,
-        'position' => null,
+        'model' => null,
+        'objectID' => null,
     ];
 
     /**
@@ -39,8 +38,8 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $attributeMap = [
-        'objectIDs' => 'objectIDs',
-        'position' => 'position',
+        'model' => 'model',
+        'objectID' => 'objectID',
     ];
 
     /**
@@ -49,8 +48,8 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'objectIDs' => 'setObjectIDs',
-        'position' => 'setPosition',
+        'model' => 'setModel',
+        'objectID' => 'setObjectID',
     ];
 
     /**
@@ -59,8 +58,8 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'objectIDs' => 'getObjectIDs',
-        'position' => 'getPosition',
+        'model' => 'getModel',
+        'objectID' => 'getObjectID',
     ];
 
     /**
@@ -77,11 +76,11 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['objectIDs'])) {
-            $this->container['objectIDs'] = $data['objectIDs'];
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
         }
-        if (isset($data['position'])) {
-            $this->container['position'] = $data['position'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -145,15 +144,11 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
-            $invalidProperties[] = "'objectIDs' can't be null";
+        if (!isset($this->container['model']) || null === $this->container['model']) {
+            $invalidProperties[] = "'model' can't be null";
         }
-        if (count($this->container['objectIDs']) > 100) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 100.";
-        }
-
-        if (!isset($this->container['position']) || null === $this->container['position']) {
-            $invalidProperties[] = "'position' can't be null";
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
+            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -171,52 +166,49 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets objectIDs.
+     * Gets model.
      *
-     * @return string[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\FbtModel
      */
-    public function getObjectIDs()
+    public function getModel()
     {
-        return $this->container['objectIDs'] ?? null;
+        return $this->container['model'] ?? null;
     }
 
     /**
-     * Sets objectIDs.
+     * Sets model.
      *
-     * @param string[] $objectIDs Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\FbtModel $model model
      *
      * @return self
      */
-    public function setObjectIDs($objectIDs)
+    public function setModel($model)
     {
-        if (count($objectIDs) > 100) {
-            throw new \InvalidArgumentException('invalid value for $objectIDs when calling PromoteObjectIDs., number of items must be less than or equal to 100.');
-        }
-        $this->container['objectIDs'] = $objectIDs;
+        $this->container['model'] = $model;
 
         return $this;
     }
 
     /**
-     * Gets position.
+     * Gets objectID.
      *
-     * @return int
+     * @return string
      */
-    public function getPosition()
+    public function getObjectID()
     {
-        return $this->container['position'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets position.
+     * Sets objectID.
      *
-     * @param int $position position in the search results where you want to show the promoted records
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
-    public function setPosition($position)
+    public function setObjectID($objectID)
     {
-        $this->container['position'] = $position;
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }

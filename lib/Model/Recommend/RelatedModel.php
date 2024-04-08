@@ -5,17 +5,17 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingFacetsModel Class Doc Comment.
+ * RelatedModel Class Doc Comment.
  *
  * @category Class
- * @description Trending facet values model.  This model recommends trending facet values for the specified facet attribute.
+ * @description Related products or similar content model.  This model recommends items that are similar to the item with the ID &#x60;objectID&#x60;. Similarity is determined from the user interactions and attributes.
  */
-class TrendingFacetsModel
+class RelatedModel
 {
     /**
      * Possible values of this enum.
      */
-    public const TRENDING_FACETS = 'trending-facets';
+    public const RELATED_PRODUCTS = 'related-products';
 
     /**
      * Gets allowable values of the enum.
@@ -25,7 +25,7 @@ class TrendingFacetsModel
     public static function getAllowableEnumValues()
     {
         return [
-            self::TRENDING_FACETS,
+            self::RELATED_PRODUCTS,
         ];
     }
 }

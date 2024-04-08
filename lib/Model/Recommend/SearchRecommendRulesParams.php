@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * SearchRecommendRulesParams Class Doc Comment.
  *
  * @category Class
- * @description Recommend rules search parameters.
+ * @description Recommend rules parameters.
  */
 class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -23,6 +23,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'int',
         'hitsPerPage' => 'int',
         'enabled' => 'bool',
+        'filters' => 'string',
+        'facets' => 'string[]',
+        'maxValuesPerFacet' => 'int',
     ];
 
     /**
@@ -36,6 +39,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => null,
         'hitsPerPage' => null,
         'enabled' => null,
+        'filters' => null,
+        'facets' => null,
+        'maxValuesPerFacet' => null,
     ];
 
     /**
@@ -50,6 +56,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'page',
         'hitsPerPage' => 'hitsPerPage',
         'enabled' => 'enabled',
+        'filters' => 'filters',
+        'facets' => 'facets',
+        'maxValuesPerFacet' => 'maxValuesPerFacet',
     ];
 
     /**
@@ -63,6 +72,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'setPage',
         'hitsPerPage' => 'setHitsPerPage',
         'enabled' => 'setEnabled',
+        'filters' => 'setFilters',
+        'facets' => 'setFacets',
+        'maxValuesPerFacet' => 'setMaxValuesPerFacet',
     ];
 
     /**
@@ -76,6 +88,9 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         'page' => 'getPage',
         'hitsPerPage' => 'getHitsPerPage',
         'enabled' => 'getEnabled',
+        'filters' => 'getFilters',
+        'facets' => 'getFacets',
+        'maxValuesPerFacet' => 'getMaxValuesPerFacet',
     ];
 
     /**
@@ -106,6 +121,15 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
+        }
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
+        }
+        if (isset($data['facets'])) {
+            $this->container['facets'] = $data['facets'];
+        }
+        if (isset($data['maxValuesPerFacet'])) {
+            $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
         }
     }
 
@@ -181,6 +205,14 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
         }
 
+        if (isset($this->container['maxValuesPerFacet']) && ($this->container['maxValuesPerFacet'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'maxValuesPerFacet', must be smaller than or equal to 1000.";
+        }
+
+        if (isset($this->container['maxValuesPerFacet']) && ($this->container['maxValuesPerFacet'] < 1)) {
+            $invalidProperties[] = "invalid value for 'maxValuesPerFacet', must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -232,7 +264,7 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets context.
      *
-     * @param null|string $context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     * @param null|string $context only search for rules with matching context
      *
      * @return self
      */
@@ -315,13 +347,92 @@ class SearchRecommendRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets enabled.
      *
-     * @param null|bool $enabled Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+     * @param null|bool $enabled Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
      *
      * @return self
      */
     public function setEnabled($enabled)
     {
         $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters.
+     *
+     * @return null|string
+     */
+    public function getFilters()
+    {
+        return $this->container['filters'] ?? null;
+    }
+
+    /**
+     * Sets filters.
+     *
+     * @param null|string $filters Filter expression. This only searches for rules matching the filter expression.
+     *
+     * @return self
+     */
+    public function setFilters($filters)
+    {
+        $this->container['filters'] = $filters;
+
+        return $this;
+    }
+
+    /**
+     * Gets facets.
+     *
+     * @return null|string[]
+     */
+    public function getFacets()
+    {
+        return $this->container['facets'] ?? null;
+    }
+
+    /**
+     * Sets facets.
+     *
+     * @param null|string[] $facets Include facets and facet values in the response. Use `['*']` to include all facets.
+     *
+     * @return self
+     */
+    public function setFacets($facets)
+    {
+        $this->container['facets'] = $facets;
+
+        return $this;
+    }
+
+    /**
+     * Gets maxValuesPerFacet.
+     *
+     * @return null|int
+     */
+    public function getMaxValuesPerFacet()
+    {
+        return $this->container['maxValuesPerFacet'] ?? null;
+    }
+
+    /**
+     * Sets maxValuesPerFacet.
+     *
+     * @param null|int $maxValuesPerFacet maximum number of values to return for each facet
+     *
+     * @return self
+     */
+    public function setMaxValuesPerFacet($maxValuesPerFacet)
+    {
+        if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling SearchRecommendRulesParams., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet < 1)) {
+            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling SearchRecommendRulesParams., must be bigger than or equal to 1.');
+        }
+
+        $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
 
         return $this;
     }

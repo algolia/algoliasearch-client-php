@@ -5,12 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * Params Class Doc Comment.
+ * RelatedProducts Class Doc Comment.
  *
  * @category Class
- * @description Parameters to apply to this search.  You can use all search parameters, plus special &#x60;automaticFacetFilters&#x60;, &#x60;automaticOptionalFacetFilters&#x60;, and &#x60;query&#x60;.
  */
-class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,10 +17,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $modelTypes = [
-        'query' => '\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery',
-        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters',
-        'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RelatedModel',
+        'objectID' => 'string',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -30,10 +28,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $modelFormats = [
-        'query' => null,
-        'automaticFacetFilters' => null,
-        'automaticOptionalFacetFilters' => null,
-        'renderingContent' => null,
+        'model' => null,
+        'objectID' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -43,10 +40,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $attributeMap = [
-        'query' => 'query',
-        'automaticFacetFilters' => 'automaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'automaticOptionalFacetFilters',
-        'renderingContent' => 'renderingContent',
+        'model' => 'model',
+        'objectID' => 'objectID',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -55,10 +51,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $setters = [
-        'query' => 'setQuery',
-        'automaticFacetFilters' => 'setAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'setAutomaticOptionalFacetFilters',
-        'renderingContent' => 'setRenderingContent',
+        'model' => 'setModel',
+        'objectID' => 'setObjectID',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -67,10 +62,9 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      * @var string[]
      */
     protected static $getters = [
-        'query' => 'getQuery',
-        'automaticFacetFilters' => 'getAutomaticFacetFilters',
-        'automaticOptionalFacetFilters' => 'getAutomaticOptionalFacetFilters',
-        'renderingContent' => 'getRenderingContent',
+        'model' => 'getModel',
+        'objectID' => 'getObjectID',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -87,17 +81,14 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
         }
-        if (isset($data['automaticFacetFilters'])) {
-            $this->container['automaticFacetFilters'] = $data['automaticFacetFilters'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
-        if (isset($data['automaticOptionalFacetFilters'])) {
-            $this->container['automaticOptionalFacetFilters'] = $data['automaticOptionalFacetFilters'];
-        }
-        if (isset($data['renderingContent'])) {
-            $this->container['renderingContent'] = $data['renderingContent'];
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -159,7 +150,16 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['model']) || null === $this->container['model']) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
+            $invalidProperties[] = "'objectID' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -174,97 +174,73 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     }
 
     /**
-     * Gets query.
+     * Gets model.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel
      */
-    public function getQuery()
+    public function getModel()
     {
-        return $this->container['query'] ?? null;
+        return $this->container['model'] ?? null;
     }
 
     /**
-     * Sets query.
+     * Sets model.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ConsequenceQuery $query query
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel $model model
      *
      * @return self
      */
-    public function setQuery($query)
+    public function setModel($model)
     {
-        $this->container['query'] = $query;
+        $this->container['model'] = $model;
 
         return $this;
     }
 
     /**
-     * Gets automaticFacetFilters.
+     * Gets objectID.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
+     * @return string
      */
-    public function getAutomaticFacetFilters()
+    public function getObjectID()
     {
-        return $this->container['automaticFacetFilters'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets automaticFacetFilters.
+     * Sets objectID.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
-    public function setAutomaticFacetFilters($automaticFacetFilters)
+    public function setObjectID($objectID)
     {
-        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }
 
     /**
-     * Gets automaticOptionalFacetFilters.
+     * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
      */
-    public function getAutomaticOptionalFacetFilters()
+    public function getFallbackParameters()
     {
-        return $this->container['automaticOptionalFacetFilters'] ?? null;
+        return $this->container['fallbackParameters'] ?? null;
     }
 
     /**
-     * Sets automaticOptionalFacetFilters.
+     * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */
-    public function setAutomaticOptionalFacetFilters($automaticOptionalFacetFilters)
+    public function setFallbackParameters($fallbackParameters)
     {
-        $this->container['automaticOptionalFacetFilters'] = $automaticOptionalFacetFilters;
-
-        return $this;
-    }
-
-    /**
-     * Gets renderingContent.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
-     */
-    public function getRenderingContent()
-    {
-        return $this->container['renderingContent'] ?? null;
-    }
-
-    /**
-     * Sets renderingContent.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
-     *
-     * @return self
-     */
-    public function setRenderingContent($renderingContent)
-    {
-        $this->container['renderingContent'] = $renderingContent;
+        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

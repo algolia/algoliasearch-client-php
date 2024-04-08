@@ -5,12 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * AutomaticFacetFilter Class Doc Comment.
+ * LookingSimilar Class Doc Comment.
  *
  * @category Class
- * @description Filter or optional filter to be applied to the search.
  */
-class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class LookingSimilar extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,9 +17,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelTypes = [
-        'facet' => 'string',
-        'score' => 'int',
-        'disjunctive' => 'bool',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\LookingSimilarModel',
+        'objectID' => 'string',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -29,9 +28,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelFormats = [
-        'facet' => null,
-        'score' => null,
-        'disjunctive' => null,
+        'model' => null,
+        'objectID' => null,
+        'fallbackParameters' => null,
     ];
 
     /**
@@ -41,9 +40,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $attributeMap = [
-        'facet' => 'facet',
-        'score' => 'score',
-        'disjunctive' => 'disjunctive',
+        'model' => 'model',
+        'objectID' => 'objectID',
+        'fallbackParameters' => 'fallbackParameters',
     ];
 
     /**
@@ -52,9 +51,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $setters = [
-        'facet' => 'setFacet',
-        'score' => 'setScore',
-        'disjunctive' => 'setDisjunctive',
+        'model' => 'setModel',
+        'objectID' => 'setObjectID',
+        'fallbackParameters' => 'setFallbackParameters',
     ];
 
     /**
@@ -63,9 +62,9 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $getters = [
-        'facet' => 'getFacet',
-        'score' => 'getScore',
-        'disjunctive' => 'getDisjunctive',
+        'model' => 'getModel',
+        'objectID' => 'getObjectID',
+        'fallbackParameters' => 'getFallbackParameters',
     ];
 
     /**
@@ -82,14 +81,14 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['facet'])) {
-            $this->container['facet'] = $data['facet'];
+        if (isset($data['model'])) {
+            $this->container['model'] = $data['model'];
         }
-        if (isset($data['score'])) {
-            $this->container['score'] = $data['score'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
-        if (isset($data['disjunctive'])) {
-            $this->container['disjunctive'] = $data['disjunctive'];
+        if (isset($data['fallbackParameters'])) {
+            $this->container['fallbackParameters'] = $data['fallbackParameters'];
         }
     }
 
@@ -153,8 +152,11 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['facet']) || null === $this->container['facet']) {
-            $invalidProperties[] = "'facet' can't be null";
+        if (!isset($this->container['model']) || null === $this->container['model']) {
+            $invalidProperties[] = "'model' can't be null";
+        }
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
+            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -172,73 +174,73 @@ class AutomaticFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets facet.
+     * Gets model.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\LookingSimilarModel
+     */
+    public function getModel()
+    {
+        return $this->container['model'] ?? null;
+    }
+
+    /**
+     * Sets model.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\LookingSimilarModel $model model
+     *
+     * @return self
+     */
+    public function setModel($model)
+    {
+        $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectID.
      *
      * @return string
      */
-    public function getFacet()
+    public function getObjectID()
     {
-        return $this->container['facet'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets facet.
+     * Sets objectID.
      *
-     * @param string $facet Facet name to be applied as filter. The name must match placeholders in the `pattern` parameter. For example, with `pattern: {facet:genre}`, `automaticFacetFilters` must be `genre`.
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
-    public function setFacet($facet)
+    public function setObjectID($objectID)
     {
-        $this->container['facet'] = $facet;
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }
 
     /**
-     * Gets score.
+     * Gets fallbackParameters.
      *
-     * @return null|int
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
      */
-    public function getScore()
+    public function getFallbackParameters()
     {
-        return $this->container['score'] ?? null;
+        return $this->container['fallbackParameters'] ?? null;
     }
 
     /**
-     * Sets score.
+     * Sets fallbackParameters.
      *
-     * @param null|int $score filter scores to give different weights to individual filters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */
-    public function setScore($score)
+    public function setFallbackParameters($fallbackParameters)
     {
-        $this->container['score'] = $score;
-
-        return $this;
-    }
-
-    /**
-     * Gets disjunctive.
-     *
-     * @return null|bool
-     */
-    public function getDisjunctive()
-    {
-        return $this->container['disjunctive'] ?? null;
-    }
-
-    /**
-     * Sets disjunctive.
-     *
-     * @param null|bool $disjunctive Whether the filter is disjunctive or conjunctive.  If true the filter has multiple matches, multiple occurences are combined with the logical `OR` operation. If false, multiple occurences are combined with the logical `AND` operation.
-     *
-     * @return self
-     */
-    public function setDisjunctive($disjunctive)
-    {
-        $this->container['disjunctive'] = $disjunctive;
+        $this->container['fallbackParameters'] = $fallbackParameters;
 
         return $this;
     }

@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RuleResponseMetadata Class Doc Comment.
+ * HideConsequenceObject Class Doc Comment.
  *
  * @category Class
+ * @description Object ID of the recommendation you want to exclude.
  */
-class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class HideConsequenceObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,7 +18,7 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelTypes = [
-        'lastUpdate' => 'string',
+        'objectID' => 'string',
     ];
 
     /**
@@ -26,7 +27,7 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $modelFormats = [
-        'lastUpdate' => null,
+        'objectID' => null,
     ];
 
     /**
@@ -36,7 +37,7 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $attributeMap = [
-        'lastUpdate' => 'lastUpdate',
+        'objectID' => 'objectID',
     ];
 
     /**
@@ -45,7 +46,7 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $setters = [
-        'lastUpdate' => 'setLastUpdate',
+        'objectID' => 'setObjectID',
     ];
 
     /**
@@ -54,7 +55,7 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      * @var string[]
      */
     protected static $getters = [
-        'lastUpdate' => 'getLastUpdate',
+        'objectID' => 'getObjectID',
     ];
 
     /**
@@ -71,8 +72,8 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['lastUpdate'])) {
-            $this->container['lastUpdate'] = $data['lastUpdate'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -149,25 +150,25 @@ class RuleResponseMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets lastUpdate.
+     * Gets objectID.
      *
      * @return null|string
      */
-    public function getLastUpdate()
+    public function getObjectID()
     {
-        return $this->container['lastUpdate'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets lastUpdate.
+     * Sets objectID.
      *
-     * @param null|string $lastUpdate date and time when the object was updated, in RFC 3339 format
+     * @param null|string $objectID unique record identifier
      *
      * @return self
      */
-    public function setLastUpdate($lastUpdate)
+    public function setObjectID($objectID)
     {
-        $this->container['lastUpdate'] = $lastUpdate;
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }

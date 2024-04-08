@@ -391,7 +391,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets facetName.
      *
-     * @param string $facetName facet name for trending models
+     * @param string $facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
      *
      * @return self
      */
@@ -415,7 +415,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets facetValue.
      *
-     * @param string $facetValue facet value for trending models
+     * @param string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
      *
      * @return self
      */

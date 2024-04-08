@@ -255,13 +255,13 @@ class RecommendClient
     }
 
     /**
-     * Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     * Deletes a Recommend rule from a recommendation scenario.
      *
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
-     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -324,17 +324,17 @@ class RecommendClient
     }
 
     /**
-     * Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     * Retrieves a Recommend rule that you previously created in the Algolia dashboard.
      *
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
-     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RuleResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule|array<string, mixed>
      */
     public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -393,14 +393,14 @@ class RecommendClient
     }
 
     /**
-     * Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
+     * Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
      *
      * Required API Key ACLs:
      *  - editSettings
      *
      * @param string $indexName      Name of the index on which to perform the operation. (required)
-     * @param array  $model          [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param int    $taskID         Unique identifier of a task. Numeric value (up to 64bits). (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param int    $taskID         Unique task identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse|array<string, mixed>
@@ -462,13 +462,13 @@ class RecommendClient
     }
 
     /**
-     * Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).
+     * Retrieves recommendations from selected AI models.
      *
      * Required API Key ACLs:
      *  - search
      *
      * @param array $getRecommendationsParams getRecommendationsParams (required)
-     *                                        - $getRecommendationsParams['requests'] => (array) Request parameters depend on the model (recommendations or trending). (required)
+     *                                        - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
      *
@@ -494,19 +494,22 @@ class RecommendClient
     }
 
     /**
-     * List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+     * Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
      *
      * Required API Key ACLs:
      *  - settings
      *
      * @param string $indexName                  Name of the index on which to perform the operation. (required)
-     * @param array  $model                      [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
      * @param array  $searchRecommendRulesParams searchRecommendRulesParams (optional)
      *                                           - $searchRecommendRulesParams['query'] => (string) Search query.
-     *                                           - $searchRecommendRulesParams['context'] => (string) Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+     *                                           - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
      *                                           - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.
      *                                           - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.
-     *                                           - $searchRecommendRulesParams['enabled'] => (bool) Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+     *                                           - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
+     *                                           - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
+     *                                           - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
+     *                                           - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
      *
      * @see \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams
      *

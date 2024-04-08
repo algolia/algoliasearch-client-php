@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * BaseRecommendedForYouQuery Class Doc Comment.
+ * TrendingItems Class Doc Comment.
  *
  * @category Class
  */
-class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +17,10 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelTypes = [
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters',
+        'facetName' => 'string',
+        'facetValue' => 'string',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
     ];
 
     /**
@@ -28,8 +29,9 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $modelFormats = [
+        'facetName' => null,
+        'facetValue' => null,
         'model' => null,
-        'queryParameters' => null,
         'fallbackParameters' => null,
     ];
 
@@ -40,8 +42,9 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $attributeMap = [
+        'facetName' => 'facetName',
+        'facetValue' => 'facetValue',
         'model' => 'model',
-        'queryParameters' => 'queryParameters',
         'fallbackParameters' => 'fallbackParameters',
     ];
 
@@ -51,8 +54,9 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $setters = [
+        'facetName' => 'setFacetName',
+        'facetValue' => 'setFacetValue',
         'model' => 'setModel',
-        'queryParameters' => 'setQueryParameters',
         'fallbackParameters' => 'setFallbackParameters',
     ];
 
@@ -62,8 +66,9 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      * @var string[]
      */
     protected static $getters = [
+        'facetName' => 'getFacetName',
+        'facetValue' => 'getFacetValue',
         'model' => 'getModel',
-        'queryParameters' => 'getQueryParameters',
         'fallbackParameters' => 'getFallbackParameters',
     ];
 
@@ -81,11 +86,14 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['facetName'])) {
+            $this->container['facetName'] = $data['facetName'];
+        }
+        if (isset($data['facetValue'])) {
+            $this->container['facetValue'] = $data['facetValue'];
+        }
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
-        }
-        if (isset($data['queryParameters'])) {
-            $this->container['queryParameters'] = $data['queryParameters'];
         }
         if (isset($data['fallbackParameters'])) {
             $this->container['fallbackParameters'] = $data['fallbackParameters'];
@@ -152,6 +160,12 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
+            $invalidProperties[] = "'facetName' can't be null";
+        }
+        if (!isset($this->container['facetValue']) || null === $this->container['facetValue']) {
+            $invalidProperties[] = "'facetValue' can't be null";
+        }
         if (!isset($this->container['model']) || null === $this->container['model']) {
             $invalidProperties[] = "'model' can't be null";
         }
@@ -171,9 +185,57 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
+     * Gets facetName.
+     *
+     * @return string
+     */
+    public function getFacetName()
+    {
+        return $this->container['facetName'] ?? null;
+    }
+
+    /**
+     * Sets facetName.
+     *
+     * @param string $facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
+     *
+     * @return self
+     */
+    public function setFacetName($facetName)
+    {
+        $this->container['facetName'] = $facetName;
+
+        return $this;
+    }
+
+    /**
+     * Gets facetValue.
+     *
+     * @return string
+     */
+    public function getFacetValue()
+    {
+        return $this->container['facetValue'] ?? null;
+    }
+
+    /**
+     * Sets facetValue.
+     *
+     * @param string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
+     *
+     * @return self
+     */
+    public function setFacetValue($facetValue)
+    {
+        $this->container['facetValue'] = $facetValue;
+
+        return $this;
+    }
+
+    /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel
      */
     public function getModel()
     {
@@ -183,7 +245,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel $model model
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel $model model
      *
      * @return self
      */
@@ -195,33 +257,9 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     }
 
     /**
-     * Gets queryParameters.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters
-     */
-    public function getQueryParameters()
-    {
-        return $this->container['queryParameters'] ?? null;
-    }
-
-    /**
-     * Sets queryParameters.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters $queryParameters queryParameters
-     *
-     * @return self
-     */
-    public function setQueryParameters($queryParameters)
-    {
-        $this->container['queryParameters'] = $queryParameters;
-
-        return $this;
-    }
-
-    /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
      */
     public function getFallbackParameters()
     {
@@ -231,7 +269,7 @@ class BaseRecommendedForYouQuery extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouQueryParameters $fallbackParameters fallbackParameters
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $fallbackParameters fallbackParameters
      *
      * @return self
      */

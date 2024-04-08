@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RecommendedForYouModel Class Doc Comment.
  *
  * @category Class
- * @description Recommended for you model.
+ * @description \&quot;Recommened for you\&quot; model.
  */
 class RecommendedForYouModel
 {

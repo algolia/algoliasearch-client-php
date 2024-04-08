@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * PromoteObjectID Class Doc Comment.
+ * RecommendRule Class Doc Comment.
  *
  * @category Class
- * @description Record to promote.
+ * @description Recommend rule.
  */
-class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +18,12 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelTypes = [
+        'metadata' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata',
         'objectID' => 'string',
-        'position' => 'int',
+        'condition' => '\Algolia\AlgoliaSearch\Model\Recommend\Condition',
+        'consequence' => '\Algolia\AlgoliaSearch\Model\Recommend\Consequence',
+        'description' => 'string',
+        'enabled' => 'bool',
     ];
 
     /**
@@ -28,8 +32,12 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $modelFormats = [
+        'metadata' => null,
         'objectID' => null,
-        'position' => null,
+        'condition' => null,
+        'consequence' => null,
+        'description' => null,
+        'enabled' => null,
     ];
 
     /**
@@ -39,8 +47,12 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $attributeMap = [
+        'metadata' => '_metadata',
         'objectID' => 'objectID',
-        'position' => 'position',
+        'condition' => 'condition',
+        'consequence' => 'consequence',
+        'description' => 'description',
+        'enabled' => 'enabled',
     ];
 
     /**
@@ -49,8 +61,12 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $setters = [
+        'metadata' => 'setMetadata',
         'objectID' => 'setObjectID',
-        'position' => 'setPosition',
+        'condition' => 'setCondition',
+        'consequence' => 'setConsequence',
+        'description' => 'setDescription',
+        'enabled' => 'setEnabled',
     ];
 
     /**
@@ -59,8 +75,12 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      * @var string[]
      */
     protected static $getters = [
+        'metadata' => 'getMetadata',
         'objectID' => 'getObjectID',
-        'position' => 'getPosition',
+        'condition' => 'getCondition',
+        'consequence' => 'getConsequence',
+        'description' => 'getDescription',
+        'enabled' => 'getEnabled',
     ];
 
     /**
@@ -77,11 +97,23 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['metadata'])) {
+            $this->container['metadata'] = $data['metadata'];
+        }
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
         }
-        if (isset($data['position'])) {
-            $this->container['position'] = $data['position'];
+        if (isset($data['condition'])) {
+            $this->container['condition'] = $data['condition'];
+        }
+        if (isset($data['consequence'])) {
+            $this->container['consequence'] = $data['consequence'];
+        }
+        if (isset($data['description'])) {
+            $this->container['description'] = $data['description'];
+        }
+        if (isset($data['enabled'])) {
+            $this->container['enabled'] = $data['enabled'];
         }
     }
 
@@ -143,16 +175,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
-            $invalidProperties[] = "'objectID' can't be null";
-        }
-        if (!isset($this->container['position']) || null === $this->container['position']) {
-            $invalidProperties[] = "'position' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -167,9 +190,33 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
+     * Gets metadata.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'] ?? null;
+    }
+
+    /**
+     * Sets metadata.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata $metadata metadata
+     *
+     * @return self
+     */
+    public function setMetadata($metadata)
+    {
+        $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
      * Gets objectID.
      *
-     * @return string
+     * @return null|string
      */
     public function getObjectID()
     {
@@ -179,7 +226,7 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique record identifier
+     * @param null|string $objectID unique identifier of a rule object
      *
      * @return self
      */
@@ -191,25 +238,97 @@ class PromoteObjectID extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     }
 
     /**
-     * Gets position.
+     * Gets condition.
      *
-     * @return int
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Condition
      */
-    public function getPosition()
+    public function getCondition()
     {
-        return $this->container['position'] ?? null;
+        return $this->container['condition'] ?? null;
     }
 
     /**
-     * Sets position.
+     * Sets condition.
      *
-     * @param int $position position in the search results where you want to show the promoted records
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Condition $condition condition
      *
      * @return self
      */
-    public function setPosition($position)
+    public function setCondition($condition)
     {
-        $this->container['position'] = $position;
+        $this->container['condition'] = $condition;
+
+        return $this;
+    }
+
+    /**
+     * Gets consequence.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence
+     */
+    public function getConsequence()
+    {
+        return $this->container['consequence'] ?? null;
+    }
+
+    /**
+     * Sets consequence.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence $consequence consequence
+     *
+     * @return self
+     */
+    public function setConsequence($consequence)
+    {
+        $this->container['consequence'] = $consequence;
+
+        return $this;
+    }
+
+    /**
+     * Gets description.
+     *
+     * @return null|string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'] ?? null;
+    }
+
+    /**
+     * Sets description.
+     *
+     * @param null|string $description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets enabled.
+     *
+     * @return null|bool
+     */
+    public function getEnabled()
+    {
+        return $this->container['enabled'] ?? null;
+    }
+
+    /**
+     * Sets enabled.
+     *
+     * @param null|bool $enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
+     *
+     * @return self
+     */
+    public function setEnabled($enabled)
+    {
+        $this->container['enabled'] = $enabled;
 
         return $this;
     }

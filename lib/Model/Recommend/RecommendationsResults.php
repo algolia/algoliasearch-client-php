@@ -46,8 +46,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'userData' => 'object',
         'queryID' => 'string',
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[]',
-        'query' => 'string',
-        'params' => 'string',
     ];
 
     /**
@@ -85,8 +83,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'userData' => null,
         'queryID' => null,
         'hits' => null,
-        'query' => null,
-        'params' => null,
     ];
 
     /**
@@ -125,8 +121,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'userData' => 'userData',
         'queryID' => 'queryID',
         'hits' => 'hits',
-        'query' => 'query',
-        'params' => 'params',
     ];
 
     /**
@@ -164,8 +158,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'userData' => 'setUserData',
         'queryID' => 'setQueryID',
         'hits' => 'setHits',
-        'query' => 'setQuery',
-        'params' => 'setParams',
     ];
 
     /**
@@ -203,8 +195,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'userData' => 'getUserData',
         'queryID' => 'getQueryID',
         'hits' => 'getHits',
-        'query' => 'getQuery',
-        'params' => 'getParams',
     ];
 
     /**
@@ -307,12 +297,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
-        }
-        if (isset($data['query'])) {
-            $this->container['query'] = $data['query'];
-        }
-        if (isset($data['params'])) {
-            $this->container['params'] = $data['params'];
         }
     }
 
@@ -1152,54 +1136,6 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     public function setHits($hits)
     {
         $this->container['hits'] = $hits;
-
-        return $this;
-    }
-
-    /**
-     * Gets query.
-     *
-     * @return null|string
-     */
-    public function getQuery()
-    {
-        return $this->container['query'] ?? null;
-    }
-
-    /**
-     * Sets query.
-     *
-     * @param null|string $query search query
-     *
-     * @return self
-     */
-    public function setQuery($query)
-    {
-        $this->container['query'] = $query;
-
-        return $this;
-    }
-
-    /**
-     * Gets params.
-     *
-     * @return null|string
-     */
-    public function getParams()
-    {
-        return $this->container['params'] ?? null;
-    }
-
-    /**
-     * Sets params.
-     *
-     * @param null|string $params URL-encoded string of all search parameters
-     *
-     * @return self
-     */
-    public function setParams($params)
-    {
-        $this->container['params'] = $params;
 
         return $this;
     }

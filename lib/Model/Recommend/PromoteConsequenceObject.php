@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * Promote Class Doc Comment.
+ * PromoteConsequenceObject Class Doc Comment.
  *
  * @category Class
+ * @description Object ID and position of the recommendation you want to pin.
  */
-class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PromoteConsequenceObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,9 +18,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $modelTypes = [
-        'objectIDs' => 'string[]',
-        'position' => 'int',
         'objectID' => 'string',
+        'position' => 'int',
     ];
 
     /**
@@ -28,9 +28,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $modelFormats = [
-        'objectIDs' => null,
-        'position' => null,
         'objectID' => null,
+        'position' => null,
     ];
 
     /**
@@ -40,9 +39,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $attributeMap = [
-        'objectIDs' => 'objectIDs',
-        'position' => 'position',
         'objectID' => 'objectID',
+        'position' => 'position',
     ];
 
     /**
@@ -51,9 +49,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $setters = [
-        'objectIDs' => 'setObjectIDs',
-        'position' => 'setPosition',
         'objectID' => 'setObjectID',
+        'position' => 'setPosition',
     ];
 
     /**
@@ -62,9 +59,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      * @var string[]
      */
     protected static $getters = [
-        'objectIDs' => 'getObjectIDs',
-        'position' => 'getPosition',
         'objectID' => 'getObjectID',
+        'position' => 'getPosition',
     ];
 
     /**
@@ -81,14 +77,11 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['objectIDs'])) {
-            $this->container['objectIDs'] = $data['objectIDs'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
         if (isset($data['position'])) {
             $this->container['position'] = $data['position'];
-        }
-        if (isset($data['objectID'])) {
-            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -152,18 +145,8 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
-            $invalidProperties[] = "'objectIDs' can't be null";
-        }
-        if (count($this->container['objectIDs']) > 100) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 100.";
-        }
-
-        if (!isset($this->container['position']) || null === $this->container['position']) {
-            $invalidProperties[] = "'position' can't be null";
-        }
-        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
-            $invalidProperties[] = "'objectID' can't be null";
+        if (isset($this->container['position']) && ($this->container['position'] < 0)) {
+            $invalidProperties[] = "invalid value for 'position', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -181,60 +164,9 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     }
 
     /**
-     * Gets objectIDs.
-     *
-     * @return string[]
-     */
-    public function getObjectIDs()
-    {
-        return $this->container['objectIDs'] ?? null;
-    }
-
-    /**
-     * Sets objectIDs.
-     *
-     * @param string[] $objectIDs Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.
-     *
-     * @return self
-     */
-    public function setObjectIDs($objectIDs)
-    {
-        if (count($objectIDs) > 100) {
-            throw new \InvalidArgumentException('invalid value for $objectIDs when calling Promote., number of items must be less than or equal to 100.');
-        }
-        $this->container['objectIDs'] = $objectIDs;
-
-        return $this;
-    }
-
-    /**
-     * Gets position.
-     *
-     * @return int
-     */
-    public function getPosition()
-    {
-        return $this->container['position'] ?? null;
-    }
-
-    /**
-     * Sets position.
-     *
-     * @param int $position position in the search results where you want to show the promoted records
-     *
-     * @return self
-     */
-    public function setPosition($position)
-    {
-        $this->container['position'] = $position;
-
-        return $this;
-    }
-
-    /**
      * Gets objectID.
      *
-     * @return string
+     * @return null|string
      */
     public function getObjectID()
     {
@@ -244,13 +176,41 @@ class Promote extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets objectID.
      *
-     * @param string $objectID unique record identifier
+     * @param null|string $objectID unique record identifier
      *
      * @return self
      */
     public function setObjectID($objectID)
     {
         $this->container['objectID'] = $objectID;
+
+        return $this;
+    }
+
+    /**
+     * Gets position.
+     *
+     * @return null|int
+     */
+    public function getPosition()
+    {
+        return $this->container['position'] ?? null;
+    }
+
+    /**
+     * Sets position.
+     *
+     * @param null|int $position index in the list of recommendations where to place this item
+     *
+     * @return self
+     */
+    public function setPosition($position)
+    {
+        if (!is_null($position) && ($position < 0)) {
+            throw new \InvalidArgumentException('invalid value for $position when calling PromoteConsequenceObject., must be bigger than or equal to 0.');
+        }
+
+        $this->container['position'] = $position;
 
         return $this;
     }

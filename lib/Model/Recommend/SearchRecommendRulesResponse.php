@@ -17,7 +17,7 @@ class SearchRecommendRulesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      * @var string[]
      */
     protected static $modelTypes = [
-        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RuleResponse[]',
+        'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendRule[]',
         'nbHits' => 'int',
         'page' => 'int',
         'nbPages' => 'int',
@@ -194,7 +194,7 @@ class SearchRecommendRulesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RuleResponse[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule[]
      */
     public function getHits()
     {
@@ -204,7 +204,7 @@ class SearchRecommendRulesResponse extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RuleResponse[] $hits fetched rules
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule[] $hits recommend rules that match the search criteria
      *
      * @return self
      */

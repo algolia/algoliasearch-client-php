@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * TrendingFacetsQuery Class Doc Comment.
+ * RelatedQuery Class Doc Comment.
  *
  * @category Class
  */
-class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,8 +21,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'float',
         'maxRecommendations' => 'int',
         'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
-        'facetName' => 'object',
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RelatedModel',
+        'objectID' => 'string',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
@@ -36,8 +36,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'double',
         'maxRecommendations' => null,
         'queryParameters' => null,
-        'facetName' => null,
         'model' => null,
+        'objectID' => null,
         'fallbackParameters' => null,
     ];
 
@@ -52,8 +52,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'threshold',
         'maxRecommendations' => 'maxRecommendations',
         'queryParameters' => 'queryParameters',
-        'facetName' => 'facetName',
         'model' => 'model',
+        'objectID' => 'objectID',
         'fallbackParameters' => 'fallbackParameters',
     ];
 
@@ -67,8 +67,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'setThreshold',
         'maxRecommendations' => 'setMaxRecommendations',
         'queryParameters' => 'setQueryParameters',
-        'facetName' => 'setFacetName',
         'model' => 'setModel',
+        'objectID' => 'setObjectID',
         'fallbackParameters' => 'setFallbackParameters',
     ];
 
@@ -82,8 +82,8 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'getThreshold',
         'maxRecommendations' => 'getMaxRecommendations',
         'queryParameters' => 'getQueryParameters',
-        'facetName' => 'getFacetName',
         'model' => 'getModel',
+        'objectID' => 'getObjectID',
         'fallbackParameters' => 'getFallbackParameters',
     ];
 
@@ -113,11 +113,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         if (isset($data['queryParameters'])) {
             $this->container['queryParameters'] = $data['queryParameters'];
         }
-        if (isset($data['facetName'])) {
-            $this->container['facetName'] = $data['facetName'];
-        }
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
+        }
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
         if (isset($data['fallbackParameters'])) {
             $this->container['fallbackParameters'] = $data['fallbackParameters'];
@@ -206,11 +206,11 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
             $invalidProperties[] = "invalid value for 'maxRecommendations', must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
-            $invalidProperties[] = "'facetName' can't be null";
-        }
         if (!isset($this->container['model']) || null === $this->container['model']) {
             $invalidProperties[] = "'model' can't be null";
+        }
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
+            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -271,10 +271,10 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setThreshold($threshold)
     {
         if ($threshold > 100) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingFacetsQuery., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $threshold when calling RelatedQuery., must be smaller than or equal to 100.');
         }
         if ($threshold < 0) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling TrendingFacetsQuery., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $threshold when calling RelatedQuery., must be bigger than or equal to 0.');
         }
 
         $this->container['threshold'] = $threshold;
@@ -302,10 +302,10 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     public function setMaxRecommendations($maxRecommendations)
     {
         if (!is_null($maxRecommendations) && ($maxRecommendations > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling TrendingFacetsQuery., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling RelatedQuery., must be smaller than or equal to 1000.');
         }
         if (!is_null($maxRecommendations) && ($maxRecommendations < 1)) {
-            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling TrendingFacetsQuery., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling RelatedQuery., must be bigger than or equal to 1.');
         }
 
         $this->container['maxRecommendations'] = $maxRecommendations;
@@ -338,33 +338,9 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     }
 
     /**
-     * Gets facetName.
-     *
-     * @return object
-     */
-    public function getFacetName()
-    {
-        return $this->container['facetName'] ?? null;
-    }
-
-    /**
-     * Sets facetName.
-     *
-     * @param object $facetName facet attribute for which to retrieve trending facet values
-     *
-     * @return self
-     */
-    public function setFacetName($facetName)
-    {
-        $this->container['facetName'] = $facetName;
-
-        return $this;
-    }
-
-    /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel
      */
     public function getModel()
     {
@@ -374,13 +350,37 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel $model model
      *
      * @return self
      */
     public function setModel($model)
     {
         $this->container['model'] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Gets objectID.
+     *
+     * @return string
+     */
+    public function getObjectID()
+    {
+        return $this->container['objectID'] ?? null;
+    }
+
+    /**
+     * Sets objectID.
+     *
+     * @param string $objectID unique record identifier
+     *
+     * @return self
+     */
+    public function setObjectID($objectID)
+    {
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }

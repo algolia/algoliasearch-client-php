@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * Condition Class Doc Comment.
  *
  * @category Class
+ * @description Condition that triggers the rule. If not specified, the rule is triggered for all recommendations.
  */
 class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -17,11 +18,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelTypes = [
-        'pattern' => 'string',
-        'anchoring' => '\Algolia\AlgoliaSearch\Model\Recommend\Anchoring',
-        'alternatives' => 'bool',
-        'context' => 'string',
         'filters' => 'string',
+        'context' => 'string',
     ];
 
     /**
@@ -30,11 +28,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelFormats = [
-        'pattern' => null,
-        'anchoring' => null,
-        'alternatives' => null,
-        'context' => null,
         'filters' => null,
+        'context' => null,
     ];
 
     /**
@@ -44,11 +39,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $attributeMap = [
-        'pattern' => 'pattern',
-        'anchoring' => 'anchoring',
-        'alternatives' => 'alternatives',
-        'context' => 'context',
         'filters' => 'filters',
+        'context' => 'context',
     ];
 
     /**
@@ -57,11 +49,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $setters = [
-        'pattern' => 'setPattern',
-        'anchoring' => 'setAnchoring',
-        'alternatives' => 'setAlternatives',
-        'context' => 'setContext',
         'filters' => 'setFilters',
+        'context' => 'setContext',
     ];
 
     /**
@@ -70,11 +59,8 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $getters = [
-        'pattern' => 'getPattern',
-        'anchoring' => 'getAnchoring',
-        'alternatives' => 'getAlternatives',
-        'context' => 'getContext',
         'filters' => 'getFilters',
+        'context' => 'getContext',
     ];
 
     /**
@@ -91,20 +77,11 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['pattern'])) {
-            $this->container['pattern'] = $data['pattern'];
-        }
-        if (isset($data['anchoring'])) {
-            $this->container['anchoring'] = $data['anchoring'];
-        }
-        if (isset($data['alternatives'])) {
-            $this->container['alternatives'] = $data['alternatives'];
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
         }
         if (isset($data['context'])) {
             $this->container['context'] = $data['context'];
-        }
-        if (isset($data['filters'])) {
-            $this->container['filters'] = $data['filters'];
         }
     }
 
@@ -187,73 +164,25 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     }
 
     /**
-     * Gets pattern.
+     * Gets filters.
      *
      * @return null|string
      */
-    public function getPattern()
+    public function getFilters()
     {
-        return $this->container['pattern'] ?? null;
+        return $this->container['filters'] ?? null;
     }
 
     /**
-     * Sets pattern.
+     * Sets filters.
      *
-     * @param null|string $pattern Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\".
+     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
      *
      * @return self
      */
-    public function setPattern($pattern)
+    public function setFilters($filters)
     {
-        $this->container['pattern'] = $pattern;
-
-        return $this;
-    }
-
-    /**
-     * Gets anchoring.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Anchoring
-     */
-    public function getAnchoring()
-    {
-        return $this->container['anchoring'] ?? null;
-    }
-
-    /**
-     * Sets anchoring.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Anchoring $anchoring anchoring
-     *
-     * @return self
-     */
-    public function setAnchoring($anchoring)
-    {
-        $this->container['anchoring'] = $anchoring;
-
-        return $this;
-    }
-
-    /**
-     * Gets alternatives.
-     *
-     * @return null|bool
-     */
-    public function getAlternatives()
-    {
-        return $this->container['alternatives'] ?? null;
-    }
-
-    /**
-     * Sets alternatives.
-     *
-     * @param null|bool $alternatives whether the pattern should match plurals, synonyms, and typos
-     *
-     * @return self
-     */
-    public function setAlternatives($alternatives)
-    {
-        $this->container['alternatives'] = $alternatives;
+        $this->container['filters'] = $filters;
 
         return $this;
     }
@@ -282,30 +211,6 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
         }
 
         $this->container['context'] = $context;
-
-        return $this;
-    }
-
-    /**
-     * Gets filters.
-     *
-     * @return null|string
-     */
-    public function getFilters()
-    {
-        return $this->container['filters'] ?? null;
-    }
-
-    /**
-     * Sets filters.
-     *
-     * @param null|string $filters Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter.
-     *
-     * @return self
-     */
-    public function setFilters($filters)
-    {
-        $this->container['filters'] = $filters;
 
         return $this;
     }

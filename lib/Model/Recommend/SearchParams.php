@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * RecommendedForYouQueryParameters Class Doc Comment.
+ * SearchParams Class Doc Comment.
  *
  * @category Class
  */
-class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -760,9 +760,6 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
             $invalidProperties[] = "invalid value for 'personalizationImpact', must be bigger than or equal to 0.";
         }
 
-        if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
-            $invalidProperties[] = "'userToken' can't be null";
-        }
         if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
@@ -862,7 +859,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets filters.
      *
-     * @param null|string $filters Filter the search so that only records with matching values are included in the results.  These filters are supported:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
+     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
      *
      * @return self
      */
@@ -1085,7 +1082,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setPage($page)
     {
         if (!is_null($page) && ($page < 0)) {
-            throw new \InvalidArgumentException('invalid value for $page when calling RecommendedForYouQueryParameters., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $page when calling SearchParams., must be bigger than or equal to 0.');
         }
 
         $this->container['page'] = $page;
@@ -1137,10 +1134,10 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setLength($length)
     {
         if (!is_null($length) && ($length > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling RecommendedForYouQueryParameters., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $length when calling SearchParams., must be smaller than or equal to 1000.');
         }
         if (!is_null($length) && ($length < 1)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling RecommendedForYouQueryParameters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $length when calling SearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['length'] = $length;
@@ -1264,7 +1261,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
         if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling RecommendedForYouQueryParameters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling SearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['minimumAroundRadius'] = $minimumAroundRadius;
@@ -1388,10 +1385,10 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setPersonalizationImpact($personalizationImpact)
     {
         if (!is_null($personalizationImpact) && ($personalizationImpact > 100)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling RecommendedForYouQueryParameters., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling SearchParams., must be smaller than or equal to 100.');
         }
         if (!is_null($personalizationImpact) && ($personalizationImpact < 0)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling RecommendedForYouQueryParameters., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling SearchParams., must be bigger than or equal to 0.');
         }
 
         $this->container['personalizationImpact'] = $personalizationImpact;
@@ -1402,7 +1399,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Gets userToken.
      *
-     * @return string
+     * @return null|string
      */
     public function getUserToken()
     {
@@ -1412,7 +1409,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     /**
      * Sets userToken.
      *
-     * @param string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+     * @param null|string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
      *
      * @return self
      */
@@ -1851,10 +1848,10 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setHitsPerPage($hitsPerPage)
     {
         if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendedForYouQueryParameters., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchParams., must be smaller than or equal to 1000.');
         }
         if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendedForYouQueryParameters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['hitsPerPage'] = $hitsPerPage;
@@ -2458,10 +2455,10 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setMinProximity($minProximity)
     {
         if (!is_null($minProximity) && ($minProximity > 7)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling RecommendedForYouQueryParameters., must be smaller than or equal to 7.');
+            throw new \InvalidArgumentException('invalid value for $minProximity when calling SearchParams., must be smaller than or equal to 7.');
         }
         if (!is_null($minProximity) && ($minProximity < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling RecommendedForYouQueryParameters., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $minProximity when calling SearchParams., must be bigger than or equal to 1.');
         }
 
         $this->container['minProximity'] = $minProximity;
@@ -2513,7 +2510,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setMaxFacetHits($maxFacetHits)
     {
         if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling RecommendedForYouQueryParameters., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchParams., must be smaller than or equal to 100.');
         }
 
         $this->container['maxFacetHits'] = $maxFacetHits;
@@ -2541,7 +2538,7 @@ class RecommendedForYouQueryParameters extends \Algolia\AlgoliaSearch\Model\Abst
     public function setMaxValuesPerFacet($maxValuesPerFacet)
     {
         if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling RecommendedForYouQueryParameters., must be smaller than or equal to 1000.');
+            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling SearchParams., must be smaller than or equal to 1000.');
         }
 
         $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;

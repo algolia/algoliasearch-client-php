@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * ConsequenceQuery Class Doc Comment.
+ * AutoFacetFilter Class Doc Comment.
  *
  * @category Class
- * @description Replace or edit the search query.  If &#x60;consequenceQuery&#x60; is a string, the entire search query is replaced with that string. If &#x60;consequenceQuery&#x60; is an object, it describes incremental edits made to the query.
+ * @description Facet attribute. Only recommendations with the same value (or only recommendations with a different value) as the original viewed item are included.
  */
-class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AutoFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,8 +18,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelTypes = [
-        'remove' => 'string[]',
-        'edits' => '\Algolia\AlgoliaSearch\Model\Recommend\Edit[]',
+        'facet' => 'string',
+        'negative' => 'bool',
     ];
 
     /**
@@ -28,8 +28,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $modelFormats = [
-        'remove' => null,
-        'edits' => null,
+        'facet' => null,
+        'negative' => null,
     ];
 
     /**
@@ -39,8 +39,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $attributeMap = [
-        'remove' => 'remove',
-        'edits' => 'edits',
+        'facet' => 'facet',
+        'negative' => 'negative',
     ];
 
     /**
@@ -49,8 +49,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $setters = [
-        'remove' => 'setRemove',
-        'edits' => 'setEdits',
+        'facet' => 'setFacet',
+        'negative' => 'setNegative',
     ];
 
     /**
@@ -59,8 +59,8 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      * @var string[]
      */
     protected static $getters = [
-        'remove' => 'getRemove',
-        'edits' => 'getEdits',
+        'facet' => 'getFacet',
+        'negative' => 'getNegative',
     ];
 
     /**
@@ -77,11 +77,11 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['remove'])) {
-            $this->container['remove'] = $data['remove'];
+        if (isset($data['facet'])) {
+            $this->container['facet'] = $data['facet'];
         }
-        if (isset($data['edits'])) {
-            $this->container['edits'] = $data['edits'];
+        if (isset($data['negative'])) {
+            $this->container['negative'] = $data['negative'];
         }
     }
 
@@ -158,49 +158,49 @@ class ConsequenceQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     }
 
     /**
-     * Gets remove.
+     * Gets facet.
      *
-     * @return null|string[]
+     * @return null|string
      */
-    public function getRemove()
+    public function getFacet()
     {
-        return $this->container['remove'] ?? null;
+        return $this->container['facet'] ?? null;
     }
 
     /**
-     * Sets remove.
+     * Sets facet.
      *
-     * @param null|string[] $remove words to remove from the search query
+     * @param null|string $facet facet attribute
      *
      * @return self
      */
-    public function setRemove($remove)
+    public function setFacet($facet)
     {
-        $this->container['remove'] = $remove;
+        $this->container['facet'] = $facet;
 
         return $this;
     }
 
     /**
-     * Gets edits.
+     * Gets negative.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[]
+     * @return null|bool
      */
-    public function getEdits()
+    public function getNegative()
     {
-        return $this->container['edits'] ?? null;
+        return $this->container['negative'] ?? null;
     }
 
     /**
-     * Sets edits.
+     * Sets negative.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Edit[] $edits changes to make to the search query
+     * @param null|bool $negative Whether the filter is negative. If true, recommendations must not have the same value for the `facet` attribute. If false, recommendations must have the same value for the `facet` attribute.
      *
      * @return self
      */
-    public function setEdits($edits)
+    public function setNegative($negative)
     {
-        $this->container['edits'] = $edits;
+        $this->container['negative'] = $negative;
 
         return $this;
     }

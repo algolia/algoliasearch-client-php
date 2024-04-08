@@ -5,11 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 /**
- * BaseTrendingItemsQuery Class Doc Comment.
+ * ParamsConsequence Class Doc Comment.
  *
  * @category Class
+ * @description Filter or boost recommendations matching a facet filter.
  */
-class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ParamsConsequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -17,11 +18,9 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetName' => 'string',
-        'facetValue' => 'string',
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'automaticFacetFilters' => '\Algolia\AlgoliaSearch\Model\Recommend\AutoFacetFilter[]',
+        'filters' => 'string',
+        'optionalFilters' => 'string[]',
     ];
 
     /**
@@ -30,11 +29,9 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetName' => null,
-        'facetValue' => null,
-        'model' => null,
-        'queryParameters' => null,
-        'fallbackParameters' => null,
+        'automaticFacetFilters' => null,
+        'filters' => null,
+        'optionalFilters' => null,
     ];
 
     /**
@@ -44,11 +41,9 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $attributeMap = [
-        'facetName' => 'facetName',
-        'facetValue' => 'facetValue',
-        'model' => 'model',
-        'queryParameters' => 'queryParameters',
-        'fallbackParameters' => 'fallbackParameters',
+        'automaticFacetFilters' => 'automaticFacetFilters',
+        'filters' => 'filters',
+        'optionalFilters' => 'optionalFilters',
     ];
 
     /**
@@ -57,11 +52,9 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $setters = [
-        'facetName' => 'setFacetName',
-        'facetValue' => 'setFacetValue',
-        'model' => 'setModel',
-        'queryParameters' => 'setQueryParameters',
-        'fallbackParameters' => 'setFallbackParameters',
+        'automaticFacetFilters' => 'setAutomaticFacetFilters',
+        'filters' => 'setFilters',
+        'optionalFilters' => 'setOptionalFilters',
     ];
 
     /**
@@ -70,11 +63,9 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      * @var string[]
      */
     protected static $getters = [
-        'facetName' => 'getFacetName',
-        'facetValue' => 'getFacetValue',
-        'model' => 'getModel',
-        'queryParameters' => 'getQueryParameters',
-        'fallbackParameters' => 'getFallbackParameters',
+        'automaticFacetFilters' => 'getAutomaticFacetFilters',
+        'filters' => 'getFilters',
+        'optionalFilters' => 'getOptionalFilters',
     ];
 
     /**
@@ -91,20 +82,14 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['facetName'])) {
-            $this->container['facetName'] = $data['facetName'];
+        if (isset($data['automaticFacetFilters'])) {
+            $this->container['automaticFacetFilters'] = $data['automaticFacetFilters'];
         }
-        if (isset($data['facetValue'])) {
-            $this->container['facetValue'] = $data['facetValue'];
+        if (isset($data['filters'])) {
+            $this->container['filters'] = $data['filters'];
         }
-        if (isset($data['model'])) {
-            $this->container['model'] = $data['model'];
-        }
-        if (isset($data['queryParameters'])) {
-            $this->container['queryParameters'] = $data['queryParameters'];
-        }
-        if (isset($data['fallbackParameters'])) {
-            $this->container['fallbackParameters'] = $data['fallbackParameters'];
+        if (isset($data['optionalFilters'])) {
+            $this->container['optionalFilters'] = $data['optionalFilters'];
         }
     }
 
@@ -181,121 +166,73 @@ class BaseTrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     }
 
     /**
-     * Gets facetName.
+     * Gets automaticFacetFilters.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutoFacetFilter[]
+     */
+    public function getAutomaticFacetFilters()
+    {
+        return $this->container['automaticFacetFilters'] ?? null;
+    }
+
+    /**
+     * Sets automaticFacetFilters.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutoFacetFilter[] $automaticFacetFilters filter recommendations that match or don't match the same `facet:facet_value` combination as the viewed item
+     *
+     * @return self
+     */
+    public function setAutomaticFacetFilters($automaticFacetFilters)
+    {
+        $this->container['automaticFacetFilters'] = $automaticFacetFilters;
+
+        return $this;
+    }
+
+    /**
+     * Gets filters.
      *
      * @return null|string
      */
-    public function getFacetName()
+    public function getFilters()
     {
-        return $this->container['facetName'] ?? null;
+        return $this->container['filters'] ?? null;
     }
 
     /**
-     * Sets facetName.
+     * Sets filters.
      *
-     * @param null|string $facetName facet name for trending models
+     * @param null|string $filters Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
      *
      * @return self
      */
-    public function setFacetName($facetName)
+    public function setFilters($filters)
     {
-        $this->container['facetName'] = $facetName;
+        $this->container['filters'] = $filters;
 
         return $this;
     }
 
     /**
-     * Gets facetValue.
+     * Gets optionalFilters.
      *
-     * @return null|string
+     * @return null|string[]
      */
-    public function getFacetValue()
+    public function getOptionalFilters()
     {
-        return $this->container['facetValue'] ?? null;
+        return $this->container['optionalFilters'] ?? null;
     }
 
     /**
-     * Sets facetValue.
+     * Sets optionalFilters.
      *
-     * @param null|string $facetValue facet value for trending models
+     * @param null|string[] $optionalFilters Filters to promote or demote records in the search results.  Optional filters work like facet filters, but they don't exclude records from the search results. Records that match the optional filter rank before records that don't match. Matches with higher weights (`<score=N>`) rank before matches with lower weights. If you're using a negative filter `facet:-value`, matching records rank after records that don't match.
      *
      * @return self
      */
-    public function setFacetValue($facetValue)
+    public function setOptionalFilters($optionalFilters)
     {
-        $this->container['facetValue'] = $facetValue;
-
-        return $this;
-    }
-
-    /**
-     * Gets model.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel
-     */
-    public function getModel()
-    {
-        return $this->container['model'] ?? null;
-    }
-
-    /**
-     * Sets model.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel $model model
-     *
-     * @return self
-     */
-    public function setModel($model)
-    {
-        $this->container['model'] = $model;
-
-        return $this;
-    }
-
-    /**
-     * Gets queryParameters.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
-     */
-    public function getQueryParameters()
-    {
-        return $this->container['queryParameters'] ?? null;
-    }
-
-    /**
-     * Sets queryParameters.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $queryParameters queryParameters
-     *
-     * @return self
-     */
-    public function setQueryParameters($queryParameters)
-    {
-        $this->container['queryParameters'] = $queryParameters;
-
-        return $this;
-    }
-
-    /**
-     * Gets fallbackParameters.
-     *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
-     */
-    public function getFallbackParameters()
-    {
-        return $this->container['fallbackParameters'] ?? null;
-    }
-
-    /**
-     * Sets fallbackParameters.
-     *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $fallbackParameters fallbackParameters
-     *
-     * @return self
-     */
-    public function setFallbackParameters($fallbackParameters)
-    {
-        $this->container['fallbackParameters'] = $fallbackParameters;
+        $this->container['optionalFilters'] = $optionalFilters;
 
         return $this;
     }

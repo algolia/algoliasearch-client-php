@@ -185,7 +185,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets timestamp.
      *
-     * @param null|string $timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param null|string $timestamp date and time of the log entry, in RFC 3339 format
      *
      * @return self
      */

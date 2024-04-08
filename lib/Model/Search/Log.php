@@ -317,7 +317,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets timestamp.
      *
-     * @param string $timestamp timestamp of the API request in ISO 8601 format
+     * @param string $timestamp date and time of the API request, in RFC 3339 format
      *
      * @return self
      */

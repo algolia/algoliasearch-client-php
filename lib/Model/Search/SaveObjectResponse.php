@@ -186,7 +186,7 @@ class SaveObjectResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt timestamp when the record was added, in ISO 8601 format
+     * @param string $createdAt date and time when the object was created, in RFC 3339 format
      *
      * @return self
      */

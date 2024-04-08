@@ -205,7 +205,7 @@ class UserId extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets userID.
      *
-     * @param string $userID user ID
+     * @param string $userID unique identifier of the user who makes the search request
      *
      * @return self
      */

@@ -240,7 +240,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID     User ID to assign. (required)
+     * @param string $xAlgoliaUserID     Unique identifier of the user who makes the search request. (required)
      * @param array  $assignUserIdParams assignUserIdParams (required)
      *                                   - $assignUserIdParams['cluster'] => (string) Cluster name. (required)
      *
@@ -330,7 +330,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID           User ID to assign. (required)
+     * @param string $xAlgoliaUserID           Unique identifier of the user who makes the search request. (required)
      * @param array  $batchAssignUserIdsParams batchAssignUserIdsParams (required)
      *                                         - $batchAssignUserIdsParams['cluster'] => (string) Cluster name. (required)
      *                                         - $batchAssignUserIdsParams['users'] => (array) User IDs to assign. (required)
@@ -1524,7 +1524,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $userID         User ID to assign. (required)
+     * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\UserId|array<string, mixed>
@@ -1841,7 +1841,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $userID         User ID to assign. (required)
+     * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse|array<string, mixed>

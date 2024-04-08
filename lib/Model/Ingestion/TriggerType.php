@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TriggerType Class Doc Comment.
  *
  * @category Class
- * @description Task trigger, describing when a task should run.  &lt;dl&gt; &lt;dt&gt;&lt;code&gt;onDemand&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;  Manually trigger the task with the &#x60;/run&#x60; endpoint.  &lt;/dd&gt; &lt;dt&gt;&lt;code&gt;schedule&lt;/code&gt;&lt;/dt&gt; &lt;dd&gt;  Regularly trigger the task on a &#x60;cron&#x60; schedule.  &lt;/dd&gt;  &lt;dt&gt;&lt;code&gt;subscription&lt;/code&gt;&lt;/dt&gt;  &lt;dd&gt;  Trigger the task after an event is received, such as, a webhook.  &lt;/dd&gt;  &lt;dt&gt;&lt;code&gt;streaming&lt;/code&gt;&lt;/dt&gt;  &lt;dd&gt;  Run the task continuously.  &lt;/dd&gt; &lt;/dl&gt;.
+ * @description Task trigger, describing when a task should run.  - &#x60;onDemand&#x60;.   Manually trigger the task with the &#x60;/run&#x60; endpoint.  - &#x60;schedule&#x60;.   Regularly trigger the task on a &#x60;cron&#x60; schedule.  - &#x60;subscription&#x60;.   Trigger the task after an event is received, such as, a webhook.  - &#x60;streaming&#x60;.   Run the task continuously.
  */
 class TriggerType
 {

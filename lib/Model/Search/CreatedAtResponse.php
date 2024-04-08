@@ -168,7 +168,7 @@ class CreatedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $createdAt date and time when the object was created, in RFC 3339 format
      *
      * @return self
      */

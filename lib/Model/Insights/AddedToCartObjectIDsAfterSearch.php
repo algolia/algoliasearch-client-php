@@ -629,7 +629,7 @@ class AddedToCartObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\Abstr
     /**
      * Sets timestamp.
      *
-     * @param null|int $timestamp Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+     * @param null|int $timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights API uses the time it receives an event as its timestamp.
      *
      * @return self
      */

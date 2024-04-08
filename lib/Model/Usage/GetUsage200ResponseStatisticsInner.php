@@ -169,7 +169,7 @@ class GetUsage200ResponseStatisticsInner extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets t.
      *
-     * @param null|int $t timestamp in milliseconds in Unix epoch time
+     * @param null|int $t timestamp, measured in milliseconds since the Unix epoch
      *
      * @return self
      */

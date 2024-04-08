@@ -203,7 +203,7 @@ class DeletedAtResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets deletedAt.
      *
-     * @param string $deletedAt Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $deletedAt date and time when the object was deleted, in RFC 3339 format
      *
      * @return self
      */

@@ -261,8 +261,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -308,8 +308,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -355,8 +355,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -402,8 +402,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -449,8 +449,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -496,8 +496,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -543,8 +543,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -590,8 +590,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -637,8 +637,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -684,8 +684,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -731,8 +731,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -791,8 +791,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -883,8 +883,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -944,8 +944,8 @@ class AnalyticsClient
      *
      * @param string $index          Index name. (required)
      * @param string $search         Search query. (optional)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -1010,8 +1010,8 @@ class AnalyticsClient
      * @param string $attribute      Attribute name. (required)
      * @param string $index          Index name. (required)
      * @param string $search         Search query. (optional)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -1090,8 +1090,8 @@ class AnalyticsClient
      *
      * @param string $index          Index name. (required)
      * @param string $search         Search query. (optional)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit          Number of items to return. (optional, default to 10)
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -1157,8 +1157,8 @@ class AnalyticsClient
      * @param string $search           Search query. (optional)
      * @param bool   $clickAnalytics   Whether to include metrics related to click and conversion events in the response. (optional, default to false)
      * @param bool   $revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response. (optional, default to false)
-     * @param string $startDate        Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate          End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate        Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate          End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param int    $limit            Number of items to return. (optional, default to 10)
      * @param int    $offset           Position of the first item to return. (optional, default to 0)
      * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
@@ -1231,8 +1231,8 @@ class AnalyticsClient
      * @param string $index            Index name. (required)
      * @param bool   $clickAnalytics   Whether to include metrics related to click and conversion events in the response. (optional, default to false)
      * @param bool   $revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response. (optional, default to false)
-     * @param string $startDate        Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate          End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate        Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate          End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param array  $orderBy          Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available. (optional)
      * @param array  $direction        Sorting direction of the results: ascending or descending. (optional)
      * @param int    $limit            Number of items to return. (optional, default to 10)
@@ -1309,8 +1309,8 @@ class AnalyticsClient
      *  - analytics
      *
      * @param string $index          Index name. (required)
-     * @param string $startDate      Start date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
-     * @param string $endDate        End date (&#x60;YYYY-MM-DD&#x60;) of the period to analyze. (optional)
+     * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
+     * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *

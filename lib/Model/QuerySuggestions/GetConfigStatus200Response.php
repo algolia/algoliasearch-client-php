@@ -241,7 +241,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets lastBuiltAt.
      *
-     * @param null|string $lastBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
+     * @param null|string $lastBuiltAt date and time when the Query Suggestions index was last built, in RFC 3339 format
      *
      * @return self
      */
@@ -265,7 +265,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets lastSuccessfulBuiltAt.
      *
-     * @param null|string $lastSuccessfulBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
+     * @param null|string $lastSuccessfulBuiltAt date and time when the Query Suggestions index was last updated successfully
      *
      * @return self
      */

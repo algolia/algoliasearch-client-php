@@ -249,7 +249,7 @@ class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets validUntil.
      *
-     * @param null|int $validUntil Timestamp in [Unix epoch time](https://en.wikipedia.org/wiki/Unix_time) when the API key should expire.
+     * @param null|int $validUntil timestamp when the secured API key expires, measured in seconds since the Unix epoch
      *
      * @return self
      */

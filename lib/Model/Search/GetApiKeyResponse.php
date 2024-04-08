@@ -266,7 +266,7 @@ class GetApiKeyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets createdAt.
      *
-     * @param int $createdAt Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
+     * @param int $createdAt timestamp when the object was created, in milliseconds since the Unix epoch
      *
      * @return self
      */

@@ -169,7 +169,7 @@ class ProbesMetric extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets t.
      *
-     * @param null|int $t Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
+     * @param null|int $t timestamp, measured in milliseconds since the Unix epoch
      *
      * @return self
      */

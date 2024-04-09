@@ -158,6 +158,13 @@ class AbTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
+        if ($this->container['trafficPercentage'] > 100) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['trafficPercentage'] < 0) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -210,12 +217,19 @@ class AbTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets trafficPercentage.
      *
-     * @param int $trafficPercentage A/B test traffic percentage
+     * @param int $trafficPercentage percentage of search requests each variant receives
      *
      * @return self
      */
     public function setTrafficPercentage($trafficPercentage)
     {
+        if ($trafficPercentage > 100) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariant., must be smaller than or equal to 100.');
+        }
+        if ($trafficPercentage < 0) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariant., must be bigger than or equal to 0.');
+        }
+
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;
@@ -234,7 +248,7 @@ class AbTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets description.
      *
-     * @param null|string $description A/B test description
+     * @param null|string $description description for this variant
      *
      * @return self
      */

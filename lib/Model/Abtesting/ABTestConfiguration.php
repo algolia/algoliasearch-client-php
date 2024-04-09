@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * CustomSearchParams Class Doc Comment.
+ * ABTestConfiguration Class Doc Comment.
  *
  * @category Class
- * @description Search parameters to add to the test variant. Only use this parameter if the two variants use the same index.
+ * @description A/B test configuration.
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +18,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'customSearchParameters' => 'object',
+        'outliers' => '\Algolia\AlgoliaSearch\Model\Abtesting\Outliers',
+        'emptySearch' => '\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch',
+        'minimumDetectableEffect' => '\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect',
     ];
 
     /**
@@ -27,7 +29,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
-        'customSearchParameters' => null,
+        'outliers' => null,
+        'emptySearch' => null,
+        'minimumDetectableEffect' => null,
     ];
 
     /**
@@ -37,7 +41,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $attributeMap = [
-        'customSearchParameters' => 'customSearchParameters',
+        'outliers' => 'outliers',
+        'emptySearch' => 'emptySearch',
+        'minimumDetectableEffect' => 'minimumDetectableEffect',
     ];
 
     /**
@@ -46,7 +52,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'customSearchParameters' => 'setCustomSearchParameters',
+        'outliers' => 'setOutliers',
+        'emptySearch' => 'setEmptySearch',
+        'minimumDetectableEffect' => 'setMinimumDetectableEffect',
     ];
 
     /**
@@ -55,7 +63,9 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'customSearchParameters' => 'getCustomSearchParameters',
+        'outliers' => 'getOutliers',
+        'emptySearch' => 'getEmptySearch',
+        'minimumDetectableEffect' => 'getMinimumDetectableEffect',
     ];
 
     /**
@@ -72,8 +82,14 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] = $data['customSearchParameters'];
+        if (isset($data['outliers'])) {
+            $this->container['outliers'] = $data['outliers'];
+        }
+        if (isset($data['emptySearch'])) {
+            $this->container['emptySearch'] = $data['emptySearch'];
+        }
+        if (isset($data['minimumDetectableEffect'])) {
+            $this->container['minimumDetectableEffect'] = $data['minimumDetectableEffect'];
         }
     }
 
@@ -137,8 +153,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
-            $invalidProperties[] = "'customSearchParameters' can't be null";
+        if (!isset($this->container['outliers']) || null === $this->container['outliers']) {
+            $invalidProperties[] = "'outliers' can't be null";
         }
 
         return $invalidProperties;
@@ -156,25 +172,73 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets customSearchParameters.
+     * Gets outliers.
      *
-     * @return object
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Outliers
      */
-    public function getCustomSearchParameters()
+    public function getOutliers()
     {
-        return $this->container['customSearchParameters'] ?? null;
+        return $this->container['outliers'] ?? null;
     }
 
     /**
-     * Sets customSearchParameters.
+     * Sets outliers.
      *
-     * @param object $customSearchParameters customSearchParameters
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Outliers $outliers outliers
      *
      * @return self
      */
-    public function setCustomSearchParameters($customSearchParameters)
+    public function setOutliers($outliers)
     {
-        $this->container['customSearchParameters'] = $customSearchParameters;
+        $this->container['outliers'] = $outliers;
+
+        return $this;
+    }
+
+    /**
+     * Gets emptySearch.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch
+     */
+    public function getEmptySearch()
+    {
+        return $this->container['emptySearch'] ?? null;
+    }
+
+    /**
+     * Sets emptySearch.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch $emptySearch emptySearch
+     *
+     * @return self
+     */
+    public function setEmptySearch($emptySearch)
+    {
+        $this->container['emptySearch'] = $emptySearch;
+
+        return $this;
+    }
+
+    /**
+     * Gets minimumDetectableEffect.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect
+     */
+    public function getMinimumDetectableEffect()
+    {
+        return $this->container['minimumDetectableEffect'] ?? null;
+    }
+
+    /**
+     * Sets minimumDetectableEffect.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect $minimumDetectableEffect minimumDetectableEffect
+     *
+     * @return self
+     */
+    public function setMinimumDetectableEffect($minimumDetectableEffect)
+    {
+        $this->container['minimumDetectableEffect'] = $minimumDetectableEffect;
 
         return $this;
     }

@@ -213,7 +213,7 @@ class ListABTestsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets count.
      *
-     * @param int $count number of A/B tests implemented
+     * @param int $count number of A/B tests
      *
      * @return self
      */

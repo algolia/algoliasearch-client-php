@@ -166,6 +166,14 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
+        if ($this->container['trafficPercentage'] > 100) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['trafficPercentage'] < 0) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
@@ -221,12 +229,19 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets trafficPercentage.
      *
-     * @param int $trafficPercentage A/B test traffic percentage
+     * @param int $trafficPercentage percentage of search requests each variant receives
      *
      * @return self
      */
     public function setTrafficPercentage($trafficPercentage)
     {
+        if ($trafficPercentage > 100) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariantSearchParams., must be smaller than or equal to 100.');
+        }
+        if ($trafficPercentage < 0) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariantSearchParams., must be bigger than or equal to 0.');
+        }
+
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;
@@ -245,7 +260,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets description.
      *
-     * @param null|string $description A/B test description
+     * @param null|string $description description for this variant
      *
      * @return self
      */

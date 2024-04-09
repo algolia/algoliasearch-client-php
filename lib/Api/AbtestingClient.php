@@ -97,7 +97,7 @@ class AbtestingClient
     }
 
     /**
-     * Creates an A/B test.
+     * Creates a new A/B test.
      *
      * Required API Key ACLs:
      *  - editSettings
@@ -105,7 +105,7 @@ class AbtestingClient
      * @param array $addABTestsRequest addABTestsRequest (required)
      *                                 - $addABTestsRequest['name'] => (string) A/B test name. (required)
      *                                 - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
-     *                                 - $addABTestsRequest['endAt'] => (string) End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. (required)
+     *                                 - $addABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
      *
@@ -289,12 +289,12 @@ class AbtestingClient
     }
 
     /**
-     * Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+     * Deletes an A/B test by its ID.
      *
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param int   $id             Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
@@ -326,12 +326,12 @@ class AbtestingClient
     }
 
     /**
-     * Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+     * Retrieves the details for an A/B test by its ID.
      *
      * Required API Key ACLs:
      *  - analytics
      *
-     * @param int   $id             Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest|array<string, mixed>
@@ -363,15 +363,15 @@ class AbtestingClient
     }
 
     /**
-     * List all A/B tests.
+     * Lists all A/B tests you configured for this application.
      *
      * Required API Key ACLs:
      *  - analytics
      *
      * @param int    $offset         Position of the first item to return. (optional, default to 0)
      * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param string $indexPrefix    Only return A/B tests for indices starting with this prefix. (optional)
-     * @param string $indexSuffix    Only return A/B tests for indices ending with this suffix. (optional)
+     * @param string $indexPrefix    Index name prefix. Only A/B tests for indices starting with this string are included in the response. (optional)
+     * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse|array<string, mixed>
@@ -407,12 +407,12 @@ class AbtestingClient
     }
 
     /**
-     * If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+     * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
      *
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param int   $id             Unique A/B test ID. (required)
+     * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>

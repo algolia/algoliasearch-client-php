@@ -251,7 +251,7 @@ class AddABTestsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets endAt.
      *
-     * @param string $endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $endAt end date and time of the A/B test, in RFC 3339 format
      *
      * @return self
      */

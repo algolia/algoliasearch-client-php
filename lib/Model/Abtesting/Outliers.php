@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * CustomSearchParams Class Doc Comment.
+ * Outliers Class Doc Comment.
  *
  * @category Class
- * @description Search parameters to add to the test variant. Only use this parameter if the two variants use the same index.
+ * @description Configuration for handling outliers.
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Outliers extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +18,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'customSearchParameters' => 'object',
+        'exclude' => 'bool',
     ];
 
     /**
@@ -27,7 +27,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
-        'customSearchParameters' => null,
+        'exclude' => null,
     ];
 
     /**
@@ -37,7 +37,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $attributeMap = [
-        'customSearchParameters' => 'customSearchParameters',
+        'exclude' => 'exclude',
     ];
 
     /**
@@ -46,7 +46,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'customSearchParameters' => 'setCustomSearchParameters',
+        'exclude' => 'setExclude',
     ];
 
     /**
@@ -55,7 +55,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'customSearchParameters' => 'getCustomSearchParameters',
+        'exclude' => 'getExclude',
     ];
 
     /**
@@ -72,8 +72,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] = $data['customSearchParameters'];
+        if (isset($data['exclude'])) {
+            $this->container['exclude'] = $data['exclude'];
         }
     }
 
@@ -135,13 +135,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
-            $invalidProperties[] = "'customSearchParameters' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -156,25 +150,25 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets customSearchParameters.
+     * Gets exclude.
      *
-     * @return object
+     * @return null|bool
      */
-    public function getCustomSearchParameters()
+    public function getExclude()
     {
-        return $this->container['customSearchParameters'] ?? null;
+        return $this->container['exclude'] ?? null;
     }
 
     /**
-     * Sets customSearchParameters.
+     * Sets exclude.
      *
-     * @param object $customSearchParameters customSearchParameters
+     * @param null|bool $exclude whether to exclude outliers when calculating A/B test results
      *
      * @return self
      */
-    public function setCustomSearchParameters($customSearchParameters)
+    public function setExclude($exclude)
     {
-        $this->container['customSearchParameters'] = $customSearchParameters;
+        $this->container['exclude'] = $exclude;
 
         return $this;
     }

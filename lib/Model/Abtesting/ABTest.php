@@ -30,8 +30,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'createdAt' => 'string',
         'endAt' => 'string',
         'name' => 'string',
-        'status' => 'string',
+        'status' => '\Algolia\AlgoliaSearch\Model\Abtesting\Status',
         'variants' => '\Algolia\AlgoliaSearch\Model\Abtesting\Variant[]',
+        'configuration' => '\Algolia\AlgoliaSearch\Model\Abtesting\ABTestConfiguration',
     ];
 
     /**
@@ -52,6 +53,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'name' => null,
         'status' => null,
         'variants' => null,
+        'configuration' => null,
     ];
 
     /**
@@ -73,6 +75,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'name' => 'name',
         'status' => 'status',
         'variants' => 'variants',
+        'configuration' => 'configuration',
     ];
 
     /**
@@ -93,6 +96,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'name' => 'setName',
         'status' => 'setStatus',
         'variants' => 'setVariants',
+        'configuration' => 'setConfiguration',
     ];
 
     /**
@@ -113,6 +117,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         'name' => 'getName',
         'status' => 'getStatus',
         'variants' => 'getVariants',
+        'configuration' => 'getConfiguration',
     ];
 
     /**
@@ -164,6 +169,9 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
         }
         if (isset($data['variants'])) {
             $this->container['variants'] = $data['variants'];
+        }
+        if (isset($data['configuration'])) {
+            $this->container['configuration'] = $data['configuration'];
         }
     }
 
@@ -291,7 +299,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets abTestID.
      *
-     * @param int $abTestID unique A/B test ID
+     * @param int $abTestID unique A/B test identifier
      *
      * @return self
      */
@@ -315,7 +323,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets clickSignificance.
      *
-     * @param float $clickSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on click data. A value of 0.95 or over is considered to be _significant_.
+     * @param float $clickSignificance clickSignificance
      *
      * @return self
      */
@@ -339,7 +347,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets conversionSignificance.
      *
-     * @param float $conversionSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on conversion. A value of 0.95 or over is considered to be _significant_.
+     * @param float $conversionSignificance conversionSignificance
      *
      * @return self
      */
@@ -363,7 +371,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets addToCartSignificance.
      *
-     * @param float $addToCartSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on add-to-cart data. A value of 0.95 or over is considered to be _significant_.
+     * @param float $addToCartSignificance addToCartSignificance
      *
      * @return self
      */
@@ -387,7 +395,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets purchaseSignificance.
      *
-     * @param float $purchaseSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on purchase data. A value of 0.95 or over is considered to be _significant_.
+     * @param float $purchaseSignificance purchaseSignificance
      *
      * @return self
      */
@@ -411,7 +419,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets revenueSignificance.
      *
-     * @param array<string,float> $revenueSignificance [A/B test significance](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing/in-depth/how-ab-test-scores-are-calculated/#statistical-significance-or-chance) based on revenue data. A value of 0.95 or over is considered to be _significant_.
+     * @param array<string,float> $revenueSignificance revenueSignificance
      *
      * @return self
      */
@@ -435,7 +443,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt Update date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $updatedAt date and time when the A/B test was last updated, in RFC 3339 format
      *
      * @return self
      */
@@ -459,7 +467,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt Creation date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $createdAt date and time when the A/B test was created, in RFC 3339 format
      *
      * @return self
      */
@@ -483,7 +491,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets endAt.
      *
-     * @param string $endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+     * @param string $endAt end date and time of the A/B test, in RFC 3339 format
      *
      * @return self
      */
@@ -521,7 +529,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets status.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Status
      */
     public function getStatus()
     {
@@ -531,7 +539,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status.
      *
-     * @param string $status A/B test status
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Status $status status
      *
      * @return self
      */
@@ -555,13 +563,37 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets variants.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.
      *
      * @return self
      */
     public function setVariants($variants)
     {
         $this->container['variants'] = $variants;
+
+        return $this;
+    }
+
+    /**
+     * Gets configuration.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestConfiguration
+     */
+    public function getConfiguration()
+    {
+        return $this->container['configuration'] ?? null;
+    }
+
+    /**
+     * Sets configuration.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestConfiguration $configuration configuration
+     *
+     * @return self
+     */
+    public function setConfiguration($configuration)
+    {
+        $this->container['configuration'] = $configuration;
 
         return $this;
     }

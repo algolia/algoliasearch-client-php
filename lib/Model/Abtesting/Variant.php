@@ -330,6 +330,14 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
+        if ($this->container['trafficPercentage'] > 100) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['trafficPercentage'] < 0) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['userCount']) || null === $this->container['userCount']) {
             $invalidProperties[] = "'userCount' can't be null";
         }
@@ -388,7 +396,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets addToCartRate.
      *
-     * @param float $addToCartRate Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).
+     * @param float $addToCartRate [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.
      *
      * @return self
      */
@@ -412,7 +420,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets averageClickPosition.
      *
-     * @param int $averageClickPosition Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
+     * @param int $averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
      *
      * @return self
      */
@@ -460,7 +468,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+     * @param float $clickThroughRate [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.
      *
      * @return self
      */
@@ -508,7 +516,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
+     * @param float $conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
      *
      * @return self
      */
@@ -556,7 +564,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets description.
      *
-     * @param string $description A/B test description
+     * @param string $description description for this variant
      *
      * @return self
      */
@@ -580,7 +588,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets estimatedSampleSize.
      *
-     * @param null|int $estimatedSampleSize The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
+     * @param null|int $estimatedSampleSize Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response.
      *
      * @return self
      */
@@ -652,7 +660,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets noResultCount.
      *
-     * @param int $noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
+     * @param int $noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.
      *
      * @return self
      */
@@ -700,7 +708,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets purchaseRate.
      *
-     * @param float $purchaseRate Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
+     * @param float $purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
      *
      * @return self
      */
@@ -724,7 +732,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets searchCount.
      *
-     * @param int $searchCount number of searches carried out during the A/B test
+     * @param int $searchCount number of searches for this variant
      *
      * @return self
      */
@@ -772,12 +780,19 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trafficPercentage.
      *
-     * @param int $trafficPercentage A/B test traffic percentage
+     * @param int $trafficPercentage percentage of search requests each variant receives
      *
      * @return self
      */
     public function setTrafficPercentage($trafficPercentage)
     {
+        if ($trafficPercentage > 100) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling Variant., must be smaller than or equal to 100.');
+        }
+        if ($trafficPercentage < 0) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling Variant., must be bigger than or equal to 0.');
+        }
+
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;
@@ -796,7 +811,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets userCount.
      *
-     * @param int $userCount number of users during the A/B test
+     * @param int $userCount number of users that made searches to this variant
      *
      * @return self
      */
@@ -820,7 +835,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets trackedUserCount.
      *
-     * @param int $trackedUserCount number of users that performed a tracked search during the A/B test
+     * @param int $trackedUserCount number of users that made tracked searches to this variant
      *
      * @return self
      */

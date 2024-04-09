@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 /**
- * CustomSearchParams Class Doc Comment.
+ * MinimumDetectableEffect Class Doc Comment.
  *
  * @category Class
- * @description Search parameters to add to the test variant. Only use this parameter if the two variants use the same index.
+ * @description Configuration for the smallest difference between test variants you want to detect.
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MinimumDetectableEffect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +18,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelTypes = [
-        'customSearchParameters' => 'object',
+        'size' => 'float',
+        'effect' => '\Algolia\AlgoliaSearch\Model\Abtesting\Effect',
     ];
 
     /**
@@ -27,7 +28,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $modelFormats = [
-        'customSearchParameters' => null,
+        'size' => 'double',
+        'effect' => null,
     ];
 
     /**
@@ -37,7 +39,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $attributeMap = [
-        'customSearchParameters' => 'customSearchParameters',
+        'size' => 'size',
+        'effect' => 'effect',
     ];
 
     /**
@@ -46,7 +49,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $setters = [
-        'customSearchParameters' => 'setCustomSearchParameters',
+        'size' => 'setSize',
+        'effect' => 'setEffect',
     ];
 
     /**
@@ -55,7 +59,8 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      * @var string[]
      */
     protected static $getters = [
-        'customSearchParameters' => 'getCustomSearchParameters',
+        'size' => 'getSize',
+        'effect' => 'getEffect',
     ];
 
     /**
@@ -72,8 +77,11 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['customSearchParameters'])) {
-            $this->container['customSearchParameters'] = $data['customSearchParameters'];
+        if (isset($data['size'])) {
+            $this->container['size'] = $data['size'];
+        }
+        if (isset($data['effect'])) {
+            $this->container['effect'] = $data['effect'];
         }
     }
 
@@ -137,8 +145,12 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
-            $invalidProperties[] = "'customSearchParameters' can't be null";
+        if (isset($this->container['size']) && ($this->container['size'] > 1)) {
+            $invalidProperties[] = "invalid value for 'size', must be smaller than or equal to 1.";
+        }
+
+        if (isset($this->container['size']) && ($this->container['size'] < 0)) {
+            $invalidProperties[] = "invalid value for 'size', must be bigger than or equal to 0.";
         }
 
         return $invalidProperties;
@@ -156,25 +168,56 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     }
 
     /**
-     * Gets customSearchParameters.
+     * Gets size.
      *
-     * @return object
+     * @return null|float
      */
-    public function getCustomSearchParameters()
+    public function getSize()
     {
-        return $this->container['customSearchParameters'] ?? null;
+        return $this->container['size'] ?? null;
     }
 
     /**
-     * Sets customSearchParameters.
+     * Sets size.
      *
-     * @param object $customSearchParameters customSearchParameters
+     * @param null|float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
      *
      * @return self
      */
-    public function setCustomSearchParameters($customSearchParameters)
+    public function setSize($size)
     {
-        $this->container['customSearchParameters'] = $customSearchParameters;
+        if (!is_null($size) && ($size > 1)) {
+            throw new \InvalidArgumentException('invalid value for $size when calling MinimumDetectableEffect., must be smaller than or equal to 1.');
+        }
+        if (!is_null($size) && ($size < 0)) {
+            throw new \InvalidArgumentException('invalid value for $size when calling MinimumDetectableEffect., must be bigger than or equal to 0.');
+        }
+
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets effect.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\Effect
+     */
+    public function getEffect()
+    {
+        return $this->container['effect'] ?? null;
+    }
+
+    /**
+     * Sets effect.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\Effect $effect effect
+     *
+     * @return self
+     */
+    public function setEffect($effect)
+    {
+        $this->container['effect'] = $effect;
 
         return $this;
     }

@@ -213,7 +213,7 @@ class ABTestResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets abTestID.
      *
-     * @param int $abTestID unique A/B test ID
+     * @param int $abTestID unique A/B test identifier
      *
      * @return self
      */

@@ -166,6 +166,14 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
+        if ($this->container['trafficPercentage'] > 100) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['trafficPercentage'] < 0) {
+            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
+        }
+
         if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
@@ -221,12 +229,19 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets trafficPercentage.
      *
-     * @param int $trafficPercentage A/B test traffic percentage
+     * @param int $trafficPercentage percentage of search requests each variant receives
      *
      * @return self
      */
     public function setTrafficPercentage($trafficPercentage)
     {
+        if ($trafficPercentage > 100) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AddABTestsVariant., must be smaller than or equal to 100.');
+        }
+        if ($trafficPercentage < 0) {
+            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AddABTestsVariant., must be bigger than or equal to 0.');
+        }
+
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;
@@ -245,7 +260,7 @@ class AddABTestsVariant extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets description.
      *
-     * @param null|string $description A/B test description
+     * @param null|string $description description for this variant
      *
      * @return self
      */

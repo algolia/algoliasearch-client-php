@@ -189,7 +189,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets userToken.
      *
-     * @param string $userToken userToken representing the user for which to fetch the Personalization profile
+     * @param string $userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets lastEventAt.
      *
-     * @param string $lastEventAt Date of last event update. (ISO-8601 format).
+     * @param string $lastEventAt date and time of the last event from this user, in RFC 3339 format
      *
      * @return self
      */
@@ -237,7 +237,7 @@ class GetUserTokenResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets scores.
      *
-     * @param object $scores the userToken scores
+     * @param object $scores Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events.
      *
      * @return self
      */

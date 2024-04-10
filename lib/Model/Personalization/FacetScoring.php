@@ -178,7 +178,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score.
      *
-     * @param int $score the score for the event
+     * @param int $score event score
      *
      * @return self
      */
@@ -202,7 +202,7 @@ class FacetScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets facetName.
      *
-     * @param string $facetName the name of the facet
+     * @param string $facetName facet attribute name
      *
      * @return self
      */

@@ -19,7 +19,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     protected static $modelTypes = [
         'score' => 'int',
         'eventName' => 'string',
-        'eventType' => 'string',
+        'eventType' => '\Algolia\AlgoliaSearch\Model\Personalization\EventType',
     ];
 
     /**
@@ -189,7 +189,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets score.
      *
-     * @param int $score the score for the event
+     * @param int $score event score
      *
      * @return self
      */
@@ -213,7 +213,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventName.
      *
-     * @param string $eventName the name of the event
+     * @param string $eventName event name
      *
      * @return self
      */
@@ -227,7 +227,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets eventType.
      *
-     * @return string
+     * @return \Algolia\AlgoliaSearch\Model\Personalization\EventType
      */
     public function getEventType()
     {
@@ -237,7 +237,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventType.
      *
-     * @param string $eventType the type of the event
+     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventType $eventType eventType
      *
      * @return self
      */

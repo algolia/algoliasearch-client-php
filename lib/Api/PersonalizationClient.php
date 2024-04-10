@@ -255,12 +255,12 @@ class PersonalizationClient
     }
 
     /**
-     * Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.
+     * Deletes a user profile.  The response includes a date and time when the user profile can safely be considered deleted.
      *
      * Required API Key ACLs:
      *  - recommendation
      *
-     * @param string $userToken      userToken representing the user for which to fetch the Personalization profile. (required)
+     * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Personalization\DeleteUserProfileResponse|array<string, mixed>
@@ -292,7 +292,7 @@ class PersonalizationClient
     }
 
     /**
-     * The strategy contains information on the events and facets that impact user profiles and personalized search results.
+     * Retrieves the current personalization strategy.
      *
      * Required API Key ACLs:
      *  - recommendation
@@ -312,12 +312,12 @@ class PersonalizationClient
     }
 
     /**
-     * Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.
+     * Retrieves a user profile and their affinities for different facets.
      *
      * Required API Key ACLs:
      *  - recommendation
      *
-     * @param string $userToken      userToken representing the user for which to fetch the Personalization profile. (required)
+     * @param string $userToken      Unique identifier representing a user for which to fetch the personalization profile. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Personalization\GetUserTokenResponse|array<string, mixed>
@@ -349,15 +349,15 @@ class PersonalizationClient
     }
 
     /**
-     * A strategy defines the events and facets that impact user profiles and personalized search results.
+     * Creates a new personalization strategy.
      *
      * Required API Key ACLs:
      *  - recommendation
      *
      * @param array $personalizationStrategyParams personalizationStrategyParams (required)
-     *                                             - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with the events. (required)
-     *                                             - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with the facets. (required)
-     *                                             - $personalizationStrategyParams['personalizationImpact'] => (int) The impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled). (required)
+     *                                             - $personalizationStrategyParams['eventScoring'] => (array) Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                             - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
+     *                                             - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
      *
      * @see \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
      *

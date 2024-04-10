@@ -161,6 +161,13 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
         if (!isset($this->container['personalizationImpact']) || null === $this->container['personalizationImpact']) {
             $invalidProperties[] = "'personalizationImpact' can't be null";
         }
+        if ($this->container['personalizationImpact'] > 100) {
+            $invalidProperties[] = "invalid value for 'personalizationImpact', must be smaller than or equal to 100.";
+        }
+
+        if ($this->container['personalizationImpact'] < 0) {
+            $invalidProperties[] = "invalid value for 'personalizationImpact', must be bigger than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -189,7 +196,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets eventScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring scores associated with the events
+     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventScoring[] $eventScoring Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.
      *
      * @return self
      */
@@ -213,7 +220,7 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets facetScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring scores associated with the facets
+     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetScoring[] $facetScoring Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.
      *
      * @return self
      */
@@ -237,12 +244,19 @@ class PersonalizationStrategyParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets personalizationImpact.
      *
-     * @param int $personalizationImpact the impact that personalization has on search results: a number between 0 (personalization disabled) and 100 (personalization fully enabled)
+     * @param int $personalizationImpact Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results.
      *
      * @return self
      */
     public function setPersonalizationImpact($personalizationImpact)
     {
+        if ($personalizationImpact > 100) {
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling PersonalizationStrategyParams., must be smaller than or equal to 100.');
+        }
+        if ($personalizationImpact < 0) {
+            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling PersonalizationStrategyParams., must be bigger than or equal to 0.');
+        }
+
         $this->container['personalizationImpact'] = $personalizationImpact;
 
         return $this;

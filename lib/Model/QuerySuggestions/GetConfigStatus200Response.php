@@ -193,7 +193,7 @@ class GetConfigStatus200Response extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets indexName.
      *
-     * @param null|string $indexName name of the Query Suggestions index
+     * @param null|string $indexName name of the Query Suggestions index (case-sensitive)
      *
      * @return self
      */

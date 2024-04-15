@@ -231,7 +231,7 @@ class SourceIndex extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets indexName.
      *
-     * @param string $indexName name of the Algolia index to use as source for query suggestions
+     * @param string $indexName name of the Algolia index (case-sensitive) to use as source for query suggestions
      *
      * @return self
      */

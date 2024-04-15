@@ -205,7 +205,7 @@ class AbTestsVariantSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractMo
     /**
      * Sets index.
      *
-     * @param string $index A/B test index
+     * @param string $index index name of the A/B test variant (case-sensitive)
      *
      * @return self
      */

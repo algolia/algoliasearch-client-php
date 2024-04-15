@@ -237,7 +237,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName.
      *
-     * @param string $indexName index to target for this operation
+     * @param string $indexName index name (case-sensitive)
      *
      * @return self
      */

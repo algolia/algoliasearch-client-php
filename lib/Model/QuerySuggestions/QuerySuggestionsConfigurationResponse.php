@@ -262,7 +262,7 @@ class QuerySuggestionsConfigurationResponse extends \Algolia\AlgoliaSearch\Model
     /**
      * Sets indexName.
      *
-     * @param string $indexName name of the Query Suggestions index
+     * @param string $indexName name of the Query Suggestions index (case-sensitive)
      *
      * @return self
      */

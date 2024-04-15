@@ -262,7 +262,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets indexName.
      *
-     * @param string $indexName index name
+     * @param string $indexName index name (case-sensitive)
      *
      * @return self
      */

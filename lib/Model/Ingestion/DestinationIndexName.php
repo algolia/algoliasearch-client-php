@@ -183,7 +183,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName algolia index name (case-sensitive)
      *
      * @return self
      */

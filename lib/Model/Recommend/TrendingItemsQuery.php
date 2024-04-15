@@ -251,7 +251,7 @@ class TrendingItemsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets indexName.
      *
-     * @param string $indexName index name
+     * @param string $indexName index name (case-sensitive)
      *
      * @return self
      */

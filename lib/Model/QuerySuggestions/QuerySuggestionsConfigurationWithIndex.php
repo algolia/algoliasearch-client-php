@@ -338,7 +338,7 @@ class QuerySuggestionsConfigurationWithIndex extends \Algolia\AlgoliaSearch\Mode
     /**
      * Sets indexName.
      *
-     * @param string $indexName name of the Query Suggestions index
+     * @param string $indexName name of the Query Suggestions index (case-sensitive)
      *
      * @return self
      */

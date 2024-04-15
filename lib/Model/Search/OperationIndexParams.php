@@ -210,7 +210,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets destination.
      *
-     * @param string $destination index name
+     * @param string $destination index name (case-sensitive)
      *
      * @return self
      */

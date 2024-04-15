@@ -37,7 +37,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
         'minimumAroundRadius' => 'int',
         'insideBoundingBox' => 'float[][]',
         'insidePolygon' => 'float[][]',
-        'naturalLanguages' => 'string[]',
+        'naturalLanguages' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]',
         'ruleContexts' => 'string[]',
         'personalizationImpact' => 'int',
         'userToken' => 'string',
@@ -595,7 +595,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets restrictSearchableAttributes.
      *
-     * @param null|string[] $restrictSearchableAttributes restricts a search to a subset of your searchable attributes
+     * @param null|string[] $restrictSearchableAttributes Restricts a search to a subset of your searchable attributes. Attribute names are case-sensitive.
      *
      * @return self
      */
@@ -898,7 +898,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets insidePolygon.
      *
-     * @param null|float[][] $insidePolygon Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored, if you also specify `insideBoundingBox`.
+     * @param null|float[][] $insidePolygon Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`.
      *
      * @return self
      */
@@ -912,7 +912,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets naturalLanguages.
      *
-     * @return null|string[]
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]
      */
     public function getNaturalLanguages()
     {
@@ -922,7 +922,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets naturalLanguages.
      *
-     * @param null|string[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
      *
      * @return self
      */

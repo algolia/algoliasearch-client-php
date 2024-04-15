@@ -636,7 +636,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets index.
      *
-     * @param string $index A/B test index
+     * @param string $index index name of the A/B test variant (case-sensitive)
      *
      * @return self
      */

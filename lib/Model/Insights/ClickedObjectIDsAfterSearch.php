@@ -371,7 +371,7 @@ class ClickedObjectIDsAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets index.
      *
-     * @param string $index index name to which the event's items belong
+     * @param string $index index name (case-sensitive) to which the event's items belong
      *
      * @return self
      */

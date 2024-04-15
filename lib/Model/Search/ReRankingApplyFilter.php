@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * ReRankingApplyFilter Class Doc Comment.
  *
  * @category Class
- * @description Restrict [Dynamic Re-ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) to records that match these filters.
+ * @description Restrict [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) to records that match these filters.
  */
 class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

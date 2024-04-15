@@ -218,7 +218,7 @@ class DestinationInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets indexName.
      *
-     * @param string $indexName algolia index name
+     * @param string $indexName algolia index name (case-sensitive)
      *
      * @return self
      */

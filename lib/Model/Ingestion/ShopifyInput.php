@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * TaskInput Class Doc Comment.
+ * ShopifyInput Class Doc Comment.
  *
  * @category Class
- * @description Configuration of the task, depending on its type.
+ * @description Represents the required elements of the task input when using a &#x60;shopify&#x60; source.
  */
-class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ShopifyInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,10 +18,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelTypes = [
-        'startDate' => 'string',
-        'endDate' => 'string',
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
-        'timeframe' => 'int',
         'metafields' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMetafield[]',
         'market' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket',
     ];
@@ -32,10 +28,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $modelFormats = [
-        'startDate' => null,
-        'endDate' => null,
-        'mapping' => null,
-        'timeframe' => null,
         'metafields' => null,
         'market' => null,
     ];
@@ -47,10 +39,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $attributeMap = [
-        'startDate' => 'startDate',
-        'endDate' => 'endDate',
-        'mapping' => 'mapping',
-        'timeframe' => 'timeframe',
         'metafields' => 'metafields',
         'market' => 'market',
     ];
@@ -61,10 +49,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $setters = [
-        'startDate' => 'setStartDate',
-        'endDate' => 'setEndDate',
-        'mapping' => 'setMapping',
-        'timeframe' => 'setTimeframe',
         'metafields' => 'setMetafields',
         'market' => 'setMarket',
     ];
@@ -75,10 +59,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      * @var string[]
      */
     protected static $getters = [
-        'startDate' => 'getStartDate',
-        'endDate' => 'getEndDate',
-        'mapping' => 'getMapping',
-        'timeframe' => 'getTimeframe',
         'metafields' => 'getMetafields',
         'market' => 'getMarket',
     ];
@@ -97,18 +77,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      */
     public function __construct(array $data = null)
     {
-        if (isset($data['startDate'])) {
-            $this->container['startDate'] = $data['startDate'];
-        }
-        if (isset($data['endDate'])) {
-            $this->container['endDate'] = $data['endDate'];
-        }
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
-        }
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
-        }
         if (isset($data['metafields'])) {
             $this->container['metafields'] = $data['metafields'];
         }
@@ -177,26 +145,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['startDate']) || null === $this->container['startDate']) {
-            $invalidProperties[] = "'startDate' can't be null";
-        }
-        if (!isset($this->container['endDate']) || null === $this->container['endDate']) {
-            $invalidProperties[] = "'endDate' can't be null";
-        }
-        if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
-            $invalidProperties[] = "'mapping' can't be null";
-        }
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
-        }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['metafields']) || null === $this->container['metafields']) {
             $invalidProperties[] = "'metafields' can't be null";
         }
@@ -216,109 +164,6 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets startDate.
-     *
-     * @return string
-     */
-    public function getStartDate()
-    {
-        return $this->container['startDate'] ?? null;
-    }
-
-    /**
-     * Sets startDate.
-     *
-     * @param string $startDate earliest date in RFC3339 format of the extracted data from Big Query
-     *
-     * @return self
-     */
-    public function setStartDate($startDate)
-    {
-        $this->container['startDate'] = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Gets endDate.
-     *
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->container['endDate'] ?? null;
-    }
-
-    /**
-     * Sets endDate.
-     *
-     * @param string $endDate latest date in RFC3339 format of the extracted data from Big Query
-     *
-     * @return self
-     */
-    public function setEndDate($endDate)
-    {
-        $this->container['endDate'] = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Gets mapping.
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
-     */
-    public function getMapping()
-    {
-        return $this->container['mapping'] ?? null;
-    }
-
-    /**
-     * Sets mapping.
-     *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
-     *
-     * @return self
-     */
-    public function setMapping($mapping)
-    {
-        $this->container['mapping'] = $mapping;
-
-        return $this;
-    }
-
-    /**
-     * Gets timeframe.
-     *
-     * @return int
-     */
-    public function getTimeframe()
-    {
-        return $this->container['timeframe'] ?? null;
-    }
-
-    /**
-     * Sets timeframe.
-     *
-     * @param int $timeframe number of days in the past until the current day for which to extract Big Query data
-     *
-     * @return self
-     */
-    public function setTimeframe($timeframe)
-    {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
-
-        return $this;
     }
 
     /**

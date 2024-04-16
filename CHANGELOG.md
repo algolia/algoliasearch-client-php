@@ -1,3 +1,10 @@
+## [4.0.0-alpha.106](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.105...4.0.0-alpha.106)
+
+- [41121e77e](https://github.com/algolia/api-clients-automation/commit/41121e77e) fix(specs): attribute and index names case sensitive ([#2990](https://github.com/algolia/api-clients-automation/pull/2990)) by [@kai687](https://github.com/kai687/)
+- [67b0eab89](https://github.com/algolia/api-clients-automation/commit/67b0eab89) feat(specs): update shopify source and task inputs ([#2987](https://github.com/algolia/api-clients-automation/pull/2987)) by [@Fluf22](https://github.com/Fluf22/)
+- [60e8e6d68](https://github.com/algolia/api-clients-automation/commit/60e8e6d68) fix(specs): Personalization API ([#2982](https://github.com/algolia/api-clients-automation/pull/2982)) by [@kai687](https://github.com/kai687/)
+- [60322c0b5](https://github.com/algolia/api-clients-automation/commit/60322c0b5) fix(specs): a/b testing ([#2981](https://github.com/algolia/api-clients-automation/pull/2981)) by [@kai687](https://github.com/kai687/)
+
 ## [4.0.0-alpha.105](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.104...4.0.0-alpha.105)
 
 - [dabdd0291](https://github.com/algolia/api-clients-automation/commit/dabdd0291) fix(specs): recommend api ([#2958](https://github.com/algolia/api-clients-automation/pull/2958)) by [@kai687](https://github.com/kai687/)

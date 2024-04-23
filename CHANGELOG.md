@@ -1,3 +1,8 @@
+## [4.0.0-beta.1](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-beta.0...4.0.0-beta.1)
+
+- [b621988bc](https://github.com/algolia/api-clients-automation/commit/b621988bc) feat(specs): promote @kai687 to code owner ([#3014](https://github.com/algolia/api-clients-automation/pull/3014)) by [@Fluf22](https://github.com/Fluf22/)
+- [f9877a8ae](https://github.com/algolia/api-clients-automation/commit/f9877a8ae) fix(specs): remove periods on summaries ([#3013](https://github.com/algolia/api-clients-automation/pull/3013)) by [@kai687](https://github.com/kai687/)
+
 ## [4.0.0-alpha.106](https://github.com/algolia/algoliasearch-client-php/compare/4.0.0-alpha.105...4.0.0-alpha.106)
 
 - [41121e77e](https://github.com/algolia/api-clients-automation/commit/41121e77e) fix(specs): attribute and index names case sensitive ([#2990](https://github.com/algolia/api-clients-automation/pull/2990)) by [@kai687](https://github.com/kai687/)

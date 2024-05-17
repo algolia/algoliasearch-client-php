@@ -24,7 +24,7 @@ use Algolia\AlgoliaSearch\Support\Helpers;
  */
 class SearchClient
 {
-    public const VERSION = '4.0.0-beta.1';
+    public const VERSION = '4.0.0-beta.2';
 
     /**
      * @var ApiWrapperInterface

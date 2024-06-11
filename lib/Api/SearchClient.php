@@ -1109,6 +1109,43 @@ class SearchClient
     }
 
     /**
+     * Checks the status of a given application task.
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param int   $taskID         Unique task identifier. (required)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Search\GetTaskResponse|array<string, mixed>
+     */
+    public function getAppTask($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getAppTask`.'
+            );
+        }
+
+        $resourcePath = '/1/task/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Lists supported languages with their supported dictionary types and number of custom entries.
      *
      * Required API Key ACLs:

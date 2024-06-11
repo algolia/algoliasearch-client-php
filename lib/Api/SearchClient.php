@@ -2762,6 +2762,36 @@ class SearchClient
     }
 
     /**
+     * Wait for an application-level task to complete with `taskID`.
+     *
+     * @param int      $taskId         Task Id
+     * @param array    $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param null|int $maxRetries     Maximum number of retries
+     * @param null|int $timeout        Timeout
+     *
+     * @throws ExceededRetriesException
+     */
+    public function waitForAppTask($taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
+    {
+        if (null === $timeout) {
+            $timeout = $this->config->getWaitTaskTimeBeforeRetry();
+        }
+
+        if (null === $maxRetries) {
+            $maxRetries = $this->config->getDefaultMaxRetries();
+        }
+
+        Helpers::retryUntil(
+            $this,
+            'getAppTask',
+            [$taskId, $requestOptions],
+            function ($res) {return 'published' === $res['status']; },
+            $maxRetries,
+            $timeout
+        );
+    }
+
+    /**
      * Wait for an API key to be added, updated or deleted based on a given `operation`.
      *
      * @param string   $operation      the `operation` that was done on a `key`

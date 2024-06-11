@@ -2908,13 +2908,13 @@ class SearchClient
                 'action' => $action,
                 'body' => $object,
             ];
-            ++$count;
 
-            if ($count === $batchSize) {
+            if (sizeof($requests) === $batchSize || $count === sizeof($objects) - 1) {
                 $responses[] = $this->batch($indexName, ['requests' => $requests], $requestOptions);
                 $requests = [];
-                $count = 0;
             }
+
+            ++$count;
         }
 
         if (!empty($requests)) {

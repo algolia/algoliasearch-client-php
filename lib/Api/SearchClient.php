@@ -2872,6 +2872,7 @@ class SearchClient
 
     /**
      * Helper: Replace all objects in an index using a temporary one.
+     * See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
      *
      * @param string $indexName      the `indexName` to replace `objects` in
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
@@ -2880,27 +2881,36 @@ class SearchClient
      */
     public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [])
     {
-        $tmpIndex = $indexName.'_tmp_'.uniqid('php_', true);
+        $tmpIndexName = $indexName.'_tmp_'.uniqid('php_', true);
 
-        // Copy all index resources from production index
         $copyResponse = $this->operationIndex(
             $indexName,
             [
                 'operation' => 'copy',
-                'destination' => $tmpIndex,
+                'destination' => $tmpIndexName,
                 'scope' => ['settings', 'synonyms', 'rules'],
             ],
             $requestOptions
         );
 
-        $this->waitForTask($indexName, $copyResponse['taskID']);
+        $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
 
-        // Index objects in chunks
-        $this->chunkedBatch($tmpIndex, $objects, 'addObject', true, $batchSize, $requestOptions);
+        $this->waitForTask($tmpIndexName, $copyResponse['taskID']);
 
-        // Move temporary index to production
+        $copyResponse = $this->operationIndex(
+            $indexName,
+            [
+                'operation' => 'copy',
+                'destination' => $tmpIndexName,
+                'scope' => ['settings', 'synonyms', 'rules'],
+            ],
+            $requestOptions
+        );
+
+        $this->waitForTask($tmpIndexName, $copyResponse['taskID']);
+
         $moveResponse = $this->operationIndex(
-            $tmpIndex,
+            $tmpIndexName,
             [
                 'operation' => 'move',
                 'destination' => $indexName,
@@ -2908,7 +2918,7 @@ class SearchClient
             $requestOptions
         );
 
-        $this->waitForTask($tmpIndex, $moveResponse['taskID']);
+        $this->waitForTask($tmpIndexName, $moveResponse['taskID']);
     }
 
     /**

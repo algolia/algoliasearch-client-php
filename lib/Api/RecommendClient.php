@@ -18,7 +18,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class RecommendClient
 {
-    public const VERSION = '4.0.0-beta.3';
+    public const VERSION = '4.0.0-beta.4';
 
     /**
      * @var ApiWrapperInterface

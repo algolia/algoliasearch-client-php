@@ -533,7 +533,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC3339 format
+     * @param string $createdAt date of creation in RFC 3339 format
      *
      * @return self
      */
@@ -557,7 +557,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets startedAt.
      *
-     * @param null|string $startedAt date of start in RFC3339 format
+     * @param null|string $startedAt date of start in RFC 3339 format
      *
      * @return self
      */
@@ -581,7 +581,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets finishedAt.
      *
-     * @param null|string $finishedAt date of finish in RFC3339 format
+     * @param null|string $finishedAt date of finish in RFC 3339 format
      *
      * @return self
      */

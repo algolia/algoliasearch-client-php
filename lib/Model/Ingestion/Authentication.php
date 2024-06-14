@@ -348,7 +348,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC3339 format
+     * @param string $createdAt date of creation in RFC 3339 format
      *
      * @return self
      */
@@ -372,7 +372,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC3339 format
+     * @param null|string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

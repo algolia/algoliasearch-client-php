@@ -187,7 +187,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets startDate.
      *
-     * @param string $startDate earliest date in RFC3339 format of the extracted data from Big Query
+     * @param string $startDate earliest date in RFC 3339 format of the extracted data from Big Query
      *
      * @return self
      */
@@ -211,7 +211,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets endDate.
      *
-     * @param string $endDate latest date in RFC3339 format of the extracted data from Big Query
+     * @param string $endDate latest date in RFC 3339 format of the extracted data from Big Query
      *
      * @return self
      */

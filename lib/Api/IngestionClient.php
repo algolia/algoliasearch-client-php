@@ -954,8 +954,8 @@ class IngestionClient
      * @param array  $type           Event type for filtering the list of task runs. (optional)
      * @param array  $sort           Property by which to sort the list of task run events. (optional)
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
-     * @param string $startDate      Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)
-     * @param string $endDate        Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used. (optional)
+     * @param string $startDate      Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used. (optional)
+     * @param string $endDate        Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListEventsResponse|array<string, mixed>
@@ -1081,8 +1081,8 @@ class IngestionClient
      * @param string $taskID         Task ID for filtering the list of task runs. (optional)
      * @param array  $sort           Property by which to sort the list of task runs. (optional)
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
-     * @param string $startDate      Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
-     * @param string $endDate        Date in RFC3339 format for the latest run to retrieve. By default, the current day is used. (optional)
+     * @param string $startDate      Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used. (optional)
+     * @param string $endDate        Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunListResponse|array<string, mixed>

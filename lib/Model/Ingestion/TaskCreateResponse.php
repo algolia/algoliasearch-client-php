@@ -203,7 +203,7 @@ class TaskCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC3339 format
+     * @param string $createdAt date of creation in RFC 3339 format
      *
      * @return self
      */

@@ -203,7 +203,7 @@ class TaskUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update in RFC3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

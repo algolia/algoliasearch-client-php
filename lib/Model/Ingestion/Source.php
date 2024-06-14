@@ -347,7 +347,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC3339 format
+     * @param string $createdAt date of creation in RFC 3339 format
      *
      * @return self
      */
@@ -371,7 +371,7 @@ class Source extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC3339 format
+     * @param null|string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

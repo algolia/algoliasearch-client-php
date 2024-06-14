@@ -415,7 +415,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets publishedAt.
      *
-     * @param string $publishedAt date of publish RFC3339 format
+     * @param string $publishedAt date of publish RFC 3339 format
      *
      * @return self
      */

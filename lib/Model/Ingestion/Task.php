@@ -464,7 +464,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets createdAt.
      *
-     * @param string $createdAt date of creation in RFC3339 format
+     * @param string $createdAt date of creation in RFC 3339 format
      *
      * @return self
      */
@@ -488,7 +488,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets updatedAt.
      *
-     * @param null|string $updatedAt date of last update in RFC3339 format
+     * @param null|string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

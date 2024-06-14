@@ -179,7 +179,7 @@ class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets startDate.
      *
-     * @param string $startDate date in RFC3339 format representing the oldest data in the time window
+     * @param string $startDate date in RFC 3339 format representing the oldest data in the time window
      *
      * @return self
      */
@@ -203,7 +203,7 @@ class Window extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets endDate.
      *
-     * @param string $endDate date in RFC3339 format representing the newest data in the time window
+     * @param string $endDate date in RFC 3339 format representing the newest data in the time window
      *
      * @return self
      */

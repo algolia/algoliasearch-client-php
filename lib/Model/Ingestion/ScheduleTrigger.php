@@ -246,7 +246,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets lastRun.
      *
-     * @param null|string $lastRun the last time the scheduled task ran in RFC3339 format
+     * @param null|string $lastRun the last time the scheduled task ran in RFC 3339 format
      *
      * @return self
      */
@@ -270,7 +270,7 @@ class ScheduleTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets nextRun.
      *
-     * @param string $nextRun the next scheduled run of the task in RFC3339 format
+     * @param string $nextRun the next scheduled run of the task in RFC 3339 format
      *
      * @return self
      */

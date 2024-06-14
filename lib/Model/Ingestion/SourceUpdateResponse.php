@@ -237,7 +237,7 @@ class SourceUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets updatedAt.
      *
-     * @param string $updatedAt date of last update in RFC3339 format
+     * @param string $updatedAt date of last update in RFC 3339 format
      *
      * @return self
      */

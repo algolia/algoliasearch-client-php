@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 /**
- * SecuredAPIKeyRestrictions Class Doc Comment.
+ * SecuredApiKeyRestrictions Class Doc Comment.
  *
  * @category Class
  */
-class SecuredAPIKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SecuredApiKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

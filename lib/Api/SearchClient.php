@@ -2978,7 +2978,14 @@ class SearchClient
      */
     public static function generateSecuredApiKey($parentApiKey, $restrictions)
     {
-        $urlEncodedRestrictions = Helpers::buildQuery($restrictions);
+        $formattedRestrictions = $restrictions;
+        if (isset($restrictions['searchParams'])) {
+            $formattedRestrictions = array_merge($restrictions, $restrictions['searchParams']);
+            unset($formattedRestrictions['searchParams']);
+        }
+
+        ksort($formattedRestrictions);
+        $urlEncodedRestrictions = Helpers::buildQuery($formattedRestrictions);
 
         $content = hash_hmac('sha256', $urlEncodedRestrictions, $parentApiKey).$urlEncodedRestrictions;
 
@@ -2986,17 +2993,17 @@ class SearchClient
     }
 
     /**
-     * Helper: Returns the time the given securedAPIKey remains valid in seconds.
+     * Helper: Returns the time the given securedApiKey remains valid in seconds.
      *
-     * @param string $securedAPIKey the key to check
+     * @param string $securedApiKey the key to check
      *
      * @throws ValidUntilNotFoundException
      *
      * @return int remaining validity in seconds
      */
-    public static function getSecuredApiKeyRemainingValidity($securedAPIKey)
+    public static function getSecuredApiKeyRemainingValidity($securedApiKey)
     {
-        $decodedKey = base64_decode($securedAPIKey);
+        $decodedKey = base64_decode($securedApiKey);
         $regex = '/validUntil=(\d+)/';
         preg_match($regex, $decodedKey, $matches);
 

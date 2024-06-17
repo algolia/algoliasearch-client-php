@@ -43,7 +43,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
         'renderingContent' => '\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent',
         'serverTimeMS' => 'int',
         'serverUsed' => 'string',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'queryID' => 'string',
     ];
 
@@ -1060,7 +1060,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -1070,7 +1070,7 @@ class BaseSearchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
+     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

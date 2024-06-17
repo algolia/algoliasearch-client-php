@@ -31,7 +31,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         'numericAttributesForFiltering' => 'string[]',
         'separatorsToIndex' => 'string',
         'searchableAttributes' => 'string[]',
-        'userData' => 'mixed',
+        'userData' => 'object',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
     ];
@@ -625,7 +625,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -635,7 +635,7 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
+     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

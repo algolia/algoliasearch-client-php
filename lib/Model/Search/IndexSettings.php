@@ -1012,7 +1012,7 @@ class IndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets userData.
      *
-     * @param null|object $userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
+     * @param null|object $userData An object with custom data.  You can store up to 32kB as custom data.
      *
      * @return self
      */

@@ -24,7 +24,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel',
         'objectID' => 'string',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
-        'facetName' => 'object',
+        'facetName' => 'mixed',
         'facetValue' => 'string',
     ];
 
@@ -434,7 +434,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets facetName.
      *
-     * @return object
+     * @return mixed
      */
     public function getFacetName()
     {
@@ -444,7 +444,7 @@ class RecommendationsRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets facetName.
      *
-     * @param object $facetName facet attribute for which to retrieve trending facet values
+     * @param mixed $facetName facet attribute for which to retrieve trending facet values
      *
      * @return self
      */

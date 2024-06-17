@@ -21,7 +21,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
         'threshold' => 'float',
         'maxRecommendations' => 'int',
         'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
-        'facetName' => 'object',
+        'facetName' => 'mixed',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
@@ -340,7 +340,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets facetName.
      *
-     * @return object
+     * @return mixed
      */
     public function getFacetName()
     {
@@ -350,7 +350,7 @@ class TrendingFacetsQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets facetName.
      *
-     * @param object $facetName facet attribute for which to retrieve trending facet values
+     * @param mixed $facetName facet attribute for which to retrieve trending facet values
      *
      * @return self
      */

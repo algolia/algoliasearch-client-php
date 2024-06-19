@@ -1798,6 +1798,88 @@ class IngestionClient
         return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
+    /**
+     * Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array $sourceCreate (optional)
+     *                            - $sourceCreate['type'] => (array)  (required)
+     *                            - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
+     *                            - $sourceCreate['input'] => (array)  (required)
+     *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *
+     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceValidateResponse|array<string, mixed>
+     */
+    public function validateSource($sourceCreate = null, $requestOptions = [])
+    {
+        $resourcePath = '/1/sources/validate';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($sourceCreate) ? $sourceCreate : [];
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID     Unique identifier of a source. (required)
+     * @param array  $sourceUpdate sourceUpdate (required)
+     *                             - $sourceUpdate['name'] => (string) Descriptive name of the source.
+     *                             - $sourceUpdate['input'] => (array)
+     *                             - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *
+     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceValidateResponse|array<string, mixed>
+     */
+    public function validateSourceBeforeUpdate($sourceID, $sourceUpdate, $requestOptions = [])
+    {
+        // verify the required parameter 'sourceID' is set
+        if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`.'
+            );
+        }
+        // verify the required parameter 'sourceUpdate' is set
+        if (!isset($sourceUpdate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceUpdate` is required when calling `validateSourceBeforeUpdate`.'
+            );
+        }
+
+        $resourcePath = '/1/sources/{sourceID}/validate';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $sourceUpdate;
+
+        // path params
+        if (null !== $sourceID) {
+            $resourcePath = str_replace(
+                '{sourceID}',
+                ObjectSerializer::toPathValue($sourceID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)
     {
         if (!isset($requestOptions['headers'])) {

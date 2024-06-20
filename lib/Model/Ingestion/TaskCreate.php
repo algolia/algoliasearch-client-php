@@ -25,6 +25,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         'enabled' => 'bool',
         'failureThreshold' => 'int',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
+        'cursor' => 'string',
     ];
 
     /**
@@ -40,6 +41,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         'enabled' => null,
         'failureThreshold' => null,
         'input' => null,
+        'cursor' => null,
     ];
 
     /**
@@ -56,6 +58,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
         'input' => 'input',
+        'cursor' => 'cursor',
     ];
 
     /**
@@ -71,6 +74,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
         'input' => 'setInput',
+        'cursor' => 'setCursor',
     ];
 
     /**
@@ -86,6 +90,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
         'input' => 'getInput',
+        'cursor' => 'getCursor',
     ];
 
     /**
@@ -122,6 +127,9 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
+        }
+        if (isset($data['cursor'])) {
+            $this->container['cursor'] = $data['cursor'];
         }
     }
 
@@ -390,6 +398,30 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     public function setInput($input)
     {
         $this->container['input'] = $input;
+
+        return $this;
+    }
+
+    /**
+     * Gets cursor.
+     *
+     * @return null|string
+     */
+    public function getCursor()
+    {
+        return $this->container['cursor'] ?? null;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param null|string $cursor date of the last cursor in RFC 3339 format
+     *
+     * @return self
+     */
+    public function setCursor($cursor)
+    {
+        $this->container['cursor'] = $cursor;
 
         return $this;
     }

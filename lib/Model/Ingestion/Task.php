@@ -25,6 +25,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         'enabled' => 'bool',
         'failureThreshold' => 'int',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'cursor' => 'string',
         'createdAt' => 'string',
         'updatedAt' => 'string',
     ];
@@ -43,6 +44,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         'enabled' => null,
         'failureThreshold' => null,
         'action' => null,
+        'cursor' => null,
         'createdAt' => null,
         'updatedAt' => null,
     ];
@@ -62,6 +64,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
         'action' => 'action',
+        'cursor' => 'cursor',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
     ];
@@ -80,6 +83,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
         'action' => 'setAction',
+        'cursor' => 'setCursor',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
     ];
@@ -98,6 +102,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
         'action' => 'getAction',
+        'cursor' => 'getCursor',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
     ];
@@ -139,6 +144,9 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
         }
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
+        }
+        if (isset($data['cursor'])) {
+            $this->container['cursor'] = $data['cursor'];
         }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
@@ -447,6 +455,30 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     public function setAction($action)
     {
         $this->container['action'] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Gets cursor.
+     *
+     * @return null|string
+     */
+    public function getCursor()
+    {
+        return $this->container['cursor'] ?? null;
+    }
+
+    /**
+     * Sets cursor.
+     *
+     * @param null|string $cursor date of the last cursor in RFC 3339 format
+     *
+     * @return self
+     */
+    public function setCursor($cursor)
+    {
+        $this->container['cursor'] = $cursor;
 
         return $this;
     }

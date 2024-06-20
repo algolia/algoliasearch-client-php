@@ -218,6 +218,7 @@ class IngestionClient
      *                          - $taskCreate['enabled'] => (bool) Whether the task is enabled.
      *                          - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                          - $taskCreate['input'] => (array)
+     *                          - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
      *
      * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate
      *

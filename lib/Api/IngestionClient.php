@@ -846,45 +846,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param string $sourceID       Unique identifier of a source. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerSourceStreams|array<string, mixed>
-     */
-    public function getDockerSourceStreams($sourceID, $requestOptions = [])
-    {
-        // verify the required parameter 'sourceID' is set
-        if (!isset($sourceID)) {
-            throw new \InvalidArgumentException(
-                'Parameter `sourceID` is required when calling `getDockerSourceStreams`.'
-            );
-        }
-
-        $resourcePath = '/1/sources/{sourceID}/discover';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        // path params
-        if (null !== $sourceID) {
-            $resourcePath = str_replace(
-                '{sourceID}',
-                ObjectSerializer::toPathValue($sourceID),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieves a single task run event by its ID.
      *
      * Required API Key ACLs:
@@ -1563,7 +1524,7 @@ class IngestionClient
      * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerSourceDiscover|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
      */
     public function triggerDockerSourceDiscover($sourceID, $requestOptions = [])
     {
@@ -1816,7 +1777,7 @@ class IngestionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceValidateResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
      */
     public function validateSource($sourceCreate = null, $requestOptions = [])
     {
@@ -1846,7 +1807,7 @@ class IngestionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceValidateResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
      */
     public function validateSourceBeforeUpdate($sourceID, $sourceUpdate, $requestOptions = [])
     {

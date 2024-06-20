@@ -5,11 +5,11 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * DockerSourceDiscover Class Doc Comment.
+ * SourceWatchResponse Class Doc Comment.
  *
  * @category Class
  */
-class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceWatchResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,7 +18,9 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $modelTypes = [
         'runID' => 'string',
-        'createdAt' => 'string',
+        'data' => 'object[]',
+        'events' => '\Algolia\AlgoliaSearch\Model\Ingestion\Event[]',
+        'message' => 'string',
     ];
 
     /**
@@ -28,7 +30,9 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $modelFormats = [
         'runID' => null,
-        'createdAt' => null,
+        'data' => null,
+        'events' => null,
+        'message' => null,
     ];
 
     /**
@@ -39,7 +43,9 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $attributeMap = [
         'runID' => 'runID',
-        'createdAt' => 'createdAt',
+        'data' => 'data',
+        'events' => 'events',
+        'message' => 'message',
     ];
 
     /**
@@ -49,7 +55,9 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $setters = [
         'runID' => 'setRunID',
-        'createdAt' => 'setCreatedAt',
+        'data' => 'setData',
+        'events' => 'setEvents',
+        'message' => 'setMessage',
     ];
 
     /**
@@ -59,7 +67,9 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      */
     protected static $getters = [
         'runID' => 'getRunID',
-        'createdAt' => 'getCreatedAt',
+        'data' => 'getData',
+        'events' => 'getEvents',
+        'message' => 'getMessage',
     ];
 
     /**
@@ -79,8 +89,14 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
         if (isset($data['runID'])) {
             $this->container['runID'] = $data['runID'];
         }
-        if (isset($data['createdAt'])) {
-            $this->container['createdAt'] = $data['createdAt'];
+        if (isset($data['data'])) {
+            $this->container['data'] = $data['data'];
+        }
+        if (isset($data['events'])) {
+            $this->container['events'] = $data['events'];
+        }
+        if (isset($data['message'])) {
+            $this->container['message'] = $data['message'];
         }
     }
 
@@ -144,11 +160,8 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['runID']) || null === $this->container['runID']) {
-            $invalidProperties[] = "'runID' can't be null";
-        }
-        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
-            $invalidProperties[] = "'createdAt' can't be null";
+        if (!isset($this->container['message']) || null === $this->container['message']) {
+            $invalidProperties[] = "'message' can't be null";
         }
 
         return $invalidProperties;
@@ -168,7 +181,7 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets runID.
      *
-     * @return string
+     * @return null|string
      */
     public function getRunID()
     {
@@ -178,7 +191,7 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets runID.
      *
-     * @param string $runID universally unique identifier (UUID) of a task run
+     * @param null|string $runID universally unique identifier (UUID) of a task run
      *
      * @return self
      */
@@ -190,25 +203,73 @@ class DockerSourceDiscover extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     }
 
     /**
-     * Gets createdAt.
+     * Gets data.
      *
-     * @return string
+     * @return null|object[]
      */
-    public function getCreatedAt()
+    public function getData()
     {
-        return $this->container['createdAt'] ?? null;
+        return $this->container['data'] ?? null;
     }
 
     /**
-     * Sets createdAt.
+     * Sets data.
      *
-     * @param string $createdAt date of creation in RFC 3339 format
+     * @param null|object[] $data depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery)
      *
      * @return self
      */
-    public function setCreatedAt($createdAt)
+    public function setData($data)
     {
-        $this->container['createdAt'] = $createdAt;
+        $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Gets events.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[]
+     */
+    public function getEvents()
+    {
+        return $this->container['events'] ?? null;
+    }
+
+    /**
+     * Sets events.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[] $events in case of error, observability events will be added to the response, if any
+     *
+     * @return self
+     */
+    public function setEvents($events)
+    {
+        $this->container['events'] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Gets message.
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'] ?? null;
+    }
+
+    /**
+     * Sets message.
+     *
+     * @param string $message a message describing the outcome of a validate run
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
 
         return $this;
     }

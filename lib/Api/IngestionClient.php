@@ -18,7 +18,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class IngestionClient
 {
-    public const VERSION = '4.0.0-beta.4';
+    public const VERSION = '4.0.0-beta.5';
 
     /**
      * @var ApiWrapperInterface

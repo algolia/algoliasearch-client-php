@@ -2881,9 +2881,9 @@ class SearchClient
      */
     public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [])
     {
-        $tmpIndexName = $indexName.'_tmp_'.uniqid('php_', true);
+        $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
-        $copyResponse = $this->operationIndex(
+        $copyOperationResponse = $this->operationIndex(
             $indexName,
             [
                 'operation' => 'copy',
@@ -2893,11 +2893,11 @@ class SearchClient
             $requestOptions
         );
 
-        $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
+        $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
 
-        $this->waitForTask($tmpIndexName, $copyResponse['taskID']);
+        $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
 
-        $copyResponse = $this->operationIndex(
+        $copyOperationResponse = $this->operationIndex(
             $indexName,
             [
                 'operation' => 'copy',
@@ -2907,9 +2907,9 @@ class SearchClient
             $requestOptions
         );
 
-        $this->waitForTask($tmpIndexName, $copyResponse['taskID']);
+        $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
 
-        $moveResponse = $this->operationIndex(
+        $moveOperationResponse = $this->operationIndex(
             $tmpIndexName,
             [
                 'operation' => 'move',
@@ -2918,7 +2918,13 @@ class SearchClient
             $requestOptions
         );
 
-        $this->waitForTask($tmpIndexName, $moveResponse['taskID']);
+        $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+
+        return [
+            'copyOperationResponse' => $copyOperationResponse,
+            'batchResponses' => $batchResponses,
+            'moveOperationResponse' => $moveOperationResponse,
+        ];
     }
 
     /**
@@ -2966,6 +2972,8 @@ class SearchClient
                 $this->waitForTask($indexName, $response['taskID']);
             }
         }
+
+        return $responses;
     }
 
     /**

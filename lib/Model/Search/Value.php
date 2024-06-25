@@ -19,6 +19,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     protected static $modelTypes = [
         'order' => 'string[]',
         'sortRemainingBy' => '\Algolia\AlgoliaSearch\Model\Search\SortRemainingBy',
+        'hide' => 'string[]',
     ];
 
     /**
@@ -29,6 +30,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     protected static $modelFormats = [
         'order' => null,
         'sortRemainingBy' => null,
+        'hide' => null,
     ];
 
     /**
@@ -40,6 +42,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     protected static $attributeMap = [
         'order' => 'order',
         'sortRemainingBy' => 'sortRemainingBy',
+        'hide' => 'hide',
     ];
 
     /**
@@ -50,6 +53,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     protected static $setters = [
         'order' => 'setOrder',
         'sortRemainingBy' => 'setSortRemainingBy',
+        'hide' => 'setHide',
     ];
 
     /**
@@ -60,6 +64,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     protected static $getters = [
         'order' => 'getOrder',
         'sortRemainingBy' => 'getSortRemainingBy',
+        'hide' => 'getHide',
     ];
 
     /**
@@ -81,6 +86,9 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
         }
         if (isset($data['sortRemainingBy'])) {
             $this->container['sortRemainingBy'] = $data['sortRemainingBy'];
+        }
+        if (isset($data['hide'])) {
+            $this->container['hide'] = $data['hide'];
         }
     }
 
@@ -200,6 +208,30 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     public function setSortRemainingBy($sortRemainingBy)
     {
         $this->container['sortRemainingBy'] = $sortRemainingBy;
+
+        return $this;
+    }
+
+    /**
+     * Gets hide.
+     *
+     * @return null|string[]
+     */
+    public function getHide()
+    {
+        return $this->container['hide'] ?? null;
+    }
+
+    /**
+     * Sets hide.
+     *
+     * @param null|string[] $hide hide facet values
+     *
+     * @return self
+     */
+    public function setHide($hide)
+    {
+        $this->container['hide'] = $hide;
 
         return $this;
     }

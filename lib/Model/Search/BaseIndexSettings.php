@@ -19,7 +19,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelTypes = [
         'attributesForFaceting' => 'string[]',
         'replicas' => 'string[]',
-        'virtual' => 'bool',
         'paginationLimitedTo' => 'int',
         'unretrievableAttributes' => 'string[]',
         'disableTypoToleranceOnWords' => 'string[]',
@@ -45,7 +44,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $modelFormats = [
         'attributesForFaceting' => null,
         'replicas' => null,
-        'virtual' => null,
         'paginationLimitedTo' => null,
         'unretrievableAttributes' => null,
         'disableTypoToleranceOnWords' => null,
@@ -72,7 +70,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $attributeMap = [
         'attributesForFaceting' => 'attributesForFaceting',
         'replicas' => 'replicas',
-        'virtual' => 'virtual',
         'paginationLimitedTo' => 'paginationLimitedTo',
         'unretrievableAttributes' => 'unretrievableAttributes',
         'disableTypoToleranceOnWords' => 'disableTypoToleranceOnWords',
@@ -98,7 +95,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $setters = [
         'attributesForFaceting' => 'setAttributesForFaceting',
         'replicas' => 'setReplicas',
-        'virtual' => 'setVirtual',
         'paginationLimitedTo' => 'setPaginationLimitedTo',
         'unretrievableAttributes' => 'setUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'setDisableTypoToleranceOnWords',
@@ -124,7 +120,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     protected static $getters = [
         'attributesForFaceting' => 'getAttributesForFaceting',
         'replicas' => 'getReplicas',
-        'virtual' => 'getVirtual',
         'paginationLimitedTo' => 'getPaginationLimitedTo',
         'unretrievableAttributes' => 'getUnretrievableAttributes',
         'disableTypoToleranceOnWords' => 'getDisableTypoToleranceOnWords',
@@ -161,9 +156,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
         }
         if (isset($data['replicas'])) {
             $this->container['replicas'] = $data['replicas'];
-        }
-        if (isset($data['virtual'])) {
-            $this->container['virtual'] = $data['virtual'];
         }
         if (isset($data['paginationLimitedTo'])) {
             $this->container['paginationLimitedTo'] = $data['paginationLimitedTo'];
@@ -334,30 +326,6 @@ class BaseIndexSettings extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     public function setReplicas($replicas)
     {
         $this->container['replicas'] = $replicas;
-
-        return $this;
-    }
-
-    /**
-     * Gets virtual.
-     *
-     * @return null|bool
-     */
-    public function getVirtual()
-    {
-        return $this->container['virtual'] ?? null;
-    }
-
-    /**
-     * Sets virtual.
-     *
-     * @param null|bool $virtual Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
-     *
-     * @return self
-     */
-    public function setVirtual($virtual)
-    {
-        $this->container['virtual'] = $virtual;
 
         return $this;
     }

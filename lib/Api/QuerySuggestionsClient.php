@@ -18,7 +18,7 @@ use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
  */
 class QuerySuggestionsClient
 {
-    public const VERSION = '4.0.0-beta.5';
+    public const VERSION = '4.0.0-beta.6';
 
     /**
      * @var ApiWrapperInterface

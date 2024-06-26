@@ -2928,6 +2928,50 @@ class SearchClient
     }
 
     /**
+     * Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+     *
+     * @param string $indexName      the `indexName` to replace `objects` in
+     * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $requestOptions Request options
+     */
+    public function saveObjects($indexName, $objects)
+    {
+        return chunkedBatch($indexName, $objects, 'addObject', false, 1000, $requestOptions);
+    }
+
+    /**
+     * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
+     *
+     * @param string $indexName      the `indexName` to delete `objectIDs` from
+     * @param array  $objectIDs      the `objectIDs` to delete
+     * @param array  $requestOptions Request options
+     * @param mixed  $objects
+     */
+    public function deleteObjects($indexName, $objects)
+    {
+        $objects = [];
+
+        foreach ($id as $objectIDs) {
+            $objects[] = ['objectID' => $id];
+        }
+
+        return chunkedBatch($indexName, $objects, 'deleteObjects', false, 1000, $requestOptions);
+    }
+
+    /**
+     * Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+     *
+     * @param string $indexName         the `indexName` to replace `objects` in
+     * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
+     * @param bool   $createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+     * @param array  $requestOptions    Request options
+     */
+    public function partialUpdateObjects($indexName, $objects, $createIfNotExists)
+    {
+        return chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', false, 1000, $requestOptions);
+    }
+
+    /**
      * Helper: Chunks the given `objects` list in subset of 1000 elements max in order to make it fit in `batch` requests.
      *
      * @param string $indexName      the `indexName` to replace `objects` in

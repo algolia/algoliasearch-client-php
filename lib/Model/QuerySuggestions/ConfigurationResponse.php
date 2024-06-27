@@ -5,12 +5,12 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 /**
- * QuerySuggestionsConfiguration Class Doc Comment.
+ * ConfigurationResponse Class Doc Comment.
  *
  * @category Class
- * @description Query Suggestions configuration.
+ * @description API response for retrieving Query Suggestions configurations.
  */
-class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ConfigurationResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -18,6 +18,8 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelTypes = [
+        'appID' => 'string',
+        'indexName' => 'string',
         'sourceIndices' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\SourceIndex[]',
         'languages' => '\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages',
         'exclude' => 'string[]',
@@ -31,6 +33,8 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $modelFormats = [
+        'appID' => null,
+        'indexName' => null,
         'sourceIndices' => null,
         'languages' => null,
         'exclude' => null,
@@ -45,6 +49,8 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $attributeMap = [
+        'appID' => 'appID',
+        'indexName' => 'indexName',
         'sourceIndices' => 'sourceIndices',
         'languages' => 'languages',
         'exclude' => 'exclude',
@@ -58,6 +64,8 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $setters = [
+        'appID' => 'setAppID',
+        'indexName' => 'setIndexName',
         'sourceIndices' => 'setSourceIndices',
         'languages' => 'setLanguages',
         'exclude' => 'setExclude',
@@ -71,6 +79,8 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      * @var string[]
      */
     protected static $getters = [
+        'appID' => 'getAppID',
+        'indexName' => 'getIndexName',
         'sourceIndices' => 'getSourceIndices',
         'languages' => 'getLanguages',
         'exclude' => 'getExclude',
@@ -92,6 +102,12 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
      */
     public function __construct(array $data = null)
     {
+        if (isset($data['appID'])) {
+            $this->container['appID'] = $data['appID'];
+        }
+        if (isset($data['indexName'])) {
+            $this->container['indexName'] = $data['indexName'];
+        }
         if (isset($data['sourceIndices'])) {
             $this->container['sourceIndices'] = $data['sourceIndices'];
         }
@@ -169,11 +185,30 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['appID']) || null === $this->container['appID']) {
+            $invalidProperties[] = "'appID' can't be null";
+        }
+        if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
+            $invalidProperties[] = "'indexName' can't be null";
+        }
         if (!isset($this->container['sourceIndices']) || null === $this->container['sourceIndices']) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
         if (count($this->container['sourceIndices']) < 1) {
             $invalidProperties[] = "invalid value for 'sourceIndices', number of items must be greater than or equal to 1.";
+        }
+
+        if (!isset($this->container['languages']) || null === $this->container['languages']) {
+            $invalidProperties[] = "'languages' can't be null";
+        }
+        if (!isset($this->container['exclude']) || null === $this->container['exclude']) {
+            $invalidProperties[] = "'exclude' can't be null";
+        }
+        if (!isset($this->container['enablePersonalization']) || null === $this->container['enablePersonalization']) {
+            $invalidProperties[] = "'enablePersonalization' can't be null";
+        }
+        if (!isset($this->container['allowSpecialCharacters']) || null === $this->container['allowSpecialCharacters']) {
+            $invalidProperties[] = "'allowSpecialCharacters' can't be null";
         }
 
         return $invalidProperties;
@@ -188,6 +223,54 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets appID.
+     *
+     * @return string
+     */
+    public function getAppID()
+    {
+        return $this->container['appID'] ?? null;
+    }
+
+    /**
+     * Sets appID.
+     *
+     * @param string $appID algolia application ID to which this Query Suggestions configuration belongs
+     *
+     * @return self
+     */
+    public function setAppID($appID)
+    {
+        $this->container['appID'] = $appID;
+
+        return $this;
+    }
+
+    /**
+     * Gets indexName.
+     *
+     * @return string
+     */
+    public function getIndexName()
+    {
+        return $this->container['indexName'] ?? null;
+    }
+
+    /**
+     * Sets indexName.
+     *
+     * @param string $indexName name of the Query Suggestions index (case-sensitive)
+     *
+     * @return self
+     */
+    public function setIndexName($indexName)
+    {
+        $this->container['indexName'] = $indexName;
+
+        return $this;
     }
 
     /**
@@ -210,7 +293,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     public function setSourceIndices($sourceIndices)
     {
         if (count($sourceIndices) < 1) {
-            throw new \InvalidArgumentException('invalid length for $sourceIndices when calling QuerySuggestionsConfiguration., number of items must be greater than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $sourceIndices when calling ConfigurationResponse., number of items must be greater than or equal to 1.');
         }
         $this->container['sourceIndices'] = $sourceIndices;
 
@@ -220,7 +303,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets languages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
      */
     public function getLanguages()
     {
@@ -230,7 +313,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets languages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
+     * @param \Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
      *
      * @return self
      */
@@ -244,7 +327,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets exclude.
      *
-     * @return null|string[]
+     * @return string[]
      */
     public function getExclude()
     {
@@ -254,7 +337,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets exclude.
      *
-     * @param null|string[] $exclude exclude
+     * @param string[] $exclude exclude
      *
      * @return self
      */
@@ -268,7 +351,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets enablePersonalization.
      *
-     * @return null|bool
+     * @return bool
      */
     public function getEnablePersonalization()
     {
@@ -278,7 +361,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets enablePersonalization.
      *
-     * @param null|bool $enablePersonalization whether to turn on personalized query suggestions
+     * @param bool $enablePersonalization whether to turn on personalized query suggestions
      *
      * @return self
      */
@@ -292,7 +375,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets allowSpecialCharacters.
      *
-     * @return null|bool
+     * @return bool
      */
     public function getAllowSpecialCharacters()
     {
@@ -302,7 +385,7 @@ class QuerySuggestionsConfiguration extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets allowSpecialCharacters.
      *
-     * @param null|bool $allowSpecialCharacters whether to include suggestions with special characters
+     * @param bool $allowSpecialCharacters whether to include suggestions with special characters
      *
      * @return self
      */

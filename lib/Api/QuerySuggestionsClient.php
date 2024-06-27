@@ -102,27 +102,27 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $querySuggestionsConfigurationWithIndex querySuggestionsConfigurationWithIndex (required)
+     * @param array $configurationWithIndex configurationWithIndex (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationWithIndex
+     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
      */
-    public function createConfig($querySuggestionsConfigurationWithIndex, $requestOptions = [])
+    public function createConfig($configurationWithIndex, $requestOptions = [])
     {
-        // verify the required parameter 'querySuggestionsConfigurationWithIndex' is set
-        if (!isset($querySuggestionsConfigurationWithIndex)) {
+        // verify the required parameter 'configurationWithIndex' is set
+        if (!isset($configurationWithIndex)) {
             throw new \InvalidArgumentException(
-                'Parameter `querySuggestionsConfigurationWithIndex` is required when calling `createConfig`.'
+                'Parameter `configurationWithIndex` is required when calling `createConfig`.'
             );
         }
 
         $resourcePath = '/1/configs';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $querySuggestionsConfigurationWithIndex;
+        $httpBody = $configurationWithIndex;
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
@@ -330,7 +330,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse[]|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse[]|array<string, mixed>
      */
     public function getAllConfigs($requestOptions = [])
     {
@@ -351,7 +351,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfigurationResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse|array<string, mixed>
      */
     public function getConfig($indexName, $requestOptions = [])
     {
@@ -459,21 +459,21 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName                     Query Suggestions index name. (required)
-     * @param array  $querySuggestionsConfiguration querySuggestionsConfiguration (required)
-     *                                              - $querySuggestionsConfiguration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
-     *                                              - $querySuggestionsConfiguration['languages'] => (array)
-     *                                              - $querySuggestionsConfiguration['exclude'] => (array)
-     *                                              - $querySuggestionsConfiguration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
-     *                                              - $querySuggestionsConfiguration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
+     * @param string $indexName     Query Suggestions index name. (required)
+     * @param array  $configuration configuration (required)
+     *                              - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
+     *                              - $configuration['languages'] => (array)
+     *                              - $configuration['exclude'] => (array)
+     *                              - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
+     *                              - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *
-     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\QuerySuggestionsConfiguration
+     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\Configuration
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
      */
-    public function updateConfig($indexName, $querySuggestionsConfiguration, $requestOptions = [])
+    public function updateConfig($indexName, $configuration, $requestOptions = [])
     {
         // verify the required parameter 'indexName' is set
         if (!isset($indexName)) {
@@ -481,17 +481,17 @@ class QuerySuggestionsClient
                 'Parameter `indexName` is required when calling `updateConfig`.'
             );
         }
-        // verify the required parameter 'querySuggestionsConfiguration' is set
-        if (!isset($querySuggestionsConfiguration)) {
+        // verify the required parameter 'configuration' is set
+        if (!isset($configuration)) {
             throw new \InvalidArgumentException(
-                'Parameter `querySuggestionsConfiguration` is required when calling `updateConfig`.'
+                'Parameter `configuration` is required when calling `updateConfig`.'
             );
         }
 
         $resourcePath = '/1/configs/{indexName}';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $querySuggestionsConfiguration;
+        $httpBody = $configuration;
 
         // path params
         if (null !== $indexName) {

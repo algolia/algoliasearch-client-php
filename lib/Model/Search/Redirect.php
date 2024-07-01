@@ -8,7 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Redirect Class Doc Comment.
  *
  * @category Class
- * @description [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/).
+ * @description [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/), this this parameter is for internal use only.
  */
 class Redirect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

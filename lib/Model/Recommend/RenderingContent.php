@@ -19,6 +19,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     protected static $modelTypes = [
         'facetOrdering' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering',
+        'redirect' => '\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL',
     ];
 
     /**
@@ -28,6 +29,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     protected static $modelFormats = [
         'facetOrdering' => null,
+        'redirect' => null,
     ];
 
     /**
@@ -38,6 +40,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     protected static $attributeMap = [
         'facetOrdering' => 'facetOrdering',
+        'redirect' => 'redirect',
     ];
 
     /**
@@ -47,6 +50,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     protected static $setters = [
         'facetOrdering' => 'setFacetOrdering',
+        'redirect' => 'setRedirect',
     ];
 
     /**
@@ -56,6 +60,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      */
     protected static $getters = [
         'facetOrdering' => 'getFacetOrdering',
+        'redirect' => 'getRedirect',
     ];
 
     /**
@@ -74,6 +79,9 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     {
         if (isset($data['facetOrdering'])) {
             $this->container['facetOrdering'] = $data['facetOrdering'];
+        }
+        if (isset($data['redirect'])) {
+            $this->container['redirect'] = $data['redirect'];
         }
     }
 
@@ -169,6 +177,30 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     public function setFacetOrdering($facetOrdering)
     {
         $this->container['facetOrdering'] = $facetOrdering;
+
+        return $this;
+    }
+
+    /**
+     * Gets redirect.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL
+     */
+    public function getRedirect()
+    {
+        return $this->container['redirect'] ?? null;
+    }
+
+    /**
+     * Sets redirect.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL $redirect redirect
+     *
+     * @return self
+     */
+    public function setRedirect($redirect)
+    {
+        $this->container['redirect'] = $redirect;
 
         return $this;
     }

@@ -2888,7 +2888,7 @@ class SearchClient
             [
                 'operation' => 'copy',
                 'destination' => $tmpIndexName,
-                'scope' => ['settings', 'synonyms', 'rules'],
+                'scope' => ['settings', 'rules', 'synonyms'],
             ],
             $requestOptions
         );
@@ -2902,7 +2902,7 @@ class SearchClient
             [
                 'operation' => 'copy',
                 'destination' => $tmpIndexName,
-                'scope' => ['settings', 'synonyms', 'rules'],
+                'scope' => ['settings', 'rules', 'synonyms'],
             ],
             $requestOptions
         );
@@ -2936,7 +2936,7 @@ class SearchClient
      */
     public function saveObjects($indexName, $objects)
     {
-        return chunkedBatch($indexName, $objects, 'addObject', false, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'addObject', false, 1000, $requestOptions);
     }
 
     /**
@@ -2945,17 +2945,16 @@ class SearchClient
      * @param string $indexName      the `indexName` to delete `objectIDs` from
      * @param array  $objectIDs      the `objectIDs` to delete
      * @param array  $requestOptions Request options
-     * @param mixed  $objects
      */
-    public function deleteObjects($indexName, $objects)
+    public function deleteObjects($indexName, $objectIDs)
     {
         $objects = [];
 
-        foreach ($id as $objectIDs) {
+        foreach ($objectIDs as $id) {
             $objects[] = ['objectID' => $id];
         }
 
-        return chunkedBatch($indexName, $objects, 'deleteObjects', false, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'deleteObject', false, 1000, $requestOptions);
     }
 
     /**
@@ -2968,7 +2967,7 @@ class SearchClient
      */
     public function partialUpdateObjects($indexName, $objects, $createIfNotExists)
     {
-        return chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', false, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', false, 1000, $requestOptions);
     }
 
     /**

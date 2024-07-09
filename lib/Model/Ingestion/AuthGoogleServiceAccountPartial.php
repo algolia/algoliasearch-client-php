@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AuthGoogleServiceAccountPartial Class Doc Comment.
  *
  * @category Class
+ *
  * @description Credentials for authenticating with a Google service account, such as BigQuery.
  */
-class AuthGoogleServiceAccountPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AuthGoogleServiceAccountPartial extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class AuthGoogleServiceAccountPartial extends \Algolia\AlgoliaSearch\Model\Abstr
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['clientEmail'])) {
             $this->container['clientEmail'] = $data['clientEmail'];

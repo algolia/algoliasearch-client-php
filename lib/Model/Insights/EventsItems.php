@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * EventsItems Class Doc Comment.
  *
  * @category Class
  */
-class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EventsItems extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -134,7 +136,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -401,7 +403,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
+     * @return ViewEvent
      */
     public function getEventType()
     {
@@ -411,7 +413,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
+     * @param ViewEvent $eventType eventType
      *
      * @return self
      */
@@ -635,7 +637,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets eventSubtype.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent
+     * @return AddToCartEvent
      */
     public function getEventSubtype()
     {
@@ -645,7 +647,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets eventSubtype.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent $eventSubtype eventSubtype
+     * @param AddToCartEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -713,7 +715,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets value.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Value
+     * @return null|Value
      */
     public function getValue()
     {
@@ -723,7 +725,7 @@ class EventsItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets value.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Value $value value
+     * @param null|Value $value value
      *
      * @return self
      */

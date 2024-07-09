@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * MappingKitAction Class Doc Comment.
  *
  * @category Class
+ *
  * @description Describes how a destination object should be resolved by means of applying a set of directives.
  */
-class MappingKitAction extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MappingKitAction extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class MappingKitAction extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['id'])) {
             $this->container['id'] = $data['id'];

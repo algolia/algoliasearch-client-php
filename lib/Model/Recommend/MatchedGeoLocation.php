@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * MatchedGeoLocation Class Doc Comment.
  *
  * @category Class
  */
-class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MatchedGeoLocation extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class MatchedGeoLocation extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['lat'])) {
             $this->container['lat'] = $data['lat'];

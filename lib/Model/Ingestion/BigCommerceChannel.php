@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BigCommerceChannel Class Doc Comment.
  *
  * @category Class
  */
-class BigCommerceChannel extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BigCommerceChannel extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class BigCommerceChannel extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['id'])) {
             $this->container['id'] = $data['id'];

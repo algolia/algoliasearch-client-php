@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SetPersonalizationStrategyResponse Class Doc Comment.
  *
  * @category Class
  */
-class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SetPersonalizationStrategyResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class SetPersonalizationStrategyResponse extends \Algolia\AlgoliaSearch\Model\Ab
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['message'])) {
             $this->container['message'] = $data['message'];

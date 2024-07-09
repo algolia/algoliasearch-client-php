@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TopHitWithRevenueAnalytics Class Doc Comment.
  *
  * @category Class
  */
-class TopHitWithRevenueAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -124,7 +126,7 @@ class TopHitWithRevenueAnalytics extends \Algolia\AlgoliaSearch\Model\AbstractMo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['hit'])) {
             $this->container['hit'] = $data['hit'];

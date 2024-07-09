@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ScheduleDateUtilsInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Input for scheduled tasks whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
  */
-class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['timeframe'])) {
             $this->container['timeframe'] = $data['timeframe'];
@@ -204,7 +207,7 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets mapping.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return null|MappingInput
      */
     public function getMapping()
     {
@@ -214,7 +217,7 @@ class ScheduleDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets mapping.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param null|MappingInput $mapping mapping
      *
      * @return self
      */

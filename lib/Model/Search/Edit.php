@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Edit Class Doc Comment.
  *
  * @category Class
  */
-class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Edit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -167,7 +169,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\EditType
+     * @return null|EditType
      */
     public function getType()
     {
@@ -177,7 +179,7 @@ class Edit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\EditType $type type
+     * @param null|EditType $type type
      *
      * @return self
      */

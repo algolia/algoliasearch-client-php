@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AroundPrecision Class Doc Comment.
  *
  * @category Class
+ *
  * @description Precision of a coordinate-based search in meters to group results with similar distances.  The Geo ranking criterion considers all matches within the same range of distances to be equal.
  */
-class AroundPrecision extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AroundPrecision extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -65,9 +68,7 @@ class AroundPrecision extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DictionaryLanguage Class Doc Comment.
  *
  * @category Class
+ *
  * @description Dictionary type. If &#x60;null&#x60;, this dictionary type isn&#39;t supported for the language.
  */
-class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionaryLanguage extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class DictionaryLanguage extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['nbCustomEntries'])) {
             $this->container['nbCustomEntries'] = $data['nbCustomEntries'];

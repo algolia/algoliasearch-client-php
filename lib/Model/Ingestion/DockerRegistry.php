@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DockerRegistry Class Doc Comment.
  *
  * @category Class
+ *
  * @description Container registry name from where to pull the image.
  */
 class DockerRegistry

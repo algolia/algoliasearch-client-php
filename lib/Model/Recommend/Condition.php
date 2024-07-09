@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Condition Class Doc Comment.
  *
  * @category Class
+ *
  * @description Condition that triggers the rule. If not specified, the rule is triggered for all recommendations.
  */
-class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];

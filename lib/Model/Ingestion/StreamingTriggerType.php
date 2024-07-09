@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * StreamingTriggerType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Task runs continuously.
  */
 class StreamingTriggerType

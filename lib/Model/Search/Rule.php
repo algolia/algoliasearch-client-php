@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Rule Class Doc Comment.
  *
  * @category Class
+ *
  * @description Rule object.
  */
-class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -95,7 +98,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -259,7 +262,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets consequence.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Consequence
+     * @return null|Consequence
      */
     public function getConsequence()
     {
@@ -269,7 +272,7 @@ class Rule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets consequence.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Consequence $consequence consequence
+     * @param null|Consequence $consequence consequence
      *
      * @return self
      */

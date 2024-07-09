@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Event Class Doc Comment.
  *
  * @category Class
+ *
  * @description An event describe a step of the task execution flow..
  */
-class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -105,7 +108,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventID'])) {
             $this->container['eventID'] = $data['eventID'];
@@ -305,7 +308,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\EventStatus
+     * @return EventStatus
      */
     public function getStatus()
     {
@@ -315,7 +318,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\EventStatus $status status
+     * @param EventStatus $status status
      *
      * @return self
      */
@@ -329,7 +332,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\EventType
+     * @return EventType
      */
     public function getType()
     {
@@ -339,7 +342,7 @@ class Event extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\EventType $type type
+     * @param EventType $type type
      *
      * @return self
      */

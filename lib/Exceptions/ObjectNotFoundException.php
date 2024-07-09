@@ -2,6 +2,4 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-final class ObjectNotFoundException extends AlgoliaException
-{
-}
+final class ObjectNotFoundException extends AlgoliaException {}

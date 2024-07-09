@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Log Class Doc Comment.
  *
  * @category Class
  */
-class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -139,7 +141,7 @@ class Log extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];

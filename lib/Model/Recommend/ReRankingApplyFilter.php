@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ReRankingApplyFilter Class Doc Comment.
  *
  * @category Class
+ *
  * @description Restrict [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) to records that match these filters.
  */
-class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ReRankingApplyFilter extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -65,9 +68,7 @@ class ReRankingApplyFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

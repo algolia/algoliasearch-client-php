@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BaseResponse Class Doc Comment.
  *
  * @category Class
  */
-class BaseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class BaseResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];

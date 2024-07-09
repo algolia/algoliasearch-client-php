@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ClickedObjectIDs Class Doc Comment.
  *
  * @category Class
+ *
  * @description Use this event to track when users click items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track click events related to Algolia requests, use the \&quot;Clicked object IDs after search\&quot; event.
  */
-class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -100,7 +103,7 @@ class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -295,7 +298,7 @@ class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     * @return ClickEvent
      */
     public function getEventType()
     {
@@ -305,7 +308,7 @@ class ClickedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     * @param ClickEvent $eventType eventType
      *
      * @return self
      */

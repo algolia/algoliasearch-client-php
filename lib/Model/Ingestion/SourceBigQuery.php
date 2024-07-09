@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceBigQuery Class Doc Comment.
  *
  * @category Class
  */
-class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceBigQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -99,7 +101,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['projectID'])) {
             $this->container['projectID'] = $data['projectID'];
@@ -256,7 +258,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets dataType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
+     * @return null|BigQueryDataType
      */
     public function getDataType()
     {
@@ -266,7 +268,7 @@ class SourceBigQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets dataType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
+     * @param null|BigQueryDataType $dataType dataType
      *
      * @return self
      */

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BatchParams Class Doc Comment.
  *
  * @category Class
+ *
  * @description Batch parameters.
  */
-class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class BatchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['requests'])) {
             $this->container['requests'] = $data['requests'];

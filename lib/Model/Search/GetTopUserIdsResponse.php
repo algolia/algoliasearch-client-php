@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetTopUserIdsResponse Class Doc Comment.
  *
  * @category Class
+ *
  * @description User IDs and clusters.
  */
-class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopUserIdsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['topUsers'])) {
             $this->container['topUsers'] = $data['topUsers'];
@@ -168,7 +171,7 @@ class GetTopUserIdsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets topUsers.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers Key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
      *
      * @return self
      */

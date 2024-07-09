@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * HighlightResult Class Doc Comment.
  *
  * @category Class
  */
-class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class HighlightResult extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['value'])) {
             $this->container['value'] = $data['value'];
@@ -211,7 +213,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets matchLevel.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel
+     * @return MatchLevel
      */
     public function getMatchLevel()
     {
@@ -221,7 +223,7 @@ class HighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets matchLevel.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\MatchLevel $matchLevel matchLevel
+     * @param MatchLevel $matchLevel matchLevel
      *
      * @return self
      */

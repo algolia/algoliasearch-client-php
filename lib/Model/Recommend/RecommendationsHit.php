@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RecommendationsHit Class Doc Comment.
  *
  * @category Class
  */
-class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendationsHit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -104,7 +106,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -302,7 +304,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets rankingInfo.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo
+     * @return null|RankingInfo
      */
     public function getRankingInfo()
     {
@@ -312,7 +314,7 @@ class RecommendationsHit extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets rankingInfo.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RankingInfo $rankingInfo rankingInfo
+     * @param null|RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * MappingInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Transformations to apply to the source, serialized as a JSON string.
  */
-class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MappingInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['format'])) {
             $this->container['format'] = $data['format'];
@@ -169,7 +172,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets format.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingFormatSchema
+     * @return MappingFormatSchema
      */
     public function getFormat()
     {
@@ -179,7 +182,7 @@ class MappingInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets format.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingFormatSchema $format format
+     * @param MappingFormatSchema $format format
      *
      * @return self
      */

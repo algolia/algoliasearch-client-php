@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * StreamingUtilsInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
  */
-class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StreamingUtilsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['mapping'])) {
             $this->container['mapping'] = $data['mapping'];
@@ -158,7 +161,7 @@ class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets mapping.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return MappingInput
      */
     public function getMapping()
     {
@@ -168,7 +171,7 @@ class StreamingUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets mapping.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param MappingInput $mapping mapping
      *
      * @return self
      */

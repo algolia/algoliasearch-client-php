@@ -6,10 +6,12 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\PersonalizationConfig;
+use Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * PersonalizationClient Class Doc Comment.
@@ -359,7 +361,7 @@ class PersonalizationClient
      *                                             - $personalizationStrategyParams['facetScoring'] => (array) Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results. (required)
      *                                             - $personalizationStrategyParams['personalizationImpact'] => (int) Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Personalization\PersonalizationStrategyParams
+     * @see PersonalizationStrategyParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -393,7 +395,7 @@ class PersonalizationClient
 
         $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
         $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
-        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
+        $query = Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

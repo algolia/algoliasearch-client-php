@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RecordType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Record type for ecommerce sources.
  */
 class RecordType

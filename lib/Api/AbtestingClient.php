@@ -6,10 +6,12 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
+use Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * AbtestingClient Class Doc Comment.
@@ -107,7 +109,7 @@ class AbtestingClient
      *                                 - $addABTestsRequest['variants'] => (array) A/B test variants. (required)
      *                                 - $addABTestsRequest['endAt'] => (string) End date and time of the A/B test, in RFC 3339 format. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest
+     * @see AddABTestsRequest
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -454,7 +456,7 @@ class AbtestingClient
 
         $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
         $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
-        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
+        $query = Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

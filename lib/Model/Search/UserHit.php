@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * UserHit Class Doc Comment.
  *
  * @category Class
  */
-class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UserHit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -94,7 +96,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['userID'])) {
             $this->container['userID'] = $data['userID'];
@@ -340,7 +342,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets highlightResult.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult
+     * @return UserHighlightResult
      */
     public function getHighlightResult()
     {
@@ -350,7 +352,7 @@ class UserHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets highlightResult.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UserHighlightResult $highlightResult highlightResult
+     * @param UserHighlightResult $highlightResult highlightResult
      *
      * @return self
      */

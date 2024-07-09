@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AutomaticFacetFilters Class Doc Comment.
  *
  * @category Class
+ *
  * @description Filter to be applied to the search.  You can use this to respond to search queries that match a facet value. For example, if users search for \&quot;comedy\&quot;, which matches a facet value of the \&quot;genre\&quot; facet, you can filter the results to show the top-ranked comedy movies.
  */
-class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AutomaticFacetFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -65,9 +68,7 @@ class AutomaticFacetFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

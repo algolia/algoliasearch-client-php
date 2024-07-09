@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BoughtTogetherQuery Class Doc Comment.
  *
  * @category Class
  */
-class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -94,7 +96,7 @@ class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -308,7 +310,7 @@ class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets queryParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams
+     * @return null|SearchParams
      */
     public function getQueryParameters()
     {
@@ -318,7 +320,7 @@ class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets queryParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams $queryParameters queryParameters
+     * @param null|SearchParams $queryParameters queryParameters
      *
      * @return self
      */
@@ -332,7 +334,7 @@ class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\FbtModel
+     * @return FbtModel
      */
     public function getModel()
     {
@@ -342,7 +344,7 @@ class BoughtTogetherQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\FbtModel $model model
+     * @param FbtModel $model model
      *
      * @return self
      */

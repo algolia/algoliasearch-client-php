@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchDictionaryEntriesResponse Class Doc Comment.
  *
  * @category Class
  */
-class SearchDictionaryEntriesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchDictionaryEntriesResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class SearchDictionaryEntriesResponse extends \Algolia\AlgoliaSearch\Model\Abstr
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];

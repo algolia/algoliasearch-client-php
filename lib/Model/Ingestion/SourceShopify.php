@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceShopify Class Doc Comment.
  *
  * @category Class
  */
-class SourceShopify extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceShopify extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -104,7 +106,7 @@ class SourceShopify extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['collectionIDIndexing'])) {
             $this->container['collectionIDIndexing'] = $data['collectionIDIndexing'];

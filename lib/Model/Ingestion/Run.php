@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Run Class Doc Comment.
  *
  * @category Class
  */
-class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Run extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -129,7 +131,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['runID'])) {
             $this->container['runID'] = $data['runID'];
@@ -348,7 +350,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunStatus
+     * @return RunStatus
      */
     public function getStatus()
     {
@@ -358,7 +360,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\RunStatus $status status
+     * @param RunStatus $status status
      *
      * @return self
      */
@@ -372,7 +374,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets progress.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RunProgress
+     * @return null|RunProgress
      */
     public function getProgress()
     {
@@ -382,7 +384,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets progress.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RunProgress $progress progress
+     * @param null|RunProgress $progress progress
      *
      * @return self
      */
@@ -396,7 +398,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets outcome.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RunOutcome
+     * @return null|RunOutcome
      */
     public function getOutcome()
     {
@@ -406,7 +408,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets outcome.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RunOutcome $outcome outcome
+     * @param null|RunOutcome $outcome outcome
      *
      * @return self
      */
@@ -475,7 +477,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets reasonCode.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RunReasonCode
+     * @return null|RunReasonCode
      */
     public function getReasonCode()
     {
@@ -485,7 +487,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets reasonCode.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RunReasonCode $reasonCode reasonCode
+     * @param null|RunReasonCode $reasonCode reasonCode
      *
      * @return self
      */
@@ -499,7 +501,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunType
+     * @return RunType
      */
     public function getType()
     {
@@ -509,7 +511,7 @@ class Run extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\RunType $type type
+     * @param RunType $type type
      *
      * @return self
      */

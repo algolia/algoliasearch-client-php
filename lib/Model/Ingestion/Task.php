@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Task Class Doc Comment.
  *
  * @category Class
  */
-class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -119,7 +121,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['taskID'])) {
             $this->container['taskID'] = $data['taskID'];
@@ -335,7 +337,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets trigger.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Trigger
+     * @return Trigger
      */
     public function getTrigger()
     {
@@ -345,7 +347,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets trigger.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Trigger $trigger trigger
+     * @param Trigger $trigger trigger
      *
      * @return self
      */
@@ -359,7 +361,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets input.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
+     * @return null|TaskInput
      */
     public function getInput()
     {
@@ -369,7 +371,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets input.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
+     * @param null|TaskInput $input input
      *
      * @return self
      */
@@ -438,7 +440,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ActionType
+     * @return ActionType
      */
     public function getAction()
     {
@@ -448,7 +450,7 @@ class Task extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelIn
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ActionType $action action
+     * @param ActionType $action action
      *
      * @return self
      */

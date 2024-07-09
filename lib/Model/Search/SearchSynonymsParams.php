@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchSynonymsParams Class Doc Comment.
  *
  * @category Class
  */
-class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchSynonymsParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -213,7 +215,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SynonymType
+     * @return null|SynonymType
      */
     public function getType()
     {
@@ -223,7 +225,7 @@ class SearchSynonymsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
+     * @param null|SynonymType $type type
      *
      * @return self
      */

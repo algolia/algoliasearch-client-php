@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  * Effect Class Doc Comment.
  *
  * @category Class
+ *
  * @description Metric for which you want to detect the smallest relative difference.
  */
 class Effect

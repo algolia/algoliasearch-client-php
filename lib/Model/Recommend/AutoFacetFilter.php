@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AutoFacetFilter Class Doc Comment.
  *
  * @category Class
+ *
  * @description Facet attribute. Only recommendations with the same value (or only recommendations with a different value) as the original viewed item are included.
  */
-class AutoFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AutoFacetFilter extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class AutoFacetFilter extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facet'])) {
             $this->container['facet'] = $data['facet'];

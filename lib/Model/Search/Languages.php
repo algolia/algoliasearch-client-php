@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Languages Class Doc Comment.
  *
  * @category Class
+ *
  * @description Dictionary language.
  */
-class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Languages extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['plurals'])) {
             $this->container['plurals'] = $data['plurals'];
@@ -180,7 +183,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets plurals.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getPlurals()
     {
@@ -190,7 +193,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets plurals.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $plurals plurals
+     * @param DictionaryLanguage $plurals plurals
      *
      * @return self
      */
@@ -204,7 +207,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets stopwords.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getStopwords()
     {
@@ -214,7 +217,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets stopwords.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $stopwords stopwords
+     * @param DictionaryLanguage $stopwords stopwords
      *
      * @return self
      */
@@ -228,7 +231,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets compounds.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage
+     * @return DictionaryLanguage
      */
     public function getCompounds()
     {
@@ -238,7 +241,7 @@ class Languages extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets compounds.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryLanguage $compounds compounds
+     * @param DictionaryLanguage $compounds compounds
      *
      * @return self
      */

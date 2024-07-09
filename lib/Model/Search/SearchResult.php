@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchResult Class Doc Comment.
  *
  * @category Class
  */
-class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchResult extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -224,7 +226,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['abTestID'])) {
             $this->container['abTestID'] = $data['abTestID'];
@@ -556,7 +558,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets exhaustive.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive
+     * @return null|Exhaustive
      */
     public function getExhaustive()
     {
@@ -566,7 +568,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets exhaustive.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Exhaustive $exhaustive exhaustive
+     * @param null|Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -1007,7 +1009,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Redirect
+     * @return null|Redirect
      */
     public function getRedirect()
     {
@@ -1017,7 +1019,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Redirect $redirect redirect
+     * @param null|Redirect $redirect redirect
      *
      * @return self
      */
@@ -1031,7 +1033,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1041,7 +1043,7 @@ class SearchResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */

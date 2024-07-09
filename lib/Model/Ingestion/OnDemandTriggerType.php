@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OnDemandTriggerType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Task is run manually, with the &#x60;/run&#x60; endpoint.
  */
 class OnDemandTriggerType

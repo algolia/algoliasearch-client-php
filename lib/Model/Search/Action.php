@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Action Class Doc Comment.
  *
  * @category Class
+ *
  * @description Type of indexing operation.
  */
 class Action

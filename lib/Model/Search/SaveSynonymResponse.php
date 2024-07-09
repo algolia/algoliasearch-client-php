@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SaveSynonymResponse Class Doc Comment.
  *
  * @category Class
  */
-class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SaveSynonymResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class SaveSynonymResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['taskID'])) {
             $this->container['taskID'] = $data['taskID'];

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * MatchLevel Class Doc Comment.
  *
  * @category Class
+ *
  * @description Whether the whole query string matches or only a part.
  */
 class MatchLevel

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TransformationTryResponse Class Doc Comment.
  *
  * @category Class
  */
-class TransformationTryResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TransformationTryResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class TransformationTryResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['payloads'])) {
             $this->container['payloads'] = $data['payloads'];
@@ -189,7 +191,7 @@ class TransformationTryResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets error.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponseError
+     * @return null|TransformationTryResponseError
      */
     public function getError()
     {
@@ -199,7 +201,7 @@ class TransformationTryResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets error.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponseError $error error
+     * @param null|TransformationTryResponseError $error error
      *
      * @return self
      */

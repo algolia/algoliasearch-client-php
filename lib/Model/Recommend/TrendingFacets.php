@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TrendingFacets Class Doc Comment.
  *
  * @category Class
  */
-class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingFacets extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facetName'])) {
             $this->container['facetName'] = $data['facetName'];
@@ -200,7 +202,7 @@ class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel
+     * @return TrendingFacetsModel
      */
     public function getModel()
     {
@@ -210,7 +212,7 @@ class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel $model model
+     * @param TrendingFacetsModel $model model
      *
      * @return self
      */
@@ -224,7 +226,7 @@ class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     * @return null|FallbackParams
      */
     public function getFallbackParameters()
     {
@@ -234,7 +236,7 @@ class TrendingFacets extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */

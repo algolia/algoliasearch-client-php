@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Params Class Doc Comment.
  *
  * @category Class
+ *
  * @description Parameters to apply to this search.  You can use all search parameters, plus special &#x60;automaticFacetFilters&#x60;, &#x60;automaticOptionalFacetFilters&#x60;, and &#x60;query&#x60;.
  */
-class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Params extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -176,7 +179,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets query.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery
+     * @return null|ConsequenceQuery
      */
     public function getQuery()
     {
@@ -186,7 +189,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets query.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceQuery $query query
+     * @param null|ConsequenceQuery $query query
      *
      * @return self
      */
@@ -200,7 +203,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets automaticFacetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters
+     * @return null|AutomaticFacetFilters
      */
     public function getAutomaticFacetFilters()
     {
@@ -210,7 +213,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets automaticFacetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
+     * @param null|AutomaticFacetFilters $automaticFacetFilters automaticFacetFilters
      *
      * @return self
      */
@@ -224,7 +227,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets automaticOptionalFacetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters
+     * @return null|AutomaticFacetFilters
      */
     public function getAutomaticOptionalFacetFilters()
     {
@@ -234,7 +237,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets automaticOptionalFacetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
+     * @param null|AutomaticFacetFilters $automaticOptionalFacetFilters automaticOptionalFacetFilters
      *
      * @return self
      */
@@ -248,7 +251,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -258,7 +261,7 @@ class Params extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */

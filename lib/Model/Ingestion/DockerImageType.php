@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DockerImageType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Image type.
  */
 class DockerImageType

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DestinationUpdate Class Doc Comment.
  *
  * @category Class
+ *
  * @description API request body for updating a destination.
  */
-class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DestinationUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -176,7 +179,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationType
+     * @return null|DestinationType
      */
     public function getType()
     {
@@ -186,7 +189,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationType $type type
+     * @param null|DestinationType $type type
      *
      * @return self
      */
@@ -224,7 +227,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets input.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput
+     * @return null|DestinationInput
      */
     public function getInput()
     {
@@ -234,7 +237,7 @@ class DestinationUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets input.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput $input input
+     * @param null|DestinationInput $input input
      *
      * @return self
      */

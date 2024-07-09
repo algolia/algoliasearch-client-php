@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * Platform Class Doc Comment.
  *
  * @category Class
+ *
  * @description Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select.
  */
 class Platform

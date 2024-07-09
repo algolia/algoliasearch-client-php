@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * InsightsEvents Class Doc Comment.
  *
  * @category Class
  */
-class InsightsEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InsightsEvents extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class InsightsEvents extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['events'])) {
             $this->container['events'] = $data['events'];

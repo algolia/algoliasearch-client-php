@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Exhaustive Class Doc Comment.
  *
  * @category Class
+ *
  * @description Whether certain properties of the search response are calculated exhaustive (exact) or approximated.
  */
-class Exhaustive extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Exhaustive extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -90,7 +93,7 @@ class Exhaustive extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facetsCount'])) {
             $this->container['facetsCount'] = $data['facetsCount'];

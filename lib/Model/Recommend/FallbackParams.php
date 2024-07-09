@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * FallbackParams Class Doc Comment.
  *
  * @category Class
  */
-class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -444,7 +446,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -873,7 +875,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets facetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters
+     * @return null|FacetFilters
      */
     public function getFacetFilters()
     {
@@ -883,7 +885,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FacetFilters $facetFilters facetFilters
+     * @param null|FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -897,7 +899,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets optionalFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters
+     * @return null|OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -907,7 +909,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets optionalFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\OptionalFilters $optionalFilters optionalFilters
+     * @param null|OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -921,7 +923,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets numericFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters
+     * @return null|NumericFilters
      */
     public function getNumericFilters()
     {
@@ -931,7 +933,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets numericFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\NumericFilters $numericFilters numericFilters
+     * @param null|NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -945,7 +947,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets tagFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters
+     * @return null|TagFilters
      */
     public function getTagFilters()
     {
@@ -955,7 +957,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets tagFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TagFilters $tagFilters tagFilters
+     * @param null|TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -1196,7 +1198,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets aroundRadius.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius
+     * @return null|AroundRadius
      */
     public function getAroundRadius()
     {
@@ -1206,7 +1208,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundRadius.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius $aroundRadius aroundRadius
+     * @param null|AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -1220,7 +1222,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets aroundPrecision.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision
+     * @return null|AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -1230,7 +1232,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundPrecision.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision $aroundPrecision aroundPrecision
+     * @param null|AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */
@@ -1910,7 +1912,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets typoTolerance.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance
+     * @return null|TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -1920,7 +1922,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets typoTolerance.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TypoTolerance $typoTolerance typoTolerance
+     * @param null|TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -1982,7 +1984,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets ignorePlurals.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals
+     * @return null|IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -1992,7 +1994,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets ignorePlurals.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -2006,7 +2008,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets removeStopWords.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords
+     * @return null|RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -2016,7 +2018,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets removeStopWords.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveStopWords $removeStopWords removeStopWords
+     * @param null|RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -2150,7 +2152,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets queryType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType
+     * @return null|QueryType
      */
     public function getQueryType()
     {
@@ -2160,7 +2162,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets queryType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\QueryType $queryType queryType
+     * @param null|QueryType $queryType queryType
      *
      * @return self
      */
@@ -2174,7 +2176,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults
+     * @return null|RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -2184,7 +2186,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -2198,7 +2200,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets mode.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Mode
+     * @return null|Mode
      */
     public function getMode()
     {
@@ -2208,7 +2210,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets mode.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Mode $mode mode
+     * @param null|Mode $mode mode
      *
      * @return self
      */
@@ -2222,7 +2224,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets semanticSearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch
+     * @return null|SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -2232,7 +2234,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets semanticSearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SemanticSearch $semanticSearch semanticSearch
+     * @param null|SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -2318,7 +2320,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery
+     * @return null|ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -2328,7 +2330,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -2390,7 +2392,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets distinct.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct
+     * @return null|Distinct
      */
     public function getDistinct()
     {
@@ -2400,7 +2402,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets distinct.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Distinct $distinct distinct
+     * @param null|Distinct $distinct distinct
      *
      * @return self
      */
@@ -2597,7 +2599,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -2607,7 +2609,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -2645,7 +2647,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter
+     * @return null|ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -2655,7 +2657,7 @@ class FallbackParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */

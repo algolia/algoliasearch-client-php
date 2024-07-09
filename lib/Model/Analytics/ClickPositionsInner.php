@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ClickPositionsInner Class Doc Comment.
  *
  * @category Class
+ *
  * @description Click position.
  */
-class ClickPositionsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ClickPositionsInner extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class ClickPositionsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['position'])) {
             $this->container['position'] = $data['position'];

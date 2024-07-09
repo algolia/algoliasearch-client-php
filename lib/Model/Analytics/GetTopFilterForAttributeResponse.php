@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetTopFilterForAttributeResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetTopFilterForAttributeResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFilterForAttributeResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetTopFilterForAttributeResponse extends \Algolia\AlgoliaSearch\Model\Abst
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['values'])) {
             $this->container['values'] = $data['values'];

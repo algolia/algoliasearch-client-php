@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetStatusResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetStatusResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetStatusResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['updatedAt'])) {
             $this->container['updatedAt'] = $data['updatedAt'];

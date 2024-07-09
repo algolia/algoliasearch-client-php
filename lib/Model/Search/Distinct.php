@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Distinct Class Doc Comment.
  *
  * @category Class
+ *
  * @description Determines how many records of a group are included in the search results.  Records with the same value for the &#x60;attributeForDistinct&#x60; attribute are considered a group. The &#x60;distinct&#x60; setting controls how many members of the group are returned. This is useful for [deduplication and grouping](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).  The &#x60;distinct&#x60; setting is ignored if &#x60;attributeForDistinct&#x60; is not set.
  */
-class Distinct extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Distinct extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -65,9 +68,7 @@ class Distinct extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

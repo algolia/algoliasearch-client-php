@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * MultipleBatchRequest Class Doc Comment.
  *
  * @category Class
  */
-class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MultipleBatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
@@ -179,7 +181,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action
+     * @return Action
      */
     public function getAction()
     {
@@ -189,7 +191,7 @@ class MultipleBatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
+     * @param Action $action action
      *
      * @return self
      */

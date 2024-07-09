@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AuthenticationCreateResponse Class Doc Comment.
  *
  * @category Class
+ *
  * @description API response for the successful creation of an authentication resource.
  */
-class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AuthenticationCreateResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class AuthenticationCreateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['authenticationID'])) {
             $this->container['authenticationID'] = $data['authenticationID'];

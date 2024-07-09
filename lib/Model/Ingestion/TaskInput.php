@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TaskInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Configuration of the task, depending on its type.
  */
-class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -95,7 +98,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['startDate'])) {
             $this->container['startDate'] = $data['startDate'];
@@ -269,7 +272,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets mapping.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return MappingInput
      */
     public function getMapping()
     {
@@ -279,7 +282,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets mapping.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param MappingInput $mapping mapping
      *
      * @return self
      */
@@ -348,7 +351,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets market.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket
+     * @return ShopifyMarket
      */
     public function getMarket()
     {
@@ -358,7 +361,7 @@ class TaskInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets market.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket $market market
+     * @param ShopifyMarket $market market
      *
      * @return self
      */

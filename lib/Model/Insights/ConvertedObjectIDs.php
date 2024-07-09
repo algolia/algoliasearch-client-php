@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ConvertedObjectIDs Class Doc Comment.
  *
  * @category Class
+ *
  * @description Use this event to track when users convert on items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track conversion events related to Algolia requests, use the \&quot;Converted object IDs after search\&quot; event.
  */
-class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ConvertedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -100,7 +103,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -295,7 +298,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
+     * @return ConversionEvent
      */
     public function getEventType()
     {
@@ -305,7 +308,7 @@ class ConvertedObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
+     * @param ConversionEvent $eventType eventType
      *
      * @return self
      */

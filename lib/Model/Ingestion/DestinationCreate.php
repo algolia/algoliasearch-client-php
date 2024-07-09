@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DestinationCreate Class Doc Comment.
  *
  * @category Class
+ *
  * @description API request body for creating a new destination.
  */
-class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -188,7 +191,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType
+     * @return DestinationType
      */
     public function getType()
     {
@@ -198,7 +201,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationType $type type
+     * @param DestinationType $type type
      *
      * @return self
      */
@@ -236,7 +239,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets input.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput
+     * @return DestinationInput
      */
     public function getInput()
     {
@@ -246,7 +249,7 @@ class DestinationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets input.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput $input input
+     * @param DestinationInput $input input
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DestinationIndexPrefix Class Doc Comment.
  *
  * @category Class
  */
-class DestinationIndexPrefix extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DestinationIndexPrefix extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class DestinationIndexPrefix extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexPrefix'])) {
             $this->container['indexPrefix'] = $data['indexPrefix'];

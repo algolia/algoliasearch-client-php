@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * SubscriptionTriggerType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Task runs after receiving subscribed event.
  */
 class SubscriptionTriggerType

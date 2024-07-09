@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RelatedQuery Class Doc Comment.
  *
  * @category Class
  */
-class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RelatedQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -99,7 +101,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -316,7 +318,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets queryParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams
+     * @return null|SearchParams
      */
     public function getQueryParameters()
     {
@@ -326,7 +328,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets queryParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams $queryParameters queryParameters
+     * @param null|SearchParams $queryParameters queryParameters
      *
      * @return self
      */
@@ -340,7 +342,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel
+     * @return RelatedModel
      */
     public function getModel()
     {
@@ -350,7 +352,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel $model model
+     * @param RelatedModel $model model
      *
      * @return self
      */
@@ -388,7 +390,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     * @return null|FallbackParams
      */
     public function getFallbackParameters()
     {
@@ -398,7 +400,7 @@ class RelatedQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */

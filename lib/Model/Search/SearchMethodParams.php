@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchMethodParams Class Doc Comment.
  *
  * @category Class
  */
-class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchMethodParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['requests'])) {
             $this->container['requests'] = $data['requests'];
@@ -189,7 +191,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets strategy.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SearchStrategy
+     * @return null|SearchStrategy
      */
     public function getStrategy()
     {
@@ -199,7 +201,7 @@ class SearchMethodParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets strategy.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SearchStrategy $strategy strategy
+     * @param null|SearchStrategy $strategy strategy
      *
      * @return self
      */

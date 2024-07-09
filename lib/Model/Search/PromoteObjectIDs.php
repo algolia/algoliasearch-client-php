@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * PromoteObjectIDs Class Doc Comment.
  *
  * @category Class
+ *
  * @description Records to promote.
  */
-class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PromoteObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class PromoteObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectIDs'])) {
             $this->container['objectIDs'] = $data['objectIDs'];

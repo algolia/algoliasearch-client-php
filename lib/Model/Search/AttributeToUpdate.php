@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AttributeToUpdate Class Doc Comment.
  *
  * @category Class
  */
-class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['operation'])) {
             $this->container['operation'] = $data['operation'];
@@ -168,7 +170,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets operation.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType
+     * @return BuiltInOperationType
      */
     public function getOperation()
     {
@@ -178,7 +180,7 @@ class AttributeToUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets operation.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType $operation operation
+     * @param BuiltInOperationType $operation operation
      *
      * @return self
      */

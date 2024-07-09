@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Incident Class Doc Comment.
  *
  * @category Class
+ *
  * @description Incident details.
  */
-class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Incident extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['title'])) {
             $this->container['title'] = $data['title'];
@@ -184,7 +187,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Gets status.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Status
+     * @return null|Status
      */
     public function getStatus()
     {
@@ -194,7 +197,7 @@ class Incident extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mod
     /**
      * Sets status.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Status $status status
+     * @param null|Status $status status
      *
      * @return self
      */

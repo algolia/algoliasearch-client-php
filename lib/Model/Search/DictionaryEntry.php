@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DictionaryEntry Class Doc Comment.
  *
  * @category Class
+ *
  * @description Dictionary entry.
  */
-class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -95,7 +98,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -225,7 +228,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets language.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SupportedLanguage
+     * @return SupportedLanguage
      */
     public function getLanguage()
     {
@@ -235,7 +238,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets language.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SupportedLanguage $language language
+     * @param SupportedLanguage $language language
      *
      * @return self
      */
@@ -321,7 +324,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets state.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState
+     * @return null|DictionaryEntryState
      */
     public function getState()
     {
@@ -331,7 +334,7 @@ class DictionaryEntry extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets state.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState $state state
+     * @param null|DictionaryEntryState $state state
      *
      * @return self
      */

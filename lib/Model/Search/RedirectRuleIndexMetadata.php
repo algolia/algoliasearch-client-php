@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RedirectRuleIndexMetadata Class Doc Comment.
  *
  * @category Class
  */
-class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RedirectRuleIndexMetadata extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['source'])) {
             $this->container['source'] = $data['source'];
@@ -297,7 +299,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets data.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadataData
+     * @return RedirectRuleIndexMetadataData
      */
     public function getData()
     {
@@ -307,7 +309,7 @@ class RedirectRuleIndexMetadata extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets data.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadataData $data data
+     * @param RedirectRuleIndexMetadataData $data data
      *
      * @return self
      */

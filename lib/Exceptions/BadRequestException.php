@@ -2,6 +2,4 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class BadRequestException extends RequestException
-{
-}
+class BadRequestException extends RequestException {}

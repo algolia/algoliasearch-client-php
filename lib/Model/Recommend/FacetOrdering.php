@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * FacetOrdering Class Doc Comment.
  *
  * @category Class
+ *
  * @description Order of facet names and facet values in your UI.
  */
-class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facets'])) {
             $this->container['facets'] = $data['facets'];
@@ -160,7 +163,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets facets.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Facets
+     * @return null|Facets
      */
     public function getFacets()
     {
@@ -170,7 +173,7 @@ class FacetOrdering extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets facets.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Facets $facets facets
+     * @param null|Facets $facets facets
      *
      * @return self
      */

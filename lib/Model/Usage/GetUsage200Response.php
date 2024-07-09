@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetUsage200Response Class Doc Comment.
  *
  * @category Class
  */
-class GetUsage200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetUsage200Response extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetUsage200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['statistics'])) {
             $this->container['statistics'] = $data['statistics'];

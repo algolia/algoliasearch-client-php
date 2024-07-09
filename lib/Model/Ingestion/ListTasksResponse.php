@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ListTasksResponse Class Doc Comment.
  *
  * @category Class
+ *
  * @description Configured tasks and pagination information.
  */
-class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListTasksResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['tasks'])) {
             $this->container['tasks'] = $data['tasks'];
@@ -193,7 +196,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets pagination.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
+     * @return Pagination
      */
     public function getPagination()
     {
@@ -203,7 +206,7 @@ class ListTasksResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets pagination.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
+     * @param Pagination $pagination pagination
      *
      * @return self
      */

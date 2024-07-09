@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * SupportedLanguage Class Doc Comment.
  *
  * @category Class
+ *
  * @description ISO code for a supported language.
  */
 class SupportedLanguage

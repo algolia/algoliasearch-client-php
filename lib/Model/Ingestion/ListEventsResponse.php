@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ListEventsResponse Class Doc Comment.
  *
  * @category Class
  */
-class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListEventsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['events'])) {
             $this->container['events'] = $data['events'];
@@ -203,7 +205,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets pagination.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
+     * @return Pagination
      */
     public function getPagination()
     {
@@ -213,7 +215,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets pagination.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
+     * @param Pagination $pagination pagination
      *
      * @return self
      */
@@ -227,7 +229,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets window.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Window
+     * @return Window
      */
     public function getWindow()
     {
@@ -237,7 +239,7 @@ class ListEventsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets window.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Window $window window
+     * @param Window $window window
      *
      * @return self
      */

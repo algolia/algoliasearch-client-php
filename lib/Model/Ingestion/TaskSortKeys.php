@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * TaskSortKeys Class Doc Comment.
  *
  * @category Class
+ *
  * @description Property by which to sort the list of tasks.
  */
 class TaskSortKeys

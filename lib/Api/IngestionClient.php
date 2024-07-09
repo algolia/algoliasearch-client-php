@@ -6,10 +6,26 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
+use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationSearch;
+use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
+use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch;
+use Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskSearch;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TransformationCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TransformationSearch;
+use Algolia\AlgoliaSearch\Model\Ingestion\TransformationTry;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * IngestionClient Class Doc Comment.
@@ -110,7 +126,7 @@ class IngestionClient
      *                                    - $authenticationCreate['platform'] => (array)
      *                                    - $authenticationCreate['input'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate
+     * @see AuthenticationCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -147,7 +163,7 @@ class IngestionClient
      *                                 - $destinationCreate['input'] => (array)  (required)
      *                                 - $destinationCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate
+     * @see DestinationCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -184,7 +200,7 @@ class IngestionClient
      *                            - $sourceCreate['input'] => (array)  (required)
      *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate
+     * @see SourceCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -220,7 +236,7 @@ class IngestionClient
      *                          - $taskCreate['input'] => (array)
      *                          - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate
+     * @see TaskCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -251,7 +267,7 @@ class IngestionClient
      *                                    - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                    - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TransformationCreate
+     * @see TransformationCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1525,7 +1541,7 @@ class IngestionClient
      * @param array $authenticationSearch authenticationSearch (required)
      *                                    - $authenticationSearch['authenticationIDs'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationSearch
+     * @see AuthenticationSearch
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1559,7 +1575,7 @@ class IngestionClient
      * @param array $destinationSearch destinationSearch (required)
      *                                 - $destinationSearch['destinationIDs'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch
+     * @see DestinationSearch
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1593,7 +1609,7 @@ class IngestionClient
      * @param array $sourceSearch sourceSearch (required)
      *                            - $sourceSearch['sourceIDs'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch
+     * @see SourceSearch
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1627,7 +1643,7 @@ class IngestionClient
      * @param array $taskSearch taskSearch (required)
      *                          - $taskSearch['taskIDs'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskSearch
+     * @see TaskSearch
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1661,7 +1677,7 @@ class IngestionClient
      * @param array $transformationSearch transformationSearch (required)
      *                                    - $transformationSearch['transformationsIDs'] => (array)  (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TransformationSearch
+     * @see TransformationSearch
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1735,7 +1751,7 @@ class IngestionClient
      *                                 - $transformationTry['code'] => (string) The source code of the transformation. (required)
      *                                 - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TransformationTry
+     * @see TransformationTry
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1773,7 +1789,7 @@ class IngestionClient
      *                                     - $authenticationUpdate['platform'] => (array)
      *                                     - $authenticationUpdate['input'] => (array)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationUpdate
+     * @see AuthenticationUpdate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1826,7 +1842,7 @@ class IngestionClient
      *                                  - $destinationUpdate['input'] => (array)
      *                                  - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate
+     * @see DestinationUpdate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1878,7 +1894,7 @@ class IngestionClient
      *                             - $sourceUpdate['input'] => (array)
      *                             - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate
+     * @see SourceUpdate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1927,7 +1943,7 @@ class IngestionClient
      *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
      *                           - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdate
+     * @see TaskUpdate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1974,7 +1990,7 @@ class IngestionClient
      *                                     - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                     - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\TransformationCreate
+     * @see TransformationCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -2026,7 +2042,7 @@ class IngestionClient
      *                            - $sourceCreate['input'] => (array)  (required)
      *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate
+     * @see SourceCreate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -2056,7 +2072,7 @@ class IngestionClient
      *                             - $sourceUpdate['input'] => (array)
      *                             - $sourceUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate
+     * @see SourceUpdate
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -2105,7 +2121,7 @@ class IngestionClient
 
         $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
         $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
-        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
+        $query = Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

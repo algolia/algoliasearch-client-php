@@ -244,7 +244,7 @@ class Uri implements UriInterface
      */
     public static function isSameDocumentReference(
         UriInterface $uri,
-        UriInterface $base = null
+        ?UriInterface $base = null
     ) {
         if (null !== $base) {
             $uri = UriResolver::resolve($base, $uri);
@@ -302,7 +302,7 @@ class Uri implements UriInterface
      * Any existing query string values that exactly match the provided key are
      * removed.
      *
-     * @param uriInterface $uri URI to use as a base
+     * @param UriInterface $uri URI to use as a base
      * @param string       $key query string key to remove
      *
      * @return UriInterface
@@ -375,9 +375,9 @@ class Uri implements UriInterface
     /**
      * Creates a URI from a hash of `parse_url` components.
      *
-     * @throws \InvalidArgumentException if the components do not form a valid URI
-     *
      * @return UriInterface
+     *
+     * @throws \InvalidArgumentException if the components do not form a valid URI
      *
      * @see http://php.net/manual/en/function.parse-url.php
      */
@@ -455,7 +455,7 @@ class Uri implements UriInterface
         return $new;
     }
 
-    public function withUserInfo(string $user, string $password = null): UriInterface
+    public function withUserInfo(string $user, ?string $password = null): UriInterface
     {
         $info = $user;
         if ('' !== $password) {
@@ -583,9 +583,9 @@ class Uri implements UriInterface
     /**
      * @param string $scheme
      *
-     * @throws \InvalidArgumentException if the scheme is invalid
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException if the scheme is invalid
      */
     private function filterScheme($scheme)
     {
@@ -599,9 +599,9 @@ class Uri implements UriInterface
     /**
      * @param string $host
      *
-     * @throws \InvalidArgumentException if the host is invalid
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException if the host is invalid
      */
     private function filterHost($host)
     {
@@ -615,9 +615,9 @@ class Uri implements UriInterface
     /**
      * @param null|int $port
      *
-     * @throws \InvalidArgumentException if the port is invalid
-     *
      * @return null|int
+     *
+     * @throws \InvalidArgumentException if the port is invalid
      */
     private function filterPort($port)
     {
@@ -645,9 +645,9 @@ class Uri implements UriInterface
      *
      * @param string $path
      *
-     * @throws \InvalidArgumentException if the path is invalid
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException if the path is invalid
      */
     private function filterPath($path)
     {
@@ -670,9 +670,9 @@ class Uri implements UriInterface
      *
      * @param string $str
      *
-     * @throws \InvalidArgumentException if the query or fragment is invalid
-     *
      * @return string
+     *
+     * @throws \InvalidArgumentException if the query or fragment is invalid
      */
     private function filterQueryAndFragment($str)
     {

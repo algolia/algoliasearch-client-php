@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceCreate Class Doc Comment.
  *
  * @category Class
  */
-class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceCreate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -187,7 +189,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceType
+     * @return SourceType
      */
     public function getType()
     {
@@ -197,7 +199,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SourceType $type type
+     * @param SourceType $type type
      *
      * @return self
      */
@@ -235,7 +237,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets input.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceInput
+     * @return SourceInput
      */
     public function getInput()
     {
@@ -245,7 +247,7 @@ class SourceCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets input.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\SourceInput $input input
+     * @param SourceInput $input input
      *
      * @return self
      */

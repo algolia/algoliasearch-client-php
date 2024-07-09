@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Consequence Class Doc Comment.
  *
  * @category Class
+ *
  * @description Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences).
  */
-class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -90,7 +93,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['params'])) {
             $this->container['params'] = $data['params'];
@@ -194,7 +197,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets params.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams
+     * @return null|ConsequenceParams
      */
     public function getParams()
     {
@@ -204,7 +207,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets params.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceParams $params params
+     * @param null|ConsequenceParams $params params
      *
      * @return self
      */

@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * Acl Class Doc Comment.
  *
  * @category Class
+ *
  * @description Access control list permissions.
  */
 class Acl

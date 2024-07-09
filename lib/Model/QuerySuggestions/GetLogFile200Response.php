@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetLogFile200Response Class Doc Comment.
  *
  * @category Class
  */
-class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetLogFile200Response extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['timestamp'])) {
             $this->container['timestamp'] = $data['timestamp'];
@@ -199,7 +201,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets level.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel
+     * @return null|LogLevel
      */
     public function getLevel()
     {
@@ -209,7 +211,7 @@ class GetLogFile200Response extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets level.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\LogLevel $level level
+     * @param null|LogLevel $level level
      *
      * @return self
      */

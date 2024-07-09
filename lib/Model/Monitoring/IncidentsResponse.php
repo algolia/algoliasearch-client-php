@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * IncidentsResponse Class Doc Comment.
  *
  * @category Class
  */
-class IncidentsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IncidentsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class IncidentsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['incidents'])) {
             $this->container['incidents'] = $data['incidents'];

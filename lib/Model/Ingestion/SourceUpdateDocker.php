@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceUpdateDocker Class Doc Comment.
  *
  * @category Class
  */
-class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceUpdateDocker extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['registry'])) {
             $this->container['registry'] = $data['registry'];
@@ -181,7 +183,7 @@ class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets registry.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
+     * @return null|DockerRegistry
      */
     public function getRegistry()
     {
@@ -191,7 +193,7 @@ class SourceUpdateDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets registry.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
+     * @param null|DockerRegistry $registry registry
      *
      * @return self
      */

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RankingInfo Class Doc Comment.
  *
  * @category Class
+ *
  * @description Object with detailed information about the record&#39;s ranking.
  */
-class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -130,7 +133,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['filters'])) {
             $this->container['filters'] = $data['filters'];
@@ -409,7 +412,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets matchedGeoLocation.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\MatchedGeoLocation
+     * @return null|MatchedGeoLocation
      */
     public function getMatchedGeoLocation()
     {
@@ -419,7 +422,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets matchedGeoLocation.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\MatchedGeoLocation $matchedGeoLocation matchedGeoLocation
+     * @param null|MatchedGeoLocation $matchedGeoLocation matchedGeoLocation
      *
      * @return self
      */
@@ -433,7 +436,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets personalization.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Personalization
+     * @return null|Personalization
      */
     public function getPersonalization()
     {
@@ -443,7 +446,7 @@ class RankingInfo extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets personalization.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Personalization $personalization personalization
+     * @param null|Personalization $personalization personalization
      *
      * @return self
      */

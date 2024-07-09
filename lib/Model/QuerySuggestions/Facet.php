@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Facet Class Doc Comment.
  *
  * @category Class
+ *
  * @description Facet to use as category.
  */
-class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Facet extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class Facet extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['attribute'])) {
             $this->container['attribute'] = $data['attribute'];

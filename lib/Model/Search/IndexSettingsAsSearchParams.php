@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * IndexSettingsAsSearchParams Class Doc Comment.
  *
  * @category Class
  */
-class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IndexSettingsAsSearchParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -284,7 +286,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
@@ -840,7 +842,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets typoTolerance.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance
+     * @return null|TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -850,7 +852,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets typoTolerance.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance $typoTolerance typoTolerance
+     * @param null|TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -912,7 +914,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets ignorePlurals.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals
+     * @return null|IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -922,7 +924,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets ignorePlurals.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -936,7 +938,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets removeStopWords.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords
+     * @return null|RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -946,7 +948,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets removeStopWords.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords $removeStopWords removeStopWords
+     * @param null|RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -1080,7 +1082,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets queryType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\QueryType
+     * @return null|QueryType
      */
     public function getQueryType()
     {
@@ -1090,7 +1092,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets queryType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\QueryType $queryType queryType
+     * @param null|QueryType $queryType queryType
      *
      * @return self
      */
@@ -1104,7 +1106,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults
+     * @return null|RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -1114,7 +1116,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -1128,7 +1130,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets mode.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Mode
+     * @return null|Mode
      */
     public function getMode()
     {
@@ -1138,7 +1140,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets mode.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Mode $mode mode
+     * @param null|Mode $mode mode
      *
      * @return self
      */
@@ -1152,7 +1154,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets semanticSearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch
+     * @return null|SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -1162,7 +1164,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets semanticSearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch $semanticSearch semanticSearch
+     * @param null|SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -1248,7 +1250,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery
+     * @return null|ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -1258,7 +1260,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -1320,7 +1322,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets distinct.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Distinct
+     * @return null|Distinct
      */
     public function getDistinct()
     {
@@ -1330,7 +1332,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets distinct.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Distinct $distinct distinct
+     * @param null|Distinct $distinct distinct
      *
      * @return self
      */
@@ -1527,7 +1529,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1537,7 +1539,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -1575,7 +1577,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter
+     * @return null|ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -1585,7 +1587,7 @@ class IndexSettingsAsSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */

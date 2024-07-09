@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AuthenticationCreate Class Doc Comment.
  *
  * @category Class
+ *
  * @description Request body for creating a new authentication resource.
  */
-class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AuthenticationCreate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -188,7 +191,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType
+     * @return AuthenticationType
      */
     public function getType()
     {
@@ -198,7 +201,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType $type type
+     * @param AuthenticationType $type type
      *
      * @return self
      */
@@ -236,7 +239,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets platform.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform
+     * @return null|Platform
      */
     public function getPlatform()
     {
@@ -246,7 +249,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets platform.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform $platform platform
+     * @param null|Platform $platform platform
      *
      * @return self
      */
@@ -260,7 +263,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets input.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput
+     * @return AuthInput
      */
     public function getInput()
     {
@@ -270,7 +273,7 @@ class AuthenticationCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets input.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInput $input input
+     * @param AuthInput $input input
      *
      * @return self
      */

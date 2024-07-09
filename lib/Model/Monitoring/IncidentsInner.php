@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * IncidentsInner Class Doc Comment.
  *
  * @category Class
  */
-class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IncidentsInner extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['t'])) {
             $this->container['t'] = $data['t'];
@@ -183,7 +185,7 @@ class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets v.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Incident
+     * @return null|Incident
      */
     public function getV()
     {
@@ -193,7 +195,7 @@ class IncidentsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets v.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Incident $v v
+     * @param null|Incident $v v
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ObjectData Class Doc Comment.
  *
  * @category Class
  */
-class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ObjectData extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['price'])) {
             $this->container['price'] = $data['price'];
@@ -167,7 +169,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets price.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Price
+     * @return null|Price
      */
     public function getPrice()
     {
@@ -177,7 +179,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets price.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Price $price price
+     * @param null|Price $price price
      *
      * @return self
      */
@@ -215,7 +217,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets discount.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Discount
+     * @return null|Discount
      */
     public function getDiscount()
     {
@@ -225,7 +227,7 @@ class ObjectData extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets discount.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Discount $discount discount
+     * @param null|Discount $discount discount
      *
      * @return self
      */

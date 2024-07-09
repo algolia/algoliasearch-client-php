@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * CommercetoolsCustomFields Class Doc Comment.
  *
  * @category Class
+ *
  * @description Custom fields from commercetools to add to the records.  For more information, see [Using Custom Types and Custom Fields](https://docs.commercetools.com/tutorials/custom-types).
  */
-class CommercetoolsCustomFields extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CommercetoolsCustomFields extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class CommercetoolsCustomFields extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['inventory'])) {
             $this->container['inventory'] = $data['inventory'];

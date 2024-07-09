@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * FrequentlyBoughtTogether Class Doc Comment.
  *
  * @category Class
  */
-class FrequentlyBoughtTogether extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FrequentlyBoughtTogether extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class FrequentlyBoughtTogether extends \Algolia\AlgoliaSearch\Model\AbstractMode
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
@@ -168,7 +170,7 @@ class FrequentlyBoughtTogether extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\FbtModel
+     * @return FbtModel
      */
     public function getModel()
     {
@@ -178,7 +180,7 @@ class FrequentlyBoughtTogether extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\FbtModel $model model
+     * @param FbtModel $model model
      *
      * @return self
      */

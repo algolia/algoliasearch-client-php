@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * RunReasonCode Class Doc Comment.
  *
  * @category Class
+ *
  * @description A code for the task run&#39;s outcome. A readable description of the code is included in the &#x60;reason&#x60; response property.
  */
 class RunReasonCode

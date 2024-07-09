@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ReplaceAllObjectsResponse Class Doc Comment.
  *
  * @category Class
  */
-class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ReplaceAllObjectsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['copyOperationResponse'])) {
             $this->container['copyOperationResponse'] = $data['copyOperationResponse'];
@@ -179,7 +181,7 @@ class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets copyOperationResponse.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
+     * @return UpdatedAtResponse
      */
     public function getCopyOperationResponse()
     {
@@ -189,7 +191,7 @@ class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets copyOperationResponse.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse $copyOperationResponse copyOperationResponse
+     * @param UpdatedAtResponse $copyOperationResponse copyOperationResponse
      *
      * @return self
      */
@@ -227,7 +229,7 @@ class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets moveOperationResponse.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse
+     * @return UpdatedAtResponse
      */
     public function getMoveOperationResponse()
     {
@@ -237,7 +239,7 @@ class ReplaceAllObjectsResponse extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets moveOperationResponse.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse $moveOperationResponse moveOperationResponse
+     * @param UpdatedAtResponse $moveOperationResponse moveOperationResponse
      *
      * @return self
      */

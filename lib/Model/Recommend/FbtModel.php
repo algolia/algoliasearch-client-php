@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * FbtModel Class Doc Comment.
  *
  * @category Class
+ *
  * @description Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID &#x60;objectID&#x60;.
  */
 class FbtModel

@@ -6,10 +6,13 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\QuerySuggestionsConfig;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\Configuration;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * QuerySuggestionsClient Class Doc Comment.
@@ -104,7 +107,7 @@ class QuerySuggestionsClient
      *
      * @param array $configurationWithIndex configurationWithIndex (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex
+     * @see ConfigurationWithIndex
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -467,7 +470,7 @@ class QuerySuggestionsClient
      *                              - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
      *                              - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *
-     * @see \Algolia\AlgoliaSearch\Model\QuerySuggestions\Configuration
+     * @see Configuration
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -516,7 +519,7 @@ class QuerySuggestionsClient
 
         $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
         $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
-        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
+        $query = Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

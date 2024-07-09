@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ClickedFilters Class Doc Comment.
  *
  * @category Class
+ *
  * @description Use this event to track when users click facet filters in your user interface.
  */
-class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ClickedFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -100,7 +103,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -295,7 +298,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ClickEvent
+     * @return ClickEvent
      */
     public function getEventType()
     {
@@ -305,7 +308,7 @@ class ClickedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ClickEvent $eventType eventType
+     * @param ClickEvent $eventType eventType
      *
      * @return self
      */

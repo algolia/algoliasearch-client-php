@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchForFacetsOptions Class Doc Comment.
  *
  * @category Class
  */
-class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchForFacetsOptions extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facet'])) {
             $this->container['facet'] = $data['facet'];
@@ -299,7 +301,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet
+     * @return SearchTypeFacet
      */
     public function getType()
     {
@@ -309,7 +311,7 @@ class SearchForFacetsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchTypeFacet $type type
+     * @param SearchTypeFacet $type type
      *
      * @return self
      */

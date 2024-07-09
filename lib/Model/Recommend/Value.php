@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Value Class Doc Comment.
  *
  * @category Class
  */
-class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Value extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['order'])) {
             $this->container['order'] = $data['order'];
@@ -191,7 +193,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Gets sortRemainingBy.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SortRemainingBy
+     * @return null|SortRemainingBy
      */
     public function getSortRemainingBy()
     {
@@ -201,7 +203,7 @@ class Value extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelI
     /**
      * Sets sortRemainingBy.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SortRemainingBy $sortRemainingBy sortRemainingBy
+     * @param null|SortRemainingBy $sortRemainingBy sortRemainingBy
      *
      * @return self
      */

@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RenderingContent Class Doc Comment.
  *
  * @category Class
+ *
  * @description Extra data that can be used in the search UI.  You can use this to control aspects of your search UI, such as, the order of facet names and values without changing your frontend code.
  */
-class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facetOrdering'])) {
             $this->container['facetOrdering'] = $data['facetOrdering'];
@@ -160,7 +163,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets facetOrdering.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering
+     * @return null|FacetOrdering
      */
     public function getFacetOrdering()
     {
@@ -170,7 +173,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets facetOrdering.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering $facetOrdering facetOrdering
+     * @param null|FacetOrdering $facetOrdering facetOrdering
      *
      * @return self
      */
@@ -184,7 +187,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL
+     * @return null|RedirectURL
      */
     public function getRedirect()
     {
@@ -194,7 +197,7 @@ class RenderingContent extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL $redirect redirect
+     * @param null|RedirectURL $redirect redirect
      *
      * @return self
      */

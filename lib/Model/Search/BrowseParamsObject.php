@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BrowseParamsObject Class Doc Comment.
  *
  * @category Class
  */
-class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BrowseParamsObject extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -449,7 +451,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -881,7 +883,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets facetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
+     * @return null|FacetFilters
      */
     public function getFacetFilters()
     {
@@ -891,7 +893,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets facetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
+     * @param null|FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -905,7 +907,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets optionalFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters
+     * @return null|OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -915,7 +917,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets optionalFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters $optionalFilters optionalFilters
+     * @param null|OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -929,7 +931,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets numericFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
+     * @return null|NumericFilters
      */
     public function getNumericFilters()
     {
@@ -939,7 +941,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets numericFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
+     * @param null|NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -953,7 +955,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets tagFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
+     * @return null|TagFilters
      */
     public function getTagFilters()
     {
@@ -963,7 +965,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets tagFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
+     * @param null|TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -1204,7 +1206,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets aroundRadius.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
+     * @return null|AroundRadius
      */
     public function getAroundRadius()
     {
@@ -1214,7 +1216,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets aroundRadius.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
+     * @param null|AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -1228,7 +1230,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets aroundPrecision.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision
+     * @return null|AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -1238,7 +1240,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets aroundPrecision.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision $aroundPrecision aroundPrecision
+     * @param null|AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */
@@ -1918,7 +1920,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets typoTolerance.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance
+     * @return null|TypoTolerance
      */
     public function getTypoTolerance()
     {
@@ -1928,7 +1930,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets typoTolerance.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TypoTolerance $typoTolerance typoTolerance
+     * @param null|TypoTolerance $typoTolerance typoTolerance
      *
      * @return self
      */
@@ -1990,7 +1992,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets ignorePlurals.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals
+     * @return null|IgnorePlurals
      */
     public function getIgnorePlurals()
     {
@@ -2000,7 +2002,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets ignorePlurals.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals $ignorePlurals ignorePlurals
+     * @param null|IgnorePlurals $ignorePlurals ignorePlurals
      *
      * @return self
      */
@@ -2014,7 +2016,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets removeStopWords.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords
+     * @return null|RemoveStopWords
      */
     public function getRemoveStopWords()
     {
@@ -2024,7 +2026,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets removeStopWords.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords $removeStopWords removeStopWords
+     * @param null|RemoveStopWords $removeStopWords removeStopWords
      *
      * @return self
      */
@@ -2158,7 +2160,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets queryType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\QueryType
+     * @return null|QueryType
      */
     public function getQueryType()
     {
@@ -2168,7 +2170,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets queryType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\QueryType $queryType queryType
+     * @param null|QueryType $queryType queryType
      *
      * @return self
      */
@@ -2182,7 +2184,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets removeWordsIfNoResults.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults
+     * @return null|RemoveWordsIfNoResults
      */
     public function getRemoveWordsIfNoResults()
     {
@@ -2192,7 +2194,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets removeWordsIfNoResults.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
+     * @param null|RemoveWordsIfNoResults $removeWordsIfNoResults removeWordsIfNoResults
      *
      * @return self
      */
@@ -2206,7 +2208,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets mode.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Mode
+     * @return null|Mode
      */
     public function getMode()
     {
@@ -2216,7 +2218,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets mode.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Mode $mode mode
+     * @param null|Mode $mode mode
      *
      * @return self
      */
@@ -2230,7 +2232,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets semanticSearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch
+     * @return null|SemanticSearch
      */
     public function getSemanticSearch()
     {
@@ -2240,7 +2242,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets semanticSearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SemanticSearch $semanticSearch semanticSearch
+     * @param null|SemanticSearch $semanticSearch semanticSearch
      *
      * @return self
      */
@@ -2326,7 +2328,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets exactOnSingleWordQuery.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery
+     * @return null|ExactOnSingleWordQuery
      */
     public function getExactOnSingleWordQuery()
     {
@@ -2336,7 +2338,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets exactOnSingleWordQuery.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
+     * @param null|ExactOnSingleWordQuery $exactOnSingleWordQuery exactOnSingleWordQuery
      *
      * @return self
      */
@@ -2398,7 +2400,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets distinct.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Distinct
+     * @return null|Distinct
      */
     public function getDistinct()
     {
@@ -2408,7 +2410,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets distinct.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Distinct $distinct distinct
+     * @param null|Distinct $distinct distinct
      *
      * @return self
      */
@@ -2605,7 +2607,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -2615,7 +2617,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */
@@ -2653,7 +2655,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Gets reRankingApplyFilter.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter
+     * @return null|ReRankingApplyFilter
      */
     public function getReRankingApplyFilter()
     {
@@ -2663,7 +2665,7 @@ class BrowseParamsObject extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
     /**
      * Sets reRankingApplyFilter.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
+     * @param null|ReRankingApplyFilter $reRankingApplyFilter reRankingApplyFilter
      *
      * @return self
      */

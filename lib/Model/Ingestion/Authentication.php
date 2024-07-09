@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Authentication Class Doc Comment.
  *
  * @category Class
+ *
  * @description Resource representing the information required to authenticate with a source or a destination.
  */
-class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Authentication extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -100,7 +103,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['authenticationID'])) {
             $this->container['authenticationID'] = $data['authenticationID'];
@@ -242,7 +245,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType
+     * @return AuthenticationType
      */
     public function getType()
     {
@@ -252,7 +255,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType $type type
+     * @param AuthenticationType $type type
      *
      * @return self
      */
@@ -290,7 +293,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets platform.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform
+     * @return null|Platform
      */
     public function getPlatform()
     {
@@ -300,7 +303,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets platform.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Platform $platform platform
+     * @param null|Platform $platform platform
      *
      * @return self
      */
@@ -314,7 +317,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets input.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial
+     * @return AuthInputPartial
      */
     public function getInput()
     {
@@ -324,7 +327,7 @@ class Authentication extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets input.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial $input input
+     * @param AuthInputPartial $input input
      *
      * @return self
      */

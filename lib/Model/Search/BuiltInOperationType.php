@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * BuiltInOperationType Class Doc Comment.
  *
  * @category Class
+ *
  * @description How to change the attribute.
  */
 class BuiltInOperationType

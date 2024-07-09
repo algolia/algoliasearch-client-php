@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RunListResponse Class Doc Comment.
  *
  * @category Class
  */
-class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RunListResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['runs'])) {
             $this->container['runs'] = $data['runs'];
@@ -203,7 +205,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets pagination.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
+     * @return Pagination
      */
     public function getPagination()
     {
@@ -213,7 +215,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets pagination.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
+     * @param Pagination $pagination pagination
      *
      * @return self
      */
@@ -227,7 +229,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets window.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Window
+     * @return Window
      */
     public function getWindow()
     {
@@ -237,7 +239,7 @@ class RunListResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets window.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Window $window window
+     * @param Window $window window
      *
      * @return self
      */

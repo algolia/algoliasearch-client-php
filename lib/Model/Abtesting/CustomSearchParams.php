@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * CustomSearchParams Class Doc Comment.
  *
  * @category Class
+ *
  * @description Search parameters to add to the test variant. Only use this parameter if the two variants use the same index.
  */
-class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class CustomSearchParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class CustomSearchParams extends \Algolia\AlgoliaSearch\Model\AbstractModel impl
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['customSearchParameters'])) {
             $this->container['customSearchParameters'] = $data['customSearchParameters'];

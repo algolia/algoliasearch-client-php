@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TransformationUpdateResponse Class Doc Comment.
  *
  * @category Class
+ *
  * @description API response for updating a transformation.
  */
-class TransformationUpdateResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TransformationUpdateResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class TransformationUpdateResponse extends \Algolia\AlgoliaSearch\Model\Abstract
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['transformationID'])) {
             $this->container['transformationID'] = $data['transformationID'];

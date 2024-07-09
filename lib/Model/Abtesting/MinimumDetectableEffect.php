@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * MinimumDetectableEffect Class Doc Comment.
  *
  * @category Class
+ *
  * @description Configuration for the smallest difference between test variants you want to detect.
  */
-class MinimumDetectableEffect extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class MinimumDetectableEffect extends \Algolia\AlgoliaSearch\Model\AbstractModel
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['size'])) {
             $this->container['size'] = $data['size'];
@@ -201,7 +204,7 @@ class MinimumDetectableEffect extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Gets effect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\Effect
+     * @return null|Effect
      */
     public function getEffect()
     {
@@ -211,7 +214,7 @@ class MinimumDetectableEffect extends \Algolia\AlgoliaSearch\Model\AbstractModel
     /**
      * Sets effect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\Effect $effect effect
+     * @param null|Effect $effect effect
      *
      * @return self
      */

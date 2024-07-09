@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchDictionaryEntriesParams Class Doc Comment.
  *
  * @category Class
+ *
  * @description Search parameter.
  */
-class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchDictionaryEntriesParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -85,7 +88,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -276,7 +279,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets language.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage
+     * @return null|SupportedLanguage
      */
     public function getLanguage()
     {
@@ -286,7 +289,7 @@ class SearchDictionaryEntriesParams extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets language.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage $language language
+     * @param null|SupportedLanguage $language language
      *
      * @return self
      */

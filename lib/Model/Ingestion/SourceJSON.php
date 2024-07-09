@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceJSON Class Doc Comment.
  *
  * @category Class
  */
-class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceJSON extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['url'])) {
             $this->container['url'] = $data['url'];
@@ -221,7 +223,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets method.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
+     * @return null|MethodType
      */
     public function getMethod()
     {
@@ -231,7 +233,7 @@ class SourceJSON extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets method.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
+     * @param null|MethodType $method method
      *
      * @return self
      */

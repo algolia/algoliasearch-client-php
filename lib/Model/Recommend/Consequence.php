@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Consequence Class Doc Comment.
  *
  * @category Class
+ *
  * @description Effect of the rule.
  */
-class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['hide'])) {
             $this->container['hide'] = $data['hide'];
@@ -232,7 +235,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets params.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\ParamsConsequence
+     * @return null|ParamsConsequence
      */
     public function getParams()
     {
@@ -242,7 +245,7 @@ class Consequence extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets params.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\ParamsConsequence $params params
+     * @param null|ParamsConsequence $params params
      *
      * @return self
      */

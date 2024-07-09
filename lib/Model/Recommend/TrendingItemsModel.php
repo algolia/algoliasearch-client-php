@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TrendingItemsModel Class Doc Comment.
  *
  * @category Class
+ *
  * @description Trending items model.  Trending items are determined from the number of conversion events collected on them.
  */
 class TrendingItemsModel

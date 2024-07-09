@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ViewedFilters Class Doc Comment.
  *
  * @category Class
+ *
  * @description Use this method to capture active filters. For example, when browsing a category page, users see content filtered on that specific category.
  */
-class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ViewedFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -100,7 +103,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -295,7 +298,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ViewEvent
+     * @return ViewEvent
      */
     public function getEventType()
     {
@@ -305,7 +308,7 @@ class ViewedFilters extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ViewEvent $eventType eventType
+     * @param ViewEvent $eventType eventType
      *
      * @return self
      */

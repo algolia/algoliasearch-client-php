@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SecuredApiKeyRestrictions Class Doc Comment.
  *
  * @category Class
  */
-class SecuredApiKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SecuredApiKeyRestrictions extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -94,7 +96,7 @@ class SecuredApiKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['searchParams'])) {
             $this->container['searchParams'] = $data['searchParams'];
@@ -191,7 +193,7 @@ class SecuredApiKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets searchParams.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SearchParamsObject
+     * @return null|SearchParamsObject
      */
     public function getSearchParams()
     {
@@ -201,7 +203,7 @@ class SecuredApiKeyRestrictions extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets searchParams.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SearchParamsObject $searchParams searchParams
+     * @param null|SearchParamsObject $searchParams searchParams
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchForHitsOptions Class Doc Comment.
  *
  * @category Class
  */
-class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchForHitsOptions extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -189,7 +191,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault
+     * @return null|SearchTypeDefault
      */
     public function getType()
     {
@@ -199,7 +201,7 @@ class SearchForHitsOptions extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SearchTypeDefault $type type
+     * @param null|SearchTypeDefault $type type
      *
      * @return self
      */

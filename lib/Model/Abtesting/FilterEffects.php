@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * FilterEffects Class Doc Comment.
  *
  * @category Class
+ *
  * @description A/B test filter effects resulting from configuration settings.
  */
-class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['outliers'])) {
             $this->container['outliers'] = $data['outliers'];
@@ -160,7 +163,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets outliers.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers
+     * @return null|FilterEffectsOutliers
      */
     public function getOutliers()
     {
@@ -170,7 +173,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets outliers.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers $outliers outliers
+     * @param null|FilterEffectsOutliers $outliers outliers
      *
      * @return self
      */
@@ -184,7 +187,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets emptySearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch
+     * @return null|FilterEffectsEmptySearch
      */
     public function getEmptySearch()
     {
@@ -194,7 +197,7 @@ class FilterEffects extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets emptySearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch $emptySearch emptySearch
+     * @param null|FilterEffectsEmptySearch $emptySearch emptySearch
      *
      * @return self
      */

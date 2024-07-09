@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * EventScoring Class Doc Comment.
  *
  * @category Class
  */
-class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EventScoring extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['score'])) {
             $this->container['score'] = $data['score'];
@@ -227,7 +229,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Personalization\EventType
+     * @return EventType
      */
     public function getEventType()
     {
@@ -237,7 +239,7 @@ class EventScoring extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventType $eventType eventType
+     * @param EventType $eventType eventType
      *
      * @return self
      */

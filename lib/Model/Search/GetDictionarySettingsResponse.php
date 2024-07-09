@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetDictionarySettingsResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetDictionarySettingsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['disableStandardEntries'])) {
             $this->container['disableStandardEntries'] = $data['disableStandardEntries'];
@@ -157,7 +159,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets disableStandardEntries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\StandardEntries
+     * @return StandardEntries
      */
     public function getDisableStandardEntries()
     {
@@ -167,7 +169,7 @@ class GetDictionarySettingsResponse extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets disableStandardEntries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\StandardEntries $disableStandardEntries disableStandardEntries
+     * @param StandardEntries $disableStandardEntries disableStandardEntries
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * InfrastructureResponseMetrics Class Doc Comment.
  *
  * @category Class
  */
-class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InfrastructureResponseMetrics extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class InfrastructureResponseMetrics extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['cpuUsage'])) {
             $this->container['cpuUsage'] = $data['cpuUsage'];

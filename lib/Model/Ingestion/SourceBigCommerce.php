@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceBigCommerce Class Doc Comment.
  *
  * @category Class
  */
-class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceBigCommerce extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['storeHash'])) {
             $this->container['storeHash'] = $data['storeHash'];
@@ -213,7 +215,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets channel.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel
+     * @return null|BigCommerceChannel
      */
     public function getChannel()
     {
@@ -223,7 +225,7 @@ class SourceBigCommerce extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets channel.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel $channel channel
+     * @param null|BigCommerceChannel $channel channel
      *
      * @return self
      */

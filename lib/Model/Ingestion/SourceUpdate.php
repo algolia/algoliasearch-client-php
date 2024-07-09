@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceUpdate Class Doc Comment.
  *
  * @category Class
  */
-class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
@@ -191,7 +193,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets input.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdateInput
+     * @return null|SourceUpdateInput
      */
     public function getInput()
     {
@@ -201,7 +203,7 @@ class SourceUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets input.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdateInput $input input
+     * @param null|SourceUpdateInput $input input
      *
      * @return self
      */

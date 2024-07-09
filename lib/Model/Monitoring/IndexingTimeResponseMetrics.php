@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * IndexingTimeResponseMetrics Class Doc Comment.
  *
  * @category Class
  */
-class IndexingTimeResponseMetrics extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IndexingTimeResponseMetrics extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class IndexingTimeResponseMetrics extends \Algolia\AlgoliaSearch\Model\AbstractM
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexing'])) {
             $this->container['indexing'] = $data['indexing'];

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ObjectDataAfterSearch Class Doc Comment.
  *
  * @category Class
  */
-class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ObjectDataAfterSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['queryID'])) {
             $this->container['queryID'] = $data['queryID'];
@@ -223,7 +225,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets price.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Price
+     * @return null|Price
      */
     public function getPrice()
     {
@@ -233,7 +235,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets price.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Price $price price
+     * @param null|Price $price price
      *
      * @return self
      */
@@ -271,7 +273,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Gets discount.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Discount
+     * @return null|Discount
      */
     public function getDiscount()
     {
@@ -281,7 +283,7 @@ class ObjectDataAfterSearch extends \Algolia\AlgoliaSearch\Model\AbstractModel i
     /**
      * Sets discount.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Discount $discount discount
+     * @param null|Discount $discount discount
      *
      * @return self
      */

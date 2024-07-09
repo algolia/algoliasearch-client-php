@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * FilterEffectsOutliers Class Doc Comment.
  *
  * @category Class
+ *
  * @description Outliers removed from the A/B test as a result of configuration settings.
  */
-class FilterEffectsOutliers extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FilterEffectsOutliers extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class FilterEffectsOutliers extends \Algolia\AlgoliaSearch\Model\AbstractModel i
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['usersCount'])) {
             $this->container['usersCount'] = $data['usersCount'];

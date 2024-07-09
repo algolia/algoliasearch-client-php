@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TrendingItems Class Doc Comment.
  *
  * @category Class
  */
-class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TrendingItems extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facetName'])) {
             $this->container['facetName'] = $data['facetName'];
@@ -235,7 +237,7 @@ class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel
+     * @return TrendingItemsModel
      */
     public function getModel()
     {
@@ -245,7 +247,7 @@ class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel $model model
+     * @param TrendingItemsModel $model model
      *
      * @return self
      */
@@ -259,7 +261,7 @@ class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject
+     * @return null|SearchParamsObject
      */
     public function getFallbackParameters()
     {
@@ -269,7 +271,7 @@ class TrendingItems extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject $fallbackParameters fallbackParameters
+     * @param null|SearchParamsObject $fallbackParameters fallbackParameters
      *
      * @return self
      */

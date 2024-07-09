@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DictionarySettingsParams Class Doc Comment.
  *
  * @category Class
+ *
  * @description Turn on or off the built-in Algolia stop words for a specific language.
  */
-class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DictionarySettingsParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['disableStandardEntries'])) {
             $this->container['disableStandardEntries'] = $data['disableStandardEntries'];
@@ -158,7 +161,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets disableStandardEntries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\StandardEntries
+     * @return StandardEntries
      */
     public function getDisableStandardEntries()
     {
@@ -168,7 +171,7 @@ class DictionarySettingsParams extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets disableStandardEntries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\StandardEntries $disableStandardEntries disableStandardEntries
+     * @param StandardEntries $disableStandardEntries disableStandardEntries
      *
      * @return self
      */

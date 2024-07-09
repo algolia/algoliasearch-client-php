@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Configuration Class Doc Comment.
  *
  * @category Class
+ *
  * @description Query Suggestions configuration.
  */
-class Configuration extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Configuration extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -90,7 +93,7 @@ class Configuration extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['sourceIndices'])) {
             $this->container['sourceIndices'] = $data['sourceIndices'];
@@ -220,7 +223,7 @@ class Configuration extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets languages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages
+     * @return null|Languages
      */
     public function getLanguages()
     {
@@ -230,7 +233,7 @@ class Configuration extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets languages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\QuerySuggestions\Languages $languages languages
+     * @param null|Languages $languages languages
      *
      * @return self
      */

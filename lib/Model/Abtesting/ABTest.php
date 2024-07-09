@@ -4,15 +4,18 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ABTest Class Doc Comment.
  *
  * @category Class
  *
  * @internal
+ *
  * @coversNothing
  */
-class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -132,7 +135,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['abTestID'])) {
             $this->container['abTestID'] = $data['abTestID'];
@@ -529,7 +532,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Status
+     * @return Status
      */
     public function getStatus()
     {
@@ -539,7 +542,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Status $status status
+     * @param Status $status status
      *
      * @return self
      */
@@ -577,7 +580,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets configuration.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestConfiguration
+     * @return null|ABTestConfiguration
      */
     public function getConfiguration()
     {
@@ -587,7 +590,7 @@ class ABTest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets configuration.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\ABTestConfiguration $configuration configuration
+     * @param null|ABTestConfiguration $configuration configuration
      *
      * @return self
      */

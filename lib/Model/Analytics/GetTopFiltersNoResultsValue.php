@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetTopFiltersNoResultsValue Class Doc Comment.
  *
  * @category Class
  */
-class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTopFiltersNoResultsValue extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['attribute'])) {
             $this->container['attribute'] = $data['attribute'];
@@ -203,7 +205,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets operator.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\Operator
+     * @return Operator
      */
     public function getOperator()
     {
@@ -213,7 +215,7 @@ class GetTopFiltersNoResultsValue extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets operator.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\Operator $operator operator
+     * @param Operator $operator operator
      *
      * @return self
      */

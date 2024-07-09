@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * LatencyResponse Class Doc Comment.
  *
  * @category Class
  */
-class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class LatencyResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['metrics'])) {
             $this->container['metrics'] = $data['metrics'];
@@ -151,7 +153,7 @@ class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets metrics.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponseMetrics
+     * @return null|LatencyResponseMetrics
      */
     public function getMetrics()
     {
@@ -161,7 +163,7 @@ class LatencyResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets metrics.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponseMetrics $metrics metrics
+     * @param null|LatencyResponseMetrics $metrics metrics
      *
      * @return self
      */

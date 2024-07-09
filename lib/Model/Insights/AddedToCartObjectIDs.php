@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AddedToCartObjectIDs Class Doc Comment.
  *
  * @category Class
+ *
  * @description Use this event to track when users add items to their shopping cart unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track add-to-cart events related to Algolia requests, use the \&quot;Added to cart object IDs after search\&quot; event.
  */
-class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AddedToCartObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -120,7 +123,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['eventName'])) {
             $this->container['eventName'] = $data['eventName'];
@@ -338,7 +341,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets eventType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent
+     * @return ConversionEvent
      */
     public function getEventType()
     {
@@ -348,7 +351,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets eventType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ConversionEvent $eventType eventType
+     * @param ConversionEvent $eventType eventType
      *
      * @return self
      */
@@ -362,7 +365,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets eventSubtype.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent
+     * @return AddToCartEvent
      */
     public function getEventSubtype()
     {
@@ -372,7 +375,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets eventSubtype.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\AddToCartEvent $eventSubtype eventSubtype
+     * @param AddToCartEvent $eventSubtype eventSubtype
      *
      * @return self
      */
@@ -586,7 +589,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets value.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\Value
+     * @return null|Value
      */
     public function getValue()
     {
@@ -596,7 +599,7 @@ class AddedToCartObjectIDs extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets value.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\Value $value value
+     * @param null|Value $value value
      *
      * @return self
      */

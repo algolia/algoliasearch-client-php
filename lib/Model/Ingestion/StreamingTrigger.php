@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * StreamingTrigger Class Doc Comment.
  *
  * @category Class
+ *
  * @description Trigger input for continuously running tasks.
  */
-class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StreamingTrigger extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -158,7 +161,7 @@ class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType
+     * @return StreamingTriggerType
      */
     public function getType()
     {
@@ -168,7 +171,7 @@ class StreamingTrigger extends \Algolia\AlgoliaSearch\Model\AbstractModel implem
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\StreamingTriggerType $type type
+     * @param StreamingTriggerType $type type
      *
      * @return self
      */

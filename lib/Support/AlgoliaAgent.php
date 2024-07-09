@@ -3,6 +3,7 @@
 namespace Algolia\AlgoliaSearch\Support;
 
 use Algolia\AlgoliaSearch\Algolia;
+use GuzzleHttp\ClientInterface;
 
 final class AlgoliaAgent
 {
@@ -55,10 +56,10 @@ final class AlgoliaAgent
         }
         if (interface_exists('\GuzzleHttp\ClientInterface')) {
             if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
-                $segments['Guzzle'] = \GuzzleHttp\ClientInterface::VERSION;
+                $segments['Guzzle'] = ClientInterface::VERSION;
             } else {
                 $segments['Guzzle'] =
-                    \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+                    ClientInterface::MAJOR_VERSION;
             }
         }
 

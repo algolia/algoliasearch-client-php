@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * OnDemandDateUtilsInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Input for a manually-triggered task whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a given time range.
  */
-class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class OnDemandDateUtilsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['startDate'])) {
             $this->container['startDate'] = $data['startDate'];
@@ -225,7 +228,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets mapping.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput
+     * @return null|MappingInput
      */
     public function getMapping()
     {
@@ -235,7 +238,7 @@ class OnDemandDateUtilsInput extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets mapping.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput $mapping mapping
+     * @param null|MappingInput $mapping mapping
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Condition Class Doc Comment.
  *
  * @category Class
  */
-class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['pattern'])) {
             $this->container['pattern'] = $data['pattern'];
@@ -213,7 +215,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets anchoring.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
+     * @return null|Anchoring
      */
     public function getAnchoring()
     {
@@ -223,7 +225,7 @@ class Condition extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets anchoring.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
+     * @param null|Anchoring $anchoring anchoring
      *
      * @return self
      */

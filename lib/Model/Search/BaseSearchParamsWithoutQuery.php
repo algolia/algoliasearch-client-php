@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BaseSearchParamsWithoutQuery Class Doc Comment.
  *
  * @category Class
  */
-class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseSearchParamsWithoutQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -219,7 +221,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['similarQuery'])) {
             $this->container['similarQuery'] = $data['similarQuery'];
@@ -465,7 +467,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets facetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
+     * @return null|FacetFilters
      */
     public function getFacetFilters()
     {
@@ -475,7 +477,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets facetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
+     * @param null|FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -489,7 +491,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets optionalFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters
+     * @return null|OptionalFilters
      */
     public function getOptionalFilters()
     {
@@ -499,7 +501,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets optionalFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\OptionalFilters $optionalFilters optionalFilters
+     * @param null|OptionalFilters $optionalFilters optionalFilters
      *
      * @return self
      */
@@ -513,7 +515,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets numericFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
+     * @return null|NumericFilters
      */
     public function getNumericFilters()
     {
@@ -523,7 +525,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets numericFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
+     * @param null|NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -537,7 +539,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets tagFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
+     * @return null|TagFilters
      */
     public function getTagFilters()
     {
@@ -547,7 +549,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets tagFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
+     * @param null|TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -788,7 +790,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets aroundRadius.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
+     * @return null|AroundRadius
      */
     public function getAroundRadius()
     {
@@ -798,7 +800,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets aroundRadius.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
+     * @param null|AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */
@@ -812,7 +814,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Gets aroundPrecision.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision
+     * @return null|AroundPrecision
      */
     public function getAroundPrecision()
     {
@@ -822,7 +824,7 @@ class BaseSearchParamsWithoutQuery extends \Algolia\AlgoliaSearch\Model\Abstract
     /**
      * Sets aroundPrecision.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundPrecision $aroundPrecision aroundPrecision
+     * @param null|AroundPrecision $aroundPrecision aroundPrecision
      *
      * @return self
      */

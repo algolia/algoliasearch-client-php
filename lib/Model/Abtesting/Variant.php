@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Variant Class Doc Comment.
  *
  * @category Class
  */
-class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -164,7 +166,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['addToCartCount'])) {
             $this->container['addToCartCount'] = $data['addToCartCount'];
@@ -602,7 +604,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Gets filterEffects.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects
+     * @return null|FilterEffects
      */
     public function getFilterEffects()
     {
@@ -612,7 +614,7 @@ class Variant extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mode
     /**
      * Sets filterEffects.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffects $filterEffects filterEffects
+     * @param null|FilterEffects $filterEffects filterEffects
      *
      * @return self
      */

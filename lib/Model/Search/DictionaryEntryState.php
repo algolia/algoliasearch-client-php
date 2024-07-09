@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * DictionaryEntryState Class Doc Comment.
  *
  * @category Class
+ *
  * @description Whether a dictionary entry is active.
  */
 class DictionaryEntryState

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceInput Class Doc Comment.
  *
  * @category Class
  */
-class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -229,7 +231,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['storeKeys'])) {
             $this->container['storeKeys'] = $data['storeKeys'];
@@ -619,7 +621,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets channel.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel
+     * @return null|BigCommerceChannel
      */
     public function getChannel()
     {
@@ -629,7 +631,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets channel.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceChannel $channel channel
+     * @param null|BigCommerceChannel $channel channel
      *
      * @return self
      */
@@ -715,7 +717,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets method.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
+     * @return null|MethodType
      */
     public function getMethod()
     {
@@ -725,7 +727,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets method.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
+     * @param null|MethodType $method method
      *
      * @return self
      */
@@ -842,7 +844,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets dataType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
+     * @return null|BigQueryDataType
      */
     public function getDataType()
     {
@@ -852,7 +854,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets dataType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
+     * @param null|BigQueryDataType $dataType dataType
      *
      * @return self
      */
@@ -938,7 +940,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets imageType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType
+     * @return DockerImageType
      */
     public function getImageType()
     {
@@ -948,7 +950,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets imageType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType $imageType imageType
+     * @param DockerImageType $imageType imageType
      *
      * @return self
      */
@@ -962,7 +964,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Gets registry.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
+     * @return DockerRegistry
      */
     public function getRegistry()
     {
@@ -972,7 +974,7 @@ class SourceInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements 
     /**
      * Sets registry.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
+     * @param DockerRegistry $registry registry
      *
      * @return self
      */

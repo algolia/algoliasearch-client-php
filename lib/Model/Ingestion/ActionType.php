@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * ActionType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Action to perform on the Algolia index.
  */
 class ActionType

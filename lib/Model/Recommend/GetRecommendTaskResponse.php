@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetRecommendTaskResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetRecommendTaskResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];
@@ -157,7 +159,7 @@ class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\TaskStatus
+     * @return TaskStatus
      */
     public function getStatus()
     {
@@ -167,7 +169,7 @@ class GetRecommendTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractMode
     /**
      * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\TaskStatus $status status
+     * @param TaskStatus $status status
      *
      * @return self
      */

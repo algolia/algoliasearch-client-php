@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchStrategy Class Doc Comment.
  *
  * @category Class
+ *
  * @description Strategy for multiple search queries:  - &#x60;none&#x60;. Run all queries. - &#x60;stopIfEnoughMatches&#x60;. Run the queries one by one, stopping as soon as a query matches at least the &#x60;hitsPerPage&#x60; number of results.
  */
 class SearchStrategy

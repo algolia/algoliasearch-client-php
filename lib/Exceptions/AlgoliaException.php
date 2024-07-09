@@ -2,6 +2,4 @@
 
 namespace Algolia\AlgoliaSearch\Exceptions;
 
-class AlgoliaException extends \Exception
-{
-}
+class AlgoliaException extends \Exception {}

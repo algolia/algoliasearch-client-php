@@ -6,10 +6,13 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
+use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams;
+use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use GuzzleHttp\Psr7\Query;
 
 /**
  * RecommendClient Class Doc Comment.
@@ -470,7 +473,7 @@ class RecommendClient
      * @param array $getRecommendationsParams getRecommendationsParams (required)
      *                                        - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
      *
-     * @see \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams
+     * @see GetRecommendationsParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -511,7 +514,7 @@ class RecommendClient
      *                                           - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
      *                                           - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
      *
-     * @see \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams
+     * @see SearchRecommendRulesParams
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -569,7 +572,7 @@ class RecommendClient
 
         $requestOptions['headers'] = array_merge($headers, $requestOptions['headers']);
         $requestOptions['queryParameters'] = array_merge($queryParameters, $requestOptions['queryParameters']);
-        $query = \GuzzleHttp\Psr7\Query::build($requestOptions['queryParameters']);
+        $query = Query::build($requestOptions['queryParameters']);
 
         return $this->api->sendRequest(
             $method,

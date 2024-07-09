@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BaseRecommendRequest Class Doc Comment.
  *
  * @category Class
  */
-class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BaseRecommendRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -285,7 +287,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets queryParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams
+     * @return null|SearchParams
      */
     public function getQueryParameters()
     {
@@ -295,7 +297,7 @@ class BaseRecommendRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets queryParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\SearchParams $queryParameters queryParameters
+     * @param null|SearchParams $queryParameters queryParameters
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RecommendedForYou Class Doc Comment.
  *
  * @category Class
  */
-class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendedForYou extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
@@ -165,7 +167,7 @@ class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel
+     * @return RecommendedForYouModel
      */
     public function getModel()
     {
@@ -175,7 +177,7 @@ class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel $model model
+     * @param RecommendedForYouModel $model model
      *
      * @return self
      */
@@ -189,7 +191,7 @@ class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     * @return null|FallbackParams
      */
     public function getFallbackParameters()
     {
@@ -199,7 +201,7 @@ class RecommendedForYou extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */

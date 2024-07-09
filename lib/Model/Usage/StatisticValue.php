@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * StatisticValue Class Doc Comment.
  *
  * @category Class
  */
-class StatisticValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StatisticValue extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -64,9 +66,7 @@ class StatisticValue extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
-    {
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,

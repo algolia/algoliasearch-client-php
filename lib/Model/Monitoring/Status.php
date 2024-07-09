@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
  * Status Class Doc Comment.
  *
  * @category Class
+ *
  * @description Status of the cluster.
  */
 class Status

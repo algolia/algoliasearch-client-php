@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SearchRulesParams Class Doc Comment.
  *
  * @category Class
+ *
  * @description Rules search parameters.
  */
-class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SearchRulesParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -95,7 +98,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['query'])) {
             $this->container['query'] = $data['query'];
@@ -230,7 +233,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets anchoring.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Anchoring
+     * @return null|Anchoring
      */
     public function getAnchoring()
     {
@@ -240,7 +243,7 @@ class SearchRulesParams extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets anchoring.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Anchoring $anchoring anchoring
+     * @param null|Anchoring $anchoring anchoring
      *
      * @return self
      */

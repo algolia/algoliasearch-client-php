@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * InfrastructureResponse Class Doc Comment.
  *
  * @category Class
  */
-class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class InfrastructureResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['metrics'])) {
             $this->container['metrics'] = $data['metrics'];
@@ -151,7 +153,7 @@ class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets metrics.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponseMetrics
+     * @return null|InfrastructureResponseMetrics
      */
     public function getMetrics()
     {
@@ -161,7 +163,7 @@ class InfrastructureResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets metrics.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponseMetrics $metrics metrics
+     * @param null|InfrastructureResponseMetrics $metrics metrics
      *
      * @return self
      */

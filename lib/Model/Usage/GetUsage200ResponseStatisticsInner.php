@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetUsage200ResponseStatisticsInner Class Doc Comment.
  *
  * @category Class
  */
-class GetUsage200ResponseStatisticsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetUsage200ResponseStatisticsInner extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class GetUsage200ResponseStatisticsInner extends \Algolia\AlgoliaSearch\Model\Ab
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['t'])) {
             $this->container['t'] = $data['t'];
@@ -183,7 +185,7 @@ class GetUsage200ResponseStatisticsInner extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Gets v.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Usage\StatisticValue
+     * @return null|StatisticValue
      */
     public function getV()
     {
@@ -193,7 +195,7 @@ class GetUsage200ResponseStatisticsInner extends \Algolia\AlgoliaSearch\Model\Ab
     /**
      * Sets v.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Usage\StatisticValue $v v
+     * @param null|StatisticValue $v v
      *
      * @return self
      */

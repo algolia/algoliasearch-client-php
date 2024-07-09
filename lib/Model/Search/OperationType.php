@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * OperationType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Operation to perform on the index.
  */
 class OperationType

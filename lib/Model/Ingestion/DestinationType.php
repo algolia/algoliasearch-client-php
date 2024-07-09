@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * DestinationType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Destination type.  - &#x60;search&#x60;.   Data is stored in an Algolia index.  - &#x60;insights&#x60;.   Data is recorded as user events in the Insights API.
  */
 class DestinationType

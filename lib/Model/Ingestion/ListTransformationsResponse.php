@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ListTransformationsResponse Class Doc Comment.
  *
  * @category Class
+ *
  * @description Configured transformations and pagination information.
  */
-class ListTransformationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListTransformationsResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class ListTransformationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['transformations'])) {
             $this->container['transformations'] = $data['transformations'];
@@ -193,7 +196,7 @@ class ListTransformationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Gets pagination.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
+     * @return Pagination
      */
     public function getPagination()
     {
@@ -203,7 +206,7 @@ class ListTransformationsResponse extends \Algolia\AlgoliaSearch\Model\AbstractM
     /**
      * Sets pagination.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
+     * @param Pagination $pagination pagination
      *
      * @return self
      */

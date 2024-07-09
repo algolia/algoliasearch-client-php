@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RelatedProducts Class Doc Comment.
  *
  * @category Class
  */
-class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RelatedProducts extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['model'])) {
             $this->container['model'] = $data['model'];
@@ -176,7 +178,7 @@ class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets model.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel
+     * @return RelatedModel
      */
     public function getModel()
     {
@@ -186,7 +188,7 @@ class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets model.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RelatedModel $model model
+     * @param RelatedModel $model model
      *
      * @return self
      */
@@ -224,7 +226,7 @@ class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets fallbackParameters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams
+     * @return null|FallbackParams
      */
     public function getFallbackParameters()
     {
@@ -234,7 +236,7 @@ class RelatedProducts extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets fallbackParameters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams $fallbackParameters fallbackParameters
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */

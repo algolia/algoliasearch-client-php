@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DestinationIndexName Class Doc Comment.
  *
  * @category Class
  */
-class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DestinationIndexName extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
@@ -197,7 +199,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets recordType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType
+     * @return null|RecordType
      */
     public function getRecordType()
     {
@@ -207,7 +209,7 @@ class DestinationIndexName extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets recordType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\RecordType $recordType recordType
+     * @param null|RecordType $recordType recordType
      *
      * @return self
      */

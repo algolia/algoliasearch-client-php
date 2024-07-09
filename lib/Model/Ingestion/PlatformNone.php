@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * PlatformNone Class Doc Comment.
  *
  * @category Class
+ *
  * @description Authentication resource not tied to any ecommerce platform, used for filtering.
  */
 class PlatformNone

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * OperationIndexParams Class Doc Comment.
  *
  * @category Class
  */
-class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class OperationIndexParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -79,7 +81,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['operation'])) {
             $this->container['operation'] = $data['operation'];
@@ -176,7 +178,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets operation.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\OperationType
+     * @return OperationType
      */
     public function getOperation()
     {
@@ -186,7 +188,7 @@ class OperationIndexParams extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets operation.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\OperationType $operation operation
+     * @param OperationType $operation operation
      *
      * @return self
      */

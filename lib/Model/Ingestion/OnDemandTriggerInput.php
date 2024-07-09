@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * OnDemandTriggerInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Trigger information for manually-triggered tasks.
  */
-class OnDemandTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class OnDemandTriggerInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -70,7 +73,7 @@ class OnDemandTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel im
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['type'])) {
             $this->container['type'] = $data['type'];
@@ -158,7 +161,7 @@ class OnDemandTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\OnDemandTriggerType
+     * @return OnDemandTriggerType
      */
     public function getType()
     {
@@ -168,7 +171,7 @@ class OnDemandTriggerInput extends \Algolia\AlgoliaSearch\Model\AbstractModel im
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\OnDemandTriggerType $type type
+     * @param OnDemandTriggerType $type type
      *
      * @return self
      */

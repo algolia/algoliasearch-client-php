@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ListSourcesResponse Class Doc Comment.
  *
  * @category Class
  */
-class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ListSourcesResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['sources'])) {
             $this->container['sources'] = $data['sources'];
@@ -192,7 +194,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets pagination.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Pagination
+     * @return Pagination
      */
     public function getPagination()
     {
@@ -202,7 +204,7 @@ class ListSourcesResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets pagination.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Pagination $pagination pagination
+     * @param Pagination $pagination pagination
      *
      * @return self
      */

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceUpdateCommercetools Class Doc Comment.
  *
  * @category Class
  */
-class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceUpdateCommercetools extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['storeKeys'])) {
             $this->container['storeKeys'] = $data['storeKeys'];
@@ -279,7 +281,7 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Gets customFields.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     * @return null|CommercetoolsCustomFields
      */
     public function getCustomFields()
     {
@@ -289,7 +291,7 @@ class SourceUpdateCommercetools extends \Algolia\AlgoliaSearch\Model\AbstractMod
     /**
      * Sets customFields.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     * @param null|CommercetoolsCustomFields $customFields customFields
      *
      * @return self
      */

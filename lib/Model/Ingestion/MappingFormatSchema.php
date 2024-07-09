@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * MappingFormatSchema Class Doc Comment.
  *
  * @category Class
+ *
  * @description Mapping format schema.
  */
 class MappingFormatSchema

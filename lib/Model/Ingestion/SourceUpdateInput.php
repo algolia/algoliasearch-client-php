@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceUpdateInput Class Doc Comment.
  *
  * @category Class
  */
-class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -194,7 +196,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['storeKeys'])) {
             $this->container['storeKeys'] = $data['storeKeys'];
@@ -473,7 +475,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets customFields.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields
+     * @return null|CommercetoolsCustomFields
      */
     public function getCustomFields()
     {
@@ -483,7 +485,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets customFields.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\CommercetoolsCustomFields $customFields customFields
+     * @param null|CommercetoolsCustomFields $customFields customFields
      *
      * @return self
      */
@@ -521,7 +523,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets method.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
+     * @return null|MethodType
      */
     public function getMethod()
     {
@@ -531,7 +533,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets method.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
+     * @param null|MethodType $method method
      *
      * @return self
      */
@@ -648,7 +650,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets dataType.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType
+     * @return null|BigQueryDataType
      */
     public function getDataType()
     {
@@ -658,7 +660,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets dataType.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigQueryDataType $dataType dataType
+     * @param null|BigQueryDataType $dataType dataType
      *
      * @return self
      */
@@ -744,7 +746,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Gets registry.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
+     * @return null|DockerRegistry
      */
     public function getRegistry()
     {
@@ -754,7 +756,7 @@ class SourceUpdateInput extends \Algolia\AlgoliaSearch\Model\AbstractModel imple
     /**
      * Sets registry.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
+     * @param null|DockerRegistry $registry registry
      *
      * @return self
      */

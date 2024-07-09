@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BatchRequest Class Doc Comment.
  *
  * @category Class
  */
-class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
@@ -168,7 +170,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Action
+     * @return Action
      */
     public function getAction()
     {
@@ -178,7 +180,7 @@ class BatchRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Action $action action
+     * @param Action $action action
      *
      * @return self
      */

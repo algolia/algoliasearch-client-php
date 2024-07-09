@@ -3,8 +3,12 @@
 namespace Algolia\AlgoliaSearch;
 
 use Algolia\AlgoliaSearch\Cache\NullCacheDriver;
+use Algolia\AlgoliaSearch\Http\CurlHttpClient;
+use Algolia\AlgoliaSearch\Http\GuzzleHttpClient;
 use Algolia\AlgoliaSearch\Http\HttpClientInterface;
 use Algolia\AlgoliaSearch\Log\DebugLogger;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -15,19 +19,19 @@ final class Algolia
     /**
      * Holds an instance of the simple cache repository (PSR-16).
      *
-     * @var null|\Psr\SimpleCache\CacheInterface
+     * @var null|CacheInterface
      */
     private static $cache;
 
     /**
      * Holds an instance of the logger (PSR-3).
      *
-     * @var null|\Psr\Log\LoggerInterface
+     * @var null|LoggerInterface
      */
     private static $logger;
 
     /**
-     * @var \Algolia\AlgoliaSearch\Http\HttpClientInterface
+     * @var HttpClientInterface
      */
     private static $httpClient;
 
@@ -43,7 +47,7 @@ final class Algolia
     /**
      * Gets the cache instance.
      *
-     * @return \Psr\SimpleCache\CacheInterface
+     * @return CacheInterface
      */
     public static function getCache()
     {
@@ -65,7 +69,7 @@ final class Algolia
     /**
      * Gets the logger instance.
      *
-     * @return \Psr\Log\LoggerInterface
+     * @return LoggerInterface
      */
     public static function getLogger()
     {
@@ -90,23 +94,23 @@ final class Algolia
         if (interface_exists('\GuzzleHttp\ClientInterface')) {
             if (defined('\GuzzleHttp\ClientInterface::VERSION')) {
                 $guzzleVersion = (int) mb_substr(
-                    \GuzzleHttp\Client::VERSION,
+                    Client::VERSION,
                     0,
                     1
                 );
             } else {
-                $guzzleVersion = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+                $guzzleVersion = ClientInterface::MAJOR_VERSION;
             }
         }
 
         if (null === self::$httpClient) {
             if (class_exists('\GuzzleHttp\Client') && 6 <= $guzzleVersion) {
                 self::setHttpClient(
-                    new \Algolia\AlgoliaSearch\Http\GuzzleHttpClient()
+                    new GuzzleHttpClient()
                 );
             } else {
                 self::setHttpClient(
-                    new \Algolia\AlgoliaSearch\Http\CurlHttpClient()
+                    new CurlHttpClient()
                 );
             }
         }

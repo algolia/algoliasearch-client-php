@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ABTestConfiguration Class Doc Comment.
  *
  * @category Class
+ *
  * @description A/B test configuration.
  */
-class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ABTestConfiguration extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -80,7 +83,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['outliers'])) {
             $this->container['outliers'] = $data['outliers'];
@@ -174,7 +177,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets outliers.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Outliers
+     * @return Outliers
      */
     public function getOutliers()
     {
@@ -184,7 +187,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets outliers.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Outliers $outliers outliers
+     * @param Outliers $outliers outliers
      *
      * @return self
      */
@@ -198,7 +201,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets emptySearch.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch
+     * @return null|EmptySearch
      */
     public function getEmptySearch()
     {
@@ -208,7 +211,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets emptySearch.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch $emptySearch emptySearch
+     * @param null|EmptySearch $emptySearch emptySearch
      *
      * @return self
      */
@@ -222,7 +225,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets minimumDetectableEffect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect
+     * @return null|MinimumDetectableEffect
      */
     public function getMinimumDetectableEffect()
     {
@@ -232,7 +235,7 @@ class ABTestConfiguration extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets minimumDetectableEffect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect $minimumDetectableEffect minimumDetectableEffect
+     * @param null|MinimumDetectableEffect $minimumDetectableEffect minimumDetectableEffect
      *
      * @return self
      */

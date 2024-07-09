@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * ShopifyInput Class Doc Comment.
  *
  * @category Class
+ *
  * @description Represents the required elements of the task input when using a &#x60;shopify&#x60; source.
  */
-class ShopifyInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class ShopifyInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class ShopifyInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['metafields'])) {
             $this->container['metafields'] = $data['metafields'];
@@ -193,7 +196,7 @@ class ShopifyInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets market.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket
+     * @return ShopifyMarket
      */
     public function getMarket()
     {
@@ -203,7 +206,7 @@ class ShopifyInput extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets market.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket $market market
+     * @param ShopifyMarket $market market
      *
      * @return self
      */

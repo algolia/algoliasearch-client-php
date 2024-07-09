@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Personalization;
  * EventType Class Doc Comment.
  *
  * @category Class
+ *
  * @description Event type.
  */
 class EventType

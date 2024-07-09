@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  * OrderKeys Class Doc Comment.
  *
  * @category Class
+ *
  * @description Ascending or descending sort order.
  */
 class OrderKeys

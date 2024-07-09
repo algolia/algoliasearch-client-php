@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * RelatedModel Class Doc Comment.
  *
  * @category Class
+ *
  * @description Related products or similar content model.  This model recommends items that are similar to the item with the ID &#x60;objectID&#x60;. Similarity is determined from the user interactions and attributes.
  */
 class RelatedModel

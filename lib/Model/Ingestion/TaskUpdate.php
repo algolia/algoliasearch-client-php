@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TaskUpdate Class Doc Comment.
  *
  * @category Class
+ *
  * @description API request body for updating a task.
  */
-class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -90,7 +93,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['destinationID'])) {
             $this->container['destinationID'] = $data['destinationID'];
@@ -218,7 +221,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets trigger.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TriggerUpdateInput
+     * @return null|TriggerUpdateInput
      */
     public function getTrigger()
     {
@@ -228,7 +231,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets trigger.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TriggerUpdateInput $trigger trigger
+     * @param null|TriggerUpdateInput $trigger trigger
      *
      * @return self
      */
@@ -242,7 +245,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets input.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
+     * @return null|TaskInput
      */
     public function getInput()
     {
@@ -252,7 +255,7 @@ class TaskUpdate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets input.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
+     * @param null|TaskInput $input input
      *
      * @return self
      */

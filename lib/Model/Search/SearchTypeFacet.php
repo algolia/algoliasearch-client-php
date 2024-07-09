@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  * SearchTypeFacet Class Doc Comment.
  *
  * @category Class
+ *
  * @description - &#x60;default&#x60;: perform a search query - &#x60;facet&#x60; [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
  */
 class SearchTypeFacet

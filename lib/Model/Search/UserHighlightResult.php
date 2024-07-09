@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * UserHighlightResult Class Doc Comment.
  *
  * @category Class
  */
-class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class UserHighlightResult extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['userID'])) {
             $this->container['userID'] = $data['userID'];
@@ -168,7 +170,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets userID.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return HighlightResult
      */
     public function getUserID()
     {
@@ -178,7 +180,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets userID.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $userID userID
+     * @param HighlightResult $userID userID
      *
      * @return self
      */
@@ -192,7 +194,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets clusterName.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HighlightResult
+     * @return HighlightResult
      */
     public function getClusterName()
     {
@@ -202,7 +204,7 @@ class UserHighlightResult extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets clusterName.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\HighlightResult $clusterName clusterName
+     * @param HighlightResult $clusterName clusterName
      *
      * @return self
      */

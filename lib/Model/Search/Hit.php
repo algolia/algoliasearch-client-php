@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Hit Class Doc Comment.
  *
  * @category Class
+ *
  * @description Search result.  A hit is a record from your index, augmented with special attributes for highlighting, snippeting, and ranking.
  */
-class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -90,7 +93,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -262,7 +265,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Gets rankingInfo.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo
+     * @return null|RankingInfo
      */
     public function getRankingInfo()
     {
@@ -272,7 +275,7 @@ class Hit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInt
     /**
      * Sets rankingInfo.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RankingInfo $rankingInfo rankingInfo
+     * @param null|RankingInfo $rankingInfo rankingInfo
      *
      * @return self
      */

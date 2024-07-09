@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * DeleteByParams Class Doc Comment.
  *
  * @category Class
  */
-class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DeleteByParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -104,7 +106,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['facetFilters'])) {
             $this->container['facetFilters'] = $data['facetFilters'];
@@ -207,7 +209,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets facetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters
+     * @return null|FacetFilters
      */
     public function getFacetFilters()
     {
@@ -217,7 +219,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets facetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\FacetFilters $facetFilters facetFilters
+     * @param null|FacetFilters $facetFilters facetFilters
      *
      * @return self
      */
@@ -255,7 +257,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets numericFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters
+     * @return null|NumericFilters
      */
     public function getNumericFilters()
     {
@@ -265,7 +267,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets numericFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\NumericFilters $numericFilters numericFilters
+     * @param null|NumericFilters $numericFilters numericFilters
      *
      * @return self
      */
@@ -279,7 +281,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets tagFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TagFilters
+     * @return null|TagFilters
      */
     public function getTagFilters()
     {
@@ -289,7 +291,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets tagFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TagFilters $tagFilters tagFilters
+     * @param null|TagFilters $tagFilters tagFilters
      *
      * @return self
      */
@@ -327,7 +329,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Gets aroundRadius.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius
+     * @return null|AroundRadius
      */
     public function getAroundRadius()
     {
@@ -337,7 +339,7 @@ class DeleteByParams extends \Algolia\AlgoliaSearch\Model\AbstractModel implemen
     /**
      * Sets aroundRadius.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AroundRadius $aroundRadius aroundRadius
+     * @param null|AroundRadius $aroundRadius aroundRadius
      *
      * @return self
      */

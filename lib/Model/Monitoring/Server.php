@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * Server Class Doc Comment.
  *
  * @category Class
  */
-class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Server extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -99,7 +101,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
@@ -223,7 +225,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets region.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Region
+     * @return null|Region
      */
     public function getRegion()
     {
@@ -233,7 +235,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets region.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Region $region region
+     * @param null|Region $region region
      *
      * @return self
      */
@@ -323,7 +325,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets status.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus
+     * @return null|ServerStatus
      */
     public function getStatus()
     {
@@ -333,7 +335,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets status.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\ServerStatus $status status
+     * @param null|ServerStatus $status status
      *
      * @return self
      */
@@ -347,7 +349,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Gets type.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Type
+     * @return null|Type
      */
     public function getType()
     {
@@ -357,7 +359,7 @@ class Server extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Model
     /**
      * Sets type.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Type $type type
+     * @param null|Type $type type
      *
      * @return self
      */

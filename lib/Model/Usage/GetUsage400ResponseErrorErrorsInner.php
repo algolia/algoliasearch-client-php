@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetUsage400ResponseErrorErrorsInner Class Doc Comment.
  *
  * @category Class
  */
-class GetUsage400ResponseErrorErrorsInner extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetUsage400ResponseErrorErrorsInner extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -84,7 +86,7 @@ class GetUsage400ResponseErrorErrorsInner extends \Algolia\AlgoliaSearch\Model\A
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['code'])) {
             $this->container['code'] = $data['code'];

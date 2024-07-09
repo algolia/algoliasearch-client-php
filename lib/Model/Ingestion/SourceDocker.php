@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceDocker Class Doc Comment.
  *
  * @category Class
  */
-class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceDocker extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['imageType'])) {
             $this->container['imageType'] = $data['imageType'];
@@ -198,7 +200,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets imageType.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType
+     * @return DockerImageType
      */
     public function getImageType()
     {
@@ -208,7 +210,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets imageType.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType $imageType imageType
+     * @param DockerImageType $imageType imageType
      *
      * @return self
      */
@@ -222,7 +224,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Gets registry.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry
+     * @return DockerRegistry
      */
     public function getRegistry()
     {
@@ -232,7 +234,7 @@ class SourceDocker extends \Algolia\AlgoliaSearch\Model\AbstractModel implements
     /**
      * Sets registry.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry $registry registry
+     * @param DockerRegistry $registry registry
      *
      * @return self
      */

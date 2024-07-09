@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SynonymHit Class Doc Comment.
  *
  * @category Class
+ *
  * @description Synonym object.
  */
-class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SynonymHit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -105,7 +108,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['objectID'])) {
             $this->container['objectID'] = $data['objectID'];
@@ -241,7 +244,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets type.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymType
+     * @return SynonymType
      */
     public function getType()
     {
@@ -251,7 +254,7 @@ class SynonymHit extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets type.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SynonymType $type type
+     * @param SynonymType $type type
      *
      * @return self
      */

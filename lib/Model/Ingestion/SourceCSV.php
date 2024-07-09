@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * SourceCSV Class Doc Comment.
  *
  * @category Class
  */
-class SourceCSV extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class SourceCSV extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -89,7 +91,7 @@ class SourceCSV extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['url'])) {
             $this->container['url'] = $data['url'];
@@ -268,7 +270,7 @@ class SourceCSV extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Gets method.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType
+     * @return null|MethodType
      */
     public function getMethod()
     {
@@ -278,7 +280,7 @@ class SourceCSV extends \Algolia\AlgoliaSearch\Model\AbstractModel implements Mo
     /**
      * Sets method.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\MethodType $method method
+     * @param null|MethodType $method method
      *
      * @return self
      */

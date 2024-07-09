@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RecommendRule Class Doc Comment.
  *
  * @category Class
+ *
  * @description Recommend rule.
  */
-class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -95,7 +98,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['metadata'])) {
             $this->container['metadata'] = $data['metadata'];
@@ -192,7 +195,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets metadata.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata
+     * @return null|RecommendRuleMetadata
      */
     public function getMetadata()
     {
@@ -202,7 +205,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets metadata.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata $metadata metadata
+     * @param null|RecommendRuleMetadata $metadata metadata
      *
      * @return self
      */
@@ -240,7 +243,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets condition.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Condition
+     * @return null|Condition
      */
     public function getCondition()
     {
@@ -250,7 +253,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets condition.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Condition $condition condition
+     * @param null|Condition $condition condition
      *
      * @return self
      */
@@ -264,7 +267,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Gets consequence.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence
+     * @return null|Consequence
      */
     public function getConsequence()
     {
@@ -274,7 +277,7 @@ class RecommendRule extends \Algolia\AlgoliaSearch\Model\AbstractModel implement
     /**
      * Sets consequence.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Consequence $consequence consequence
+     * @param null|Consequence $consequence consequence
      *
      * @return self
      */

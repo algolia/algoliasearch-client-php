@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetTaskResponse Class Doc Comment.
  *
  * @category Class
  */
-class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetTaskResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];
@@ -157,7 +159,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Gets status.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\TaskStatus
+     * @return TaskStatus
      */
     public function getStatus()
     {
@@ -167,7 +169,7 @@ class GetTaskResponse extends \Algolia\AlgoliaSearch\Model\AbstractModel impleme
     /**
      * Sets status.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\TaskStatus $status status
+     * @param TaskStatus $status status
      *
      * @return self
      */

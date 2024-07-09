@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * TaskCreate Class Doc Comment.
  *
  * @category Class
+ *
  * @description API request body for creating a task.
  */
-class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -105,7 +108,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['sourceID'])) {
             $this->container['sourceID'] = $data['sourceID'];
@@ -278,7 +281,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets trigger.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger
+     * @return TaskCreateTrigger
      */
     public function getTrigger()
     {
@@ -288,7 +291,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets trigger.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger $trigger trigger
+     * @param TaskCreateTrigger $trigger trigger
      *
      * @return self
      */
@@ -302,7 +305,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ActionType
+     * @return ActionType
      */
     public function getAction()
     {
@@ -312,7 +315,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ActionType $action action
+     * @param ActionType $action action
      *
      * @return self
      */
@@ -381,7 +384,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Gets input.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput
+     * @return null|TaskInput
      */
     public function getInput()
     {
@@ -391,7 +394,7 @@ class TaskCreate extends \Algolia\AlgoliaSearch\Model\AbstractModel implements M
     /**
      * Sets input.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput $input input
+     * @param null|TaskInput $input input
      *
      * @return self
      */

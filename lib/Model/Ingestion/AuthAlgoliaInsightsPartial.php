@@ -4,13 +4,16 @@
 
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * AuthAlgoliaInsightsPartial Class Doc Comment.
  *
  * @category Class
+ *
  * @description Credentials for authenticating with the Algolia Insights API.
  */
-class AuthAlgoliaInsightsPartial extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class AuthAlgoliaInsightsPartial extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -75,7 +78,7 @@ class AuthAlgoliaInsightsPartial extends \Algolia\AlgoliaSearch\Model\AbstractMo
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['appID'])) {
             $this->container['appID'] = $data['appID'];

@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * RecommendationsResults Class Doc Comment.
  *
  * @category Class
  */
-class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class RecommendationsResults extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -209,7 +211,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['abTestID'])) {
             $this->container['abTestID'] = $data['abTestID'];
@@ -520,7 +522,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets exhaustive.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive
+     * @return null|Exhaustive
      */
     public function getExhaustive()
     {
@@ -530,7 +532,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets exhaustive.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive $exhaustive exhaustive
+     * @param null|Exhaustive $exhaustive exhaustive
      *
      * @return self
      */
@@ -975,7 +977,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets redirect.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect
+     * @return null|Redirect
      */
     public function getRedirect()
     {
@@ -985,7 +987,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets redirect.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Redirect $redirect redirect
+     * @param null|Redirect $redirect redirect
      *
      * @return self
      */
@@ -999,7 +1001,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Gets renderingContent.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent
+     * @return null|RenderingContent
      */
     public function getRenderingContent()
     {
@@ -1009,7 +1011,7 @@ class RecommendationsResults extends \Algolia\AlgoliaSearch\Model\AbstractModel 
     /**
      * Sets renderingContent.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RenderingContent $renderingContent renderingContent
+     * @param null|RenderingContent $renderingContent renderingContent
      *
      * @return self
      */

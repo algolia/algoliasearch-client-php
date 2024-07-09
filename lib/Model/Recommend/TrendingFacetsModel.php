@@ -8,6 +8,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  * TrendingFacetsModel Class Doc Comment.
  *
  * @category Class
+ *
  * @description Trending facet values model.  This model recommends trending facet values for the specified facet attribute.
  */
 class TrendingFacetsModel

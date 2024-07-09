@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Search;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * BatchDictionaryEntriesRequest Class Doc Comment.
  *
  * @category Class
  */
-class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BatchDictionaryEntriesRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -74,7 +76,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
@@ -168,7 +170,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryAction
+     * @return DictionaryAction
      */
     public function getAction()
     {
@@ -178,7 +180,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryAction $action action
+     * @param DictionaryAction $action action
      *
      * @return self
      */
@@ -192,7 +194,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Gets body.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry
+     * @return DictionaryEntry
      */
     public function getBody()
     {
@@ -202,7 +204,7 @@ class BatchDictionaryEntriesRequest extends \Algolia\AlgoliaSearch\Model\Abstrac
     /**
      * Sets body.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry $body body
+     * @param DictionaryEntry $body body
      *
      * @return self
      */

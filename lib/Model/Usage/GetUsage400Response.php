@@ -4,12 +4,14 @@
 
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
+use Algolia\AlgoliaSearch\Model\AbstractModel;
+
 /**
  * GetUsage400Response Class Doc Comment.
  *
  * @category Class
  */
-class GetUsage400Response extends \Algolia\AlgoliaSearch\Model\AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class GetUsage400Response extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -69,7 +71,7 @@ class GetUsage400Response extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         if (isset($data['error'])) {
             $this->container['error'] = $data['error'];
@@ -157,7 +159,7 @@ class GetUsage400Response extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Gets error.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Usage\GetUsage400ResponseError
+     * @return GetUsage400ResponseError
      */
     public function getError()
     {
@@ -167,7 +169,7 @@ class GetUsage400Response extends \Algolia\AlgoliaSearch\Model\AbstractModel imp
     /**
      * Sets error.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Usage\GetUsage400ResponseError $error error
+     * @param GetUsage400ResponseError $error error
      *
      * @return self
      */

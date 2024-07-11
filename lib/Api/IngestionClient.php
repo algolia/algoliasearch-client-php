@@ -265,7 +265,7 @@ class IngestionClient
      * @param array $transformationCreate Request body for creating a transformation. (required)
      *                                    - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                    - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
-     *                                    - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does. (required)
+     *                                    - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
      *
      * @see TransformationCreate
      *
@@ -1988,7 +1988,7 @@ class IngestionClient
      * @param array  $transformationCreate transformationCreate (required)
      *                                     - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                     - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
-     *                                     - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does. (required)
+     *                                     - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
      *
      * @see TransformationCreate
      *

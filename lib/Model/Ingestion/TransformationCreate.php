@@ -162,9 +162,6 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['description']) || null === $this->container['description']) {
-            $invalidProperties[] = "'description' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -231,7 +228,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     /**
      * Gets description.
      *
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -241,7 +238,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets description.
      *
-     * @param string $description a descriptive name for your transformation of what it does
+     * @param null|string $description a descriptive name for your transformation of what it does
      *
      * @return self
      */

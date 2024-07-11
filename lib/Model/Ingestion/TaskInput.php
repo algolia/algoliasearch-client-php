@@ -21,10 +21,8 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'startDate' => 'string',
-        'endDate' => 'string',
         'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
-        'timeframe' => 'int',
+        'streams' => 'object',
         'metafields' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMetafield[]',
         'market' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket',
     ];
@@ -35,10 +33,8 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'startDate' => null,
-        'endDate' => null,
         'mapping' => null,
-        'timeframe' => null,
+        'streams' => null,
         'metafields' => null,
         'market' => null,
     ];
@@ -50,10 +46,8 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'startDate' => 'startDate',
-        'endDate' => 'endDate',
         'mapping' => 'mapping',
-        'timeframe' => 'timeframe',
+        'streams' => 'streams',
         'metafields' => 'metafields',
         'market' => 'market',
     ];
@@ -64,10 +58,8 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $setters = [
-        'startDate' => 'setStartDate',
-        'endDate' => 'setEndDate',
         'mapping' => 'setMapping',
-        'timeframe' => 'setTimeframe',
+        'streams' => 'setStreams',
         'metafields' => 'setMetafields',
         'market' => 'setMarket',
     ];
@@ -78,10 +70,8 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $getters = [
-        'startDate' => 'getStartDate',
-        'endDate' => 'getEndDate',
         'mapping' => 'getMapping',
-        'timeframe' => 'getTimeframe',
+        'streams' => 'getStreams',
         'metafields' => 'getMetafields',
         'market' => 'getMarket',
     ];
@@ -100,17 +90,11 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['startDate'])) {
-            $this->container['startDate'] = $data['startDate'];
-        }
-        if (isset($data['endDate'])) {
-            $this->container['endDate'] = $data['endDate'];
-        }
         if (isset($data['mapping'])) {
             $this->container['mapping'] = $data['mapping'];
         }
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
+        if (isset($data['streams'])) {
+            $this->container['streams'] = $data['streams'];
         }
         if (isset($data['metafields'])) {
             $this->container['metafields'] = $data['metafields'];
@@ -180,26 +164,12 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['startDate']) || null === $this->container['startDate']) {
-            $invalidProperties[] = "'startDate' can't be null";
-        }
-        if (!isset($this->container['endDate']) || null === $this->container['endDate']) {
-            $invalidProperties[] = "'endDate' can't be null";
-        }
         if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
             $invalidProperties[] = "'mapping' can't be null";
         }
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
+        if (!isset($this->container['streams']) || null === $this->container['streams']) {
+            $invalidProperties[] = "'streams' can't be null";
         }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['metafields']) || null === $this->container['metafields']) {
             $invalidProperties[] = "'metafields' can't be null";
         }
@@ -219,54 +189,6 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets startDate.
-     *
-     * @return string
-     */
-    public function getStartDate()
-    {
-        return $this->container['startDate'] ?? null;
-    }
-
-    /**
-     * Sets startDate.
-     *
-     * @param string $startDate earliest date in RFC 3339 format of the extracted data from Big Query
-     *
-     * @return self
-     */
-    public function setStartDate($startDate)
-    {
-        $this->container['startDate'] = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Gets endDate.
-     *
-     * @return string
-     */
-    public function getEndDate()
-    {
-        return $this->container['endDate'] ?? null;
-    }
-
-    /**
-     * Sets endDate.
-     *
-     * @param string $endDate latest date in RFC 3339 format of the extracted data from Big Query
-     *
-     * @return self
-     */
-    public function setEndDate($endDate)
-    {
-        $this->container['endDate'] = $endDate;
-
-        return $this;
     }
 
     /**
@@ -294,32 +216,25 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     }
 
     /**
-     * Gets timeframe.
+     * Gets streams.
      *
-     * @return int
+     * @return object
      */
-    public function getTimeframe()
+    public function getStreams()
     {
-        return $this->container['timeframe'] ?? null;
+        return $this->container['streams'] ?? null;
     }
 
     /**
-     * Sets timeframe.
+     * Sets streams.
      *
-     * @param int $timeframe number of days in the past until the current day for which to extract Big Query data
+     * @param object $streams streams
      *
      * @return self
      */
-    public function setTimeframe($timeframe)
+    public function setStreams($streams)
     {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling TaskInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
+        $this->container['streams'] = $streams;
 
         return $this;
     }

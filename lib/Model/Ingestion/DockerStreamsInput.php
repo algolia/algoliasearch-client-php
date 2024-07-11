@@ -7,13 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * StreamingUtilsInput Class Doc Comment.
+ * DockerStreamsInput Class Doc Comment.
  *
  * @category Class
- *
- * @description Input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
  */
-class StreamingUtilsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DockerStreamsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,7 +19,7 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $modelTypes = [
-        'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
+        'streams' => 'object',
     ];
 
     /**
@@ -30,7 +28,7 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $modelFormats = [
-        'mapping' => null,
+        'streams' => null,
     ];
 
     /**
@@ -40,7 +38,7 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'mapping' => 'mapping',
+        'streams' => 'streams',
     ];
 
     /**
@@ -49,7 +47,7 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $setters = [
-        'mapping' => 'setMapping',
+        'streams' => 'setStreams',
     ];
 
     /**
@@ -58,7 +56,7 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      * @var string[]
      */
     protected static $getters = [
-        'mapping' => 'getMapping',
+        'streams' => 'getStreams',
     ];
 
     /**
@@ -75,8 +73,8 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['mapping'])) {
-            $this->container['mapping'] = $data['mapping'];
+        if (isset($data['streams'])) {
+            $this->container['streams'] = $data['streams'];
         }
     }
 
@@ -140,8 +138,8 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
-            $invalidProperties[] = "'mapping' can't be null";
+        if (!isset($this->container['streams']) || null === $this->container['streams']) {
+            $invalidProperties[] = "'streams' can't be null";
         }
 
         return $invalidProperties;
@@ -159,25 +157,25 @@ class StreamingUtilsInput extends AbstractModel implements ModelInterface, \Arra
     }
 
     /**
-     * Gets mapping.
+     * Gets streams.
      *
-     * @return MappingInput
+     * @return object
      */
-    public function getMapping()
+    public function getStreams()
     {
-        return $this->container['mapping'] ?? null;
+        return $this->container['streams'] ?? null;
     }
 
     /**
-     * Sets mapping.
+     * Sets streams.
      *
-     * @param MappingInput $mapping mapping
+     * @param object $streams streams
      *
      * @return self
      */
-    public function setMapping($mapping)
+    public function setStreams($streams)
     {
-        $this->container['mapping'] = $mapping;
+        $this->container['streams'] = $streams;
 
         return $this;
     }

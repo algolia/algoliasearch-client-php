@@ -7,13 +7,13 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * ScheduleDateUtilsInput Class Doc Comment.
+ * StreamingInput Class Doc Comment.
  *
  * @category Class
  *
- * @description Input for scheduled tasks whose source is of type &#x60;bigquery&#x60; and for which extracted data spans a fixed number of days.
+ * @description Input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
  */
-class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class StreamingInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,7 +21,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $modelTypes = [
-        'timeframe' => 'int',
         'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
     ];
 
@@ -31,7 +30,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $modelFormats = [
-        'timeframe' => null,
         'mapping' => null,
     ];
 
@@ -42,7 +40,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $attributeMap = [
-        'timeframe' => 'timeframe',
         'mapping' => 'mapping',
     ];
 
@@ -52,7 +49,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $setters = [
-        'timeframe' => 'setTimeframe',
         'mapping' => 'setMapping',
     ];
 
@@ -62,7 +58,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $getters = [
-        'timeframe' => 'getTimeframe',
         'mapping' => 'getMapping',
     ];
 
@@ -80,9 +75,6 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['timeframe'])) {
-            $this->container['timeframe'] = $data['timeframe'];
-        }
         if (isset($data['mapping'])) {
             $this->container['mapping'] = $data['mapping'];
         }
@@ -148,15 +140,8 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['timeframe']) || null === $this->container['timeframe']) {
-            $invalidProperties[] = "'timeframe' can't be null";
-        }
-        if ($this->container['timeframe'] > 30) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be smaller than or equal to 30.";
-        }
-
-        if ($this->container['timeframe'] < 1) {
-            $invalidProperties[] = "invalid value for 'timeframe', must be bigger than or equal to 1.";
+        if (!isset($this->container['mapping']) || null === $this->container['mapping']) {
+            $invalidProperties[] = "'mapping' can't be null";
         }
 
         return $invalidProperties;
@@ -174,40 +159,9 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
     }
 
     /**
-     * Gets timeframe.
-     *
-     * @return int
-     */
-    public function getTimeframe()
-    {
-        return $this->container['timeframe'] ?? null;
-    }
-
-    /**
-     * Sets timeframe.
-     *
-     * @param int $timeframe number of days in the past until the current day for which to extract Big Query data
-     *
-     * @return self
-     */
-    public function setTimeframe($timeframe)
-    {
-        if ($timeframe > 30) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be smaller than or equal to 30.');
-        }
-        if ($timeframe < 1) {
-            throw new \InvalidArgumentException('invalid value for $timeframe when calling ScheduleDateUtilsInput., must be bigger than or equal to 1.');
-        }
-
-        $this->container['timeframe'] = $timeframe;
-
-        return $this;
-    }
-
-    /**
      * Gets mapping.
      *
-     * @return null|MappingInput
+     * @return MappingInput
      */
     public function getMapping()
     {
@@ -217,7 +171,7 @@ class ScheduleDateUtilsInput extends AbstractModel implements ModelInterface, \A
     /**
      * Sets mapping.
      *
-     * @param null|MappingInput $mapping mapping
+     * @param MappingInput $mapping mapping
      *
      * @return self
      */

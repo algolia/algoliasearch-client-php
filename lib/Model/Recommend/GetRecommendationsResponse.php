@@ -136,7 +136,13 @@ class GetRecommendationsResponse extends AbstractModel implements ModelInterface
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['results']) || null === $this->container['results']) {
+            $invalidProperties[] = "'results' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -153,7 +159,7 @@ class GetRecommendationsResponse extends AbstractModel implements ModelInterface
     /**
      * Gets results.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[]
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[]
      */
     public function getResults()
     {
@@ -163,7 +169,7 @@ class GetRecommendationsResponse extends AbstractModel implements ModelInterface
     /**
      * Sets results.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[] $results results
+     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[] $results results
      *
      * @return self
      */

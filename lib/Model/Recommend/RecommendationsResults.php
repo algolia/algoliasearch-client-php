@@ -29,14 +29,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,int>>',
         'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>',
-        'hitsPerPage' => 'int',
         'index' => 'string',
         'indexUsed' => 'string',
         'message' => 'string',
-        'nbHits' => 'int',
-        'nbPages' => 'int',
         'nbSortedHits' => 'int',
-        'page' => 'int',
         'parsedQuery' => 'string',
         'processingTimeMS' => 'int',
         'processingTimingsMS' => 'object',
@@ -47,6 +43,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'string',
         'userData' => 'object',
         'queryID' => 'string',
+        'page' => 'int',
+        'nbHits' => 'int',
+        'nbPages' => 'int',
+        'hitsPerPage' => 'int',
         'hits' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendationsHit[]',
     ];
 
@@ -66,14 +66,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveTypo' => null,
         'facets' => null,
         'facetsStats' => null,
-        'hitsPerPage' => null,
         'index' => null,
         'indexUsed' => null,
         'message' => null,
-        'nbHits' => null,
-        'nbPages' => null,
         'nbSortedHits' => null,
-        'page' => null,
         'parsedQuery' => null,
         'processingTimeMS' => null,
         'processingTimingsMS' => null,
@@ -84,6 +80,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => null,
         'userData' => null,
         'queryID' => null,
+        'page' => null,
+        'nbHits' => null,
+        'nbPages' => null,
+        'hitsPerPage' => null,
         'hits' => null,
     ];
 
@@ -104,14 +104,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveTypo' => 'exhaustiveTypo',
         'facets' => 'facets',
         'facetsStats' => 'facets_stats',
-        'hitsPerPage' => 'hitsPerPage',
         'index' => 'index',
         'indexUsed' => 'indexUsed',
         'message' => 'message',
-        'nbHits' => 'nbHits',
-        'nbPages' => 'nbPages',
         'nbSortedHits' => 'nbSortedHits',
-        'page' => 'page',
         'parsedQuery' => 'parsedQuery',
         'processingTimeMS' => 'processingTimeMS',
         'processingTimingsMS' => 'processingTimingsMS',
@@ -122,6 +118,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
         'queryID' => 'queryID',
+        'page' => 'page',
+        'nbHits' => 'nbHits',
+        'nbPages' => 'nbPages',
+        'hitsPerPage' => 'hitsPerPage',
         'hits' => 'hits',
     ];
 
@@ -141,14 +141,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveTypo' => 'setExhaustiveTypo',
         'facets' => 'setFacets',
         'facetsStats' => 'setFacetsStats',
-        'hitsPerPage' => 'setHitsPerPage',
         'index' => 'setIndex',
         'indexUsed' => 'setIndexUsed',
         'message' => 'setMessage',
-        'nbHits' => 'setNbHits',
-        'nbPages' => 'setNbPages',
         'nbSortedHits' => 'setNbSortedHits',
-        'page' => 'setPage',
         'parsedQuery' => 'setParsedQuery',
         'processingTimeMS' => 'setProcessingTimeMS',
         'processingTimingsMS' => 'setProcessingTimingsMS',
@@ -159,6 +155,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
         'queryID' => 'setQueryID',
+        'page' => 'setPage',
+        'nbHits' => 'setNbHits',
+        'nbPages' => 'setNbPages',
+        'hitsPerPage' => 'setHitsPerPage',
         'hits' => 'setHits',
     ];
 
@@ -178,14 +178,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveTypo' => 'getExhaustiveTypo',
         'facets' => 'getFacets',
         'facetsStats' => 'getFacetsStats',
-        'hitsPerPage' => 'getHitsPerPage',
         'index' => 'getIndex',
         'indexUsed' => 'getIndexUsed',
         'message' => 'getMessage',
-        'nbHits' => 'getNbHits',
-        'nbPages' => 'getNbPages',
         'nbSortedHits' => 'getNbSortedHits',
-        'page' => 'getPage',
         'parsedQuery' => 'getParsedQuery',
         'processingTimeMS' => 'getProcessingTimeMS',
         'processingTimingsMS' => 'getProcessingTimingsMS',
@@ -196,6 +192,10 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
         'queryID' => 'getQueryID',
+        'page' => 'getPage',
+        'nbHits' => 'getNbHits',
+        'nbPages' => 'getNbPages',
+        'hitsPerPage' => 'getHitsPerPage',
         'hits' => 'getHits',
     ];
 
@@ -243,9 +243,6 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         if (isset($data['facetsStats'])) {
             $this->container['facetsStats'] = $data['facetsStats'];
         }
-        if (isset($data['hitsPerPage'])) {
-            $this->container['hitsPerPage'] = $data['hitsPerPage'];
-        }
         if (isset($data['index'])) {
             $this->container['index'] = $data['index'];
         }
@@ -255,17 +252,8 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         if (isset($data['message'])) {
             $this->container['message'] = $data['message'];
         }
-        if (isset($data['nbHits'])) {
-            $this->container['nbHits'] = $data['nbHits'];
-        }
-        if (isset($data['nbPages'])) {
-            $this->container['nbPages'] = $data['nbPages'];
-        }
         if (isset($data['nbSortedHits'])) {
             $this->container['nbSortedHits'] = $data['nbSortedHits'];
-        }
-        if (isset($data['page'])) {
-            $this->container['page'] = $data['page'];
         }
         if (isset($data['parsedQuery'])) {
             $this->container['parsedQuery'] = $data['parsedQuery'];
@@ -296,6 +284,18 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         }
         if (isset($data['queryID'])) {
             $this->container['queryID'] = $data['queryID'];
+        }
+        if (isset($data['page'])) {
+            $this->container['page'] = $data['page'];
+        }
+        if (isset($data['nbHits'])) {
+            $this->container['nbHits'] = $data['nbHits'];
+        }
+        if (isset($data['nbPages'])) {
+            $this->container['nbPages'] = $data['nbPages'];
+        }
+        if (isset($data['hitsPerPage'])) {
+            $this->container['hitsPerPage'] = $data['hitsPerPage'];
         }
         if (isset($data['hits'])) {
             $this->container['hits'] = $data['hits'];
@@ -370,6 +370,22 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
             $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
         }
 
+        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
+            $invalidProperties[] = "'processingTimeMS' can't be null";
+        }
+        if (!isset($this->container['page']) || null === $this->container['page']) {
+            $invalidProperties[] = "'page' can't be null";
+        }
+        if ($this->container['page'] < 0) {
+            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
+        }
+
+        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
+            $invalidProperties[] = "'nbHits' can't be null";
+        }
+        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
+            $invalidProperties[] = "'nbPages' can't be null";
+        }
         if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
@@ -381,22 +397,6 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
-            $invalidProperties[] = "'nbHits' can't be null";
-        }
-        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
-            $invalidProperties[] = "'nbPages' can't be null";
-        }
-        if (!isset($this->container['page']) || null === $this->container['page']) {
-            $invalidProperties[] = "'page' can't be null";
-        }
-        if ($this->container['page'] < 0) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
-        if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
-            $invalidProperties[] = "'processingTimeMS' can't be null";
-        }
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
@@ -676,37 +676,6 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     }
 
     /**
-     * Gets hitsPerPage.
-     *
-     * @return int
-     */
-    public function getHitsPerPage()
-    {
-        return $this->container['hitsPerPage'] ?? null;
-    }
-
-    /**
-     * Sets hitsPerPage.
-     *
-     * @param int $hitsPerPage number of hits per page
-     *
-     * @return self
-     */
-    public function setHitsPerPage($hitsPerPage)
-    {
-        if ($hitsPerPage > 1000) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be smaller than or equal to 1000.');
-        }
-        if ($hitsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be bigger than or equal to 1.');
-        }
-
-        $this->container['hitsPerPage'] = $hitsPerPage;
-
-        return $this;
-    }
-
-    /**
      * Gets index.
      *
      * @return null|string
@@ -779,54 +748,6 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     }
 
     /**
-     * Gets nbHits.
-     *
-     * @return int
-     */
-    public function getNbHits()
-    {
-        return $this->container['nbHits'] ?? null;
-    }
-
-    /**
-     * Sets nbHits.
-     *
-     * @param int $nbHits number of results (hits)
-     *
-     * @return self
-     */
-    public function setNbHits($nbHits)
-    {
-        $this->container['nbHits'] = $nbHits;
-
-        return $this;
-    }
-
-    /**
-     * Gets nbPages.
-     *
-     * @return int
-     */
-    public function getNbPages()
-    {
-        return $this->container['nbPages'] ?? null;
-    }
-
-    /**
-     * Sets nbPages.
-     *
-     * @param int $nbPages number of pages of results
-     *
-     * @return self
-     */
-    public function setNbPages($nbPages)
-    {
-        $this->container['nbPages'] = $nbPages;
-
-        return $this;
-    }
-
-    /**
      * Gets nbSortedHits.
      *
      * @return null|int
@@ -846,34 +767,6 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     public function setNbSortedHits($nbSortedHits)
     {
         $this->container['nbSortedHits'] = $nbSortedHits;
-
-        return $this;
-    }
-
-    /**
-     * Gets page.
-     *
-     * @return int
-     */
-    public function getPage()
-    {
-        return $this->container['page'] ?? null;
-    }
-
-    /**
-     * Sets page.
-     *
-     * @param int $page page of search results to retrieve
-     *
-     * @return self
-     */
-    public function setPage($page)
-    {
-        if ($page < 0) {
-            throw new \InvalidArgumentException('invalid value for $page when calling RecommendationsResults., must be bigger than or equal to 0.');
-        }
-
-        $this->container['page'] = $page;
 
         return $this;
     }
@@ -1114,6 +1007,113 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     public function setQueryID($queryID)
     {
         $this->container['queryID'] = $queryID;
+
+        return $this;
+    }
+
+    /**
+     * Gets page.
+     *
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->container['page'] ?? null;
+    }
+
+    /**
+     * Sets page.
+     *
+     * @param int $page page of search results to retrieve
+     *
+     * @return self
+     */
+    public function setPage($page)
+    {
+        if ($page < 0) {
+            throw new \InvalidArgumentException('invalid value for $page when calling RecommendationsResults., must be bigger than or equal to 0.');
+        }
+
+        $this->container['page'] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbHits.
+     *
+     * @return int
+     */
+    public function getNbHits()
+    {
+        return $this->container['nbHits'] ?? null;
+    }
+
+    /**
+     * Sets nbHits.
+     *
+     * @param int $nbHits number of results (hits)
+     *
+     * @return self
+     */
+    public function setNbHits($nbHits)
+    {
+        $this->container['nbHits'] = $nbHits;
+
+        return $this;
+    }
+
+    /**
+     * Gets nbPages.
+     *
+     * @return int
+     */
+    public function getNbPages()
+    {
+        return $this->container['nbPages'] ?? null;
+    }
+
+    /**
+     * Sets nbPages.
+     *
+     * @param int $nbPages number of pages of results
+     *
+     * @return self
+     */
+    public function setNbPages($nbPages)
+    {
+        $this->container['nbPages'] = $nbPages;
+
+        return $this;
+    }
+
+    /**
+     * Gets hitsPerPage.
+     *
+     * @return int
+     */
+    public function getHitsPerPage()
+    {
+        return $this->container['hitsPerPage'] ?? null;
+    }
+
+    /**
+     * Sets hitsPerPage.
+     *
+     * @param int $hitsPerPage number of hits per page
+     *
+     * @return self
+     */
+    public function setHitsPerPage($hitsPerPage)
+    {
+        if ($hitsPerPage > 1000) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be smaller than or equal to 1000.');
+        }
+        if ($hitsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling RecommendationsResults., must be bigger than or equal to 1.');
+        }
+
+        $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
     }

@@ -233,9 +233,6 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
             $invalidProperties[] = "'facetName' can't be null";
         }
-        if (!isset($this->container['facetValue']) || null === $this->container['facetValue']) {
-            $invalidProperties[] = "'facetValue' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -460,7 +457,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Gets facetValue.
      *
-     * @return string
+     * @return null|string
      */
     public function getFacetValue()
     {
@@ -470,7 +467,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Sets facetValue.
      *
-     * @param string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
+     * @param null|string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
      *
      * @return self
      */

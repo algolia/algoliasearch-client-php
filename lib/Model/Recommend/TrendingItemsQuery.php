@@ -216,12 +216,6 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
             $invalidProperties[] = "invalid value for 'maxRecommendations', must be bigger than or equal to 1.";
         }
 
-        if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
-            $invalidProperties[] = "'facetName' can't be null";
-        }
-        if (!isset($this->container['facetValue']) || null === $this->container['facetValue']) {
-            $invalidProperties[] = "'facetValue' can't be null";
-        }
         if (!isset($this->container['model']) || null === $this->container['model']) {
             $invalidProperties[] = "'model' can't be null";
         }
@@ -353,7 +347,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets facetName.
      *
-     * @return string
+     * @return null|string
      */
     public function getFacetName()
     {
@@ -363,7 +357,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets facetName.
      *
-     * @param string $facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
+     * @param null|string $facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
      *
      * @return self
      */
@@ -377,7 +371,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets facetValue.
      *
-     * @return string
+     * @return null|string
      */
     public function getFacetValue()
     {
@@ -387,7 +381,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets facetValue.
      *
-     * @param string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
+     * @param null|string $facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
      *
      * @return self
      */

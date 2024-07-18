@@ -151,13 +151,13 @@ final class Helpers
 
                 // In case of an addition, if there was no error, the $key has been added as it should be
                 if ('add' === $operation) {
-                    return;
+                    return $response;
                 }
 
                 // In case of an update, check if the key has been updated as it should be
                 if ('update' === $operation) {
                     if (self::isKeyUpdated($response, $apiKey)) {
-                        return;
+                        return $response;
                     }
                 }
 
@@ -166,9 +166,9 @@ final class Helpers
                 // In case of a deletion, if there was an error, the $key has been deleted as it should be
                 if (
                     'delete' === $operation
-                    && 'Key does not exist' === $e->getMessage()
+                    && 404 === $e->getCode()
                 ) {
-                    return;
+                    return null;
                 }
 
                 // Else try again ...

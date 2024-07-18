@@ -2817,8 +2817,8 @@ class SearchClient
     /**
      * Wait for an API key to be added, updated or deleted based on a given `operation`.
      *
-     * @param string   $operation      the `operation` that was done on a `key`
      * @param string   $key            the `key` that has been added, deleted or updated
+     * @param string   $operation      the `operation` that was done on a `key`
      * @param array    $apiKey         necessary to know if an `update` operation has been processed, compare fields of the response with it
      * @param null|int $maxRetries     Maximum number of retries
      * @param null|int $timeout        Timeout
@@ -2827,8 +2827,8 @@ class SearchClient
      * @throws ExceededRetriesException
      */
     public function waitForApiKey(
-        $operation,
         $key,
+        $operation,
         $apiKey = null,
         $maxRetries = null,
         $timeout = null,
@@ -2842,14 +2842,14 @@ class SearchClient
             $maxRetries = $this->config->getDefaultMaxRetries();
         }
 
-        Helpers::retryForApiKeyUntil(
+        return Helpers::retryForApiKeyUntil(
             $operation,
             $this,
             $key,
             $apiKey,
             $maxRetries,
             $timeout,
-            null,
+            'Algolia\AlgoliaSearch\Support\Helpers::linearTimeout',
             $requestOptions
         );
     }

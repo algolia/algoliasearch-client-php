@@ -7,11 +7,13 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * Task Class Doc Comment.
+ * TaskCreateV1 Class Doc Comment.
  *
  * @category Class
+ *
+ * @description API request body for creating a task using the V1 shape, please use methods and types that don&#39;t contain the V1 suffix.
  */
-class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskCreateV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,19 +21,14 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $modelTypes = [
-        'taskID' => 'string',
         'sourceID' => 'string',
         'destinationID' => 'string',
-        'cron' => 'string',
-        'lastRun' => 'string',
-        'nextRun' => 'string',
-        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
+        'trigger' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger',
+        'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
-        'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'cursor' => 'string',
-        'createdAt' => 'string',
-        'updatedAt' => 'string',
     ];
 
     /**
@@ -40,19 +37,14 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $modelFormats = [
-        'taskID' => null,
         'sourceID' => null,
         'destinationID' => null,
-        'cron' => null,
-        'lastRun' => null,
-        'nextRun' => null,
-        'input' => null,
+        'trigger' => null,
+        'action' => null,
         'enabled' => null,
         'failureThreshold' => null,
-        'action' => null,
+        'input' => null,
         'cursor' => null,
-        'createdAt' => null,
-        'updatedAt' => null,
     ];
 
     /**
@@ -62,19 +54,14 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'taskID' => 'taskID',
         'sourceID' => 'sourceID',
         'destinationID' => 'destinationID',
-        'cron' => 'cron',
-        'lastRun' => 'lastRun',
-        'nextRun' => 'nextRun',
-        'input' => 'input',
+        'trigger' => 'trigger',
+        'action' => 'action',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
-        'action' => 'action',
+        'input' => 'input',
         'cursor' => 'cursor',
-        'createdAt' => 'createdAt',
-        'updatedAt' => 'updatedAt',
     ];
 
     /**
@@ -83,19 +70,14 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'taskID' => 'setTaskID',
         'sourceID' => 'setSourceID',
         'destinationID' => 'setDestinationID',
-        'cron' => 'setCron',
-        'lastRun' => 'setLastRun',
-        'nextRun' => 'setNextRun',
-        'input' => 'setInput',
+        'trigger' => 'setTrigger',
+        'action' => 'setAction',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
-        'action' => 'setAction',
+        'input' => 'setInput',
         'cursor' => 'setCursor',
-        'createdAt' => 'setCreatedAt',
-        'updatedAt' => 'setUpdatedAt',
     ];
 
     /**
@@ -104,19 +86,14 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'taskID' => 'getTaskID',
         'sourceID' => 'getSourceID',
         'destinationID' => 'getDestinationID',
-        'cron' => 'getCron',
-        'lastRun' => 'getLastRun',
-        'nextRun' => 'getNextRun',
-        'input' => 'getInput',
+        'trigger' => 'getTrigger',
+        'action' => 'getAction',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
-        'action' => 'getAction',
+        'input' => 'getInput',
         'cursor' => 'getCursor',
-        'createdAt' => 'getCreatedAt',
-        'updatedAt' => 'getUpdatedAt',
     ];
 
     /**
@@ -133,26 +110,17 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['taskID'])) {
-            $this->container['taskID'] = $data['taskID'];
-        }
         if (isset($data['sourceID'])) {
             $this->container['sourceID'] = $data['sourceID'];
         }
         if (isset($data['destinationID'])) {
             $this->container['destinationID'] = $data['destinationID'];
         }
-        if (isset($data['cron'])) {
-            $this->container['cron'] = $data['cron'];
+        if (isset($data['trigger'])) {
+            $this->container['trigger'] = $data['trigger'];
         }
-        if (isset($data['lastRun'])) {
-            $this->container['lastRun'] = $data['lastRun'];
-        }
-        if (isset($data['nextRun'])) {
-            $this->container['nextRun'] = $data['nextRun'];
-        }
-        if (isset($data['input'])) {
-            $this->container['input'] = $data['input'];
+        if (isset($data['action'])) {
+            $this->container['action'] = $data['action'];
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
@@ -160,17 +128,11 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         if (isset($data['failureThreshold'])) {
             $this->container['failureThreshold'] = $data['failureThreshold'];
         }
-        if (isset($data['action'])) {
-            $this->container['action'] = $data['action'];
+        if (isset($data['input'])) {
+            $this->container['input'] = $data['input'];
         }
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
-        }
-        if (isset($data['createdAt'])) {
-            $this->container['createdAt'] = $data['createdAt'];
-        }
-        if (isset($data['updatedAt'])) {
-            $this->container['updatedAt'] = $data['updatedAt'];
         }
     }
 
@@ -234,17 +196,17 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['taskID']) || null === $this->container['taskID']) {
-            $invalidProperties[] = "'taskID' can't be null";
-        }
         if (!isset($this->container['sourceID']) || null === $this->container['sourceID']) {
             $invalidProperties[] = "'sourceID' can't be null";
         }
         if (!isset($this->container['destinationID']) || null === $this->container['destinationID']) {
             $invalidProperties[] = "'destinationID' can't be null";
         }
-        if (!isset($this->container['enabled']) || null === $this->container['enabled']) {
-            $invalidProperties[] = "'enabled' can't be null";
+        if (!isset($this->container['trigger']) || null === $this->container['trigger']) {
+            $invalidProperties[] = "'trigger' can't be null";
+        }
+        if (!isset($this->container['action']) || null === $this->container['action']) {
+            $invalidProperties[] = "'action' can't be null";
         }
         if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] > 100)) {
             $invalidProperties[] = "invalid value for 'failureThreshold', must be smaller than or equal to 100.";
@@ -252,13 +214,6 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
 
         if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] < 0)) {
             $invalidProperties[] = "invalid value for 'failureThreshold', must be bigger than or equal to 0.";
-        }
-
-        if (!isset($this->container['action']) || null === $this->container['action']) {
-            $invalidProperties[] = "'action' can't be null";
-        }
-        if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
-            $invalidProperties[] = "'createdAt' can't be null";
         }
 
         return $invalidProperties;
@@ -273,30 +228,6 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets taskID.
-     *
-     * @return string
-     */
-    public function getTaskID()
-    {
-        return $this->container['taskID'] ?? null;
-    }
-
-    /**
-     * Sets taskID.
-     *
-     * @param string $taskID universally unique identifier (UUID) of a task
-     *
-     * @return self
-     */
-    public function setTaskID($taskID)
-    {
-        $this->container['taskID'] = $taskID;
-
-        return $this;
     }
 
     /**
@@ -348,97 +279,49 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     }
 
     /**
-     * Gets cron.
+     * Gets trigger.
      *
-     * @return null|string
+     * @return TaskCreateTrigger
      */
-    public function getCron()
+    public function getTrigger()
     {
-        return $this->container['cron'] ?? null;
+        return $this->container['trigger'] ?? null;
     }
 
     /**
-     * Sets cron.
+     * Sets trigger.
      *
-     * @param null|string $cron cron expression for the task's schedule
+     * @param TaskCreateTrigger $trigger trigger
      *
      * @return self
      */
-    public function setCron($cron)
+    public function setTrigger($trigger)
     {
-        $this->container['cron'] = $cron;
+        $this->container['trigger'] = $trigger;
 
         return $this;
     }
 
     /**
-     * Gets lastRun.
+     * Gets action.
      *
-     * @return null|string
+     * @return ActionType
      */
-    public function getLastRun()
+    public function getAction()
     {
-        return $this->container['lastRun'] ?? null;
+        return $this->container['action'] ?? null;
     }
 
     /**
-     * Sets lastRun.
+     * Sets action.
      *
-     * @param null|string $lastRun the last time the scheduled task ran in RFC 3339 format
+     * @param ActionType $action action
      *
      * @return self
      */
-    public function setLastRun($lastRun)
+    public function setAction($action)
     {
-        $this->container['lastRun'] = $lastRun;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextRun.
-     *
-     * @return null|string
-     */
-    public function getNextRun()
-    {
-        return $this->container['nextRun'] ?? null;
-    }
-
-    /**
-     * Sets nextRun.
-     *
-     * @param null|string $nextRun the next scheduled run of the task in RFC 3339 format
-     *
-     * @return self
-     */
-    public function setNextRun($nextRun)
-    {
-        $this->container['nextRun'] = $nextRun;
-
-        return $this;
-    }
-
-    /**
-     * Gets input.
-     *
-     * @return null|TaskInput
-     */
-    public function getInput()
-    {
-        return $this->container['input'] ?? null;
-    }
-
-    /**
-     * Sets input.
-     *
-     * @param null|TaskInput $input input
-     *
-     * @return self
-     */
-    public function setInput($input)
-    {
-        $this->container['input'] = $input;
+        $this->container['action'] = $action;
 
         return $this;
     }
@@ -446,7 +329,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets enabled.
      *
-     * @return bool
+     * @return null|bool
      */
     public function getEnabled()
     {
@@ -456,7 +339,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets enabled.
      *
-     * @param bool $enabled whether the task is enabled
+     * @param null|bool $enabled whether the task is enabled
      *
      * @return self
      */
@@ -487,10 +370,10 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setFailureThreshold($failureThreshold)
     {
         if (!is_null($failureThreshold) && ($failureThreshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling Task., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskCreateV1., must be smaller than or equal to 100.');
         }
         if (!is_null($failureThreshold) && ($failureThreshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling Task., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskCreateV1., must be bigger than or equal to 0.');
         }
 
         $this->container['failureThreshold'] = $failureThreshold;
@@ -499,25 +382,25 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     }
 
     /**
-     * Gets action.
+     * Gets input.
      *
-     * @return ActionType
+     * @return null|TaskInput
      */
-    public function getAction()
+    public function getInput()
     {
-        return $this->container['action'] ?? null;
+        return $this->container['input'] ?? null;
     }
 
     /**
-     * Sets action.
+     * Sets input.
      *
-     * @param ActionType $action action
+     * @param null|TaskInput $input input
      *
      * @return self
      */
-    public function setAction($action)
+    public function setInput($input)
     {
-        $this->container['action'] = $action;
+        $this->container['input'] = $input;
 
         return $this;
     }
@@ -542,54 +425,6 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setCursor($cursor)
     {
         $this->container['cursor'] = $cursor;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt.
-     *
-     * @return string
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'] ?? null;
-    }
-
-    /**
-     * Sets createdAt.
-     *
-     * @param string $createdAt date of creation in RFC 3339 format
-     *
-     * @return self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets updatedAt.
-     *
-     * @return null|string
-     */
-    public function getUpdatedAt()
-    {
-        return $this->container['updatedAt'] ?? null;
-    }
-
-    /**
-     * Sets updatedAt.
-     *
-     * @param null|string $updatedAt date of last update in RFC 3339 format
-     *
-     * @return self
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->container['updatedAt'] = $updatedAt;
 
         return $this;
     }

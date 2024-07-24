@@ -23,8 +23,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     protected static $modelTypes = [
         'sourceID' => 'string',
         'destinationID' => 'string',
-        'trigger' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateTrigger',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'cron' => 'string',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
@@ -39,8 +39,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     protected static $modelFormats = [
         'sourceID' => null,
         'destinationID' => null,
-        'trigger' => null,
         'action' => null,
+        'cron' => null,
         'enabled' => null,
         'failureThreshold' => null,
         'input' => null,
@@ -56,8 +56,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     protected static $attributeMap = [
         'sourceID' => 'sourceID',
         'destinationID' => 'destinationID',
-        'trigger' => 'trigger',
         'action' => 'action',
+        'cron' => 'cron',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
         'input' => 'input',
@@ -72,8 +72,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     protected static $setters = [
         'sourceID' => 'setSourceID',
         'destinationID' => 'setDestinationID',
-        'trigger' => 'setTrigger',
         'action' => 'setAction',
+        'cron' => 'setCron',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
         'input' => 'setInput',
@@ -88,8 +88,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     protected static $getters = [
         'sourceID' => 'getSourceID',
         'destinationID' => 'getDestinationID',
-        'trigger' => 'getTrigger',
         'action' => 'getAction',
+        'cron' => 'getCron',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
         'input' => 'getInput',
@@ -116,11 +116,11 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['destinationID'])) {
             $this->container['destinationID'] = $data['destinationID'];
         }
-        if (isset($data['trigger'])) {
-            $this->container['trigger'] = $data['trigger'];
-        }
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
+        }
+        if (isset($data['cron'])) {
+            $this->container['cron'] = $data['cron'];
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
@@ -202,9 +202,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (!isset($this->container['destinationID']) || null === $this->container['destinationID']) {
             $invalidProperties[] = "'destinationID' can't be null";
         }
-        if (!isset($this->container['trigger']) || null === $this->container['trigger']) {
-            $invalidProperties[] = "'trigger' can't be null";
-        }
         if (!isset($this->container['action']) || null === $this->container['action']) {
             $invalidProperties[] = "'action' can't be null";
         }
@@ -279,30 +276,6 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
-     * Gets trigger.
-     *
-     * @return TaskCreateTrigger
-     */
-    public function getTrigger()
-    {
-        return $this->container['trigger'] ?? null;
-    }
-
-    /**
-     * Sets trigger.
-     *
-     * @param TaskCreateTrigger $trigger trigger
-     *
-     * @return self
-     */
-    public function setTrigger($trigger)
-    {
-        $this->container['trigger'] = $trigger;
-
-        return $this;
-    }
-
-    /**
      * Gets action.
      *
      * @return ActionType
@@ -322,6 +295,30 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setAction($action)
     {
         $this->container['action'] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Gets cron.
+     *
+     * @return null|string
+     */
+    public function getCron()
+    {
+        return $this->container['cron'] ?? null;
+    }
+
+    /**
+     * Sets cron.
+     *
+     * @param null|string $cron cron expression for the task's schedule
+     *
+     * @return self
+     */
+    public function setCron($cron)
+    {
+        $this->container['cron'] = $cron;
 
         return $this;
     }

@@ -7,13 +7,13 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * TaskUpdate Class Doc Comment.
+ * TaskUpdateV1 Class Doc Comment.
  *
  * @category Class
  *
- * @description API request body for updating a task.
+ * @description API request body for updating a task using the V1 shape, please use methods and types that don&#39;t contain the V1 suffix.
  */
-class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TaskUpdateV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,7 +22,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelTypes = [
         'destinationID' => 'string',
-        'cron' => 'string',
+        'trigger' => '\Algolia\AlgoliaSearch\Model\Ingestion\TriggerUpdateInput',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
@@ -35,7 +35,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $modelFormats = [
         'destinationID' => null,
-        'cron' => null,
+        'trigger' => null,
         'input' => null,
         'enabled' => null,
         'failureThreshold' => null,
@@ -49,7 +49,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $attributeMap = [
         'destinationID' => 'destinationID',
-        'cron' => 'cron',
+        'trigger' => 'trigger',
         'input' => 'input',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
@@ -62,7 +62,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $setters = [
         'destinationID' => 'setDestinationID',
-        'cron' => 'setCron',
+        'trigger' => 'setTrigger',
         'input' => 'setInput',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
@@ -75,7 +75,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     protected static $getters = [
         'destinationID' => 'getDestinationID',
-        'cron' => 'getCron',
+        'trigger' => 'getTrigger',
         'input' => 'getInput',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
@@ -98,8 +98,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (isset($data['destinationID'])) {
             $this->container['destinationID'] = $data['destinationID'];
         }
-        if (isset($data['cron'])) {
-            $this->container['cron'] = $data['cron'];
+        if (isset($data['trigger'])) {
+            $this->container['trigger'] = $data['trigger'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -219,25 +219,25 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     }
 
     /**
-     * Gets cron.
+     * Gets trigger.
      *
-     * @return null|string
+     * @return null|TriggerUpdateInput
      */
-    public function getCron()
+    public function getTrigger()
     {
-        return $this->container['cron'] ?? null;
+        return $this->container['trigger'] ?? null;
     }
 
     /**
-     * Sets cron.
+     * Sets trigger.
      *
-     * @param null|string $cron cron expression for the task's schedule
+     * @param null|TriggerUpdateInput $trigger trigger
      *
      * @return self
      */
-    public function setCron($cron)
+    public function setTrigger($trigger)
     {
-        $this->container['cron'] = $cron;
+        $this->container['trigger'] = $trigger;
 
         return $this;
     }
@@ -310,10 +310,10 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setFailureThreshold($failureThreshold)
     {
         if (!is_null($failureThreshold) && ($failureThreshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdate., must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdateV1., must be smaller than or equal to 100.');
         }
         if (!is_null($failureThreshold) && ($failureThreshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdate., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdateV1., must be bigger than or equal to 0.');
         }
 
         $this->container['failureThreshold'] = $failureThreshold;

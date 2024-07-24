@@ -16,8 +16,10 @@ use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateV1;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateV1;
 use Algolia\AlgoliaSearch\Model\Ingestion\TransformationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\TransformationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\TransformationTry;
@@ -229,8 +231,8 @@ class IngestionClient
      * @param array $taskCreate Request body for creating a task. (required)
      *                          - $taskCreate['sourceID'] => (string) Universally uniqud identifier (UUID) of a source. (required)
      *                          - $taskCreate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
-     *                          - $taskCreate['trigger'] => (array)  (required)
      *                          - $taskCreate['action'] => (array)  (required)
+     *                          - $taskCreate['cron'] => (string) Cron expression for the task's schedule.
      *                          - $taskCreate['enabled'] => (bool) Whether the task is enabled.
      *                          - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                          - $taskCreate['input'] => (array)
@@ -248,6 +250,42 @@ class IngestionClient
         if (!isset($taskCreate)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskCreate` is required when calling `createTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskCreate;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Creates a new task using the v1 endpoint, please use `createTask` instead.
+     *
+     * @param array $taskCreate Request body for creating a task. (required)
+     *                          - $taskCreate['sourceID'] => (string) Universally uniqud identifier (UUID) of a source. (required)
+     *                          - $taskCreate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource. (required)
+     *                          - $taskCreate['trigger'] => (array)  (required)
+     *                          - $taskCreate['action'] => (array)  (required)
+     *                          - $taskCreate['enabled'] => (bool) Whether the task is enabled.
+     *                          - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *                          - $taskCreate['input'] => (array)
+     *                          - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *
+     * @see TaskCreateV1
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateResponse|array<string, mixed>
+     */
+    public function createTaskV1($taskCreate, $requestOptions = [])
+    {
+        // verify the required parameter 'taskCreate' is set
+        if (!isset($taskCreate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskCreate` is required when calling `createTaskV1`.'
             );
         }
 
@@ -582,6 +620,40 @@ class IngestionClient
             );
         }
 
+        $resourcePath = '/2/tasks/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
+     */
+    public function deleteTaskV1($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `deleteTaskV1`.'
+            );
+        }
+
         $resourcePath = '/1/tasks/{taskID}';
         $queryParameters = [];
         $headers = [];
@@ -655,6 +727,47 @@ class IngestionClient
             );
         }
 
+        $resourcePath = '/2/tasks/{taskID}/disable';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Disables a task using the v1 endpoint, please use `disableTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
+     *
+     * @deprecated
+     */
+    public function disableTaskV1($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `disableTaskV1`.'
+            );
+        }
+
         $resourcePath = '/1/tasks/{taskID}/disable';
         $queryParameters = [];
         $headers = [];
@@ -691,6 +804,45 @@ class IngestionClient
         if (!isset($taskID)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `enableTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}/enable';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Enables a task using the v1 endpoint, please use `enableTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
+     */
+    public function enableTaskV1($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `enableTaskV1`.'
             );
         }
 
@@ -751,75 +903,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a list of all authentication resources.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
-     * @param int   $page           Page number of the paginated API response. (optional)
-     * @param array $type           Type of authentication resource to retrieve. (optional)
-     * @param array $platform       Ecommerce platform for which to retrieve authentication resources. (optional)
-     * @param array $sort           Property by which to sort the list of authentication resources. (optional)
-     * @param array $order          Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListAuthenticationsResponse|array<string, mixed>
-     */
-    public function getAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
-    {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getAuthentications, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getAuthentications, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getAuthentications, must be bigger than or equal to 1.');
-        }
-
-        $resourcePath = '/1/authentications';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        if (null !== $itemsPerPage) {
-            $queryParameters['itemsPerPage'] = $itemsPerPage;
-        }
-
-        if (null !== $page) {
-            $queryParameters['page'] = $page;
-        }
-
-        if (is_array($type)) {
-            $type = ObjectSerializer::serializeCollection($type, 'form', true);
-        }
-        if (null !== $type) {
-            $queryParameters['type'] = $type;
-        }
-
-        if (is_array($platform)) {
-            $platform = ObjectSerializer::serializeCollection($platform, 'form', true);
-        }
-        if (null !== $platform) {
-            $queryParameters['platform'] = $platform;
-        }
-
-        if (null !== $sort) {
-            $queryParameters['sort'] = $sort;
-        }
-
-        if (null !== $order) {
-            $queryParameters['order'] = $order;
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieves a destination by its ID.
      *
      * Required API Key ACLs:
@@ -853,75 +936,6 @@ class IngestionClient
                 ObjectSerializer::toPathValue($destinationID),
                 $resourcePath
             );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Retrieves a list of destinations.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
-     * @param int   $page             Page number of the paginated API response. (optional)
-     * @param array $type             Destination type. (optional)
-     * @param array $authenticationID Authentication ID used by destinations. (optional)
-     * @param array $sort             Property by which to sort the destinations. (optional)
-     * @param array $order            Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListDestinationsResponse|array<string, mixed>
-     */
-    public function getDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
-    {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getDestinations, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getDestinations, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getDestinations, must be bigger than or equal to 1.');
-        }
-
-        $resourcePath = '/1/destinations';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        if (null !== $itemsPerPage) {
-            $queryParameters['itemsPerPage'] = $itemsPerPage;
-        }
-
-        if (null !== $page) {
-            $queryParameters['page'] = $page;
-        }
-
-        if (is_array($type)) {
-            $type = ObjectSerializer::serializeCollection($type, 'form', true);
-        }
-        if (null !== $type) {
-            $queryParameters['type'] = $type;
-        }
-
-        if (is_array($authenticationID)) {
-            $authenticationID = ObjectSerializer::serializeCollection($authenticationID, 'form', true);
-        }
-        if (null !== $authenticationID) {
-            $queryParameters['authenticationID'] = $authenticationID;
-        }
-
-        if (null !== $sort) {
-            $queryParameters['sort'] = $sort;
-        }
-
-        if (null !== $order) {
-            $queryParameters['order'] = $order;
         }
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
@@ -983,6 +997,339 @@ class IngestionClient
     }
 
     /**
+     * Retrieve a single task run by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $runID          Unique identifier of a task run. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Run|array<string, mixed>
+     */
+    public function getRun($runID, $requestOptions = [])
+    {
+        // verify the required parameter 'runID' is set
+        if (!isset($runID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `runID` is required when calling `getRun`.'
+            );
+        }
+
+        $resourcePath = '/1/runs/{runID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $runID) {
+            $resourcePath = str_replace(
+                '{runID}',
+                ObjectSerializer::toPathValue($runID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieve a source by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID       Unique identifier of a source. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Source|array<string, mixed>
+     */
+    public function getSource($sourceID, $requestOptions = [])
+    {
+        // verify the required parameter 'sourceID' is set
+        if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `getSource`.'
+            );
+        }
+
+        $resourcePath = '/1/sources/{sourceID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $sourceID) {
+            $resourcePath = str_replace(
+                '{sourceID}',
+                ObjectSerializer::toPathValue($sourceID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a task by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Task|array<string, mixed>
+     */
+    public function getTask($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskV1|array<string, mixed>
+     */
+    public function getTaskV1($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `getTaskV1`.'
+            );
+        }
+
+        $resourcePath = '/1/tasks/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a transformation by its ID.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $transformationID Unique identifier of a transformation. (required)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Transformation|array<string, mixed>
+     */
+    public function getTransformation($transformationID, $requestOptions = [])
+    {
+        // verify the required parameter 'transformationID' is set
+        if (!isset($transformationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `getTransformation`.'
+            );
+        }
+
+        $resourcePath = '/1/transformations/{transformationID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $transformationID) {
+            $resourcePath = str_replace(
+                '{transformationID}',
+                ObjectSerializer::toPathValue($transformationID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a list of all authentication resources.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $type           Type of authentication resource to retrieve. (optional)
+     * @param array $platform       Ecommerce platform for which to retrieve authentication resources. (optional)
+     * @param array $sort           Property by which to sort the list of authentication resources. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListAuthenticationsResponse|array<string, mixed>
+     */
+    public function listAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listAuthentications, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listAuthentications, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listAuthentications, must be bigger than or equal to 1.');
+        }
+
+        $resourcePath = '/1/authentications';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $itemsPerPage) {
+            $queryParameters['itemsPerPage'] = $itemsPerPage;
+        }
+
+        if (null !== $page) {
+            $queryParameters['page'] = $page;
+        }
+
+        if (is_array($type)) {
+            $type = ObjectSerializer::serializeCollection($type, 'form', true);
+        }
+        if (null !== $type) {
+            $queryParameters['type'] = $type;
+        }
+
+        if (is_array($platform)) {
+            $platform = ObjectSerializer::serializeCollection($platform, 'form', true);
+        }
+        if (null !== $platform) {
+            $queryParameters['platform'] = $platform;
+        }
+
+        if (null !== $sort) {
+            $queryParameters['sort'] = $sort;
+        }
+
+        if (null !== $order) {
+            $queryParameters['order'] = $order;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a list of destinations.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int   $page             Page number of the paginated API response. (optional)
+     * @param array $type             Destination type. (optional)
+     * @param array $authenticationID Authentication ID used by destinations. (optional)
+     * @param array $sort             Property by which to sort the destinations. (optional)
+     * @param array $order            Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListDestinationsResponse|array<string, mixed>
+     */
+    public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listDestinations, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listDestinations, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listDestinations, must be bigger than or equal to 1.');
+        }
+
+        $resourcePath = '/1/destinations';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $itemsPerPage) {
+            $queryParameters['itemsPerPage'] = $itemsPerPage;
+        }
+
+        if (null !== $page) {
+            $queryParameters['page'] = $page;
+        }
+
+        if (is_array($type)) {
+            $type = ObjectSerializer::serializeCollection($type, 'form', true);
+        }
+        if (null !== $type) {
+            $queryParameters['type'] = $type;
+        }
+
+        if (is_array($authenticationID)) {
+            $authenticationID = ObjectSerializer::serializeCollection($authenticationID, 'form', true);
+        }
+        if (null !== $authenticationID) {
+            $queryParameters['authenticationID'] = $authenticationID;
+        }
+
+        if (null !== $sort) {
+            $queryParameters['sort'] = $sort;
+        }
+
+        if (null !== $order) {
+            $queryParameters['order'] = $order;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * Retrieves a list of events for a task run, identified by it's ID.
      *
      * Required API Key ACLs:
@@ -1003,23 +1350,23 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListEventsResponse|array<string, mixed>
      */
-    public function getEvents($runID, $itemsPerPage = null, $page = null, $status = null, $type = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    public function listEvents($runID, $itemsPerPage = null, $page = null, $status = null, $type = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
         // verify the required parameter 'runID' is set
         if (!isset($runID)) {
             throw new \InvalidArgumentException(
-                'Parameter `runID` is required when calling `getEvents`.'
+                'Parameter `runID` is required when calling `listEvents`.'
             );
         }
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getEvents, must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listEvents, must be smaller than or equal to 100.');
         }
         if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getEvents, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listEvents, must be bigger than or equal to 1.');
         }
 
         if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getEvents, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listEvents, must be bigger than or equal to 1.');
         }
 
         $resourcePath = '/1/runs/{runID}/events';
@@ -1072,45 +1419,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieve a single task run by its ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param string $runID          Unique identifier of a task run. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Run|array<string, mixed>
-     */
-    public function getRun($runID, $requestOptions = [])
-    {
-        // verify the required parameter 'runID' is set
-        if (!isset($runID)) {
-            throw new \InvalidArgumentException(
-                'Parameter `runID` is required when calling `getRun`.'
-            );
-        }
-
-        $resourcePath = '/1/runs/{runID}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        // path params
-        if (null !== $runID) {
-            $resourcePath = str_replace(
-                '{runID}',
-                ObjectSerializer::toPathValue($runID),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieve a list of task runs.
      *
      * Required API Key ACLs:
@@ -1130,17 +1438,17 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunListResponse|array<string, mixed>
      */
-    public function getRuns($itemsPerPage = null, $page = null, $status = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    public function listRuns($itemsPerPage = null, $page = null, $status = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getRuns, must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listRuns, must be smaller than or equal to 100.');
         }
         if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getRuns, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listRuns, must be bigger than or equal to 1.');
         }
 
         if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getRuns, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listRuns, must be bigger than or equal to 1.');
         }
 
         $resourcePath = '/1/runs';
@@ -1184,45 +1492,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieve a source by its ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param string $sourceID       Unique identifier of a source. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Source|array<string, mixed>
-     */
-    public function getSource($sourceID, $requestOptions = [])
-    {
-        // verify the required parameter 'sourceID' is set
-        if (!isset($sourceID)) {
-            throw new \InvalidArgumentException(
-                'Parameter `sourceID` is required when calling `getSource`.'
-            );
-        }
-
-        $resourcePath = '/1/sources/{sourceID}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        // path params
-        if (null !== $sourceID) {
-            $resourcePath = str_replace(
-                '{sourceID}',
-                ObjectSerializer::toPathValue($sourceID),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieves a list of sources.
      *
      * Required API Key ACLs:
@@ -1240,17 +1509,17 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListSourcesResponse|array<string, mixed>
      */
-    public function getSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
+    public function listSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
     {
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getSources, must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listSources, must be smaller than or equal to 100.');
         }
         if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getSources, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listSources, must be bigger than or equal to 1.');
         }
 
         if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getSources, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listSources, must be bigger than or equal to 1.');
         }
 
         $resourcePath = '/1/sources';
@@ -1292,45 +1561,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a task by its ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param string $taskID         Unique identifier of a task. (required)
-     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Task|array<string, mixed>
-     */
-    public function getTask($taskID, $requestOptions = [])
-    {
-        // verify the required parameter 'taskID' is set
-        if (!isset($taskID)) {
-            throw new \InvalidArgumentException(
-                'Parameter `taskID` is required when calling `getTask`.'
-            );
-        }
-
-        $resourcePath = '/1/tasks/{taskID}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        // path params
-        if (null !== $taskID) {
-            $resourcePath = str_replace(
-                '{taskID}',
-                ObjectSerializer::toPathValue($taskID),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieves a list of tasks.
      *
      * Required API Key ACLs:
@@ -1351,17 +1581,107 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponse|array<string, mixed>
      */
-    public function getTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getTasks, must be smaller than or equal to 100.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasks, must be smaller than or equal to 100.');
         }
         if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.getTasks, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasks, must be bigger than or equal to 1.');
         }
 
         if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.getTasks, must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTasks, must be bigger than or equal to 1.');
+        }
+
+        $resourcePath = '/2/tasks';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        if (null !== $itemsPerPage) {
+            $queryParameters['itemsPerPage'] = $itemsPerPage;
+        }
+
+        if (null !== $page) {
+            $queryParameters['page'] = $page;
+        }
+
+        if (is_array($action)) {
+            $action = ObjectSerializer::serializeCollection($action, 'form', true);
+        }
+        if (null !== $action) {
+            $queryParameters['action'] = $action;
+        }
+
+        if (null !== $enabled) {
+            $queryParameters['enabled'] = $enabled;
+        }
+
+        if (is_array($sourceID)) {
+            $sourceID = ObjectSerializer::serializeCollection($sourceID, 'form', true);
+        }
+        if (null !== $sourceID) {
+            $queryParameters['sourceID'] = $sourceID;
+        }
+
+        if (is_array($destinationID)) {
+            $destinationID = ObjectSerializer::serializeCollection($destinationID, 'form', true);
+        }
+        if (null !== $destinationID) {
+            $queryParameters['destinationID'] = $destinationID;
+        }
+
+        if (is_array($triggerType)) {
+            $triggerType = ObjectSerializer::serializeCollection($triggerType, 'form', true);
+        }
+        if (null !== $triggerType) {
+            $queryParameters['triggerType'] = $triggerType;
+        }
+
+        if (null !== $sort) {
+            $queryParameters['sort'] = $sort;
+        }
+
+        if (null !== $order) {
+            $queryParameters['order'] = $order;
+        }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
+     * @param array $action         Actions for filtering the list of tasks. (optional)
+     * @param bool  $enabled        Whether to filter the list of tasks by the &#x60;enabled&#x60; status. (optional)
+     * @param array $sourceID       Source IDs for filtering the list of tasks. (optional)
+     * @param array $destinationID  Destination IDs for filtering the list of tasks. (optional)
+     * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
+     * @param array $sort           Property by which to sort the list of tasks. (optional)
+     * @param array $order          Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponseV1|array<string, mixed>
+     */
+    public function listTasksV1($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasksV1, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasksV1, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTasksV1, must be bigger than or equal to 1.');
         }
 
         $resourcePath = '/1/tasks';
@@ -1421,45 +1741,6 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a transformation by its ID.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param string $transformationID Unique identifier of a transformation. (required)
-     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Transformation|array<string, mixed>
-     */
-    public function getTransformation($transformationID, $requestOptions = [])
-    {
-        // verify the required parameter 'transformationID' is set
-        if (!isset($transformationID)) {
-            throw new \InvalidArgumentException(
-                'Parameter `transformationID` is required when calling `getTransformation`.'
-            );
-        }
-
-        $resourcePath = '/1/transformations/{transformationID}';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
-
-        // path params
-        if (null !== $transformationID) {
-            $resourcePath = str_replace(
-                '{transformationID}',
-                ObjectSerializer::toPathValue($transformationID),
-                $resourcePath
-            );
-        }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
      * Retrieves a list of transformations.
      *
      * Required API Key ACLs:
@@ -1473,7 +1754,7 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTransformationsResponse|array<string, mixed>
      */
-    public function getTransformations($sort = null, $order = null, $requestOptions = [])
+    public function listTransformations($sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/1/transformations';
         $queryParameters = [];
@@ -1510,6 +1791,45 @@ class IngestionClient
         if (!isset($taskID)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskID` is required when calling `runTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}/run';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID         Unique identifier of a task. (required)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
+     */
+    public function runTaskV1($taskID, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `runTaskV1`.'
             );
         }
 
@@ -1655,6 +1975,40 @@ class IngestionClient
         if (!isset($taskSearch)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskSearch` is required when calling `searchTasks`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/search';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskSearch;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array $taskSearch taskSearch (required)
+     *                          - $taskSearch['taskIDs'] => (array)  (required)
+     *
+     * @see TaskSearch
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskV1[]|array<string, mixed>
+     */
+    public function searchTasksV1($taskSearch, $requestOptions = [])
+    {
+        // verify the required parameter 'taskSearch' is set
+        if (!isset($taskSearch)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskSearch` is required when calling `searchTasksV1`.'
             );
         }
 
@@ -1938,7 +2292,7 @@ class IngestionClient
      * @param string $taskID     Unique identifier of a task. (required)
      * @param array  $taskUpdate taskUpdate (required)
      *                           - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
-     *                           - $taskUpdate['trigger'] => (array)
+     *                           - $taskUpdate['cron'] => (string) Cron expression for the task's schedule.
      *                           - $taskUpdate['input'] => (array)
      *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
      *                           - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
@@ -1961,6 +2315,55 @@ class IngestionClient
         if (!isset($taskUpdate)) {
             throw new \InvalidArgumentException(
                 'Parameter `taskUpdate` is required when calling `updateTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $taskUpdate;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('PATCH', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+     *
+     * @param string $taskID     Unique identifier of a task. (required)
+     * @param array  $taskUpdate taskUpdate (required)
+     *                           - $taskUpdate['destinationID'] => (string) Universally unique identifier (UUID) of a destination resource.
+     *                           - $taskUpdate['trigger'] => (array)
+     *                           - $taskUpdate['input'] => (array)
+     *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
+     *                           - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *
+     * @see TaskUpdateV1
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
+     */
+    public function updateTaskV1($taskID, $taskUpdate, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `updateTaskV1`.'
+            );
+        }
+        // verify the required parameter 'taskUpdate' is set
+        if (!isset($taskUpdate)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskUpdate` is required when calling `updateTaskV1`.'
             );
         }
 

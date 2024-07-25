@@ -1404,7 +1404,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\IndexSettings|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Search\SettingsResponse|array<string, mixed>
      */
     public function getSettings($indexName, $requestOptions = [])
     {

@@ -9,6 +9,7 @@ use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
@@ -1770,6 +1771,56 @@ class IngestionClient
         }
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $taskID           Unique identifier of a task. (required)
+     * @param array  $batchWriteParams Request body of a Search API &#x60;batch&#x60; request that will be pushed in the Connectors pipeline. (required)
+     *                                 - $batchWriteParams['requests'] => (array)  (required)
+     *
+     * @see BatchWriteParams
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
+     */
+    public function pushTask($taskID, $batchWriteParams, $requestOptions = [])
+    {
+        // verify the required parameter 'taskID' is set
+        if (!isset($taskID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `taskID` is required when calling `pushTask`.'
+            );
+        }
+        // verify the required parameter 'batchWriteParams' is set
+        if (!isset($batchWriteParams)) {
+            throw new \InvalidArgumentException(
+                'Parameter `batchWriteParams` is required when calling `pushTask`.'
+            );
+        }
+
+        $resourcePath = '/2/tasks/{taskID}/push';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $batchWriteParams;
+
+        // path params
+        if (null !== $taskID) {
+            $resourcePath = str_replace(
+                '{taskID}',
+                ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

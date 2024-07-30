@@ -1263,7 +1263,7 @@ class SearchClient
      * @param array  $attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned.  &#x60;objectID&#x60; is always retrieved.  Attributes included in &#x60;unretrievableAttributes&#x60; won&#39;t be retrieved unless the request is authenticated with the admin API key. (optional)
      * @param array  $requestOptions       the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|array<string,string>
+     * @return array<string, mixed>|object
      */
     public function getObject($indexName, $objectID, $attributesToRetrieve = null, $requestOptions = [])
     {

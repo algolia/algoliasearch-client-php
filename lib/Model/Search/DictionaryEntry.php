@@ -183,9 +183,6 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['language']) || null === $this->container['language']) {
-            $invalidProperties[] = "'language' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -228,7 +225,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets language.
      *
-     * @return SupportedLanguage
+     * @return null|SupportedLanguage
      */
     public function getLanguage()
     {
@@ -238,7 +235,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets language.
      *
-     * @param SupportedLanguage $language language
+     * @param null|SupportedLanguage $language language
      *
      * @return self
      */

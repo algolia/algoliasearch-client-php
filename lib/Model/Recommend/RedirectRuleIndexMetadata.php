@@ -23,7 +23,7 @@ class RedirectRuleIndexMetadata extends AbstractModel implements ModelInterface,
         'dest' => 'string',
         'reason' => 'string',
         'succeed' => 'bool',
-        'data' => '\Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexMetadataData',
+        'data' => '\Algolia\AlgoliaSearch\Model\Recommend\RedirectRuleIndexData',
     ];
 
     /**
@@ -299,7 +299,7 @@ class RedirectRuleIndexMetadata extends AbstractModel implements ModelInterface,
     /**
      * Gets data.
      *
-     * @return RedirectRuleIndexMetadataData
+     * @return RedirectRuleIndexData
      */
     public function getData()
     {
@@ -309,7 +309,7 @@ class RedirectRuleIndexMetadata extends AbstractModel implements ModelInterface,
     /**
      * Sets data.
      *
-     * @param RedirectRuleIndexMetadataData $data data
+     * @param RedirectRuleIndexData $data data
      *
      * @return self
      */

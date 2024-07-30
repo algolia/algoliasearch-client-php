@@ -21,8 +21,8 @@ class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAcces
      * @var string[]
      */
     protected static $modelTypes = [
-        'outliers' => '\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsOutliers',
-        'emptySearch' => '\Algolia\AlgoliaSearch\Model\Abtesting\FilterEffectsEmptySearch',
+        'outliers' => '\Algolia\AlgoliaSearch\Model\Abtesting\OutliersFilter',
+        'emptySearch' => '\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearchFilter',
     ];
 
     /**
@@ -163,7 +163,7 @@ class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets outliers.
      *
-     * @return null|FilterEffectsOutliers
+     * @return null|OutliersFilter
      */
     public function getOutliers()
     {
@@ -173,7 +173,7 @@ class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets outliers.
      *
-     * @param null|FilterEffectsOutliers $outliers outliers
+     * @param null|OutliersFilter $outliers outliers
      *
      * @return self
      */
@@ -187,7 +187,7 @@ class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets emptySearch.
      *
-     * @return null|FilterEffectsEmptySearch
+     * @return null|EmptySearchFilter
      */
     public function getEmptySearch()
     {
@@ -197,7 +197,7 @@ class FilterEffects extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets emptySearch.
      *
-     * @param null|FilterEffectsEmptySearch $emptySearch emptySearch
+     * @param null|EmptySearchFilter $emptySearch emptySearch
      *
      * @return self
      */

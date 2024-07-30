@@ -20,7 +20,7 @@ class TransformationTryResponse extends AbstractModel implements ModelInterface,
      */
     protected static $modelTypes = [
         'payloads' => 'object[]',
-        'error' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponseError',
+        'error' => '\Algolia\AlgoliaSearch\Model\Ingestion\TransformationError',
     ];
 
     /**
@@ -191,7 +191,7 @@ class TransformationTryResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets error.
      *
-     * @return null|TransformationTryResponseError
+     * @return null|TransformationError
      */
     public function getError()
     {
@@ -201,7 +201,7 @@ class TransformationTryResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets error.
      *
-     * @param null|TransformationTryResponseError $error error
+     * @param null|TransformationError $error error
      *
      * @return self
      */

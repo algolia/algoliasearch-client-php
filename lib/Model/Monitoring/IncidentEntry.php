@@ -7,11 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * IncidentsInner Class Doc Comment.
+ * IncidentEntry Class Doc Comment.
  *
  * @category Class
  */
-class IncidentsInner extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class IncidentEntry extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

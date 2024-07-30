@@ -23,7 +23,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
         'count' => 'int',
         'clickThroughRate' => 'float',
         'averageClickPosition' => 'float',
-        'clickPositions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]',
+        'clickPositions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]',
         'conversionRate' => 'float',
         'trackedSearchCount' => 'int',
         'clickCount' => 'int',
@@ -476,7 +476,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Gets clickPositions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
      */
     public function getClickPositions()
     {
@@ -486,7 +486,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets clickPositions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[] $clickPositions list of positions in the search results and clicks associated with this search
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */

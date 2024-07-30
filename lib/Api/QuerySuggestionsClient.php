@@ -391,7 +391,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\GetConfigStatus200Response|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigStatus|array<string, mixed>
      */
     public function getConfigStatus($indexName, $requestOptions = [])
     {
@@ -428,7 +428,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\GetLogFile200Response|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile|array<string, mixed>
      */
     public function getLogFile($indexName, $requestOptions = [])
     {

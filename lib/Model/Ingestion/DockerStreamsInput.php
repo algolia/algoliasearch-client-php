@@ -10,6 +10,8 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
  * DockerStreamsInput Class Doc Comment.
  *
  * @category Class
+ *
+ * @description The selected streams of a singer or airbyte connector.
  */
 class DockerStreamsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

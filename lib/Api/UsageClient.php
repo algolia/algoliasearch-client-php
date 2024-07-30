@@ -265,7 +265,7 @@ class UsageClient
      * @param array  $granularity    Granularity of the aggregated metrics.  - &#x60;hourly&#x60;: the maximum time range for hourly metrics is 7 days. - &#x60;daily&#x60;: the maximum time range for daily metrics is 365 days. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Usage\GetUsage200Response|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Usage\IndexUsage|array<string, mixed>
      */
     public function getIndexUsage($statistic, $indexName, $startDate, $endDate, $granularity = null, $requestOptions = [])
     {
@@ -341,7 +341,7 @@ class UsageClient
      * @param array  $granularity    Granularity of the aggregated metrics.  - &#x60;hourly&#x60;: the maximum time range for hourly metrics is 7 days. - &#x60;daily&#x60;: the maximum time range for daily metrics is 365 days. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Usage\GetUsage200Response|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Usage\IndexUsage|array<string, mixed>
      */
     public function getUsage($statistic, $startDate, $endDate, $granularity = null, $requestOptions = [])
     {

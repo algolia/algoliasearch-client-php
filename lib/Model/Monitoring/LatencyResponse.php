@@ -19,7 +19,7 @@ class LatencyResponse extends AbstractModel implements ModelInterface, \ArrayAcc
      * @var string[]
      */
     protected static $modelTypes = [
-        'metrics' => '\Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponseMetrics',
+        'metrics' => '\Algolia\AlgoliaSearch\Model\Monitoring\LatencyMetric',
     ];
 
     /**
@@ -153,7 +153,7 @@ class LatencyResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets metrics.
      *
-     * @return null|LatencyResponseMetrics
+     * @return null|LatencyMetric
      */
     public function getMetrics()
     {
@@ -163,7 +163,7 @@ class LatencyResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets metrics.
      *
-     * @param null|LatencyResponseMetrics $metrics metrics
+     * @param null|LatencyMetric $metrics metrics
      *
      * @return self
      */

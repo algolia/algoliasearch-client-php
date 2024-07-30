@@ -10,6 +10,8 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
  * SearchParamsString Class Doc Comment.
  *
  * @category Class
+ *
+ * @description Search parameters as query string.
  */
 class SearchParamsString extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

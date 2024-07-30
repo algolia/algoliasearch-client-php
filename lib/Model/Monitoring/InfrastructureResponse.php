@@ -19,7 +19,7 @@ class InfrastructureResponse extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $modelTypes = [
-        'metrics' => '\Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponseMetrics',
+        'metrics' => '\Algolia\AlgoliaSearch\Model\Monitoring\Metrics',
     ];
 
     /**
@@ -153,7 +153,7 @@ class InfrastructureResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Gets metrics.
      *
-     * @return null|InfrastructureResponseMetrics
+     * @return null|Metrics
      */
     public function getMetrics()
     {
@@ -163,7 +163,7 @@ class InfrastructureResponse extends AbstractModel implements ModelInterface, \A
     /**
      * Sets metrics.
      *
-     * @param null|InfrastructureResponseMetrics $metrics metrics
+     * @param null|Metrics $metrics metrics
      *
      * @return self
      */

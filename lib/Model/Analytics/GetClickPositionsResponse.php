@@ -19,7 +19,7 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
      * @var string[]
      */
     protected static $modelTypes = [
-        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]',
+        'positions' => '\Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]',
     ];
 
     /**
@@ -166,7 +166,7 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets positions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[]
+     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
      */
     public function getPositions()
     {
@@ -176,7 +176,7 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets positions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPositionsInner[] $positions list of positions in the search results and clicks associated with this search
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */

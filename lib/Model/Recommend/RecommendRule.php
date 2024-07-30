@@ -21,7 +21,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
      * @var string[]
      */
     protected static $modelTypes = [
-        'metadata' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendRuleMetadata',
+        'metadata' => '\Algolia\AlgoliaSearch\Model\Recommend\RuleMetadata',
         'objectID' => 'string',
         'condition' => '\Algolia\AlgoliaSearch\Model\Recommend\Condition',
         'consequence' => '\Algolia\AlgoliaSearch\Model\Recommend\Consequence',
@@ -195,7 +195,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets metadata.
      *
-     * @return null|RecommendRuleMetadata
+     * @return null|RuleMetadata
      */
     public function getMetadata()
     {
@@ -205,7 +205,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets metadata.
      *
-     * @param null|RecommendRuleMetadata $metadata metadata
+     * @param null|RuleMetadata $metadata metadata
      *
      * @return self
      */

@@ -7,11 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Monitoring;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * LatencyResponseMetrics Class Doc Comment.
+ * TimeEntry Class Doc Comment.
  *
  * @category Class
  */
-class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class TimeEntry extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,7 +19,8 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $modelTypes = [
-        'latency' => 'array<string,array>',
+        't' => 'int',
+        'v' => 'int',
     ];
 
     /**
@@ -28,7 +29,8 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $modelFormats = [
-        'latency' => null,
+        't' => 'int64',
+        'v' => null,
     ];
 
     /**
@@ -38,7 +40,8 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $attributeMap = [
-        'latency' => 'latency',
+        't' => 't',
+        'v' => 'v',
     ];
 
     /**
@@ -47,7 +50,8 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $setters = [
-        'latency' => 'setLatency',
+        't' => 'setT',
+        'v' => 'setV',
     ];
 
     /**
@@ -56,7 +60,8 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      * @var string[]
      */
     protected static $getters = [
-        'latency' => 'getLatency',
+        't' => 'getT',
+        'v' => 'getV',
     ];
 
     /**
@@ -73,8 +78,11 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['latency'])) {
-            $this->container['latency'] = $data['latency'];
+        if (isset($data['t'])) {
+            $this->container['t'] = $data['t'];
+        }
+        if (isset($data['v'])) {
+            $this->container['v'] = $data['v'];
         }
     }
 
@@ -151,25 +159,49 @@ class LatencyResponseMetrics extends AbstractModel implements ModelInterface, \A
     }
 
     /**
-     * Gets latency.
+     * Gets t.
      *
-     * @return null|array<string,array>
+     * @return null|int
      */
-    public function getLatency()
+    public function getT()
     {
-        return $this->container['latency'] ?? null;
+        return $this->container['t'] ?? null;
     }
 
     /**
-     * Sets latency.
+     * Sets t.
      *
-     * @param null|array<string,array> $latency latency
+     * @param null|int $t timestamp, measured in milliseconds since the Unix epoch
      *
      * @return self
      */
-    public function setLatency($latency)
+    public function setT($t)
     {
-        $this->container['latency'] = $latency;
+        $this->container['t'] = $t;
+
+        return $this;
+    }
+
+    /**
+     * Gets v.
+     *
+     * @return null|int
+     */
+    public function getV()
+    {
+        return $this->container['v'] ?? null;
+    }
+
+    /**
+     * Sets v.
+     *
+     * @param null|int $v time in ms
+     *
+     * @return self
+     */
+    public function setV($v)
+    {
+        $this->container['v'] = $v;
 
         return $this;
     }

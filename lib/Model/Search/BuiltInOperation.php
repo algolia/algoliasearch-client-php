@@ -22,7 +22,7 @@ class BuiltInOperation extends AbstractModel implements ModelInterface, \ArrayAc
      */
     protected static $modelTypes = [
         'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
-        'value' => 'string',
+        'value' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationValue',
     ];
 
     /**
@@ -196,7 +196,7 @@ class BuiltInOperation extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Gets value.
      *
-     * @return string
+     * @return BuiltInOperationValue
      */
     public function getValue()
     {
@@ -206,7 +206,7 @@ class BuiltInOperation extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets value.
      *
-     * @param string $value value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value
+     * @param BuiltInOperationValue $value value
      *
      * @return self
      */

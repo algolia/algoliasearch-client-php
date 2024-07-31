@@ -7,11 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Search;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * AttributeToUpdate Class Doc Comment.
+ * BuiltInOperationValue Class Doc Comment.
  *
  * @category Class
  */
-class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BuiltInOperationValue extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,8 +19,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $modelTypes = [
-        'operation' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationType',
-        'value' => '\Algolia\AlgoliaSearch\Model\Search\BuiltInOperationValue',
     ];
 
     /**
@@ -29,8 +27,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $modelFormats = [
-        'operation' => null,
-        'value' => null,
     ];
 
     /**
@@ -40,8 +36,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $attributeMap = [
-        'operation' => '_operation',
-        'value' => 'value',
     ];
 
     /**
@@ -50,8 +44,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $setters = [
-        'operation' => 'setOperation',
-        'value' => 'setValue',
     ];
 
     /**
@@ -60,8 +52,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      * @var string[]
      */
     protected static $getters = [
-        'operation' => 'getOperation',
-        'value' => 'getValue',
     ];
 
     /**
@@ -76,15 +66,7 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      *
      * @param mixed[] $data Associated array of property values
      */
-    public function __construct(?array $data = null)
-    {
-        if (isset($data['operation'])) {
-            $this->container['operation'] = $data['operation'];
-        }
-        if (isset($data['value'])) {
-            $this->container['value'] = $data['value'];
-        }
-    }
+    public function __construct(?array $data = null) {}
 
     /**
      * Array of attributes where the key is the local name,
@@ -144,16 +126,7 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['operation']) || null === $this->container['operation']) {
-            $invalidProperties[] = "'operation' can't be null";
-        }
-        if (!isset($this->container['value']) || null === $this->container['value']) {
-            $invalidProperties[] = "'value' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -165,54 +138,6 @@ class AttributeToUpdate extends AbstractModel implements ModelInterface, \ArrayA
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets operation.
-     *
-     * @return BuiltInOperationType
-     */
-    public function getOperation()
-    {
-        return $this->container['operation'] ?? null;
-    }
-
-    /**
-     * Sets operation.
-     *
-     * @param BuiltInOperationType $operation operation
-     *
-     * @return self
-     */
-    public function setOperation($operation)
-    {
-        $this->container['operation'] = $operation;
-
-        return $this;
-    }
-
-    /**
-     * Gets value.
-     *
-     * @return BuiltInOperationValue
-     */
-    public function getValue()
-    {
-        return $this->container['value'] ?? null;
-    }
-
-    /**
-     * Sets value.
-     *
-     * @param BuiltInOperationValue $value value
-     *
-     * @return self
-     */
-    public function setValue($value)
-    {
-        $this->container['value'] = $value;
-
-        return $this;
     }
 
     /**

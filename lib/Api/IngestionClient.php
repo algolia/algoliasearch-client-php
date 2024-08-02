@@ -13,6 +13,7 @@ use Algolia\AlgoliaSearch\Model\Ingestion\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\RunSourcePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceUpdate;
@@ -1816,6 +1817,53 @@ class IngestionClient
             $resourcePath = str_replace(
                 '{taskID}',
                 ObjectSerializer::toPathValue($taskID),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $sourceID         Unique identifier of a source. (required)
+     * @param array  $runSourcePayload (optional)
+     *                                 - $runSourcePayload['indexToInclude'] => (array) List of index names to include in reidexing/update.
+     *                                 - $runSourcePayload['indexToExclude'] => (array) List of index names to exclude in reidexing/update.
+     *                                 - $runSourcePayload['entityIDs'] => (array) List of entityID to update.
+     *                                 - $runSourcePayload['entityType'] => (array)
+     *
+     * @see RunSourcePayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunSourceResponse|array<string, mixed>
+     */
+    public function runSource($sourceID, $runSourcePayload = null, $requestOptions = [])
+    {
+        // verify the required parameter 'sourceID' is set
+        if (!isset($sourceID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `sourceID` is required when calling `runSource`.'
+            );
+        }
+
+        $resourcePath = '/1/sources/{sourceID}/run';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($runSourcePayload) ? $runSourcePayload : [];
+
+        // path params
+        if (null !== $sourceID) {
+            $resourcePath = str_replace(
+                '{sourceID}',
+                ObjectSerializer::toPathValue($sourceID),
                 $resourcePath
             );
         }

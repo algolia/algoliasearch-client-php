@@ -157,9 +157,6 @@ class MultipleBatchRequest extends AbstractModel implements ModelInterface, \Arr
         if (!isset($this->container['action']) || null === $this->container['action']) {
             $invalidProperties[] = "'action' can't be null";
         }
-        if (!isset($this->container['body']) || null === $this->container['body']) {
-            $invalidProperties[] = "'body' can't be null";
-        }
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -205,7 +202,7 @@ class MultipleBatchRequest extends AbstractModel implements ModelInterface, \Arr
     /**
      * Gets body.
      *
-     * @return object
+     * @return null|object
      */
     public function getBody()
     {
@@ -215,7 +212,7 @@ class MultipleBatchRequest extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets body.
      *
-     * @param object $body operation arguments (varies with specified `action`)
+     * @param null|object $body operation arguments (varies with specified `action`)
      *
      * @return self
      */

@@ -19,7 +19,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelTypes = [
-        'indexPrefix' => 'string',
         'indexName' => 'string',
         'recordType' => '\Algolia\AlgoliaSearch\Model\Ingestion\RecordType',
         'attributesToExclude' => 'string[]',
@@ -31,7 +30,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelFormats = [
-        'indexPrefix' => null,
         'indexName' => null,
         'recordType' => null,
         'attributesToExclude' => null,
@@ -44,7 +42,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'indexPrefix' => 'indexPrefix',
         'indexName' => 'indexName',
         'recordType' => 'recordType',
         'attributesToExclude' => 'attributesToExclude',
@@ -56,7 +53,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'indexPrefix' => 'setIndexPrefix',
         'indexName' => 'setIndexName',
         'recordType' => 'setRecordType',
         'attributesToExclude' => 'setAttributesToExclude',
@@ -68,7 +64,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'indexPrefix' => 'getIndexPrefix',
         'indexName' => 'getIndexName',
         'recordType' => 'getRecordType',
         'attributesToExclude' => 'getAttributesToExclude',
@@ -88,9 +83,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['indexPrefix'])) {
-            $this->container['indexPrefix'] = $data['indexPrefix'];
-        }
         if (isset($data['indexName'])) {
             $this->container['indexName'] = $data['indexName'];
         }
@@ -162,9 +154,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['indexPrefix']) || null === $this->container['indexPrefix']) {
-            $invalidProperties[] = "'indexPrefix' can't be null";
-        }
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -181,30 +170,6 @@ class DestinationInput extends AbstractModel implements ModelInterface, \ArrayAc
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
-    }
-
-    /**
-     * Gets indexPrefix.
-     *
-     * @return string
-     */
-    public function getIndexPrefix()
-    {
-        return $this->container['indexPrefix'] ?? null;
-    }
-
-    /**
-     * Sets indexPrefix.
-     *
-     * @param string $indexPrefix string added to the beginning of all indices created by this destination
-     *
-     * @return self
-     */
-    public function setIndexPrefix($indexPrefix)
-    {
-        $this->container['indexPrefix'] = $indexPrefix;
-
-        return $this;
     }
 
     /**

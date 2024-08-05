@@ -28,6 +28,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'createdAt' => 'string',
         'updatedAt' => 'string',
         'authenticationID' => 'string',
+        'transformationIDs' => 'string[]',
     ];
 
     /**
@@ -43,6 +44,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'createdAt' => null,
         'updatedAt' => null,
         'authenticationID' => null,
+        'transformationIDs' => null,
     ];
 
     /**
@@ -59,6 +61,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
         'authenticationID' => 'authenticationID',
+        'transformationIDs' => 'transformationIDs',
     ];
 
     /**
@@ -74,6 +77,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
         'authenticationID' => 'setAuthenticationID',
+        'transformationIDs' => 'setTransformationIDs',
     ];
 
     /**
@@ -89,6 +93,7 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
         'authenticationID' => 'getAuthenticationID',
+        'transformationIDs' => 'getTransformationIDs',
     ];
 
     /**
@@ -125,6 +130,9 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['authenticationID'])) {
             $this->container['authenticationID'] = $data['authenticationID'];
+        }
+        if (isset($data['transformationIDs'])) {
+            $this->container['transformationIDs'] = $data['transformationIDs'];
         }
     }
 
@@ -382,6 +390,30 @@ class Destination extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setAuthenticationID($authenticationID)
     {
         $this->container['authenticationID'] = $authenticationID;
+
+        return $this;
+    }
+
+    /**
+     * Gets transformationIDs.
+     *
+     * @return null|string[]
+     */
+    public function getTransformationIDs()
+    {
+        return $this->container['transformationIDs'] ?? null;
+    }
+
+    /**
+     * Sets transformationIDs.
+     *
+     * @param null|string[] $transformationIDs transformationIDs
+     *
+     * @return self
+     */
+    public function setTransformationIDs($transformationIDs)
+    {
+        $this->container['transformationIDs'] = $transformationIDs;
 
         return $this;
     }

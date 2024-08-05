@@ -166,6 +166,7 @@ class IngestionClient
      *                                 - $destinationCreate['name'] => (string) Descriptive name for the resource. (required)
      *                                 - $destinationCreate['input'] => (array)  (required)
      *                                 - $destinationCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *                                 - $destinationCreate['transformationIDs'] => (array)
      *
      * @see DestinationCreate
      *
@@ -1750,18 +1751,39 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
+     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
+     * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $sort           Property by which to sort the list. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTransformationsResponse|array<string, mixed>
      */
-    public function listTransformations($sort = null, $order = null, $requestOptions = [])
+    public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $requestOptions = [])
     {
+        if (null !== $itemsPerPage && $itemsPerPage > 100) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTransformations, must be smaller than or equal to 100.');
+        }
+        if (null !== $itemsPerPage && $itemsPerPage < 1) {
+            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTransformations, must be bigger than or equal to 1.');
+        }
+
+        if (null !== $page && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTransformations, must be bigger than or equal to 1.');
+        }
+
         $resourcePath = '/1/transformations';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;
+
+        if (null !== $itemsPerPage) {
+            $queryParameters['itemsPerPage'] = $itemsPerPage;
+        }
+
+        if (null !== $page) {
+            $queryParameters['page'] = $page;
+        }
 
         if (null !== $sort) {
             $queryParameters['sort'] = $sort;
@@ -2294,6 +2316,7 @@ class IngestionClient
      *                                  - $destinationUpdate['name'] => (string) Descriptive name for the resource.
      *                                  - $destinationUpdate['input'] => (array)
      *                                  - $destinationUpdate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
+     *                                  - $destinationUpdate['transformationIDs'] => (array)
      *
      * @see DestinationUpdate
      *

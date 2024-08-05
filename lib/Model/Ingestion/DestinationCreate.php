@@ -25,6 +25,7 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         'name' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\DestinationInput',
         'authenticationID' => 'string',
+        'transformationIDs' => 'string[]',
     ];
 
     /**
@@ -37,6 +38,7 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         'name' => null,
         'input' => null,
         'authenticationID' => null,
+        'transformationIDs' => null,
     ];
 
     /**
@@ -50,6 +52,7 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         'name' => 'name',
         'input' => 'input',
         'authenticationID' => 'authenticationID',
+        'transformationIDs' => 'transformationIDs',
     ];
 
     /**
@@ -62,6 +65,7 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         'name' => 'setName',
         'input' => 'setInput',
         'authenticationID' => 'setAuthenticationID',
+        'transformationIDs' => 'setTransformationIDs',
     ];
 
     /**
@@ -74,6 +78,7 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         'name' => 'getName',
         'input' => 'getInput',
         'authenticationID' => 'getAuthenticationID',
+        'transformationIDs' => 'getTransformationIDs',
     ];
 
     /**
@@ -101,6 +106,9 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['authenticationID'])) {
             $this->container['authenticationID'] = $data['authenticationID'];
+        }
+        if (isset($data['transformationIDs'])) {
+            $this->container['transformationIDs'] = $data['transformationIDs'];
         }
     }
 
@@ -280,6 +288,30 @@ class DestinationCreate extends AbstractModel implements ModelInterface, \ArrayA
     public function setAuthenticationID($authenticationID)
     {
         $this->container['authenticationID'] = $authenticationID;
+
+        return $this;
+    }
+
+    /**
+     * Gets transformationIDs.
+     *
+     * @return null|string[]
+     */
+    public function getTransformationIDs()
+    {
+        return $this->container['transformationIDs'] ?? null;
+    }
+
+    /**
+     * Sets transformationIDs.
+     *
+     * @param null|string[] $transformationIDs transformationIDs
+     *
+     * @return self
+     */
+    public function setTransformationIDs($transformationIDs)
+    {
+        $this->container['transformationIDs'] = $transformationIDs;
 
         return $this;
     }

@@ -27,6 +27,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         'words' => 'string[]',
         'decomposition' => 'string[]',
         'state' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryState',
+        'type' => '\Algolia\AlgoliaSearch\Model\Search\DictionaryEntryType',
     ];
 
     /**
@@ -41,6 +42,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         'words' => null,
         'decomposition' => null,
         'state' => null,
+        'type' => null,
     ];
 
     /**
@@ -56,6 +58,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         'words' => 'words',
         'decomposition' => 'decomposition',
         'state' => 'state',
+        'type' => 'type',
     ];
 
     /**
@@ -70,6 +73,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         'words' => 'setWords',
         'decomposition' => 'setDecomposition',
         'state' => 'setState',
+        'type' => 'setType',
     ];
 
     /**
@@ -84,6 +88,7 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         'words' => 'getWords',
         'decomposition' => 'getDecomposition',
         'state' => 'getState',
+        'type' => 'getType',
     ];
 
     /**
@@ -117,6 +122,9 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
         }
         if (isset($data['state'])) {
             $this->container['state'] = $data['state'];
+        }
+        if (isset($data['type'])) {
+            $this->container['type'] = $data['type'];
         }
     }
 
@@ -338,6 +346,30 @@ class DictionaryEntry extends AbstractModel implements ModelInterface, \ArrayAcc
     public function setState($state)
     {
         $this->container['state'] = $state;
+
+        return $this;
+    }
+
+    /**
+     * Gets type.
+     *
+     * @return null|DictionaryEntryType
+     */
+    public function getType()
+    {
+        return $this->container['type'] ?? null;
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param null|DictionaryEntryType $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->container['type'] = $type;
 
         return $this;
     }

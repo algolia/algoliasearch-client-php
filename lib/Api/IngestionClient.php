@@ -29,6 +29,7 @@ use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
+use Algolia\AlgoliaSearch\Support\Helpers;
 use GuzzleHttp\Psr7\Query;
 
 /**
@@ -1739,6 +1740,28 @@ class IngestionClient
         if (null !== $order) {
             $queryParameters['order'] = $order;
         }
+
+        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Retrieves a list of existing LLM transformation helpers.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TransformationModels|array<string, mixed>
+     */
+    public function listTransformationModels($requestOptions = [])
+    {
+        $resourcePath = '/1/transformations/copilot';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = null;
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }

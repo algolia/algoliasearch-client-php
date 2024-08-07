@@ -2255,12 +2255,12 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponse|array<string, mixed>
      */
-    public function tryTransformations($transformationTry, $requestOptions = [])
+    public function tryTransformation($transformationTry, $requestOptions = [])
     {
         // verify the required parameter 'transformationTry' is set
         if (!isset($transformationTry)) {
             throw new \InvalidArgumentException(
-                'Parameter `transformationTry` is required when calling `tryTransformations`.'
+                'Parameter `transformationTry` is required when calling `tryTransformation`.'
             );
         }
 

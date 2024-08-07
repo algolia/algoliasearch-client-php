@@ -22,7 +22,7 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     protected static $modelTypes = [
         'mapping' => '\Algolia\AlgoliaSearch\Model\Ingestion\MappingInput',
-        'streams' => 'object',
+        'streams' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[]',
         'metafields' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMetafield[]',
         'market' => '\Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMarket',
     ];
@@ -218,7 +218,7 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets streams.
      *
-     * @return object
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[]
      */
     public function getStreams()
     {
@@ -228,7 +228,7 @@ class TaskInput extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets streams.
      *
-     * @param object $streams streams
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[] $streams streams
      *
      * @return self
      */

@@ -7,13 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * DockerStreamsInput Class Doc Comment.
+ * DockerStreams Class Doc Comment.
  *
  * @category Class
- *
- * @description The selected streams of a singer or airbyte connector.
  */
-class DockerStreamsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class DockerStreams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,7 +19,9 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
-        'streams' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[]',
+        'name' => 'string',
+        'properties' => 'string[]',
+        'syncMode' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerStreamsSyncMode',
     ];
 
     /**
@@ -30,7 +30,9 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
-        'streams' => null,
+        'name' => null,
+        'properties' => null,
+        'syncMode' => null,
     ];
 
     /**
@@ -40,7 +42,9 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
-        'streams' => 'streams',
+        'name' => 'name',
+        'properties' => 'properties',
+        'syncMode' => 'syncMode',
     ];
 
     /**
@@ -49,7 +53,9 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
-        'streams' => 'setStreams',
+        'name' => 'setName',
+        'properties' => 'setProperties',
+        'syncMode' => 'setSyncMode',
     ];
 
     /**
@@ -58,7 +64,9 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
-        'streams' => 'getStreams',
+        'name' => 'getName',
+        'properties' => 'getProperties',
+        'syncMode' => 'getSyncMode',
     ];
 
     /**
@@ -75,8 +83,14 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['streams'])) {
-            $this->container['streams'] = $data['streams'];
+        if (isset($data['name'])) {
+            $this->container['name'] = $data['name'];
+        }
+        if (isset($data['properties'])) {
+            $this->container['properties'] = $data['properties'];
+        }
+        if (isset($data['syncMode'])) {
+            $this->container['syncMode'] = $data['syncMode'];
         }
     }
 
@@ -140,8 +154,11 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['streams']) || null === $this->container['streams']) {
-            $invalidProperties[] = "'streams' can't be null";
+        if (!isset($this->container['name']) || null === $this->container['name']) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if (!isset($this->container['syncMode']) || null === $this->container['syncMode']) {
+            $invalidProperties[] = "'syncMode' can't be null";
         }
 
         return $invalidProperties;
@@ -159,25 +176,73 @@ class DockerStreamsInput extends AbstractModel implements ModelInterface, \Array
     }
 
     /**
-     * Gets streams.
+     * Gets name.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[]
+     * @return string
      */
-    public function getStreams()
+    public function getName()
     {
-        return $this->container['streams'] ?? null;
+        return $this->container['name'] ?? null;
     }
 
     /**
-     * Sets streams.
+     * Sets name.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\DockerStreams[] $streams streams
+     * @param string $name The name of the stream to fetch the data from (e.g. table name).
      *
      * @return self
      */
-    public function setStreams($streams)
+    public function setName($name)
     {
-        $this->container['streams'] = $streams;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets properties.
+     *
+     * @return null|string[]
+     */
+    public function getProperties()
+    {
+        return $this->container['properties'] ?? null;
+    }
+
+    /**
+     * Sets properties.
+     *
+     * @param null|string[] $properties The properties of the stream to select (e.g. column).
+     *
+     * @return self
+     */
+    public function setProperties($properties)
+    {
+        $this->container['properties'] = $properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets syncMode.
+     *
+     * @return DockerStreamsSyncMode
+     */
+    public function getSyncMode()
+    {
+        return $this->container['syncMode'] ?? null;
+    }
+
+    /**
+     * Sets syncMode.
+     *
+     * @param DockerStreamsSyncMode $syncMode syncMode
+     *
+     * @return self
+     */
+    public function setSyncMode($syncMode)
+    {
+        $this->container['syncMode'] = $syncMode;
 
         return $this;
     }

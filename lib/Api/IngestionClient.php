@@ -13,6 +13,7 @@ use Algolia\AlgoliaSearch\Model\Ingestion\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
+use Algolia\AlgoliaSearch\Model\Ingestion\GenerateTransformationCodePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunSourcePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch;
@@ -865,6 +866,42 @@ class IngestionClient
         }
 
         return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Generates code for the selected model based on the given prompt.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param array $generateTransformationCodePayload generateTransformationCodePayload (required)
+     *                                                 - $generateTransformationCodePayload['id'] => (string)  (required)
+     *                                                 - $generateTransformationCodePayload['systemPrompt'] => (string)
+     *                                                 - $generateTransformationCodePayload['userPrompt'] => (string)  (required)
+     *
+     * @see GenerateTransformationCodePayload
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\GenerateTransformationCodeResponse|array<string, mixed>
+     */
+    public function generateTransformationCode($generateTransformationCodePayload, $requestOptions = [])
+    {
+        // verify the required parameter 'generateTransformationCodePayload' is set
+        if (!isset($generateTransformationCodePayload)) {
+            throw new \InvalidArgumentException(
+                'Parameter `generateTransformationCodePayload` is required when calling `generateTransformationCode`.'
+            );
+        }
+
+        $resourcePath = '/1/transformations/models';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $generateTransformationCodePayload;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -1758,7 +1795,7 @@ class IngestionClient
      */
     public function listTransformationModels($requestOptions = [])
     {
-        $resourcePath = '/1/transformations/copilot';
+        $resourcePath = '/1/transformations/models';
         $queryParameters = [];
         $headers = [];
         $httpBody = null;

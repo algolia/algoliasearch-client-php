@@ -2173,7 +2173,7 @@ class IngestionClient
      *  - editSettings
      *
      * @param array $transformationSearch transformationSearch (required)
-     *                                    - $transformationSearch['transformationsIDs'] => (array)  (required)
+     *                                    - $transformationSearch['transformationIDs'] => (array)
      *
      * @see TransformationSearch
      *

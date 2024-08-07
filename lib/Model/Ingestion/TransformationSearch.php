@@ -19,7 +19,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $modelTypes = [
-        'transformationsIDs' => 'string[]',
+        'transformationIDs' => 'string[]',
     ];
 
     /**
@@ -28,7 +28,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $modelFormats = [
-        'transformationsIDs' => null,
+        'transformationIDs' => null,
     ];
 
     /**
@@ -38,7 +38,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $attributeMap = [
-        'transformationsIDs' => 'transformationsIDs',
+        'transformationIDs' => 'transformationIDs',
     ];
 
     /**
@@ -47,7 +47,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $setters = [
-        'transformationsIDs' => 'setTransformationsIDs',
+        'transformationIDs' => 'setTransformationIDs',
     ];
 
     /**
@@ -56,7 +56,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      * @var string[]
      */
     protected static $getters = [
-        'transformationsIDs' => 'getTransformationsIDs',
+        'transformationIDs' => 'getTransformationIDs',
     ];
 
     /**
@@ -73,8 +73,8 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['transformationsIDs'])) {
-            $this->container['transformationsIDs'] = $data['transformationsIDs'];
+        if (isset($data['transformationIDs'])) {
+            $this->container['transformationIDs'] = $data['transformationIDs'];
         }
     }
 
@@ -136,13 +136,7 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['transformationsIDs']) || null === $this->container['transformationsIDs']) {
-            $invalidProperties[] = "'transformationsIDs' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -157,25 +151,25 @@ class TransformationSearch extends AbstractModel implements ModelInterface, \Arr
     }
 
     /**
-     * Gets transformationsIDs.
+     * Gets transformationIDs.
      *
-     * @return string[]
+     * @return null|string[]
      */
-    public function getTransformationsIDs()
+    public function getTransformationIDs()
     {
-        return $this->container['transformationsIDs'] ?? null;
+        return $this->container['transformationIDs'] ?? null;
     }
 
     /**
-     * Sets transformationsIDs.
+     * Sets transformationIDs.
      *
-     * @param string[] $transformationsIDs transformationsIDs
+     * @param null|string[] $transformationIDs transformationIDs
      *
      * @return self
      */
-    public function setTransformationsIDs($transformationsIDs)
+    public function setTransformationIDs($transformationIDs)
     {
-        $this->container['transformationsIDs'] = $transformationsIDs;
+        $this->container['transformationIDs'] = $transformationIDs;
 
         return $this;
     }

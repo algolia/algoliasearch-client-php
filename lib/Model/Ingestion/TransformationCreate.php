@@ -24,6 +24,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         'code' => 'string',
         'name' => 'string',
         'description' => 'string',
+        'authenticationIDs' => 'string[]',
     ];
 
     /**
@@ -35,6 +36,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         'code' => null,
         'name' => null,
         'description' => null,
+        'authenticationIDs' => null,
     ];
 
     /**
@@ -47,6 +49,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         'code' => 'code',
         'name' => 'name',
         'description' => 'description',
+        'authenticationIDs' => 'authenticationIDs',
     ];
 
     /**
@@ -58,6 +61,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         'code' => 'setCode',
         'name' => 'setName',
         'description' => 'setDescription',
+        'authenticationIDs' => 'setAuthenticationIDs',
     ];
 
     /**
@@ -69,6 +73,7 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         'code' => 'getCode',
         'name' => 'getName',
         'description' => 'getDescription',
+        'authenticationIDs' => 'getAuthenticationIDs',
     ];
 
     /**
@@ -93,6 +98,9 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
         }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
+        }
+        if (isset($data['authenticationIDs'])) {
+            $this->container['authenticationIDs'] = $data['authenticationIDs'];
         }
     }
 
@@ -245,6 +253,30 @@ class TransformationCreate extends AbstractModel implements ModelInterface, \Arr
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets authenticationIDs.
+     *
+     * @return null|string[]
+     */
+    public function getAuthenticationIDs()
+    {
+        return $this->container['authenticationIDs'] ?? null;
+    }
+
+    /**
+     * Sets authenticationIDs.
+     *
+     * @param null|string[] $authenticationIDs the authentications associated for the current transformation
+     *
+     * @return self
+     */
+    public function setAuthenticationIDs($authenticationIDs)
+    {
+        $this->container['authenticationIDs'] = $authenticationIDs;
 
         return $this;
     }

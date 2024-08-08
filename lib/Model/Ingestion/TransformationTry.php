@@ -21,6 +21,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     protected static $modelTypes = [
         'code' => 'string',
         'sampleRecord' => 'object',
+        'authentications' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[]',
     ];
 
     /**
@@ -31,6 +32,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     protected static $modelFormats = [
         'code' => null,
         'sampleRecord' => null,
+        'authentications' => null,
     ];
 
     /**
@@ -42,6 +44,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     protected static $attributeMap = [
         'code' => 'code',
         'sampleRecord' => 'sampleRecord',
+        'authentications' => 'authentications',
     ];
 
     /**
@@ -52,6 +55,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     protected static $setters = [
         'code' => 'setCode',
         'sampleRecord' => 'setSampleRecord',
+        'authentications' => 'setAuthentications',
     ];
 
     /**
@@ -62,6 +66,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     protected static $getters = [
         'code' => 'getCode',
         'sampleRecord' => 'getSampleRecord',
+        'authentications' => 'getAuthentications',
     ];
 
     /**
@@ -83,6 +88,9 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['sampleRecord'])) {
             $this->container['sampleRecord'] = $data['sampleRecord'];
+        }
+        if (isset($data['authentications'])) {
+            $this->container['authentications'] = $data['authentications'];
         }
     }
 
@@ -211,6 +219,30 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     public function setSampleRecord($sampleRecord)
     {
         $this->container['sampleRecord'] = $sampleRecord;
+
+        return $this;
+    }
+
+    /**
+     * Gets authentications.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[]
+     */
+    public function getAuthentications()
+    {
+        return $this->container['authentications'] ?? null;
+    }
+
+    /**
+     * Sets authentications.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[] $authentications authentications
+     *
+     * @return self
+     */
+    public function setAuthentications($authentications)
+    {
+        $this->container['authentications'] = $authentications;
 
         return $this;
     }

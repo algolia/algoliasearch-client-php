@@ -309,6 +309,7 @@ class IngestionClient
      *                                    - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                    - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                    - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
+     *                                    - $transformationCreate['authenticationIDs'] => (array) The authentications associated for the current transformation.
      *
      * @see TransformationCreate
      *
@@ -2275,7 +2276,7 @@ class IngestionClient
     }
 
     /**
-     * Try a transformation.
+     * Try a transformation before creating it.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -2285,6 +2286,7 @@ class IngestionClient
      * @param array $transformationTry transformationTry (required)
      *                                 - $transformationTry['code'] => (string) The source code of the transformation. (required)
      *                                 - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
+     *                                 - $transformationTry['authentications'] => (array)
      *
      * @see TransformationTry
      *
@@ -2305,6 +2307,58 @@ class IngestionClient
         $queryParameters = [];
         $headers = [];
         $httpBody = $transformationTry;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Try a transformation before updating it.
+     *
+     * Required API Key ACLs:
+     *  - addObject
+     *  - deleteIndex
+     *  - editSettings
+     *
+     * @param string $transformationID  Unique identifier of a transformation. (required)
+     * @param array  $transformationTry transformationTry (required)
+     *                                  - $transformationTry['code'] => (string) The source code of the transformation. (required)
+     *                                  - $transformationTry['sampleRecord'] => (array) The record to apply the given code to. (required)
+     *                                  - $transformationTry['authentications'] => (array)
+     *
+     * @see TransformationTry
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TransformationTryResponse|array<string, mixed>
+     */
+    public function tryTransformationBeforeUpdate($transformationID, $transformationTry, $requestOptions = [])
+    {
+        // verify the required parameter 'transformationID' is set
+        if (!isset($transformationID)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationID` is required when calling `tryTransformationBeforeUpdate`.'
+            );
+        }
+        // verify the required parameter 'transformationTry' is set
+        if (!isset($transformationTry)) {
+            throw new \InvalidArgumentException(
+                'Parameter `transformationTry` is required when calling `tryTransformationBeforeUpdate`.'
+            );
+        }
+
+        $resourcePath = '/1/transformations/{transformationID}/try';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $transformationTry;
+
+        // path params
+        if (null !== $transformationID) {
+            $resourcePath = str_replace(
+                '{transformationID}',
+                ObjectSerializer::toPathValue($transformationID),
+                $resourcePath
+            );
+        }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
@@ -2574,6 +2628,7 @@ class IngestionClient
      *                                     - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                     - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                     - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
+     *                                     - $transformationCreate['authenticationIDs'] => (array) The authentications associated for the current transformation.
      *
      * @see TransformationCreate
      *

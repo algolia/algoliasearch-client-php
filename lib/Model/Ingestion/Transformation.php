@@ -20,6 +20,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     protected static $modelTypes = [
         'transformationID' => 'string',
+        'authenticationIDs' => 'string[]',
         'code' => 'string',
         'name' => 'string',
         'description' => 'string',
@@ -34,6 +35,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     protected static $modelFormats = [
         'transformationID' => null,
+        'authenticationIDs' => null,
         'code' => null,
         'name' => null,
         'description' => null,
@@ -49,6 +51,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     protected static $attributeMap = [
         'transformationID' => 'transformationID',
+        'authenticationIDs' => 'authenticationIDs',
         'code' => 'code',
         'name' => 'name',
         'description' => 'description',
@@ -63,6 +66,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     protected static $setters = [
         'transformationID' => 'setTransformationID',
+        'authenticationIDs' => 'setAuthenticationIDs',
         'code' => 'setCode',
         'name' => 'setName',
         'description' => 'setDescription',
@@ -77,6 +81,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     protected static $getters = [
         'transformationID' => 'getTransformationID',
+        'authenticationIDs' => 'getAuthenticationIDs',
         'code' => 'getCode',
         'name' => 'getName',
         'description' => 'getDescription',
@@ -100,6 +105,9 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     {
         if (isset($data['transformationID'])) {
             $this->container['transformationID'] = $data['transformationID'];
+        }
+        if (isset($data['authenticationIDs'])) {
+            $this->container['authenticationIDs'] = $data['authenticationIDs'];
         }
         if (isset($data['code'])) {
             $this->container['code'] = $data['code'];
@@ -225,6 +233,30 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setTransformationID($transformationID)
     {
         $this->container['transformationID'] = $transformationID;
+
+        return $this;
+    }
+
+    /**
+     * Gets authenticationIDs.
+     *
+     * @return null|string[]
+     */
+    public function getAuthenticationIDs()
+    {
+        return $this->container['authenticationIDs'] ?? null;
+    }
+
+    /**
+     * Sets authenticationIDs.
+     *
+     * @param null|string[] $authenticationIDs the authentications associated for the current transformation
+     *
+     * @return self
+     */
+    public function setAuthenticationIDs($authenticationIDs)
+    {
+        $this->container['authenticationIDs'] = $authenticationIDs;
 
         return $this;
     }

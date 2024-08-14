@@ -34,7 +34,7 @@
 First, install Algolia PHP API Client via the [composer](https://getcomposer.org/) package manager:
 
 ```bash
-composer require algolia/algoliasearch-client-php "^4.0@beta"
+composer require algolia/algoliasearch-client-php "^4.0"
 ```
 
 You can now import the Algolia API client in your project and play with it.

@@ -1,3 +1,7 @@
+## [4.1.0](https://github.com/algolia/algoliasearch-client-php/compare/4.0.2...4.1.0)
+
+- [d53060d96](https://github.com/algolia/api-clients-automation/commit/d53060d96) feat(specs): add /schedule endpoint ([#3350](https://github.com/algolia/api-clients-automation/pull/3350)) by [@febeck](https://github.com/febeck/)
+
 ## [4.0.2](https://github.com/algolia/algoliasearch-client-php/compare/4.0.1...4.0.2)
 
 - [6cfc2d479](https://github.com/algolia/api-clients-automation/commit/6cfc2d479) chore(specs): update rendered title for search params ([#3553](https://github.com/algolia/api-clients-automation/pull/3553)) by [@shortcuts](https://github.com/shortcuts/)

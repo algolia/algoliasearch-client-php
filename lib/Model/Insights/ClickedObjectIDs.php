@@ -469,10 +469,8 @@ class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAc
      * Returns true if offset exists. False otherwise.
      *
      * @param int $offset Offset
-     *
-     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -484,7 +482,7 @@ class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAc
      *
      * @return null|mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -495,7 +493,7 @@ class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAc
      * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -509,7 +507,7 @@ class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAc
      *
      * @param int $offset Offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }

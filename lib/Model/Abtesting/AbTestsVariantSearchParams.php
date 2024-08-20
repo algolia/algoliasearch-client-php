@@ -301,10 +301,8 @@ class AbTestsVariantSearchParams extends AbstractModel implements ModelInterface
      * Returns true if offset exists. False otherwise.
      *
      * @param int $offset Offset
-     *
-     * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->container[$offset]);
     }
@@ -316,7 +314,7 @@ class AbTestsVariantSearchParams extends AbstractModel implements ModelInterface
      *
      * @return null|mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->container[$offset] ?? null;
     }
@@ -327,7 +325,7 @@ class AbTestsVariantSearchParams extends AbstractModel implements ModelInterface
      * @param null|int $offset Offset
      * @param mixed    $value  Value to be set
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -341,7 +339,7 @@ class AbTestsVariantSearchParams extends AbstractModel implements ModelInterface
      *
      * @param int $offset Offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->container[$offset]);
     }

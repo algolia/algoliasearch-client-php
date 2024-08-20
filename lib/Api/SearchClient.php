@@ -800,7 +800,7 @@ class SearchClient
     }
 
     /**
-     * This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch).
+     * This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](#tag/Records/operation/batch).
      *
      * Required API Key ACLs:
      *  - deleteIndex

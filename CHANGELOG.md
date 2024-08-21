@@ -1,3 +1,14 @@
+## [4.2.0](https://github.com/algolia/algoliasearch-client-php/compare/4.1.0...4.2.0)
+
+- [4cbbce55c](https://github.com/algolia/api-clients-automation/commit/4cbbce55c) fix(clients): highlight and snippet results e2e ([#3567](https://github.com/algolia/api-clients-automation/pull/3567)) by [@shortcuts](https://github.com/shortcuts/)
+- [7c7de04ab](https://github.com/algolia/api-clients-automation/commit/7c7de04ab) fix(specs): another wrong link ([#3570](https://github.com/algolia/api-clients-automation/pull/3570)) by [@kai687](https://github.com/kai687/)
+- [f38a9ef12](https://github.com/algolia/api-clients-automation/commit/f38a9ef12) chore(specs): breaking change method names mapping table ([#3568](https://github.com/algolia/api-clients-automation/pull/3568)) by [@shortcuts](https://github.com/shortcuts/)
+- [d0e4f4ed4](https://github.com/algolia/api-clients-automation/commit/d0e4f4ed4) feat(php): waitForTasks param for various SearchClient methods ([#3565](https://github.com/algolia/api-clients-automation/pull/3565)) by [@aykutersoy](https://github.com/aykutersoy/)
+- [fbe8a2356](https://github.com/algolia/api-clients-automation/commit/fbe8a2356) fix(php): native return types for AbstractModel methods ([#3563](https://github.com/algolia/api-clients-automation/pull/3563)) by [@aykutersoy](https://github.com/aykutersoy/)
+- [9dedfc90f](https://github.com/algolia/api-clients-automation/commit/9dedfc90f) fix(clients): mention `main` branch instead of `master` ([#3566](https://github.com/algolia/api-clients-automation/pull/3566)) by [@shortcuts](https://github.com/shortcuts/)
+- [0e5ffb1e8](https://github.com/algolia/api-clients-automation/commit/0e5ffb1e8) fix(specs): broken link ([#3559](https://github.com/algolia/api-clients-automation/pull/3559)) by [@kai687](https://github.com/kai687/)
+- [675fc78d0](https://github.com/algolia/api-clients-automation/commit/675fc78d0) fix(php): Deprecation warning fix for PHP 8.1+ ([#3562](https://github.com/algolia/api-clients-automation/pull/3562)) by [@aykutersoy](https://github.com/aykutersoy/)
+
 ## [4.1.0](https://github.com/algolia/algoliasearch-client-php/compare/4.0.2...4.1.0)
 
 - [d53060d96](https://github.com/algolia/api-clients-automation/commit/d53060d96) feat(specs): add /schedule endpoint ([#3350](https://github.com/algolia/api-clients-automation/pull/3350)) by [@febeck](https://github.com/febeck/)

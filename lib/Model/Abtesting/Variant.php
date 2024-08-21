@@ -293,23 +293,11 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
         if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
             $invalidProperties[] = "'addToCartCount' can't be null";
         }
-        if (!isset($this->container['addToCartRate']) || null === $this->container['addToCartRate']) {
-            $invalidProperties[] = "'addToCartRate' can't be null";
-        }
-        if (!isset($this->container['averageClickPosition']) || null === $this->container['averageClickPosition']) {
-            $invalidProperties[] = "'averageClickPosition' can't be null";
-        }
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if (!isset($this->container['clickThroughRate']) || null === $this->container['clickThroughRate']) {
-            $invalidProperties[] = "'clickThroughRate' can't be null";
-        }
         if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
-        }
-        if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
-            $invalidProperties[] = "'conversionRate' can't be null";
         }
         if (!isset($this->container['description']) || null === $this->container['description']) {
             $invalidProperties[] = "'description' can't be null";
@@ -322,9 +310,6 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
         }
         if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
             $invalidProperties[] = "'purchaseCount' can't be null";
-        }
-        if (!isset($this->container['purchaseRate']) || null === $this->container['purchaseRate']) {
-            $invalidProperties[] = "'purchaseRate' can't be null";
         }
         if (!isset($this->container['searchCount']) || null === $this->container['searchCount']) {
             $invalidProperties[] = "'searchCount' can't be null";
@@ -388,7 +373,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets addToCartRate.
      *
-     * @return float
+     * @return null|float
      */
     public function getAddToCartRate()
     {
@@ -398,7 +383,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets addToCartRate.
      *
-     * @param float $addToCartRate [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.
+     * @param null|float $addToCartRate [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.
      *
      * @return self
      */
@@ -412,7 +397,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets averageClickPosition.
      *
-     * @return int
+     * @return null|int
      */
     public function getAverageClickPosition()
     {
@@ -422,7 +407,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets averageClickPosition.
      *
-     * @param int $averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
+     * @param null|int $averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
      *
      * @return self
      */
@@ -460,7 +445,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets clickThroughRate.
      *
-     * @return float
+     * @return null|float
      */
     public function getClickThroughRate()
     {
@@ -470,7 +455,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.
+     * @param null|float $clickThroughRate [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.
      *
      * @return self
      */
@@ -508,7 +493,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets conversionRate.
      *
-     * @return float
+     * @return null|float
      */
     public function getConversionRate()
     {
@@ -518,7 +503,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
+     * @param null|float $conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
      *
      * @return self
      */
@@ -700,7 +685,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets purchaseRate.
      *
-     * @return float
+     * @return null|float
      */
     public function getPurchaseRate()
     {
@@ -710,7 +695,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets purchaseRate.
      *
-     * @param float $purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
+     * @param null|float $purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
      *
      * @return self
      */

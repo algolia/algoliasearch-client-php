@@ -762,8 +762,8 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
             $invalidProperties[] = "invalid value for 'length', must be smaller than or equal to 1000.";
         }
 
-        if (isset($this->container['length']) && ($this->container['length'] < 1)) {
-            $invalidProperties[] = "invalid value for 'length', must be bigger than or equal to 1.";
+        if (isset($this->container['length']) && ($this->container['length'] < 0)) {
+            $invalidProperties[] = "invalid value for 'length', must be bigger than or equal to 0.";
         }
 
         if (isset($this->container['minimumAroundRadius']) && ($this->container['minimumAroundRadius'] < 1)) {
@@ -1178,8 +1178,8 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
         if (!is_null($length) && ($length > 1000)) {
             throw new \InvalidArgumentException('invalid value for $length when calling BrowseParams., must be smaller than or equal to 1000.');
         }
-        if (!is_null($length) && ($length < 1)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling BrowseParams., must be bigger than or equal to 1.');
+        if (!is_null($length) && ($length < 0)) {
+            throw new \InvalidArgumentException('invalid value for $length when calling BrowseParams., must be bigger than or equal to 0.');
         }
 
         $this->container['length'] = $length;

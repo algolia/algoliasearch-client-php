@@ -19,7 +19,7 @@ class DailyRevenue extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
-        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>',
         'date' => 'string',
     ];
 
@@ -170,7 +170,7 @@ class DailyRevenue extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>
      */
     public function getCurrencies()
     {
@@ -180,7 +180,7 @@ class DailyRevenue extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue> $currencies revenue associated with this search, broken-down by currencies
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search, broken-down by currencies
      *
      * @return self
      */

@@ -28,7 +28,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,int>>',
-        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>',
+        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetStats>',
         'index' => 'string',
         'indexUsed' => 'string',
         'message' => 'string',
@@ -654,7 +654,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetStats>
      */
     public function getFacetsStats()
     {
@@ -664,7 +664,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetsStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */

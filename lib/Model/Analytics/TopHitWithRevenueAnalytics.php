@@ -30,7 +30,7 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
         'addToCartCount' => 'int',
         'purchaseRate' => 'float',
         'purchaseCount' => 'int',
-        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>',
+        'currencies' => 'array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>',
     ];
 
     /**
@@ -628,7 +628,7 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue>
+     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>
      */
     public function getCurrencies()
     {
@@ -638,7 +638,7 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrenciesValue> $currencies revenue associated with this search, broken-down by currencies
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search, broken-down by currencies
      *
      * @return self
      */

@@ -28,7 +28,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
         'facets' => 'array<string,array<string,int>>',
-        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>',
+        'facetsStats' => 'array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats>',
         'index' => 'string',
         'indexUsed' => 'string',
         'message' => 'string',
@@ -676,7 +676,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats>
+     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats>
      */
     public function getFacetsStats()
     {
@@ -686,7 +686,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetsStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */

@@ -204,7 +204,7 @@ class IngestionClient
      * @param array $sourceCreate (required)
      *                            - $sourceCreate['type'] => (array)  (required)
      *                            - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
-     *                            - $sourceCreate['input'] => (array)  (required)
+     *                            - $sourceCreate['input'] => (array)
      *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see SourceCreate
@@ -2684,7 +2684,7 @@ class IngestionClient
      * @param array $sourceCreate (optional)
      *                            - $sourceCreate['type'] => (array)  (required)
      *                            - $sourceCreate['name'] => (string) Descriptive name of the source. (required)
-     *                            - $sourceCreate['input'] => (array)  (required)
+     *                            - $sourceCreate['input'] => (array)
      *                            - $sourceCreate['authenticationID'] => (string) Universally unique identifier (UUID) of an authentication resource.
      *
      * @see SourceCreate

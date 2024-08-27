@@ -168,9 +168,6 @@ class SourceCreate extends AbstractModel implements ModelInterface, \ArrayAccess
         if (!isset($this->container['name']) || null === $this->container['name']) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if (!isset($this->container['input']) || null === $this->container['input']) {
-            $invalidProperties[] = "'input' can't be null";
-        }
 
         return $invalidProperties;
     }
@@ -237,7 +234,7 @@ class SourceCreate extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets input.
      *
-     * @return SourceInput
+     * @return null|SourceInput
      */
     public function getInput()
     {
@@ -247,7 +244,7 @@ class SourceCreate extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets input.
      *
-     * @param SourceInput $input input
+     * @param null|SourceInput $input input
      *
      * @return self
      */

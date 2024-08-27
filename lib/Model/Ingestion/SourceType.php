@@ -32,6 +32,8 @@ class SourceType
 
     public const SFCC = 'sfcc';
 
+    public const PUSH = 'push';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -49,6 +51,7 @@ class SourceType
             self::JSON,
             self::SHOPIFY,
             self::SFCC,
+            self::PUSH,
         ];
     }
 }

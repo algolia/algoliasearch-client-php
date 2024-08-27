@@ -22,6 +22,10 @@ class RunType
 
     public const DISCOVER = 'discover';
 
+    public const VALIDATE = 'validate';
+
+    public const PUSH = 'push';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -33,6 +37,8 @@ class RunType
             self::REINDEX,
             self::UPDATE,
             self::DISCOVER,
+            self::VALIDATE,
+            self::PUSH,
         ];
     }
 }

@@ -1471,6 +1471,7 @@ class IngestionClient
      * @param int    $itemsPerPage   Number of items per page. (optional, default to 10)
      * @param int    $page           Page number of the paginated API response. (optional)
      * @param array  $status         Run status for filtering the list of task runs. (optional)
+     * @param array  $type           Run type for filtering the list of task runs. (optional)
      * @param string $taskID         Task ID for filtering the list of task runs. (optional)
      * @param array  $sort           Property by which to sort the list of task runs. (optional)
      * @param array  $order          Sort order of the response, ascending or descending. (optional)
@@ -1480,7 +1481,7 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunListResponse|array<string, mixed>
      */
-    public function listRuns($itemsPerPage = null, $page = null, $status = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
+    public function listRuns($itemsPerPage = null, $page = null, $status = null, $type = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
             throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listRuns, must be smaller than or equal to 100.');
@@ -1508,6 +1509,10 @@ class IngestionClient
 
         if (null !== $status) {
             $queryParameters['status'] = $status;
+        }
+
+        if (null !== $type) {
+            $queryParameters['type'] = $type;
         }
 
         if (null !== $taskID) {

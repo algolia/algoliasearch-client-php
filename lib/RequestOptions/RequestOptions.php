@@ -358,7 +358,7 @@ final class RequestOptions
     /**
      * Set connect timeout.
      *
-     * @param $connectTimeout Connect timeout in seconds
+     * @param int $connectTimeout Connect timeout in seconds
      *
      * @return $this
      */

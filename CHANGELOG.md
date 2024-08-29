@@ -1,3 +1,7 @@
+## [4.3.3](https://github.com/algolia/algoliasearch-client-php/compare/4.3.2...4.3.3)
+
+- [327e08d4e](https://github.com/algolia/api-clients-automation/commit/327e08d4e) fix(specs): ingestion push task payload [skip-bc] ([#3607](https://github.com/algolia/api-clients-automation/pull/3607)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.3.2](https://github.com/algolia/algoliasearch-client-php/compare/4.3.1...4.3.2)
 
 - [d822b9783](https://github.com/algolia/api-clients-automation/commit/d822b9783) fix(php): type hint for setConnectTimeout ([#3605](https://github.com/algolia/api-clients-automation/pull/3605)) by [@millotp](https://github.com/millotp/)

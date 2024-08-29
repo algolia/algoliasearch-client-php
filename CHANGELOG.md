@@ -1,3 +1,7 @@
+## [4.3.2](https://github.com/algolia/algoliasearch-client-php/compare/4.3.1...4.3.2)
+
+- [d822b9783](https://github.com/algolia/api-clients-automation/commit/d822b9783) fix(php): type hint for setConnectTimeout ([#3605](https://github.com/algolia/api-clients-automation/pull/3605)) by [@millotp](https://github.com/millotp/)
+
 ## [4.3.1](https://github.com/algolia/algoliasearch-client-php/compare/4.3.0...4.3.1)
 
 - [41f849e41](https://github.com/algolia/api-clients-automation/commit/41f849e41) fix(specs): partial update operation ([#3486](https://github.com/algolia/api-clients-automation/pull/3486)) by [@kai687](https://github.com/kai687/)

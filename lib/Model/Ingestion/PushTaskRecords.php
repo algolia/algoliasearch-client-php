@@ -7,11 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * BatchRequest Class Doc Comment.
+ * PushTaskRecords Class Doc Comment.
  *
  * @category Class
  */
-class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PushTaskRecords extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -19,8 +19,7 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelTypes = [
-        'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\Action',
-        'body' => 'object',
+        'objectID' => 'string',
     ];
 
     /**
@@ -29,8 +28,7 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $modelFormats = [
-        'action' => null,
-        'body' => null,
+        'objectID' => null,
     ];
 
     /**
@@ -40,8 +38,7 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'action' => 'action',
-        'body' => 'body',
+        'objectID' => 'objectID',
     ];
 
     /**
@@ -50,8 +47,7 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'action' => 'setAction',
-        'body' => 'setBody',
+        'objectID' => 'setObjectID',
     ];
 
     /**
@@ -60,8 +56,7 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'action' => 'getAction',
-        'body' => 'getBody',
+        'objectID' => 'getObjectID',
     ];
 
     /**
@@ -78,11 +73,8 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['action'])) {
-            $this->container['action'] = $data['action'];
-        }
-        if (isset($data['body'])) {
-            $this->container['body'] = $data['body'];
+        if (isset($data['objectID'])) {
+            $this->container['objectID'] = $data['objectID'];
         }
     }
 
@@ -146,11 +138,8 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['action']) || null === $this->container['action']) {
-            $invalidProperties[] = "'action' can't be null";
-        }
-        if (!isset($this->container['body']) || null === $this->container['body']) {
-            $invalidProperties[] = "'body' can't be null";
+        if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
+            $invalidProperties[] = "'objectID' can't be null";
         }
 
         return $invalidProperties;
@@ -168,49 +157,25 @@ class BatchRequest extends AbstractModel implements ModelInterface, \ArrayAccess
     }
 
     /**
-     * Gets action.
+     * Gets objectID.
      *
-     * @return Action
+     * @return string
      */
-    public function getAction()
+    public function getObjectID()
     {
-        return $this->container['action'] ?? null;
+        return $this->container['objectID'] ?? null;
     }
 
     /**
-     * Sets action.
+     * Sets objectID.
      *
-     * @param Action $action action
+     * @param string $objectID unique record identifier
      *
      * @return self
      */
-    public function setAction($action)
+    public function setObjectID($objectID)
     {
-        $this->container['action'] = $action;
-
-        return $this;
-    }
-
-    /**
-     * Gets body.
-     *
-     * @return object
-     */
-    public function getBody()
-    {
-        return $this->container['body'] ?? null;
-    }
-
-    /**
-     * Sets body.
-     *
-     * @param object $body operation arguments (varies with specified `action`)
-     *
-     * @return self
-     */
-    public function setBody($body)
-    {
-        $this->container['body'] = $body;
+        $this->container['objectID'] = $objectID;
 
         return $this;
     }

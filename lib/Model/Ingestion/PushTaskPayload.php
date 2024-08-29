@@ -7,13 +7,11 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
 use Algolia\AlgoliaSearch\Model\AbstractModel;
 
 /**
- * BatchWriteParams Class Doc Comment.
+ * PushTaskPayload Class Doc Comment.
  *
  * @category Class
- *
- * @description Batch parameters.
  */
-class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class PushTaskPayload extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -21,7 +19,8 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelTypes = [
-        'requests' => '\Algolia\AlgoliaSearch\Model\Ingestion\BatchRequest[]',
+        'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\Action',
+        'records' => '\Algolia\AlgoliaSearch\Model\Ingestion\PushTaskRecords[]',
     ];
 
     /**
@@ -30,7 +29,8 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelFormats = [
-        'requests' => null,
+        'action' => null,
+        'records' => null,
     ];
 
     /**
@@ -40,7 +40,8 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'requests' => 'requests',
+        'action' => 'action',
+        'records' => 'records',
     ];
 
     /**
@@ -49,7 +50,8 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'requests' => 'setRequests',
+        'action' => 'setAction',
+        'records' => 'setRecords',
     ];
 
     /**
@@ -58,7 +60,8 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'requests' => 'getRequests',
+        'action' => 'getAction',
+        'records' => 'getRecords',
     ];
 
     /**
@@ -75,8 +78,11 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['requests'])) {
-            $this->container['requests'] = $data['requests'];
+        if (isset($data['action'])) {
+            $this->container['action'] = $data['action'];
+        }
+        if (isset($data['records'])) {
+            $this->container['records'] = $data['records'];
         }
     }
 
@@ -140,8 +146,11 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['requests']) || null === $this->container['requests']) {
-            $invalidProperties[] = "'requests' can't be null";
+        if (!isset($this->container['action']) || null === $this->container['action']) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if (!isset($this->container['records']) || null === $this->container['records']) {
+            $invalidProperties[] = "'records' can't be null";
         }
 
         return $invalidProperties;
@@ -159,25 +168,49 @@ class BatchWriteParams extends AbstractModel implements ModelInterface, \ArrayAc
     }
 
     /**
-     * Gets requests.
+     * Gets action.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\BatchRequest[]
+     * @return Action
      */
-    public function getRequests()
+    public function getAction()
     {
-        return $this->container['requests'] ?? null;
+        return $this->container['action'] ?? null;
     }
 
     /**
-     * Sets requests.
+     * Sets action.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\BatchRequest[] $requests requests
+     * @param Action $action action
      *
      * @return self
      */
-    public function setRequests($requests)
+    public function setAction($action)
     {
-        $this->container['requests'] = $requests;
+        $this->container['action'] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Gets records.
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\PushTaskRecords[]
+     */
+    public function getRecords()
+    {
+        return $this->container['records'] ?? null;
+    }
+
+    /**
+     * Sets records.
+     *
+     * @param \Algolia\AlgoliaSearch\Model\Ingestion\PushTaskRecords[] $records records
+     *
+     * @return self
+     */
+    public function setRecords($records)
+    {
+        $this->container['records'] = $records;
 
         return $this;
     }

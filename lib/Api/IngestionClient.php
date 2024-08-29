@@ -9,11 +9,11 @@ use Algolia\AlgoliaSearch\Configuration\IngestionConfig;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationUpdate;
-use Algolia\AlgoliaSearch\Model\Ingestion\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
 use Algolia\AlgoliaSearch\Model\Ingestion\GenerateTransformationCodePayload;
+use Algolia\AlgoliaSearch\Model\Ingestion\PushTaskPayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunSourcePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceSearch;
@@ -1870,17 +1870,18 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
-     * @param string $taskID           Unique identifier of a task. (required)
-     * @param array  $batchWriteParams Request body of a Search API &#x60;batch&#x60; request that will be pushed in the Connectors pipeline. (required)
-     *                                 - $batchWriteParams['requests'] => (array)  (required)
+     * @param string $taskID          Unique identifier of a task. (required)
+     * @param array  $pushTaskPayload Request body of a Search API &#x60;batch&#x60; request that will be pushed in the Connectors pipeline. (required)
+     *                                - $pushTaskPayload['action'] => (array)  (required)
+     *                                - $pushTaskPayload['records'] => (array)  (required)
      *
-     * @see BatchWriteParams
+     * @see PushTaskPayload
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
      */
-    public function pushTask($taskID, $batchWriteParams, $requestOptions = [])
+    public function pushTask($taskID, $pushTaskPayload, $requestOptions = [])
     {
         // verify the required parameter 'taskID' is set
         if (!isset($taskID)) {
@@ -1888,17 +1889,17 @@ class IngestionClient
                 'Parameter `taskID` is required when calling `pushTask`.'
             );
         }
-        // verify the required parameter 'batchWriteParams' is set
-        if (!isset($batchWriteParams)) {
+        // verify the required parameter 'pushTaskPayload' is set
+        if (!isset($pushTaskPayload)) {
             throw new \InvalidArgumentException(
-                'Parameter `batchWriteParams` is required when calling `pushTask`.'
+                'Parameter `pushTaskPayload` is required when calling `pushTask`.'
             );
         }
 
         $resourcePath = '/2/tasks/{taskID}/push';
         $queryParameters = [];
         $headers = [];
-        $httpBody = $batchWriteParams;
+        $httpBody = $pushTaskPayload;
 
         // path params
         if (null !== $taskID) {

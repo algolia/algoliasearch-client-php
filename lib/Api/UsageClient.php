@@ -73,17 +73,14 @@ class UsageClient
      */
     public static function getClusterHosts(UsageConfig $config)
     {
-        $cacheKey = sprintf('%s-clusterHosts-%s', __CLASS__, $config->getAppId());
-
         if ($hosts = $config->getHosts()) {
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
-        } elseif (false === ($clusterHosts = ClusterHosts::createFromCache($cacheKey))) {
-            // We'll try to restore the ClusterHost from cache, if we cannot
-            // we create a new instance and set the cache key
-            $clusterHosts = ClusterHosts::createFromAppId($config->getAppId())
-                ->setCacheKey($cacheKey)
-            ;
+        } else {
+            $clusterHosts = ClusterHosts::create([
+                'usage.algolia.com',
+                'usage-dev.algolia.com',
+            ]);
         }
 
         return $clusterHosts;

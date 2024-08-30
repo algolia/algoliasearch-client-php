@@ -77,7 +77,9 @@ class MonitoringClient
             // If a list of hosts was passed, we ignore the cache
             $clusterHosts = ClusterHosts::create($hosts);
         } else {
-            $clusterHosts = ClusterHosts::create('status.algolia.com');
+            $clusterHosts = ClusterHosts::create([
+                'status.algolia.com',
+            ]);
         }
 
         return $clusterHosts;

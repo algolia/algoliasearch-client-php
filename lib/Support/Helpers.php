@@ -85,6 +85,8 @@ final class Helpers
      * @param int      $timeout            Timeout
      * @param string   $timeoutCalculation name of the method to call to calculate the timeout
      *
+     * @return object the last result of the function
+     *
      * @throws ExceededRetriesException
      */
     public static function retryUntil(
@@ -103,11 +105,11 @@ final class Helpers
                 $res = call_user_func_array([$object, $function], $args);
 
                 if ($validate($res)) {
-                    return;
+                    return $res;
                 }
             } catch (\Exception $e) {
                 // if the task is interrupted, just return
-                return;
+                return null;
             }
 
             ++$retry;

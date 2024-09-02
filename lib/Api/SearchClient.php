@@ -21,6 +21,7 @@ use Algolia\AlgoliaSearch\Model\Search\BrowseParams;
 use Algolia\AlgoliaSearch\Model\Search\DeleteByParams;
 use Algolia\AlgoliaSearch\Model\Search\DictionarySettingsParams;
 use Algolia\AlgoliaSearch\Model\Search\GetObjectsParams;
+use Algolia\AlgoliaSearch\Model\Search\GetTaskResponse;
 use Algolia\AlgoliaSearch\Model\Search\IndexSettings;
 use Algolia\AlgoliaSearch\Model\Search\OperationIndexParams;
 use Algolia\AlgoliaSearch\Model\Search\Rule;
@@ -2762,6 +2763,8 @@ class SearchClient
      * @param null|int $maxRetries     Maximum number of retries
      * @param null|int $timeout        Timeout
      *
+     * @return GetTaskResponse
+     *
      * @throws ExceededRetriesException
      */
     public function waitForTask($indexName, $taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
@@ -2774,7 +2777,7 @@ class SearchClient
             $maxRetries = $this->config->getDefaultMaxRetries();
         }
 
-        Helpers::retryUntil(
+        return Helpers::retryUntil(
             $this,
             'getTask',
             [$indexName, $taskId, $requestOptions],
@@ -2792,6 +2795,8 @@ class SearchClient
      * @param null|int $maxRetries     Maximum number of retries
      * @param null|int $timeout        Timeout
      *
+     * @return GetTaskResponse
+     *
      * @throws ExceededRetriesException
      */
     public function waitForAppTask($taskId, $requestOptions = [], $maxRetries = null, $timeout = null)
@@ -2804,7 +2809,7 @@ class SearchClient
             $maxRetries = $this->config->getDefaultMaxRetries();
         }
 
-        Helpers::retryUntil(
+        return Helpers::retryUntil(
             $this,
             'getAppTask',
             [$taskId, $requestOptions],

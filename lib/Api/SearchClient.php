@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\SearchConfig;
 use Algolia\AlgoliaSearch\Exceptions\ExceededRetriesException;
+use Algolia\AlgoliaSearch\Exceptions\NotFoundException;
 use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
@@ -3096,6 +3097,19 @@ class SearchClient
         $validUntil = (int) $matches[1];
 
         return $validUntil - time();
+    }
+
+    public function indexExists($indexName)
+    {
+        try {
+            $this->getSettings($indexName);
+        } catch (NotFoundException $e) {
+            return false;
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+        return true;
     }
 
     private function sendRequest($method, $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions, $useReadTransporter = false)

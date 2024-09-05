@@ -32,16 +32,14 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0 || ^3.5.0",
         "phpunit/phpunit": "^11.0",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "phpstan/phpstan": "^1.12"
     },
     "autoload": {
         "psr-4": { "Algolia\\AlgoliaSearch\\" : "lib/" },
         "files": [
             "lib/Http/Psr7/functions.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": { "Algolia\\AlgoliaSearch\\Test\\" : "test/" }
     },
     "suggest": {
         "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"

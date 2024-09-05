@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Abtesting;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * ScheduleABTestsRequest Class Doc Comment.

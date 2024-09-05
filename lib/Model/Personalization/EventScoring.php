@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * EventScoring Class Doc Comment.

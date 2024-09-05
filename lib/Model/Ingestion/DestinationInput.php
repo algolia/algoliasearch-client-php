@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * DestinationInput Class Doc Comment.

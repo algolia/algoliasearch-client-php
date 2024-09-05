@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * AroundRadius Class Doc Comment.
@@ -65,10 +66,8 @@ class AroundRadius extends AbstractModel implements ModelInterface, \ArrayAccess
 
     /**
      * Constructor.
-     *
-     * @param mixed[] $data Associated array of property values
      */
-    public function __construct(?array $data = null) {}
+    public function __construct() {}
 
     /**
      * Array of attributes where the key is the local name,

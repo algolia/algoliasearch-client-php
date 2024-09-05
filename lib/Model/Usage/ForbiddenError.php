@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Usage;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * ForbiddenError Class Doc Comment.

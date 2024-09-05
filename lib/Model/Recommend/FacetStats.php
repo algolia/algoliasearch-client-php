@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Recommend;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * FacetStats Class Doc Comment.

@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Search;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * AutomaticFacetFilters Class Doc Comment.
@@ -65,10 +66,8 @@ class AutomaticFacetFilters extends AbstractModel implements ModelInterface, \Ar
 
     /**
      * Constructor.
-     *
-     * @param mixed[] $data Associated array of property values
      */
-    public function __construct(?array $data = null) {}
+    public function __construct() {}
 
     /**
      * Array of attributes where the key is the local name,

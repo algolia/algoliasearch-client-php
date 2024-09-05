@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Personalization;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * ErrorBase Class Doc Comment.

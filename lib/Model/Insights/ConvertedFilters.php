@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Insights;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * ConvertedFilters Class Doc Comment.

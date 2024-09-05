@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * BaseResponse Class Doc Comment.

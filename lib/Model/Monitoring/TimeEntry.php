@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Monitoring;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * TimeEntry Class Doc Comment.

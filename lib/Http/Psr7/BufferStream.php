@@ -32,12 +32,12 @@ class BufferStream implements StreamInterface
         $this->hwm = $hwm;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getContents();
     }
 
-    public function getContents()
+    public function getContents(): string
     {
         $buffer = $this->buffer;
         $this->buffer = '';
@@ -45,52 +45,52 @@ class BufferStream implements StreamInterface
         return $buffer;
     }
 
-    public function close()
+    public function close(): void
     {
         $this->buffer = '';
     }
 
-    public function detach()
+    public function detach(): void
     {
         $this->close();
     }
 
-    public function getSize()
+    public function getSize(): int
     {
         return mb_strlen($this->buffer);
     }
 
-    public function isReadable()
+    public function isReadable(): bool
     {
         return true;
     }
 
-    public function isWritable()
+    public function isWritable(): bool
     {
         return true;
     }
 
-    public function isSeekable()
+    public function isSeekable(): bool
     {
         return false;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->seek(0);
     }
 
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek($offset, $whence = SEEK_SET): void
     {
         throw new \RuntimeException('Cannot seek a BufferStream');
     }
 
-    public function eof()
+    public function eof(): bool
     {
         return 0 === mb_strlen($this->buffer);
     }
 
-    public function tell()
+    public function tell(): int
     {
         throw new \RuntimeException('Cannot determine the position of a BufferStream');
     }
@@ -100,7 +100,7 @@ class BufferStream implements StreamInterface
      *
      * @param mixed $length
      */
-    public function read($length)
+    public function read($length): string
     {
         $currentLength = mb_strlen($this->buffer);
 
@@ -122,7 +122,7 @@ class BufferStream implements StreamInterface
      *
      * @param mixed $string
      */
-    public function write($string)
+    public function write($string): int
     {
         $this->buffer .= $string;
 

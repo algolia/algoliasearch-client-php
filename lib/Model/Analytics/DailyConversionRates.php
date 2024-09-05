@@ -5,6 +5,7 @@
 namespace Algolia\AlgoliaSearch\Model\Analytics;
 
 use Algolia\AlgoliaSearch\Model\AbstractModel;
+use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
  * DailyConversionRates Class Doc Comment.

@@ -67,7 +67,7 @@ abstract class Configuration
             throw new AlgoliaException('`apiKey` is missing.');
         }
 
-        $this->setAlgoliaApiKey($config['apiKey']);
+        $this->setClientApiKey($config['apiKey']);
         $this->setAuth('x-algolia-api-key', $config['apiKey']);
 
         $this->setAppId($config['appId']);
@@ -193,13 +193,6 @@ abstract class Configuration
         return $this->config['apiKey'];
     }
 
-    public function setAlgoliaApiKey($apiKey)
-    {
-        $this->config['apiKey'] = $apiKey;
-
-        return $this;
-    }
-
     public function getHosts()
     {
         return $this->config['hosts'];
@@ -270,6 +263,28 @@ abstract class Configuration
         $this->config['defaultHeaders'] = $defaultHeaders;
 
         return $this;
+    }
+
+    /**
+     * Switch the API key used to authenticate requessts.
+     *
+     * @param string $apiKey The new API key to be used
+     */
+    public function setClientApiKey($apiKey)
+    {
+        $this->config['apiKey'] = $apiKey;
+
+        return $this;
+    }
+
+    /**
+     * @deprecated This method is deprecated. Use setClientApiKey() instead.
+     *
+     * @param mixed $apiKey
+     */
+    public function setAlgoliaApiKey($apiKey)
+    {
+        return $this->setClientApiKey($apiKey);
     }
 
     /**

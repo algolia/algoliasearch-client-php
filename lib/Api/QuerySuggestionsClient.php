@@ -100,6 +100,16 @@ class QuerySuggestionsClient
     }
 
     /**
+     * Stub method setting a new API key to authenticate requests.
+     *
+     * @param string $apiKey
+     */
+    public function setClientApiKey($apiKey)
+    {
+        $this->config->setClientApiKey($apiKey);
+    }
+
+    /**
      * Creates a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
      *
      * Required API Key ACLs:

@@ -100,6 +100,16 @@ class AbtestingClient
     }
 
     /**
+     * Stub method setting a new API key to authenticate requests.
+     *
+     * @param string $apiKey
+     */
+    public function setClientApiKey($apiKey)
+    {
+        $this->config->setClientApiKey($apiKey);
+    }
+
+    /**
      * Creates a new A/B test.
      *
      * Required API Key ACLs:

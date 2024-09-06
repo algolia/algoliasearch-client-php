@@ -94,6 +94,16 @@ class UsageClient
     }
 
     /**
+     * Stub method setting a new API key to authenticate requests.
+     *
+     * @param string $apiKey
+     */
+    public function setClientApiKey($apiKey)
+    {
+        $this->config->setClientApiKey($apiKey);
+    }
+
+    /**
      * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)

@@ -119,6 +119,16 @@ class IngestionClient
     }
 
     /**
+     * Stub method setting a new API key to authenticate requests.
+     *
+     * @param string $apiKey
+     */
+    public function setClientApiKey($apiKey)
+    {
+        $this->config->setClientApiKey($apiKey);
+    }
+
+    /**
      * Creates a new authentication resource.
      *
      * Required API Key ACLs:

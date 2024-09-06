@@ -1,3 +1,14 @@
+## [4.4.0](https://github.com/algolia/algoliasearch-client-php/compare/4.3.5...4.4.0)
+
+- [a254f03ef](https://github.com/algolia/api-clients-automation/commit/a254f03ef) fix(php): assign value when normalising request options ([#3659](https://github.com/algolia/api-clients-automation/pull/3659)) by [@aykutersoy](https://github.com/aykutersoy/)
+- [2c65a8d11](https://github.com/algolia/api-clients-automation/commit/2c65a8d11) feat(clients): helper to switch API key in use ([#3616](https://github.com/algolia/api-clients-automation/pull/3616)) by [@Fluf22](https://github.com/Fluf22/)
+- [050501501](https://github.com/algolia/api-clients-automation/commit/050501501) fix(php): add PHPStan for static code analysis ([#3655](https://github.com/algolia/api-clients-automation/pull/3655)) by [@millotp](https://github.com/millotp/)
+- [365030a81](https://github.com/algolia/api-clients-automation/commit/365030a81) fix(php): put banner after php tag ([#3653](https://github.com/algolia/api-clients-automation/pull/3653)) by [@millotp](https://github.com/millotp/)
+- [f126366dc](https://github.com/algolia/api-clients-automation/commit/f126366dc) fix(specs): note on Analytics API server ([#3650](https://github.com/algolia/api-clients-automation/pull/3650)) by [@kai687](https://github.com/kai687/)
+- [3d02b3164](https://github.com/algolia/api-clients-automation/commit/3d02b3164) feat(clients): add helper to check if an index exists ([#3646](https://github.com/algolia/api-clients-automation/pull/3646)) by [@millotp](https://github.com/millotp/)
+- [a36746d65](https://github.com/algolia/api-clients-automation/commit/a36746d65) fix(specs): note on insights API server ([#3649](https://github.com/algolia/api-clients-automation/pull/3649)) by [@kai687](https://github.com/kai687/)
+- [1f53716c6](https://github.com/algolia/api-clients-automation/commit/1f53716c6) fix(specs): don't extend $ref objects ([#3623](https://github.com/algolia/api-clients-automation/pull/3623)) by [@kai687](https://github.com/kai687/)
+
 ## [4.3.5](https://github.com/algolia/algoliasearch-client-php/compare/4.3.4...4.3.5)
 
 - [a9405b168](https://github.com/algolia/api-clients-automation/commit/a9405b168) fix(specs): usage api ([#3624](https://github.com/algolia/api-clients-automation/pull/3624)) by [@kai687](https://github.com/kai687/)

@@ -44,6 +44,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'string',
         'userData' => 'object',
         'queryID' => 'string',
+        'automaticInsights' => 'bool',
         'page' => 'int',
         'nbHits' => 'int',
         'nbPages' => 'int',
@@ -81,6 +82,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => null,
         'userData' => null,
         'queryID' => null,
+        'automaticInsights' => null,
         'page' => null,
         'nbHits' => null,
         'nbPages' => null,
@@ -119,6 +121,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
         'queryID' => 'queryID',
+        'automaticInsights' => '_automaticInsights',
         'page' => 'page',
         'nbHits' => 'nbHits',
         'nbPages' => 'nbPages',
@@ -156,6 +159,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
         'queryID' => 'setQueryID',
+        'automaticInsights' => 'setAutomaticInsights',
         'page' => 'setPage',
         'nbHits' => 'setNbHits',
         'nbPages' => 'setNbPages',
@@ -193,6 +197,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
         'queryID' => 'getQueryID',
+        'automaticInsights' => 'getAutomaticInsights',
         'page' => 'getPage',
         'nbHits' => 'getNbHits',
         'nbPages' => 'getNbPages',
@@ -285,6 +290,9 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         }
         if (isset($data['queryID'])) {
             $this->container['queryID'] = $data['queryID'];
+        }
+        if (isset($data['automaticInsights'])) {
+            $this->container['automaticInsights'] = $data['automaticInsights'];
         }
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
@@ -1008,6 +1016,30 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     public function setQueryID($queryID)
     {
         $this->container['queryID'] = $queryID;
+
+        return $this;
+    }
+
+    /**
+     * Gets automaticInsights.
+     *
+     * @return null|bool
+     */
+    public function getAutomaticInsights()
+    {
+        return $this->container['automaticInsights'] ?? null;
+    }
+
+    /**
+     * Sets automaticInsights.
+     *
+     * @param null|bool $automaticInsights whether automatic events collection is enabled for the application
+     *
+     * @return self
+     */
+    public function setAutomaticInsights($automaticInsights)
+    {
+        $this->container['automaticInsights'] = $automaticInsights;
 
         return $this;
     }

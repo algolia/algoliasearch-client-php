@@ -44,6 +44,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'serverUsed' => 'string',
         'userData' => 'object',
         'queryID' => 'string',
+        'automaticInsights' => 'bool',
         'page' => 'int',
         'nbHits' => 'int',
         'nbPages' => 'int',
@@ -83,6 +84,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'serverUsed' => null,
         'userData' => null,
         'queryID' => null,
+        'automaticInsights' => null,
         'page' => null,
         'nbHits' => null,
         'nbPages' => null,
@@ -123,6 +125,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'serverUsed' => 'serverUsed',
         'userData' => 'userData',
         'queryID' => 'queryID',
+        'automaticInsights' => '_automaticInsights',
         'page' => 'page',
         'nbHits' => 'nbHits',
         'nbPages' => 'nbPages',
@@ -162,6 +165,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'serverUsed' => 'setServerUsed',
         'userData' => 'setUserData',
         'queryID' => 'setQueryID',
+        'automaticInsights' => 'setAutomaticInsights',
         'page' => 'setPage',
         'nbHits' => 'setNbHits',
         'nbPages' => 'setNbPages',
@@ -201,6 +205,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'serverUsed' => 'getServerUsed',
         'userData' => 'getUserData',
         'queryID' => 'getQueryID',
+        'automaticInsights' => 'getAutomaticInsights',
         'page' => 'getPage',
         'nbHits' => 'getNbHits',
         'nbPages' => 'getNbPages',
@@ -295,6 +300,9 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['queryID'])) {
             $this->container['queryID'] = $data['queryID'];
+        }
+        if (isset($data['automaticInsights'])) {
+            $this->container['automaticInsights'] = $data['automaticInsights'];
         }
         if (isset($data['page'])) {
             $this->container['page'] = $data['page'];
@@ -1030,6 +1038,30 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setQueryID($queryID)
     {
         $this->container['queryID'] = $queryID;
+
+        return $this;
+    }
+
+    /**
+     * Gets automaticInsights.
+     *
+     * @return null|bool
+     */
+    public function getAutomaticInsights()
+    {
+        return $this->container['automaticInsights'] ?? null;
+    }
+
+    /**
+     * Sets automaticInsights.
+     *
+     * @param null|bool $automaticInsights whether automatic events collection is enabled for the application
+     *
+     * @return self
+     */
+    public function setAutomaticInsights($automaticInsights)
+    {
+        $this->container['automaticInsights'] = $automaticInsights;
 
         return $this;
     }

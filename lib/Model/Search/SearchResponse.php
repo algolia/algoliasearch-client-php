@@ -398,27 +398,15 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
         }
-        if (!isset($this->container['page']) || null === $this->container['page']) {
-            $invalidProperties[] = "'page' can't be null";
-        }
-        if ($this->container['page'] < 0) {
+        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
             $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
         }
 
-        if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
-            $invalidProperties[] = "'nbHits' can't be null";
-        }
-        if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
-            $invalidProperties[] = "'nbPages' can't be null";
-        }
-        if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
-            $invalidProperties[] = "'hitsPerPage' can't be null";
-        }
-        if ($this->container['hitsPerPage'] > 1000) {
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
         }
 
-        if ($this->container['hitsPerPage'] < 1) {
+        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
             $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
         }
 
@@ -1069,7 +1057,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets page.
      *
-     * @return int
+     * @return null|int
      */
     public function getPage()
     {
@@ -1079,13 +1067,13 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets page.
      *
-     * @param int $page page of search results to retrieve
+     * @param null|int $page page of search results to retrieve
      *
      * @return self
      */
     public function setPage($page)
     {
-        if ($page < 0) {
+        if (!is_null($page) && ($page < 0)) {
             throw new \InvalidArgumentException('invalid value for $page when calling SearchResponse., must be bigger than or equal to 0.');
         }
 
@@ -1097,7 +1085,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets nbHits.
      *
-     * @return int
+     * @return null|int
      */
     public function getNbHits()
     {
@@ -1107,7 +1095,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets nbHits.
      *
-     * @param int $nbHits number of results (hits)
+     * @param null|int $nbHits number of results (hits)
      *
      * @return self
      */
@@ -1121,7 +1109,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets nbPages.
      *
-     * @return int
+     * @return null|int
      */
     public function getNbPages()
     {
@@ -1131,7 +1119,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets nbPages.
      *
-     * @param int $nbPages number of pages of results
+     * @param null|int $nbPages number of pages of results
      *
      * @return self
      */
@@ -1145,7 +1133,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets hitsPerPage.
      *
-     * @return int
+     * @return null|int
      */
     public function getHitsPerPage()
     {
@@ -1155,16 +1143,16 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets hitsPerPage.
      *
-     * @param int $hitsPerPage number of hits per page
+     * @param null|int $hitsPerPage number of hits per page
      *
      * @return self
      */
     public function setHitsPerPage($hitsPerPage)
     {
-        if ($hitsPerPage > 1000) {
+        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResponse., must be smaller than or equal to 1000.');
         }
-        if ($hitsPerPage < 1) {
+        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
             throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchResponse., must be bigger than or equal to 1.');
         }
 

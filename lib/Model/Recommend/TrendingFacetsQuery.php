@@ -23,7 +23,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'string',
         'threshold' => 'float',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'facetName' => 'mixed',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
@@ -319,7 +319,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets queryParameters.
      *
-     * @return null|SearchParams
+     * @return null|RecommendSearchParams
      */
     public function getQueryParameters()
     {
@@ -329,7 +329,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets queryParameters.
      *
-     * @param null|SearchParams $queryParameters queryParameters
+     * @param null|RecommendSearchParams $queryParameters queryParameters
      *
      * @return self
      */

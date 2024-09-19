@@ -23,7 +23,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
         'indexName' => 'string',
         'threshold' => 'float',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel',
         'objectID' => 'string',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
@@ -338,7 +338,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Gets queryParameters.
      *
-     * @return null|SearchParams
+     * @return null|RecommendSearchParams
      */
     public function getQueryParameters()
     {
@@ -348,7 +348,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Sets queryParameters.
      *
-     * @param null|SearchParams $queryParameters queryParameters
+     * @param null|RecommendSearchParams $queryParameters queryParameters
      *
      * @return self
      */

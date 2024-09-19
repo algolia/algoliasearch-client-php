@@ -23,11 +23,11 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
         'indexName' => 'string',
         'threshold' => 'float',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'facetName' => 'string',
         'facetValue' => 'string',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingItemsModel',
-        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParamsObject',
+        'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
 
     /**
@@ -324,7 +324,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets queryParameters.
      *
-     * @return null|SearchParams
+     * @return null|RecommendSearchParams
      */
     public function getQueryParameters()
     {
@@ -334,7 +334,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets queryParameters.
      *
-     * @param null|SearchParams $queryParameters queryParameters
+     * @param null|RecommendSearchParams $queryParameters queryParameters
      *
      * @return self
      */
@@ -420,7 +420,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets fallbackParameters.
      *
-     * @return null|SearchParamsObject
+     * @return null|FallbackParams
      */
     public function getFallbackParameters()
     {
@@ -430,7 +430,7 @@ class TrendingItemsQuery extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets fallbackParameters.
      *
-     * @param null|SearchParamsObject $fallbackParameters fallbackParameters
+     * @param null|FallbackParams $fallbackParameters fallbackParameters
      *
      * @return self
      */

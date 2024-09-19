@@ -23,7 +23,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
         'indexName' => 'string',
         'threshold' => 'float',
         'maxRecommendations' => 'int',
-        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\SearchParams',
+        'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\FbtModel',
         'objectID' => 'string',
     ];
@@ -311,7 +311,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets queryParameters.
      *
-     * @return null|SearchParams
+     * @return null|RecommendSearchParams
      */
     public function getQueryParameters()
     {
@@ -321,7 +321,7 @@ class BoughtTogetherQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets queryParameters.
      *
-     * @param null|SearchParams $queryParameters queryParameters
+     * @param null|RecommendSearchParams $queryParameters queryParameters
      *
      * @return self
      */

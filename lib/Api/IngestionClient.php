@@ -12,7 +12,6 @@ use Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationUpdate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationCreate;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationSearch;
 use Algolia\AlgoliaSearch\Model\Ingestion\DestinationUpdate;
-use Algolia\AlgoliaSearch\Model\Ingestion\GenerateTransformationCodePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\PushTaskPayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\RunSourcePayload;
 use Algolia\AlgoliaSearch\Model\Ingestion\SourceCreate;
@@ -30,7 +29,6 @@ use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
 use Algolia\AlgoliaSearch\RetryStrategy\ClusterHosts;
-use Algolia\AlgoliaSearch\Support\Helpers;
 use GuzzleHttp\Psr7\Query;
 
 /**
@@ -877,42 +875,6 @@ class IngestionClient
         }
 
         return $this->sendRequest('PUT', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Generates code for the selected model based on the given prompt.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param array $generateTransformationCodePayload generateTransformationCodePayload (required)
-     *                                                 - $generateTransformationCodePayload['id'] => (string)  (required)
-     *                                                 - $generateTransformationCodePayload['systemPrompt'] => (string)
-     *                                                 - $generateTransformationCodePayload['userPrompt'] => (string)  (required)
-     *
-     * @see GenerateTransformationCodePayload
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\GenerateTransformationCodeResponse|array<string, mixed>
-     */
-    public function generateTransformationCode($generateTransformationCodePayload, $requestOptions = [])
-    {
-        // verify the required parameter 'generateTransformationCodePayload' is set
-        if (!isset($generateTransformationCodePayload)) {
-            throw new \InvalidArgumentException(
-                'Parameter `generateTransformationCodePayload` is required when calling `generateTransformationCode`.'
-            );
-        }
-
-        $resourcePath = '/1/transformations/models';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = $generateTransformationCodePayload;
-
-        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**
@@ -1793,28 +1755,6 @@ class IngestionClient
         if (null !== $order) {
             $queryParameters['order'] = $order;
         }
-
-        return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
-    }
-
-    /**
-     * Retrieves a list of existing LLM transformation helpers.
-     *
-     * Required API Key ACLs:
-     *  - addObject
-     *  - deleteIndex
-     *  - editSettings
-     *
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
-     *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\TransformationModels|array<string, mixed>
-     */
-    public function listTransformationModels($requestOptions = [])
-    {
-        $resourcePath = '/1/transformations/models';
-        $queryParameters = [];
-        $headers = [];
-        $httpBody = null;
 
         return $this->sendRequest('GET', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }

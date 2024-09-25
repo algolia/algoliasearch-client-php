@@ -1216,8 +1216,8 @@ class IngestionClient
      * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
      * @param int   $page           Page number of the paginated API response. (optional)
      * @param array $type           Type of authentication resource to retrieve. (optional)
-     * @param array $platform       Ecommerce platform for which to retrieve authentication resources. (optional)
-     * @param array $sort           Property by which to sort the list of authentication resources. (optional)
+     * @param array $platform       Ecommerce platform for which to retrieve authentications. (optional)
+     * @param array $sort           Property by which to sort the list of authentications. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1282,17 +1282,18 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
-     * @param int   $page             Page number of the paginated API response. (optional)
-     * @param array $type             Destination type. (optional)
-     * @param array $authenticationID Authentication ID used by destinations. (optional)
-     * @param array $sort             Property by which to sort the destinations. (optional)
-     * @param array $order            Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param int    $itemsPerPage     Number of items per page. (optional, default to 10)
+     * @param int    $page             Page number of the paginated API response. (optional)
+     * @param array  $type             Destination type. (optional)
+     * @param array  $authenticationID Authentication ID used by destinations. (optional)
+     * @param string $transformationID Get the list of destinations used by a transformation. (optional)
+     * @param array  $sort             Property by which to sort the destinations. (optional)
+     * @param array  $order            Sort order of the response, ascending or descending. (optional)
+     * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListDestinationsResponse|array<string, mixed>
      */
-    public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
+    public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $transformationID = null, $sort = null, $order = null, $requestOptions = [])
     {
         if (null !== $itemsPerPage && $itemsPerPage > 100) {
             throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listDestinations, must be smaller than or equal to 100.');
@@ -1330,6 +1331,13 @@ class IngestionClient
         }
         if (null !== $authenticationID) {
             $queryParameters['authenticationID'] = $authenticationID;
+        }
+
+        if (is_array($transformationID)) {
+            $transformationID = ObjectSerializer::serializeCollection($transformationID, 'form', true);
+        }
+        if (null !== $transformationID) {
+            $queryParameters['transformationID'] = $transformationID;
         }
 
         if (null !== $sort) {
@@ -1521,7 +1529,7 @@ class IngestionClient
      * @param int   $itemsPerPage     Number of items per page. (optional, default to 10)
      * @param int   $page             Page number of the paginated API response. (optional)
      * @param array $type             Source type. Some sources require authentication. (optional)
-     * @param array $authenticationID Authentication IDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication resource. (optional)
+     * @param array $authenticationID Authentication IDs of the sources to retrieve. &#39;none&#39; returns sources that doesn&#39;t have an authentication. (optional)
      * @param array $sort             Property by which to sort the list of sources. (optional)
      * @param array $order            Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1769,7 +1777,7 @@ class IngestionClient
      *
      * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
      * @param int   $page           Page number of the paginated API response. (optional)
-     * @param array $sort           Property by which to sort the list. (optional)
+     * @param array $sort           Property by which to sort the list of transformations. (optional)
      * @param array $order          Sort order of the response, ascending or descending. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *

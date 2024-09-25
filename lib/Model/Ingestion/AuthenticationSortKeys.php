@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description Property by which to sort the list of authentication resources.
+ * @description Property by which to sort the list of authentications.
  */
 class AuthenticationSortKeys
 {
@@ -18,7 +18,7 @@ class AuthenticationSortKeys
      */
     public const NAME = 'name';
 
-    public const AUTH_TYPE = 'auth_type';
+    public const TYPE = 'type';
 
     public const PLATFORM = 'platform';
 
@@ -35,7 +35,7 @@ class AuthenticationSortKeys
     {
         return [
             self::NAME,
-            self::AUTH_TYPE,
+            self::TYPE,
             self::PLATFORM,
             self::UPDATED_AT,
             self::CREATED_AT,

@@ -5,20 +5,18 @@
 namespace Algolia\AlgoliaSearch\Model\Ingestion;
 
 /**
- * SortKeys Class Doc Comment.
+ * TransformationSortKeys Class Doc Comment.
  *
  * @category Class
  *
- * @description Property by which to sort the list.
+ * @description Property by which to sort the list of transformations.
  */
-class SortKeys
+class TransformationSortKeys
 {
     /**
      * Possible values of this enum.
      */
     public const NAME = 'name';
-
-    public const TYPE = 'type';
 
     public const UPDATED_AT = 'updatedAt';
 
@@ -33,7 +31,6 @@ class SortKeys
     {
         return [
             self::NAME,
-            self::TYPE,
             self::UPDATED_AT,
             self::CREATED_AT,
         ];

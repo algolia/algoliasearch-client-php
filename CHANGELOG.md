@@ -1,3 +1,7 @@
+## [4.4.4](https://github.com/algolia/algoliasearch-client-php/compare/4.4.3...4.4.4)
+
+- [022131871](https://github.com/algolia/api-clients-automation/commit/022131871) fix(specs): correct query params for ingestion [skip-bc] ([#3830](https://github.com/algolia/api-clients-automation/pull/3830)) by [@millotp](https://github.com/millotp/)
+
 ## [4.4.3](https://github.com/algolia/algoliasearch-client-php/compare/4.4.2...4.4.3)
 
 - [1a73994ff](https://github.com/algolia/api-clients-automation/commit/1a73994ff) fix(specs): recommend remove unsupported query parameters [RECO-2345] [skip-bc] ([#3692](https://github.com/algolia/api-clients-automation/pull/3692)) by [@raed667](https://github.com/raed667/)

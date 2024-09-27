@@ -28,6 +28,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         'consequence' => '\Algolia\AlgoliaSearch\Model\Recommend\Consequence',
         'description' => 'string',
         'enabled' => 'bool',
+        'validity' => '\Algolia\AlgoliaSearch\Model\Recommend\TimeRange[]',
     ];
 
     /**
@@ -42,6 +43,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         'consequence' => null,
         'description' => null,
         'enabled' => null,
+        'validity' => null,
     ];
 
     /**
@@ -57,6 +59,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         'consequence' => 'consequence',
         'description' => 'description',
         'enabled' => 'enabled',
+        'validity' => 'validity',
     ];
 
     /**
@@ -71,6 +74,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         'consequence' => 'setConsequence',
         'description' => 'setDescription',
         'enabled' => 'setEnabled',
+        'validity' => 'setValidity',
     ];
 
     /**
@@ -85,6 +89,7 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         'consequence' => 'getConsequence',
         'description' => 'getDescription',
         'enabled' => 'getEnabled',
+        'validity' => 'getValidity',
     ];
 
     /**
@@ -118,6 +123,9 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
+        }
+        if (isset($data['validity'])) {
+            $this->container['validity'] = $data['validity'];
         }
     }
 
@@ -333,6 +341,30 @@ class RecommendRule extends AbstractModel implements ModelInterface, \ArrayAcces
     public function setEnabled($enabled)
     {
         $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets validity.
+     *
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\TimeRange[]
+     */
+    public function getValidity()
+    {
+        return $this->container['validity'] ?? null;
+    }
+
+    /**
+     * Sets validity.
+     *
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\TimeRange[] $validity time periods when the rule is active
+     *
+     * @return self
+     */
+    public function setValidity($validity)
+    {
+        $this->container['validity'] = $validity;
 
         return $this;
     }

@@ -110,6 +110,60 @@ class RecommendClient
     }
 
     /**
+     * Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
+     *
+     * Required API Key ACLs:
+     *  - editSettings
+     *
+     * @param string $indexName      Name of the index on which to perform the operation. (required)
+     * @param array  $model          [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array  $recommendRule  recommendRule (optional)
+     * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse|array<string, mixed>
+     */
+    public function batchRecommendRules($indexName, $model, $recommendRule = null, $requestOptions = [])
+    {
+        // verify the required parameter 'indexName' is set
+        if (!isset($indexName)) {
+            throw new \InvalidArgumentException(
+                'Parameter `indexName` is required when calling `batchRecommendRules`.'
+            );
+        }
+        // verify the required parameter 'model' is set
+        if (!isset($model)) {
+            throw new \InvalidArgumentException(
+                'Parameter `model` is required when calling `batchRecommendRules`.'
+            );
+        }
+
+        $resourcePath = '/1/indexes/{indexName}/{model}/recommend/rules/batch';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = isset($recommendRule) ? $recommendRule : [];
+
+        // path params
+        if (null !== $indexName) {
+            $resourcePath = str_replace(
+                '{indexName}',
+                ObjectSerializer::toPathValue($indexName),
+                $resourcePath
+            );
+        }
+
+        // path params
+        if (null !== $model) {
+            $resourcePath = str_replace(
+                '{model}',
+                ObjectSerializer::toPathValue($model),
+                $resourcePath
+            );
+        }
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
      * This method allow you to send requests to the Algolia REST API.
      *
      * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)

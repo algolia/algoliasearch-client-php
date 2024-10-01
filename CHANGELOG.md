@@ -1,3 +1,9 @@
+## [4.5.0](https://github.com/algolia/algoliasearch-client-php/compare/4.4.4...4.5.0)
+
+- [788483537](https://github.com/algolia/api-clients-automation/commit/788483537) chore(clients): add workflow to auto-close PR ([#3834](https://github.com/algolia/api-clients-automation/pull/3834)) by [@shortcuts](https://github.com/shortcuts/)
+- [e59dd41d5](https://github.com/algolia/api-clients-automation/commit/e59dd41d5) fix(specs): API key description will be obfuscated ([#3840](https://github.com/algolia/api-clients-automation/pull/3840)) by [@kai687](https://github.com/kai687/)
+- [dc28c0268](https://github.com/algolia/api-clients-automation/commit/dc28c0268) feat(specs): add recommend batch rules endpoint ([#3782](https://github.com/algolia/api-clients-automation/pull/3782)) by [@raed667](https://github.com/raed667/)
+
 ## [4.4.4](https://github.com/algolia/algoliasearch-client-php/compare/4.4.3...4.4.4)
 
 - [022131871](https://github.com/algolia/api-clients-automation/commit/022131871) fix(specs): correct query params for ingestion [skip-bc] ([#3830](https://github.com/algolia/api-clients-automation/pull/3830)) by [@millotp](https://github.com/millotp/)

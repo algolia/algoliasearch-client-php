@@ -744,8 +744,8 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -758,6 +758,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getSearchesNoClicks, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoClicks, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoClicks, must be bigger than or equal to 0.');
@@ -804,8 +811,8 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -818,6 +825,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getSearchesNoResults, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoResults, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoResults, must be bigger than or equal to 0.');
@@ -896,8 +910,8 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -910,6 +924,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopCountries`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopCountries, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopCountries, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopCountries, must be bigger than or equal to 0.');
@@ -957,8 +978,8 @@ class AnalyticsClient
      * @param string $search         Search query. (optional)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -971,6 +992,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFilterAttributes, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterAttributes, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterAttributes, must be bigger than or equal to 0.');
@@ -1023,8 +1051,8 @@ class AnalyticsClient
      * @param string $search         Search query. (optional)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1043,6 +1071,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFilterForAttribute, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterForAttribute, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterForAttribute, must be bigger than or equal to 0.');
@@ -1103,8 +1138,8 @@ class AnalyticsClient
      * @param string $search         Search query. (optional)
      * @param string $startDate      Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate        End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit          Number of items to return. (optional, default to 10)
-     * @param int    $offset         Position of the first item to return. (optional, default to 0)
+     * @param int    $limit          Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset         Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1117,6 +1152,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFiltersNoResults, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFiltersNoResults, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFiltersNoResults, must be bigger than or equal to 0.');
@@ -1170,8 +1212,8 @@ class AnalyticsClient
      * @param bool   $revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response. (optional, default to false)
      * @param string $startDate        Start date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param string $endDate          End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
-     * @param int    $limit            Number of items to return. (optional, default to 10)
-     * @param int    $offset           Position of the first item to return. (optional, default to 0)
+     * @param int    $limit            Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset           Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1184,6 +1226,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopHits`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopHits, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopHits, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopHits, must be bigger than or equal to 0.');
@@ -1246,8 +1295,8 @@ class AnalyticsClient
      * @param string $endDate          End date of the period to analyze, in &#x60;YYYY-MM-DD&#x60; format. (optional)
      * @param array  $orderBy          Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available. (optional)
      * @param array  $direction        Sorting direction of the results: ascending or descending. (optional)
-     * @param int    $limit            Number of items to return. (optional, default to 10)
-     * @param int    $offset           Position of the first item to return. (optional, default to 0)
+     * @param int    $limit            Number of items to return.  Combined with the &#x60;offset&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 10)
+     * @param int    $offset           Position of the first item to return.  Combined with the &#x60;limit&#x60; parameter, only the first 1000 items can be retrieved. (optional, default to 0)
      * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with &#x60;OR&#x60; and &#x60;AND&#x60;. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1260,6 +1309,13 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopSearches`.'
             );
+        }
+        if (null !== $limit && $limit > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopSearches, must be smaller than or equal to 1000.');
+        }
+
+        if (null !== $offset && $offset > 1000) {
+            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopSearches, must be smaller than or equal to 1000.');
         }
         if (null !== $offset && $offset < 0) {
             throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopSearches, must be bigger than or equal to 0.');

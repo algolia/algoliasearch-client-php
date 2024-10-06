@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * RenderingContent Class Doc Comment.
+ * Banners Class Doc Comment.
  *
  * @category Class
  *
- * @description Extra data that can be used in the search UI.  You can use this to control aspects of your search UI, such as, the order of facet names and values without changing your frontend code.
+ * @description banners defined in the merchandising studio for the given search.
  */
-class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class Banners extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,9 +22,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetOrdering' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering',
-        'redirect' => '\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL',
-        'widgets' => '\Algolia\AlgoliaSearch\Model\Recommend\Widgets',
+        'banners' => '\Algolia\AlgoliaSearch\Model\Recommend\Banner',
     ];
 
     /**
@@ -33,9 +31,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetOrdering' => null,
-        'redirect' => null,
-        'widgets' => null,
+        'banners' => null,
     ];
 
     /**
@@ -45,9 +41,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'facetOrdering' => 'facetOrdering',
-        'redirect' => 'redirect',
-        'widgets' => 'widgets',
+        'banners' => 'banners',
     ];
 
     /**
@@ -56,9 +50,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'facetOrdering' => 'setFacetOrdering',
-        'redirect' => 'setRedirect',
-        'widgets' => 'setWidgets',
+        'banners' => 'setBanners',
     ];
 
     /**
@@ -67,9 +59,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'facetOrdering' => 'getFacetOrdering',
-        'redirect' => 'getRedirect',
-        'widgets' => 'getWidgets',
+        'banners' => 'getBanners',
     ];
 
     /**
@@ -86,14 +76,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['facetOrdering'])) {
-            $this->container['facetOrdering'] = $data['facetOrdering'];
-        }
-        if (isset($data['redirect'])) {
-            $this->container['redirect'] = $data['redirect'];
-        }
-        if (isset($data['widgets'])) {
-            $this->container['widgets'] = $data['widgets'];
+        if (isset($data['banners'])) {
+            $this->container['banners'] = $data['banners'];
         }
     }
 
@@ -170,73 +154,25 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     }
 
     /**
-     * Gets facetOrdering.
+     * Gets banners.
      *
-     * @return null|FacetOrdering
+     * @return null|Banner
      */
-    public function getFacetOrdering()
+    public function getBanners()
     {
-        return $this->container['facetOrdering'] ?? null;
+        return $this->container['banners'] ?? null;
     }
 
     /**
-     * Sets facetOrdering.
+     * Sets banners.
      *
-     * @param null|FacetOrdering $facetOrdering facetOrdering
+     * @param null|Banner $banners banners
      *
      * @return self
      */
-    public function setFacetOrdering($facetOrdering)
+    public function setBanners($banners)
     {
-        $this->container['facetOrdering'] = $facetOrdering;
-
-        return $this;
-    }
-
-    /**
-     * Gets redirect.
-     *
-     * @return null|RedirectURL
-     */
-    public function getRedirect()
-    {
-        return $this->container['redirect'] ?? null;
-    }
-
-    /**
-     * Sets redirect.
-     *
-     * @param null|RedirectURL $redirect redirect
-     *
-     * @return self
-     */
-    public function setRedirect($redirect)
-    {
-        $this->container['redirect'] = $redirect;
-
-        return $this;
-    }
-
-    /**
-     * Gets widgets.
-     *
-     * @return null|Widgets
-     */
-    public function getWidgets()
-    {
-        return $this->container['widgets'] ?? null;
-    }
-
-    /**
-     * Sets widgets.
-     *
-     * @param null|Widgets $widgets widgets
-     *
-     * @return self
-     */
-    public function setWidgets($widgets)
-    {
-        $this->container['widgets'] = $widgets;
+        $this->container['banners'] = $banners;
 
         return $this;
     }

@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * RenderingContent Class Doc Comment.
+ * BannerImage Class Doc Comment.
  *
  * @category Class
  *
- * @description Extra data that can be used in the search UI.  You can use this to control aspects of your search UI, such as, the order of facet names and values without changing your frontend code.
+ * @description image of a search banner.
  */
-class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,9 +22,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelTypes = [
-        'facetOrdering' => '\Algolia\AlgoliaSearch\Model\Recommend\FacetOrdering',
-        'redirect' => '\Algolia\AlgoliaSearch\Model\Recommend\RedirectURL',
-        'widgets' => '\Algolia\AlgoliaSearch\Model\Recommend\Widgets',
+        'urls' => '\Algolia\AlgoliaSearch\Model\Recommend\BannerImageUrl',
+        'title' => 'string',
     ];
 
     /**
@@ -33,9 +32,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $modelFormats = [
-        'facetOrdering' => null,
-        'redirect' => null,
-        'widgets' => null,
+        'urls' => null,
+        'title' => null,
     ];
 
     /**
@@ -45,9 +43,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $attributeMap = [
-        'facetOrdering' => 'facetOrdering',
-        'redirect' => 'redirect',
-        'widgets' => 'widgets',
+        'urls' => 'urls',
+        'title' => 'title',
     ];
 
     /**
@@ -56,9 +53,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $setters = [
-        'facetOrdering' => 'setFacetOrdering',
-        'redirect' => 'setRedirect',
-        'widgets' => 'setWidgets',
+        'urls' => 'setUrls',
+        'title' => 'setTitle',
     ];
 
     /**
@@ -67,9 +63,8 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      * @var string[]
      */
     protected static $getters = [
-        'facetOrdering' => 'getFacetOrdering',
-        'redirect' => 'getRedirect',
-        'widgets' => 'getWidgets',
+        'urls' => 'getUrls',
+        'title' => 'getTitle',
     ];
 
     /**
@@ -86,14 +81,11 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['facetOrdering'])) {
-            $this->container['facetOrdering'] = $data['facetOrdering'];
+        if (isset($data['urls'])) {
+            $this->container['urls'] = $data['urls'];
         }
-        if (isset($data['redirect'])) {
-            $this->container['redirect'] = $data['redirect'];
-        }
-        if (isset($data['widgets'])) {
-            $this->container['widgets'] = $data['widgets'];
+        if (isset($data['title'])) {
+            $this->container['title'] = $data['title'];
         }
     }
 
@@ -170,73 +162,49 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     }
 
     /**
-     * Gets facetOrdering.
+     * Gets urls.
      *
-     * @return null|FacetOrdering
+     * @return null|BannerImageUrl
      */
-    public function getFacetOrdering()
+    public function getUrls()
     {
-        return $this->container['facetOrdering'] ?? null;
+        return $this->container['urls'] ?? null;
     }
 
     /**
-     * Sets facetOrdering.
+     * Sets urls.
      *
-     * @param null|FacetOrdering $facetOrdering facetOrdering
+     * @param null|BannerImageUrl $urls urls
      *
      * @return self
      */
-    public function setFacetOrdering($facetOrdering)
+    public function setUrls($urls)
     {
-        $this->container['facetOrdering'] = $facetOrdering;
+        $this->container['urls'] = $urls;
 
         return $this;
     }
 
     /**
-     * Gets redirect.
+     * Gets title.
      *
-     * @return null|RedirectURL
+     * @return null|string
      */
-    public function getRedirect()
+    public function getTitle()
     {
-        return $this->container['redirect'] ?? null;
+        return $this->container['title'] ?? null;
     }
 
     /**
-     * Sets redirect.
+     * Sets title.
      *
-     * @param null|RedirectURL $redirect redirect
+     * @param null|string $title title
      *
      * @return self
      */
-    public function setRedirect($redirect)
+    public function setTitle($title)
     {
-        $this->container['redirect'] = $redirect;
-
-        return $this;
-    }
-
-    /**
-     * Gets widgets.
-     *
-     * @return null|Widgets
-     */
-    public function getWidgets()
-    {
-        return $this->container['widgets'] ?? null;
-    }
-
-    /**
-     * Sets widgets.
-     *
-     * @param null|Widgets $widgets widgets
-     *
-     * @return self
-     */
-    public function setWidgets($widgets)
-    {
-        $this->container['widgets'] = $widgets;
+        $this->container['title'] = $title;
 
         return $this;
     }

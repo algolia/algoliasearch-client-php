@@ -24,6 +24,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     protected static $modelTypes = [
         'facetOrdering' => '\Algolia\AlgoliaSearch\Model\Search\FacetOrdering',
         'redirect' => '\Algolia\AlgoliaSearch\Model\Search\RedirectURL',
+        'widgets' => '\Algolia\AlgoliaSearch\Model\Search\Widgets',
     ];
 
     /**
@@ -34,6 +35,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     protected static $modelFormats = [
         'facetOrdering' => null,
         'redirect' => null,
+        'widgets' => null,
     ];
 
     /**
@@ -45,6 +47,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     protected static $attributeMap = [
         'facetOrdering' => 'facetOrdering',
         'redirect' => 'redirect',
+        'widgets' => 'widgets',
     ];
 
     /**
@@ -55,6 +58,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     protected static $setters = [
         'facetOrdering' => 'setFacetOrdering',
         'redirect' => 'setRedirect',
+        'widgets' => 'setWidgets',
     ];
 
     /**
@@ -65,6 +69,7 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     protected static $getters = [
         'facetOrdering' => 'getFacetOrdering',
         'redirect' => 'getRedirect',
+        'widgets' => 'getWidgets',
     ];
 
     /**
@@ -86,6 +91,9 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
         }
         if (isset($data['redirect'])) {
             $this->container['redirect'] = $data['redirect'];
+        }
+        if (isset($data['widgets'])) {
+            $this->container['widgets'] = $data['widgets'];
         }
     }
 
@@ -205,6 +213,30 @@ class RenderingContent extends AbstractModel implements ModelInterface, \ArrayAc
     public function setRedirect($redirect)
     {
         $this->container['redirect'] = $redirect;
+
+        return $this;
+    }
+
+    /**
+     * Gets widgets.
+     *
+     * @return null|Widgets
+     */
+    public function getWidgets()
+    {
+        return $this->container['widgets'] ?? null;
+    }
+
+    /**
+     * Sets widgets.
+     *
+     * @param null|Widgets $widgets widgets
+     *
+     * @return self
+     */
+    public function setWidgets($widgets)
+    {
+        $this->container['widgets'] = $widgets;
 
         return $this;
     }

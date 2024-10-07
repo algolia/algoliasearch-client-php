@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Which part of the search query the pattern should match:  - &#x60;startsWith&#x60;. The pattern must match the begginning of the query. - &#x60;endsWith&#x60;. The pattern must match the end of the query. - &#x60;is&#x60;. The pattern must match the query exactly. - &#x60;contains&#x60;. The pattern must match anywhere in the query.  Empty queries are only allowed as pattern with &#x60;anchoring: is&#x60;.
+ * @description Which part of the search query the pattern should match:  - &#x60;startsWith&#x60;. The pattern must match the beginning of the query. - &#x60;endsWith&#x60;. The pattern must match the end of the query. - &#x60;is&#x60;. The pattern must match the query exactly. - &#x60;contains&#x60;. The pattern must match anywhere in the query.  Empty queries are only allowed as patterns with &#x60;anchoring: is&#x60;.
  */
 class Anchoring
 {

@@ -251,7 +251,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets authenticationIDs.
      *
-     * @param null|string[] $authenticationIDs the authentications associated for the current transformation
+     * @param null|string[] $authenticationIDs the authentications associated with the current transformation
      *
      * @return self
      */

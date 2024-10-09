@@ -264,7 +264,7 @@ class MonitoringClient
     /**
      * Retrieves known incidents for the selected clusters.
      *
-     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Monitoring\IncidentsResponse|array<string, mixed>
@@ -298,7 +298,7 @@ class MonitoringClient
     /**
      * Retrieves the status of selected clusters.
      *
-     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Monitoring\StatusResponse|array<string, mixed>
@@ -349,7 +349,7 @@ class MonitoringClient
     /**
      * Retrieves average times for indexing operations for selected clusters.
      *
-     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Monitoring\IndexingTimeResponse|array<string, mixed>
@@ -383,7 +383,7 @@ class MonitoringClient
     /**
      * Retrieves the average latency for search requests for selected clusters.
      *
-     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Monitoring\LatencyResponse|array<string, mixed>
@@ -467,7 +467,7 @@ class MonitoringClient
     /**
      * Test whether clusters are reachable or not.
      *
-     * @param string $clusters       Subset of clusters, separated by comma. (required)
+     * @param string $clusters       Subset of clusters, separated by commas. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|array<string,array>

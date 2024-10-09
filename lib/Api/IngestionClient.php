@@ -317,7 +317,7 @@ class IngestionClient
      *                                    - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                    - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                    - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
-     *                                    - $transformationCreate['authenticationIDs'] => (array) The authentications associated for the current transformation.
+     *                                    - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
      *
      * @see TransformationCreate
      *
@@ -1352,7 +1352,7 @@ class IngestionClient
     }
 
     /**
-     * Retrieves a list of events for a task run, identified by it's ID.
+     * Retrieves a list of events for a task run, identified by its ID.
      *
      * Required API Key ACLs:
      *  - addObject
@@ -2592,7 +2592,7 @@ class IngestionClient
      *                                     - $transformationCreate['code'] => (string) The source code of the transformation. (required)
      *                                     - $transformationCreate['name'] => (string) The uniquely identified name of your transformation. (required)
      *                                     - $transformationCreate['description'] => (string) A descriptive name for your transformation of what it does.
-     *                                     - $transformationCreate['authenticationIDs'] => (array) The authentications associated for the current transformation.
+     *                                     - $transformationCreate['authenticationIDs'] => (array) The authentications associated with the current transformation.
      *
      * @see TransformationCreate
      *

@@ -263,17 +263,9 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         if (!isset($this->container['queryBody']) || null === $this->container['queryBody']) {
             $invalidProperties[] = "'queryBody' can't be null";
         }
-        if (mb_strlen($this->container['queryBody']) > 1000) {
-            $invalidProperties[] = "invalid value for 'queryBody', the character length must be smaller than or equal to 1000.";
-        }
-
         if (!isset($this->container['answer']) || null === $this->container['answer']) {
             $invalidProperties[] = "'answer' can't be null";
         }
-        if (mb_strlen($this->container['answer']) > 1000) {
-            $invalidProperties[] = "invalid value for 'answer', the character length must be smaller than or equal to 1000.";
-        }
-
         if (!isset($this->container['url']) || null === $this->container['url']) {
             $invalidProperties[] = "'url' can't be null";
         }
@@ -398,10 +390,6 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      */
     public function setQueryBody($queryBody)
     {
-        if (mb_strlen($queryBody) > 1000) {
-            throw new \InvalidArgumentException('invalid length for $queryBody when calling Log., must be smaller than or equal to 1000.');
-        }
-
         $this->container['queryBody'] = $queryBody;
 
         return $this;
@@ -426,10 +414,6 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
      */
     public function setAnswer($answer)
     {
-        if (mb_strlen($answer) > 1000) {
-            throw new \InvalidArgumentException('invalid length for $answer when calling Log., must be smaller than or equal to 1000.');
-        }
-
         $this->container['answer'] = $answer;
 
         return $this;

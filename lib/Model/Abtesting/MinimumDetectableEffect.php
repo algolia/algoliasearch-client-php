@@ -147,17 +147,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['size']) && ($this->container['size'] > 1)) {
-            $invalidProperties[] = "invalid value for 'size', must be smaller than or equal to 1.";
-        }
-
-        if (isset($this->container['size']) && ($this->container['size'] < 0)) {
-            $invalidProperties[] = "invalid value for 'size', must be bigger than or equal to 0.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -190,13 +180,6 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function setSize($size)
     {
-        if (!is_null($size) && ($size > 1)) {
-            throw new \InvalidArgumentException('invalid value for $size when calling MinimumDetectableEffect., must be smaller than or equal to 1.');
-        }
-        if (!is_null($size) && ($size < 0)) {
-            throw new \InvalidArgumentException('invalid value for $size when calling MinimumDetectableEffect., must be bigger than or equal to 0.');
-        }
-
         $this->container['size'] = $size;
 
         return $this;

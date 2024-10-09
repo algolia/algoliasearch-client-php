@@ -169,14 +169,6 @@ class ScheduleABTestsRequest extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['variants']) || null === $this->container['variants']) {
             $invalidProperties[] = "'variants' can't be null";
         }
-        if (count($this->container['variants']) > 2) {
-            $invalidProperties[] = "invalid value for 'variants', number of items must be less than or equal to 2.";
-        }
-
-        if (count($this->container['variants']) < 2) {
-            $invalidProperties[] = "invalid value for 'variants', number of items must be greater than or equal to 2.";
-        }
-
         if (!isset($this->container['scheduledAt']) || null === $this->container['scheduledAt']) {
             $invalidProperties[] = "'scheduledAt' can't be null";
         }
@@ -241,12 +233,6 @@ class ScheduleABTestsRequest extends AbstractModel implements ModelInterface, \A
      */
     public function setVariants($variants)
     {
-        if (count($variants) > 2) {
-            throw new \InvalidArgumentException('invalid value for $variants when calling ScheduleABTestsRequest., number of items must be less than or equal to 2.');
-        }
-        if (count($variants) < 2) {
-            throw new \InvalidArgumentException('invalid length for $variants when calling ScheduleABTestsRequest., number of items must be greater than or equal to 2.');
-        }
         $this->container['variants'] = $variants;
 
         return $this;

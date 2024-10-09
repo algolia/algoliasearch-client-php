@@ -169,10 +169,6 @@ class SearchDictionaryEntriesResponse extends AbstractModel implements ModelInte
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if ($this->container['page'] < 0) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
@@ -237,10 +233,6 @@ class SearchDictionaryEntriesResponse extends AbstractModel implements ModelInte
      */
     public function setPage($page)
     {
-        if ($page < 0) {
-            throw new \InvalidArgumentException('invalid value for $page when calling SearchDictionaryEntriesResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;

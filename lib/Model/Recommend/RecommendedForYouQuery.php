@@ -185,22 +185,6 @@ class RecommendedForYouQuery extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['threshold']) || null === $this->container['threshold']) {
             $invalidProperties[] = "'threshold' can't be null";
         }
-        if ($this->container['threshold'] > 100) {
-            $invalidProperties[] = "invalid value for 'threshold', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['threshold'] < 0) {
-            $invalidProperties[] = "invalid value for 'threshold', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['maxRecommendations']) && ($this->container['maxRecommendations'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'maxRecommendations', must be smaller than or equal to 1000.";
-        }
-
-        if (isset($this->container['maxRecommendations']) && ($this->container['maxRecommendations'] < 1)) {
-            $invalidProperties[] = "invalid value for 'maxRecommendations', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['model']) || null === $this->container['model']) {
             $invalidProperties[] = "'model' can't be null";
         }
@@ -262,13 +246,6 @@ class RecommendedForYouQuery extends AbstractModel implements ModelInterface, \A
      */
     public function setThreshold($threshold)
     {
-        if ($threshold > 100) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling RecommendedForYouQuery., must be smaller than or equal to 100.');
-        }
-        if ($threshold < 0) {
-            throw new \InvalidArgumentException('invalid value for $threshold when calling RecommendedForYouQuery., must be bigger than or equal to 0.');
-        }
-
         $this->container['threshold'] = $threshold;
 
         return $this;
@@ -293,13 +270,6 @@ class RecommendedForYouQuery extends AbstractModel implements ModelInterface, \A
      */
     public function setMaxRecommendations($maxRecommendations)
     {
-        if (!is_null($maxRecommendations) && ($maxRecommendations > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling RecommendedForYouQuery., must be smaller than or equal to 1000.');
-        }
-        if (!is_null($maxRecommendations) && ($maxRecommendations < 1)) {
-            throw new \InvalidArgumentException('invalid value for $maxRecommendations when calling RecommendedForYouQuery., must be bigger than or equal to 1.');
-        }
-
         $this->container['maxRecommendations'] = $maxRecommendations;
 
         return $this;

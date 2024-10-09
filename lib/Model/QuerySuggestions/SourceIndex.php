@@ -200,13 +200,6 @@ class SourceIndex extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
-        if (isset($this->container['minHits']) && ($this->container['minHits'] < 0)) {
-            $invalidProperties[] = "invalid value for 'minHits', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['minLetters']) && ($this->container['minLetters'] < 0)) {
-            $invalidProperties[] = "invalid value for 'minLetters', must be bigger than or equal to 0.";
-        }
 
         return $invalidProperties;
     }
@@ -337,10 +330,6 @@ class SourceIndex extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setMinHits($minHits)
     {
-        if (!is_null($minHits) && ($minHits < 0)) {
-            throw new \InvalidArgumentException('invalid value for $minHits when calling SourceIndex., must be bigger than or equal to 0.');
-        }
-
         $this->container['minHits'] = $minHits;
 
         return $this;
@@ -365,10 +354,6 @@ class SourceIndex extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setMinLetters($minLetters)
     {
-        if (!is_null($minLetters) && ($minLetters < 0)) {
-            throw new \InvalidArgumentException('invalid value for $minLetters when calling SourceIndex., must be bigger than or equal to 0.');
-        }
-
         $this->container['minLetters'] = $minLetters;
 
         return $this;

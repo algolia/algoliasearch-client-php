@@ -147,13 +147,7 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['context']) && !preg_match('/[A-Za-z0-9_-]+/', $this->container['context'])) {
-            $invalidProperties[] = "invalid value for 'context', must be conform to the pattern /[A-Za-z0-9_-]+/.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -210,10 +204,6 @@ class Condition extends AbstractModel implements ModelInterface, \ArrayAccess, \
      */
     public function setContext($context)
     {
-        if (!is_null($context) && (!preg_match('/[A-Za-z0-9_-]+/', $context))) {
-            throw new \InvalidArgumentException("invalid value for {$context} when calling Condition., must conform to the pattern /[A-Za-z0-9_-]+/.");
-        }
-
         $this->container['context'] = $context;
 
         return $this;

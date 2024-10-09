@@ -166,24 +166,12 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
         if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if ($this->container['conversionCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'conversionCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['dates']) || null === $this->container['dates']) {
             $invalidProperties[] = "'dates' can't be null";
         }
@@ -221,13 +209,6 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
      */
     public function setRate($rate)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversionRateResponse., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetConversionRateResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['rate'] = $rate;
 
         return $this;
@@ -276,10 +257,6 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
      */
     public function setConversionCount($conversionCount)
     {
-        if ($conversionCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionCount when calling GetConversionRateResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['conversionCount'] = $conversionCount;
 
         return $this;

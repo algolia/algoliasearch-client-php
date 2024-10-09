@@ -280,15 +280,6 @@ class InsightsClient
                 'Parameter `userToken` is required when calling `deleteUserToken`.'
             );
         }
-        if (strlen($userToken) > 129) {
-            throw new \InvalidArgumentException('invalid length for "$userToken" when calling InsightsClient.deleteUserToken, must be smaller than or equal to 129.');
-        }
-        if (strlen($userToken) < 1) {
-            throw new \InvalidArgumentException('invalid length for "$userToken" when calling InsightsClient.deleteUserToken, must be bigger than or equal to 1.');
-        }
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
-            throw new \InvalidArgumentException('invalid value for "userToken" when calling InsightsClient.deleteUserToken, must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.');
-        }
 
         $resourcePath = '/1/usertokens/{userToken}';
         $queryParameters = [];

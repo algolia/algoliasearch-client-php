@@ -1225,17 +1225,6 @@ class IngestionClient
      */
     public function listAuthentications($itemsPerPage = null, $page = null, $type = null, $platform = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listAuthentications, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listAuthentications, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listAuthentications, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/authentications';
         $queryParameters = [];
         $headers = [];
@@ -1295,17 +1284,6 @@ class IngestionClient
      */
     public function listDestinations($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $transformationID = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listDestinations, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listDestinations, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listDestinations, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/destinations';
         $queryParameters = [];
         $headers = [];
@@ -1380,16 +1358,6 @@ class IngestionClient
                 'Parameter `runID` is required when calling `listEvents`.'
             );
         }
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listEvents, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listEvents, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listEvents, must be bigger than or equal to 1.');
-        }
 
         $resourcePath = '/1/runs/{runID}/events';
         $queryParameters = [];
@@ -1463,17 +1431,6 @@ class IngestionClient
      */
     public function listRuns($itemsPerPage = null, $page = null, $status = null, $type = null, $taskID = null, $sort = null, $order = null, $startDate = null, $endDate = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listRuns, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listRuns, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listRuns, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/runs';
         $queryParameters = [];
         $headers = [];
@@ -1538,17 +1495,6 @@ class IngestionClient
      */
     public function listSources($itemsPerPage = null, $page = null, $type = null, $authenticationID = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listSources, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listSources, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listSources, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/sources';
         $queryParameters = [];
         $headers = [];
@@ -1610,17 +1556,6 @@ class IngestionClient
      */
     public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasks, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasks, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTasks, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/2/tasks';
         $queryParameters = [];
         $headers = [];
@@ -1700,17 +1635,6 @@ class IngestionClient
      */
     public function listTasksV1($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasksV1, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTasksV1, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTasksV1, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/tasks';
         $queryParameters = [];
         $headers = [];
@@ -1785,17 +1709,6 @@ class IngestionClient
      */
     public function listTransformations($itemsPerPage = null, $page = null, $sort = null, $order = null, $requestOptions = [])
     {
-        if (null !== $itemsPerPage && $itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTransformations, must be smaller than or equal to 100.');
-        }
-        if (null !== $itemsPerPage && $itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for "$itemsPerPage" when calling IngestionClient.listTransformations, must be bigger than or equal to 1.');
-        }
-
-        if (null !== $page && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling IngestionClient.listTransformations, must be bigger than or equal to 1.');
-        }
-
         $resourcePath = '/1/transformations';
         $queryParameters = [];
         $headers = [];

@@ -192,18 +192,6 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
         if (!isset($this->container['eventName']) || null === $this->container['eventName']) {
             $invalidProperties[] = "'eventName' can't be null";
         }
-        if (mb_strlen($this->container['eventName']) > 64) {
-            $invalidProperties[] = "invalid value for 'eventName', the character length must be smaller than or equal to 64.";
-        }
-
-        if (mb_strlen($this->container['eventName']) < 1) {
-            $invalidProperties[] = "invalid value for 'eventName', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $this->container['eventName'])) {
-            $invalidProperties[] = "invalid value for 'eventName', must be conform to the pattern /[\\x20-\\x7E]{1,64}/.";
-        }
-
         if (!isset($this->container['eventType']) || null === $this->container['eventType']) {
             $invalidProperties[] = "'eventType' can't be null";
         }
@@ -213,39 +201,8 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
         if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if (count($this->container['objectIDs']) > 20) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 20.";
-        }
-
-        if (count($this->container['objectIDs']) < 1) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be greater than or equal to 1.";
-        }
-
         if (!isset($this->container['userToken']) || null === $this->container['userToken']) {
             $invalidProperties[] = "'userToken' can't be null";
-        }
-        if (mb_strlen($this->container['userToken']) > 129) {
-            $invalidProperties[] = "invalid value for 'userToken', the character length must be smaller than or equal to 129.";
-        }
-
-        if (mb_strlen($this->container['userToken']) < 1) {
-            $invalidProperties[] = "invalid value for 'userToken', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['userToken'])) {
-            $invalidProperties[] = "invalid value for 'userToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
-        }
-
-        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) > 129)) {
-            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be smaller than or equal to 129.";
-        }
-
-        if (isset($this->container['authenticatedUserToken']) && (mb_strlen($this->container['authenticatedUserToken']) < 1)) {
-            $invalidProperties[] = "invalid value for 'authenticatedUserToken', the character length must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['authenticatedUserToken']) && !preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $this->container['authenticatedUserToken'])) {
-            $invalidProperties[] = "invalid value for 'authenticatedUserToken', must be conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.";
         }
 
         return $invalidProperties;
@@ -281,16 +238,6 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     public function setEventName($eventName)
     {
-        if (mb_strlen($eventName) > 64) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ViewedObjectIDs., must be smaller than or equal to 64.');
-        }
-        if (mb_strlen($eventName) < 1) {
-            throw new \InvalidArgumentException('invalid length for $eventName when calling ViewedObjectIDs., must be bigger than or equal to 1.');
-        }
-        if (!preg_match('/[\\x20-\\x7E]{1,64}/', $eventName)) {
-            throw new \InvalidArgumentException("invalid value for {$eventName} when calling ViewedObjectIDs., must conform to the pattern /[\\x20-\\x7E]{1,64}/.");
-        }
-
         $this->container['eventName'] = $eventName;
 
         return $this;
@@ -363,12 +310,6 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     public function setObjectIDs($objectIDs)
     {
-        if (count($objectIDs) > 20) {
-            throw new \InvalidArgumentException('invalid value for $objectIDs when calling ViewedObjectIDs., number of items must be less than or equal to 20.');
-        }
-        if (count($objectIDs) < 1) {
-            throw new \InvalidArgumentException('invalid length for $objectIDs when calling ViewedObjectIDs., number of items must be greater than or equal to 1.');
-        }
         $this->container['objectIDs'] = $objectIDs;
 
         return $this;
@@ -393,16 +334,6 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     public function setUserToken($userToken)
     {
-        if (mb_strlen($userToken) > 129) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ViewedObjectIDs., must be smaller than or equal to 129.');
-        }
-        if (mb_strlen($userToken) < 1) {
-            throw new \InvalidArgumentException('invalid length for $userToken when calling ViewedObjectIDs., must be bigger than or equal to 1.');
-        }
-        if (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $userToken)) {
-            throw new \InvalidArgumentException("invalid value for {$userToken} when calling ViewedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
-        }
-
         $this->container['userToken'] = $userToken;
 
         return $this;
@@ -427,16 +358,6 @@ class ViewedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAcc
      */
     public function setAuthenticatedUserToken($authenticatedUserToken)
     {
-        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) > 129)) {
-            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling ViewedObjectIDs., must be smaller than or equal to 129.');
-        }
-        if (!is_null($authenticatedUserToken) && (mb_strlen($authenticatedUserToken) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $authenticatedUserToken when calling ViewedObjectIDs., must be bigger than or equal to 1.');
-        }
-        if (!is_null($authenticatedUserToken) && (!preg_match('/[a-zA-Z0-9_=\\/+-]{1,129}/', $authenticatedUserToken))) {
-            throw new \InvalidArgumentException("invalid value for {$authenticatedUserToken} when calling ViewedObjectIDs., must conform to the pattern /[a-zA-Z0-9_=\\/+-]{1,129}/.");
-        }
-
         $this->container['authenticatedUserToken'] = $authenticatedUserToken;
 
         return $this;

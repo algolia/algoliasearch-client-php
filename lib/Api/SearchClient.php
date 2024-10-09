@@ -293,10 +293,6 @@ class SearchClient
                 'Parameter `xAlgoliaUserID` is required when calling `assignUserId`.'
             );
         }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
-            throw new \InvalidArgumentException('invalid value for "xAlgoliaUserID" when calling SearchClient.assignUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
-        }
-
         // verify the required parameter 'assignUserIdParams' is set
         if (!isset($assignUserIdParams)) {
             throw new \InvalidArgumentException(
@@ -384,10 +380,6 @@ class SearchClient
                 'Parameter `xAlgoliaUserID` is required when calling `batchAssignUserIds`.'
             );
         }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $xAlgoliaUserID)) {
-            throw new \InvalidArgumentException('invalid value for "xAlgoliaUserID" when calling SearchClient.batchAssignUserIds, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
-        }
-
         // verify the required parameter 'batchAssignUserIdsParams' is set
         if (!isset($batchAssignUserIdsParams)) {
             throw new \InvalidArgumentException(
@@ -1236,10 +1228,6 @@ class SearchClient
      */
     public function getLogs($offset = null, $length = null, $indexName = null, $type = null, $requestOptions = [])
     {
-        if (null !== $length && $length > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$length" when calling SearchClient.getLogs, must be smaller than or equal to 1000.');
-        }
-
         $resourcePath = '/1/logs';
         $queryParameters = [];
         $headers = [];
@@ -1609,9 +1597,6 @@ class SearchClient
                 'Parameter `userID` is required when calling `getUserId`.'
             );
         }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException('invalid value for "userID" when calling SearchClient.getUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
-        }
 
         $resourcePath = '/1/clusters/mapping/{userID}';
         $queryParameters = [];
@@ -1709,10 +1694,6 @@ class SearchClient
      */
     public function listIndices($page = null, $hitsPerPage = null, $requestOptions = [])
     {
-        if (null !== $page && $page < 0) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling SearchClient.listIndices, must be bigger than or equal to 0.');
-        }
-
         $resourcePath = '/1/indexes';
         $queryParameters = [];
         $headers = [];
@@ -1743,10 +1724,6 @@ class SearchClient
      */
     public function listUserIds($page = null, $hitsPerPage = null, $requestOptions = [])
     {
-        if (null !== $page && $page < 0) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling SearchClient.listUserIds, must be bigger than or equal to 0.');
-        }
-
         $resourcePath = '/1/clusters/mapping';
         $queryParameters = [];
         $headers = [];
@@ -1925,9 +1902,6 @@ class SearchClient
             throw new \InvalidArgumentException(
                 'Parameter `userID` is required when calling `removeUserId`.'
             );
-        }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException('invalid value for "userID" when calling SearchClient.removeUserId, must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.');
         }
 
         $resourcePath = '/1/clusters/mapping/{userID}';

@@ -161,21 +161,7 @@ class ObjectDataAfterSearch extends AbstractModel implements ModelInterface, \Ar
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['queryID']) && (mb_strlen($this->container['queryID']) > 32)) {
-            $invalidProperties[] = "invalid value for 'queryID', the character length must be smaller than or equal to 32.";
-        }
-
-        if (isset($this->container['queryID']) && (mb_strlen($this->container['queryID']) < 32)) {
-            $invalidProperties[] = "invalid value for 'queryID', the character length must be bigger than or equal to 32.";
-        }
-
-        if (isset($this->container['queryID']) && !preg_match('/[0-9a-f]{32}/', $this->container['queryID'])) {
-            $invalidProperties[] = "invalid value for 'queryID', must be conform to the pattern /[0-9a-f]{32}/.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -208,16 +194,6 @@ class ObjectDataAfterSearch extends AbstractModel implements ModelInterface, \Ar
      */
     public function setQueryID($queryID)
     {
-        if (!is_null($queryID) && (mb_strlen($queryID) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $queryID when calling ObjectDataAfterSearch., must be smaller than or equal to 32.');
-        }
-        if (!is_null($queryID) && (mb_strlen($queryID) < 32)) {
-            throw new \InvalidArgumentException('invalid length for $queryID when calling ObjectDataAfterSearch., must be bigger than or equal to 32.');
-        }
-        if (!is_null($queryID) && (!preg_match('/[0-9a-f]{32}/', $queryID))) {
-            throw new \InvalidArgumentException("invalid value for {$queryID} when calling ObjectDataAfterSearch., must conform to the pattern /[0-9a-f]{32}/.");
-        }
-
         $this->container['queryID'] = $queryID;
 
         return $this;

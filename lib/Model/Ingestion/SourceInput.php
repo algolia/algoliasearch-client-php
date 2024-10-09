@@ -356,14 +356,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (!isset($this->container['storeHash']) || null === $this->container['storeHash']) {
             $invalidProperties[] = "'storeHash' can't be null";
         }
-        if (isset($this->container['delimiter']) && (mb_strlen($this->container['delimiter']) > 1)) {
-            $invalidProperties[] = "invalid value for 'delimiter', the character length must be smaller than or equal to 1.";
-        }
-
-        if (isset($this->container['delimiter']) && (mb_strlen($this->container['delimiter']) < 1)) {
-            $invalidProperties[] = "invalid value for 'delimiter', the character length must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['projectID']) || null === $this->container['projectID']) {
             $invalidProperties[] = "'projectID' can't be null";
         }
@@ -734,13 +726,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setDelimiter($delimiter)
     {
-        if (!is_null($delimiter) && (mb_strlen($delimiter) > 1)) {
-            throw new \InvalidArgumentException('invalid length for $delimiter when calling SourceInput., must be smaller than or equal to 1.');
-        }
-        if (!is_null($delimiter) && (mb_strlen($delimiter) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $delimiter when calling SourceInput., must be bigger than or equal to 1.');
-        }
-
         $this->container['delimiter'] = $delimiter;
 
         return $this;

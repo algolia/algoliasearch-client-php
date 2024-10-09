@@ -236,14 +236,6 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (!isset($this->container['enabled']) || null === $this->container['enabled']) {
             $invalidProperties[] = "'enabled' can't be null";
         }
-        if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] > 100)) {
-            $invalidProperties[] = "invalid value for 'failureThreshold', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] < 0)) {
-            $invalidProperties[] = "invalid value for 'failureThreshold', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['action']) || null === $this->container['action']) {
             $invalidProperties[] = "'action' can't be null";
         }
@@ -428,13 +420,6 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      */
     public function setFailureThreshold($failureThreshold)
     {
-        if (!is_null($failureThreshold) && ($failureThreshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskV1., must be smaller than or equal to 100.');
-        }
-        if (!is_null($failureThreshold) && ($failureThreshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskV1., must be bigger than or equal to 0.');
-        }
-
         $this->container['failureThreshold'] = $failureThreshold;
 
         return $this;

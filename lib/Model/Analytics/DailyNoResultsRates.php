@@ -175,13 +175,6 @@ class DailyNoResultsRates extends AbstractModel implements ModelInterface, \Arra
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
 
         return $invalidProperties;
     }
@@ -288,13 +281,6 @@ class DailyNoResultsRates extends AbstractModel implements ModelInterface, \Arra
      */
     public function setRate($rate)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling DailyNoResultsRates., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling DailyNoResultsRates., must be bigger than or equal to 0.');
-        }
-
         $this->container['rate'] = $rate;
 
         return $this;

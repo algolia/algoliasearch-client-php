@@ -158,17 +158,9 @@ class DailyAverageClicks extends AbstractModel implements ModelInterface, \Array
         if (!isset($this->container['average']) || null === $this->container['average']) {
             $invalidProperties[] = "'average' can't be null";
         }
-        if ($this->container['average'] < 1) {
-            $invalidProperties[] = "invalid value for 'average', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if ($this->container['clickCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['date']) || null === $this->container['date']) {
             $invalidProperties[] = "'date' can't be null";
         }
@@ -206,10 +198,6 @@ class DailyAverageClicks extends AbstractModel implements ModelInterface, \Array
      */
     public function setAverage($average)
     {
-        if ($average < 1) {
-            throw new \InvalidArgumentException('invalid value for $average when calling DailyAverageClicks., must be bigger than or equal to 1.');
-        }
-
         $this->container['average'] = $average;
 
         return $this;
@@ -234,10 +222,6 @@ class DailyAverageClicks extends AbstractModel implements ModelInterface, \Array
      */
     public function setClickCount($clickCount)
     {
-        if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling DailyAverageClicks., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickCount'] = $clickCount;
 
         return $this;

@@ -166,24 +166,12 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['count']) || null === $this->container['count']) {
             $invalidProperties[] = "'count' can't be null";
         }
         if (!isset($this->container['noClickCount']) || null === $this->container['noClickCount']) {
             $invalidProperties[] = "'noClickCount' can't be null";
         }
-        if ($this->container['noClickCount'] < 1) {
-            $invalidProperties[] = "invalid value for 'noClickCount', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['dates']) || null === $this->container['dates']) {
             $invalidProperties[] = "'dates' can't be null";
         }
@@ -221,13 +209,6 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
      */
     public function setRate($rate)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoClickRateResponse., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetNoClickRateResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['rate'] = $rate;
 
         return $this;
@@ -276,10 +257,6 @@ class GetNoClickRateResponse extends AbstractModel implements ModelInterface, \A
      */
     public function setNoClickCount($noClickCount)
     {
-        if ($noClickCount < 1) {
-            throw new \InvalidArgumentException('invalid value for $noClickCount when calling GetNoClickRateResponse., must be bigger than or equal to 1.');
-        }
-
         $this->container['noClickCount'] = $noClickCount;
 
         return $this;

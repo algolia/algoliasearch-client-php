@@ -142,13 +142,6 @@ class InsightsEvents extends AbstractModel implements ModelInterface, \ArrayAcce
         if (!isset($this->container['events']) || null === $this->container['events']) {
             $invalidProperties[] = "'events' can't be null";
         }
-        if (count($this->container['events']) > 1000) {
-            $invalidProperties[] = "invalid value for 'events', number of items must be less than or equal to 1000.";
-        }
-
-        if (count($this->container['events']) < 1) {
-            $invalidProperties[] = "invalid value for 'events', number of items must be greater than or equal to 1.";
-        }
 
         return $invalidProperties;
     }
@@ -183,12 +176,6 @@ class InsightsEvents extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setEvents($events)
     {
-        if (count($events) > 1000) {
-            throw new \InvalidArgumentException('invalid value for $events when calling InsightsEvents., number of items must be less than or equal to 1000.');
-        }
-        if (count($events) < 1) {
-            throw new \InvalidArgumentException('invalid length for $events when calling InsightsEvents., number of items must be greater than or equal to 1.');
-        }
         $this->container['events'] = $events;
 
         return $this;

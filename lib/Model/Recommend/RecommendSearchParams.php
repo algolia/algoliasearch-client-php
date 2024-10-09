@@ -811,41 +811,7 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['minimumAroundRadius']) && ($this->container['minimumAroundRadius'] < 1)) {
-            $invalidProperties[] = "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['personalizationImpact']) && ($this->container['personalizationImpact'] > 100)) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['personalizationImpact']) && ($this->container['personalizationImpact'] < 0)) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['paginationLimitedTo']) && ($this->container['paginationLimitedTo'] > 20000)) {
-            $invalidProperties[] = "invalid value for 'paginationLimitedTo', must be smaller than or equal to 20000.";
-        }
-
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] > 7)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be smaller than or equal to 7.";
-        }
-
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] < 1)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
-            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['maxValuesPerFacet']) && ($this->container['maxValuesPerFacet'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'maxValuesPerFacet', must be smaller than or equal to 1000.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -1214,10 +1180,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
-        if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling RecommendSearchParams., must be bigger than or equal to 1.');
-        }
-
         $this->container['minimumAroundRadius'] = $minimumAroundRadius;
 
         return $this;
@@ -1338,13 +1300,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setPersonalizationImpact($personalizationImpact)
     {
-        if (!is_null($personalizationImpact) && ($personalizationImpact > 100)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling RecommendSearchParams., must be smaller than or equal to 100.');
-        }
-        if (!is_null($personalizationImpact) && ($personalizationImpact < 0)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling RecommendSearchParams., must be bigger than or equal to 0.');
-        }
-
         $this->container['personalizationImpact'] = $personalizationImpact;
 
         return $this;
@@ -1633,10 +1588,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setPaginationLimitedTo($paginationLimitedTo)
     {
-        if (!is_null($paginationLimitedTo) && ($paginationLimitedTo > 20000)) {
-            throw new \InvalidArgumentException('invalid value for $paginationLimitedTo when calling RecommendSearchParams., must be smaller than or equal to 20000.');
-        }
-
         $this->container['paginationLimitedTo'] = $paginationLimitedTo;
 
         return $this;
@@ -2717,13 +2668,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setMinProximity($minProximity)
     {
-        if (!is_null($minProximity) && ($minProximity > 7)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling RecommendSearchParams., must be smaller than or equal to 7.');
-        }
-        if (!is_null($minProximity) && ($minProximity < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling RecommendSearchParams., must be bigger than or equal to 1.');
-        }
-
         $this->container['minProximity'] = $minProximity;
 
         return $this;
@@ -2772,10 +2716,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling RecommendSearchParams., must be smaller than or equal to 100.');
-        }
-
         $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
@@ -2800,10 +2740,6 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
      */
     public function setMaxValuesPerFacet($maxValuesPerFacet)
     {
-        if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling RecommendSearchParams., must be smaller than or equal to 1000.');
-        }
-
         $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
 
         return $this;

@@ -166,21 +166,9 @@ class DailyClickThroughRates extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if ($this->container['clickCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
@@ -221,13 +209,6 @@ class DailyClickThroughRates extends AbstractModel implements ModelInterface, \A
      */
     public function setRate($rate)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling DailyClickThroughRates., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling DailyClickThroughRates., must be bigger than or equal to 0.');
-        }
-
         $this->container['rate'] = $rate;
 
         return $this;
@@ -252,10 +233,6 @@ class DailyClickThroughRates extends AbstractModel implements ModelInterface, \A
      */
     public function setClickCount($clickCount)
     {
-        if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling DailyClickThroughRates., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickCount'] = $clickCount;
 
         return $this;

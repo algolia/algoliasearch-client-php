@@ -391,10 +391,6 @@ class AbtestingClient
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AbtestingClient.listABTests, must be bigger than or equal to 0.');
-        }
-
         $resourcePath = '/2/abtests';
         $queryParameters = [];
         $headers = [];

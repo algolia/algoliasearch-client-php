@@ -318,14 +318,6 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if ($this->container['trafficPercentage'] > 100) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['trafficPercentage'] < 0) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['userCount']) || null === $this->container['userCount']) {
             $invalidProperties[] = "'userCount' can't be null";
         }
@@ -774,13 +766,6 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     public function setTrafficPercentage($trafficPercentage)
     {
-        if ($trafficPercentage > 100) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling Variant., must be smaller than or equal to 100.');
-        }
-        if ($trafficPercentage < 0) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling Variant., must be bigger than or equal to 0.');
-        }
-
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;

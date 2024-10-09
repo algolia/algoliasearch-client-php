@@ -759,16 +759,6 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getSearchesNoClicks`.'
             );
         }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getSearchesNoClicks, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoClicks, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoClicks, must be bigger than or equal to 0.');
-        }
 
         $resourcePath = '/2/searches/noClicks';
         $queryParameters = [];
@@ -825,16 +815,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getSearchesNoResults`.'
             );
-        }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getSearchesNoResults, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoResults, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getSearchesNoResults, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/searches/noResults';
@@ -925,16 +905,6 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopCountries`.'
             );
         }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopCountries, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopCountries, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopCountries, must be bigger than or equal to 0.');
-        }
 
         $resourcePath = '/2/countries';
         $queryParameters = [];
@@ -992,16 +962,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterAttributes`.'
             );
-        }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFilterAttributes, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterAttributes, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterAttributes, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/filters';
@@ -1071,16 +1031,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopFilterForAttribute`.'
             );
-        }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFilterForAttribute, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterForAttribute, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFilterForAttribute, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/filters/{attribute}';
@@ -1153,16 +1103,6 @@ class AnalyticsClient
                 'Parameter `index` is required when calling `getTopFiltersNoResults`.'
             );
         }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopFiltersNoResults, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFiltersNoResults, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopFiltersNoResults, must be bigger than or equal to 0.');
-        }
 
         $resourcePath = '/2/filters/noResults';
         $queryParameters = [];
@@ -1226,16 +1166,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopHits`.'
             );
-        }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopHits, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopHits, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopHits, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/hits';
@@ -1309,16 +1239,6 @@ class AnalyticsClient
             throw new \InvalidArgumentException(
                 'Parameter `index` is required when calling `getTopSearches`.'
             );
-        }
-        if (null !== $limit && $limit > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$limit" when calling AnalyticsClient.getTopSearches, must be smaller than or equal to 1000.');
-        }
-
-        if (null !== $offset && $offset > 1000) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopSearches, must be smaller than or equal to 1000.');
-        }
-        if (null !== $offset && $offset < 0) {
-            throw new \InvalidArgumentException('invalid value for "$offset" when calling AnalyticsClient.getTopSearches, must be bigger than or equal to 0.');
         }
 
         $resourcePath = '/2/searches';

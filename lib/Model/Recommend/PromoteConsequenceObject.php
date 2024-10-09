@@ -147,13 +147,7 @@ class PromoteConsequenceObject extends AbstractModel implements ModelInterface, 
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['position']) && ($this->container['position'] < 0)) {
-            $invalidProperties[] = "invalid value for 'position', must be bigger than or equal to 0.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -210,10 +204,6 @@ class PromoteConsequenceObject extends AbstractModel implements ModelInterface, 
      */
     public function setPosition($position)
     {
-        if (!is_null($position) && ($position < 0)) {
-            throw new \InvalidArgumentException('invalid value for $position when calling PromoteConsequenceObject., must be bigger than or equal to 0.');
-        }
-
         $this->container['position'] = $position;
 
         return $this;

@@ -161,13 +161,6 @@ class AbTestsVariant extends AbstractModel implements ModelInterface, \ArrayAcce
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if ($this->container['trafficPercentage'] > 100) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['trafficPercentage'] < 0) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
-        }
 
         return $invalidProperties;
     }
@@ -226,13 +219,6 @@ class AbTestsVariant extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setTrafficPercentage($trafficPercentage)
     {
-        if ($trafficPercentage > 100) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariant., must be smaller than or equal to 100.');
-        }
-        if ($trafficPercentage < 0) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AbTestsVariant., must be bigger than or equal to 0.');
-        }
-
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;

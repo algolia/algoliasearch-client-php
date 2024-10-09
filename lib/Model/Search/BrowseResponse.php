@@ -395,29 +395,9 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     {
         $invalidProperties = [];
 
-        if (isset($this->container['abTestVariantID']) && ($this->container['abTestVariantID'] < 1)) {
-            $invalidProperties[] = "invalid value for 'abTestVariantID', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['aroundLatLng']) && !preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $this->container['aroundLatLng'])) {
-            $invalidProperties[] = "invalid value for 'aroundLatLng', must be conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.";
-        }
-
         if (!isset($this->container['processingTimeMS']) || null === $this->container['processingTimeMS']) {
             $invalidProperties[] = "'processingTimeMS' can't be null";
         }
-        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['hits']) || null === $this->container['hits']) {
             $invalidProperties[] = "'hits' can't be null";
         }
@@ -485,10 +465,6 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setAbTestVariantID($abTestVariantID)
     {
-        if (!is_null($abTestVariantID) && ($abTestVariantID < 1)) {
-            throw new \InvalidArgumentException('invalid value for $abTestVariantID when calling BrowseResponse., must be bigger than or equal to 1.');
-        }
-
         $this->container['abTestVariantID'] = $abTestVariantID;
 
         return $this;
@@ -513,10 +489,6 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setAroundLatLng($aroundLatLng)
     {
-        if (!is_null($aroundLatLng) && (!preg_match('/^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/', $aroundLatLng))) {
-            throw new \InvalidArgumentException("invalid value for {$aroundLatLng} when calling BrowseResponse., must conform to the pattern /^(-?\\d+(\\.\\d+)?),\\s*(-?\\d+(\\.\\d+)?)$/.");
-        }
-
         $this->container['aroundLatLng'] = $aroundLatLng;
 
         return $this;
@@ -1081,10 +1053,6 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setPage($page)
     {
-        if (!is_null($page) && ($page < 0)) {
-            throw new \InvalidArgumentException('invalid value for $page when calling BrowseResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;
@@ -1157,13 +1125,6 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
      */
     public function setHitsPerPage($hitsPerPage)
     {
-        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling BrowseResponse., must be smaller than or equal to 1000.');
-        }
-        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling BrowseResponse., must be bigger than or equal to 1.');
-        }
-
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;

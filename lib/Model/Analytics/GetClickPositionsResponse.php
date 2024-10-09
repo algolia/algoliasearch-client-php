@@ -142,13 +142,6 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
         if (!isset($this->container['positions']) || null === $this->container['positions']) {
             $invalidProperties[] = "'positions' can't be null";
         }
-        if (count($this->container['positions']) > 12) {
-            $invalidProperties[] = "invalid value for 'positions', number of items must be less than or equal to 12.";
-        }
-
-        if (count($this->container['positions']) < 12) {
-            $invalidProperties[] = "invalid value for 'positions', number of items must be greater than or equal to 12.";
-        }
 
         return $invalidProperties;
     }
@@ -183,12 +176,6 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
      */
     public function setPositions($positions)
     {
-        if (count($positions) > 12) {
-            throw new \InvalidArgumentException('invalid value for $positions when calling GetClickPositionsResponse., number of items must be less than or equal to 12.');
-        }
-        if (count($positions) < 12) {
-            throw new \InvalidArgumentException('invalid length for $positions when calling GetClickPositionsResponse., number of items must be greater than or equal to 12.');
-        }
         $this->container['positions'] = $positions;
 
         return $this;

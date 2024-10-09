@@ -212,10 +212,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
         if (!isset($this->container['batchSize']) || null === $this->container['batchSize']) {
             $invalidProperties[] = "'batchSize' can't be null";
         }
-        if ($this->container['batchSize'] < 0) {
-            $invalidProperties[] = "invalid value for 'batchSize', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['publishedAt']) || null === $this->container['publishedAt']) {
             $invalidProperties[] = "'publishedAt' can't be null";
         }
@@ -373,10 +369,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
      */
     public function setBatchSize($batchSize)
     {
-        if ($batchSize < 0) {
-            throw new \InvalidArgumentException('invalid value for $batchSize when calling Event., must be bigger than or equal to 0.');
-        }
-
         $this->container['batchSize'] = $batchSize;
 
         return $this;

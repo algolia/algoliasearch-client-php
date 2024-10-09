@@ -158,10 +158,6 @@ class Promote extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
         if (!isset($this->container['objectIDs']) || null === $this->container['objectIDs']) {
             $invalidProperties[] = "'objectIDs' can't be null";
         }
-        if (count($this->container['objectIDs']) > 100) {
-            $invalidProperties[] = "invalid value for 'objectIDs', number of items must be less than or equal to 100.";
-        }
-
         if (!isset($this->container['position']) || null === $this->container['position']) {
             $invalidProperties[] = "'position' can't be null";
         }
@@ -202,9 +198,6 @@ class Promote extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      */
     public function setObjectIDs($objectIDs)
     {
-        if (count($objectIDs) > 100) {
-            throw new \InvalidArgumentException('invalid value for $objectIDs when calling Promote., number of items must be less than or equal to 100.');
-        }
         $this->container['objectIDs'] = $objectIDs;
 
         return $this;

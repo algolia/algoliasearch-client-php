@@ -172,10 +172,6 @@ class SearchRecommendRulesResponse extends AbstractModel implements ModelInterfa
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if ($this->container['page'] < 0) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
@@ -261,10 +257,6 @@ class SearchRecommendRulesResponse extends AbstractModel implements ModelInterfa
      */
     public function setPage($page)
     {
-        if ($page < 0) {
-            throw new \InvalidArgumentException('invalid value for $page when calling SearchRecommendRulesResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;

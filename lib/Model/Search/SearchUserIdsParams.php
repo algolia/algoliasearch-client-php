@@ -168,17 +168,6 @@ class SearchUserIdsParams extends AbstractModel implements ModelInterface, \Arra
         if (!isset($this->container['query']) || null === $this->container['query']) {
             $invalidProperties[] = "'query' can't be null";
         }
-        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
-        }
 
         return $invalidProperties;
     }
@@ -261,10 +250,6 @@ class SearchUserIdsParams extends AbstractModel implements ModelInterface, \Arra
      */
     public function setPage($page)
     {
-        if (!is_null($page) && ($page < 0)) {
-            throw new \InvalidArgumentException('invalid value for $page when calling SearchUserIdsParams., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;
@@ -289,13 +274,6 @@ class SearchUserIdsParams extends AbstractModel implements ModelInterface, \Arra
      */
     public function setHitsPerPage($hitsPerPage)
     {
-        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsParams., must be smaller than or equal to 1000.');
-        }
-        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsParams., must be bigger than or equal to 1.');
-        }
-
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;

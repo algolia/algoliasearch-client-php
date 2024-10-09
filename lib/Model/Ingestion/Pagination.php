@@ -168,33 +168,14 @@ class Pagination extends AbstractModel implements ModelInterface, \ArrayAccess, 
         if (!isset($this->container['nbPages']) || null === $this->container['nbPages']) {
             $invalidProperties[] = "'nbPages' can't be null";
         }
-        if ($this->container['nbPages'] < 1) {
-            $invalidProperties[] = "invalid value for 'nbPages', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if ($this->container['page'] < 1) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['nbItems']) || null === $this->container['nbItems']) {
             $invalidProperties[] = "'nbItems' can't be null";
         }
-        if ($this->container['nbItems'] < 0) {
-            $invalidProperties[] = "invalid value for 'nbItems', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['itemsPerPage']) || null === $this->container['itemsPerPage']) {
             $invalidProperties[] = "'itemsPerPage' can't be null";
-        }
-        if ($this->container['itemsPerPage'] > 100) {
-            $invalidProperties[] = "invalid value for 'itemsPerPage', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['itemsPerPage'] < 1) {
-            $invalidProperties[] = "invalid value for 'itemsPerPage', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -230,10 +211,6 @@ class Pagination extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function setNbPages($nbPages)
     {
-        if ($nbPages < 1) {
-            throw new \InvalidArgumentException('invalid value for $nbPages when calling Pagination., must be bigger than or equal to 1.');
-        }
-
         $this->container['nbPages'] = $nbPages;
 
         return $this;
@@ -258,10 +235,6 @@ class Pagination extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function setPage($page)
     {
-        if ($page < 1) {
-            throw new \InvalidArgumentException('invalid value for $page when calling Pagination., must be bigger than or equal to 1.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;
@@ -286,10 +259,6 @@ class Pagination extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function setNbItems($nbItems)
     {
-        if ($nbItems < 0) {
-            throw new \InvalidArgumentException('invalid value for $nbItems when calling Pagination., must be bigger than or equal to 0.');
-        }
-
         $this->container['nbItems'] = $nbItems;
 
         return $this;
@@ -314,13 +283,6 @@ class Pagination extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function setItemsPerPage($itemsPerPage)
     {
-        if ($itemsPerPage > 100) {
-            throw new \InvalidArgumentException('invalid value for $itemsPerPage when calling Pagination., must be smaller than or equal to 100.');
-        }
-        if ($itemsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for $itemsPerPage when calling Pagination., must be bigger than or equal to 1.');
-        }
-
         $this->container['itemsPerPage'] = $itemsPerPage;
 
         return $this;

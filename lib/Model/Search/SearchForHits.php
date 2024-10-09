@@ -763,54 +763,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
     {
         $invalidProperties = [];
 
-        if (isset($this->container['page']) && ($this->container['page'] < 0)) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['length']) && ($this->container['length'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'length', must be smaller than or equal to 1000.";
-        }
-
-        if (isset($this->container['length']) && ($this->container['length'] < 0)) {
-            $invalidProperties[] = "invalid value for 'length', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['minimumAroundRadius']) && ($this->container['minimumAroundRadius'] < 1)) {
-            $invalidProperties[] = "invalid value for 'minimumAroundRadius', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['personalizationImpact']) && ($this->container['personalizationImpact'] > 100)) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['personalizationImpact']) && ($this->container['personalizationImpact'] < 0)) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
-        }
-
-        if (isset($this->container['hitsPerPage']) && ($this->container['hitsPerPage'] < 1)) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] > 7)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be smaller than or equal to 7.";
-        }
-
-        if (isset($this->container['minProximity']) && ($this->container['minProximity'] < 1)) {
-            $invalidProperties[] = "invalid value for 'minProximity', must be bigger than or equal to 1.";
-        }
-
-        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
-            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['maxValuesPerFacet']) && ($this->container['maxValuesPerFacet'] > 1000)) {
-            $invalidProperties[] = "invalid value for 'maxValuesPerFacet', must be smaller than or equal to 1000.";
-        }
-
         if (!isset($this->container['indexName']) || null === $this->container['indexName']) {
             $invalidProperties[] = "'indexName' can't be null";
         }
@@ -1136,10 +1088,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setPage($page)
     {
-        if (!is_null($page) && ($page < 0)) {
-            throw new \InvalidArgumentException('invalid value for $page when calling SearchForHits., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;
@@ -1188,13 +1136,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setLength($length)
     {
-        if (!is_null($length) && ($length > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling SearchForHits., must be smaller than or equal to 1000.');
-        }
-        if (!is_null($length) && ($length < 0)) {
-            throw new \InvalidArgumentException('invalid value for $length when calling SearchForHits., must be bigger than or equal to 0.');
-        }
-
         $this->container['length'] = $length;
 
         return $this;
@@ -1315,10 +1256,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setMinimumAroundRadius($minimumAroundRadius)
     {
-        if (!is_null($minimumAroundRadius) && ($minimumAroundRadius < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minimumAroundRadius when calling SearchForHits., must be bigger than or equal to 1.');
-        }
-
         $this->container['minimumAroundRadius'] = $minimumAroundRadius;
 
         return $this;
@@ -1439,13 +1376,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setPersonalizationImpact($personalizationImpact)
     {
-        if (!is_null($personalizationImpact) && ($personalizationImpact > 100)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling SearchForHits., must be smaller than or equal to 100.');
-        }
-        if (!is_null($personalizationImpact) && ($personalizationImpact < 0)) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling SearchForHits., must be bigger than or equal to 0.');
-        }
-
         $this->container['personalizationImpact'] = $personalizationImpact;
 
         return $this;
@@ -1902,13 +1832,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setHitsPerPage($hitsPerPage)
     {
-        if (!is_null($hitsPerPage) && ($hitsPerPage > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchForHits., must be smaller than or equal to 1000.');
-        }
-        if (!is_null($hitsPerPage) && ($hitsPerPage < 1)) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchForHits., must be bigger than or equal to 1.');
-        }
-
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;
@@ -2509,13 +2432,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setMinProximity($minProximity)
     {
-        if (!is_null($minProximity) && ($minProximity > 7)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling SearchForHits., must be smaller than or equal to 7.');
-        }
-        if (!is_null($minProximity) && ($minProximity < 1)) {
-            throw new \InvalidArgumentException('invalid value for $minProximity when calling SearchForHits., must be bigger than or equal to 1.');
-        }
-
         $this->container['minProximity'] = $minProximity;
 
         return $this;
@@ -2564,10 +2480,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchForHits., must be smaller than or equal to 100.');
-        }
-
         $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
@@ -2592,10 +2504,6 @@ class SearchForHits extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setMaxValuesPerFacet($maxValuesPerFacet)
     {
-        if (!is_null($maxValuesPerFacet) && ($maxValuesPerFacet > 1000)) {
-            throw new \InvalidArgumentException('invalid value for $maxValuesPerFacet when calling SearchForHits., must be smaller than or equal to 1000.');
-        }
-
         $this->container['maxValuesPerFacet'] = $maxValuesPerFacet;
 
         return $this;

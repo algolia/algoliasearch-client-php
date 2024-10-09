@@ -155,17 +155,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['hide']) && (count($this->container['hide']) < 1)) {
-            $invalidProperties[] = "invalid value for 'hide', number of items must be greater than or equal to 1.";
-        }
-
-        if (isset($this->container['promote']) && (count($this->container['promote']) < 1)) {
-            $invalidProperties[] = "invalid value for 'promote', number of items must be greater than or equal to 1.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -198,9 +188,6 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setHide($hide)
     {
-        if (!is_null($hide) && (count($hide) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $hide when calling Consequence., number of items must be greater than or equal to 1.');
-        }
         $this->container['hide'] = $hide;
 
         return $this;
@@ -225,9 +212,6 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setPromote($promote)
     {
-        if (!is_null($promote) && (count($promote) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $promote when calling Consequence., number of items must be greater than or equal to 1.');
-        }
         $this->container['promote'] = $promote;
 
         return $this;

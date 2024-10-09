@@ -182,21 +182,9 @@ class SearchUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
         if (!isset($this->container['page']) || null === $this->container['page']) {
             $invalidProperties[] = "'page' can't be null";
         }
-        if ($this->container['page'] < 0) {
-            $invalidProperties[] = "invalid value for 'page', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['hitsPerPage']) || null === $this->container['hitsPerPage']) {
             $invalidProperties[] = "'hitsPerPage' can't be null";
         }
-        if ($this->container['hitsPerPage'] > 1000) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be smaller than or equal to 1000.";
-        }
-
-        if ($this->container['hitsPerPage'] < 1) {
-            $invalidProperties[] = "invalid value for 'hitsPerPage', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['updatedAt']) || null === $this->container['updatedAt']) {
             $invalidProperties[] = "'updatedAt' can't be null";
         }
@@ -282,10 +270,6 @@ class SearchUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
      */
     public function setPage($page)
     {
-        if ($page < 0) {
-            throw new \InvalidArgumentException('invalid value for $page when calling SearchUserIdsResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['page'] = $page;
 
         return $this;
@@ -310,13 +294,6 @@ class SearchUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
      */
     public function setHitsPerPage($hitsPerPage)
     {
-        if ($hitsPerPage > 1000) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be smaller than or equal to 1000.');
-        }
-        if ($hitsPerPage < 1) {
-            throw new \InvalidArgumentException('invalid value for $hitsPerPage when calling SearchUserIdsResponse., must be bigger than or equal to 1.');
-        }
-
         $this->container['hitsPerPage'] = $hitsPerPage;
 
         return $this;

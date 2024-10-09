@@ -164,9 +164,6 @@ class DailySearchesNoResults extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['withFilterCount']) || null === $this->container['withFilterCount']) {
             $invalidProperties[] = "'withFilterCount' can't be null";
         }
-        if ($this->container['withFilterCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'withFilterCount', must be bigger than or equal to 0.";
-        }
 
         return $invalidProperties;
     }
@@ -249,10 +246,6 @@ class DailySearchesNoResults extends AbstractModel implements ModelInterface, \A
      */
     public function setWithFilterCount($withFilterCount)
     {
-        if ($withFilterCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $withFilterCount when calling DailySearchesNoResults., must be bigger than or equal to 0.');
-        }
-
         $this->container['withFilterCount'] = $withFilterCount;
 
         return $this;

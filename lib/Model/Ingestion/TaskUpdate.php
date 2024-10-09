@@ -171,17 +171,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] > 100)) {
-            $invalidProperties[] = "invalid value for 'failureThreshold', must be smaller than or equal to 100.";
-        }
-
-        if (isset($this->container['failureThreshold']) && ($this->container['failureThreshold'] < 0)) {
-            $invalidProperties[] = "invalid value for 'failureThreshold', must be bigger than or equal to 0.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -310,13 +300,6 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
      */
     public function setFailureThreshold($failureThreshold)
     {
-        if (!is_null($failureThreshold) && ($failureThreshold > 100)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdate., must be smaller than or equal to 100.');
-        }
-        if (!is_null($failureThreshold) && ($failureThreshold < 0)) {
-            throw new \InvalidArgumentException('invalid value for $failureThreshold when calling TaskUpdate., must be bigger than or equal to 0.');
-        }
-
         $this->container['failureThreshold'] = $failureThreshold;
 
         return $this;

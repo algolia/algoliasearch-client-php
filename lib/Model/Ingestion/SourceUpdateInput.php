@@ -294,14 +294,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         if (!isset($this->container['url']) || null === $this->container['url']) {
             $invalidProperties[] = "'url' can't be null";
         }
-        if (isset($this->container['delimiter']) && (mb_strlen($this->container['delimiter']) > 1)) {
-            $invalidProperties[] = "invalid value for 'delimiter', the character length must be smaller than or equal to 1.";
-        }
-
-        if (isset($this->container['delimiter']) && (mb_strlen($this->container['delimiter']) < 1)) {
-            $invalidProperties[] = "invalid value for 'delimiter', the character length must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['projectID']) || null === $this->container['projectID']) {
             $invalidProperties[] = "'projectID' can't be null";
         }
@@ -540,13 +532,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
      */
     public function setDelimiter($delimiter)
     {
-        if (!is_null($delimiter) && (mb_strlen($delimiter) > 1)) {
-            throw new \InvalidArgumentException('invalid length for $delimiter when calling SourceUpdateInput., must be smaller than or equal to 1.');
-        }
-        if (!is_null($delimiter) && (mb_strlen($delimiter) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $delimiter when calling SourceUpdateInput., must be bigger than or equal to 1.');
-        }
-
         $this->container['delimiter'] = $delimiter;
 
         return $this;

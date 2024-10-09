@@ -237,51 +237,20 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
     {
         $invalidProperties = [];
 
-        if (isset($this->container['filters']) && ($this->container['filters'] < 0)) {
-            $invalidProperties[] = "invalid value for 'filters', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['firstMatchedWord']) || null === $this->container['firstMatchedWord']) {
             $invalidProperties[] = "'firstMatchedWord' can't be null";
         }
-        if ($this->container['firstMatchedWord'] < 0) {
-            $invalidProperties[] = "invalid value for 'firstMatchedWord', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['geoDistance']) || null === $this->container['geoDistance']) {
             $invalidProperties[] = "'geoDistance' can't be null";
         }
-        if ($this->container['geoDistance'] < 0) {
-            $invalidProperties[] = "invalid value for 'geoDistance', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['geoPrecision']) && ($this->container['geoPrecision'] < 1)) {
-            $invalidProperties[] = "invalid value for 'geoPrecision', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['nbExactWords']) || null === $this->container['nbExactWords']) {
             $invalidProperties[] = "'nbExactWords' can't be null";
         }
-        if ($this->container['nbExactWords'] < 0) {
-            $invalidProperties[] = "invalid value for 'nbExactWords', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['nbTypos']) || null === $this->container['nbTypos']) {
             $invalidProperties[] = "'nbTypos' can't be null";
         }
-        if ($this->container['nbTypos'] < 0) {
-            $invalidProperties[] = "invalid value for 'nbTypos', must be bigger than or equal to 0.";
-        }
-
-        if (isset($this->container['proximityDistance']) && ($this->container['proximityDistance'] < 0)) {
-            $invalidProperties[] = "invalid value for 'proximityDistance', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['userScore']) || null === $this->container['userScore']) {
             $invalidProperties[] = "'userScore' can't be null";
-        }
-        if (isset($this->container['words']) && ($this->container['words'] < 1)) {
-            $invalidProperties[] = "invalid value for 'words', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -317,10 +286,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setFilters($filters)
     {
-        if (!is_null($filters) && ($filters < 0)) {
-            throw new \InvalidArgumentException('invalid value for $filters when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['filters'] = $filters;
 
         return $this;
@@ -345,10 +310,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setFirstMatchedWord($firstMatchedWord)
     {
-        if ($firstMatchedWord < 0) {
-            throw new \InvalidArgumentException('invalid value for $firstMatchedWord when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['firstMatchedWord'] = $firstMatchedWord;
 
         return $this;
@@ -373,10 +334,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setGeoDistance($geoDistance)
     {
-        if ($geoDistance < 0) {
-            throw new \InvalidArgumentException('invalid value for $geoDistance when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['geoDistance'] = $geoDistance;
 
         return $this;
@@ -401,10 +358,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setGeoPrecision($geoPrecision)
     {
-        if (!is_null($geoPrecision) && ($geoPrecision < 1)) {
-            throw new \InvalidArgumentException('invalid value for $geoPrecision when calling RankingInfo., must be bigger than or equal to 1.');
-        }
-
         $this->container['geoPrecision'] = $geoPrecision;
 
         return $this;
@@ -477,10 +430,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setNbExactWords($nbExactWords)
     {
-        if ($nbExactWords < 0) {
-            throw new \InvalidArgumentException('invalid value for $nbExactWords when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['nbExactWords'] = $nbExactWords;
 
         return $this;
@@ -505,10 +454,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setNbTypos($nbTypos)
     {
-        if ($nbTypos < 0) {
-            throw new \InvalidArgumentException('invalid value for $nbTypos when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['nbTypos'] = $nbTypos;
 
         return $this;
@@ -557,10 +502,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setProximityDistance($proximityDistance)
     {
-        if (!is_null($proximityDistance) && ($proximityDistance < 0)) {
-            throw new \InvalidArgumentException('invalid value for $proximityDistance when calling RankingInfo., must be bigger than or equal to 0.');
-        }
-
         $this->container['proximityDistance'] = $proximityDistance;
 
         return $this;
@@ -609,10 +550,6 @@ class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function setWords($words)
     {
-        if (!is_null($words) && ($words < 1)) {
-            throw new \InvalidArgumentException('invalid value for $words when calling RankingInfo., must be bigger than or equal to 1.');
-        }
-
         $this->container['words'] = $words;
 
         return $this;

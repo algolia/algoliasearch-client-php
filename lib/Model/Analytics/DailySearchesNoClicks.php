@@ -161,10 +161,6 @@ class DailySearchesNoClicks extends AbstractModel implements ModelInterface, \Ar
         if (!isset($this->container['count']) || null === $this->container['count']) {
             $invalidProperties[] = "'count' can't be null";
         }
-        if ($this->container['count'] < 1) {
-            $invalidProperties[] = "invalid value for 'count', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
@@ -226,10 +222,6 @@ class DailySearchesNoClicks extends AbstractModel implements ModelInterface, \Ar
      */
     public function setCount($count)
     {
-        if ($count < 1) {
-            throw new \InvalidArgumentException('invalid value for $count when calling DailySearchesNoClicks., must be bigger than or equal to 1.');
-        }
-
         $this->container['count'] = $count;
 
         return $this;

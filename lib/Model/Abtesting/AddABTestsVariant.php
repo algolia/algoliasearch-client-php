@@ -169,14 +169,6 @@ class AddABTestsVariant extends AbstractModel implements ModelInterface, \ArrayA
         if (!isset($this->container['trafficPercentage']) || null === $this->container['trafficPercentage']) {
             $invalidProperties[] = "'trafficPercentage' can't be null";
         }
-        if ($this->container['trafficPercentage'] > 100) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['trafficPercentage'] < 0) {
-            $invalidProperties[] = "invalid value for 'trafficPercentage', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['customSearchParameters']) || null === $this->container['customSearchParameters']) {
             $invalidProperties[] = "'customSearchParameters' can't be null";
         }
@@ -238,13 +230,6 @@ class AddABTestsVariant extends AbstractModel implements ModelInterface, \ArrayA
      */
     public function setTrafficPercentage($trafficPercentage)
     {
-        if ($trafficPercentage > 100) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AddABTestsVariant., must be smaller than or equal to 100.');
-        }
-        if ($trafficPercentage < 0) {
-            throw new \InvalidArgumentException('invalid value for $trafficPercentage when calling AddABTestsVariant., must be bigger than or equal to 0.');
-        }
-
         $this->container['trafficPercentage'] = $trafficPercentage;
 
         return $this;

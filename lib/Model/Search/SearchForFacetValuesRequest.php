@@ -153,13 +153,7 @@ class SearchForFacetValuesRequest extends AbstractModel implements ModelInterfac
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['maxFacetHits']) && ($this->container['maxFacetHits'] > 100)) {
-            $invalidProperties[] = "invalid value for 'maxFacetHits', must be smaller than or equal to 100.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -240,10 +234,6 @@ class SearchForFacetValuesRequest extends AbstractModel implements ModelInterfac
      */
     public function setMaxFacetHits($maxFacetHits)
     {
-        if (!is_null($maxFacetHits) && ($maxFacetHits > 100)) {
-            throw new \InvalidArgumentException('invalid value for $maxFacetHits when calling SearchForFacetValuesRequest., must be smaller than or equal to 100.');
-        }
-
         $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;

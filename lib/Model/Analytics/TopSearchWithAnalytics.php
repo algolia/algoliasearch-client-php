@@ -220,60 +220,24 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
         if (!isset($this->container['clickThroughRate']) || null === $this->container['clickThroughRate']) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if ($this->container['clickThroughRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'clickThroughRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['clickThroughRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickThroughRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['averageClickPosition']) || null === $this->container['averageClickPosition']) {
             $invalidProperties[] = "'averageClickPosition' can't be null";
         }
-        if ($this->container['averageClickPosition'] < 1) {
-            $invalidProperties[] = "invalid value for 'averageClickPosition', must be bigger than or equal to 1.";
-        }
-
         if (!isset($this->container['clickPositions']) || null === $this->container['clickPositions']) {
             $invalidProperties[] = "'clickPositions' can't be null";
         }
-        if (count($this->container['clickPositions']) > 12) {
-            $invalidProperties[] = "invalid value for 'clickPositions', number of items must be less than or equal to 12.";
-        }
-
-        if (count($this->container['clickPositions']) < 12) {
-            $invalidProperties[] = "invalid value for 'clickPositions', number of items must be greater than or equal to 12.";
-        }
-
         if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if ($this->container['conversionRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'conversionRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['conversionRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'conversionRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if ($this->container['clickCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if ($this->container['conversionCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'conversionCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['nbHits']) || null === $this->container['nbHits']) {
             $invalidProperties[] = "'nbHits' can't be null";
         }
@@ -359,13 +323,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setClickThroughRate($clickThroughRate)
     {
-        if ($clickThroughRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($clickThroughRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickThroughRate'] = $clickThroughRate;
 
         return $this;
@@ -390,10 +347,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setAverageClickPosition($averageClickPosition)
     {
-        if ($averageClickPosition < 1) {
-            throw new \InvalidArgumentException('invalid value for $averageClickPosition when calling TopSearchWithAnalytics., must be bigger than or equal to 1.');
-        }
-
         $this->container['averageClickPosition'] = $averageClickPosition;
 
         return $this;
@@ -418,12 +371,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setClickPositions($clickPositions)
     {
-        if (count($clickPositions) > 12) {
-            throw new \InvalidArgumentException('invalid value for $clickPositions when calling TopSearchWithAnalytics., number of items must be less than or equal to 12.');
-        }
-        if (count($clickPositions) < 12) {
-            throw new \InvalidArgumentException('invalid length for $clickPositions when calling TopSearchWithAnalytics., number of items must be greater than or equal to 12.');
-        }
         $this->container['clickPositions'] = $clickPositions;
 
         return $this;
@@ -448,13 +395,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setConversionRate($conversionRate)
     {
-        if ($conversionRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopSearchWithAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($conversionRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['conversionRate'] = $conversionRate;
 
         return $this;
@@ -503,10 +443,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setClickCount($clickCount)
     {
-        if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickCount'] = $clickCount;
 
         return $this;
@@ -531,10 +467,6 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
      */
     public function setConversionCount($conversionCount)
     {
-        if ($conversionCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionCount when calling TopSearchWithAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['conversionCount'] = $conversionCount;
 
         return $this;

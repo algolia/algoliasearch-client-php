@@ -168,10 +168,6 @@ class UserId extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (!isset($this->container['userID']) || null === $this->container['userID']) {
             $invalidProperties[] = "'userID' can't be null";
         }
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $this->container['userID'])) {
-            $invalidProperties[] = "invalid value for 'userID', must be conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.";
-        }
-
         if (!isset($this->container['clusterName']) || null === $this->container['clusterName']) {
             $invalidProperties[] = "'clusterName' can't be null";
         }
@@ -215,10 +211,6 @@ class UserId extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
      */
     public function setUserID($userID)
     {
-        if (!preg_match('/^[a-zA-Z0-9 \\-*.]+$/', $userID)) {
-            throw new \InvalidArgumentException("invalid value for {$userID} when calling UserId., must conform to the pattern /^[a-zA-Z0-9 \\-*.]+$/.");
-        }
-
         $this->container['userID'] = $userID;
 
         return $this;

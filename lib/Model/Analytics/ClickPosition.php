@@ -147,21 +147,7 @@ class ClickPosition extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (isset($this->container['position']) && (count($this->container['position']) > 2)) {
-            $invalidProperties[] = "invalid value for 'position', number of items must be less than or equal to 2.";
-        }
-
-        if (isset($this->container['position']) && (count($this->container['position']) < 2)) {
-            $invalidProperties[] = "invalid value for 'position', number of items must be greater than or equal to 2.";
-        }
-
-        if (isset($this->container['clickCount']) && ($this->container['clickCount'] < 0)) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -194,12 +180,6 @@ class ClickPosition extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setPosition($position)
     {
-        if (!is_null($position) && (count($position) > 2)) {
-            throw new \InvalidArgumentException('invalid value for $position when calling ClickPosition., number of items must be less than or equal to 2.');
-        }
-        if (!is_null($position) && (count($position) < 2)) {
-            throw new \InvalidArgumentException('invalid length for $position when calling ClickPosition., number of items must be greater than or equal to 2.');
-        }
         $this->container['position'] = $position;
 
         return $this;
@@ -224,10 +204,6 @@ class ClickPosition extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setClickCount($clickCount)
     {
-        if (!is_null($clickCount) && ($clickCount < 0)) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling ClickPosition., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickCount'] = $clickCount;
 
         return $this;

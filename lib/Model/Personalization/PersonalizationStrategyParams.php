@@ -164,13 +164,6 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
         if (!isset($this->container['personalizationImpact']) || null === $this->container['personalizationImpact']) {
             $invalidProperties[] = "'personalizationImpact' can't be null";
         }
-        if ($this->container['personalizationImpact'] > 100) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['personalizationImpact'] < 0) {
-            $invalidProperties[] = "invalid value for 'personalizationImpact', must be bigger than or equal to 0.";
-        }
 
         return $invalidProperties;
     }
@@ -253,13 +246,6 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
      */
     public function setPersonalizationImpact($personalizationImpact)
     {
-        if ($personalizationImpact > 100) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling PersonalizationStrategyParams., must be smaller than or equal to 100.');
-        }
-        if ($personalizationImpact < 0) {
-            throw new \InvalidArgumentException('invalid value for $personalizationImpact when calling PersonalizationStrategyParams., must be bigger than or equal to 0.');
-        }
-
         $this->container['personalizationImpact'] = $personalizationImpact;
 
         return $this;

@@ -176,9 +176,6 @@ class Configuration extends AbstractModel implements ModelInterface, \ArrayAcces
         if (!isset($this->container['sourceIndices']) || null === $this->container['sourceIndices']) {
             $invalidProperties[] = "'sourceIndices' can't be null";
         }
-        if (count($this->container['sourceIndices']) < 1) {
-            $invalidProperties[] = "invalid value for 'sourceIndices', number of items must be greater than or equal to 1.";
-        }
 
         return $invalidProperties;
     }
@@ -213,9 +210,6 @@ class Configuration extends AbstractModel implements ModelInterface, \ArrayAcces
      */
     public function setSourceIndices($sourceIndices)
     {
-        if (count($sourceIndices) < 1) {
-            throw new \InvalidArgumentException('invalid length for $sourceIndices when calling Configuration., number of items must be greater than or equal to 1.');
-        }
         $this->container['sourceIndices'] = $sourceIndices;
 
         return $this;

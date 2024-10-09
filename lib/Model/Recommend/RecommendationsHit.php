@@ -201,14 +201,6 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
         if (!isset($this->container['score']) || null === $this->container['score']) {
             $invalidProperties[] = "'score' can't be null";
         }
-        if ($this->container['score'] > 100) {
-            $invalidProperties[] = "invalid value for 'score', must be smaller than or equal to 100.";
-        }
-
-        if ($this->container['score'] < 0) {
-            $invalidProperties[] = "invalid value for 'score', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
             $invalidProperties[] = "'facetName' can't be null";
         }
@@ -369,13 +361,6 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
      */
     public function setScore($score)
     {
-        if ($score > 100) {
-            throw new \InvalidArgumentException('invalid value for $score when calling RecommendationsHit., must be smaller than or equal to 100.');
-        }
-        if ($score < 0) {
-            throw new \InvalidArgumentException('invalid value for $score when calling RecommendationsHit., must be bigger than or equal to 0.');
-        }
-
         $this->container['score'] = $score;
 
         return $this;

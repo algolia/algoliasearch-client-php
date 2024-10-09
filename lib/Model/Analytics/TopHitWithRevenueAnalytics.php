@@ -236,71 +236,27 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
         if (!isset($this->container['clickThroughRate']) || null === $this->container['clickThroughRate']) {
             $invalidProperties[] = "'clickThroughRate' can't be null";
         }
-        if ($this->container['clickThroughRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'clickThroughRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['clickThroughRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickThroughRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['conversionRate']) || null === $this->container['conversionRate']) {
             $invalidProperties[] = "'conversionRate' can't be null";
         }
-        if ($this->container['conversionRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'conversionRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['conversionRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'conversionRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['trackedHitCount']) || null === $this->container['trackedHitCount']) {
             $invalidProperties[] = "'trackedHitCount' can't be null";
         }
         if (!isset($this->container['clickCount']) || null === $this->container['clickCount']) {
             $invalidProperties[] = "'clickCount' can't be null";
         }
-        if ($this->container['clickCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'clickCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if ($this->container['conversionCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'conversionCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['addToCartRate']) || null === $this->container['addToCartRate']) {
             $invalidProperties[] = "'addToCartRate' can't be null";
         }
-        if ($this->container['addToCartRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'addToCartRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['addToCartRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'addToCartRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['addToCartCount']) || null === $this->container['addToCartCount']) {
             $invalidProperties[] = "'addToCartCount' can't be null";
         }
-        if ($this->container['addToCartCount'] < 0) {
-            $invalidProperties[] = "invalid value for 'addToCartCount', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['purchaseRate']) || null === $this->container['purchaseRate']) {
             $invalidProperties[] = "'purchaseRate' can't be null";
         }
-        if ($this->container['purchaseRate'] > 1) {
-            $invalidProperties[] = "invalid value for 'purchaseRate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['purchaseRate'] < 0) {
-            $invalidProperties[] = "invalid value for 'purchaseRate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['purchaseCount']) || null === $this->container['purchaseCount']) {
             $invalidProperties[] = "'purchaseCount' can't be null";
         }
@@ -389,13 +345,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setClickThroughRate($clickThroughRate)
     {
-        if ($clickThroughRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($clickThroughRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickThroughRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickThroughRate'] = $clickThroughRate;
 
         return $this;
@@ -420,13 +369,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setConversionRate($conversionRate)
     {
-        if ($conversionRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($conversionRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['conversionRate'] = $conversionRate;
 
         return $this;
@@ -475,10 +417,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setClickCount($clickCount)
     {
-        if ($clickCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $clickCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['clickCount'] = $clickCount;
 
         return $this;
@@ -503,10 +441,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setConversionCount($conversionCount)
     {
-        if ($conversionCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $conversionCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['conversionCount'] = $conversionCount;
 
         return $this;
@@ -531,13 +465,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setAddToCartRate($addToCartRate)
     {
-        if ($addToCartRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $addToCartRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($addToCartRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $addToCartRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['addToCartRate'] = $addToCartRate;
 
         return $this;
@@ -562,10 +489,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setAddToCartCount($addToCartCount)
     {
-        if ($addToCartCount < 0) {
-            throw new \InvalidArgumentException('invalid value for $addToCartCount when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['addToCartCount'] = $addToCartCount;
 
         return $this;
@@ -590,13 +513,6 @@ class TopHitWithRevenueAnalytics extends AbstractModel implements ModelInterface
      */
     public function setPurchaseRate($purchaseRate)
     {
-        if ($purchaseRate > 1) {
-            throw new \InvalidArgumentException('invalid value for $purchaseRate when calling TopHitWithRevenueAnalytics., must be smaller than or equal to 1.');
-        }
-        if ($purchaseRate < 0) {
-            throw new \InvalidArgumentException('invalid value for $purchaseRate when calling TopHitWithRevenueAnalytics., must be bigger than or equal to 0.');
-        }
-
         $this->container['purchaseRate'] = $purchaseRate;
 
         return $this;

@@ -166,14 +166,6 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
         if (!isset($this->container['rate']) || null === $this->container['rate']) {
             $invalidProperties[] = "'rate' can't be null";
         }
-        if ($this->container['rate'] > 1) {
-            $invalidProperties[] = "invalid value for 'rate', must be smaller than or equal to 1.";
-        }
-
-        if ($this->container['rate'] < 0) {
-            $invalidProperties[] = "invalid value for 'rate', must be bigger than or equal to 0.";
-        }
-
         if (!isset($this->container['trackedSearchCount']) || null === $this->container['trackedSearchCount']) {
             $invalidProperties[] = "'trackedSearchCount' can't be null";
         }
@@ -217,13 +209,6 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
      */
     public function setRate($rate)
     {
-        if ($rate > 1) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetPurchaseRateResponse., must be smaller than or equal to 1.');
-        }
-        if ($rate < 0) {
-            throw new \InvalidArgumentException('invalid value for $rate when calling GetPurchaseRateResponse., must be bigger than or equal to 0.');
-        }
-
         $this->container['rate'] = $rate;
 
         return $this;

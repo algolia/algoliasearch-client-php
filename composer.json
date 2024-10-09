@@ -2,21 +2,14 @@
     "name": "algolia/algoliasearch-client-php",
     "version": "4.6.0",
     "description": "API powering the features of Algolia.",
-    "keywords": [
-        "openapitools",
-        "openapi-generator",
-        "openapi",
-        "php",
-        "sdk",
-        "rest",
-        "api"
-    ],
-    "homepage": "https://openapi-generator.tech",
-    "license": "unlicense",
+    "keywords": ["algolia", "search", "api", "client", "php"],
+    "type": "library",
+    "homepage": "https://github.com/algolia/algoliasearch-client-php",
+    "license": "MIT",
     "authors": [
         {
-            "name": "OpenAPI-Generator contributors",
-            "homepage": "https://openapi-generator.tech"
+            "name": "Algolia Team",
+            "homepage": "https://alg.li/support"
         }
     ],
     "require": {

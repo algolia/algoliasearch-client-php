@@ -22,7 +22,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
      * @var string[]
      */
     protected static $modelTypes = [
-        'banners' => '\Algolia\AlgoliaSearch\Model\Recommend\Banners',
+        'banners' => '\Algolia\AlgoliaSearch\Model\Recommend\Banner[]',
     ];
 
     /**
@@ -156,7 +156,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets banners.
      *
-     * @return null|Banners
+     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[]
      */
     public function getBanners()
     {
@@ -166,7 +166,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets banners.
      *
-     * @param null|Banners $banners banners
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[] $banners banners defined in the merchandising studio for the given search
      *
      * @return self
      */

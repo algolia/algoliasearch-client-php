@@ -22,7 +22,7 @@ class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess,
      * @var string[]
      */
     protected static $modelTypes = [
-        'urls' => '\Algolia\AlgoliaSearch\Model\Search\BannerImageUrl',
+        'urls' => '\Algolia\AlgoliaSearch\Model\Search\BannerImageUrl[]',
         'title' => 'string',
     ];
 
@@ -164,7 +164,7 @@ class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets urls.
      *
-     * @return null|BannerImageUrl
+     * @return null|\Algolia\AlgoliaSearch\Model\Search\BannerImageUrl[]
      */
     public function getUrls()
     {
@@ -174,7 +174,7 @@ class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets urls.
      *
-     * @param null|BannerImageUrl $urls urls
+     * @param null|\Algolia\AlgoliaSearch\Model\Search\BannerImageUrl[] $urls urls
      *
      * @return self
      */

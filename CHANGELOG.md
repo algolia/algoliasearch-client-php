@@ -1,3 +1,11 @@
+## [4.6.1](https://github.com/algolia/algoliasearch-client-php/compare/4.6.0...4.6.1)
+
+- [f516d0243](https://github.com/algolia/api-clients-automation/commit/f516d0243) fix(specs): Typos in API descriptions ([#3932](https://github.com/algolia/api-clients-automation/pull/3932)) by [@gazconroy](https://github.com/gazconroy/)
+- [ee6c043ef](https://github.com/algolia/api-clients-automation/commit/ee6c043ef) fix(clients): remove all client side validation expect null check ([#3936](https://github.com/algolia/api-clients-automation/pull/3936)) by [@millotp](https://github.com/millotp/)
+- [dd71d1c13](https://github.com/algolia/api-clients-automation/commit/dd71d1c13) fix(php): add license to composer ([#3937](https://github.com/algolia/api-clients-automation/pull/3937)) by [@millotp](https://github.com/millotp/)
+- [434c99f80](https://github.com/algolia/api-clients-automation/commit/434c99f80) fix(specs): use the read transporter for browse ([#3938](https://github.com/algolia/api-clients-automation/pull/3938)) by [@millotp](https://github.com/millotp/)
+- [45d433d0a](https://github.com/algolia/api-clients-automation/commit/45d433d0a) fix(specs): correct type for banners [skip-bc] ([#3939](https://github.com/algolia/api-clients-automation/pull/3939)) by [@millotp](https://github.com/millotp/)
+
 ## [4.6.0](https://github.com/algolia/algoliasearch-client-php/compare/4.5.0...4.6.0)
 
 - [ad8e3d224](https://github.com/algolia/api-clients-automation/commit/ad8e3d224) fix(specs): update analytics and abtesting max pagination query limit ([#3696](https://github.com/algolia/api-clients-automation/pull/3696)) by [@febeck](https://github.com/febeck/)

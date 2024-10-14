@@ -198,9 +198,6 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
         if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
-        if (!isset($this->container['score']) || null === $this->container['score']) {
-            $invalidProperties[] = "'score' can't be null";
-        }
         if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
             $invalidProperties[] = "'facetName' can't be null";
         }
@@ -345,7 +342,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets score.
      *
-     * @return float
+     * @return null|float
      */
     public function getScore()
     {
@@ -355,7 +352,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets score.
      *
-     * @param float $score recommendation score
+     * @param null|float $score recommendation score
      *
      * @return self
      */

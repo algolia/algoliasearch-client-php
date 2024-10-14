@@ -157,9 +157,6 @@ class TrendingFacetHit extends AbstractModel implements ModelInterface, \ArrayAc
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['score']) || null === $this->container['score']) {
-            $invalidProperties[] = "'score' can't be null";
-        }
         if (!isset($this->container['facetName']) || null === $this->container['facetName']) {
             $invalidProperties[] = "'facetName' can't be null";
         }
@@ -184,7 +181,7 @@ class TrendingFacetHit extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Gets score.
      *
-     * @return float
+     * @return null|float
      */
     public function getScore()
     {
@@ -194,7 +191,7 @@ class TrendingFacetHit extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets score.
      *
-     * @param float $score recommendation score
+     * @param null|float $score recommendation score
      *
      * @return self
      */

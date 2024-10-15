@@ -106,7 +106,7 @@ class MonitoringClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -145,7 +145,7 @@ class MonitoringClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -184,7 +184,7 @@ class MonitoringClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -224,7 +224,7 @@ class MonitoringClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -417,8 +417,8 @@ class MonitoringClient
     /**
      * Retrieves metrics related to your Algolia infrastructure, aggregated over a selected time window.  Access to this API is available as part of the [Premium or Elevate plans](https://www.algolia.com/pricing). You must authenticate requests with the `x-algolia-application-id` and `x-algolia-api-key` headers (using the Monitoring API key).
      *
-     * @param array $metric         Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use &#x60;*&#x60;. (required)
-     * @param array $period         Period over which to aggregate the metrics:  - &#x60;minute&#x60;. Aggregate the last minute. 1 data point per 10 seconds. - &#x60;hour&#x60;. Aggregate the last hour. 1 data point per minute. - &#x60;day&#x60;. Aggregate the last day. 1 data point per 10 minutes. - &#x60;week&#x60;. Aggregate the last week. 1 data point per hour. - &#x60;month&#x60;. Aggregate the last month. 1 data point per day. (required)
+     * @param array $metric         Metric to report.  For more information about the individual metrics, see the description of the API response. To include all metrics, use `*`. (required)
+     * @param array $period         Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Monitoring\InfrastructureResponse|array<string, mixed>

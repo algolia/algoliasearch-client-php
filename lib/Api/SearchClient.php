@@ -611,7 +611,7 @@ class SearchClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -650,7 +650,7 @@ class SearchClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -689,7 +689,7 @@ class SearchClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -729,7 +729,7 @@ class SearchClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -1260,7 +1260,7 @@ class SearchClient
      *
      * @param string $indexName            Name of the index on which to perform the operation. (required)
      * @param string $objectID             Unique record identifier. (required)
-     * @param array  $attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned.  &#x60;objectID&#x60; is always retrieved.  Attributes included in &#x60;unretrievableAttributes&#x60; won&#39;t be retrieved unless the request is authenticated with the admin API key. (optional)
+     * @param array  $attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned.  `objectID` is always retrieved.  Attributes included in `unretrievableAttributes` won't be retrieved unless the request is authenticated with the admin API key. (optional)
      * @param array  $requestOptions       the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return array<string, mixed>|object
@@ -1621,7 +1621,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param bool  $getClusters    Whether to include the cluster&#39;s pending mapping state in the response. (optional)
+     * @param bool  $getClusters    Whether to include the cluster's pending mapping state in the response. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse|array<string, mixed>
@@ -1686,7 +1686,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - listIndexes
      *
-     * @param int   $page           Requested page of the API response. If &#x60;null&#x60;, the API response is not paginated. (optional)
+     * @param int   $page           Requested page of the API response. If `null`, the API response is not paginated. (optional)
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1716,7 +1716,7 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param int   $page           Requested page of the API response. If &#x60;null&#x60;, the API response is not paginated. (optional)
+     * @param int   $page           Requested page of the API response. If `null`, the API response is not paginated. (optional)
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -1828,7 +1828,7 @@ class SearchClient
      * @param string $indexName          Name of the index on which to perform the operation. (required)
      * @param string $objectID           Unique record identifier. (required)
      * @param array  $attributesToUpdate Attributes with their values. (required)
-     * @param bool   $createIfNotExists  Whether to create a new record if it doesn&#39;t exist. (optional, default to true)
+     * @param bool   $createIfNotExists  Whether to create a new record if it doesn't exist. (optional, default to true)
      * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse|array<string, mixed>
@@ -2379,7 +2379,7 @@ class SearchClient
      *  - search
      *
      * @param string $indexName                   Name of the index on which to perform the operation. (required)
-     * @param string $facetName                   Facet attribute in which to search for values.  This attribute must be included in the &#x60;attributesForFaceting&#x60; index setting with the &#x60;searchable()&#x60; modifier. (required)
+     * @param string $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
      * @param array  $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
      *                                            - $searchForFacetValuesRequest['params'] => (string) Search parameters as a URL-encoded query string.
      *                                            - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
@@ -2527,7 +2527,7 @@ class SearchClient
      *  - settings
      *
      * @param string $indexName            Name of the index on which to perform the operation. (required)
-     * @param array  $searchSynonymsParams Body of the &#x60;searchSynonyms&#x60; operation. (optional)
+     * @param array  $searchSynonymsParams Body of the `searchSynonyms` operation. (optional)
      *                                     - $searchSynonymsParams['query'] => (string) Search query.
      *                                     - $searchSynonymsParams['type'] => (array)
      *                                     - $searchSynonymsParams['page'] => (int) Page of search results to retrieve.

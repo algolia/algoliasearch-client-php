@@ -146,7 +146,7 @@ class AbtestingClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -185,7 +185,7 @@ class AbtestingClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
@@ -224,7 +224,7 @@ class AbtestingClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
@@ -264,7 +264,7 @@ class AbtestingClient
     /**
      * This method allow you to send requests to the Algolia REST API.
      *
-     * @param string $path           Path of the endpoint, anything after \&quot;/1\&quot; must be specified. (required)
+     * @param string $path           Path of the endpoint, anything after \"/1\" must be specified. (required)
      * @param array  $parameters     Query parameters to apply to the current query. (optional)
      * @param array  $body           Parameters to send with the custom request. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions

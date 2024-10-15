@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Looking similar model.  This model recommends items that look similar to the item with the ID &#x60;objectID&#x60; based on image attributes in your index.
+ * @description Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index.
  */
 class LookingSimilarModel
 {

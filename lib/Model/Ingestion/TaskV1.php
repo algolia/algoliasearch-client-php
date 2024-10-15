@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description The V1 task object, please use methods and types that don&#39;t contain the V1 suffix.
+ * @description The V1 task object, please use methods and types that don't contain the V1 suffix.
  */
 class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

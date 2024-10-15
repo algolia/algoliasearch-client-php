@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Filter the search by facet values, so that only records with the same facet values are retrieved.  **Prefer using the &#x60;filters&#x60; parameter, which supports all filter types and combinations with boolean operators.**  - &#x60;[filter1, filter2]&#x60; is interpreted as &#x60;filter1 AND filter2&#x60;. - &#x60;[[filter1, filter2], filter3]&#x60; is interpreted as &#x60;filter1 OR filter2 AND filter3&#x60;. - &#x60;facet:-value&#x60; is interpreted as &#x60;NOT facet:value&#x60;.  While it&#39;s best to avoid attributes that start with a &#x60;-&#x60;, you can still filter them by escaping with a backslash: &#x60;facet:\\-value&#x60;.
+ * @description Filter the search by facet values, so that only records with the same facet values are retrieved.  **Prefer using the `filters` parameter, which supports all filter types and combinations with boolean operators.**  - `[filter1, filter2]` is interpreted as `filter1 AND filter2`. - `[[filter1, filter2], filter3]` is interpreted as `filter1 OR filter2 AND filter3`. - `facet:-value` is interpreted as `NOT facet:value`.  While it's best to avoid attributes that start with a `-`, you can still filter them by escaping with a backslash: `facet:\\-value`.
  */
 class FacetFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

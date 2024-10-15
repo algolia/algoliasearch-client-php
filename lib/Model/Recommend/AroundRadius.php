@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Maximum radius for a search around a central location.  This parameter works in combination with the &#x60;aroundLatLng&#x60; and &#x60;aroundLatLngViaIP&#x60; parameters. By default, the search radius is determined automatically from the density of hits around the central location. The search radius is small if there are many hits close to the central coordinates.
+ * @description Maximum radius for a search around a central location.  This parameter works in combination with the `aroundLatLng` and `aroundLatLngViaIP` parameters. By default, the search radius is determined automatically from the density of hits around the central location. The search radius is small if there are many hits close to the central coordinates.
  */
 class AroundRadius extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

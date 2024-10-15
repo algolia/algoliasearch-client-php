@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Settings for the semantic search part of NeuralSearch. Only used when &#x60;mode&#x60; is &#x60;neuralSearch&#x60;.
+ * @description Settings for the semantic search part of NeuralSearch. Only used when `mode` is `neuralSearch`.
  */
 class SemanticSearch extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

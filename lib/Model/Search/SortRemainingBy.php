@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Order of facet values that aren&#39;t explicitly positioned with the &#x60;order&#x60; setting.  - &#x60;count&#x60;.   Order remaining facet values by decreasing count.   The count is the number of matching records containing this facet value.  - &#x60;alpha&#x60;.   Sort facet values alphabetically.  - &#x60;hidden&#x60;.   Don&#39;t show facet values that aren&#39;t explicitly positioned.
+ * @description Order of facet values that aren't explicitly positioned with the `order` setting.  - `count`.   Order remaining facet values by decreasing count.   The count is the number of matching records containing this facet value.  - `alpha`.   Sort facet values alphabetically.  - `hidden`.   Don't show facet values that aren't explicitly positioned.
  */
 class SortRemainingBy
 {

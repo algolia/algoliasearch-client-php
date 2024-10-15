@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Each parameter value, including the &#x60;query&#x60; must not be larger than 512 bytes.
+ * @description Each parameter value, including the `query` must not be larger than 512 bytes.
  */
 class SearchParamsObject extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

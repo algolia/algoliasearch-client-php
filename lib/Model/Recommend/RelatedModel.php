@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Related products or similar content model.  This model recommends items that are similar to the item with the ID &#x60;objectID&#x60;. Similarity is determined from the user interactions and attributes.
+ * @description Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes.
  */
 class RelatedModel
 {

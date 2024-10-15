@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Determines how many records of a group are included in the search results.  Records with the same value for the &#x60;attributeForDistinct&#x60; attribute are considered a group. The &#x60;distinct&#x60; setting controls how many members of the group are returned. This is useful for [deduplication and grouping](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).  The &#x60;distinct&#x60; setting is ignored if &#x60;attributeForDistinct&#x60; is not set.
+ * @description Determines how many records of a group are included in the search results.  Records with the same value for the `attributeForDistinct` attribute are considered a group. The `distinct` setting controls how many members of the group are returned. This is useful for [deduplication and grouping](https://www.algolia.com/doc/guides/managing-results/refine-results/grouping/#introducing-algolias-distinct-feature).  The `distinct` setting is ignored if `attributeForDistinct` is not set.
  */
 class Distinct extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

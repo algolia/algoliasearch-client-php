@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description Task is run manually, with the &#x60;/run&#x60; endpoint.
+ * @description Task is run manually, with the `/run` endpoint.
  */
 class OnDemandTriggerType
 {

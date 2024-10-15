@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\QuerySuggestions;
  *
  * @category Class
  *
- * @description Type of log entry.  - &#x60;SKIP&#x60;. A query is skipped because it doesn&#39;t match the conditions for successful inclusion. For example, when a query doesn&#39;t generate enough search results. - &#x60;INFO&#x60;. An informative log entry. - &#x60;ERROR&#x60;. The Query Suggestions process encountered an error.
+ * @description Type of log entry.  - `SKIP`. A query is skipped because it doesn't match the conditions for successful inclusion. For example, when a query doesn't generate enough search results. - `INFO`. An informative log entry. - `ERROR`. The Query Suggestions process encountered an error.
  */
 class LogLevel
 {

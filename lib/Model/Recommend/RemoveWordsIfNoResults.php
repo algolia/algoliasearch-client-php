@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description Strategy for removing words from the query when it doesn&#39;t return any results. This helps to avoid returning empty search results.  - &#x60;none&#x60;.   No words are removed when a query doesn&#39;t return results.  - &#x60;lastWords&#x60;.   Treat the last (then second to last, then third to last) word as optional,   until there are results or at most 5 words have been removed.  - &#x60;firstWords&#x60;.   Treat the first (then second, then third) word as optional,   until there are results or at most 5 words have been removed.  - &#x60;allOptional&#x60;.   Treat all words as optional.  For more information, see [Remove words to improve results](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/in-depth/why-use-remove-words-if-no-results/).
+ * @description Strategy for removing words from the query when it doesn't return any results. This helps to avoid returning empty search results.  - `none`.   No words are removed when a query doesn't return results.  - `lastWords`.   Treat the last (then second to last, then third to last) word as optional,   until there are results or at most 5 words have been removed.  - `firstWords`.   Treat the first (then second, then third) word as optional,   until there are results or at most 5 words have been removed.  - `allOptional`.   Treat all words as optional.  For more information, see [Remove words to improve results](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/in-depth/why-use-remove-words-if-no-results/).
  */
 class RemoveWordsIfNoResults
 {

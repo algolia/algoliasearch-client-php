@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Use this event to track when users convert on items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track conversion events related to Algolia requests, use the \&quot;Converted object IDs after search\&quot; event.
+ * @description Use this event to track when users convert on items unrelated to a previous Algolia request. For example, if you don't use Algolia to build your category pages, use this event.  To track conversion events related to Algolia requests, use the \"Converted object IDs after search\" event.
  */
 class ConvertedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

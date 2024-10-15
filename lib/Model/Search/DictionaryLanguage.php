@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Dictionary type. If &#x60;null&#x60;, this dictionary type isn&#39;t supported for the language.
+ * @description Dictionary type. If `null`, this dictionary type isn't supported for the language.
  */
 class DictionaryLanguage extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

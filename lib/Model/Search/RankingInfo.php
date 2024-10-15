@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Object with detailed information about the record&#39;s ranking.
+ * @description Object with detailed information about the record's ranking.
  */
 class RankingInfo extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

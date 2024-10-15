@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description Type of authentication. This determines the type of credentials required in the &#x60;input&#x60; object.
+ * @description Type of authentication. This determines the type of credentials required in the `input` object.
  */
 class AuthenticationType
 {

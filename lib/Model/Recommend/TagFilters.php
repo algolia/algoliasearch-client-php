@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Filter the search by values of the special &#x60;_tags&#x60; attribute.  **Prefer using the &#x60;filters&#x60; parameter, which supports all filter types and combinations with boolean operators.**  Different from regular facets, &#x60;_tags&#x60; can only be used for filtering (including or excluding records). You won&#39;t get a facet count. The same combination and escaping rules apply as for &#x60;facetFilters&#x60;.
+ * @description Filter the search by values of the special `_tags` attribute.  **Prefer using the `filters` parameter, which supports all filter types and combinations with boolean operators.**  Different from regular facets, `_tags` can only be used for filtering (including or excluding records). You won't get a facet count. The same combination and escaping rules apply as for `facetFilters`.
  */
 class TagFilters extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

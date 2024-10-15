@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description - &#x60;min&#x60;. Return matches with the lowest number of typos.   For example, if you have matches without typos, only include those.   But if there are no matches without typos (with 1 typo), include matches with 1 typo (2 typos). - &#x60;strict&#x60;. Return matches with the two lowest numbers of typos.   With &#x60;strict&#x60;, the Typo ranking criterion is applied first in the &#x60;ranking&#x60; setting.
+ * @description - `min`. Return matches with the lowest number of typos.   For example, if you have matches without typos, only include those.   But if there are no matches without typos (with 1 typo), include matches with 1 typo (2 typos). - `strict`. Return matches with the two lowest numbers of typos.   With `strict`, the Typo ranking criterion is applied first in the `ranking` setting.
  */
 class TypoToleranceEnum
 {

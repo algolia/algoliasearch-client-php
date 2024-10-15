@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description Destination type.  - &#x60;search&#x60;.   Data is stored in an Algolia index.  - &#x60;insights&#x60;.   Data is recorded as user events in the Insights API.
+ * @description Destination type.  - `search`.   Data is stored in an Algolia index.  - `insights`.   Data is recorded as user events in the Insights API.
  */
 class DestinationType
 {

@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Use this event to track when users add items to their shopping cart unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track add-to-cart events related to Algolia requests, use the \&quot;Added to cart object IDs after search\&quot; event.
+ * @description Use this event to track when users add items to their shopping cart unrelated to a previous Algolia request. For example, if you don't use Algolia to build your category pages, use this event.  To track add-to-cart events related to Algolia requests, use the \"Added to cart object IDs after search\" event.
  */
 class AddedToCartObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Replace or edit the search query.  If &#x60;consequenceQuery&#x60; is a string, the entire search query is replaced with that string. If &#x60;consequenceQuery&#x60; is an object, it describes incremental edits made to the query.
+ * @description Replace or edit the search query.  If `consequenceQuery` is a string, the entire search query is replaced with that string. If `consequenceQuery` is an object, it describes incremental edits made to the query.
  */
 class ConsequenceQuery extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

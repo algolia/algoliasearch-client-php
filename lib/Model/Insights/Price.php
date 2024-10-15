@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Total price of a product, including any discounts, in units of &#x60;currency&#x60;.
+ * @description Total price of a product, including any discounts, in units of `currency`.
  */
 class Price extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

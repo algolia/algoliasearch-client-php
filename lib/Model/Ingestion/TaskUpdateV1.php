@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description API request body for updating a task using the V1 shape, please use methods and types that don&#39;t contain the V1 suffix.
+ * @description API request body for updating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
  */
 class TaskUpdateV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

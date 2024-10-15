@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Abtesting;
  *
  * @category Class
  *
- * @description A/B test status.  - &#x60;active&#x60;. The A/B test is live and search traffic is split between the two variants. - &#x60;stopped&#x60;. You stopped the A/B test. The A/B test data is still available for analysis. - &#x60;expired&#x60;. The A/B test was automatically stopped after reaching its end date. - &#x60;failed&#x60;. Creating the A/B test failed.
+ * @description A/B test status.  - `active`. The A/B test is live and search traffic is split between the two variants. - `stopped`. You stopped the A/B test. The A/B test data is still available for analysis. - `expired`. The A/B test was automatically stopped after reaching its end date. - `failed`. Creating the A/B test failed.
  */
 class Status
 {

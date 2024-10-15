@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Input for a &#x60;streaming&#x60; task whose source is of type &#x60;ga4BigqueryExport&#x60; and for which extracted data is continuously streamed.
+ * @description Input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
  */
 class StreamingInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

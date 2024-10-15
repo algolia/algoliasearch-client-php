@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Use this event to track when users click items unrelated to a previous Algolia request. For example, if you don&#39;t use Algolia to build your category pages, use this event.  To track click events related to Algolia requests, use the \&quot;Clicked object IDs after search\&quot; event.
+ * @description Use this event to track when users click items unrelated to a previous Algolia request. For example, if you don't use Algolia to build your category pages, use this event.  To track click events related to Algolia requests, use the \"Clicked object IDs after search\" event.
  */
 class ClickedObjectIDs extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

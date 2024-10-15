@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Recommend;
  *
  * @category Class
  *
- * @description \&quot;Recommened for you\&quot; model.
+ * @description \"Recommened for you\" model.
  */
 class RecommendedForYouModel
 {

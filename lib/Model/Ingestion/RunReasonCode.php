@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Ingestion;
  *
  * @category Class
  *
- * @description A code for the task run&#39;s outcome. A readable description of the code is included in the &#x60;reason&#x60; response property.
+ * @description A code for the task run's outcome. A readable description of the code is included in the `reason` response property.
  */
 class RunReasonCode
 {

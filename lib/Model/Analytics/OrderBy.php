@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  *
  * @category Class
  *
- * @description Attribute by which to order the response items.  If the &#x60;clickAnalytics&#x60; parameter is false, only &#x60;searchCount&#x60; is available.
+ * @description Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.
  */
 class OrderBy
 {

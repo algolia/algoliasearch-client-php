@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Represents the required elements of the task input when using a &#x60;shopify&#x60; source.
+ * @description Represents the required elements of the task input when using a `shopify` source.
  */
 class ShopifyInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

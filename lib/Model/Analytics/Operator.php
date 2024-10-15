@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Analytics;
  *
  * @category Class
  *
- * @description Character that characterizes how the filter is applied.  For example, for a facet filter &#x60;facet:value&#x60;, &#x60;:&#x60; is the operator. For a numeric filter &#x60;count&gt;50&#x60;, &#x60;&gt;&#x60; is the operator.
+ * @description Character that characterizes how the filter is applied.  For example, for a facet filter `facet:value`, `:` is the operator. For a numeric filter `count>50`, `>` is the operator.
  */
 class Operator
 {

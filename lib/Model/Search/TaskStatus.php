@@ -9,7 +9,7 @@ namespace Algolia\AlgoliaSearch\Model\Search;
  *
  * @category Class
  *
- * @description Task status, &#x60;published&#x60; if the task is completed, &#x60;notPublished&#x60; otherwise.
+ * @description Task status, `published` if the task is completed, `notPublished` otherwise.
  */
 class TaskStatus
 {

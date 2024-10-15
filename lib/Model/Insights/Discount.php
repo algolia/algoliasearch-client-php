@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description Absolute value of the discount for this product, in units of &#x60;currency&#x60;.
+ * @description Absolute value of the discount for this product, in units of `currency`.
  */
 class Discount extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

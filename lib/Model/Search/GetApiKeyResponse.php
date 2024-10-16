@@ -211,6 +211,9 @@ class GetApiKeyResponse extends AbstractModel implements ModelInterface, \ArrayA
     {
         $invalidProperties = [];
 
+        if (!isset($this->container['value']) || null === $this->container['value']) {
+            $invalidProperties[] = "'value' can't be null";
+        }
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
@@ -235,7 +238,7 @@ class GetApiKeyResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets value.
      *
-     * @return null|string
+     * @return string
      */
     public function getValue()
     {
@@ -245,7 +248,7 @@ class GetApiKeyResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets value.
      *
-     * @param null|string $value API key
+     * @param string $value API key
      *
      * @return self
      */

@@ -155,13 +155,7 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['outliers']) || null === $this->container['outliers']) {
-            $invalidProperties[] = "'outliers' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -178,7 +172,7 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets outliers.
      *
-     * @return Outliers
+     * @return null|Outliers
      */
     public function getOutliers()
     {
@@ -188,7 +182,7 @@ class ABTestConfiguration extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets outliers.
      *
-     * @param Outliers $outliers outliers
+     * @param null|Outliers $outliers outliers
      *
      * @return self
      */

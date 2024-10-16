@@ -25,6 +25,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundLatLng' => 'string',
         'automaticRadius' => 'string',
         'exhaustive' => '\Algolia\AlgoliaSearch\Model\Search\Exhaustive',
+        'appliedRules' => 'object[]',
         'exhaustiveFacetsCount' => 'bool',
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
@@ -66,6 +67,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundLatLng' => null,
         'automaticRadius' => null,
         'exhaustive' => null,
+        'appliedRules' => null,
         'exhaustiveFacetsCount' => null,
         'exhaustiveNbHits' => null,
         'exhaustiveTypo' => null,
@@ -108,6 +110,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundLatLng' => 'aroundLatLng',
         'automaticRadius' => 'automaticRadius',
         'exhaustive' => 'exhaustive',
+        'appliedRules' => 'appliedRules',
         'exhaustiveFacetsCount' => 'exhaustiveFacetsCount',
         'exhaustiveNbHits' => 'exhaustiveNbHits',
         'exhaustiveTypo' => 'exhaustiveTypo',
@@ -149,6 +152,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundLatLng' => 'setAroundLatLng',
         'automaticRadius' => 'setAutomaticRadius',
         'exhaustive' => 'setExhaustive',
+        'appliedRules' => 'setAppliedRules',
         'exhaustiveFacetsCount' => 'setExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'setExhaustiveNbHits',
         'exhaustiveTypo' => 'setExhaustiveTypo',
@@ -190,6 +194,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundLatLng' => 'getAroundLatLng',
         'automaticRadius' => 'getAutomaticRadius',
         'exhaustive' => 'getExhaustive',
+        'appliedRules' => 'getAppliedRules',
         'exhaustiveFacetsCount' => 'getExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'getExhaustiveNbHits',
         'exhaustiveTypo' => 'getExhaustiveTypo',
@@ -248,6 +253,9 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['exhaustive'])) {
             $this->container['exhaustive'] = $data['exhaustive'];
+        }
+        if (isset($data['appliedRules'])) {
+            $this->container['appliedRules'] = $data['appliedRules'];
         }
         if (isset($data['exhaustiveFacetsCount'])) {
             $this->container['exhaustiveFacetsCount'] = $data['exhaustiveFacetsCount'];
@@ -538,6 +546,30 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setExhaustive($exhaustive)
     {
         $this->container['exhaustive'] = $exhaustive;
+
+        return $this;
+    }
+
+    /**
+     * Gets appliedRules.
+     *
+     * @return null|object[]
+     */
+    public function getAppliedRules()
+    {
+        return $this->container['appliedRules'] ?? null;
+    }
+
+    /**
+     * Sets appliedRules.
+     *
+     * @param null|object[] $appliedRules rules applied to the query
+     *
+     * @return self
+     */
+    public function setAppliedRules($appliedRules)
+    {
+        $this->container['appliedRules'] = $appliedRules;
 
         return $this;
     }

@@ -300,9 +300,6 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
         if (!isset($this->container['conversionCount']) || null === $this->container['conversionCount']) {
             $invalidProperties[] = "'conversionCount' can't be null";
         }
-        if (!isset($this->container['description']) || null === $this->container['description']) {
-            $invalidProperties[] = "'description' can't be null";
-        }
         if (!isset($this->container['index']) || null === $this->container['index']) {
             $invalidProperties[] = "'index' can't be null";
         }
@@ -534,7 +531,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets description.
      *
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -544,7 +541,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets description.
      *
-     * @param string $description description for this variant
+     * @param null|string $description description for this variant
      *
      * @return self
      */

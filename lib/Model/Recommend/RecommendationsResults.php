@@ -25,6 +25,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'aroundLatLng' => 'string',
         'automaticRadius' => 'string',
         'exhaustive' => '\Algolia\AlgoliaSearch\Model\Recommend\Exhaustive',
+        'appliedRules' => 'object[]',
         'exhaustiveFacetsCount' => 'bool',
         'exhaustiveNbHits' => 'bool',
         'exhaustiveTypo' => 'bool',
@@ -63,6 +64,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'aroundLatLng' => null,
         'automaticRadius' => null,
         'exhaustive' => null,
+        'appliedRules' => null,
         'exhaustiveFacetsCount' => null,
         'exhaustiveNbHits' => null,
         'exhaustiveTypo' => null,
@@ -102,6 +104,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'aroundLatLng' => 'aroundLatLng',
         'automaticRadius' => 'automaticRadius',
         'exhaustive' => 'exhaustive',
+        'appliedRules' => 'appliedRules',
         'exhaustiveFacetsCount' => 'exhaustiveFacetsCount',
         'exhaustiveNbHits' => 'exhaustiveNbHits',
         'exhaustiveTypo' => 'exhaustiveTypo',
@@ -140,6 +143,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'aroundLatLng' => 'setAroundLatLng',
         'automaticRadius' => 'setAutomaticRadius',
         'exhaustive' => 'setExhaustive',
+        'appliedRules' => 'setAppliedRules',
         'exhaustiveFacetsCount' => 'setExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'setExhaustiveNbHits',
         'exhaustiveTypo' => 'setExhaustiveTypo',
@@ -178,6 +182,7 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         'aroundLatLng' => 'getAroundLatLng',
         'automaticRadius' => 'getAutomaticRadius',
         'exhaustive' => 'getExhaustive',
+        'appliedRules' => 'getAppliedRules',
         'exhaustiveFacetsCount' => 'getExhaustiveFacetsCount',
         'exhaustiveNbHits' => 'getExhaustiveNbHits',
         'exhaustiveTypo' => 'getExhaustiveTypo',
@@ -233,6 +238,9 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
         }
         if (isset($data['exhaustive'])) {
             $this->container['exhaustive'] = $data['exhaustive'];
+        }
+        if (isset($data['appliedRules'])) {
+            $this->container['appliedRules'] = $data['appliedRules'];
         }
         if (isset($data['exhaustiveFacetsCount'])) {
             $this->container['exhaustiveFacetsCount'] = $data['exhaustiveFacetsCount'];
@@ -508,6 +516,30 @@ class RecommendationsResults extends AbstractModel implements ModelInterface, \A
     public function setExhaustive($exhaustive)
     {
         $this->container['exhaustive'] = $exhaustive;
+
+        return $this;
+    }
+
+    /**
+     * Gets appliedRules.
+     *
+     * @return null|object[]
+     */
+    public function getAppliedRules()
+    {
+        return $this->container['appliedRules'] ?? null;
+    }
+
+    /**
+     * Sets appliedRules.
+     *
+     * @param null|object[] $appliedRules rules applied to the query
+     *
+     * @return self
+     */
+    public function setAppliedRules($appliedRules)
+    {
+        $this->container['appliedRules'] = $appliedRules;
 
         return $this;
     }

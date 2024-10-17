@@ -1,3 +1,13 @@
+## [4.6.2](https://github.com/algolia/algoliasearch-client-php/compare/4.6.1...4.6.2)
+
+- [cd98290fa](https://github.com/algolia/api-clients-automation/commit/cd98290fa) fix(specs): Typo tolernace on words ([#3968](https://github.com/algolia/api-clients-automation/pull/3968)) by [@gazconroy](https://github.com/gazconroy/)
+- [5866c2954](https://github.com/algolia/api-clients-automation/commit/5866c2954) fix(specs): Add context to hitsPerPage ([#3969](https://github.com/algolia/api-clients-automation/pull/3969)) by [@gazconroy](https://github.com/gazconroy/)
+- [95e4149a3](https://github.com/algolia/api-clients-automation/commit/95e4149a3) chore(deps): dependencies 2024-10-14 ([#3944](https://github.com/algolia/api-clients-automation/pull/3944)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [162dfafa1](https://github.com/algolia/api-clients-automation/commit/162dfafa1) fix(clients): escape char in comments ([#3973](https://github.com/algolia/api-clients-automation/pull/3973)) by [@millotp](https://github.com/millotp/)
+- [8b879dead](https://github.com/algolia/api-clients-automation/commit/8b879dead) fix(specs): alternativesAsExact is plurals and synonyms ([#3974](https://github.com/algolia/api-clients-automation/pull/3974)) by [@gazconroy](https://github.com/gazconroy/)
+- [1a9b95e85](https://github.com/algolia/api-clients-automation/commit/1a9b95e85) fix(specs): Separators are non-alphanumeric characters ([#3978](https://github.com/algolia/api-clients-automation/pull/3978)) by [@gazconroy](https://github.com/gazconroy/)
+- [519fd9840](https://github.com/algolia/api-clients-automation/commit/519fd9840) fix(specs): multiple clients fixes ([#3971](https://github.com/algolia/api-clients-automation/pull/3971)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.6.1](https://github.com/algolia/algoliasearch-client-php/compare/4.6.0...4.6.1)
 
 - [f516d0243](https://github.com/algolia/api-clients-automation/commit/f516d0243) fix(specs): Typos in API descriptions ([#3932](https://github.com/algolia/api-clients-automation/pull/3932)) by [@gazconroy](https://github.com/gazconroy/)

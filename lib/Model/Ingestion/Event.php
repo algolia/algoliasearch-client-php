@@ -24,7 +24,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     protected static $modelTypes = [
         'eventID' => 'string',
         'runID' => 'string',
-        'parentID' => 'string',
         'status' => '\Algolia\AlgoliaSearch\Model\Ingestion\EventStatus',
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\EventType',
         'batchSize' => 'int',
@@ -40,7 +39,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     protected static $modelFormats = [
         'eventID' => null,
         'runID' => null,
-        'parentID' => null,
         'status' => null,
         'type' => null,
         'batchSize' => null,
@@ -57,7 +55,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     protected static $attributeMap = [
         'eventID' => 'eventID',
         'runID' => 'runID',
-        'parentID' => 'parentID',
         'status' => 'status',
         'type' => 'type',
         'batchSize' => 'batchSize',
@@ -73,7 +70,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     protected static $setters = [
         'eventID' => 'setEventID',
         'runID' => 'setRunID',
-        'parentID' => 'setParentID',
         'status' => 'setStatus',
         'type' => 'setType',
         'batchSize' => 'setBatchSize',
@@ -89,7 +85,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     protected static $getters = [
         'eventID' => 'getEventID',
         'runID' => 'getRunID',
-        'parentID' => 'getParentID',
         'status' => 'getStatus',
         'type' => 'getType',
         'batchSize' => 'getBatchSize',
@@ -116,9 +111,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
         }
         if (isset($data['runID'])) {
             $this->container['runID'] = $data['runID'];
-        }
-        if (isset($data['parentID'])) {
-            $this->container['parentID'] = $data['parentID'];
         }
         if (isset($data['status'])) {
             $this->container['status'] = $data['status'];
@@ -274,30 +266,6 @@ class Event extends AbstractModel implements ModelInterface, \ArrayAccess, \Json
     public function setRunID($runID)
     {
         $this->container['runID'] = $runID;
-
-        return $this;
-    }
-
-    /**
-     * Gets parentID.
-     *
-     * @return null|string
-     */
-    public function getParentID()
-    {
-        return $this->container['parentID'] ?? null;
-    }
-
-    /**
-     * Sets parentID.
-     *
-     * @param null|string $parentID the parent event, the cause of this event
-     *
-     * @return self
-     */
-    public function setParentID($parentID)
-    {
-        $this->container['parentID'] = $parentID;
 
         return $this;
     }

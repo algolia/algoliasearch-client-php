@@ -137,7 +137,13 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['results']) || null === $this->container['results']) {
+            $invalidProperties[] = "'results' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -154,7 +160,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets results.
      *
-     * @return null|object[]
+     * @return object[]
      */
     public function getResults()
     {
@@ -164,7 +170,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets results.
      *
-     * @param null|object[] $results retrieved records
+     * @param object[] $results retrieved records
      *
      * @return self
      */

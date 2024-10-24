@@ -30,8 +30,8 @@ class TimeRange extends AbstractModel implements ModelInterface, \ArrayAccess, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'from' => null,
-        'until' => null,
+        'from' => 'int64',
+        'until' => 'int64',
     ];
 
     /**

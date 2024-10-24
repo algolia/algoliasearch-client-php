@@ -20,6 +20,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelTypes = [
+        'message' => 'string',
         'results' => 'object[]',
     ];
 
@@ -29,6 +30,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $modelFormats = [
+        'message' => null,
         'results' => null,
     ];
 
@@ -39,6 +41,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $attributeMap = [
+        'message' => 'message',
         'results' => 'results',
     ];
 
@@ -48,6 +51,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $setters = [
+        'message' => 'setMessage',
         'results' => 'setResults',
     ];
 
@@ -57,6 +61,7 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      * @var string[]
      */
     protected static $getters = [
+        'message' => 'getMessage',
         'results' => 'getResults',
     ];
 
@@ -74,6 +79,9 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
      */
     public function __construct(?array $data = null)
     {
+        if (isset($data['message'])) {
+            $this->container['message'] = $data['message'];
+        }
         if (isset($data['results'])) {
             $this->container['results'] = $data['results'];
         }
@@ -155,6 +163,30 @@ class GetObjectsResponse extends AbstractModel implements ModelInterface, \Array
     public function valid()
     {
         return 0 === count($this->listInvalidProperties());
+    }
+
+    /**
+     * Gets message.
+     *
+     * @return null|string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'] ?? null;
+    }
+
+    /**
+     * Sets message.
+     *
+     * @param null|string $message an optional status message
+     *
+     * @return self
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
+
+        return $this;
     }
 
     /**

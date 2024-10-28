@@ -26,6 +26,12 @@ class SynonymType
 
     public const PLACEHOLDER = 'placeholder';
 
+    public const ONE_WAY_SYNONYM = 'oneWaySynonym';
+
+    public const ALT_CORRECTION1 = 'altCorrection1';
+
+    public const ALT_CORRECTION2 = 'altCorrection2';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -39,6 +45,9 @@ class SynonymType
             self::ALTCORRECTION1,
             self::ALTCORRECTION2,
             self::PLACEHOLDER,
+            self::ONE_WAY_SYNONYM,
+            self::ALT_CORRECTION1,
+            self::ALT_CORRECTION2,
         ];
     }
 }

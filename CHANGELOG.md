@@ -1,3 +1,9 @@
+## [4.7.0](https://github.com/algolia/algoliasearch-client-php/compare/4.6.4...4.7.0)
+
+- [22f49f1f6](https://github.com/algolia/api-clients-automation/commit/22f49f1f6) fix(specs): update time range number types [skip-bc] ([#4023](https://github.com/algolia/api-clients-automation/pull/4023)) by [@Fluf22](https://github.com/Fluf22/)
+- [312d33731](https://github.com/algolia/api-clients-automation/commit/312d33731) feat(specs): add missing message attribute to GetObjectsResponse [skip-bc] ([#4029](https://github.com/algolia/api-clients-automation/pull/4029)) by [@kombucha](https://github.com/kombucha/)
+- [32f9f4d16](https://github.com/algolia/api-clients-automation/commit/32f9f4d16) fix(specs): support synonyms type in camel case [skip-bc] ([#4031](https://github.com/algolia/api-clients-automation/pull/4031)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.6.4](https://github.com/algolia/algoliasearch-client-php/compare/4.6.3...4.6.4)
 
 - [1f36e8f93](https://github.com/algolia/api-clients-automation/commit/1f36e8f93) fix(specs): results in getObjects is required ([#4024](https://github.com/algolia/api-clients-automation/pull/4024)) by [@shortcuts](https://github.com/shortcuts/)

@@ -21,7 +21,7 @@ use GuzzleHttp\Psr7\Query;
  */
 class AbtestingClient
 {
-    public const VERSION = '4.7.0';
+    public const VERSION = '4.8.0';
 
     /**
      * @var ApiWrapperInterface

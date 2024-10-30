@@ -28,6 +28,8 @@ class AuthenticationType
 
     public const ALGOLIA_INSIGHTS = 'algoliaInsights';
 
+    public const SECRETS = 'secrets';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -42,6 +44,7 @@ class AuthenticationType
             self::OAUTH,
             self::ALGOLIA,
             self::ALGOLIA_INSIGHTS,
+            self::SECRETS,
         ];
     }
 }

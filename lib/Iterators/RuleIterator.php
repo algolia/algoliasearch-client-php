@@ -15,7 +15,7 @@ final class RuleIterator extends AbstractAlgoliaIterator
     {
         if (
             is_array($this->response)
-            && $this->key >= $this->response['nbHits']
+            && $this->key >= count($this->response['hits'])
         ) {
             return;
         }

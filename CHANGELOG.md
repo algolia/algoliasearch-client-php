@@ -1,3 +1,7 @@
+## [4.8.1](https://github.com/algolia/algoliasearch-client-php/compare/4.8.0...4.8.1)
+
+- [625421783](https://github.com/algolia/api-clients-automation/commit/625421783) fix(clients): update browse iterator ([#4058](https://github.com/algolia/api-clients-automation/pull/4058)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.8.0](https://github.com/algolia/algoliasearch-client-php/compare/4.7.0...4.8.0)
 
 - [be40cf61d](https://github.com/algolia/api-clients-automation/commit/be40cf61d) feat(specs): add secrets authentications to ingestion ([#4054](https://github.com/algolia/api-clients-automation/pull/4054)) by [@shortcuts](https://github.com/shortcuts/)

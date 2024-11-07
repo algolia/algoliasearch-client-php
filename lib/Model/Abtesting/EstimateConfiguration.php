@@ -8,13 +8,13 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MinimumDetectableEffect Class Doc Comment.
+ * EstimateConfiguration Class Doc Comment.
  *
  * @category Class
  *
- * @description Configuration for the smallest difference between test variants you want to detect.
+ * @description A/B test configuration for estimating the sample size and duration using minimum detectable effect.
  */
-class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EstimateConfiguration extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +22,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'size' => 'float',
-        'metric' => '\Algolia\AlgoliaSearch\Model\Abtesting\EffectMetric',
+        'outliers' => '\Algolia\AlgoliaSearch\Model\Abtesting\Outliers',
+        'emptySearch' => '\Algolia\AlgoliaSearch\Model\Abtesting\EmptySearch',
+        'minimumDetectableEffect' => '\Algolia\AlgoliaSearch\Model\Abtesting\MinimumDetectableEffect',
     ];
 
     /**
@@ -32,8 +33,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'size' => 'double',
-        'metric' => null,
+        'outliers' => null,
+        'emptySearch' => null,
+        'minimumDetectableEffect' => null,
     ];
 
     /**
@@ -43,8 +45,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'size' => 'size',
-        'metric' => 'metric',
+        'outliers' => 'outliers',
+        'emptySearch' => 'emptySearch',
+        'minimumDetectableEffect' => 'minimumDetectableEffect',
     ];
 
     /**
@@ -53,8 +56,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $setters = [
-        'size' => 'setSize',
-        'metric' => 'setMetric',
+        'outliers' => 'setOutliers',
+        'emptySearch' => 'setEmptySearch',
+        'minimumDetectableEffect' => 'setMinimumDetectableEffect',
     ];
 
     /**
@@ -63,8 +67,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $getters = [
-        'size' => 'getSize',
-        'metric' => 'getMetric',
+        'outliers' => 'getOutliers',
+        'emptySearch' => 'getEmptySearch',
+        'minimumDetectableEffect' => 'getMinimumDetectableEffect',
     ];
 
     /**
@@ -81,11 +86,14 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['size'])) {
-            $this->container['size'] = $data['size'];
+        if (isset($data['outliers'])) {
+            $this->container['outliers'] = $data['outliers'];
         }
-        if (isset($data['metric'])) {
-            $this->container['metric'] = $data['metric'];
+        if (isset($data['emptySearch'])) {
+            $this->container['emptySearch'] = $data['emptySearch'];
+        }
+        if (isset($data['minimumDetectableEffect'])) {
+            $this->container['minimumDetectableEffect'] = $data['minimumDetectableEffect'];
         }
     }
 
@@ -149,11 +157,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['size']) || null === $this->container['size']) {
-            $invalidProperties[] = "'size' can't be null";
-        }
-        if (!isset($this->container['metric']) || null === $this->container['metric']) {
-            $invalidProperties[] = "'metric' can't be null";
+        if (!isset($this->container['minimumDetectableEffect']) || null === $this->container['minimumDetectableEffect']) {
+            $invalidProperties[] = "'minimumDetectableEffect' can't be null";
         }
 
         return $invalidProperties;
@@ -171,49 +176,73 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     }
 
     /**
-     * Gets size.
+     * Gets outliers.
      *
-     * @return float
+     * @return null|Outliers
      */
-    public function getSize()
+    public function getOutliers()
     {
-        return $this->container['size'] ?? null;
+        return $this->container['outliers'] ?? null;
     }
 
     /**
-     * Sets size.
+     * Sets outliers.
      *
-     * @param float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
+     * @param null|Outliers $outliers outliers
      *
      * @return self
      */
-    public function setSize($size)
+    public function setOutliers($outliers)
     {
-        $this->container['size'] = $size;
+        $this->container['outliers'] = $outliers;
 
         return $this;
     }
 
     /**
-     * Gets metric.
+     * Gets emptySearch.
      *
-     * @return EffectMetric
+     * @return null|EmptySearch
      */
-    public function getMetric()
+    public function getEmptySearch()
     {
-        return $this->container['metric'] ?? null;
+        return $this->container['emptySearch'] ?? null;
     }
 
     /**
-     * Sets metric.
+     * Sets emptySearch.
      *
-     * @param EffectMetric $metric metric
+     * @param null|EmptySearch $emptySearch emptySearch
      *
      * @return self
      */
-    public function setMetric($metric)
+    public function setEmptySearch($emptySearch)
     {
-        $this->container['metric'] = $metric;
+        $this->container['emptySearch'] = $emptySearch;
+
+        return $this;
+    }
+
+    /**
+     * Gets minimumDetectableEffect.
+     *
+     * @return MinimumDetectableEffect
+     */
+    public function getMinimumDetectableEffect()
+    {
+        return $this->container['minimumDetectableEffect'] ?? null;
+    }
+
+    /**
+     * Sets minimumDetectableEffect.
+     *
+     * @param MinimumDetectableEffect $minimumDetectableEffect minimumDetectableEffect
+     *
+     * @return self
+     */
+    public function setMinimumDetectableEffect($minimumDetectableEffect)
+    {
+        $this->container['minimumDetectableEffect'] = $minimumDetectableEffect;
 
         return $this;
     }

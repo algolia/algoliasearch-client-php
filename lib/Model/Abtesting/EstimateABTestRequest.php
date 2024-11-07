@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MinimumDetectableEffect Class Doc Comment.
+ * EstimateABTestRequest Class Doc Comment.
  *
  * @category Class
- *
- * @description Configuration for the smallest difference between test variants you want to detect.
  */
-class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EstimateABTestRequest extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +20,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'size' => 'float',
-        'metric' => '\Algolia\AlgoliaSearch\Model\Abtesting\EffectMetric',
+        'configuration' => '\Algolia\AlgoliaSearch\Model\Abtesting\EstimateConfiguration',
+        'variants' => '\Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]',
     ];
 
     /**
@@ -32,8 +30,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'size' => 'double',
-        'metric' => null,
+        'configuration' => null,
+        'variants' => null,
     ];
 
     /**
@@ -43,8 +41,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'size' => 'size',
-        'metric' => 'metric',
+        'configuration' => 'configuration',
+        'variants' => 'variants',
     ];
 
     /**
@@ -53,8 +51,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $setters = [
-        'size' => 'setSize',
-        'metric' => 'setMetric',
+        'configuration' => 'setConfiguration',
+        'variants' => 'setVariants',
     ];
 
     /**
@@ -63,8 +61,8 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $getters = [
-        'size' => 'getSize',
-        'metric' => 'getMetric',
+        'configuration' => 'getConfiguration',
+        'variants' => 'getVariants',
     ];
 
     /**
@@ -81,11 +79,11 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['size'])) {
-            $this->container['size'] = $data['size'];
+        if (isset($data['configuration'])) {
+            $this->container['configuration'] = $data['configuration'];
         }
-        if (isset($data['metric'])) {
-            $this->container['metric'] = $data['metric'];
+        if (isset($data['variants'])) {
+            $this->container['variants'] = $data['variants'];
         }
     }
 
@@ -149,11 +147,11 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     {
         $invalidProperties = [];
 
-        if (!isset($this->container['size']) || null === $this->container['size']) {
-            $invalidProperties[] = "'size' can't be null";
+        if (!isset($this->container['configuration']) || null === $this->container['configuration']) {
+            $invalidProperties[] = "'configuration' can't be null";
         }
-        if (!isset($this->container['metric']) || null === $this->container['metric']) {
-            $invalidProperties[] = "'metric' can't be null";
+        if (!isset($this->container['variants']) || null === $this->container['variants']) {
+            $invalidProperties[] = "'variants' can't be null";
         }
 
         return $invalidProperties;
@@ -171,49 +169,49 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     }
 
     /**
-     * Gets size.
+     * Gets configuration.
      *
-     * @return float
+     * @return EstimateConfiguration
      */
-    public function getSize()
+    public function getConfiguration()
     {
-        return $this->container['size'] ?? null;
+        return $this->container['configuration'] ?? null;
     }
 
     /**
-     * Sets size.
+     * Sets configuration.
      *
-     * @param float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
+     * @param EstimateConfiguration $configuration configuration
      *
      * @return self
      */
-    public function setSize($size)
+    public function setConfiguration($configuration)
     {
-        $this->container['size'] = $size;
+        $this->container['configuration'] = $configuration;
 
         return $this;
     }
 
     /**
-     * Gets metric.
+     * Gets variants.
      *
-     * @return EffectMetric
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]
      */
-    public function getMetric()
+    public function getVariants()
     {
-        return $this->container['metric'] ?? null;
+        return $this->container['variants'] ?? null;
     }
 
     /**
-     * Sets metric.
+     * Sets variants.
      *
-     * @param EffectMetric $metric metric
+     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variants A/B test variants
      *
      * @return self
      */
-    public function setMetric($metric)
+    public function setVariants($variants)
     {
-        $this->container['metric'] = $metric;
+        $this->container['variants'] = $variants;
 
         return $this;
     }

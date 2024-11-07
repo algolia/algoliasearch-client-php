@@ -8,13 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * MinimumDetectableEffect Class Doc Comment.
+ * EstimateABTestResponse Class Doc Comment.
  *
  * @category Class
- *
- * @description Configuration for the smallest difference between test variants you want to detect.
  */
-class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EstimateABTestResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -22,8 +20,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelTypes = [
-        'size' => 'float',
-        'metric' => '\Algolia\AlgoliaSearch\Model\Abtesting\EffectMetric',
+        'durationDays' => 'int',
+        'controlSampleSize' => 'int',
+        'experimentSampleSize' => 'int',
     ];
 
     /**
@@ -32,8 +31,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $modelFormats = [
-        'size' => 'double',
-        'metric' => null,
+        'durationDays' => 'int64',
+        'controlSampleSize' => 'int64',
+        'experimentSampleSize' => 'int64',
     ];
 
     /**
@@ -43,8 +43,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $attributeMap = [
-        'size' => 'size',
-        'metric' => 'metric',
+        'durationDays' => 'durationDays',
+        'controlSampleSize' => 'controlSampleSize',
+        'experimentSampleSize' => 'experimentSampleSize',
     ];
 
     /**
@@ -53,8 +54,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $setters = [
-        'size' => 'setSize',
-        'metric' => 'setMetric',
+        'durationDays' => 'setDurationDays',
+        'controlSampleSize' => 'setControlSampleSize',
+        'experimentSampleSize' => 'setExperimentSampleSize',
     ];
 
     /**
@@ -63,8 +65,9 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      * @var string[]
      */
     protected static $getters = [
-        'size' => 'getSize',
-        'metric' => 'getMetric',
+        'durationDays' => 'getDurationDays',
+        'controlSampleSize' => 'getControlSampleSize',
+        'experimentSampleSize' => 'getExperimentSampleSize',
     ];
 
     /**
@@ -81,11 +84,14 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function __construct(?array $data = null)
     {
-        if (isset($data['size'])) {
-            $this->container['size'] = $data['size'];
+        if (isset($data['durationDays'])) {
+            $this->container['durationDays'] = $data['durationDays'];
         }
-        if (isset($data['metric'])) {
-            $this->container['metric'] = $data['metric'];
+        if (isset($data['controlSampleSize'])) {
+            $this->container['controlSampleSize'] = $data['controlSampleSize'];
+        }
+        if (isset($data['experimentSampleSize'])) {
+            $this->container['experimentSampleSize'] = $data['experimentSampleSize'];
         }
     }
 
@@ -147,16 +153,7 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!isset($this->container['size']) || null === $this->container['size']) {
-            $invalidProperties[] = "'size' can't be null";
-        }
-        if (!isset($this->container['metric']) || null === $this->container['metric']) {
-            $invalidProperties[] = "'metric' can't be null";
-        }
-
-        return $invalidProperties;
+        return [];
     }
 
     /**
@@ -171,49 +168,73 @@ class MinimumDetectableEffect extends AbstractModel implements ModelInterface, \
     }
 
     /**
-     * Gets size.
+     * Gets durationDays.
      *
-     * @return float
+     * @return null|int
      */
-    public function getSize()
+    public function getDurationDays()
     {
-        return $this->container['size'] ?? null;
+        return $this->container['durationDays'] ?? null;
     }
 
     /**
-     * Sets size.
+     * Sets durationDays.
      *
-     * @param float $size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
+     * @param null|int $durationDays Estimated number of days needed to reach the sample sizes required for detecting the configured effect. This value is based on historical traffic.
      *
      * @return self
      */
-    public function setSize($size)
+    public function setDurationDays($durationDays)
     {
-        $this->container['size'] = $size;
+        $this->container['durationDays'] = $durationDays;
 
         return $this;
     }
 
     /**
-     * Gets metric.
+     * Gets controlSampleSize.
      *
-     * @return EffectMetric
+     * @return null|int
      */
-    public function getMetric()
+    public function getControlSampleSize()
     {
-        return $this->container['metric'] ?? null;
+        return $this->container['controlSampleSize'] ?? null;
     }
 
     /**
-     * Sets metric.
+     * Sets controlSampleSize.
      *
-     * @param EffectMetric $metric metric
+     * @param null|int $controlSampleSize number of tracked searches needed to be able to detect the configured effect for the control variant
      *
      * @return self
      */
-    public function setMetric($metric)
+    public function setControlSampleSize($controlSampleSize)
     {
-        $this->container['metric'] = $metric;
+        $this->container['controlSampleSize'] = $controlSampleSize;
+
+        return $this;
+    }
+
+    /**
+     * Gets experimentSampleSize.
+     *
+     * @return null|int
+     */
+    public function getExperimentSampleSize()
+    {
+        return $this->container['experimentSampleSize'] ?? null;
+    }
+
+    /**
+     * Sets experimentSampleSize.
+     *
+     * @param null|int $experimentSampleSize number of tracked searches needed to be able to detect the configured effect for the experiment variant
+     *
+     * @return self
+     */
+    public function setExperimentSampleSize($experimentSampleSize)
+    {
+        $this->container['experimentSampleSize'] = $experimentSampleSize;
 
         return $this;
     }

@@ -7,6 +7,7 @@ namespace Algolia\AlgoliaSearch\Api;
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
 use Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest;
+use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestsRequest;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -336,6 +337,39 @@ class AbtestingClient
         }
 
         return $this->sendRequest('DELETE', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
+    }
+
+    /**
+     * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+     *
+     * Required API Key ACLs:
+     *  - analytics
+     *
+     * @param array $estimateABTestRequest estimateABTestRequest (required)
+     *                                     - $estimateABTestRequest['configuration'] => (array)  (required)
+     *                                     - $estimateABTestRequest['variants'] => (array) A/B test variants. (required)
+     *
+     * @see EstimateABTestRequest
+     *
+     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     *
+     * @return \Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse|array<string, mixed>
+     */
+    public function estimateABTest($estimateABTestRequest, $requestOptions = [])
+    {
+        // verify the required parameter 'estimateABTestRequest' is set
+        if (!isset($estimateABTestRequest)) {
+            throw new \InvalidArgumentException(
+                'Parameter `estimateABTestRequest` is required when calling `estimateABTest`.'
+            );
+        }
+
+        $resourcePath = '/2/abtests/estimate';
+        $queryParameters = [];
+        $headers = [];
+        $httpBody = $estimateABTestRequest;
+
+        return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
     /**

@@ -236,9 +236,6 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         if (!isset($this->container['enabled']) || null === $this->container['enabled']) {
             $invalidProperties[] = "'enabled' can't be null";
         }
-        if (!isset($this->container['action']) || null === $this->container['action']) {
-            $invalidProperties[] = "'action' can't be null";
-        }
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
@@ -428,7 +425,7 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Gets action.
      *
-     * @return ActionType
+     * @return null|ActionType
      */
     public function getAction()
     {
@@ -438,7 +435,7 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets action.
      *
-     * @param ActionType $action action
+     * @param null|ActionType $action action
      *
      * @return self
      */

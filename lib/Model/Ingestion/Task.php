@@ -247,9 +247,6 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         if (!isset($this->container['enabled']) || null === $this->container['enabled']) {
             $invalidProperties[] = "'enabled' can't be null";
         }
-        if (!isset($this->container['action']) || null === $this->container['action']) {
-            $invalidProperties[] = "'action' can't be null";
-        }
         if (!isset($this->container['createdAt']) || null === $this->container['createdAt']) {
             $invalidProperties[] = "'createdAt' can't be null";
         }
@@ -487,7 +484,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets action.
      *
-     * @return ActionType
+     * @return null|ActionType
      */
     public function getAction()
     {
@@ -497,7 +494,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets action.
      *
-     * @param ActionType $action action
+     * @param null|ActionType $action action
      *
      * @return self
      */

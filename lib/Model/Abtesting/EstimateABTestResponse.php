@@ -21,8 +21,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
      */
     protected static $modelTypes = [
         'durationDays' => 'int',
-        'controlSampleSize' => 'int',
-        'experimentSampleSize' => 'int',
+        'sampleSizes' => 'int[]',
     ];
 
     /**
@@ -32,8 +31,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
      */
     protected static $modelFormats = [
         'durationDays' => 'int64',
-        'controlSampleSize' => 'int64',
-        'experimentSampleSize' => 'int64',
+        'sampleSizes' => 'int64',
     ];
 
     /**
@@ -44,8 +42,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
      */
     protected static $attributeMap = [
         'durationDays' => 'durationDays',
-        'controlSampleSize' => 'controlSampleSize',
-        'experimentSampleSize' => 'experimentSampleSize',
+        'sampleSizes' => 'sampleSizes',
     ];
 
     /**
@@ -55,8 +52,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
      */
     protected static $setters = [
         'durationDays' => 'setDurationDays',
-        'controlSampleSize' => 'setControlSampleSize',
-        'experimentSampleSize' => 'setExperimentSampleSize',
+        'sampleSizes' => 'setSampleSizes',
     ];
 
     /**
@@ -66,8 +62,7 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
      */
     protected static $getters = [
         'durationDays' => 'getDurationDays',
-        'controlSampleSize' => 'getControlSampleSize',
-        'experimentSampleSize' => 'getExperimentSampleSize',
+        'sampleSizes' => 'getSampleSizes',
     ];
 
     /**
@@ -87,11 +82,8 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
         if (isset($data['durationDays'])) {
             $this->container['durationDays'] = $data['durationDays'];
         }
-        if (isset($data['controlSampleSize'])) {
-            $this->container['controlSampleSize'] = $data['controlSampleSize'];
-        }
-        if (isset($data['experimentSampleSize'])) {
-            $this->container['experimentSampleSize'] = $data['experimentSampleSize'];
+        if (isset($data['sampleSizes'])) {
+            $this->container['sampleSizes'] = $data['sampleSizes'];
         }
     }
 
@@ -192,49 +184,25 @@ class EstimateABTestResponse extends AbstractModel implements ModelInterface, \A
     }
 
     /**
-     * Gets controlSampleSize.
+     * Gets sampleSizes.
      *
-     * @return null|int
+     * @return null|int[]
      */
-    public function getControlSampleSize()
+    public function getSampleSizes()
     {
-        return $this->container['controlSampleSize'] ?? null;
+        return $this->container['sampleSizes'] ?? null;
     }
 
     /**
-     * Sets controlSampleSize.
+     * Sets sampleSizes.
      *
-     * @param null|int $controlSampleSize number of tracked searches needed to be able to detect the configured effect for the control variant
+     * @param null|int[] $sampleSizes Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance.
      *
      * @return self
      */
-    public function setControlSampleSize($controlSampleSize)
+    public function setSampleSizes($sampleSizes)
     {
-        $this->container['controlSampleSize'] = $controlSampleSize;
-
-        return $this;
-    }
-
-    /**
-     * Gets experimentSampleSize.
-     *
-     * @return null|int
-     */
-    public function getExperimentSampleSize()
-    {
-        return $this->container['experimentSampleSize'] ?? null;
-    }
-
-    /**
-     * Sets experimentSampleSize.
-     *
-     * @param null|int $experimentSampleSize number of tracked searches needed to be able to detect the configured effect for the experiment variant
-     *
-     * @return self
-     */
-    public function setExperimentSampleSize($experimentSampleSize)
-    {
-        $this->container['experimentSampleSize'] = $experimentSampleSize;
+        $this->container['sampleSizes'] = $sampleSizes;
 
         return $this;
     }

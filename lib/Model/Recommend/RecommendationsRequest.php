@@ -24,7 +24,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
         'threshold' => 'float',
         'maxRecommendations' => 'int',
         'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
-        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendedForYouModel',
+        'model' => '\Algolia\AlgoliaSearch\Model\Recommend\LookingSimilarModel',
         'objectID' => 'string',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
         'facetName' => 'mixed',
@@ -332,7 +332,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Gets model.
      *
-     * @return RecommendedForYouModel
+     * @return LookingSimilarModel
      */
     public function getModel()
     {
@@ -342,7 +342,7 @@ class RecommendationsRequest extends AbstractModel implements ModelInterface, \A
     /**
      * Sets model.
      *
-     * @param RecommendedForYouModel $model model
+     * @param LookingSimilarModel $model model
      *
      * @return self
      */

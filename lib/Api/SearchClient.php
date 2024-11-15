@@ -824,7 +824,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
      */
     public function deleteBy($indexName, $deleteByParams, $requestOptions = [])
     {

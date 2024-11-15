@@ -26,7 +26,7 @@ class DeleteByParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'tagFilters' => '\Algolia\AlgoliaSearch\Model\Search\TagFilters',
         'aroundLatLng' => 'string',
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Search\AroundRadius',
-        'insideBoundingBox' => 'float[][]',
+        'insideBoundingBox' => '\Algolia\AlgoliaSearch\Model\Search\InsideBoundingBox',
         'insidePolygon' => 'float[][]',
     ];
 
@@ -42,7 +42,7 @@ class DeleteByParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'tagFilters' => null,
         'aroundLatLng' => null,
         'aroundRadius' => null,
-        'insideBoundingBox' => 'double',
+        'insideBoundingBox' => null,
         'insidePolygon' => 'double',
     ];
 
@@ -354,7 +354,7 @@ class DeleteByParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets insideBoundingBox.
      *
-     * @return null|float[][]
+     * @return null|InsideBoundingBox
      */
     public function getInsideBoundingBox()
     {
@@ -364,7 +364,7 @@ class DeleteByParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets insideBoundingBox.
      *
-     * @param null|float[][] $insideBoundingBox Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas).
+     * @param null|InsideBoundingBox $insideBoundingBox insideBoundingBox
      *
      * @return self
      */

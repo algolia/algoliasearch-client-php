@@ -39,7 +39,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Search\AroundRadius',
         'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\Search\AroundPrecision',
         'minimumAroundRadius' => 'int',
-        'insideBoundingBox' => 'float[][]',
+        'insideBoundingBox' => '\Algolia\AlgoliaSearch\Model\Search\InsideBoundingBox',
         'insidePolygon' => 'float[][]',
         'naturalLanguages' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]',
         'ruleContexts' => 'string[]',
@@ -80,7 +80,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'mode' => '\Algolia\AlgoliaSearch\Model\Search\Mode',
         'semanticSearch' => '\Algolia\AlgoliaSearch\Model\Search\SemanticSearch',
         'advancedSyntax' => 'bool',
-        'optionalWords' => 'string[]',
+        'optionalWords' => '\Algolia\AlgoliaSearch\Model\Search\OptionalWords',
         'disableExactOnAttributes' => 'string[]',
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Search\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]',
@@ -89,7 +89,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
         'responseFields' => 'string[]',
-        'maxFacetHits' => 'int',
         'maxValuesPerFacet' => 'int',
         'sortFacetValuesBy' => 'string',
         'attributeCriteriaComputedByMinProximity' => 'bool',
@@ -124,7 +123,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'aroundRadius' => null,
         'aroundPrecision' => null,
         'minimumAroundRadius' => null,
-        'insideBoundingBox' => 'double',
+        'insideBoundingBox' => null,
         'insidePolygon' => 'double',
         'naturalLanguages' => null,
         'ruleContexts' => null,
@@ -174,7 +173,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
         'responseFields' => null,
-        'maxFacetHits' => null,
         'maxValuesPerFacet' => null,
         'sortFacetValuesBy' => null,
         'attributeCriteriaComputedByMinProximity' => null,
@@ -260,7 +258,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
         'minProximity' => 'minProximity',
         'responseFields' => 'responseFields',
-        'maxFacetHits' => 'maxFacetHits',
         'maxValuesPerFacet' => 'maxValuesPerFacet',
         'sortFacetValuesBy' => 'sortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
@@ -345,7 +342,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
-        'maxFacetHits' => 'setMaxFacetHits',
         'maxValuesPerFacet' => 'setMaxValuesPerFacet',
         'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
@@ -430,7 +426,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
-        'maxFacetHits' => 'getMaxFacetHits',
         'maxValuesPerFacet' => 'getMaxValuesPerFacet',
         'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
@@ -660,9 +655,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
         }
         if (isset($data['responseFields'])) {
             $this->container['responseFields'] = $data['responseFields'];
-        }
-        if (isset($data['maxFacetHits'])) {
-            $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
         if (isset($data['maxValuesPerFacet'])) {
             $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
@@ -1218,7 +1210,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets insideBoundingBox.
      *
-     * @return null|float[][]
+     * @return null|InsideBoundingBox
      */
     public function getInsideBoundingBox()
     {
@@ -1228,7 +1220,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets insideBoundingBox.
      *
-     * @param null|float[][] $insideBoundingBox Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas).
+     * @param null|InsideBoundingBox $insideBoundingBox insideBoundingBox
      *
      * @return self
      */
@@ -2202,7 +2194,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets optionalWords.
      *
-     * @return null|string[]
+     * @return null|OptionalWords
      */
     public function getOptionalWords()
     {
@@ -2212,7 +2204,7 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets optionalWords.
      *
-     * @param null|string[] $optionalWords Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words divided by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words).
+     * @param null|OptionalWords $optionalWords optionalWords
      *
      * @return self
      */
@@ -2411,30 +2403,6 @@ class BrowseParamsObject extends AbstractModel implements ModelInterface, \Array
     public function setResponseFields($responseFields)
     {
         $this->container['responseFields'] = $responseFields;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxFacetHits.
-     *
-     * @return null|int
-     */
-    public function getMaxFacetHits()
-    {
-        return $this->container['maxFacetHits'] ?? null;
-    }
-
-    /**
-     * Sets maxFacetHits.
-     *
-     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-     *
-     * @return self
-     */
-    public function setMaxFacetHits($maxFacetHits)
-    {
-        $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
     }

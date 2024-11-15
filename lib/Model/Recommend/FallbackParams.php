@@ -35,7 +35,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundRadius' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundRadius',
         'aroundPrecision' => '\Algolia\AlgoliaSearch\Model\Recommend\AroundPrecision',
         'minimumAroundRadius' => 'int',
-        'insideBoundingBox' => 'float[][]',
+        'insideBoundingBox' => '\Algolia\AlgoliaSearch\Model\Recommend\InsideBoundingBox',
         'insidePolygon' => 'float[][]',
         'naturalLanguages' => '\Algolia\AlgoliaSearch\Model\Recommend\SupportedLanguage[]',
         'ruleContexts' => 'string[]',
@@ -66,6 +66,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'userData' => 'object',
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
+        'maxFacetHits' => 'int',
         'attributesToRetrieve' => 'string[]',
         'ranking' => 'string[]',
         'relevancyStrictness' => 'int',
@@ -89,7 +90,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'queryType' => '\Algolia\AlgoliaSearch\Model\Recommend\QueryType',
         'removeWordsIfNoResults' => '\Algolia\AlgoliaSearch\Model\Recommend\RemoveWordsIfNoResults',
         'advancedSyntax' => 'bool',
-        'optionalWords' => 'string[]',
+        'optionalWords' => '\Algolia\AlgoliaSearch\Model\Recommend\OptionalWords',
         'disableExactOnAttributes' => 'string[]',
         'exactOnSingleWordQuery' => '\Algolia\AlgoliaSearch\Model\Recommend\ExactOnSingleWordQuery',
         'alternativesAsExact' => '\Algolia\AlgoliaSearch\Model\Recommend\AlternativesAsExact[]',
@@ -98,7 +99,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'replaceSynonymsInHighlight' => 'bool',
         'minProximity' => 'int',
         'responseFields' => 'string[]',
-        'maxFacetHits' => 'int',
         'maxValuesPerFacet' => 'int',
         'sortFacetValuesBy' => 'string',
         'attributeCriteriaComputedByMinProximity' => 'bool',
@@ -128,7 +128,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'aroundRadius' => null,
         'aroundPrecision' => null,
         'minimumAroundRadius' => null,
-        'insideBoundingBox' => 'double',
+        'insideBoundingBox' => null,
         'insidePolygon' => 'double',
         'naturalLanguages' => null,
         'ruleContexts' => null,
@@ -159,6 +159,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'userData' => null,
         'customNormalization' => null,
         'attributeForDistinct' => null,
+        'maxFacetHits' => null,
         'attributesToRetrieve' => null,
         'ranking' => null,
         'relevancyStrictness' => null,
@@ -191,7 +192,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'replaceSynonymsInHighlight' => null,
         'minProximity' => null,
         'responseFields' => null,
-        'maxFacetHits' => null,
         'maxValuesPerFacet' => null,
         'sortFacetValuesBy' => null,
         'attributeCriteriaComputedByMinProximity' => null,
@@ -253,6 +253,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'userData' => 'userData',
         'customNormalization' => 'customNormalization',
         'attributeForDistinct' => 'attributeForDistinct',
+        'maxFacetHits' => 'maxFacetHits',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'ranking' => 'ranking',
         'relevancyStrictness' => 'relevancyStrictness',
@@ -285,7 +286,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'replaceSynonymsInHighlight' => 'replaceSynonymsInHighlight',
         'minProximity' => 'minProximity',
         'responseFields' => 'responseFields',
-        'maxFacetHits' => 'maxFacetHits',
         'maxValuesPerFacet' => 'maxValuesPerFacet',
         'sortFacetValuesBy' => 'sortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'attributeCriteriaComputedByMinProximity',
@@ -346,6 +346,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'userData' => 'setUserData',
         'customNormalization' => 'setCustomNormalization',
         'attributeForDistinct' => 'setAttributeForDistinct',
+        'maxFacetHits' => 'setMaxFacetHits',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'ranking' => 'setRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
@@ -378,7 +379,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'replaceSynonymsInHighlight' => 'setReplaceSynonymsInHighlight',
         'minProximity' => 'setMinProximity',
         'responseFields' => 'setResponseFields',
-        'maxFacetHits' => 'setMaxFacetHits',
         'maxValuesPerFacet' => 'setMaxValuesPerFacet',
         'sortFacetValuesBy' => 'setSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'setAttributeCriteriaComputedByMinProximity',
@@ -439,6 +439,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'userData' => 'getUserData',
         'customNormalization' => 'getCustomNormalization',
         'attributeForDistinct' => 'getAttributeForDistinct',
+        'maxFacetHits' => 'getMaxFacetHits',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'ranking' => 'getRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
@@ -471,7 +472,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         'replaceSynonymsInHighlight' => 'getReplaceSynonymsInHighlight',
         'minProximity' => 'getMinProximity',
         'responseFields' => 'getResponseFields',
-        'maxFacetHits' => 'getMaxFacetHits',
         'maxValuesPerFacet' => 'getMaxValuesPerFacet',
         'sortFacetValuesBy' => 'getSortFacetValuesBy',
         'attributeCriteriaComputedByMinProximity' => 'getAttributeCriteriaComputedByMinProximity',
@@ -632,6 +632,9 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         if (isset($data['attributeForDistinct'])) {
             $this->container['attributeForDistinct'] = $data['attributeForDistinct'];
         }
+        if (isset($data['maxFacetHits'])) {
+            $this->container['maxFacetHits'] = $data['maxFacetHits'];
+        }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
         }
@@ -727,9 +730,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['responseFields'])) {
             $this->container['responseFields'] = $data['responseFields'];
-        }
-        if (isset($data['maxFacetHits'])) {
-            $this->container['maxFacetHits'] = $data['maxFacetHits'];
         }
         if (isset($data['maxValuesPerFacet'])) {
             $this->container['maxValuesPerFacet'] = $data['maxValuesPerFacet'];
@@ -1186,7 +1186,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets insideBoundingBox.
      *
-     * @return null|float[][]
+     * @return null|InsideBoundingBox
      */
     public function getInsideBoundingBox()
     {
@@ -1196,7 +1196,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets insideBoundingBox.
      *
-     * @param null|float[][] $insideBoundingBox Coordinates for a rectangular area in which to search.  Each bounding box is defined by the two opposite points of its diagonal, and expressed as latitude and longitude pair: `[p1 lat, p1 long, p2 lat, p2 long]`. Provide multiple bounding boxes as nested arrays. For more information, see [rectangular area](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas).
+     * @param null|InsideBoundingBox $insideBoundingBox insideBoundingBox
      *
      * @return self
      */
@@ -1928,6 +1928,30 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     }
 
     /**
+     * Gets maxFacetHits.
+     *
+     * @return null|int
+     */
+    public function getMaxFacetHits()
+    {
+        return $this->container['maxFacetHits'] ?? null;
+    }
+
+    /**
+     * Sets maxFacetHits.
+     *
+     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     *
+     * @return self
+     */
+    public function setMaxFacetHits($maxFacetHits)
+    {
+        $this->container['maxFacetHits'] = $maxFacetHits;
+
+        return $this;
+    }
+
+    /**
      * Gets attributesToRetrieve.
      *
      * @return null|string[]
@@ -2482,7 +2506,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets optionalWords.
      *
-     * @return null|string[]
+     * @return null|OptionalWords
      */
     public function getOptionalWords()
     {
@@ -2492,7 +2516,7 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets optionalWords.
      *
-     * @param null|string[] $optionalWords Words that should be considered optional when found in the query.  By default, records must match all words in the search query to be included in the search results. Adding optional words can help to increase the number of search results by running an additional search query that doesn't include the optional words. For example, if the search query is \"action video\" and \"video\" is an optional word, the search engine runs two queries. One for \"action video\" and one for \"action\". Records that match all words are ranked higher.  For a search query with 4 or more words **and** all its words are optional, the number of matched words required for a record to be included in the search results increases for every 1,000 records:  - If `optionalWords` has less than 10 words, the required number of matched words increases by 1:   results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 2 matched words. - If `optionalWords` has 10 or more words, the number of required matched words increases by the number of optional words divided by 5 (rounded down).   For example, with 18 optional words: results 1 to 1,000 require 1 matched word, results 1,001 to 2000 need 4 matched words.  For more information, see [Optional words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/empty-or-insufficient-results/#creating-a-list-of-optional-words).
+     * @param null|OptionalWords $optionalWords optionalWords
      *
      * @return self
      */
@@ -2691,30 +2715,6 @@ class FallbackParams extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setResponseFields($responseFields)
     {
         $this->container['responseFields'] = $responseFields;
-
-        return $this;
-    }
-
-    /**
-     * Gets maxFacetHits.
-     *
-     * @return null|int
-     */
-    public function getMaxFacetHits()
-    {
-        return $this->container['maxFacetHits'] ?? null;
-    }
-
-    /**
-     * Sets maxFacetHits.
-     *
-     * @param null|int $maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-     *
-     * @return self
-     */
-    public function setMaxFacetHits($maxFacetHits)
-    {
-        $this->container['maxFacetHits'] = $maxFacetHits;
 
         return $this;
     }

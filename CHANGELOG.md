@@ -1,3 +1,7 @@
+## [4.9.2](https://github.com/algolia/algoliasearch-client-php/compare/4.9.1...4.9.2)
+
+- [f97e44ce0](https://github.com/algolia/api-clients-automation/commit/f97e44ce0) fix(cts): add tests for HTML error ([#4097](https://github.com/algolia/api-clients-automation/pull/4097)) by [@millotp](https://github.com/millotp/)
+
 ## [4.9.1](https://github.com/algolia/algoliasearch-client-php/compare/4.9.0...4.9.1)
 
 - [36d583e35](https://github.com/algolia/api-clients-automation/commit/36d583e35) fix(specs): make the searchParams compatible with v4 ([#4108](https://github.com/algolia/api-clients-automation/pull/4108)) by [@millotp](https://github.com/millotp/)

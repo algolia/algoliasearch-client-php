@@ -116,11 +116,12 @@ final class CurlHttpClient implements HttpClientInterface
         $statusCode = (int) curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
         $responseBody = curl_multi_getcontent($curlHandle);
         $error = curl_error($curlHandle);
+        $contentType = curl_getinfo($curlHandle, CURLINFO_CONTENT_TYPE);
 
         $this->releaseMHandle($curlHandle);
         curl_close($curlHandle);
 
-        return new Response($statusCode, [], $responseBody, '1.1', $error);
+        return new Response($statusCode, ['Content-Type' => $contentType], $responseBody, '1.1', $error);
     }
 
     private function getMHandle($curlHandle)

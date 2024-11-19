@@ -247,6 +247,11 @@ final class ApiWrapper implements ApiWrapperInterface
             throw new RetriableException('Retriable failure on '.$request->getUri()->getHost().': '.$reason, $statusCode);
         }
 
+        // handle HTML error responses
+        if (false !== strpos($response->getHeaderLine('Content-Type'), 'text/html')) {
+            throw new AlgoliaException($statusCode.': '.$response->getReasonPhrase(), $statusCode);
+        }
+
         $responseArray = Helpers::json_decode($body, true);
 
         if (404 === $statusCode) {

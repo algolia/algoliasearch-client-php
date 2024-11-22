@@ -278,9 +278,6 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         if (!isset($this->container['sha1']) || null === $this->container['sha1']) {
             $invalidProperties[] = "'sha1' can't be null";
         }
-        if (!isset($this->container['nbApiCalls']) || null === $this->container['nbApiCalls']) {
-            $invalidProperties[] = "'nbApiCalls' can't be null";
-        }
         if (!isset($this->container['processingTimeMs']) || null === $this->container['processingTimeMs']) {
             $invalidProperties[] = "'processingTimeMs' can't be null";
         }
@@ -518,7 +515,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Gets nbApiCalls.
      *
-     * @return string
+     * @return null|string
      */
     public function getNbApiCalls()
     {
@@ -528,7 +525,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets nbApiCalls.
      *
-     * @param string $nbApiCalls number of API requests
+     * @param null|string $nbApiCalls number of API requests
      *
      * @return self
      */

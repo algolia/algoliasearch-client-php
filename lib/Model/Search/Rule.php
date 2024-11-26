@@ -184,6 +184,9 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         if (!isset($this->container['objectID']) || null === $this->container['objectID']) {
             $invalidProperties[] = "'objectID' can't be null";
         }
+        if (!isset($this->container['consequence']) || null === $this->container['consequence']) {
+            $invalidProperties[] = "'consequence' can't be null";
+        }
 
         return $invalidProperties;
     }
@@ -250,7 +253,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets consequence.
      *
-     * @return null|Consequence
+     * @return Consequence
      */
     public function getConsequence()
     {
@@ -260,7 +263,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets consequence.
      *
-     * @param null|Consequence $consequence consequence
+     * @param Consequence $consequence consequence
      *
      * @return self
      */

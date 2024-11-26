@@ -2051,7 +2051,7 @@ class SearchClient
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedRuleResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
      */
     public function saveRule($indexName, $objectID, $rule, $forwardToReplicas = null, $requestOptions = [])
     {

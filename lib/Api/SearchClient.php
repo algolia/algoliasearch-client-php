@@ -2945,12 +2945,13 @@ class SearchClient
      *
      * @param string $indexName      the `indexName` to replace `objects` in
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions Request options
      * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
      */
-    public function saveObjects($indexName, $objects, $requestOptions = [], $waitForTasks = false)
+    public function saveObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
     {
-        return $this->chunkedBatch($indexName, $objects, 'addObject', $waitForTasks, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'addObject', $waitForTasks, $batchSize, $requestOptions);
     }
 
     /**
@@ -2958,10 +2959,11 @@ class SearchClient
      *
      * @param string $indexName      the `indexName` to delete `objectIDs` from
      * @param array  $objectIDs      the `objectIDs` to delete
+     * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions Request options
      * @param bool   $waitForTasks   Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
      */
-    public function deleteObjects($indexName, $objectIDs, $requestOptions = [], $waitForTasks = false)
+    public function deleteObjects($indexName, $objectIDs, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
     {
         $objects = [];
 
@@ -2969,7 +2971,7 @@ class SearchClient
             $objects[] = ['objectID' => $id];
         }
 
-        return $this->chunkedBatch($indexName, $objects, 'deleteObject', $waitForTasks, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, 'deleteObject', $waitForTasks, $batchSize, $requestOptions);
     }
 
     /**
@@ -2978,12 +2980,13 @@ class SearchClient
      * @param string $indexName         the `indexName` to replace `objects` in
      * @param array  $objects           the array of `objects` to store in the given Algolia `indexName`
      * @param bool   $createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+     * @param array  $batchSize         The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions    Request options
      * @param bool   $waitForTasks      Whether or not we should wait until every `batch` tasks has been processed, this operation may slow the total execution time of this method but is more reliable
      */
-    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $requestOptions = [], $waitForTasks = false)
+    public function partialUpdateObjects($indexName, $objects, $createIfNotExists, $batchSize = 1000, $requestOptions = [], $waitForTasks = false)
     {
-        return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, 1000, $requestOptions);
+        return $this->chunkedBatch($indexName, $objects, (true == $createIfNotExists) ? 'partialUpdateObject' : 'partialUpdateObjectNoCreate', $waitForTasks, $batchSize, $requestOptions);
     }
 
     /**

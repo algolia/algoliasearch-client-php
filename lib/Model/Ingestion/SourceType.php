@@ -30,8 +30,6 @@ class SourceType
 
     public const SHOPIFY = 'shopify';
 
-    public const SFCC = 'sfcc';
-
     public const PUSH = 'push';
 
     /**
@@ -50,7 +48,6 @@ class SourceType
             self::GA4_BIGQUERY_EXPORT,
             self::JSON,
             self::SHOPIFY,
-            self::SFCC,
             self::PUSH,
         ];
     }

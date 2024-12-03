@@ -1546,6 +1546,7 @@ class IngestionClient
      * @param array $action         Actions for filtering the list of tasks. (optional)
      * @param bool  $enabled        Whether to filter the list of tasks by the `enabled` status. (optional)
      * @param array $sourceID       Source IDs for filtering the list of tasks. (optional)
+     * @param array $sourceType     Filters the tasks with the specified source type. (optional)
      * @param array $destinationID  Destination IDs for filtering the list of tasks. (optional)
      * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
      * @param array $sort           Property by which to sort the list of tasks. (optional)
@@ -1554,7 +1555,7 @@ class IngestionClient
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponse|array<string, mixed>
      */
-    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/2/tasks';
         $queryParameters = [];
@@ -1585,6 +1586,13 @@ class IngestionClient
         }
         if (null !== $sourceID) {
             $queryParameters['sourceID'] = $sourceID;
+        }
+
+        if (is_array($sourceType)) {
+            $sourceType = ObjectSerializer::serializeCollection($sourceType, 'form', true);
+        }
+        if (null !== $sourceType) {
+            $queryParameters['sourceType'] = $sourceType;
         }
 
         if (is_array($destinationID)) {

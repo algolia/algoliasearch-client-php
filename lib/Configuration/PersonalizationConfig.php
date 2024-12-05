@@ -26,4 +26,18 @@ class PersonalizationConfig extends ConfigWithRegion
 
         return parent::create($appId, $apiKey, $region);
     }
+
+    public function getDefaultConfiguration()
+    {
+        return [
+            'appId' => '',
+            'apiKey' => '',
+            'hosts' => null,
+            'hasFullHosts' => false,
+            'readTimeout' => 5,
+            'writeTimeout' => 30,
+            'connectTimeout' => 2,
+            'defaultHeaders' => [],
+        ];
+    }
 }

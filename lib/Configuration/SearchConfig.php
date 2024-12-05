@@ -21,24 +21,6 @@ class SearchConfig extends Configuration
         return new static($config);
     }
 
-    public function getDefaultConfiguration()
-    {
-        return [
-            'appId' => '',
-            'apiKey' => '',
-            'hosts' => null,
-            'hasFullHosts' => false,
-            'readTimeout' => $this->defaultReadTimeout,
-            'writeTimeout' => $this->defaultWriteTimeout,
-            'connectTimeout' => $this->defaultConnectTimeout,
-            'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
-            'defaultMaxRetries' => $this->defaultMaxRetries,
-            'defaultHeaders' => [],
-            'defaultForwardToReplicas' => null,
-            'batchSize' => 1000,
-        ];
-    }
-
     public function getWaitTaskTimeBeforeRetry()
     {
         return $this->config['waitTaskTimeBeforeRetry'];
@@ -47,5 +29,23 @@ class SearchConfig extends Configuration
     public function getDefaultMaxRetries()
     {
         return $this->config['defaultMaxRetries'];
+    }
+
+    public function getDefaultConfiguration()
+    {
+        return [
+            'appId' => '',
+            'apiKey' => '',
+            'hosts' => null,
+            'hasFullHosts' => false,
+            'readTimeout' => 5,
+            'writeTimeout' => 30,
+            'connectTimeout' => 2,
+            'defaultHeaders' => [],
+            'waitTaskTimeBeforeRetry' => $this->defaultWaitTaskTimeBeforeRetry,
+            'defaultMaxRetries' => $this->defaultMaxRetries,
+            'defaultForwardToReplicas' => null,
+            'batchSize' => 1000,
+        ];
     }
 }

@@ -26,4 +26,18 @@ class IngestionConfig extends ConfigWithRegion
 
         return parent::create($appId, $apiKey, $region);
     }
+
+    public function getDefaultConfiguration()
+    {
+        return [
+            'appId' => '',
+            'apiKey' => '',
+            'hosts' => null,
+            'hasFullHosts' => false,
+            'readTimeout' => 25,
+            'writeTimeout' => 25,
+            'connectTimeout' => 25,
+            'defaultHeaders' => [],
+        ];
+    }
 }

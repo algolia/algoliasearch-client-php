@@ -1,3 +1,14 @@
+## [4.10.0](https://github.com/algolia/algoliasearch-client-php/compare/4.9.2...4.10.0)
+
+- [068fdacb5](https://github.com/algolia/api-clients-automation/commit/068fdacb5) feat(specs): add info and link about indexing rate limits ([#4136](https://github.com/algolia/api-clients-automation/pull/4136)) by [@kai687](https://github.com/kai687/)
+- [9e0235697](https://github.com/algolia/api-clients-automation/commit/9e0235697) fix(specs): `nb_api_calls` in `getLogs` response is optional ([#4142](https://github.com/algolia/api-clients-automation/pull/4142)) by [@shortcuts](https://github.com/shortcuts/)
+- [b728c5f25](https://github.com/algolia/api-clients-automation/commit/b728c5f25) fix(specs): `consequence` is required when saving rules ([#4146](https://github.com/algolia/api-clients-automation/pull/4146)) by [@shortcuts](https://github.com/shortcuts/)
+- [afd94fac8](https://github.com/algolia/api-clients-automation/commit/afd94fac8) fix(specs): `saveRule` response type ([#4170](https://github.com/algolia/api-clients-automation/pull/4170)) by [@shortcuts](https://github.com/shortcuts/)
+- [2325c61b8](https://github.com/algolia/api-clients-automation/commit/2325c61b8) feat(clients): allow batch size on objects helper ([#4172](https://github.com/algolia/api-clients-automation/pull/4172)) by [@shortcuts](https://github.com/shortcuts/)
+- [aae74cb38](https://github.com/algolia/api-clients-automation/commit/aae74cb38) fix(specs): remove SFCC source type ([#4190](https://github.com/algolia/api-clients-automation/pull/4190)) by [@millotp](https://github.com/millotp/)
+- [254052857](https://github.com/algolia/api-clients-automation/commit/254052857) fix(specs): add sourceType to listTasks ([#4193](https://github.com/algolia/api-clients-automation/pull/4193)) by [@millotp](https://github.com/millotp/)
+- [106d64313](https://github.com/algolia/api-clients-automation/commit/106d64313) feat(generators): allow per-spec timeouts ([#4173](https://github.com/algolia/api-clients-automation/pull/4173)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.9.2](https://github.com/algolia/algoliasearch-client-php/compare/4.9.1...4.9.2)
 
 - [f97e44ce0](https://github.com/algolia/api-clients-automation/commit/f97e44ce0) fix(cts): add tests for HTML error ([#4097](https://github.com/algolia/api-clients-automation/pull/4097)) by [@millotp](https://github.com/millotp/)

@@ -1759,7 +1759,7 @@ class IngestionClient
      * @param bool  $watch          When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\WatchResponse|array<string, mixed>
      */
     public function pushTask($taskID, $pushTaskPayload, $watch = null, $requestOptions = [])
     {
@@ -2137,7 +2137,7 @@ class IngestionClient
      * @param string $sourceID       Unique identifier of a source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\WatchResponse|array<string, mixed>
      */
     public function triggerDockerSourceDiscover($sourceID, $requestOptions = [])
     {
@@ -2576,7 +2576,7 @@ class IngestionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\WatchResponse|array<string, mixed>
      */
     public function validateSource($sourceCreate = null, $requestOptions = [])
     {
@@ -2606,7 +2606,7 @@ class IngestionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\SourceWatchResponse|array<string, mixed>
+     * @return \Algolia\AlgoliaSearch\Model\Ingestion\WatchResponse|array<string, mixed>
      */
     public function validateSourceBeforeUpdate($sourceID, $sourceUpdate, $requestOptions = [])
     {

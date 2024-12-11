@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * SourceWatchResponse Class Doc Comment.
+ * WatchResponse Class Doc Comment.
  *
  * @category Class
  */
-class SourceWatchResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.
@@ -218,7 +218,7 @@ class SourceWatchResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets data.
      *
-     * @param null|object[] $data depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery)
+     * @param null|object[] $data when used with discovering or validating sources, the sampled data of your source is returned
      *
      * @return self
      */

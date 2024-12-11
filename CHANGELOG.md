@@ -1,3 +1,8 @@
+## [4.11.0](https://github.com/algolia/algoliasearch-client-php/compare/4.10.0...4.11.0)
+
+- [866d859f8](https://github.com/algolia/api-clients-automation/commit/866d859f8) fix(specs): different summaries for saveObject/addOrUpdate methods ([#4223](https://github.com/algolia/api-clients-automation/pull/4223)) by [@kai687](https://github.com/kai687/)
+- [baf16c689](https://github.com/algolia/api-clients-automation/commit/baf16c689) feat(specs): add `watch` to `pushTask` ingestion ([#4224](https://github.com/algolia/api-clients-automation/pull/4224)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.10.0](https://github.com/algolia/algoliasearch-client-php/compare/4.9.2...4.10.0)
 
 - [068fdacb5](https://github.com/algolia/api-clients-automation/commit/068fdacb5) feat(specs): add info and link about indexing rate limits ([#4136](https://github.com/algolia/api-clients-automation/pull/4136)) by [@kai687](https://github.com/kai687/)

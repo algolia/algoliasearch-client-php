@@ -20,6 +20,8 @@ class AlternativesAsExact
 
     public const MULTI_WORDS_SYNONYM = 'multiWordsSynonym';
 
+    public const IGNORE_CONJUGATIONS = 'ignoreConjugations';
+
     /**
      * Gets allowable values of the enum.
      *
@@ -31,6 +33,7 @@ class AlternativesAsExact
             self::IGNORE_PLURALS,
             self::SINGLE_WORD_SYNONYM,
             self::MULTI_WORDS_SYNONYM,
+            self::IGNORE_CONJUGATIONS,
         ];
     }
 }

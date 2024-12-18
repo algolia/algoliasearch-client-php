@@ -1,3 +1,7 @@
+## [4.11.2](https://github.com/algolia/algoliasearch-client-php/compare/4.11.1...4.11.2)
+
+- [0481473fe0](https://github.com/algolia/api-clients-automation/commit/0481473fe0) chore: trigger auto close pr ([#4250](https://github.com/algolia/api-clients-automation/pull/4250)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.11.1](https://github.com/algolia/algoliasearch-client-php/compare/4.11.0...4.11.1)
 
 - [cd59f445e](https://github.com/algolia/api-clients-automation/commit/cd59f445e) fix(specs): enable watcher for push ([#4229](https://github.com/algolia/api-clients-automation/pull/4229)) by [@shortcuts](https://github.com/shortcuts/)

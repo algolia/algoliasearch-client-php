@@ -16,8 +16,6 @@ class DockerImageType
     /**
      * Possible values of this enum.
      */
-    public const SINGER = 'singer';
-
     public const CUSTOM = 'custom';
 
     public const AIRBYTE = 'airbyte';
@@ -30,7 +28,6 @@ class DockerImageType
     public static function getAllowableEnumValues()
     {
         return [
-            self::SINGER,
             self::CUSTOM,
             self::AIRBYTE,
         ];

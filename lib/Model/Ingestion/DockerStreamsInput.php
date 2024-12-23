@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description The selected streams of a singer or airbyte connector.
+ * @description The selected streams of an airbyte connector.
  */
 class DockerStreamsInput extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {

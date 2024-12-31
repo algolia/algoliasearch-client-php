@@ -2896,48 +2896,54 @@ class SearchClient
     {
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
-        $copyOperationResponse = $this->operationIndex(
-            $indexName,
-            [
-                'operation' => 'copy',
-                'destination' => $tmpIndexName,
-                'scope' => ['settings', 'rules', 'synonyms'],
-            ],
-            $requestOptions
-        );
+        try {
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => ['settings', 'rules', 'synonyms'],
+                ],
+                $requestOptions
+            );
 
-        $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
+            $batchResponses = $this->chunkedBatch($tmpIndexName, $objects, 'addObject', true, $batchSize, $requestOptions);
 
-        $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
 
-        $copyOperationResponse = $this->operationIndex(
-            $indexName,
-            [
-                'operation' => 'copy',
-                'destination' => $tmpIndexName,
-                'scope' => ['settings', 'rules', 'synonyms'],
-            ],
-            $requestOptions
-        );
+            $copyOperationResponse = $this->operationIndex(
+                $indexName,
+                [
+                    'operation' => 'copy',
+                    'destination' => $tmpIndexName,
+                    'scope' => ['settings', 'rules', 'synonyms'],
+                ],
+                $requestOptions
+            );
 
-        $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $copyOperationResponse['taskID']);
 
-        $moveOperationResponse = $this->operationIndex(
-            $tmpIndexName,
-            [
-                'operation' => 'move',
-                'destination' => $indexName,
-            ],
-            $requestOptions
-        );
+            $moveOperationResponse = $this->operationIndex(
+                $tmpIndexName,
+                [
+                    'operation' => 'move',
+                    'destination' => $indexName,
+                ],
+                $requestOptions
+            );
 
-        $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
+            $this->waitForTask($tmpIndexName, $moveOperationResponse['taskID']);
 
-        return [
-            'copyOperationResponse' => $copyOperationResponse,
-            'batchResponses' => $batchResponses,
-            'moveOperationResponse' => $moveOperationResponse,
-        ];
+            return [
+                'copyOperationResponse' => $copyOperationResponse,
+                'batchResponses' => $batchResponses,
+                'moveOperationResponse' => $moveOperationResponse,
+            ];
+        } catch (\Throwable $e) {
+            $this->deleteIndex($tmpIndexName);
+
+            throw $e;
+        }
     }
 
     /**
@@ -3092,7 +3098,7 @@ class SearchClient
             $this->getSettings($indexName);
         } catch (NotFoundException $e) {
             return false;
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             throw $e;
         }
 

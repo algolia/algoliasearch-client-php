@@ -30,6 +30,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'failureThreshold' => 'int',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'cursor' => 'string',
+        'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
+        'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
     ];
 
     /**
@@ -46,6 +48,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'failureThreshold' => null,
         'input' => null,
         'cursor' => null,
+        'notifications' => null,
+        'policies' => null,
     ];
 
     /**
@@ -63,6 +67,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'failureThreshold' => 'failureThreshold',
         'input' => 'input',
         'cursor' => 'cursor',
+        'notifications' => 'notifications',
+        'policies' => 'policies',
     ];
 
     /**
@@ -79,6 +85,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'failureThreshold' => 'setFailureThreshold',
         'input' => 'setInput',
         'cursor' => 'setCursor',
+        'notifications' => 'setNotifications',
+        'policies' => 'setPolicies',
     ];
 
     /**
@@ -95,6 +103,8 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'failureThreshold' => 'getFailureThreshold',
         'input' => 'getInput',
         'cursor' => 'getCursor',
+        'notifications' => 'getNotifications',
+        'policies' => 'getPolicies',
     ];
 
     /**
@@ -134,6 +144,12 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
+        }
+        if (isset($data['notifications'])) {
+            $this->container['notifications'] = $data['notifications'];
+        }
+        if (isset($data['policies'])) {
+            $this->container['policies'] = $data['policies'];
         }
     }
 
@@ -409,6 +425,54 @@ class TaskCreate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setCursor($cursor)
     {
         $this->container['cursor'] = $cursor;
+
+        return $this;
+    }
+
+    /**
+     * Gets notifications.
+     *
+     * @return null|Notifications
+     */
+    public function getNotifications()
+    {
+        return $this->container['notifications'] ?? null;
+    }
+
+    /**
+     * Sets notifications.
+     *
+     * @param null|Notifications $notifications notifications
+     *
+     * @return self
+     */
+    public function setNotifications($notifications)
+    {
+        $this->container['notifications'] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Gets policies.
+     *
+     * @return null|Policies
+     */
+    public function getPolicies()
+    {
+        return $this->container['policies'] ?? null;
+    }
+
+    /**
+     * Sets policies.
+     *
+     * @param null|Policies $policies policies
+     *
+     * @return self
+     */
+    public function setPolicies($policies)
+    {
+        $this->container['policies'] = $policies;
 
         return $this;
     }

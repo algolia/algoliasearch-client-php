@@ -250,6 +250,8 @@ class IngestionClient
      *                          - $taskCreate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
      *                          - $taskCreate['input'] => (array)
      *                          - $taskCreate['cursor'] => (string) Date of the last cursor in RFC 3339 format.
+     *                          - $taskCreate['notifications'] => (array)
+     *                          - $taskCreate['policies'] => (array)
      *
      * @see TaskCreate
      *
@@ -1541,21 +1543,22 @@ class IngestionClient
      *  - deleteIndex
      *  - editSettings
      *
-     * @param int   $itemsPerPage   Number of items per page. (optional, default to 10)
-     * @param int   $page           Page number of the paginated API response. (optional)
-     * @param array $action         Actions for filtering the list of tasks. (optional)
-     * @param bool  $enabled        Whether to filter the list of tasks by the `enabled` status. (optional)
-     * @param array $sourceID       Source IDs for filtering the list of tasks. (optional)
-     * @param array $sourceType     Filters the tasks with the specified source type. (optional)
-     * @param array $destinationID  Destination IDs for filtering the list of tasks. (optional)
-     * @param array $triggerType    Type of task trigger for filtering the list of tasks. (optional)
-     * @param array $sort           Property by which to sort the list of tasks. (optional)
-     * @param array $order          Sort order of the response, ascending or descending. (optional)
-     * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
+     * @param int   $itemsPerPage           Number of items per page. (optional, default to 10)
+     * @param int   $page                   Page number of the paginated API response. (optional)
+     * @param array $action                 Actions for filtering the list of tasks. (optional)
+     * @param bool  $enabled                Whether to filter the list of tasks by the `enabled` status. (optional)
+     * @param array $sourceID               Source IDs for filtering the list of tasks. (optional)
+     * @param array $sourceType             Filters the tasks with the specified source type. (optional)
+     * @param array $destinationID          Destination IDs for filtering the list of tasks. (optional)
+     * @param array $triggerType            Type of task trigger for filtering the list of tasks. (optional)
+     * @param bool  $withEmailNotifications If specified, the response only includes tasks with notifications.email.enabled set to this value. (optional)
+     * @param array $sort                   Property by which to sort the list of tasks. (optional)
+     * @param array $order                  Sort order of the response, ascending or descending. (optional)
+     * @param array $requestOptions         the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponse|array<string, mixed>
      */
-    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
+    public function listTasks($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $sourceType = null, $destinationID = null, $triggerType = null, $withEmailNotifications = null, $sort = null, $order = null, $requestOptions = [])
     {
         $resourcePath = '/2/tasks';
         $queryParameters = [];
@@ -1607,6 +1610,10 @@ class IngestionClient
         }
         if (null !== $triggerType) {
             $queryParameters['triggerType'] = $triggerType;
+        }
+
+        if (null !== $withEmailNotifications) {
+            $queryParameters['withEmailNotifications'] = $withEmailNotifications;
         }
 
         if (null !== $sort) {
@@ -2422,6 +2429,8 @@ class IngestionClient
      *                           - $taskUpdate['input'] => (array)
      *                           - $taskUpdate['enabled'] => (bool) Whether the task is enabled.
      *                           - $taskUpdate['failureThreshold'] => (int) Maximum accepted percentage of failures for a task run to finish successfully.
+     *                           - $taskUpdate['notifications'] => (array)
+     *                           - $taskUpdate['policies'] => (array)
      *
      * @see TaskUpdate
      *

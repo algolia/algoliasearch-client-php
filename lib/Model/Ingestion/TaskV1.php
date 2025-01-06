@@ -31,6 +31,8 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'failureThreshold' => 'int',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'cursor' => 'string',
+        'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
+        'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
         'createdAt' => 'string',
         'updatedAt' => 'string',
     ];
@@ -50,6 +52,8 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'failureThreshold' => null,
         'action' => null,
         'cursor' => null,
+        'notifications' => null,
+        'policies' => null,
         'createdAt' => null,
         'updatedAt' => null,
     ];
@@ -70,6 +74,8 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'failureThreshold' => 'failureThreshold',
         'action' => 'action',
         'cursor' => 'cursor',
+        'notifications' => 'notifications',
+        'policies' => 'policies',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
     ];
@@ -89,6 +95,8 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'failureThreshold' => 'setFailureThreshold',
         'action' => 'setAction',
         'cursor' => 'setCursor',
+        'notifications' => 'setNotifications',
+        'policies' => 'setPolicies',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
     ];
@@ -108,6 +116,8 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'failureThreshold' => 'getFailureThreshold',
         'action' => 'getAction',
         'cursor' => 'getCursor',
+        'notifications' => 'getNotifications',
+        'policies' => 'getPolicies',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
     ];
@@ -152,6 +162,12 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
+        }
+        if (isset($data['notifications'])) {
+            $this->container['notifications'] = $data['notifications'];
+        }
+        if (isset($data['policies'])) {
+            $this->container['policies'] = $data['policies'];
         }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
@@ -466,6 +482,54 @@ class TaskV1 extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setCursor($cursor)
     {
         $this->container['cursor'] = $cursor;
+
+        return $this;
+    }
+
+    /**
+     * Gets notifications.
+     *
+     * @return null|Notifications
+     */
+    public function getNotifications()
+    {
+        return $this->container['notifications'] ?? null;
+    }
+
+    /**
+     * Sets notifications.
+     *
+     * @param null|Notifications $notifications notifications
+     *
+     * @return self
+     */
+    public function setNotifications($notifications)
+    {
+        $this->container['notifications'] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Gets policies.
+     *
+     * @return null|Policies
+     */
+    public function getPolicies()
+    {
+        return $this->container['policies'] ?? null;
+    }
+
+    /**
+     * Sets policies.
+     *
+     * @param null|Policies $policies policies
+     *
+     * @return self
+     */
+    public function setPolicies($policies)
+    {
+        $this->container['policies'] = $policies;
 
         return $this;
     }

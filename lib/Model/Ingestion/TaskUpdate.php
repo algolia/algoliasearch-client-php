@@ -27,6 +27,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
+        'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
+        'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
     ];
 
     /**
@@ -40,6 +42,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'input' => null,
         'enabled' => null,
         'failureThreshold' => null,
+        'notifications' => null,
+        'policies' => null,
     ];
 
     /**
@@ -54,6 +58,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'input' => 'input',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
+        'notifications' => 'notifications',
+        'policies' => 'policies',
     ];
 
     /**
@@ -67,6 +73,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'input' => 'setInput',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
+        'notifications' => 'setNotifications',
+        'policies' => 'setPolicies',
     ];
 
     /**
@@ -80,6 +88,8 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'input' => 'getInput',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
+        'notifications' => 'getNotifications',
+        'policies' => 'getPolicies',
     ];
 
     /**
@@ -110,6 +120,12 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['failureThreshold'])) {
             $this->container['failureThreshold'] = $data['failureThreshold'];
+        }
+        if (isset($data['notifications'])) {
+            $this->container['notifications'] = $data['notifications'];
+        }
+        if (isset($data['policies'])) {
+            $this->container['policies'] = $data['policies'];
         }
     }
 
@@ -301,6 +317,54 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setFailureThreshold($failureThreshold)
     {
         $this->container['failureThreshold'] = $failureThreshold;
+
+        return $this;
+    }
+
+    /**
+     * Gets notifications.
+     *
+     * @return null|Notifications
+     */
+    public function getNotifications()
+    {
+        return $this->container['notifications'] ?? null;
+    }
+
+    /**
+     * Sets notifications.
+     *
+     * @param null|Notifications $notifications notifications
+     *
+     * @return self
+     */
+    public function setNotifications($notifications)
+    {
+        $this->container['notifications'] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Gets policies.
+     *
+     * @return null|Policies
+     */
+    public function getPolicies()
+    {
+        return $this->container['policies'] ?? null;
+    }
+
+    /**
+     * Sets policies.
+     *
+     * @param null|Policies $policies policies
+     *
+     * @return self
+     */
+    public function setPolicies($policies)
+    {
+        $this->container['policies'] = $policies;
 
         return $this;
     }

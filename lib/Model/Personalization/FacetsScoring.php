@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * FacetScoring Class Doc Comment.
+ * FacetsScoring Class Doc Comment.
  *
  * @category Class
  */
-class FacetScoring extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class FacetsScoring extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

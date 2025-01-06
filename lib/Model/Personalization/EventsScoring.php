@@ -8,11 +8,11 @@ use Algolia\AlgoliaSearch\Model\AbstractModel;
 use Algolia\AlgoliaSearch\Model\ModelInterface;
 
 /**
- * EventScoring Class Doc Comment.
+ * EventsScoring Class Doc Comment.
  *
  * @category Class
  */
-class EventScoring extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
+class EventsScoring extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
     /**
      * Array of property to type mappings. Used for (de)serialization.

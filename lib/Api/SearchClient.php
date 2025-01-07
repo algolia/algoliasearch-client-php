@@ -2891,8 +2891,9 @@ class SearchClient
      * @param array  $objects        the array of `objects` to store in the given Algolia `indexName`
      * @param array  $batchSize      The size of the chunk of `objects`. The number of `batch` calls will be equal to `length(objects) / batchSize`. Defaults to 1000.
      * @param array  $requestOptions Request options
+     * @param mixed  $scopes
      */
-    public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $requestOptions = [])
+    public function replaceAllObjects($indexName, $objects, $batchSize = 1000, $scopes = ['settings', 'rules', 'synonyms'], $requestOptions = [])
     {
         $tmpIndexName = $indexName.'_tmp_'.rand(10000000, 99999999);
 
@@ -2902,7 +2903,7 @@ class SearchClient
                 [
                     'operation' => 'copy',
                     'destination' => $tmpIndexName,
-                    'scope' => ['settings', 'rules', 'synonyms'],
+                    'scope' => $scopes,
                 ],
                 $requestOptions
             );
@@ -2916,7 +2917,7 @@ class SearchClient
                 [
                     'operation' => 'copy',
                     'destination' => $tmpIndexName,
-                    'scope' => ['settings', 'rules', 'synonyms'],
+                    'scope' => $scopes,
                 ],
                 $requestOptions
             );

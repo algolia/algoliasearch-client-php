@@ -35,9 +35,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'table' => 'string',
         'tablePrefix' => 'string',
         'customSQLRequest' => 'string',
-        'registry' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry',
-        'image' => 'string',
-        'version' => 'string',
         'configuration' => 'object',
         'featureFlags' => 'array<string,mixed>',
     ];
@@ -63,9 +60,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'table' => null,
         'tablePrefix' => null,
         'customSQLRequest' => null,
-        'registry' => null,
-        'image' => null,
-        'version' => null,
         'configuration' => null,
         'featureFlags' => null,
     ];
@@ -92,9 +86,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'table' => 'table',
         'tablePrefix' => 'tablePrefix',
         'customSQLRequest' => 'customSQLRequest',
-        'registry' => 'registry',
-        'image' => 'image',
-        'version' => 'version',
         'configuration' => 'configuration',
         'featureFlags' => 'featureFlags',
     ];
@@ -120,9 +111,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'table' => 'setTable',
         'tablePrefix' => 'setTablePrefix',
         'customSQLRequest' => 'setCustomSQLRequest',
-        'registry' => 'setRegistry',
-        'image' => 'setImage',
-        'version' => 'setVersion',
         'configuration' => 'setConfiguration',
         'featureFlags' => 'setFeatureFlags',
     ];
@@ -148,9 +136,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         'table' => 'getTable',
         'tablePrefix' => 'getTablePrefix',
         'customSQLRequest' => 'getCustomSQLRequest',
-        'registry' => 'getRegistry',
-        'image' => 'getImage',
-        'version' => 'getVersion',
         'configuration' => 'getConfiguration',
         'featureFlags' => 'getFeatureFlags',
     ];
@@ -213,15 +198,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
         }
         if (isset($data['customSQLRequest'])) {
             $this->container['customSQLRequest'] = $data['customSQLRequest'];
-        }
-        if (isset($data['registry'])) {
-            $this->container['registry'] = $data['registry'];
-        }
-        if (isset($data['image'])) {
-            $this->container['image'] = $data['image'];
-        }
-        if (isset($data['version'])) {
-            $this->container['version'] = $data['version'];
         }
         if (isset($data['configuration'])) {
             $this->container['configuration'] = $data['configuration'];
@@ -677,78 +653,6 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     public function setCustomSQLRequest($customSQLRequest)
     {
         $this->container['customSQLRequest'] = $customSQLRequest;
-
-        return $this;
-    }
-
-    /**
-     * Gets registry.
-     *
-     * @return null|DockerRegistry
-     */
-    public function getRegistry()
-    {
-        return $this->container['registry'] ?? null;
-    }
-
-    /**
-     * Sets registry.
-     *
-     * @param null|DockerRegistry $registry registry
-     *
-     * @return self
-     */
-    public function setRegistry($registry)
-    {
-        $this->container['registry'] = $registry;
-
-        return $this;
-    }
-
-    /**
-     * Gets image.
-     *
-     * @return null|string
-     */
-    public function getImage()
-    {
-        return $this->container['image'] ?? null;
-    }
-
-    /**
-     * Sets image.
-     *
-     * @param null|string $image docker image name
-     *
-     * @return self
-     */
-    public function setImage($image)
-    {
-        $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets version.
-     *
-     * @return null|string
-     */
-    public function getVersion()
-    {
-        return $this->container['version'] ?? null;
-    }
-
-    /**
-     * Sets version.
-     *
-     * @param null|string $version docker image version
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
 
         return $this;
     }

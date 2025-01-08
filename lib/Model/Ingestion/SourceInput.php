@@ -40,10 +40,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'string',
         'tablePrefix' => 'string',
         'customSQLRequest' => 'string',
-        'imageType' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerImageType',
-        'registry' => '\Algolia\AlgoliaSearch\Model\Ingestion\DockerRegistry',
         'image' => 'string',
-        'version' => 'string',
         'configuration' => 'object',
         'featureFlags' => 'array<string,mixed>',
         'shopURL' => 'string',
@@ -75,10 +72,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => null,
         'tablePrefix' => null,
         'customSQLRequest' => null,
-        'imageType' => null,
-        'registry' => null,
         'image' => null,
-        'version' => null,
         'configuration' => null,
         'featureFlags' => null,
         'shopURL' => null,
@@ -111,10 +105,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'table',
         'tablePrefix' => 'tablePrefix',
         'customSQLRequest' => 'customSQLRequest',
-        'imageType' => 'imageType',
-        'registry' => 'registry',
         'image' => 'image',
-        'version' => 'version',
         'configuration' => 'configuration',
         'featureFlags' => 'featureFlags',
         'shopURL' => 'shopURL',
@@ -146,10 +137,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'setTable',
         'tablePrefix' => 'setTablePrefix',
         'customSQLRequest' => 'setCustomSQLRequest',
-        'imageType' => 'setImageType',
-        'registry' => 'setRegistry',
         'image' => 'setImage',
-        'version' => 'setVersion',
         'configuration' => 'setConfiguration',
         'featureFlags' => 'setFeatureFlags',
         'shopURL' => 'setShopURL',
@@ -181,10 +169,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         'table' => 'getTable',
         'tablePrefix' => 'getTablePrefix',
         'customSQLRequest' => 'getCustomSQLRequest',
-        'imageType' => 'getImageType',
-        'registry' => 'getRegistry',
         'image' => 'getImage',
-        'version' => 'getVersion',
         'configuration' => 'getConfiguration',
         'featureFlags' => 'getFeatureFlags',
         'shopURL' => 'getShopURL',
@@ -264,17 +249,8 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (isset($data['customSQLRequest'])) {
             $this->container['customSQLRequest'] = $data['customSQLRequest'];
         }
-        if (isset($data['imageType'])) {
-            $this->container['imageType'] = $data['imageType'];
-        }
-        if (isset($data['registry'])) {
-            $this->container['registry'] = $data['registry'];
-        }
         if (isset($data['image'])) {
             $this->container['image'] = $data['image'];
-        }
-        if (isset($data['version'])) {
-            $this->container['version'] = $data['version'];
         }
         if (isset($data['configuration'])) {
             $this->container['configuration'] = $data['configuration'];
@@ -364,12 +340,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (!isset($this->container['tablePrefix']) || null === $this->container['tablePrefix']) {
             $invalidProperties[] = "'tablePrefix' can't be null";
-        }
-        if (!isset($this->container['imageType']) || null === $this->container['imageType']) {
-            $invalidProperties[] = "'imageType' can't be null";
-        }
-        if (!isset($this->container['registry']) || null === $this->container['registry']) {
-            $invalidProperties[] = "'registry' can't be null";
         }
         if (!isset($this->container['image']) || null === $this->container['image']) {
             $invalidProperties[] = "'image' can't be null";
@@ -876,54 +846,6 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
-     * Gets imageType.
-     *
-     * @return DockerImageType
-     */
-    public function getImageType()
-    {
-        return $this->container['imageType'] ?? null;
-    }
-
-    /**
-     * Sets imageType.
-     *
-     * @param DockerImageType $imageType imageType
-     *
-     * @return self
-     */
-    public function setImageType($imageType)
-    {
-        $this->container['imageType'] = $imageType;
-
-        return $this;
-    }
-
-    /**
-     * Gets registry.
-     *
-     * @return DockerRegistry
-     */
-    public function getRegistry()
-    {
-        return $this->container['registry'] ?? null;
-    }
-
-    /**
-     * Sets registry.
-     *
-     * @param DockerRegistry $registry registry
-     *
-     * @return self
-     */
-    public function setRegistry($registry)
-    {
-        $this->container['registry'] = $registry;
-
-        return $this;
-    }
-
-    /**
      * Gets image.
      *
      * @return string
@@ -936,37 +858,13 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets image.
      *
-     * @param string $image docker image name
+     * @param string $image shortname of the image, as returned by the referential
      *
      * @return self
      */
     public function setImage($image)
     {
         $this->container['image'] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Gets version.
-     *
-     * @return null|string
-     */
-    public function getVersion()
-    {
-        return $this->container['version'] ?? null;
-    }
-
-    /**
-     * Sets version.
-     *
-     * @param null|string $version docker image version
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        $this->container['version'] = $version;
 
         return $this;
     }

@@ -55,7 +55,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'enableABTest' => 'bool',
         'attributesToRetrieve' => 'string[]',
         'ranking' => 'string[]',
-        'customRanking' => 'string[]',
         'relevancyStrictness' => 'int',
         'attributesToHighlight' => 'string[]',
         'attributesToSnippet' => 'string[]',
@@ -71,7 +70,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'disableTypoToleranceOnAttributes' => 'string[]',
         'ignorePlurals' => '\Algolia\AlgoliaSearch\Model\Search\IgnorePlurals',
         'removeStopWords' => '\Algolia\AlgoliaSearch\Model\Search\RemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'string',
         'queryLanguages' => '\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]',
         'decompoundQuery' => 'bool',
         'enableRules' => 'bool',
@@ -144,7 +142,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'enableABTest' => null,
         'attributesToRetrieve' => null,
         'ranking' => null,
-        'customRanking' => null,
         'relevancyStrictness' => null,
         'attributesToHighlight' => null,
         'attributesToSnippet' => null,
@@ -160,7 +157,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'disableTypoToleranceOnAttributes' => null,
         'ignorePlurals' => null,
         'removeStopWords' => null,
-        'keepDiacriticsOnCharacters' => null,
         'queryLanguages' => null,
         'decompoundQuery' => null,
         'enableRules' => null,
@@ -234,7 +230,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'enableABTest' => 'enableABTest',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'ranking' => 'ranking',
-        'customRanking' => 'customRanking',
         'relevancyStrictness' => 'relevancyStrictness',
         'attributesToHighlight' => 'attributesToHighlight',
         'attributesToSnippet' => 'attributesToSnippet',
@@ -250,7 +245,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'disableTypoToleranceOnAttributes' => 'disableTypoToleranceOnAttributes',
         'ignorePlurals' => 'ignorePlurals',
         'removeStopWords' => 'removeStopWords',
-        'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
         'queryLanguages' => 'queryLanguages',
         'decompoundQuery' => 'decompoundQuery',
         'enableRules' => 'enableRules',
@@ -323,7 +317,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'enableABTest' => 'setEnableABTest',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'ranking' => 'setRanking',
-        'customRanking' => 'setCustomRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
         'attributesToHighlight' => 'setAttributesToHighlight',
         'attributesToSnippet' => 'setAttributesToSnippet',
@@ -339,7 +332,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'disableTypoToleranceOnAttributes' => 'setDisableTypoToleranceOnAttributes',
         'ignorePlurals' => 'setIgnorePlurals',
         'removeStopWords' => 'setRemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
         'queryLanguages' => 'setQueryLanguages',
         'decompoundQuery' => 'setDecompoundQuery',
         'enableRules' => 'setEnableRules',
@@ -412,7 +404,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'enableABTest' => 'getEnableABTest',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'ranking' => 'getRanking',
-        'customRanking' => 'getCustomRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
         'attributesToHighlight' => 'getAttributesToHighlight',
         'attributesToSnippet' => 'getAttributesToSnippet',
@@ -428,7 +419,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         'disableTypoToleranceOnAttributes' => 'getDisableTypoToleranceOnAttributes',
         'ignorePlurals' => 'getIgnorePlurals',
         'removeStopWords' => 'getRemoveStopWords',
-        'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
         'queryLanguages' => 'getQueryLanguages',
         'decompoundQuery' => 'getDecompoundQuery',
         'enableRules' => 'getEnableRules',
@@ -579,9 +569,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         if (isset($data['ranking'])) {
             $this->container['ranking'] = $data['ranking'];
         }
-        if (isset($data['customRanking'])) {
-            $this->container['customRanking'] = $data['customRanking'];
-        }
         if (isset($data['relevancyStrictness'])) {
             $this->container['relevancyStrictness'] = $data['relevancyStrictness'];
         }
@@ -626,9 +613,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
         }
         if (isset($data['removeStopWords'])) {
             $this->container['removeStopWords'] = $data['removeStopWords'];
-        }
-        if (isset($data['keepDiacriticsOnCharacters'])) {
-            $this->container['keepDiacriticsOnCharacters'] = $data['keepDiacriticsOnCharacters'];
         }
         if (isset($data['queryLanguages'])) {
             $this->container['queryLanguages'] = $data['queryLanguages'];
@@ -1644,30 +1628,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
     }
 
     /**
-     * Gets customRanking.
-     *
-     * @return null|string[]
-     */
-    public function getCustomRanking()
-    {
-        return $this->container['customRanking'] ?? null;
-    }
-
-    /**
-     * Sets customRanking.
-     *
-     * @param null|string[] $customRanking Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied.
-     *
-     * @return self
-     */
-    public function setCustomRanking($customRanking)
-    {
-        $this->container['customRanking'] = $customRanking;
-
-        return $this;
-    }
-
-    /**
      * Gets relevancyStrictness.
      *
      * @return null|int
@@ -2023,30 +1983,6 @@ class SearchQuery extends AbstractModel implements ModelInterface, \ArrayAccess,
     public function setRemoveStopWords($removeStopWords)
     {
         $this->container['removeStopWords'] = $removeStopWords;
-
-        return $this;
-    }
-
-    /**
-     * Gets keepDiacriticsOnCharacters.
-     *
-     * @return null|string
-     */
-    public function getKeepDiacriticsOnCharacters()
-    {
-        return $this->container['keepDiacriticsOnCharacters'] ?? null;
-    }
-
-    /**
-     * Sets keepDiacriticsOnCharacters.
-     *
-     * @param null|string $keepDiacriticsOnCharacters Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics.
-     *
-     * @return self
-     */
-    public function setKeepDiacriticsOnCharacters($keepDiacriticsOnCharacters)
-    {
-        $this->container['keepDiacriticsOnCharacters'] = $keepDiacriticsOnCharacters;
 
         return $this;
     }

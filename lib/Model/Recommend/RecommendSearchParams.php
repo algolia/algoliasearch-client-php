@@ -69,6 +69,8 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'customNormalization' => 'array<string,array<string,string>>',
         'attributeForDistinct' => 'string',
         'maxFacetHits' => 'int',
+        'keepDiacriticsOnCharacters' => 'string',
+        'customRanking' => 'string[]',
         'attributesToRetrieve' => 'string[]',
         'ranking' => 'string[]',
         'relevancyStrictness' => 'int',
@@ -162,6 +164,8 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'customNormalization' => null,
         'attributeForDistinct' => null,
         'maxFacetHits' => null,
+        'keepDiacriticsOnCharacters' => null,
+        'customRanking' => null,
         'attributesToRetrieve' => null,
         'ranking' => null,
         'relevancyStrictness' => null,
@@ -256,6 +260,8 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'customNormalization' => 'customNormalization',
         'attributeForDistinct' => 'attributeForDistinct',
         'maxFacetHits' => 'maxFacetHits',
+        'keepDiacriticsOnCharacters' => 'keepDiacriticsOnCharacters',
+        'customRanking' => 'customRanking',
         'attributesToRetrieve' => 'attributesToRetrieve',
         'ranking' => 'ranking',
         'relevancyStrictness' => 'relevancyStrictness',
@@ -349,6 +355,8 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'customNormalization' => 'setCustomNormalization',
         'attributeForDistinct' => 'setAttributeForDistinct',
         'maxFacetHits' => 'setMaxFacetHits',
+        'keepDiacriticsOnCharacters' => 'setKeepDiacriticsOnCharacters',
+        'customRanking' => 'setCustomRanking',
         'attributesToRetrieve' => 'setAttributesToRetrieve',
         'ranking' => 'setRanking',
         'relevancyStrictness' => 'setRelevancyStrictness',
@@ -442,6 +450,8 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         'customNormalization' => 'getCustomNormalization',
         'attributeForDistinct' => 'getAttributeForDistinct',
         'maxFacetHits' => 'getMaxFacetHits',
+        'keepDiacriticsOnCharacters' => 'getKeepDiacriticsOnCharacters',
+        'customRanking' => 'getCustomRanking',
         'attributesToRetrieve' => 'getAttributesToRetrieve',
         'ranking' => 'getRanking',
         'relevancyStrictness' => 'getRelevancyStrictness',
@@ -636,6 +646,12 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
         }
         if (isset($data['maxFacetHits'])) {
             $this->container['maxFacetHits'] = $data['maxFacetHits'];
+        }
+        if (isset($data['keepDiacriticsOnCharacters'])) {
+            $this->container['keepDiacriticsOnCharacters'] = $data['keepDiacriticsOnCharacters'];
+        }
+        if (isset($data['customRanking'])) {
+            $this->container['customRanking'] = $data['customRanking'];
         }
         if (isset($data['attributesToRetrieve'])) {
             $this->container['attributesToRetrieve'] = $data['attributesToRetrieve'];
@@ -1949,6 +1965,54 @@ class RecommendSearchParams extends AbstractModel implements ModelInterface, \Ar
     public function setMaxFacetHits($maxFacetHits)
     {
         $this->container['maxFacetHits'] = $maxFacetHits;
+
+        return $this;
+    }
+
+    /**
+     * Gets keepDiacriticsOnCharacters.
+     *
+     * @return null|string
+     */
+    public function getKeepDiacriticsOnCharacters()
+    {
+        return $this->container['keepDiacriticsOnCharacters'] ?? null;
+    }
+
+    /**
+     * Sets keepDiacriticsOnCharacters.
+     *
+     * @param null|string $keepDiacriticsOnCharacters Characters for which diacritics should be preserved.  By default, Algolia removes diacritics from letters. For example, `é` becomes `e`. If this causes issues in your search, you can specify characters that should keep their diacritics.
+     *
+     * @return self
+     */
+    public function setKeepDiacriticsOnCharacters($keepDiacriticsOnCharacters)
+    {
+        $this->container['keepDiacriticsOnCharacters'] = $keepDiacriticsOnCharacters;
+
+        return $this;
+    }
+
+    /**
+     * Gets customRanking.
+     *
+     * @return null|string[]
+     */
+    public function getCustomRanking()
+    {
+        return $this->container['customRanking'] ?? null;
+    }
+
+    /**
+     * Sets customRanking.
+     *
+     * @param null|string[] $customRanking Attributes to use as [custom ranking](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/). Attribute names are case-sensitive.  The custom ranking attributes decide which items are shown first if the other ranking criteria are equal.  Records with missing values for your selected custom ranking attributes are always sorted last. Boolean attributes are sorted based on their alphabetical order.  **Modifiers**  - `asc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in ascending order.  - `desc(\"ATTRIBUTE\")`.   Sort the index by the values of an attribute, in descending order.  If you use two or more custom ranking attributes, [reduce the precision](https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/how-to/controlling-custom-ranking-metrics-precision/) of your first attributes, or the other attributes will never be applied.
+     *
+     * @return self
+     */
+    public function setCustomRanking($customRanking)
+    {
+        $this->container['customRanking'] = $customRanking;
 
         return $this;
     }

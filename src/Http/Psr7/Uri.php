@@ -245,7 +245,7 @@ class Uri implements UriInterface
      *
      * @see https://tools.ietf.org/html/rfc3986#section-4.4
      */
-    public static function isSameDocumentReference(UriInterface $uri, UriInterface $base = null)
+    public static function isSameDocumentReference(UriInterface $uri, ?UriInterface $base = null)
     {
         if (null !== $base) {
             $uri = UriResolver::resolve($base, $uri);

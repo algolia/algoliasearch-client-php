@@ -294,6 +294,8 @@ class IngestionClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskCreateResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function createTaskV1($taskCreate, $requestOptions = [])
     {
@@ -660,6 +662,8 @@ class IngestionClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\DeleteResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function deleteTaskV1($taskID, $requestOptions = [])
     {
@@ -852,6 +856,8 @@ class IngestionClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function enableTaskV1($taskID, $requestOptions = [])
     {
@@ -1141,6 +1147,8 @@ class IngestionClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskV1|array<string, mixed>
+     *
+     * @deprecated
      */
     public function getTaskV1($taskID, $requestOptions = [])
     {
@@ -1647,6 +1655,8 @@ class IngestionClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\ListTasksResponseV1|array<string, mixed>
+     *
+     * @deprecated
      */
     public function listTasksV1($itemsPerPage = null, $page = null, $action = null, $enabled = null, $sourceID = null, $destinationID = null, $triggerType = null, $sort = null, $order = null, $requestOptions = [])
     {
@@ -1912,6 +1922,8 @@ class IngestionClient
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\RunResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function runTaskV1($taskID, $requestOptions = [])
     {
@@ -2091,6 +2103,8 @@ class IngestionClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskV1[]|array<string, mixed>
+     *
+     * @deprecated
      */
     public function searchTasksV1($taskSearch, $requestOptions = [])
     {
@@ -2506,6 +2520,8 @@ class IngestionClient
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
      * @return \Algolia\AlgoliaSearch\Model\Ingestion\TaskUpdateResponse|array<string, mixed>
+     *
+     * @deprecated
      */
     public function updateTaskV1($taskID, $taskUpdate, $requestOptions = [])
     {

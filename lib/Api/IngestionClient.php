@@ -1801,6 +1801,16 @@ class IngestionClient
             );
         }
 
+        if (!isset($requestOptions['readTimeout'])) {
+            $requestOptions['readTimeout'] = 180;
+        }
+        if (!isset($requestOptions['writeTimeout'])) {
+            $requestOptions['writeTimeout'] = 180;
+        }
+        if (!isset($requestOptions['connectTimeout'])) {
+            $requestOptions['connectTimeout'] = 180;
+        }
+
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
@@ -2167,6 +2177,16 @@ class IngestionClient
                 ObjectSerializer::toPathValue($sourceID),
                 $resourcePath
             );
+        }
+
+        if (!isset($requestOptions['readTimeout'])) {
+            $requestOptions['readTimeout'] = 180;
+        }
+        if (!isset($requestOptions['writeTimeout'])) {
+            $requestOptions['writeTimeout'] = 180;
+        }
+        if (!isset($requestOptions['connectTimeout'])) {
+            $requestOptions['connectTimeout'] = 180;
         }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
@@ -2594,6 +2614,16 @@ class IngestionClient
         $headers = [];
         $httpBody = isset($sourceCreate) ? $sourceCreate : [];
 
+        if (!isset($requestOptions['readTimeout'])) {
+            $requestOptions['readTimeout'] = 180;
+        }
+        if (!isset($requestOptions['writeTimeout'])) {
+            $requestOptions['writeTimeout'] = 180;
+        }
+        if (!isset($requestOptions['connectTimeout'])) {
+            $requestOptions['connectTimeout'] = 180;
+        }
+
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);
     }
 
@@ -2644,6 +2674,16 @@ class IngestionClient
                 ObjectSerializer::toPathValue($sourceID),
                 $resourcePath
             );
+        }
+
+        if (!isset($requestOptions['readTimeout'])) {
+            $requestOptions['readTimeout'] = 180;
+        }
+        if (!isset($requestOptions['writeTimeout'])) {
+            $requestOptions['writeTimeout'] = 180;
+        }
+        if (!isset($requestOptions['connectTimeout'])) {
+            $requestOptions['connectTimeout'] = 180;
         }
 
         return $this->sendRequest('POST', $resourcePath, $headers, $queryParameters, $httpBody, $requestOptions);

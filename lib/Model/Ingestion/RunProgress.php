@@ -145,7 +145,16 @@ class RunProgress extends AbstractModel implements ModelInterface, \ArrayAccess,
      */
     public function listInvalidProperties()
     {
-        return [];
+        $invalidProperties = [];
+
+        if (!isset($this->container['expectedNbOfEvents']) || null === $this->container['expectedNbOfEvents']) {
+            $invalidProperties[] = "'expectedNbOfEvents' can't be null";
+        }
+        if (!isset($this->container['receivedNbOfEvents']) || null === $this->container['receivedNbOfEvents']) {
+            $invalidProperties[] = "'receivedNbOfEvents' can't be null";
+        }
+
+        return $invalidProperties;
     }
 
     /**
@@ -162,7 +171,7 @@ class RunProgress extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets expectedNbOfEvents.
      *
-     * @return null|int
+     * @return int
      */
     public function getExpectedNbOfEvents()
     {
@@ -172,7 +181,7 @@ class RunProgress extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets expectedNbOfEvents.
      *
-     * @param null|int $expectedNbOfEvents expectedNbOfEvents
+     * @param int $expectedNbOfEvents expectedNbOfEvents
      *
      * @return self
      */
@@ -186,7 +195,7 @@ class RunProgress extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets receivedNbOfEvents.
      *
-     * @return null|int
+     * @return int
      */
     public function getReceivedNbOfEvents()
     {
@@ -196,7 +205,7 @@ class RunProgress extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets receivedNbOfEvents.
      *
-     * @param null|int $receivedNbOfEvents receivedNbOfEvents
+     * @param int $receivedNbOfEvents receivedNbOfEvents
      *
      * @return self
      */

@@ -20,8 +20,6 @@ class RunOutcome
 
     public const FAILURE = 'failure';
 
-    public const PROCESSING = 'processing';
-
     /**
      * Gets allowable values of the enum.
      *
@@ -32,7 +30,6 @@ class RunOutcome
         return [
             self::SUCCESS,
             self::FAILURE,
-            self::PROCESSING,
         ];
     }
 }

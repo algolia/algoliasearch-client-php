@@ -12,7 +12,7 @@ use Algolia\AlgoliaSearch\Model\ModelInterface;
  *
  * @category Class
  *
- * @description widgets returned from any rules that are applied to the current search.
+ * @description Widgets returned from any rules that are applied to the current search.
  */
 class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSerializable
 {
@@ -166,7 +166,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets banners.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[] $banners banners defined in the merchandising studio for the given search
+     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[] $banners banners defined in the Merchandising Studio for a given search
      *
      * @return self
      */

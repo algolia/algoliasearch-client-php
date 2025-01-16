@@ -236,7 +236,7 @@ class TopHitWithAnalytics extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets hit.
      *
-     * @param string $hit object ID of a record that's returned as a search result
+     * @param string $hit object ID of a record returned as a search result
      *
      * @return self
      */
@@ -284,7 +284,7 @@ class TopHitWithAnalytics extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $clickThroughRate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -308,7 +308,7 @@ class TopHitWithAnalytics extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $conversionRate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */

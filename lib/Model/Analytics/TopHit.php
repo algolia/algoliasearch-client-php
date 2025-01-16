@@ -181,7 +181,7 @@ class TopHit extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets hit.
      *
-     * @param string $hit object ID of a record that's returned as a search result
+     * @param string $hit object ID of a record returned as a search result
      *
      * @return self
      */

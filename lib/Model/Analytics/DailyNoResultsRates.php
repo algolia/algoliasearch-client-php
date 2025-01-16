@@ -275,7 +275,7 @@ class DailyNoResultsRates extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets rate.
      *
-     * @param float $rate no results rate, calculated as number of searches with zero results divided by the total number of searches
+     * @param float $rate no results rate: calculated as the number of searches with zero results divided by the total number of searches
      *
      * @return self
      */

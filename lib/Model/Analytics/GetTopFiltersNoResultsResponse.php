@@ -170,7 +170,7 @@ class GetTopFiltersNoResultsResponse extends AbstractModel implements ModelInter
     /**
      * Sets values.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request.
+     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValues[] $values Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request.
      *
      * @return self
      */

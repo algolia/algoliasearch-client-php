@@ -317,7 +317,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $clickThroughRate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -389,7 +389,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $conversionRate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */

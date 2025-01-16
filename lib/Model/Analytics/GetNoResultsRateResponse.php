@@ -203,7 +203,7 @@ class GetNoResultsRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets rate.
      *
-     * @param float $rate no results rate, calculated as number of searches with zero results divided by the total number of searches
+     * @param float $rate no results rate: calculated as the number of searches with zero results divided by the total number of searches
      *
      * @return self
      */

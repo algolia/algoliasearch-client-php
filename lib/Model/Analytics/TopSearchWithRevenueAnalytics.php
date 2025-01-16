@@ -372,7 +372,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets clickThroughRate.
      *
-     * @param float $clickThroughRate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $clickThroughRate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -444,7 +444,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets conversionRate.
      *
-     * @param float $conversionRate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $conversionRate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -564,7 +564,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search, broken-down by currencies
+     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search: broken down by currency
      *
      * @return self
      */
@@ -588,7 +588,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets addToCartRate.
      *
-     * @param float $addToCartRate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $addToCartRate Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */
@@ -636,7 +636,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets purchaseRate.
      *
-     * @param float $purchaseRate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $purchaseRate Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */

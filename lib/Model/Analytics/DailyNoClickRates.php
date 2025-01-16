@@ -203,7 +203,7 @@ class DailyNoClickRates extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets rate.
      *
-     * @param float $rate no click rate, calculated as number of tracked searches without any click divided by the number of tracked searches
+     * @param float $rate no click rate: calculated as the number of tracked searches without clicks divided by the number of tracked searches
      *
      * @return self
      */

@@ -203,7 +203,7 @@ class DailyAddToCartRates extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets rate.
      *
-     * @param float $rate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+     * @param float $rate Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
      *
      * @return self
      */

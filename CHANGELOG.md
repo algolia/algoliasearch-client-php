@@ -6,7 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 # Release Notes
 
-## [v3.4.1](https://github.com/algolia/algoliasearch-client-php/compare/3.4.0...master)
+## [v3.4.2](https://github.com/algolia/algoliasearch-client-php/compare/3.4.1...v3)
+
+### Fixed
+
+- Address PHP 8.4-specific deprecation ([#745](https://github.com/algolia/algoliasearch-client-php/pull/745)) (by @greg0ire)
+
+## [v3.4.1](https://github.com/algolia/algoliasearch-client-php/compare/3.4.0...3.4.1)
 
 ### Fixed
 

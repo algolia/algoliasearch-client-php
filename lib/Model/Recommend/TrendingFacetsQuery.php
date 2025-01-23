@@ -24,7 +24,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
         'threshold' => 'float',
         'maxRecommendations' => 'int',
         'queryParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\RecommendSearchParams',
-        'facetName' => 'mixed',
+        'facetName' => 'string',
         'model' => '\Algolia\AlgoliaSearch\Model\Recommend\TrendingFacetsModel',
         'fallbackParameters' => '\Algolia\AlgoliaSearch\Model\Recommend\FallbackParams',
     ];
@@ -313,7 +313,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets facetName.
      *
-     * @return mixed
+     * @return string
      */
     public function getFacetName()
     {
@@ -323,7 +323,7 @@ class TrendingFacetsQuery extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets facetName.
      *
-     * @param mixed $facetName facet attribute for which to retrieve trending facet values
+     * @param string $facetName facet attribute for which to retrieve trending facet values
      *
      * @return self
      */

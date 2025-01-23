@@ -26,7 +26,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
         'promote' => '\Algolia\AlgoliaSearch\Model\Search\Promote[]',
         'filterPromotes' => 'bool',
         'hide' => '\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]',
-        'userData' => 'mixed',
+        'userData' => 'object',
     ];
 
     /**
@@ -284,7 +284,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets userData.
      *
-     * @return null|mixed
+     * @return null|object
      */
     public function getUserData()
     {
@@ -294,7 +294,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets userData.
      *
-     * @param null|mixed $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
+     * @param null|object $userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
      *
      * @return self
      */

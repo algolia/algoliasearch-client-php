@@ -63,8 +63,11 @@ class IngestionClient
      * @param string $apiKey Algolia API Key
      * @param string $region Region
      */
-    public static function create($appId = null, $apiKey = null, $region = null)
-    {
+    public static function create(
+        string $appId = null, 
+        string $apiKey = null, 
+        string $region = null
+    ){
         $config = IngestionConfig::create($appId, $apiKey, $region);
 
         return static::createWithConfig($config);

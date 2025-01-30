@@ -229,7 +229,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets conditions.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Condition[]
+     * @return null|Condition[]
      */
     public function getConditions()
     {
@@ -239,7 +239,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets conditions.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Condition[] $conditions Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
+     * @param null|Condition[] $conditions Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
      *
      * @return self
      */
@@ -325,7 +325,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Gets validity.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[]
+     * @return null|TimeRange[]
      */
     public function getValidity()
     {
@@ -335,7 +335,7 @@ class Rule extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     /**
      * Sets validity.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\TimeRange[] $validity time periods when the rule is active
+     * @param null|TimeRange[] $validity time periods when the rule is active
      *
      * @return self
      */

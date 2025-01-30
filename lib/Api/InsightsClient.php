@@ -6,6 +6,7 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\InsightsConfig;
+use Algolia\AlgoliaSearch\Model\Insights\EventsResponse;
 use Algolia\AlgoliaSearch\Model\Insights\InsightsEvents;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -308,7 +309,7 @@ class InsightsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\EventsResponse|array<string, mixed>
+     * @return array<string, mixed>|EventsResponse
      */
     public function pushEvents($insightsEvents, $requestOptions = [])
     {

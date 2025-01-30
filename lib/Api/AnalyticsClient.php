@@ -6,6 +6,26 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AnalyticsConfig;
+use Algolia\AlgoliaSearch\Model\Analytics\GetAddToCartRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetConversionRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetPurchaseRateResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetRevenue;
+use Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse;
+use Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -277,7 +297,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetAddToCartRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetAddToCartRateResponse
      */
     public function getAddToCartRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -324,7 +344,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetAverageClickPositionResponse|array<string, mixed>
+     * @return array<string, mixed>|GetAverageClickPositionResponse
      */
     public function getAverageClickPosition($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -371,7 +391,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetClickPositionsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetClickPositionsResponse
      */
     public function getClickPositions($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -418,7 +438,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetClickThroughRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetClickThroughRateResponse
      */
     public function getClickThroughRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -465,7 +485,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetConversionRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetConversionRateResponse
      */
     public function getConversionRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -512,7 +532,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoClickRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetNoClickRateResponse
      */
     public function getNoClickRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -559,7 +579,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetNoResultsRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetNoResultsRateResponse
      */
     public function getNoResultsRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -606,7 +626,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetPurchaseRateResponse|array<string, mixed>
+     * @return array<string, mixed>|GetPurchaseRateResponse
      */
     public function getPurchaseRate($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -653,7 +673,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetRevenue|array<string, mixed>
+     * @return array<string, mixed>|GetRevenue
      */
     public function getRevenue($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -700,7 +720,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesCountResponse|array<string, mixed>
+     * @return array<string, mixed>|GetSearchesCountResponse
      */
     public function getSearchesCount($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {
@@ -749,7 +769,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoClicksResponse|array<string, mixed>
+     * @return array<string, mixed>|GetSearchesNoClicksResponse
      */
     public function getSearchesNoClicks($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -806,7 +826,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetSearchesNoResultsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetSearchesNoResultsResponse
      */
     public function getSearchesNoResults($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -858,7 +878,7 @@ class AnalyticsClient
      * @param string $index          Index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetStatusResponse|array<string, mixed>
+     * @return array<string, mixed>|GetStatusResponse
      */
     public function getStatus($index, $requestOptions = [])
     {
@@ -895,7 +915,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopCountriesResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopCountriesResponse
      */
     public function getTopCountries($index, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -953,7 +973,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttributesResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopFilterAttributesResponse
      */
     public function getTopFilterAttributes($index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -1016,7 +1036,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterForAttributeResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopFilterForAttributeResponse
      */
     public function getTopFilterForAttribute($attribute, $index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -1093,7 +1113,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopFiltersNoResultsResponse
      */
     public function getTopFiltersNoResults($index, $search = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -1157,7 +1177,7 @@ class AnalyticsClient
      * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopHitsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopHitsResponse
      */
     public function getTopHits($index, $search = null, $clickAnalytics = null, $revenueAnalytics = null, $startDate = null, $endDate = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -1230,7 +1250,7 @@ class AnalyticsClient
      * @param string $tags             Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions   the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopSearchesResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopSearchesResponse
      */
     public function getTopSearches($index, $clickAnalytics = null, $revenueAnalytics = null, $startDate = null, $endDate = null, $orderBy = null, $direction = null, $limit = null, $offset = null, $tags = null, $requestOptions = [])
     {
@@ -1301,7 +1321,7 @@ class AnalyticsClient
      * @param string $tags           Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/). (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetUsersCountResponse|array<string, mixed>
+     * @return array<string, mixed>|GetUsersCountResponse
      */
     public function getUsersCount($index, $startDate = null, $endDate = null, $tags = null, $requestOptions = [])
     {

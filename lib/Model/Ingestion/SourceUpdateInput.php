@@ -468,7 +468,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets mapping.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV>
+     * @return null|array<string,MappingTypeCSV>
      */
     public function getMapping()
     {
@@ -478,7 +478,7 @@ class SourceUpdateInput extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets mapping.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping key-value pairs of column names and their expected types
+     * @param null|array<string,MappingTypeCSV> $mapping key-value pairs of column names and their expected types
      *
      * @return self
      */

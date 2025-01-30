@@ -355,7 +355,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Gets clickPositions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
+     * @return ClickPosition[]
      */
     public function getClickPositions()
     {
@@ -365,7 +365,7 @@ class TopSearchWithAnalytics extends AbstractModel implements ModelInterface, \A
     /**
      * Sets clickPositions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
+     * @param ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */

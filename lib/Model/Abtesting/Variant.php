@@ -507,7 +507,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets currencies.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\Currency>
+     * @return null|array<string,Currency>
      */
     public function getCurrencies()
     {
@@ -517,7 +517,7 @@ class Variant extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets currencies.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Abtesting\Currency> $currencies A/B test currencies
+     * @param null|array<string,Currency> $currencies A/B test currencies
      *
      * @return self
      */

@@ -182,7 +182,7 @@ class RunListResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets runs.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Run[]
+     * @return Run[]
      */
     public function getRuns()
     {
@@ -192,7 +192,7 @@ class RunListResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets runs.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Run[] $runs runs
+     * @param Run[] $runs runs
      *
      * @return self
      */

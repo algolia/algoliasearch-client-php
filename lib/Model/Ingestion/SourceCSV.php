@@ -240,7 +240,7 @@ class SourceCSV extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Gets mapping.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV>
+     * @return null|array<string,MappingTypeCSV>
      */
     public function getMapping()
     {
@@ -250,7 +250,7 @@ class SourceCSV extends AbstractModel implements ModelInterface, \ArrayAccess, \
     /**
      * Sets mapping.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping key-value pairs of column names and their expected types
+     * @param null|array<string,MappingTypeCSV> $mapping key-value pairs of column names and their expected types
      *
      * @return self
      */

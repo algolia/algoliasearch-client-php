@@ -8,6 +8,8 @@ use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\CompositionConfig;
 use Algolia\AlgoliaSearch\Model\Composition\RequestBody;
 use Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesRequest;
+use Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResponse;
+use Algolia\AlgoliaSearch\Model\Composition\SearchResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -123,7 +125,7 @@ class CompositionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\SearchResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchResponse
      */
     public function search($compositionID, $requestBody, $requestOptions = [])
     {
@@ -172,7 +174,7 @@ class CompositionClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchForFacetValuesResponse
      */
     public function searchForFacetValues($compositionID, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
     {

@@ -162,7 +162,7 @@ class GetRecommendationsParams extends AbstractModel implements ModelInterface, 
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[]
+     * @return RecommendationsRequest[]
      */
     public function getRequests()
     {
@@ -172,7 +172,7 @@ class GetRecommendationsParams extends AbstractModel implements ModelInterface, 
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsRequest[] $requests recommendation request with parameters depending on the requested model
+     * @param RecommendationsRequest[] $requests recommendation request with parameters depending on the requested model
      *
      * @return self
      */

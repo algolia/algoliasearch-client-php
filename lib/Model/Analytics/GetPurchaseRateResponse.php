@@ -265,7 +265,7 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[]
+     * @return DailyPurchaseRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetPurchaseRateResponse extends AbstractModel implements ModelInterface, \
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyPurchaseRates[] $dates daily purchase rates
+     * @param DailyPurchaseRates[] $dates daily purchase rates
      *
      * @return self
      */

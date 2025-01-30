@@ -182,7 +182,7 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
     /**
      * Gets eventsScoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Personalization\EventsScoring[]
+     * @return EventsScoring[]
      */
     public function getEventsScoring()
     {
@@ -192,7 +192,7 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
     /**
      * Sets eventsScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\EventsScoring[] $eventsScoring Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.
+     * @param EventsScoring[] $eventsScoring Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.
      *
      * @return self
      */
@@ -206,7 +206,7 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
     /**
      * Gets facetsScoring.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Personalization\FacetsScoring[]
+     * @return FacetsScoring[]
      */
     public function getFacetsScoring()
     {
@@ -216,7 +216,7 @@ class PersonalizationStrategyParams extends AbstractModel implements ModelInterf
     /**
      * Sets facetsScoring.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Personalization\FacetsScoring[] $facetsScoring Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.
+     * @param FacetsScoring[] $facetsScoring Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.
      *
      * @return self
      */

@@ -173,7 +173,7 @@ class ShopifyInput extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets metafields.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMetafield[]
+     * @return ShopifyMetafield[]
      */
     public function getMetafields()
     {
@@ -183,7 +183,7 @@ class ShopifyInput extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets metafields.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\ShopifyMetafield[] $metafields metafields
+     * @param ShopifyMetafield[] $metafields metafields
      *
      * @return self
      */

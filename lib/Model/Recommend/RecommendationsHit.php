@@ -246,7 +246,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets highlightResult.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult>
+     * @return null|array<string,HighlightResult>
      */
     public function getHighlightResult()
     {
@@ -256,7 +256,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets highlightResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
+     * @param null|array<string,HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
      *
      * @return self
      */
@@ -270,7 +270,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Gets snippetResult.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult>
+     * @return null|array<string,SnippetResult>
      */
     public function getSnippetResult()
     {
@@ -280,7 +280,7 @@ class RecommendationsHit extends AbstractModel implements ModelInterface, \Array
     /**
      * Sets snippetResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Recommend\SnippetResult> $snippetResult snippets that show the context around a matching search query
+     * @param null|array<string,SnippetResult> $snippetResult snippets that show the context around a matching search query
      *
      * @return self
      */

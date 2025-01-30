@@ -410,7 +410,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Gets clickPositions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
+     * @return ClickPosition[]
      */
     public function getClickPositions()
     {
@@ -420,7 +420,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets clickPositions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
+     * @param ClickPosition[] $clickPositions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */
@@ -554,7 +554,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>
+     * @return array<string,CurrencyCode>
      */
     public function getCurrencies()
     {
@@ -564,7 +564,7 @@ class TopSearchWithRevenueAnalytics extends AbstractModel implements ModelInterf
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search: broken down by currency
+     * @param array<string,CurrencyCode> $currencies revenue associated with this search: broken down by currency
      *
      * @return self
      */

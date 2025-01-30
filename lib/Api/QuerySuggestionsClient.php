@@ -6,8 +6,12 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\QuerySuggestionsConfig;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigStatus;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\Configuration;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse;
 use Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationWithIndex;
+use Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -121,7 +125,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function createConfig($configurationWithIndex, $requestOptions = [])
     {
@@ -307,7 +311,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function deleteConfig($indexName, $requestOptions = [])
     {
@@ -343,7 +347,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse[]|array<string, mixed>
+     * @return array<string, mixed>|ConfigurationResponse[]
      */
     public function getAllConfigs($requestOptions = [])
     {
@@ -364,7 +368,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigurationResponse|array<string, mixed>
+     * @return array<string, mixed>|ConfigurationResponse
      */
     public function getConfig($indexName, $requestOptions = [])
     {
@@ -401,7 +405,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\ConfigStatus|array<string, mixed>
+     * @return array<string, mixed>|ConfigStatus
      */
     public function getConfigStatus($indexName, $requestOptions = [])
     {
@@ -438,7 +442,7 @@ class QuerySuggestionsClient
      * @param string $indexName      Query Suggestions index name. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\LogFile|array<string, mixed>
+     * @return array<string, mixed>|LogFile
      */
     public function getLogFile($indexName, $requestOptions = [])
     {
@@ -484,7 +488,7 @@ class QuerySuggestionsClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\QuerySuggestions\BaseResponse|array<string, mixed>
+     * @return array<string, mixed>|BaseResponse
      */
     public function updateConfig($indexName, $configuration, $requestOptions = [])
     {

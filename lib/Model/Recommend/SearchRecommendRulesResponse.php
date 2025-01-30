@@ -193,7 +193,7 @@ class SearchRecommendRulesResponse extends AbstractModel implements ModelInterfa
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule[]
+     * @return RecommendRule[]
      */
     public function getHits()
     {
@@ -203,7 +203,7 @@ class SearchRecommendRulesResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule[] $hits recommend rules that match the search criteria
+     * @param RecommendRule[] $hits recommend rules that match the search criteria
      *
      * @return self
      */

@@ -162,7 +162,7 @@ class GetObjectsParams extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Gets requests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[]
+     * @return GetObjectsRequest[]
      */
     public function getRequests()
     {
@@ -172,7 +172,7 @@ class GetObjectsParams extends AbstractModel implements ModelInterface, \ArrayAc
     /**
      * Sets requests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetObjectsRequest[] $requests requests
+     * @param GetObjectsRequest[] $requests requests
      *
      * @return self
      */

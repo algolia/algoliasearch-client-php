@@ -160,7 +160,7 @@ class ListApiKeysResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets keys.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[]
+     * @return GetApiKeyResponse[]
      */
     public function getKeys()
     {
@@ -170,7 +170,7 @@ class ListApiKeysResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets keys.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse[] $keys API keys
+     * @param GetApiKeyResponse[] $keys API keys
      *
      * @return self
      */

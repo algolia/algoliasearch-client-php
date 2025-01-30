@@ -188,7 +188,7 @@ class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets values.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\Value>
+     * @return null|array<string,Value>
      */
     public function getValues()
     {
@@ -198,7 +198,7 @@ class FacetOrdering extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets values.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\Value> $values Order of facet values. One object for each facet.
+     * @param null|array<string,Value> $values Order of facet values. One object for each facet.
      *
      * @return self
      */

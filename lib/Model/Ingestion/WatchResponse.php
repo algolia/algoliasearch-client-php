@@ -232,7 +232,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Gets events.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[]
+     * @return null|Event[]
      */
     public function getEvents()
     {
@@ -242,7 +242,7 @@ class WatchResponse extends AbstractModel implements ModelInterface, \ArrayAcces
     /**
      * Sets events.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\Event[] $events in case of error, observability events will be added to the response, if any
+     * @param null|Event[] $events in case of error, observability events will be added to the response, if any
      *
      * @return self
      */

@@ -12,29 +12,64 @@ use Algolia\AlgoliaSearch\Exceptions\ValidUntilNotFoundException;
 use Algolia\AlgoliaSearch\Iterators\ObjectIterator;
 use Algolia\AlgoliaSearch\Iterators\RuleIterator;
 use Algolia\AlgoliaSearch\Iterators\SynonymIterator;
+use Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse;
 use Algolia\AlgoliaSearch\Model\Search\ApiKey;
 use Algolia\AlgoliaSearch\Model\Search\AssignUserIdParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchAssignUserIdsParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchDictionaryEntriesParams;
 use Algolia\AlgoliaSearch\Model\Search\BatchParams;
+use Algolia\AlgoliaSearch\Model\Search\BatchResponse;
 use Algolia\AlgoliaSearch\Model\Search\BatchWriteParams;
 use Algolia\AlgoliaSearch\Model\Search\BrowseParams;
+use Algolia\AlgoliaSearch\Model\Search\BrowseResponse;
+use Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\DeleteApiKeyResponse;
 use Algolia\AlgoliaSearch\Model\Search\DeleteByParams;
+use Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\DeleteSourceResponse;
 use Algolia\AlgoliaSearch\Model\Search\DictionarySettingsParams;
+use Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetLogsResponse;
 use Algolia\AlgoliaSearch\Model\Search\GetObjectsParams;
+use Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse;
 use Algolia\AlgoliaSearch\Model\Search\GetTaskResponse;
+use Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse;
 use Algolia\AlgoliaSearch\Model\Search\IndexSettings;
+use Algolia\AlgoliaSearch\Model\Search\Languages;
+use Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListClustersResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListIndicesResponse;
+use Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse;
 use Algolia\AlgoliaSearch\Model\Search\OperationIndexParams;
+use Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse;
+use Algolia\AlgoliaSearch\Model\Search\ReplaceSourceResponse;
 use Algolia\AlgoliaSearch\Model\Search\Rule;
+use Algolia\AlgoliaSearch\Model\Search\SaveObjectResponse;
+use Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesRequest;
+use Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchMethodParams;
 use Algolia\AlgoliaSearch\Model\Search\SearchParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchResponse;
+use Algolia\AlgoliaSearch\Model\Search\SearchResponses;
 use Algolia\AlgoliaSearch\Model\Search\SearchRulesParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchSynonymsParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse;
 use Algolia\AlgoliaSearch\Model\Search\SearchUserIdsParams;
+use Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse;
+use Algolia\AlgoliaSearch\Model\Search\SettingsResponse;
 use Algolia\AlgoliaSearch\Model\Search\Source;
 use Algolia\AlgoliaSearch\Model\Search\SynonymHit;
+use Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse;
+use Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse;
+use Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse;
+use Algolia\AlgoliaSearch\Model\Search\UserId;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -157,7 +192,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse|array<string, mixed>
+     * @return AddApiKeyResponse|array<string, mixed>
      */
     public function addApiKey($apiKey, $requestOptions = [])
     {
@@ -187,7 +222,7 @@ class SearchClient
      * @param array  $body           The record. A schemaless object with attributes that are useful in the context of search and discovery. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtWithObjectIdResponse
      */
     public function addOrUpdateObject($indexName, $objectID, $body, $requestOptions = [])
     {
@@ -250,7 +285,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
      */
     public function appendSource($source, $requestOptions = [])
     {
@@ -283,7 +318,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
      */
     public function assignUserId($xAlgoliaUserID, $assignUserIdParams, $requestOptions = [])
     {
@@ -321,7 +356,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BatchResponse|array<string, mixed>
+     * @return array<string, mixed>|BatchResponse
      */
     public function batch($indexName, $batchWriteParams, $requestOptions = [])
     {
@@ -370,7 +405,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\CreatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|CreatedAtResponse
      */
     public function batchAssignUserIds($xAlgoliaUserID, $batchAssignUserIdsParams, $requestOptions = [])
     {
@@ -412,7 +447,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function batchDictionaryEntries($dictionaryName, $batchDictionaryEntriesParams, $requestOptions = [])
     {
@@ -459,7 +494,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BrowseResponse|array<string, mixed>
+     * @return array<string, mixed>|BrowseResponse
      */
     public function browse($indexName, $browseParams = null, $requestOptions = [])
     {
@@ -496,7 +531,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearObjects($indexName, $requestOptions = [])
     {
@@ -534,7 +569,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearRules($indexName, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -576,7 +611,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function clearSynonyms($indexName, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -775,7 +810,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeleteApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|DeleteApiKeyResponse
      */
     public function deleteApiKey($key, $requestOptions = [])
     {
@@ -824,7 +859,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function deleteBy($indexName, $deleteByParams, $requestOptions = [])
     {
@@ -867,7 +902,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteIndex($indexName, $requestOptions = [])
     {
@@ -905,7 +940,7 @@ class SearchClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteObject($indexName, $objectID, $requestOptions = [])
     {
@@ -959,7 +994,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function deleteRule($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -1015,7 +1050,7 @@ class SearchClient
      * @param string $source         IP address range of the source. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeleteSourceResponse|array<string, mixed>
+     * @return array<string, mixed>|DeleteSourceResponse
      */
     public function deleteSource($source, $requestOptions = [])
     {
@@ -1054,7 +1089,7 @@ class SearchClient
      * @param bool   $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array  $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteSynonym($indexName, $objectID, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -1107,7 +1142,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|GetApiKeyResponse
      */
     public function getApiKey($key, $requestOptions = [])
     {
@@ -1144,7 +1179,7 @@ class SearchClient
      * @param int   $taskID         Unique task identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTaskResponse
      */
     public function getAppTask($taskID, $requestOptions = [])
     {
@@ -1180,7 +1215,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return array<string, mixed>|array<string,\Algolia\AlgoliaSearch\Model\Search\Languages>
+     * @return array<string, mixed>|array<string,Languages>
      */
     public function getDictionaryLanguages($requestOptions = [])
     {
@@ -1200,7 +1235,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetDictionarySettingsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetDictionarySettingsResponse
      */
     public function getDictionarySettings($requestOptions = [])
     {
@@ -1224,7 +1259,7 @@ class SearchClient
      * @param array  $type           Type of log entries to retrieve. By default, all log entries are retrieved. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetLogsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetLogsResponse
      */
     public function getLogs($offset = null, $length = null, $indexName = null, $type = null, $requestOptions = [])
     {
@@ -1323,7 +1358,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetObjectsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetObjectsResponse
      */
     public function getObjects($getObjectsParams, $requestOptions = [])
     {
@@ -1352,7 +1387,7 @@ class SearchClient
      * @param string $objectID       Unique identifier of a rule object. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Rule|array<string, mixed>
+     * @return array<string, mixed>|Rule
      */
     public function getRule($indexName, $objectID, $requestOptions = [])
     {
@@ -1404,7 +1439,7 @@ class SearchClient
      * @param string $indexName      Name of the index on which to perform the operation. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SettingsResponse|array<string, mixed>
+     * @return array<string, mixed>|SettingsResponse
      */
     public function getSettings($indexName, $requestOptions = [])
     {
@@ -1440,7 +1475,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Source[]|array<string, mixed>
+     * @return array<string, mixed>|Source[]
      */
     public function getSources($requestOptions = [])
     {
@@ -1462,7 +1497,7 @@ class SearchClient
      * @param string $objectID       Unique identifier of a synonym object. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SynonymHit|array<string, mixed>
+     * @return array<string, mixed>|SynonymHit
      */
     public function getSynonym($indexName, $objectID, $requestOptions = [])
     {
@@ -1515,7 +1550,7 @@ class SearchClient
      * @param int    $taskID         Unique task identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTaskResponse
      */
     public function getTask($indexName, $taskID, $requestOptions = [])
     {
@@ -1566,7 +1601,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\GetTopUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetTopUserIdsResponse
      */
     public function getTopUserIds($requestOptions = [])
     {
@@ -1587,7 +1622,7 @@ class SearchClient
      * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UserId|array<string, mixed>
+     * @return array<string, mixed>|UserId
      */
     public function getUserId($userID, $requestOptions = [])
     {
@@ -1624,7 +1659,7 @@ class SearchClient
      * @param bool  $getClusters    Whether to include the cluster's pending mapping state in the response. (optional)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\HasPendingMappingsResponse|array<string, mixed>
+     * @return array<string, mixed>|HasPendingMappingsResponse
      */
     public function hasPendingMappings($getClusters = null, $requestOptions = [])
     {
@@ -1648,7 +1683,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListApiKeysResponse|array<string, mixed>
+     * @return array<string, mixed>|ListApiKeysResponse
      */
     public function listApiKeys($requestOptions = [])
     {
@@ -1668,7 +1703,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListClustersResponse|array<string, mixed>
+     * @return array<string, mixed>|ListClustersResponse
      */
     public function listClusters($requestOptions = [])
     {
@@ -1690,7 +1725,7 @@ class SearchClient
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListIndicesResponse|array<string, mixed>
+     * @return array<string, mixed>|ListIndicesResponse
      */
     public function listIndices($page = null, $hitsPerPage = null, $requestOptions = [])
     {
@@ -1720,7 +1755,7 @@ class SearchClient
      * @param int   $hitsPerPage    Number of hits per page. (optional, default to 100)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ListUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|ListUserIdsResponse
      */
     public function listUserIds($page = null, $hitsPerPage = null, $requestOptions = [])
     {
@@ -1750,7 +1785,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\MultipleBatchResponse|array<string, mixed>
+     * @return array<string, mixed>|MultipleBatchResponse
      */
     public function multipleBatch($batchParams, $requestOptions = [])
     {
@@ -1785,7 +1820,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function operationIndex($indexName, $operationIndexParams, $requestOptions = [])
     {
@@ -1831,7 +1866,7 @@ class SearchClient
      * @param bool   $createIfNotExists  Whether to create a new record if it doesn't exist. (optional, default to true)
      * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtWithObjectIdResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtWithObjectIdResponse
      */
     public function partialUpdateObject($indexName, $objectID, $attributesToUpdate, $createIfNotExists = null, $requestOptions = [])
     {
@@ -1893,7 +1928,7 @@ class SearchClient
      * @param string $userID         Unique identifier of the user who makes the search request. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\RemoveUserIdResponse|array<string, mixed>
+     * @return array<string, mixed>|RemoveUserIdResponse
      */
     public function removeUserId($userID, $requestOptions = [])
     {
@@ -1930,7 +1965,7 @@ class SearchClient
      * @param array $source         Allowed sources. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\ReplaceSourceResponse|array<string, mixed>
+     * @return array<string, mixed>|ReplaceSourceResponse
      */
     public function replaceSources($source, $requestOptions = [])
     {
@@ -1958,7 +1993,7 @@ class SearchClient
      * @param string $key            API key. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\AddApiKeyResponse|array<string, mixed>
+     * @return AddApiKeyResponse|array<string, mixed>
      */
     public function restoreApiKey($key, $requestOptions = [])
     {
@@ -1996,7 +2031,7 @@ class SearchClient
      * @param array  $body           The record. A schemaless object with attributes that are useful in the context of search and discovery. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SaveObjectResponse|array<string, mixed>
+     * @return array<string, mixed>|SaveObjectResponse
      */
     public function saveObject($indexName, $body, $requestOptions = [])
     {
@@ -2051,7 +2086,7 @@ class SearchClient
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveRule($indexName, $objectID, $rule, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2116,7 +2151,7 @@ class SearchClient
      * @param bool   $clearExistingRules Whether existing rules should be deleted before adding this batch. (optional)
      * @param array  $requestOptions     the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveRules($indexName, $rules, $forwardToReplicas = null, $clearExistingRules = null, $requestOptions = [])
     {
@@ -2181,7 +2216,7 @@ class SearchClient
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SaveSynonymResponse|array<string, mixed>
+     * @return array<string, mixed>|SaveSynonymResponse
      */
     public function saveSynonym($indexName, $objectID, $synonymHit, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2246,7 +2281,7 @@ class SearchClient
      * @param bool   $replaceExistingSynonyms Whether to replace all synonyms in the index with the ones sent with this request. (optional)
      * @param array  $requestOptions          the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function saveSynonyms($indexName, $synonymHit, $forwardToReplicas = null, $replaceExistingSynonyms = null, $requestOptions = [])
     {
@@ -2302,7 +2337,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponses|array<string, mixed>
+     * @return array<string, mixed>|SearchResponses
      */
     public function search($searchMethodParams, $requestOptions = [])
     {
@@ -2338,7 +2373,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchDictionaryEntriesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchDictionaryEntriesResponse
      */
     public function searchDictionaryEntries($dictionaryName, $searchDictionaryEntriesParams, $requestOptions = [])
     {
@@ -2389,7 +2424,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchForFacetValuesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchForFacetValuesResponse
      */
     public function searchForFacetValues($indexName, $facetName, $searchForFacetValuesRequest = null, $requestOptions = [])
     {
@@ -2451,7 +2486,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchRulesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchRulesResponse
      */
     public function searchRules($indexName, $searchRulesParams = null, $requestOptions = [])
     {
@@ -2492,7 +2527,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchResponse
      */
     public function searchSingleIndex($indexName, $searchParams = null, $requestOptions = [])
     {
@@ -2537,7 +2572,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchSynonymsResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchSynonymsResponse
      */
     public function searchSynonyms($indexName, $searchSynonymsParams = null, $requestOptions = [])
     {
@@ -2581,7 +2616,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchUserIdsResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchUserIdsResponse
      */
     public function searchUserIds($searchUserIdsParams, $requestOptions = [])
     {
@@ -2613,7 +2648,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function setDictionarySettings($dictionarySettingsParams, $requestOptions = [])
     {
@@ -2646,7 +2681,7 @@ class SearchClient
      * @param bool  $forwardToReplicas Whether changes are applied to replica indices. (optional)
      * @param array $requestOptions    the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdatedAtResponse
      */
     public function setSettings($indexName, $indexSettings, $forwardToReplicas = null, $requestOptions = [])
     {
@@ -2705,7 +2740,7 @@ class SearchClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UpdateApiKeyResponse|array<string, mixed>
+     * @return array<string, mixed>|UpdateApiKeyResponse
      */
     public function updateApiKey($key, $apiKey, $requestOptions = [])
     {

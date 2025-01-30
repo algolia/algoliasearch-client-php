@@ -265,7 +265,7 @@ class GetAddToCartRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[]
+     * @return DailyAddToCartRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetAddToCartRateResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyAddToCartRates[] $dates daily add-to-cart rates
+     * @param DailyAddToCartRates[] $dates daily add-to-cart rates
      *
      * @return self
      */

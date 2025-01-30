@@ -164,7 +164,7 @@ class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets urls.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Composition\BannerImageUrl[]
+     * @return null|BannerImageUrl[]
      */
     public function getUrls()
     {
@@ -174,7 +174,7 @@ class BannerImage extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets urls.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Composition\BannerImageUrl[] $urls urls
+     * @param null|BannerImageUrl[] $urls urls
      *
      * @return self
      */

@@ -160,7 +160,7 @@ class TopSearchesResponseWithRevenueAnalytics extends AbstractModel implements M
     /**
      * Gets searches.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[]
+     * @return TopSearchWithRevenueAnalytics[]
      */
     public function getSearches()
     {
@@ -170,7 +170,7 @@ class TopSearchesResponseWithRevenueAnalytics extends AbstractModel implements M
     /**
      * Sets searches.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopSearchWithRevenueAnalytics[] $searches most popular searches, including their click and revenue metrics
+     * @param TopSearchWithRevenueAnalytics[] $searches most popular searches, including their click and revenue metrics
      *
      * @return self
      */

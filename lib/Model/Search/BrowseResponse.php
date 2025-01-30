@@ -685,7 +685,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats>
+     * @return null|array<string,FacetStats>
      */
     public function getFacetsStats()
     {
@@ -695,7 +695,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\FacetStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -1165,7 +1165,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Hit[]
+     * @return Hit[]
      */
     public function getHits()
     {
@@ -1175,7 +1175,7 @@ class BrowseResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+     * @param Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */

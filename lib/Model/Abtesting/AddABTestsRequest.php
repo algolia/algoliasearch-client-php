@@ -206,7 +206,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets variants.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[]
+     * @return AddABTestsVariant[]
      */
     public function getVariants()
     {
@@ -216,7 +216,7 @@ class AddABTestsRequest extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets variants.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsVariant[] $variants A/B test variants
+     * @param AddABTestsVariant[] $variants A/B test variants
      *
      * @return self
      */

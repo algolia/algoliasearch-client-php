@@ -171,7 +171,7 @@ class ListDestinationsResponse extends AbstractModel implements ModelInterface, 
     /**
      * Gets destinations.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Destination[]
+     * @return Destination[]
      */
     public function getDestinations()
     {
@@ -181,7 +181,7 @@ class ListDestinationsResponse extends AbstractModel implements ModelInterface, 
     /**
      * Sets destinations.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Destination[] $destinations destinations
+     * @param Destination[] $destinations destinations
      *
      * @return self
      */

@@ -192,7 +192,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets results.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\SearchResultsItem[]
+     * @return SearchResultsItem[]
      */
     public function getResults()
     {
@@ -202,7 +202,7 @@ class SearchResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets results.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Composition\SearchResultsItem[] $results search results
+     * @param SearchResultsItem[] $results search results
      *
      * @return self
      */

@@ -160,7 +160,7 @@ class SearchResponses extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets results.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\SearchResult[]
+     * @return SearchResult[]
      */
     public function getResults()
     {
@@ -170,7 +170,7 @@ class SearchResponses extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets results.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\SearchResult[] $results results
+     * @param SearchResult[] $results results
      *
      * @return self
      */

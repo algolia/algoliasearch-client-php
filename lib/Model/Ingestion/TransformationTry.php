@@ -227,7 +227,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets authentications.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[]
+     * @return null|AuthenticationCreate[]
      */
     public function getAuthentications()
     {
@@ -237,7 +237,7 @@ class TransformationTry extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets authentications.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationCreate[] $authentications authentications
+     * @param null|AuthenticationCreate[] $authentications authentications
      *
      * @return self
      */

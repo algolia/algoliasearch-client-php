@@ -171,7 +171,7 @@ class DailyRevenue extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>
+     * @return array<string,CurrencyCode>
      */
     public function getCurrencies()
     {
@@ -181,7 +181,7 @@ class DailyRevenue extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search: broken down by currency
+     * @param array<string,CurrencyCode> $currencies revenue associated with this search: broken down by currency
      *
      * @return self
      */

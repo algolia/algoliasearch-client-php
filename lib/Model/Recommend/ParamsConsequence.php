@@ -172,7 +172,7 @@ class ParamsConsequence extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets automaticFacetFilters.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\AutoFacetFilter[]
+     * @return null|AutoFacetFilter[]
      */
     public function getAutomaticFacetFilters()
     {
@@ -182,7 +182,7 @@ class ParamsConsequence extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets automaticFacetFilters.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\AutoFacetFilter[] $automaticFacetFilters filter recommendations that match or don't match the same `facet:facet_value` combination as the viewed item
+     * @param null|AutoFacetFilter[] $automaticFacetFilters filter recommendations that match or don't match the same `facet:facet_value` combination as the viewed item
      *
      * @return self
      */

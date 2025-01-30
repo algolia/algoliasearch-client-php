@@ -160,7 +160,7 @@ class GetRecommendationsResponse extends AbstractModel implements ModelInterface
     /**
      * Gets results.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[]
+     * @return RecommendationsResults[]
      */
     public function getResults()
     {
@@ -170,7 +170,7 @@ class GetRecommendationsResponse extends AbstractModel implements ModelInterface
     /**
      * Sets results.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Recommend\RecommendationsResults[] $results results
+     * @param RecommendationsResults[] $results results
      *
      * @return self
      */

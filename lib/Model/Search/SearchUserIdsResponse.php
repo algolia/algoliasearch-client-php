@@ -206,7 +206,7 @@ class SearchUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\UserHit[]
+     * @return UserHit[]
      */
     public function getHits()
     {
@@ -216,7 +216,7 @@ class SearchUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\UserHit[] $hits user objects that match the query
+     * @param UserHit[] $hits user objects that match the query
      *
      * @return self
      */

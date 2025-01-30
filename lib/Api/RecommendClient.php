@@ -6,8 +6,14 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\RecommendConfig;
+use Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse;
 use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsParams;
+use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse;
+use Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse;
+use Algolia\AlgoliaSearch\Model\Recommend\RecommendRule;
+use Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse;
 use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesParams;
+use Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapperInterface;
@@ -120,7 +126,7 @@ class RecommendClient
      * @param array  $recommendRule  recommendRule (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendUpdatedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|RecommendUpdatedAtResponse
      */
     public function batchRecommendRules($indexName, $model, $recommendRule = null, $requestOptions = [])
     {
@@ -332,7 +338,7 @@ class RecommendClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\DeletedAtResponse|array<string, mixed>
+     * @return array<string, mixed>|DeletedAtResponse
      */
     public function deleteRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -401,7 +407,7 @@ class RecommendClient
      * @param string $objectID       Unique record identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\RecommendRule|array<string, mixed>
+     * @return array<string, mixed>|RecommendRule
      */
     public function getRecommendRule($indexName, $model, $objectID, $requestOptions = [])
     {
@@ -470,7 +476,7 @@ class RecommendClient
      * @param int    $taskID         Unique task identifier. (required)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendTaskResponse|array<string, mixed>
+     * @return array<string, mixed>|GetRecommendTaskResponse
      */
     public function getRecommendStatus($indexName, $model, $taskID, $requestOptions = [])
     {
@@ -541,7 +547,7 @@ class RecommendClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\GetRecommendationsResponse|array<string, mixed>
+     * @return array<string, mixed>|GetRecommendationsResponse
      */
     public function getRecommendations($getRecommendationsParams, $requestOptions = [])
     {
@@ -582,7 +588,7 @@ class RecommendClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Recommend\SearchRecommendRulesResponse|array<string, mixed>
+     * @return array<string, mixed>|SearchRecommendRulesResponse
      */
     public function searchRecommendRules($indexName, $model, $searchRecommendRulesParams = null, $requestOptions = [])
     {

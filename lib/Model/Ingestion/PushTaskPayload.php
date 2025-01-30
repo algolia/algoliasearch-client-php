@@ -195,7 +195,7 @@ class PushTaskPayload extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets records.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\PushTaskRecords[]
+     * @return PushTaskRecords[]
      */
     public function getRecords()
     {
@@ -205,7 +205,7 @@ class PushTaskPayload extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets records.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\PushTaskRecords[] $records records
+     * @param PushTaskRecords[] $records records
      *
      * @return self
      */

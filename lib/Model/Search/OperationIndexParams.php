@@ -227,7 +227,7 @@ class OperationIndexParams extends AbstractModel implements ModelInterface, \Arr
     /**
      * Gets scope.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[]
+     * @return null|ScopeType[]
      */
     public function getScope()
     {
@@ -237,7 +237,7 @@ class OperationIndexParams extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets scope.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ScopeType[] $scope **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
+     * @param null|ScopeType[] $scope **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
      *
      * @return self
      */

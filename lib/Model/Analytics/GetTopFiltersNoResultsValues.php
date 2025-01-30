@@ -195,7 +195,7 @@ class GetTopFiltersNoResultsValues extends AbstractModel implements ModelInterfa
     /**
      * Gets values.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[]
+     * @return GetTopFiltersNoResultsValue[]
      */
     public function getValues()
     {
@@ -205,7 +205,7 @@ class GetTopFiltersNoResultsValues extends AbstractModel implements ModelInterfa
     /**
      * Sets values.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFiltersNoResultsValue[] $values filters with no results
+     * @param GetTopFiltersNoResultsValue[] $values filters with no results
      *
      * @return self
      */

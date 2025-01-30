@@ -265,7 +265,7 @@ class GetClickThroughRateResponse extends AbstractModel implements ModelInterfac
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[]
+     * @return DailyClickThroughRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetClickThroughRateResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyClickThroughRates[] $dates daily click-through rates
+     * @param DailyClickThroughRates[] $dates daily click-through rates
      *
      * @return self
      */

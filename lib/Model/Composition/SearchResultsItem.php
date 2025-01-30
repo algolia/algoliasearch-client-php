@@ -700,7 +700,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets facetsStats.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Composition\FacetStats>
+     * @return null|array<string,FacetStats>
      */
     public function getFacetsStats()
     {
@@ -710,7 +710,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets facetsStats.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Composition\FacetStats> $facetsStats statistics for numerical facets
+     * @param null|array<string,FacetStats> $facetsStats statistics for numerical facets
      *
      * @return self
      */
@@ -1180,7 +1180,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\Hit[]
+     * @return Hit[]
      */
     public function getHits()
     {
@@ -1190,7 +1190,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Composition\Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+     * @param Hit[] $hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
      *
      * @return self
      */
@@ -1252,7 +1252,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets compositions.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Composition\ResultsCompositionInfoResponse>
+     * @return array<string,ResultsCompositionInfoResponse>
      */
     public function getCompositions()
     {
@@ -1262,7 +1262,7 @@ class SearchResultsItem extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets compositions.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Composition\ResultsCompositionInfoResponse> $compositions compositions
+     * @param array<string,ResultsCompositionInfoResponse> $compositions compositions
      *
      * @return self
      */

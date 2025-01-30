@@ -171,7 +171,7 @@ class ListAuthenticationsResponse extends AbstractModel implements ModelInterfac
     /**
      * Gets authentications.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\Authentication[]
+     * @return Authentication[]
      */
     public function getAuthentications()
     {
@@ -181,7 +181,7 @@ class ListAuthenticationsResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets authentications.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\Authentication[] $authentications authentications
+     * @param Authentication[] $authentications authentications
      *
      * @return self
      */

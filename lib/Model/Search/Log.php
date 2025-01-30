@@ -635,7 +635,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Gets innerQueries.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[]
+     * @return null|LogQuery[]
      */
     public function getInnerQueries()
     {
@@ -645,7 +645,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets innerQueries.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\LogQuery[] $innerQueries queries performed for the given request
+     * @param null|LogQuery[] $innerQueries queries performed for the given request
      *
      * @return self
      */

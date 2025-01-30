@@ -160,7 +160,7 @@ class CompositionsSearchResponse extends AbstractModel implements ModelInterface
     /**
      * Gets run.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\CompositionRunSearchResponse[]
+     * @return CompositionRunSearchResponse[]
      */
     public function getRun()
     {
@@ -170,7 +170,7 @@ class CompositionsSearchResponse extends AbstractModel implements ModelInterface
     /**
      * Sets run.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Composition\CompositionRunSearchResponse[] $run run
+     * @param CompositionRunSearchResponse[] $run run
      *
      * @return self
      */

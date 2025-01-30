@@ -452,7 +452,7 @@ class PurchasedObjectIDsAfterSearch extends AbstractModel implements ModelInterf
     /**
      * Gets objectData.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[]
+     * @return ObjectDataAfterSearch[]
      */
     public function getObjectData()
     {
@@ -462,7 +462,7 @@ class PurchasedObjectIDsAfterSearch extends AbstractModel implements ModelInterf
     /**
      * Sets objectData.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Insights\ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+     * @param ObjectDataAfterSearch[] $objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
      *
      * @return self
      */

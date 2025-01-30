@@ -588,7 +588,7 @@ class HitRankingInfo extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets composed.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Composition\CompositionIdRankingInfo>
+     * @return null|array<string,CompositionIdRankingInfo>
      */
     public function getComposed()
     {
@@ -598,7 +598,7 @@ class HitRankingInfo extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets composed.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Composition\CompositionIdRankingInfo> $composed composed
+     * @param null|array<string,CompositionIdRankingInfo> $composed composed
      *
      * @return self
      */

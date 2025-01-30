@@ -192,7 +192,7 @@ class CompositionRunSearchResponse extends AbstractModel implements ModelInterfa
     /**
      * Gets appliedRules.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Composition\CompositionRunAppliedRules[]
+     * @return null|CompositionRunAppliedRules[]
      */
     public function getAppliedRules()
     {
@@ -202,7 +202,7 @@ class CompositionRunSearchResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets appliedRules.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Composition\CompositionRunAppliedRules[] $appliedRules appliedRules
+     * @param null|CompositionRunAppliedRules[] $appliedRules appliedRules
      *
      * @return self
      */

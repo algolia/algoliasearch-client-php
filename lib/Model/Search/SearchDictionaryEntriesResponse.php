@@ -193,7 +193,7 @@ class SearchDictionaryEntriesResponse extends AbstractModel implements ModelInte
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry[]
+     * @return DictionaryEntry[]
      */
     public function getHits()
     {
@@ -203,7 +203,7 @@ class SearchDictionaryEntriesResponse extends AbstractModel implements ModelInte
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\DictionaryEntry[] $hits dictionary entries matching the search criteria
+     * @param DictionaryEntry[] $hits dictionary entries matching the search criteria
      *
      * @return self
      */

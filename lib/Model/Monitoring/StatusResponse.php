@@ -154,7 +154,7 @@ class StatusResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Gets status.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Monitoring\Status>
+     * @return null|array<string,Status>
      */
     public function getStatus()
     {
@@ -164,7 +164,7 @@ class StatusResponse extends AbstractModel implements ModelInterface, \ArrayAcce
     /**
      * Sets status.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Monitoring\Status> $status status
+     * @param null|array<string,Status> $status status
      *
      * @return self
      */

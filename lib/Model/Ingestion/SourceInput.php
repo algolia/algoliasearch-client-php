@@ -560,7 +560,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets productMetafields.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
+     * @return null|BigCommerceMetafield[]
      */
     public function getProductMetafields()
     {
@@ -570,7 +570,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets productMetafields.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $productMetafields productMetafields
+     * @param null|BigCommerceMetafield[] $productMetafields productMetafields
      *
      * @return self
      */
@@ -584,7 +584,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets variantMetafields.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[]
+     * @return null|BigCommerceMetafield[]
      */
     public function getVariantMetafields()
     {
@@ -594,7 +594,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets variantMetafields.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Ingestion\BigCommerceMetafield[] $variantMetafields variantMetafields
+     * @param null|BigCommerceMetafield[] $variantMetafields variantMetafields
      *
      * @return self
      */
@@ -656,7 +656,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets mapping.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV>
+     * @return null|array<string,MappingTypeCSV>
      */
     public function getMapping()
     {
@@ -666,7 +666,7 @@ class SourceInput extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets mapping.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Ingestion\MappingTypeCSV> $mapping key-value pairs of column names and their expected types
+     * @param null|array<string,MappingTypeCSV> $mapping key-value pairs of column names and their expected types
      *
      * @return self
      */

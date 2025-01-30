@@ -206,7 +206,7 @@ class ReplaceAllObjectsResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets batchResponses.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\BatchResponse[]
+     * @return BatchResponse[]
      */
     public function getBatchResponses()
     {
@@ -216,7 +216,7 @@ class ReplaceAllObjectsResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets batchResponses.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\BatchResponse[] $batchResponses the response of the `batch` request(s)
+     * @param BatchResponse[] $batchResponses the response of the `batch` request(s)
      *
      * @return self
      */

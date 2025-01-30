@@ -154,7 +154,7 @@ class SearchForFacetValuesResponse extends AbstractModel implements ModelInterfa
     /**
      * Gets results.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResults[]
+     * @return null|SearchForFacetValuesResults[]
      */
     public function getResults()
     {
@@ -164,7 +164,7 @@ class SearchForFacetValuesResponse extends AbstractModel implements ModelInterfa
     /**
      * Sets results.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Composition\SearchForFacetValuesResults[] $results search for facet values results
+     * @param null|SearchForFacetValuesResults[] $results search for facet values results
      *
      * @return self
      */

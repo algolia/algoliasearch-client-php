@@ -154,7 +154,7 @@ class InventoryResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Gets inventory.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Monitoring\Server[]
+     * @return null|Server[]
      */
     public function getInventory()
     {
@@ -164,7 +164,7 @@ class InventoryResponse extends AbstractModel implements ModelInterface, \ArrayA
     /**
      * Sets inventory.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Monitoring\Server[] $inventory inventory
+     * @param null|Server[] $inventory inventory
      *
      * @return self
      */

@@ -230,7 +230,7 @@ class GetAverageClickPositionResponse extends AbstractModel implements ModelInte
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyAverageClicks[]
+     * @return DailyAverageClicks[]
      */
     public function getDates()
     {
@@ -240,7 +240,7 @@ class GetAverageClickPositionResponse extends AbstractModel implements ModelInte
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyAverageClicks[] $dates daily average click positions
+     * @param DailyAverageClicks[] $dates daily average click positions
      *
      * @return self
      */

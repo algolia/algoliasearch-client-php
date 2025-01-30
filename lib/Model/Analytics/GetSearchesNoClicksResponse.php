@@ -160,7 +160,7 @@ class GetSearchesNoClicksResponse extends AbstractModel implements ModelInterfac
     /**
      * Gets searches.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailySearchesNoClicks[]
+     * @return DailySearchesNoClicks[]
      */
     public function getSearches()
     {
@@ -170,7 +170,7 @@ class GetSearchesNoClicksResponse extends AbstractModel implements ModelInterfac
     /**
      * Sets searches.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailySearchesNoClicks[] $searches searches without any clicks
+     * @param DailySearchesNoClicks[] $searches searches without any clicks
      *
      * @return self
      */

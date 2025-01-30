@@ -265,7 +265,7 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[]
+     * @return DailyConversionRates[]
      */
     public function getDates()
     {
@@ -275,7 +275,7 @@ class GetConversionRateResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyConversionRates[] $dates daily conversion rates
+     * @param DailyConversionRates[] $dates daily conversion rates
      *
      * @return self
      */

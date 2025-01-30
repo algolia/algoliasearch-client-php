@@ -160,7 +160,7 @@ class GetLogsResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Gets logs.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Log[]
+     * @return Log[]
      */
     public function getLogs()
     {
@@ -170,7 +170,7 @@ class GetLogsResponse extends AbstractModel implements ModelInterface, \ArrayAcc
     /**
      * Sets logs.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Log[] $logs logs
+     * @param Log[] $logs logs
      *
      * @return self
      */

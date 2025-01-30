@@ -160,7 +160,7 @@ class ResultsCompositionInfoResponse extends AbstractModel implements ModelInter
     /**
      * Gets injectedItems.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Composition\ResultsInjectedItemInfoResponse[]
+     * @return ResultsInjectedItemInfoResponse[]
      */
     public function getInjectedItems()
     {
@@ -170,7 +170,7 @@ class ResultsCompositionInfoResponse extends AbstractModel implements ModelInter
     /**
      * Sets injectedItems.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Composition\ResultsInjectedItemInfoResponse[] $injectedItems injectedItems
+     * @param ResultsInjectedItemInfoResponse[] $injectedItems injectedItems
      *
      * @return self
      */

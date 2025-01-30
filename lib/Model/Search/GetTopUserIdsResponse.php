@@ -162,7 +162,7 @@ class GetTopUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Gets topUsers.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[]
+     * @return array<string,UserId[]>[]
      */
     public function getTopUsers()
     {
@@ -172,7 +172,7 @@ class GetTopUserIdsResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets topUsers.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Search\UserId[]>[] $topUsers key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
+     * @param array<string,UserId[]>[] $topUsers key-value pairs with cluster names as keys and lists of users with the highest number of records per cluster as values
      *
      * @return self
      */

@@ -171,7 +171,7 @@ class GetRevenue extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Gets currencies.
      *
-     * @return array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode>
+     * @return array<string,CurrencyCode>
      */
     public function getCurrencies()
     {
@@ -181,7 +181,7 @@ class GetRevenue extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets currencies.
      *
-     * @param array<string,\Algolia\AlgoliaSearch\Model\Analytics\CurrencyCode> $currencies revenue associated with this search: broken down by currency
+     * @param array<string,CurrencyCode> $currencies revenue associated with this search: broken down by currency
      *
      * @return self
      */
@@ -195,7 +195,7 @@ class GetRevenue extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyRevenue[]
+     * @return DailyRevenue[]
      */
     public function getDates()
     {
@@ -205,7 +205,7 @@ class GetRevenue extends AbstractModel implements ModelInterface, \ArrayAccess, 
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyRevenue[] $dates daily revenue
+     * @param DailyRevenue[] $dates daily revenue
      *
      * @return self
      */

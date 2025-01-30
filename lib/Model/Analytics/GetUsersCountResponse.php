@@ -195,7 +195,7 @@ class GetUsersCountResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Gets dates.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\DailyUsers[]
+     * @return DailyUsers[]
      */
     public function getDates()
     {
@@ -205,7 +205,7 @@ class GetUsersCountResponse extends AbstractModel implements ModelInterface, \Ar
     /**
      * Sets dates.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\DailyUsers[] $dates daily number of unique users
+     * @param DailyUsers[] $dates daily number of unique users
      *
      * @return self
      */

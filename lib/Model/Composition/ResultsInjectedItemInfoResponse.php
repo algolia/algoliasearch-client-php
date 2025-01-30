@@ -192,7 +192,7 @@ class ResultsInjectedItemInfoResponse extends AbstractModel implements ModelInte
     /**
      * Gets appliedRules.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Composition\ResultsInjectedItemAppliedRulesInfoResponse[]
+     * @return null|ResultsInjectedItemAppliedRulesInfoResponse[]
      */
     public function getAppliedRules()
     {
@@ -202,7 +202,7 @@ class ResultsInjectedItemInfoResponse extends AbstractModel implements ModelInte
     /**
      * Sets appliedRules.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Composition\ResultsInjectedItemAppliedRulesInfoResponse[] $appliedRules appliedRules
+     * @param null|ResultsInjectedItemAppliedRulesInfoResponse[] $appliedRules appliedRules
      *
      * @return self
      */

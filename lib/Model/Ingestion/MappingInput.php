@@ -197,7 +197,7 @@ class MappingInput extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets actions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[]
+     * @return MappingKitAction[]
      */
     public function getActions()
     {
@@ -207,7 +207,7 @@ class MappingInput extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets actions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Ingestion\MappingKitAction[] $actions actions
+     * @param MappingKitAction[] $actions actions
      *
      * @return self
      */

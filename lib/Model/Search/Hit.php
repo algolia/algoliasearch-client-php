@@ -218,7 +218,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Gets highlightResult.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult>
+     * @return null|array<string,HighlightResult>
      */
     public function getHighlightResult()
     {
@@ -228,7 +228,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets highlightResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
+     * @param null|array<string,HighlightResult> $highlightResult surround words that match the query with HTML tags for highlighting
      *
      * @return self
      */
@@ -242,7 +242,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Gets snippetResult.
      *
-     * @return null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult>
+     * @return null|array<string,SnippetResult>
      */
     public function getSnippetResult()
     {
@@ -252,7 +252,7 @@ class Hit extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
     /**
      * Sets snippetResult.
      *
-     * @param null|array<string,\Algolia\AlgoliaSearch\Model\Search\SnippetResult> $snippetResult snippets that show the context around a matching search query
+     * @param null|array<string,SnippetResult> $snippetResult snippets that show the context around a matching search query
      *
      * @return self
      */

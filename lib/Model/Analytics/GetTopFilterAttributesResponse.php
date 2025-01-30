@@ -160,7 +160,7 @@ class GetTopFilterAttributesResponse extends AbstractModel implements ModelInter
     /**
      * Gets attributes.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[]
+     * @return GetTopFilterAttribute[]
      */
     public function getAttributes()
     {
@@ -170,7 +170,7 @@ class GetTopFilterAttributesResponse extends AbstractModel implements ModelInter
     /**
      * Sets attributes.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\GetTopFilterAttribute[] $attributes most frequent filters
+     * @param GetTopFilterAttribute[] $attributes most frequent filters
      *
      * @return self
      */

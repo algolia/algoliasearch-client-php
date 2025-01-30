@@ -218,7 +218,7 @@ class ApiKey extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Gets acl.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Acl[]
+     * @return Acl[]
      */
     public function getAcl()
     {
@@ -228,7 +228,7 @@ class ApiKey extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets acl.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Acl[] $acl Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).
+     * @param Acl[] $acl Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).
      *
      * @return self
      */

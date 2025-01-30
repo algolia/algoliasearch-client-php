@@ -160,7 +160,7 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
     /**
      * Gets positions.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[]
+     * @return ClickPosition[]
      */
     public function getPositions()
     {
@@ -170,7 +170,7 @@ class GetClickPositionsResponse extends AbstractModel implements ModelInterface,
     /**
      * Sets positions.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\ClickPosition[] $positions list of positions in the search results and clicks associated with this search
+     * @param ClickPosition[] $positions list of positions in the search results and clicks associated with this search
      *
      * @return self
      */

@@ -182,7 +182,7 @@ class ListABTestsResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets abtests.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[]
+     * @return ABTest[]
      */
     public function getAbtests()
     {
@@ -192,7 +192,7 @@ class ListABTestsResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets abtests.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\ABTest[] $abtests the list of A/B tests, null if no A/B tests are configured for this application
+     * @param ABTest[] $abtests the list of A/B tests, null if no A/B tests are configured for this application
      *
      * @return self
      */

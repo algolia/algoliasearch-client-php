@@ -1274,7 +1274,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets naturalLanguages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]
+     * @return null|SupportedLanguage[]
      */
     public function getNaturalLanguages()
     {
@@ -1284,7 +1284,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets naturalLanguages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+     * @param null|SupportedLanguage[] $naturalLanguages ISO language codes that adjust settings that are useful for processing natural language queries (as opposed to keyword searches):  - Sets `removeStopWords` and `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
      *
      * @return self
      */
@@ -1946,7 +1946,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets queryLanguages.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[]
+     * @return null|SupportedLanguage[]
      */
     public function getQueryLanguages()
     {
@@ -1956,7 +1956,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets queryLanguages.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
+     * @param null|SupportedLanguage[] $queryLanguages Languages for language-specific query processing steps such as plurals, stop-word removal, and word-detection dictionaries.  This setting sets a default list of languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word detection in the logogram-based [CJK](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#normalization-for-logogram-based-languages-cjk) languages. To support this, you must place the CJK language **first**.  **You should always specify a query language.** If you don't specify an indexing language, the search engine uses all [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/), or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This can lead to unexpected search results. For more information, see [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/).
      *
      * @return self
      */
@@ -2234,7 +2234,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets alternativesAsExact.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[]
+     * @return null|AlternativesAsExact[]
      */
     public function getAlternativesAsExact()
     {
@@ -2244,7 +2244,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets alternativesAsExact.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AlternativesAsExact[] $alternativesAsExact Determine which plurals and synonyms should be considered an exact matches.  By default, Algolia treats singular and plural forms of a word, and single-word synonyms, as [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact) matches when searching. For example:  - \"swimsuit\" and \"swimsuits\" are treated the same - \"swimsuit\" and \"swimwear\" are treated the same (if they are [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)).  - `ignorePlurals`.   Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  - `singleWordSynonym`.   Single-word synonyms, such as \"NY\" = \"NYC\", are considered exact matches.  - `multiWordsSynonym`.   Multi-word synonyms, such as \"NY\" = \"New York\", are considered exact matches.
+     * @param null|AlternativesAsExact[] $alternativesAsExact Determine which plurals and synonyms should be considered an exact matches.  By default, Algolia treats singular and plural forms of a word, and single-word synonyms, as [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact) matches when searching. For example:  - \"swimsuit\" and \"swimsuits\" are treated the same - \"swimsuit\" and \"swimwear\" are treated the same (if they are [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)).  - `ignorePlurals`.   Plurals and similar declensions added by the `ignorePlurals` setting are considered exact matches.  - `singleWordSynonym`.   Single-word synonyms, such as \"NY\" = \"NYC\", are considered exact matches.  - `multiWordsSynonym`.   Multi-word synonyms, such as \"NY\" = \"New York\", are considered exact matches.
      *
      * @return self
      */
@@ -2258,7 +2258,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Gets advancedSyntaxFeatures.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[]
+     * @return null|AdvancedSyntaxFeatures[]
      */
     public function getAdvancedSyntaxFeatures()
     {
@@ -2268,7 +2268,7 @@ class BrowseParams extends AbstractModel implements ModelInterface, \ArrayAccess
     /**
      * Sets advancedSyntaxFeatures.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\AdvancedSyntaxFeatures[] $advancedSyntaxFeatures Advanced search syntax features you want to support.  - `exactPhrase`.   Phrases in quotes must match exactly.   For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  - `excludeWords`.   Query words prefixed with a `-` must not occur in a record.   For example, `search -engine` matches records that contain \"search\" but not \"engine\".  This setting only has an effect if `advancedSyntax` is true.
+     * @param null|AdvancedSyntaxFeatures[] $advancedSyntaxFeatures Advanced search syntax features you want to support.  - `exactPhrase`.   Phrases in quotes must match exactly.   For example, `sparkly blue \"iPhone case\"` only returns records with the exact string \"iPhone case\".  - `excludeWords`.   Query words prefixed with a `-` must not occur in a record.   For example, `search -engine` matches records that contain \"search\" but not \"engine\".  This setting only has an effect if `advancedSyntax` is true.
      *
      * @return self
      */

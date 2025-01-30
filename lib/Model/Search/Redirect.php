@@ -156,7 +156,7 @@ class Redirect extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     /**
      * Gets index.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadata[]
+     * @return null|RedirectRuleIndexMetadata[]
      */
     public function getIndex()
     {
@@ -166,7 +166,7 @@ class Redirect extends AbstractModel implements ModelInterface, \ArrayAccess, \J
     /**
      * Sets index.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\RedirectRuleIndexMetadata[] $index index
+     * @param null|RedirectRuleIndexMetadata[] $index index
      *
      * @return self
      */

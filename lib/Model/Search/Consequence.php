@@ -212,7 +212,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets promote.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\Promote[]
+     * @return null|Promote[]
      */
     public function getPromote()
     {
@@ -222,7 +222,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets promote.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
+     * @param null|Promote[] $promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
      *
      * @return self
      */
@@ -260,7 +260,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets hide.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[]
+     * @return null|ConsequenceHide[]
      */
     public function getHide()
     {
@@ -270,7 +270,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets hide.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Search\ConsequenceHide[] $hide records you want to hide from the search results
+     * @param null|ConsequenceHide[] $hide records you want to hide from the search results
      *
      * @return self
      */

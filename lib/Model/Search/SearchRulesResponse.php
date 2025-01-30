@@ -193,7 +193,7 @@ class SearchRulesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Gets hits.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Search\Rule[]
+     * @return Rule[]
      */
     public function getHits()
     {
@@ -203,7 +203,7 @@ class SearchRulesResponse extends AbstractModel implements ModelInterface, \Arra
     /**
      * Sets hits.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Search\Rule[] $hits rules that matched the search criteria
+     * @param Rule[] $hits rules that matched the search criteria
      *
      * @return self
      */

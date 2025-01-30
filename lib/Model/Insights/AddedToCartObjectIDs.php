@@ -449,7 +449,7 @@ class AddedToCartObjectIDs extends AbstractModel implements ModelInterface, \Arr
     /**
      * Gets objectData.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[]
+     * @return null|ObjectData[]
      */
     public function getObjectData()
     {
@@ -459,7 +459,7 @@ class AddedToCartObjectIDs extends AbstractModel implements ModelInterface, \Arr
     /**
      * Sets objectData.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Insights\ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
+     * @param null|ObjectData[] $objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
      *
      * @return self
      */

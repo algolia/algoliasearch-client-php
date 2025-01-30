@@ -542,7 +542,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Gets variants.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\Variant[]
+     * @return Variant[]
      */
     public function getVariants()
     {
@@ -552,7 +552,7 @@ class ABTest extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     /**
      * Sets variants.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Abtesting\Variant[] $variants A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.
+     * @param Variant[] $variants A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.
      *
      * @return self
      */

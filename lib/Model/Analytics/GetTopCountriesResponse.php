@@ -160,7 +160,7 @@ class GetTopCountriesResponse extends AbstractModel implements ModelInterface, \
     /**
      * Gets countries.
      *
-     * @return \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[]
+     * @return TopCountry[]
      */
     public function getCountries()
     {
@@ -170,7 +170,7 @@ class GetTopCountriesResponse extends AbstractModel implements ModelInterface, \
     /**
      * Sets countries.
      *
-     * @param \Algolia\AlgoliaSearch\Model\Analytics\TopCountry[] $countries countries and number of searches
+     * @param TopCountry[] $countries countries and number of searches
      *
      * @return self
      */

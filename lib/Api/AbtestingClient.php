@@ -6,8 +6,13 @@ namespace Algolia\AlgoliaSearch\Api;
 
 use Algolia\AlgoliaSearch\Algolia;
 use Algolia\AlgoliaSearch\Configuration\AbtestingConfig;
+use Algolia\AlgoliaSearch\Model\Abtesting\ABTest;
+use Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\AddABTestsRequest;
 use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestRequest;
+use Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse;
+use Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse;
+use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestResponse;
 use Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestsRequest;
 use Algolia\AlgoliaSearch\ObjectSerializer;
 use Algolia\AlgoliaSearch\RetryStrategy\ApiWrapper;
@@ -125,7 +130,7 @@ class AbtestingClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function addABTests($addABTestsRequest, $requestOptions = [])
     {
@@ -311,7 +316,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function deleteABTest($id, $requestOptions = [])
     {
@@ -353,7 +358,7 @@ class AbtestingClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\EstimateABTestResponse|array<string, mixed>
+     * @return array<string, mixed>|EstimateABTestResponse
      */
     public function estimateABTest($estimateABTestRequest, $requestOptions = [])
     {
@@ -381,7 +386,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTest|array<string, mixed>
+     * @return ABTest|array<string, mixed>
      */
     public function getABTest($id, $requestOptions = [])
     {
@@ -421,7 +426,7 @@ class AbtestingClient
      * @param string $indexSuffix    Index name suffix. Only A/B tests for indices ending with this string are included in the response. (optional)
      * @param array  $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ListABTestsResponse|array<string, mixed>
+     * @return array<string, mixed>|ListABTestsResponse
      */
     public function listABTests($offset = null, $limit = null, $indexPrefix = null, $indexSuffix = null, $requestOptions = [])
     {
@@ -465,7 +470,7 @@ class AbtestingClient
      *
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ScheduleABTestResponse|array<string, mixed>
+     * @return array<string, mixed>|ScheduleABTestResponse
      */
     public function scheduleABTest($scheduleABTestsRequest, $requestOptions = [])
     {
@@ -493,7 +498,7 @@ class AbtestingClient
      * @param int   $id             Unique A/B test identifier. (required)
      * @param array $requestOptions the requestOptions to send along with the query, they will be merged with the transporter requestOptions
      *
-     * @return \Algolia\AlgoliaSearch\Model\Abtesting\ABTestResponse|array<string, mixed>
+     * @return ABTestResponse|array<string, mixed>
      */
     public function stopABTest($id, $requestOptions = [])
     {

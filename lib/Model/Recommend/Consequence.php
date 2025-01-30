@@ -172,7 +172,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets hide.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\HideConsequenceObject[]
+     * @return null|HideConsequenceObject[]
      */
     public function getHide()
     {
@@ -182,7 +182,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets hide.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\HideConsequenceObject[] $hide exclude items from recommendations
+     * @param null|HideConsequenceObject[] $hide exclude items from recommendations
      *
      * @return self
      */
@@ -196,7 +196,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Gets promote.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\PromoteConsequenceObject[]
+     * @return null|PromoteConsequenceObject[]
      */
     public function getPromote()
     {
@@ -206,7 +206,7 @@ class Consequence extends AbstractModel implements ModelInterface, \ArrayAccess,
     /**
      * Sets promote.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\PromoteConsequenceObject[] $promote place items at specific positions in the list of recommendations
+     * @param null|PromoteConsequenceObject[] $promote place items at specific positions in the list of recommendations
      *
      * @return self
      */

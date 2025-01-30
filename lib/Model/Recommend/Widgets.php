@@ -156,7 +156,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Gets banners.
      *
-     * @return null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[]
+     * @return null|Banner[]
      */
     public function getBanners()
     {
@@ -166,7 +166,7 @@ class Widgets extends AbstractModel implements ModelInterface, \ArrayAccess, \Js
     /**
      * Sets banners.
      *
-     * @param null|\Algolia\AlgoliaSearch\Model\Recommend\Banner[] $banners banners defined in the Merchandising Studio for a given search
+     * @param null|Banner[] $banners banners defined in the Merchandising Studio for a given search
      *
      * @return self
      */

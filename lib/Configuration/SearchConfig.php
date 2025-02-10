@@ -26,6 +26,20 @@ class SearchConfig extends Configuration
         return $this->config['waitTaskTimeBeforeRetry'];
     }
 
+    /**
+     * Sets the max retries value used in the Search helpers (e.g. replaceAllobjects).
+     *
+     * @param number $maxRetries the user agent of the api client
+     *
+     * @return $this
+     */
+    public function setMaxRetries($maxRetries)
+    {
+        $this->config['defaultMaxRetries'] = $maxRetries;
+
+        return $this;
+    }
+
     public function getDefaultMaxRetries()
     {
         return $this->config['defaultMaxRetries'];

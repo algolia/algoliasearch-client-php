@@ -540,8 +540,8 @@ class RecommendClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $getRecommendationsParams getRecommendationsParams (required)
-     *                                        - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
+     * @param array|GetRecommendationsParams $getRecommendationsParams getRecommendationsParams (required)
+     *                                                                 - $getRecommendationsParams['requests'] => (array) Recommendation request with parameters depending on the requested model. (required)
      *
      * @see GetRecommendationsParams
      *
@@ -572,17 +572,17 @@ class RecommendClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName                  Name of the index on which to perform the operation. (required)
-     * @param array  $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
-     * @param array  $searchRecommendRulesParams searchRecommendRulesParams (optional)
-     *                                           - $searchRecommendRulesParams['query'] => (string) Search query.
-     *                                           - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
-     *                                           - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                           - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                           - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
-     *                                           - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
-     *                                           - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
-     *                                           - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
+     * @param string                           $indexName                  Name of the index on which to perform the operation. (required)
+     * @param array                            $model                      [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models). (required)
+     * @param array|SearchRecommendRulesParams $searchRecommendRulesParams searchRecommendRulesParams (optional)
+     *                                                                     - $searchRecommendRulesParams['query'] => (string) Search query.
+     *                                                                     - $searchRecommendRulesParams['context'] => (string) Only search for rules with matching context.
+     *                                                                     - $searchRecommendRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                                     - $searchRecommendRulesParams['enabled'] => (bool) Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
+     *                                                                     - $searchRecommendRulesParams['filters'] => (string) Filter expression. This only searches for rules matching the filter expression.
+     *                                                                     - $searchRecommendRulesParams['facets'] => (array) Include facets and facet values in the response. Use `['*']` to include all facets.
+     *                                                                     - $searchRecommendRulesParams['maxValuesPerFacet'] => (int) Maximum number of values to return for each facet.
      *
      * @see SearchRecommendRulesParams
      *

@@ -302,8 +302,8 @@ class InsightsClient
     /**
      * Sends a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
      *
-     * @param array $insightsEvents insightsEvents (required)
-     *                              - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)
+     * @param array|InsightsEvents $insightsEvents insightsEvents (required)
+     *                                             - $insightsEvents['events'] => (array) Click and conversion events.  **All** events must be valid, otherwise the API returns an error. (required)
      *
      * @see InsightsEvents
      *

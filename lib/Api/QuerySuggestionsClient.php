@@ -119,7 +119,7 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $configurationWithIndex configurationWithIndex (required)
+     * @param array|ConfigurationWithIndex $configurationWithIndex configurationWithIndex (required)
      *
      * @see ConfigurationWithIndex
      *
@@ -476,13 +476,13 @@ class QuerySuggestionsClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName     Query Suggestions index name. (required)
-     * @param array  $configuration configuration (required)
-     *                              - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
-     *                              - $configuration['languages'] => (array)
-     *                              - $configuration['exclude'] => (array)
-     *                              - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
-     *                              - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
+     * @param string              $indexName     Query Suggestions index name. (required)
+     * @param array|Configuration $configuration configuration (required)
+     *                                           - $configuration['sourceIndices'] => (array) Algolia indices from which to get the popular searches for query suggestions. (required)
+     *                                           - $configuration['languages'] => (array)
+     *                                           - $configuration['exclude'] => (array)
+     *                                           - $configuration['enablePersonalization'] => (bool) Whether to turn on personalized query suggestions.
+     *                                           - $configuration['allowSpecialCharacters'] => (bool) Whether to include suggestions with special characters.
      *
      * @see Configuration
      *

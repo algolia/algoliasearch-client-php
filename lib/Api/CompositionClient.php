@@ -117,9 +117,9 @@ class CompositionClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $compositionID Unique Composition ObjectID. (required)
-     * @param array  $requestBody   requestBody (required)
-     *                              - $requestBody['params'] => (array)
+     * @param string            $compositionID Unique Composition ObjectID. (required)
+     * @param array|RequestBody $requestBody   requestBody (required)
+     *                                         - $requestBody['params'] => (array)
      *
      * @see RequestBody
      *
@@ -165,10 +165,10 @@ class CompositionClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $compositionID               Unique Composition ObjectID. (required)
-     * @param string $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
-     * @param array  $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
-     *                                            - $searchForFacetValuesRequest['params'] => (array)
+     * @param string                            $compositionID               Unique Composition ObjectID. (required)
+     * @param string                            $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
+     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
+     *                                                                       - $searchForFacetValuesRequest['params'] => (array)
      *
      * @see SearchForFacetValuesRequest
      *

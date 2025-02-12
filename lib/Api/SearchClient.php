@@ -178,15 +178,15 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $apiKey apiKey (required)
-     *                      - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
-     *                      - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
-     *                      - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
-     *                      - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
-     *                      - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
-     *                      - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
-     *                      - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
-     *                      - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
+     * @param ApiKey|array $apiKey apiKey (required)
+     *                             - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
+     *                             - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
+     *                             - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+     *                             - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+     *                             - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
+     *                             - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
+     *                             - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+     *                             - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
      *
      * @see ApiKey
      *
@@ -277,9 +277,9 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $source Source to add. (required)
-     *                      - $source['source'] => (string) IP address range of the source. (required)
-     *                      - $source['description'] => (string) Source description.
+     * @param array|Source $source Source to add. (required)
+     *                             - $source['source'] => (string) IP address range of the source. (required)
+     *                             - $source['description'] => (string) Source description.
      *
      * @see Source
      *
@@ -310,9 +310,9 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID     Unique identifier of the user who makes the search request. (required)
-     * @param array  $assignUserIdParams assignUserIdParams (required)
-     *                                   - $assignUserIdParams['cluster'] => (string) Cluster name. (required)
+     * @param string                   $xAlgoliaUserID     Unique identifier of the user who makes the search request. (required)
+     * @param array|AssignUserIdParams $assignUserIdParams assignUserIdParams (required)
+     *                                                     - $assignUserIdParams['cluster'] => (string) Cluster name. (required)
      *
      * @see AssignUserIdParams
      *
@@ -348,9 +348,9 @@ class SearchClient
     /**
      * Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
      *
-     * @param string $indexName        Name of the index on which to perform the operation. (required)
-     * @param array  $batchWriteParams batchWriteParams (required)
-     *                                 - $batchWriteParams['requests'] => (array)  (required)
+     * @param string                 $indexName        Name of the index on which to perform the operation. (required)
+     * @param array|BatchWriteParams $batchWriteParams batchWriteParams (required)
+     *                                                 - $batchWriteParams['requests'] => (array)  (required)
      *
      * @see BatchWriteParams
      *
@@ -396,10 +396,10 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $xAlgoliaUserID           Unique identifier of the user who makes the search request. (required)
-     * @param array  $batchAssignUserIdsParams batchAssignUserIdsParams (required)
-     *                                         - $batchAssignUserIdsParams['cluster'] => (string) Cluster name. (required)
-     *                                         - $batchAssignUserIdsParams['users'] => (array) User IDs to assign. (required)
+     * @param string                         $xAlgoliaUserID           Unique identifier of the user who makes the search request. (required)
+     * @param array|BatchAssignUserIdsParams $batchAssignUserIdsParams batchAssignUserIdsParams (required)
+     *                                                                 - $batchAssignUserIdsParams['cluster'] => (string) Cluster name. (required)
+     *                                                                 - $batchAssignUserIdsParams['users'] => (array) User IDs to assign. (required)
      *
      * @see BatchAssignUserIdsParams
      *
@@ -438,10 +438,10 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $dictionaryName               Dictionary type in which to search. (required)
-     * @param array $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
-     *                                            - $batchDictionaryEntriesParams['clearExistingDictionaryEntries'] => (bool) Whether to replace all custom entries in the dictionary with the ones sent with this request.
-     *                                            - $batchDictionaryEntriesParams['requests'] => (array) List of additions and deletions to your dictionaries. (required)
+     * @param array                              $dictionaryName               Dictionary type in which to search. (required)
+     * @param array|BatchDictionaryEntriesParams $batchDictionaryEntriesParams batchDictionaryEntriesParams (required)
+     *                                                                         - $batchDictionaryEntriesParams['clearExistingDictionaryEntries'] => (bool) Whether to replace all custom entries in the dictionary with the ones sent with this request.
+     *                                                                         - $batchDictionaryEntriesParams['requests'] => (array) List of additions and deletions to your dictionaries. (required)
      *
      * @see BatchDictionaryEntriesParams
      *
@@ -487,8 +487,8 @@ class SearchClient
      * Required API Key ACLs:
      *  - browse
      *
-     * @param string $indexName    Name of the index on which to perform the operation. (required)
-     * @param array  $browseParams browseParams (optional)
+     * @param string             $indexName    Name of the index on which to perform the operation. (required)
+     * @param array|BrowseParams $browseParams browseParams (optional)
      *
      * @see BrowseParams
      *
@@ -844,16 +844,16 @@ class SearchClient
      * Required API Key ACLs:
      *  - deleteIndex
      *
-     * @param string $indexName      Name of the index on which to perform the operation. (required)
-     * @param array  $deleteByParams deleteByParams (required)
-     *                               - $deleteByParams['facetFilters'] => (array)
-     *                               - $deleteByParams['filters'] => (string) Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
-     *                               - $deleteByParams['numericFilters'] => (array)
-     *                               - $deleteByParams['tagFilters'] => (array)
-     *                               - $deleteByParams['aroundLatLng'] => (string) Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within a circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`.
-     *                               - $deleteByParams['aroundRadius'] => (array)
-     *                               - $deleteByParams['insideBoundingBox'] => (array)
-     *                               - $deleteByParams['insidePolygon'] => (array) Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`.
+     * @param string               $indexName      Name of the index on which to perform the operation. (required)
+     * @param array|DeleteByParams $deleteByParams deleteByParams (required)
+     *                                             - $deleteByParams['facetFilters'] => (array)
+     *                                             - $deleteByParams['filters'] => (string) Filter expression to only include items that match the filter criteria in the response.  You can use these filter expressions:  - **Numeric filters.** `<facet> <op> <number>`, where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO <upper>` where `<lower>` and `<upper>` are the lower and upper limits of the range (inclusive). - **Facet filters.** `<facet>:<value>` where `<facet>` is a facet attribute (case-sensitive) and `<value>` a facet value. - **Tag filters.** `_tags:<value>` or just `<value>` (case-sensitive). - **Boolean filters.** `<facet>: true | false`.  You can combine filters with `AND`, `OR`, and `NOT` operators with the following restrictions:  - You can only combine filters of the same type with `OR`.   **Not supported:** `facet:value OR num > 3`. - You can't use `NOT` with combinations of filters.   **Not supported:** `NOT(facet:value OR facet:value)` - You can't combine conjunctions (`AND`) with `OR`.   **Not supported:** `facet:value OR (facet:value AND facet:value)`  Use quotes around your filters, if the facet attribute name or facet value has spaces, keywords (`OR`, `AND`, `NOT`), or quotes. If a facet attribute is an array, the filter matches if it matches at least one element of the array.  For more information, see [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/).
+     *                                             - $deleteByParams['numericFilters'] => (array)
+     *                                             - $deleteByParams['tagFilters'] => (array)
+     *                                             - $deleteByParams['aroundLatLng'] => (string) Coordinates for the center of a circle, expressed as a comma-separated string of latitude and longitude.  Only records included within a circle around this central location are included in the results. The radius of the circle is determined by the `aroundRadius` and `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon` or `insideBoundingBox`.
+     *                                             - $deleteByParams['aroundRadius'] => (array)
+     *                                             - $deleteByParams['insideBoundingBox'] => (array)
+     *                                             - $deleteByParams['insidePolygon'] => (array) Coordinates of a polygon in which to search.  Polygons are defined by 3 to 10,000 points. Each point is represented by its latitude and longitude. Provide multiple polygons as nested arrays. For more information, see [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas). This parameter is ignored if you also specify `insideBoundingBox`.
      *
      * @see DeleteByParams
      *
@@ -1351,8 +1351,8 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $getObjectsParams Request object. (required)
-     *                                - $getObjectsParams['requests'] => (array)  (required)
+     * @param array|GetObjectsParams $getObjectsParams Request object. (required)
+     *                                                 - $getObjectsParams['requests'] => (array)  (required)
      *
      * @see GetObjectsParams
      *
@@ -1778,8 +1778,8 @@ class SearchClient
     /**
      * Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.  This operation is subject to [indexing rate limits](https://support.algolia.com/hc/en-us/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
      *
-     * @param array $batchParams batchParams (required)
-     *                           - $batchParams['requests'] => (array)  (required)
+     * @param array|BatchParams $batchParams batchParams (required)
+     *                                       - $batchParams['requests'] => (array)  (required)
      *
      * @see BatchParams
      *
@@ -1810,11 +1810,11 @@ class SearchClient
      * Required API Key ACLs:
      *  - addObject
      *
-     * @param string $indexName            Name of the index on which to perform the operation. (required)
-     * @param array  $operationIndexParams operationIndexParams (required)
-     *                                     - $operationIndexParams['operation'] => (array)  (required)
-     *                                     - $operationIndexParams['destination'] => (string) Index name (case-sensitive). (required)
-     *                                     - $operationIndexParams['scope'] => (array) **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
+     * @param string                     $indexName            Name of the index on which to perform the operation. (required)
+     * @param array|OperationIndexParams $operationIndexParams operationIndexParams (required)
+     *                                                         - $operationIndexParams['operation'] => (array)  (required)
+     *                                                         - $operationIndexParams['destination'] => (string) Index name (case-sensitive). (required)
+     *                                                         - $operationIndexParams['scope'] => (array) **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
      *
      * @see OperationIndexParams
      *
@@ -2071,15 +2071,15 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName Name of the index on which to perform the operation. (required)
-     * @param string $objectID  Unique identifier of a rule object. (required)
-     * @param array  $rule      rule (required)
-     *                          - $rule['objectID'] => (string) Unique identifier of a rule object. (required)
-     *                          - $rule['conditions'] => (array) Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
-     *                          - $rule['consequence'] => (array)  (required)
-     *                          - $rule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
-     *                          - $rule['enabled'] => (bool) Whether the rule is active.
-     *                          - $rule['validity'] => (array) Time periods when the rule is active.
+     * @param string     $indexName Name of the index on which to perform the operation. (required)
+     * @param string     $objectID  Unique identifier of a rule object. (required)
+     * @param array|Rule $rule      rule (required)
+     *                              - $rule['objectID'] => (string) Unique identifier of a rule object. (required)
+     *                              - $rule['conditions'] => (array) Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
+     *                              - $rule['consequence'] => (array)  (required)
+     *                              - $rule['description'] => (string) Description of the rule's purpose to help you distinguish between different rules.
+     *                              - $rule['enabled'] => (bool) Whether the rule is active.
+     *                              - $rule['validity'] => (array) Time periods when the rule is active.
      *
      * @see Rule
      *
@@ -2199,17 +2199,17 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName  Name of the index on which to perform the operation. (required)
-     * @param string $objectID   Unique identifier of a synonym object. (required)
-     * @param array  $synonymHit synonymHit (required)
-     *                           - $synonymHit['objectID'] => (string) Unique identifier of a synonym object. (required)
-     *                           - $synonymHit['type'] => (array)  (required)
-     *                           - $synonymHit['synonyms'] => (array) Words or phrases considered equivalent.
-     *                           - $synonymHit['input'] => (string) Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
-     *                           - $synonymHit['word'] => (string) Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
-     *                           - $synonymHit['corrections'] => (array) Words to be matched in records.
-     *                           - $synonymHit['placeholder'] => (string) [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
-     *                           - $synonymHit['replacements'] => (array) Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
+     * @param string           $indexName  Name of the index on which to perform the operation. (required)
+     * @param string           $objectID   Unique identifier of a synonym object. (required)
+     * @param array|SynonymHit $synonymHit synonymHit (required)
+     *                                     - $synonymHit['objectID'] => (string) Unique identifier of a synonym object. (required)
+     *                                     - $synonymHit['type'] => (array)  (required)
+     *                                     - $synonymHit['synonyms'] => (array) Words or phrases considered equivalent.
+     *                                     - $synonymHit['input'] => (string) Word or phrase to appear in query strings (for [`onewaysynonym`s](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/one-way-synonyms/)).
+     *                                     - $synonymHit['word'] => (string) Word or phrase to appear in query strings (for [`altcorrection1` and `altcorrection2`](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-alternative-corrections/)).
+     *                                     - $synonymHit['corrections'] => (array) Words to be matched in records.
+     *                                     - $synonymHit['placeholder'] => (string) [Placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/) to be put inside records.
+     *                                     - $synonymHit['replacements'] => (array) Query words that will match the [placeholder token](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/in-depth/synonyms-placeholders/).
      *
      * @see SynonymHit
      *
@@ -2329,9 +2329,9 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param array $searchMethodParams Muli-search request body. Results are returned in the same order as the requests. (required)
-     *                                  - $searchMethodParams['requests'] => (array)  (required)
-     *                                  - $searchMethodParams['strategy'] => (array)
+     * @param array|SearchMethodParams $searchMethodParams Muli-search request body. Results are returned in the same order as the requests. (required)
+     *                                                     - $searchMethodParams['requests'] => (array)  (required)
+     *                                                     - $searchMethodParams['strategy'] => (array)
      *
      * @see SearchMethodParams
      *
@@ -2362,12 +2362,12 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param array $dictionaryName                Dictionary type in which to search. (required)
-     * @param array $searchDictionaryEntriesParams searchDictionaryEntriesParams (required)
-     *                                             - $searchDictionaryEntriesParams['query'] => (string) Search query. (required)
-     *                                             - $searchDictionaryEntriesParams['page'] => (int) Page of search results to retrieve.
-     *                                             - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Number of hits per page.
-     *                                             - $searchDictionaryEntriesParams['language'] => (array)
+     * @param array                               $dictionaryName                Dictionary type in which to search. (required)
+     * @param array|SearchDictionaryEntriesParams $searchDictionaryEntriesParams searchDictionaryEntriesParams (required)
+     *                                                                           - $searchDictionaryEntriesParams['query'] => (string) Search query. (required)
+     *                                                                           - $searchDictionaryEntriesParams['page'] => (int) Page of search results to retrieve.
+     *                                                                           - $searchDictionaryEntriesParams['hitsPerPage'] => (int) Number of hits per page.
+     *                                                                           - $searchDictionaryEntriesParams['language'] => (array)
      *
      * @see SearchDictionaryEntriesParams
      *
@@ -2413,12 +2413,12 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $indexName                   Name of the index on which to perform the operation. (required)
-     * @param string $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
-     * @param array  $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
-     *                                            - $searchForFacetValuesRequest['params'] => (string) Search parameters as a URL-encoded query string.
-     *                                            - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
-     *                                            - $searchForFacetValuesRequest['maxFacetHits'] => (int) Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+     * @param string                            $indexName                   Name of the index on which to perform the operation. (required)
+     * @param string                            $facetName                   Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier. (required)
+     * @param array|SearchForFacetValuesRequest $searchForFacetValuesRequest searchForFacetValuesRequest (optional)
+     *                                                                       - $searchForFacetValuesRequest['params'] => (string) Search parameters as a URL-encoded query string.
+     *                                                                       - $searchForFacetValuesRequest['facetQuery'] => (string) Text to search inside the facet's values.
+     *                                                                       - $searchForFacetValuesRequest['maxFacetHits'] => (int) Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
      *
      * @see SearchForFacetValuesRequest
      *
@@ -2473,14 +2473,14 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName         Name of the index on which to perform the operation. (required)
-     * @param array  $searchRulesParams searchRulesParams (optional)
-     *                                  - $searchRulesParams['query'] => (string) Search query for rules.
-     *                                  - $searchRulesParams['anchoring'] => (array)
-     *                                  - $searchRulesParams['context'] => (string) Only return rules that match the context (exact match).
-     *                                  - $searchRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                  - $searchRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
-     *                                  - $searchRulesParams['enabled'] => (bool) If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
+     * @param string                  $indexName         Name of the index on which to perform the operation. (required)
+     * @param array|SearchRulesParams $searchRulesParams searchRulesParams (optional)
+     *                                                   - $searchRulesParams['query'] => (string) Search query for rules.
+     *                                                   - $searchRulesParams['anchoring'] => (array)
+     *                                                   - $searchRulesParams['context'] => (string) Only return rules that match the context (exact match).
+     *                                                   - $searchRulesParams['page'] => (int) Requested page of the API response.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                   - $searchRulesParams['hitsPerPage'] => (int) Maximum number of hits per page.  Algolia uses `page` and `hitsPerPage` to control how search results are displayed ([paginated](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/pagination/js/)).  - `hitsPerPage`: sets the number of search results (_hits_) displayed per page. - `page`: specifies the page number of the search results you want to retrieve. Page numbering starts at 0, so the first page is `page=0`, the second is `page=1`, and so on.  For example, to display 10 results per page starting from the third page, set `hitsPerPage` to 10 and `page` to 2.
+     *                                                   - $searchRulesParams['enabled'] => (bool) If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
      *
      * @see SearchRulesParams
      *
@@ -2520,8 +2520,8 @@ class SearchClient
      * Required API Key ACLs:
      *  - search
      *
-     * @param string $indexName    Name of the index on which to perform the operation. (required)
-     * @param array  $searchParams searchParams (optional)
+     * @param string             $indexName    Name of the index on which to perform the operation. (required)
+     * @param array|SearchParams $searchParams searchParams (optional)
      *
      * @see SearchParams
      *
@@ -2561,12 +2561,12 @@ class SearchClient
      * Required API Key ACLs:
      *  - settings
      *
-     * @param string $indexName            Name of the index on which to perform the operation. (required)
-     * @param array  $searchSynonymsParams Body of the `searchSynonyms` operation. (optional)
-     *                                     - $searchSynonymsParams['query'] => (string) Search query.
-     *                                     - $searchSynonymsParams['type'] => (array)
-     *                                     - $searchSynonymsParams['page'] => (int) Page of search results to retrieve.
-     *                                     - $searchSynonymsParams['hitsPerPage'] => (int) Number of hits per page.
+     * @param string                     $indexName            Name of the index on which to perform the operation. (required)
+     * @param array|SearchSynonymsParams $searchSynonymsParams Body of the `searchSynonyms` operation. (optional)
+     *                                                         - $searchSynonymsParams['query'] => (string) Search query.
+     *                                                         - $searchSynonymsParams['type'] => (array)
+     *                                                         - $searchSynonymsParams['page'] => (int) Page of search results to retrieve.
+     *                                                         - $searchSynonymsParams['hitsPerPage'] => (int) Number of hits per page.
      *
      * @see SearchSynonymsParams
      *
@@ -2606,11 +2606,11 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param array $searchUserIdsParams searchUserIdsParams (required)
-     *                                   - $searchUserIdsParams['query'] => (string) Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required)
-     *                                   - $searchUserIdsParams['clusterName'] => (string) Cluster name.
-     *                                   - $searchUserIdsParams['page'] => (int) Page of search results to retrieve.
-     *                                   - $searchUserIdsParams['hitsPerPage'] => (int) Number of hits per page.
+     * @param array|SearchUserIdsParams $searchUserIdsParams searchUserIdsParams (required)
+     *                                                       - $searchUserIdsParams['query'] => (string) Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. (required)
+     *                                                       - $searchUserIdsParams['clusterName'] => (string) Cluster name.
+     *                                                       - $searchUserIdsParams['page'] => (int) Page of search results to retrieve.
+     *                                                       - $searchUserIdsParams['hitsPerPage'] => (int) Number of hits per page.
      *
      * @see SearchUserIdsParams
      *
@@ -2641,8 +2641,8 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param array $dictionarySettingsParams dictionarySettingsParams (required)
-     *                                        - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
+     * @param array|DictionarySettingsParams $dictionarySettingsParams dictionarySettingsParams (required)
+     *                                                                 - $dictionarySettingsParams['disableStandardEntries'] => (array)  (required)
      *
      * @see DictionarySettingsParams
      *
@@ -2673,8 +2673,8 @@ class SearchClient
      * Required API Key ACLs:
      *  - editSettings
      *
-     * @param string $indexName     Name of the index on which to perform the operation. (required)
-     * @param array  $indexSettings indexSettings (required)
+     * @param string              $indexName     Name of the index on which to perform the operation. (required)
+     * @param array|IndexSettings $indexSettings indexSettings (required)
      *
      * @see IndexSettings
      *
@@ -2725,16 +2725,16 @@ class SearchClient
      * Required API Key ACLs:
      *  - admin
      *
-     * @param string $key    API key. (required)
-     * @param array  $apiKey apiKey (required)
-     *                       - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
-     *                       - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
-     *                       - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
-     *                       - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
-     *                       - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
-     *                       - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
-     *                       - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
-     *                       - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
+     * @param string       $key    API key. (required)
+     * @param ApiKey|array $apiKey apiKey (required)
+     *                             - $apiKey['acl'] => (array) Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). (required)
+     *                             - $apiKey['description'] => (string) Description of an API key to help you identify this API key.
+     *                             - $apiKey['indexes'] => (array) Index names or patterns that this API key can access. By default, an API key can access all indices in the same application.  You can use leading and trailing wildcard characters (`*`):  - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+     *                             - $apiKey['maxHitsPerQuery'] => (int) Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+     *                             - $apiKey['maxQueriesPerIPPerHour'] => (int) Maximum number of API requests allowed per IP address or [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) per hour.  If this limit is reached, the API returns an error with status code `429`. By default, there's no limit.
+     *                             - $apiKey['queryParameters'] => (string) Query parameters to add when making API requests with this API key.  To restrict this API key to specific IP addresses, add the `restrictSources` parameter. You can only add a single source, but you can provide a range of IP addresses.  Creating an API key fails if the request is made from an IP address outside the restricted range.
+     *                             - $apiKey['referers'] => (array) Allowed HTTP referrers for this API key.  By default, all referrers are allowed. You can use leading and trailing wildcard characters (`*`):  - `https://algolia.com/_*` allows all referrers starting with \"https://algolia.com/\" - `*.algolia.com` allows all referrers ending with \".algolia.com\" - `*algolia.com*` allows all referrers in the domain \"algolia.com\".  Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more information, see [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+     *                             - $apiKey['validity'] => (int) Duration (in seconds) after which the API key expires. By default, API keys don't expire.
      *
      * @see ApiKey
      *

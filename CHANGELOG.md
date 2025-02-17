@@ -1,3 +1,7 @@
+## [4.15.0](https://github.com/algolia/algoliasearch-client-php/compare/4.14.0...4.15.0)
+
+- [d2127cf74b](https://github.com/algolia/api-clients-automation/commit/d2127cf74b) feat(clients): more manual snippets for doc ([#4452](https://github.com/algolia/api-clients-automation/pull/4452)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [4.14.0](https://github.com/algolia/algoliasearch-client-php/compare/4.13.1...4.14.0)
 
 - [fd2353a092](https://github.com/algolia/api-clients-automation/commit/fd2353a092) feat(clients): add manual snippets for search doc ([#4388](https://github.com/algolia/api-clients-automation/pull/4388)) by [@Fluf22](https://github.com/Fluf22/)

@@ -48,7 +48,7 @@ class Log extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonSe
         'answerCode' => null,
         'queryBody' => null,
         'answer' => null,
-        'url' => 'uri',
+        'url' => 'uri-reference',
         'ip' => 'ipv4',
         'queryHeaders' => null,
         'sha1' => null,

@@ -1,3 +1,8 @@
+## [4.15.1](https://github.com/algolia/algoliasearch-client-php/compare/4.15.0...4.15.1)
+
+- [92bd911848](https://github.com/algolia/api-clients-automation/commit/92bd911848) chore(scripts): point jira issues to another epic ([#4505](https://github.com/algolia/api-clients-automation/pull/4505)) by [@millotp](https://github.com/millotp/)
+- [97d2722bc9](https://github.com/algolia/api-clients-automation/commit/97d2722bc9) fix(specs): Increase optionalWords visibility in docs ([#4559](https://github.com/algolia/api-clients-automation/pull/4559)) by [@gazconroy](https://github.com/gazconroy/)
+
 ## [4.15.0](https://github.com/algolia/algoliasearch-client-php/compare/4.14.0...4.15.0)
 
 - [d2127cf74b](https://github.com/algolia/api-clients-automation/commit/d2127cf74b) feat(clients): more manual snippets for doc ([#4452](https://github.com/algolia/api-clients-automation/pull/4452)) by [@Fluf22](https://github.com/Fluf22/)

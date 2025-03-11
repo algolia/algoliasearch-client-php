@@ -1,3 +1,7 @@
+## [4.16.0](https://github.com/algolia/algoliasearch-client-php/compare/4.15.1...4.16.0)
+
+- [ab623194e](https://github.com/algolia/api-clients-automation/commit/ab623194e) feat(specs): add `subscriptionAction` to ingestion specs ([#4587](https://github.com/algolia/api-clients-automation/pull/4587)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [4.15.1](https://github.com/algolia/algoliasearch-client-php/compare/4.15.0...4.15.1)
 
 - [92bd911848](https://github.com/algolia/api-clients-automation/commit/92bd911848) chore(scripts): point jira issues to another epic ([#4505](https://github.com/algolia/api-clients-automation/pull/4505)) by [@millotp](https://github.com/millotp/)

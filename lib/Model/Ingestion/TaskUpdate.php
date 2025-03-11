@@ -26,6 +26,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'cron' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'enabled' => 'bool',
+        'subscriptionAction' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'failureThreshold' => 'int',
         'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
         'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
@@ -41,6 +42,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'cron' => null,
         'input' => null,
         'enabled' => null,
+        'subscriptionAction' => null,
         'failureThreshold' => null,
         'notifications' => null,
         'policies' => null,
@@ -57,6 +59,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'cron' => 'cron',
         'input' => 'input',
         'enabled' => 'enabled',
+        'subscriptionAction' => 'subscriptionAction',
         'failureThreshold' => 'failureThreshold',
         'notifications' => 'notifications',
         'policies' => 'policies',
@@ -72,6 +75,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'cron' => 'setCron',
         'input' => 'setInput',
         'enabled' => 'setEnabled',
+        'subscriptionAction' => 'setSubscriptionAction',
         'failureThreshold' => 'setFailureThreshold',
         'notifications' => 'setNotifications',
         'policies' => 'setPolicies',
@@ -87,6 +91,7 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         'cron' => 'getCron',
         'input' => 'getInput',
         'enabled' => 'getEnabled',
+        'subscriptionAction' => 'getSubscriptionAction',
         'failureThreshold' => 'getFailureThreshold',
         'notifications' => 'getNotifications',
         'policies' => 'getPolicies',
@@ -117,6 +122,9 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
         }
         if (isset($data['enabled'])) {
             $this->container['enabled'] = $data['enabled'];
+        }
+        if (isset($data['subscriptionAction'])) {
+            $this->container['subscriptionAction'] = $data['subscriptionAction'];
         }
         if (isset($data['failureThreshold'])) {
             $this->container['failureThreshold'] = $data['failureThreshold'];
@@ -293,6 +301,30 @@ class TaskUpdate extends AbstractModel implements ModelInterface, \ArrayAccess, 
     public function setEnabled($enabled)
     {
         $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscriptionAction.
+     *
+     * @return null|ActionType
+     */
+    public function getSubscriptionAction()
+    {
+        return $this->container['subscriptionAction'] ?? null;
+    }
+
+    /**
+     * Sets subscriptionAction.
+     *
+     * @param null|ActionType $subscriptionAction subscriptionAction
+     *
+     * @return self
+     */
+    public function setSubscriptionAction($subscriptionAction)
+    {
+        $this->container['subscriptionAction'] = $subscriptionAction;
 
         return $this;
     }

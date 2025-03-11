@@ -30,6 +30,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'enabled' => 'bool',
         'failureThreshold' => 'int',
         'action' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
+        'subscriptionAction' => '\Algolia\AlgoliaSearch\Model\Ingestion\ActionType',
         'cursor' => 'string',
         'notifications' => '\Algolia\AlgoliaSearch\Model\Ingestion\Notifications',
         'policies' => '\Algolia\AlgoliaSearch\Model\Ingestion\Policies',
@@ -53,6 +54,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'enabled' => null,
         'failureThreshold' => null,
         'action' => null,
+        'subscriptionAction' => null,
         'cursor' => null,
         'notifications' => null,
         'policies' => null,
@@ -77,6 +79,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
         'action' => 'action',
+        'subscriptionAction' => 'subscriptionAction',
         'cursor' => 'cursor',
         'notifications' => 'notifications',
         'policies' => 'policies',
@@ -100,6 +103,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
         'action' => 'setAction',
+        'subscriptionAction' => 'setSubscriptionAction',
         'cursor' => 'setCursor',
         'notifications' => 'setNotifications',
         'policies' => 'setPolicies',
@@ -123,6 +127,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
         'action' => 'getAction',
+        'subscriptionAction' => 'getSubscriptionAction',
         'cursor' => 'getCursor',
         'notifications' => 'getNotifications',
         'policies' => 'getPolicies',
@@ -173,6 +178,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (isset($data['action'])) {
             $this->container['action'] = $data['action'];
+        }
+        if (isset($data['subscriptionAction'])) {
+            $this->container['subscriptionAction'] = $data['subscriptionAction'];
         }
         if (isset($data['cursor'])) {
             $this->container['cursor'] = $data['cursor'];
@@ -517,6 +525,30 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setAction($action)
     {
         $this->container['action'] = $action;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscriptionAction.
+     *
+     * @return null|ActionType
+     */
+    public function getSubscriptionAction()
+    {
+        return $this->container['subscriptionAction'] ?? null;
+    }
+
+    /**
+     * Sets subscriptionAction.
+     *
+     * @param null|ActionType $subscriptionAction subscriptionAction
+     *
+     * @return self
+     */
+    public function setSubscriptionAction($subscriptionAction)
+    {
+        $this->container['subscriptionAction'] = $subscriptionAction;
 
         return $this;
     }

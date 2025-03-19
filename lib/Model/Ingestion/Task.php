@@ -26,6 +26,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'string',
         'lastRun' => 'string',
         'nextRun' => 'string',
+        'owner' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\TaskInput',
         'enabled' => 'bool',
         'failureThreshold' => 'int',
@@ -50,6 +51,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => null,
         'lastRun' => null,
         'nextRun' => null,
+        'owner' => null,
         'input' => null,
         'enabled' => null,
         'failureThreshold' => null,
@@ -75,6 +77,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'cron',
         'lastRun' => 'lastRun',
         'nextRun' => 'nextRun',
+        'owner' => 'owner',
         'input' => 'input',
         'enabled' => 'enabled',
         'failureThreshold' => 'failureThreshold',
@@ -99,6 +102,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'setCron',
         'lastRun' => 'setLastRun',
         'nextRun' => 'setNextRun',
+        'owner' => 'setOwner',
         'input' => 'setInput',
         'enabled' => 'setEnabled',
         'failureThreshold' => 'setFailureThreshold',
@@ -123,6 +127,7 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         'cron' => 'getCron',
         'lastRun' => 'getLastRun',
         'nextRun' => 'getNextRun',
+        'owner' => 'getOwner',
         'input' => 'getInput',
         'enabled' => 'getEnabled',
         'failureThreshold' => 'getFailureThreshold',
@@ -166,6 +171,9 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
         }
         if (isset($data['nextRun'])) {
             $this->container['nextRun'] = $data['nextRun'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -429,6 +437,30 @@ class Task extends AbstractModel implements ModelInterface, \ArrayAccess, \JsonS
     public function setNextRun($nextRun)
     {
         $this->container['nextRun'] = $nextRun;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
 
         return $this;
     }

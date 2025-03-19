@@ -26,6 +26,7 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthenticationType',
         'name' => 'string',
         'platform' => '\Algolia\AlgoliaSearch\Model\Ingestion\Platform',
+        'owner' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\AuthInputPartial',
         'createdAt' => 'string',
         'updatedAt' => 'string',
@@ -41,6 +42,7 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         'type' => null,
         'name' => null,
         'platform' => null,
+        'owner' => null,
         'input' => null,
         'createdAt' => null,
         'updatedAt' => null,
@@ -57,6 +59,7 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         'type' => 'type',
         'name' => 'name',
         'platform' => 'platform',
+        'owner' => 'owner',
         'input' => 'input',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
@@ -72,6 +75,7 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         'type' => 'setType',
         'name' => 'setName',
         'platform' => 'setPlatform',
+        'owner' => 'setOwner',
         'input' => 'setInput',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
@@ -87,6 +91,7 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         'type' => 'getType',
         'name' => 'getName',
         'platform' => 'getPlatform',
+        'owner' => 'getOwner',
         'input' => 'getInput',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
@@ -117,6 +122,9 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['platform'])) {
             $this->container['platform'] = $data['platform'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -311,6 +319,30 @@ class Authentication extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setPlatform($platform)
     {
         $this->container['platform'] = $platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
 
         return $this;
     }

@@ -23,6 +23,7 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'sourceID' => 'string',
         'type' => '\Algolia\AlgoliaSearch\Model\Ingestion\SourceType',
         'name' => 'string',
+        'owner' => 'string',
         'input' => '\Algolia\AlgoliaSearch\Model\Ingestion\SourceInput',
         'authenticationID' => 'string',
         'createdAt' => 'string',
@@ -38,6 +39,7 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'sourceID' => null,
         'type' => null,
         'name' => null,
+        'owner' => null,
         'input' => null,
         'authenticationID' => null,
         'createdAt' => null,
@@ -54,6 +56,7 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'sourceID' => 'sourceID',
         'type' => 'type',
         'name' => 'name',
+        'owner' => 'owner',
         'input' => 'input',
         'authenticationID' => 'authenticationID',
         'createdAt' => 'createdAt',
@@ -69,6 +72,7 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'sourceID' => 'setSourceID',
         'type' => 'setType',
         'name' => 'setName',
+        'owner' => 'setOwner',
         'input' => 'setInput',
         'authenticationID' => 'setAuthenticationID',
         'createdAt' => 'setCreatedAt',
@@ -84,6 +88,7 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         'sourceID' => 'getSourceID',
         'type' => 'getType',
         'name' => 'getName',
+        'owner' => 'getOwner',
         'input' => 'getInput',
         'authenticationID' => 'getAuthenticationID',
         'createdAt' => 'getCreatedAt',
@@ -112,6 +117,9 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
         }
         if (isset($data['name'])) {
             $this->container['name'] = $data['name'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['input'])) {
             $this->container['input'] = $data['input'];
@@ -282,6 +290,30 @@ class Source extends AbstractModel implements ModelInterface, \ArrayAccess, \Jso
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
 
         return $this;
     }

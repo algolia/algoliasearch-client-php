@@ -25,6 +25,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'code' => 'string',
         'name' => 'string',
         'description' => 'string',
+        'owner' => 'string',
         'createdAt' => 'string',
         'updatedAt' => 'string',
     ];
@@ -40,6 +41,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'code' => null,
         'name' => null,
         'description' => null,
+        'owner' => null,
         'createdAt' => null,
         'updatedAt' => null,
     ];
@@ -56,6 +58,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'code' => 'code',
         'name' => 'name',
         'description' => 'description',
+        'owner' => 'owner',
         'createdAt' => 'createdAt',
         'updatedAt' => 'updatedAt',
     ];
@@ -71,6 +74,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'code' => 'setCode',
         'name' => 'setName',
         'description' => 'setDescription',
+        'owner' => 'setOwner',
         'createdAt' => 'setCreatedAt',
         'updatedAt' => 'setUpdatedAt',
     ];
@@ -86,6 +90,7 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         'code' => 'getCode',
         'name' => 'getName',
         'description' => 'getDescription',
+        'owner' => 'getOwner',
         'createdAt' => 'getCreatedAt',
         'updatedAt' => 'getUpdatedAt',
     ];
@@ -118,6 +123,9 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
         }
         if (isset($data['description'])) {
             $this->container['description'] = $data['description'];
+        }
+        if (isset($data['owner'])) {
+            $this->container['owner'] = $data['owner'];
         }
         if (isset($data['createdAt'])) {
             $this->container['createdAt'] = $data['createdAt'];
@@ -330,6 +338,30 @@ class Transformation extends AbstractModel implements ModelInterface, \ArrayAcce
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner.
+     *
+     * @return null|string
+     */
+    public function getOwner()
+    {
+        return $this->container['owner'] ?? null;
+    }
+
+    /**
+     * Sets owner.
+     *
+     * @param null|string $owner owner of the resource
+     *
+     * @return self
+     */
+    public function setOwner($owner)
+    {
+        $this->container['owner'] = $owner;
 
         return $this;
     }

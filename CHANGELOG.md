@@ -1,3 +1,7 @@
+## [4.17.0](https://github.com/algolia/algoliasearch-client-php/compare/4.16.0...4.17.0)
+
+- [26457d0ec8](https://github.com/algolia/api-clients-automation/commit/26457d0ec8) feat(specs): add the owner attributes to ingestion resources ([#4616](https://github.com/algolia/api-clients-automation/pull/4616)) by [@millotp](https://github.com/millotp/)
+
 ## [4.16.0](https://github.com/algolia/algoliasearch-client-php/compare/4.15.1...4.16.0)
 
 - [ab623194e](https://github.com/algolia/api-clients-automation/commit/ab623194e) feat(specs): add `subscriptionAction` to ingestion specs ([#4587](https://github.com/algolia/api-clients-automation/pull/4587)) by [@shortcuts](https://github.com/shortcuts/)
